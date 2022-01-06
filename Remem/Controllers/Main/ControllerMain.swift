@@ -117,6 +117,7 @@ extension ControllerMain: UITableViewDataSource {
         let data = list.entries[indexPath.row]
         
         row.update(name: data.name)
+        row.update(value: data.value)
         
         return row
     }
