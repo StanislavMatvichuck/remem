@@ -17,6 +17,7 @@
 		08D5123D278715C900C2037F /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123C278715C900C2037F /* Entry.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08E620822787212400BBABFD /* EntriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620812787212400BBABFD /* EntriesList.swift */; };
+		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		08D5123C278715C900C2037F /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08E620812787212400BBABFD /* EntriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesList.swift; sourceTree = "<group>"; };
+		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
+				08E620832787406400BBABFD /* Metrics.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				08D5123D278715C900C2037F /* Entry.swift in Sources */,
 				08D512382787153900C2037F /* ViewMainRow.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
+				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
