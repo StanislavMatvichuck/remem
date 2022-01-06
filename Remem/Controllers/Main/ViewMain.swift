@@ -17,7 +17,7 @@ class ViewMain: UIView {
     let viewTable: UITableView = {
         let view = UITableView(frame: .zero)
 
-        view.register(ViewMainRow.self, forCellReuseIdentifier: ViewMainRow.reuseIdentifier)
+        view.register(CellMain.self, forCellReuseIdentifier: CellMain.reuseIdentifier)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.tableFooterView = UIView()
         view.allowsSelection = false

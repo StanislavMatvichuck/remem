@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ViewMainRow: UITableViewCell {
+protocol CellMainDelegate: AnyObject {
+    func didPress(cell: CellMain)
+}
+
+class CellMain: UITableViewCell {
     //
 
     // MARK: - Static properties
@@ -21,6 +25,8 @@ class ViewMainRow: UITableViewCell {
     // MARK: - Public properties
 
     //
+
+    weak var delegate: CellMainDelegate?
 
     //
 
@@ -73,10 +79,28 @@ class ViewMainRow: UITableViewCell {
             valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             valueLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
+        
+        setupEventHandlers()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    //
+
+    // MARK: - Events handling
+
+    //
+
+    func setupEventHandlers() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handlePress))
+
+        contentView.addGestureRecognizer(recognizer)
+    }
+
+    @objc private func handlePress() {
+        delegate?.didPress(cell: self)
     }
 
     //

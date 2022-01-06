@@ -9,5 +9,5 @@ import Foundation
 
 struct Entry {
     let name: String
-    let value: Int = 0
+    var value: Int = 0
 }

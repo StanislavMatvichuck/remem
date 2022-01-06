@@ -111,14 +111,28 @@ extension ControllerMain: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: ViewMainRow.reuseIdentifier) as? ViewMainRow
+            let row = tableView.dequeueReusableCell(withIdentifier: CellMain.reuseIdentifier) as? CellMain
         else { return UITableViewCell() }
         
         let data = list.entries[indexPath.row]
         
+        row.delegate = self
         row.update(name: data.name)
         row.update(value: data.value)
         
         return row
+    }
+}
+
+extension ControllerMain: CellMainDelegate {
+    func didPress(cell: CellMain) {
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            index.row < list.entries.count
+        else { return }
+        
+        list.entries[index.row].value += 1
+        
+        viewRoot.viewTable.reloadData()
     }
 }
