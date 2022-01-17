@@ -97,7 +97,7 @@ class CellMain: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-//        backgroundColor = .orange
+        contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
 
         setupEventHandlers()
 
@@ -127,7 +127,7 @@ class CellMain: UITableViewCell {
             viewRoot.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2)
         ])
 
-        contentView.addAndConstrain(viewRoot)
+        contentView.addAndConstrain(viewRoot, constant: .xs)
     }
 
     private func setupViewMovable() {
@@ -167,7 +167,7 @@ class CellMain: UITableViewCell {
     //
 
     private var isMovableViewInSuccessState: Bool {
-        let leftAcceptanceValue = UIScreen.main.bounds.width - CellMain.r2
+        let leftAcceptanceValue = UIScreen.main.bounds.width - CellMain.r2 - 2 * .xs
 
         return movableCenterXPosition >= leftAcceptanceValue
     }
@@ -185,9 +185,9 @@ class CellMain: UITableViewCell {
 
         let translation = gestureRecognizer.translation(in: contentView)
 
-        let maximumWidth = UIScreen.main.bounds.width - CellMain.r2
+        let maximumWidth = UIScreen.main.bounds.width - CellMain.r2 - 2 * .xs
 
-        let newXPosition = (movedView.center.x + translation.x * 1.5)
+        let newXPosition = (movedView.center.x + translation.x * 2)
             .clamped(to: CellMain.r2 ... maximumWidth)
 
         let newCenter = CGPoint(x: newXPosition, y: movedView.center.y)

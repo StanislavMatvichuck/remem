@@ -18,7 +18,14 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     
     fileprivate var textField = UITextField()
     
-    fileprivate var list = EntriesList(entries: [])
+    fileprivate var list = EntriesList(entries: [
+        Entry(name: "Coffee", value: 0),
+        Entry(name: "Smoking", value: 0),
+        Entry(name: "Weed", value: 0),
+        Entry(name: "Gym", value: 0),
+        Entry(name: "Karate", value: 0),
+        Entry(name: "ios swift programming", value: 0),
+    ])
     
     //
     
@@ -98,6 +105,12 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     }
 }
 
+//
+
+// MARK: - UITableViewDataSource
+
+//
+
 extension ControllerMain: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if list.entries.count == 0 {
@@ -124,6 +137,12 @@ extension ControllerMain: UITableViewDataSource {
     }
 }
 
+//
+
+// MARK: - CellMainDelegate
+
+//
+
 extension ControllerMain: CellMainDelegate {
     func didPress(cell: CellMain) {
         guard
@@ -133,6 +152,6 @@ extension ControllerMain: CellMainDelegate {
         
         list.entries[index.row].value += 1
         
-        viewRoot.viewTable.reloadData()
+        viewRoot.viewTable.reloadRows(at: [index], with: .none)
     }
 }
