@@ -8,14 +8,14 @@
 import UIKit
 
 extension UIView {
-    func addAndConstrain(_ view: UIView) {
+    func addAndConstrain(_ view: UIView, constant: CGFloat = 0) {
         addSubview(view)
 
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            view.topAnchor.constraint(equalTo: topAnchor),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant),
+            view.topAnchor.constraint(equalTo: topAnchor, constant: constant),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1 * constant),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1 * constant),
         ])
     }
 }

@@ -19,9 +19,12 @@ class ViewMain: UIView {
 
         view.register(CellMain.self, forCellReuseIdentifier: CellMain.reuseIdentifier)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentInsetAdjustmentBehavior = .never
+
         view.tableFooterView = UIView()
         view.allowsSelection = false
         view.separatorStyle = .none
+        view.transform = CGAffineTransform(scaleX: 1, y: -1)
 
         return view
     }()
