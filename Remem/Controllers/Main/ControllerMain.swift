@@ -25,6 +25,9 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
         Entry(name: "Gym", value: 0),
         Entry(name: "Karate", value: 0),
         Entry(name: "ios swift programming", value: 0),
+        Entry(name: "Gym", value: 0),
+        Entry(name: "Karate", value: 0),
+        Entry(name: "ios swift programming", value: 0),
     ])
     
     //
@@ -32,6 +35,10 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     // MARK: - Initialization
     
     //
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)

@@ -25,6 +25,7 @@ class ViewMain: UIView {
         view.allowsSelection = false
         view.separatorStyle = .none
         view.transform = CGAffineTransform(scaleX: 1, y: -1)
+        view.showsVerticalScrollIndicator = false
 
         return view
     }()
