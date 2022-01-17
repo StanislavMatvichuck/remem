@@ -34,9 +34,25 @@ class CellMain: UITableViewCell {
 
     //
 
+    static let textSize: CGFloat = 24
+
+    static var r1: CGFloat {
+        return 40
+    }
+
+    static var r2: CGFloat {
+        return r1 + .xs
+    }
+
+    //
+    // Layout
+    //
+
     private let viewRoot: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = CellMain.r2
+        view.backgroundColor = .orange
         return view
     }()
 
@@ -46,6 +62,8 @@ class CellMain: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: textSize, weight: .medium)
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
 
         return label
     }()
@@ -65,7 +83,7 @@ class CellMain: UITableViewCell {
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.backgroundColor = UIColor.gray.cgColor
-        view.alpha = 0.75
+        view.layer.cornerRadius = CellMain.r1
 
         return view
     }()
@@ -79,7 +97,7 @@ class CellMain: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = .orange
+//        backgroundColor = .orange
 
         setupEventHandlers()
 
@@ -97,15 +115,16 @@ class CellMain: UITableViewCell {
         viewRoot.addSubview(valueLabel)
 
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .hButton),
-            nameLabel.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.hButton),
+            nameLabel.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: 2 * CellMain.r2),
+            nameLabel.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -2 * CellMain.r2),
 
-            nameLabel.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: .md),
-            nameLabel.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -.md),
+            nameLabel.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: CellMain.r2 - CellMain.r1),
+            nameLabel.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -(CellMain.r2 - CellMain.r1)),
 
-            valueLabel.leadingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.hButton),
-            valueLabel.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
+            valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -CellMain.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
+            
+            viewRoot.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2)
         ])
 
         contentView.addAndConstrain(viewRoot)
@@ -115,8 +134,11 @@ class CellMain: UITableViewCell {
         viewRoot.addSubview(viewMovable)
 
         NSLayoutConstraint.activate([
-            viewMovable.widthAnchor.constraint(equalToConstant: .hButton),
-            viewMovable.heightAnchor.constraint(equalTo: viewRoot.heightAnchor),
+            viewMovable.widthAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+            viewMovable.heightAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+
+            viewMovable.centerXAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: CellMain.r2),
+            viewMovable.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
         ])
     }
 
@@ -145,13 +167,9 @@ class CellMain: UITableViewCell {
     //
 
     private var isMovableViewInSuccessState: Bool {
-        let leftAcceptanceValue = UIScreen.main.bounds.width - movedViewXCompensation
+        let leftAcceptanceValue = UIScreen.main.bounds.width - CellMain.r2
 
         return movableCenterXPosition >= leftAcceptanceValue
-    }
-
-    private var movedViewXCompensation: CGFloat {
-        return viewMovable.bounds.width / 2
     }
 
     private var movableCenterXPosition: CGFloat {
@@ -159,7 +177,7 @@ class CellMain: UITableViewCell {
     }
 
     private var movableCenterXInitialPosition: CGFloat {
-        return viewMovable.bounds.width / 2
+        return CellMain.r2
     }
 
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -167,10 +185,10 @@ class CellMain: UITableViewCell {
 
         let translation = gestureRecognizer.translation(in: contentView)
 
-        let maximumWidth = UIScreen.main.bounds.width - movedViewXCompensation
+        let maximumWidth = UIScreen.main.bounds.width - CellMain.r2
 
         let newXPosition = (movedView.center.x + translation.x * 1.5)
-            .clamped(to: movedViewXCompensation ... maximumWidth)
+            .clamped(to: CellMain.r2 ... maximumWidth)
 
         let newCenter = CGPoint(x: newXPosition, y: movedView.center.y)
 
@@ -190,7 +208,7 @@ class CellMain: UITableViewCell {
             }
 
             UIView.animate(withDuration: 0.25, animations: {
-                movedView.center = CGPoint(x: self.movedViewXCompensation, y: movedView.bounds.height / 2)
+                movedView.center = CGPoint(x: CellMain.r2, y: movedView.center.y)
             })
         }
     }
