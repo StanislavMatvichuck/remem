@@ -19,16 +19,12 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     fileprivate var textField = UITextField()
     
     fileprivate var list = EntriesList(entries: [
-        Entry(name: "Coffee", value: 0),
-        Entry(name: "Smoking", value: 0),
-        Entry(name: "Weed", value: 0),
         Entry(name: "Gym", value: 0),
         Entry(name: "Karate", value: 0),
-        Entry(name: "ios swift programming", value: 0),
-        Entry(name: "Gym", value: 0),
-        Entry(name: "Karate", value: 0),
-        Entry(name: "ios swift programming", value: 0),
+        Entry(name: "IOS learning", value: 0)
     ])
+    
+    fileprivate var cellIndexToBeAnimated: IndexPath?
     
     //
     
@@ -58,6 +54,7 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         viewRoot.viewTable.dataSource = self
+        viewRoot.viewTable.delegate = self
         textField.delegate = self
         
         setupNavigationItem()
@@ -133,7 +130,7 @@ extension ControllerMain: UITableViewDataSource {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: CellMain.reuseIdentifier) as? CellMain
         else { return UITableViewCell() }
-        
+
         let data = list.entries[indexPath.row]
         
         row.delegate = self
@@ -144,6 +141,16 @@ extension ControllerMain: UITableViewDataSource {
     }
 }
 
+extension ControllerMain: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let index = cellIndexToBeAnimated, index == indexPath {
+            let cell = cell as! CellMain
+            
+            cell.animateMovableViewBack()
+        }
+    }
+}
+
 //
 
 // MARK: - CellMainDelegate
@@ -151,14 +158,17 @@ extension ControllerMain: UITableViewDataSource {
 //
 
 extension ControllerMain: CellMainDelegate {
-    func didPress(cell: CellMain) {
-        guard
-            let index = viewRoot.viewTable.indexPath(for: cell),
-            index.row < list.entries.count
-        else { return }
+    func didSwipeAction(_ cell: CellMain) {
+        guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
+        
+        cellIndexToBeAnimated = index
         
         list.entries[index.row].value += 1
         
-        viewRoot.viewTable.reloadRows(at: [index], with: .none)
+        viewRoot.viewTable.reloadData()
+    }
+    
+    func didAnimation(_ cell: CellMain) {
+        cellIndexToBeAnimated = nil
     }
 }

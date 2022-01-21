@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CellMainDelegate: AnyObject {
-    func didPress(cell: CellMain)
+    func didSwipeAction(_ cell: CellMain)
+    func didAnimation(_ cell: CellMain)
 }
 
 class CellMain: UITableViewCell {
@@ -123,8 +124,8 @@ class CellMain: UITableViewCell {
 
             valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -CellMain.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
-            
-            viewRoot.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2)
+
+            viewRoot.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2),
         ])
 
         contentView.addAndConstrain(viewRoot, constant: .xs)
@@ -142,6 +143,12 @@ class CellMain: UITableViewCell {
         ])
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        movableCenterXPosition = movableCenterXInitialPosition
+    }
+
     //
 
     // MARK: - Events handling
@@ -149,17 +156,9 @@ class CellMain: UITableViewCell {
     //
 
     func setupEventHandlers() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handlePress))
-
-        contentView.addGestureRecognizer(recognizer)
-
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
 
         viewMovable.addGestureRecognizer(gestureRecognizer)
-    }
-
-    @objc private func handlePress() {
-        delegate?.didPress(cell: self)
     }
 
     //
@@ -173,11 +172,20 @@ class CellMain: UITableViewCell {
     }
 
     private var movableCenterXPosition: CGFloat {
-        return viewMovable.center.x
+        get {
+            return viewMovable.center.x
+        }
+        set {
+            viewMovable.center.x = newValue
+        }
     }
 
     private var movableCenterXInitialPosition: CGFloat {
         return CellMain.r2
+    }
+
+    private var movableCenterXSuccessPosition: CGFloat {
+        return UIScreen.main.bounds.width - CellMain.r2 - 2 * .xs
     }
 
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -185,10 +193,8 @@ class CellMain: UITableViewCell {
 
         let translation = gestureRecognizer.translation(in: contentView)
 
-        let maximumWidth = UIScreen.main.bounds.width - CellMain.r2 - 2 * .xs
-
         let newXPosition = (movedView.center.x + translation.x * 2)
-            .clamped(to: CellMain.r2 ... maximumWidth)
+            .clamped(to: movableCenterXInitialPosition ... movableCenterXSuccessPosition)
 
         let newCenter = CGPoint(x: newXPosition, y: movedView.center.y)
 
@@ -203,14 +209,48 @@ class CellMain: UITableViewCell {
             gestureRecognizer.state == .ended ||
             gestureRecognizer.state == .cancelled
         {
-            if isMovableViewInSuccessState {
-                delegate?.didPress(cell: self)
+            if isMovableViewInSuccessState { delegate?.didSwipeAction(self) } else {
+                animateMovableViewReturn()
             }
-
-            UIView.animate(withDuration: 0.25, animations: {
-                movedView.center = CGPoint(x: CellMain.r2, y: movedView.center.y)
-            })
         }
+    }
+
+    // TODO: make single spring animation with proper reusability for the user
+
+    func animateMovableViewReturn() {
+        let animation = CABasicAnimation(keyPath: "position.x")
+        animation.fromValue = movableCenterXPosition
+        animation.toValue = movableCenterXInitialPosition
+        animation.duration = 0.3
+        animation.fillMode = .backwards
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        CATransaction.begin()
+
+        viewMovable.layer.add(animation, forKey: nil)
+        movableCenterXPosition = movableCenterXInitialPosition
+
+        CATransaction.commit()
+    }
+
+    func animateMovableViewBack() {
+        let animation = CABasicAnimation(keyPath: "position.x")
+        animation.fromValue = movableCenterXSuccessPosition
+        animation.toValue = movableCenterXInitialPosition
+        animation.duration = 0.3
+        animation.fillMode = .backwards
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        CATransaction.begin()
+
+        CATransaction.setCompletionBlock {
+            self.delegate?.didAnimation(self)
+        }
+
+        viewMovable.layer.add(animation, forKey: nil)
+        viewMovable.layer.position.x = movableCenterXInitialPosition
+
+        CATransaction.commit()
     }
 
     //
