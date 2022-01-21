@@ -20,7 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let controller = ControllerMain()
 
-        window.rootViewController = controller
+        controller.persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+
+        let navigator = UINavigationController(rootViewController: controller)
+
+        window.rootViewController = navigator
 
         self.window = window
 

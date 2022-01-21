@@ -5,9 +5,10 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
+import CoreData
 import UIKit
 
-class ControllerMain: UIViewController, UITextFieldDelegate {
+class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     //
     
     // MARK: - Private properties
@@ -18,13 +19,17 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     
     fileprivate var textField = UITextField()
     
-    fileprivate var list = EntriesList(entries: [
-        Entry(name: "Gym", value: 0),
-        Entry(name: "Karate", value: 0),
-        Entry(name: "IOS learning", value: 0)
-    ])
-    
     fileprivate var cellIndexToBeAnimated: IndexPath?
+    
+    fileprivate var data: [Entry] = [] {
+        didSet {
+            viewRoot.viewTable.reloadData()
+        }
+    }
+    
+    var persistentContainer: NSPersistentContainer!
+    
+    var fetchedResultsController: NSFetchedResultsController<Entry>?
     
     //
     
@@ -57,6 +62,8 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
         viewRoot.viewTable.delegate = self
         textField.delegate = self
         
+        fetch()
+        
         setupNavigationItem()
     }
     
@@ -75,6 +82,25 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
         let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(handlePressAdd))
         
         navigationItem.setRightBarButton(addButton, animated: false)
+    }
+    
+    private func fetch() {
+        let request = NSFetchRequest<Entry>(entityName: "Entry")
+        
+        let moc = persistentContainer.viewContext
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                              managedObjectContext: moc,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
+        fetchedResultsController?.delegate = self
+        do {
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print("fetch request failed")
+        }
     }
     
     //
@@ -99,13 +125,20 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func handlePressAddConfirm(_: UIAlertAction) {
-        print(#function)
-        
         guard let name = textField.text, !name.isEmpty else { return }
         
-        list.entries.append(Entry(name: name))
+        let moc = persistentContainer.viewContext
         
-        viewRoot.viewTable.reloadData()
+        moc.perform {
+            let entry = Entry(context: moc)
+            entry.name = name
+            entry.value = 0
+            do {
+                try moc.save()
+            } catch {
+                moc.rollback()
+            }
+        }
     }
 }
 
@@ -117,25 +150,26 @@ class ControllerMain: UIViewController, UITextFieldDelegate {
 
 extension ControllerMain: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if list.entries.count == 0 {
+        let dataAmount = fetchedResultsController?.fetchedObjects?.count ?? 0
+        
+        if dataAmount == 0 {
             viewRoot.showEmptyState()
         } else {
             viewRoot.hideEmptyState()
         }
         
-        return list.entries.count
+        return dataAmount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: CellMain.reuseIdentifier) as? CellMain
+            let row = tableView.dequeueReusableCell(withIdentifier: CellMain.reuseIdentifier) as? CellMain,
+            let dataRow = fetchedResultsController?.object(at: indexPath)
         else { return UITableViewCell() }
 
-        let data = list.entries[indexPath.row]
-        
         row.delegate = self
-        row.update(name: data.name)
-        row.update(value: data.value)
+        row.update(name: dataRow.name!)
+        row.update(value: Int(dataRow.value))
         
         return row
     }
@@ -163,12 +197,60 @@ extension ControllerMain: CellMainDelegate {
         
         cellIndexToBeAnimated = index
         
-        list.entries[index.row].value += 1
-        
-        viewRoot.viewTable.reloadData()
+        guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
+        let moc = persistentContainer.viewContext
+        moc.perform {
+            managedObjects[index.row].value += 1
+            do {
+                try moc.save()
+            } catch {
+                moc.rollback()
+            }
+        }
     }
     
     func didAnimation(_ cell: CellMain) {
         cellIndexToBeAnimated = nil
+    }
+}
+
+//
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+//
+
+extension ControllerMain: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        viewRoot.viewTable.beginUpdates()
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        viewRoot.viewTable.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?)
+    {
+        switch type {
+        case .insert:
+            guard let insertIndex = newIndexPath else { return }
+            viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
+        case .delete:
+            guard let deleteIndex = indexPath else { return }
+            viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
+        case .move:
+            guard let fromIndex = indexPath, let toIndex = newIndexPath
+            else { return }
+            viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
+        case .update:
+            guard let updateIndex = indexPath else { return }
+            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .automatic)
+        @unknown default:
+            fatalError("Unhandled case")
+        }
     }
 }
