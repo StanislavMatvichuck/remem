@@ -36,22 +36,26 @@ class ViewMain: UIView {
 
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.backgroundColor = .green
+        view.backgroundColor = .secondarySystemBackground
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            view.heightAnchor.constraint(equalToConstant: CellMain.r2),
+            view.heightAnchor.constraint(equalToConstant: 2 * .xs + CellMain.r2),
         ])
 
         let createPointView: UIView = {
             let view = UIView(frame: .zero)
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .red
+            view.backgroundColor = .systemBlue
+            view.layer.cornerRadius = CellMain.r2 / 2
+            view.layer.opacity = 0.75
 
             let label = UILabel(frame: .zero)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = "point"
             label.textAlignment = .center
+            label.textColor = .systemBackground
+            
             view.addAndConstrain(label)
 
             return view
@@ -62,10 +66,10 @@ class ViewMain: UIView {
         let screenThird = UIScreen.main.bounds.width / 3
 
         NSLayoutConstraint.activate([
-            createPointView.topAnchor.constraint(equalTo: view.topAnchor),
-            createPointView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            createPointView.topAnchor.constraint(equalTo: view.topAnchor, constant: .xs),
+            createPointView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.xs),
             createPointView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 2 * screenThird),
-            createPointView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            createPointView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.xs),
         ])
 
         return view
@@ -75,9 +79,10 @@ class ViewMain: UIView {
         let view = UIView(frame: .zero)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-
-        view.backgroundColor = .cyan
-        view.layer.cornerRadius = 5
+        
+        view.layer.opacity = 0.75  
+        view.backgroundColor = .systemBlue
+        view.layer.cornerRadius = CellMain.r2 / 2
         
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: CellMain.r2),
@@ -119,7 +124,7 @@ class ViewMain: UIView {
     init() {
         super.init(frame: .zero)
 
-        backgroundColor = .white
+        backgroundColor = .systemBackground
 
         setupViewSwiper()
 
@@ -160,7 +165,7 @@ class ViewMain: UIView {
         viewSwiper.addSubview(viewSwiperPointer)
 
         NSLayoutConstraint.activate([
-            viewSwiperPointer.topAnchor.constraint(equalTo: viewSwiper.topAnchor),
+            viewSwiperPointer.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .xs),
             fillerConstraint,
         ])
     }

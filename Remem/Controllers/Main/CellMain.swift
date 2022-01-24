@@ -53,7 +53,7 @@ class CellMain: UITableViewCell {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = CellMain.r2
-        view.backgroundColor = .orange
+        view.backgroundColor = .secondarySystemBackground
         return view
     }()
 
@@ -63,8 +63,9 @@ class CellMain: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: textSize, weight: .medium)
+        label.font = UIFont.init(name: "Nunito", size: textSize)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.textColor = .label
 
         return label
     }()
@@ -74,7 +75,10 @@ class CellMain: UITableViewCell {
 
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.init(name: "Nunito-Bold", size: textSize)
         label.numberOfLines = 1
+        label.textColor = .label
+        
 
         return label
     }()
@@ -83,8 +87,8 @@ class CellMain: UITableViewCell {
         let view = UIView(frame: .zero)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.backgroundColor = UIColor.gray.cgColor
         view.layer.cornerRadius = CellMain.r1
+        view.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
 
         return view
     }()
@@ -100,6 +104,8 @@ class CellMain: UITableViewCell {
 
         contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
 
+        backgroundColor = .systemBackground
+
         setupEventHandlers()
 
         setupViewRoot()
@@ -109,6 +115,12 @@ class CellMain: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        viewMovable.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
     }
 
     private func setupViewRoot() {
