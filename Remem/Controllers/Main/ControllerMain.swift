@@ -175,12 +175,34 @@ extension ControllerMain: UITableViewDataSource {
     }
 }
 
+//
+
+// MARK: - UITableViewDelegate
+
+//
+
 extension ControllerMain: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let index = cellIndexToBeAnimated, index == indexPath {
             let cell = cell as! CellMain
             
             cell.animateMovableViewBack()
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let newContentOffset = scrollView.contentOffset.y * 3
+    
+        viewRoot.fillerConstraint.constant = -newContentOffset
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let newContentOffset = -3 * scrollView.contentOffset.y
+        
+        let screenThird = UIScreen.main.bounds.width / 3
+    
+        if newContentOffset >= 2 * screenThird {
+            handlePressAdd()
         }
     }
 }
@@ -198,11 +220,14 @@ extension ControllerMain: CellMainDelegate {
         cellIndexToBeAnimated = index
         
         guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
+        
         let moc = persistentContainer.viewContext
+        
         moc.perform {
             managedObjects[index.row].value += 1
             do {
                 try moc.save()
+                UIDevice.vibrate()
             } catch {
                 moc.rollback()
             }
@@ -248,7 +273,7 @@ extension ControllerMain: NSFetchedResultsControllerDelegate {
             viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
         case .update:
             guard let updateIndex = indexPath else { return }
-            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .automatic)
+            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
         @unknown default:
             fatalError("Unhandled case")
         }

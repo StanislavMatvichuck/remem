@@ -20,6 +20,7 @@ class ViewMain: UIView {
         view.register(CellMain.self, forCellReuseIdentifier: CellMain.reuseIdentifier)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentInsetAdjustmentBehavior = .never
+        view.backgroundColor = .clear
 
         view.tableFooterView = UIView()
         view.allowsSelection = false
@@ -28,6 +29,68 @@ class ViewMain: UIView {
         view.showsVerticalScrollIndicator = false
 
         return view
+    }()
+
+    let viewSwiper: UIView = {
+        let view = UIView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.backgroundColor = .green
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            view.heightAnchor.constraint(equalToConstant: CellMain.r2),
+        ])
+
+        let createPointView: UIView = {
+            let view = UIView(frame: .zero)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.backgroundColor = .red
+
+            let label = UILabel(frame: .zero)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "point"
+            label.textAlignment = .center
+            view.addAndConstrain(label)
+
+            return view
+        }()
+
+        view.addSubview(createPointView)
+
+        let screenThird = UIScreen.main.bounds.width / 3
+
+        NSLayoutConstraint.activate([
+            createPointView.topAnchor.constraint(equalTo: view.topAnchor),
+            createPointView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            createPointView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 2 * screenThird),
+            createPointView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+
+        return view
+    }()
+
+    let viewSwiperPointer: UIView = {
+        let view = UIView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.backgroundColor = .cyan
+        view.layer.cornerRadius = 5
+        
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: CellMain.r2),
+            view.heightAnchor.constraint(equalToConstant: CellMain.r2),
+        ])
+
+        return view
+    }()
+
+    lazy var fillerConstraint: NSLayoutConstraint = {
+        let constraint = viewSwiperPointer.trailingAnchor.constraint(equalTo: viewSwiper.leadingAnchor)
+
+        return constraint
     }()
 
     //
@@ -58,6 +121,8 @@ class ViewMain: UIView {
 
         backgroundColor = .white
 
+        setupViewSwiper()
+
         addAndConstrain(viewTable)
 
         setupEmptyLabel()
@@ -81,6 +146,22 @@ class ViewMain: UIView {
             emptyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             emptyLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             emptyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+
+    private func setupViewSwiper() {
+        addSubview(viewSwiper)
+
+        NSLayoutConstraint.activate([
+            viewSwiper.bottomAnchor.constraint(equalTo: bottomAnchor),
+            viewSwiper.leadingAnchor.constraint(equalTo: leadingAnchor),
+        ])
+
+        viewSwiper.addSubview(viewSwiperPointer)
+
+        NSLayoutConstraint.activate([
+            viewSwiperPointer.topAnchor.constraint(equalTo: viewSwiper.topAnchor),
+            fillerConstraint,
         ])
     }
 
