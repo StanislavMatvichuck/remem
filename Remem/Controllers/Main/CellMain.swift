@@ -63,7 +63,7 @@ class CellMain: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = UIFont.init(name: "Nunito", size: textSize)
+        label.font = UIFont(name: "Nunito", size: textSize)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.textColor = .label
 
@@ -75,10 +75,9 @@ class CellMain: UITableViewCell {
 
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.init(name: "Nunito-Bold", size: textSize)
+        label.font = UIFont(name: "Nunito-Bold", size: textSize)
         label.numberOfLines = 1
-        label.textColor = .label
-        
+        label.textColor = .systemBlue
 
         return label
     }()
@@ -239,8 +238,8 @@ class CellMain: UITableViewCell {
 
         CATransaction.begin()
 
-        viewMovable.layer.add(animation, forKey: nil)
         movableCenterXPosition = movableCenterXInitialPosition
+        viewMovable.layer.add(animation, forKey: nil)
 
         CATransaction.commit()
     }
@@ -259,8 +258,8 @@ class CellMain: UITableViewCell {
             self.delegate?.didAnimation(self)
         }
 
-        viewMovable.layer.add(animation, forKey: nil)
         viewMovable.layer.position.x = movableCenterXInitialPosition
+        viewMovable.layer.add(animation, forKey: nil)
 
         CATransaction.commit()
     }

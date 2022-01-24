@@ -36,41 +36,31 @@ class ViewMain: UIView {
 
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .clear
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             view.heightAnchor.constraint(equalToConstant: 2 * .xs + CellMain.r2),
         ])
 
-        let createPointView: UIView = {
-            let view = UIView(frame: .zero)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .systemBlue
-            view.layer.cornerRadius = CellMain.r2 / 2
-            view.layer.opacity = 0.75
+        return view
+    }()
 
-            let label = UILabel(frame: .zero)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "point"
-            label.textAlignment = .center
-            label.textColor = .systemBackground
-            
-            view.addAndConstrain(label)
+    let viewCreatePoint: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .secondarySystemBackground
+        view.layer.cornerRadius = CellMain.r2 / 2
+        view.layer.opacity = 0.75
 
-            return view
-        }()
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Nunito", size: 18)
+        label.text = "point"
+        label.textAlignment = .center
+        label.textColor = .label
 
-        view.addSubview(createPointView)
-
-        let screenThird = UIScreen.main.bounds.width / 3
-
-        NSLayoutConstraint.activate([
-            createPointView.topAnchor.constraint(equalTo: view.topAnchor, constant: .xs),
-            createPointView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.xs),
-            createPointView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 2 * screenThird),
-            createPointView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.xs),
-        ])
+        view.addAndConstrain(label)
 
         return view
     }()
@@ -79,11 +69,11 @@ class ViewMain: UIView {
         let view = UIView(frame: .zero)
 
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.layer.opacity = 0.75  
+
+        view.layer.opacity = 0.75
         view.backgroundColor = .systemBlue
         view.layer.cornerRadius = CellMain.r2 / 2
-        
+
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: CellMain.r2),
             view.heightAnchor.constraint(equalToConstant: CellMain.r2),
@@ -136,6 +126,12 @@ class ViewMain: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+    }
 
     //
 
@@ -168,6 +164,17 @@ class ViewMain: UIView {
             viewSwiperPointer.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .xs),
             fillerConstraint,
         ])
+
+        viewSwiper.addSubview(viewCreatePoint)
+
+        let screenThird = UIScreen.main.bounds.width / 3
+
+        NSLayoutConstraint.activate([
+            viewCreatePoint.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .xs),
+            viewCreatePoint.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.xs),
+            viewCreatePoint.leadingAnchor.constraint(equalTo: viewSwiper.leadingAnchor, constant: 2 * screenThird),
+            viewCreatePoint.trailingAnchor.constraint(equalTo: viewSwiper.trailingAnchor, constant: -.xs),
+        ])
     }
 
     func showEmptyState() {
@@ -176,5 +183,62 @@ class ViewMain: UIView {
 
     func hideEmptyState() {
         emptyLabel.isHidden = true
+    }
+
+//    var isPointerAnimated = false
+    var isPointerSmall = false
+
+    func animatePointSelector() {
+        guard !isPointerSmall else { return }
+
+//        let animation = CABasicAnimation(keyPath: "transform.scale.y")
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
+        animation.fromValue = UIColor.secondarySystemBackground.cgColor
+        animation.toValue = UIColor.systemBlue.cgColor
+        animation.duration = 0.2
+//        animation.fillMode = .backwards
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+//        CATransaction.begin()
+//
+//        CATransaction.setCompletionBlock {
+//            self.isPointerSmall = true
+//        }
+
+//        viewCreatePoint.transform = CGAffineTransform(scaleX: 1, y: 0.8)
+        viewCreatePoint.layer.backgroundColor = UIColor.systemBlue.cgColor
+        viewCreatePoint.layer.add(animation, forKey: nil)
+
+//        isPointerAnimated = true
+        isPointerSmall = true
+        
+
+//        CATransaction.commit()
+    }
+
+    func reversePointSelectorAnimation() {
+        guard isPointerSmall else { return }
+//
+//        let animation = CABasicAnimation(keyPath: "transform.scale.y")
+                let animation = CABasicAnimation(keyPath: "backgroundColor")
+        animation.fromValue = UIColor.systemBlue.cgColor
+        animation.toValue = UIColor.secondarySystemBackground.cgColor
+        animation.duration = 0.2
+//        animation.fillMode = .backwards
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+//
+        CATransaction.begin()
+//
+        CATransaction.setCompletionBlock {
+            self.isPointerSmall = false
+        }
+//
+//        viewCreatePoint.transform = CGAffineTransform.identity
+        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        viewCreatePoint.layer.add(animation, forKey: nil)
+        
+        isPointerSmall = false
+//
+        CATransaction.commit()
     }
 }

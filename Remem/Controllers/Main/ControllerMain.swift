@@ -191,9 +191,19 @@ extension ControllerMain: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let newContentOffset = scrollView.contentOffset.y * 3
+        let newContentOffset = 3 * scrollView.contentOffset.y
     
-        viewRoot.fillerConstraint.constant = -newContentOffset
+        viewRoot.fillerConstraint.constant = -newContentOffset.clamped(to: -(UIScreen.main.bounds.width - .xs) ... 0)
+        
+        print(newContentOffset)
+        
+        let screenThird = UIScreen.main.bounds.width / 3
+
+        if -newContentOffset >= 2 * screenThird + CellMain.r2 {
+            viewRoot.animatePointSelector()
+        } else {
+            viewRoot.reversePointSelectorAnimation()
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
