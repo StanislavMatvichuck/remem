@@ -126,7 +126,7 @@ class ViewMain: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
@@ -211,7 +211,7 @@ class ViewMain: UIView {
 
 //        isPointerAnimated = true
         isPointerSmall = true
-        
+        UIDevice.vibrate(.soft)
 
 //        CATransaction.commit()
     }
@@ -220,7 +220,7 @@ class ViewMain: UIView {
         guard isPointerSmall else { return }
 //
 //        let animation = CABasicAnimation(keyPath: "transform.scale.y")
-                let animation = CABasicAnimation(keyPath: "backgroundColor")
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
         animation.fromValue = UIColor.systemBlue.cgColor
         animation.toValue = UIColor.secondarySystemBackground.cgColor
         animation.duration = 0.2
@@ -236,8 +236,9 @@ class ViewMain: UIView {
 //        viewCreatePoint.transform = CGAffineTransform.identity
         viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
         viewCreatePoint.layer.add(animation, forKey: nil)
-        
+
         isPointerSmall = false
+        UIDevice.vibrate(.soft)
 //
         CATransaction.commit()
     }

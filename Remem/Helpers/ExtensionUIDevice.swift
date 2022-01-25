@@ -9,7 +9,10 @@ import AVFoundation
 import UIKit
 
 extension UIDevice {
-    static func vibrate() {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    static func vibrate(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
+//        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: style)
+        impactFeedbackgenerator.prepare()
+        impactFeedbackgenerator.impactOccurred()
     }
 }

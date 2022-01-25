@@ -210,7 +210,10 @@ class CellMain: UITableViewCell {
         let newCenter = CGPoint(x: newXPosition, y: movedView.center.y)
 
         if
-            gestureRecognizer.state == .began ||
+            gestureRecognizer.state == .began
+        {
+            UIDevice.vibrate(.light)
+        } else if
             gestureRecognizer.state == .changed
         {
             movedView.center = newCenter
@@ -245,12 +248,29 @@ class CellMain: UITableViewCell {
     }
 
     func animateMovableViewBack() {
+        let animColor = CABasicAnimation(keyPath: "backgroundColor")
+        animColor.fromValue = UIColor.tertiarySystemBackground.cgColor
+        animColor.toValue = UIColor.systemBlue.cgColor
+        animColor.timingFunction = CAMediaTimingFunction(name: .linear)
+        animColor.autoreverses = true
+        animColor.repeatCount = 1
+        animColor.duration = 0.1
+
+        let animScale = CABasicAnimation(keyPath: "transform.scale")
+        animScale.fromValue = 1
+        animScale.toValue = CellMain.r2 / CellMain.r1
+        animScale.timingFunction = CAMediaTimingFunction(name: .linear)
+        animScale.autoreverses = true
+        animScale.repeatCount = 1
+        animScale.duration = 0.1
+
         let animation = CABasicAnimation(keyPath: "position.x")
         animation.fromValue = movableCenterXSuccessPosition
         animation.toValue = movableCenterXInitialPosition
         animation.duration = 0.3
         animation.fillMode = .backwards
         animation.timingFunction = CAMediaTimingFunction(name: .linear)
+        animation.beginTime = CACurrentMediaTime() + 0.2
 
         CATransaction.begin()
 
@@ -259,6 +279,8 @@ class CellMain: UITableViewCell {
         }
 
         viewMovable.layer.position.x = movableCenterXInitialPosition
+        viewMovable.layer.add(animScale, forKey: nil)
+        viewMovable.layer.add(animColor, forKey: nil)
         viewMovable.layer.add(animation, forKey: nil)
 
         CATransaction.commit()

@@ -211,7 +211,7 @@ extension ControllerMain: UITableViewDelegate {
         
         let screenThird = UIScreen.main.bounds.width / 3
     
-        if newContentOffset >= 2 * screenThird {
+        if newContentOffset >= 2 * screenThird + CellMain.r2 {
             handlePressAdd()
         }
     }
@@ -237,7 +237,7 @@ extension ControllerMain: CellMainDelegate {
             managedObjects[index.row].value += 1
             do {
                 try moc.save()
-                UIDevice.vibrate()
+                UIDevice.vibrate(.medium)
             } catch {
                 moc.rollback()
             }
