@@ -270,7 +270,9 @@ extension ControllerMain: CellMainDelegate {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
-            print("time to show list controller")
+            let controller = ControllerPointsList()
+            
+            self.present(controller, animated: true, completion: nil)
         }))
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in

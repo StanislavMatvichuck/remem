@@ -13,6 +13,9 @@
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
+		0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* ControllerPointsList.swift */; };
+		0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* ViewPointsList.swift */; };
+		0890627C27A0A2700032847C /* CellPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* CellPoint.swift */; };
 		08B05463279EFB6D00544720 /* Nunito.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B05460279EFA9300544720 /* Nunito.ttf */; };
 		08B05465279EFC3000544720 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B05464279EFC3000544720 /* Nunito-Bold.ttf */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
@@ -33,6 +36,9 @@
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
+		0890627727A0A2520032847C /* ControllerPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerPointsList.swift; sourceTree = "<group>"; };
+		0890627927A0A25E0032847C /* ViewPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPointsList.swift; sourceTree = "<group>"; };
+		0890627B27A0A2700032847C /* CellPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPoint.swift; sourceTree = "<group>"; };
 		08B05460279EFA9300544720 /* Nunito.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nunito.ttf; sourceTree = "<group>"; };
 		08B05464279EFC3000544720 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +65,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0890627627A0A1E30032847C /* PointsList */ = {
+			isa = PBXGroup;
+			children = (
+				0890627727A0A2520032847C /* ControllerPointsList.swift */,
+				0890627927A0A25E0032847C /* ViewPointsList.swift */,
+				0890627B27A0A2700032847C /* CellPoint.swift */,
+			);
+			path = PointsList;
+			sourceTree = "<group>";
+		};
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +127,7 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0890627627A0A1E30032847C /* PointsList */,
 				08D512342787143900C2037F /* Main */,
 			);
 			path = Controllers;
@@ -224,11 +241,14 @@
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08D512382787153900C2037F /* CellMain.swift in Sources */,
+				0890627C27A0A2700032847C /* CellPoint.swift in Sources */,
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
+				0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
+				0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */,
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
