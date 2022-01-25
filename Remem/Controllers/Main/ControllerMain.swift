@@ -267,6 +267,22 @@ extension ControllerMain: CellMainDelegate {
     func didLongPressAction(_ cell: CellMain) {
         guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
         
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
+            print("time to show list controller")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
+            self.deleteRowBy(index: index)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func deleteRowBy(index: IndexPath) {
         let moc = persistentContainer.viewContext
         
         guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
