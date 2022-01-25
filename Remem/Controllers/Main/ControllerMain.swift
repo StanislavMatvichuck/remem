@@ -30,6 +30,7 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     var persistentContainer: NSPersistentContainer!
     
     var fetchedResultsController: NSFetchedResultsController<Entry>?
+    var pointsFetchedResultsController: NSFetchedResultsController<Point>?
     
     //
     
@@ -96,8 +97,19 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
                                                               sectionNameKeyPath: nil,
                                                               cacheName: nil)
         fetchedResultsController?.delegate = self
+        
+        let pointsRequest = NSFetchRequest<Point>(entityName: "Point")
+        
+        pointsRequest.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+        
+        pointsFetchedResultsController = NSFetchedResultsController(fetchRequest: pointsRequest,
+                                                                    managedObjectContext: moc,
+                                                                    sectionNameKeyPath: nil,
+                                                                    cacheName: nil)
+        
         do {
             try fetchedResultsController?.performFetch()
+            try pointsFetchedResultsController?.performFetch()
         } catch {
             print("fetch request failed")
         }
@@ -132,11 +144,35 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
         moc.perform {
             let entry = Entry(context: moc)
             entry.name = name
-            entry.value = 0
             do {
                 try moc.save()
             } catch {
                 moc.rollback()
+            }
+        }
+    }
+    
+    //
+    // Shake gesture handling
+    //
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            let moc = persistentContainer.viewContext
+            
+            guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
+
+            moc.perform {
+                guard !managedObjects.isEmpty else { return }
+                
+                moc.delete(managedObjects.last!)
+                
+                do {
+                    try moc.save()
+                    UIDevice.vibrate(.medium)
+                } catch {
+                    moc.rollback()
+                }
             }
         }
     }
@@ -169,7 +205,7 @@ extension ControllerMain: UITableViewDataSource {
 
         row.delegate = self
         row.update(name: dataRow.name!)
-        row.update(value: Int(dataRow.value))
+        row.update(value: dataRow.totalAmount)
         
         return row
     }
@@ -194,8 +230,6 @@ extension ControllerMain: UITableViewDelegate {
         let newContentOffset = 3 * scrollView.contentOffset.y
     
         viewRoot.fillerConstraint.constant = -newContentOffset.clamped(to: -(UIScreen.main.bounds.width - .xs) ... 0)
-        
-        print(newContentOffset)
         
         let screenThird = UIScreen.main.bounds.width / 3
 
@@ -234,7 +268,16 @@ extension ControllerMain: CellMainDelegate {
         let moc = persistentContainer.viewContext
         
         moc.perform {
-            managedObjects[index.row].value += 1
+            let newPoint = Point(context: moc)
+            
+            newPoint.dateTime = Date.now
+            newPoint.value = 1
+            
+            let newFavorites: Set<AnyHashable> = managedObjects[index.row].points?.adding(newPoint) ?? [newPoint]
+            
+            let entry = managedObjects[index.row]
+            
+            entry.points = NSSet(set: newFavorites)
             do {
                 try moc.save()
                 UIDevice.vibrate(.medium)
