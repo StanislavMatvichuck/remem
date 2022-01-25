@@ -107,6 +107,8 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
                                                                     sectionNameKeyPath: nil,
                                                                     cacheName: nil)
         
+        pointsFetchedResultsController?.delegate = self
+        
         do {
             try fetchedResultsController?.performFetch()
             try pointsFetchedResultsController?.performFetch()
@@ -161,7 +163,7 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
             let moc = persistentContainer.viewContext
             
             guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
-
+            
             moc.perform {
                 guard !managedObjects.isEmpty else { return }
                 
@@ -258,6 +260,32 @@ extension ControllerMain: UITableViewDelegate {
 //
 
 extension ControllerMain: CellMainDelegate {
+    //
+    // Long press Entry deletion
+    //
+    
+    func didLongPressAction(_ cell: CellMain) {
+        guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
+        
+        let moc = persistentContainer.viewContext
+        
+        guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
+
+        moc.perform {
+            guard !managedObjects.isEmpty else { return }
+            
+            moc.delete(managedObjects[index.row])
+            
+            do {
+                try moc.save()
+                
+                UIDevice.vibrate(.medium)
+            } catch {
+                moc.rollback()
+            }
+        }
+    }
+    
     func didSwipeAction(_ cell: CellMain) {
         guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
         
@@ -300,11 +328,15 @@ extension ControllerMain: CellMainDelegate {
 
 extension ControllerMain: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.beginUpdates()
+        if controller == fetchedResultsController {
+            viewRoot.viewTable.beginUpdates()
+        }
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.endUpdates()
+        if controller == fetchedResultsController {
+            viewRoot.viewTable.endUpdates()
+        }
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -313,22 +345,24 @@ extension ControllerMain: NSFetchedResultsControllerDelegate {
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?)
     {
-        switch type {
-        case .insert:
-            guard let insertIndex = newIndexPath else { return }
-            viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
-        case .delete:
-            guard let deleteIndex = indexPath else { return }
-            viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
-        case .move:
-            guard let fromIndex = indexPath, let toIndex = newIndexPath
-            else { return }
-            viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
-        case .update:
-            guard let updateIndex = indexPath else { return }
-            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
-        @unknown default:
-            fatalError("Unhandled case")
+        if controller == fetchedResultsController {
+            switch type {
+            case .insert:
+                guard let insertIndex = newIndexPath else { return }
+                viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
+            case .delete:
+                guard let deleteIndex = indexPath else { return }
+                viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
+            case .move:
+                guard let fromIndex = indexPath, let toIndex = newIndexPath
+                else { return }
+                viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
+            case .update:
+                guard let updateIndex = indexPath else { return }
+                viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
+            @unknown default:
+                fatalError("Unhandled case")
+            }
         }
     }
 }

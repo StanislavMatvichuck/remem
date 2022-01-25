@@ -9,6 +9,7 @@ import UIKit
 
 protocol CellMainDelegate: AnyObject {
     func didSwipeAction(_ cell: CellMain)
+    func didLongPressAction(_ cell: CellMain)
     func didAnimation(_ cell: CellMain)
 }
 
@@ -170,6 +171,10 @@ class CellMain: UITableViewCell {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
 
         viewMovable.addGestureRecognizer(gestureRecognizer)
+
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+
+        viewMovable.addGestureRecognizer(longPressRecognizer)
     }
 
     //
@@ -284,6 +289,12 @@ class CellMain: UITableViewCell {
         viewMovable.layer.add(animation, forKey: nil)
 
         CATransaction.commit()
+    }
+
+    @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            delegate?.didLongPressAction(self)
+        }
     }
 
     //
