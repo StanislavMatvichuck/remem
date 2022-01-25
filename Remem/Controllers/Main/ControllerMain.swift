@@ -272,6 +272,14 @@ extension ControllerMain: CellMainDelegate {
         alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
             let controller = ControllerPointsList()
             
+            controller.persistentContainer = self.persistentContainer
+            
+//            let moc = self.persistentContainer.viewContext
+            
+//            let entry = self.fetchedResultsController?.fetchedObjects?[index.row]
+            
+//            dump(entry)
+            
             self.present(controller, animated: true, completion: nil)
         }))
         
@@ -316,7 +324,7 @@ extension ControllerMain: CellMainDelegate {
         moc.perform {
             let newPoint = Point(context: moc)
             
-            newPoint.dateTime = Date.now
+            newPoint.dateTime = NSDate.now
             newPoint.value = 1
             
             let newFavorites: Set<AnyHashable> = managedObjects[index.row].points?.adding(newPoint) ?? [newPoint]
