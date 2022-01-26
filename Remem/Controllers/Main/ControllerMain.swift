@@ -270,17 +270,16 @@ extension ControllerMain: CellMainDelegate {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
-            let controller = ControllerPointsList()
             
-            controller.persistentContainer = self.persistentContainer
+            if let entry = self.fetchedResultsController?.fetchedObjects?[index.row] {
+                let controller = ControllerPointsList(entry: entry)
+                
+                controller.persistentContainer = self.persistentContainer
+                
+                let navigator = UINavigationController(rootViewController: controller)
             
-//            let moc = self.persistentContainer.viewContext
-            
-//            let entry = self.fetchedResultsController?.fetchedObjects?[index.row]
-            
-//            dump(entry)
-            
-            self.present(controller, animated: true, completion: nil)
+                self.present(navigator, animated: true, completion: nil)
+            }
         }))
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in

@@ -27,13 +27,17 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     
     var fetchedResultsController: NSFetchedResultsController<Point>?
     
+    var relatedEntry: Entry
+    
     //
     
     // MARK: - Initialization
     
     //
     
-    init() {
+    init(entry: Entry) {
+        relatedEntry = entry
+        
         super.init(nibName: nil, bundle: nil)
         
         viewRoot.viewTable.dataSource = self
@@ -54,7 +58,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     override func viewDidLoad() {
         view.backgroundColor = .red
         
-        title = "Points list"
+        title = relatedEntry.name
         
         fetch()
     }
@@ -65,6 +69,10 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         let moc = persistentContainer.viewContext
         
         request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+        
+        let predicate  = NSPredicate(format: "entry == %@", argumentArray: [relatedEntry])
+        
+        request.predicate = predicate
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                               managedObjectContext: moc,
