@@ -27,6 +27,10 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     
     var fetchedResultsController: NSFetchedResultsController<Point>?
     
+    var moc: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
+    
     var relatedEntry: Entry
     
     //
@@ -65,8 +69,6 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     
     private func fetch() {
         let request = NSFetchRequest<Point>(entityName: "Point")
-        
-        let moc = persistentContainer.viewContext
         
         request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: false)]
         

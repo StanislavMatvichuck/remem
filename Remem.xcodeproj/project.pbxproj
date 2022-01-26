@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
+		0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */; };
 		083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */; };
 		083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3891279AE61E00134A15 /* CoreDataConsumer.swift */; };
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
+		0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSManagedObjectContext.swift; sourceTree = "<group>"; };
 		083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSPersistentDataContainer.swift; sourceTree = "<group>"; };
 		083D3891279AE61E00134A15 /* CoreDataConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConsumer.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				083D3891279AE61E00134A15 /* CoreDataConsumer.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
+				0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */,
 				083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
@@ -255,6 +258,7 @@
 				0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */,
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,
+				0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 			);

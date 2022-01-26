@@ -27,10 +27,18 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
         }
     }
     
+    //
+    // CoreData properties
+    //
+    
     var persistentContainer: NSPersistentContainer!
     
     var fetchedResultsController: NSFetchedResultsController<Entry>?
     var pointsFetchedResultsController: NSFetchedResultsController<Point>?
+    
+    var moc: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
     
     //
     
@@ -59,36 +67,20 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     override func loadView() { view = viewRoot }
     
     override func viewDidLoad() {
-        viewRoot.viewTable.dataSource = self
-        viewRoot.viewTable.delegate = self
         textField.delegate = self
         
-        fetch()
+        setupTableView()
         
-        setupNavigationItem()
+        fetch()
     }
     
-    private func setupNavigationItem() {
-        title = "Remem"
-        
-        //
-        // Right temporary button
-        //
-        
-        let addImage = UIImage(systemName: "plus")?
-            .withTintColor(.orange)
-            .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))
-        
-        let addButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(handlePressAdd))
-        
-        navigationItem.setRightBarButton(addButton, animated: false)
+    private func setupTableView() {
+        viewRoot.viewTable.dataSource = self
+        viewRoot.viewTable.delegate = self
     }
     
     private func fetch() {
         let request = NSFetchRequest<Entry>(entityName: "Entry")
-        
-        let moc = persistentContainer.viewContext
         
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
@@ -141,16 +133,10 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     @objc private func handlePressAddConfirm(_: UIAlertAction) {
         guard let name = textField.text, !name.isEmpty else { return }
         
-        let moc = persistentContainer.viewContext
-        
-        moc.perform {
-            let entry = Entry(context: moc)
+        moc.persist {
+            let entry = Entry(context: self.moc)
+            
             entry.name = name
-            do {
-                try moc.save()
-            } catch {
-                moc.rollback()
-            }
         }
     }
     
@@ -160,21 +146,14 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            let moc = persistentContainer.viewContext
-            
             guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
             
-            moc.perform {
+            moc.persist(block: {
                 guard !managedObjects.isEmpty else { return }
                 
-                moc.delete(managedObjects.last!)
-                
-                do {
-                    try moc.save()
-                    UIDevice.vibrate(.medium)
-                } catch {
-                    moc.rollback()
-                }
+                self.moc.delete(managedObjects.last!)
+            }) {
+                UIDevice.vibrate(.medium)
             }
         }
     }
@@ -292,22 +271,14 @@ extension ControllerMain: CellMainDelegate {
     }
     
     private func deleteRowBy(index: IndexPath) {
-        let moc = persistentContainer.viewContext
-        
         guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
 
-        moc.perform {
+        moc.persist {
             guard !managedObjects.isEmpty else { return }
             
-            moc.delete(managedObjects[index.row])
-            
-            do {
-                try moc.save()
-                
-                UIDevice.vibrate(.medium)
-            } catch {
-                moc.rollback()
-            }
+            self.moc.delete(managedObjects[index.row])
+        } successBlock: {
+            UIDevice.vibrate(.medium)
         }
     }
     
@@ -318,10 +289,8 @@ extension ControllerMain: CellMainDelegate {
         
         guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
         
-        let moc = persistentContainer.viewContext
-        
-        moc.perform {
-            let newPoint = Point(context: moc)
+        moc.persist {
+            let newPoint = Point(context: self.moc)
             
             newPoint.dateTime = NSDate.now
             newPoint.value = 1
@@ -331,12 +300,8 @@ extension ControllerMain: CellMainDelegate {
             let entry = managedObjects[index.row]
             
             entry.points = NSSet(set: newFavorites)
-            do {
-                try moc.save()
-                UIDevice.vibrate(.medium)
-            } catch {
-                moc.rollback()
-            }
+        } successBlock: {
+            UIDevice.vibrate(.medium)
         }
     }
     
