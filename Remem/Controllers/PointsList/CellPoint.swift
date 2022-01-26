@@ -16,6 +16,8 @@ class CellPoint: UITableViewCell {
 
     static let reuseIdentifier = "CellPoint"
 
+    static let textSize: CGFloat = 24
+
     //
 
     // MARK: - Private properties
@@ -31,8 +33,11 @@ class CellPoint: UITableViewCell {
     fileprivate var labelTime: UILabel = {
         let label = UILabel(frame: .zero)
 
-        label.textColor = .label
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Nunito-Bold", size: textSize)
+        label.numberOfLines = 1
+        label.textColor = .systemBlue
 
         return label
     }()
@@ -40,9 +45,12 @@ class CellPoint: UITableViewCell {
     fileprivate var labelDay: UILabel = {
         let label = UILabel(frame: .zero)
 
-        label.textColor = .label
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
+        label.font = UIFont(name: "Nunito", size: textSize)
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.textColor = .label
 
         return label
     }()
@@ -70,7 +78,10 @@ class CellPoint: UITableViewCell {
             labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
             labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
 
-            labelTime.widthAnchor.constraint(equalTo: labelDay.widthAnchor),
+            labelTime.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, multiplier: 1 / 3),
+            labelDay.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, multiplier: 2 / 3),
+            
+            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor),
         ])
 
         contentView.addAndConstrain(viewRoot)

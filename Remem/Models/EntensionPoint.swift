@@ -19,4 +19,12 @@ extension Point {
 
         return dateString
     }
+    
+    var day: String {
+        guard let date = dateTime else { return "day" }
+        
+        let formatter = DateFormatter()
+        
+        return formatter.weekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
+    }
 }

@@ -68,9 +68,9 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         
         let moc = persistentContainer.viewContext
         
-        request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: false)]
         
-        let predicate  = NSPredicate(format: "entry == %@", argumentArray: [relatedEntry])
+        let predicate = NSPredicate(format: "entry == %@", argumentArray: [relatedEntry])
         
         request.predicate = predicate
         
@@ -87,6 +87,12 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         }
     }
 }
+
+//
+
+// MARK: - UITableViewDataSource
+
+//
 
 extension ControllerPointsList: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +113,7 @@ extension ControllerPointsList: UITableViewDataSource {
             let dataRow = fetchedResultsController?.object(at: indexPath)
         else { return UITableViewCell() }
 
-        row.update(time: dataRow.time, day: "day")
+        row.update(time: dataRow.time, day: dataRow.day)
         
         return row
     }
