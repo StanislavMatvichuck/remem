@@ -13,7 +13,7 @@ protocol CellMainDelegate: AnyObject {
     func didAnimation(_ cell: CellMain)
 }
 
-class CellMain: UITableViewCell {
+final class CellMain: UITableViewCell {
     //
 
     // MARK: - Static properties
@@ -102,15 +102,13 @@ class CellMain: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-
         backgroundColor = .systemBackground
-
-        setupEventHandlers()
 
         setupViewRoot()
 
         setupViewMovable()
+
+        setupEventHandlers()
     }
 
     required init?(coder: NSCoder) {
@@ -124,6 +122,8 @@ class CellMain: UITableViewCell {
     }
 
     private func setupViewRoot() {
+        contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+
         viewRoot.addSubview(nameLabel)
         viewRoot.addSubview(valueLabel)
 
@@ -167,14 +167,18 @@ class CellMain: UITableViewCell {
 
     //
 
-    func setupEventHandlers() {
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-
-        viewMovable.addGestureRecognizer(gestureRecognizer)
-
+    private func setupEventHandlers() {
+        let swipeRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
 
+        viewMovable.addGestureRecognizer(swipeRecognizer)
         viewMovable.addGestureRecognizer(longPressRecognizer)
+    }
+
+    @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            delegate?.didLongPressAction(self)
+        }
     }
 
     //
@@ -189,10 +193,10 @@ class CellMain: UITableViewCell {
 
     private var movableCenterXPosition: CGFloat {
         get {
-            return viewMovable.center.x
+            return viewMovable.layer.position.x
         }
         set {
-            viewMovable.center.x = newValue
+            viewMovable.layer.position.x = newValue
         }
     }
 
@@ -234,22 +238,31 @@ class CellMain: UITableViewCell {
         }
     }
 
-    // TODO: make single spring animation with proper reusability for the user
+    //
 
-    func animateMovableViewReturn() {
+    // MARK: - Behaviour
+
+    //
+
+    func update(name: String) {
+        nameLabel.text = name
+    }
+
+    func update(value: Int) {
+        valueLabel.text = "\(value)"
+    }
+
+    func animateMovableViewReturn(delay: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "position.x")
         animation.fromValue = movableCenterXPosition
         animation.toValue = movableCenterXInitialPosition
         animation.duration = 0.3
         animation.fillMode = .backwards
         animation.timingFunction = CAMediaTimingFunction(name: .linear)
-
-        CATransaction.begin()
+        animation.beginTime = CACurrentMediaTime() + delay
 
         movableCenterXPosition = movableCenterXInitialPosition
         viewMovable.layer.add(animation, forKey: nil)
-
-        CATransaction.commit()
     }
 
     func animateMovableViewBack() {
@@ -269,45 +282,41 @@ class CellMain: UITableViewCell {
         animScale.repeatCount = 1
         animScale.duration = 0.1
 
-        let animation = CABasicAnimation(keyPath: "position.x")
-        animation.fromValue = movableCenterXSuccessPosition
-        animation.toValue = movableCenterXInitialPosition
-        animation.duration = 0.3
-        animation.fillMode = .backwards
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
-        animation.beginTime = CACurrentMediaTime() + 0.2
-
         CATransaction.begin()
 
         CATransaction.setCompletionBlock {
             self.delegate?.didAnimation(self)
         }
 
-        viewMovable.layer.position.x = movableCenterXInitialPosition
+        viewMovable.layer.position.x = movableCenterXSuccessPosition
+
+        animateMovableViewReturn(delay: 0.2)
+
         viewMovable.layer.add(animScale, forKey: nil)
+
         viewMovable.layer.add(animColor, forKey: nil)
-        viewMovable.layer.add(animation, forKey: nil)
 
         CATransaction.commit()
     }
 
-    @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == .began {
-            delegate?.didLongPressAction(self)
+    func animateTotalAmountDecrement() {
+        let animScale = CABasicAnimation(keyPath: "transform.scale")
+        animScale.fromValue = 1
+        animScale.toValue = 2
+        animScale.timingFunction = CAMediaTimingFunction(name: .linear)
+        animScale.autoreverses = true
+        animScale.repeatCount = 1
+        animScale.duration = 0.2
+
+        CATransaction.begin()
+
+        CATransaction.setCompletionBlock {
+            self.valueLabel.textColor = .systemBlue
         }
-    }
 
-    //
+        valueLabel.textColor = .systemOrange
+        valueLabel.layer.add(animScale, forKey: nil)
 
-    // MARK: - Behaviour
-
-    //
-
-    func update(name: String) {
-        nameLabel.text = name
-    }
-
-    func update(value: Int) {
-        valueLabel.text = "\(value)"
+        CATransaction.commit()
     }
 }

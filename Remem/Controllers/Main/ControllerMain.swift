@@ -168,13 +168,22 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     }
     
     private func removeLastPoint() {
-        guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
+        guard
+            let allPoints = pointsFetchedResultsController?.fetchedObjects,
+            let allEntries = fetchedResultsController?.fetchedObjects,
+            let removedPoint = allPoints.last,
+            let removedPointParentEntry = removedPoint.entry
+        else { return }
         
         moc.persist(block: {
-            guard !managedObjects.isEmpty else { return }
-            
-            self.moc.delete(managedObjects.last!)
+            self.moc.delete(removedPoint)
         }) {
+            guard
+                let entryIndex = allEntries.firstIndex(of: removedPointParentEntry),
+                let cell = self.viewRoot.viewTable.cellForRow(at: IndexPath(row: entryIndex, section: 0)) as? CellMain
+            else { return }
+            
+            cell.animateTotalAmountDecrement()
             UIDevice.vibrate(.medium)
         }
     }
@@ -260,10 +269,6 @@ extension ControllerMain: UITableViewDelegate {
 //
 
 extension ControllerMain: CellMainDelegate {
-    //
-    // Long press Entry deletion
-    //
-    
     func didLongPressAction(_ cell: CellMain) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
