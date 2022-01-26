@@ -10,6 +10,16 @@ import UIKit
 
 class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     //
+
+    // MARK: - Super properties
+
+    //
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    //
     
     // MARK: - Private properties
     
@@ -45,10 +55,6 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     // MARK: - Initialization
     
     //
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -116,7 +122,14 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     //
     
     @objc private func handlePressAdd() {
-        let alert = UIAlertController(title: "New entry", message: "Give your event a name", preferredStyle: .alert)
+        present(createNewEntryAlert(), animated: true, completion: nil)
+    }
+    
+    private func createNewEntryAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "New entry",
+                                      message: "Give your event a name",
+                                      preferredStyle: .alert)
+        
         let addAction = UIAlertAction(title: "Add", style: .default, handler: handlePressAddConfirm)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -126,11 +139,15 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
         alert.addTextField { textField in
             self.textField = textField
         }
-            
-        present(alert, animated: true, completion: nil)
+        
+        return alert
     }
     
     @objc private func handlePressAddConfirm(_: UIAlertAction) {
+        createEntryAndPersistIt()
+    }
+    
+    private func createEntryAndPersistIt() {
         guard let name = textField.text, !name.isEmpty else { return }
         
         moc.persist {
@@ -146,15 +163,19 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
+            removeLastPoint()
+        }
+    }
+    
+    private func removeLastPoint() {
+        guard let managedObjects = pointsFetchedResultsController?.fetchedObjects else { return }
+        
+        moc.persist(block: {
+            guard !managedObjects.isEmpty else { return }
             
-            moc.persist(block: {
-                guard !managedObjects.isEmpty else { return }
-                
-                self.moc.delete(managedObjects.last!)
-            }) {
-                UIDevice.vibrate(.medium)
-            }
+            self.moc.delete(managedObjects.last!)
+        }) {
+            UIDevice.vibrate(.medium)
         }
     }
 }
@@ -244,39 +265,43 @@ extension ControllerMain: CellMainDelegate {
     //
     
     func didLongPressAction(_ cell: CellMain) {
-        guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let entry = fetchedResultsController?.fetchedObjects?[index.row]
+        else { return }
         
+        present(createManipulationAlert(for: entry), animated: true, completion: nil)
+    }
+    
+    private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
-            
-            if let entry = self.fetchedResultsController?.fetchedObjects?[index.row] {
-                let controller = ControllerPointsList(entry: entry)
-                
-                controller.persistentContainer = self.persistentContainer
-                
-                let navigator = UINavigationController(rootViewController: controller)
-            
-                self.present(navigator, animated: true, completion: nil)
-            }
+            self.present(self.createControllerPointList(for: entry), animated: true, completion: nil)
         }))
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
-            self.deleteRowBy(index: index)
+            self.delete(entry: entry)
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        present(alert, animated: true, completion: nil)
+        return alert
     }
     
-    private func deleteRowBy(index: IndexPath) {
-        guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
-
-        moc.persist {
-            guard !managedObjects.isEmpty else { return }
+    private func createControllerPointList(for entry: Entry) -> UIViewController {
+        let controller = ControllerPointsList(entry: entry)
             
-            self.moc.delete(managedObjects[index.row])
+        controller.persistentContainer = persistentContainer
+            
+        let navigator = UINavigationController(rootViewController: controller)
+        
+        return navigator
+    }
+    
+    private func delete(entry: Entry) {
+        moc.persist {
+            self.moc.delete(entry)
         } successBlock: {
             UIDevice.vibrate(.medium)
         }
@@ -289,17 +314,25 @@ extension ControllerMain: CellMainDelegate {
         
         guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
         
+        let entry = managedObjects[index.row]
+        
+        add(point: createPoint(), to: entry)
+    }
+    
+    private func createPoint() -> Point {
+        let point = Point(context: moc)
+        
+        point.dateTime = NSDate.now
+        point.value = 1
+        
+        return point
+    }
+    
+    private func add(point: Point, to entry: Entry) {
         moc.persist {
-            let newPoint = Point(context: self.moc)
+            let newPoints: Set<AnyHashable> = entry.points?.adding(point) ?? [point]
             
-            newPoint.dateTime = NSDate.now
-            newPoint.value = 1
-            
-            let newFavorites: Set<AnyHashable> = managedObjects[index.row].points?.adding(newPoint) ?? [newPoint]
-            
-            let entry = managedObjects[index.row]
-            
-            entry.points = NSSet(set: newFavorites)
+            entry.points = NSSet(set: newPoints)
         } successBlock: {
             UIDevice.vibrate(.medium)
         }
