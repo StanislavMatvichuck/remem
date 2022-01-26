@@ -236,9 +236,9 @@ extension ControllerMain: UITableViewDelegate {
         let screenThird = UIScreen.main.bounds.width / 3
 
         if -newContentOffset >= 2 * screenThird + CellMain.r2 {
-            viewRoot.animatePointSelector()
+            viewRoot.animateViewCreatePointSelectedState(to: true)
         } else {
-            viewRoot.reversePointSelectorAnimation()
+            viewRoot.animateViewCreatePointSelectedState(to: false)
         }
     }
     

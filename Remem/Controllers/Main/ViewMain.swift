@@ -94,11 +94,11 @@ class ViewMain: UIView {
 
     //
 
-    let emptyLabel: UILabel = {
+    private let emptyLabel: UILabel = {
         let label = UILabel(frame: .zero)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "You have no entries yet. Do #SOME ACTION# to begin."
+        label.text = "You have no entries yet. Swipe up to create"
         label.textAlignment = .center
         label.isHidden = true
         label.numberOfLines = 0
@@ -111,6 +111,7 @@ class ViewMain: UIView {
     // MARK: - Initialization
 
     //
+
     init() {
         super.init(frame: .zero)
 
@@ -126,18 +127,6 @@ class ViewMain: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
-    }
-
-    //
-
-    // MARK: - Behaviour
-
-    //
 
     private func setupEmptyLabel() {
         addSubview(emptyLabel)
@@ -177,6 +166,24 @@ class ViewMain: UIView {
         ])
     }
 
+    //
+
+    // MARK: - Events handling
+
+    //
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+    }
+
+    //
+
+    // MARK: - Behaviour
+
+    //
+
     func showEmptyState() {
         emptyLabel.isHidden = false
     }
@@ -185,61 +192,42 @@ class ViewMain: UIView {
         emptyLabel.isHidden = true
     }
 
-//    var isPointerAnimated = false
-    var isPointerSmall = false
+    //
 
-    func animatePointSelector() {
-        guard !isPointerSmall else { return }
+    // MARK: - Animations
 
-//        let animation = CABasicAnimation(keyPath: "transform.scale.y")
-        let animation = CABasicAnimation(keyPath: "backgroundColor")
-        animation.fromValue = UIColor.secondarySystemBackground.cgColor
-        animation.toValue = UIColor.systemBlue.cgColor
-        animation.duration = 0.2
-//        animation.fillMode = .backwards
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+    //
 
-//        CATransaction.begin()
-//
-//        CATransaction.setCompletionBlock {
-//            self.isPointerSmall = true
-//        }
+    private var isViewCreatePointSelected = false
 
-//        viewCreatePoint.transform = CGAffineTransform(scaleX: 1, y: 0.8)
-        viewCreatePoint.layer.backgroundColor = UIColor.systemBlue.cgColor
+    func animateViewCreatePointSelectedState(to isSelected: Bool) {
+        guard isSelected != isViewCreatePointSelected else { return }
+
+        let animation = createSelectedAnimation(isSelected: isSelected)
+
+        viewCreatePoint.layer.backgroundColor = isSelected ?
+            UIColor.systemBlue.cgColor :
+            UIColor.secondarySystemBackground.cgColor
+
         viewCreatePoint.layer.add(animation, forKey: nil)
 
-//        isPointerAnimated = true
-        isPointerSmall = true
-        UIDevice.vibrate(.soft)
+        isViewCreatePointSelected = isSelected
 
-//        CATransaction.commit()
+        if isSelected {
+            UIDevice.vibrate(.soft)
+        }
     }
 
-    func reversePointSelectorAnimation() {
-        guard isPointerSmall else { return }
-//
-//        let animation = CABasicAnimation(keyPath: "transform.scale.y")
+    private func createSelectedAnimation(isSelected: Bool) -> CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "backgroundColor")
-        animation.fromValue = UIColor.systemBlue.cgColor
-        animation.toValue = UIColor.secondarySystemBackground.cgColor
-        animation.duration = 0.2
-//        animation.fillMode = .backwards
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
-//
-        CATransaction.begin()
-//
-        CATransaction.setCompletionBlock {
-            self.isPointerSmall = false
-        }
-//
-//        viewCreatePoint.transform = CGAffineTransform.identity
-        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
-        viewCreatePoint.layer.add(animation, forKey: nil)
 
-        isPointerSmall = false
-        UIDevice.vibrate(.soft)
-//
-        CATransaction.commit()
+        animation.fromValue = isSelected ? UIColor.secondarySystemBackground : UIColor.systemBlue
+        animation.toValue = isSelected ? UIColor.systemBlue : UIColor.secondarySystemBackground
+
+        animation.duration = 0.2
+
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        return animation
     }
 }
