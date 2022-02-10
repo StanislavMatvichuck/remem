@@ -258,7 +258,7 @@ final class CellMain: UITableViewCell {
         animation.toValue = movableCenterXInitialPosition
         animation.duration = 0.3
         animation.fillMode = .backwards
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.beginTime = CACurrentMediaTime() + delay
 
         movableCenterXPosition = movableCenterXInitialPosition
@@ -269,7 +269,7 @@ final class CellMain: UITableViewCell {
         let animColor = CABasicAnimation(keyPath: "backgroundColor")
         animColor.fromValue = UIColor.tertiarySystemBackground.cgColor
         animColor.toValue = UIColor.systemBlue.cgColor
-        animColor.timingFunction = CAMediaTimingFunction(name: .linear)
+        animColor.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animColor.autoreverses = true
         animColor.repeatCount = 1
         animColor.duration = 0.1
@@ -277,13 +277,17 @@ final class CellMain: UITableViewCell {
         let animScale = CABasicAnimation(keyPath: "transform.scale")
         animScale.fromValue = 1
         animScale.toValue = CellMain.r2 / CellMain.r1
-        animScale.timingFunction = CAMediaTimingFunction(name: .linear)
+        animScale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animScale.autoreverses = true
         animScale.repeatCount = 1
         animScale.duration = 0.1
 
         CATransaction.begin()
 
+        // does this completion block work as intended?
+        // what animations are implicit here?
+        // make explicit animations with delegate
+        // how to measure?
         CATransaction.setCompletionBlock {
             self.delegate?.didAnimation(self)
         }
@@ -303,7 +307,7 @@ final class CellMain: UITableViewCell {
         let animScale = CABasicAnimation(keyPath: "transform.scale")
         animScale.fromValue = 1
         animScale.toValue = 2
-        animScale.timingFunction = CAMediaTimingFunction(name: .linear)
+        animScale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animScale.autoreverses = true
         animScale.repeatCount = 1
         animScale.duration = 0.2

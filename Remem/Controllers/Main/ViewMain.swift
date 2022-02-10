@@ -109,7 +109,7 @@ class ViewMain: UIView {
         let circle = UIView(frame: .zero)
         circle.translatesAutoresizingMaskIntoConstraints = false
         circle.layer.cornerRadius = CellMain.r1
-        circle.backgroundColor = .systemBackground
+        circle.backgroundColor = .tertiarySystemBackground
 
         view.addSubview(circle)
 
@@ -125,7 +125,7 @@ class ViewMain: UIView {
 
             return label
         }()
-        
+
         view.addSubview(valueLabel)
 
         NSLayoutConstraint.activate([
@@ -192,7 +192,14 @@ class ViewMain: UIView {
 
         setupViewSwiper()
 
-        addAndConstrain(viewTable)
+        addSubview(viewTable)
+
+        NSLayoutConstraint.activate([
+            viewTable.topAnchor.constraint(equalTo: topAnchor),
+            viewTable.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewTable.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
 
         setupEmptyLabel()
 
@@ -218,7 +225,7 @@ class ViewMain: UIView {
         addSubview(viewSwiper)
 
         NSLayoutConstraint.activate([
-            viewSwiper.bottomAnchor.constraint(equalTo: bottomAnchor),
+            viewSwiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             viewSwiper.leadingAnchor.constraint(equalTo: leadingAnchor),
         ])
 

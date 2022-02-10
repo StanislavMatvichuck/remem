@@ -10,16 +10,6 @@ import UIKit
 
 class ControllerMain: UIViewController, CoreDataConsumer {
     //
-
-    // MARK: - Super properties
-
-    //
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
-    //
     
     // MARK: - Private properties
     
