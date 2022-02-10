@@ -82,10 +82,83 @@ class ViewMain: UIView {
         return view
     }()
 
-    lazy var fillerConstraint: NSLayoutConstraint = {
-        let constraint = viewSwiperPointer.trailingAnchor.constraint(equalTo: viewSwiper.leadingAnchor)
+    let viewInputBackground: UIView = {
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = .systemBackground
+        return view
+    }()
 
-        return constraint
+    let viewInput: UIView = {
+        let view = UIView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.backgroundColor = .secondarySystemBackground
+
+        let input = UITextView()
+        input.translatesAutoresizingMaskIntoConstraints = false
+
+        input.font = UIFont(name: "Nunito", size: CellMain.textSize)
+        input.textAlignment = .center
+        input.backgroundColor = .clear
+
+        view.addSubview(input)
+        view.layer.cornerRadius = CellMain.r2
+        view.isOpaque = true
+
+        let circle = UIView(frame: .zero)
+        circle.translatesAutoresizingMaskIntoConstraints = false
+        circle.layer.cornerRadius = CellMain.r1
+        circle.backgroundColor = .systemBackground
+
+        view.addSubview(circle)
+
+        let valueLabel: UILabel = {
+            let label = UILabel(frame: .zero)
+
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont(name: "Nunito-Bold", size: CellMain.textSize)
+            label.numberOfLines = 1
+            label.textColor = .systemBlue
+            label.text = "0"
+
+            return label
+        }()
+        
+        view.addSubview(valueLabel)
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: .wScreen - .sm),
+            view.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2),
+
+            input.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            input.heightAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+            input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -4 * CellMain.r2),
+
+            circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            circle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .xs),
+            circle.widthAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+            circle.heightAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+
+            valueLabel.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -CellMain.r2),
+            valueLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+
+        return view
+    }()
+
+    var input: UITextView {
+        viewInput.subviews[0] as! UITextView
+    }
+
+    lazy var fillerConstraint: NSLayoutConstraint = {
+        viewSwiperPointer.trailingAnchor.constraint(equalTo: viewSwiper.leadingAnchor)
+    }()
+
+    lazy var inputContainerConstraint: NSLayoutConstraint = {
+        viewInput.topAnchor.constraint(equalTo: bottomAnchor)
     }()
 
     //
@@ -122,6 +195,8 @@ class ViewMain: UIView {
         addAndConstrain(viewTable)
 
         setupEmptyLabel()
+
+        setupViewInput()
     }
 
     required init?(coder: NSCoder) {
@@ -163,6 +238,19 @@ class ViewMain: UIView {
             viewCreatePoint.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.xs),
             viewCreatePoint.leadingAnchor.constraint(equalTo: viewSwiper.leadingAnchor, constant: 2 * screenThird),
             viewCreatePoint.trailingAnchor.constraint(equalTo: viewSwiper.trailingAnchor, constant: -.xs),
+        ])
+    }
+
+    private func setupViewInput() {
+        addSubview(viewInputBackground)
+        addSubview(viewInput)
+
+        viewInputBackground.alpha = 0.0
+        viewInputBackground.isHidden = true
+
+        NSLayoutConstraint.activate([
+            viewInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
+            inputContainerConstraint,
         ])
     }
 

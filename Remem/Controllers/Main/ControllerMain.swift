@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
+class ControllerMain: UIViewController, CoreDataConsumer {
     //
 
     // MARK: - Super properties
@@ -26,8 +26,6 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     //
     
     fileprivate let viewRoot = ViewMain()
-    
-    fileprivate var textField = UITextField()
     
     fileprivate var cellIndexToBeAnimated: IndexPath?
     
@@ -60,6 +58,10 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
         super.init(nibName: nil, bundle: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -73,9 +75,9 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
     override func loadView() { view = viewRoot }
     
     override func viewDidLoad() {
-        textField.delegate = self
-        
         setupTableView()
+        
+        setupEventHandlers()
         
         fetch()
     }
@@ -121,40 +123,31 @@ class ControllerMain: UIViewController, UITextFieldDelegate, CoreDataConsumer {
 
     //
     
-    @objc private func handlePressAdd() {
-        present(createNewEntryAlert(), animated: true, completion: nil)
-    }
-    
-    private func createNewEntryAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "New entry",
-                                      message: "Give your event a name",
-                                      preferredStyle: .alert)
+    private func setupEventHandlers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillChangeFrame(notification:)),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil
+        )
         
-        let addAction = UIAlertAction(title: "Add", style: .default, handler: handlePressAddConfirm)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        viewRoot.input.delegate = self
         
-        alert.addAction(addAction)
-        alert.addAction(cancelAction)
-            
-        alert.addTextField { textField in
-            self.textField = textField
-        }
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap))
         
-        return alert
-    }
-    
-    @objc private func handlePressAddConfirm(_: UIAlertAction) {
-        createEntryAndPersistIt()
+        viewRoot.viewInputBackground.addGestureRecognizer(recognizer)
     }
     
     private func createEntryAndPersistIt() {
-        guard let name = textField.text, !name.isEmpty else { return }
+        guard let name = viewRoot.input.text, !name.isEmpty else { return }
         
         moc.persist {
             let entry = Entry(context: self.moc)
             
             entry.name = name
         }
+        
+        viewRoot.input.text = ""
     }
     
     //
@@ -392,5 +385,83 @@ extension ControllerMain: NSFetchedResultsControllerDelegate {
                 fatalError("Unhandled case")
             }
         }
+    }
+}
+
+//
+
+// MARK: - UITextFieldDelegate
+
+//
+
+extension ControllerMain: UITextViewDelegate {
+    @objc func keyboardWillChangeFrame(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardFutureOrigin = keyboardSize.cgRectValue.origin.y
+
+        let keyboardFutureHeight = .hScreen - keyboardFutureOrigin
+        
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
+            if keyboardFutureHeight != 0 {
+                self.viewRoot.inputContainerConstraint.constant = -keyboardFutureHeight - 2 * CellMain.r2 - .xs
+            } else {
+                self.viewRoot.inputContainerConstraint.constant = keyboardFutureHeight
+            }
+            self.viewRoot.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc private func handlePressAdd() {
+        showInput()
+    }
+    
+    @objc func handleViewInputBackgroundTap() {
+        hideInput()
+        
+        viewRoot.input.text = ""
+    }
+    
+    private func showInput() {
+        viewRoot.viewInputBackground.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewRoot.viewInputBackground.alpha = 1
+        })
+        
+        let bar = UIToolbar()
+        let create = UIBarButtonItem(title: "Create",
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(handleCreate))
+        
+        let dismiss = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(handleViewInputBackgroundTap))
+        
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        bar.items = [dismiss, space, create]
+        bar.sizeToFit()
+        viewRoot.input.inputAccessoryView = bar
+        
+        viewRoot.input.becomeFirstResponder()
+    }
+    
+    @objc private func handleCreate() {
+        hideInput()
+        
+        // TODO: remove this mess!
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.createEntryAndPersistIt()
+        }
+    }
+    
+    @objc private func hideInput() {
+        viewRoot.input.resignFirstResponder()
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewRoot.viewInputBackground.alpha = 0.0
+        }, completion: { _ in
+            self.viewRoot.viewInputBackground.isHidden = true
+        })
     }
 }
