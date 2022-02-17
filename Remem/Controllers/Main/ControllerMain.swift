@@ -90,7 +90,7 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         
         let pointsRequest = NSFetchRequest<Point>(entityName: "Point")
         
-        pointsRequest.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+        pointsRequest.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: true)]
         
         pointsFetchedResultsController = NSFetchedResultsController(fetchRequest: pointsRequest,
                                                                     managedObjectContext: moc,
@@ -134,7 +134,106 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         moc.persist {
             let entry = Entry(context: self.moc)
             
-            entry.name = name
+            if name == "Test00" {
+                entry.name = "Test00"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test01" {
+                entry.name = "Test01"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 1
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test02" {
+                entry.name = "Test02"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 2
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test03" {
+                entry.name = "Test03"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 3
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test04" {
+                entry.name = "Test04"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 4
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test05" {
+                entry.name = "Test05"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 5
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test06" {
+                entry.name = "Test06"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 6
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test07" {
+                entry.name = "Test07"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 7
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test08" {
+                entry.name = "Test08"
+                
+                let dateNow = NSDate.now
+                
+                let dateCreated = dateNow - 60 * 60 * 24 * 8
+                
+                entry.dateCreated = dateCreated
+            } else if name == "Test12" {
+                entry.name = "Test12"
+               
+                let dateNow = NSDate.now
+               
+                let dateCreated = dateNow - 60 * 60 * 24 * 12
+               
+                entry.dateCreated = dateCreated
+            } else if name == "Test128" {
+                entry.name = "Test128"
+               
+                let dateNow = NSDate.now
+               
+                let dateCreated = dateNow - 60 * 60 * 24 * 128
+               
+                entry.dateCreated = dateCreated
+            } else if name == "Test1280" {
+                entry.name = "Test1280"
+               
+                let dateNow = NSDate.now
+               
+                let dateCreated = dateNow - 60 * 60 * 24 * 1280
+               
+                entry.dateCreated = dateCreated
+            } else {
+                entry.name = name
+                entry.dateCreated = NSDate.now
+            }
         }
         
         viewRoot.input.text = ""
@@ -310,7 +409,7 @@ extension ControllerMain: CellMainDelegate {
     private func createPoint() -> Point {
         let point = Point(context: moc)
         
-        point.dateTime = NSDate.now
+        point.dateCreated = NSDate.now
         point.value = 1
         
         return point

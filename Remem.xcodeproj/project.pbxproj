@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
+		08293CC127B670FC0039E432 /* CellDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* CellDay.swift */; };
 		0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */; };
+		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
 		083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */; };
 		083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3891279AE61E00134A15 /* CoreDataConsumer.swift */; };
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
@@ -33,7 +35,9 @@
 
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
+		08293CC027B670FC0039E432 /* CellDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDay.swift; sourceTree = "<group>"; };
 		0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSManagedObjectContext.swift; sourceTree = "<group>"; };
+		083A415F27BE603800AF2098 /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSPersistentDataContainer.swift; sourceTree = "<group>"; };
 		083D3891279AE61E00134A15 /* CoreDataConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConsumer.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		0890627627A0A1E30032847C /* PointsList */ = {
 			isa = PBXGroup;
 			children = (
+				08293CC027B670FC0039E432 /* CellDay.swift */,
 				0890627B27A0A2700032847C /* CellPoint.swift */,
 				0890627727A0A2520032847C /* ControllerPointsList.swift */,
 				0890627927A0A25E0032847C /* ViewPointsList.swift */,
@@ -162,6 +167,7 @@
 			children = (
 				083D3891279AE61E00134A15 /* CoreDataConsumer.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
+				083A415F27BE603800AF2098 /* ExtensionDate.swift */,
 				0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */,
 				083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
@@ -252,9 +258,11 @@
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
+				08293CC127B670FC0039E432 /* CellDay.swift in Sources */,
 				0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
+				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
 				0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */,
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,

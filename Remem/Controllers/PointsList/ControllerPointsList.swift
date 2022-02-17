@@ -34,6 +34,20 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     var relatedEntry: Entry
     
     //
+    // Display data types
+    //
+    
+    var dataSize: Int
+    
+    var headSize: Int
+    
+    var tailSize: Int
+    
+    var totalCellsAmount: Int {
+        headSize + dataSize + tailSize
+    }
+    
+    //
     
     // MARK: - Initialization
     
@@ -42,9 +56,39 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     init(entry: Entry) {
         relatedEntry = entry
         
+        let dateCreated = relatedEntry.dateCreated!
+        
+        let dateToday = Date.now
+        
+        let dateDelta = dateToday - dateCreated
+        
+        dataSize = {
+            (dateDelta.day ?? 0) + 1
+        }()
+        
+        headSize = {
+            if dateCreated.weekdayNumber.rawValue == 1 {
+                return 6
+            }
+            
+            return dateCreated.weekdayNumber.rawValue - 2
+        }()
+        
+        tailSize = {
+            if dateToday.weekdayNumber.rawValue == 1 {
+                return 0
+            }
+            
+            return 8 - dateToday.weekdayNumber.rawValue
+            
+        }()
+        
         super.init(nibName: nil, bundle: nil)
         
         viewRoot.viewTable.dataSource = self
+        
+        viewRoot.viewDisplay.dataSource = self
+        viewRoot.viewDisplay.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -60,7 +104,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     override func loadView() { view = viewRoot }
     
     override func viewDidLoad() {
-        view.backgroundColor = .red
+        view.backgroundColor = .systemBackground
         
         title = relatedEntry.name
         
@@ -70,7 +114,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     private func fetch() {
         let request = NSFetchRequest<Point>(entityName: "Point")
         
-        request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
         
         let predicate = NSPredicate(format: "entry == %@", argumentArray: [relatedEntry])
         
@@ -159,5 +203,113 @@ extension ControllerPointsList: NSFetchedResultsControllerDelegate {
         @unknown default:
             fatalError("Unhandled case")
         }
+    }
+}
+
+//
+
+// MARK: - UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
+
+//
+
+extension ControllerPointsList: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    var pointsGroupedByDay: [Int] {
+        let allPoints = fetchedResultsController?.fetchedObjects ?? []
+        
+        var result = [Int](repeating: 0, count: dataSize)
+        
+        for point in allPoints {
+            let pointDate = point.dateCreated!
+            
+            let pointIndex = (Date.now - pointDate).day!
+            
+            result[pointIndex] += 1
+        }
+        
+        return result.reversed()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize(width: .wScreen / 7, height: collectionView.bounds.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return totalCellsAmount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellDay.reuseIdentifier, for: indexPath) as! CellDay
+        
+        let index = indexPath.row
+        
+        let numberInMonth = dayInMonth(by: index)
+        
+        switch cellType(by: index) {
+        case .past:
+            cell.update(day: "\(numberInMonth)")
+            cell.update(amount: nil)
+        case .created:
+            cell.update(day: "\(numberInMonth)")
+            cell.update(amount: nil)
+        case .data:
+            cell.backgroundColor = .secondarySystemBackground
+            cell.update(day: "\(numberInMonth)")
+            if !pointsGroupedByDay.isEmpty {
+                let safeDataIndex = index - headSize
+                
+                cell.update(amount: pointsGroupedByDay[safeDataIndex])
+            } else {
+                cell.update(amount: nil)
+            }
+        case .today:
+            cell.update(day: "\(numberInMonth)")
+            cell.update(amount: nil)
+        case .future:
+            cell.update(day: "\(numberInMonth)")
+            cell.update(amount: nil)
+        }
+        
+        return cell
+    }
+    
+    private func cellType(by index: Int) -> CellDay.type {
+        if headSize == 0, index == 0 {
+            return .data
+        }
+        
+        if index < headSize - 1 {
+            return .past
+        }
+        
+        if index < headSize {
+            return .created
+        }
+        
+        if index == totalCellsAmount - tailSize {
+            return .today
+        }
+        
+        if index > totalCellsAmount - tailSize {
+            return .future
+        }
+        
+        return .data
+    }
+    
+    private func dayInMonth(by index: Int) -> Int {
+        let todayIndex = totalCellsAmount - tailSize - 1
+        
+        let today = Date.now
+        
+        let daysDelta = todayIndex - index
+        
+        let nextDate = Calendar.current.date(byAdding: .day, value: -daysDelta, to: today)!
+        
+        let nextDay = Calendar.current.dateComponents([.day], from: nextDate).day!
+        
+        return nextDay
     }
 }
