@@ -39,12 +39,4 @@ extension Point {
         
         return date.timeAgoDisplay()
     }
-
-    var dow: DayOfWeek {
-        guard let date = dateCreated else { return .monday }
-
-        let dayOfWeek = DayOfWeek(rawValue: Calendar.current.dateComponents([.weekday], from: date).weekday!)!
-
-        return dayOfWeek
-    }
 }

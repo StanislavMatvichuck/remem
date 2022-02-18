@@ -109,14 +109,22 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         title = relatedEntry.name
         
         fetch()
+        
+        setupViewStats()
     }
+    
+    var scrollHappened = false
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        guard !scrollHappened else { return }
+        
         let lastCellIndex = IndexPath(row: totalCellsAmount - 1, section: 0)
         
         viewRoot.viewDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
+        
+        scrollHappened = true
     }
     
     private func fetch() {
@@ -139,6 +147,15 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         } catch {
             print("fetch request failed")
         }
+    }
+    
+    private func setupViewStats() {
+        let viewDayAverage = ViewStatDisplay(value: relatedEntry.dayAverage, description: "Day average")
+        let viewWeekAverage = ViewStatDisplay(value: relatedEntry.weekAverage, description: "Week average")
+        let viewLastWeekTotal = ViewStatDisplay(value: Float(relatedEntry.lastWeekTotal), description: "Last week total")
+        let viewThisWeekTotal = ViewStatDisplay(value: Float(relatedEntry.thisWeekTotal), description: "This week total")
+        
+        viewRoot.viewStats.contain(views: viewDayAverage, viewWeekAverage, viewLastWeekTotal, viewThisWeekTotal)
     }
 }
 

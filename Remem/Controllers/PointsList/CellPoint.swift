@@ -16,8 +16,6 @@ class CellPoint: UITableViewCell {
 
     static let reuseIdentifier = "CellPoint"
 
-    static let textSize: CGFloat = 24
-
     //
 
     // MARK: - Private properties
@@ -35,7 +33,7 @@ class CellPoint: UITableViewCell {
 
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Nunito-Bold", size: textSize)
+        label.font = .systemFont(ofSize: 16)
         label.numberOfLines = 1
         label.textColor = .systemBlue
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -49,7 +47,7 @@ class CellPoint: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = UIFont(name: "Nunito", size: textSize)
+        label.font = .systemFont(ofSize: 16)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.textColor = .label
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)

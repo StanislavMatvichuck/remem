@@ -18,6 +18,7 @@
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
+		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
 		0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* ControllerPointsList.swift */; };
 		0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* ViewPointsList.swift */; };
 		0890627C27A0A2700032847C /* CellPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* CellPoint.swift */; };
@@ -47,6 +48,7 @@
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
+		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* ControllerPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerPointsList.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* ViewPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPointsList.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* CellPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPoint.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 				0868209627BFAD9600551F6A /* ViewContaining.swift */,
+				0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,
 				0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */,
+				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 			);
