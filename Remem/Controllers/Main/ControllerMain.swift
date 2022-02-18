@@ -132,111 +132,44 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         guard let name = viewRoot.input.text, !name.isEmpty else { return }
         
         moc.persist {
-            let entry = Entry(context: self.moc)
-            
-            if name == "Test00" {
-                entry.name = "Test00"
+            if name.hasPrefix("Test") {
+                let index = name.index(name.startIndex, offsetBy: 4)
                 
-                let dateNow = NSDate.now
+                let parsedDaysAmount = Int(name.suffix(from: index)) ?? 0
                 
-                let dateCreated = dateNow
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test01" {
-                entry.name = "Test01"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 1
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test02" {
-                entry.name = "Test02"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 2
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test03" {
-                entry.name = "Test03"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 3
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test04" {
-                entry.name = "Test04"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 4
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test05" {
-                entry.name = "Test05"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 5
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test06" {
-                entry.name = "Test06"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 6
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test07" {
-                entry.name = "Test07"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 7
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test08" {
-                entry.name = "Test08"
-                
-                let dateNow = NSDate.now
-                
-                let dateCreated = dateNow - 60 * 60 * 24 * 8
-                
-                entry.dateCreated = dateCreated
-            } else if name == "Test12" {
-                entry.name = "Test12"
-               
-                let dateNow = NSDate.now
-               
-                let dateCreated = dateNow - 60 * 60 * 24 * 12
-               
-                entry.dateCreated = dateCreated
-            } else if name == "Test128" {
-                entry.name = "Test128"
-               
-                let dateNow = NSDate.now
-               
-                let dateCreated = dateNow - 60 * 60 * 24 * 128
-               
-                entry.dateCreated = dateCreated
-            } else if name == "Test1280" {
-                entry.name = "Test1280"
-               
-                let dateNow = NSDate.now
-               
-                let dateCreated = dateNow - 60 * 60 * 24 * 1280
-               
-                entry.dateCreated = dateCreated
+                self.createTestEntry(daysAmount: parsedDaysAmount, hasData: true)
             } else {
+                let entry = Entry(context: self.moc)
                 entry.name = name
                 entry.dateCreated = NSDate.now
             }
         }
         
         viewRoot.input.text = ""
+    }
+
+    private func createTestEntry(daysAmount: Int, hasData: Bool) {
+        let entry = Entry(context: moc)
+        
+        entry.name = "Test\(daysAmount)"
+        
+        entry.dateCreated = Calendar.current.date(byAdding: .day, value: -daysAmount, to: Date.now)!
+        
+        if hasData {
+            for i in 0 ... daysAmount {
+                createTestPoint(for: entry, at: i, amount: Int.random(in: 1 ... 7))
+            }
+        }
+    }
+    
+    private func createTestPoint(for entry: Entry, at day: Int, amount: Int) {
+        for _ in 1 ... amount {
+            let point = Point(context: moc)
+        
+            point.entry = entry
+            point.value = 1
+            point.dateCreated = Calendar.current.date(byAdding: .day, value: -day, to: Date.now)!
+        }
     }
     
     //
