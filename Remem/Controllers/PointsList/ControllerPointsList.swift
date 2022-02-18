@@ -47,6 +47,22 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         headSize + dataSize + tailSize
     }
     
+    lazy var pointsGroupedByDay: [Int] = {
+        let allPoints = fetchedResultsController?.fetchedObjects ?? []
+        
+        var result = [Int](repeating: 0, count: dataSize)
+        
+        for point in allPoints {
+            let pointDate = point.dateCreated!
+            
+            let pointIndex = (Date.now - pointDate).day!
+            
+            result[pointIndex] += 1
+        }
+        
+        return result.reversed()
+    }()
+    
     //
     
     // MARK: - Initialization
@@ -238,22 +254,6 @@ extension ControllerPointsList: NSFetchedResultsControllerDelegate {
 //
 
 extension ControllerPointsList: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    var pointsGroupedByDay: [Int] {
-        let allPoints = fetchedResultsController?.fetchedObjects ?? []
-        
-        var result = [Int](repeating: 0, count: dataSize)
-        
-        for point in allPoints {
-            let pointDate = point.dateCreated!
-            
-            let pointIndex = (Date.now - pointDate).day!
-            
-            result[pointIndex] += 1
-        }
-        
-        return result.reversed()
-    }
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
