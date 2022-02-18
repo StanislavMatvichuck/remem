@@ -46,7 +46,7 @@ class CellDay: UICollectionViewCell {
         label.numberOfLines = 1
         label.font = UIFont(name: "Nunito", size: 24)
         label.textColor = .label
-        label.text = ""
+        label.text = " "
 
         return label
     }()
@@ -59,9 +59,32 @@ class CellDay: UICollectionViewCell {
         label.numberOfLines = 1
         label.font = UIFont(name: "Nunito", size: 24)
         label.textColor = .label
-        label.text = ""
+        label.text = " "
 
         return label
+    }()
+
+    fileprivate var viewIndicatorsContainer: UIStackView = {
+        let view = UIStackView(frame: .zero)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.spacing = 5
+        view.distribution = .fillEqually
+        view.transform = CGAffineTransform(scaleX: 1, y: -1)
+
+        for i in 1 ... 7 {
+            let viewIndicator = UIView(frame: .zero)
+
+            viewIndicator.translatesAutoresizingMaskIntoConstraints = false
+            viewIndicator.backgroundColor = .systemBlue
+            viewIndicator.alpha = 0
+            viewIndicator.layer.cornerRadius = 5
+
+            view.addArrangedSubview(viewIndicator)
+        }
+
+        return view
     }()
 
     override init(frame: CGRect) {
@@ -77,17 +100,32 @@ class CellDay: UICollectionViewCell {
     }
 
     fileprivate func setupViewRoot() {
-        viewRoot.addSubview(labelDay)
+        viewRoot.addSubview(viewIndicatorsContainer)
         viewRoot.addSubview(labelAmount)
+        viewRoot.addSubview(labelDay)
+
+        let colWidth = .wScreen / 7
 
         NSLayoutConstraint.activate([
-            labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
-            labelDay.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
-            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
-
-            labelAmount.bottomAnchor.constraint(equalTo: labelDay.topAnchor),
+            // leading
+            viewIndicatorsContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: 5),
             labelAmount.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
+            labelDay.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
+            // trailing
+            viewIndicatorsContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -5),
             labelAmount.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
+            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
+            // top and bottom
+            viewIndicatorsContainer.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: 5),
+
+            labelAmount.topAnchor.constraint(equalTo: viewIndicatorsContainer.bottomAnchor, constant: 5),
+            labelAmount.bottomAnchor.constraint(equalTo: labelDay.topAnchor),
+
+            labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
+            // heights
+
+            labelDay.heightAnchor.constraint(equalToConstant: colWidth),
+            labelAmount.heightAnchor.constraint(equalToConstant: colWidth),
         ])
 
         contentView.addAndConstrain(viewRoot)
@@ -105,15 +143,38 @@ class CellDay: UICollectionViewCell {
 
     //
 
-    func update(day: String) {
+    func update(day: String, isToday: Bool = false) {
         labelDay.text = day
+
+        if isToday {
+            labelDay.textColor = .systemBlue
+        } else {
+            labelDay.textColor = .label
+        }
     }
 
     func update(amount: Int?) {
+        disableAllIndicators()
+
         if amount == nil {
-            labelAmount.text = ""
+            labelAmount.text = " "
         } else {
             labelAmount.text = "\(amount!)"
+            enableIndicators(amount: amount!)
+        }
+    }
+
+    private func disableAllIndicators() {
+        for subview in viewIndicatorsContainer.arrangedSubviews {
+            subview.alpha = 0
+        }
+    }
+
+    private func enableIndicators(amount: Int) {
+        for (index, indicatorView) in viewIndicatorsContainer.arrangedSubviews.enumerated() {
+            if index < amount {
+                indicatorView.alpha = 1
+            }
         }
     }
 }

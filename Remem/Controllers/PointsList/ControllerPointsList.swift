@@ -111,6 +111,14 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         fetch()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let lastCellIndex = IndexPath(row: totalCellsAmount - 1, section: 0)
+        
+        viewRoot.viewDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
+    }
+    
     private func fetch() {
         let request = NSFetchRequest<Point>(entityName: "Point")
         
@@ -255,8 +263,9 @@ extension ControllerPointsList: UICollectionViewDelegateFlowLayout, UICollection
             cell.update(day: "\(numberInMonth)")
             cell.update(amount: nil)
         case .data:
-            cell.backgroundColor = .secondarySystemBackground
-            cell.update(day: "\(numberInMonth)")
+            let isToday = index == totalCellsAmount - tailSize - 1
+            
+            cell.update(day: "\(numberInMonth)", isToday: isToday)
             if !pointsGroupedByDay.isEmpty {
                 let safeDataIndex = index - headSize
                 

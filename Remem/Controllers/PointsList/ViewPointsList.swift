@@ -53,13 +53,18 @@ class ViewPointsList: UIView {
         view.axis = .horizontal
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let days = ["M", "T", "W", "T", "F", "S", "S"]
+        let fmt = DateFormatter()
 
-        for day in days {
+        var days = fmt.veryShortWeekdaySymbols!
+
+        days = Array(days[1..<days.count]) + days[0..<1]
+
+        for (index, day) in days.enumerated() {
             let label = UILabel(frame: .zero)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = day
             label.textAlignment = .center
+
             view.addArrangedSubview(label)
 
             NSLayoutConstraint.activate([
