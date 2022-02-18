@@ -16,6 +16,8 @@
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
+		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
+		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
 		0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* ControllerPointsList.swift */; };
 		0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* ViewPointsList.swift */; };
 		0890627C27A0A2700032847C /* CellPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* CellPoint.swift */; };
@@ -43,6 +45,8 @@
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
+		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
+		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* ControllerPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerPointsList.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* ViewPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPointsList.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* CellPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPoint.swift; sourceTree = "<group>"; };
@@ -73,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0868209327BFAD6500551F6A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
+				0868209627BFAD9600551F6A /* ViewContaining.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		0890627627A0A1E30032847C /* PointsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,10 +116,11 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
-				08D5123E278716DA00C2037F /* Helpers */,
-				08D512392787156500C2037F /* Models */,
+				0868209327BFAD6500551F6A /* Components */,
 				08D512332787140D00C2037F /* Controllers */,
 				08D512322787136B00C2037F /* Delegates */,
+				08D5123E278716DA00C2037F /* Helpers */,
+				08D512392787156500C2037F /* Models */,
 				08D512312787135300C2037F /* Resources */,
 			);
 			path = Remem;
@@ -249,12 +263,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08D512382787153900C2037F /* CellMain.swift in Sources */,
 				0890627C27A0A2700032847C /* CellPoint.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
+				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,

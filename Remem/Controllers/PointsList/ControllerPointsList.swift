@@ -167,7 +167,7 @@ extension ControllerPointsList: UITableViewDataSource {
             let dataRow = fetchedResultsController?.object(at: indexPath)
         else { return UITableViewCell() }
 
-        row.update(time: dataRow.time, day: dataRow.day)
+        row.update(time: dataRow.time, day: dataRow.timeSince)
         
         return row
     }

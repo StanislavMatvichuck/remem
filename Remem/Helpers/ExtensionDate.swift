@@ -21,4 +21,10 @@ extension Date {
 
         return (month: month, day: day, hour: hour, minute: minute, second: second)
     }
+
+    func timeAgoDisplay() -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: self, relativeTo: Date())
+    }
 }

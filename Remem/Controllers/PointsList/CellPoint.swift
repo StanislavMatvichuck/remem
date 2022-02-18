@@ -38,6 +38,7 @@ class CellPoint: UITableViewCell {
         label.font = UIFont(name: "Nunito-Bold", size: textSize)
         label.numberOfLines = 1
         label.textColor = .systemBlue
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         return label
     }()
@@ -51,6 +52,7 @@ class CellPoint: UITableViewCell {
         label.font = UIFont(name: "Nunito", size: textSize)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.textColor = .label
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         return label
     }()
@@ -71,17 +73,14 @@ class CellPoint: UITableViewCell {
 
         NSLayoutConstraint.activate([
             labelTime.topAnchor.constraint(equalTo: viewRoot.topAnchor),
-            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
+            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: 10),
             labelTime.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
 
             labelDay.topAnchor.constraint(equalTo: viewRoot.topAnchor),
             labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
-            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
+            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: 10),
 
-            labelTime.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, multiplier: 1 / 3),
-            labelDay.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, multiplier: 2 / 3),
-            
-            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor),
+            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -10),
         ])
 
         contentView.addAndConstrain(viewRoot)

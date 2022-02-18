@@ -34,8 +34,10 @@ extension Point {
         return dateString
     }
 
-    var day: String {
-        return dow.string
+    var timeSince: String {
+        guard let date = dateCreated else { return "-" }
+        
+        return date.timeAgoDisplay()
     }
 
     var dow: DayOfWeek {
