@@ -23,8 +23,6 @@
 		0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* ViewPointsList.swift */; };
 		0890627C27A0A2700032847C /* CellPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* CellPoint.swift */; };
 		0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionPoint.swift */; };
-		08B05463279EFB6D00544720 /* Nunito.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B05460279EFA9300544720 /* Nunito.ttf */; };
-		08B05465279EFC3000544720 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08B05464279EFC3000544720 /* Nunito-Bold.ttf */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* ControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* ControllerMain.swift */; };
@@ -53,8 +51,6 @@
 		0890627927A0A25E0032847C /* ViewPointsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPointsList.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* CellPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPoint.swift; sourceTree = "<group>"; };
 		0890627D27A0AD460032847C /* EntensionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionPoint.swift; sourceTree = "<group>"; };
-		08B05460279EFA9300544720 /* Nunito.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nunito.ttf; sourceTree = "<group>"; };
-		08B05464279EFC3000544720 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,8 +128,6 @@
 		08D512312787135300C2037F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				08B05464279EFC3000544720 /* Nunito-Bold.ttf */,
-				08B05460279EFA9300544720 /* Nunito.ttf */,
 				08D5122627870D2600C2037F /* Assets.xcassets */,
 				08D5122B27870D2600C2037F /* Info.plist */,
 				08D5122827870D2600C2037F /* LaunchScreen.storyboard */,
@@ -253,9 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D5122A27870D2600C2037F /* LaunchScreen.storyboard in Resources */,
-				08B05465279EFC3000544720 /* Nunito-Bold.ttf in Resources */,
 				08D5122727870D2600C2037F /* Assets.xcassets in Resources */,
-				08B05463279EFB6D00544720 /* Nunito.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

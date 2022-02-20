@@ -38,39 +38,44 @@ class ViewStatDisplay: UIView {
         let viewStatContainer = UIView(frame: .zero)
         viewStatContainer.translatesAutoresizingMaskIntoConstraints = false
         viewStatContainer.backgroundColor = .secondarySystemBackground
-        viewStatContainer.layer.cornerRadius = 10
+        viewStatContainer.layer.cornerRadius = .delta1
 
         let labelAmount = UILabel(frame: .zero)
 
         labelAmount.translatesAutoresizingMaskIntoConstraints = false
         labelAmount.text = formatter.string(from: NSNumber(value: value))
         labelAmount.numberOfLines = 1
-        labelAmount.font = UIFont.systemFont(ofSize: 32)
+        labelAmount.font = .systemFont(ofSize: .font2)
         labelAmount.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
         let labelDescription = UILabel(frame: .zero)
 
         labelDescription.translatesAutoresizingMaskIntoConstraints = false
         labelDescription.text = description
-        labelDescription.font = .systemFont(ofSize: 16)
+        labelDescription.font = .systemFont(ofSize: .font1)
         labelDescription.numberOfLines = 2
         labelDescription.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         viewStatContainer.addSubview(labelAmount)
         viewStatContainer.addSubview(labelDescription)
-        addAndConstrain(viewStatContainer, constant: 10)
+        addSubview(viewStatContainer)
 
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: .wScreen / 2),
+            widthAnchor.constraint(equalToConstant: (.wScreen - 3 * .delta1) / 2),
 
-            labelAmount.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: 10),
-            labelAmount.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -10),
-            labelDescription.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: 10),
-            labelDescription.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -10),
+            labelAmount.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: .delta1),
+            labelAmount.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -.delta1),
+            labelDescription.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: .delta1),
+            labelDescription.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -.delta1),
 
-            labelAmount.topAnchor.constraint(equalTo: viewStatContainer.topAnchor, constant: 10),
+            labelAmount.topAnchor.constraint(equalTo: viewStatContainer.topAnchor, constant: .delta1),
             labelAmount.bottomAnchor.constraint(equalTo: labelDescription.topAnchor),
-            labelDescription.bottomAnchor.constraint(equalTo: viewStatContainer.bottomAnchor, constant: -10),
+            labelDescription.bottomAnchor.constraint(equalTo: viewStatContainer.bottomAnchor, constant: -.delta1),
+
+            viewStatContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewStatContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewStatContainer.topAnchor.constraint(equalTo: topAnchor, constant: .delta1),
+            viewStatContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.delta1),
         ])
     }
 

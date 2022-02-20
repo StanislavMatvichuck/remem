@@ -40,16 +40,43 @@ extension CGFloat {
 
     // MARK: Fonts
 
-    static var font1: CGFloat { return 0.8 * rem }
-    static var font2: CGFloat { return 1.0 * rem }
-    static var font3: CGFloat { return 1.3 * rem }
-    static var font4: CGFloat { return 1.6 * rem }
-    static var font5: CGFloat { return 2.0 * rem }
-    static var font6: CGFloat { return 2.2 * rem }
+    static var font1: CGFloat { return 1.2 * rem }
+    static var font2: CGFloat { return 2 * .font1 }
 
     // MARK: Extras
 
     static var hairline: CGFloat { return 1.0 / UIScreen.main.scale }
-    static var hInput: CGFloat { return 3 * rem }
-    static var hButton: CGFloat { return 3.2 * rem }
+//    static var hInput: CGFloat { return 3 * rem }
+//    static var hButton: CGFloat { return 3.2 * rem }
+    //
+
+    // MARK: Main screen layout
+
+    //
+
+    static var r1: CGFloat {
+        return 2 * rem
+    }
+
+    static var r2: CGFloat {
+        return r1 + .delta1
+    }
+
+    static var delta1: CGFloat {
+        return .xs
+    }
+
+    static var d1: CGFloat {
+        return 2 * r1
+    }
+
+    static var d2: CGFloat {
+        return 2 * r2
+    }
+
+    //
+
+    // MARK: - Points list layout
+
+    //
 }

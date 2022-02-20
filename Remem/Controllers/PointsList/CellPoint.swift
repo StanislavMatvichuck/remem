@@ -33,7 +33,7 @@ class CellPoint: UITableViewCell {
 
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: .font1)
         label.numberOfLines = 1
         label.textColor = .systemBlue
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -47,7 +47,7 @@ class CellPoint: UITableViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: .font1)
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.textColor = .label
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -57,6 +57,8 @@ class CellPoint: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        backgroundColor = .clear
 
         setupViewRoot()
     }
@@ -68,20 +70,24 @@ class CellPoint: UITableViewCell {
     fileprivate func setupViewRoot() {
         viewRoot.addSubview(labelTime)
         viewRoot.addSubview(labelDay)
+        contentView.addSubview(viewRoot)
 
         NSLayoutConstraint.activate([
             labelTime.topAnchor.constraint(equalTo: viewRoot.topAnchor),
-            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: 10),
+            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .delta1),
             labelTime.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
 
             labelDay.topAnchor.constraint(equalTo: viewRoot.topAnchor),
             labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
-            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: 10),
+            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: .delta1),
 
-            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -10),
+            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -.delta1),
+
+            viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            viewRoot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            viewRoot.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .delta1 / 2),
+            viewRoot.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.delta1 / 2),
         ])
-
-        contentView.addAndConstrain(viewRoot)
     }
 
     //

@@ -259,7 +259,7 @@ extension ControllerMain: UITableViewDelegate {
         
         let screenThird = UIScreen.main.bounds.width / 3
 
-        if -newContentOffset >= 2 * screenThird + CellMain.r2 {
+        if -newContentOffset >= 2 * screenThird + .r2 {
             viewRoot.animateViewCreatePointSelectedState(to: true)
         } else {
             viewRoot.animateViewCreatePointSelectedState(to: false)
@@ -271,7 +271,7 @@ extension ControllerMain: UITableViewDelegate {
         
         let screenThird = UIScreen.main.bounds.width / 3
     
-        if newContentOffset >= 2 * screenThird + CellMain.r2 {
+        if newContentOffset >= 2 * screenThird + .r2 {
             handlePressAdd()
         }
     }
@@ -315,6 +315,17 @@ extension ControllerMain: CellMainDelegate {
         controller.persistentContainer = persistentContainer
             
         let navigator = UINavigationController(rootViewController: controller)
+        
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.backgroundColor = .systemBackground
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowImage = nil
+        appearance.shadowColor = .clear
+        
+        navigator.navigationBar.scrollEdgeAppearance = appearance
+        navigator.navigationBar.standardAppearance = appearance
+        navigator.navigationBar.compactAppearance = appearance
         
         return navigator
     }
@@ -428,7 +439,7 @@ extension ControllerMain: UITextViewDelegate {
         
         UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
             if keyboardFutureHeight != 0 {
-                self.viewRoot.inputContainerConstraint.constant = -keyboardFutureHeight - 2 * CellMain.r2 - .xs
+                self.viewRoot.inputContainerConstraint.constant = -keyboardFutureHeight - .d2 - .delta1
             } else {
                 self.viewRoot.inputContainerConstraint.constant = keyboardFutureHeight
             }

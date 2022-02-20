@@ -44,7 +44,7 @@ class CellDay: UICollectionViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = UIFont(name: "Nunito", size: 24)
+        label.font = .systemFont(ofSize: .font1)
         label.textColor = .label
         label.text = " "
 
@@ -57,7 +57,7 @@ class CellDay: UICollectionViewCell {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = UIFont(name: "Nunito", size: 24)
+        label.font = .systemFont(ofSize: .font1)
         label.textColor = .label
         label.text = " "
 
@@ -69,7 +69,7 @@ class CellDay: UICollectionViewCell {
 
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
-        view.spacing = 5
+        view.spacing = .delta1
         view.distribution = .fillEqually
         view.transform = CGAffineTransform(scaleX: 1, y: -1)
 
@@ -79,7 +79,7 @@ class CellDay: UICollectionViewCell {
             viewIndicator.translatesAutoresizingMaskIntoConstraints = false
             viewIndicator.backgroundColor = .systemBlue
             viewIndicator.alpha = 0
-            viewIndicator.layer.cornerRadius = 5
+            viewIndicator.layer.cornerRadius = .delta1
 
             view.addArrangedSubview(viewIndicator)
         }
@@ -108,17 +108,17 @@ class CellDay: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             // leading
-            viewIndicatorsContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: 5),
+            viewIndicatorsContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .delta1),
             labelAmount.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
             labelDay.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor),
             // trailing
-            viewIndicatorsContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -5),
+            viewIndicatorsContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.delta1),
             labelAmount.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
             labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor),
             // top and bottom
-            viewIndicatorsContainer.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: 5),
+            viewIndicatorsContainer.topAnchor.constraint(equalTo: viewRoot.topAnchor),
 
-            labelAmount.topAnchor.constraint(equalTo: viewIndicatorsContainer.bottomAnchor, constant: 5),
+            labelAmount.topAnchor.constraint(equalTo: viewIndicatorsContainer.bottomAnchor, constant: .delta1),
             labelAmount.bottomAnchor.constraint(equalTo: labelDay.topAnchor),
 
             labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),

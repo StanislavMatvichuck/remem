@@ -170,8 +170,9 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         let viewWeekAverage = ViewStatDisplay(value: relatedEntry.weekAverage, description: "Week average")
         let viewLastWeekTotal = ViewStatDisplay(value: Float(relatedEntry.lastWeekTotal), description: "Last week total")
         let viewThisWeekTotal = ViewStatDisplay(value: Float(relatedEntry.thisWeekTotal), description: "This week total")
+        let viewPlaceholder = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         
-        viewRoot.viewStats.contain(views: viewDayAverage, viewWeekAverage, viewLastWeekTotal, viewThisWeekTotal)
+        viewRoot.viewStats.contain(views: viewDayAverage, viewWeekAverage, viewLastWeekTotal, viewThisWeekTotal, viewPlaceholder)
     }
 }
 

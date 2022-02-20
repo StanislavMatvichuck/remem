@@ -40,7 +40,7 @@ class ViewMain: UIView {
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            view.heightAnchor.constraint(equalToConstant: 2 * .xs + CellMain.r2),
+            view.heightAnchor.constraint(equalToConstant: 2 * .xs + .r2),
         ])
 
         return view
@@ -50,12 +50,12 @@ class ViewMain: UIView {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = CellMain.r2 / 2
+        view.layer.cornerRadius = .r2 / 2
         view.layer.opacity = 0.75
 
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Nunito", size: 18)
+        label.font = .systemFont(ofSize: .font1)
         label.text = "point"
         label.textAlignment = .center
         label.textColor = .label
@@ -72,11 +72,11 @@ class ViewMain: UIView {
 
         view.layer.opacity = 0.75
         view.backgroundColor = .systemBlue
-        view.layer.cornerRadius = CellMain.r2 / 2
+        view.layer.cornerRadius = .r2 / 2
 
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: CellMain.r2),
-            view.heightAnchor.constraint(equalToConstant: CellMain.r2),
+            view.widthAnchor.constraint(equalToConstant: .r2),
+            view.heightAnchor.constraint(equalToConstant: .r2),
         ])
 
         return view
@@ -98,17 +98,17 @@ class ViewMain: UIView {
         let input = UITextView()
         input.translatesAutoresizingMaskIntoConstraints = false
 
-        input.font = UIFont(name: "Nunito", size: CellMain.textSize)
+        input.font = .systemFont(ofSize: .font1)
         input.textAlignment = .center
         input.backgroundColor = .clear
 
         view.addSubview(input)
-        view.layer.cornerRadius = CellMain.r2
+        view.layer.cornerRadius = .r2
         view.isOpaque = true
 
         let circle = UIView(frame: .zero)
         circle.translatesAutoresizingMaskIntoConstraints = false
-        circle.layer.cornerRadius = CellMain.r1
+        circle.layer.cornerRadius = .r1
         circle.backgroundColor = .tertiarySystemBackground
 
         view.addSubview(circle)
@@ -118,7 +118,7 @@ class ViewMain: UIView {
 
             label.textAlignment = .center
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: "Nunito-Bold", size: CellMain.textSize)
+            label.font = .systemFont(ofSize: .font1)
             label.numberOfLines = 1
             label.textColor = .systemBlue
             label.text = "0"
@@ -129,20 +129,20 @@ class ViewMain: UIView {
         view.addSubview(valueLabel)
 
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: .wScreen - .sm),
-            view.heightAnchor.constraint(equalToConstant: 2 * CellMain.r2),
+            view.widthAnchor.constraint(equalToConstant: .wScreen - 2 * .delta1),
+            view.heightAnchor.constraint(equalToConstant: .d2),
 
             input.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            input.heightAnchor.constraint(equalToConstant: 2 * CellMain.r1),
-            input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -4 * CellMain.r2),
+            input.heightAnchor.constraint(equalToConstant: .d1),
+            input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .d2),
 
             circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            circle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .xs),
-            circle.widthAnchor.constraint(equalToConstant: 2 * CellMain.r1),
-            circle.heightAnchor.constraint(equalToConstant: 2 * CellMain.r1),
+            circle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .delta1),
+            circle.widthAnchor.constraint(equalToConstant: .d1),
+            circle.heightAnchor.constraint(equalToConstant: .d1),
 
-            valueLabel.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -CellMain.r2),
+            valueLabel.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -.r2),
             valueLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
