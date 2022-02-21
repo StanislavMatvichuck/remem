@@ -56,11 +56,48 @@ class ViewMain: UIView {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: .font1)
-        label.text = "point"
+        label.text = "Add"
         label.textAlignment = .center
         label.textColor = .label
 
-        view.addAndConstrain(label)
+        view.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: 8 * .delta1),
+        ])
+
+        return view
+    }()
+
+    let viewSettings: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .secondarySystemBackground
+        view.layer.cornerRadius = .r2 / 2
+        view.layer.opacity = 0.75
+
+        let image = UIImage(systemName: "gearshape.fill")?
+            .withTintColor(.label)
+            .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: .font1)))
+
+        let imageView = UIImageView(image: image)
+
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        imageView.contentMode = .center
+
+        view.addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            view.widthAnchor.constraint(equalTo: imageView.widthAnchor, constant: 8 * .delta1),
+        ])
 
         return view
     }()
@@ -236,15 +273,17 @@ class ViewMain: UIView {
             fillerConstraint,
         ])
 
+        viewSwiper.addSubview(viewSettings)
         viewSwiper.addSubview(viewCreatePoint)
 
-        let screenThird = UIScreen.main.bounds.width / 3
-
         NSLayoutConstraint.activate([
-            viewCreatePoint.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .xs),
-            viewCreatePoint.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.xs),
-            viewCreatePoint.leadingAnchor.constraint(equalTo: viewSwiper.leadingAnchor, constant: 2 * screenThird),
-            viewCreatePoint.trailingAnchor.constraint(equalTo: viewSwiper.trailingAnchor, constant: -.xs),
+            viewCreatePoint.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .delta1),
+            viewCreatePoint.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.delta1),
+            viewCreatePoint.trailingAnchor.constraint(equalTo: viewSwiper.trailingAnchor, constant: -.delta1),
+
+            viewSettings.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .delta1),
+            viewSettings.trailingAnchor.constraint(equalTo: viewCreatePoint.leadingAnchor, constant: -.delta1),
+            viewSettings.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.delta1),
         ])
     }
 
@@ -293,20 +332,23 @@ class ViewMain: UIView {
 
     //
 
-    private var isViewCreatePointSelected = false
+    lazy var isViewSelected: [UIView: Bool] = [
+        viewSettings: false,
+        viewCreatePoint: false,
+    ]
 
-    func animateViewCreatePointSelectedState(to isSelected: Bool) {
-        guard isSelected != isViewCreatePointSelected else { return }
+    func animateSelectedState(to isSelected: Bool, for view: UIView) {
+        guard isSelected != isViewSelected[view] else { return }
 
         let animation = createSelectedAnimation(isSelected: isSelected)
 
-        viewCreatePoint.layer.backgroundColor = isSelected ?
+        view.layer.backgroundColor = isSelected ?
             UIColor.systemBlue.cgColor :
             UIColor.secondarySystemBackground.cgColor
 
-        viewCreatePoint.layer.add(animation, forKey: nil)
+        view.layer.add(animation, forKey: nil)
 
-        isViewCreatePointSelected = isSelected
+        isViewSelected[view] = isSelected
 
         if isSelected {
             UIDevice.vibrate(.soft)

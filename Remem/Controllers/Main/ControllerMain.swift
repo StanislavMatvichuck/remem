@@ -39,6 +39,17 @@ class ControllerMain: UIViewController, CoreDataConsumer {
     }
     
     //
+    // Swiper properties
+    //
+    
+    var settingsBounds: CGRect = .zero
+    var settingsLeft: CGFloat { settingsBounds.minX }
+    var settingsRight: CGFloat { settingsBounds.maxX }
+    
+    var addBounds: CGRect = .zero
+    var addLeft: CGFloat { addBounds.minX }
+    
+    //
     
     // MARK: - Initialization
     
@@ -105,6 +116,13 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         } catch {
             print("fetch request failed")
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        settingsBounds = viewRoot.viewSettings.convert(viewRoot.viewSettings.bounds, to: viewRoot)
+        addBounds = viewRoot.viewCreatePoint.convert(viewRoot.viewCreatePoint.bounds, to: viewRoot)
     }
     
     //
@@ -202,6 +220,17 @@ class ControllerMain: UIViewController, CoreDataConsumer {
             UIDevice.vibrate(.medium)
         }
     }
+    
+    //
+    // Settings selection handling
+    //
+    
+    private func handleSettings() {
+        let controller = ControllerSettings()
+        let navigation = UINavigationController(rootViewController: controller)
+        
+        present(navigation, animated: true, completion: nil)
+    }
 }
 
 //
@@ -253,26 +282,40 @@ extension ControllerMain: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let newContentOffset = 3 * scrollView.contentOffset.y
+        let newContentOffset = -3 * scrollView.contentOffset.y
     
-        viewRoot.fillerConstraint.constant = -newContentOffset.clamped(to: -(UIScreen.main.bounds.width - .xs) ... 0)
+        viewRoot.fillerConstraint.constant = newContentOffset.clamped(to: 0 ... (UIScreen.main.bounds.width - .delta1))
         
-        let screenThird = UIScreen.main.bounds.width / 3
-
-        if -newContentOffset >= 2 * screenThird + .r2 {
-            viewRoot.animateViewCreatePointSelectedState(to: true)
+        if
+            newContentOffset >= settingsLeft + .r2,
+            newContentOffset <= settingsRight
+        {
+            viewRoot.animateSelectedState(to: true, for: viewRoot.viewSettings)
         } else {
-            viewRoot.animateViewCreatePointSelectedState(to: false)
+            viewRoot.animateSelectedState(to: false, for: viewRoot.viewSettings)
+        }
+            
+        if newContentOffset >= addLeft + .r2 {
+            viewRoot.animateSelectedState(to: true, for: viewRoot.viewCreatePoint)
+        } else {
+            viewRoot.animateSelectedState(to: false, for: viewRoot.viewCreatePoint)
         }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let newContentOffset = -3 * scrollView.contentOffset.y
-        
-        let screenThird = UIScreen.main.bounds.width / 3
-    
-        if newContentOffset >= 2 * screenThird + .r2 {
+        if
+            let isCreatePointSelected = viewRoot.isViewSelected[viewRoot.viewCreatePoint],
+            isCreatePointSelected
+        {
             handlePressAdd()
+            return
+        }
+        
+        if let isSettingsSelected = viewRoot.isViewSelected[viewRoot.viewSettings],
+           isSettingsSelected
+        {
+            handleSettings()
+            return
         }
     }
 }

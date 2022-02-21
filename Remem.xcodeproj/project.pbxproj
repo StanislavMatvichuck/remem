@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
 		08293CC127B670FC0039E432 /* CellDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* CellDay.swift */; };
+		0830DA3427C3A6DA00479014 /* ControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* ControllerSettings.swift */; };
+		0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* ViewSettings.swift */; };
 		0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */; };
 		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
 		083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* CellDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDay.swift; sourceTree = "<group>"; };
+		0830DA3327C3A6DA00479014 /* ControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerSettings.swift; sourceTree = "<group>"; };
+		0830DA3527C3A6E000479014 /* ViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSettings.swift; sourceTree = "<group>"; };
 		0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSManagedObjectContext.swift; sourceTree = "<group>"; };
 		083A415F27BE603800AF2098 /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSPersistentDataContainer.swift; sourceTree = "<group>"; };
@@ -75,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0830DA3227C3A6C900479014 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0830DA3327C3A6DA00479014 /* ControllerSettings.swift */,
+				0830DA3527C3A6E000479014 /* ViewSettings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +160,7 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0830DA3227C3A6C900479014 /* Settings */,
 				0890627627A0A1E30032847C /* PointsList */,
 				08D512342787143900C2037F /* Main */,
 			);
@@ -258,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0830DA3427C3A6DA00479014 /* ControllerSettings.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
@@ -269,6 +284,7 @@
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
+				0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */,
 				08293CC127B670FC0039E432 /* CellDay.swift in Sources */,
 				0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
