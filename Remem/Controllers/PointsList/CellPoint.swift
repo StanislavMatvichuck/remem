@@ -31,7 +31,6 @@ class CellPoint: UITableViewCell {
     fileprivate var labelTime: UILabel = {
         let label = UILabel(frame: .zero)
 
-        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: .font1)
         label.numberOfLines = 1
@@ -44,7 +43,6 @@ class CellPoint: UITableViewCell {
     fileprivate var labelDay: UILabel = {
         let label = UILabel(frame: .zero)
 
-        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: .font1)
@@ -82,6 +80,8 @@ class CellPoint: UITableViewCell {
             labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: .delta1),
 
             labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -.delta1),
+            
+            labelDay.widthAnchor.constraint(equalTo: labelTime.widthAnchor),
 
             viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             viewRoot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

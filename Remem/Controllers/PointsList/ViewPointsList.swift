@@ -68,6 +68,7 @@ class ViewPointsList: UIView {
             label.text = day
             label.textAlignment = .center
             label.font = .systemFont(ofSize: .font1)
+            label.textColor = .tertiaryLabel
 
             view.addArrangedSubview(label)
 

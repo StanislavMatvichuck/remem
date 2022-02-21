@@ -58,7 +58,7 @@ class CellDay: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: .font1)
-        label.textColor = .label
+        label.textColor = .systemBlue
         label.text = " "
 
         return label
