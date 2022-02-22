@@ -129,18 +129,34 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         setupViewStats()
     }
     
-    var scrollHappened = false
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        setInitialScrolls()
+    }
+    
+    var scrollHappened = false
+    
+    private func setInitialScrolls() {
         guard !scrollHappened else { return }
         
+        setInitialScrollPositionForDisplay()
+        
+        setInitialScrollPositionForStats()
+        
+        scrollHappened = true
+    }
+    
+    private func setInitialScrollPositionForDisplay() {
         let lastCellIndex = IndexPath(row: totalCellsAmount - 1, section: 0)
         
         viewRoot.viewDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
+    }
+    
+    private func setInitialScrollPositionForStats() {
+        let point = CGPoint(x: 2 * .wScreen, y: 0)
         
-        scrollHappened = true
+        viewRoot.viewStats.setContentOffset(point, animated: false)
     }
     
     private func fetch() {
@@ -170,9 +186,21 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         let viewWeekAverage = ViewStatDisplay(value: relatedEntry.weekAverage, description: "Week average")
         let viewLastWeekTotal = ViewStatDisplay(value: Float(relatedEntry.lastWeekTotal), description: "Last week total")
         let viewThisWeekTotal = ViewStatDisplay(value: Float(relatedEntry.thisWeekTotal), description: "This week total")
-        let viewPlaceholder = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         
-        viewRoot.viewStats.contain(views: viewDayAverage, viewWeekAverage, viewLastWeekTotal, viewThisWeekTotal, viewPlaceholder)
+        let viewPlaceholder = UIView(frame: .zero)
+        viewPlaceholder.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewRoot.viewStats.contain(views:
+            viewLastWeekTotal,
+            viewThisWeekTotal,
+            viewDayAverage,
+            viewWeekAverage,
+            viewPlaceholder)
+        
+        NSLayoutConstraint.activate([
+            viewPlaceholder.widthAnchor.constraint(equalToConstant: 1),
+            viewPlaceholder.heightAnchor.constraint(equalTo: viewThisWeekTotal.heightAnchor),
+        ])
     }
 }
 

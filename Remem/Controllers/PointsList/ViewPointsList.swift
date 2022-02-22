@@ -127,21 +127,19 @@ class ViewPointsList: UIView {
             viewTable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
             viewTable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
 
-            viewDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
-            viewDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
-
+            viewStats.topAnchor.constraint(equalTo: viewTable.bottomAnchor),
             viewStats.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
             viewStats.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            viewStats.topAnchor.constraint(equalTo: viewTable.bottomAnchor),
-            viewStats.bottomAnchor.constraint(equalTo: viewDisplay.topAnchor),
+            viewDisplay.topAnchor.constraint(equalTo: viewStats.bottomAnchor),
+            viewDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),
 
+            viewWeekdaysLine.topAnchor.constraint(equalTo: viewDisplay.bottomAnchor),
             viewWeekdaysLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewWeekdaysLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewWeekdaysLine.topAnchor.constraint(equalTo: viewDisplay.bottomAnchor),
             viewWeekdaysLine.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-
-            viewDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),
         ])
     }
 

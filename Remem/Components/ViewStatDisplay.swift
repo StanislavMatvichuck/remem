@@ -58,24 +58,25 @@ class ViewStatDisplay: UIView {
 
         viewStatContainer.addSubview(labelAmount)
         viewStatContainer.addSubview(labelDescription)
+
         addSubview(viewStatContainer)
 
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: (.wScreen - 3 * .delta1) / 2),
-
             labelAmount.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: .delta1),
             labelAmount.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -.delta1),
             labelDescription.leadingAnchor.constraint(equalTo: viewStatContainer.leadingAnchor, constant: .delta1),
             labelDescription.trailingAnchor.constraint(equalTo: viewStatContainer.trailingAnchor, constant: -.delta1),
 
-            labelAmount.topAnchor.constraint(equalTo: viewStatContainer.topAnchor, constant: .delta1),
+            labelAmount.topAnchor.constraint(equalTo: viewStatContainer.topAnchor),
             labelAmount.bottomAnchor.constraint(equalTo: labelDescription.topAnchor),
             labelDescription.bottomAnchor.constraint(equalTo: viewStatContainer.bottomAnchor, constant: -.delta1),
 
+            viewStatContainer.topAnchor.constraint(equalTo: topAnchor, constant: .delta1),
             viewStatContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewStatContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewStatContainer.topAnchor.constraint(equalTo: topAnchor, constant: .delta1),
             viewStatContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.delta1),
+
+            viewStatContainer.widthAnchor.constraint(equalToConstant: (.wScreen - 3 * .delta1) / 2),
         ])
     }
 
