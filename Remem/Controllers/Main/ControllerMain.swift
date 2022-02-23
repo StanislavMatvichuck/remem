@@ -243,10 +243,26 @@ class ControllerMain: UIViewController, CoreDataConsumer {
     //
     
     private func handleSettings() {
-        let controller = ControllerSettings()
+        let controller = ControllerSettings(self)
         let navigation = UINavigationController(rootViewController: controller)
         
         present(navigation, animated: true, completion: nil)
+    }
+    
+    //
+
+    // MARK: - Onboarding
+
+    //
+    
+    var onboardingController: ControllerOnboarding?
+    
+    func launchOnboarding() {
+        let controller = ControllerOnboarding(main: self)
+        
+        onboardingController = controller
+        
+        controller.start()
     }
 }
 

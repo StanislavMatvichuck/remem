@@ -16,13 +16,17 @@ class ControllerSettings: UIViewController {
     
     fileprivate let viewRoot = ViewSettings()
     
+    fileprivate weak var mainController: ControllerMain?
+    
     //
     
     // MARK: - Initialization
     
     //
     
-    init() {
+    init(_ mainController: ControllerMain) {
+        self.mainController = mainController
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,8 +43,25 @@ class ControllerSettings: UIViewController {
     override func loadView() { view = viewRoot }
     
     override func viewDidLoad() {
-        view.backgroundColor = .red
-        
         title = "Settings"
+        
+        setupEventsHandlers()
+    }
+    
+    //
+
+    // MARK: - Events handling
+
+    //
+    
+    private func setupEventsHandlers() {
+        let onboarding = UITapGestureRecognizer(target: self, action: #selector(handlePressOnboarding))
+        viewRoot.viewWatchOnboarding.addGestureRecognizer(onboarding)
+    }
+    
+    @objc func handlePressOnboarding() {
+        dismiss(animated: true) { [weak self] in
+            self?.mainController?.launchOnboarding()
+        }
     }
 }

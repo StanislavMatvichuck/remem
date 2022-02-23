@@ -17,6 +17,8 @@
 		083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3891279AE61E00134A15 /* CoreDataConsumer.swift */; };
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
+		083DD13227C6B20F006F1479 /* ControllerOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* ControllerOnboarding.swift */; };
+		083DD13427C6B21A006F1479 /* ViewOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* ViewOnboarding.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
@@ -47,6 +49,8 @@
 		083D3891279AE61E00134A15 /* CoreDataConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConsumer.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
+		083DD13127C6B20F006F1479 /* ControllerOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerOnboarding.swift; sourceTree = "<group>"; };
+		083DD13327C6B21A006F1479 /* ViewOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnboarding.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
@@ -86,6 +90,15 @@
 				0830DA3527C3A6E000479014 /* ViewSettings.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		083DD13027C6B1FF006F1479 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				083DD13127C6B20F006F1479 /* ControllerOnboarding.swift */,
+				083DD13327C6B21A006F1479 /* ViewOnboarding.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		0868209327BFAD6500551F6A /* Components */ = {
@@ -160,6 +173,7 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				083DD13027C6B1FF006F1479 /* Onboarding */,
 				0830DA3227C3A6C900479014 /* Settings */,
 				0890627627A0A1E30032847C /* PointsList */,
 				08D512342787143900C2037F /* Main */,
@@ -272,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083DD13427C6B21A006F1479 /* ViewOnboarding.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* ControllerSettings.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
@@ -284,6 +299,7 @@
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
+				083DD13227C6B20F006F1479 /* ControllerOnboarding.swift in Sources */,
 				0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */,
 				08293CC127B670FC0039E432 /* CellDay.swift in Sources */,
 				0890627A27A0A25E0032847C /* ViewPointsList.swift in Sources */,
