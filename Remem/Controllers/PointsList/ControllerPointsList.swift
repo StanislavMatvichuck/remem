@@ -47,21 +47,51 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         headSize + dataSize + tailSize
     }
     
-    lazy var pointsGroupedByDay: [Int] = {
-        let allPoints = fetchedResultsController?.fetchedObjects ?? []
+    lazy var amountByDay: [DateComponents: Int] = {
+        var result = [DateComponents: Int]()
         
-        var result = [Int](repeating: 0, count: dataSize)
+        let points = fetchedResultsController?.fetchedObjects ?? []
         
-        for point in allPoints {
-            let pointDate = point.dateCreated!
+        for point in points {
+            let date = point.dateCreated!
             
-            let pointIndex = (Date.now - pointDate).day!
+            let dateComponents = ControllerPointsList.dateComponents(for: date)
             
-            result[pointIndex] += 1
+            if let existingValue = result[dateComponents] {
+                result.updateValue(existingValue + Int(point.value), forKey: dateComponents)
+            } else {
+                result.updateValue(Int(point.value), forKey: dateComponents)
+            }
         }
         
-        return result.reversed()
+        return result
     }()
+    
+    private func dateComponents(for dataIndex: Int) -> DateComponents {
+        let amountOfDaysToSubtract = dataSize - dataIndex - 1
+            
+        let date = Calendar.current.date(byAdding: .day, value: -amountOfDaysToSubtract, to: Date.now)
+        
+        return ControllerPointsList.dateComponents(for: date!)
+    }
+    
+    private static func dateComponents(for date: Date) -> DateComponents {
+        return Calendar.current.dateComponents([.year, .month, .day], from: date)
+    }
+    
+    private func amount(for dateComponent: DateComponents) -> Int {
+        if let value = amountByDay[dateComponent] {
+            return value
+        } else {
+            return 0
+        }
+    }
+    
+    private func amount(for dataIndex: Int) -> Int {
+        let dateComponent = dateComponents(for: dataIndex)
+        
+        return amount(for: dateComponent)
+    }
     
     //
     
@@ -76,11 +106,9 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         
         let dateToday = Date.now
         
-        let dateDelta = dateToday - dateCreated
+        let daysDelta = Calendar.current.numberOfDaysBetween(dateCreated, and: dateToday)
         
-        dataSize = {
-            (dateDelta.day ?? 0) + 1
-        }()
+        dataSize = daysDelta
         
         headSize = {
             if dateCreated.weekdayNumber.rawValue == 1 {
@@ -309,16 +337,14 @@ extension ControllerPointsList: UICollectionViewDelegateFlowLayout, UICollection
             cell.update(day: "\(numberInMonth)")
             cell.update(amount: nil)
         case .data:
-            let isToday = index == totalCellsAmount - tailSize - 1
-            
-            cell.update(day: "\(numberInMonth)", isToday: isToday)
-            if !pointsGroupedByDay.isEmpty {
-                let safeDataIndex = index - headSize
+            let dataIndex = index - headSize
                 
-                cell.update(amount: pointsGroupedByDay[safeDataIndex])
-            } else {
-                cell.update(amount: nil)
-            }
+            cell.update(amount: amount(for: dataIndex))
+            
+            let isToday = index == totalCellsAmount - tailSize - 1
+                        
+            cell.update(day: "\(numberInMonth)", isToday: isToday)
+            
         case .today:
             cell.update(day: "\(numberInMonth)")
             cell.update(amount: nil)

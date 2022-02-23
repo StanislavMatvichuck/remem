@@ -186,7 +186,24 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         
             point.entry = entry
             point.value = 1
-            point.dateCreated = Calendar.current.date(byAdding: .day, value: -day, to: Date.now)!
+            
+            var dateCreated = Calendar.current.date(byAdding: .day, value: -day, to: Date.now)!
+            
+            dateCreated = Calendar.current.date(byAdding: .hour, value: Int.random(in: 1 ... 24), to: dateCreated)!
+            
+            dateCreated = Calendar.current.date(byAdding: .minute, value: Int.random(in: 1 ... 60), to: dateCreated)!
+            
+            dateCreated = Calendar.current.date(byAdding: .second, value: Int.random(in: 1 ... 60), to: dateCreated)!
+            
+            if dateCreated.timeIntervalSinceNow > 0 {
+                point.dateCreated = Date.now
+            } else {
+                if entry.dateCreated!.timeIntervalSince(dateCreated) > 0 {
+                    point.dateCreated = entry.dateCreated!
+                } else {
+                    point.dateCreated = dateCreated
+                }
+            }
         }
     }
     
