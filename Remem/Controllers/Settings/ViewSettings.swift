@@ -44,7 +44,6 @@ class ViewSettings: UIView {
         let container: UIView = {
             let view = UIView(frame: .zero)
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .systemBackground
             view.layer.cornerRadius = .delta1
 
             view.addSubview(label)
@@ -77,7 +76,7 @@ class ViewSettings: UIView {
     init() {
         super.init(frame: .zero)
 
-        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        updateBackgroundColors()
 
         setupLabelOnboarding()
     }
@@ -94,5 +93,22 @@ class ViewSettings: UIView {
             viewWatchOnboarding.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
             viewWatchOnboarding.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
         ])
+    }
+
+    //
+
+    // MARK: - Events handling
+
+    //
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        updateBackgroundColors()
+    }
+
+    private func updateBackgroundColors() {
+        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        viewWatchOnboarding.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
     }
 }
