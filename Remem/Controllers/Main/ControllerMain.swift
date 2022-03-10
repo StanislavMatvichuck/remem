@@ -15,7 +15,7 @@ class ControllerMain: UIViewController, CoreDataConsumer {
     
     //
     
-    fileprivate let viewRoot = ViewMain()
+    let viewRoot = ViewMain()
     
     fileprivate var cellIndexToBeAnimated: IndexPath?
     

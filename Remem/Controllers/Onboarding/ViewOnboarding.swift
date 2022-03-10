@@ -28,7 +28,7 @@ class ViewOnboarding: UIView {
 
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: .wScreen, height: .hScreen))
-        layer.backgroundColor = UIColor.systemBackground.cgColor
+        layer.backgroundColor = UIColor.orange.cgColor
     }
 
     required init?(coder: NSCoder) {
