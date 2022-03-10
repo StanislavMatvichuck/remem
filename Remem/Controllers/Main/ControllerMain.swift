@@ -80,6 +80,8 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         
         setupEventHandlers()
         
+        configureInputAccessoryView()
+        
         fetch()
     }
     
@@ -534,25 +536,49 @@ extension ControllerMain: UITextViewDelegate {
     }
     
     private func showInput() {
-        viewRoot.viewInputBackground.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.viewRoot.viewInputBackground.alpha = 1
-        })
+        showInputBackground()
         
+        viewRoot.input.becomeFirstResponder()
+    }
+    
+    private func configureInputAccessoryView() {
         let bar = UIToolbar()
-        let create = UIBarButtonItem(title: "Create",
+        
+        let dismiss = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(handleViewInputBackgroundTap))
+        
+        let icon01 = UIBarButtonItem(title: "☕️", style: .plain, target: self, action: #selector(handleEmojiPress))
+        let icon02 = UIBarButtonItem(title: "💊", style: .plain, target: self, action: #selector(handleEmojiPress))
+        let icon03 = UIBarButtonItem(title: "👟", style: .plain, target: self, action: #selector(handleEmojiPress))
+        let icon04 = UIBarButtonItem(title: "📖", style: .plain, target: self, action: #selector(handleEmojiPress))
+        let icon05 = UIBarButtonItem(title: "🚬", style: .plain, target: self, action: #selector(handleEmojiPress))
+        
+        let spaceLeft = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let spaceRight = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let create = UIBarButtonItem(title: "Add",
                                      style: .plain,
                                      target: self,
                                      action: #selector(handleCreate))
         
-        let dismiss = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(handleViewInputBackgroundTap))
+        bar.items = [
+            dismiss,
+            spaceLeft,
+            icon01,
+            icon02,
+            icon03,
+            icon04,
+            icon05,
+            spaceRight,
+            create,
+        ]
         
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        bar.items = [dismiss, space, create]
         bar.sizeToFit()
-        viewRoot.input.inputAccessoryView = bar
         
-        viewRoot.input.becomeFirstResponder()
+        viewRoot.input.inputAccessoryView = bar
+    }
+    
+    @objc private func handleEmojiPress(_ barItem: UIBarButtonItem) {
+        viewRoot.input.text += barItem.title ?? ""
     }
     
     @objc private func handleCreate() {
@@ -564,13 +590,25 @@ extension ControllerMain: UITextViewDelegate {
         }
     }
     
-    @objc private func hideInput() {
-        viewRoot.input.resignFirstResponder()
+    private func showInputBackground() {
+        viewRoot.viewInputBackground.isHidden = false
         
+        UIView.animate(withDuration: 0.3, animations: {
+            self.viewRoot.viewInputBackground.alpha = 1
+        })
+    }
+    
+    private func hideInputBackgroud() {
         UIView.animate(withDuration: 0.3, animations: {
             self.viewRoot.viewInputBackground.alpha = 0.0
         }, completion: { _ in
             self.viewRoot.viewInputBackground.isHidden = true
         })
+    }
+    
+    @objc private func hideInput() {
+        viewRoot.input.resignFirstResponder()
+        
+        hideInputBackgroud()
     }
 }
