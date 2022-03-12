@@ -263,8 +263,6 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         let controller = ControllerOnboarding(main: self)
         
         onboardingController = controller
-        
-        controller.start()
     }
 }
 
