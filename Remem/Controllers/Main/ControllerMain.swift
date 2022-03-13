@@ -151,7 +151,7 @@ class ControllerMain: UIViewController, CoreDataConsumer {
     private func createEntryAndPersistIt() {
         guard let name = viewRoot.input.text, !name.isEmpty else { return }
         
-        moc.persist {
+        moc.persist(block: {
             if name.hasPrefix("Test") {
                 let index = name.index(name.startIndex, offsetBy: 4)
                 
@@ -163,7 +163,9 @@ class ControllerMain: UIViewController, CoreDataConsumer {
                 entry.name = name
                 entry.dateCreated = NSDate.now
             }
-        }
+        }, successBlock: {
+            NotificationCenter.default.post(name: .ControllerMainItemCreated, object: nil)
+        })
         
         viewRoot.input.text = ""
     }
@@ -513,14 +515,20 @@ extension ControllerMain: UITextViewDelegate {
 
         let keyboardFutureHeight = .hScreen - keyboardFutureOrigin
         
+        let height = -keyboardFutureHeight - .d2 - .delta1
+        
         UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
             if keyboardFutureHeight != 0 {
-                self.viewRoot.inputContainerConstraint.constant = -keyboardFutureHeight - .d2 - .delta1
+                self.viewRoot.inputContainerConstraint.constant = height
             } else {
                 self.viewRoot.inputContainerConstraint.constant = keyboardFutureHeight
             }
             self.viewRoot.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { animationCompleted in
+            if animationCompleted {
+                NotificationCenter.default.post(name: .ControllerMainSwipeUp, object: nil, userInfo: ["keyboardFutureHeight": height])
+            }
+        })
     }
     
     @objc private func handlePressAdd() {

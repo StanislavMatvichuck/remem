@@ -40,7 +40,7 @@ final class CellMain: UITableViewCell {
     // Layout
     //
 
-    private let viewRoot: UIView = {
+    let viewRoot: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = .r2

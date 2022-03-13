@@ -252,7 +252,7 @@ class ViewMain: UIView {
 
         NSLayoutConstraint.activate([
             emptyLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            emptyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            emptyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .hScreen / 2),
             emptyLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             emptyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])

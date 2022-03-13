@@ -149,6 +149,30 @@ class ControllerOnboarding: NSObject {
         return label
     }()
     
+    lazy var labelEventName: UILabel = {
+        let label = createLabel()
+        
+        label.text = "Give it a name. Using emojis is encouraged!"
+        
+        return label
+    }()
+    
+    lazy var labelEventCreated: UILabel = {
+        let label = createLabel()
+        
+        label.text = "Since that moment I can record each time this event happens, but not without your help, of course."
+        
+        return label
+    }()
+    
+    lazy var labelEventSwipe: UILabel = {
+        let label = createLabel()
+        
+        label.text = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it"
+        
+        return label
+    }()
+    
     lazy var viewCircle: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -202,6 +226,10 @@ class ControllerOnboarding: NSObject {
         super.init()
         
         stepForward()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //
@@ -277,15 +305,50 @@ class ControllerOnboarding: NSObject {
             animate(label: labelClose)
         case .showTextStartIsEasy:
             animate(label: labelStart)
+            stepForwardAfterDelay()
         case .highlightBottomSection:
             animateMaskLayer(for: mainController?.viewRoot.viewSwiper, cornerRadius: 0, offset: 0)
+            stepForwardAfterDelay()
         case .showFloatingCircleUp:
             animateCircle(with: .bottomTop)
             viewRoot.isTransparentForTouches = true
-//        case .waitForSwipeUp:
-//        case showTextGiveEventAName
-//        case waitForEventSubmit
-//        case highlightCreatedEntry
+            stepForwardAfterDelay()
+        case .waitForSwipeUp:
+            NotificationCenter.default.addObserver(self, selector: #selector(onSwipeUp), name: .ControllerMainSwipeUp, object: nil)
+        case .showTextGiveEventAName:
+            labelEventName.bottomAnchor.constraint(equalTo: viewRoot.safeAreaLayoutGuide.bottomAnchor, constant: controllerMainInputHeight).isActive = true
+            
+            animate(label: labelEventName)
+            
+            removeWithAnimation(label: labelGreeting)
+            removeWithAnimation(label: labelMyNameIs)
+            removeWithAnimation(label: labelQuestion01)
+            removeWithAnimation(label: labelQuestion02)
+            removeWithAnimation(label: labelHint)
+            removeWithAnimation(label: labelStart)
+            
+            viewCircle.layer.removeAllAnimations()
+            viewCircle.isHidden = true
+            
+            animateMaskLayer(for: mainController?.viewRoot.viewInput, cornerRadius: .r1, offset: 0)
+            
+            NotificationCenter.default.removeObserver(self, name: .ControllerMainSwipeUp, object: nil)
+            // TODO: make this error prone
+            stepForwardAfterDelay()
+        case .waitForEventSubmit:
+            NotificationCenter.default.addObserver(self, selector: #selector(onItemCreated), name: .ControllerMainItemCreated, object: nil)
+        case .highlightCreatedEntry:
+            removeWithAnimation(label: labelEventName)
+            
+            addAnimationToMaskLayer(willShowHighlight: false)
+            
+            // TODO: get rid of asyncs
+            DispatchQueue.main.asyncAfter(deadline: .now() + ControllerOnboarding.standartDuration) {
+                let cell = self.mainController?.viewRoot.viewTable.visibleCells.first as! CellMain
+                self.animateMaskLayer(for: cell.viewRoot, cornerRadius: .r1, offset: 0)
+                NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
+            }
+            
 //        case showTextEntryDescription
 //        case showTextTrySwipe
 //        case showFloatingCircleRight
@@ -300,6 +363,26 @@ class ControllerOnboarding: NSObject {
         }
         
         currentStep = Step(rawValue: currentStep.rawValue + 1)!
+    }
+    
+    private func stepForwardAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.stepForward()
+        }
+    }
+    
+    var controllerMainInputHeight: CGFloat = 0.0
+    
+    @objc private func onSwipeUp(_ notification: Notification) {
+        guard let height = notification.userInfo?["keyboardFutureHeight"] as? CGFloat else { return }
+        
+        controllerMainInputHeight = height
+        
+        stepForward()
+    }
+    
+    @objc private func onItemCreated() {
+        stepForward()
     }
     
     //
@@ -522,3 +605,19 @@ extension ControllerOnboarding: CAAnimationDelegate {
         }
     }
 }
+
+//
+
+// MARK: - Notifications
+
+//
+
+extension Notification.Name {
+    static let ControllerMainSwipeUp = Notification.Name(rawValue: "ControllerMainSwipeUp")
+    static let ControllerMainItemCreated = Notification.Name(rawValue: "ControllerMainItemCreated")
+}
+
+// TODO: - Crucial animations names
+/// animations finish that trigger events (step forward only?)
+
+// TODO: - move all animations creation code to a helper?
