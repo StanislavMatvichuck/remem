@@ -247,24 +247,10 @@ class ControllerMain: UIViewController, CoreDataConsumer {
     //
     
     private func handleSettings() {
-        let controller = ControllerSettings(self)
+        let controller = ControllerSettings()
         let navigation = UINavigationController(rootViewController: controller)
         
         present(navigation, animated: true, completion: nil)
-    }
-    
-    //
-
-    // MARK: - Onboarding
-
-    //
-    
-    var onboardingController: ControllerOnboarding?
-    
-    func launchOnboarding() {
-        let controller = ControllerOnboarding(main: self)
-        
-        onboardingController = controller
     }
 }
 
@@ -526,7 +512,7 @@ extension ControllerMain: UITextViewDelegate {
             self.viewRoot.layoutIfNeeded()
         }, completion: { animationCompleted in
             if animationCompleted {
-                NotificationCenter.default.post(name: .ControllerMainSwipeUp, object: nil, userInfo: ["keyboardFutureHeight": height])
+                NotificationCenter.default.post(name: .ControllerMainAddItemTriggered, object: nil, userInfo: ["keyboardFutureHeight": height])
             }
         })
     }
@@ -616,5 +602,39 @@ extension ControllerMain: UITextViewDelegate {
         viewRoot.input.resignFirstResponder()
         
         hideInputBackgroud()
+    }
+}
+
+//
+
+// MARK: - Onboarding
+
+//
+
+extension ControllerMain: ControllerMainOnboardingDataSource {
+    var viewSwiper: UIView {
+        viewRoot.viewSwiper
+    }
+    
+    var viewCellCreated: UIView {
+        viewRoot.viewTable.visibleCells.first!
+    }
+    
+    var viewInput: UIView {
+        viewRoot.viewInput
+    }
+    
+    var inputHeightOffset: CGFloat {
+        viewRoot.inputContainerConstraint.constant
+    }
+}
+
+extension ControllerMain: ControllerMainOnboardingDelegate {
+    func createTestItem() {
+        print(#function)
+    }
+    
+    func disableSettingsButton() {
+        print(#function)
     }
 }

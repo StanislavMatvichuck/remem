@@ -225,6 +225,8 @@ class ViewMain: UIView {
     init() {
         super.init(frame: .zero)
 
+        translatesAutoresizingMaskIntoConstraints = false
+
         backgroundColor = .systemBackground
 
         setupViewSwiper()

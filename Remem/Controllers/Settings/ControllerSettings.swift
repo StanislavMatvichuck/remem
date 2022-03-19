@@ -16,17 +16,13 @@ class ControllerSettings: UIViewController {
     
     fileprivate let viewRoot = ViewSettings()
     
-    fileprivate weak var mainController: ControllerMain?
-    
     //
     
     // MARK: - Initialization
     
     //
     
-    init(_ mainController: ControllerMain) {
-        self.mainController = mainController
-        
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,13 +51,12 @@ class ControllerSettings: UIViewController {
     //
     
     private func setupEventsHandlers() {
-        let onboarding = UITapGestureRecognizer(target: self, action: #selector(handlePressOnboarding))
-        viewRoot.viewWatchOnboarding.addGestureRecognizer(onboarding)
+        viewRoot.viewWatchOnboarding.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handlePressOnboarding)))
     }
     
     @objc func handlePressOnboarding() {
-        dismiss(animated: true) { [weak self] in
-            self?.mainController?.launchOnboarding()
-        }
+        guard let onboardingController = parent?.presentingViewController as? ControllerOnboardingContainer else { return }
+        dismiss(animated: true) { onboardingController.startOnboarding() }
     }
 }

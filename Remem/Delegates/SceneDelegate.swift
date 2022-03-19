@@ -18,9 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
 
-        let controller = ControllerMain()
-
-        controller.persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let controller = ControllerOnboardingContainer()
 
         window.rootViewController = controller
 
