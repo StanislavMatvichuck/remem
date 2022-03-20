@@ -32,11 +32,19 @@ class AnimationsHelperOnboarding: NSObject {
 
     //
 
-    // MARK: - Private properties
+    // MARK: - Public properties
 
     //
 
     let window = UIApplication.shared.keyWindow!
+
+    let animatorBackground: AnimatorBackground
+
+    //
+
+    // MARK: - Private properties
+
+    //
 
     private weak var viewRoot: UIView!
 
@@ -55,11 +63,54 @@ class AnimationsHelperOnboarding: NSObject {
     init(root: UIView, circle: UIView) {
         viewRoot = root
         viewCircle = circle
+
+        animatorBackground = AnimatorBackground(background: root)
     }
 
     //
 
     // MARK: - Behaviour
+
+    //
+
+    fileprivate func moveCircleUp() {
+        circleBottomConstraint?.constant -= 3 * .r2
+
+        let position = CABasicAnimation(keyPath: "position.y")
+        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        position.duration = 0.7
+
+        position.fromValue = viewCircle.layer.position.y
+        position.toValue = viewCircle.layer.position.y - 3 * .r2
+
+        position.delegate = self
+        position.setValue(Animations.circlePositionUp, forKey: CodingKeys.animationName.rawValue)
+
+        viewCircle.layer.add(position, forKey: nil)
+    }
+
+    fileprivate func moveCircleRight() {}
+
+    fileprivate func downscaleCircle() {
+        viewCircle.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+
+        let scaleDown = CABasicAnimation(keyPath: "transform.scale")
+        scaleDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        scaleDown.duration = 0.3
+
+        scaleDown.fromValue = 1
+        scaleDown.toValue = 0.01
+
+        scaleDown.delegate = self
+        scaleDown.setValue(Animations.circleDisappear, forKey: CodingKeys.animationName.rawValue)
+
+        viewCircle.layer.add(scaleDown, forKey: nil)
+    }
+
+    //
+
+    // MARK: - Public methods
 
     //
 
@@ -126,129 +177,6 @@ class AnimationsHelperOnboarding: NSObject {
         scaleUp.setValue(Animations.circlePositionUp, forKey: CodingKeys.nextAnimation.rawValue)
 
         viewCircle.layer.add(scaleUp, forKey: nil)
-    }
-
-    fileprivate func moveCircleUp() {
-        circleBottomConstraint?.constant -= 3 * .r2
-
-        let position = CABasicAnimation(keyPath: "position.y")
-        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        position.duration = 0.7
-
-        position.fromValue = viewCircle.layer.position.y
-        position.toValue = viewCircle.layer.position.y - 3 * .r2
-
-        position.delegate = self
-        position.setValue(Animations.circlePositionUp, forKey: CodingKeys.animationName.rawValue)
-
-        viewCircle.layer.add(position, forKey: nil)
-    }
-
-    fileprivate func moveCircleRight() {}
-
-    fileprivate func downscaleCircle() {
-        viewCircle.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-
-        let scaleDown = CABasicAnimation(keyPath: "transform.scale")
-        scaleDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
-        scaleDown.duration = 0.3
-
-        scaleDown.fromValue = 1
-        scaleDown.toValue = 0.01
-
-        scaleDown.delegate = self
-        scaleDown.setValue(Animations.circleDisappear, forKey: CodingKeys.animationName.rawValue)
-
-        viewCircle.layer.add(scaleDown, forKey: nil)
-    }
-
-    //
-
-    // MARK: Highlighting
-
-    //
-
-    private var startPath: UIBezierPath?
-
-    private var finalPath: UIBezierPath?
-
-    private func createProjectedFrame(for view: UIView) -> CGRect {
-        let windowView = window.rootViewController!.view
-
-        let frame = view.convert(view.bounds, to: windowView)
-
-        return frame
-    }
-
-    private func createStartPath(for frame: CGRect, cornerRadius: CGFloat = 0) -> UIBezierPath {
-        let centerX = frame.origin.x + frame.width / 2
-        let centerY = frame.origin.y + frame.height / 2
-
-        let path = UIBezierPath(rect: viewRoot.bounds)
-
-        path.append(UIBezierPath(roundedRect: CGRect(x: centerX,
-                                                     y: centerY,
-                                                     width: 0,
-                                                     height: 0),
-                                 cornerRadius: cornerRadius))
-
-        return path
-    }
-
-    private func createFinalPath(for frame: CGRect, cornerRadius: CGFloat = 0, offset: CGFloat = 0) -> UIBezierPath {
-        let path = UIBezierPath(rect: viewRoot.bounds)
-
-        let finalRect = CGRect(x: frame.origin.x - offset,
-                               y: frame.origin.y - offset,
-                               width: frame.width + offset * 2,
-                               height: frame.height + offset * 2)
-
-        path.append(UIBezierPath(roundedRect: finalRect, cornerRadius: cornerRadius))
-
-        return path
-    }
-
-    func addAnimationToMaskLayer(willShowHighlight: Bool) {
-        guard
-            let startPath = startPath,
-            let finalPath = finalPath,
-            let maskLayer = viewRoot.layer.mask as? CAShapeLayer
-        else { return }
-
-        let animation = CABasicAnimation(keyPath: "path")
-
-        animation.fromValue = willShowHighlight ? startPath.cgPath : finalPath.cgPath
-        animation.toValue = willShowHighlight ? finalPath.cgPath : startPath.cgPath
-        animation.duration = ControllerOnboardingOverlay.standartDuration
-        animation.fillMode = .backwards
-        animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
-
-        maskLayer.add(animation, forKey: nil)
-        maskLayer.path = willShowHighlight ? finalPath.cgPath : startPath.cgPath
-    }
-
-    func animateMaskLayer(for view: UIView?, cornerRadius: CGFloat = 0, offset: CGFloat = 0) {
-        guard let highlightedView = view else { return }
-
-        let projectedFrame = createProjectedFrame(for: highlightedView)
-
-        let startPath = createStartPath(for: projectedFrame, cornerRadius: cornerRadius)
-        self.startPath = startPath
-
-        let finalPath = createFinalPath(for: projectedFrame, cornerRadius: cornerRadius, offset: offset)
-        self.finalPath = finalPath
-
-        let backgroundOverlay: CAShapeLayer = {
-            let layer = CAShapeLayer()
-            layer.path = startPath.cgPath
-            layer.fillRule = .evenOdd
-            return layer
-        }()
-
-        viewRoot.layer.mask = backgroundOverlay
-
-        addAnimationToMaskLayer(willShowHighlight: true)
     }
 }
 

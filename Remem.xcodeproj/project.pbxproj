@@ -31,6 +31,7 @@
 		0890627C27A0A2700032847C /* CellPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* CellPoint.swift */; };
 		0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionPoint.swift */; };
 		08975A9927DDF51C0021E0D3 /* AnimationsHelperOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08975A9827DDF51C0021E0D3 /* AnimationsHelperOnboarding.swift */; };
+		089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4627E7966800157D26 /* AnimatorBackground.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* ControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* ControllerMain.swift */; };
@@ -67,6 +68,7 @@
 		0890627B27A0A2700032847C /* CellPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPoint.swift; sourceTree = "<group>"; };
 		0890627D27A0AD460032847C /* EntensionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionPoint.swift; sourceTree = "<group>"; };
 		08975A9827DDF51C0021E0D3 /* AnimationsHelperOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsHelperOnboarding.swift; sourceTree = "<group>"; };
+		089A5A4627E7966800157D26 /* AnimatorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBackground.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				08975A9827DDF51C0021E0D3 /* AnimationsHelperOnboarding.swift */,
+				089A5A4627E7966800157D26 /* AnimatorBackground.swift */,
 				0880FB3F27E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift */,
 				0849612D27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift */,
 				083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */,
@@ -312,6 +315,7 @@
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
 				0849612E27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
+				089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
 				083DD13227C6B20F006F1479 /* ControllerOnboardingOverlay.swift in Sources */,
 				0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */,

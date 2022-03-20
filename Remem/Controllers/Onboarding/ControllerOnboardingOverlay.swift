@@ -64,17 +64,14 @@ class ControllerOnboardingOverlay: UIViewController {
     
     fileprivate lazy var animationsHelper = AnimationsHelperOnboarding(root: viewRoot, circle: viewRoot.viewCircle)
     
-    let viewRoot = ViewOnboardingOverlay()
+    fileprivate let viewRoot = ViewOnboardingOverlay()
     
     fileprivate var tapAnywhereIsShown = false
     
     fileprivate var tapMovesForward = true
     
     fileprivate var currentStep: Step = .showBackground {
-        didSet {
-            print("newCurrentStep is \(currentStep)")
-            perform(step: currentStep)
-        }
+        didSet { perform(step: currentStep) }
     }
     
     //
@@ -117,25 +114,22 @@ class ControllerOnboardingOverlay: UIViewController {
     
     private func setupEventHandlers() {
         viewRoot.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        )
+            UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
         viewRoot.labelClose.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handlePressClose))
-        )
+            UITapGestureRecognizer(target: self, action: #selector(handlePressClose)))
         
         viewRoot.labelClose.isUserInteractionEnabled = true
     }
     
     @objc private func handleTap() {
-        if tapMovesForward {
-            goToNextStep()
-        }
+        if tapMovesForward { goToNextStep() }
     }
     
     @objc private func handlePressClose() {
-        guard let onboardingController = parent as? ControllerOnboardingContainer else { return }
-        onboardingController.closeOnboarding()
+        if let onboardingController = parent as? ControllerOnboardingContainer {
+            onboardingController.closeOnboarding()
+        }
     }
     
     //
@@ -149,13 +143,12 @@ class ControllerOnboardingOverlay: UIViewController {
     }
     
     func close(completionBlock: @escaping () -> Void) {
-        animationsHelper.addAnimationToMaskLayer(willShowHighlight: false)
+        animationsHelper.animatorBackground.hide()
         
         UIView.animate(withDuration: 0.3, delay: ControllerOnboardingOverlay.standartDuration, animations: {
             self.viewRoot.alpha = 0
         }, completion: { flag in
-            guard flag else { return }
-            completionBlock()
+            if flag { completionBlock() }
         })
     }
     
@@ -190,7 +183,7 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.show(label: viewRoot.labelStart)
             currentStep = .highlightBottomSection
         case .highlightBottomSection:
-            animationsHelper.animateMaskLayer(for: mainDataSource.viewSwiper, cornerRadius: 0, offset: 0)
+            animationsHelper.animatorBackground.show(view: mainDataSource.viewSwiper, cornerRadius: 0, offset: 0)
             currentStep = .showFloatingCircleUp
         case .showFloatingCircleUp:
             setupCircleForSwipeUpDemonstration()
@@ -222,7 +215,7 @@ class ControllerOnboardingOverlay: UIViewController {
             ).isActive = true
             
             animationsHelper.show(label: viewRoot.labelEventName)
-            animationsHelper.animateMaskLayer(for: mainDataSource.viewInput, cornerRadius: .r1, offset: 0)
+            animationsHelper.animatorBackground.show(view: mainDataSource.viewInput, cornerRadius: .r1, offset: 0)
             
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
@@ -230,8 +223,7 @@ class ControllerOnboardingOverlay: UIViewController {
                                                    name: .ControllerMainItemCreated, object: nil)
         case .highlightCreatedEntry:
             animationsHelper.hide(label: viewRoot.labelEventName)
-            animationsHelper.addAnimationToMaskLayer(willShowHighlight: false)
-            animationsHelper.animateMaskLayer(for: mainDataSource.viewCellCreated, cornerRadius: .r1, offset: 0)
+            animationsHelper.animatorBackground.hide()
 
 //        case showTextEntryDescription
 //        case showTextTrySwipe
