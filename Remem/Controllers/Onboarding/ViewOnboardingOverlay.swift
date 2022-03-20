@@ -145,16 +145,11 @@ class ViewOnboardingOverlay: UIView {
         
         addSubview(view)
         
-        // FIXME: position circle + animation
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: .r2),
             view.heightAnchor.constraint(equalToConstant: .r2),
             
             view.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-//            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(
-//                .delta1 + mainController!.viewRoot.viewSwiper.bounds.height + .r2
-//            )),
         ])
         
         return view

@@ -62,7 +62,7 @@ class ControllerOnboardingOverlay: UIViewController {
     
     //
     
-    fileprivate lazy var animationsHelper = AnimationsHelperOnboarding(background: viewRoot, delegate: self)
+    fileprivate lazy var animationsHelper = AnimationsHelperOnboarding(root: viewRoot, circle: viewRoot.viewCircle)
     
     let viewRoot = ViewOnboardingOverlay()
     
@@ -166,48 +166,53 @@ class ControllerOnboardingOverlay: UIViewController {
     fileprivate func perform(step: Step) {
         switch step {
         case .showBackground:
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, animations: {
                 self.viewRoot.alpha = 1
             }, completion: { flag in
-                guard flag else { return }
-                self.currentStep = .showTextGreeting
+                if flag {
+                    self.currentStep = .showTextGreeting
+                }
             })
         case .showTextGreeting:
-            animate(label: viewRoot.labelGreeting)
-            animate(label: viewRoot.labelTapToProceed)
+            animationsHelper.show(label: viewRoot.labelGreeting)
+            animationsHelper.show(label: viewRoot.labelTapToProceed)
         case .showTextName:
-            animate(label: viewRoot.labelMyNameIs)
-            removeWithAnimation(label: viewRoot.labelTapToProceed)
+            animationsHelper.show(label: viewRoot.labelMyNameIs)
+            animationsHelper.hide(label: viewRoot.labelTapToProceed)
         case .showTextFirstQuestion:
-            animate(label: viewRoot.labelQuestion01)
+            animationsHelper.show(label: viewRoot.labelQuestion01)
         case .showTextSecondQuestion:
-            animate(label: viewRoot.labelQuestion02)
+            animationsHelper.show(label: viewRoot.labelQuestion02)
         case .showTextHint:
-            animate(label: viewRoot.labelHint)
-            animate(label: viewRoot.labelClose)
+            animationsHelper.show(label: viewRoot.labelHint)
+            animationsHelper.show(label: viewRoot.labelClose)
         case .showTextStartIsEasy:
-            animate(label: viewRoot.labelStart)
+            animationsHelper.show(label: viewRoot.labelStart)
             currentStep = .highlightBottomSection
         case .highlightBottomSection:
             animationsHelper.animateMaskLayer(for: mainDataSource.viewSwiper, cornerRadius: 0, offset: 0)
             currentStep = .showFloatingCircleUp
         case .showFloatingCircleUp:
-            animateCircle(with: AnimationsHelperOnboarding.OnboardingSwipeAnimationVariants.bottomTop)
+            setupCircleForSwipeUpDemonstration()
+            animationsHelper.beginSwipeUpDemonstration()
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainAddItemTriggered, object: nil)
-            viewRoot.isTransparentForTouches = true
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(handleNotification),
+                name: .ControllerMainAddItemTriggered, object: nil
+            )
+            
             tapMovesForward = false
+            viewRoot.isTransparentForTouches = true
         case .showTextGiveEventAName:
             NotificationCenter.default.removeObserver(self, name: .ControllerMainAddItemTriggered, object: nil)
             
-            removeWithAnimation(label: viewRoot.labelGreeting)
-            removeWithAnimation(label: viewRoot.labelMyNameIs)
-            removeWithAnimation(label: viewRoot.labelQuestion01)
-            removeWithAnimation(label: viewRoot.labelQuestion02)
-            removeWithAnimation(label: viewRoot.labelHint)
-            removeWithAnimation(label: viewRoot.labelStart)
+            animationsHelper.hide(label: viewRoot.labelGreeting)
+            animationsHelper.hide(label: viewRoot.labelMyNameIs)
+            animationsHelper.hide(label: viewRoot.labelQuestion01)
+            animationsHelper.hide(label: viewRoot.labelQuestion02)
+            animationsHelper.hide(label: viewRoot.labelHint)
+            animationsHelper.hide(label: viewRoot.labelStart)
             
             viewRoot.viewCircle.layer.removeAllAnimations()
             viewRoot.viewCircle.isHidden = true
@@ -216,16 +221,15 @@ class ControllerOnboardingOverlay: UIViewController {
                 constant: mainDataSource.inputHeightOffset
             ).isActive = true
             
-            animate(label: viewRoot.labelEventName)
+            animationsHelper.show(label: viewRoot.labelEventName)
             animationsHelper.animateMaskLayer(for: mainDataSource.viewInput, cornerRadius: .r1, offset: 0)
             
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
                                                    name: .ControllerMainItemCreated, object: nil)
-            
         case .highlightCreatedEntry:
-            removeWithAnimation(label: viewRoot.labelEventName)
+            animationsHelper.hide(label: viewRoot.labelEventName)
             animationsHelper.addAnimationToMaskLayer(willShowHighlight: false)
             animationsHelper.animateMaskLayer(for: mainDataSource.viewCellCreated, cornerRadius: .r1, offset: 0)
 
@@ -242,70 +246,17 @@ class ControllerOnboardingOverlay: UIViewController {
         }
     }
     
-    //
+    fileprivate func setupCircleForSwipeUpDemonstration() {
+        let circleBottomConstraint = viewRoot.viewCircle.bottomAnchor.constraint(
+            equalTo: viewRoot.safeAreaLayoutGuide.bottomAnchor,
+            constant: -1 * (mainDataSource.viewSwiper.bounds.height + .delta1)
+        )
 
-    // MARK: Text animaiton
-
-    //
-    
-    private func animate(label: UILabel) {
-        label.isHidden = false
-        viewRoot.layoutIfNeeded()
+        circleBottomConstraint.identifier = "circle.bottom"
+        circleBottomConstraint.isActive = true
         
-        let appearAnimation = animationsHelper.createAppearAnimation(for: label)
-        label.layer.add(appearAnimation, forKey: nil)
-    }
-    
-    private func removeWithAnimation(label: UILabel) {
-        let removeAnimation = animationsHelper.createDisappearAnimation(for: label)
-
-        label.layer.add(removeAnimation, forKey: nil)
-        label.layer.position.y = label.layer.position.y + 30
-        label.layer.opacity = 0
-    }
-    
-    //
-
-    // MARK: Circle animation
-
-    //
-    
-    private func animateCircle(with direction: AnimationsHelperOnboarding.OnboardingSwipeAnimationVariants) {
         viewRoot.viewCircle.isHidden = false
         viewRoot.layoutIfNeeded()
-        
-        switch direction {
-        case .bottomTop:
-            let circleSwipeAnimation = animationsHelper.createSwipeUpAnimation(for: viewRoot.viewCircle)
-            viewRoot.viewCircle.layer.add(circleSwipeAnimation, forKey: nil)
-        case .leftRight:
-            return
-        }
-    }
-}
-
-//
-
-// MARK: - CAAnimationDelegate
-
-//
-
-extension ControllerOnboardingOverlay: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard
-            let name = anim.value(forKey: AnimationsHelperOnboarding.OnboardingCodingKeys.animationName.rawValue)
-            as? AnimationsHelperOnboarding.OnboardingAnimationsNames,
-            flag else { return }
-
-        switch name {
-        case .circleSwipeUp:
-            print("swiped up")
-        case .labelDisappear:
-            guard
-                let label = anim.value(forKey: AnimationsHelperOnboarding.OnboardingCodingKeys.labelToBeRemoved.rawValue)
-                as? UILabel else { return }
-            label.isHidden = true
-        }
     }
 }
 
