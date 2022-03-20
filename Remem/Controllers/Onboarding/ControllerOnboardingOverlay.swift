@@ -62,7 +62,7 @@ class ControllerOnboardingOverlay: UIViewController {
     
     //
     
-    fileprivate lazy var animationsHelper = AnimationsHelperOnboarding(root: viewRoot, circle: viewRoot.viewCircle)
+    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot, circle: viewRoot.viewCircle)
     
     fileprivate let viewRoot = ViewOnboardingOverlay()
     

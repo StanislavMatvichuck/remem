@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AnimationsHelperOnboarding: NSObject {
+class AnimatorOnboarding: NSObject {
     //
 
     // MARK: - Related types
@@ -186,7 +186,7 @@ class AnimationsHelperOnboarding: NSObject {
 
 //
 
-extension AnimationsHelperOnboarding: CAAnimationDelegate {
+extension AnimatorOnboarding: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         guard let name = anim.value(forKey: CodingKeys.animationName.rawValue) as? Animations, flag else { return }
 
