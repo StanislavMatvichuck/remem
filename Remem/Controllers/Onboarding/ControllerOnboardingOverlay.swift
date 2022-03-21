@@ -44,7 +44,7 @@ class ControllerOnboardingOverlay: UIViewController {
 
     //
     
-    static let standartDuration = TimeInterval(0.5)
+    static let standartDuration = TimeInterval(0.3)
     
     //
 
@@ -145,11 +145,15 @@ class ControllerOnboardingOverlay: UIViewController {
     func close(completionBlock: @escaping () -> Void) {
         animationsHelper.animatorBackground.hide()
         
-        UIView.animate(withDuration: 0.3, delay: ControllerOnboardingOverlay.standartDuration, animations: {
-            self.viewRoot.alpha = 0
-        }, completion: { flag in
-            if flag { completionBlock() }
-        })
+        animationsHelper.animate(closeButton: viewRoot.labelClose)
+        
+        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration,
+                       delay: ControllerOnboardingOverlay.standartDuration,
+                       animations: {
+                           self.viewRoot.alpha = 0
+                       }, completion: { flag in
+                           if flag { completionBlock() }
+                       })
     }
     
     fileprivate func goToNextStep() {
@@ -169,6 +173,7 @@ class ControllerOnboardingOverlay: UIViewController {
         case .showTextGreeting:
             animationsHelper.show(label: viewRoot.labelGreeting)
             animationsHelper.show(label: viewRoot.labelTapToProceed)
+            animationsHelper.show(label: viewRoot.labelClose)
         case .showTextName:
             animationsHelper.show(label: viewRoot.labelMyNameIs)
             animationsHelper.hide(label: viewRoot.labelTapToProceed)
@@ -178,9 +183,8 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.show(label: viewRoot.labelQuestion02)
         case .showTextHint:
             animationsHelper.show(label: viewRoot.labelHint)
-            animationsHelper.show(label: viewRoot.labelClose)
         case .showTextStartIsEasy:
-            animationsHelper.hide(label: viewRoot.labelGreeting)
+            viewRoot.labelGreeting.text = " "
             animationsHelper.hide(label: viewRoot.labelMyNameIs)
             animationsHelper.hide(label: viewRoot.labelQuestion01)
             animationsHelper.hide(label: viewRoot.labelQuestion02)

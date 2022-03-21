@@ -114,6 +114,27 @@ class AnimatorOnboarding: NSObject {
 
         label.layer.add(group, forKey: nil)
     }
+
+    func animate(closeButton: UILabel) {
+        closeButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+
+        let group = CAAnimationGroup()
+        group.duration = ControllerOnboardingOverlay.standartDuration
+        group.fillMode = .backwards
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        let scale = CABasicAnimation(keyPath: "transform.scale")
+        scale.fromValue = 1
+        scale.toValue = 0.01
+
+        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.fromValue = 0
+        rotation.toValue = CGFloat.pi / 2
+
+        group.animations = [scale, rotation]
+
+        closeButton.layer.add(group, forKey: nil)
+    }
 }
 
 //

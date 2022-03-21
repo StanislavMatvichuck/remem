@@ -26,15 +26,27 @@ class ViewOnboardingOverlay: UIView {
 
     //
     
-    let labelsSpacing: CGFloat = .delta1
+    let labelsVerticalSpacing: CGFloat = .sm
+    let labelsHorizontalSpacing: CGFloat = .md
     
     lazy var labelGreeting: UILabel = {
-        let label = createLabel()
-        
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: .font2, weight: .bold)
+        label.textColor = .label
+        label.numberOfLines = 0
+
         label.text = "Greetings!"
         
-        label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsSpacing).isActive = true
+        label.isHidden = true
+        
+        addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsVerticalSpacing),
+            label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: labelsHorizontalSpacing),
+            label.trailingAnchor.constraint(equalTo: labelClose.leadingAnchor),
+        ])
         
         return label
     }()
@@ -51,12 +63,19 @@ class ViewOnboardingOverlay: UIView {
     }()
     
     lazy var labelClose: UILabel = {
-        let label = createLabel()
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: .font2)
+        label.text = "❌"
         
-        label.font = .systemFont(ofSize: .font1)
-        label.text = "close onboarding"
+        label.isHidden = true
         
-        label.bottomAnchor.constraint(equalTo: labelGreeting.topAnchor).isActive = true
+        addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsVerticalSpacing),
+            label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsHorizontalSpacing),
+        ])
         
         return label
     }()
@@ -66,7 +85,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "I am tracking app called Remem and I am designed to help you to answer following questions:"
         
-        label.topAnchor.constraint(equalTo: labelGreeting.bottomAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelGreeting.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
           
         return label
     }()
@@ -76,7 +95,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "- when did an event last happened?"
         
-        label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
           
         return label
     }()
@@ -86,7 +105,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "- how many events happen in a week?"
         
-        label.topAnchor.constraint(equalTo: labelQuestion01.bottomAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelQuestion01.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
           
         return label
     }()
@@ -96,7 +115,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly"
         
-        label.topAnchor.constraint(equalTo: labelQuestion02.bottomAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelQuestion02.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
             
         return label
     }()
@@ -106,7 +125,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "Start is easy. Swipe up the screen to create an event"
         
-        label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelGreeting.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         
         return label
     }()
@@ -184,8 +203,8 @@ class ViewOnboardingOverlay: UIView {
         addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: labelsSpacing),
-            label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsSpacing),
+            label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: labelsHorizontalSpacing),
+            label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsHorizontalSpacing),
         ])
         
         return label
