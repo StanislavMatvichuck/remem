@@ -40,7 +40,7 @@ extension CGFloat {
 
     // MARK: Fonts
 
-    static var font1: CGFloat { return 1.2 * rem }
+    static var font1: CGFloat { return 1 * rem }
     static var font2: CGFloat { return 2 * .font1 }
 
     // MARK: Extras

@@ -15,10 +15,6 @@ class AnimatorOnboarding: NSObject {
     //
 
     enum Animations {
-        case circleAppear
-        case circlePositionUp
-        case circlePositionRight
-        case circleDisappear
         case labelDisappear
     }
 
@@ -27,7 +23,6 @@ class AnimatorOnboarding: NSObject {
         case nextAnimation
 
         case labelToBeRemoved
-        case circleToBeAnimated
     }
 
     //
@@ -36,9 +31,9 @@ class AnimatorOnboarding: NSObject {
 
     //
 
-    let window = UIApplication.shared.keyWindow!
-
     let animatorBackground: AnimatorBackground
+
+    let animatorCircle: AnimatorCircle
 
     //
 
@@ -48,23 +43,17 @@ class AnimatorOnboarding: NSObject {
 
     private weak var viewRoot: UIView!
 
-    private weak var viewCircle: UIView!
-
-    private var circleBottomConstraint: NSLayoutConstraint? {
-        viewCircle.constraintsAffectingLayout(for: .vertical).first(where: { $0.identifier == "circle.bottom" })
-    }
-
     //
 
     // MARK: - Initialization
 
     //
 
-    init(root: UIView, circle: UIView) {
+    init(root: UIView, circle: UIView, finger: UIView) {
         viewRoot = root
-        viewCircle = circle
 
         animatorBackground = AnimatorBackground(background: root)
+        animatorCircle = AnimatorCircle(circle: circle, finger: finger)
     }
 
     //
@@ -72,41 +61,6 @@ class AnimatorOnboarding: NSObject {
     // MARK: - Behaviour
 
     //
-
-    fileprivate func moveCircleUp() {
-        circleBottomConstraint?.constant -= 3 * .r2
-
-        let position = CABasicAnimation(keyPath: "position.y")
-        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        position.duration = 0.7
-
-        position.fromValue = viewCircle.layer.position.y
-        position.toValue = viewCircle.layer.position.y - 3 * .r2
-
-        position.delegate = self
-        position.setValue(Animations.circlePositionUp, forKey: CodingKeys.animationName.rawValue)
-
-        viewCircle.layer.add(position, forKey: nil)
-    }
-
-    fileprivate func moveCircleRight() {}
-
-    fileprivate func downscaleCircle() {
-        viewCircle.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-
-        let scaleDown = CABasicAnimation(keyPath: "transform.scale")
-        scaleDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
-        scaleDown.duration = 0.3
-
-        scaleDown.fromValue = 1
-        scaleDown.toValue = 0.01
-
-        scaleDown.delegate = self
-        scaleDown.setValue(Animations.circleDisappear, forKey: CodingKeys.animationName.rawValue)
-
-        viewCircle.layer.add(scaleDown, forKey: nil)
-    }
 
     //
 
@@ -137,7 +91,6 @@ class AnimatorOnboarding: NSObject {
     }
 
     func hide(label: UILabel) {
-        label.layer.position.y = label.layer.position.y + 30
         label.layer.opacity = 0
 
         let group = CAAnimationGroup()
@@ -161,23 +114,6 @@ class AnimatorOnboarding: NSObject {
 
         label.layer.add(group, forKey: nil)
     }
-
-    func beginSwipeUpDemonstration() {
-        let scaleUp = CABasicAnimation(keyPath: "transform.scale")
-        scaleUp.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
-        scaleUp.duration = 0.3
-        scaleUp.fillMode = .backwards
-
-        scaleUp.fromValue = 0.01
-        scaleUp.toValue = 1
-
-        scaleUp.delegate = self
-        scaleUp.setValue(Animations.circleAppear, forKey: CodingKeys.animationName.rawValue)
-        scaleUp.setValue(Animations.circlePositionUp, forKey: CodingKeys.nextAnimation.rawValue)
-
-        viewCircle.layer.add(scaleUp, forKey: nil)
-    }
 }
 
 //
@@ -191,27 +127,6 @@ extension AnimatorOnboarding: CAAnimationDelegate {
         guard let name = anim.value(forKey: CodingKeys.animationName.rawValue) as? Animations, flag else { return }
 
         switch name {
-        case .circleAppear:
-            if let next = anim.value(forKey: CodingKeys.nextAnimation.rawValue) as? Animations {
-                if next == .circlePositionUp {
-                    moveCircleUp()
-                } else if next == .circlePositionRight {
-                    moveCircleRight()
-                }
-            }
-        case .circlePositionUp:
-            downscaleCircle()
-        case .circlePositionRight:
-            downscaleCircle()
-        case .circleDisappear:
-
-            circleBottomConstraint?.constant += 3 * .r2
-            viewCircle.transform = .identity
-
-            viewRoot.layoutIfNeeded()
-
-            beginSwipeUpDemonstration()
-
         case .labelDisappear:
             if let label = anim.value(forKey: CodingKeys.labelToBeRemoved.rawValue) as? UILabel {
                 label.isHidden = true

@@ -62,7 +62,7 @@ class ControllerOnboardingOverlay: UIViewController {
     
     //
     
-    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot, circle: viewRoot.viewCircle)
+    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot, circle: viewRoot.viewCircle, finger: viewRoot.viewFinger)
     
     fileprivate let viewRoot = ViewOnboardingOverlay()
     
@@ -187,7 +187,7 @@ class ControllerOnboardingOverlay: UIViewController {
             currentStep = .showFloatingCircleUp
         case .showFloatingCircleUp:
             setupCircleForSwipeUpDemonstration()
-            animationsHelper.beginSwipeUpDemonstration()
+            animationsHelper.animatorCircle.startUp()
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
             NotificationCenter.default.addObserver(
@@ -248,6 +248,7 @@ class ControllerOnboardingOverlay: UIViewController {
         circleBottomConstraint.isActive = true
         
         viewRoot.viewCircle.isHidden = false
+        viewRoot.viewFinger.isHidden = false
         viewRoot.layoutIfNeeded()
     }
 }

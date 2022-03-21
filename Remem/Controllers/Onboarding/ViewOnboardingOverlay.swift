@@ -26,7 +26,7 @@ class ViewOnboardingOverlay: UIView {
 
     //
     
-    let labelsSpacing: CGFloat = .r2
+    let labelsSpacing: CGFloat = .delta1
     
     lazy var labelGreeting: UILabel = {
         let label = createLabel()
@@ -148,11 +148,29 @@ class ViewOnboardingOverlay: UIView {
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: .r2),
             view.heightAnchor.constraint(equalToConstant: .r2),
-            
             view.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
         
         return view
+    }()
+    
+    lazy var viewFinger: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "👆"
+        label.font = .systemFont(ofSize: .font2)
+        label.transform = CGAffineTransform(rotationAngle: -1 * (.pi / 4))
+        
+        label.isHidden = true
+        
+        addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: viewCircle.trailingAnchor),
+            label.topAnchor.constraint(equalTo: viewCircle.bottomAnchor),
+        ])
+        
+        return label
     }()
     
     private func createLabel() -> UILabel {
