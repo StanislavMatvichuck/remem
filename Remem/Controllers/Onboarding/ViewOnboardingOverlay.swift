@@ -106,7 +106,7 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "Start is easy. Swipe up the screen to create an event"
         
-        label.topAnchor.constraint(equalTo: labelHint.bottomAnchor, constant: labelsSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsSpacing).isActive = true
         
         return label
     }()

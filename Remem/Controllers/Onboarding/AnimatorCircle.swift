@@ -10,6 +10,16 @@ import UIKit
 class AnimatorCircle: NSObject {
     //
 
+    // MARK: - Static properties
+
+    //
+
+    static let verticalTravelDistance: CGFloat = 2 * .d2
+
+    static let horizontalTravelDistance: CGFloat = .d2
+
+    //
+
     // MARK: - Related types
 
     //
@@ -43,7 +53,7 @@ class AnimatorCircle: NSObject {
     private weak var viewFinger: UIView!
 
     private var circleBottomConstraint: NSLayoutConstraint? {
-        viewCircle.constraintsAffectingLayout(for: .vertical).first(where: { $0.identifier == "circle.bottom" })
+        viewCircle.constraintsAffectingLayout(for: .vertical).first(where: { $0.identifier == "circle.center.y" })
     }
 
     //
@@ -64,7 +74,7 @@ class AnimatorCircle: NSObject {
     //
 
     fileprivate func moveCircleUp() {
-        circleBottomConstraint?.constant -= 3 * .r2
+        circleBottomConstraint?.constant -= AnimatorCircle.verticalTravelDistance
 
         let position = CABasicAnimation(keyPath: "position.y")
         position.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -72,7 +82,7 @@ class AnimatorCircle: NSObject {
         position.duration = Durations.positionUp.rawValue
 
         position.fromValue = viewCircle.layer.position.y
-        position.toValue = viewCircle.layer.position.y - 3 * .r2
+        position.toValue = viewCircle.layer.position.y - AnimatorCircle.verticalTravelDistance
 
         position.delegate = self
         position.setValue(Animations.positionUp, forKey: CodingKeys.animationName.rawValue)
@@ -99,6 +109,8 @@ class AnimatorCircle: NSObject {
         viewCircle.layer.add(scaleDown, forKey: nil)
     }
 
+    fileprivate func startUpFinger() {}
+
     fileprivate func moveFingerUp() {
         let position = CABasicAnimation(keyPath: "position.y")
         position.timingFunction = CAMediaTimingFunction(name: .easeOut)
@@ -106,7 +118,7 @@ class AnimatorCircle: NSObject {
         position.duration = Durations.positionUp.rawValue
 
         position.fromValue = viewFinger.layer.position.y
-        position.toValue = viewFinger.layer.position.y - 3 * .r2
+        position.toValue = viewFinger.layer.position.y - AnimatorCircle.verticalTravelDistance
 
         viewFinger.layer.add(position, forKey: nil)
     }
@@ -120,7 +132,6 @@ class AnimatorCircle: NSObject {
     func startUp() {
         let scaleUp = CABasicAnimation(keyPath: "transform.scale")
         scaleUp.timingFunction = CAMediaTimingFunction(name: .linear)
-        scaleUp.beginTime = CACurrentMediaTime() + 0.24
 
         scaleUp.duration = Durations.appear.rawValue
         scaleUp.fillMode = .backwards
@@ -165,7 +176,7 @@ extension AnimatorCircle: CAAnimationDelegate {
             downscaleCircle()
         case .disappear:
             CATransaction.begin()
-            circleBottomConstraint?.constant += 3 * .r2
+            circleBottomConstraint?.constant += AnimatorCircle.verticalTravelDistance
             viewCircle.transform = .identity
             startUp()
             CATransaction.commit()

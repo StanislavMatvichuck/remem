@@ -180,6 +180,12 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.show(label: viewRoot.labelHint)
             animationsHelper.show(label: viewRoot.labelClose)
         case .showTextStartIsEasy:
+            animationsHelper.hide(label: viewRoot.labelGreeting)
+            animationsHelper.hide(label: viewRoot.labelMyNameIs)
+            animationsHelper.hide(label: viewRoot.labelQuestion01)
+            animationsHelper.hide(label: viewRoot.labelQuestion02)
+            animationsHelper.hide(label: viewRoot.labelHint)
+            
             animationsHelper.show(label: viewRoot.labelStart)
             currentStep = .highlightBottomSection
         case .highlightBottomSection:
@@ -200,11 +206,6 @@ class ControllerOnboardingOverlay: UIViewController {
         case .showTextGiveEventAName:
             NotificationCenter.default.removeObserver(self, name: .ControllerMainAddItemTriggered, object: nil)
             
-            animationsHelper.hide(label: viewRoot.labelGreeting)
-            animationsHelper.hide(label: viewRoot.labelMyNameIs)
-            animationsHelper.hide(label: viewRoot.labelQuestion01)
-            animationsHelper.hide(label: viewRoot.labelQuestion02)
-            animationsHelper.hide(label: viewRoot.labelHint)
             animationsHelper.hide(label: viewRoot.labelStart)
             
             viewRoot.viewCircle.layer.removeAllAnimations()
@@ -239,13 +240,13 @@ class ControllerOnboardingOverlay: UIViewController {
     }
     
     fileprivate func setupCircleForSwipeUpDemonstration() {
-        let circleBottomConstraint = viewRoot.viewCircle.bottomAnchor.constraint(
-            equalTo: viewRoot.safeAreaLayoutGuide.bottomAnchor,
-            constant: -1 * (mainDataSource.viewSwiper.bounds.height + .delta1)
+        let circleVerticalConstraint = viewRoot.viewCircle.centerYAnchor.constraint(
+            equalTo: viewRoot.centerYAnchor,
+            constant: AnimatorCircle.verticalTravelDistance / 2
         )
 
-        circleBottomConstraint.identifier = "circle.bottom"
-        circleBottomConstraint.isActive = true
+        circleVerticalConstraint.identifier = "circle.center.y"
+        circleVerticalConstraint.isActive = true
         
         viewRoot.viewCircle.isHidden = false
         viewRoot.viewFinger.isHidden = false
