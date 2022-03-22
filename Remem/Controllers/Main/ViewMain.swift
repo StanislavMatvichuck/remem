@@ -66,7 +66,7 @@ class ViewMain: UIView {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: 8 * .delta1),
+            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: .lg),
         ])
 
         return view
@@ -79,24 +79,20 @@ class ViewMain: UIView {
         view.layer.cornerRadius = .r2 / 2
         view.layer.opacity = 0.75
 
-        let image = UIImage(systemName: "gearshape.fill")?
-            .withTintColor(.label)
-            .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: .font1)))
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: .font1)
+        label.text = "Settings"
+        label.textAlignment = .center
+        label.textColor = .label
 
-        let imageView = UIImageView(image: image)
-
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-
-        imageView.contentMode = .center
-
-        view.addSubview(imageView)
+        view.addSubview(label)
 
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-            view.widthAnchor.constraint(equalTo: imageView.widthAnchor, constant: 8 * .delta1),
+            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: .lg),
         ])
 
         return view

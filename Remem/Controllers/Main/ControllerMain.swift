@@ -308,6 +308,7 @@ extension ControllerMain: UITableViewDelegate {
         viewRoot.fillerConstraint.constant = newContentOffset.clamped(to: 0 ... (UIScreen.main.bounds.width - .delta1))
         
         if
+            !viewRoot.viewSettings.isHidden,
             newContentOffset >= settingsLeft + .r2,
             newContentOffset <= settingsRight
         {
@@ -332,8 +333,10 @@ extension ControllerMain: UITableViewDelegate {
             return
         }
         
-        if let isSettingsSelected = viewRoot.isViewSelected[viewRoot.viewSettings],
-           isSettingsSelected
+        if
+            !viewRoot.viewSettings.isHidden,
+            let isSettingsSelected = viewRoot.isViewSelected[viewRoot.viewSettings],
+            isSettingsSelected
         {
             handleSettings()
             return
@@ -635,6 +638,18 @@ extension ControllerMain: ControllerMainOnboardingDelegate {
     }
     
     func disableSettingsButton() {
-        print(#function)
+        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveLinear, animations: {
+            self.viewRoot.viewSettings.alpha = 0
+        }, completion: { _ in
+            self.viewRoot.viewSettings.isHidden = true
+        })
+    }
+    
+    func enableSettingsButton() {
+        viewRoot.viewSettings.isHidden = false
+        viewRoot.viewSettings.alpha = 0
+        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveLinear, animations: {
+            self.viewRoot.viewSettings.alpha = 1
+        }, completion: nil)
     }
 }

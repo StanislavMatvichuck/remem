@@ -140,6 +140,8 @@ class ControllerOnboardingOverlay: UIViewController {
     
     func start() {
         currentStep = .showBackground
+        
+        mainDelegate.disableSettingsButton()
     }
     
     func close(completionBlock: @escaping () -> Void) {
@@ -151,8 +153,11 @@ class ControllerOnboardingOverlay: UIViewController {
                        delay: ControllerOnboardingOverlay.standartDuration,
                        animations: {
                            self.viewRoot.alpha = 0
-                       }, completion: { flag in
-                           if flag { completionBlock() }
+                       }, completion: { [weak self] flag in
+                           if flag {
+                               self?.mainDelegate.enableSettingsButton()
+                               completionBlock()
+                           }
                        })
     }
     

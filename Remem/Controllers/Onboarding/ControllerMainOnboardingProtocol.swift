@@ -17,4 +17,5 @@ protocol ControllerMainOnboardingDataSource: UIViewController {
 protocol ControllerMainOnboardingDelegate: UIViewController {
     func createTestItem()
     func disableSettingsButton()
+    func enableSettingsButton()
 }
