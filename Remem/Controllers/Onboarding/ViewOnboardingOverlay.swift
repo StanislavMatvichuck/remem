@@ -157,7 +157,7 @@ class ViewOnboardingOverlay: UIView {
     lazy var viewCircle: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
+        view.layer.backgroundColor = UIColor.systemOrange.cgColor
         view.layer.cornerRadius = .r2 / 2
         
         view.isHidden = true
@@ -184,9 +184,12 @@ class ViewOnboardingOverlay: UIView {
         
         addSubview(label)
         
+        let labelSize = label.sizeThatFits(CGSize(width: .wScreen,
+                                                  height: .hScreen))
+        
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: viewCircle.trailingAnchor),
-            label.topAnchor.constraint(equalTo: viewCircle.bottomAnchor),
+            label.centerXAnchor.constraint(equalTo: viewCircle.centerXAnchor, constant: labelSize.width / 1.6 + 7),
+            label.centerYAnchor.constraint(equalTo: viewCircle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
         ])
         
         return label
@@ -220,7 +223,7 @@ class ViewOnboardingOverlay: UIView {
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
-        layer.backgroundColor = UIColor.orange.cgColor
+        backgroundColor = .systemBackground
         alpha = 0.0
     }
 

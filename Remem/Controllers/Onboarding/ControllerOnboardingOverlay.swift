@@ -197,7 +197,7 @@ class ControllerOnboardingOverlay: UIViewController {
             currentStep = .showFloatingCircleUp
         case .showFloatingCircleUp:
             setupCircleForSwipeUpDemonstration()
-            animationsHelper.animatorCircle.startUp()
+            animationsHelper.animatorCircle.circleAppear()
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
             NotificationCenter.default.addObserver(

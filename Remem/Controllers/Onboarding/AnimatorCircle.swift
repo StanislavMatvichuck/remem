@@ -18,6 +18,8 @@ class AnimatorCircle: NSObject {
 
     static let horizontalTravelDistance: CGFloat = .d2
 
+    static let fingerTravelDistance: CGFloat = .md
+
     //
 
     // MARK: - Related types
@@ -38,8 +40,8 @@ class AnimatorCircle: NSObject {
 
     enum Durations: Double {
         case appear = 0.3
-        case positionUp = 0.5
-        case disappear = 0.32
+        case positionUp = 0.7
+        case disappear = 0.31
     }
 
     //
@@ -73,7 +75,7 @@ class AnimatorCircle: NSObject {
 
     //
 
-    fileprivate func moveCircleUp() {
+    fileprivate func circleMovesUp() {
         circleBottomConstraint?.constant -= AnimatorCircle.verticalTravelDistance
 
         let position = CABasicAnimation(keyPath: "position.y")
@@ -88,13 +90,25 @@ class AnimatorCircle: NSObject {
         position.setValue(Animations.positionUp, forKey: CodingKeys.animationName.rawValue)
 
         viewCircle.layer.add(position, forKey: nil)
+
+        fingerMovesUp()
+    }
+
+    fileprivate func fingerMovesUp() {
+        let position = CABasicAnimation(keyPath: "position.y")
+        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        position.fillMode = .backwards
+        position.duration = Durations.positionUp.rawValue
+
+        position.fromValue = viewFinger.layer.position.y
+        position.toValue = viewFinger.layer.position.y - AnimatorCircle.verticalTravelDistance
+
+        viewFinger.layer.add(position, forKey: nil)
     }
 
     fileprivate func moveCircleRight() {}
 
-    fileprivate func downscaleCircle() {
-        viewCircle.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-
+    fileprivate func circleDisappear() {
         let scaleDown = CABasicAnimation(keyPath: "transform.scale")
         scaleDown.timingFunction = CAMediaTimingFunction(name: .linear)
 
@@ -107,20 +121,35 @@ class AnimatorCircle: NSObject {
         scaleDown.setValue(Animations.disappear, forKey: CodingKeys.animationName.rawValue)
 
         viewCircle.layer.add(scaleDown, forKey: nil)
+
+        viewCircle.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+
+        fingerDisappear()
     }
 
-    fileprivate func startUpFinger() {}
+    fileprivate func fingerDisappear() {
+        let group = CAAnimationGroup()
+        group.fillMode = .backwards
+        group.timingFunction = CAMediaTimingFunction(name: .linear)
+        group.duration = Durations.appear.rawValue
 
-    fileprivate func moveFingerUp() {
-        let position = CABasicAnimation(keyPath: "position.y")
-        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        position.fillMode = .backwards
-        position.duration = Durations.positionUp.rawValue
+        let opacity = CABasicAnimation(keyPath: "opacity")
+        opacity.fromValue = 1
+        opacity.toValue = 0
 
-        position.fromValue = viewFinger.layer.position.y
-        position.toValue = viewFinger.layer.position.y - AnimatorCircle.verticalTravelDistance
+        let translationX = CABasicAnimation(keyPath: "transform.translation.x")
+        translationX.fromValue = 0
+        translationX.toValue = AnimatorCircle.fingerTravelDistance
 
-        viewFinger.layer.add(position, forKey: nil)
+        let translationY = CABasicAnimation(keyPath: "transform.translation.y")
+        translationY.fromValue = 0
+        translationY.toValue = AnimatorCircle.fingerTravelDistance
+
+        group.animations = [opacity, translationX, translationY]
+
+        viewFinger.layer.add(group, forKey: nil)
+
+        viewFinger.layer.opacity = 0
     }
 
     //
@@ -129,7 +158,9 @@ class AnimatorCircle: NSObject {
 
     //
 
-    func startUp() {
+    func circleAppear() {
+        viewCircle.transform = .identity
+
         let scaleUp = CABasicAnimation(keyPath: "transform.scale")
         scaleUp.timingFunction = CAMediaTimingFunction(name: .linear)
 
@@ -144,9 +175,34 @@ class AnimatorCircle: NSObject {
         scaleUp.setValue(Animations.positionUp, forKey: CodingKeys.nextAnimation.rawValue)
 
         viewCircle.layer.add(scaleUp, forKey: nil)
+
+        fingerAppear()
     }
 
-    func startRight() {}
+    fileprivate func fingerAppear() {
+        viewFinger.layer.opacity = 1
+
+        let group = CAAnimationGroup()
+        group.fillMode = .backwards
+        group.timingFunction = CAMediaTimingFunction(name: .linear)
+        group.duration = Durations.appear.rawValue
+
+        let opacity = CABasicAnimation(keyPath: "opacity")
+        opacity.fromValue = 0
+        opacity.toValue = 1
+
+        let translationX = CABasicAnimation(keyPath: "transform.translation.x")
+        translationX.fromValue = AnimatorCircle.fingerTravelDistance
+        translationX.toValue = 0
+
+        let translationY = CABasicAnimation(keyPath: "transform.translation.y")
+        translationY.fromValue = AnimatorCircle.fingerTravelDistance
+        translationY.toValue = 0
+
+        group.animations = [opacity, translationX, translationY]
+
+        viewFinger.layer.add(group, forKey: nil)
+    }
 }
 
 //
@@ -163,22 +219,21 @@ extension AnimatorCircle: CAAnimationDelegate {
         case .appear:
             if let next = anim.value(forKey: CodingKeys.nextAnimation.rawValue) as? Animations {
                 if next == .positionUp {
-                    moveCircleUp()
-                    moveFingerUp()
+                    circleMovesUp()
                 } else if next == .positionRight {
                     moveCircleRight()
                 }
             }
-
         case .positionUp:
-            downscaleCircle()
+            circleDisappear()
+
         case .positionRight:
-            downscaleCircle()
+            circleDisappear()
+
         case .disappear:
             CATransaction.begin()
             circleBottomConstraint?.constant += AnimatorCircle.verticalTravelDistance
-            viewCircle.transform = .identity
-            startUp()
+            circleAppear()
             CATransaction.commit()
         }
     }
