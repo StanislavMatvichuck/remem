@@ -143,6 +143,8 @@ class ViewOnboardingOverlay: UIView {
         
         label.text = "Since that moment I can record each time this event happens, but not without your help, of course."
         
+        label.topAnchor.constraint(equalTo: labelGreeting.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        
         return label
     }()
     
@@ -150,6 +152,18 @@ class ViewOnboardingOverlay: UIView {
         let label = createLabel()
         
         label.text = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it"
+        
+        label.topAnchor.constraint(equalTo: labelEventCreated.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        
+        return label
+    }()
+    
+    lazy var labelSwipeComplete: UILabel = {
+        let label = createLabel()
+        
+        label.text = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it"
+        
+        label.topAnchor.constraint(equalTo: labelEventSwipe.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         
         return label
     }()
@@ -223,12 +237,23 @@ class ViewOnboardingOverlay: UIView {
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemBackground
+//        backgroundColor = .systemBackground
+        backgroundColor = .systemTeal
         alpha = 0.0
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViewFingerConstraints() {
+        let labelSize = viewFinger.sizeThatFits(CGSize(width: .wScreen,
+                                                       height: .hScreen))
+        
+        NSLayoutConstraint.activate([
+            viewFinger.centerXAnchor.constraint(equalTo: viewCircle.centerXAnchor, constant: labelSize.width / 1.6 + 7),
+            viewFinger.centerYAnchor.constraint(equalTo: viewCircle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
+        ])
     }
 
     //
@@ -260,4 +285,9 @@ class ViewOnboardingOverlay: UIView {
         
         return viewResponder
     }
+    
+    // override func layoutSubviews() {
+    //     super.layoutSubviews()
+    //     print(#function)
+    // }
 }

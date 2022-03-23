@@ -70,7 +70,7 @@ class AnimatorBackground {
         maskLayer.path = flag ? finalPath.cgPath : startPath.cgPath
 
         let animation = CABasicAnimation(keyPath: "path")
-        animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.duration = ControllerOnboardingOverlay.standartDuration
         animation.fillMode = .backwards
 
@@ -94,6 +94,31 @@ class AnimatorBackground {
 
         let finalPath = createFinalPath(for: projectedFrame, cornerRadius: cornerRadius, offset: offset)
         self.finalPath = finalPath
+
+        let mask: CAShapeLayer = {
+            let layer = CAShapeLayer()
+            layer.path = startPath.cgPath
+            layer.fillRule = .evenOdd
+            return layer
+        }()
+
+        viewRoot.layer.mask = mask
+
+        animate(true)
+    }
+
+    func move(to view: UIView, cornerRadius: CGFloat = 0.0, offset: CGFloat = 0.0) {
+        guard let finalPath = finalPath else {
+            return
+        }
+
+        let projectedFrame = view.convert(view.bounds, to: viewRoot)
+
+        let startPath = finalPath
+        self.startPath = startPath
+
+        let final = createFinalPath(for: projectedFrame, cornerRadius: cornerRadius, offset: offset)
+        self.finalPath = final
 
         let mask: CAShapeLayer = {
             let layer = CAShapeLayer()

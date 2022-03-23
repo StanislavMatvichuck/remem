@@ -433,6 +433,7 @@ extension ControllerMain: CellMainDelegate {
             entry.points = NSSet(set: newPoints)
         } successBlock: {
             UIDevice.vibrate(.medium)
+            NotificationCenter.default.post(name: .ControllerMainItemSwipe, object: nil)
         }
     }
     
@@ -506,7 +507,7 @@ extension ControllerMain: UITextViewDelegate {
         
         let height = -keyboardFutureHeight - .d2 - .delta1
         
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0.0, options: .curveEaseInOut, animations: {
             if keyboardFutureHeight != 0 {
                 self.viewRoot.inputContainerConstraint.constant = height
             } else {
@@ -515,9 +516,11 @@ extension ControllerMain: UITextViewDelegate {
             self.viewRoot.layoutIfNeeded()
         }, completion: { animationCompleted in
             if animationCompleted {
-                NotificationCenter.default.post(name: .ControllerMainAddItemTriggered, object: nil, userInfo: ["keyboardFutureHeight": height])
+                NotificationCenter.default.post(name: .ControllerMainAddItemTriggered, object: nil)
             }
         })
+        
+        NotificationCenter.default.post(name: .ControllerMainInputConstraintUpdated, object: nil)
     }
     
     @objc private func handlePressAdd() {
@@ -628,7 +631,7 @@ extension ControllerMain: ControllerMainOnboardingDataSource {
     }
     
     var inputHeightOffset: CGFloat {
-        viewRoot.inputContainerConstraint.constant
+        viewRoot.inputContainerConstraint.constant - .delta1
     }
 }
 
