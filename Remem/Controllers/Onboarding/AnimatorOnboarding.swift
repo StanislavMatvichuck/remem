@@ -49,11 +49,11 @@ class AnimatorOnboarding: NSObject {
 
     //
 
-    init(root: UIView, circle: UIView, finger: UIView) {
+    init(root: UIView, circle: UIView, finger: UIView, background: UIView) {
         viewRoot = root
 
-        animatorBackground = AnimatorBackground(background: root)
-        animatorCircle = AnimatorCircle(circle: circle, finger: finger)
+        animatorBackground = AnimatorBackground(background: background)
+        animatorCircle = AnimatorCircle(circle: circle, finger: finger, background: background)
     }
 
     //

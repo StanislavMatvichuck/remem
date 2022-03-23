@@ -540,7 +540,7 @@ extension ControllerMain: UITextViewDelegate {
     }
     
     private func configureInputAccessoryView() {
-        let bar = UIToolbar()
+        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
         
         let dismiss = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(handleViewInputBackgroundTap))
         
@@ -582,10 +582,7 @@ extension ControllerMain: UITextViewDelegate {
     @objc private func handleCreate() {
         hideInput()
         
-        // TODO: remove this mess!
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.createEntryAndPersistIt()
-        }
+        createEntryAndPersistIt()
     }
     
     private func showInputBackground() {

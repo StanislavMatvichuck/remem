@@ -34,7 +34,6 @@ class ControllerOnboardingContainer: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         installControllerMain()
-        installControllerOverlay()
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +71,7 @@ class ControllerOnboardingContainer: UIViewController {
         newOverlay.mainDataSource = controllerMain
         controllerOverlay = newOverlay
         
-        newOverlay.willMove(toParent: self)
+//        newOverlay.willMove(toParent: self)
         addChild(newOverlay)
         viewRoot.install(overlay: newOverlay.view)
         newOverlay.didMove(toParent: self)

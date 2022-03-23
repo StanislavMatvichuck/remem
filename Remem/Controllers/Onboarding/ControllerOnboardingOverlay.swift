@@ -62,7 +62,10 @@ class ControllerOnboardingOverlay: UIViewController {
     
     //
     
-    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot, circle: viewRoot.viewCircle, finger: viewRoot.viewFinger)
+    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot,
+                                                               circle: viewRoot.viewCircle,
+                                                               finger: viewRoot.viewFinger,
+                                                               background: viewRoot.viewBackground)
     
     fileprivate let viewRoot = ViewOnboardingOverlay()
     
@@ -77,8 +80,7 @@ class ControllerOnboardingOverlay: UIViewController {
     fileprivate lazy var labelNameBottomConstraint: NSLayoutConstraint = {
         viewRoot.labelEventName.bottomAnchor.constraint(
             equalTo: viewRoot.bottomAnchor,
-            constant: mainDataSource.inputHeightOffset
-        )
+            constant: mainDataSource.inputHeightOffset)
     }()
     
     //
@@ -156,6 +158,8 @@ class ControllerOnboardingOverlay: UIViewController {
         
         animationsHelper.animate(closeButton: viewRoot.labelClose)
         
+        NotificationCenter.default.removeObserver(self)
+        
         UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration,
                        delay: ControllerOnboardingOverlay.standartDuration,
                        animations: {
@@ -208,8 +212,7 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.animatorBackground.show(view: mainDataSource.viewSwiper, cornerRadius: 0, offset: 0)
             currentStep = .showFloatingCircleUp
         case .showFloatingCircleUp:
-            setupCircleForSwipeUpDemonstration()
-            animationsHelper.animatorCircle.circleAppear()
+            animationsHelper.animatorCircle.start(.addItem)
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
@@ -246,7 +249,7 @@ class ControllerOnboardingOverlay: UIViewController {
             NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
             NotificationCenter.default.removeObserver(self, name: .ControllerMainInputConstraintUpdated, object: nil)
             
-            animationsHelper.hide(label: viewRoot.labelEventName)
+            viewRoot.labelEventName.isHidden = true
             animationsHelper.animatorBackground.hide()
             animationsHelper.animatorBackground.show(view: mainDataSource.viewCellCreated)
             tapMovesForward = true
@@ -258,10 +261,10 @@ class ControllerOnboardingOverlay: UIViewController {
             tapMovesForward = false
             currentStep = .showFloatingCircleRight
         case .showFloatingCircleRight:
-            setupCircleForSwipeRightDemonstration()
+            animationsHelper.animatorCircle.start(.addPoint)
             currentStep = .waitForSwipe
         case .waitForSwipe:
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)),
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
                                                    name: .ControllerMainItemSwipe, object: nil)
             
             viewRoot.isTransparentForTouches = true
@@ -275,45 +278,6 @@ class ControllerOnboardingOverlay: UIViewController {
         default:
             fatalError("⚠️ unhandled onboarding case")
         }
-    }
-    
-    fileprivate func setupCircleForSwipeUpDemonstration() {
-        let circleVerticalConstraint = viewRoot.viewCircle.centerYAnchor.constraint(
-            equalTo: viewRoot.centerYAnchor,
-            constant: AnimatorCircle.verticalTravelDistance / 2
-        )
-
-        circleVerticalConstraint.identifier = "circle.center.y"
-        circleVerticalConstraint.isActive = true
-        
-        viewRoot.viewCircle.isHidden = false
-        viewRoot.viewFinger.isHidden = false
-    }
-    
-    fileprivate func setupCircleForSwipeRightDemonstration() {
-        let circle = viewRoot.viewCircle
-        let finger = viewRoot.viewFinger
-        
-        circle.removeFromSuperview()
-        finger.removeFromSuperview()
-        
-        viewRoot.addSubview(circle)
-        viewRoot.addSubview(finger)
-        
-        viewRoot.setupViewFingerConstraints()
-        
-        NSLayoutConstraint.activate([
-            circle.centerYAnchor.constraint(equalTo: viewRoot.safeAreaLayoutGuide.bottomAnchor, constant: -.r2),
-            circle.centerXAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .delta1 + .r1),
-        ])
-        
-        viewRoot.viewCircle.isHidden = false
-        viewRoot.viewFinger.isHidden = false
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(#function)
     }
 }
 
@@ -331,6 +295,8 @@ extension ControllerOnboardingOverlay {
         case .ControllerMainItemCreated:
             currentStep = .highlightCreatedEntry
         case .ControllerMainInputConstraintUpdated:
+            guard mainDataSource.inputHeightOffset != -.delta1 else { return }
+            /// this guard statement fixes immediate label disappearing
             UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveEaseInOut, animations: {
                 self.labelNameBottomConstraint.constant = self.mainDataSource.inputHeightOffset
                 self.viewRoot.layoutIfNeeded()

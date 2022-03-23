@@ -107,6 +107,7 @@ class AnimatorBackground {
         animate(true)
     }
 
+    // TODO: close animation ending after movement must be closing, not moving
     func move(to view: UIView, cornerRadius: CGFloat = 0.0, offset: CGFloat = 0.0) {
         guard let finalPath = finalPath else {
             return

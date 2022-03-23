@@ -20,6 +20,13 @@ class ViewOnboardingOverlay: UIView {
 
     //
     
+    lazy var viewBackground: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemCyan
+        return view
+    }()
+    
     //
 
     // MARK: Labels layout
@@ -47,6 +54,8 @@ class ViewOnboardingOverlay: UIView {
             label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: labelsHorizontalSpacing),
             label.trailingAnchor.constraint(equalTo: labelClose.leadingAnchor),
         ])
+        
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         return label
     }()
@@ -76,6 +85,8 @@ class ViewOnboardingOverlay: UIView {
             label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsVerticalSpacing),
             label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsHorizontalSpacing),
         ])
+        
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return label
     }()
@@ -173,7 +184,7 @@ class ViewOnboardingOverlay: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.backgroundColor = UIColor.systemOrange.cgColor
         view.layer.cornerRadius = .r2 / 2
-        
+        view.isUserInteractionEnabled = false
         view.isHidden = true
         
         addSubview(view)
@@ -193,7 +204,7 @@ class ViewOnboardingOverlay: UIView {
         label.text = "👆"
         label.font = .systemFont(ofSize: .font2)
         label.transform = CGAffineTransform(rotationAngle: -1 * (.pi / 4))
-        
+        label.isUserInteractionEnabled = false
         label.isHidden = true
         
         addSubview(label)
@@ -235,27 +246,15 @@ class ViewOnboardingOverlay: UIView {
 
     init() {
         super.init(frame: .zero)
-        
         translatesAutoresizingMaskIntoConstraints = false
-//        backgroundColor = .systemBackground
-        backgroundColor = .systemTeal
         alpha = 0.0
+        addAndConstrain(viewBackground)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViewFingerConstraints() {
-        let labelSize = viewFinger.sizeThatFits(CGSize(width: .wScreen,
-                                                       height: .hScreen))
-        
-        NSLayoutConstraint.activate([
-            viewFinger.centerXAnchor.constraint(equalTo: viewCircle.centerXAnchor, constant: labelSize.width / 1.6 + 7),
-            viewFinger.centerYAnchor.constraint(equalTo: viewCircle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
-        ])
-    }
-
     //
 
     // MARK: - Touches transparency with children capturing
@@ -271,7 +270,10 @@ class ViewOnboardingOverlay: UIView {
         
         if isTransparentForTouches {
             // Allows pressing "close onboarding" button
-            if let touchedSubviewIndex = subviews.firstIndex(of: viewResponder) {
+            if
+                viewResponder != viewBackground,
+                let touchedSubviewIndex = subviews.firstIndex(of: viewResponder)
+            {
                 let touchedSubview = subviews[touchedSubviewIndex]
                 return touchedSubview
             } else if let viewMain = superview?.superview?.subviews.first?.subviews.first {
