@@ -230,11 +230,7 @@ class ControllerOnboardingOverlay: UIViewController {
             
             animationsHelper.hide(label: viewRoot.labelStart)
             
-            viewRoot.viewCircle.layer.removeAllAnimations()
-            viewRoot.viewCircle.isHidden = true
-            
-            viewRoot.viewFinger.layer.removeAllAnimations()
-            viewRoot.viewFinger.isHidden = true
+            animationsHelper.animatorCircle.stop()
             
             labelNameBottomConstraint.isActive = true
             
@@ -270,6 +266,8 @@ class ControllerOnboardingOverlay: UIViewController {
             viewRoot.isTransparentForTouches = true
         case .showTextAfterFirstSwipe:
             NotificationCenter.default.removeObserver(self, name: .ControllerMainItemSwipe, object: nil)
+            
+            animationsHelper.animatorCircle.stop()
             
             animationsHelper.show(label: viewRoot.labelSwipeComplete)
 //        case waitForSwipe02

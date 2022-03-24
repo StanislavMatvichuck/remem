@@ -42,6 +42,7 @@ class AnimatorCircle: NSObject {
     //
 
     fileprivate var mode = Mode.addItem
+    fileprivate var lastIteration = false
 
     fileprivate let verticalTravelDistance: CGFloat = 2 * .d2
     fileprivate let horizontalTravelDistance: CGFloat = .wScreen - 2 * .delta1 - .d2
@@ -286,6 +287,7 @@ class AnimatorCircle: NSObject {
 
     func start(_ mode: Mode) {
         self.mode = mode
+        lastIteration = false
 
         setupConstraints()
 
@@ -293,6 +295,10 @@ class AnimatorCircle: NSObject {
         finger.isHidden = false
 
         startAppearing()
+    }
+
+    func stop() {
+        lastIteration = true
     }
 }
 
@@ -312,7 +318,9 @@ extension AnimatorCircle: CAAnimationDelegate {
         case .position:
             startDisappearing()
         case .disappear:
-            reset()
+            if !lastIteration {
+                reset()
+            }
         }
     }
 }
