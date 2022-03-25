@@ -9,7 +9,6 @@ import UIKit
 
 protocol ControllerMainOnboardingDataSource: UIViewController {
     var viewSwiper: UIView { get }
-    var viewCellCreated: UIView { get }
     var viewInput: UIView { get }
     var inputHeightOffset: CGFloat { get }
 }

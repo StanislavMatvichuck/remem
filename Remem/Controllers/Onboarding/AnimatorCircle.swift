@@ -67,6 +67,12 @@ class AnimatorCircle: NSObject {
         self.background = background
     }
 
+    //
+
+    // MARK: - Behaviour
+
+    //
+
     fileprivate func setupConstraints() {
         guard let parentView = circle.superview else { return }
 
@@ -98,12 +104,6 @@ class AnimatorCircle: NSObject {
             finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
         ])
     }
-
-    //
-
-    // MARK: - Behaviour
-
-    //
 
     fileprivate func startAppearing() {
         circle.transform = .identity

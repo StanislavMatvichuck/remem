@@ -163,8 +163,6 @@ class ControllerMain: UIViewController, CoreDataConsumer {
                 entry.name = name
                 entry.dateCreated = NSDate.now
             }
-        }, successBlock: {
-            NotificationCenter.default.post(name: .ControllerMainItemCreated, object: nil)
         })
         
         viewRoot.input.text = ""
@@ -299,6 +297,10 @@ extension ControllerMain: UITableViewDelegate {
             let cell = cell as! CellMain
             
             cell.animateMovableViewBack()
+        }
+        
+        if tableView.visibleCells.firstIndex(of: cell) == nil {
+            NotificationCenter.default.post(name: .ControllerMainItemCreated, object: cell)
         }
     }
     
@@ -619,10 +621,6 @@ extension ControllerMain: ControllerMainOnboardingDataSource {
         viewRoot.viewSwiper
     }
     
-    var viewCellCreated: UIView {
-        viewRoot.viewTable.visibleCells.first!
-    }
-    
     var viewInput: UIView {
         viewRoot.viewInput
     }
@@ -634,7 +632,10 @@ extension ControllerMain: ControllerMainOnboardingDataSource {
 
 extension ControllerMain: ControllerMainOnboardingDelegate {
     func createTestItem() {
-        print(#function)
+        // TODO: refactor items creation
+        viewRoot.input.text = "Test10"
+        
+        createEntryAndPersistIt()
     }
     
     func disableSettingsButton() {

@@ -179,6 +179,36 @@ class ViewOnboardingOverlay: UIView {
         return label
     }()
     
+    lazy var labelAdditionalSwipes: UILabel = {
+        let label = createLabel()
+        
+        label.text = "2 / 5"
+        
+        label.topAnchor.constraint(equalTo: labelSwipeComplete.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        
+        return label
+    }()
+    
+    lazy var labelTestItemDescription: UILabel = {
+        let label = createLabel()
+        
+        label.text = "Now let`s assume that you have been using me for some time. You will receive something like that"
+        
+        label.topAnchor.constraint(equalTo: labelGreeting.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        
+        return label
+    }()
+    
+    lazy var labelTestItemLongPress: UILabel = {
+        let label = createLabel()
+        
+        label.text = "Press and hold on the circle to see additional options"
+        
+        label.topAnchor.constraint(equalTo: labelSwipeComplete.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        
+        return label
+    }()
+    
     lazy var viewCircle: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false

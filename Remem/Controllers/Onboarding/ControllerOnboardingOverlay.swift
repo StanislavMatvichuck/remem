@@ -32,10 +32,33 @@ class ControllerOnboardingOverlay: UIViewController {
         case showTextTrySwipe
         case showFloatingCircleRight
         case waitForSwipe
-        case showTextAfterFirstSwipe
-        case waitForSwipe02
-        case showTextAfterSecondSwipe
-        case waitForSwipe03
+        case showTextAfterSwipe01
+        case showTextAfterSwipe02
+        case showTextAfterSwipe03
+        case showTextAfterSwipe04
+        case showTextAfterSwipe05
+        case highlightTestItem
+        case showTextCreatedTestItem
+        case showTextLongPress
+        case waitForLongPress
+        case highlightViewList
+        case waitForViewListPress
+        case highlightPointsList
+        case showTextPointsList
+        case showTextScrollPoints
+        case showFloatingCircleScrollPoints
+        case waitForScrollPoints
+        case highlightStats
+        case showTextStatsDescription
+        case showTextStatsScroll
+        case showFloatingCircleScrollStats
+        case waitForScrollStats
+        case highlightDisplay
+        case showTextDisplayDescription
+        case showTextDisplayScroll
+        case showFloatingCircleDisplayScroll
+        case waitForDisplayScroll
+        case showTextFinal
     }
 
     //
@@ -82,6 +105,8 @@ class ControllerOnboardingOverlay: UIViewController {
             equalTo: viewRoot.bottomAnchor,
             constant: mainDataSource.inputHeightOffset)
     }()
+    
+    fileprivate weak var cellToHighlight: UITableViewCell!
     
     //
     
@@ -247,7 +272,7 @@ class ControllerOnboardingOverlay: UIViewController {
             
             viewRoot.labelEventName.isHidden = true
             animationsHelper.animatorBackground.hide()
-            animationsHelper.animatorBackground.show(view: mainDataSource.viewCellCreated)
+            animationsHelper.animatorBackground.show(view: cellToHighlight)
             tapMovesForward = true
             currentStep = .showTextEntryDescription
         case .showTextEntryDescription:
@@ -264,15 +289,38 @@ class ControllerOnboardingOverlay: UIViewController {
                                                    name: .ControllerMainItemSwipe, object: nil)
             
             viewRoot.isTransparentForTouches = true
-        case .showTextAfterFirstSwipe:
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemSwipe, object: nil)
-            
+        case .showTextAfterSwipe01:
             animationsHelper.animatorCircle.stop()
             
             animationsHelper.show(label: viewRoot.labelSwipeComplete)
-//        case waitForSwipe02
-//        case showTextAfterSecondSwipe
-//        case waitForSwipe03
+        case .showTextAfterSwipe02:
+            animationsHelper.show(label: viewRoot.labelAdditionalSwipes)
+        case .showTextAfterSwipe03:
+            viewRoot.labelAdditionalSwipes.text = "3 / 5"
+        case .showTextAfterSwipe04:
+            viewRoot.labelAdditionalSwipes.text = "4 / 5"
+        case .showTextAfterSwipe05:
+            viewRoot.labelAdditionalSwipes.text = "5 / 5"
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
+                                                   name: .ControllerMainItemCreated, object: nil)
+            
+            mainDelegate.createTestItem()
+            
+            tapMovesForward = false
+            
+            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemSwipe, object: nil)
+        case .highlightTestItem:
+            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
+            animationsHelper.animatorBackground.show(view: cellToHighlight)
+            currentStep = .showTextCreatedTestItem
+        case .showTextCreatedTestItem:
+            animationsHelper.hide(label: viewRoot.labelEventCreated)
+            animationsHelper.hide(label: viewRoot.labelEventSwipe)
+            animationsHelper.hide(label: viewRoot.labelAdditionalSwipes)
+            animationsHelper.hide(label: viewRoot.labelSwipeComplete)
+            
+            animationsHelper.show(label: viewRoot.labelTestItemDescription)
         default:
             fatalError("⚠️ unhandled onboarding case")
         }
@@ -291,7 +339,14 @@ extension ControllerOnboardingOverlay {
         case .ControllerMainAddItemTriggered:
             currentStep = .showTextGiveEventAName
         case .ControllerMainItemCreated:
-            currentStep = .highlightCreatedEntry
+            guard let cell = notification.object as? UITableViewCell else { return }
+            cellToHighlight = cell
+            
+            if currentStep == .showTextAfterSwipe05 {
+                currentStep = .highlightTestItem
+            } else {
+                currentStep = .highlightCreatedEntry
+            }
         case .ControllerMainInputConstraintUpdated:
             guard mainDataSource.inputHeightOffset != -.delta1 else { return }
             /// this guard statement fixes immediate label disappearing
@@ -301,7 +356,7 @@ extension ControllerOnboardingOverlay {
             }, completion: nil)
             animationsHelper.animatorBackground.move(to: mainDataSource.viewInput, cornerRadius: .r1)
         case .ControllerMainItemSwipe:
-            currentStep = .showTextAfterFirstSwipe
+            goToNextStep()
         default:
             fatalError("Unhandled notification")
         }
