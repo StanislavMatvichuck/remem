@@ -359,7 +359,17 @@ extension ControllerMain: CellMainDelegate {
             let entry = fetchedResultsController?.fetchedObjects?[index.row]
         else { return }
         
-        present(createManipulationAlert(for: entry), animated: true, completion: nil)
+        let alert = createManipulationAlert(for: entry)
+        
+        present(alert, animated: true)
+    }
+    
+    func didPressAction(_ cell: CellMain) {
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let entry = fetchedResultsController?.fetchedObjects?[index.row]
+        else { return }
+        // TODO: present details controller
     }
     
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
@@ -378,6 +388,27 @@ extension ControllerMain: CellMainDelegate {
         return alert
     }
     
+//    private func createControllerPointList(for entry: Entry) -> UIViewController {
+//        let controller = ControllerPointsList(entry: entry)
+//
+//        controller.persistentContainer = persistentContainer
+//
+    ////        let navigator = UINavigationController(rootViewController: controller)
+//
+//        let appearance = UINavigationBarAppearance()
+//
+//        appearance.backgroundColor = .systemBackground
+//        appearance.configureWithOpaqueBackground()
+//        appearance.shadowImage = nil
+//        appearance.shadowColor = .clear
+//
+//        controller.navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//        controller.navigationController?.navigationBar.standardAppearance = appearance
+//        controller.navigationBar.compactAppearance = appearance
+//
+//        return controller
+//    }
+    
     private func createControllerPointList(for entry: Entry) -> UIViewController {
         let controller = ControllerPointsList(entry: entry)
             
@@ -386,12 +417,12 @@ extension ControllerMain: CellMainDelegate {
         let navigator = UINavigationController(rootViewController: controller)
         
         let appearance = UINavigationBarAppearance()
-        
+
         appearance.backgroundColor = .systemBackground
         appearance.configureWithOpaqueBackground()
         appearance.shadowImage = nil
         appearance.shadowColor = .clear
-        
+
         navigator.navigationBar.scrollEdgeAppearance = appearance
         navigator.navigationBar.standardAppearance = appearance
         navigator.navigationBar.compactAppearance = appearance

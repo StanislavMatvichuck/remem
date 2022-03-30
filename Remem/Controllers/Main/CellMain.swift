@@ -10,6 +10,7 @@ import UIKit
 protocol CellMainDelegate: AnyObject {
     func didSwipeAction(_ cell: CellMain)
     func didLongPressAction(_ cell: CellMain)
+    func didPressAction(_ cell: CellMain)
     func didAnimation(_ cell: CellMain)
 }
 
@@ -73,7 +74,7 @@ final class CellMain: UITableViewCell {
         return label
     }()
 
-    private let viewMovable: UIView = {
+    let viewMovable: UIView = {
         let view = UIView(frame: .zero)
 
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -163,17 +164,24 @@ final class CellMain: UITableViewCell {
     //
 
     private func setupEventHandlers() {
-        let swipeRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        viewMovable.addGestureRecognizer(UIPanGestureRecognizer(
+            target: self, action: #selector(handlePan)))
 
-        viewMovable.addGestureRecognizer(swipeRecognizer)
-        viewMovable.addGestureRecognizer(longPressRecognizer)
+        viewMovable.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(handleCirclePress)))
+
+        viewMovable.addGestureRecognizer(UILongPressGestureRecognizer(
+            target: self, action: #selector(handleLongPress)))
     }
 
     @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
             delegate?.didLongPressAction(self)
         }
+    }
+
+    @objc private func handleCirclePress(_ gestureRecognizer: UITapGestureRecognizer) {
+        delegate?.didPressAction(self)
     }
 
     //

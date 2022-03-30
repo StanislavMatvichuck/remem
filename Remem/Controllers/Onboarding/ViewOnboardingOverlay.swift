@@ -202,9 +202,9 @@ class ViewOnboardingOverlay: UIView {
     lazy var labelTestItemLongPress: UILabel = {
         let label = createLabel()
         
-        label.text = "Press and hold on the circle to see additional options"
+        label.text = "Tap the circle to view details"
         
-        label.topAnchor.constraint(equalTo: labelSwipeComplete.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelTestItemDescription.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         
         return label
     }()

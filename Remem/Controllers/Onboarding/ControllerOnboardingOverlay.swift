@@ -40,6 +40,7 @@ class ControllerOnboardingOverlay: UIViewController {
         case highlightTestItem
         case showTextCreatedTestItem
         case showTextLongPress
+        case highlightLongPress
         case waitForLongPress
         case highlightViewList
         case waitForViewListPress
@@ -106,7 +107,10 @@ class ControllerOnboardingOverlay: UIViewController {
             constant: mainDataSource.inputHeightOffset)
     }()
     
+    // TODO: maybe do it in a better way?
+    /// for now notifications are used to pass these `uiView` objects
     fileprivate weak var cellToHighlight: UITableViewCell!
+    fileprivate weak var viewToHighlight: UIView!
     
     //
     
@@ -321,6 +325,24 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.hide(label: viewRoot.labelSwipeComplete)
             
             animationsHelper.show(label: viewRoot.labelTestItemDescription)
+            tapMovesForward = true
+            viewRoot.isTransparentForTouches = false
+        case .showTextLongPress:
+            animationsHelper.show(label: viewRoot.labelTestItemLongPress)
+            currentStep = .highlightLongPress
+        case .highlightLongPress:
+            if let cellMain = cellToHighlight as? CellMain {
+                animationsHelper.animatorBackground.move(to: cellMain.viewMovable)
+            }
+            currentStep = .waitForLongPress
+        case .waitForLongPress:
+            tapMovesForward = false
+            viewRoot.isTransparentForTouches = true
+            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
+                                                   name: .ControllerMainPresentedDetails, object: nil)
+        case .highlightViewList:
+            NotificationCenter.default.removeObserver(self, name: .ControllerMainPresentedDetails, object: nil)
+            animationsHelper.animatorBackground.show(view: viewToHighlight)
         default:
             fatalError("⚠️ unhandled onboarding case")
         }
@@ -357,6 +379,10 @@ extension ControllerOnboardingOverlay {
             animationsHelper.animatorBackground.move(to: mainDataSource.viewInput, cornerRadius: .r1)
         case .ControllerMainItemSwipe:
             goToNextStep()
+        case .ControllerMainPresentedDetails:
+            guard let view = notification.object as? UIView else { return }
+            viewToHighlight = view
+            currentStep = .highlightViewList
         default:
             fatalError("Unhandled notification")
         }
@@ -368,4 +394,5 @@ extension Notification.Name {
     static let ControllerMainItemCreated = Notification.Name(rawValue: "ControllerMainItemCreated")
     static let ControllerMainInputConstraintUpdated = Notification.Name(rawValue: "ControllerMainInputConstraintUpdated")
     static let ControllerMainItemSwipe = Notification.Name(rawValue: "ControllerMainItemSwipe")
+    static let ControllerMainPresentedDetails = Notification.Name(rawValue: "ControllerMainPresentedDetails")
 }
