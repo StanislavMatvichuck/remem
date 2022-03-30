@@ -18,4 +18,12 @@ extension UIView {
             view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1 * constant),
         ])
     }
+
+    /// Initializer made to shorten programmatic `UIView` creation
+    /// - Parameter al: AutoLayout usage flag
+    convenience init(al: Bool) {
+        self.init(frame: .zero)
+
+        translatesAutoresizingMaskIntoConstraints = !al
+    }
 }

@@ -15,19 +15,18 @@ class ViewOnboardingContainer: UIView {
     //
 
     fileprivate let viewOverlay: UIView = {
-        let view = UIView(frame: .zero)
-
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view = UIView(al: true)
         view.isHidden = true
-
         return view
     }()
 
     fileprivate let viewContainer: UIView = {
-        let view = UIView(frame: .zero)
+        let view = UIView(al: true)
+        return view
+    }()
 
-        view.translatesAutoresizingMaskIntoConstraints = false
-
+    fileprivate let viewPointsList: UIView = {
+        let view = UIView(al: true)
         return view
     }()
 
