@@ -375,8 +375,10 @@ extension ControllerMain: CellMainDelegate {
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { _ in
-            self.present(self.createControllerPointList(for: entry), animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { [weak self] _ in
+            if let container = self?.parent as? ControllerOnboardingContainer {
+                container.showPointsList(for: entry)
+            }
         }))
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in

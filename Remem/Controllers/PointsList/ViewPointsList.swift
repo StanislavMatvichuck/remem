@@ -108,6 +108,7 @@ class ViewPointsList: UIView {
 
     init() {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
 
         setupLayout()
     }

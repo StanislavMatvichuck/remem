@@ -24,6 +24,8 @@ class ControllerOnboardingContainer: UIViewController {
     
     fileprivate weak var controllerOverlay: ControllerOnboardingOverlay?
     
+    fileprivate weak var controllerPointsList: ControllerPointsList?
+    
     //
     
     // MARK: - Initialization
@@ -59,9 +61,8 @@ class ControllerOnboardingContainer: UIViewController {
     //
     
     fileprivate func installControllerMain() {
-        controllerMain.willMove(toParent: self)
         addChild(controllerMain)
-        viewRoot.contain(view: controllerMain.view)
+        viewRoot.viewMain.addAndConstrain(controllerMain.view)
         controllerMain.didMove(toParent: self)
     }
     
@@ -71,18 +72,24 @@ class ControllerOnboardingContainer: UIViewController {
         newOverlay.mainDataSource = controllerMain
         controllerOverlay = newOverlay
         
-//        newOverlay.willMove(toParent: self)
         addChild(newOverlay)
-        viewRoot.install(overlay: newOverlay.view)
+
+        viewRoot.viewOverlay.addAndConstrain(newOverlay.view)
         newOverlay.didMove(toParent: self)
     }
     
     fileprivate func uninstallControllerOverlay() {
-        controllerOverlay?.willMove(toParent: nil)
-        controllerOverlay?.view.removeFromSuperview()
-        controllerOverlay?.removeFromParent()
-        controllerOverlay?.didMove(toParent: nil)
+        if let controller = controllerOverlay {
+            remove(controller)
+        }
         controllerOverlay = nil
+    }
+    
+    fileprivate func remove(_ controller: UIViewController) {
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
+        controller.didMove(toParent: nil)
     }
     
     //
@@ -93,14 +100,39 @@ class ControllerOnboardingContainer: UIViewController {
     
     func startOnboarding() {
         installControllerOverlay()
-        viewRoot.showOverlay()
+        viewRoot.viewOverlay.isHidden = false
         controllerOverlay?.start()
     }
     
     func closeOnboarding() {
         controllerOverlay?.close {
-            self.viewRoot.hideOverlay()
+            self.viewRoot.viewOverlay.isHidden = true
             self.uninstallControllerOverlay()
         }
+    }
+    
+    func showPointsList(for entry: Entry) {
+        let controller = ControllerPointsList(entry: entry)
+        controllerPointsList = controller
+        // TODO: refactor persistanceContainer injection
+        controller.persistentContainer = controllerMain.persistentContainer
+        
+        addChild(controller)
+        viewRoot.viewPointsList.addAndConstrain(controller.view)
+        viewRoot.addAndConstrain(viewRoot.viewPointsList)
+        viewRoot.viewPointsList.isHidden = false
+        controller.didMove(toParent: self)
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//            self.closePointsList()
+//        }
+    }
+    
+    func closePointsList() {
+        if let controller = controllerPointsList {
+            remove(controller)
+        }
+        controllerPointsList = nil
+        viewRoot.viewPointsList.isHidden = true
     }
 }
