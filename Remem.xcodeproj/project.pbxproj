@@ -19,8 +19,6 @@
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		083DD13227C6B20F006F1479 /* ControllerOnboardingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */; };
 		083DD13427C6B21A006F1479 /* ViewOnboardingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */; };
-		0849612E27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0849612D27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift */; };
-		0849613027E5DA4C00EFA8C0 /* ViewOnboardingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0849612F27E5DA4C00EFA8C0 /* ViewOnboardingContainer.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
@@ -57,8 +55,6 @@
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerOnboardingOverlay.swift; sourceTree = "<group>"; };
 		083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnboardingOverlay.swift; sourceTree = "<group>"; };
-		0849612D27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerOnboardingContainer.swift; sourceTree = "<group>"; };
-		0849612F27E5DA4C00EFA8C0 /* ViewOnboardingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnboardingContainer.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
@@ -111,9 +107,7 @@
 				089A5A4827E7A28000157D26 /* AnimatorCircle.swift */,
 				08975A9827DDF51C0021E0D3 /* AnimatorOnboarding.swift */,
 				0880FB3F27E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift */,
-				0849612D27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift */,
 				083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */,
-				0849612F27E5DA4C00EFA8C0 /* ViewOnboardingContainer.swift */,
 				083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */,
 			);
 			path = Onboarding;
@@ -317,7 +311,6 @@
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
-				0849612E27E5D9FF00EFA8C0 /* ControllerOnboardingContainer.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
@@ -331,7 +324,6 @@
 				0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */,
 				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
 				08D512362787144800C2037F /* ViewMain.swift in Sources */,
-				0849613027E5DA4C00EFA8C0 /* ViewOnboardingContainer.swift in Sources */,
 				0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */,
 				0880FB4027E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,

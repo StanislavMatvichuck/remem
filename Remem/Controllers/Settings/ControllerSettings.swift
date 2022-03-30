@@ -56,7 +56,7 @@ class ControllerSettings: UIViewController {
     }
     
     @objc func handlePressOnboarding() {
-        guard let onboardingController = parent?.presentingViewController as? ControllerOnboardingContainer else { return }
-        dismiss(animated: true) { onboardingController.startOnboarding() }
+        guard let main = parent?.presentingViewController as? ControllerMain else { return }
+        dismiss(animated: true) { main.startOnboarding() }
     }
 }

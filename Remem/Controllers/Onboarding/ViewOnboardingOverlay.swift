@@ -276,8 +276,6 @@ class ViewOnboardingOverlay: UIView {
 
     init() {
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        alpha = 0.0
         addAndConstrain(viewBackground)
     }
 
@@ -306,7 +304,7 @@ class ViewOnboardingOverlay: UIView {
             {
                 let touchedSubview = subviews[touchedSubviewIndex]
                 return touchedSubview
-            } else if let viewMain = superview?.superview?.subviews.first?.subviews.first {
+            } else if let viewMain = superview?.superview?.subviews.first {
                 // FIXME: make this condition to be general
                 let convertedPoint = viewMain.convert(point, from: self)
                 return viewMain.hitTest(convertedPoint, with: event)

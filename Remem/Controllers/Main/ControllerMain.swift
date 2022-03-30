@@ -250,6 +250,21 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         
         present(navigation, animated: true, completion: nil)
     }
+    
+    //
+
+    // MARK: - Public methods
+
+    //
+    
+    func startOnboarding() {
+        let onboarding = ControllerOnboardingOverlay()
+        onboarding.modalPresentationStyle = .overCurrentContext
+        onboarding.mainDataSource = self
+        onboarding.mainDelegate = self
+        onboarding.isModalInPresentation = true
+        present(onboarding, animated: true)
+    }
 }
 
 //
@@ -369,17 +384,25 @@ extension ControllerMain: CellMainDelegate {
             let index = viewRoot.viewTable.indexPath(for: cell),
             let entry = fetchedResultsController?.fetchedObjects?[index.row]
         else { return }
-        // TODO: present details controller
+        
+        let pointsList = ControllerPointsList(entry: entry)
+        pointsList.persistentContainer = persistentContainer
+        let navigation = UINavigationController(rootViewController: pointsList)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemBackground
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowImage = nil
+        appearance.shadowColor = .clear
+        
+        navigation.navigationBar.scrollEdgeAppearance = appearance
+        navigation.navigationBar.standardAppearance = appearance
+        navigation.navigationBar.compactAppearance = appearance
+        present(navigation, animated: true)
     }
     
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "View list", style: .default, handler: { [weak self] _ in
-            if let container = self?.parent as? ControllerOnboardingContainer {
-                container.showPointsList(for: entry)
-            }
-        }))
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
             self.delete(entry: entry)
@@ -389,27 +412,6 @@ extension ControllerMain: CellMainDelegate {
         
         return alert
     }
-    
-//    private func createControllerPointList(for entry: Entry) -> UIViewController {
-//        let controller = ControllerPointsList(entry: entry)
-//
-//        controller.persistentContainer = persistentContainer
-//
-    ////        let navigator = UINavigationController(rootViewController: controller)
-//
-//        let appearance = UINavigationBarAppearance()
-//
-//        appearance.backgroundColor = .systemBackground
-//        appearance.configureWithOpaqueBackground()
-//        appearance.shadowImage = nil
-//        appearance.shadowColor = .clear
-//
-//        controller.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-//        controller.navigationController?.navigationBar.standardAppearance = appearance
-//        controller.navigationBar.compactAppearance = appearance
-//
-//        return controller
-//    }
     
     private func createControllerPointList(for entry: Entry) -> UIViewController {
         let controller = ControllerPointsList(entry: entry)

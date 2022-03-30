@@ -165,9 +165,7 @@ class ControllerOnboardingOverlay: UIViewController {
     }
     
     @objc private func handlePressClose() {
-        if let onboardingController = parent as? ControllerOnboardingContainer {
-            onboardingController.closeOnboarding()
-        }
+        finish()
     }
     
     //
@@ -182,23 +180,10 @@ class ControllerOnboardingOverlay: UIViewController {
         mainDelegate.disableSettingsButton()
     }
     
-    func close(completionBlock: @escaping () -> Void) {
-        animationsHelper.animatorBackground.hide()
-        
-        animationsHelper.animate(closeButton: viewRoot.labelClose)
-        
+    func finish() {
         NotificationCenter.default.removeObserver(self)
-        
-        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration,
-                       delay: ControllerOnboardingOverlay.standartDuration,
-                       animations: {
-                           self.viewRoot.alpha = 0
-                       }, completion: { [weak self] flag in
-                           if flag {
-                               self?.mainDelegate.enableSettingsButton()
-                               completionBlock()
-                           }
-                       })
+        mainDelegate.enableSettingsButton()
+        dismiss(animated: true)
     }
     
     fileprivate func goToNextStep() {
