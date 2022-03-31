@@ -188,19 +188,19 @@
 				083DD13027C6B1FF006F1479 /* Onboarding */,
 				0830DA3227C3A6C900479014 /* Settings */,
 				0890627627A0A1E30032847C /* PointsList */,
-				08D512342787143900C2037F /* Main */,
+				08D512342787143900C2037F /* EntriesList */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		08D512342787143900C2037F /* Main */ = {
+		08D512342787143900C2037F /* EntriesList */ = {
 			isa = PBXGroup;
 			children = (
 				08D512372787153900C2037F /* EntryCell.swift */,
 				08D5122127870D2500C2037F /* EntriesListController.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
 			);
-			path = Main;
+			path = EntriesList;
 			sourceTree = "<group>";
 		};
 		08D512392787156500C2037F /* Models */ = {
