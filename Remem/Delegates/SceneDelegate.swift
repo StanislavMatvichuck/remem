@@ -16,10 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let application = UIApplication.shared.delegate as! AppDelegate
-
+        let model = EntriesListModel()
         let controller = EntriesListController()
-        controller.persistentContainer = application.persistentContainer
+        // TODO: check if this is okay
+        controller.model = model
+        model.delegate = controller
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = controller

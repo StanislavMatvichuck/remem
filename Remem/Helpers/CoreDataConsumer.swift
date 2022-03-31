@@ -6,8 +6,7 @@
 //
 
 import CoreData
-import UIKit
 
-protocol CoreDataConsumer: UIViewController {
-    var persistentContainer: NSPersistentContainer! { get }
+protocol CoreDataConsumer {
+    var persistentContainer: NSPersistentContainer { get }
 }

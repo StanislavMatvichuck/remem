@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class EntriesListController: UIViewController, CoreDataConsumer {
+class EntriesListController: UIViewController, EntriesListModelDelegate {
     //
     
     // MARK: - Private properties
@@ -17,26 +17,9 @@ class EntriesListController: UIViewController, CoreDataConsumer {
     
     let viewRoot = EntriesListView()
     
+    var model: EntriesListModelInterface!
+    
     fileprivate var cellIndexToBeAnimated: IndexPath?
-    
-    fileprivate var data: [Entry] = [] {
-        didSet {
-            viewRoot.viewTable.reloadData()
-        }
-    }
-    
-    //
-    // CoreData properties
-    //
-    
-    var persistentContainer: NSPersistentContainer!
-    
-    var fetchedResultsController: NSFetchedResultsController<Entry>?
-    var pointsFetchedResultsController: NSFetchedResultsController<Point>?
-    
-    var moc: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
     
     //
     // Swiper properties
@@ -82,42 +65,12 @@ class EntriesListController: UIViewController, CoreDataConsumer {
         
         configureInputAccessoryView()
         
-        fetch()
+        model.fetchEntries()
     }
     
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         viewRoot.viewTable.dataSource = self
         viewRoot.viewTable.delegate = self
-    }
-    
-    private func fetch() {
-        let request = NSFetchRequest<Entry>(entityName: "Entry")
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                              managedObjectContext: moc,
-                                                              sectionNameKeyPath: nil,
-                                                              cacheName: nil)
-        fetchedResultsController?.delegate = self
-        
-        let pointsRequest = NSFetchRequest<Point>(entityName: "Point")
-        
-        pointsRequest.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: true)]
-        
-        pointsFetchedResultsController = NSFetchedResultsController(fetchRequest: pointsRequest,
-                                                                    managedObjectContext: moc,
-                                                                    sectionNameKeyPath: nil,
-                                                                    cacheName: nil)
-        
-        pointsFetchedResultsController?.delegate = self
-        
-        do {
-            try fetchedResultsController?.performFetch()
-            try pointsFetchedResultsController?.performFetch()
-        } catch {
-            print("fetch request failed")
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -133,118 +86,33 @@ class EntriesListController: UIViewController, CoreDataConsumer {
 
     //
     
-    private func setupEventHandlers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillChangeFrame(notification:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil
-        )
+    fileprivate func setupEventHandlers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         viewRoot.input.delegate = self
         
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap))
-        
-        viewRoot.viewInputBackground.addGestureRecognizer(recognizer)
+        viewRoot.viewInputBackground.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap)))
     }
     
-    private func createEntryAndPersistIt() {
-        guard let name = viewRoot.input.text, !name.isEmpty else { return }
+    fileprivate func createManipulationAlert(for entry: Entry) -> UIAlertController {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        moc.persist(block: {
-            if name.hasPrefix("Test") {
-                let index = name.index(name.startIndex, offsetBy: 4)
-                
-                let parsedDaysAmount = Int(name.suffix(from: index)) ?? 0
-                
-                self.createTestEntry(daysAmount: parsedDaysAmount, hasData: true)
-            } else {
-                let entry = Entry(context: self.moc)
-                entry.name = name
-                entry.dateCreated = NSDate.now
-            }
-        })
+        alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
+            self.model.remove(entry: entry)
+        }))
         
-        viewRoot.input.text = ""
-    }
-
-    private func createTestEntry(daysAmount: Int, hasData: Bool) {
-        let entry = Entry(context: moc)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        entry.name = "Test\(daysAmount)"
-        
-        entry.dateCreated = Calendar.current.date(byAdding: .day, value: -daysAmount, to: Date.now)!
-        
-        if hasData {
-            for i in 0 ... daysAmount {
-                createTestPoint(for: entry, at: i, amount: Int.random(in: 1 ... 7))
-            }
-        }
-    }
-    
-    private func createTestPoint(for entry: Entry, at day: Int, amount: Int) {
-        for _ in 1 ... amount {
-            let point = Point(context: moc)
-        
-            point.entry = entry
-            point.value = 1
-            
-            var dateCreated = Calendar.current.date(byAdding: .day, value: -day, to: Date.now)!
-            
-            dateCreated = Calendar.current.date(byAdding: .hour, value: Int.random(in: 1 ... 24), to: dateCreated)!
-            
-            dateCreated = Calendar.current.date(byAdding: .minute, value: Int.random(in: 1 ... 60), to: dateCreated)!
-            
-            dateCreated = Calendar.current.date(byAdding: .second, value: Int.random(in: 1 ... 60), to: dateCreated)!
-            
-            if dateCreated.timeIntervalSinceNow > 0 {
-                point.dateCreated = Date.now
-            } else {
-                if entry.dateCreated!.timeIntervalSince(dateCreated) > 0 {
-                    point.dateCreated = entry.dateCreated!
-                } else {
-                    point.dateCreated = dateCreated
-                }
-            }
-        }
-    }
-    
-    //
-    // Shake gesture handling
-    //
-    
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            removeLastPoint()
-        }
-    }
-    
-    private func removeLastPoint() {
-        guard
-            let allPoints = pointsFetchedResultsController?.fetchedObjects,
-            let allEntries = fetchedResultsController?.fetchedObjects,
-            let removedPoint = allPoints.last,
-            let removedPointParentEntry = removedPoint.entry
-        else { return }
-        
-        moc.persist(block: {
-            self.moc.delete(removedPoint)
-        }) {
-            guard
-                let entryIndex = allEntries.firstIndex(of: removedPointParentEntry),
-                let cell = self.viewRoot.viewTable.cellForRow(at: IndexPath(row: entryIndex, section: 0)) as? EntryCell
-            else { return }
-            
-            cell.animateTotalAmountDecrement()
-            UIDevice.vibrate(.medium)
-        }
+        return alert
     }
     
     //
     // Settings selection handling
     //
     
-    private func handleSettings() {
+    fileprivate func handleSettings() {
         let controller = SettingsController()
         let navigation = UINavigationController(rootViewController: controller)
         
@@ -275,7 +143,7 @@ class EntriesListController: UIViewController, CoreDataConsumer {
 
 extension EntriesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataAmount = fetchedResultsController?.fetchedObjects?.count ?? 0
+        let dataAmount = model.dataAmount
         
         if dataAmount == 0 {
             viewRoot.showEmptyState()
@@ -289,14 +157,54 @@ extension EntriesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
-            let dataRow = fetchedResultsController?.object(at: indexPath)
+            let dataRow = model.entry(at: indexPath)
         else { return UITableViewCell() }
-
+        
         row.delegate = self
         row.update(name: dataRow.name!)
         row.update(value: dataRow.totalAmount)
         
         return row
+    }
+}
+
+//
+
+// MARK: NSFetchedResultsControllerDelegate
+
+//
+
+extension EntriesListController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        viewRoot.viewTable.beginUpdates()
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        viewRoot.viewTable.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?)
+    {
+        switch type {
+        case .insert:
+            guard let insertIndex = newIndexPath else { return }
+            viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
+        case .delete:
+            guard let deleteIndex = indexPath else { return }
+            viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
+        case .move:
+            guard let fromIndex = indexPath, let toIndex = newIndexPath else { return }
+            viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
+        case .update:
+            guard let updateIndex = indexPath else { return }
+            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
+        @unknown default:
+            fatalError("Unhandled case")
+        }
     }
 }
 
@@ -314,7 +222,11 @@ extension EntriesListController: UITableViewDelegate {
             cell.animateMovableViewBack()
         }
         
-        if tableView.visibleCells.firstIndex(of: cell) == nil {
+        // TODO: make this condition to be good
+        /// what if there are more cells than screen can fit?
+        let cellIsNew = tableView.visibleCells.firstIndex(of: cell) == nil
+        
+        if cellIsNew {
             NotificationCenter.default.post(name: .ControllerMainItemCreated, object: cell)
         }
     }
@@ -371,7 +283,7 @@ extension EntriesListController: CellMainDelegate {
     func didLongPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = fetchedResultsController?.fetchedObjects?[index.row]
+            let entry = model.entry(at: index)
         else { return }
         
         let alert = createManipulationAlert(for: entry)
@@ -379,14 +291,14 @@ extension EntriesListController: CellMainDelegate {
         present(alert, animated: true)
     }
     
+    // TODO: fix EntryDetailsController
     func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = fetchedResultsController?.fetchedObjects?[index.row]
+            let entry = model.entry(at: index)
         else { return }
         
         let pointsList = EntryDetailsController(entry: entry)
-        pointsList.persistentContainer = persistentContainer
         let navigation = UINavigationController(rootViewController: pointsList)
         
         let appearance = UINavigationBarAppearance()
@@ -401,128 +313,20 @@ extension EntriesListController: CellMainDelegate {
         present(navigation, animated: true)
     }
     
-    private func createManipulationAlert(for entry: Entry) -> UIAlertController {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
-            self.delete(entry: entry)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        return alert
-    }
-    
-    private func createControllerPointList(for entry: Entry) -> UIViewController {
-        let controller = EntryDetailsController(entry: entry)
-            
-        controller.persistentContainer = persistentContainer
-            
-        let navigator = UINavigationController(rootViewController: controller)
-        
-        let appearance = UINavigationBarAppearance()
-
-        appearance.backgroundColor = .systemBackground
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowImage = nil
-        appearance.shadowColor = .clear
-
-        navigator.navigationBar.scrollEdgeAppearance = appearance
-        navigator.navigationBar.standardAppearance = appearance
-        navigator.navigationBar.compactAppearance = appearance
-        
-        return navigator
-    }
-    
-    private func delete(entry: Entry) {
-        moc.persist {
-            self.moc.delete(entry)
-        } successBlock: {
-            UIDevice.vibrate(.medium)
-        }
-    }
-    
     func didSwipeAction(_ cell: EntryCell) {
-        guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let entry = model.entry(at: index)
+        else { return }
         
         cellIndexToBeAnimated = index
-        
-        guard let managedObjects = fetchedResultsController?.fetchedObjects else { return }
-        
-        let entry = managedObjects[index.row]
-        
-        add(point: createPoint(), to: entry)
+        model.addNewPoint(to: entry)
     }
     
-    private func createPoint() -> Point {
-        let point = Point(context: moc)
-        
-        point.dateCreated = NSDate.now
-        point.value = 1
-        
-        return point
-    }
-    
-    private func add(point: Point, to entry: Entry) {
-        moc.persist {
-            let newPoints: Set<AnyHashable> = entry.points?.adding(point) ?? [point]
-            
-            entry.points = NSSet(set: newPoints)
-        } successBlock: {
-            UIDevice.vibrate(.medium)
-            NotificationCenter.default.post(name: .ControllerMainItemSwipe, object: nil)
-        }
-    }
+    //
     
     func didAnimation(_ cell: EntryCell) {
         cellIndexToBeAnimated = nil
-    }
-}
-
-//
-
-// MARK: - NSFetchedResultsControllerDelegate
-
-//
-
-extension EntriesListController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if controller == fetchedResultsController {
-            viewRoot.viewTable.beginUpdates()
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if controller == fetchedResultsController {
-            viewRoot.viewTable.endUpdates()
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?)
-    {
-        if controller == fetchedResultsController {
-            switch type {
-            case .insert:
-                guard let insertIndex = newIndexPath else { return }
-                viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
-            case .delete:
-                guard let deleteIndex = indexPath else { return }
-                viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
-            case .move:
-                guard let fromIndex = indexPath, let toIndex = newIndexPath
-                else { return }
-                viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
-            case .update:
-                guard let updateIndex = indexPath else { return }
-                viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
-            @unknown default:
-                fatalError("Unhandled case")
-            }
-        }
     }
 }
 
@@ -617,9 +421,9 @@ extension EntriesListController: UITextViewDelegate {
     }
     
     @objc private func handleCreate() {
-        hideInput()
+        model.create(entryName: viewRoot.input.text)
         
-        createEntryAndPersistIt()
+        hideInput()
     }
     
     private func showInputBackground() {
@@ -630,7 +434,7 @@ extension EntriesListController: UITextViewDelegate {
         })
     }
     
-    private func hideInputBackgroud() {
+    private func hideInputBackground() {
         UIView.animate(withDuration: 0.3, animations: {
             self.viewRoot.viewInputBackground.alpha = 0.0
         }, completion: { _ in
@@ -638,10 +442,10 @@ extension EntriesListController: UITextViewDelegate {
         })
     }
     
-    @objc private func hideInput() {
+    fileprivate func hideInput() {
         viewRoot.input.resignFirstResponder()
-        
-        hideInputBackgroud()
+        hideInputBackground()
+        viewRoot.input.text = ""
     }
 }
 
@@ -667,10 +471,7 @@ extension EntriesListController: ControllerMainOnboardingDataSource {
 
 extension EntriesListController: ControllerMainOnboardingDelegate {
     func createTestItem() {
-        // TODO: refactor items creation
-        viewRoot.input.text = "Test10"
-        
-        createEntryAndPersistIt()
+        model.create(entryName: "Test10")
     }
     
     func disableSettingsButton() {

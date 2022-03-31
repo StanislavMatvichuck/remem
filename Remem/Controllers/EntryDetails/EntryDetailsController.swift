@@ -7,7 +7,7 @@
 import CoreData
 import UIKit
 
-class EntryDetailsController: UIViewController, CoreDataConsumer {
+class EntryDetailsController: UIViewController {
     //
 
     // MARK: - Public properties
