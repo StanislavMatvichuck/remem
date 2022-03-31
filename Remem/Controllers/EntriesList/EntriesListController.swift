@@ -385,7 +385,7 @@ extension EntriesListController: CellMainDelegate {
             let entry = fetchedResultsController?.fetchedObjects?[index.row]
         else { return }
         
-        let pointsList = ControllerPointsList(entry: entry)
+        let pointsList = EntryDetailsController(entry: entry)
         pointsList.persistentContainer = persistentContainer
         let navigation = UINavigationController(rootViewController: pointsList)
         
@@ -414,7 +414,7 @@ extension EntriesListController: CellMainDelegate {
     }
     
     private func createControllerPointList(for entry: Entry) -> UIViewController {
-        let controller = ControllerPointsList(entry: entry)
+        let controller = EntryDetailsController(entry: entry)
             
         controller.persistentContainer = persistentContainer
             

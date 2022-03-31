@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewPointsList: UIView {
+class EntryDetailsView: UIView {
     //
 
     // MARK: - Public properties

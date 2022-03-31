@@ -7,7 +7,7 @@
 import CoreData
 import UIKit
 
-class ControllerPointsList: UIViewController, CoreDataConsumer {
+class EntryDetailsController: UIViewController, CoreDataConsumer {
     //
 
     // MARK: - Public properties
@@ -21,7 +21,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
     
     //
     
-    fileprivate let viewRoot = ViewPointsList()
+    fileprivate let viewRoot = EntryDetailsView()
     
     var persistentContainer: NSPersistentContainer!
     
@@ -55,7 +55,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
         for point in points {
             let date = point.dateCreated!
             
-            let dateComponents = ControllerPointsList.dateComponents(for: date)
+            let dateComponents = EntryDetailsController.dateComponents(for: date)
             
             if let existingValue = result[dateComponents] {
                 result.updateValue(existingValue + Int(point.value), forKey: dateComponents)
@@ -72,7 +72,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
             
         let date = Calendar.current.date(byAdding: .day, value: -amountOfDaysToSubtract, to: Date.now)
         
-        return ControllerPointsList.dateComponents(for: date!)
+        return EntryDetailsController.dateComponents(for: date!)
     }
     
     private static func dateComponents(for date: Date) -> DateComponents {
@@ -238,7 +238,7 @@ class ControllerPointsList: UIViewController, CoreDataConsumer {
 
 //
 
-extension ControllerPointsList: UITableViewDataSource {
+extension EntryDetailsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataAmount = fetchedResultsController?.fetchedObjects?.count ?? 0
         
@@ -269,7 +269,7 @@ extension ControllerPointsList: UITableViewDataSource {
 
 //
 
-extension ControllerPointsList: NSFetchedResultsControllerDelegate {
+extension EntryDetailsController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         viewRoot.viewTable.beginUpdates()
     }
@@ -310,7 +310,7 @@ extension ControllerPointsList: NSFetchedResultsControllerDelegate {
 
 //
 
-extension ControllerPointsList: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
