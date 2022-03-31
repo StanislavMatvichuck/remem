@@ -316,7 +316,7 @@ class ControllerOnboardingOverlay: UIViewController {
             animationsHelper.show(label: viewRoot.labelTestItemLongPress)
             currentStep = .highlightLongPress
         case .highlightLongPress:
-            if let cellMain = cellToHighlight as? CellMain {
+            if let cellMain = cellToHighlight as? EntryCell {
                 animationsHelper.animatorBackground.move(to: cellMain.viewMovable)
             }
             currentStep = .waitForLongPress

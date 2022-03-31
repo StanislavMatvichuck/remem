@@ -33,11 +33,11 @@
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
-		08D5122227870D2500C2037F /* ControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* ControllerMain.swift */; };
+		08D5122227870D2500C2037F /* EntriesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EntriesListController.swift */; };
 		08D5122727870D2600C2037F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		08D5122A27870D2600C2037F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122827870D2600C2037F /* LaunchScreen.storyboard */; };
-		08D512362787144800C2037F /* ViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* ViewMain.swift */; };
-		08D512382787153900C2037F /* CellMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512372787153900C2037F /* CellMain.swift */; };
+		08D512362787144800C2037F /* EntriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EntriesListView.swift */; };
+		08D512382787153900C2037F /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512372787153900C2037F /* EntryCell.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 /* End PBXBuildFile section */
@@ -70,12 +70,12 @@
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		08D5122127870D2500C2037F /* ControllerMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerMain.swift; sourceTree = "<group>"; };
+		08D5122127870D2500C2037F /* EntriesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListController.swift; sourceTree = "<group>"; };
 		08D5122627870D2600C2037F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08D5122927870D2600C2037F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08D5122B27870D2600C2037F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08D512352787144800C2037F /* ViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMain.swift; sourceTree = "<group>"; };
-		08D512372787153900C2037F /* CellMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMain.swift; sourceTree = "<group>"; };
+		08D512352787144800C2037F /* EntriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListView.swift; sourceTree = "<group>"; };
+		08D512372787153900C2037F /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,9 +196,9 @@
 		08D512342787143900C2037F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				08D512372787153900C2037F /* CellMain.swift */,
-				08D5122127870D2500C2037F /* ControllerMain.swift */,
-				08D512352787144800C2037F /* ViewMain.swift */,
+				08D512372787153900C2037F /* EntryCell.swift */,
+				08D5122127870D2500C2037F /* EntriesListController.swift */,
+				08D512352787144800C2037F /* EntriesListView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08975A9927DDF51C0021E0D3 /* AnimatorOnboarding.swift in Sources */,
-				08D512382787153900C2037F /* CellMain.swift in Sources */,
+				08D512382787153900C2037F /* EntryCell.swift in Sources */,
 				089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */,
 				0890627C27A0A2700032847C /* CellPoint.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
@@ -322,8 +322,8 @@
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
 				0890627827A0A2520032847C /* ControllerPointsList.swift in Sources */,
-				08D5122227870D2500C2037F /* ControllerMain.swift in Sources */,
-				08D512362787144800C2037F /* ViewMain.swift in Sources */,
+				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
+				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */,
 				0880FB4027E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,

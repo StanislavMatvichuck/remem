@@ -8,14 +8,14 @@
 import CoreData
 import UIKit
 
-class ControllerMain: UIViewController, CoreDataConsumer {
+class EntriesListController: UIViewController, CoreDataConsumer {
     //
     
     // MARK: - Private properties
     
     //
     
-    let viewRoot = ViewMain()
+    let viewRoot = EntriesListView()
     
     fileprivate var cellIndexToBeAnimated: IndexPath?
     
@@ -232,7 +232,7 @@ class ControllerMain: UIViewController, CoreDataConsumer {
         }) {
             guard
                 let entryIndex = allEntries.firstIndex(of: removedPointParentEntry),
-                let cell = self.viewRoot.viewTable.cellForRow(at: IndexPath(row: entryIndex, section: 0)) as? CellMain
+                let cell = self.viewRoot.viewTable.cellForRow(at: IndexPath(row: entryIndex, section: 0)) as? EntryCell
             else { return }
             
             cell.animateTotalAmountDecrement()
@@ -273,7 +273,7 @@ class ControllerMain: UIViewController, CoreDataConsumer {
 
 //
 
-extension ControllerMain: UITableViewDataSource {
+extension EntriesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataAmount = fetchedResultsController?.fetchedObjects?.count ?? 0
         
@@ -288,7 +288,7 @@ extension ControllerMain: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: CellMain.reuseIdentifier) as? CellMain,
+            let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
             let dataRow = fetchedResultsController?.object(at: indexPath)
         else { return UITableViewCell() }
 
@@ -306,10 +306,10 @@ extension ControllerMain: UITableViewDataSource {
 
 //
 
-extension ControllerMain: UITableViewDelegate {
+extension EntriesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let index = cellIndexToBeAnimated, index == indexPath {
-            let cell = cell as! CellMain
+            let cell = cell as! EntryCell
             
             cell.animateMovableViewBack()
         }
@@ -367,8 +367,8 @@ extension ControllerMain: UITableViewDelegate {
 
 //
 
-extension ControllerMain: CellMainDelegate {
-    func didLongPressAction(_ cell: CellMain) {
+extension EntriesListController: CellMainDelegate {
+    func didLongPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
             let entry = fetchedResultsController?.fetchedObjects?[index.row]
@@ -379,7 +379,7 @@ extension ControllerMain: CellMainDelegate {
         present(alert, animated: true)
     }
     
-    func didPressAction(_ cell: CellMain) {
+    func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
             let entry = fetchedResultsController?.fetchedObjects?[index.row]
@@ -442,7 +442,7 @@ extension ControllerMain: CellMainDelegate {
         }
     }
     
-    func didSwipeAction(_ cell: CellMain) {
+    func didSwipeAction(_ cell: EntryCell) {
         guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
         
         cellIndexToBeAnimated = index
@@ -474,7 +474,7 @@ extension ControllerMain: CellMainDelegate {
         }
     }
     
-    func didAnimation(_ cell: CellMain) {
+    func didAnimation(_ cell: EntryCell) {
         cellIndexToBeAnimated = nil
     }
 }
@@ -485,7 +485,7 @@ extension ControllerMain: CellMainDelegate {
 
 //
 
-extension ControllerMain: NSFetchedResultsControllerDelegate {
+extension EntriesListController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         if controller == fetchedResultsController {
             viewRoot.viewTable.beginUpdates()
@@ -532,7 +532,7 @@ extension ControllerMain: NSFetchedResultsControllerDelegate {
 
 //
 
-extension ControllerMain: UITextViewDelegate {
+extension EntriesListController: UITextViewDelegate {
     @objc func keyboardWillChangeFrame(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         
@@ -651,7 +651,7 @@ extension ControllerMain: UITextViewDelegate {
 
 //
 
-extension ControllerMain: ControllerMainOnboardingDataSource {
+extension EntriesListController: ControllerMainOnboardingDataSource {
     var viewSwiper: UIView {
         viewRoot.viewSwiper
     }
@@ -665,7 +665,7 @@ extension ControllerMain: ControllerMainOnboardingDataSource {
     }
 }
 
-extension ControllerMain: ControllerMainOnboardingDelegate {
+extension EntriesListController: ControllerMainOnboardingDelegate {
     func createTestItem() {
         // TODO: refactor items creation
         viewRoot.input.text = "Test10"

@@ -8,13 +8,13 @@
 import UIKit
 
 protocol CellMainDelegate: AnyObject {
-    func didSwipeAction(_ cell: CellMain)
-    func didLongPressAction(_ cell: CellMain)
-    func didPressAction(_ cell: CellMain)
-    func didAnimation(_ cell: CellMain)
+    func didSwipeAction(_ cell: EntryCell)
+    func didLongPressAction(_ cell: EntryCell)
+    func didPressAction(_ cell: EntryCell)
+    func didAnimation(_ cell: EntryCell)
 }
 
-final class CellMain: UITableViewCell {
+final class EntryCell: UITableViewCell {
     //
 
     // MARK: - Static properties

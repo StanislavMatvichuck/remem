@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewMain: UIView {
+class EntriesListView: UIView {
     //
 
     // MARK: - Public properties
@@ -17,7 +17,7 @@ class ViewMain: UIView {
     let viewTable: UITableView = {
         let view = UITableView(frame: .zero)
 
-        view.register(CellMain.self, forCellReuseIdentifier: CellMain.reuseIdentifier)
+        view.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentInsetAdjustmentBehavior = .never
         view.backgroundColor = .clear
