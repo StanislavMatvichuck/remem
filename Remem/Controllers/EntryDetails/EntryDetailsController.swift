@@ -253,7 +253,7 @@ extension EntryDetailsController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: CellPoint.reuseIdentifier) as? CellPoint,
+            let row = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell,
             let dataRow = fetchedResultsController?.object(at: indexPath)
         else { return UITableViewCell() }
 
@@ -323,7 +323,7 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellDay.reuseIdentifier, for: indexPath) as! CellDay
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier, for: indexPath) as! DayOfTheWeekCell
         
         let index = indexPath.row
         
@@ -356,7 +356,7 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
         return cell
     }
     
-    private func cellType(by index: Int) -> CellDay.type {
+    private func cellType(by index: Int) -> DayOfTheWeekCell.type {
         if headSize == 0, index == 0 {
             return .data
         }

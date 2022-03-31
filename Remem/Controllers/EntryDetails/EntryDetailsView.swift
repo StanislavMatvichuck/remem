@@ -17,7 +17,7 @@ class EntryDetailsView: UIView {
     let viewTable: UITableView = {
         let view = UITableView(frame: .zero)
 
-        view.register(CellPoint.self, forCellReuseIdentifier: CellPoint.reuseIdentifier)
+        view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondarySystemBackground
         view.layer.cornerRadius = .delta1
@@ -43,7 +43,7 @@ class EntryDetailsView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isPagingEnabled = true
 
-        view.register(CellDay.self, forCellWithReuseIdentifier: CellDay.reuseIdentifier)
+        view.register(DayOfTheWeekCell.self, forCellWithReuseIdentifier: DayOfTheWeekCell.reuseIdentifier)
 
         view.backgroundColor = .systemBackground
 

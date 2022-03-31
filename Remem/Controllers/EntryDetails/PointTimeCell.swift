@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CellPoint: UITableViewCell {
+class PointTimeCell: UITableViewCell {
     //
 
     // MARK: - Static properties

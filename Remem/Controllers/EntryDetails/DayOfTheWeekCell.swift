@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CellDay: UICollectionViewCell {
+class DayOfTheWeekCell: UICollectionViewCell {
     //
 
     // MARK: - Static properties
