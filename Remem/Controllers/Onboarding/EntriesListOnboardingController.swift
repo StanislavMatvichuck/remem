@@ -7,7 +7,19 @@
 
 import UIKit
 
-class ControllerOnboardingOverlay: UIViewController {
+protocol ControllerMainOnboardingDataSource: UIViewController {
+    var viewSwiper: UIView { get }
+    var viewInput: UIView { get }
+    var inputHeightOffset: CGFloat { get }
+}
+
+protocol ControllerMainOnboardingDelegate: UIViewController {
+    func createTestItem()
+    func disableSettingsButton()
+    func enableSettingsButton()
+}
+
+class EntriesListOnboardingController: UIViewController {
     //
 
     // MARK: - Related types
@@ -91,7 +103,7 @@ class ControllerOnboardingOverlay: UIViewController {
                                                                finger: viewRoot.viewFinger,
                                                                background: viewRoot.viewBackground)
     
-    fileprivate let viewRoot = ViewOnboardingOverlay()
+    fileprivate let viewRoot = EntriesListOnboardingView()
     
     fileprivate var tapAnywhereIsShown = false
     
@@ -193,7 +205,7 @@ class ControllerOnboardingOverlay: UIViewController {
     fileprivate func perform(step: Step) {
         switch step {
         case .showBackground:
-            UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, animations: {
+            UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, animations: {
                 self.viewRoot.alpha = 1
             }, completion: { flag in
                 if flag {
@@ -340,7 +352,7 @@ class ControllerOnboardingOverlay: UIViewController {
 
 //
 
-extension ControllerOnboardingOverlay {
+extension EntriesListOnboardingController {
     @objc private func handleNotification(_ notification: Notification) {
         switch notification.name {
         case .ControllerMainAddItemTriggered:
@@ -357,7 +369,7 @@ extension ControllerOnboardingOverlay {
         case .ControllerMainInputConstraintUpdated:
             guard mainDataSource.inputHeightOffset != -.delta1 else { return }
             /// this guard statement fixes immediate label disappearing
-            UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveEaseInOut, animations: {
                 self.labelNameBottomConstraint.constant = self.mainDataSource.inputHeightOffset
                 self.viewRoot.layoutIfNeeded()
             }, completion: nil)

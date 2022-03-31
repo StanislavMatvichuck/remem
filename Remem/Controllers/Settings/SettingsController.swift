@@ -7,14 +7,14 @@
 
 import UIKit
 
-class ControllerSettings: UIViewController {
+class SettingsController: UIViewController {
     //
     
     // MARK: - Private properties
     
     //
     
-    fileprivate let viewRoot = ViewSettings()
+    fileprivate let viewRoot = SettingsView()
     
     //
     

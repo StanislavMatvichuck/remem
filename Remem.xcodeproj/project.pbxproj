@@ -9,21 +9,20 @@
 /* Begin PBXBuildFile section */
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
-		0830DA3427C3A6DA00479014 /* ControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* ControllerSettings.swift */; };
-		0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* ViewSettings.swift */; };
+		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
+		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
 		0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */; };
 		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
 		083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */; };
 		083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3891279AE61E00134A15 /* CoreDataConsumer.swift */; };
 		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
-		083DD13227C6B20F006F1479 /* ControllerOnboardingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */; };
-		083DD13427C6B21A006F1479 /* ViewOnboardingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */; };
+		083DD13227C6B20F006F1479 /* EntriesListOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */; };
+		083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
-		0880FB4027E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880FB3F27E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift */; };
 		0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EntryDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EntryDetailsView.swift */; };
 		0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* PointTimeCell.swift */; };
@@ -45,21 +44,20 @@
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
-		0830DA3327C3A6DA00479014 /* ControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerSettings.swift; sourceTree = "<group>"; };
-		0830DA3527C3A6E000479014 /* ViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSettings.swift; sourceTree = "<group>"; };
+		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		0830DA3527C3A6E000479014 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0834091C27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSManagedObjectContext.swift; sourceTree = "<group>"; };
 		083A415F27BE603800AF2098 /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		083D388F279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNSPersistentDataContainer.swift; sourceTree = "<group>"; };
 		083D3891279AE61E00134A15 /* CoreDataConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConsumer.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
-		083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerOnboardingOverlay.swift; sourceTree = "<group>"; };
-		083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOnboardingOverlay.swift; sourceTree = "<group>"; };
+		083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingController.swift; sourceTree = "<group>"; };
+		083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingView.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
 		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
-		0880FB3F27E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerMainOnboardingProtocol.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EntryDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* PointTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTimeCell.swift; sourceTree = "<group>"; };
@@ -94,8 +92,8 @@
 		0830DA3227C3A6C900479014 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0830DA3327C3A6DA00479014 /* ControllerSettings.swift */,
-				0830DA3527C3A6E000479014 /* ViewSettings.swift */,
+				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
+				0830DA3527C3A6E000479014 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -106,9 +104,8 @@
 				089A5A4627E7966800157D26 /* AnimatorBackground.swift */,
 				089A5A4827E7A28000157D26 /* AnimatorCircle.swift */,
 				08975A9827DDF51C0021E0D3 /* AnimatorOnboarding.swift */,
-				0880FB3F27E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift */,
-				083DD13127C6B20F006F1479 /* ControllerOnboardingOverlay.swift */,
-				083DD13327C6B21A006F1479 /* ViewOnboardingOverlay.swift */,
+				083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */,
+				083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -127,9 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
-				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 				0890627727A0A2520032847C /* EntryDetailsController.swift */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
+				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = EntryDetails;
 			sourceTree = "<group>";
@@ -196,9 +193,9 @@
 		08D512342787143900C2037F /* EntriesList */ = {
 			isa = PBXGroup;
 			children = (
-				08D512372787153900C2037F /* EntryCell.swift */,
 				08D5122127870D2500C2037F /* EntriesListController.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
+				08D512372787153900C2037F /* EntryCell.swift */,
 			);
 			path = EntriesList;
 			sourceTree = "<group>";
@@ -298,8 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				083DD13427C6B21A006F1479 /* ViewOnboardingOverlay.swift in Sources */,
-				0830DA3427C3A6DA00479014 /* ControllerSettings.swift in Sources */,
+				083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */,
+				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
@@ -314,8 +311,8 @@
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
-				083DD13227C6B20F006F1479 /* ControllerOnboardingOverlay.swift in Sources */,
-				0830DA3627C3A6E000479014 /* ViewSettings.swift in Sources */,
+				083DD13227C6B20F006F1479 /* EntriesListOnboardingController.swift in Sources */,
+				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -325,7 +322,6 @@
 				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0834091D27A1685700C15AC9 /* ExtensionNSManagedObjectContext.swift in Sources */,
-				0880FB4027E35FF3001C8C5B /* ControllerMainOnboardingProtocol.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,

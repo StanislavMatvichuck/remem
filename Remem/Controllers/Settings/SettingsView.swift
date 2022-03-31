@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewSettings: UIView {
+class SettingsView: UIView {
     //
 
     // MARK: - Public properties

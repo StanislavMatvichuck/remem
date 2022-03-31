@@ -245,7 +245,7 @@ class EntriesListController: UIViewController, CoreDataConsumer {
     //
     
     private func handleSettings() {
-        let controller = ControllerSettings()
+        let controller = SettingsController()
         let navigation = UINavigationController(rootViewController: controller)
         
         present(navigation, animated: true, completion: nil)
@@ -258,7 +258,7 @@ class EntriesListController: UIViewController, CoreDataConsumer {
     //
     
     func startOnboarding() {
-        let onboarding = ControllerOnboardingOverlay()
+        let onboarding = EntriesListOnboardingController()
         onboarding.modalPresentationStyle = .overCurrentContext
         onboarding.mainDataSource = self
         onboarding.mainDelegate = self
@@ -544,7 +544,7 @@ extension EntriesListController: UITextViewDelegate {
         
         let height = -keyboardFutureHeight - .d2 - .delta1
         
-        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0.0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0.0, options: .curveEaseInOut, animations: {
             if keyboardFutureHeight != 0 {
                 self.viewRoot.inputContainerConstraint.constant = height
             } else {
@@ -674,7 +674,7 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
     }
     
     func disableSettingsButton() {
-        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveLinear, animations: {
             self.viewRoot.viewSettings.alpha = 0
         }, completion: { _ in
             self.viewRoot.viewSettings.isHidden = true
@@ -684,7 +684,7 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
     func enableSettingsButton() {
         viewRoot.viewSettings.isHidden = false
         viewRoot.viewSettings.alpha = 0
-        UIView.animate(withDuration: ControllerOnboardingOverlay.standartDuration, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveLinear, animations: {
             self.viewRoot.viewSettings.alpha = 1
         }, completion: nil)
     }

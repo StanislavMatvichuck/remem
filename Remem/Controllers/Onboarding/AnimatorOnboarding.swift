@@ -119,7 +119,7 @@ class AnimatorOnboarding: NSObject {
         closeButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
 
         let group = CAAnimationGroup()
-        group.duration = ControllerOnboardingOverlay.standartDuration
+        group.duration = EntriesListOnboardingController.standartDuration
         group.fillMode = .backwards
         group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 

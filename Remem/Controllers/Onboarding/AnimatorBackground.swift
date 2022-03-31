@@ -71,7 +71,7 @@ class AnimatorBackground {
 
         let animation = CABasicAnimation(keyPath: "path")
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        animation.duration = ControllerOnboardingOverlay.standartDuration
+        animation.duration = EntriesListOnboardingController.standartDuration
         animation.fillMode = .backwards
 
         animation.fromValue = flag ? startPath.cgPath : finalPath.cgPath

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewOnboardingOverlay: UIView {
+class EntriesListOnboardingView: UIView {
     //
 
     // MARK: - Public properties
