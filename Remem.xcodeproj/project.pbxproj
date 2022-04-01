@@ -31,6 +31,7 @@
 		089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4627E7966800157D26 /* AnimatorBackground.swift */; };
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
 		08C5D24F27F5D6250099260D /* EntriesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListModel.swift */; };
+		08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D25027F606CF0099260D /* UISwipingSelector.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* EntriesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EntriesListController.swift */; };
@@ -67,6 +68,7 @@
 		089A5A4627E7966800157D26 /* AnimatorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBackground.swift; sourceTree = "<group>"; };
 		089A5A4827E7A28000157D26 /* AnimatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorCircle.swift; sourceTree = "<group>"; };
 		08C5D24E27F5D6250099260D /* EntriesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListModel.swift; sourceTree = "<group>"; };
+		08C5D25027F606CF0099260D /* UISwipingSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipingSelector.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				08C5D24E27F5D6250099260D /* EntriesListModel.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
 				08D512372787153900C2037F /* EntryCell.swift */,
+				08C5D25027F606CF0099260D /* UISwipingSelector.swift */,
 			);
 			path = EntriesList;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
+				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,

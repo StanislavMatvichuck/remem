@@ -22,17 +22,6 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     fileprivate var cellIndexToBeAnimated: IndexPath?
     
     //
-    // Swiper properties
-    //
-    
-    var settingsBounds: CGRect = .zero
-    var settingsLeft: CGFloat { settingsBounds.minX }
-    var settingsRight: CGFloat { settingsBounds.maxX }
-    
-    var addBounds: CGRect = .zero
-    var addLeft: CGFloat { addBounds.minX }
-    
-    //
     
     // MARK: - Initialization
     
@@ -73,13 +62,6 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         viewRoot.viewTable.delegate = self
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        settingsBounds = viewRoot.viewSettings.convert(viewRoot.viewSettings.bounds, to: viewRoot)
-        addBounds = viewRoot.viewCreatePoint.convert(viewRoot.viewCreatePoint.bounds, to: viewRoot)
-    }
-    
     //
 
     // MARK: - Events handling
@@ -92,8 +74,22 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         
         viewRoot.input.delegate = self
         
+        viewRoot.swiper.listen(scrollView: viewRoot.viewTable)
+        
         viewRoot.viewInputBackground.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap)))
+        
+        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection), for: .primaryActionTriggered)
+    }
+    
+    @objc fileprivate func handleSwiperSelection(_ sender: UISwipingSelector) {
+        guard let selectedOption = sender.value else { return }
+        switch selectedOption {
+        case .addEntry:
+            showInput()
+        case .settings:
+            presentSettings()
+        }
     }
     
     fileprivate func createManipulationAlert(for entry: Entry) -> UIAlertController {
@@ -112,7 +108,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     // Settings selection handling
     //
     
-    fileprivate func handleSettings() {
+    fileprivate func presentSettings() {
         let controller = SettingsController()
         let navigation = UINavigationController(rootViewController: controller)
         
@@ -228,47 +224,6 @@ extension EntriesListController: UITableViewDelegate {
         
         if cellIsNew {
             NotificationCenter.default.post(name: .ControllerMainItemCreated, object: cell)
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let newContentOffset = -3 * scrollView.contentOffset.y
-    
-        viewRoot.fillerConstraint.constant = newContentOffset.clamped(to: 0 ... (UIScreen.main.bounds.width - .delta1))
-        
-        if
-            !viewRoot.viewSettings.isHidden,
-            newContentOffset >= settingsLeft + .r2,
-            newContentOffset <= settingsRight
-        {
-            viewRoot.animateSelectedState(to: true, for: viewRoot.viewSettings)
-        } else {
-            viewRoot.animateSelectedState(to: false, for: viewRoot.viewSettings)
-        }
-            
-        if newContentOffset >= addLeft + .r2 {
-            viewRoot.animateSelectedState(to: true, for: viewRoot.viewCreatePoint)
-        } else {
-            viewRoot.animateSelectedState(to: false, for: viewRoot.viewCreatePoint)
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if
-            let isCreatePointSelected = viewRoot.isViewSelected[viewRoot.viewCreatePoint],
-            isCreatePointSelected
-        {
-            handlePressAdd()
-            return
-        }
-        
-        if
-            !viewRoot.viewSettings.isHidden,
-            let isSettingsSelected = viewRoot.isViewSelected[viewRoot.viewSettings],
-            isSettingsSelected
-        {
-            handleSettings()
-            return
         }
     }
 }
@@ -457,7 +412,7 @@ extension EntriesListController: UITextViewDelegate {
 
 extension EntriesListController: ControllerMainOnboardingDataSource {
     var viewSwiper: UIView {
-        viewRoot.viewSwiper
+        viewRoot.swiper
     }
     
     var viewInput: UIView {
@@ -475,18 +430,10 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
     }
     
     func disableSettingsButton() {
-        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveLinear, animations: {
-            self.viewRoot.viewSettings.alpha = 0
-        }, completion: { _ in
-            self.viewRoot.viewSettings.isHidden = true
-        })
+        viewRoot.swiper.hideSettings()
     }
     
     func enableSettingsButton() {
-        viewRoot.viewSettings.isHidden = false
-        viewRoot.viewSettings.alpha = 0
-        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveLinear, animations: {
-            self.viewRoot.viewSettings.alpha = 1
-        }, completion: nil)
+        viewRoot.swiper.showSettings()
     }
 }

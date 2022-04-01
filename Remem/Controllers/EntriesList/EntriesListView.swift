@@ -31,90 +31,6 @@ class EntriesListView: UIView {
         return view
     }()
 
-    let viewSwiper: UIView = {
-        let view = UIView(frame: .zero)
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        view.backgroundColor = .clear
-
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            view.heightAnchor.constraint(equalToConstant: 2 * .xs + .r2),
-        ])
-
-        return view
-    }()
-
-    let viewCreatePoint: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = .r2 / 2
-        view.layer.opacity = 0.75
-
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: .font1)
-        label.text = "Add"
-        label.textAlignment = .center
-        label.textColor = .label
-
-        view.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-
-            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: .lg),
-        ])
-
-        return view
-    }()
-
-    let viewSettings: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = .r2 / 2
-        view.layer.opacity = 0.75
-
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: .font1)
-        label.text = "Settings"
-        label.textAlignment = .center
-        label.textColor = .label
-
-        view.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-
-            view.widthAnchor.constraint(equalTo: label.widthAnchor, constant: .lg),
-        ])
-
-        return view
-    }()
-
-    let viewSwiperPointer: UIView = {
-        let view = UIView(frame: .zero)
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        view.layer.opacity = 0.75
-        view.backgroundColor = .systemBlue
-        view.layer.cornerRadius = .r2 / 2
-
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: .r2),
-            view.heightAnchor.constraint(equalToConstant: .r2),
-        ])
-
-        return view
-    }()
-
     let viewInputBackground: UIView = {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .systemBackground
@@ -186,9 +102,7 @@ class EntriesListView: UIView {
         viewInput.subviews[0] as! UITextView
     }
 
-    lazy var fillerConstraint: NSLayoutConstraint = {
-        viewSwiperPointer.trailingAnchor.constraint(equalTo: viewSwiper.leadingAnchor)
-    }()
+    var swiper: UISwipingSelectorInterface = UISwipingSelector()
 
     lazy var inputContainerConstraint: NSLayoutConstraint = {
         viewInput.topAnchor.constraint(equalTo: bottomAnchor)
@@ -225,7 +139,12 @@ class EntriesListView: UIView {
 
         backgroundColor = .systemBackground
 
-        setupViewSwiper()
+        addSubview(swiper)
+
+        NSLayoutConstraint.activate([
+            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
+            swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
+        ])
 
         addSubview(viewTable)
 
@@ -256,35 +175,6 @@ class EntriesListView: UIView {
         ])
     }
 
-    private func setupViewSwiper() {
-        addSubview(viewSwiper)
-
-        NSLayoutConstraint.activate([
-            viewSwiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            viewSwiper.leadingAnchor.constraint(equalTo: leadingAnchor),
-        ])
-
-        viewSwiper.addSubview(viewSwiperPointer)
-
-        NSLayoutConstraint.activate([
-            viewSwiperPointer.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .xs),
-            fillerConstraint,
-        ])
-
-        viewSwiper.addSubview(viewSettings)
-        viewSwiper.addSubview(viewCreatePoint)
-
-        NSLayoutConstraint.activate([
-            viewCreatePoint.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .delta1),
-            viewCreatePoint.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.delta1),
-            viewCreatePoint.trailingAnchor.constraint(equalTo: viewSwiper.trailingAnchor, constant: -.delta1),
-
-            viewSettings.topAnchor.constraint(equalTo: viewSwiper.topAnchor, constant: .delta1),
-            viewSettings.trailingAnchor.constraint(equalTo: viewCreatePoint.leadingAnchor, constant: -.delta1),
-            viewSettings.bottomAnchor.constraint(equalTo: viewSwiper.bottomAnchor, constant: -.delta1),
-        ])
-    }
-
     private func setupViewInput() {
         addSubview(viewInputBackground)
         addSubview(viewInput)
@@ -300,18 +190,6 @@ class EntriesListView: UIView {
 
     //
 
-    // MARK: - Events handling
-
-    //
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        viewCreatePoint.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
-    }
-
-    //
-
     // MARK: - Behaviour
 
     //
@@ -322,47 +200,5 @@ class EntriesListView: UIView {
 
     func hideEmptyState() {
         emptyLabel.isHidden = true
-    }
-
-    //
-
-    // MARK: - Animations
-
-    //
-
-    lazy var isViewSelected: [UIView: Bool] = [
-        viewSettings: false,
-        viewCreatePoint: false,
-    ]
-
-    func animateSelectedState(to isSelected: Bool, for view: UIView) {
-        guard isSelected != isViewSelected[view] else { return }
-
-        let animation = createSelectedAnimation(isSelected: isSelected)
-
-        view.layer.backgroundColor = isSelected ?
-            UIColor.systemBlue.cgColor :
-            UIColor.secondarySystemBackground.cgColor
-
-        view.layer.add(animation, forKey: nil)
-
-        isViewSelected[view] = isSelected
-
-        if isSelected {
-            UIDevice.vibrate(.soft)
-        }
-    }
-
-    private func createSelectedAnimation(isSelected: Bool) -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "backgroundColor")
-
-        animation.fromValue = isSelected ? UIColor.secondarySystemBackground : UIColor.systemBlue
-        animation.toValue = isSelected ? UIColor.systemBlue : UIColor.secondarySystemBackground
-
-        animation.duration = 0.2
-
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
-
-        return animation
     }
 }
