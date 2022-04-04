@@ -7,8 +7,10 @@
 
 import UIKit
 
-protocol UISwipingSelectorInterface: UIControl, UIScrollViewDelegate {
-    func listen(scrollView: UIScrollView)
+protocol UISwipingSelectorInterface: UIControl {
+    func handleScrollView(contentOffset: CGPoint)
+    func handleScrollViewDraggingEnd()
+
     func hideSettings()
     func showSettings()
 }
@@ -45,6 +47,12 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
 
     var value: SelectableOption?
 
+    //
+
+    // MARK: - Initialization
+
+    //
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -58,12 +66,12 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
 
     //
 
-    // MARK: - Behaviour
+    // MARK: - Public behaviour
 
     //
 
-    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let newContentOffset = -3 * scrollView.contentOffset.y
+    func handleScrollView(contentOffset: CGPoint) {
+        let newContentOffset = -3 * contentOffset.y
 
         viewRoot.pointerHorizontalConstraint.constant = newContentOffset.clamped(to: 0 ... (UIScreen.main.bounds.width - .delta1))
 
@@ -84,7 +92,7 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
         }
     }
 
-    internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func handleScrollViewDraggingEnd() {
         if
             let isCreatePointSelected = isViewSelected[viewRoot.viewAddEntry],
             isCreatePointSelected
@@ -103,10 +111,6 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
             sendActions(for: .primaryActionTriggered)
             return
         }
-    }
-
-    func listen(scrollView: UIScrollView) {
-        scrollView.delegate = self
     }
 
     func hideSettings() {

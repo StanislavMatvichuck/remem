@@ -74,8 +74,6 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         
         viewRoot.input.delegate = self
         
-        viewRoot.swiper.listen(scrollView: viewRoot.viewTable)
-        
         viewRoot.viewInputBackground.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap)))
         
@@ -225,6 +223,22 @@ extension EntriesListController: UITableViewDelegate {
         if cellIsNew {
             NotificationCenter.default.post(name: .ControllerMainItemCreated, object: cell)
         }
+    }
+}
+
+//
+
+// MARK: UIScrollViewDelegate
+
+//
+
+extension EntriesListController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewRoot.swiper.handleScrollView(contentOffset: scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        viewRoot.swiper.handleScrollViewDraggingEnd()
     }
 }
 
