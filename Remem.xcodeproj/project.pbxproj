@@ -28,6 +28,7 @@
 		0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* PointTimeCell.swift */; };
 		0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionPoint.swift */; };
 		08975A9927DDF51C0021E0D3 /* AnimatorOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08975A9827DDF51C0021E0D3 /* AnimatorOnboarding.swift */; };
+		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4627E7966800157D26 /* AnimatorBackground.swift */; };
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
 		08C5D24F27F5D6250099260D /* EntriesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListModel.swift */; };
@@ -65,6 +66,7 @@
 		0890627B27A0A2700032847C /* PointTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTimeCell.swift; sourceTree = "<group>"; };
 		0890627D27A0AD460032847C /* EntensionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionPoint.swift; sourceTree = "<group>"; };
 		08975A9827DDF51C0021E0D3 /* AnimatorOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorOnboarding.swift; sourceTree = "<group>"; };
+		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		089A5A4627E7966800157D26 /* AnimatorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBackground.swift; sourceTree = "<group>"; };
 		089A5A4827E7A28000157D26 /* AnimatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorCircle.swift; sourceTree = "<group>"; };
 		08C5D24E27F5D6250099260D /* EntriesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListModel.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				08C5D24E27F5D6250099260D /* EntriesListModel.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
 				08D512372787153900C2037F /* EntryCell.swift */,
+				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
 				08C5D25027F606CF0099260D /* UISwipingSelector.swift */,
 			);
 			path = EntriesList;
@@ -312,6 +315,7 @@
 				08D512382787153900C2037F /* EntryCell.swift in Sources */,
 				089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */,
 				0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */,
+				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,

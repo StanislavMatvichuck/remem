@@ -116,7 +116,7 @@ class EntriesListOnboardingController: UIViewController {
     fileprivate lazy var labelNameBottomConstraint: NSLayoutConstraint = {
         viewRoot.labelEventName.bottomAnchor.constraint(
             equalTo: viewRoot.bottomAnchor,
-            constant: mainDataSource.inputHeightOffset)
+            constant: 300)
     }()
     
     // TODO: maybe do it in a better way?

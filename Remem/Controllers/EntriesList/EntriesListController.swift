@@ -19,7 +19,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     
     var model: EntriesListModelInterface!
     
-    fileprivate var cellIndexToBeAnimated: IndexPath?
+    private var cellIndexToBeAnimated: IndexPath?
     
     //
     
@@ -52,12 +52,10 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         
         setupEventHandlers()
         
-        configureInputAccessoryView()
-        
         model.fetchEntries()
     }
     
-    fileprivate func setupTableView() {
+    private func setupTableView() {
         viewRoot.viewTable.dataSource = self
         viewRoot.viewTable.delegate = self
     }
@@ -68,29 +66,30 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
 
     //
     
-    fileprivate func setupEventHandlers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)),
-                                               name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    private func setupEventHandlers() {
+        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection),
+                                  for: .primaryActionTriggered)
         
-        viewRoot.input.delegate = self
-        
-        viewRoot.viewInputBackground.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleViewInputBackgroundTap)))
-        
-        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection), for: .primaryActionTriggered)
+        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
     }
     
-    @objc fileprivate func handleSwiperSelection(_ sender: UISwipingSelector) {
+    @objc
+    private func handleAdd() {
+        model.create(entryName: viewRoot.input.value)
+    }
+    
+    @objc
+    private func handleSwiperSelection(_ sender: UISwipingSelector) {
         guard let selectedOption = sender.value else { return }
         switch selectedOption {
         case .addEntry:
-            showInput()
+            viewRoot.input.show()
         case .settings:
             presentSettings()
         }
     }
     
-    fileprivate func createManipulationAlert(for entry: Entry) -> UIAlertController {
+    private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
@@ -106,7 +105,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     // Settings selection handling
     //
     
-    fileprivate func presentSettings() {
+    private func presentSettings() {
         let controller = SettingsController()
         let navigation = UINavigationController(rootViewController: controller)
         
@@ -301,125 +300,6 @@ extension EntriesListController: CellMainDelegate {
 
 //
 
-// MARK: - UITextFieldDelegate
-
-//
-
-extension EntriesListController: UITextViewDelegate {
-    @objc func keyboardWillChangeFrame(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        
-        let keyboardFutureOrigin = keyboardSize.cgRectValue.origin.y
-
-        let keyboardFutureHeight = .hScreen - keyboardFutureOrigin
-        
-        let height = -keyboardFutureHeight - .d2 - .delta1
-        
-        UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0.0, options: .curveEaseInOut, animations: {
-            if keyboardFutureHeight != 0 {
-                self.viewRoot.inputContainerConstraint.constant = height
-            } else {
-                self.viewRoot.inputContainerConstraint.constant = keyboardFutureHeight
-            }
-            self.viewRoot.layoutIfNeeded()
-        }, completion: { animationCompleted in
-            if animationCompleted {
-                NotificationCenter.default.post(name: .ControllerMainAddItemTriggered, object: nil)
-            }
-        })
-        
-        NotificationCenter.default.post(name: .ControllerMainInputConstraintUpdated, object: nil)
-    }
-    
-    @objc private func handlePressAdd() {
-        showInput()
-    }
-    
-    @objc func handleViewInputBackgroundTap() {
-        hideInput()
-        
-        viewRoot.input.text = ""
-    }
-    
-    private func showInput() {
-        showInputBackground()
-        
-        viewRoot.input.becomeFirstResponder()
-    }
-    
-    private func configureInputAccessoryView() {
-        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
-        
-        let dismiss = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(handleViewInputBackgroundTap))
-        
-        let icon01 = UIBarButtonItem(title: "☕️", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon02 = UIBarButtonItem(title: "💊", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon03 = UIBarButtonItem(title: "👟", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon04 = UIBarButtonItem(title: "📖", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon05 = UIBarButtonItem(title: "🚬", style: .plain, target: self, action: #selector(handleEmojiPress))
-        
-        let spaceLeft = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let spaceRight = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        let create = UIBarButtonItem(title: "Add",
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(handleCreate))
-        
-        bar.items = [
-            dismiss,
-            spaceLeft,
-            icon01,
-            icon02,
-            icon03,
-            icon04,
-            icon05,
-            spaceRight,
-            create,
-        ]
-        
-        bar.sizeToFit()
-        
-        viewRoot.input.inputAccessoryView = bar
-    }
-    
-    @objc private func handleEmojiPress(_ barItem: UIBarButtonItem) {
-        viewRoot.input.text += barItem.title ?? ""
-    }
-    
-    @objc private func handleCreate() {
-        model.create(entryName: viewRoot.input.text)
-        
-        hideInput()
-    }
-    
-    private func showInputBackground() {
-        viewRoot.viewInputBackground.isHidden = false
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.viewRoot.viewInputBackground.alpha = 1
-        })
-    }
-    
-    private func hideInputBackground() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.viewRoot.viewInputBackground.alpha = 0.0
-        }, completion: { _ in
-            self.viewRoot.viewInputBackground.isHidden = true
-        })
-    }
-    
-    fileprivate func hideInput() {
-        viewRoot.input.resignFirstResponder()
-        hideInputBackground()
-        viewRoot.input.text = ""
-    }
-}
-
-//
-
 // MARK: - Onboarding
 
 //
@@ -430,11 +310,11 @@ extension EntriesListController: ControllerMainOnboardingDataSource {
     }
     
     var viewInput: UIView {
-        viewRoot.viewInput
+        viewRoot.input.onboardingHighlight
     }
     
     var inputHeightOffset: CGFloat {
-        viewRoot.inputContainerConstraint.constant - .delta1
+        viewRoot.input.frame.minY - .delta1
     }
 }
 
