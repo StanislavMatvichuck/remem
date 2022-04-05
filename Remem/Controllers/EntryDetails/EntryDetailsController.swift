@@ -4,16 +4,17 @@
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
 //
-import CoreData
+import CoreData.NSFetchedResultsController
 import UIKit
 
-class EntryDetailsController: UIViewController {
+class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     //
 
-    // MARK: - Public properties
+    // MARK: - Public props
 
     //
-    var data = NSSet()
+    
+    var model: EntryDetailsModelInterface!
     
     //
     
@@ -23,110 +24,13 @@ class EntryDetailsController: UIViewController {
     
     fileprivate let viewRoot = EntryDetailsView()
     
-    var persistentContainer: NSPersistentContainer!
-    
-    var fetchedResultsController: NSFetchedResultsController<Point>?
-    
-    var moc: NSManagedObjectContext {
-        persistentContainer.viewContext
-    }
-    
-    var relatedEntry: Entry
-    
-    //
-    // Display data types
-    //
-    
-    var dataSize: Int
-    
-    var headSize: Int
-    
-    var tailSize: Int
-    
-    var totalCellsAmount: Int {
-        headSize + dataSize + tailSize
-    }
-    
-    lazy var amountByDay: [DateComponents: Int] = {
-        var result = [DateComponents: Int]()
-        
-        let points = fetchedResultsController?.fetchedObjects ?? []
-        
-        for point in points {
-            let date = point.dateCreated!
-            
-            let dateComponents = EntryDetailsController.dateComponents(for: date)
-            
-            if let existingValue = result[dateComponents] {
-                result.updateValue(existingValue + Int(point.value), forKey: dateComponents)
-            } else {
-                result.updateValue(Int(point.value), forKey: dateComponents)
-            }
-        }
-        
-        return result
-    }()
-    
-    private func dateComponents(for dataIndex: Int) -> DateComponents {
-        let amountOfDaysToSubtract = dataSize - dataIndex - 1
-            
-        let date = Calendar.current.date(byAdding: .day, value: -amountOfDaysToSubtract, to: Date.now)
-        
-        return EntryDetailsController.dateComponents(for: date!)
-    }
-    
-    private static func dateComponents(for date: Date) -> DateComponents {
-        return Calendar.current.dateComponents([.year, .month, .day], from: date)
-    }
-    
-    private func amount(for dateComponent: DateComponents) -> Int {
-        if let value = amountByDay[dateComponent] {
-            return value
-        } else {
-            return 0
-        }
-    }
-    
-    private func amount(for dataIndex: Int) -> Int {
-        let dateComponent = dateComponents(for: dataIndex)
-        
-        return amount(for: dateComponent)
-    }
-    
     //
     
     // MARK: - Initialization
     
     //
     
-    init(entry: Entry) {
-        relatedEntry = entry
-        
-        let dateCreated = relatedEntry.dateCreated!
-        
-        let dateToday = Date.now
-        
-        let daysDelta = Calendar.current.numberOfDaysBetween(dateCreated, and: dateToday)
-        
-        dataSize = daysDelta
-        
-        headSize = {
-            if dateCreated.weekdayNumber.rawValue == 1 {
-                return 6
-            }
-            
-            return dateCreated.weekdayNumber.rawValue - 2
-        }()
-        
-        tailSize = {
-            if dateToday.weekdayNumber.rawValue == 1 {
-                return 0
-            }
-            
-            return 8 - dateToday.weekdayNumber.rawValue
-            
-        }()
-        
+    init() {
         super.init(nibName: nil, bundle: nil)
         
         viewRoot.viewTable.dataSource = self
@@ -149,11 +53,8 @@ class EntryDetailsController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
-        
-        title = relatedEntry.name
-        
-        fetch()
-        
+        title = model.name
+        model.fetch()
         setupViewStats()
     }
     
@@ -176,7 +77,7 @@ class EntryDetailsController: UIViewController {
     }
     
     private func setInitialScrollPositionForDisplay() {
-        let lastCellIndex = IndexPath(row: totalCellsAmount - 1, section: 0)
+        let lastCellIndex = IndexPath(row: model.dayCellsAmount - 1, section: 0)
         
         viewRoot.viewDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
     }
@@ -187,33 +88,11 @@ class EntryDetailsController: UIViewController {
         viewRoot.viewStats.setContentOffset(point, animated: false)
     }
     
-    private func fetch() {
-        let request = NSFetchRequest<Point>(entityName: "Point")
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
-        
-        let predicate = NSPredicate(format: "entry == %@", argumentArray: [relatedEntry])
-        
-        request.predicate = predicate
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                              managedObjectContext: moc,
-                                                              sectionNameKeyPath: nil,
-                                                              cacheName: nil)
-        fetchedResultsController?.delegate = self
-        
-        do {
-            try fetchedResultsController?.performFetch()
-        } catch {
-            print("fetch request failed")
-        }
-    }
-    
     private func setupViewStats() {
-        let viewDayAverage = ViewStatDisplay(value: relatedEntry.dayAverage, description: "Day average")
-        let viewWeekAverage = ViewStatDisplay(value: relatedEntry.weekAverage, description: "Week average")
-        let viewLastWeekTotal = ViewStatDisplay(value: Float(relatedEntry.lastWeekTotal), description: "Last week total")
-        let viewThisWeekTotal = ViewStatDisplay(value: Float(relatedEntry.thisWeekTotal), description: "This week total")
+        let viewDayAverage = ViewStatDisplay(value: model.dayAverage, description: "Day average")
+        let viewWeekAverage = ViewStatDisplay(value: model.weekAverage, description: "Week average")
+        let viewLastWeekTotal = ViewStatDisplay(value: model.lastWeekTotal, description: "Last week total")
+        let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: "This week total")
         
         let viewPlaceholder = UIView(frame: .zero)
         viewPlaceholder.translatesAutoresizingMaskIntoConstraints = false
@@ -240,7 +119,7 @@ class EntryDetailsController: UIViewController {
 
 extension EntryDetailsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataAmount = fetchedResultsController?.fetchedObjects?.count ?? 0
+        let dataAmount = model.pointsAmount
         
         if dataAmount == 0 {
             viewRoot.showEmptyState()
@@ -254,7 +133,7 @@ extension EntryDetailsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell,
-            let dataRow = fetchedResultsController?.object(at: indexPath)
+            let dataRow = model.point(at: indexPath)
         else { return UITableViewCell() }
 
         row.update(time: dataRow.time, day: dataRow.timeSince)
@@ -319,29 +198,23 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return totalCellsAmount
+        return model.dayCellsAmount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier, for: indexPath) as! DayOfTheWeekCell
         
-        let index = indexPath.row
+        let numberInMonth = model.dayInMonth(at: indexPath)
         
-        let numberInMonth = dayInMonth(by: index)
-        
-        switch cellType(by: index) {
+        switch model.cellKind(at: indexPath) {
         case .past:
-            cell.update(day: "\(numberInMonth)")
             cell.update(amount: nil)
         case .created:
-            cell.update(day: "\(numberInMonth)")
             cell.update(amount: nil)
         case .data:
-            let dataIndex = index - headSize
-                
-            cell.update(amount: amount(for: dataIndex))
+            cell.update(amount: model.cellAmount(at: indexPath))
             
-            let isToday = index == totalCellsAmount - tailSize - 1
+            let isToday = model.isTodayCell(at: indexPath)
                         
             cell.update(day: "\(numberInMonth)", isToday: isToday)
             
@@ -354,43 +227,5 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
         }
         
         return cell
-    }
-    
-    private func cellType(by index: Int) -> DayOfTheWeekCell.type {
-        if headSize == 0, index == 0 {
-            return .data
-        }
-        
-        if index < headSize - 1 {
-            return .past
-        }
-        
-        if index < headSize {
-            return .created
-        }
-        
-        if index == totalCellsAmount - tailSize {
-            return .today
-        }
-        
-        if index > totalCellsAmount - tailSize {
-            return .future
-        }
-        
-        return .data
-    }
-    
-    private func dayInMonth(by index: Int) -> Int {
-        let todayIndex = totalCellsAmount - tailSize - 1
-        
-        let today = Date.now
-        
-        let daysDelta = todayIndex - index
-        
-        let nextDate = Calendar.current.date(byAdding: .day, value: -daysDelta, to: today)!
-        
-        let nextDay = Calendar.current.dateComponents([.day], from: nextDate).day!
-        
-        return nextDay
     }
 }
