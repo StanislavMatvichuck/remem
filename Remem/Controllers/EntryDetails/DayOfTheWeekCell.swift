@@ -16,7 +16,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
 
     static let reuseIdentifier = "CellDay"
 
-    enum type {
+    enum Kind {
         case past
         case created
         case data

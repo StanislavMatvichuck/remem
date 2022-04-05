@@ -7,7 +7,7 @@
 
 import CoreData
 import Foundation
-import UIKit
+import UIKit.UIApplication
 
 protocol EntriesListModelInterface {
     var delegate: EntriesListModelDelegate? { get set }
@@ -54,7 +54,7 @@ class EntriesListModel: EntriesListModelInterface, CoreDataConsumer {
     // CoreData properties
     //
 
-    internal var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
 
     fileprivate var fetchedResultsController: NSFetchedResultsController<Entry>?
 

@@ -15,7 +15,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     
     //
     
-    let viewRoot = EntriesListView()
+    private let viewRoot = EntriesListView()
     
     var model: EntriesListModelInterface!
     
@@ -121,6 +121,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     func startOnboarding() {
         let onboarding = EntriesListOnboardingController()
         onboarding.modalPresentationStyle = .overCurrentContext
+        onboarding.modalTransitionStyle = .crossDissolve
         onboarding.mainDataSource = self
         onboarding.mainDelegate = self
         onboarding.isModalInPresentation = true
@@ -266,8 +267,14 @@ extension EntriesListController: CellMainDelegate {
             let entry = model.entry(at: index)
         else { return }
         
-        let pointsList = EntryDetailsController(entry: entry)
+        let pointsList = EntryDetailsController()
         let navigation = UINavigationController(rootViewController: pointsList)
+        
+        let model = EntryDetailsModel(entry)
+        
+        // TODO: check if this is okay
+        pointsList.model = model
+        model.delegate = pointsList
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemBackground
