@@ -51,25 +51,26 @@ class EntriesListOnboardingController: UIViewController {
         case showTextCreatedTestItem
         case showTextLongPress
         case highlightLongPress
-        case waitForLongPress
-        case highlightViewList
-        case waitForViewListPress
-        case highlightPointsList
-        case showTextPointsList
-        case showTextScrollPoints
-        case showFloatingCircleScrollPoints
-        case waitForScrollPoints
-        case highlightStats
-        case showTextStatsDescription
-        case showTextStatsScroll
-        case showFloatingCircleScrollStats
-        case waitForScrollStats
-        case highlightDisplay
-        case showTextDisplayDescription
-        case showTextDisplayScroll
-        case showFloatingCircleDisplayScroll
-        case waitForDisplayScroll
-        case showTextFinal
+        case waitForEntryDetailsPresentationAttempt
+        case presentEntryDetailsController
+//        case highlightViewList
+//        case waitForViewListPress
+//        case highlightPointsList
+//        case showTextPointsList
+//        case showTextScrollPoints
+//        case showFloatingCircleScrollPoints
+//        case waitForScrollPoints
+//        case highlightStats
+//        case showTextStatsDescription
+//        case showTextStatsScroll
+//        case showFloatingCircleScrollStats
+//        case waitForScrollStats
+//        case highlightDisplay
+//        case showTextDisplayDescription
+//        case showTextDisplayScroll
+//        case showFloatingCircleDisplayScroll
+//        case waitForDisplayScroll
+//        case showTextFinal
     }
 
     //
@@ -233,40 +234,31 @@ class EntriesListOnboardingController: UIViewController {
             animationsHelper.animatorCircle.start(.addItem)
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .UIMovableTextViewShown, object: nil)
-            
+            watch(.UIMovableTextViewShown)
             tapMovesForward = false
             viewRoot.isTransparentForTouches = true
         case .showTextGiveEventAName:
-            NotificationCenter.default.removeObserver(self, name: .UIMovableTextViewShown, object: nil)
-            
-            NotificationCenter.default.addObserver(
-                self, selector: #selector(handleNotification),
-                name: .UIMovableTextViewWillShow, object: nil)
-
+            ignore(.UIMovableTextViewShown)
+            watch(.UIMovableTextViewWillShow)
             viewRoot.isTransparentForTouches = false
-            
-            animationsHelper.hide(label: viewRoot.labelStart)
-            
-            animationsHelper.animatorCircle.stop()
-            
             labelNameBottomConstraint.isActive = true
             
+            animationsHelper.hide(label: viewRoot.labelStart)
+            animationsHelper.animatorCircle.stop()
             animationsHelper.show(label: viewRoot.labelEventName)
             animationsHelper.animatorBackground.show(view: viewToHighlight, cornerRadius: .r1, offset: 0)
-            
+    
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .EntriesListNewEntry, object: nil)
+            watch(.EntriesListNewEntry)
         case .highlightCreatedEntry:
-            NotificationCenter.default.removeObserver(self, name: .UIMovableTextViewWillShow, object: nil)
-            NotificationCenter.default.removeObserver(self, name: .EntriesListNewEntry, object: nil)
+            ignore(.UIMovableTextViewWillShow)
+            ignore(.EntriesListNewEntry)
             
             viewRoot.labelEventName.isHidden = true
-            animationsHelper.animatorBackground.show(view: cellToHighlight)
             tapMovesForward = true
+            
+            animationsHelper.animatorBackground.show(view: cellToHighlight)
             currentStep = .showTextEntryDescription
         case .showTextEntryDescription:
             animationsHelper.show(label: viewRoot.labelEventCreated)
@@ -278,13 +270,10 @@ class EntriesListOnboardingController: UIViewController {
             animationsHelper.animatorCircle.start(.addPoint)
             currentStep = .waitForSwipe
         case .waitForSwipe:
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .EntriesListNewPoint, object: nil)
-            
+            watch(.EntriesListNewPoint)
             viewRoot.isTransparentForTouches = true
         case .showTextAfterSwipe01:
             animationsHelper.animatorCircle.stop()
-            
             animationsHelper.show(label: viewRoot.labelSwipeComplete)
         case .showTextAfterSwipe02:
             animationsHelper.show(label: viewRoot.labelAdditionalSwipes)
@@ -294,17 +283,12 @@ class EntriesListOnboardingController: UIViewController {
             viewRoot.labelAdditionalSwipes.text = "4 / 5"
         case .showTextAfterSwipe05:
             viewRoot.labelAdditionalSwipes.text = "5 / 5"
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .EntriesListNewPoint, object: nil)
-            
+            watch(.EntriesListNewEntry)
+            ignore(.EntriesListNewPoint)
             mainDelegate.createTestItem()
-            
             tapMovesForward = false
-            
-            NotificationCenter.default.removeObserver(self, name: .EntriesListNewPoint, object: nil)
         case .highlightTestItem:
-            NotificationCenter.default.removeObserver(self, name: .EntriesListNewEntry, object: nil)
+            ignore(.EntriesListNewEntry)
             animationsHelper.animatorBackground.show(view: cellToHighlight)
             currentStep = .showTextCreatedTestItem
         case .showTextCreatedTestItem:
@@ -323,18 +307,22 @@ class EntriesListOnboardingController: UIViewController {
             if let cellMain = cellToHighlight as? EntryCell {
                 animationsHelper.animatorBackground.move(to: cellMain.viewMovable)
             }
-            currentStep = .waitForLongPress
-//        case .waitForLongPress:
-//            tapMovesForward = false
-//            viewRoot.isTransparentForTouches = true
-//            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-//                                                   name: .ControllerMainPresentedDetails, object: nil)
-//        case .highlightViewList:
-//            NotificationCenter.default.removeObserver(self, name: .ControllerMainPresentedDetails, object: nil)
-//            animationsHelper.animatorBackground.show(view: viewToHighlight)
+            currentStep = .waitForEntryDetailsPresentationAttempt
+        case .waitForEntryDetailsPresentationAttempt:
+            tapMovesForward = false
+            viewRoot.isTransparentForTouches = true
+            watch(.EntriesListDetailsPresentationAttempt)
         default:
             fatalError("⚠️ unhandled onboarding case")
         }
+    }
+    
+    private func watch(_ name: Notification.Name) {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: name, object: nil)
+    }
+    
+    private func ignore(_ name: Notification.Name) {
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
 }
 
@@ -367,10 +355,11 @@ extension EntriesListOnboardingController {
             }
         case .EntriesListNewPoint:
             goToNextStep()
-//        case .ControllerMainPresentedDetails:
-//            guard let view = notification.object as? UIView else { return }
-//            viewToHighlight = view
-//            currentStep = .highlightViewList
+        case .EntriesListDetailsPresentationAttempt:
+            if let preparedEntryDetailsController = notification.object as? UINavigationController {
+                preparedEntryDetailsController.isModalInPresentation = true
+                present(preparedEntryDetailsController, animated: true)
+            }
         default:
             fatalError("Unhandled notification")
         }

@@ -278,7 +278,6 @@ extension EntriesListController: CellMainDelegate {
         present(alert, animated: true)
     }
     
-    // TODO: fix EntryDetailsController
     func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
@@ -303,7 +302,12 @@ extension EntriesListController: CellMainDelegate {
         navigation.navigationBar.scrollEdgeAppearance = appearance
         navigation.navigationBar.standardAppearance = appearance
         navigation.navigationBar.compactAppearance = appearance
+        ///
+        /// During onboarding this presentation will fail but notification will be handled by `EntriesListOnboardingController`
+        ///
         present(navigation, animated: true)
+        
+        NotificationCenter.default.post(name: .EntriesListDetailsPresentationAttempt, object: navigation)
     }
     
     func didSwipeAction(_ cell: EntryCell) {
@@ -364,4 +368,5 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
 extension Notification.Name {
     static let EntriesListNewEntry = Notification.Name(rawValue: "EntriesListNewEntry")
     static let EntriesListNewPoint = Notification.Name(rawValue: "EntriesListNewPoint")
+    static let EntriesListDetailsPresentationAttempt = Notification.Name(rawValue: "EntriesListDetailsPresentationAttempt")
 }
