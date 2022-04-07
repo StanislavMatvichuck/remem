@@ -10,6 +10,14 @@ import UIKit
 
 class EntriesListController: UIViewController, EntriesListModelDelegate {
     //
+
+    // MARK: - Public properties
+
+    //
+    
+    var model: EntriesListModelInterface!
+    
+    //
     
     // MARK: - Private properties
     
@@ -17,9 +25,10 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     
     private let viewRoot = EntriesListView()
     
-    var model: EntriesListModelInterface!
-    
     private var cellIndexToBeAnimated: IndexPath?
+    
+    /// Used for posting `EntriesListNewEntry` notification
+    private var newCellIndex: IndexPath?
     
     //
     
@@ -188,6 +197,7 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             guard let insertIndex = newIndexPath else { return }
+            newCellIndex = insertIndex
             viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
         case .delete:
             guard let deleteIndex = indexPath else { return }
@@ -202,6 +212,16 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
             fatalError("Unhandled case")
         }
     }
+    
+    func newPointAdded(at index: IndexPath) {
+        postNewPointNotification(for: index)
+    }
+    
+    private func postNewPointNotification(for index: IndexPath) {
+        if let cell = viewRoot.viewTable.cellForRow(at: index) {
+            NotificationCenter.default.post(name: .EntriesListNewPoint, object: cell)
+        }
+    }
 }
 
 //
@@ -212,18 +232,14 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
 
 extension EntriesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let index = cellIndexToBeAnimated, index == indexPath {
+        if cellIndexToBeAnimated == indexPath {
             let cell = cell as! EntryCell
-            
             cell.animateMovableViewBack()
         }
         
-        // TODO: make this condition to be good
-        /// what if there are more cells than screen can fit?
-        let cellIsNew = tableView.visibleCells.firstIndex(of: cell) == nil
-        
-        if cellIsNew {
-            NotificationCenter.default.post(name: .ControllerMainItemCreated, object: cell)
+        if newCellIndex == indexPath {
+            NotificationCenter.default.post(name: .EntriesListNewEntry, object: cell)
+            newCellIndex = nil
         }
     }
 }
@@ -321,10 +337,6 @@ extension EntriesListController: ControllerMainOnboardingDataSource {
     var viewInput: UIView {
         viewRoot.input.onboardingHighlight
     }
-    
-    var inputHeightOffset: CGFloat {
-        viewRoot.input.frame.minY - .delta1
-    }
 }
 
 extension EntriesListController: ControllerMainOnboardingDelegate {
@@ -341,4 +353,15 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
         viewRoot.swiper.showSettings()
         viewRoot.input.enableCancelButton()
     }
+}
+
+//
+
+// MARK: - Notifications
+
+//
+
+extension Notification.Name {
+    static let EntriesListNewEntry = Notification.Name(rawValue: "EntriesListNewEntry")
+    static let EntriesListNewPoint = Notification.Name(rawValue: "EntriesListNewPoint")
 }

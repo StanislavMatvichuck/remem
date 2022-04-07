@@ -23,7 +23,9 @@ protocol EntriesListModelInterface {
     func addNewPoint(to: Entry)
 }
 
-protocol EntriesListModelDelegate: NSFetchedResultsControllerDelegate {}
+protocol EntriesListModelDelegate: NSFetchedResultsControllerDelegate {
+    func newPointAdded(at: IndexPath)
+}
 
 //
 
@@ -121,6 +123,10 @@ class EntriesListModel: EntriesListModelInterface, CoreDataConsumer {
             let newPoints: Set<AnyHashable> = entry.points?.adding(point) ?? [point]
 
             entry.points = NSSet(set: newPoints)
+        }
+
+        if let index = fetchedResultsController?.indexPath(forObject: entry) {
+            delegate?.newPointAdded(at: index)
         }
     }
 

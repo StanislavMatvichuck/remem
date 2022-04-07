@@ -10,7 +10,6 @@ import UIKit
 protocol ControllerMainOnboardingDataSource: UIViewController {
     var viewSwiper: UIView { get }
     var viewInput: UIView { get }
-    var inputHeightOffset: CGFloat { get }
 }
 
 protocol ControllerMainOnboardingDelegate: UIViewController {
@@ -260,11 +259,10 @@ class EntriesListOnboardingController: UIViewController {
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainItemCreated, object: nil)
+                                                   name: .EntriesListNewEntry, object: nil)
         case .highlightCreatedEntry:
             NotificationCenter.default.removeObserver(self, name: .UIMovableTextViewWillShow, object: nil)
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainInputConstraintUpdated, object: nil)
+            NotificationCenter.default.removeObserver(self, name: .EntriesListNewEntry, object: nil)
             
             viewRoot.labelEventName.isHidden = true
             animationsHelper.animatorBackground.show(view: cellToHighlight)
@@ -281,7 +279,7 @@ class EntriesListOnboardingController: UIViewController {
             currentStep = .waitForSwipe
         case .waitForSwipe:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainItemSwipe, object: nil)
+                                                   name: .EntriesListNewPoint, object: nil)
             
             viewRoot.isTransparentForTouches = true
         case .showTextAfterSwipe01:
@@ -298,15 +296,15 @@ class EntriesListOnboardingController: UIViewController {
             viewRoot.labelAdditionalSwipes.text = "5 / 5"
             
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainItemCreated, object: nil)
+                                                   name: .EntriesListNewPoint, object: nil)
             
             mainDelegate.createTestItem()
             
             tapMovesForward = false
             
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemSwipe, object: nil)
+            NotificationCenter.default.removeObserver(self, name: .EntriesListNewPoint, object: nil)
         case .highlightTestItem:
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
+            NotificationCenter.default.removeObserver(self, name: .EntriesListNewEntry, object: nil)
             animationsHelper.animatorBackground.show(view: cellToHighlight)
             currentStep = .showTextCreatedTestItem
         case .showTextCreatedTestItem:
@@ -326,14 +324,14 @@ class EntriesListOnboardingController: UIViewController {
                 animationsHelper.animatorBackground.move(to: cellMain.viewMovable)
             }
             currentStep = .waitForLongPress
-        case .waitForLongPress:
-            tapMovesForward = false
-            viewRoot.isTransparentForTouches = true
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainPresentedDetails, object: nil)
-        case .highlightViewList:
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainPresentedDetails, object: nil)
-            animationsHelper.animatorBackground.show(view: viewToHighlight)
+//        case .waitForLongPress:
+//            tapMovesForward = false
+//            viewRoot.isTransparentForTouches = true
+//            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
+//                                                   name: .ControllerMainPresentedDetails, object: nil)
+//        case .highlightViewList:
+//            NotificationCenter.default.removeObserver(self, name: .ControllerMainPresentedDetails, object: nil)
+//            animationsHelper.animatorBackground.show(view: viewToHighlight)
         default:
             fatalError("⚠️ unhandled onboarding case")
         }
@@ -358,7 +356,7 @@ extension EntriesListOnboardingController {
             if let descriptor = notification.object as? UIMovableTextView.KeyboardHeightChangeDescriptor {
                 animationsHelper.animatorBackground.moveShownArea(by: descriptor.movedBy, duration: descriptor.duration)
             }
-        case .ControllerMainItemCreated:
+        case .EntriesListNewEntry:
             guard let cell = notification.object as? UITableViewCell else { return }
             cellToHighlight = cell
             
@@ -367,29 +365,14 @@ extension EntriesListOnboardingController {
             } else {
                 currentStep = .highlightCreatedEntry
             }
-        case .ControllerMainInputConstraintUpdated:
-            guard mainDataSource.inputHeightOffset != -.delta1 else { return }
-            /// this guard statement fixes immediate label disappearing
-            UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, delay: 0, options: .curveEaseInOut, animations: {
-                self.labelNameBottomConstraint.constant = self.mainDataSource.inputHeightOffset
-                self.viewRoot.layoutIfNeeded()
-            }, completion: nil)
-            animationsHelper.animatorBackground.move(to: mainDataSource.viewInput, cornerRadius: .r1)
-        case .ControllerMainItemSwipe:
+        case .EntriesListNewPoint:
             goToNextStep()
-        case .ControllerMainPresentedDetails:
-            guard let view = notification.object as? UIView else { return }
-            viewToHighlight = view
-            currentStep = .highlightViewList
+//        case .ControllerMainPresentedDetails:
+//            guard let view = notification.object as? UIView else { return }
+//            viewToHighlight = view
+//            currentStep = .highlightViewList
         default:
             fatalError("Unhandled notification")
         }
     }
-}
-
-extension Notification.Name {
-    static let ControllerMainItemCreated = Notification.Name(rawValue: "ControllerMainItemCreated")
-    static let ControllerMainInputConstraintUpdated = Notification.Name(rawValue: "ControllerMainInputConstraintUpdated")
-    static let ControllerMainItemSwipe = Notification.Name(rawValue: "ControllerMainItemSwipe")
-    static let ControllerMainPresentedDetails = Notification.Name(rawValue: "ControllerMainPresentedDetails")
 }
