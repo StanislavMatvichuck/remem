@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AnimatorOnboarding: NSObject {
+class AnimatorOnboarding: NSObject, CAAnimationDelegate {
     //
 
     // MARK: - Related types
@@ -27,21 +27,11 @@ class AnimatorOnboarding: NSObject {
 
     //
 
-    // MARK: - Public properties
-
-    //
-
-    let animatorBackground: AnimatorBackground
-
-    let animatorCircle: AnimatorCircle
-
-    //
-
     // MARK: - Private properties
 
     //
 
-    private weak var viewRoot: UIView!
+    private var viewRoot: UIView
 
     //
 
@@ -49,18 +39,9 @@ class AnimatorOnboarding: NSObject {
 
     //
 
-    init(root: UIView, circle: UIView, finger: UIView, background: UIView) {
+    init(root: UIView) {
         viewRoot = root
-
-        animatorBackground = AnimatorBackground(background)
-        animatorCircle = AnimatorCircle(circle: circle, finger: finger, background: background)
     }
-
-    //
-
-    // MARK: - Behaviour
-
-    //
 
     //
 
@@ -119,7 +100,7 @@ class AnimatorOnboarding: NSObject {
         closeButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
 
         let group = CAAnimationGroup()
-        group.duration = EntriesListOnboardingController.standartDuration
+        group.duration = Animator.standartDuration
         group.fillMode = .backwards
         group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
@@ -135,15 +116,13 @@ class AnimatorOnboarding: NSObject {
 
         closeButton.layer.add(group, forKey: nil)
     }
-}
 
-//
+    //
 
-// MARK: - CAAnimationDelegate
+    // MARK: CAAnimationDelegate
 
-//
+    //
 
-extension AnimatorOnboarding: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         guard let name = anim.value(forKey: CodingKeys.animationName.rawValue) as? Animations, flag else { return }
 

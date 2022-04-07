@@ -14,7 +14,7 @@ class AnimatorBackground {
 
     //
 
-    private weak var viewRoot: UIView!
+    private var viewRoot: UIView
 
     /// These properties are updated by `shownPath` and `moveShownArea` methods
     private var lastShownPath: UIBezierPath?
@@ -34,7 +34,7 @@ class AnimatorBackground {
 
     private func setupMask() {
         let mask = CAShapeLayer()
-        mask.path = hiddenPath(for: viewRoot).cgPath
+        mask.path = UIBezierPath(rect: UIScreen.main.bounds).cgPath
         mask.fillRule = .evenOdd
         viewRoot.layer.mask = mask
     }
@@ -82,7 +82,7 @@ class AnimatorBackground {
     }
 
     private func animate(from: UIBezierPath, to: UIBezierPath,
-                         duration: Double = EntriesListOnboardingController.standartDuration)
+                         duration: Double = Animator.standartDuration)
     {
         guard let mask = viewRoot.layer.mask as? CAShapeLayer else { return }
 
@@ -115,7 +115,7 @@ class AnimatorBackground {
         animate(from: start, to: final)
     }
 
-    func moveShownArea(by: CGPoint, duration: Double = EntriesListOnboardingController.standartDuration) {
+    func moveShownArea(by: CGPoint, duration: Double = Animator.standartDuration) {
         guard
             let start = lastShownPath,
             let inner = lastShownInnerRect,

@@ -50,7 +50,7 @@ class AnimatorCircle: NSObject {
 
     fileprivate weak var circle: UIView!
     fileprivate weak var finger: UIView!
-    fileprivate weak var background: UIView!
+    fileprivate weak var root: UIView!
 
     fileprivate var circleY: NSLayoutConstraint!
     fileprivate var circleX: NSLayoutConstraint!
@@ -61,10 +61,10 @@ class AnimatorCircle: NSObject {
 
     //
 
-    init(circle: UIView, finger: UIView, background: UIView) {
+    init(circle: UIView, finger: UIView, root: UIView) {
         self.circle = circle
         self.finger = finger
-        self.background = background
+        self.root = root
     }
 
     //
@@ -84,11 +84,11 @@ class AnimatorCircle: NSObject {
 
         switch mode {
         case .addItem:
-            circleY = circle.centerYAnchor.constraint(equalTo: background.centerYAnchor, constant: verticalTravelDistance / 2)
-            circleX = circle.centerXAnchor.constraint(equalTo: background.centerXAnchor)
+            circleY = circle.centerYAnchor.constraint(equalTo: root.centerYAnchor, constant: verticalTravelDistance / 2)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.centerXAnchor)
         case .addPoint:
-            circleY = circle.centerYAnchor.constraint(equalTo: background.safeAreaLayoutGuide.bottomAnchor, constant: -.r2 - .delta1 / 2)
-            circleX = circle.centerXAnchor.constraint(equalTo: background.leadingAnchor, constant: .r2 + .delta1)
+            circleY = circle.centerYAnchor.constraint(equalTo: root.safeAreaLayoutGuide.bottomAnchor, constant: -.r2 - .delta1 / 2)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: .r2 + .delta1)
         }
 
         setupViewFingerConstraints()

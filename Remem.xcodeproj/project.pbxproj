@@ -20,6 +20,9 @@
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		083DD13227C6B20F006F1479 /* EntriesListOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */; };
 		083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */; };
+		085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DB27FEF3FA00A18912 /* OnboardingController.swift */; };
+		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
+		085D38E027FEFD1E00A18912 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DF27FEFD1E00A18912 /* OnboardingView.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
@@ -59,6 +62,9 @@
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingController.swift; sourceTree = "<group>"; };
 		083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingView.swift; sourceTree = "<group>"; };
+		085D38DB27FEF3FA00A18912 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
+		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		085D38DF27FEFD1E00A18912 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
@@ -114,6 +120,8 @@
 				08975A9827DDF51C0021E0D3 /* AnimatorOnboarding.swift */,
 				083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */,
 				083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */,
+				085D38DB27FEF3FA00A18912 /* OnboardingController.swift */,
+				085D38DF27FEFD1E00A18912 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				085D38DD27FEF45600A18912 /* Animator.swift */,
 				083D3891279AE61E00134A15 /* CoreDataConsumer.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				083A415F27BE603800AF2098 /* ExtensionDate.swift */,
@@ -310,6 +319,7 @@
 				083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
+				085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */,
 				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				080F0FDE27FC83E2006BFCE8 /* EntryDetailsModel.swift in Sources */,
@@ -330,7 +340,9 @@
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
+				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
+				085D38E027FEFD1E00A18912 /* OnboardingView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				08C5D24F27F5D6250099260D /* EntriesListModel.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
