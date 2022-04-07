@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol ControllerMainOnboardingDataSource: UIViewController {
+protocol EntriesListOnboardingControllerDataSource: UIViewController {
     var viewSwiper: UIView { get }
     var viewInput: UIView { get }
 }
 
-protocol ControllerMainOnboardingDelegate: UIViewController {
+protocol EntriesListOnboardingControllerDelegate: UIViewController, OnboardingControllerDelegate {
     func createTestItem()
     func disableSettingsButton()
     func enableSettingsButton()
@@ -25,9 +25,8 @@ class EntriesListOnboardingController: OnboardingController {
 
     //
     
-    weak var mainDataSource: ControllerMainOnboardingDataSource!
-    
-    weak var mainDelegate: ControllerMainOnboardingDelegate!
+    weak var mainDataSource: EntriesListOnboardingControllerDataSource!
+    weak var mainDelegate: EntriesListOnboardingControllerDelegate!
     
     //
     
@@ -67,11 +66,11 @@ class EntriesListOnboardingController: OnboardingController {
         view = viewRoot
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupEventHandlers()
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        
+//        setupEventHandlers()
+//    }
     
     //
 
@@ -79,15 +78,7 @@ class EntriesListOnboardingController: OnboardingController {
 
     //
     
-    private func setupEventHandlers() {
-        viewRoot.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleTap)))
-        
-        viewRoot.labelClose.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handlePressClose)))
-        
-        viewRoot.labelClose.isUserInteractionEnabled = true
-    }
+    
     
     //
 
@@ -244,7 +235,11 @@ class EntriesListOnboardingController: OnboardingController {
         case .EntriesListDetailsPresentationAttempt:
             if let preparedEntryDetailsController = notification.object as? UINavigationController {
                 preparedEntryDetailsController.isModalInPresentation = true
-                present(preparedEntryDetailsController, animated: true)
+                present(preparedEntryDetailsController, animated: true) {
+                    if let controller = preparedEntryDetailsController.viewControllers[0] as? OnboardingControllerDelegate {
+                        controller.startOnboarding()
+                    }
+                }
             }
         default:
             fatalError("Unhandled notification")

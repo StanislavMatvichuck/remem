@@ -120,24 +120,6 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         
         present(navigation, animated: true, completion: nil)
     }
-    
-    //
-
-    // MARK: - Public methods
-
-    //
-    
-    func startOnboarding() {
-        let onboarding = EntriesListOnboardingController()
-        onboarding.modalPresentationStyle = .overCurrentContext
-        onboarding.modalTransitionStyle = .crossDissolve
-        onboarding.mainDataSource = self
-        onboarding.mainDelegate = self
-        onboarding.isModalInPresentation = true
-        present(onboarding, animated: true) {
-            onboarding.start()
-        }
-    }
 }
 
 //
@@ -333,7 +315,7 @@ extension EntriesListController: CellMainDelegate {
 
 //
 
-extension EntriesListController: ControllerMainOnboardingDataSource {
+extension EntriesListController: EntriesListOnboardingControllerDataSource {
     var viewSwiper: UIView {
         viewRoot.swiper
     }
@@ -343,7 +325,19 @@ extension EntriesListController: ControllerMainOnboardingDataSource {
     }
 }
 
-extension EntriesListController: ControllerMainOnboardingDelegate {
+extension EntriesListController: EntriesListOnboardingControllerDelegate {
+    func startOnboarding() {
+        let onboarding = EntriesListOnboardingController()
+        onboarding.modalPresentationStyle = .overCurrentContext
+        onboarding.modalTransitionStyle = .crossDissolve
+        onboarding.mainDataSource = self
+        onboarding.mainDelegate = self
+        onboarding.isModalInPresentation = true
+        present(onboarding, animated: true) {
+            onboarding.start()
+        }
+    }
+    
     func createTestItem() {
         model.create(entryName: "Test10")
     }

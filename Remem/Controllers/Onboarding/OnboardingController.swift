@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol OnboardingControllerDelegate {
+    func startOnboarding()
+}
+
 class OnboardingController: UIViewController {
     //
 
@@ -15,6 +19,9 @@ class OnboardingController: UIViewController {
     //
     
     enum Step: Int, CaseIterable {
+        //
+        // EntiesList steps
+        //
         case showTextGreeting
         case showTextName
         case showTextFirstQuestion
@@ -42,24 +49,28 @@ class OnboardingController: UIViewController {
         case highlightLongPress
         case waitForEntryDetailsPresentationAttempt
         case presentEntryDetailsController
-//        case highlightViewList
-//        case waitForViewListPress
-//        case highlightPointsList
-//        case showTextPointsList
-//        case showTextScrollPoints
-//        case showFloatingCircleScrollPoints
-//        case waitForScrollPoints
-//        case highlightStats
-//        case showTextStatsDescription
-//        case showTextStatsScroll
-//        case showFloatingCircleScrollStats
-//        case waitForScrollStats
-//        case highlightDisplay
-//        case showTextDisplayDescription
-//        case showTextDisplayScroll
-//        case showFloatingCircleDisplayScroll
-//        case waitForDisplayScroll
-//        case showTextFinal
+        //
+        // EntryDetails steps
+        //
+        case showTextEntryDetails
+        case highlightViewList
+        case waitForViewListPress
+        case highlightPointsList
+        case showTextPointsList
+        case showTextScrollPoints
+        case showFloatingCircleScrollPoints
+        case waitForScrollPoints
+        case highlightStats
+        case showTextStatsDescription
+        case showTextStatsScroll
+        case showFloatingCircleScrollStats
+        case waitForScrollStats
+        case highlightDisplay
+        case showTextDisplayDescription
+        case showTextDisplayScroll
+        case showFloatingCircleDisplayScroll
+        case waitForDisplayScroll
+        case showTextFinal
     }
     
     //
@@ -105,8 +116,22 @@ class OnboardingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupEventHandlers()
         setupAnimators()
+    }
+    
+    private func setupEventHandlers() {
+        if let view = view as? OnboardingView {
+            view.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+            view.labelClose.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(handlePressClose)))
+        
+            view.labelClose.isUserInteractionEnabled = true
+        } else {
+            fatalError("view must be a subclass of OnboardingView")
+        }
     }
     
     private func setupAnimators() {

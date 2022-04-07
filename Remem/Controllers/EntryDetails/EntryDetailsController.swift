@@ -229,3 +229,16 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
         return cell
     }
 }
+
+extension EntryDetailsController: OnboardingControllerDelegate {
+    func startOnboarding() {
+        let onboarding = EntryDetailsOnboardingController(withStep: .highlightViewList)
+        onboarding.modalPresentationStyle = .overCurrentContext
+        onboarding.modalTransitionStyle = .crossDissolve
+        onboarding.viewToHighlight = viewRoot.viewTable
+        onboarding.isModalInPresentation = true
+        present(onboarding, animated: true) {
+            onboarding.start()
+        }
+    }
+}
