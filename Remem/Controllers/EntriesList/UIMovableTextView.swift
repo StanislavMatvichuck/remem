@@ -12,6 +12,8 @@ protocol UIMovableTextViewInterface: UIControl {
     var value: String { get set }
 
     func show()
+    func disableCancelButton()
+    func enableCancelButton()
 }
 
 class UIMovableTextView: UIControl, UIMovableTextViewInterface {
@@ -26,7 +28,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         set { input.text = newValue }
     }
 
-    var onboardingHighlight: UIView { viewInput.subviews[0] }
+    var onboardingHighlight: UIView { viewInput }
 
     //
 
@@ -167,11 +169,34 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 
         viewInputBackground.isHidden = false
 
-        UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
-            self.inputAnimatedConstraint.constant = -keyboardSize.cgRectValue.size.height - .d2 - .delta1
+        let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .delta1
+
+        postWillShowNotification(newConstant: newConstant, duration: duration)
+
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
+            self.inputAnimatedConstraint.constant = newConstant
             self.viewInputBackground.alpha = 1
             self.layoutIfNeeded()
-        }).startAnimation()
+        })
+
+        animator.addCompletion { _ in
+            NotificationCenter.default.post(name: .UIMovableTextViewShown, object: self.viewInput)
+        }
+
+        animator.startAnimation()
+    }
+
+    typealias KeyboardHeightChangeDescriptor = (movedBy: CGPoint, duration: Double)
+
+    private func postWillShowNotification(newConstant: CGFloat, duration: Double) {
+        let existingConstant = inputAnimatedConstraint.constant
+        let constantDifference = newConstant - existingConstant
+
+        let notificationObject: KeyboardHeightChangeDescriptor = (
+            movedBy: CGPoint(x: 0, y: constantDifference),
+            duration: duration)
+
+        NotificationCenter.default.post(name: .UIMovableTextViewWillShow, object: notificationObject)
     }
 
     @objc
@@ -196,7 +221,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         animator.startAnimation()
     }
 
-    private func configureInputAccessoryView() {
+    private func configureInputAccessoryView(cancelEnabled: Bool = true) {
         let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
 
         let icon01 = UIBarButtonItem(title: "☕️", style: .plain, target: self, action: #selector(handleEmojiPress))
@@ -212,6 +237,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
                                       style: .plain,
                                       target: self,
                                       action: #selector(handlePressCancel))
+
+        dismiss.isEnabled = cancelEnabled
 
         let create = UIBarButtonItem(title: "Add",
                                      style: .plain,
@@ -269,4 +296,23 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         isUserInteractionEnabled = true
         input.becomeFirstResponder()
     }
+
+    func disableCancelButton() {
+        configureInputAccessoryView(cancelEnabled: false)
+    }
+
+    func enableCancelButton() {
+        configureInputAccessoryView(cancelEnabled: true)
+    }
+}
+
+//
+
+// MARK: - Notifications
+
+//
+
+extension Notification.Name {
+    static let UIMovableTextViewShown = Notification.Name(rawValue: "UISwipingInputShown")
+    static let UIMovableTextViewWillShow = Notification.Name(rawValue: "UIMovableTextViewWillShow")
 }

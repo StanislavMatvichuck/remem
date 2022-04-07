@@ -27,7 +27,6 @@ class EntriesListOnboardingController: UIViewController {
     //
     
     enum Step: Int, CaseIterable {
-        case showBackground
         case showTextGreeting
         case showTextName
         case showTextFirstQuestion
@@ -98,22 +97,25 @@ class EntriesListOnboardingController: UIViewController {
     
     //
     
-    fileprivate lazy var animationsHelper = AnimatorOnboarding(root: viewRoot,
-                                                               circle: viewRoot.viewCircle,
-                                                               finger: viewRoot.viewFinger,
-                                                               background: viewRoot.viewBackground)
+    private lazy var animationsHelper = AnimatorOnboarding(root: viewRoot,
+                                                           circle: viewRoot.viewCircle,
+                                                           finger: viewRoot.viewFinger,
+                                                           background: viewRoot.viewBackground)
     
-    fileprivate let viewRoot = EntriesListOnboardingView()
+    private let viewRoot = EntriesListOnboardingView()
     
-    fileprivate var tapAnywhereIsShown = false
+    private var tapAnywhereIsShown = false
     
-    fileprivate var tapMovesForward = true
+    private var tapMovesForward = true
     
-    fileprivate var currentStep: Step = .showBackground {
-        didSet { perform(step: currentStep) }
+    private var currentStep: Step = .showTextGreeting {
+        didSet {
+            print("switching to \(currentStep)")
+            perform(step: currentStep)
+        }
     }
     
-    fileprivate lazy var labelNameBottomConstraint: NSLayoutConstraint = {
+    private lazy var labelNameBottomConstraint: NSLayoutConstraint = {
         viewRoot.labelEventName.bottomAnchor.constraint(
             equalTo: viewRoot.bottomAnchor,
             constant: 300)
@@ -121,8 +123,8 @@ class EntriesListOnboardingController: UIViewController {
     
     // TODO: maybe do it in a better way?
     /// for now notifications are used to pass these `uiView` objects
-    fileprivate weak var cellToHighlight: UITableViewCell!
-    fileprivate weak var viewToHighlight: UIView!
+    private weak var cellToHighlight: UITableViewCell!
+    private weak var viewToHighlight: UIView!
     
     //
     
@@ -187,8 +189,7 @@ class EntriesListOnboardingController: UIViewController {
     //
     
     func start() {
-        currentStep = .showBackground
-        
+        perform(step: currentStep)
         mainDelegate.disableSettingsButton()
     }
     
@@ -198,20 +199,12 @@ class EntriesListOnboardingController: UIViewController {
         dismiss(animated: true)
     }
     
-    fileprivate func goToNextStep() {
+    private func goToNextStep() {
         currentStep = Step(rawValue: currentStep.rawValue + 1)!
     }
     
-    fileprivate func perform(step: Step) {
+    private func perform(step: Step) {
         switch step {
-        case .showBackground:
-            UIView.animate(withDuration: EntriesListOnboardingController.standartDuration, animations: {
-                self.viewRoot.alpha = 1
-            }, completion: { flag in
-                if flag {
-                    self.currentStep = .showTextGreeting
-                }
-            })
         case .showTextGreeting:
             animationsHelper.show(label: viewRoot.labelGreeting)
             animationsHelper.show(label: viewRoot.labelTapToProceed)
@@ -242,16 +235,17 @@ class EntriesListOnboardingController: UIViewController {
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainAddItemTriggered, object: nil)
+                                                   name: .UIMovableTextViewShown, object: nil)
             
             tapMovesForward = false
             viewRoot.isTransparentForTouches = true
         case .showTextGiveEventAName:
-            NotificationCenter.default.removeObserver(self, name: .ControllerMainAddItemTriggered, object: nil)
+            NotificationCenter.default.removeObserver(self, name: .UIMovableTextViewShown, object: nil)
             
-            NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
-                                                   name: .ControllerMainInputConstraintUpdated, object: nil)
-            
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(handleNotification),
+                name: .UIMovableTextViewWillShow, object: nil)
+
             viewRoot.isTransparentForTouches = false
             
             animationsHelper.hide(label: viewRoot.labelStart)
@@ -261,18 +255,18 @@ class EntriesListOnboardingController: UIViewController {
             labelNameBottomConstraint.isActive = true
             
             animationsHelper.show(label: viewRoot.labelEventName)
-            animationsHelper.animatorBackground.show(view: mainDataSource.viewInput, cornerRadius: .r1, offset: 0)
+            animationsHelper.animatorBackground.show(view: viewToHighlight, cornerRadius: .r1, offset: 0)
             
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
             NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
                                                    name: .ControllerMainItemCreated, object: nil)
         case .highlightCreatedEntry:
+            NotificationCenter.default.removeObserver(self, name: .UIMovableTextViewWillShow, object: nil)
             NotificationCenter.default.removeObserver(self, name: .ControllerMainItemCreated, object: nil)
             NotificationCenter.default.removeObserver(self, name: .ControllerMainInputConstraintUpdated, object: nil)
             
             viewRoot.labelEventName.isHidden = true
-            animationsHelper.animatorBackground.hide()
             animationsHelper.animatorBackground.show(view: cellToHighlight)
             tapMovesForward = true
             currentStep = .showTextEntryDescription
@@ -355,8 +349,15 @@ class EntriesListOnboardingController: UIViewController {
 extension EntriesListOnboardingController {
     @objc private func handleNotification(_ notification: Notification) {
         switch notification.name {
-        case .ControllerMainAddItemTriggered:
-            currentStep = .showTextGiveEventAName
+        case .UIMovableTextViewShown:
+            if let view = notification.object as? UIView {
+                viewToHighlight = view
+                currentStep = .showTextGiveEventAName
+            }
+        case .UIMovableTextViewWillShow:
+            if let descriptor = notification.object as? UIMovableTextView.KeyboardHeightChangeDescriptor {
+                animationsHelper.animatorBackground.moveShownArea(by: descriptor.movedBy, duration: descriptor.duration)
+            }
         case .ControllerMainItemCreated:
             guard let cell = notification.object as? UITableViewCell else { return }
             cellToHighlight = cell
@@ -387,7 +388,6 @@ extension EntriesListOnboardingController {
 }
 
 extension Notification.Name {
-    static let ControllerMainAddItemTriggered = Notification.Name(rawValue: "ControllerMainAddItemTriggered")
     static let ControllerMainItemCreated = Notification.Name(rawValue: "ControllerMainItemCreated")
     static let ControllerMainInputConstraintUpdated = Notification.Name(rawValue: "ControllerMainInputConstraintUpdated")
     static let ControllerMainItemSwipe = Notification.Name(rawValue: "ControllerMainItemSwipe")

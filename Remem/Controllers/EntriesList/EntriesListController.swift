@@ -125,7 +125,9 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         onboarding.mainDataSource = self
         onboarding.mainDelegate = self
         onboarding.isModalInPresentation = true
-        present(onboarding, animated: true)
+        present(onboarding, animated: true) {
+            onboarding.start()
+        }
     }
 }
 
@@ -332,9 +334,11 @@ extension EntriesListController: ControllerMainOnboardingDelegate {
     
     func disableSettingsButton() {
         viewRoot.swiper.hideSettings()
+        viewRoot.input.disableCancelButton()
     }
     
     func enableSettingsButton() {
         viewRoot.swiper.showSettings()
+        viewRoot.input.enableCancelButton()
     }
 }
