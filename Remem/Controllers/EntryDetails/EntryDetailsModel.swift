@@ -44,7 +44,7 @@ class EntryDetailsModel: EntryDetailsModelInterface {
 
     //
 
-    var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    var persistentContainer: NSPersistentContainer
 
     weak var delegate: EntryDetailsModelDelegate?
 
@@ -126,7 +126,8 @@ class EntryDetailsModel: EntryDetailsModelInterface {
 
     //
 
-    init(_ relatedEntry: Entry) {
+    init(_ relatedEntry: Entry, container: NSPersistentContainer) {
+        persistentContainer = container
         entry = relatedEntry
 
         let dateCreated = relatedEntry.dateCreated!

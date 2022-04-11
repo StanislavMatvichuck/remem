@@ -11,6 +11,7 @@ import UIKit.UIApplication
 
 protocol EntriesListModelInterface {
     var delegate: EntriesListModelDelegate? { get set }
+    var persistentContainer: NSPersistentContainer { get }
 
     var dataAmount: Int { get }
 
@@ -56,11 +57,21 @@ class EntriesListModel: EntriesListModelInterface, CoreDataConsumer {
     // CoreData properties
     //
 
-    var persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    let persistentContainer: NSPersistentContainer
 
     fileprivate var fetchedResultsController: NSFetchedResultsController<Entry>?
 
     fileprivate var moc: NSManagedObjectContext { persistentContainer.viewContext }
+
+    //
+
+    // MARK: - Init
+
+    //
+
+    init(_ persistentContainer: NSPersistentContainer) {
+        self.persistentContainer = persistentContainer
+    }
 
     //
 

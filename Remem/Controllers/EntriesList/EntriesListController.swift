@@ -269,7 +269,7 @@ extension EntriesListController: CellMainDelegate {
         let pointsList = EntryDetailsController()
         let navigation = UINavigationController(rootViewController: pointsList)
         
-        let model = EntryDetailsModel(entry)
+        let model = EntryDetailsModel(entry, container: model.persistentContainer)
         
         // TODO: check if this is okay
         pointsList.model = model
@@ -345,11 +345,25 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
     func disableSettingsButton() {
         viewRoot.swiper.hideSettings()
         viewRoot.input.disableCancelButton()
+        
+        let container = (UIApplication.shared.delegate as! AppDelegate).coreDataStack.onboardingPersistentContainer
+        setupModel(with: container)
     }
     
     func enableSettingsButton() {
         viewRoot.swiper.showSettings()
         viewRoot.input.enableCancelButton()
+        
+        let container = (UIApplication.shared.delegate as! AppDelegate).coreDataStack.persistentContainer
+        setupModel(with: container)
+    }
+    
+    private func setupModel(with container: NSPersistentContainer) {
+        let model = EntriesListModel(container)
+        self.model = model
+        model.delegate = self
+        model.fetchEntries()
+        viewRoot.viewTable.reloadData()
     }
 }
 

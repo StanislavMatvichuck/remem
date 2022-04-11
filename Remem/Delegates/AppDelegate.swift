@@ -34,20 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Code data
 
     //
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "EntriesList")
 
-        container.loadPersistentStores(completionHandler: { _, error in
-            if let error = error {
-                fatalError("Unresolved error (error), (error.userInfo)")
-            }
-        })
-
-        return container
-    }()
+    let coreDataStack = CoreDataStack()
 
     func applicationWillTerminate(_ application: UIApplication) {
-        persistentContainer.saveContextIfNeeded()
+        coreDataStack.persistentContainer.saveContextIfNeeded()
     }
 }

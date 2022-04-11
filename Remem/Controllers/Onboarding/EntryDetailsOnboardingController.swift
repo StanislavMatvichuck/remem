@@ -73,11 +73,13 @@ class EntryDetailsOnboardingController: OnboardingController {
     }
 
     override func finish() {
-        let entryDetails = presentingViewController
-        guard let entriesListOnboarding = entryDetails?.presentingViewController as? EntriesListOnboardingController else { return }
+        guard
+            let entryDetails = presentingViewController as? EntryDetailsController,
+            let entriesListOnboarding = entryDetails.presentingViewController as? EntriesListOnboardingController
+        else { return }
 
         dismiss(animated: true) {
-            entryDetails?.dismiss(animated: true) {
+            entryDetails.dismiss(animated: true) {
                 entriesListOnboarding.finish()
             }
         }
