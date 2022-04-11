@@ -18,4 +18,44 @@ extension NSPersistentContainer {
             }
         }
     }
+
+    func loadInMemoryStore() {
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+
+        persistentStoreDescriptions = [description]
+
+        loadPersistentStores(completionHandler: { _, error in
+            if let error = error {
+                fatalError("Unresolved error \(error)")
+            }
+        })
+    }
+
+    func loadSQLiteStore() {
+        loadPersistentStores(completionHandler: { _, error in
+            if let error = error {
+                fatalError("Unresolved error \(error)")
+            }
+        })
+    }
+
+    func clearInMemoryStore() {
+        let coordinator = persistentStoreCoordinator
+        guard let store = coordinator.persistentStores.first else { return }
+        let storeURL = coordinator.url(for: store)
+
+        do {
+            if #available(iOS 15.0, *) {
+                let storeType: NSPersistentStore.StoreType = .inMemory
+                try coordinator.destroyPersistentStore(at: storeURL, type: storeType)
+            } else {
+                let storeType: String = NSInMemoryStoreType
+                try coordinator.destroyPersistentStore(at: storeURL, ofType: storeType)
+                try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: storeURL, options: nil)
+            }
+        } catch {
+            fatalError()
+        }
+    }
 }

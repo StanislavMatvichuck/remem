@@ -74,7 +74,8 @@ class EntryDetailsOnboardingController: OnboardingController {
 
     override func finish() {
         guard
-            let entryDetails = presentingViewController as? EntryDetailsController,
+            let entryDetailsContainer = presentingViewController as? UINavigationController,
+            let entryDetails = entryDetailsContainer.viewControllers[0] as? EntryDetailsController,
             let entriesListOnboarding = entryDetails.presentingViewController as? EntriesListOnboardingController
         else { return }
 

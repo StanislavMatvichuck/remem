@@ -342,20 +342,30 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
         model.create(entryName: "Test10")
     }
     
-    func disableSettingsButton() {
+    var coreDataStack: CoreDataStack {
+        (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+    }
+    
+    func prepareForOnboardingStart() {
         viewRoot.swiper.hideSettings()
         viewRoot.input.disableCancelButton()
         
-        let container = (UIApplication.shared.delegate as! AppDelegate).coreDataStack.onboardingPersistentContainer
+        let container = coreDataStack.onboardingPersistentContainer
         setupModel(with: container)
     }
     
-    func enableSettingsButton() {
+    func prepareForOnboardingEnd() {
         viewRoot.swiper.showSettings()
         viewRoot.input.enableCancelButton()
         
-        let container = (UIApplication.shared.delegate as! AppDelegate).coreDataStack.persistentContainer
-        setupModel(with: container)
+        let container = model.persistentContainer
+        if container == coreDataStack.onboardingPersistentContainer {
+            container.clearInMemoryStore()
+            container.loadInMemoryStore()
+        }
+        
+        let newContainer = coreDataStack.persistentContainer
+        setupModel(with: newContainer)
     }
     
     private func setupModel(with container: NSPersistentContainer) {

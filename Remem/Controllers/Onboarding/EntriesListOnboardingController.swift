@@ -14,8 +14,8 @@ protocol EntriesListOnboardingControllerDataSource: UIViewController {
 
 protocol EntriesListOnboardingControllerDelegate: UIViewController, OnboardingControllerDelegate {
     func createTestItem()
-    func disableSettingsButton()
-    func enableSettingsButton()
+    func prepareForOnboardingStart()
+    func prepareForOnboardingEnd()
 }
 
 class EntriesListOnboardingController: OnboardingController {
@@ -88,11 +88,11 @@ class EntriesListOnboardingController: OnboardingController {
     
     override func start() {
         super.start()
-        mainDelegate.disableSettingsButton()
+        mainDelegate.prepareForOnboardingStart()
     }
     
     override func finish() {
-        mainDelegate.enableSettingsButton()
+        mainDelegate.prepareForOnboardingEnd()
         super.finish()
     }
     

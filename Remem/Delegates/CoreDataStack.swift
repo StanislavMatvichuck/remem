@@ -45,19 +45,12 @@ class CoreDataStack {
             container = NSPersistentContainer(name: "EntriesList")
         }
 
-        container.loadPersistentStores(completionHandler: { _, error in
-            if let error = error {
-                fatalError("Unresolved error (error), (error.userInfo)")
-            }
-        })
+        container.loadSQLiteStore()
 
         return container
     }()
 
     lazy var onboardingPersistentContainer: NSPersistentContainer = {
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-
         let container: NSPersistentContainer
 
         do {
@@ -68,12 +61,7 @@ class CoreDataStack {
             container = NSPersistentContainer(name: "EntriesList")
         }
 
-        container.persistentStoreDescriptions = [description]
-        container.loadPersistentStores(completionHandler: { _, error in
-            if let error = error {
-                fatalError("Unresolved error (error), (error.userInfo)")
-            }
-        })
+        container.loadInMemoryStore()
 
         return container
     }()
