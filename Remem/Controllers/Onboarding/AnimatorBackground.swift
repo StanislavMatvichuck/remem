@@ -111,7 +111,7 @@ class AnimatorBackground {
 
     func move(to view: UIView, cornerRadius: CGFloat = 0.0, offset: CGFloat = 0.0) {
         guard let start = lastShownPath else { return }
-        let final = shownPath(for: view)
+        let final = shownPath(for: view, cornerRadius: cornerRadius, offset: offset)
         animate(from: start, to: final)
     }
 

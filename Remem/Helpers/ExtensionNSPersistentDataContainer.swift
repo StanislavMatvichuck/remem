@@ -55,7 +55,7 @@ extension NSPersistentContainer {
                 try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: storeURL, options: nil)
             }
         } catch {
-            fatalError()
+            print(error.localizedDescription)
         }
     }
 }

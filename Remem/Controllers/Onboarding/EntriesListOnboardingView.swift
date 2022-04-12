@@ -46,6 +46,7 @@ class EntriesListOnboardingView: OnboardingView {
     lazy var labelEventName: UILabel = {
         let label = createLabel()
         label.text = "Give it a name. Using emojis is encouraged!"
+        label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
@@ -72,7 +73,7 @@ class EntriesListOnboardingView: OnboardingView {
     
     lazy var labelAdditionalSwipes: UILabel = {
         let label = createLabel()
-        label.text = "2 / 5"
+        label.text = "1 / 5"
         label.topAnchor.constraint(equalTo: labelSwipeComplete.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()

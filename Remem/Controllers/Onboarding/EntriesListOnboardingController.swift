@@ -34,12 +34,6 @@ class EntriesListOnboardingController: OnboardingController {
     
     //
     
-    private lazy var labelNameBottomConstraint: NSLayoutConstraint = {
-        viewRoot.labelEventName.bottomAnchor.constraint(
-            equalTo: viewRoot.bottomAnchor,
-            constant: 300)
-    }()
-    
     //
     
     // MARK: - Initialization
@@ -68,7 +62,7 @@ class EntriesListOnboardingController: OnboardingController {
     
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
-//        
+//
 //        setupEventHandlers()
 //    }
     
@@ -77,8 +71,6 @@ class EntriesListOnboardingController: OnboardingController {
     // MARK: - Events handling
 
     //
-    
-    
     
     //
 
@@ -133,14 +125,14 @@ class EntriesListOnboardingController: OnboardingController {
         case .showTextGiveEventAName:
             ignore(.UIMovableTextViewShown)
             watch(.UIMovableTextViewWillShow)
+            
             viewRoot.isTransparentForTouches = false
-            labelNameBottomConstraint.isActive = true
             
             animator.hide(label: viewRoot.labelStart)
-            circleAnimator.stop()
             animator.show(label: viewRoot.labelEventName)
             backgroundAnimator.show(view: viewToHighlight, cornerRadius: .r1, offset: 0)
-    
+            circleAnimator.stop()
+            
             currentStep = .waitForEventSubmit
         case .waitForEventSubmit:
             watch(.EntriesListNewEntry)
@@ -154,9 +146,13 @@ class EntriesListOnboardingController: OnboardingController {
             backgroundAnimator.show(view: viewToHighlight)
             currentStep = .showTextEntryDescription
         case .showTextEntryDescription:
+            viewRoot.placeTapToProceedInsteadOfTitle()
+            viewRoot.labelTapToProceed.layer.opacity = 1
+            animator.show(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelEventCreated)
         case .showTextTrySwipe:
             animator.show(label: viewRoot.labelEventSwipe)
+            animator.hide(label: viewRoot.labelTapToProceed)
             tapMovesForward = false
             currentStep = .showFloatingCircleRight
         case .showFloatingCircleRight:
@@ -168,8 +164,9 @@ class EntriesListOnboardingController: OnboardingController {
         case .showTextAfterSwipe01:
             circleAnimator.stop()
             animator.show(label: viewRoot.labelSwipeComplete)
-        case .showTextAfterSwipe02:
             animator.show(label: viewRoot.labelAdditionalSwipes)
+        case .showTextAfterSwipe02:
+            viewRoot.labelAdditionalSwipes.text = "2 / 5"
         case .showTextAfterSwipe03:
             viewRoot.labelAdditionalSwipes.text = "3 / 5"
         case .showTextAfterSwipe04:
@@ -190,7 +187,10 @@ class EntriesListOnboardingController: OnboardingController {
             animator.hide(label: viewRoot.labelAdditionalSwipes)
             animator.hide(label: viewRoot.labelSwipeComplete)
             
+            viewRoot.labelTapToProceed.layer.opacity = 1
+            animator.show(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelTestItemDescription)
+            
             tapMovesForward = true
             viewRoot.isTransparentForTouches = false
         case .showTextLongPress:
@@ -198,10 +198,11 @@ class EntriesListOnboardingController: OnboardingController {
             currentStep = .highlightLongPress
         case .highlightLongPress:
             if let cell = viewToHighlight as? EntryCell {
-                backgroundAnimator.move(to: cell.viewMovable)
+                backgroundAnimator.move(to: cell.viewMovable, cornerRadius: .r2, offset: .delta1)
             }
             currentStep = .waitForEntryDetailsPresentationAttempt
         case .waitForEntryDetailsPresentationAttempt:
+            animator.hide(label: viewRoot.labelTapToProceed)
             tapMovesForward = false
             viewRoot.isTransparentForTouches = true
             watch(.EntriesListDetailsPresentationAttempt)

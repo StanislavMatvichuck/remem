@@ -19,7 +19,7 @@ class OnboardingView: UIView {
 
     lazy var viewBackground: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .systemCyan
+        view.backgroundColor = .systemGray2
         return view
     }()
 
@@ -50,7 +50,8 @@ class OnboardingView: UIView {
         let label = createLabel()
         
         label.font = .systemFont(ofSize: .font1)
-        label.text = "tap anywhere to proceed"
+        label.text = "tap to proceed 👆"
+        label.textAlignment = .center
         
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: .delta1).isActive = true
         
@@ -136,7 +137,7 @@ class OnboardingView: UIView {
     
     //
 
-    // MARK: - Internal behaviour
+    // MARK: - Behaviour
 
     //
     
@@ -155,6 +156,19 @@ class OnboardingView: UIView {
         ])
         
         return label
+    }
+    
+    func placeTapToProceedInsteadOfTitle() {
+        labelTapToProceed.removeFromSuperview()
+        addSubview(labelTapToProceed)
+        
+        NSLayoutConstraint.activate([
+            labelTapToProceed.centerYAnchor.constraint(equalTo: labelClose.centerYAnchor),
+            labelTapToProceed.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                                                       constant: labelsHorizontalSpacing),
+            labelTapToProceed.trailingAnchor.constraint(equalTo: labelClose.leadingAnchor,
+                                                        constant: labelsHorizontalSpacing),
+        ])
     }
     
     //

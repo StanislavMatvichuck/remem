@@ -16,16 +16,17 @@ protocol UIMovableTextViewInterface: UIControl {
     func enableCancelButton()
 }
 
-class UIMovableTextView: UIControl, UIMovableTextViewInterface {
+class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelegate {
     //
 
     // MARK: - Public properties
 
     //
 
-    var value: String {
-        get { input.text }
-        set { input.text = newValue }
+    var value: String = "" {
+        didSet {
+            barAdd.isEnabled = !value.isEmpty
+        }
     }
 
     var onboardingHighlight: UIView { viewInput }
@@ -100,6 +101,16 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         return constraint
     }()
 
+    private lazy var barCancel = UIBarButtonItem(title: "Cancel",
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(handlePressCancel))
+
+    private lazy var barAdd = UIBarButtonItem(title: "Add",
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(handlePressCreate))
+
     //
 
     // MARK: - Initialization
@@ -145,6 +156,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     }
 
     private func setupEventHandlers() {
+        input.delegate = self
+
         NotificationCenter.default.addObserver(
             self, selector: #selector(handleKeyboardWillShow(notification:)),
             name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -221,7 +234,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         animator.startAnimation()
     }
 
-    private func configureInputAccessoryView(cancelEnabled: Bool = true) {
+    private func configureInputAccessoryView() {
         let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
 
         let icon01 = UIBarButtonItem(title: "☕️", style: .plain, target: self, action: #selector(handleEmojiPress))
@@ -233,20 +246,10 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         let spaceLeft = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let spaceRight = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
-        let dismiss = UIBarButtonItem(title: "Cancel",
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(handlePressCancel))
-
-        dismiss.isEnabled = cancelEnabled
-
-        let create = UIBarButtonItem(title: "Add",
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(handlePressCreate))
+        barAdd.isEnabled = !value.isEmpty
 
         bar.items = [
-            dismiss,
+            barCancel,
             spaceLeft,
             icon01,
             icon02,
@@ -254,7 +257,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
             icon04,
             icon05,
             spaceRight,
-            create,
+            barAdd,
         ]
 
         bar.sizeToFit()
@@ -265,6 +268,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     @objc
     private func handleEmojiPress(_ barItem: UIBarButtonItem) {
         input.text += barItem.title!
+        textViewDidChange(input)
     }
 
     @objc
@@ -286,6 +290,10 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         value = ""
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        value = textView.text
+    }
+
     //
 
     // MARK: - Public behaviour
@@ -298,11 +306,11 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     }
 
     func disableCancelButton() {
-        configureInputAccessoryView(cancelEnabled: false)
+        barCancel.isEnabled = false
     }
 
     func enableCancelButton() {
-        configureInputAccessoryView(cancelEnabled: true)
+        barCancel.isEnabled = true
     }
 }
 
