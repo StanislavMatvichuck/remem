@@ -25,10 +25,6 @@ class EntryDetailsOnboardingController: OnboardingController {
         view = viewRoot
     }
 
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-
     override func perform(step: OnboardingController.Step) {
         switch step {
         case .showTextEntryDetails:
@@ -60,8 +56,9 @@ class EntryDetailsOnboardingController: OnboardingController {
         case .waitForPointsDisplayScroll:
             watch(.PointsDisplayDidScroll)
             circleAnimator.start(.scrollPointsDisplay(view: viewToHighlight))
-            viewRoot.isTransparentForTouches = true
+            disableTap()
         case .highlightStatsDisplay:
+            ignore(.PointsDisplayDidScroll)
             animator.hide(label: viewRoot.labelPointsDisplayDescription)
             animator.hide(label: viewRoot.labelPointsDisplayDescriptionSecondary)
             circleAnimator.stop()
@@ -75,13 +72,41 @@ class EntryDetailsOnboardingController: OnboardingController {
             viewRoot.labelStatsDisplayDescription.topAnchor.constraint(equalTo: viewRoot.topAnchor,
                                                                        constant: constant).isActive = true
             animator.show(label: viewRoot.labelStatsDisplayDescription)
-//        case showTextStatsDisplayScroll
-//        case waitForScrollStatsDisplay
-//        case highlightDisplayWeek
-//        case showTextDisplayWeek
-//        case showTextDisplayWeekScroll
-//        case waitForDisplayWeekScroll
-//        case showTextFinal
+            enableTap()
+        case .showTextStatsDisplayScroll:
+            animator.show(label: viewRoot.labelStatsDisplayDescriptionSecondary) {
+                self.currentStep = .waitForScrollStatsDisplay
+            }
+        case .waitForScrollStatsDisplay:
+            watch(.StatsDisplayDidScroll)
+            disableTap()
+            circleAnimator.start(.scrollStatsDisplay(view: viewToHighlight))
+        case .highlightDisplayWeek:
+            ignore(.StatsDisplayDidScroll)
+            animator.hide(label: viewRoot.labelStatsDisplayDescription)
+            animator.hide(label: viewRoot.labelStatsDisplayDescriptionSecondary)
+            circleAnimator.stop()
+            backgroundAnimator.show(view: viewToHighlight) {
+                self.currentStep = .showTextDisplayWeek
+            }
+
+        case .showTextDisplayWeek:
+            animator.show(label: viewRoot.labelWeekDisplayDescription)
+            enableTap()
+        case .showTextDisplayWeekScroll:
+            animator.show(label: viewRoot.labelWeekDisplayDescriptionSecondary) {
+                self.currentStep = .waitForDisplayWeekScroll
+            }
+        case .waitForDisplayWeekScroll:
+            watch(.WeekDisplayDidScroll)
+            circleAnimator.start(.scrollWeekDisplay(view: viewToHighlight))
+            disableTap()
+        case .showTextFinal:
+            backgroundAnimator.hide()
+            circleAnimator.stop()
+            animator.hide(label: viewRoot.labelWeekDisplayDescription)
+            animator.hide(label: viewRoot.labelWeekDisplayDescriptionSecondary)
+            animator.show(label: viewRoot.labelFinal)
         default:
             fatalError("Unhandled step")
         }
@@ -94,6 +119,14 @@ class EntryDetailsOnboardingController: OnboardingController {
                 viewToHighlight = view
                 currentStep = .highlightStatsDisplay
             }
+        case .StatsDisplayDidScroll:
+            if let view = notification.object as? UIView {
+                viewToHighlight = view
+                currentStep = .highlightDisplayWeek
+            }
+
+        case .WeekDisplayDidScroll:
+            currentStep = .showTextFinal
         default:
             fatalError("Unhandled case \(notification.name)")
         }

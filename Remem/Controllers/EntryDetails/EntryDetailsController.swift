@@ -32,11 +32,6 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        
-        viewRoot.viewTable.dataSource = self
-        
-        viewRoot.viewDisplay.dataSource = self
-        viewRoot.viewDisplay.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +51,12 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         title = model.name
         model.fetch()
         setupViewStats()
+        
+        viewRoot.viewTable.dataSource = self
         viewRoot.viewTable.delegate = self
+        viewRoot.viewDisplay.dataSource = self
+        viewRoot.viewDisplay.delegate = self
+        viewRoot.viewStats.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -111,13 +111,25 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         ])
     }
     
-    var isScrollOnboardingNotificationSent = false
     // TODO: create neat mechanism to observe scrolling
+    var pointsDisplayScrollNotificationSent = false
+    var statsDisplayScrollNotificationSent = false
+    var weekDisplayScrollNotificationSent = false
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == viewRoot.viewTable {
-            if !isScrollOnboardingNotificationSent, scrollView.contentOffset.y > viewRoot.viewTable.frame.height {
+            if !pointsDisplayScrollNotificationSent, scrollView.contentOffset.y > scrollView.frame.height {
                 NotificationCenter.default.post(name: .PointsDisplayDidScroll, object: viewRoot.viewStats)
-                isScrollOnboardingNotificationSent = true
+                pointsDisplayScrollNotificationSent = true
+            }
+        } else if scrollView == viewRoot.viewStats {
+            if !statsDisplayScrollNotificationSent, scrollView.contentOffset.x <= 0 {
+                NotificationCenter.default.post(name: .StatsDisplayDidScroll, object: viewRoot.viewDisplay)
+                statsDisplayScrollNotificationSent = true
+            }
+        } else if scrollView == viewRoot.viewDisplay {
+            let scrollOffsetAcceptance = scrollView.contentSize.width - 2 * scrollView.frame.width
+            if !weekDisplayScrollNotificationSent, scrollView.contentOffset.x <= scrollOffsetAcceptance {
+                NotificationCenter.default.post(name: .WeekDisplayDidScroll, object: nil)
             }
         }
     }
@@ -263,4 +275,6 @@ extension EntryDetailsController: OnboardingControllerDelegate {
 
 extension Notification.Name {
     static let PointsDisplayDidScroll = Notification.Name(rawValue: "PointsDisplayDidScroll")
+    static let StatsDisplayDidScroll = Notification.Name(rawValue: "StatsDisplayDidScroll")
+    static let WeekDisplayDidScroll = Notification.Name(rawValue: "WeekDisplayDidScroll")
 }

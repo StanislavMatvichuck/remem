@@ -43,4 +43,28 @@ class EntryDetailsOnboardingView: OnboardingView {
                                    constant: labelsVerticalSpacing).isActive = true
         return label
     }()
+
+    lazy var labelWeekDisplayDescription: UILabel = {
+        let label = createLabel()
+        label.text = "Week display"
+        label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor,
+                                   constant: labelsVerticalSpacing).isActive = true
+        return label
+    }()
+
+    lazy var labelWeekDisplayDescriptionSecondary: UILabel = {
+        let label = createLabel()
+        label.text = "Week display is scrollable"
+        label.topAnchor.constraint(equalTo: labelWeekDisplayDescription.bottomAnchor,
+                                   constant: labelsVerticalSpacing).isActive = true
+        return label
+    }()
+
+    lazy var labelFinal: UILabel = {
+        let label = createLabel()
+        label.text = "Final text"
+        label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor,
+                                   constant: labelsVerticalSpacing).isActive = true
+        return label
+    }()
 }

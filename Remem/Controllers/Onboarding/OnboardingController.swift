@@ -78,9 +78,7 @@ class OnboardingController: UIViewController {
     var circleAnimator: AnimatorCircle!
     var backgroundAnimator: AnimatorBackground!
 
-    var tapAnywhereIsVisible = false
-    
-    var tapMovesForward = true
+    private var tapMovesForward = true
     
     var currentStep: Step = .showTextGreeting {
         didSet {
@@ -173,6 +171,27 @@ class OnboardingController: UIViewController {
     
     func perform(step: Step) {
         fatalError("this method must be overridden")
+    }
+    
+    func enableTap() {
+        if let view = view as? OnboardingView {
+            tapMovesForward = true
+            view.isTransparentForTouches = false
+            view.labelTapToProceed.layer.opacity = 1
+            animator.show(label: view.labelTapToProceed)
+        } else {
+            fatalError("view must be a subclass of OnboardingView")
+        }
+    }
+    
+    func disableTap() {
+        if let view = view as? OnboardingView {
+            tapMovesForward = false
+            view.isTransparentForTouches = true
+            animator.hide(label: view.labelTapToProceed)
+        } else {
+            fatalError("view must be a subclass of OnboardingView")
+        }
     }
     
     //

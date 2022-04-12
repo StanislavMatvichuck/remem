@@ -120,8 +120,7 @@ class EntriesListOnboardingController: OnboardingController {
             currentStep = .waitForSwipeUp
         case .waitForSwipeUp:
             watch(.UIMovableTextViewShown)
-            tapMovesForward = false
-            viewRoot.isTransparentForTouches = true
+            disableTap()
         case .showTextGiveEventAName:
             ignore(.UIMovableTextViewShown)
             watch(.UIMovableTextViewWillShow)
@@ -141,7 +140,7 @@ class EntriesListOnboardingController: OnboardingController {
             ignore(.EntriesListNewEntry)
             
             viewRoot.labelEventName.isHidden = true
-            tapMovesForward = true
+            enableTap()
             
             backgroundAnimator.show(view: viewToHighlight)
             currentStep = .showTextEntryDescription
@@ -153,14 +152,13 @@ class EntriesListOnboardingController: OnboardingController {
         case .showTextTrySwipe:
             animator.show(label: viewRoot.labelEventSwipe)
             animator.hide(label: viewRoot.labelTapToProceed)
-            tapMovesForward = false
+            disableTap()
             currentStep = .showFloatingCircleRight
         case .showFloatingCircleRight:
             circleAnimator.start(.addPoint)
             currentStep = .waitForSwipe
         case .waitForSwipe:
             watch(.EntriesListNewPoint)
-            viewRoot.isTransparentForTouches = true
         case .showTextAfterSwipe01:
             circleAnimator.stop()
             animator.show(label: viewRoot.labelSwipeComplete)
@@ -176,23 +174,20 @@ class EntriesListOnboardingController: OnboardingController {
             watch(.EntriesListNewEntry)
             ignore(.EntriesListNewPoint)
             mainDelegate.createTestItem()
-            tapMovesForward = false
         case .highlightTestItem:
             ignore(.EntriesListNewEntry)
-            backgroundAnimator.show(view: viewToHighlight)
-            currentStep = .showTextCreatedTestItem
+            backgroundAnimator.show(view: viewToHighlight) {
+                self.currentStep = .showTextCreatedTestItem
+            }
         case .showTextCreatedTestItem:
+            enableTap()
+            
             animator.hide(label: viewRoot.labelEventCreated)
             animator.hide(label: viewRoot.labelEventSwipe)
             animator.hide(label: viewRoot.labelAdditionalSwipes)
             animator.hide(label: viewRoot.labelSwipeComplete)
             
-            viewRoot.labelTapToProceed.layer.opacity = 1
-            animator.show(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelTestItemDescription)
-            
-            tapMovesForward = true
-            viewRoot.isTransparentForTouches = false
         case .showTextLongPress:
             animator.show(label: viewRoot.labelTestItemLongPress)
             currentStep = .highlightLongPress
@@ -203,8 +198,7 @@ class EntriesListOnboardingController: OnboardingController {
             currentStep = .waitForEntryDetailsPresentationAttempt
         case .waitForEntryDetailsPresentationAttempt:
             animator.hide(label: viewRoot.labelTapToProceed)
-            tapMovesForward = false
-            viewRoot.isTransparentForTouches = true
+            disableTap()
             watch(.EntriesListDetailsPresentationAttempt)
         default:
             fatalError("⚠️ unhandled onboarding case")
