@@ -177,8 +177,7 @@ class OnboardingView: UIView {
 
     //
 
-    /// This property enables touches to be passed through this view but not its siblings
-    /// used together with hitTest override
+    /// This property enables touches to be passed through this view but not its siblings like close buttons
     var isTransparentForTouches = false
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {

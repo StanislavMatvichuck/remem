@@ -7,7 +7,7 @@
 import CoreData.NSFetchedResultsController
 import UIKit
 
-class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
+class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITableViewDelegate {
     //
 
     // MARK: - Public props
@@ -56,6 +56,7 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
         title = model.name
         model.fetch()
         setupViewStats()
+        viewRoot.viewTable.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -108,6 +109,17 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
             viewPlaceholder.widthAnchor.constraint(equalToConstant: 1),
             viewPlaceholder.heightAnchor.constraint(equalTo: viewThisWeekTotal.heightAnchor),
         ])
+    }
+    
+    var isScrollOnboardingNotificationSent = false
+    // TODO: create neat mechanism to observe scrolling
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == viewRoot.viewTable {
+            if !isScrollOnboardingNotificationSent, scrollView.contentOffset.y > viewRoot.viewTable.frame.height {
+                NotificationCenter.default.post(name: .PointsDisplayDidScroll, object: viewRoot.viewStats)
+                isScrollOnboardingNotificationSent = true
+            }
+        }
     }
 }
 
@@ -232,7 +244,7 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
 
 extension EntryDetailsController: OnboardingControllerDelegate {
     func startOnboarding() {
-        let onboarding = EntryDetailsOnboardingController(withStep: .highlightViewList)
+        let onboarding = EntryDetailsOnboardingController(withStep: .highlightPointsDisplay)
         onboarding.modalPresentationStyle = .overCurrentContext
         onboarding.modalTransitionStyle = .crossDissolve
         onboarding.viewToHighlight = viewRoot.viewTable
@@ -241,4 +253,14 @@ extension EntryDetailsController: OnboardingControllerDelegate {
             onboarding.start()
         }
     }
+}
+
+//
+
+// MARK: - Notifications
+
+//
+
+extension Notification.Name {
+    static let PointsDisplayDidScroll = Notification.Name(rawValue: "PointsDisplayDidScroll")
 }

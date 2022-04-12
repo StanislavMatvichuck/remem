@@ -17,6 +17,8 @@ class AnimatorCircle: NSObject {
     enum Mode {
         case addItem
         case addPoint
+        // TODO: improve this mode accuracy on EntryDetailsOnboardingView
+        case scrollPointsDisplay(view: UIView)
     }
 
     enum Animations {
@@ -89,6 +91,9 @@ class AnimatorCircle: NSObject {
         case .addPoint:
             circleY = circle.centerYAnchor.constraint(equalTo: root.safeAreaLayoutGuide.bottomAnchor, constant: -.r2 - .delta1 / 2)
             circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: .r2 + .delta1)
+        case .scrollPointsDisplay(let view):
+            circleY = circle.centerYAnchor.constraint(equalTo: root.topAnchor, constant: view.frame.maxY)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.safeAreaLayoutGuide.trailingAnchor, constant: -.r2)
         }
 
         setupViewFingerConstraints()
@@ -152,7 +157,7 @@ class AnimatorCircle: NSObject {
 
     fileprivate func startMovement() {
         switch mode {
-        case .addItem:
+        case .addItem, .scrollPointsDisplay:
             circleMovesUp()
         case .addPoint:
             circleMovesRight()
@@ -269,7 +274,7 @@ class AnimatorCircle: NSObject {
         CATransaction.begin()
 
         switch mode {
-        case .addItem:
+        case .addItem, .scrollPointsDisplay:
             circleY.constant += verticalTravelDistance
         case .addPoint:
             circleX.constant -= horizontalTravelDistance

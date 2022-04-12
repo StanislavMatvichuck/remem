@@ -53,23 +53,18 @@ class OnboardingController: UIViewController {
         // EntryDetails steps
         //
         case showTextEntryDetails
-        case highlightViewList
-        case waitForViewListPress
-        case highlightPointsList
-        case showTextPointsList
-        case showTextScrollPoints
-        case showFloatingCircleScrollPoints
-        case waitForScrollPoints
-        case highlightStats
-        case showTextStatsDescription
-        case showTextStatsScroll
-        case showFloatingCircleScrollStats
-        case waitForScrollStats
-        case highlightDisplay
-        case showTextDisplayDescription
-        case showTextDisplayScroll
-        case showFloatingCircleDisplayScroll
-        case waitForDisplayScroll
+        case highlightPointsDisplay
+        case showTextPointsDisplay
+        case showTextPointsDisplayScroll
+        case waitForPointsDisplayScroll
+        case highlightStatsDisplay
+        case showTextStatsDisplay
+        case showTextStatsDisplayScroll
+        case waitForScrollStatsDisplay
+        case highlightDisplayWeek
+        case showTextDisplayWeek
+        case showTextDisplayWeekScroll
+        case waitForDisplayWeekScroll
         case showTextFinal
     }
     

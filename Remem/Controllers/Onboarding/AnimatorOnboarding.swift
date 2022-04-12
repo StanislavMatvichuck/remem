@@ -19,11 +19,13 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
     }
 
     enum CodingKeys: String {
-        case animationName
-        case nextAnimation
+        case name
+        case completionBlock
 
         case labelToBeRemoved
     }
+
+    typealias AnimationCompletionBlock = () -> Void
 
     //
 
@@ -49,7 +51,7 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
 
     //
 
-    func show(label: UILabel) {
+    func show(label: UILabel, completion: AnimationCompletionBlock? = nil) {
         label.isHidden = false
         viewRoot.layoutIfNeeded()
 
@@ -68,10 +70,13 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
 
         group.animations = [opacity, position]
 
+        group.delegate = self
+        group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
+
         label.layer.add(group, forKey: nil)
     }
 
-    func hide(label: UILabel) {
+    func hide(label: UILabel, completion: AnimationCompletionBlock? = nil) {
         label.layer.opacity = 0
 
         let group = CAAnimationGroup()
@@ -80,8 +85,9 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
         group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         group.delegate = self
-        group.setValue(Animations.labelDisappear, forKey: CodingKeys.animationName.rawValue)
+        group.setValue(Animations.labelDisappear, forKey: CodingKeys.name.rawValue)
         group.setValue(label, forKey: CodingKeys.labelToBeRemoved.rawValue)
+        group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
 
         let opacity = CABasicAnimation(keyPath: "opacity")
         opacity.fromValue = 1
@@ -96,27 +102,6 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
         label.layer.add(group, forKey: nil)
     }
 
-    func animate(closeButton: UILabel) {
-        closeButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-
-        let group = CAAnimationGroup()
-        group.duration = Animator.standartDuration
-        group.fillMode = .backwards
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
-        let scale = CABasicAnimation(keyPath: "transform.scale")
-        scale.fromValue = 1
-        scale.toValue = 0.01
-
-        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.fromValue = 0
-        rotation.toValue = CGFloat.pi / 2
-
-        group.animations = [scale, rotation]
-
-        closeButton.layer.add(group, forKey: nil)
-    }
-
     //
 
     // MARK: CAAnimationDelegate
@@ -124,7 +109,17 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
     //
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard let name = anim.value(forKey: CodingKeys.animationName.rawValue) as? Animations, flag else { return }
+        if
+            flag,
+            let completion = anim.value(forKey: CodingKeys.completionBlock.rawValue) as? AnimationCompletionBlock
+        {
+            completion()
+        }
+
+        guard
+            flag,
+            let name = anim.value(forKey: CodingKeys.name.rawValue) as? Animations
+        else { return }
 
         switch name {
         case .labelDisappear:

@@ -7,7 +7,17 @@
 
 import UIKit
 
-class AnimatorBackground {
+class AnimatorBackground: NSObject, CAAnimationDelegate {
+    //
+
+    // MARK: - Related types
+
+    //
+
+    enum CodingKeys: String {
+        case completionBlock
+    }
+
     //
 
     // MARK: - Private properties
@@ -20,6 +30,7 @@ class AnimatorBackground {
     private var lastShownPath: UIBezierPath?
     private var lastShownInnerRect: UIBezierPath?
     private var lastShownCornerRadius: CGFloat?
+    private var lastHiddenPath: UIBezierPath?
 
     //
 
@@ -29,6 +40,7 @@ class AnimatorBackground {
 
     init(_ viewWithAnimatedMask: UIView) {
         viewRoot = viewWithAnimatedMask
+        super.init()
         setupMask()
     }
 
@@ -60,6 +72,7 @@ class AnimatorBackground {
                 height: 0),
             cornerRadius: cornerRadius)
         path.append(innerRectangle)
+        lastHiddenPath = path
         return path
     }
 
@@ -82,7 +95,8 @@ class AnimatorBackground {
     }
 
     private func animate(from: UIBezierPath, to: UIBezierPath,
-                         duration: Double = Animator.standartDuration)
+                         duration: Double = Animator.standartDuration,
+                         completion: CompletionBlock? = nil)
     {
         guard let mask = viewRoot.layer.mask as? CAShapeLayer else { return }
 
@@ -92,6 +106,9 @@ class AnimatorBackground {
         animation.fillMode = .backwards
         animation.fromValue = from.cgPath
         animation.toValue = to.cgPath
+
+        animation.delegate = self
+        animation.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
 
         mask.path = to.cgPath
         mask.add(animation, forKey: nil)
@@ -103,10 +120,22 @@ class AnimatorBackground {
 
     //
 
-    func show(view: UIView, cornerRadius: CGFloat = 0, offset: CGFloat = 0) {
+    // TODO: make this to be a part of superclass for all animators
+    typealias CompletionBlock = () -> Void
+
+    func show(view: UIView, cornerRadius: CGFloat = 0, offset: CGFloat = 0, completion: CompletionBlock? = nil) {
         let start = hiddenPath(for: view, cornerRadius: cornerRadius)
         let final = shownPath(for: view, cornerRadius: cornerRadius, offset: offset)
-        animate(from: start, to: final)
+        animate(from: start, to: final, completion: completion)
+    }
+
+    func hide(_ completion: CompletionBlock? = nil) {
+        guard
+            let start = lastShownPath,
+            let finish = lastHiddenPath
+        else { return }
+
+        animate(from: start, to: finish, completion: completion)
     }
 
     func move(to view: UIView, cornerRadius: CGFloat = 0.0, offset: CGFloat = 0.0) {
@@ -136,5 +165,11 @@ class AnimatorBackground {
         lastShownInnerRect = newInnerRectangle
 
         animate(from: start, to: final, duration: duration)
+    }
+
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if flag, let completion = anim.value(forKey: CodingKeys.completionBlock.rawValue) as? CompletionBlock {
+            completion()
+        }
     }
 }
