@@ -7,17 +7,6 @@
 
 import UIKit
 
-// protocol EntriesListOnboardingControllerDataSource: UIViewController {
-//    var viewSwiper: UIView { get }
-//    var viewInput: UIView { get }
-// }
-//
-// protocol EntriesListOnboardingControllerDelegate: UIViewController {
-//    func createTestItem()
-//    func disableSettingsButton()
-//    func enableSettingsButton()
-// }
-
 class EntryDetailsOnboardingController: OnboardingController {
     let viewRoot = EntryDetailsOnboardingView()
 
@@ -28,14 +17,16 @@ class EntryDetailsOnboardingController: OnboardingController {
     override func perform(step: OnboardingController.Step) {
         switch step {
         case .showTextEntryDetails:
+            enableTap()
+
             viewRoot.labelTitle.text = "Details screen"
+
             animator.show(label: viewRoot.labelTitle)
-            animator.show(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelClose)
             animator.show(label: viewRoot.labelScreenDescription)
         case .highlightPointsDisplay:
+            disableTap()
             viewRoot.placeTapToProceedInsteadOfTitle()
-
             let constant = viewToHighlight.frame.maxY + viewRoot.labelsVerticalSpacing
             viewRoot.labelPointsDisplayDescription.topAnchor.constraint(equalTo: viewRoot.topAnchor,
                                                                         constant: constant).isActive = true
@@ -43,12 +34,18 @@ class EntryDetailsOnboardingController: OnboardingController {
             viewRoot.labelTitle.isHidden = true
             viewRoot.labelScreenDescription.isHidden = true
 
-            backgroundAnimator.show(view: viewToHighlight, cornerRadius: .xs) {
-                self.currentStep = .showTextPointsDisplay
+            animator.hide(label: viewRoot.labelTitle)
+            animator.hide(label: viewRoot.labelScreenDescription) {
+                self.backgroundAnimator.show(view: self.viewToHighlight, cornerRadius: .xs) {
+                    self.currentStep = .showTextPointsDisplay
+                }
             }
         case .showTextPointsDisplay:
-            animator.show(label: viewRoot.labelPointsDisplayDescription)
+            animator.show(label: viewRoot.labelPointsDisplayDescription) {
+                self.currentStep = .showTextPointsDisplayScroll
+            }
         case .showTextPointsDisplayScroll:
+
             animator.hide(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelPointsDisplayDescriptionSecondary) {
                 self.currentStep = .waitForPointsDisplayScroll
@@ -56,7 +53,6 @@ class EntryDetailsOnboardingController: OnboardingController {
         case .waitForPointsDisplayScroll:
             watch(.PointsDisplayDidScroll)
             circleAnimator.start(.scrollPointsDisplay(view: viewToHighlight))
-            disableTap()
         case .highlightStatsDisplay:
             ignore(.PointsDisplayDidScroll)
             animator.hide(label: viewRoot.labelPointsDisplayDescription)
@@ -74,12 +70,12 @@ class EntryDetailsOnboardingController: OnboardingController {
             animator.show(label: viewRoot.labelStatsDisplayDescription)
             enableTap()
         case .showTextStatsDisplayScroll:
+            disableTap()
             animator.show(label: viewRoot.labelStatsDisplayDescriptionSecondary) {
                 self.currentStep = .waitForScrollStatsDisplay
             }
         case .waitForScrollStatsDisplay:
             watch(.StatsDisplayDidScroll)
-            disableTap()
             circleAnimator.start(.scrollStatsDisplay(view: viewToHighlight))
         case .highlightDisplayWeek:
             ignore(.StatsDisplayDidScroll)
@@ -91,16 +87,16 @@ class EntryDetailsOnboardingController: OnboardingController {
             }
 
         case .showTextDisplayWeek:
-            animator.show(label: viewRoot.labelWeekDisplayDescription)
             enableTap()
+            animator.show(label: viewRoot.labelWeekDisplayDescription)
         case .showTextDisplayWeekScroll:
+            disableTap()
             animator.show(label: viewRoot.labelWeekDisplayDescriptionSecondary) {
                 self.currentStep = .waitForDisplayWeekScroll
             }
         case .waitForDisplayWeekScroll:
             watch(.WeekDisplayDidScroll)
             circleAnimator.start(.scrollWeekDisplay(view: viewToHighlight))
-            disableTap()
         case .showTextFinal:
             backgroundAnimator.hide()
             circleAnimator.stop()

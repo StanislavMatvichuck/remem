@@ -192,6 +192,7 @@ class EntriesListOnboardingController: OnboardingController {
             }
             
         case .showTextLongPress:
+            disableTap()
             animator.show(label: viewRoot.labelTestItemLongPress) {
                 self.currentStep = .highlightLongPress
             }
@@ -206,7 +207,6 @@ class EntriesListOnboardingController: OnboardingController {
             
         case .waitForEntryDetailsPresentationAttempt:
             animator.hide(label: viewRoot.labelTapToProceed)
-            disableTap()
             watch(.EntriesListDetailsPresentationAttempt)
         default:
             fatalError("⚠️ unhandled onboarding case")
