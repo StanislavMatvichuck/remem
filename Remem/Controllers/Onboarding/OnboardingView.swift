@@ -15,7 +15,7 @@ class OnboardingView: UIView {
     //
     
     let labelsVerticalSpacing: CGFloat = .sm
-    let labelsHorizontalSpacing: CGFloat = .md
+    let labelsHorizontalSpacing: CGFloat = .sm
 
     lazy var viewBackground: UIView = {
         let view = UIView(al: true)
@@ -51,7 +51,6 @@ class OnboardingView: UIView {
         
         label.font = .systemFont(ofSize: .font1)
         label.text = "tap to proceed 👆"
-        label.textAlignment = .center
         
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: .delta1).isActive = true
         
@@ -59,21 +58,13 @@ class OnboardingView: UIView {
     }()
     
     lazy var labelClose: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: .font2)
-        label.text = "❌"
+        let label = UILabel(al: true)
+        label.font = .systemFont(ofSize: .font1)
+        label.text = "Close"
         
         label.isHidden = true
         
         addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: labelsVerticalSpacing),
-            label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsHorizontalSpacing),
-        ])
-        
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return label
     }()
@@ -129,10 +120,21 @@ class OnboardingView: UIView {
         super.init(frame: .zero)
         
         addAndConstrain(viewBackground)
+        
+        setupLabelClose()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLabelClose() {
+        NSLayoutConstraint.activate([
+            labelClose.centerYAnchor.constraint(equalTo: labelTitle.centerYAnchor),
+            labelClose.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -labelsHorizontalSpacing),
+        ])
+        
+        labelClose.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
     
     //

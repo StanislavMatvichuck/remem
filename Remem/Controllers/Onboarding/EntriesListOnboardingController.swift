@@ -150,10 +150,10 @@ class EntriesListOnboardingController: OnboardingController {
             animator.show(label: viewRoot.labelTapToProceed)
             animator.show(label: viewRoot.labelEventCreated)
         case .showTextTrySwipe:
-            animator.show(label: viewRoot.labelEventSwipe)
-            animator.hide(label: viewRoot.labelTapToProceed)
             disableTap()
-            currentStep = .showFloatingCircleRight
+            animator.show(label: viewRoot.labelEventSwipe) {
+                self.currentStep = .showFloatingCircleRight
+            }
         case .showFloatingCircleRight:
             circleAnimator.start(.addPoint)
             currentStep = .waitForSwipe
@@ -176,8 +176,10 @@ class EntriesListOnboardingController: OnboardingController {
             mainDelegate.createTestItem()
         case .highlightTestItem:
             ignore(.EntriesListNewEntry)
-            backgroundAnimator.show(view: viewToHighlight) {
-                self.currentStep = .showTextCreatedTestItem
+            backgroundAnimator.hide {
+                self.backgroundAnimator.show(view: self.viewToHighlight) {
+                    self.currentStep = .showTextCreatedTestItem
+                }
             }
         case .showTextCreatedTestItem:
             enableTap()
@@ -185,17 +187,23 @@ class EntriesListOnboardingController: OnboardingController {
             animator.hide(label: viewRoot.labelEventCreated)
             animator.hide(label: viewRoot.labelEventSwipe)
             animator.hide(label: viewRoot.labelAdditionalSwipes)
-            animator.hide(label: viewRoot.labelSwipeComplete)
+            animator.hide(label: viewRoot.labelSwipeComplete) {
+                self.animator.show(label: self.viewRoot.labelTestItemDescription)
+            }
             
-            animator.show(label: viewRoot.labelTestItemDescription)
         case .showTextLongPress:
-            animator.show(label: viewRoot.labelTestItemLongPress)
-            currentStep = .highlightLongPress
+            animator.show(label: viewRoot.labelTestItemLongPress) {
+                self.currentStep = .highlightLongPress
+            }
         case .highlightLongPress:
             if let cell = viewToHighlight as? EntryCell {
-                backgroundAnimator.move(to: cell.viewMovable, cornerRadius: .r2, offset: .delta1)
+                backgroundAnimator.hide {
+                    self.backgroundAnimator.show(view: cell.viewMovable, cornerRadius: .r2, offset: .delta1) {
+                        self.currentStep = .waitForEntryDetailsPresentationAttempt
+                    }
+                }
             }
-            currentStep = .waitForEntryDetailsPresentationAttempt
+            
         case .waitForEntryDetailsPresentationAttempt:
             animator.hide(label: viewRoot.labelTapToProceed)
             disableTap()

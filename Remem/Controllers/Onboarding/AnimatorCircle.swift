@@ -45,19 +45,22 @@ class AnimatorCircle: NSObject {
 
     //
 
-    fileprivate var mode = Mode.addItem
-    fileprivate var lastIteration = false
+    private var mode = Mode.addItem
+    private var lastIteration = false
 
-    fileprivate let verticalTravelDistance: CGFloat = 2 * .d2
-    fileprivate let horizontalTravelDistance: CGFloat = .wScreen - 2 * .delta1 - .d2
-    fileprivate let fingerTravelDistance: CGFloat = .md
+    private var verticalTravelDistance: CGFloat = 2 * .d2
+    private var horizontalTravelDistance: CGFloat = .wScreen - 2 * .delta1 - .d2
+    private let fingerTravelDistance: CGFloat = .md
 
-    fileprivate weak var circle: UIView!
-    fileprivate weak var finger: UIView!
-    fileprivate weak var root: UIView!
+    private lazy var viewDemonstrationInnerVerticalPadding: CGFloat = circle.frame.height + .xs
+    private lazy var viewDemonstrationInnerHorizontalPadding: CGFloat = circle.frame.width + .xs
 
-    fileprivate var circleY: NSLayoutConstraint!
-    fileprivate var circleX: NSLayoutConstraint!
+    private weak var circle: UIView!
+    private weak var finger: UIView!
+    private weak var root: UIView!
+
+    private var circleY: NSLayoutConstraint!
+    private var circleX: NSLayoutConstraint!
 
     //
 
@@ -77,7 +80,7 @@ class AnimatorCircle: NSObject {
 
     //
 
-    fileprivate func setupConstraints() {
+    private func setupConstraints() {
         guard let parentView = circle.superview else { return }
 
         circle.removeFromSuperview()
@@ -94,15 +97,20 @@ class AnimatorCircle: NSObject {
             circleY = circle.centerYAnchor.constraint(equalTo: root.safeAreaLayoutGuide.bottomAnchor, constant: -.r2 - .delta1 / 2)
             circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: .r2 + .delta1)
         case .scrollPointsDisplay(let view):
-            circleY = circle.centerYAnchor.constraint(equalTo: root.topAnchor, constant: view.frame.maxY)
-            circleX = circle.centerXAnchor.constraint(equalTo: root.safeAreaLayoutGuide.trailingAnchor, constant: -.r2)
+            circleY = circle.centerYAnchor.constraint(equalTo: root.topAnchor,
+                                                      constant: view.frame.maxY - viewDemonstrationInnerVerticalPadding)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.safeAreaLayoutGuide.trailingAnchor,
+                                                      constant: -viewDemonstrationInnerHorizontalPadding)
+            verticalTravelDistance = view.frame.height - 2 * viewDemonstrationInnerVerticalPadding
         case .scrollStatsDisplay(let view):
-            circleY = circle.centerYAnchor.constraint(equalTo: root.topAnchor, constant: view.frame.minY)
-            circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: view.frame.minX)
+            circleY = circle.centerYAnchor.constraint(equalTo: root.topAnchor, constant: view.frame.midY)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: view.frame.minX + viewDemonstrationInnerHorizontalPadding)
+            horizontalTravelDistance = view.frame.width - 2 * viewDemonstrationInnerHorizontalPadding
         case .scrollWeekDisplay(let view):
             let verticalBottomConstant = view.frame.midY - root.frame.height
             circleY = circle.centerYAnchor.constraint(equalTo: root.bottomAnchor, constant: verticalBottomConstant)
-            circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: view.frame.minX)
+            circleX = circle.centerXAnchor.constraint(equalTo: root.leadingAnchor, constant: view.frame.minX + viewDemonstrationInnerHorizontalPadding)
+            horizontalTravelDistance = view.frame.width - 2 * viewDemonstrationInnerHorizontalPadding
         }
 
         setupViewFingerConstraints()
@@ -110,7 +118,7 @@ class AnimatorCircle: NSObject {
         NSLayoutConstraint.activate([circleX, circleY])
     }
 
-    fileprivate func setupViewFingerConstraints() {
+    private func setupViewFingerConstraints() {
         let labelSize = finger.sizeThatFits(CGSize(width: .wScreen, height: .hScreen))
 
         NSLayoutConstraint.activate([
@@ -119,7 +127,7 @@ class AnimatorCircle: NSObject {
         ])
     }
 
-    fileprivate func startAppearing() {
+    private func startAppearing() {
         circle.transform = .identity
 
         let scaleUp = CABasicAnimation(keyPath: "transform.scale")
@@ -139,7 +147,7 @@ class AnimatorCircle: NSObject {
         fingerAppear()
     }
 
-    fileprivate func fingerAppear() {
+    private func fingerAppear() {
         finger.layer.opacity = 1
 
         let group = CAAnimationGroup()
@@ -164,7 +172,7 @@ class AnimatorCircle: NSObject {
         finger.layer.add(group, forKey: nil)
     }
 
-    fileprivate func startMovement() {
+    private func startMovement() {
         switch mode {
         case .addItem, .scrollPointsDisplay:
             circleMovesUp()
@@ -173,7 +181,7 @@ class AnimatorCircle: NSObject {
         }
     }
 
-    fileprivate func circleMovesUp() {
+    private func circleMovesUp() {
         circleY.constant -= verticalTravelDistance
 
         let position = CABasicAnimation(keyPath: "position.y")
@@ -192,7 +200,7 @@ class AnimatorCircle: NSObject {
         fingerMovesUp()
     }
 
-    fileprivate func fingerMovesUp() {
+    private func fingerMovesUp() {
         let position = CABasicAnimation(keyPath: "position.y")
         position.timingFunction = CAMediaTimingFunction(name: .easeOut)
         position.fillMode = .backwards
@@ -204,7 +212,7 @@ class AnimatorCircle: NSObject {
         finger.layer.add(position, forKey: nil)
     }
 
-    fileprivate func circleMovesRight() {
+    private func circleMovesRight() {
         circleX.constant += horizontalTravelDistance
 
         let position = CABasicAnimation(keyPath: "position.x")
@@ -223,7 +231,7 @@ class AnimatorCircle: NSObject {
         fingerMovesRight()
     }
 
-    fileprivate func fingerMovesRight() {
+    private func fingerMovesRight() {
         let position = CABasicAnimation(keyPath: "position.x")
         position.timingFunction = CAMediaTimingFunction(name: .easeOut)
         position.fillMode = .backwards
@@ -235,7 +243,7 @@ class AnimatorCircle: NSObject {
         finger.layer.add(position, forKey: nil)
     }
 
-    fileprivate func startDisappearing() {
+    private func startDisappearing() {
         let scaleDown = CABasicAnimation(keyPath: "transform.scale")
         scaleDown.timingFunction = CAMediaTimingFunction(name: .linear)
 
@@ -254,7 +262,7 @@ class AnimatorCircle: NSObject {
         fingerDisappear()
     }
 
-    fileprivate func fingerDisappear() {
+    private func fingerDisappear() {
         let group = CAAnimationGroup()
         group.fillMode = .backwards
         group.timingFunction = CAMediaTimingFunction(name: .linear)
@@ -279,7 +287,7 @@ class AnimatorCircle: NSObject {
         finger.layer.opacity = 0
     }
 
-    fileprivate func reset() {
+    private func reset() {
         CATransaction.begin()
 
         switch mode {

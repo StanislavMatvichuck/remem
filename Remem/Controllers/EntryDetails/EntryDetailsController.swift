@@ -118,20 +118,42 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == viewRoot.viewTable {
             if !pointsDisplayScrollNotificationSent, scrollView.contentOffset.y > scrollView.frame.height {
-                NotificationCenter.default.post(name: .PointsDisplayDidScroll, object: viewRoot.viewStats)
+                NotificationCenter.default.post(name: .PointsDisplayDidScroll,
+                                                object: createViewStatsDisplayDescriptor())
                 pointsDisplayScrollNotificationSent = true
             }
         } else if scrollView == viewRoot.viewStats {
             if !statsDisplayScrollNotificationSent, scrollView.contentOffset.x <= 0 {
-                NotificationCenter.default.post(name: .StatsDisplayDidScroll, object: viewRoot.viewDisplay)
+                NotificationCenter.default.post(name: .StatsDisplayDidScroll,
+                                                object: createViewWeekDisplayDescriptor())
                 statsDisplayScrollNotificationSent = true
             }
         } else if scrollView == viewRoot.viewDisplay {
             let scrollOffsetAcceptance = scrollView.contentSize.width - 2 * scrollView.frame.width
             if !weekDisplayScrollNotificationSent, scrollView.contentOffset.x <= scrollOffsetAcceptance {
                 NotificationCenter.default.post(name: .WeekDisplayDidScroll, object: nil)
+                weekDisplayScrollNotificationSent = true
             }
         }
+    }
+    
+    private func createViewStatsDisplayDescriptor() -> UIView {
+        let source = viewRoot.viewStats.frame
+        let view = UIView(frame: CGRect(x: source.minX - .xs,
+                                        y: source.minY,
+                                        width: source.width + .xs,
+                                        height: source.height))
+        return view
+    }
+    
+    private func createViewWeekDisplayDescriptor() -> UIView {
+        let source = viewRoot.viewDisplay.frame
+        let weeksView = viewRoot.viewWeekdaysLine.frame
+        let view = UIView(frame: CGRect(x: source.minX,
+                                        y: source.minY,
+                                        width: source.width,
+                                        height: source.height + weeksView.height))
+        return view
     }
 }
 
