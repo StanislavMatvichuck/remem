@@ -21,11 +21,12 @@ class EntryDetailsOnboardingController: OnboardingController {
 
             viewRoot.labelTitle.text = "Details screen"
 
-            animator.show(label: viewRoot.labelTitle)
-            animator.show(label: viewRoot.labelClose)
-            animator.show(label: viewRoot.labelScreenDescription)
+            animator.show(labels: viewRoot.labelTitle,
+                          viewRoot.labelClose,
+                          viewRoot.labelScreenDescription)
         case .highlightPointsDisplay:
             disableTap()
+
             viewRoot.placeTapToProceedInsteadOfTitle()
             let constant = viewToHighlight.frame.maxY + viewRoot.labelsVerticalSpacing
             viewRoot.labelPointsDisplayDescription.topAnchor.constraint(equalTo: viewRoot.topAnchor,
@@ -34,20 +35,19 @@ class EntryDetailsOnboardingController: OnboardingController {
             viewRoot.labelTitle.isHidden = true
             viewRoot.labelScreenDescription.isHidden = true
 
-            animator.hide(label: viewRoot.labelTitle)
-            animator.hide(label: viewRoot.labelScreenDescription) {
+            animator.hide(labels: viewRoot.labelTitle,
+                          viewRoot.labelScreenDescription) {
                 self.backgroundAnimator.show(view: self.viewToHighlight, cornerRadius: .xs) {
                     self.currentStep = .showTextPointsDisplay
                 }
             }
         case .showTextPointsDisplay:
-            animator.show(label: viewRoot.labelPointsDisplayDescription) {
-                self.currentStep = .showTextPointsDisplayScroll
-            }
+            enableTap()
+            animator.show(labels: viewRoot.labelPointsDisplayDescription)
         case .showTextPointsDisplayScroll:
-
-            animator.hide(label: viewRoot.labelTapToProceed)
-            animator.show(label: viewRoot.labelPointsDisplayDescriptionSecondary) {
+            disableTap()
+            animator.hide(labels: viewRoot.labelTapToProceed)
+            animator.show(labels: viewRoot.labelPointsDisplayDescriptionSecondary) {
                 self.currentStep = .waitForPointsDisplayScroll
             }
         case .waitForPointsDisplayScroll:
@@ -55,23 +55,28 @@ class EntryDetailsOnboardingController: OnboardingController {
             circleAnimator.start(.scrollPointsDisplay(view: viewToHighlight))
         case .highlightStatsDisplay:
             ignore(.PointsDisplayDidScroll)
-            animator.hide(label: viewRoot.labelPointsDisplayDescription)
-            animator.hide(label: viewRoot.labelPointsDisplayDescriptionSecondary)
+
             circleAnimator.stop()
+
+            animator.hide(labels: viewRoot.labelPointsDisplayDescription, viewRoot.labelPointsDisplayDescriptionSecondary)
+
             backgroundAnimator.hide {
                 self.backgroundAnimator.show(view: self.viewToHighlight) {
                     self.currentStep = .showTextStatsDisplay
                 }
             }
         case .showTextStatsDisplay:
+            enableTap()
+
             let constant = viewToHighlight.frame.maxY + viewRoot.labelsVerticalSpacing
             viewRoot.labelStatsDisplayDescription.topAnchor.constraint(equalTo: viewRoot.topAnchor,
                                                                        constant: constant).isActive = true
-            animator.show(label: viewRoot.labelStatsDisplayDescription)
-            enableTap()
+
+            animator.show(labels: viewRoot.labelStatsDisplayDescription)
+
         case .showTextStatsDisplayScroll:
             disableTap()
-            animator.show(label: viewRoot.labelStatsDisplayDescriptionSecondary) {
+            animator.show(labels: viewRoot.labelStatsDisplayDescriptionSecondary) {
                 self.currentStep = .waitForScrollStatsDisplay
             }
         case .waitForScrollStatsDisplay:
@@ -79,19 +84,21 @@ class EntryDetailsOnboardingController: OnboardingController {
             circleAnimator.start(.scrollStatsDisplay(view: viewToHighlight))
         case .highlightDisplayWeek:
             ignore(.StatsDisplayDidScroll)
-            animator.hide(label: viewRoot.labelStatsDisplayDescription)
-            animator.hide(label: viewRoot.labelStatsDisplayDescriptionSecondary)
+
             circleAnimator.stop()
+
+            animator.hide(labels: viewRoot.labelStatsDisplayDescription, viewRoot.labelStatsDisplayDescriptionSecondary)
+
             backgroundAnimator.show(view: viewToHighlight) {
                 self.currentStep = .showTextDisplayWeek
             }
 
         case .showTextDisplayWeek:
             enableTap()
-            animator.show(label: viewRoot.labelWeekDisplayDescription)
+            animator.show(labels: viewRoot.labelWeekDisplayDescription)
         case .showTextDisplayWeekScroll:
             disableTap()
-            animator.show(label: viewRoot.labelWeekDisplayDescriptionSecondary) {
+            animator.show(labels: viewRoot.labelWeekDisplayDescriptionSecondary) {
                 self.currentStep = .waitForDisplayWeekScroll
             }
         case .waitForDisplayWeekScroll:
@@ -99,10 +106,12 @@ class EntryDetailsOnboardingController: OnboardingController {
             circleAnimator.start(.scrollWeekDisplay(view: viewToHighlight))
         case .showTextFinal:
             backgroundAnimator.hide()
+
             circleAnimator.stop()
-            animator.hide(label: viewRoot.labelWeekDisplayDescription)
-            animator.hide(label: viewRoot.labelWeekDisplayDescriptionSecondary)
-            animator.show(label: viewRoot.labelFinal)
+
+            animator.hide(labels: viewRoot.labelWeekDisplayDescription, viewRoot.labelWeekDisplayDescriptionSecondary)
+
+            animator.show(labels: viewRoot.labelFinal)
         default:
             fatalError("Unhandled step")
         }

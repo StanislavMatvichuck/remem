@@ -80,6 +80,8 @@ class OnboardingController: UIViewController {
 
     private var tapMovesForward = true
     
+    /// NEVER set current step with animation callback if tap is enabled by `enableTap`
+    /// only after disabling tap with `disableTap`
     var currentStep: Step = .showTextGreeting {
         didSet {
             print("switching to \(currentStep)")
@@ -173,14 +175,15 @@ class OnboardingController: UIViewController {
         fatalError("this method must be overridden")
     }
     
+    /// Must be switching with `disableTap` method
     func enableTap() {
         if let view = view as? OnboardingView {
             tapMovesForward = true
             view.isTransparentForTouches = false
             view.labelTapToProceed.layer.opacity = 1
-            animator.show(label: view.labelTapToProceed)
+            animator.show(labels: view.labelTapToProceed)
         } else {
-            fatalError("view must be a subclass of OnboardingView")
+            fatalError("view must be a subclass of OnboardingVie1w")
         }
     }
     
@@ -188,7 +191,7 @@ class OnboardingController: UIViewController {
         if let view = view as? OnboardingView {
             tapMovesForward = false
             view.isTransparentForTouches = true
-            animator.hide(label: view.labelTapToProceed)
+            animator.hide(labels: view.labelTapToProceed)
         } else {
             fatalError("view must be a subclass of OnboardingView")
         }

@@ -51,55 +51,66 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
 
     //
 
-    func show(label: UILabel, completion: AnimationCompletionBlock? = nil) {
-        label.isHidden = false
+    func show(labels: UILabel..., completion: AnimationCompletionBlock? = nil) {
+        labels.forEach { $0.isHidden = false }
         viewRoot.layoutIfNeeded()
 
-        let group = CAAnimationGroup()
-        group.duration = 0.5
-        group.fillMode = .backwards
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        for (index, label) in labels.enumerated() {
+            let group = CAAnimationGroup()
+            group.duration = 0.5
+            group.fillMode = .backwards
+            group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
-        let opacity = CABasicAnimation(keyPath: "opacity")
-        opacity.fromValue = 0
-        opacity.toValue = 1
+            let opacity = CABasicAnimation(keyPath: "opacity")
+            opacity.fromValue = 0
+            opacity.toValue = 1
 
-        let position = CABasicAnimation(keyPath: "position.y")
-        position.fromValue = label.layer.position.y + 30
-        position.toValue = label.layer.position.y
+            let position = CABasicAnimation(keyPath: "position.y")
+            position.fromValue = label.layer.position.y + 30
+            position.toValue = label.layer.position.y
 
-        group.animations = [opacity, position]
+            group.animations = [opacity, position]
 
-        group.delegate = self
-        group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
+            // add callback to last animation
+            if index == labels.count - 1 {
+                group.delegate = self
+                group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
+            }
 
-        label.layer.add(group, forKey: nil)
+            label.layer.add(group, forKey: nil)
+        }
     }
 
-    func hide(label: UILabel, completion: AnimationCompletionBlock? = nil) {
-        label.layer.opacity = 0
+    func hide(labels: UILabel..., completion: AnimationCompletionBlock? = nil) {
+        for (index, label) in labels.enumerated() {
+            label.layer.opacity = 0
 
-        let group = CAAnimationGroup()
-        group.duration = 0.5
-        group.fillMode = .backwards
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            let group = CAAnimationGroup()
+            group.duration = 0.5
+            group.fillMode = .backwards
+            group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
-        group.delegate = self
-        group.setValue(Animations.labelDisappear, forKey: CodingKeys.name.rawValue)
-        group.setValue(label, forKey: CodingKeys.labelToBeRemoved.rawValue)
-        group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
+            group.delegate = self
+            group.setValue(Animations.labelDisappear, forKey: CodingKeys.name.rawValue)
+            group.setValue(label, forKey: CodingKeys.labelToBeRemoved.rawValue)
 
-        let opacity = CABasicAnimation(keyPath: "opacity")
-        opacity.fromValue = 1
-        opacity.toValue = 0
+            // add callback to last animation
+            if index == labels.count - 1 {
+                group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
+            }
 
-        let position = CABasicAnimation(keyPath: "position.y")
-        position.fromValue = label.layer.position.y
-        position.toValue = label.layer.position.y + 30
+            let opacity = CABasicAnimation(keyPath: "opacity")
+            opacity.fromValue = 1
+            opacity.toValue = 0
 
-        group.animations = [opacity, position]
+            let position = CABasicAnimation(keyPath: "position.y")
+            position.fromValue = label.layer.position.y
+            position.toValue = label.layer.position.y + 30
 
-        label.layer.add(group, forKey: nil)
+            group.animations = [opacity, position]
+
+            label.layer.add(group, forKey: nil)
+        }
     }
 
     //
