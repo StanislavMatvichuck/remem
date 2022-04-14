@@ -21,8 +21,7 @@ class SettingsView: UIView {
 
     let viewWatchOnboarding: UIView = {
         let label: UILabel = {
-            let label = UILabel(frame: .zero)
-            label.translatesAutoresizingMaskIntoConstraints = false
+            let label = UILabel(al: true)
             label.text = "Watch onboarding"
             label.font = .systemFont(ofSize: .font1)
             label.textColor = .label
@@ -42,8 +41,7 @@ class SettingsView: UIView {
         }()
 
         let container: UIView = {
-            let view = UIView(frame: .zero)
-            view.translatesAutoresizingMaskIntoConstraints = false
+            let view = UIView(al: true)
             view.layer.cornerRadius = .delta1
 
             view.addSubview(label)
@@ -90,8 +88,8 @@ class SettingsView: UIView {
 
         NSLayoutConstraint.activate([
             viewWatchOnboarding.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .delta1),
-            viewWatchOnboarding.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            viewWatchOnboarding.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
+            viewWatchOnboarding.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            viewWatchOnboarding.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
         ])
     }
 
@@ -108,7 +106,7 @@ class SettingsView: UIView {
     }
 
     private func updateBackgroundColors() {
-        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
-        viewWatchOnboarding.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
+        layer.backgroundColor = UIColor.systemBackground.cgColor
+        viewWatchOnboarding.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
     }
 }

@@ -138,8 +138,8 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
         let animation = createSelectedAnimation(isSelected: isSelected)
 
         view.layer.backgroundColor = isSelected ?
-            UIColor.systemBlue.cgColor :
-            UIColor.secondarySystemBackground.cgColor
+            viewRoot.selectedButtonBackground.cgColor :
+            viewRoot.defaultButtonBackground.cgColor
 
         view.layer.add(animation, forKey: nil)
 
@@ -151,10 +151,13 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
     }
 
     private func createSelectedAnimation(isSelected: Bool) -> CABasicAnimation {
+        let defaultColor = viewRoot.defaultButtonBackground
+        let selectedColor = viewRoot.selectedButtonBackground
+
         let animation = CABasicAnimation(keyPath: "backgroundColor")
 
-        animation.fromValue = isSelected ? UIColor.secondarySystemBackground : UIColor.systemBlue
-        animation.toValue = isSelected ? UIColor.systemBlue : UIColor.secondarySystemBackground
+        animation.fromValue = isSelected ? defaultColor : selectedColor
+        animation.toValue = isSelected ? selectedColor : defaultColor
 
         animation.duration = 0.2
 
@@ -174,10 +177,13 @@ private class UISwipingSelectorView: UIView {
     fileprivate lazy var viewAddEntry = makeButton(text: "Add")
     fileprivate lazy var viewSettings = makeButton(text: "Settings")
 
-    fileprivate let viewPointer: UIView = {
+    fileprivate let defaultButtonBackground = UIColor.systemBackground.withAlphaComponent(0.75)
+    fileprivate let selectedButtonBackground = UIColor.systemBlue.withAlphaComponent(0.75)
+
+    fileprivate lazy var viewPointer: UIView = {
         let view = UIView(al: true)
 
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = selectedButtonBackground
         view.layer.cornerRadius = .r2 / 2
 
         NSLayoutConstraint.activate([
@@ -231,7 +237,7 @@ private class UISwipingSelectorView: UIView {
 
     fileprivate func makeButton(text: String) -> UIView {
         let view = UIView(al: true)
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.5)
         view.layer.cornerRadius = .r2 / 2
 
         let label = UILabel(al: true)
@@ -255,6 +261,22 @@ private class UISwipingSelectorView: UIView {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        viewPointer.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        updateBackgroundColors()
+    }
+
+    private func updateBackgroundColors() {
+        viewPointer.backgroundColor = selectedButtonBackground
+
+        backgroundColor = .systemBackground
+        viewSettings.backgroundColor = defaultButtonBackground
+        viewAddEntry.backgroundColor = defaultButtonBackground
+
+        if let labelSettings = viewSettings.subviews[0] as? UILabel {
+            labelSettings.textColor = .label
+        }
+
+        if let labelAddEntry = viewSettings.subviews[0] as? UILabel {
+            labelAddEntry.textColor = .label
+        }
     }
 }

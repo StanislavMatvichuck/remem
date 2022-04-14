@@ -49,7 +49,8 @@ class ViewScroll: UIScrollView, ViewContaining {
             viewContent.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor),
 
             axis == .vertical ?
-                viewContent.widthAnchor.constraint(equalTo: frameLayoutGuide.widthAnchor) : viewContent.heightAnchor.constraint(equalTo: frameLayoutGuide.heightAnchor),
+                viewContent.widthAnchor.constraint(equalTo: frameLayoutGuide.widthAnchor) :
+                viewContent.heightAnchor.constraint(equalTo: frameLayoutGuide.heightAnchor),
         ])
     }
 

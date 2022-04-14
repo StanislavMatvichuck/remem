@@ -14,11 +14,10 @@ class EntryDetailsView: UIView {
 
     //
 
-    let viewTable: UITableView = {
-        let view = UITableView(frame: .zero)
+    let viewPointsDisplay: UITableView = {
+        let view = UITableView(al: true)
 
         view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondarySystemBackground
         view.layer.cornerRadius = .delta1
 
@@ -31,7 +30,7 @@ class EntryDetailsView: UIView {
         return view
     }()
 
-    let viewDisplay: UICollectionView = {
+    let viewWeekDisplay: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
 
         layout.scrollDirection = .horizontal
@@ -84,13 +83,20 @@ class EntryDetailsView: UIView {
         return view
     }()
 
-    let viewStats: ViewScroll = {
+    let viewStatsDisplay: ViewScroll = {
         let view = ViewScroll(.horizontal)
 
         view.isPagingEnabled = true
-        view.viewContent.spacing = .delta1
         view.showsHorizontalScrollIndicator = false
 
+        view.viewContent.spacing = .delta1
+        // to place elements in the center of screen
+        view.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .delta1,
+                                                      bottom: 0, right: .delta1)
+        view.viewContent.isLayoutMarginsRelativeArrangement = true
+
+        // to fix vertical scrolling on x3 scale displays
+        view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -1, right: 0)
         return view
     }()
 
@@ -116,26 +122,26 @@ class EntryDetailsView: UIView {
     }
 
     private func setupLayout() {
-        addSubview(viewTable)
-        addSubview(viewStats)
-        addSubview(viewDisplay)
+        addSubview(viewPointsDisplay)
+        addSubview(viewStatsDisplay)
+        addSubview(viewWeekDisplay)
         addSubview(viewWeekdaysLine)
 
         NSLayoutConstraint.activate([
-            viewTable.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .delta1),
-            viewTable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            viewTable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
+            viewPointsDisplay.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .delta1),
+            viewPointsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
+            viewPointsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
 
-            viewStats.topAnchor.constraint(equalTo: viewTable.bottomAnchor),
-            viewStats.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            viewStats.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewStatsDisplay.topAnchor.constraint(equalTo: viewPointsDisplay.bottomAnchor, constant: .delta1),
+            viewStatsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewStatsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            viewDisplay.topAnchor.constraint(equalTo: viewStats.bottomAnchor),
-            viewDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
-            viewDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),
+            viewWeekDisplay.topAnchor.constraint(equalTo: viewStatsDisplay.bottomAnchor, constant: .delta1),
+            viewWeekDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewWeekDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewWeekDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),
 
-            viewWeekdaysLine.topAnchor.constraint(equalTo: viewDisplay.bottomAnchor),
+            viewWeekdaysLine.topAnchor.constraint(equalTo: viewWeekDisplay.bottomAnchor),
             viewWeekdaysLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewWeekdaysLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             viewWeekdaysLine.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),

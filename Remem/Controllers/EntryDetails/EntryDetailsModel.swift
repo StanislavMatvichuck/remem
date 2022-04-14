@@ -22,10 +22,10 @@ protocol EntryDetailsModelInterface {
     func cellAmount(at: IndexPath) -> Int?
 
     var name: String { get }
-    var dayAverage: Float { get }
-    var weekAverage: Float { get }
-    var lastWeekTotal: Float { get }
-    var thisWeekTotal: Float { get }
+    var dayAverage: NSNumber { get }
+    var weekAverage: NSNumber { get }
+    var lastWeekTotal: NSNumber { get }
+    var thisWeekTotal: NSNumber { get }
 
     func fetch()
 }
@@ -33,10 +33,10 @@ protocol EntryDetailsModelInterface {
 protocol EntryDetailsModelDelegate: NSFetchedResultsControllerDelegate {}
 
 class EntryDetailsModel: EntryDetailsModelInterface {
-    var dayAverage: Float { entry.dayAverage }
-    var weekAverage: Float { entry.weekAverage }
-    var lastWeekTotal: Float { Float(entry.lastWeekTotal) }
-    var thisWeekTotal: Float { Float(entry.thisWeekTotal) }
+    var dayAverage: NSNumber { entry.dayAverage as NSNumber }
+    var weekAverage: NSNumber { entry.weekAverage as NSNumber }
+    var lastWeekTotal: NSNumber { entry.lastWeekTotal as NSNumber }
+    var thisWeekTotal: NSNumber { entry.thisWeekTotal as NSNumber }
 
     //
 

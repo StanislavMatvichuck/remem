@@ -52,11 +52,11 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         model.fetch()
         setupViewStats()
         
-        viewRoot.viewTable.dataSource = self
-        viewRoot.viewTable.delegate = self
-        viewRoot.viewDisplay.dataSource = self
-        viewRoot.viewDisplay.delegate = self
-        viewRoot.viewStats.delegate = self
+        viewRoot.viewPointsDisplay.dataSource = self
+        viewRoot.viewPointsDisplay.delegate = self
+        viewRoot.viewWeekDisplay.dataSource = self
+        viewRoot.viewWeekDisplay.delegate = self
+        viewRoot.viewStatsDisplay.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,13 +80,13 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
     private func setInitialScrollPositionForDisplay() {
         let lastCellIndex = IndexPath(row: model.dayCellsAmount - 1, section: 0)
         
-        viewRoot.viewDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
+        viewRoot.viewWeekDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
     }
     
     private func setInitialScrollPositionForStats() {
         let point = CGPoint(x: 2 * .wScreen, y: 0)
         
-        viewRoot.viewStats.setContentOffset(point, animated: false)
+        viewRoot.viewStatsDisplay.setContentOffset(point, animated: false)
     }
     
     private func setupViewStats() {
@@ -95,20 +95,11 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         let viewLastWeekTotal = ViewStatDisplay(value: model.lastWeekTotal, description: "Last week total")
         let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: "This week total")
         
-        let viewPlaceholder = UIView(frame: .zero)
-        viewPlaceholder.translatesAutoresizingMaskIntoConstraints = false
-        
-        viewRoot.viewStats.contain(views:
+        viewRoot.viewStatsDisplay.contain(views:
             viewLastWeekTotal,
             viewThisWeekTotal,
             viewDayAverage,
-            viewWeekAverage,
-            viewPlaceholder)
-        
-        NSLayoutConstraint.activate([
-            viewPlaceholder.widthAnchor.constraint(equalToConstant: 1),
-            viewPlaceholder.heightAnchor.constraint(equalTo: viewThisWeekTotal.heightAnchor),
-        ])
+            viewWeekAverage)
     }
     
     // TODO: create neat mechanism to observe scrolling
@@ -116,19 +107,19 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
     var statsDisplayScrollNotificationSent = false
     var weekDisplayScrollNotificationSent = false
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == viewRoot.viewTable {
+        if scrollView == viewRoot.viewPointsDisplay {
             if !pointsDisplayScrollNotificationSent, scrollView.contentOffset.y > scrollView.frame.height {
                 NotificationCenter.default.post(name: .PointsDisplayDidScroll,
-                                                object: createViewStatsDisplayDescriptor())
+                                                object: viewRoot.viewStatsDisplay)
                 pointsDisplayScrollNotificationSent = true
             }
-        } else if scrollView == viewRoot.viewStats {
+        } else if scrollView == viewRoot.viewStatsDisplay {
             if !statsDisplayScrollNotificationSent, scrollView.contentOffset.x <= 0 {
                 NotificationCenter.default.post(name: .StatsDisplayDidScroll,
                                                 object: createViewWeekDisplayDescriptor())
                 statsDisplayScrollNotificationSent = true
             }
-        } else if scrollView == viewRoot.viewDisplay {
+        } else if scrollView == viewRoot.viewWeekDisplay {
             let scrollOffsetAcceptance = scrollView.contentSize.width - 2 * scrollView.frame.width
             if !weekDisplayScrollNotificationSent, scrollView.contentOffset.x <= scrollOffsetAcceptance {
                 NotificationCenter.default.post(name: .WeekDisplayDidScroll, object: nil)
@@ -137,17 +128,9 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         }
     }
     
-    private func createViewStatsDisplayDescriptor() -> UIView {
-        let source = viewRoot.viewStats.frame
-        let view = UIView(frame: CGRect(x: source.minX - .xs,
-                                        y: source.minY,
-                                        width: source.width + .xs,
-                                        height: source.height))
-        return view
-    }
     
     private func createViewWeekDisplayDescriptor() -> UIView {
-        let source = viewRoot.viewDisplay.frame
+        let source = viewRoot.viewWeekDisplay.frame
         let weeksView = viewRoot.viewWeekdaysLine.frame
         let view = UIView(frame: CGRect(x: source.minX,
                                         y: source.minY,
@@ -196,11 +179,11 @@ extension EntryDetailsController: UITableViewDataSource {
 
 extension EntryDetailsController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.beginUpdates()
+        viewRoot.viewPointsDisplay.beginUpdates()
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.endUpdates()
+        viewRoot.viewPointsDisplay.endUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -212,17 +195,17 @@ extension EntryDetailsController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             guard let insertIndex = newIndexPath else { return }
-            viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
+            viewRoot.viewPointsDisplay.insertRows(at: [insertIndex], with: .automatic)
         case .delete:
             guard let deleteIndex = indexPath else { return }
-            viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
+            viewRoot.viewPointsDisplay.deleteRows(at: [deleteIndex], with: .automatic)
         case .move:
             guard let fromIndex = indexPath, let toIndex = newIndexPath
             else { return }
-            viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
+            viewRoot.viewPointsDisplay.moveRow(at: fromIndex, to: toIndex)
         case .update:
             guard let updateIndex = indexPath else { return }
-            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
+            viewRoot.viewPointsDisplay.reloadRows(at: [updateIndex], with: .none)
         @unknown default:
             fatalError("Unhandled case")
         }
@@ -281,7 +264,7 @@ extension EntryDetailsController: OnboardingControllerDelegate {
         let onboarding = EntryDetailsOnboardingController(withStep: .highlightPointsDisplay)
         onboarding.modalPresentationStyle = .overCurrentContext
         onboarding.modalTransitionStyle = .crossDissolve
-        onboarding.viewToHighlight = viewRoot.viewTable
+        onboarding.viewToHighlight = viewRoot.viewPointsDisplay
         onboarding.isModalInPresentation = true
         present(onboarding, animated: true) {
             onboarding.start()

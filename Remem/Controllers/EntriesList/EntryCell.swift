@@ -120,12 +120,15 @@ final class EntryCell: UITableViewCell {
 
         contentView.addSubview(viewRoot)
 
+        let height = contentView.heightAnchor.constraint(equalToConstant: .d2 + .delta1)
+        height.priority = .defaultLow /// tableView constraints fix
+
         NSLayoutConstraint.activate([
+            height,
             nameLabel.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .d2),
             nameLabel.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.d2),
 
-            nameLabel.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: .delta1),
-            nameLabel.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -.delta1),
+            nameLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
 
             valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
@@ -134,8 +137,7 @@ final class EntryCell: UITableViewCell {
 
             viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .delta1),
             viewRoot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.delta1),
-            viewRoot.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .delta1 / 2),
-            viewRoot.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.delta1 / 2),
+            viewRoot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
 

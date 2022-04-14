@@ -287,7 +287,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         input.resignFirstResponder()
 
         isUserInteractionEnabled = false
-        value = ""
+        input.text = ""
+        textViewDidChange(input)
     }
 
     func textViewDidChange(_ textView: UITextView) {
