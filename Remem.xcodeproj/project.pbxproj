@@ -27,6 +27,7 @@
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209627BFAD9600551F6A /* ViewContaining.swift */; };
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
+		0870EEFB2809B81100336759 /* RememTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* RememTests.swift */; };
 		0878819527FF414100CFE362 /* EntryDetailsOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */; };
 		0878819727FF419600CFE362 /* EntryDetailsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
@@ -51,6 +52,16 @@
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0870EEFC2809B81100336759 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08D5121927870D2500C2037F;
+			remoteInfo = Remem;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
 		080F0FDD27FC83E2006BFCE8 /* EntryDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsModel.swift; sourceTree = "<group>"; };
@@ -72,6 +83,8 @@
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209627BFAD9600551F6A /* ViewContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContaining.swift; sourceTree = "<group>"; };
 		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
+		0870EEF82809B81100336759 /* RememTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0870EEFA2809B81100336759 /* RememTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememTests.swift; sourceTree = "<group>"; };
 		0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingController.swift; sourceTree = "<group>"; };
 		0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingView.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -99,6 +112,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0870EEF52809B81100336759 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D5121727870D2500C2037F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,6 +164,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		0870EEF92809B81100336759 /* RememTests */ = {
+			isa = PBXGroup;
+			children = (
+				0870EEFA2809B81100336759 /* RememTests.swift */,
+			);
+			path = RememTests;
+			sourceTree = "<group>";
+		};
 		0890627627A0A1E30032847C /* EntryDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				08D5121C27870D2500C2037F /* Remem */,
+				0870EEF92809B81100336759 /* RememTests */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				08D5121A27870D2500C2037F /* Remem.app */,
+				0870EEF82809B81100336759 /* RememTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,6 +288,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0870EEF72809B81100336759 /* RememTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */;
+			buildPhases = (
+				0870EEF42809B81100336759 /* Sources */,
+				0870EEF52809B81100336759 /* Frameworks */,
+				0870EEF62809B81100336759 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0870EEFD2809B81100336759 /* PBXTargetDependency */,
+			);
+			name = RememTests;
+			productName = RememTests;
+			productReference = 0870EEF82809B81100336759 /* RememTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		08D5121927870D2500C2037F /* Remem */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Remem" */;
@@ -282,9 +330,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					0870EEF72809B81100336759 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 08D5121927870D2500C2037F;
+					};
 					08D5121927870D2500C2037F = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -304,11 +356,19 @@
 			projectRoot = "";
 			targets = (
 				08D5121927870D2500C2037F /* Remem */,
+				0870EEF72809B81100336759 /* RememTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0870EEF62809B81100336759 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D5121827870D2500C2037F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +381,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0870EEF42809B81100336759 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0870EEFB2809B81100336759 /* RememTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D5121627870D2500C2037F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,6 +437,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0870EEFD2809B81100336759 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08D5121927870D2500C2037F /* Remem */;
+			targetProxy = 0870EEFC2809B81100336759 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		08D5122827870D2600C2037F /* LaunchScreen.storyboard */ = {
@@ -471,6 +547,63 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Onboarding;
+		};
+		0870EEFE2809B81100336759 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+			};
+			name = Debug;
+		};
+		0870EEFF2809B81100336759 /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+			};
+			name = Onboarding;
+		};
+		0870EF002809B81100336759 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+			};
+			name = Release;
 		};
 		08D5122C27870D2600C2037F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -649,6 +782,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0870EEFE2809B81100336759 /* Debug */,
+				0870EEFF2809B81100336759 /* Onboarding */,
+				0870EF002809B81100336759 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		08D5121527870D2500C2037F /* Build configuration list for PBXProject "Remem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
