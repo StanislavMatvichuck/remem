@@ -17,7 +17,7 @@ protocol EntriesListModelInterface {
 
     func fetch()
     func entry(at: IndexPath) -> Entry?
-    func create(entryName: String) -> Entry
+    @discardableResult func create(entryName: String) -> Entry
     func remove(entry: Entry)
     func addNewPoint(to: Entry)
 }
@@ -56,20 +56,6 @@ class EntriesListService: EntriesListModelInterface {
 
 // MARK: - Internal
 extension EntriesListService {
-    @discardableResult
-    private func createTestEntry() -> Entry {
-        let entry = Entry(context: moc)
-        entry.name = "Test100"
-        entry.dateCreated = Calendar.current.date(byAdding: .day,
-                                                  value: -100,
-                                                  to: Date.now)!
-        for i in 0 ... 100 {
-            createTestPoint(for: entry, at: i, amount: Int.random(in: 1 ... 7))
-        }
-
-        return entry
-    }
-
     private func createTestPoint(for entry: Entry, at day: Int, amount: Int) {
         for _ in 1 ... amount {
             let point = Point(context: moc)
@@ -99,10 +85,8 @@ extension EntriesListService {
 
     private func createPoint() -> Point {
         let point = Point(context: moc)
-
         point.dateCreated = NSDate.now
         point.value = 1
-
         return point
     }
 }
@@ -121,30 +105,41 @@ extension EntriesListService {
 
     @discardableResult
     func create(entryName: String) -> Entry {
-        let newEntry: Entry
+        let newEntry = Entry(context: moc)
+        newEntry.name = entryName
+        newEntry.dateCreated = NSDate.now
+        coreDataStack.save(moc)
+        return newEntry
+    }
 
-        if entryName.hasPrefix("Test") {
-            newEntry = createTestEntry()
-        } else {
-            newEntry = Entry(context: moc)
-            newEntry.name = entryName
-            newEntry.dateCreated = NSDate.now
+    @discardableResult
+    func create(testEntryName: String, withDaysAmount: Int) -> Entry {
+        let entry = Entry(context: moc)
+        entry.name = testEntryName
+        entry.dateCreated = Calendar.current.date(byAdding: .day,
+                                                  value: -withDaysAmount,
+                                                  to: Date.now)!
+
+        if withDaysAmount > 0 {
+            for i in 0 ... withDaysAmount {
+                createTestPoint(for: entry, at: i, amount: Int.random(in: 1 ... 7))
+            }
         }
 
         coreDataStack.save(moc)
 
-        return newEntry
+        return entry
     }
 
     func remove(entry: Entry) {
         moc.delete(entry)
-
         coreDataStack.save(moc)
     }
 
     func addNewPoint(to entry: Entry) {
         let point = createPoint()
         point.entry = entry
+
         coreDataStack.save(moc)
 
         if let index = fetchedResultsController.indexPath(forObject: entry) {

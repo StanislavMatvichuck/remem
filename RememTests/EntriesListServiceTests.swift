@@ -76,4 +76,26 @@ class EntriesListServiceTests: XCTestCase {
 
         XCTAssertEqual(service.dataAmount, 0)
     }
+
+    func testPointAddition() {
+        let newEntry = service.create(entryName: "EntryWithPoint")
+
+        service.addNewPoint(to: newEntry)
+        XCTAssertEqual(newEntry.points?.count, 1)
+
+        service.addNewPoint(to: newEntry)
+        XCTAssertEqual(newEntry.points?.count, 2)
+    }
+
+//    func testEntryWithPointsCreation() {
+//        let newEntryWithoutPoints = service.create(testEntryName: "TestName", withDaysAmount: 0)
+//        XCTAssertEqual(newEntryWithoutPoints.name, "TestName")
+//        XCTAssertEqual(newEntryWithoutPoints.points?.count, 0)
+//
+//        let newEntryWithPoint = service.create(testEntryName: "TestName", withDaysAmount: 1)
+//        XCTAssertEqual(newEntryWithPoint.points?.count, 1)
+//
+//        let newEntryWithPoints = service.create(testEntryName: "TestName", withDaysAmount: 10)
+//        XCTAssertEqual(newEntryWithPoints.points?.count, 10)
+//    }
 }
