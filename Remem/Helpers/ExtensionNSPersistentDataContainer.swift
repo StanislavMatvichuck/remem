@@ -18,30 +18,11 @@ extension NSPersistentContainer {
             }
         }
     }
+}
 
-    func loadInMemoryStore() {
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-
-        persistentStoreDescriptions = [description]
-
-        loadPersistentStores(completionHandler: { _, error in
-            if let error = error {
-                fatalError("Unresolved error \(error)")
-            }
-        })
-    }
-
-    func loadSQLiteStore() {
-        loadPersistentStores(completionHandler: { _, error in
-            if let error = error {
-                fatalError("Unresolved error \(error)")
-            }
-        })
-    }
-
+extension NSPersistentStoreCoordinator {
     func clearInMemoryStore() {
-        let coordinator = persistentStoreCoordinator
+        let coordinator = self
         guard let store = coordinator.persistentStores.first else { return }
         let storeURL = coordinator.url(for: store)
 

@@ -9,60 +9,46 @@ import CoreData
 import Foundation
 
 class CoreDataStack {
-    private static var _model: NSManagedObjectModel?
+    private static let entries = "EntriesList"
 
-    private static func model(name: String) throws -> NSManagedObjectModel {
-        if _model == nil {
-            _model = try loadModel(name: name, bundle: Bundle.main)
-        }
-        return _model!
-    }
-
-    private static func loadModel(name: String, bundle: Bundle) throws -> NSManagedObjectModel {
-        guard let modelURL = bundle.url(forResource: name, withExtension: "momd") else {
-            throw CoreDataError.modelURLNotFound(forResourceName: name)
-        }
-
-        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
-            throw CoreDataError.modelLoadingFailed(forURL: modelURL)
-        }
-        return model
-    }
-
-    enum CoreDataError: Error {
-        case modelURLNotFound(forResourceName: String)
-        case modelLoadingFailed(forURL: URL)
-    }
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container: NSPersistentContainer
-
-        do {
-            let model = try CoreDataStack.model(name: "EntriesList")
-            container = NSPersistentContainer(name: "EntriesList", managedObjectModel: model)
-        } catch {
-            print("error \(error.localizedDescription)")
-            container = NSPersistentContainer(name: "EntriesList")
-        }
-
-        container.loadSQLiteStore()
-
-        return container
+    private static let model: NSManagedObjectModel = {
+        let url = Bundle.main.url(forResource: entries, withExtension: "momd")!
+        let mom = NSManagedObjectModel(contentsOf: url)!
+        return mom
     }()
 
-    lazy var onboardingPersistentContainer: NSPersistentContainer = {
-        let container: NSPersistentContainer
+    private lazy var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
+    private lazy var onboardingContainer: NSPersistentContainer = { createContainer(inMemory: true) }()
 
-        do {
-            let model = try CoreDataStack.model(name: "EntriesList")
-            container = NSPersistentContainer(name: "EntriesList", managedObjectModel: model)
-        } catch {
-            print("error \(error.localizedDescription)")
-            container = NSPersistentContainer(name: "EntriesList")
+    lazy var defaultContext: NSManagedObjectContext = { defaultContainer.viewContext }()
+    lazy var onboardingContext: NSManagedObjectContext = { onboardingContainer.viewContext }()
+}
+
+// MARK: - Public
+extension CoreDataStack {
+    func save(_ context: NSManagedObjectContext) {
+        context.perform {
+            do {
+                try context.save()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
+    func createContainer(inMemory: Bool) -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: CoreDataStack.entries, managedObjectModel: CoreDataStack.model)
+
+        if inMemory {
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [description]
         }
 
-        container.loadInMemoryStore()
+        container.loadPersistentStores(completionHandler: { _, error in
+            if let error = error { fatalError("Unresolved error \(error)") }
+        })
 
         return container
-    }()
+    }
 }

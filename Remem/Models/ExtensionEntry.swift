@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 25.01.2022.
 //
 
+import CoreData
 import Foundation
 
 extension Entry {

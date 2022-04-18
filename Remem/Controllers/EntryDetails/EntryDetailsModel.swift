@@ -44,7 +44,7 @@ class EntryDetailsModel: EntryDetailsModelInterface {
 
     //
 
-    var persistentContainer: NSPersistentContainer
+    private let moc: NSManagedObjectContext
 
     weak var delegate: EntryDetailsModelDelegate?
 
@@ -59,8 +59,6 @@ class EntryDetailsModel: EntryDetailsModelInterface {
     //
 
     private var fetchedResultsController: NSFetchedResultsController<Point>?
-
-    private var moc: NSManagedObjectContext { persistentContainer.viewContext }
 
     func fetch() {
         let request = NSFetchRequest<Point>(entityName: "Point")
@@ -126,8 +124,8 @@ class EntryDetailsModel: EntryDetailsModelInterface {
 
     //
 
-    init(_ relatedEntry: Entry, container: NSPersistentContainer) {
-        persistentContainer = container
+    init(_ relatedEntry: Entry) {
+        moc = relatedEntry.managedObjectContext!
         entry = relatedEntry
 
         let dateCreated = relatedEntry.dateCreated!

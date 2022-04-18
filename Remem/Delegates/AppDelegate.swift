@@ -38,6 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let coreDataStack = CoreDataStack()
 
     func applicationWillTerminate(_ application: UIApplication) {
-        coreDataStack.persistentContainer.saveContextIfNeeded()
+        coreDataStack.save(coreDataStack.defaultContext)
     }
 }

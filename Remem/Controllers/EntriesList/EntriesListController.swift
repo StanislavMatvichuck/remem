@@ -17,6 +17,8 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     
     var model: EntriesListModelInterface!
     
+    var coreDataStack: CoreDataStack!
+
     //
     
     // MARK: - Private properties
@@ -61,7 +63,7 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
         
         setupEventHandlers()
         
-        model.fetchEntries()
+        model.fetch()
     }
     
     private func setupTableView() {
@@ -269,7 +271,7 @@ extension EntriesListController: CellMainDelegate {
         let pointsList = EntryDetailsController()
         let navigation = UINavigationController(rootViewController: pointsList)
         
-        let model = EntryDetailsModel(entry, container: model.persistentContainer)
+        let model = EntryDetailsModel(entry)
         
         // TODO: check if this is okay
         pointsList.model = model
@@ -342,37 +344,27 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
         model.create(entryName: "Test10")
     }
     
-    var coreDataStack: CoreDataStack {
-        (UIApplication.shared.delegate as! AppDelegate).coreDataStack
-    }
-    
     func prepareForOnboardingStart() {
         viewRoot.swiper.hideSettings()
         viewRoot.input.disableCancelButton()
         
-        let container = coreDataStack.onboardingPersistentContainer
-        setupModel(with: container)
+        setupModel(with: coreDataStack.onboardingContext)
     }
     
     func prepareForOnboardingEnd() {
         viewRoot.swiper.showSettings()
         viewRoot.input.enableCancelButton()
         
-        let container = model.persistentContainer
-        if container == coreDataStack.onboardingPersistentContainer {
-            container.clearInMemoryStore()
-            container.loadInMemoryStore()
-        }
+        coreDataStack.onboardingContext.persistentStoreCoordinator?.clearInMemoryStore()
         
-        let newContainer = coreDataStack.persistentContainer
-        setupModel(with: newContainer)
+        setupModel(with: coreDataStack.defaultContext)
     }
     
-    private func setupModel(with container: NSPersistentContainer) {
-        let model = EntriesListModel(container)
+    private func setupModel(with moc: NSManagedObjectContext) {
+        let model = EntriesListService(moc: moc, stack: coreDataStack)
         self.model = model
         model.delegate = self
-        model.fetchEntries()
+        model.fetch()
         viewRoot.viewTable.reloadData()
     }
 }
