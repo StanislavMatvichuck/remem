@@ -52,6 +52,18 @@ extension Date {
 
     var isInTheFuture: Bool { self > Date() }
     var isInThePast: Bool { self < Date() }
+
+    ///
+    /// Remem methods
+    ///
+
+    func days(ago: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: -ago, to: self)!
+    }
+
+    static let yesterday: Date = { Date.now.days(ago: 1) }()
+    static let beforeYesterday: Date = { Date.now.days(ago: 2) }()
+    static let weekAgo: Date = { Date.now.days(ago: 7) }()
 }
 
 extension Calendar {

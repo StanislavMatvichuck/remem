@@ -96,10 +96,10 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
         let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: "This week total")
         
         viewRoot.viewStatsDisplay.contain(views:
-            viewLastWeekTotal,
-            viewThisWeekTotal,
             viewDayAverage,
-            viewWeekAverage)
+            viewWeekAverage,
+            viewThisWeekTotal,
+            viewLastWeekTotal)
     }
     
     // TODO: create neat mechanism to observe scrolling
@@ -127,7 +127,6 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate, UITab
             }
         }
     }
-    
     
     private func createViewWeekDisplayDescriptor() -> UIView {
         let source = viewRoot.viewWeekDisplay.frame

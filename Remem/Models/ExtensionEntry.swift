@@ -8,10 +8,12 @@
 import CoreData
 import Foundation
 
+// MARK: - Getters
 extension Entry {
     var totalAmount: Int {
         guard let points = self.points else { return 0 }
-
+        // TODO: make this as a fetch request?
+        // or move this property to somewhere else
         return points.reduce(0) { partialResult, point in
             if let point = point as? Point {
                 return partialResult + Int(point.value)
@@ -21,97 +23,89 @@ extension Entry {
         }
     }
 
-    var dayAverage: Float {
-        guard let points = self.points else { return 0 }
-
-        var results = [DateComponents: Int]()
-
-        for point in points {
-            guard let point = point as? Point else { continue }
-
-            let pointDay = Calendar.current.dateComponents([.year, .month, .day], from: point.dateCreated!)
-
-            if let daySum = results[pointDay] {
-                results.updateValue(daySum + 1, forKey: pointDay)
-            } else {
-                results.updateValue(1, forKey: pointDay)
-            }
-        }
-
-        var totalAmount = 0
-
-        for daySum in results {
-            totalAmount += daySum.value
-        }
-
-        if results.count == 0 {
-            return 0
-        }
-
-        return Float(totalAmount) / Float(results.count)
+    var daysSince: Int {
+        let cal = Calendar.current
+        let fromDate = cal.startOfDay(for: dateCreated!)
+        let toDate = cal.startOfDay(for: Date())
+        let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate).day!
+        return numberOfDays + 1
     }
 
-    var weekAverage: Float {
-        guard let points = self.points else { return 0 }
+    var weeksSince: Int {
+        var iterationDate = Date.now
+        var result = 1
 
-        var results = [DateComponents: Int]()
-
-        for point in points {
-            guard let point = point as? Point else { continue }
-
-            let pointWeek = Calendar.current.dateComponents([.year, .weekOfYear], from: point.dateCreated!)
-
-            if let daySum = results[pointWeek] {
-                results.updateValue(daySum + 1, forKey: pointWeek)
-            } else {
-                results.updateValue(1, forKey: pointWeek)
-            }
-        }
-
-        var totalAmount = 0
-
-        for daySum in results {
-            totalAmount += daySum.value
-        }
-
-        if results.count == 0 {
-            return 0
-        }
-
-        return Float(totalAmount) / Float(results.count)
-    }
-
-    var lastWeekTotal: Int {
-        guard let points = self.points else { return 0 }
-
-        var result = 0
-
-        for point in points {
-            guard let point = point as? Point else { continue }
-
-            let previousWeek = Calendar.current.date(byAdding: .day, value: -7, to: Date.now)!
-
-            if previousWeek.isInSameWeek(as: point.dateCreated!) {
-                result += 1
-            }
+        while !iterationDate.isInSameWeek(as: dateCreated!) {
+            iterationDate = iterationDate.days(ago: 7)
+            result += 1
         }
 
         return result
     }
 
-    var thisWeekTotal: Int {
+    var dayAverage: Double {
+        let total = Double(totalAmount)
+        let daysAmount = Double(daysSince)
+        return total / daysAmount
+    }
+
+    var weekAverage: Double {
+        var weeksTotals: [Double] = []
+
+        for i in 0 ... weeksSince - 1 {
+            let totalAtWeek = Double(totalAtWeek(previousToCurrent: i))
+            weeksTotals.append(totalAtWeek)
+        }
+
+        let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
+            result + iterationAverage
+        }
+
+        return total / Double(weeksTotals.count)
+    }
+
+    var thisWeekTotal: Int { totalAtWeek(previousToCurrent: 0) }
+    var lastWeekTotal: Int { totalAtWeek(previousToCurrent: 1) }
+
+    private func totalAtWeek(previousToCurrent: Int) -> Int {
         guard let points = self.points else { return 0 }
 
         var result = 0
-
         for point in points {
             guard let point = point as? Point else { continue }
-
-            if Date.now.isInSameWeek(as: point.dateCreated!) {
-                result += 1
+            let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
+            if weekOffset.isInSameWeek(as: point.dateCreated!) {
+                result += Int(point.value)
             }
         }
 
         return result
+    }
+}
+
+// MARK: - Public
+extension Entry {
+    @discardableResult
+    open func addDefaultPoint() -> Point? {
+        guard let moc = managedObjectContext else { return nil }
+
+        let point = Point(context: moc)
+        point.dateCreated = Date()
+        point.entry = self
+        point.value = 1
+
+        return point
+    }
+
+    @discardableResult
+    open func addDefaultPoint(withDate: Date) -> Point? {
+        guard let moc = managedObjectContext else { return nil }
+
+        let point = Point(context: moc)
+        point.dateCreated = withDate
+        point.entry = self
+        point.value = 1
+
+        return point
     }
 }
