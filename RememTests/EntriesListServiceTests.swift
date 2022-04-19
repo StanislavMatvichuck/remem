@@ -79,23 +79,54 @@ class EntriesListServiceTests: XCTestCase {
 
     func testPointAddition() {
         let newEntry = service.create(entryName: "EntryWithPoint")
+        service.fetch()
 
         service.addNewPoint(to: newEntry)
         XCTAssertEqual(newEntry.points?.count, 1)
 
         service.addNewPoint(to: newEntry)
         XCTAssertEqual(newEntry.points?.count, 2)
+
+        let delegateMock = EntriesListServiceDelegateMock(self)
+        delegateMock.expectNewPointNotification()
+        service.delegate = delegateMock
+        service.addNewPoint(to: newEntry)
+        waitForExpectations(timeout: 1.0)
     }
 
-//    func testEntryWithPointsCreation() {
-//        let newEntryWithoutPoints = service.create(testEntryName: "TestName", withDaysAmount: 0)
-//        XCTAssertEqual(newEntryWithoutPoints.name, "TestName")
-//        XCTAssertEqual(newEntryWithoutPoints.points?.count, 0)
-//
-//        let newEntryWithPoint = service.create(testEntryName: "TestName", withDaysAmount: 1)
-//        XCTAssertEqual(newEntryWithPoint.points?.count, 1)
-//
-//        let newEntryWithPoints = service.create(testEntryName: "TestName", withDaysAmount: 10)
-//        XCTAssertEqual(newEntryWithPoints.points?.count, 10)
-//    }
+    func testFilledEntryCreation() {
+        let filledEntry = service.create(filledEntryName: "Filled entry", withDaysAmount: 18)
+
+        coreDataStack.save(service.moc)
+
+        XCTAssertEqual(filledEntry.name, "Filled entry")
+        XCTAssertEqual(filledEntry.daysSince, 19)
+        XCTAssertNotEqual(filledEntry.weeksSince, 1)
+        XCTAssertNotEqual(filledEntry.totalAmount, 0)
+        XCTAssertNotEqual(filledEntry.dayAverage, 0)
+        XCTAssertNotEqual(filledEntry.thisWeekTotal, 0)
+        XCTAssertNotEqual(filledEntry.lastWeekTotal, 0)
+        XCTAssertNotEqual(filledEntry.weekAverage, 0)
+    }
+}
+
+class EntriesListServiceDelegateMock: NSObject {
+    var newPointEntryIndex: IndexPath?
+
+    private let testCase: XCTestCase
+    private var expectation: XCTestExpectation?
+
+    init(_ testCase: XCTestCase) { self.testCase = testCase }
+
+    func expectNewPointNotification() {
+        expectation = testCase.expectation(description: "Waiting for new point index")
+    }
+}
+
+extension EntriesListServiceDelegateMock: EntriesListModelDelegate {
+    func newPointAdded(at: IndexPath) {
+        newPointEntryIndex = at
+        expectation?.fulfill()
+        expectation = nil
+    }
 }

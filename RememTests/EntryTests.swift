@@ -35,12 +35,12 @@ class EntryTests: XCTestCase {
 
         XCTAssertEqual(newEntry.name, "Name")
         XCTAssertEqual(newEntry.points?.count, 0)
-//        XCTAssertEqual(newEntry.totalAmount, 0)
-//        XCTAssertEqual(newEntry.dayAverage, 0)
-//        XCTAssertEqual(newEntry.weekAverage, 0)
-//        XCTAssertEqual(newEntry.lastWeekTotal, 0)
-//        XCTAssertEqual(newEntry.thisWeekTotal, 0)
-//        XCTAssertEqual(newEntry.daysSince, 1)
+        XCTAssertEqual(newEntry.totalAmount, 0)
+        XCTAssertEqual(newEntry.dayAverage, 0)
+        XCTAssertEqual(newEntry.weekAverage, 0)
+        XCTAssertEqual(newEntry.lastWeekTotal, 0)
+        XCTAssertEqual(newEntry.thisWeekTotal, 0)
+        XCTAssertEqual(newEntry.daysSince, 1)
     }
 
     func testDaysSince() {

@@ -8,113 +8,46 @@
 import CoreData
 import UIKit
 
-class EntriesListController: UIViewController, EntriesListModelDelegate {
-    //
+class EntriesListController: UIViewController {
+    // MARK: - Properties
 
-    // MARK: - Public properties
-
-    //
-    
-    var model: EntriesListModelInterface!
-    
+    var service: EntriesListService!
     var coreDataStack: CoreDataStack!
 
-    //
-    
-    // MARK: - Private properties
-    
-    //
-    
     private let viewRoot = EntriesListView()
-    
     private var cellIndexToBeAnimated: IndexPath?
-    
     /// Used for posting `EntriesListNewEntry` notification
     private var newCellIndex: IndexPath?
     
-    //
-    
-    // MARK: - Initialization
-    
-    //
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //
+    // MARK: - Init
+    init() { super.init(nibName: nil, bundle: nil) }
+    deinit { NotificationCenter.default.removeObserver(self) }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     // MARK: - View lifecycle
-    
-    //
-    
     override func loadView() { view = viewRoot }
-    
     override func viewDidLoad() {
         setupTableView()
-        
         setupEventHandlers()
-        
-        model.fetch()
+        service.fetch()
     }
-    
+
     private func setupTableView() {
         viewRoot.viewTable.dataSource = self
         viewRoot.viewTable.delegate = self
     }
-    
-    //
+}
 
-    // MARK: - Events handling
-
-    //
-    
-    private func setupEventHandlers() {
-        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection),
-                                  for: .primaryActionTriggered)
-        
-        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
-    }
-    
-    @objc
-    private func handleAdd() {
-        model.create(entryName: viewRoot.input.value)
-    }
-    
-    @objc
-    private func handleSwiperSelection(_ sender: UISwipingSelector) {
-        guard let selectedOption = sender.value else { return }
-        switch selectedOption {
-        case .addEntry:
-            viewRoot.input.show()
-        case .settings:
-            presentSettings()
-        }
-    }
-    
+// MARK: - Internal
+extension EntriesListController {
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
-            self.model.remove(entry: entry)
+            self.service.remove(entry: entry)
         }))
-        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         return alert
     }
-    
-    //
-    // Settings selection handling
-    //
     
     private func presentSettings() {
         let controller = SettingsController()
@@ -124,29 +57,42 @@ class EntriesListController: UIViewController, EntriesListModelDelegate {
     }
 }
 
-//
+// MARK: - Events handling
+extension EntriesListController {
+    private func setupEventHandlers() {
+        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection),
+                                  for: .primaryActionTriggered)
+        viewRoot.input.addTarget(self, action: #selector(handleAdd),
+                                 for: .editingDidEnd)
+    }
+    
+    @objc private func handleAdd() {
+        service.create(entryName: viewRoot.input.value)
+    }
+    
+    @objc private func handleSwiperSelection(_ sender: UISwipingSelector) {
+        guard let selectedOption = sender.value else { return }
+        switch selectedOption {
+        case .addEntry:
+            viewRoot.input.show()
+        case .settings:
+            presentSettings()
+        }
+    }
+}
 
 // MARK: - UITableViewDataSource
-
-//
-
 extension EntriesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataAmount = model.dataAmount
-        
-        if dataAmount == 0 {
-            viewRoot.showEmptyState()
-        } else {
-            viewRoot.hideEmptyState()
-        }
-        
+        let dataAmount = service.dataAmount
+        dataAmount == 0 ? viewRoot.showEmptyState() : viewRoot.hideEmptyState()
         return dataAmount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
-            let dataRow = model.entry(at: indexPath)
+            let dataRow = service.entry(at: indexPath)
         else { return UITableViewCell() }
         
         row.delegate = self
@@ -157,26 +103,32 @@ extension EntriesListController: UITableViewDataSource {
     }
 }
 
-//
+// MARK: - UITableViewDelegate
+extension EntriesListController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cellIndexToBeAnimated == indexPath, let cell = cell as? EntryCell {
+            cell.animateMovableViewBack()
+        }
+        
+        if newCellIndex == indexPath {
+            NotificationCenter.default.post(name: .EntriesListNewEntry, object: cell)
+            newCellIndex = nil
+        }
+    }
+}
 
-// MARK: NSFetchedResultsControllerDelegate
-
-//
-
+// MARK: - NSFetchedResultsControllerDelegate
 extension EntriesListController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         viewRoot.viewTable.beginUpdates()
     }
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?)
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChange anObject: Any,
+        at indexPath: IndexPath?,
+        for type: NSFetchedResultsChangeType,
+        newIndexPath: IndexPath?)
     {
         switch type {
         case .insert:
@@ -197,43 +149,21 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
         }
     }
     
-    func newPointAdded(at index: IndexPath) {
-        postNewPointNotification(for: index)
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        viewRoot.viewTable.endUpdates()
     }
-    
-    private func postNewPointNotification(for index: IndexPath) {
+}
+
+// MARK: - EntriesListServiceDelegate
+extension EntriesListController: EntriesListModelDelegate {
+    func newPointAdded(at index: IndexPath) {
         if let cell = viewRoot.viewTable.cellForRow(at: index) {
             NotificationCenter.default.post(name: .EntriesListNewPoint, object: cell)
         }
     }
 }
 
-//
-
-// MARK: - UITableViewDelegate
-
-//
-
-extension EntriesListController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cellIndexToBeAnimated == indexPath {
-            let cell = cell as! EntryCell
-            cell.animateMovableViewBack()
-        }
-        
-        if newCellIndex == indexPath {
-            NotificationCenter.default.post(name: .EntriesListNewEntry, object: cell)
-            newCellIndex = nil
-        }
-    }
-}
-
-//
-
-// MARK: UIScrollViewDelegate
-
-//
-
+// MARK: - UIScrollViewDelegate
 extension EntriesListController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         viewRoot.swiper.handleScrollView(contentOffset: scrollView.contentOffset)
@@ -244,28 +174,22 @@ extension EntriesListController: UIScrollViewDelegate {
     }
 }
 
-//
-
 // MARK: - CellMainDelegate
-
-//
-
 extension EntriesListController: CellMainDelegate {
     func didLongPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = model.entry(at: index)
+            let entry = service.entry(at: index)
         else { return }
-        
+     
         let alert = createManipulationAlert(for: entry)
-        
         present(alert, animated: true)
     }
     
     func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = model.entry(at: index)
+            let entry = service.entry(at: index)
         else { return }
         
         let pointsList = EntryDetailsController()
@@ -297,34 +221,20 @@ extension EntriesListController: CellMainDelegate {
     func didSwipeAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = model.entry(at: index)
+            let entry = service.entry(at: index)
         else { return }
         
         cellIndexToBeAnimated = index
-        model.addNewPoint(to: entry)
+        service.addNewPoint(to: entry)
     }
     
-    //
-    
-    func didAnimation(_ cell: EntryCell) {
-        cellIndexToBeAnimated = nil
-    }
+    func didAnimation(_ cell: EntryCell) { cellIndexToBeAnimated = nil }
 }
 
-//
-
 // MARK: - Onboarding
-
-//
-
 extension EntriesListController: EntriesListOnboardingControllerDataSource {
-    var viewSwiper: UIView {
-        viewRoot.swiper
-    }
-    
-    var viewInput: UIView {
-        viewRoot.input.onboardingHighlight
-    }
+    var viewSwiper: UIView { viewRoot.swiper }
+    var viewInput: UIView { viewRoot.input.onboardingHighlight }
 }
 
 extension EntriesListController: EntriesListOnboardingControllerDelegate {
@@ -341,7 +251,7 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
     }
     
     func createTestItem() {
-        model.create(entryName: "Test10")
+        service.create(filledEntryName: "Demo entry", withDaysAmount: 18)
     }
     
     func prepareForOnboardingStart() {
@@ -362,19 +272,14 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
     
     private func setupModel(with moc: NSManagedObjectContext) {
         let model = EntriesListService(moc: moc, stack: coreDataStack)
-        self.model = model
+        service = model
         model.delegate = self
         model.fetch()
         viewRoot.viewTable.reloadData()
     }
 }
 
-//
-
 // MARK: - Notifications
-
-//
-
 extension Notification.Name {
     static let EntriesListNewEntry = Notification.Name(rawValue: "EntriesListNewEntry")
     static let EntriesListNewPoint = Notification.Name(rawValue: "EntriesListNewPoint")

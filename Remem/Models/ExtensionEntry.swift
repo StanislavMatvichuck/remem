@@ -12,14 +12,9 @@ import Foundation
 extension Entry {
     var totalAmount: Int {
         guard let points = self.points else { return 0 }
-        // TODO: make this as a fetch request?
-        // or move this property to somewhere else
         return points.reduce(0) { partialResult, point in
-            if let point = point as? Point {
-                return partialResult + Int(point.value)
-            } else {
-                return partialResult
-            }
+            let point = point as! Point
+            return partialResult + Int(point.value)
         }
     }
 

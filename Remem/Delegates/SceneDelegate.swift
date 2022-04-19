@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let controller = EntriesListController()
         controller.coreDataStack = stack
         // TODO: check if this is okay
-        controller.model = model
+        controller.service = model
         model.delegate = controller
 
         let window = UIWindow(windowScene: windowScene)
