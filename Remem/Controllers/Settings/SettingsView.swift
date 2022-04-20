@@ -8,18 +8,7 @@
 import UIKit
 
 class SettingsView: UIView {
-    //
-
-    // MARK: - Public properties
-
-    //
-    //
-
-    // MARK: - Private properties
-
-    //
-
-    let viewWatchOnboarding: UIView = {
+    lazy var viewWatchOnboarding: UIView = {
         let label: UILabel = {
             let label = UILabel(al: true)
             label.text = "Watch onboarding"
@@ -62,46 +51,49 @@ class SettingsView: UIView {
             return view
         }()
 
+        addSubview(container)
+
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: title.bottomAnchor, constant: .sm),
+            container.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+        ])
+
         return container
     }()
 
-    //
+    private lazy var title: UILabel = {
+        let label = UILabel(al: true)
+        label.text = "Settings"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: .font2, weight: .bold)
 
-    // MARK: - Initialization
+        addSubview(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
+            label.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+        ])
 
-    //
+        return label
+    }()
 
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
-
         updateBackgroundColors()
-
-        setupLabelOnboarding()
+//        setupLabelOnboarding()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    private func setupLabelOnboarding() {
-        addSubview(viewWatchOnboarding)
+//    private func setupLabelOnboarding() {
+//        addSubview(viewWatchOnboarding)
+//    }
 
-        NSLayoutConstraint.activate([
-            viewWatchOnboarding.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .delta1),
-            viewWatchOnboarding.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
-            viewWatchOnboarding.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
-        ])
-    }
-
-    //
-
-    // MARK: - Events handling
-
-    //
-
+    // MARK: - Dark mode handling
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-
         updateBackgroundColors()
     }
 
