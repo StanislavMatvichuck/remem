@@ -50,6 +50,8 @@
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
+		08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */; };
+		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,8 @@
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsTests.swift; sourceTree = "<group>"; };
+		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,7 @@
 			children = (
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
 				08E56DEF280DD77900635887 /* EntryTests.swift */,
+				08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */,
 			);
 			path = RememTests;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
 				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
+				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 			files = (
 				08E56DF0280DD77900635887 /* EntryTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
+				08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +425,7 @@
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
 				083DD13227C6B20F006F1479 /* EntriesListOnboardingController.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
+				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
