@@ -107,7 +107,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
                                                  action: #selector(handlePressCancel))
 
     private lazy var barAdd = UIBarButtonItem(title: "Add",
-                                              style: .plain,
+                                              style: .done,
                                               target: self,
                                               action: #selector(handlePressCreate))
 
