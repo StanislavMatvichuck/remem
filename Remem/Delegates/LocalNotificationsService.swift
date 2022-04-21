@@ -22,26 +22,23 @@ class LocalNotificationsService {
 // MARK: - Public
 extension LocalNotificationsService {
     func requestAuthorization() {
-        center.requestAuthorization(
-            options: [.badge, .sound, .alert]
-        ) {
-                [weak self] granted, error in
+        center.requestAuthorization(options: [.badge, .sound, .alert]) { [weak self] granted, error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
 
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-
-                DispatchQueue.main.async {
-                    self?.authorized = granted
-                    self?.delegate?.authorizationRequest(result: granted)
-                }
+            DispatchQueue.main.async {
+                self?.authorized = granted
+                self?.delegate?.authorizationRequest(result: granted)
+            }
         }
     }
 
     func requestPendingNotifications() {
-        if let delegate = delegate {
-            center.getPendingNotificationRequests(
-                completionHandler: delegate.notificationsRequest(result:))
+        center.getPendingNotificationRequests { [weak self] result in
+            DispatchQueue.main.async {
+                self?.delegate?.notificationsRequest(result: result)
+            }
         }
     }
 
@@ -51,8 +48,8 @@ extension LocalNotificationsService {
         hours: Int,
         minutes: Int,
         seconds: Int,
-        repeats: Bool) -> UNNotificationRequest
-    {
+        repeats: Bool
+    ) -> UNNotificationRequest {
         var components = DateComponents()
         components.hour = hours
         components.minute = minutes

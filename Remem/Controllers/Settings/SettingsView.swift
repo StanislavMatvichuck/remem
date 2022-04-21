@@ -20,6 +20,14 @@ class SettingsView: UIView {
 
     let onboardingButton = SettingsRowView("Watch onboarding")
     let reminderInput = ReminderInputView()
+    let remindersStack: UIStackView = {
+        let stack = UIStackView(al: true)
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.spacing = .hairline
+        stack.layer.cornerRadius = .delta1
+        return stack
+    }()
 
     private lazy var footer: UILabel = {
         let label = UILabel(al: true)
@@ -57,6 +65,7 @@ class SettingsView: UIView {
 
         stackView.addArrangedSubview(title)
         stackView.addArrangedSubview(onboardingButton)
+        stackView.addArrangedSubview(remindersStack)
         stackView.addArrangedSubview(reminderInput)
 
         footer.tag = 1
