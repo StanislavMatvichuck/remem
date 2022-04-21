@@ -51,6 +51,7 @@ class LocalNotificationsServiceTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
+    // TODO: this test sometimes fails
     func testNotificationCreationAndRemoval() {
         testGetNotifications()
         XCTAssertNotNil(sutDelegate.pendingNotifications)
