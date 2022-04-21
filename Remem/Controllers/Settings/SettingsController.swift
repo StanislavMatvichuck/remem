@@ -26,10 +26,28 @@ extension SettingsController {
     private func setupEventsHandlers() {
         viewRoot.onboardingButton.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handlePressOnboarding)))
+
+        viewRoot.reminderInput.timeCancel.target = self
+        viewRoot.reminderInput.timeCancel.action = #selector(handlePressCancel)
+        viewRoot.reminderInput.titleCancel.target = self
+        viewRoot.reminderInput.titleCancel.action = #selector(handlePressCancel)
+
+        viewRoot.reminderInput.titleSubmit.target = self
+        viewRoot.reminderInput.titleSubmit.action = #selector(handleTitleSubmit)
+        viewRoot.reminderInput.timeSubmit.target = self
+        viewRoot.reminderInput.timeSubmit.action = #selector(handleTimeSubmit)
     }
 
     @objc func handlePressOnboarding() {
         guard let main = presentingViewController as? EntriesListController else { return }
         dismiss(animated: true) { main.startOnboarding() }
+    }
+
+    @objc func handlePressCancel() { viewRoot.endEditing(true) }
+    @objc func handleTitleSubmit() { viewRoot.reminderInput.timeInput.becomeFirstResponder() }
+
+    @objc func handleTimeSubmit() {
+        viewRoot.endEditing(true)
+        print("initiate authorization request")
     }
 }

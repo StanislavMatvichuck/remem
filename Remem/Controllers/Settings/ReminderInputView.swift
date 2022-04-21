@@ -8,7 +8,12 @@
 import UIKit
 
 class ReminderInputView: UIView {
-    let titleInput: UITextField = {
+    let titleCancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
+    let titleSubmit = UIBarButtonItem(title: "Choose time", style: .done, target: nil, action: nil)
+    let timeCancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
+    let timeSubmit = UIBarButtonItem(title: "Add reminder", style: .done, target: nil, action: nil)
+
+    lazy var titleInput: UITextField = {
         let input = UITextFieldWithPadding()
         let placeholderText = NSAttributedString(
             string: "Press here to add a reminder title",
@@ -24,9 +29,7 @@ class ReminderInputView: UIView {
 
         let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
-        let time = UIBarButtonItem(title: "Choose time", style: .done, target: nil, action: nil)
-        accessory.items = [cancel, space, time]
+        accessory.items = [titleCancel, space, titleSubmit]
         accessory.sizeToFit()
 
         input.inputAccessoryView = accessory
@@ -34,7 +37,7 @@ class ReminderInputView: UIView {
         return input
     }()
 
-    let timeInput: UITextField = {
+    lazy var timeInput: UITextField = {
         let input = UITextFieldWithPadding()
         let placeholderText = NSAttributedString(
             string: "00:00",
@@ -49,9 +52,7 @@ class ReminderInputView: UIView {
 
         let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
-        let time = UIBarButtonItem(title: "Add reminder", style: .done, target: nil, action: nil)
-        accessory.items = [cancel, space, time]
+        accessory.items = [timeCancel, space, timeSubmit]
         accessory.sizeToFit()
 
         input.inputAccessoryView = accessory
