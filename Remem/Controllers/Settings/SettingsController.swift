@@ -51,12 +51,12 @@ class SettingsController: UIViewController {
     //
     
     private func setupEventsHandlers() {
-        viewRoot.viewWatchOnboarding.addGestureRecognizer(
+        viewRoot.onboardingButton.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handlePressOnboarding)))
     }
     
     @objc func handlePressOnboarding() {
-        guard let main = parent?.presentingViewController as? EntriesListController else { return }
+        guard let main = presentingViewController as? EntriesListController else { return }
         dismiss(animated: true) { main.startOnboarding() }
     }
 }
