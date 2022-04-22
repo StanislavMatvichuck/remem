@@ -19,7 +19,7 @@
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		083DD13227C6B20F006F1479 /* EntriesListOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */; };
 		083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */; };
-		0848C947281161F9003ED51D /* ReminderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C946281161F9003ED51D /* ReminderInputView.swift */; };
+		0848C947281161F9003ED51D /* ReminderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C946281161F9003ED51D /* ReminderInput.swift */; };
 		0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */; };
 		0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C94A281163C9003ED51D /* SettingsRowView.swift */; };
 		085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DB27FEF3FA00A18912 /* OnboardingController.swift */; };
@@ -43,6 +43,8 @@
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
 		08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListService.swift */; };
 		08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D25027F606CF0099260D /* UISwipingSelector.swift */; };
+		08D47A4128129D210085826F /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4028129D210085826F /* RemindersController.swift */; };
+		08D47A4428129FC30085826F /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4328129FC30085826F /* ReminderCell.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* EntriesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EntriesListController.swift */; };
@@ -80,7 +82,7 @@
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		083DD13127C6B20F006F1479 /* EntriesListOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingController.swift; sourceTree = "<group>"; };
 		083DD13327C6B21A006F1479 /* EntriesListOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListOnboardingView.swift; sourceTree = "<group>"; };
-		0848C946281161F9003ED51D /* ReminderInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderInputView.swift; sourceTree = "<group>"; };
+		0848C946281161F9003ED51D /* ReminderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderInput.swift; sourceTree = "<group>"; };
 		0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithPadding.swift; sourceTree = "<group>"; };
 		0848C94A281163C9003ED51D /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		085D38DB27FEF3FA00A18912 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,8 @@
 		089A5A4827E7A28000157D26 /* AnimatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorCircle.swift; sourceTree = "<group>"; };
 		08C5D24E27F5D6250099260D /* EntriesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListService.swift; sourceTree = "<group>"; };
 		08C5D25027F606CF0099260D /* UISwipingSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipingSelector.swift; sourceTree = "<group>"; };
+		08D47A4028129D210085826F /* RemindersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
+		08D47A4328129FC30085826F /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +146,7 @@
 		0830DA3227C3A6C900479014 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0848C946281161F9003ED51D /* ReminderInputView.swift */,
+				08D47A4228129D910085826F /* Reminders */,
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
 				0848C94A281163C9003ED51D /* SettingsRowView.swift */,
 				0830DA3527C3A6E000479014 /* SettingsView.swift */,
@@ -197,6 +201,16 @@
 				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = EntryDetails;
+			sourceTree = "<group>";
+		};
+		08D47A4228129D910085826F /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				08D47A4328129FC30085826F /* ReminderCell.swift */,
+				0848C946281161F9003ED51D /* ReminderInput.swift */,
+				08D47A4028129D210085826F /* RemindersController.swift */,
+			);
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		08D5121127870D2500C2037F = {
@@ -413,8 +427,9 @@
 				083DD13427C6B21A006F1479 /* EntriesListOnboardingView.swift in Sources */,
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
-				0848C947281161F9003ED51D /* ReminderInputView.swift in Sources */,
+				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				0868209727BFAD9600551F6A /* ViewContaining.swift in Sources */,
+				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
 				085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */,
 				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
@@ -449,6 +464,7 @@
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,
 				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
+				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,

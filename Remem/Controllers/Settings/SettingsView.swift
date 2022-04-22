@@ -10,24 +10,8 @@ import UIKit
 class SettingsView: UIView {
     static var margin: CGFloat = 2 * .delta1
 
-    private lazy var title: UILabel = {
-        let label = UILabel(al: true)
-        label.text = "Settings"
-        label.textColor = .label
-        label.font = .systemFont(ofSize: .font2, weight: .bold)
-        return label
-    }()
-
     let onboardingButton = SettingsRowView("Watch onboarding")
-    let reminderInput = ReminderInputView()
-    let remindersStack: UIStackView = {
-        let stack = UIStackView(al: true)
-        stack.axis = .vertical
-        stack.distribution = .fill
-        stack.spacing = .hairline
-        stack.layer.cornerRadius = .delta1
-        return stack
-    }()
+    let remindersButton = SettingsRowView("Configure reminders")
 
     private lazy var footer: UILabel = {
         let label = UILabel(al: true)
@@ -48,11 +32,11 @@ class SettingsView: UIView {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
         stack.distribution = .fill
-        stack.spacing = SettingsView.margin
+        stack.layer.cornerRadius = .delta1
 
         addSubview(stack)
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
+            stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stack.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
         ])
@@ -63,11 +47,13 @@ class SettingsView: UIView {
     init() {
         super.init(frame: .zero)
 
-        stackView.addArrangedSubview(title)
-        stackView.addArrangedSubview(onboardingButton)
-        stackView.addArrangedSubview(remindersStack)
-        stackView.addArrangedSubview(reminderInput)
+        let separator = UIView(al: true)
+        separator.backgroundColor = .opaqueSeparator
+        separator.heightAnchor.constraint(equalToConstant: .hairline).isActive = true
 
+        stackView.addArrangedSubview(remindersButton)
+        stackView.addArrangedSubview(separator)
+        stackView.addArrangedSubview(onboardingButton)
         footer.tag = 1
     }
 
@@ -76,6 +62,7 @@ class SettingsView: UIView {
     // MARK: - Dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        layer.backgroundColor = UIColor.systemBackground.cgColor
+        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        stackView.layer.backgroundColor = UIColor.systemBackground.cgColor
     }
 }

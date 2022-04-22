@@ -22,7 +22,7 @@ class SettingsRowView: UIView {
 
         let chevron: UIImageView = {
             let image = UIImage(systemName: "chevron.right")?
-                .withTintColor(.tertiaryLabel)
+                .withTintColor(.opaqueSeparator)
                 .withRenderingMode(.alwaysOriginal)
                 .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: .font1)))
 
@@ -32,7 +32,6 @@ class SettingsRowView: UIView {
             return container
         }()
 
-        layer.cornerRadius = .delta1
 
         addSubview(label)
         addSubview(chevron)
@@ -56,6 +55,6 @@ class SettingsRowView: UIView {
     // MARK: - Dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+//        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
     }
 }

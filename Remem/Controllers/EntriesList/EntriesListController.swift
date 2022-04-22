@@ -51,13 +51,14 @@ extension EntriesListController {
     
     private func presentSettings() {
         let controller = SettingsController()
-        controller.modalPresentationStyle = .pageSheet
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .pageSheet
 
-        if let sheet = controller.sheetPresentationController {
+        if let sheet = nav.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
         }
         
-        present(controller, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
     }
 }
 
