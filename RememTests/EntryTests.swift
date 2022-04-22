@@ -17,7 +17,7 @@ class EntryTests: XCTestCase {
     override func setUp() {
         super.setUp()
         coreDataStack = CoreDataStack()
-        moc = coreDataStack.createContainer(inMemory: true).viewContext
+        moc = CoreDataStack.createContainer(inMemory: true).viewContext
     }
 
     override func tearDown() {
@@ -101,9 +101,9 @@ class EntryTests: XCTestCase {
             XCTAssertEqual(entry00.weeksSince, 1)
             XCTAssertEqual(entry01.weeksSince, 1)
             XCTAssertEqual(entry05.weeksSince, 2)
-            XCTAssertEqual(entry07.weeksSince, 3)
+            XCTAssertEqual(entry07.weeksSince, 2)
             XCTAssertEqual(entry12.weeksSince, 3)
-            XCTAssertEqual(entry18.weeksSince, 4)
+            XCTAssertEqual(entry18.weeksSince, 3)
             XCTAssertEqual(entry22.weeksSince, 4)
         case .saturday:
             XCTAssertEqual(entry00.weeksSince, 1)

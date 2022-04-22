@@ -17,7 +17,7 @@ class EntriesListServiceTests: XCTestCase {
     override func setUp() {
         super.setUp()
         coreDataStack = CoreDataStack()
-        let container = coreDataStack.createContainer(inMemory: true)
+        let container = CoreDataStack.createContainer(inMemory: true)
         service = EntriesListService(moc: container.viewContext, stack: coreDataStack)
     }
 

@@ -17,11 +17,11 @@ class CoreDataStack {
         return mom
     }()
 
-    private lazy var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
-    private lazy var onboardingContainer: NSPersistentContainer = { createContainer(inMemory: true) }()
+    private var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
+    private var onboardingContainer: NSPersistentContainer = { createContainer(inMemory: true) }()
 
-    lazy var defaultContext: NSManagedObjectContext = { defaultContainer.viewContext }()
-    lazy var onboardingContext: NSManagedObjectContext = { onboardingContainer.viewContext }()
+    var defaultContext: NSManagedObjectContext { defaultContainer.viewContext }
+    var onboardingContext: NSManagedObjectContext { onboardingContainer.viewContext }
 }
 
 // MARK: - Public
@@ -36,7 +36,7 @@ extension CoreDataStack {
         }
     }
 
-    func createContainer(inMemory: Bool) -> NSPersistentContainer {
+    static func createContainer(inMemory: Bool) -> NSPersistentContainer {
         let container = NSPersistentContainer(name: CoreDataStack.entries, managedObjectModel: CoreDataStack.model)
 
         if inMemory {
