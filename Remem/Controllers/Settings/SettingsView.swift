@@ -8,16 +8,24 @@
 import UIKit
 
 class SettingsView: UIView {
+    // MARK: I18n
+    static let onboarding = NSLocalizedString(
+        "button.settings.onboarding", comment: "settings button onboarding")
+    static let reminders = NSLocalizedString(
+        "button.settings.reminders", comment: "settings button reminders")
+    static let forgedIn = NSLocalizedString("label.footer", comment: " settings footer")
+
+    // MARK: - Properties
     static var margin: CGFloat = 2 * .delta1
 
-    let onboardingButton = SettingsRowView("Watch onboarding")
-    let remindersButton = SettingsRowView("Configure reminders")
+    lazy var onboardingButton = SettingsRowView(Self.onboarding)
+    lazy var remindersButton = SettingsRowView(Self.reminders)
 
     private lazy var footer: UILabel = {
         let label = UILabel(al: true)
         label.textColor = .label
         label.font = .systemFont(ofSize: 0.6 * .font1)
-        label.text = "Made with ❤️ in 🇺🇦"
+        label.text = Self.forgedIn
 
         addSubview(label)
         NSLayoutConstraint.activate([

@@ -8,65 +8,100 @@
 import UIKit
 
 class EntriesListOnboardingView: OnboardingView {
+    // MARK: - I18n
+    static let start = NSLocalizedString(
+        "onboarding.entriesList.start",
+        comment: "onboarding entries list start")
+    static let question01 = NSLocalizedString(
+        "onboarding.entriesList.question1",
+        comment: "onboarding entries list question 01")
+    static let question02 = NSLocalizedString(
+        "onboarding.entriesList.question2",
+        comment: "onboarding entries list question 02")
+    static let useCaseDescription = NSLocalizedString(
+        "onboarding.entriesList.useCases",
+        comment: "onboarding entries list use cases description")
+    static let creationStart = NSLocalizedString(
+        "onboarding.entriesList.entryCreation.start",
+        comment: "onboarding entries list entry creation start")
+    static let creationNaming = NSLocalizedString(
+        "onboarding.entriesList.entryCreation.name",
+        comment: "onboarding entries list entry creation naming")
+    static let creationFinish = NSLocalizedString(
+        "onboarding.entriesList.entryCreation.finish",
+        comment: "onboarding entries list entry creation finished")
+    static let addPoints = NSLocalizedString(
+        "onboarding.entriesList.addPoints",
+        comment: "onboarding entries list entry add points")
+    static let addAdditionalPoints = NSLocalizedString(
+        "onboarding.entriesList.addAdditionalPoints",
+        comment: "onboarding entries list entry add additional points")
+    static let filledEntryCreated = NSLocalizedString(
+        "onboarding.entriesList.filledEntry.description",
+        comment: "onboarding entries list test entry appeared")
+    static let filledEntryInspect = NSLocalizedString(
+        "onboarding.entriesList.filledEntry.inspect",
+        comment: "onboarding entries list test entry inspect")
+    
     lazy var labelMyNameIs: UILabel = {
         let label = createLabel()
-        label.text = "I am tracking app called Remem and I am designed to help you to answer following questions:"
+        label.text = Self.start
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelQuestion01: UILabel = {
         let label = createLabel()
-        label.text = "- when did an event last happened?"
+        label.text = Self.question01
         label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelQuestion02: UILabel = {
         let label = createLabel()
-        label.text = "- how many events happen in a week?"
+        label.text = Self.question02
         label.topAnchor.constraint(equalTo: labelQuestion01.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelHint: UILabel = {
         let label = createLabel()
-        label.text = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly"
+        label.text = Self.useCaseDescription
         label.topAnchor.constraint(equalTo: labelQuestion02.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelStart: UILabel = {
         let label = createLabel()
-        label.text = "Start is easy. Swipe up the screen to create an event"
+        label.text = Self.creationStart
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelEventName: UILabel = {
         let label = createLabel()
-        label.text = "Give it a name. Using emojis is encouraged!"
+        label.text = Self.creationNaming
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelEventCreated: UILabel = {
         let label = createLabel()
-        label.text = "Since that moment I can record each time this event happens, but not without your help, of course."
+        label.text = Self.creationFinish
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelEventSwipe: UILabel = {
         let label = createLabel()
-        label.text = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it"
+        label.text = Self.addPoints
         label.topAnchor.constraint(equalTo: labelEventCreated.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelSwipeComplete: UILabel = {
         let label = createLabel()
-        label.text = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it"
+        label.text = Self.addAdditionalPoints
         label.topAnchor.constraint(equalTo: labelEventSwipe.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
@@ -80,14 +115,14 @@ class EntriesListOnboardingView: OnboardingView {
     
     lazy var labelTestItemDescription: UILabel = {
         let label = createLabel()
-        label.text = "Now let`s assume that you have been using me for some time. You will receive something like that"
+        label.text = Self.filledEntryCreated
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
     lazy var labelTestItemLongPress: UILabel = {
         let label = createLabel()
-        label.text = "Tap the circle to view details"
+        label.text = Self.filledEntryInspect
         label.topAnchor.constraint(equalTo: labelTestItemDescription.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()

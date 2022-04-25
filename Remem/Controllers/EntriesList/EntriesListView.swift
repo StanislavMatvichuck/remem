@@ -8,6 +8,9 @@
 import UIKit
 
 class EntriesListView: UIView {
+    // MARK: I18n
+    static let empty = NSLocalizedString("empty.entriesList", comment: "entries list empty")
+
     //
 
     // MARK: - Public properties
@@ -41,11 +44,11 @@ class EntriesListView: UIView {
 
     //
 
-    private let emptyLabel: UILabel = {
+    private lazy var emptyLabel: UILabel = {
         let label = UILabel(frame: .zero)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "You have no entries yet. Swipe up to create"
+        label.text = Self.empty
         label.textAlignment = .center
         label.isHidden = true
         label.numberOfLines = 0

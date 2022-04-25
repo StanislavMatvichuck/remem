@@ -17,6 +17,10 @@ protocol UIMovableTextViewInterface: UIControl {
 }
 
 class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelegate {
+    // MARK: I18n
+    static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
+    static let add = NSLocalizedString("button.add.entry", comment: "movable view accessory button add")
+
     //
 
     // MARK: - Public properties
@@ -101,15 +105,17 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         return constraint
     }()
 
-    private lazy var barCancel = UIBarButtonItem(title: "Cancel",
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(handlePressCancel))
+    private lazy var barCancel = UIBarButtonItem(
+        title: Self.cancel,
+        style: .plain,
+        target: self,
+        action: #selector(handlePressCancel))
 
-    private lazy var barAdd = UIBarButtonItem(title: "Add",
-                                              style: .done,
-                                              target: self,
-                                              action: #selector(handlePressCreate))
+    private lazy var barAdd = UIBarButtonItem(
+        title: Self.add,
+        style: .done,
+        target: self,
+        action: #selector(handlePressCreate))
 
     //
 

@@ -16,6 +16,12 @@ protocol UISwipingSelectorInterface: UIControl {
 }
 
 class UISwipingSelector: UIControl, UISwipingSelectorInterface {
+    // MARK: I18n
+    static let settings = NSLocalizedString(
+        "button.settings", comment: "button Settings")
+    static let addEntry = NSLocalizedString(
+        "button.add.entry", comment: "button Add entry")
+
     //
 
     // MARK: - Related types
@@ -174,8 +180,8 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
 //
 
 private class UISwipingSelectorView: UIView {
-    fileprivate lazy var viewAddEntry = makeButton(text: "Add")
-    fileprivate lazy var viewSettings = makeButton(text: "Settings")
+    fileprivate lazy var viewAddEntry = makeButton(text: UISwipingSelector.addEntry)
+    fileprivate lazy var viewSettings = makeButton(text: UISwipingSelector.settings)
 
     fileprivate let defaultButtonBackground = UIColor.systemBackground.withAlphaComponent(0.75)
     fileprivate let selectedButtonBackground = UIColor.systemBlue.withAlphaComponent(0.75)

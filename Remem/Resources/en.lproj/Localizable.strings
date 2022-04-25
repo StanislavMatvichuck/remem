@@ -1,0 +1,98 @@
+/* 
+  Localizable.strings
+  Remem
+
+  Created by Stanislav Matvichuck on 25.04.2022.
+  
+*/
+
+/* onboarding hello */
+"onboarding.greeting" = "Greetings!";
+/* onboarding tap to proceed */
+"onboarding.tapToProceed" = "tap to proceed 👆";
+/* onboarding close */
+"onboarding.close" = "Close";
+
+/* onboarding entries list start */
+"onboarding.entriesList.start" = "I am tracking app called Remem and I am designed to help you to answer following questions:";
+/* onboarding entries list question 01 */
+"onboarding.entriesList.question1" = "- when did an event last happened?";
+/* onboarding entries list question 02 */
+"onboarding.entriesList.question2" = "- how many events happen in a week?";
+/* onboarding entries list use cases description */
+"onboarding.entriesList.useCases" = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly";
+/* onboarding entries list entry creation start */
+"onboarding.entriesList.entryCreation.start" = "Start is easy. Swipe up the screen to create an event";
+/* onboarding entries list entry creation naming */
+"onboarding.entriesList.entryCreation.name" = "Give it a name. Using emojis is encouraged!";
+/* onboarding entries list entry creation finished */
+"onboarding.entriesList.entryCreation.finish" = "Since that moment I can record each time this event happens, but not without your help, of course.";
+/* onboarding entries list entry add points */
+"onboarding.entriesList.addPoints" = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it";
+/* onboarding entries list entry add additional points */
+"onboarding.entriesList.addAdditionalPoints" = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it";
+/* onboarding entries list test entry appeared */
+"onboarding.entriesList.filledEntry.description" = "Now let`s assume that you have been using me for some time. You will receive something like that";
+/* onboarding entries list test entry inspect */
+"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view details";
+
+/* onboarding entry details start */
+"onboarding.entryDetails.start" = "Details screen description";
+/* onboarding entry details points display description */
+"onboarding.entryDetails.pointsList.description" = "Points list description";
+/* onboarding entry details points display scrollable */
+"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Try";
+/* onboarding entry details stats display description */
+"onboarding.entryDetails.stats.description" = "Statistics description";
+/* onboarding entry details stats display scrollable */
+"onboarding.entryDetails.stats.scrollable" = "Statistics is scrollable";
+/* onboarding entry details week display description */
+"onboarding.entryDetails.week.description" = "Week display";
+/* onboarding entry details week display scrollable */
+"onboarding.entryDetails.week.scrollable" = "Week display is scrollable";
+/* onboarding entry details final */
+"onboarding.entryDetails.final" = "Final text";
+
+/*
+    UISwipingSelector button settings
+    Settings screen title
+*/
+"button.settings" = "Settings";
+/*
+    UISwipingSelector button
+    UISwipingSelector accessory
+    UIMovableTextView accessory
+ */
+"button.add.entry" = "Add";
+
+/*
+    UIReminderInput accessory
+    UISwipingSelector accessory
+    UIMovableTextView accessory
+ */
+"button.cancel" = "Cancel";
+
+/* UIReminderInput button submit title */
+"button.reminder.submit.title" = "Choose time";
+/* UIReminderInput button cancel time */
+"button.reminder.cancel.time" = "Back";
+/* UIReminderInput button submit time */
+"button.reminder.submit.time" = "Add reminder";
+
+/* settings button onboarding */
+"button.settings.onboarding" = "Watch onboarding";
+/* settings button reminders */
+"button.settings.reminders" = "Configure reminders";
+/* settings footer */
+"label.footer" = "Forged with ❤️ in 🇺🇦";
+
+/* entries list empty */
+"empty.entriesList" = "You have no entries yet. Swipe up to create";
+
+/*
+    Reminders screen
+ */
+"label.remindersTitle" = "Reminders";
+"label.addReminder" = "Add reminder";
+"label.existingReminders" = "Existing reminders (swipe left to delete)";
+"placeholder.inputReminder.title" = "Reminder text";

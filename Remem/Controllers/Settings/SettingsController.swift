@@ -8,11 +8,14 @@
 import UIKit
 
 class SettingsController: UIViewController {
+    // MARK: I18n
+    static let title = NSLocalizedString("button.settings", comment: "Settings screen title")
+
     // MARK: - View lifecycle
     fileprivate let viewRoot = SettingsView()
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        title = "Settings"
+        title = Self.title
         setupEventsHandlers()
     }
 }

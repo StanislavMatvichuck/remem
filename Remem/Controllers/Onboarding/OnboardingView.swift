@@ -8,6 +8,13 @@
 import UIKit
 
 class OnboardingView: UIView {
+    // MARK: - I18n
+    static let greeting = NSLocalizedString(
+        "onboarding.greeting", comment: "onboarding hello")
+    static let tapToProceed = NSLocalizedString(
+        "onboarding.tapToProceed", comment: "onboarding tap to proceed")
+    static let cancel = NSLocalizedString(
+        "onboarding.close", comment: "onboarding close")
     //
 
     // MARK: - Properties
@@ -29,7 +36,7 @@ class OnboardingView: UIView {
         label.textColor = .label
         label.numberOfLines = 0
 
-        label.text = "Greetings!"
+        label.text = Self.greeting
         
         label.isHidden = true
         
@@ -50,7 +57,7 @@ class OnboardingView: UIView {
         let label = createLabel()
         
         label.font = .systemFont(ofSize: .font1)
-        label.text = "tap to proceed 👆"
+        label.text = Self.tapToProceed
         
         label.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: .delta1).isActive = true
         
@@ -60,7 +67,7 @@ class OnboardingView: UIView {
     lazy var labelClose: UILabel = {
         let label = UILabel(al: true)
         label.font = .systemFont(ofSize: .font1)
-        label.text = "Close"
+        label.text = Self.cancel
         
         label.isHidden = true
         

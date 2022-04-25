@@ -8,6 +8,14 @@
 import UIKit
 
 class ReminderInput: UIControl {
+    // MARK: I18n
+    static let titleCancel = NSLocalizedString("button.cancel", comment: "UIReminderInput cancel title")
+    static let titleSubmit = NSLocalizedString("button.reminder.submit.title", comment: "UIReminderInput submit title")
+    static let timeCancel = NSLocalizedString("button.reminder.cancel.time", comment: "UIReminderInput cancel time")
+    static let timeSubmit = NSLocalizedString("button.reminder.submit.time", comment: "UIReminderInput submit time")
+    static let placeholderTitle = NSLocalizedString("placeholder.inputReminder.title", comment: "UIReminderInput title placeholder")
+
+    // MARK: - Type props
     typealias ValueTuple = (title: String?, hour: Int?, minute: Int?)
 
     static let formatter: DateFormatter = {
@@ -32,26 +40,26 @@ class ReminderInput: UIControl {
 
     // MARK: - View props
     private lazy var titleCancel = UIBarButtonItem(
-        title: "Cancel", style: .plain,
+        title: Self.titleCancel, style: .plain,
         target: self, action: #selector(handlePressCancel)
     )
     private lazy var titleSubmit = UIBarButtonItem(
-        title: "Choose time", style: .done,
+        title: Self.titleSubmit, style: .done,
         target: self, action: #selector(handleTitleSubmit)
     )
     private lazy var timeCancel = UIBarButtonItem(
-        title: "Back", style: .plain,
+        title: Self.timeCancel, style: .plain,
         target: self, action: #selector(handlePressCancel)
     )
     private lazy var timeSubmit = UIBarButtonItem(
-        title: "Add reminder", style: .done,
+        title: Self.timeSubmit, style: .done,
         target: self, action: #selector(handleTimeSubmit)
     )
 
     private lazy var titleInput: UITextField = {
         let input = UITextFieldWithPadding()
         let placeholderText = NSAttributedString(
-            string: "Enter a title",
+            string: Self.placeholderTitle,
             attributes: [
                 NSAttributedString.Key.foregroundColor:
                     UIColor.label.withAlphaComponent(0.6),

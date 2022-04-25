@@ -8,6 +8,11 @@
 import UIKit
 
 class RemindersController: UITableViewController {
+    // MARK: - I18n
+    static let title = NSLocalizedString("label.remindersTitle", comment: "Reminders screen title")
+    static let addReminder = NSLocalizedString("label.addReminder", comment: "Reminders screen first section title")
+    static let existingReminders = NSLocalizedString("label.existingReminders", comment: "Reminders screen second section title")
+
     // MARK: - Properties
     let service = LocalNotificationsService()
     var reminders: [UNNotificationRequest]?
@@ -17,14 +22,14 @@ class RemindersController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Reminders"
+        title = Self.title
 
         setupTableView()
         setupEventHandlers()
 
         service.delegate = self
         service.requestPendingNotifications()
-        
+
         view.backgroundColor = UIColor.secondarySystemBackground
     }
 }
@@ -36,7 +41,7 @@ extension RemindersController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 0 ? "Add reminder" : "Existing reminders (swipe left to delete)"
+        section == 0 ? Self.addReminder : Self.existingReminders
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
