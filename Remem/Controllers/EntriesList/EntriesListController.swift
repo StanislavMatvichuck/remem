@@ -270,7 +270,7 @@ extension EntriesListController: EntriesListOnboardingControllerDelegate {
         viewRoot.swiper.showSettings()
         viewRoot.input.enableCancelButton()
         
-        coreDataStack.onboardingContext.persistentStoreCoordinator?.clearInMemoryStore()
+        coreDataStack.resetOnboardingContainer()
         
         setupModel(with: coreDataStack.defaultContext)
     }
