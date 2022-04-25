@@ -24,8 +24,8 @@ class OnboardingController: UIViewController {
         //
         case showTextGreeting
         case showTextName
-        case showTextFirstQuestion
-        case showTextSecondQuestion
+//        case showTextFirstQuestion
+//        case showTextSecondQuestion
         case showTextHint
         case showTextStartIsEasy
         case highlightBottomSection

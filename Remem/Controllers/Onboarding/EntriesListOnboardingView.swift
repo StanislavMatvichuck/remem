@@ -50,24 +50,24 @@ class EntriesListOnboardingView: OnboardingView {
         return label
     }()
     
-    lazy var labelQuestion01: UILabel = {
-        let label = createLabel()
-        label.text = Self.question01
-        label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
-        return label
-    }()
-    
-    lazy var labelQuestion02: UILabel = {
-        let label = createLabel()
-        label.text = Self.question02
-        label.topAnchor.constraint(equalTo: labelQuestion01.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
-        return label
-    }()
+//    lazy var labelQuestion01: UILabel = {
+//        let label = createLabel()
+//        label.text = Self.question01
+//        label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+//        return label
+//    }()
+//
+//    lazy var labelQuestion02: UILabel = {
+//        let label = createLabel()
+//        label.text = Self.question02
+//        label.topAnchor.constraint(equalTo: labelQuestion01.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+//        return label
+//    }()
     
     lazy var labelHint: UILabel = {
         let label = createLabel()
         label.text = Self.useCaseDescription
-        label.topAnchor.constraint(equalTo: labelQuestion02.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
+        label.topAnchor.constraint(equalTo: labelMyNameIs.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()
     
@@ -109,6 +109,7 @@ class EntriesListOnboardingView: OnboardingView {
     lazy var labelAdditionalSwipes: UILabel = {
         let label = createLabel()
         label.text = "1 / 5"
+        label.font = .systemFont(ofSize: .font2, weight: .bold)
         label.topAnchor.constraint(equalTo: labelSwipeComplete.bottomAnchor, constant: labelsVerticalSpacing).isActive = true
         return label
     }()

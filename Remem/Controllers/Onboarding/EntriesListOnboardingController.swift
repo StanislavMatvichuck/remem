@@ -97,10 +97,10 @@ class EntriesListOnboardingController: OnboardingController {
         case .showTextName:
             animator.show(labels: viewRoot.labelMyNameIs)
             animator.hide(labels: viewRoot.labelTapToProceed)
-        case .showTextFirstQuestion:
-            animator.show(labels: viewRoot.labelQuestion01)
-        case .showTextSecondQuestion:
-            animator.show(labels: viewRoot.labelQuestion02)
+//        case .showTextFirstQuestion:
+//            animator.show(labels: viewRoot.labelQuestion01)
+//        case .showTextSecondQuestion:
+//            animator.show(labels: viewRoot.labelQuestion02)
         case .showTextHint:
             animator.show(labels: viewRoot.labelHint)
         case .showTextStartIsEasy:
@@ -108,10 +108,11 @@ class EntriesListOnboardingController: OnboardingController {
             
             viewRoot.labelTitle.text = " "
             
-            animator.hide(labels: viewRoot.labelMyNameIs,
-                          viewRoot.labelQuestion01,
-                          viewRoot.labelQuestion02,
-                          viewRoot.labelHint)
+            animator.hide(labels:
+                viewRoot.labelMyNameIs,
+//                viewRoot.labelQuestion01,
+//                viewRoot.labelQuestion02,
+                viewRoot.labelHint)
             
             animator.show(labels: viewRoot.labelStart) {
                 self.currentStep = .highlightBottomSection

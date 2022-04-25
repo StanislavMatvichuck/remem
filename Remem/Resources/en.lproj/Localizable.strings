@@ -14,44 +14,44 @@
 "onboarding.close" = "Close";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "I am tracking app called Remem and I am designed to help you to answer following questions:";
+"onboarding.entriesList.start" = "I am an application-counter. That means I help count things and inspect results.";
 /* onboarding entries list question 01 */
-"onboarding.entriesList.question1" = "- when did an event last happened?";
+//"onboarding.entriesList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
-"onboarding.entriesList.question2" = "- how many events happen in a week?";
-/* onboarding entries list use cases description */
-"onboarding.entriesList.useCases" = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly";
+//"onboarding.entriesList.question2" = "- how many events happen in a week?";
+// onboarding entries list use cases description
+"onboarding.entriesList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want to remember exactly";
 /* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "Start is easy. Swipe up the screen to create an event";
+"onboarding.entriesList.entryCreation.start" = "First, you have to create an event. Swipe up the screen to do it";
 /* onboarding entries list entry creation naming */
-"onboarding.entriesList.entryCreation.name" = "Give it a name. Using emojis is encouraged!";
+"onboarding.entriesList.entryCreation.name" = "Give it a short name. Using emoji is encouraged!";
 /* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Since that moment I can record each time this event happens, but not without your help, of course.";
+"onboarding.entriesList.entryCreation.finish" = "Now event is created. Next step is to place a point in it";
 /* onboarding entries list entry add points */
-"onboarding.entriesList.addPoints" = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it";
+"onboarding.entriesList.addPoints" = "You do it by swiping a circle, just like accepting a call. Please try";
 /* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it";
+"onboarding.entriesList.addAdditionalPoints" = "Success! Please add a point 4 more times";
 /* onboarding entries list test entry appeared */
-"onboarding.entriesList.filledEntry.description" = "Now let`s assume that you have been using me for some time. You will receive something like that";
+"onboarding.entriesList.filledEntry.description" = "Now you know how to provide me with information. Look what I can show you after a month, for example";
 /* onboarding entries list test entry inspect */
-"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view details";
+"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view event details";
 
 /* onboarding entry details start */
-"onboarding.entryDetails.start" = "Details screen description";
+"onboarding.entryDetails.start" = "You visit this screen to see recorded data. There are 3 displays available.";
 /* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "Points list description";
+"onboarding.entryDetails.pointsList.description" = "A list of points. Each circle swipe is simply fixed in time";
 /* onboarding entry details points display scrollable */
-"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Try";
+"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Please try to scroll";
 /* onboarding entry details stats display description */
-"onboarding.entryDetails.stats.description" = "Statistics description";
+"onboarding.entryDetails.stats.description" = "Statistics. Daily and weekly numbers that you might me interested in";
 /* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "Statistics is scrollable";
+"onboarding.entryDetails.stats.scrollable" = "Statistics display is scrollable horizontally. Please try to scroll";
 /* onboarding entry details week display description */
-"onboarding.entryDetails.week.description" = "Week display";
+"onboarding.entryDetails.week.description" = "Week distribution. Very useful to make up a good habit discipline on a 7-day basis";
 /* onboarding entry details week display scrollable */
-"onboarding.entryDetails.week.scrollable" = "Week display is scrollable";
+"onboarding.entryDetails.week.scrollable" = "It is also scrollable horizontally. Please try scrolling";
 /* onboarding entry details final */
-"onboarding.entryDetails.final" = "Final text";
+"onboarding.entryDetails.final" = "That is all you need to know to find this application useful.\n\nOne more thing: check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
 
 /*
     UISwipingSelector button settings
@@ -87,7 +87,8 @@
 "label.footer" = "Forged with ❤️ in 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "You have no entries yet. Swipe up to create";
+//"empty.entriesList" = "You have no entries yet. Swipe up to create";
+"empty.entriesList" = "";
 
 /*
     Reminders screen

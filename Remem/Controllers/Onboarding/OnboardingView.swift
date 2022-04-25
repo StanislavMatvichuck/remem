@@ -26,7 +26,7 @@ class OnboardingView: UIView {
 
     lazy var viewBackground: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .systemGray2
+        view.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.92)
         return view
     }()
 
@@ -156,7 +156,7 @@ class OnboardingView: UIView {
         label.textColor = .label
         label.numberOfLines = 0
         label.isHidden = true
-        
+
         addSubview(label)
         
         NSLayoutConstraint.activate([
