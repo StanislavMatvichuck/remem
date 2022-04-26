@@ -36,6 +36,11 @@ class EntriesListController: UIViewController {
         viewRoot.viewTable.dataSource = self
         viewRoot.viewTable.delegate = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startOnboardingForNewUser()
+    }
 }
 
 // MARK: - Internal
@@ -240,6 +245,17 @@ extension EntriesListController: CellMainDelegate {
 extension EntriesListController: EntriesListOnboardingControllerDataSource {
     var viewSwiper: UIView { viewRoot.swiper }
     var viewInput: UIView { viewRoot.input.onboardingHighlight }
+}
+
+// MARK: First time launch logic
+extension EntriesListController {
+    var openedPreviously: Bool { UserDefaults.standard.bool(forKey: "openedPreviously") }
+    
+    private func startOnboardingForNewUser() {
+        guard !openedPreviously else { return }
+        UserDefaults.standard.set(true, forKey: "openedPreviously")
+        startOnboarding()
+    }
 }
 
 extension EntriesListController: EntriesListOnboardingControllerDelegate {
