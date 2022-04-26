@@ -14,38 +14,40 @@
 "onboarding.close" = "Close";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "I am an application-counter. That means I help count things and inspect results.";
+"onboarding.entriesList.start" = "I am an application-counter. That means I help count things and inspect results";
 /* onboarding entries list question 01 */
 //"onboarding.entriesList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
 //"onboarding.entriesList.question2" = "- how many events happen in a week?";
 // onboarding entries list use cases description
-"onboarding.entriesList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want to remember exactly";
+"onboarding.entriesList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want fix in time";
 /* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "First, you have to create an event. Swipe up the screen to do it";
+"onboarding.entriesList.entryCreation.start" = "First, you have to create an event. Swipe up to do it";
 /* onboarding entries list entry creation naming */
 "onboarding.entriesList.entryCreation.name" = "Give it a short name. Using emoji is encouraged!";
 /* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Now event is created. Next step is to place a point in it";
+"onboarding.entriesList.entryCreation.finish" = "Now event is created. Next step is to place a mark in time";
 /* onboarding entries list entry add points */
 "onboarding.entriesList.addPoints" = "You do it by swiping a circle, just like accepting a call. Please try";
 /* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Success! Please add a point 4 more times";
+"onboarding.entriesList.addAdditionalPoints" = "Success! Please add a mark 4 more times";
 /* onboarding entries list test entry appeared */
 "onboarding.entriesList.filledEntry.description" = "Now you know how to provide me with information. Look what I can show you after a month, for example";
 /* onboarding entries list test entry inspect */
 "onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view event details";
 
+/* onboarding entry details title */
+"onboarding.entryDetails.title" = "Details";
 /* onboarding entry details start */
 "onboarding.entryDetails.start" = "You visit this screen to see recorded data. There are 3 displays available.";
 /* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "A list of points. Each circle swipe is simply fixed in time";
+"onboarding.entryDetails.pointsList.description" = "A list of marks. Each circle swipe is simply fixed in time";
 /* onboarding entry details points display scrollable */
 "onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Please try to scroll";
 /* onboarding entry details stats display description */
 "onboarding.entryDetails.stats.description" = "Statistics. Daily and weekly numbers that you might me interested in";
 /* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "Statistics display is scrollable horizontally. Please try to scroll";
+"onboarding.entryDetails.stats.scrollable" = "It is scrollable horizontally. Please try to scroll";
 /* onboarding entry details week display description */
 "onboarding.entryDetails.week.description" = "Week distribution. Very useful to make up a good habit discipline on a 7-day basis";
 /* onboarding entry details week display scrollable */
@@ -97,3 +99,11 @@
 "label.addReminder" = "Add reminder";
 "label.existingReminders" = "Existing reminders (swipe left to delete)";
 "placeholder.inputReminder.title" = "Reminder text";
+
+/*
+    EntryDetails screen
+ */
+"label.stats.average.week" = "Week average";
+"label.stats.average.day" = "Day average";
+"label.stats.weekThis.total" = "This week total";
+"label.stats.weekLast.total" = "Last week total";

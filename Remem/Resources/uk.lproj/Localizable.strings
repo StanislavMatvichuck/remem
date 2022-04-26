@@ -14,44 +14,46 @@
 "onboarding.close" = "Закрити";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "I am tracking app called Remem and I am designed to help you to answer following questions:";
+"onboarding.entriesList.start" = "Я застосунок-лічильник. Це означає що я допомогаю рахувати штуки та дивитися на результати";
 /* onboarding entries list question 01 */
-"onboarding.entriesList.question1" = "- when did an event last happened?";
+//"onboarding.entriesList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
-"onboarding.entriesList.question2" = "- how many events happen in a week?";
+//"onboarding.entriesList.question2" = "- how many events happen in a week?";
 /* onboarding entries list use cases description */
-"onboarding.entriesList.useCases" = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly";
+"onboarding.entriesList.useCases" = "Використовуй мене для того щоб відслідковувати події як то зпалена сигарета, випита чашка кави, зроблена зранку зарядка чи випита таблетка.\nБудь-які періодичні події які ти бажаеш зафіксувати у часі";
 /* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "Start is easy. Swipe up the screen to create an event";
+"onboarding.entriesList.entryCreation.start" = "Спершу тобі потрібно створити подію. Проведи догори щоб це зробити";
 /* onboarding entries list entry creation naming */
-"onboarding.entriesList.entryCreation.name" = "Give it a name. Using emojis is encouraged!";
+"onboarding.entriesList.entryCreation.name" = "Дай їй коротеньке ім'я. Використання емодзі заохочується!";
 /* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Since that moment I can record each time this event happens, but not without your help, of course.";
+"onboarding.entriesList.entryCreation.finish" = "Подію створено. Наступний крок це розмістити відмітку у часі";
 /* onboarding entries list entry add points */
-"onboarding.entriesList.addPoints" = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it";
+"onboarding.entriesList.addPoints" = "Ти можеш це зробити проводячи коло праворуч, так само як прийняти дзвінок. Спробуй будь ласка";
 /* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it";
+"onboarding.entriesList.addAdditionalPoints" = "Успіх! Будь ласка додай ще 4 відмітки";
 /* onboarding entries list test entry appeared */
-"onboarding.entriesList.filledEntry.description" = "Now let`s assume that you have been using me for some time. You will receive something like that";
+"onboarding.entriesList.filledEntry.description" = "Тепер ти вміеш надавати мені інформацію. Давай подивимось, що я зможу тобі показати, наприклад, через місяць";
 /* onboarding entries list test entry inspect */
-"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view details";
+"onboarding.entriesList.filledEntry.inspect" = "Тицьни по колу щоб подивитись на подробиці події";
 
+/* onboarding entry details title */
+"onboarding.entryDetails.title" = "Подробиці";
 /* onboarding entry details start */
-"onboarding.entryDetails.start" = "Details screen description";
+"onboarding.entryDetails.start" = "Ти відвідуєш цей екран щоб подивитися на записані дані. Наразі він має три секції";
 /* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "Points list description";
+"onboarding.entryDetails.pointsList.description" = "Список відміток. Кожен свайп кола просто фіксується у часі";
 /* onboarding entry details points display scrollable */
-"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Try";
+"onboarding.entryDetails.pointsList.scrollable" = "Він прокручується вертикально. Спробуй будь ласка";
 /* onboarding entry details stats display description */
-"onboarding.entryDetails.stats.description" = "Statistics description";
+"onboarding.entryDetails.stats.description" = "Статистика. Денні та тижневі цифри, які можуть бути тобі цікаві";
 /* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "Statistics is scrollable";
+"onboarding.entryDetails.stats.scrollable" = "Вона прокручується горизонтально. Спробуй будь ласка";
 /* onboarding entry details week display description */
-"onboarding.entryDetails.week.description" = "Week display";
+"onboarding.entryDetails.week.description" = "Розподілення по тижнях. Дуже корисно для будування корисної звички на тижневій основі";
 /* onboarding entry details week display scrollable */
-"onboarding.entryDetails.week.scrollable" = "Week display is scrollable";
+"onboarding.entryDetails.week.scrollable" = "Воно також прокручується горизонтально. Спробуй будь ласка";
 /* onboarding entry details final */
-"onboarding.entryDetails.final" = "Final text";
+"onboarding.entryDetails.final" = "Це все що потрібно знати для того щоб цей застосунок був корисним.\n\nНа завершення я рекомендую відвідати розділ з налаштуваннями (проведіть вгору на основному екрані щоб відкрити) і встановити собі нагадайку, вона точно стане у нагоді!\n\nВдалого рахування!";
 
 /*
     UISwipingSelector button settings
@@ -87,7 +89,7 @@
 "label.footer" = "Виковано з ❤️ в 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "You have no entries yet. Swipe up to create";
+"empty.entriesList" = "";
 
 /*
     Reminders screen
@@ -96,3 +98,11 @@
 "label.addReminder" = "Додати нагадайку";
 "label.existingReminders" = "Існуючі нагадайки (проведіть ліворуч щоб видалити)";
 "placeholder.inputReminder.title" = "Текст нагадайки";
+
+/*
+    EntryDetails screen
+ */
+"label.stats.average.week" = "Середнє за тиждень";
+"label.stats.average.day" = "Середнє за день";
+"label.stats.weekThis.total" = "Всього за цей тиждень";
+"label.stats.weekLast.total" = "Всього за минулий тиждень";

@@ -9,49 +9,51 @@
 /* onboarding hello */
 "onboarding.greeting" = "Приветствую!";
 /* onboarding tap to proceed */
-"onboarding.tapToProceed" = "нажмите чтобы продолжить 👆";
+"onboarding.tapToProceed" = "нажми чтобы продолжить 👆";
 /* onboarding close */
 "onboarding.close" = "Закрыть";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "I am tracking app called Remem and I am designed to help you to answer following questions:";
+"onboarding.entriesList.start" = "Я приложение-счетчик. Это значит я помогаю считать штуки и смотреть на результаты";
 /* onboarding entries list question 01 */
-"onboarding.entriesList.question1" = "- when did an event last happened?";
+//"onboarding.entriesList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
-"onboarding.entriesList.question2" = "- how many events happen in a week?";
+//"onboarding.entriesList.question2" = "- how many events happen in a week?";
 /* onboarding entries list use cases description */
-"onboarding.entriesList.useCases" = "You can use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills. Whatever periodic event you want to track exactly";
+"onboarding.entriesList.useCases" = "Используй меня для того чтобы считать такие события как выкуренная сигарета, выпитая чашка кофе, сделанная утром зарядка или выпитые таблетки.\nЛюбые периодичные события, которые хотелось бы зафиксировать во времени";
 /* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "Start is easy. Swipe up the screen to create an event";
+"onboarding.entriesList.entryCreation.start" = "Сперва нужно создать событие. Потяни вверх чтобы это сделать";
 /* onboarding entries list entry creation naming */
-"onboarding.entriesList.entryCreation.name" = "Give it a name. Using emojis is encouraged!";
+"onboarding.entriesList.entryCreation.name" = "Дай ему небольшое имя. Использование эмодзи поощряется!";
 /* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Since that moment I can record each time this event happens, but not without your help, of course.";
+"onboarding.entriesList.entryCreation.finish" = "Событие создано. Следующий шаг это добавление отметки во времени";
 /* onboarding entries list entry add points */
-"onboarding.entriesList.addPoints" = "You do the job of notifying me by swiping a circle, just like accepting a call. Try it";
+"onboarding.entriesList.addPoints" = "Ты делаешь это проводя кругом вправо, точно также как принятие звонка. Попробуй пожалуйста";
 /* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Nice! Now I will Remember that moment in time and let you review it later. Do it couple more times to get used to it";
+"onboarding.entriesList.addAdditionalPoints" = "Успех! Пожалуйста добавь еще 4 отметки";
 /* onboarding entries list test entry appeared */
-"onboarding.entriesList.filledEntry.description" = "Now let`s assume that you have been using me for some time. You will receive something like that";
+"onboarding.entriesList.filledEntry.description" = "Теперь ты знаешь как предоставлять мне информацию. Давай посмотрим что я смогу показать тебе, например, через месяц";
 /* onboarding entries list test entry inspect */
-"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view details";
+"onboarding.entriesList.filledEntry.inspect" = "Нажми на круг чтобы увидеть подробности";
 
+/* onboarding entry details title */
+"onboarding.entryDetails.title" = "Подробности";
 /* onboarding entry details start */
-"onboarding.entryDetails.start" = "Details screen description";
+"onboarding.entryDetails.start" = "Ты посещаешь этот экран чтобы смотреть записанные данные. Он состоит из трёх частей";
 /* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "Points list description";
+"onboarding.entryDetails.pointsList.description" = "Список отметок. Каждый свайп круга просто фиксируется во времени";
 /* onboarding entry details points display scrollable */
-"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Try";
+"onboarding.entryDetails.pointsList.scrollable" = "Он прокручивается вертикально. Попробуй пожалуйста";
 /* onboarding entry details stats display description */
-"onboarding.entryDetails.stats.description" = "Statistics description";
+"onboarding.entryDetails.stats.description" = "Статистика. Дневные и недельные цифры, которые могут быть тебе интересны";
 /* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "Statistics is scrollable";
+"onboarding.entryDetails.stats.scrollable" = "Она прокручивается горизонтально. Попробуй пожалуйста";
 /* onboarding entry details week display description */
-"onboarding.entryDetails.week.description" = "Week display";
+"onboarding.entryDetails.week.description" = "Недельное распределение. Очень полезно для создания полезных привычек на 7-дневной основе";
 /* onboarding entry details week display scrollable */
-"onboarding.entryDetails.week.scrollable" = "Week display is scrollable";
+"onboarding.entryDetails.week.scrollable" = "Оно тоже прокручивается горизонтально. Попробуй пожалуйста";
 /* onboarding entry details final */
-"onboarding.entryDetails.final" = "Final text";
+"onboarding.entryDetails.final" = "Это всё что нужно знать чтобы это приложение было тебе полезно.\n\nВ конце я рекомендую зайти в настройки (потяни вверх на основном экране чтобы открыть) и добавить себе напоминание, оно тебе точно пригодится!\n\nУдачных подсчетов!";
 
 /*
     UISwipingSelector button settings
@@ -87,7 +89,7 @@
 "label.footer" = "Выковано с ❤️ в 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "Записей пока нет. Потяните вверх чтобы добавить";
+"empty.entriesList" = "";
 
 /*
     Reminders screen
@@ -96,3 +98,11 @@
 "label.addReminder" = "Добавить напоминание";
 "label.existingReminders" = "Существующие напоминания (проведите влево чтобы удалить)";
 "placeholder.inputReminder.title" = "Текст напоминания";
+
+/*
+    EntryDetails screen
+ */
+"label.stats.average.week" = "Среднее за неделю";
+"label.stats.average.day" = "Среднее за день";
+"label.stats.weekThis.total" = "Всего за эту неделю";
+"label.stats.weekLast.total" = "Всего за прошлую неделю";

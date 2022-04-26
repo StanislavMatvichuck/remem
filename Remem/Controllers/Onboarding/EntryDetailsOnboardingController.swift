@@ -8,6 +8,11 @@
 import UIKit
 
 class EntryDetailsOnboardingController: OnboardingController {
+    // MARK: I18n
+    static let localizedTitle = NSLocalizedString("onboarding.entryDetails.title",
+                                                  comment: "onboarding entry details title")
+
+    // MARK: - Properties
     let viewRoot = EntryDetailsOnboardingView()
 
     override func loadView() {
@@ -19,7 +24,7 @@ class EntryDetailsOnboardingController: OnboardingController {
         case .showTextEntryDetails:
             enableTap()
 
-            viewRoot.labelTitle.text = "Details screen"
+            viewRoot.labelTitle.text = Self.localizedTitle
 
             animator.show(labels: viewRoot.labelTitle,
                           viewRoot.labelClose,

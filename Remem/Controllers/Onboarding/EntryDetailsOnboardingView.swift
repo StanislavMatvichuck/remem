@@ -9,30 +9,22 @@ import UIKit
 
 class EntryDetailsOnboardingView: OnboardingView {
     // MARK: - I18n
-    static let start = NSLocalizedString(
-        "onboarding.entryDetails.start",
-        comment: " onboarding entry details start")
-    static let pointsDescription = NSLocalizedString(
-        "onboarding.entryDetails.pointsList.description",
-        comment: " onboarding entry details points display description")
-    static let pointsScrollable = NSLocalizedString(
-        "onboarding.entryDetails.pointsList.scrollable",
-        comment: " onboarding entry details points display scrollable")
-    static let statsDescription = NSLocalizedString(
-        "onboarding.entryDetails.stats.description",
-        comment: " onboarding entry details stats display description")
-    static let statsScrollable = NSLocalizedString(
-        "onboarding.entryDetails.stats.scrollable",
-        comment: " onboarding entry details stats display scrollable")
-    static let weekDescription = NSLocalizedString(
-        "onboarding.entryDetails.week.description",
-        comment: " onboarding entry details week display description")
-    static let weekScrollable = NSLocalizedString(
-        "onboarding.entryDetails.week.scrollable",
-        comment: " onboarding entry details week display scrollable")
-    static let final = NSLocalizedString(
-        "onboarding.entryDetails.final",
-        comment: " onboarding entry details final")
+    static let start = NSLocalizedString("onboarding.entryDetails.start",
+                                         comment: "onboarding entry details start")
+    static let pointsDescription = NSLocalizedString("onboarding.entryDetails.pointsList.description",
+                                                     comment: "onboarding entry details points display description")
+    static let pointsScrollable = NSLocalizedString("onboarding.entryDetails.pointsList.scrollable",
+                                                    comment: "onboarding entry details points display scrollable")
+    static let statsDescription = NSLocalizedString("onboarding.entryDetails.stats.description",
+                                                    comment: "onboarding entry details stats display description")
+    static let statsScrollable = NSLocalizedString("onboarding.entryDetails.stats.scrollable",
+                                                   comment: "onboarding entry details stats display scrollable")
+    static let weekDescription = NSLocalizedString("onboarding.entryDetails.week.description",
+                                                   comment: "onboarding entry details week display description")
+    static let weekScrollable = NSLocalizedString("onboarding.entryDetails.week.scrollable",
+                                                  comment: "onboarding entry details week display scrollable")
+    static let final = NSLocalizedString("onboarding.entryDetails.final",
+                                         comment: "onboarding entry details final")
 
     lazy var labelScreenDescription: UILabel = {
         let label = createLabel()

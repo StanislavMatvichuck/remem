@@ -8,6 +8,12 @@ import CoreData.NSFetchedResultsController
 import UIKit
 
 class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
+    // MARK: I18n
+    static let dayAverage = NSLocalizedString("label.stats.average.day", comment: "EntryDetailsScreen")
+    static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "EntryDetailsScreen")
+    static let lastWeekTotal = NSLocalizedString("label.stats.weekLast.total", comment: "EntryDetailsScreen")
+    static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EntryDetailsScreen")
+
     // MARK: - Properties
     var model: EntryDetailsModelInterface!
     private var scrollHappened = false
@@ -57,10 +63,10 @@ extension EntryDetailsController {
     }
 
     private func setupViewStats() {
-        let viewDayAverage = ViewStatDisplay(value: model.dayAverage, description: "Day average")
-        let viewWeekAverage = ViewStatDisplay(value: model.weekAverage, description: "Week average")
-        let viewLastWeekTotal = ViewStatDisplay(value: model.lastWeekTotal, description: "Last week total")
-        let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: "This week total")
+        let viewDayAverage = ViewStatDisplay(value: model.dayAverage, description: Self.dayAverage)
+        let viewWeekAverage = ViewStatDisplay(value: model.weekAverage, description: Self.weekAverage)
+        let viewLastWeekTotal = ViewStatDisplay(value: model.lastWeekTotal, description: Self.lastWeekTotal)
+        let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: Self.thisWeekTotal)
 
         viewRoot.viewStatsDisplay.contain(views:
             viewDayAverage,

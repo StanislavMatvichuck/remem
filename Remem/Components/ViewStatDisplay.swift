@@ -8,22 +8,7 @@
 import UIKit
 
 class ViewStatDisplay: UIView {
-    //
-
-    // MARK: - Public properties
-
-    //
-    //
-
-    // MARK: - Private properties
-
-    //
-
-    //
-
-    // MARK: - Initialization
-
-    //
+    // MARK: - Init
     init(value: NSNumber, description: String) {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -36,38 +21,39 @@ class ViewStatDisplay: UIView {
         backgroundColor = .secondarySystemBackground
         layer.cornerRadius = .delta1
 
-        let labelAmount = UILabel(frame: .zero)
-        labelAmount.translatesAutoresizingMaskIntoConstraints = false
+        let labelAmount = UILabel(al: true)
         labelAmount.text = formatter.string(from: value)
         labelAmount.numberOfLines = 1
         labelAmount.font = .systemFont(ofSize: .font2)
         labelAmount.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-        let labelDescription = UILabel(frame: .zero)
-        labelDescription.translatesAutoresizingMaskIntoConstraints = false
+        let labelDescription = UILabel(al: true)
         labelDescription.text = description
         labelDescription.font = .systemFont(ofSize: .font1)
-        labelDescription.numberOfLines = 2
+        labelDescription.numberOfLines = 0
         labelDescription.setContentHuggingPriority(.defaultLow, for: .vertical)
 
-        addSubview(labelAmount)
-        addSubview(labelDescription)
+        let flexibleSpace = UIView(al: true)
+
+        let stack = UIStackView(al: true)
+        stack.axis = .vertical
+        stack.spacing = .delta1
+
+        stack.addArrangedSubview(labelAmount)
+        stack.addArrangedSubview(labelDescription)
+        stack.addArrangedSubview(flexibleSpace)
+        stack.setCustomSpacing(0, after: labelDescription)
+
+        addSubview(stack)
 
         NSLayoutConstraint.activate([
-            labelAmount.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            labelAmount.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
-            labelDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            labelDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
-
-            labelAmount.topAnchor.constraint(equalTo: topAnchor),
-            labelAmount.bottomAnchor.constraint(equalTo: labelDescription.topAnchor),
-            labelDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.delta1),
-
+            stack.topAnchor.constraint(equalTo: topAnchor),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.delta1),
             widthAnchor.constraint(equalToConstant: (.wScreen - 3 * .delta1) / 2),
         ])
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
