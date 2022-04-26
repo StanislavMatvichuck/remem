@@ -7,51 +7,25 @@
 
 import UIKit
 
-class AnimatorOnboarding: NSObject, CAAnimationDelegate {
-    //
-
+class AnimatorOnboarding: Animator {
     // MARK: - Related types
-
-    //
-
     enum Animations {
         case labelDisappear
     }
 
-    enum CodingKeys: String {
+    enum OnboardingCodingKeys: String {
         case name
-        case completionBlock
-
         case labelToBeRemoved
     }
 
-    typealias AnimationCompletionBlock = () -> Void
-
-    //
-
     // MARK: - Private properties
-
-    //
-
     private var viewRoot: UIView
 
-    //
-
-    // MARK: - Initialization
-
-    //
-
-    init(root: UIView) {
-        viewRoot = root
-    }
-
-    //
+    // MARK: - Init
+    init(root: UIView) { viewRoot = root }
 
     // MARK: - Public methods
-
-    //
-
-    func show(labels: UILabel..., completion: AnimationCompletionBlock? = nil) {
+    func show(labels: UILabel..., completion: CompletionBlock? = nil) {
         labels.forEach { $0.isHidden = false }
         viewRoot.layoutIfNeeded()
 
@@ -81,7 +55,7 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
         }
     }
 
-    func hide(labels: UILabel..., completion: AnimationCompletionBlock? = nil) {
+    func hide(labels: UILabel..., completion: CompletionBlock? = nil) {
         for (index, label) in labels.enumerated() {
             label.layer.opacity = 0
 
@@ -91,8 +65,8 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
             group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
             group.delegate = self
-            group.setValue(Animations.labelDisappear, forKey: CodingKeys.name.rawValue)
-            group.setValue(label, forKey: CodingKeys.labelToBeRemoved.rawValue)
+            group.setValue(Animations.labelDisappear, forKey: OnboardingCodingKeys.name.rawValue)
+            group.setValue(label, forKey: OnboardingCodingKeys.labelToBeRemoved.rawValue)
 
             // add callback to last animation
             if index == labels.count - 1 {
@@ -112,30 +86,27 @@ class AnimatorOnboarding: NSObject, CAAnimationDelegate {
             label.layer.add(group, forKey: nil)
         }
     }
+}
 
-    //
+// MARK: - CAAnimationDelegate
+extension AnimatorOnboarding {
+    override func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        super.animationDidStop(anim, finished: flag)
 
-    // MARK: CAAnimationDelegate
+        guard flag else { return }
 
-    //
-
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if
-            flag,
-            let completion = anim.value(forKey: CodingKeys.completionBlock.rawValue) as? AnimationCompletionBlock
+        if let name = anim.value(
+            forKey: OnboardingCodingKeys.name.rawValue)
+            as? Animations
         {
-            completion()
-        }
-
-        guard
-            flag,
-            let name = anim.value(forKey: CodingKeys.name.rawValue) as? Animations
-        else { return }
-
-        switch name {
-        case .labelDisappear:
-            if let label = anim.value(forKey: CodingKeys.labelToBeRemoved.rawValue) as? UILabel {
-                label.isHidden = true
+            switch name {
+            case .labelDisappear:
+                if let label = anim.value(
+                    forKey: OnboardingCodingKeys.labelToBeRemoved.rawValue)
+                    as? UILabel
+                {
+                    label.isHidden = true
+                }
             }
         }
     }

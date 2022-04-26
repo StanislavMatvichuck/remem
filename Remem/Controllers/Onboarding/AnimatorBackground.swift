@@ -7,37 +7,16 @@
 
 import UIKit
 
-class AnimatorBackground: NSObject, CAAnimationDelegate {
-    //
-
-    // MARK: - Related types
-
-    //
-
-    enum CodingKeys: String {
-        case completionBlock
-    }
-
-    //
-
+class AnimatorBackground: Animator {
     // MARK: - Private properties
-
-    //
-
     private var viewRoot: UIView
-
     /// These properties are updated by `shownPath` and `moveShownArea` methods
     private var lastShownPath: UIBezierPath?
     private var lastShownInnerRect: UIBezierPath?
     private var lastShownCornerRadius: CGFloat?
     private var lastHiddenPath: UIBezierPath?
 
-    //
-
-    // MARK: - Initialization
-
-    //
-
+    // MARK: - Init
     init(_ viewWithAnimatedMask: UIView) {
         viewRoot = viewWithAnimatedMask
         super.init()
@@ -50,26 +29,20 @@ class AnimatorBackground: NSObject, CAAnimationDelegate {
         mask.fillRule = .evenOdd
         viewRoot.layer.mask = mask
     }
+}
 
-    //
-
-    // MARK: - Behaviour
-
-    //
-
-    private var outerRectanglePath: UIBezierPath {
-        UIBezierPath(rect: viewRoot.bounds)
-    }
+// MARK: - Private
+extension AnimatorBackground {
+    private var outerRectanglePath: UIBezierPath { UIBezierPath(rect: viewRoot.bounds) }
 
     private func hiddenPath(for view: UIView, cornerRadius: CGFloat = 0) -> UIBezierPath {
         let frame = view.convert(view.bounds, to: viewRoot)
         let path = outerRectanglePath
         let innerRectangle = UIBezierPath(
-            roundedRect: CGRect(
-                x: frame.origin.x + frame.width / 2,
-                y: frame.origin.y + frame.height / 2,
-                width: 0,
-                height: 0),
+            roundedRect: CGRect(x: frame.origin.x + frame.width / 2,
+                                y: frame.origin.y + frame.height / 2,
+                                width: 0,
+                                height: 0),
             cornerRadius: cornerRadius)
         path.append(innerRectangle)
         lastHiddenPath = path
@@ -113,16 +86,10 @@ class AnimatorBackground: NSObject, CAAnimationDelegate {
         mask.path = to.cgPath
         mask.add(animation, forKey: nil)
     }
+}
 
-    //
-
-    // MARK: - Public methods
-
-    //
-
-    // TODO: make this to be a part of superclass for all animators
-    typealias CompletionBlock = () -> Void
-
+// MARK: - Public
+extension AnimatorBackground {
     func show(view: UIView, cornerRadius: CGFloat = 0, offset: CGFloat = 0, completion: CompletionBlock? = nil) {
         let start = hiddenPath(for: view, cornerRadius: cornerRadius)
         let final = shownPath(for: view, cornerRadius: cornerRadius, offset: offset)
@@ -165,11 +132,5 @@ class AnimatorBackground: NSObject, CAAnimationDelegate {
         lastShownInnerRect = newInnerRectangle
 
         animate(from: start, to: final, duration: duration)
-    }
-
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if flag, let completion = anim.value(forKey: CodingKeys.completionBlock.rawValue) as? CompletionBlock {
-            completion()
-        }
     }
 }
