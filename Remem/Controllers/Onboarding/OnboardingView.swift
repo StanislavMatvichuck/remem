@@ -26,7 +26,11 @@ class OnboardingView: UIView {
 
     lazy var viewBackground: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.92)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.addAndConstrain(blurView)
         return view
     }()
 
@@ -77,9 +81,8 @@ class OnboardingView: UIView {
     }()
     
     lazy var viewCircle: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.backgroundColor = UIColor.systemOrange.cgColor
+        let view = UIView(al: true)
+        view.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
         view.layer.cornerRadius = .r2 / 2
         view.isUserInteractionEnabled = false
         view.isHidden = true
@@ -153,6 +156,7 @@ class OnboardingView: UIView {
     func createLabel() -> UILabel {
         let label = UILabel(al: true)
         label.font = .systemFont(ofSize: .font1, weight: .regular)
+//        label.backgroundColor = .secondarySystemBackground
         label.textColor = .label
         label.numberOfLines = 0
         label.isHidden = true

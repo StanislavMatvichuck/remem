@@ -46,7 +46,6 @@ class EntryDetailsOnboardingController: OnboardingController {
             animator.show(labels: viewRoot.labelPointsDisplayDescription)
         case .showTextPointsDisplayScroll:
             disableTap()
-//            animator.hide(labels: viewRoot.labelTapToProceed)
             animator.show(labels: viewRoot.labelPointsDisplayDescriptionSecondary) {
                 self.currentStep = .waitForPointsDisplayScroll
             }
@@ -61,7 +60,7 @@ class EntryDetailsOnboardingController: OnboardingController {
             animator.hide(labels: viewRoot.labelPointsDisplayDescription, viewRoot.labelPointsDisplayDescriptionSecondary)
 
             backgroundAnimator.hide {
-                self.backgroundAnimator.show(view: self.viewToHighlight, offset: .delta1) {
+                self.backgroundAnimator.show(view: self.viewToHighlight, offset: .delta1 - 1) {
                     self.currentStep = .showTextStatsDisplay
                 }
             }
@@ -105,12 +104,10 @@ class EntryDetailsOnboardingController: OnboardingController {
             watch(.WeekDisplayDidScroll)
             circleAnimator.start(.scrollWeekDisplay(view: viewToHighlight))
         case .showTextFinal:
+            disableTap()
             backgroundAnimator.hide()
-
             circleAnimator.stop()
-
             animator.hide(labels: viewRoot.labelWeekDisplayDescription, viewRoot.labelWeekDisplayDescriptionSecondary)
-
             animator.show(labels: viewRoot.labelFinal)
         default:
             fatalError("Unhandled step")

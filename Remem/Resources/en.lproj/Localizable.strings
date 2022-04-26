@@ -51,7 +51,7 @@
 /* onboarding entry details week display scrollable */
 "onboarding.entryDetails.week.scrollable" = "It is also scrollable horizontally. Please try scrolling";
 /* onboarding entry details final */
-"onboarding.entryDetails.final" = "That is all you need to know to find this application useful.\n\nOne more thing: check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
+"onboarding.entryDetails.final" = "That is all you need to know to find this application useful.\n\nIn conclusion, I recommend to check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
 
 /*
     UISwipingSelector button settings

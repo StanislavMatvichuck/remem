@@ -136,7 +136,7 @@ class EntriesListOnboardingController: OnboardingController {
             
             animator.hide(labels: viewRoot.labelStart)
             animator.show(labels: viewRoot.labelEventName)
-            backgroundAnimator.show(view: viewToHighlight, cornerRadius: .r1, offset: 0)
+            backgroundAnimator.show(view: viewToHighlight, offset: .delta1)
             circleAnimator.stop()
             
             currentStep = .waitForEventSubmit
