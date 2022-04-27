@@ -34,10 +34,13 @@ class AnimatorCircle: NSObject {
     }
 
     enum Durations: Double {
-        case appear = 0.3
+        case appear = 0.5
         case position = 0.7
-        case disappear = 0.31
+        case disappear = 0.6
     }
+
+    static let fingerDefaultAngle = -45 * CGFloat.pi / 360
+    static let fingerRotationAngle = 15 * CGFloat.pi / 360
 
     //
 
@@ -48,7 +51,7 @@ class AnimatorCircle: NSObject {
     private var mode = Mode.addItem
     private var lastIteration = false
 
-    private var verticalTravelDistance: CGFloat = 2 * .d2
+    private var verticalTravelDistance: CGFloat = 0.3 * .hScreen
     private var horizontalTravelDistance: CGFloat = .wScreen - 2 * .delta1 - .d2
     private let fingerTravelDistance: CGFloat = .md
 
@@ -120,10 +123,10 @@ class AnimatorCircle: NSObject {
 
     private func setupViewFingerConstraints() {
         let labelSize = finger.sizeThatFits(CGSize(width: .wScreen, height: .hScreen))
-
+        finger.layer.anchorPoint = CGPoint(x: 423.0 / 668.0, y: 560.0 / 738.0)
         NSLayoutConstraint.activate([
-            finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: labelSize.width / 1.6 + 7),
-            finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
+            finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: 0.75 * labelSize.width),
+            finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: 0.56 * labelSize.height),
         ])
     }
 
@@ -131,7 +134,7 @@ class AnimatorCircle: NSObject {
         circle.transform = .identity
 
         let scaleUp = CABasicAnimation(keyPath: "transform.scale")
-        scaleUp.timingFunction = CAMediaTimingFunction(name: .linear)
+        scaleUp.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         scaleUp.duration = Durations.appear.rawValue
         scaleUp.fillMode = .backwards
@@ -152,7 +155,7 @@ class AnimatorCircle: NSObject {
 
         let group = CAAnimationGroup()
         group.fillMode = .backwards
-        group.timingFunction = CAMediaTimingFunction(name: .linear)
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         group.duration = Durations.appear.rawValue
 
         let opacity = CABasicAnimation(keyPath: "opacity")
@@ -167,7 +170,16 @@ class AnimatorCircle: NSObject {
         translationY.fromValue = fingerTravelDistance
         translationY.toValue = 0
 
-        group.animations = [opacity, translationX, translationY]
+        let translationAngle = CABasicAnimation(keyPath: "transform.rotation.z")
+        translationAngle.fromValue = Self.fingerRotationAngle
+        translationAngle.toValue = Self.fingerDefaultAngle
+
+        group.animations = [
+            opacity,
+            translationX,
+            translationY,
+            translationAngle,
+        ]
 
         finger.layer.add(group, forKey: nil)
     }
@@ -185,7 +197,7 @@ class AnimatorCircle: NSObject {
         circleY.constant -= verticalTravelDistance
 
         let position = CABasicAnimation(keyPath: "position.y")
-        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        position.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         position.fillMode = .backwards
         position.duration = Durations.position.rawValue
 
@@ -202,7 +214,7 @@ class AnimatorCircle: NSObject {
 
     private func fingerMovesUp() {
         let position = CABasicAnimation(keyPath: "position.y")
-        position.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        position.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         position.fillMode = .backwards
         position.duration = Durations.position.rawValue
 
@@ -245,7 +257,7 @@ class AnimatorCircle: NSObject {
 
     private func startDisappearing() {
         let scaleDown = CABasicAnimation(keyPath: "transform.scale")
-        scaleDown.timingFunction = CAMediaTimingFunction(name: .linear)
+        scaleDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         scaleDown.duration = Durations.disappear.rawValue
 
@@ -265,7 +277,7 @@ class AnimatorCircle: NSObject {
     private func fingerDisappear() {
         let group = CAAnimationGroup()
         group.fillMode = .backwards
-        group.timingFunction = CAMediaTimingFunction(name: .linear)
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         group.duration = Durations.appear.rawValue
 
         let opacity = CABasicAnimation(keyPath: "opacity")
@@ -280,7 +292,16 @@ class AnimatorCircle: NSObject {
         translationY.fromValue = 0
         translationY.toValue = fingerTravelDistance
 
-        group.animations = [opacity, translationX, translationY]
+        let translationAngle = CABasicAnimation(keyPath: "transform.rotation.z")
+        translationAngle.fromValue = Self.fingerDefaultAngle
+        translationAngle.toValue = Self.fingerRotationAngle
+
+        group.animations = [
+            opacity,
+            translationX,
+            translationY,
+            translationAngle,
+        ]
 
         finger.layer.add(group, forKey: nil)
 

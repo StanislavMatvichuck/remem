@@ -82,10 +82,24 @@ class OnboardingView: UIView {
     
     lazy var viewCircle: UIView = {
         let view = UIView(al: true)
-        view.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
+        view.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
         view.layer.cornerRadius = .r2 / 2
         view.isUserInteractionEnabled = false
         view.isHidden = true
+        
+        let littleSize = CGFloat.xs * 1.5
+        let littleCenter = UIView(al: true)
+        littleCenter.layer.backgroundColor = UIColor.systemBlue.cgColor
+        littleCenter.layer.cornerRadius = littleSize / 2
+        
+        view.addSubview(littleCenter)
+        
+        NSLayoutConstraint.activate([
+            littleCenter.widthAnchor.constraint(equalToConstant: littleSize),
+            littleCenter.heightAnchor.constraint(equalToConstant: littleSize),
+            littleCenter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            littleCenter.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
         
         addSubview(view)
         
@@ -98,26 +112,18 @@ class OnboardingView: UIView {
         return view
     }()
     
-    lazy var viewFinger: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "👆"
-        label.font = .systemFont(ofSize: .font2)
-        label.transform = CGAffineTransform(rotationAngle: -1 * (.pi / 4))
-        label.isUserInteractionEnabled = false
-        label.isHidden = true
-        
-        addSubview(label)
-        
-        let labelSize = label.sizeThatFits(CGSize(width: .wScreen,
-                                                  height: .hScreen))
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: viewCircle.centerXAnchor, constant: labelSize.width / 1.6 + 7),
-            label.centerYAnchor.constraint(equalTo: viewCircle.centerYAnchor, constant: labelSize.height / 1.6 + 2),
-        ])
-        
-        return label
+    lazy var viewFinger: UIView = {
+        let image = UIImage(systemName: "hand.point.up.left")?
+            .withTintColor(.systemBlue.withAlphaComponent(1.0))
+            .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font:
+                .systemFont(ofSize: 64, weight: .regular)))
+        let view = UIImageView(image: image)
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.transform = CGAffineTransform(rotationAngle: AnimatorCircle.fingerDefaultAngle)
+        addSubview(view)
+        return view
     }()
 
     //
