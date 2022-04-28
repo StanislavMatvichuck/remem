@@ -9,6 +9,9 @@ import CoreData
 import UIKit
 
 class EntriesListController: UIViewController {
+    // MARK: I18n
+    static let delete = NSLocalizedString("button.contextual.delete", comment: "EntriesList swipe gesture actions")
+    
     // MARK: - Properties
 
     var service: EntriesListService!
@@ -142,7 +145,7 @@ extension EntriesListController: UITableViewDelegate {
 
         let deleteView: UILabel = {
             let label = UILabel()
-            label.text = "Delete"
+            label.text = Self.delete
             label.textColor = .white
             label.font = .systemFont(ofSize: .font1, weight: .regular)
             label.sizeToFit()

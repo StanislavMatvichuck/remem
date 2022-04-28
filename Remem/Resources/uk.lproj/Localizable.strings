@@ -73,6 +73,10 @@
     UIMovableTextView accessory
  */
 "button.cancel" = "Відмінити";
+/*
+    EntriesList swipe gesture actions
+ */
+"button.contextual.delete" = "Видалити";
 
 /* UIReminderInput button submit title */
 "button.reminder.submit.title" = "Обрати час";
