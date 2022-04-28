@@ -11,92 +11,67 @@ class EntriesListView: UIView {
     // MARK: I18n
     static let empty = NSLocalizedString("empty.entriesList", comment: "entries list empty")
 
-    //
-
-    // MARK: - Public properties
-
-    //
+    // MARK: - Properties
+    let swiper: UISwipingSelectorInterface = UISwipingSelector()
+    let input: UIMovableTextViewInterface = UIMovableTextView()
 
     let viewTable: UITableView = {
-        let view = UITableView(frame: .zero)
-
+        let view = UITableView(al: true)
         view.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.transform = CGAffineTransform(scaleX: 1, y: -1)
         view.contentInsetAdjustmentBehavior = .never
-        view.backgroundColor = .clear
-
+        view.showsVerticalScrollIndicator = false
         view.tableFooterView = UIView()
+        view.backgroundColor = .clear
         view.allowsSelection = false
         view.separatorStyle = .none
-        view.transform = CGAffineTransform(scaleX: 1, y: -1)
-        view.showsVerticalScrollIndicator = false
-
         return view
     }()
 
-    var swiper: UISwipingSelectorInterface = UISwipingSelector()
-
-    var input: UIMovableTextViewInterface = UIMovableTextView()
-
-    //
-
-    // MARK: - Private properties
-
-    //
-
     private lazy var emptyLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = UILabel(al: true)
         label.text = Self.empty
         label.textAlignment = .center
         label.isHidden = true
         label.numberOfLines = 0
-
         return label
     }()
 
-    //
-
-    // MARK: - Initialization
-
-    //
-
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
-
-        translatesAutoresizingMaskIntoConstraints = false
-
         backgroundColor = .systemBackground
+        setupSwiper()
+        setupTableView()
+        addAndConstrain(input)
+        setupEmptyLabel()
+    }
 
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+// MARK: - Private
+extension EntriesListView {
+    private func setupSwiper() {
         addSubview(swiper)
-
         NSLayoutConstraint.activate([
             swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
             swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
         ])
+    }
 
+    private func setupTableView() {
         addSubview(viewTable)
-
         NSLayoutConstraint.activate([
             viewTable.topAnchor.constraint(equalTo: topAnchor),
             viewTable.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewTable.trailingAnchor.constraint(equalTo: trailingAnchor),
             viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        addAndConstrain(input)
-
-        setupEmptyLabel()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func setupEmptyLabel() {
         addSubview(emptyLabel)
-
         NSLayoutConstraint.activate([
             emptyLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             emptyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .hScreen / 2),
@@ -104,13 +79,10 @@ class EntriesListView: UIView {
             emptyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
     }
+}
 
-    //
-
-    // MARK: - Behaviour
-
-    //
-
+// MARK: - Public
+extension EntriesListView {
     func showEmptyState() {
         emptyLabel.isHidden = false
     }
