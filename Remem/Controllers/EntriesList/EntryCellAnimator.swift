@@ -11,7 +11,7 @@ class EntryCellAnimator: Animator {}
 
 // MARK: - Public
 extension EntryCellAnimator {
-    func pointAdded(cell: EntryCell, delay: Double = 0.0) {
+    func handleUnfinishedSwipe(cell: EntryCell, delay: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "position.x")
         animation.fromValue = cell.movableCenterXPosition
         animation.toValue = cell.movableCenterXInitialPosition
@@ -24,7 +24,7 @@ extension EntryCellAnimator {
         cell.viewMovable.layer.add(animation, forKey: nil)
     }
 
-    func handleUnfinishedSwipe(cell: EntryCell) {
+    func pointAdded(cell: EntryCell) {
         let group = CAAnimationGroup()
         group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         group.autoreverses = true
@@ -47,8 +47,8 @@ extension EntryCellAnimator {
         group.delegate = self
         group.animations = [background, size]
 
-        pointAdded(cell: cell, delay: 0.2)
         cell.viewMovable.layer.position.x = cell.movableCenterXSuccessPosition
         cell.viewMovable.layer.add(group, forKey: nil)
+        handleUnfinishedSwipe(cell: cell, delay: 0.2)
     }
 }

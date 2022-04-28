@@ -114,18 +114,52 @@ extension EntriesListController: UITableViewDataSource {
         
         return row
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension EntriesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cellIndexToBeAnimated == indexPath, let cell = cell as? EntryCell {
-            cellsAnimator.handleUnfinishedSwipe(cell: cell)
+            cellsAnimator.pointAdded(cell: cell)
         }
         
         if newCellIndex == indexPath {
             NotificationCenter.default.post(name: .EntriesListNewEntry, object: cell)
             newCellIndex = nil
+        }
+    }
+
+    // MARK: Right to left row swipe actions
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: nil) { _, _, completion in
+            self.handleDeleteContextualAction(indexPath)
+            completion(true)
+        }
+
+        let deleteView: UILabel = {
+            let label = UILabel()
+            label.text = "Delete"
+            label.textColor = .white
+            label.font = .systemFont(ofSize: .font1, weight: .regular)
+            label.sizeToFit()
+            return label
+        }()
+
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = UIImage(view: deleteView)
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        config.performsFirstActionWithFullSwipe = true
+        return config
+    }
+    
+    private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
+        if let entry = service.entry(at: forIndexPath) {
+            service.remove(entry: entry)
         }
     }
 }
@@ -187,18 +221,8 @@ extension EntriesListController: UIScrollViewDelegate {
     }
 }
 
-// MARK: - CellMainDelegate
+// MARK: - EntryCellDelegate
 extension EntriesListController: EntryCellDelegate {
-    func didLongPressAction(_ cell: EntryCell) {
-        guard
-            let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = service.entry(at: index)
-        else { return }
-     
-        let alert = createManipulationAlert(for: entry)
-        present(alert, animated: true)
-    }
-    
     func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),

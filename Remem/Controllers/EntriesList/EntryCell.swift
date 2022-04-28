@@ -9,7 +9,6 @@ import UIKit
 
 protocol EntryCellDelegate: AnyObject {
     func didSwipeAction(_ cell: EntryCell)
-    func didLongPressAction(_ cell: EntryCell)
     func didPressAction(_ cell: EntryCell)
     func didAnimation(_ cell: EntryCell)
 }
@@ -139,14 +138,6 @@ extension EntryCell {
             target: self, action: #selector(handlePan)))
         viewRoot.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePress)))
-        viewMovable.addGestureRecognizer(UILongPressGestureRecognizer(
-            target: self, action: #selector(handleLongPress)))
-    }
-
-    @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == .began {
-            delegate?.didLongPressAction(self)
-        }
     }
 
     @objc private func handlePress(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -177,7 +168,7 @@ extension EntryCell {
             if isMovableViewInSuccessState {
                 delegate?.didSwipeAction(self)
             } else {
-                animator?.pointAdded(cell: self)
+                animator?.handleUnfinishedSwipe(cell: self)
             }
         }
     }
