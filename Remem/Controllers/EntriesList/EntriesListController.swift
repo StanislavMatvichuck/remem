@@ -14,10 +14,12 @@ class EntriesListController: UIViewController {
     var service: EntriesListService!
     var coreDataStack: CoreDataStack!
 
+    // MARK: Private properties
     private let viewRoot = EntriesListView()
     private var cellIndexToBeAnimated: IndexPath?
     /// Used for posting `EntriesListNewEntry` notification
     private var newCellIndex: IndexPath?
+    private let cellsAnimator = EntryCellAnimator()
     
     // MARK: - Init
     init() { super.init(nibName: nil, bundle: nil) }
@@ -106,6 +108,7 @@ extension EntriesListController: UITableViewDataSource {
         else { return UITableViewCell() }
         
         row.delegate = self
+        row.animator = cellsAnimator
         row.update(name: dataRow.name!)
         row.update(value: dataRow.totalAmount)
         
@@ -117,7 +120,7 @@ extension EntriesListController: UITableViewDataSource {
 extension EntriesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cellIndexToBeAnimated == indexPath, let cell = cell as? EntryCell {
-            cell.animateMovableViewBack()
+            cellsAnimator.handleUnfinishedSwipe(cell: cell)
         }
         
         if newCellIndex == indexPath {
@@ -185,7 +188,7 @@ extension EntriesListController: UIScrollViewDelegate {
 }
 
 // MARK: - CellMainDelegate
-extension EntriesListController: CellMainDelegate {
+extension EntriesListController: EntryCellDelegate {
     func didLongPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),

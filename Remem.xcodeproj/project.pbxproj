@@ -42,6 +42,7 @@
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4627E7966800157D26 /* AnimatorBackground.swift */; };
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
+		08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */; };
 		08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListService.swift */; };
 		08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D25027F606CF0099260D /* UISwipingSelector.swift */; };
 		08D47A4128129D210085826F /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4028129D210085826F /* RemindersController.swift */; };
@@ -111,6 +112,7 @@
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		089A5A4627E7966800157D26 /* AnimatorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBackground.swift; sourceTree = "<group>"; };
 		089A5A4827E7A28000157D26 /* AnimatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorCircle.swift; sourceTree = "<group>"; };
+		08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellAnimator.swift; sourceTree = "<group>"; };
 		08C5D24E27F5D6250099260D /* EntriesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListService.swift; sourceTree = "<group>"; };
 		08C5D25027F606CF0099260D /* UISwipingSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipingSelector.swift; sourceTree = "<group>"; };
 		08D47A4028129D210085826F /* RemindersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				08C5D24E27F5D6250099260D /* EntriesListService.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
 				08D512372787153900C2037F /* EntryCell.swift */,
+				08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */,
 				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
 				08C5D25027F606CF0099260D /* UISwipingSelector.swift */,
 			);
@@ -443,6 +446,7 @@
 				085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */,
 				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
+				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				0878819527FF414100CFE362 /* EntryDetailsOnboardingController.swift in Sources */,
 				080F0FDE27FC83E2006BFCE8 /* EntryDetailsModel.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
