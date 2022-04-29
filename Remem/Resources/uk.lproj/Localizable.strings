@@ -95,6 +95,8 @@
 /* entries list empty */
 "empty.entriesList" = "Додай подію яку хочеш відслідковувати";
 "empty.entriesList.firstName" = "Коротка назва чи emoji";
+"empty.entriesList.firstPoint" = "Проведи коли подія сталася";
+"empty.entriesList.firstDetailsInspection" = "Натисни щоб подивитись відмітки";
 
 /*
     Reminders screen

@@ -95,6 +95,8 @@
 /* entries list empty */
 "empty.entriesList" = "Добавь событие которое хочешь отслеживать";
 "empty.entriesList.firstName" = "Короткое название или emoji";
+"empty.entriesList.firstPoint" = "Отметь когда событие произошло";
+"empty.entriesList.firstDetailsInspection" = "Нажми чтобы посмотреть отметки";
 
 /*
     Reminders screen

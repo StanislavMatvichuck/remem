@@ -39,7 +39,7 @@ extension EntryCellAnimator {
         size.fromValue = 1
         size.toValue = .r2 / .r1
 
-        let completion = {
+        let completion: CompletionBlock = {
             cell.delegate?.didAnimation(cell)
         }
 

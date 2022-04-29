@@ -96,6 +96,8 @@
 //"empty.entriesList" = "You have no entries yet. Swipe up to create";
 "empty.entriesList" = "Add an event you want to track";
 "empty.entriesList.firstName" = "Short name or emodji";
+"empty.entriesList.firstPoint" = "Place a mark when event happened";
+"empty.entriesList.firstDetailsInspection" = "Press to see marks";
 
 /*
     Reminders screen
