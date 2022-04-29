@@ -65,21 +65,33 @@ class DayOfTheWeekCell: UICollectionViewCell {
     }()
 
     fileprivate var viewIndicatorsContainer: UIStackView = {
-        let view = UIStackView(frame: .zero)
+        let view = UIStackView(al: true)
 
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let indicatorSpacing = 5.0
+        let indicatorHeight = (3.0 * .wScreen / 7.0 - 6.0 * indicatorSpacing) / 7
+
         view.axis = .vertical
-        view.spacing = .delta1
+        view.spacing = indicatorSpacing
         view.distribution = .fillEqually
         view.transform = CGAffineTransform(scaleX: 1, y: -1)
 
         for i in 1 ... 7 {
-            let viewIndicator = UIView(frame: .zero)
-
-            viewIndicator.translatesAutoresizingMaskIntoConstraints = false
+            let viewIndicator = UIView(al: true)
             viewIndicator.backgroundColor = .systemBlue
             viewIndicator.alpha = 0
-            viewIndicator.layer.cornerRadius = .delta1
+            viewIndicator.layer.cornerRadius = indicatorHeight / 2
+
+            let viewIndicatorPoint = UIView(al: true)
+            viewIndicatorPoint.backgroundColor = .systemBackground
+            viewIndicatorPoint.layer.cornerRadius = (indicatorHeight - 4) / 2
+            viewIndicator.addSubview(viewIndicatorPoint)
+
+            NSLayoutConstraint.activate([
+                viewIndicatorPoint.widthAnchor.constraint(equalToConstant: indicatorHeight - 4),
+                viewIndicatorPoint.heightAnchor.constraint(equalToConstant: indicatorHeight - 4),
+                viewIndicatorPoint.trailingAnchor.constraint(equalTo: viewIndicator.trailingAnchor, constant: -2),
+                viewIndicatorPoint.centerYAnchor.constraint(equalTo: viewIndicator.centerYAnchor),
+            ])
 
             view.addArrangedSubview(viewIndicator)
         }
