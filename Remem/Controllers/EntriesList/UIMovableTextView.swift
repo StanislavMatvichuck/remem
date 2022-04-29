@@ -16,7 +16,7 @@ protocol UIMovableTextViewInterface: UIControl {
     func enableCancelButton()
 }
 
-class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelegate {
+class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     // MARK: I18n
     static let empty = NSLocalizedString("empty.entriesList.firstName", comment: "Entries list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
@@ -25,7 +25,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
     // MARK: - Properties
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
     var onboardingHighlight: UIView { viewInput }
-    private var input: UITextView { viewInput.subviews[0] as! UITextView }
+    private var input: UITextField { viewInput.subviews[0] as! UITextField }
 
     lazy var viewInputBackground: UIView = {
         let view = UIView(al: true)
@@ -47,10 +47,18 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
         view.layer.shadowOpacity = 1
 
-        let input = UITextView(al: true)
-        input.font = .systemFont(ofSize: .font1)
+//        let input = UITextView(al: true)
+//        input.font = .systemFont(ofSize: .font2)
+//        input.textAlignment = .center
+//        input.backgroundColor = .clear
+//        view.addSubview(input)
+
+        let input = UITextField(al: true)
+        input.font = .systemFont(ofSize: .font2, weight: .light)
         input.textAlignment = .center
         input.backgroundColor = .clear
+        input.adjustsFontSizeToFitWidth = true
+        input.minimumFontSize = .font1
         view.addSubview(input)
 
         let circle = UIView(al: true)
@@ -60,19 +68,21 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font1)
+        label.font = .systemFont(ofSize: .font1_6, weight: .bold)
         label.numberOfLines = 1
         label.textColor = .systemBlue
         label.text = "0"
         view.addSubview(label)
 
+        addSubview(view)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: .wScreen - 2 * .delta1),
+            view.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .sm),
             view.heightAnchor.constraint(equalToConstant: .d2),
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             input.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            input.heightAnchor.constraint(equalToConstant: .d1),
+            input.heightAnchor.constraint(equalToConstant: .d2),
             input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .d2),
 
             circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -84,7 +94,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
-        addSubview(view)
         return view
     }()
 
@@ -173,10 +182,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         namingHintLabel.isHidden = false
         emojiContainer.isHidden = true
 
-        NSLayoutConstraint.activate([
-            viewInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
-            inputAnimatedConstraint,
-        ])
+        NSLayoutConstraint.activate([inputAnimatedConstraint])
     }
 
     private func setupEventHandlers() {
@@ -192,6 +198,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 
         viewInputBackground.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePressCancel)))
+        
+        input.addTarget(self, action: #selector(textViewDidChange), for: .editingChanged)
     }
 
     @objc
@@ -207,7 +215,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         viewInputBackground.isHidden = false
         emojiContainer.isHidden = false
 
-        let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .delta1
+        let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .sm
 
         postWillShowNotification(newConstant: newConstant, duration: duration)
 
@@ -272,7 +280,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 
     @objc
     private func handleEmojiPress(_ barItem: UIBarButtonItem) {
-        input.text += barItem.title!
+        input.text? += barItem.title!
         textViewDidChange(input)
     }
 
@@ -281,7 +289,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
             let label = sender.view as? UILabel,
             let emoji = label.text
         {
-            input.text += emoji
+            input.text? += emoji
             textViewDidChange(input)
         }
     }
@@ -306,8 +314,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         textViewDidChange(input)
     }
 
-    func textViewDidChange(_ textView: UITextView) {
-        value = textView.text
+    @objc func textViewDidChange(_ textView: UITextField) {
+        value = textView.text ?? ""
     }
 
     //
@@ -346,5 +354,13 @@ extension UIMovableTextView {
         super.traitCollectionDidChange(previousTraitCollection)
         viewInput.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
         viewInput.subviews[1].layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension UIMovableTextView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handlePressCreate()
+        return true
     }
 }

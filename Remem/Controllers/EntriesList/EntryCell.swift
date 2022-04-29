@@ -16,11 +16,13 @@ protocol EntryCellDelegate: AnyObject {
 final class EntryCell: UITableViewCell {
     // MARK: - Static properties
     static let reuseIdentifier = "ViewMainRow"
+    static let backgroundColor = UIColor.systemBackground
+    static let pinColor = UIColor.secondarySystemBackground
     // MARK: - Public properties
     weak var delegate: EntryCellDelegate?
     weak var animator: EntryCellAnimator?
 
-    var movableCenterXSuccessPosition: CGFloat { UIScreen.main.bounds.width - .r2 - 2 * .xs }
+    var movableCenterXSuccessPosition: CGFloat { viewRoot.bounds.width - .r2 }
     var movableCenterXInitialPosition: CGFloat { .r2 }
     var movableCenterXPosition: CGFloat {
         get { viewMovable.layer.position.x }
@@ -28,24 +30,23 @@ final class EntryCell: UITableViewCell {
     }
 
     let viewRoot: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view = UIView(al: true)
         view.layer.cornerRadius = .r2
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = EntryCell.backgroundColor
         return view
     }()
 
     let viewMovable: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r1
-        view.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
+        view.backgroundColor = EntryCell.pinColor
         return view
     }()
 
     let valueLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font1)
+        label.font = .systemFont(ofSize: .font2, weight: .bold)
         label.numberOfLines = 1
         label.textColor = .systemBlue
         return label
@@ -55,9 +56,9 @@ final class EntryCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.numberOfLines = 2
-        label.font = .systemFont(ofSize: .font1)
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = .systemFont(ofSize: .font2, weight: .light)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.textColor = .label
         return label
     }()
@@ -65,7 +66,7 @@ final class EntryCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .systemBackground
+        backgroundColor = .clear
         setupViewRoot()
         setupViewMovable()
         setupEventHandlers()
@@ -81,23 +82,23 @@ final class EntryCell: UITableViewCell {
 
         contentView.addSubview(viewRoot)
 
-        let height = contentView.heightAnchor.constraint(equalToConstant: .d2 + .delta1)
+        let height = contentView.heightAnchor.constraint(equalToConstant: .d2 + .sm)
         height.priority = .defaultLow /// tableView constraints fix
 
         NSLayoutConstraint.activate([
             height,
-            nameLabel.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .d2),
-            nameLabel.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.d2),
-
+            nameLabel.centerXAnchor.constraint(equalTo: viewRoot.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
+            nameLabel.heightAnchor.constraint(equalToConstant: .d2),
+            nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * .d2),
 
             valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
 
             viewRoot.heightAnchor.constraint(equalToConstant: .d2),
 
-            viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .delta1),
-            viewRoot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.delta1),
+            viewRoot.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            viewRoot.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
             viewRoot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
@@ -165,7 +166,7 @@ extension EntryCell {
             gestureRecognizer.state == .ended ||
             gestureRecognizer.state == .cancelled
         {
-            if isMovableViewInSuccessState {
+            if movableCenterXPosition >= movableCenterXSuccessPosition {
                 delegate?.didSwipeAction(self)
             } else {
                 animator?.handleUnfinishedSwipe(cell: self)
@@ -178,6 +179,7 @@ extension EntryCell {
 extension EntryCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        viewMovable.layer.backgroundColor = UIColor.tertiarySystemBackground.cgColor
+        viewMovable.layer.backgroundColor = Self.pinColor.cgColor
+        viewRoot.layer.backgroundColor = Self.backgroundColor.cgColor
     }
 }
