@@ -71,6 +71,7 @@ extension RemindersController {
             cell.textLabel!.text = reminder.content.title
             cell.detailTextLabel!.text = ReminderInput.formatter.string(from: date)
         }
+        cell.heightAnchor.constraint(equalToConstant: 64).isActive = true
         return cell
     }
 }
@@ -106,7 +107,7 @@ extension RemindersController {
         tableView.register(ReminderCell.self, forCellReuseIdentifier: ReminderCell.reuseIdentifier)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
-        tableView.sectionHeaderTopPadding = .delta1
+        tableView.sectionHeaderTopPadding = .sm
     }
 
     private func setupEventHandlers() {

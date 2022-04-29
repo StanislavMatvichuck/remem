@@ -123,7 +123,7 @@ class ReminderInput: UIControl {
 
     // MARK: - View lifecycle
     private func setupLayout() {
-        layer.cornerRadius = .delta1
+        layer.cornerRadius = .sm
 
         addSubview(titleInput)
         addSubview(timeInput)

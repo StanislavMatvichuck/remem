@@ -16,7 +16,7 @@ class SettingsView: UIView {
     static let forgedIn = NSLocalizedString("label.footer", comment: " settings footer")
 
     // MARK: - Properties
-    static var margin: CGFloat = 2 * .delta1
+    static var margin: CGFloat = .sm
 
     lazy var onboardingButton = SettingsRowView(Self.onboarding)
     lazy var remindersButton = SettingsRowView(Self.reminders)
