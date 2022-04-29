@@ -93,7 +93,8 @@
 "label.footer" = "Виковано з ❤️ в 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "";
+"empty.entriesList" = "Додай подію яку хочеш відслідковувати";
+"empty.entriesList.firstName" = "Коротка назва чи emoji";
 
 /*
     Reminders screen

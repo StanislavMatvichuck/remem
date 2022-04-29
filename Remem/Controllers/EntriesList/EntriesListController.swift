@@ -42,6 +42,11 @@ class EntriesListController: UIViewController {
         viewRoot.viewTable.delegate = self
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        viewRoot.gestureView.start()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startOnboardingForNewUser()

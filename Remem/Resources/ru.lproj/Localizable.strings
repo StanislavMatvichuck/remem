@@ -93,7 +93,8 @@
 "label.footer" = "Выковано с ❤️ в 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "";
+"empty.entriesList" = "Добавь событие которое хочешь отслеживать";
+"empty.entriesList.firstName" = "Короткое название или emoji";
 
 /*
     Reminders screen

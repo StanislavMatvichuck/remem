@@ -31,6 +31,7 @@
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */; };
+		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		0878819527FF414100CFE362 /* EntryDetailsOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */; };
 		0878819727FF419600CFE362 /* EntryDetailsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
@@ -102,6 +103,7 @@
 		086FFE6D28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0870EEF82809B81100336759 /* RememTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListServiceTests.swift; sourceTree = "<group>"; };
+		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingController.swift; sourceTree = "<group>"; };
 		0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingView.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 				0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */,
 				0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */,
+				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				085D38E027FEFD1E00A18912 /* OnboardingView.swift in Sources */,
+				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */,
 				0878819727FF419600CFE362 /* EntryDetailsOnboardingView.swift in Sources */,

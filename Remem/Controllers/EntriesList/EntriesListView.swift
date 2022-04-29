@@ -32,19 +32,39 @@ class EntriesListView: UIView {
         let label = UILabel(al: true)
         label.text = Self.empty
         label.textAlignment = .center
-        label.isHidden = true
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
         label.numberOfLines = 0
+        addSubview(label)
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+        ])
         return label
+    }()
+
+    lazy var gestureView: SwipeGestureView = {
+        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 0.0)
+        addSubview(view)
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalTo: widthAnchor),
+            view.topAnchor.constraint(equalTo: emptyLabel.bottomAnchor),
+            view.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
+        return view
     }()
 
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        backgroundColor = .systemBackground
+        backgroundColor = .secondarySystemBackground
         setupSwiper()
         setupTableView()
+        emptyLabel.isHidden = false
+        gestureView.isHidden = false
         addAndConstrain(input)
-        setupEmptyLabel()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -69,25 +89,17 @@ extension EntriesListView {
             viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-
-    private func setupEmptyLabel() {
-        addSubview(emptyLabel)
-        NSLayoutConstraint.activate([
-            emptyLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            emptyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .hScreen / 2),
-            emptyLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            emptyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
 }
 
 // MARK: - Public
 extension EntriesListView {
     func showEmptyState() {
         emptyLabel.isHidden = false
+        gestureView.isHidden = false
     }
 
     func hideEmptyState() {
         emptyLabel.isHidden = true
+        gestureView.isHidden = true
     }
 }

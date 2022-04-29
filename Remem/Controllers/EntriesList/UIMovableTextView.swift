@@ -18,6 +18,7 @@ protocol UIMovableTextViewInterface: UIControl {
 
 class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelegate {
     // MARK: I18n
+    static let empty = NSLocalizedString("empty.entriesList.firstName", comment: "Entries list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
     static let add = NSLocalizedString("button.add.entry", comment: "movable view accessory button add")
 
@@ -35,23 +36,27 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 
     var onboardingHighlight: UIView { viewInput }
 
-    //
-
-    // MARK: - Private properties
-
-    //
-
-    private let viewInputBackground: UIView = {
-        let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .systemBackground
+    // MARK: - Properties
+    lazy var viewInputBackground: UIView = {
+        let view = UIView(al: true)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.addAndConstrain(blurView)
+        addAndConstrain(view)
         return view
     }()
 
     private let viewInput: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = .r2
         view.isOpaque = true
+        view.layer.shadowRadius = 30
+        view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+
+        view.layer.shadowOpacity = 1
 
         let input = UITextView(al: true)
         input.font = .systemFont(ofSize: .font1)
@@ -62,7 +67,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 
         let circle = UIView(al: true)
         circle.layer.cornerRadius = .r1
-        circle.backgroundColor = .tertiarySystemBackground
+        circle.backgroundColor = UIColor.secondarySystemBackground
 
         view.addSubview(circle)
 
@@ -117,6 +122,22 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         target: self,
         action: #selector(handlePressCreate))
 
+    private lazy var namingHintLabel: UILabel = {
+        let label = UILabel(al: true)
+        label.text = Self.empty
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.numberOfLines = 0
+        viewInputBackground.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+        ])
+        return label
+    }()
+
     //
 
     // MARK: - Initialization
@@ -132,6 +153,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         setupEventHandlers()
 
         isUserInteractionEnabled = false
+        namingHintLabel.isHidden = false
     }
 
     required init?(coder: NSCoder) {
@@ -149,12 +171,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
     //
 
     private func setupView() {
-        addSubview(viewInputBackground)
-        addSubview(viewInput)
-
-        viewInputBackground.alpha = 0.0
         viewInputBackground.isHidden = true
-
+        addSubview(viewInput)
         NSLayoutConstraint.activate([
             viewInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
             inputAnimatedConstraint,
@@ -330,4 +348,12 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
 extension Notification.Name {
     static let UIMovableTextViewShown = Notification.Name(rawValue: "UISwipingInputShown")
     static let UIMovableTextViewWillShow = Notification.Name(rawValue: "UIMovableTextViewWillShow")
+}
+
+extension UIMovableTextView {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        viewInput.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+        viewInput.subviews[1].layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+    }
 }

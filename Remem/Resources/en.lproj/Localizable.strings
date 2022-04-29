@@ -94,7 +94,8 @@
 
 /* entries list empty */
 //"empty.entriesList" = "You have no entries yet. Swipe up to create";
-"empty.entriesList" = "";
+"empty.entriesList" = "Add an event you want to track";
+"empty.entriesList.firstName" = "Short name or emodji";
 
 /*
     Reminders screen

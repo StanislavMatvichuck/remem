@@ -183,7 +183,7 @@ private class UISwipingSelectorView: UIView {
     fileprivate lazy var viewAddEntry = makeButton(text: UISwipingSelector.addEntry)
     fileprivate lazy var viewSettings = makeButton(text: UISwipingSelector.settings)
 
-    fileprivate let defaultButtonBackground = UIColor.systemBackground.withAlphaComponent(0.75)
+    fileprivate let defaultButtonBackground = UIColor.clear
     fileprivate let selectedButtonBackground = UIColor.systemBlue.withAlphaComponent(0.75)
 
     fileprivate lazy var viewPointer: UIView = {
@@ -272,8 +272,6 @@ private class UISwipingSelectorView: UIView {
 
     private func updateBackgroundColors() {
         viewPointer.backgroundColor = selectedButtonBackground
-
-        backgroundColor = .systemBackground
         viewSettings.backgroundColor = defaultButtonBackground
         viewAddEntry.backgroundColor = defaultButtonBackground
 
