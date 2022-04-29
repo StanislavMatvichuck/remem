@@ -22,21 +22,11 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
     static let add = NSLocalizedString("button.add.entry", comment: "movable view accessory button add")
 
-    //
-
-    // MARK: - Public properties
-
-    //
-
-    var value: String = "" {
-        didSet {
-            barAdd.isEnabled = !value.isEmpty
-        }
-    }
-
-    var onboardingHighlight: UIView { viewInput }
-
     // MARK: - Properties
+    var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
+    var onboardingHighlight: UIView { viewInput }
+    private var input: UITextView { viewInput.subviews[0] as! UITextView }
+
     lazy var viewInputBackground: UIView = {
         let view = UIView(al: true)
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
@@ -48,27 +38,24 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         return view
     }()
 
-    private let viewInput: UIView = {
+    private lazy var viewInput: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = .r2
         view.isOpaque = true
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
-
         view.layer.shadowOpacity = 1
 
         let input = UITextView(al: true)
         input.font = .systemFont(ofSize: .font1)
         input.textAlignment = .center
         input.backgroundColor = .clear
-
         view.addSubview(input)
 
         let circle = UIView(al: true)
         circle.layer.cornerRadius = .r1
         circle.backgroundColor = UIColor.secondarySystemBackground
-
         view.addSubview(circle)
 
         let label = UILabel(al: true)
@@ -77,7 +64,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         label.numberOfLines = 1
         label.textColor = .systemBlue
         label.text = "0"
-
         view.addSubview(label)
 
         NSLayoutConstraint.activate([
@@ -98,12 +84,9 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
+        addSubview(view)
         return view
     }()
-
-    private var input: UITextView {
-        viewInput.subviews[0] as! UITextView
-    }
 
     private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
         let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
@@ -130,12 +113,38 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         label.numberOfLines = 0
         viewInputBackground.addSubview(label)
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
-            label.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
             label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
         ])
         return label
+    }()
+
+    private lazy var emojiContainer: UIScrollView = {
+        let scroll = ViewScroll(.horizontal, spacing: .sm)
+        scroll.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm, bottom: 0, right: .sm)
+        scroll.viewContent.isLayoutMarginsRelativeArrangement = true
+        scroll.showsHorizontalScrollIndicator = false
+
+        for emoji in [
+            "📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭",
+        ] {
+            let label = UILabel(al: true)
+            label.text = emoji
+            label.font = .systemFont(ofSize: 48)
+            label.isUserInteractionEnabled = true
+            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapEmoji)))
+            scroll.contain(views: label)
+        }
+
+        addSubview(scroll)
+        NSLayoutConstraint.activate([
+            scroll.widthAnchor.constraint(equalTo: widthAnchor),
+            scroll.centerXAnchor.constraint(equalTo: centerXAnchor),
+            scroll.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
+        ])
+        return scroll
     }()
 
     //
@@ -148,31 +157,22 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
 
-        configureInputAccessoryView()
         setupView()
+        configureInputAccessoryView()
         setupEventHandlers()
 
         isUserInteractionEnabled = false
-        namingHintLabel.isHidden = false
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    //
-
-    // MARK: - Internal behaviour
-
-    //
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    deinit { NotificationCenter.default.removeObserver(self) }
 
     private func setupView() {
         viewInputBackground.isHidden = true
-        addSubview(viewInput)
+        viewInput.isHidden = false
+        namingHintLabel.isHidden = false
+        emojiContainer.isHidden = true
+
         NSLayoutConstraint.activate([
             viewInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
             inputAnimatedConstraint,
@@ -205,6 +205,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         else { return }
 
         viewInputBackground.isHidden = false
+        emojiContainer.isHidden = false
 
         let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .delta1
 
@@ -251,39 +252,19 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
             self.layoutIfNeeded()
         })
 
-        animator.addCompletion { _ in
-            self.viewInputBackground.isHidden = true
-        }
+        viewInputBackground.isHidden = true
+        emojiContainer.isHidden = true
 
         animator.startAnimation()
     }
 
     private func configureInputAccessoryView() {
         let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
-
-        let icon01 = UIBarButtonItem(title: "☕️", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon02 = UIBarButtonItem(title: "💊", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon03 = UIBarButtonItem(title: "👟", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon04 = UIBarButtonItem(title: "📖", style: .plain, target: self, action: #selector(handleEmojiPress))
-        let icon05 = UIBarButtonItem(title: "🚬", style: .plain, target: self, action: #selector(handleEmojiPress))
-
-        let spaceLeft = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let spaceRight = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         barAdd.isEnabled = !value.isEmpty
 
-        bar.items = [
-            barCancel,
-            spaceLeft,
-            icon01,
-            icon02,
-            icon03,
-            icon04,
-            icon05,
-            spaceRight,
-            barAdd,
-        ]
-
+        bar.items = [barCancel, space, barAdd]
         bar.sizeToFit()
 
         input.inputAccessoryView = bar
@@ -295,8 +276,18 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface, UITextViewDelega
         textViewDidChange(input)
     }
 
+    @objc private func handleTapEmoji(_ sender: UITapGestureRecognizer) {
+        if
+            let label = sender.view as? UILabel,
+            let emoji = label.text
+        {
+            input.text += emoji
+            textViewDidChange(input)
+        }
+    }
+
     @objc
-    private func handlePressCancel() {
+    private func handlePressCancel(_ sender: UITapGestureRecognizer) {
         sendActions(for: .editingDidEndOnExit)
         hideInput()
     }

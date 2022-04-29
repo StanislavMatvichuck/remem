@@ -36,8 +36,8 @@ class EntriesListView: UIView {
         label.numberOfLines = 0
         addSubview(label)
         NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
-            label.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
             label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
         ])
