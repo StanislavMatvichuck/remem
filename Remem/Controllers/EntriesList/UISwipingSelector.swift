@@ -41,7 +41,7 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
 
     fileprivate let viewRoot = UISwipingSelectorView()
 
-    fileprivate var settingsLeft: CGFloat { viewRoot.viewSettings.frame.minX }
+    fileprivate var settingsLeft: CGFloat { viewRoot.viewSettings.frame.minX + .r2 }
     fileprivate var settingsRight: CGFloat { viewRoot.viewSettings.frame.maxX }
     fileprivate var addLeft: CGFloat { viewRoot.viewAddEntry.frame.minX }
 
@@ -79,11 +79,11 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
     func handleScrollView(contentOffset: CGPoint) {
         let newContentOffset = -3 * contentOffset.y
 
-        viewRoot.pointerHorizontalConstraint.constant = newContentOffset.clamped(to: 0 ... (UIScreen.main.bounds.width - .delta1))
+        viewRoot.pointerHorizontalConstraint.constant = newContentOffset.clamped(to: 0 ... (viewRoot.bounds.width))
 
         if
             !viewRoot.viewSettings.isHidden,
-            newContentOffset >= settingsLeft + .r2,
+            newContentOffset >= settingsLeft,
             newContentOffset <= settingsRight
         {
             animateSelectedState(to: true, for: viewRoot.viewSettings)
@@ -215,7 +215,6 @@ private class UISwipingSelectorView: UIView {
         addSubview(viewAddEntry)
 
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: .wScreen),
             heightAnchor.constraint(equalToConstant: .r2),
 
             viewPointer.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -226,8 +225,8 @@ private class UISwipingSelectorView: UIView {
             viewAddEntry.heightAnchor.constraint(equalTo: heightAnchor),
 
             pointerHorizontalConstraint,
-            viewAddEntry.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
-            viewSettings.trailingAnchor.constraint(equalTo: viewAddEntry.leadingAnchor, constant: -.delta1),
+            viewAddEntry.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewSettings.trailingAnchor.constraint(equalTo: viewAddEntry.leadingAnchor, constant: -.sm),
         ])
     }
 

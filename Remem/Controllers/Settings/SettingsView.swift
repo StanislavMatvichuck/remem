@@ -40,7 +40,7 @@ class SettingsView: UIView {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
         stack.distribution = .fill
-        stack.layer.cornerRadius = .delta1
+        stack.layer.cornerRadius = .sm
 
         addSubview(stack)
         NSLayoutConstraint.activate([

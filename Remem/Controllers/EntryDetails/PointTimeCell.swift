@@ -72,21 +72,21 @@ class PointTimeCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             labelTime.topAnchor.constraint(equalTo: viewRoot.topAnchor),
-            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .delta1),
+            labelTime.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .sm),
             labelTime.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
 
             labelDay.topAnchor.constraint(equalTo: viewRoot.topAnchor),
             labelDay.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor),
-            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: .delta1),
+            labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: .sm),
 
-            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -.delta1),
+            labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -.sm),
             
             labelDay.widthAnchor.constraint(equalTo: labelTime.widthAnchor),
 
             viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             viewRoot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            viewRoot.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .delta1 / 2),
-            viewRoot.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.delta1 / 2),
+            viewRoot.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .sm / 2),
+            viewRoot.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.sm / 2),
         ])
     }
 

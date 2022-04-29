@@ -60,6 +60,11 @@ class EntriesListView: UIView {
     init() {
         super.init(frame: .zero)
         backgroundColor = .secondarySystemBackground
+//        let image = UIImage(named: "plus")?.withTintColor(.systemBackground.withAlphaComponent(0.5))
+//        let resizedImage = image?.scalePreservingAspectRatio(targetSize: CGSize(width: 80, height: 80))
+//        let bg = UIImageView(image: resizedImage?.resizableImage(withCapInsets: .zero, resizingMode: .tile))
+//        bg.translatesAutoresizingMaskIntoConstraints = false
+//        addAndConstrain(bg)
         setupSwiper()
         setupTableView()
         emptyLabel.isHidden = false
@@ -77,6 +82,7 @@ extension EntriesListView {
         NSLayoutConstraint.activate([
             swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
             swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
+            swiper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
         ])
     }
 

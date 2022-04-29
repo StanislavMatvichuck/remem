@@ -40,13 +40,13 @@ class SettingsRowView: UIView {
         chevron.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 2 * .delta1),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2 * .delta1),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: .sm),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .sm),
             label.trailingAnchor.constraint(equalTo: chevron.leadingAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2 * .delta1),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.sm),
 
             chevron.centerYAnchor.constraint(equalTo: centerYAnchor),
-            chevron.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2 * .delta1),
+            chevron.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
         ])
     }
 

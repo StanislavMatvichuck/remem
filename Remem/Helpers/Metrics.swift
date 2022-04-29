@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: get rid of stupid scaling
 extension CGFloat {
     // MARK: Relative unit definition
     static var rem: CGFloat = {
@@ -35,14 +36,15 @@ extension CGFloat {
     static var hScreen: CGFloat { UIScreen.main.bounds.height }
     // MARK: Fonts
     static var font1: CGFloat { UIFont.labelFontSize }
+    static var font1_6: CGFloat { 1.6 * font1 }
     static var font2: CGFloat { 2 * .font1 }
     // MARK: Extras
     static var hairline: CGFloat { return 1.0 / UIScreen.main.scale }
 
     // MARK: - Remem specific layout
-    static var r1: CGFloat { 2 * rem }
+    static var r1: CGFloat { 2.2 * rem }
     static var r2: CGFloat { r1 + .delta1 }
-    static var delta1: CGFloat { .xs }
+    static var delta1: CGFloat { .xs / 2 }
     static var d1: CGFloat { 2 * r1 }
     static var d2: CGFloat { 2 * r2 }
 }

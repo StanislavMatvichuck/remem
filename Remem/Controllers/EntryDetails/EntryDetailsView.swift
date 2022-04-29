@@ -19,11 +19,11 @@ class EntryDetailsView: UIView {
 
         view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
         view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = .delta1
+        view.layer.cornerRadius = .sm
 
-        view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .delta1, height: .delta1 / 2))
-        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .delta1, height: .delta1 / 2))
-        view.scrollIndicatorInsets = UIEdgeInsets(top: .delta1, left: 0, bottom: .delta1, right: .delta1 / 2)
+        view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
+        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
+        view.scrollIndicatorInsets = UIEdgeInsets(top: .sm, left: 0, bottom: .sm, right: .sm / 2)
         view.allowsSelection = false
         view.separatorStyle = .none
 
@@ -89,10 +89,10 @@ class EntryDetailsView: UIView {
         view.isPagingEnabled = true
         view.showsHorizontalScrollIndicator = false
 
-        view.viewContent.spacing = .delta1
+        view.viewContent.spacing = .sm
         // to place elements in the center of screen
-        view.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .delta1,
-                                                      bottom: 0, right: .delta1)
+        view.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm,
+                                                      bottom: 0, right: .sm)
         view.viewContent.isLayoutMarginsRelativeArrangement = true
 
         // to fix vertical scrolling on x3 scale displays
@@ -128,15 +128,15 @@ class EntryDetailsView: UIView {
         addSubview(viewWeekdaysLine)
 
         NSLayoutConstraint.activate([
-            viewPointsDisplay.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .delta1),
-            viewPointsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            viewPointsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
+            viewPointsDisplay.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
+            viewPointsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .sm),
+            viewPointsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
 
-            viewStatsDisplay.topAnchor.constraint(equalTo: viewPointsDisplay.bottomAnchor, constant: .delta1),
+            viewStatsDisplay.topAnchor.constraint(equalTo: viewPointsDisplay.bottomAnchor, constant: .sm),
             viewStatsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewStatsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            viewWeekDisplay.topAnchor.constraint(equalTo: viewStatsDisplay.bottomAnchor, constant: .delta1),
+            viewWeekDisplay.topAnchor.constraint(equalTo: viewStatsDisplay.bottomAnchor, constant: .sm),
             viewWeekDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewWeekDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
             viewWeekDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),

@@ -19,12 +19,13 @@ class ViewStatDisplay: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         backgroundColor = .secondarySystemBackground
-        layer.cornerRadius = .delta1
+        layer.cornerRadius = .sm
 
         let labelAmount = UILabel(al: true)
         labelAmount.text = formatter.string(from: value)
         labelAmount.numberOfLines = 1
-        labelAmount.font = .systemFont(ofSize: .font2)
+        labelAmount.font = .systemFont(ofSize: .font2, weight: .bold)
+        labelAmount.textColor = UIColor.label
         labelAmount.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
         let labelDescription = UILabel(al: true)
@@ -37,7 +38,7 @@ class ViewStatDisplay: UIView {
 
         let stack = UIStackView(al: true)
         stack.axis = .vertical
-        stack.spacing = .delta1
+        stack.spacing = .xs
 
         stack.addArrangedSubview(labelAmount)
         stack.addArrangedSubview(labelDescription)
@@ -48,10 +49,10 @@ class ViewStatDisplay: UIView {
 
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: topAnchor),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .delta1),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.delta1),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.delta1),
-            widthAnchor.constraint(equalToConstant: (.wScreen - 3 * .delta1) / 2),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.xs),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.xs),
+            widthAnchor.constraint(equalToConstant: .wScreen / 2.5),
         ])
     }
 
