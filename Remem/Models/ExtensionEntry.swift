@@ -103,4 +103,9 @@ extension Entry {
 
         return point
     }
+
+    open func markAsVisited() {
+        guard dateVisited == nil else { return }
+        dateVisited = Date.now
+    }
 }

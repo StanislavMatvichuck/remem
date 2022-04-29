@@ -10,6 +10,8 @@ import UIKit
 class EntriesListView: UIView {
     // MARK: I18n
     static let empty = NSLocalizedString("empty.entriesList", comment: "entries list empty")
+    static let firstPoint = NSLocalizedString("empty.entriesList.firstPoint", comment: "entries list first point")
+    static let firstDetails = NSLocalizedString("empty.entriesList.firstDetailsInspection", comment: "entries list first details opening")
 
     // MARK: - Properties
     let swiper: UISwipingSelectorInterface = UISwipingSelector()
@@ -31,6 +33,38 @@ class EntriesListView: UIView {
     private lazy var emptyLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.empty
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.numberOfLines = 0
+        addSubview(label)
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+        ])
+        return label
+    }()
+
+    private lazy var firstPointLabel: UILabel = {
+        let label = UILabel(al: true)
+        label.text = Self.firstPoint
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.numberOfLines = 0
+        addSubview(label)
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
+            label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+        ])
+        return label
+    }()
+
+    private lazy var inspectEntryLabel: UILabel = {
+        let label = UILabel(al: true)
+        label.text = Self.firstDetails
         label.textAlignment = .center
         label.font = .systemFont(ofSize: .font2, weight: .semibold)
         label.numberOfLines = 0
@@ -69,6 +103,8 @@ class EntriesListView: UIView {
         setupTableView()
         emptyLabel.isHidden = false
         gestureView.isHidden = false
+        firstPointLabel.isHidden = true
+        inspectEntryLabel.isHidden = true
         addAndConstrain(input)
     }
 
@@ -107,5 +143,21 @@ extension EntriesListView {
     func hideEmptyState() {
         emptyLabel.isHidden = true
         gestureView.isHidden = true
+    }
+
+    func showFirstPointState() {
+        firstPointLabel.isHidden = false
+    }
+
+    func hideFirstPointState() {
+        firstPointLabel.isHidden = true
+    }
+
+    func showFirstDetails() {
+        inspectEntryLabel.isHidden = false
+    }
+
+    func hideFirstDetails() {
+        inspectEntryLabel.isHidden = true
     }
 }

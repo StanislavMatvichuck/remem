@@ -108,6 +108,38 @@ class EntriesListServiceTests: XCTestCase {
         XCTAssertNotEqual(filledEntry.lastWeekTotal, 0)
         XCTAssertNotEqual(filledEntry.weekAverage, 0)
     }
+
+    func testVisitedEntriesAmount() {
+        XCTAssertEqual(service.fetchVisitedEntries(), 0)
+        let entry = service.create(entryName: "Entry")
+        let entry2 = service.create(entryName: "Entry")
+        let entry3 = service.create(entryName: "Entry")
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchVisitedEntries(), 0)
+        entry.markAsVisited()
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchVisitedEntries(), 1)
+        entry2.markAsVisited()
+        entry3.markAsVisited()
+        XCTAssertEqual(service.fetchVisitedEntries(), 3)
+    }
+
+    func testPointsAmount() {
+        XCTAssertEqual(service.fetchPointsCount(), 0)
+        let entry = service.create(entryName: "Entry")
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchPointsCount(), 0)
+        entry.addDefaultPoint()
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchPointsCount(), 1)
+        entry.addDefaultPoint()
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchPointsCount(), 2)
+        let entry2 = service.create(entryName: "Entry2")
+        entry2.addDefaultPoint()
+        coreDataStack.save(service.moc)
+        XCTAssertEqual(service.fetchPointsCount(), 3)
+    }
 }
 
 class EntriesListServiceDelegateMock: NSObject {

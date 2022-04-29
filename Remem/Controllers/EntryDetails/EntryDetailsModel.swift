@@ -28,6 +28,7 @@ protocol EntryDetailsModelInterface {
     var thisWeekTotal: NSNumber { get }
 
     func fetch()
+    func markAsVisited()
 }
 
 protocol EntryDetailsModelDelegate: NSFetchedResultsControllerDelegate {}
@@ -83,6 +84,7 @@ class EntryDetailsModel: EntryDetailsModelInterface {
     }
 
     private let entry: Entry
+    private let coreDataStack: CoreDataStack
 
     //
     // UICollectionView props
@@ -124,9 +126,10 @@ class EntryDetailsModel: EntryDetailsModelInterface {
 
     //
 
-    init(_ relatedEntry: Entry) {
+    init(_ relatedEntry: Entry, coreDataStack: CoreDataStack) {
         moc = relatedEntry.managedObjectContext!
         entry = relatedEntry
+        self.coreDataStack = coreDataStack
 
         let dateCreated = relatedEntry.dateCreated!
 
@@ -241,5 +244,10 @@ class EntryDetailsModel: EntryDetailsModelInterface {
         let dataIndex = index - headSize
 
         return amount(for: dataIndex)
+    }
+
+    func markAsVisited() {
+        entry.markAsVisited()
+        coreDataStack.save(moc)
     }
 }

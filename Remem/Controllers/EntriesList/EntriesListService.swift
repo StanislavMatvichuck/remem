@@ -47,6 +47,36 @@ extension EntriesListService {
         catch { print("fetch request failed") }
     }
 
+    func fetchPointsCount() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Point")
+        fetchRequest.resultType = .countResultType
+
+        do {
+            let countResult = try moc.fetch(fetchRequest)
+            let count = countResult.first?.intValue ?? 0
+            return count
+        } catch let error as NSError {
+            print("count not fetched \(error), \(error.userInfo)")
+            return 0
+        }
+    }
+
+    func fetchVisitedEntries() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Entry")
+        fetchRequest.resultType = .countResultType
+        let predicate = NSPredicate(format: "%K != nil", #keyPath(Entry.dateVisited))
+        fetchRequest.predicate = predicate
+
+        do {
+            let countResult = try moc.fetch(fetchRequest)
+            let count = countResult.first?.intValue ?? 0
+            return count
+        } catch let error as NSError {
+            print("count not fetched \(error), \(error.userInfo)")
+            return 0
+        }
+    }
+
     func entry(at: IndexPath) -> Entry? { fetchedResultsController.object(at: at) }
 
     @discardableResult

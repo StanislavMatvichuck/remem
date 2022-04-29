@@ -252,6 +252,13 @@ class EntryTests: XCTestCase {
         XCTAssertEqual(entry02.weekAverage, 7)
         XCTAssertEqual(entry03.weekAverage, 7 / 3)
     }
+
+    func testIsVisitedFlag() {
+        let entry01 = createEntry(withDaysOffset: 0)
+        XCTAssertNil(entry01.dateVisited)
+        entry01.markAsVisited()
+        XCTAssertNotNil(entry01.dateVisited, "Must be set by markAsVisited()")
+    }
 }
 
 // MARK: - Private

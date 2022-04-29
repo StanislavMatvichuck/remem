@@ -40,6 +40,7 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setInitialScrolls()
+        model.markAsVisited()
     }
 }
 

@@ -103,9 +103,32 @@ extension EntriesListController {
 
 // MARK: - UITableViewDataSource
 extension EntriesListController: UITableViewDataSource {
+    // TODO: load test this method
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataAmount = service.dataAmount
-        dataAmount == 0 ? viewRoot.showEmptyState() : viewRoot.hideEmptyState()
+        
+        if dataAmount == 0 {
+            viewRoot.showEmptyState()
+            viewRoot.hideFirstPointState()
+            viewRoot.hideFirstDetails()
+        } else {
+            viewRoot.hideEmptyState()
+            
+            let pointsAmount = service.fetchPointsCount()
+            if pointsAmount == 0 {
+                viewRoot.showFirstPointState()
+            } else {
+                viewRoot.hideFirstPointState()
+                
+                let visitedEntriesAmount = service.fetchVisitedEntries()
+                if visitedEntriesAmount == 0 {
+                    viewRoot.showFirstDetails()
+                } else {
+                    viewRoot.hideFirstDetails()
+                }
+            }
+        }
+        
         return dataAmount
     }
     
@@ -198,6 +221,14 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
             viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
         case .update:
             guard let updateIndex = indexPath else { return }
+            // points count check for single entry
+            if
+                let entry = service.entry(at: updateIndex),
+                let pointsCount = entry.points?.count,
+                pointsCount >= 1
+            {
+                viewRoot.hideFirstPointState()
+            }
             viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
         @unknown default:
             fatalError("Unhandled case")
@@ -240,7 +271,7 @@ extension EntriesListController: EntryCellDelegate {
         let pointsList = EntryDetailsController()
         let navigation = UINavigationController(rootViewController: pointsList)
         
-        let model = EntryDetailsModel(entry)
+        let model = EntryDetailsModel(entry, coreDataStack: coreDataStack)
         
         // TODO: check if this is okay
         pointsList.model = model
