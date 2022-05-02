@@ -43,6 +43,8 @@
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4627E7966800157D26 /* AnimatorBackground.swift */; };
 		089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A5A4827E7A28000157D26 /* AnimatorCircle.swift */; };
+		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
+		08A473FE2820210600D62194 /* HintsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FD2820210600D62194 /* HintsManager.swift */; };
 		08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */; };
 		08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */; };
 		08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListService.swift */; };
@@ -115,6 +117,8 @@
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		089A5A4627E7966800157D26 /* AnimatorBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBackground.swift; sourceTree = "<group>"; };
 		089A5A4827E7A28000157D26 /* AnimatorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorCircle.swift; sourceTree = "<group>"; };
+		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
+		08A473FD2820210600D62194 /* HintsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManager.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellAnimator.swift; sourceTree = "<group>"; };
 		08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionUIImage.swift; sourceTree = "<group>"; };
 		08C5D24E27F5D6250099260D /* EntriesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListService.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 			children = (
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
 				08E56DEF280DD77900635887 /* EntryTests.swift */,
+				08A473FB28201F5400D62194 /* HintsManagerTests.swift */,
 				08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */,
 			);
 			path = RememTests;
@@ -298,6 +303,7 @@
 				08D512352787144800C2037F /* EntriesListView.swift */,
 				08D512372787153900C2037F /* EntryCell.swift */,
 				08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */,
+				08A473FD2820210600D62194 /* HintsManager.swift */,
 				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
 				08C5D25027F606CF0099260D /* UISwipingSelector.swift */,
 			);
@@ -435,6 +441,7 @@
 			files = (
 				08E56DF0280DD77900635887 /* EntryTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
+				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
 				08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +474,7 @@
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				083D3892279AE61E00134A15 /* CoreDataConsumer.swift in Sources */,
+				08A473FE2820210600D62194 /* HintsManager.swift in Sources */,
 				083D3890279AE52600134A15 /* ExtensionNSPersistentDataContainer.swift in Sources */,
 				089A5A4727E7966800157D26 /* AnimatorBackground.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,

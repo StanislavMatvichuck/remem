@@ -51,4 +51,19 @@ extension EntryCellAnimator {
         cell.viewMovable.layer.add(group, forKey: nil)
         handleUnfinishedSwipe(cell: cell, delay: 0.2)
     }
+
+    func pressMe(cell: EntryCell) {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 1.0
+        animation.toValue = 0.9
+        animation.duration = 0.3
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.repeatCount = .greatestFiniteMagnitude
+        animation.autoreverses = true
+        cell.viewRoot.layer.add(animation, forKey: "pressMe")
+    }
+
+    func removeAnimations(from cell: EntryCell) {
+        cell.viewRoot.layer.removeAllAnimations()
+    }
 }

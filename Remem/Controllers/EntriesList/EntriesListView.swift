@@ -154,26 +154,20 @@ extension EntriesListView {
         gestureView.isHidden = false
     }
 
-    func hideEmptyState() {
-        emptyLabel.isHidden = true
-        gestureView.isHidden = true
-    }
-
     func showFirstPointState() {
         firstPointLabel.isHidden = false
         cellGestureView.isHidden = false
-    }
-
-    func hideFirstPointState() {
-        firstPointLabel.isHidden = true
-        cellGestureView.isHidden = true
     }
 
     func showFirstDetails() {
         inspectEntryLabel.isHidden = false
     }
 
-    func hideFirstDetails() {
+    func hideAllHints() {
         inspectEntryLabel.isHidden = true
+        firstPointLabel.isHidden = true
+        cellGestureView.isHidden = true
+        emptyLabel.isHidden = true
+        gestureView.isHidden = true
     }
 }

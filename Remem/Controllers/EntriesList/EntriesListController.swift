@@ -23,6 +23,7 @@ class EntriesListController: UIViewController {
     /// Used for posting `EntriesListNewEntry` notification
     private var newCellIndex: IndexPath?
     private let cellsAnimator = EntryCellAnimator()
+    private lazy var hintsManager = HintsManager(service: service)
     
     // MARK: - Init
     init() { super.init(nibName: nil, bundle: nil) }
@@ -35,6 +36,7 @@ class EntriesListController: UIViewController {
         setupTableView()
         setupEventHandlers()
         service.fetch()
+        configureHintsVisibility()
     }
 
     private func setupTableView() {
@@ -77,6 +79,35 @@ extension EntriesListController {
         
         present(nav, animated: true, completion: nil)
     }
+    
+    private func configureHintsVisibility() {
+        viewRoot.hideAllHints()
+        switch hintsManager.fetchState() {
+        case .empty:
+            viewRoot.showEmptyState()
+        case .placeFirstMark:
+            viewRoot.showFirstPointState()
+        case .pressMe:
+            viewRoot.showFirstDetails()
+            addPressMeAnimationsForCells()
+        case .noHints:
+            removePressMeAnimationsFromCells()
+        }
+    }
+    
+    private func addPressMeAnimationsForCells() {
+        for cell in viewRoot.viewTable.visibleCells {
+            guard let cell = cell as? EntryCell else { continue }
+            cellsAnimator.pressMe(cell: cell)
+        }
+    }
+    
+    private func removePressMeAnimationsFromCells() {
+        for cell in viewRoot.viewTable.visibleCells {
+            guard let cell = cell as? EntryCell else { continue }
+            cellsAnimator.removeAnimations(from: cell)
+        }
+    }
 }
 
 // MARK: - Events handling
@@ -105,35 +136,8 @@ extension EntriesListController {
 
 // MARK: - UITableViewDataSource
 extension EntriesListController: UITableViewDataSource {
-    // TODO: load test this method
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataAmount = service.dataAmount
-        
-        if dataAmount == 0 {
-            viewRoot.showEmptyState()
-            viewRoot.hideFirstPointState()
-            viewRoot.hideFirstDetails()
-        } else {
-            viewRoot.hideEmptyState()
-            
-            let pointsAmount = service.fetchPointsCount()
-            if pointsAmount == 0 {
-                viewRoot.showFirstPointState()
-            } else {
-                viewRoot.hideFirstPointState()
-                
-                let visitedEntriesAmount = service.fetchVisitedEntries()
-                if visitedEntriesAmount == 0 {
-                    viewRoot.showFirstDetails()
-                } else {
-                    viewRoot.hideFirstDetails()
-                }
-            }
-        }
-        
-        return dataAmount
-    }
-    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { service.dataAmount }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
@@ -146,10 +150,6 @@ extension EntriesListController: UITableViewDataSource {
         row.update(value: dataRow.totalAmount)
         
         return row
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
     }
 }
 
@@ -223,14 +223,6 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
             viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
         case .update:
             guard let updateIndex = indexPath else { return }
-            // points count check for single entry
-            if
-                let entry = service.entry(at: updateIndex),
-                let pointsCount = entry.points?.count,
-                pointsCount >= 1
-            {
-                viewRoot.hideFirstPointState()
-            }
             viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
         @unknown default:
             fatalError("Unhandled case")
@@ -239,6 +231,7 @@ extension EntriesListController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         viewRoot.viewTable.endUpdates()
+        configureHintsVisibility()
     }
 }
 
