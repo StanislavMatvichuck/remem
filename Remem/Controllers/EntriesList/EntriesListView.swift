@@ -79,7 +79,7 @@ class EntriesListView: UIView {
     }()
 
     lazy var gestureView: SwipeGestureView = {
-        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 40)
+        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 0)
         addSubview(view)
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalTo: widthAnchor),

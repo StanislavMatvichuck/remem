@@ -17,6 +17,7 @@ final class EntryCell: UITableViewCell {
     // MARK: - Static properties
     static let reuseIdentifier = "ViewMainRow"
     static let backgroundColor = UIColor.systemBackground
+    static let decorationColor = UIColor.secondarySystemBackground.withAlphaComponent(0.5)
     static let pinColor = UIColor.secondarySystemBackground
     static let height = .d2 + .sm
     // MARK: - Public properties
@@ -34,20 +35,44 @@ final class EntryCell: UITableViewCell {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r2
         view.backgroundColor = EntryCell.backgroundColor
+
+        let viewDecoration = UIView(al: true)
+        viewDecoration.layer.cornerRadius = .r1
+        viewDecoration.backgroundColor = EntryCell.decorationColor
+        view.addSubview(viewDecoration)
+        NSLayoutConstraint.activate([
+            viewDecoration.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .delta1),
+            viewDecoration.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -2 * .delta1),
+            viewDecoration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            viewDecoration.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
         return view
     }()
 
     let viewMovable: UIView = {
         let view = UIView(al: true)
-        view.layer.cornerRadius = .r1
-        view.backgroundColor = EntryCell.pinColor
+        view.layer.cornerRadius = .r2
+        view.backgroundColor = EntryCell.backgroundColor
+
+        let viewDecor = UIView(al: true)
+        viewDecor.layer.cornerRadius = .r1
+        viewDecor.backgroundColor = EntryCell.pinColor
+
+        view.addSubview(viewDecor)
+        NSLayoutConstraint.activate([
+            viewDecor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            viewDecor.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            viewDecor.widthAnchor.constraint(equalToConstant: .d1),
+            viewDecor.heightAnchor.constraint(equalToConstant: .d1),
+        ])
+
         return view
     }()
 
     let valueLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .bold)
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
         label.numberOfLines = 1
         label.textColor = .systemBlue
         return label
@@ -57,7 +82,7 @@ final class EntryCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .light)
+        label.font = .systemFont(ofSize: .font2, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.textColor = .label
@@ -108,8 +133,8 @@ final class EntryCell: UITableViewCell {
         viewRoot.addSubview(viewMovable)
 
         NSLayoutConstraint.activate([
-            viewMovable.widthAnchor.constraint(equalToConstant: .d1),
-            viewMovable.heightAnchor.constraint(equalToConstant: .d1),
+            viewMovable.widthAnchor.constraint(equalToConstant: .d2),
+            viewMovable.heightAnchor.constraint(equalToConstant: .d2),
 
             viewMovable.centerXAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .r2),
             viewMovable.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
@@ -147,11 +172,6 @@ extension EntryCell {
     }
 
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        var isMovableViewInSuccessState: Bool {
-            let leftAcceptanceValue = UIScreen.main.bounds.width - .r2 - 2 * .xs
-            return movableCenterXPosition >= leftAcceptanceValue
-        }
-
         let movedView = gestureRecognizer.view!
         let translation = gestureRecognizer.translation(in: contentView)
         let newXPosition = (movedView.center.x + translation.x * 2)
@@ -180,7 +200,8 @@ extension EntryCell {
 extension EntryCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        viewMovable.layer.backgroundColor = Self.pinColor.cgColor
+        viewMovable.layer.backgroundColor = Self.backgroundColor.cgColor
+        viewMovable.subviews.first?.layer.backgroundColor = Self.pinColor.cgColor
         viewRoot.layer.backgroundColor = Self.backgroundColor.cgColor
     }
 }

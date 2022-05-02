@@ -25,7 +25,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     // MARK: - Properties
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
     var onboardingHighlight: UIView { viewInput }
-    private var input: UITextField { viewInput.subviews[0] as! UITextField }
+    private var input: UITextField { viewInput.subviews[1] as! UITextField }
 
     lazy var viewInputBackground: UIView = {
         let view = UIView(al: true)
@@ -47,6 +47,17 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
         view.layer.shadowOpacity = 1
 
+        let viewDecoration = UIView(al: true)
+        viewDecoration.layer.cornerRadius = .r1
+        viewDecoration.backgroundColor = EntryCell.decorationColor
+        view.addSubview(viewDecoration)
+        NSLayoutConstraint.activate([
+            viewDecoration.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .delta1),
+            viewDecoration.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -2 * .delta1),
+            viewDecoration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            viewDecoration.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+
 //        let input = UITextView(al: true)
 //        input.font = .systemFont(ofSize: .font2)
 //        input.textAlignment = .center
@@ -54,16 +65,33 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 //        view.addSubview(input)
 
         let input = UITextField(al: true)
-        input.font = .systemFont(ofSize: .font2, weight: .light)
+        input.font = .systemFont(ofSize: .font2, weight: .semibold)
         input.textAlignment = .center
         input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
         input.minimumFontSize = .font1
         view.addSubview(input)
 
-        let circle = UIView(al: true)
-        circle.layer.cornerRadius = .r1
-        circle.backgroundColor = UIColor.secondarySystemBackground
+        let circle: UIView = {
+            let view = UIView(al: true)
+            view.layer.cornerRadius = .r2
+            view.backgroundColor = EntryCell.backgroundColor
+
+            let viewDecor = UIView(al: true)
+            viewDecor.layer.cornerRadius = .r1
+            viewDecor.backgroundColor = EntryCell.pinColor
+
+            view.addSubview(viewDecor)
+            NSLayoutConstraint.activate([
+                viewDecor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                viewDecor.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                viewDecor.widthAnchor.constraint(equalToConstant: .d1),
+                viewDecor.heightAnchor.constraint(equalToConstant: .d1),
+            ])
+
+            return view
+        }()
+
         view.addSubview(circle)
 
         let label = UILabel(al: true)
@@ -86,9 +114,9 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
             input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .d2),
 
             circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            circle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .delta1),
-            circle.widthAnchor.constraint(equalToConstant: .d1),
-            circle.heightAnchor.constraint(equalToConstant: .d1),
+            circle.centerXAnchor.constraint(equalTo: view.leadingAnchor, constant: .r2),
+            circle.widthAnchor.constraint(equalToConstant: .d2),
+            circle.heightAnchor.constraint(equalToConstant: .d2),
 
             label.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -.r2),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -198,7 +226,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 
         viewInputBackground.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePressCancel)))
-        
+
         input.addTarget(self, action: #selector(textViewDidChange), for: .editingChanged)
     }
 
@@ -353,7 +381,6 @@ extension UIMovableTextView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         viewInput.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
-        viewInput.subviews[1].layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
     }
 }
 
