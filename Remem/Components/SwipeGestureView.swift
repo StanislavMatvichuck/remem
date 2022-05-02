@@ -69,7 +69,6 @@ class SwipeGestureView: UIView {
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: .r2),
             view.heightAnchor.constraint(equalToConstant: .r2),
-            view.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
 
         return view
