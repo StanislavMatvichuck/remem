@@ -23,8 +23,8 @@ class SettingsController: UIViewController {
 // MARK: - Private
 extension SettingsController {
     private func setupEventsHandlers() {
-        viewRoot.onboardingButton.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handlePress)))
+//        viewRoot.onboardingButton.addGestureRecognizer(
+//            UITapGestureRecognizer(target: self, action: #selector(handlePress)))
         viewRoot.remindersButton.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handlePress)))
     }
@@ -34,9 +34,9 @@ extension SettingsController {
 extension SettingsController {
     @objc func handlePress(_ sender: UITapGestureRecognizer) {
         switch sender.view {
-        case viewRoot.onboardingButton:
-            guard let main = parent?.presentingViewController as? EntriesListController else { return }
-            dismiss(animated: true) { main.startOnboarding() }
+//        case viewRoot.onboardingButton:
+//            guard let main = parent?.presentingViewController as? EntriesListController else { return }
+//            dismiss(animated: true) { main.startOnboarding() }
         case viewRoot.remindersButton:
             let controller = RemindersController()
             navigationController?.pushViewController(controller, animated: true)
