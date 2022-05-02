@@ -50,11 +50,6 @@ class EntriesListController: UIViewController {
         viewRoot.gestureView.start()
         viewRoot.cellGestureView.start()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        startOnboardingForNewUser()
-    }
 }
 
 // MARK: - Internal
@@ -309,15 +304,15 @@ extension EntriesListController: EntriesListOnboardingControllerDataSource {
 }
 
 // MARK: First time launch logic
-extension EntriesListController {
-    var openedPreviously: Bool { UserDefaults.standard.bool(forKey: "openedPreviously") }
-    
-    private func startOnboardingForNewUser() {
-        guard !openedPreviously else { return }
-        UserDefaults.standard.set(true, forKey: "openedPreviously")
-        startOnboarding()
-    }
-}
+// extension EntriesListController {
+//    var openedPreviously: Bool { UserDefaults.standard.bool(forKey: "openedPreviously") }
+//
+//    private func startOnboardingForNewUser() {
+//        guard !openedPreviously else { return }
+//        UserDefaults.standard.set(true, forKey: "openedPreviously")
+//        startOnboarding()
+//    }
+// }
 
 extension EntriesListController: EntriesListOnboardingControllerDelegate {
     func startOnboarding() {
