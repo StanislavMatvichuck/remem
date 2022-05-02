@@ -22,24 +22,28 @@ class SwipeGestureView: UIView {
     private var edgeInset: CGFloat
     private lazy var circleX: NSLayoutConstraint = {
         let initialAnchor: NSLayoutXAxisAnchor
+        var constant: CGFloat = 0.0
         switch mode {
         case .vertical:
             initialAnchor = centerXAnchor
         case .horizontal:
             initialAnchor = leadingAnchor
+            constant = edgeInset
         }
-        return viewCircle.centerXAnchor.constraint(equalTo: initialAnchor)
+        return viewCircle.centerXAnchor.constraint(equalTo: initialAnchor, constant: constant)
     }()
 
     private lazy var circleY: NSLayoutConstraint = {
         let initialAnchor: NSLayoutYAxisAnchor
+        var constant: CGFloat = 0.0
         switch mode {
         case .vertical:
             initialAnchor = bottomAnchor
+            constant = edgeInset
         case .horizontal:
             initialAnchor = centerYAnchor
         }
-        return viewCircle.centerYAnchor.constraint(equalTo: initialAnchor)
+        return viewCircle.centerYAnchor.constraint(equalTo: initialAnchor, constant: -constant)
     }()
 
     lazy var viewCircle: UIView = {
@@ -117,18 +121,18 @@ extension SwipeGestureView {
     }
 }
 
-// MARK: - Public
+// MARK: - Private
 extension SwipeGestureView {
-    func start() {
+    private func startVerticalAnimation() {
         layoutIfNeeded()
-        let verticalTravelDistance = bounds.height
+        let verticalTravelDistance = bounds.height - 2 * edgeInset
         let circle = viewCircle.layer
         let finger = viewFinger.layer
 
         func createAnimation() -> CABasicAnimation {
             let animation = CABasicAnimation(keyPath: "position.y")
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-//            animation.fillMode = .backwards
+            //            animation.fillMode = .backwards
             animation.duration = Durations.position.rawValue
             animation.repeatCount = .greatestFiniteMagnitude
             animation.isRemovedOnCompletion = false
@@ -146,12 +150,46 @@ extension SwipeGestureView {
 
         circle.add(circlePosition, forKey: nil)
         finger.add(fingerPosition, forKey: nil)
+    }
 
-        let circleScale = CABasicAnimation(keyPath: "transform.scale")
-        circleScale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-//            animation.fillMode = .backwards
-        circleScale.duration = Durations.position.rawValue
-        circleScale.repeatCount = .greatestFiniteMagnitude
-        circleScale.autoreverses = true
+    private func startHorizontalAnimation() {
+        layoutIfNeeded()
+        let travelDistance = bounds.width - 2 * edgeInset
+        let circle = viewCircle.layer
+        let finger = viewFinger.layer
+
+        func createAnimation() -> CABasicAnimation {
+            let animation = CABasicAnimation(keyPath: "position.x")
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            //            animation.fillMode = .backwards
+            animation.duration = Durations.position.rawValue
+            animation.repeatCount = .greatestFiniteMagnitude
+            animation.isRemovedOnCompletion = false
+            animation.autoreverses = true
+            return animation
+        }
+
+        let circlePosition = createAnimation()
+        circlePosition.fromValue = circle.position.x
+        circlePosition.toValue = circle.position.x + travelDistance
+
+        let fingerPosition = createAnimation()
+        fingerPosition.fromValue = finger.position.x
+        fingerPosition.toValue = finger.position.x + travelDistance
+
+        circle.add(circlePosition, forKey: nil)
+        finger.add(fingerPosition, forKey: nil)
+    }
+}
+
+// MARK: - Public
+extension SwipeGestureView {
+    func start() {
+        switch mode {
+        case .vertical:
+            startVerticalAnimation()
+        case .horizontal:
+            startHorizontalAnimation()
+        }
     }
 }

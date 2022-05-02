@@ -44,7 +44,9 @@ class EntriesListController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // TODO: maybe move this to didAppear?
         viewRoot.gestureView.start()
+        viewRoot.cellGestureView.start()
     }
     
     override func viewDidAppear(_ animated: Bool) {

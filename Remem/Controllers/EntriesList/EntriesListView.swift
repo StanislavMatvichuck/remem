@@ -79,12 +79,24 @@ class EntriesListView: UIView {
     }()
 
     lazy var gestureView: SwipeGestureView = {
-        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 0.0)
+        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 40)
         addSubview(view)
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalTo: widthAnchor),
             view.topAnchor.constraint(equalTo: emptyLabel.bottomAnchor),
             view.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
+        return view
+    }()
+
+    lazy var cellGestureView: SwipeGestureView = {
+        let view = SwipeGestureView(mode: SwipeGestureView.Mode.horizontal, edgeInset: .sm + .r2)
+        addSubview(view)
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalTo: widthAnchor),
+            view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            view.heightAnchor.constraint(equalToConstant: EntryCell.height),
             view.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
         return view
@@ -101,8 +113,10 @@ class EntriesListView: UIView {
 //        addAndConstrain(bg)
         setupSwiper()
         setupTableView()
+        // these flags configure UIView tree
         emptyLabel.isHidden = false
         gestureView.isHidden = false
+        cellGestureView.isHidden = false
         firstPointLabel.isHidden = true
         inspectEntryLabel.isHidden = true
         addAndConstrain(input)
@@ -147,10 +161,12 @@ extension EntriesListView {
 
     func showFirstPointState() {
         firstPointLabel.isHidden = false
+        cellGestureView.isHidden = false
     }
 
     func hideFirstPointState() {
         firstPointLabel.isHidden = true
+        cellGestureView.isHidden = true
     }
 
     func showFirstDetails() {

@@ -18,6 +18,7 @@ final class EntryCell: UITableViewCell {
     static let reuseIdentifier = "ViewMainRow"
     static let backgroundColor = UIColor.systemBackground
     static let pinColor = UIColor.secondarySystemBackground
+    static let height = .d2 + .sm
     // MARK: - Public properties
     weak var delegate: EntryCellDelegate?
     weak var animator: EntryCellAnimator?
@@ -82,7 +83,7 @@ final class EntryCell: UITableViewCell {
 
         contentView.addSubview(viewRoot)
 
-        let height = contentView.heightAnchor.constraint(equalToConstant: .d2 + .sm)
+        let height = contentView.heightAnchor.constraint(equalToConstant: Self.height)
         height.priority = .defaultLow /// tableView constraints fix
 
         NSLayoutConstraint.activate([
