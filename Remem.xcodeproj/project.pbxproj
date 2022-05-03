@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
-		080F0FDE27FC83E2006BFCE8 /* EntryDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F0FDD27FC83E2006BFCE8 /* EntryDetailsModel.swift */; };
+		080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
 		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
@@ -77,7 +77,7 @@
 
 /* Begin PBXFileReference section */
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
-		080F0FDD27FC83E2006BFCE8 /* EntryDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsModel.swift; sourceTree = "<group>"; };
+		080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsService.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0830DA3527C3A6E000479014 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 			children = (
 				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
 				0890627727A0A2520032847C /* EntryDetailsController.swift */,
-				080F0FDD27FC83E2006BFCE8 /* EntryDetailsModel.swift */,
+				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
 				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
@@ -461,7 +461,7 @@
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				0878819527FF414100CFE362 /* EntryDetailsOnboardingController.swift in Sources */,
-				080F0FDE27FC83E2006BFCE8 /* EntryDetailsModel.swift in Sources */,
+				080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08975A9927DDF51C0021E0D3 /* AnimatorOnboarding.swift in Sources */,
@@ -604,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -808,7 +808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -837,7 +837,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;

@@ -15,7 +15,7 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EntryDetailsScreen")
 
     // MARK: - Properties
-    var model: EntryDetailsModelInterface!
+    var model: EntryDetailsService!
     private var scrollHappened = false
     // TODO: create neat mechanism to observe scrolling
     var pointsDisplayScrollNotificationSent = false
