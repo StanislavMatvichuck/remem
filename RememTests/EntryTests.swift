@@ -175,7 +175,7 @@ class EntryTests: XCTestCase {
         coreDataStack.save(moc)
     }
 
-    func testWeeksTotal() {
+    func testThisWeekTotal() {
         let entry01 = createEntry(withDaysOffset: 0)
         let entry02 = createEntry(withDaysOffset: 7)
         let entry03 = createEntry(withDaysOffset: 7)
@@ -197,38 +197,65 @@ class EntryTests: XCTestCase {
         switch Date.now.weekdayNumber {
         case .monday:
             XCTAssertEqual(entry02.thisWeekTotal, 1)
-            XCTAssertEqual(entry02.lastWeekTotal, 6)
             XCTAssertEqual(entry03.thisWeekTotal, 2)
-            XCTAssertEqual(entry03.lastWeekTotal, 12)
         case .tuesday:
             XCTAssertEqual(entry02.thisWeekTotal, 2)
-            XCTAssertEqual(entry02.lastWeekTotal, 5)
             XCTAssertEqual(entry03.thisWeekTotal, 4)
-            XCTAssertEqual(entry03.lastWeekTotal, 10)
         case .wednesday:
             XCTAssertEqual(entry02.thisWeekTotal, 3)
-            XCTAssertEqual(entry02.lastWeekTotal, 4)
             XCTAssertEqual(entry03.thisWeekTotal, 6)
-            XCTAssertEqual(entry03.lastWeekTotal, 8)
         case .thursday:
             XCTAssertEqual(entry02.thisWeekTotal, 4)
-            XCTAssertEqual(entry02.lastWeekTotal, 3)
             XCTAssertEqual(entry03.thisWeekTotal, 8)
-            XCTAssertEqual(entry03.lastWeekTotal, 6)
         case .friday:
             XCTAssertEqual(entry02.thisWeekTotal, 5)
-            XCTAssertEqual(entry02.lastWeekTotal, 2)
             XCTAssertEqual(entry03.thisWeekTotal, 10)
-            XCTAssertEqual(entry03.lastWeekTotal, 4)
         case .saturday:
             XCTAssertEqual(entry02.thisWeekTotal, 6)
-            XCTAssertEqual(entry02.lastWeekTotal, 1)
             XCTAssertEqual(entry03.thisWeekTotal, 12)
-            XCTAssertEqual(entry03.lastWeekTotal, 2)
         case .sunday:
             XCTAssertEqual(entry02.thisWeekTotal, 7)
-            XCTAssertEqual(entry02.lastWeekTotal, 0)
             XCTAssertEqual(entry03.thisWeekTotal, 14)
+        }
+    }
+
+    func testLastWeekTotal() {
+        let entry01 = createEntry(withDaysOffset: 0)
+        let entry02 = createEntry(withDaysOffset: 7)
+        let entry03 = createEntry(withDaysOffset: 7)
+
+        entry01.addDefaultPoint()
+        entry01.addDefaultPoint()
+        entry01.addDefaultPoint()
+
+        for i in 0 ... 6 {
+            entry02.addDefaultPoint(withDate: Date.now.days(ago: i))
+            entry03.addDefaultPoint(withDate: Date.now.days(ago: i))
+            entry03.addDefaultPoint(withDate: Date.now.days(ago: i))
+        }
+
+        // TODO: adapt this logic for retarded 1st day of week
+        switch Date.now.weekdayNumber {
+        case .monday:
+            XCTAssertEqual(entry02.lastWeekTotal, 6)
+            XCTAssertEqual(entry03.lastWeekTotal, 12)
+        case .tuesday:
+            XCTAssertEqual(entry02.lastWeekTotal, 5)
+            XCTAssertEqual(entry03.lastWeekTotal, 10)
+        case .wednesday:
+            XCTAssertEqual(entry02.lastWeekTotal, 4)
+            XCTAssertEqual(entry03.lastWeekTotal, 8)
+        case .thursday:
+            XCTAssertEqual(entry02.lastWeekTotal, 3)
+            XCTAssertEqual(entry03.lastWeekTotal, 6)
+        case .friday:
+            XCTAssertEqual(entry02.lastWeekTotal, 2)
+            XCTAssertEqual(entry03.lastWeekTotal, 4)
+        case .saturday:
+            XCTAssertEqual(entry02.lastWeekTotal, 1)
+            XCTAssertEqual(entry03.lastWeekTotal, 2)
+        case .sunday:
+            XCTAssertEqual(entry02.lastWeekTotal, 0)
             XCTAssertEqual(entry03.lastWeekTotal, 0)
         }
     }

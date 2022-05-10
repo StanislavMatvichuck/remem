@@ -53,7 +53,11 @@ class LocalNotificationsServiceTests: XCTestCase {
 
     // TODO: this test sometimes fails
     func testNotificationCreationAndRemoval() {
-        testGetNotifications()
+        // testGetNotifications
+        sutDelegate.expectPendingNotificationsCallback()
+        sut.requestPendingNotifications()
+        waitForExpectations(timeout: 1)
+        
         XCTAssertNotNil(sutDelegate.pendingNotifications)
 
         /// get `arrangedNotificationsAmount` before addition and deletion to isolate this test
@@ -70,7 +74,12 @@ class LocalNotificationsServiceTests: XCTestCase {
 
         // Assert added notification
         // TODO: fix this failing
-        testGetNotifications()
+        
+        // testGetNotifications
+        sutDelegate.expectPendingNotificationsCallback()
+        sut.requestPendingNotifications()
+        waitForExpectations(timeout: 1)
+        
         XCTAssertEqual(
             sutDelegate.pendingNotifications!.count,
             arrangedNotificationsAmount + 1
@@ -80,7 +89,12 @@ class LocalNotificationsServiceTests: XCTestCase {
         sut.removePendingNotifications(addedNotification.identifier)
 
         // Assert added notification removal
-        testGetNotifications()
+        
+        // testGetNotifications
+        sutDelegate.expectPendingNotificationsCallback()
+        sut.requestPendingNotifications()
+        waitForExpectations(timeout: 1)
+        
         XCTAssertEqual(
             sutDelegate.pendingNotifications!.count,
             arrangedNotificationsAmount
