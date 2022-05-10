@@ -19,11 +19,7 @@ class EntryDetailsController: UIViewController {
     var pointsListService: EntryPointsListService!
     var weekDistributionService: EntryWeekDistributionService!
 
-    // TODO: create neat mechanism to observe scrolling
     private var scrollHappened = false
-    var pointsDisplayScrollNotificationSent = false
-    var statsDisplayScrollNotificationSent = false
-    var weekDisplayScrollNotificationSent = false
     // MARK: - View lifecycle
     private let viewRoot = EntryDetailsView()
     override func loadView() { view = viewRoot }

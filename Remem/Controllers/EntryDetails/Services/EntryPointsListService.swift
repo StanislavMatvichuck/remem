@@ -9,12 +9,13 @@ import CoreData
 import Foundation
 
 class EntryPointsListService {
-    // MARK: - Public properties
+    // MARK: - Properties
     var points: [Point] = []
     var count: Int { points.count }
-    // MARK: - Private properties
+
     private let entry: Entry
     private let moc: NSManagedObjectContext
+
     // MARK: - Init
     init(_ entry: Entry) {
         self.entry = entry

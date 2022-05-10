@@ -8,12 +8,7 @@
 import UIKit
 
 class EntryDetailsView: UIView {
-    //
-
-    // MARK: - Public properties
-
-    //
-
+    // MARK: - Properties
     let viewPointsDisplay: UITableView = {
         let view = UITableView(al: true)
 
@@ -100,26 +95,13 @@ class EntryDetailsView: UIView {
         return view
     }()
 
-    //
-
-    // MARK: - Private properties
-
-    //
-
-    //
-
-    // MARK: - Initialization
-
-    //
-
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
         setupLayout()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
         addSubview(viewPointsDisplay)
@@ -147,12 +129,4 @@ class EntryDetailsView: UIView {
             viewWeekdaysLine.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-
-    //
-
-    // MARK: - Behaviour
-
-    //
-    func showEmptyState() {}
-    func hideEmptyState() {}
 }

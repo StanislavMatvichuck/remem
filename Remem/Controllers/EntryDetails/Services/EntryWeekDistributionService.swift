@@ -8,7 +8,6 @@
 import CoreData
 
 class EntryWeekDistributionService {
-    // MARK: - Types
     enum CellVariant {
         case past
         case filled
@@ -16,13 +15,14 @@ class EntryWeekDistributionService {
         case future
     }
 
-    // MARK: - Public properties
+    // MARK: - Properties
     var daysAmount: Int { entry.weeksSince * 7 }
     var todayIndexRow: Int { daysAmount + Date.now.weekdayNumber.europeanDayOfWeek - 8 }
-    // MARK: - Private properties
+
     private var entry: Entry
     private var moc: NSManagedObjectContext
     private var calendar: Calendar { Calendar.current }
+
     // MARK: - Init
     init(_ entry: Entry) {
         self.entry = entry
@@ -42,7 +42,6 @@ extension EntryWeekDistributionService {
         } else { return nil }
     }
 
-    /// This method is a potential bottleneck!
     // TODO: load test
     func pointsAmount(for index: IndexPath) -> Int? {
         let daysDifference = index.row - todayIndexRow

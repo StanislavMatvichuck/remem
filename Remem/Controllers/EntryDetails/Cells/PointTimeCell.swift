@@ -8,20 +8,9 @@
 import UIKit
 
 class PointTimeCell: UITableViewCell {
-    //
-
-    // MARK: - Static properties
-
-    //
-
     static let reuseIdentifier = "CellPoint"
 
-    //
-
-    // MARK: - Private properties
-
-    //
-
+    // MARK: - Properties
     fileprivate var viewRoot: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -53,17 +42,14 @@ class PointTimeCell: UITableViewCell {
         return label
     }()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         backgroundColor = .clear
-
         setupViewRoot()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     fileprivate func setupViewRoot() {
         viewRoot.addSubview(labelTime)
@@ -80,7 +66,7 @@ class PointTimeCell: UITableViewCell {
             labelDay.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: .sm),
 
             labelTime.trailingAnchor.constraint(equalTo: labelDay.leadingAnchor, constant: -.sm),
-            
+
             labelDay.widthAnchor.constraint(equalTo: labelTime.widthAnchor),
 
             viewRoot.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -89,13 +75,10 @@ class PointTimeCell: UITableViewCell {
             viewRoot.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.sm / 2),
         ])
     }
+}
 
-    //
-
-    // MARK: - Behaviour
-
-    //
-
+// MARK: - Public
+extension PointTimeCell {
     func update(time: String, day: String) {
         labelDay.text = day
         labelTime.text = time

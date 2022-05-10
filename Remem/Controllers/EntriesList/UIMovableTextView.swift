@@ -17,6 +17,8 @@ protocol UIMovableTextViewInterface: UIControl {
 }
 
 class UIMovableTextView: UIControl, UIMovableTextViewInterface {
+    typealias KeyboardHeightChangeDescriptor = (movedBy: CGPoint, duration: Double)
+
     // MARK: I18n
     static let empty = NSLocalizedString("empty.entriesList.firstName", comment: "Entries list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
@@ -25,6 +27,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     // MARK: - Properties
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
     var onboardingHighlight: UIView { viewInput }
+
     private var input: UITextField { viewInput.subviews[1] as! UITextField }
 
     lazy var viewInputBackground: UIView = {
@@ -57,12 +60,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
             viewDecoration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             viewDecoration.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-
-//        let input = UITextView(al: true)
-//        input.font = .systemFont(ofSize: .font2)
-//        input.textAlignment = .center
-//        input.backgroundColor = .clear
-//        view.addSubview(input)
 
         let input = UITextField(al: true)
         input.font = .systemFont(ofSize: .font2, weight: .semibold)
@@ -184,12 +181,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         return scroll
     }()
 
-    //
-
-    // MARK: - Initialization
-
-    //
-
+    // MARK: - Init
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -212,7 +204,26 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 
         NSLayoutConstraint.activate([inputAnimatedConstraint])
     }
+}
 
+// MARK: - Public
+extension UIMovableTextView {
+    func show() {
+        isUserInteractionEnabled = true
+        input.becomeFirstResponder()
+    }
+
+    func disableCancelButton() {
+        barCancel.isEnabled = false
+    }
+
+    func enableCancelButton() {
+        barCancel.isEnabled = true
+    }
+}
+
+// MARK: - Private
+extension UIMovableTextView {
     private func setupEventHandlers() {
         input.delegate = self
 
@@ -259,8 +270,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 
         animator.startAnimation()
     }
-
-    typealias KeyboardHeightChangeDescriptor = (movedBy: CGPoint, duration: Double)
 
     private func postWillShowNotification(newConstant: CGFloat, duration: Double) {
         let existingConstant = inputAnimatedConstraint.constant
@@ -345,38 +354,15 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     @objc func textViewDidChange(_ textView: UITextField) {
         value = textView.text ?? ""
     }
-
-    //
-
-    // MARK: - Public behaviour
-
-    //
-
-    func show() {
-        isUserInteractionEnabled = true
-        input.becomeFirstResponder()
-    }
-
-    func disableCancelButton() {
-        barCancel.isEnabled = false
-    }
-
-    func enableCancelButton() {
-        barCancel.isEnabled = true
-    }
 }
 
-//
-
 // MARK: - Notifications
-
-//
-
 extension Notification.Name {
     static let UIMovableTextViewShown = Notification.Name(rawValue: "UISwipingInputShown")
     static let UIMovableTextViewWillShow = Notification.Name(rawValue: "UIMovableTextViewWillShow")
 }
 
+// MARK: - Dark mode
 extension UIMovableTextView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

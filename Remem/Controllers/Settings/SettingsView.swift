@@ -9,14 +9,11 @@ import UIKit
 
 class SettingsView: UIView {
     // MARK: I18n
-//    static let onboarding = NSLocalizedString("button.settings.onboarding", comment: "settings button onboarding")
     static let reminders = NSLocalizedString("button.settings.reminders", comment: "settings button reminders")
     static let forgedIn = NSLocalizedString("label.footer", comment: " settings footer")
 
     // MARK: - Properties
     static var margin: CGFloat = .sm
-
-//    lazy var onboardingButton = SettingsRowView(Self.onboarding)
     lazy var remindersButton = SettingsRowView(Self.reminders)
 
     private lazy var footer: UILabel = {
@@ -58,8 +55,6 @@ class SettingsView: UIView {
 //        separator.heightAnchor.constraint(equalToConstant: .hairline).isActive = true
 
         stackView.addArrangedSubview(remindersButton)
-//        stackView.addArrangedSubview(separator)
-//        stackView.addArrangedSubview(onboardingButton)
         footer.tag = 1
     }
 

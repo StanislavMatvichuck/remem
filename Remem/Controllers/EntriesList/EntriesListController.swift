@@ -16,7 +16,6 @@ class EntriesListController: UIViewController {
     var service: EntriesListService!
     var coreDataStack: CoreDataStack!
 
-    // MARK: Private properties
     private let viewRoot = EntriesListView()
     private var cellIndexToBeAnimated: IndexPath?
     private var newCellIndex: IndexPath?
@@ -24,9 +23,7 @@ class EntriesListController: UIViewController {
     private lazy var hintsManager = HintsManager(service: service)
 
     // MARK: - Init
-    init() { super.init(nibName: nil, bundle: nil) }
     deinit { NotificationCenter.default.removeObserver(self) }
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -50,7 +47,7 @@ class EntriesListController: UIViewController {
     }
 }
 
-// MARK: - Internal
+// MARK: - Private
 extension EntriesListController {
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

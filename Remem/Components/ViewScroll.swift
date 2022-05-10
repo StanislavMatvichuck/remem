@@ -7,21 +7,10 @@
 
 import UIKit
 
-class ViewScroll: UIScrollView, ViewContaining {
-    //
-
-    // MARK: - Private properties
-
-    //
-
+class ViewScroll: UIScrollView {
+    // MARK: - Properties
     var viewContent: UIStackView
-
-    //
-
-    // MARK: - Initialization
-
-    //
-
+    // MARK: - Init
     init(_ axis: NSLayoutConstraint.Axis, spacing: CGFloat = 0) {
         viewContent = UIStackView(frame: .zero)
         viewContent.translatesAutoresizingMaskIntoConstraints = false
@@ -31,13 +20,10 @@ class ViewScroll: UIScrollView, ViewContaining {
         super.init(frame: .zero)
 
         translatesAutoresizingMaskIntoConstraints = false
-
         setupLayout(axis: axis)
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     func setupLayout(axis: NSLayoutConstraint.Axis) {
         addSubview(viewContent)
@@ -53,12 +39,6 @@ class ViewScroll: UIScrollView, ViewContaining {
                 viewContent.heightAnchor.constraint(equalTo: frameLayoutGuide.heightAnchor),
         ])
     }
-
-    //
-
-    // MARK: - ViewContaining
-
-    //
 
     func contain(views: UIView...) {
         for view in views {

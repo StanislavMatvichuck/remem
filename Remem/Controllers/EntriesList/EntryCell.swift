@@ -14,13 +14,13 @@ protocol EntryCellDelegate: AnyObject {
 }
 
 final class EntryCell: UITableViewCell {
-    // MARK: - Static properties
+    // MARK: - Properties
     static let reuseIdentifier = "ViewMainRow"
     static let backgroundColor = UIColor.systemBackground
     static let decorationColor = UIColor.secondarySystemBackground.withAlphaComponent(0.5)
     static let pinColor = UIColor.secondarySystemBackground
     static let height = .d2 + .sm
-    // MARK: - Public properties
+    // Public
     weak var delegate: EntryCellDelegate?
     weak var animator: EntryCellAnimator?
 
@@ -78,7 +78,7 @@ final class EntryCell: UITableViewCell {
         return label
     }()
 
-    // MARK: - Private properties
+    // Private
     private let nameLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center

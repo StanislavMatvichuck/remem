@@ -6,8 +6,6 @@
 //
 
 import CoreData
-import Foundation
-import UIKit.UIApplication
 
 class EntryDetailsService {
     // MARK: - Properties

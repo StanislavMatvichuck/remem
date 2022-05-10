@@ -46,7 +46,7 @@ class SwipeGestureView: UIView {
         return viewCircle.centerYAnchor.constraint(equalTo: initialAnchor, constant: -constant)
     }()
 
-    lazy var viewCircle: UIView = {
+    private lazy var viewCircle: UIView = {
         let view = UIView(al: true)
         view.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
         view.layer.cornerRadius = .r2 / 2
@@ -74,7 +74,7 @@ class SwipeGestureView: UIView {
         return view
     }()
 
-    lazy var viewFinger: UIView = {
+    private lazy var viewFinger: UIView = {
         let image = UIImage(systemName: "hand.point.up.left")?
             .withTintColor(.systemBlue.withAlphaComponent(1.0))
             .withRenderingMode(.alwaysOriginal)
@@ -103,21 +103,15 @@ class SwipeGestureView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-// MARK: - Private
+// MARK: - Public
 extension SwipeGestureView {
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([circleX, circleY])
-        setupViewFingerConstraints()
-    }
-
-    private func setupViewFingerConstraints() {
-        let finger = viewFinger
-        let circle = viewCircle
-        let labelSize = finger.sizeThatFits(CGSize(width: .wScreen, height: .hScreen))
-        NSLayoutConstraint.activate([
-            finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: 0.75 * labelSize.width),
-            finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: 0.56 * labelSize.height),
-        ])
+    func start() {
+        switch mode {
+        case .vertical:
+            startVerticalAnimation()
+        case .horizontal:
+            startHorizontalAnimation()
+        }
     }
 }
 
@@ -132,7 +126,6 @@ extension SwipeGestureView {
         func createAnimation() -> CABasicAnimation {
             let animation = CABasicAnimation(keyPath: "position.y")
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            //            animation.fillMode = .backwards
             animation.duration = Durations.position.rawValue
             animation.repeatCount = .greatestFiniteMagnitude
             animation.isRemovedOnCompletion = false
@@ -161,7 +154,6 @@ extension SwipeGestureView {
         func createAnimation() -> CABasicAnimation {
             let animation = CABasicAnimation(keyPath: "position.x")
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            //            animation.fillMode = .backwards
             animation.duration = Durations.position.rawValue
             animation.repeatCount = .greatestFiniteMagnitude
             animation.isRemovedOnCompletion = false
@@ -180,16 +172,19 @@ extension SwipeGestureView {
         circle.add(circlePosition, forKey: nil)
         finger.add(fingerPosition, forKey: nil)
     }
-}
 
-// MARK: - Public
-extension SwipeGestureView {
-    func start() {
-        switch mode {
-        case .vertical:
-            startVerticalAnimation()
-        case .horizontal:
-            startHorizontalAnimation()
-        }
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([circleX, circleY])
+        setupViewFingerConstraints()
+    }
+
+    private func setupViewFingerConstraints() {
+        let finger = viewFinger
+        let circle = viewCircle
+        let labelSize = finger.sizeThatFits(CGSize(width: .wScreen, height: .hScreen))
+        NSLayoutConstraint.activate([
+            finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: 0.75 * labelSize.width),
+            finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: 0.56 * labelSize.height),
+        ])
     }
 }

@@ -125,28 +125,6 @@ class EntriesListView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
-// MARK: - Private
-extension EntriesListView {
-    private func setupSwiper() {
-        addSubview(swiper)
-        NSLayoutConstraint.activate([
-            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
-            swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
-            swiper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
-        ])
-    }
-
-    private func setupTableView() {
-        addSubview(viewTable)
-        NSLayoutConstraint.activate([
-            viewTable.topAnchor.constraint(equalTo: topAnchor),
-            viewTable.leadingAnchor.constraint(equalTo: leadingAnchor),
-            viewTable.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
-}
-
 // MARK: - Public
 extension EntriesListView {
     func showEmptyState() {
@@ -169,5 +147,27 @@ extension EntriesListView {
         cellGestureView.isHidden = true
         emptyLabel.isHidden = true
         gestureView.isHidden = true
+    }
+}
+
+// MARK: - Private
+extension EntriesListView {
+    private func setupSwiper() {
+        addSubview(swiper)
+        NSLayoutConstraint.activate([
+            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
+            swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
+            swiper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
+        ])
+    }
+
+    private func setupTableView() {
+        addSubview(viewTable)
+        NSLayoutConstraint.activate([
+            viewTable.topAnchor.constraint(equalTo: topAnchor),
+            viewTable.leadingAnchor.constraint(equalTo: leadingAnchor),
+            viewTable.trailingAnchor.constraint(equalTo: trailingAnchor),
+            viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }

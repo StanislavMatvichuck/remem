@@ -16,172 +16,27 @@ protocol UISwipingSelectorInterface: UIControl {
 }
 
 class UISwipingSelector: UIControl, UISwipingSelectorInterface {
+    enum SelectableOption {
+        case addEntry
+        case settings
+    }
+
     // MARK: I18n
     static let settings = NSLocalizedString(
         "button.settings", comment: "button Settings")
     static let addEntry = NSLocalizedString(
         "button.add.entry", comment: "button Add entry")
 
-    //
-
-    // MARK: - Related types
-
-    //
-
-    enum SelectableOption {
-        case addEntry
-        case settings
-    }
-
-    //
-
-    // MARK: - Private properties
-
-    //
-
-    fileprivate let viewRoot = UISwipingSelectorView()
-
-    fileprivate var settingsLeft: CGFloat { viewRoot.viewSettings.frame.minX + .r2 }
-    fileprivate var settingsRight: CGFloat { viewRoot.viewSettings.frame.maxX }
-    fileprivate var addLeft: CGFloat { viewRoot.viewAddEntry.frame.minX }
-
-    //
-
-    // MARK: - Public properties
-
-    //
+    // MARK: - Properties
+    private var settingsLeft: CGFloat { viewSettings.frame.minX + .r2 }
+    private var settingsRight: CGFloat { viewSettings.frame.maxX }
+    private var addLeft: CGFloat { viewAddEntry.frame.minX }
 
     var value: SelectableOption?
 
-    //
-
-    // MARK: - Initialization
-
-    //
-
-    init() {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-
-        addAndConstrain(viewRoot)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    //
-
-    // MARK: - Public behaviour
-
-    //
-
-    func handleScrollView(contentOffset: CGPoint) {
-        let newContentOffset = -3 * contentOffset.y
-
-        viewRoot.pointerHorizontalConstraint.constant = newContentOffset.clamped(to: 0 ... (viewRoot.bounds.width))
-
-        if
-            !viewRoot.viewSettings.isHidden,
-            newContentOffset >= settingsLeft,
-            newContentOffset <= settingsRight
-        {
-            animateSelectedState(to: true, for: viewRoot.viewSettings)
-        } else {
-            animateSelectedState(to: false, for: viewRoot.viewSettings)
-        }
-
-        if newContentOffset >= addLeft + .r2 {
-            animateSelectedState(to: true, for: viewRoot.viewAddEntry)
-        } else {
-            animateSelectedState(to: false, for: viewRoot.viewAddEntry)
-        }
-    }
-
-    func handleScrollViewDraggingEnd() {
-        if
-            let isCreatePointSelected = isViewSelected[viewRoot.viewAddEntry],
-            isCreatePointSelected
-        {
-            value = .addEntry
-            sendActions(for: .primaryActionTriggered)
-            return
-        }
-
-        if
-            !viewRoot.viewSettings.isHidden,
-            let isSettingsSelected = isViewSelected[viewRoot.viewSettings],
-            isSettingsSelected
-        {
-            value = .settings
-            sendActions(for: .primaryActionTriggered)
-            return
-        }
-    }
-
-    func hideSettings() {
-        viewRoot.viewSettings.isHidden = true
-    }
-
-    func showSettings() {
-        viewRoot.viewSettings.isHidden = false
-    }
-
-    //
-
-    // MARK: - Animations
-
-    //
-
-    lazy var isViewSelected: [UIView: Bool] = [
-        viewRoot.viewSettings: false,
-        viewRoot.viewAddEntry: false,
-    ]
-
-    func animateSelectedState(to isSelected: Bool, for view: UIView) {
-        guard isSelected != isViewSelected[view] else { return }
-
-        let animation = createSelectedAnimation(isSelected: isSelected)
-
-        view.layer.backgroundColor = isSelected ?
-            viewRoot.selectedButtonBackground.cgColor :
-            viewRoot.defaultButtonBackground.cgColor
-
-        view.layer.add(animation, forKey: nil)
-
-        isViewSelected[view] = isSelected
-
-        if isSelected {
-            UIDevice.vibrate(.soft)
-        }
-    }
-
-    private func createSelectedAnimation(isSelected: Bool) -> CABasicAnimation {
-        let defaultColor = viewRoot.defaultButtonBackground
-        let selectedColor = viewRoot.selectedButtonBackground
-
-        let animation = CABasicAnimation(keyPath: "backgroundColor")
-
-        animation.fromValue = isSelected ? defaultColor : selectedColor
-        animation.toValue = isSelected ? selectedColor : defaultColor
-
-        animation.duration = 0.2
-
-        animation.timingFunction = CAMediaTimingFunction(name: .linear)
-
-        return animation
-    }
-}
-
-//
-
-// MARK: - UISwipingSelectorView
-
-//
-
-private class UISwipingSelectorView: UIView {
-    fileprivate lazy var viewAddEntry = makeButton(text: UISwipingSelector.addEntry)
-    fileprivate lazy var viewSettings = makeButton(text: UISwipingSelector.settings)
+    // UIView
+    private lazy var viewAddEntry = makeButton(text: UISwipingSelector.addEntry)
+    private lazy var viewSettings = makeButton(text: UISwipingSelector.settings)
 
     fileprivate let defaultButtonBackground = UIColor.clear
     fileprivate let selectedButtonBackground = UIColor.systemBlue.withAlphaComponent(0.75)
@@ -205,6 +60,12 @@ private class UISwipingSelectorView: UIView {
 
         return constraint
     }()
+
+    //
+
+    // MARK: - Initialization
+
+    //
 
     init() {
         super.init(frame: .zero)
@@ -230,17 +91,105 @@ private class UISwipingSelectorView: UIView {
         ])
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    lazy var isViewSelected: [UIView: Bool] = [
+        viewSettings: false,
+        viewAddEntry: false,
+    ]
+}
+
+// MARK: - Public
+extension UISwipingSelector {
+    func handleScrollView(contentOffset: CGPoint) {
+        let newContentOffset = -3 * contentOffset.y
+
+        pointerHorizontalConstraint.constant = newContentOffset.clamped(to: 0 ... bounds.width)
+
+        if
+            !viewSettings.isHidden,
+            newContentOffset >= settingsLeft,
+            newContentOffset <= settingsRight
+        {
+            animateSelectedState(to: true, for: viewSettings)
+        } else {
+            animateSelectedState(to: false, for: viewSettings)
+        }
+
+        if newContentOffset >= addLeft + .r2 {
+            animateSelectedState(to: true, for: viewAddEntry)
+        } else {
+            animateSelectedState(to: false, for: viewAddEntry)
+        }
     }
 
-    //
+    func handleScrollViewDraggingEnd() {
+        if
+            let isCreatePointSelected = isViewSelected[viewAddEntry],
+            isCreatePointSelected
+        {
+            value = .addEntry
+            sendActions(for: .primaryActionTriggered)
+            return
+        }
 
-    // MARK: - Internal behaviour
+        if
+            !viewSettings.isHidden,
+            let isSettingsSelected = isViewSelected[viewSettings],
+            isSettingsSelected
+        {
+            value = .settings
+            sendActions(for: .primaryActionTriggered)
+            return
+        }
+    }
 
-    //
+    func hideSettings() {
+        viewSettings.isHidden = true
+    }
 
-    fileprivate func makeButton(text: String) -> UIView {
+    func showSettings() {
+        viewSettings.isHidden = false
+    }
+}
+
+// MARK: - Private
+extension UISwipingSelector {
+    private func animateSelectedState(to isSelected: Bool, for view: UIView) {
+        guard isSelected != isViewSelected[view] else { return }
+
+        let animation = createSelectedAnimation(isSelected: isSelected)
+
+        view.layer.backgroundColor = isSelected ?
+            selectedButtonBackground.cgColor :
+            defaultButtonBackground.cgColor
+
+        view.layer.add(animation, forKey: nil)
+
+        isViewSelected[view] = isSelected
+
+        if isSelected {
+            UIDevice.vibrate(.soft)
+        }
+    }
+
+    private func createSelectedAnimation(isSelected: Bool) -> CABasicAnimation {
+        let defaultColor = defaultButtonBackground
+        let selectedColor = selectedButtonBackground
+
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
+
+        animation.fromValue = isSelected ? defaultColor : selectedColor
+        animation.toValue = isSelected ? selectedColor : defaultColor
+
+        animation.duration = 0.2
+
+        animation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        return animation
+    }
+
+    private func makeButton(text: String) -> UIView {
         let view = UIView(al: true)
         view.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.5)
         view.layer.cornerRadius = .r2 / 2
@@ -263,7 +212,10 @@ private class UISwipingSelectorView: UIView {
 
         return view
     }
+}
 
+// MARK: - Dark mode
+extension UISwipingSelector {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateBackgroundColors()

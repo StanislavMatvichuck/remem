@@ -8,12 +8,6 @@
 import UIKit
 
 class DayOfTheWeekCell: UICollectionViewCell {
-    //
-
-    // MARK: - Static properties
-
-    //
-
     static let reuseIdentifier = "CellDay"
 
     enum Kind {
@@ -24,12 +18,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
         case future
     }
 
-    //
-
-    // MARK: - Private properties
-
-    //
-
+    // MARK: - Properties
     fileprivate var viewRoot: UIView = {
         let view = UIView(frame: .zero)
 
@@ -99,19 +88,16 @@ class DayOfTheWeekCell: UICollectionViewCell {
         return view
     }()
 
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         contentView.addAndConstrain(viewRoot)
-
         setupViewRoot()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    fileprivate func setupViewRoot() {
+    private func setupViewRoot() {
         viewRoot.addSubview(viewIndicatorsContainer)
         viewRoot.addSubview(labelAmount)
         viewRoot.addSubview(labelDay)
@@ -145,16 +131,12 @@ class DayOfTheWeekCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-
         backgroundColor = .systemBackground
     }
+}
 
-    //
-
-    // MARK: - Behaviour
-
-    //
-
+// MARK: - Public
+extension DayOfTheWeekCell {
     func update(day: String, isToday: Bool = false) {
         labelDay.text = day
 
@@ -175,7 +157,10 @@ class DayOfTheWeekCell: UICollectionViewCell {
             enableIndicators(amount: amount!)
         }
     }
+}
 
+// MARK: - Private
+extension DayOfTheWeekCell {
     private func disableAllIndicators() {
         for subview in viewIndicatorsContainer.arrangedSubviews {
             subview.alpha = 0

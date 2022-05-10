@@ -14,7 +14,7 @@ class EntriesListService {
     weak var delegate: NSFetchedResultsControllerDelegate?
     var dataAmount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
 
-    // MARK: CoreData
+    // Core data
     let moc: NSManagedObjectContext
     private let coreDataStack: CoreDataStack
     private lazy var fetchedResultsController: NSFetchedResultsController<Entry> = {

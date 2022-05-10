@@ -32,7 +32,6 @@ class SettingsRowView: UIView {
             return container
         }()
 
-
         addSubview(label)
         addSubview(chevron)
 
@@ -55,6 +54,5 @@ class SettingsRowView: UIView {
     // MARK: - Dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-//        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
     }
 }
