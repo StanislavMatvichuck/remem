@@ -86,12 +86,6 @@ class EntriesListServiceTests: XCTestCase {
 
         service.addNewPoint(to: newEntry)
         XCTAssertEqual(newEntry.points?.count, 2)
-
-        let delegateMock = EntriesListServiceDelegateMock(self)
-        delegateMock.expectNewPointNotification()
-        service.delegate = delegateMock
-        service.addNewPoint(to: newEntry)
-        waitForExpectations(timeout: 1.0)
     }
 
     func testFilledEntryCreation() {
@@ -152,13 +146,5 @@ class EntriesListServiceDelegateMock: NSObject {
 
     func expectNewPointNotification() {
         expectation = testCase.expectation(description: "Waiting for new point index")
-    }
-}
-
-extension EntriesListServiceDelegateMock: EntriesListModelDelegate {
-    func newPointAdded(at: IndexPath) {
-        newPointEntryIndex = at
-        expectation?.fulfill()
-        expectation = nil
     }
 }
