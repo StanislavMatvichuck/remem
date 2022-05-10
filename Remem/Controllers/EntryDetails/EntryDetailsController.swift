@@ -34,10 +34,8 @@ class EntryDetailsController: UIViewController {
         setupViewStats()
 
         viewRoot.viewPointsDisplay.dataSource = self
-        viewRoot.viewPointsDisplay.delegate = self
         viewRoot.viewWeekDisplay.dataSource = self
         viewRoot.viewWeekDisplay.delegate = self
-        viewRoot.viewStatsDisplay.delegate = self
     }
 
     override func viewDidLayoutSubviews() {
@@ -87,31 +85,6 @@ extension EntryDetailsController {
                                         width: source.width,
                                         height: source.height + weeksView.height))
         return view
-    }
-}
-
-// MARK: - UITableViewDelegate (UIScrollViewDelegate)
-extension EntryDetailsController: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == viewRoot.viewPointsDisplay {
-            if !pointsDisplayScrollNotificationSent, scrollView.contentOffset.y > scrollView.frame.height {
-                NotificationCenter.default.post(name: .PointsDisplayDidScroll,
-                                                object: viewRoot.viewStatsDisplay)
-                pointsDisplayScrollNotificationSent = true
-            }
-        } else if scrollView == viewRoot.viewStatsDisplay {
-            if !statsDisplayScrollNotificationSent, scrollView.contentOffset.x <= 0 {
-                NotificationCenter.default.post(name: .StatsDisplayDidScroll,
-                                                object: createViewWeekDisplayDescriptor())
-                statsDisplayScrollNotificationSent = true
-            }
-        } else if scrollView == viewRoot.viewWeekDisplay {
-            let scrollOffsetAcceptance = scrollView.contentSize.width - 2 * scrollView.frame.width
-            if !weekDisplayScrollNotificationSent, scrollView.contentOffset.x <= scrollOffsetAcceptance {
-                NotificationCenter.default.post(name: .WeekDisplayDidScroll, object: nil)
-                weekDisplayScrollNotificationSent = true
-            }
-        }
     }
 }
 
@@ -192,25 +165,4 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
         cell.update(amount: weekDistributionService.pointsAmount(for: indexPath))
         return cell
     }
-}
-
-// MARK: - Onboarding
-extension EntryDetailsController: OnboardingControllerDelegate {
-    func startOnboarding() {
-        let onboarding = EntryDetailsOnboardingController(withStep: .highlightPointsDisplay)
-        onboarding.modalPresentationStyle = .overCurrentContext
-        onboarding.modalTransitionStyle = .crossDissolve
-        onboarding.viewToHighlight = viewRoot.viewPointsDisplay
-        onboarding.isModalInPresentation = true
-        present(onboarding, animated: true) {
-            onboarding.start()
-        }
-    }
-}
-
-// MARK: - Notifications
-extension Notification.Name {
-    static let PointsDisplayDidScroll = Notification.Name(rawValue: "PointsDisplayDidScroll")
-    static let StatsDisplayDidScroll = Notification.Name(rawValue: "StatsDisplayDidScroll")
-    static let WeekDisplayDidScroll = Notification.Name(rawValue: "WeekDisplayDidScroll")
 }

@@ -9,13 +9,9 @@ import CoreData
 import Foundation
 import UIKit.UIApplication
 
-protocol EntriesListModelDelegate: NSFetchedResultsControllerDelegate {
-    func newPointAdded(at: IndexPath)
-}
-
 class EntriesListService {
     // MARK: - Properties
-    weak var delegate: EntriesListModelDelegate?
+    weak var delegate: NSFetchedResultsControllerDelegate?
     var dataAmount: Int { fetchedResultsController.fetchedObjects?.count ?? 0 }
 
     // MARK: CoreData
@@ -113,9 +109,5 @@ extension EntriesListService {
     func addNewPoint(to entry: Entry) {
         entry.addDefaultPoint()
         coreDataStack.save(moc)
-
-        if let index = fetchedResultsController.indexPath(forObject: entry) {
-            delegate?.newPointAdded(at: index)
-        }
     }
 }

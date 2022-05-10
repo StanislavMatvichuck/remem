@@ -18,10 +18,8 @@ class CoreDataStack {
     }()
 
     private var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
-    private var onboardingContainer: NSPersistentContainer = { createContainer(inMemory: true) }()
 
     var defaultContext: NSManagedObjectContext { defaultContainer.viewContext }
-    var onboardingContext: NSManagedObjectContext { onboardingContainer.viewContext }
 }
 
 // MARK: - Public
@@ -50,25 +48,5 @@ extension CoreDataStack {
         })
 
         return container
-    }
-
-    func resetOnboardingContainer() {
-        let coordinator = onboardingContainer.persistentStoreCoordinator
-        guard let store = coordinator.persistentStores.first else { return }
-        let storeURL = coordinator.url(for: store)
-
-        do {
-            if #available(iOS 15.0, *) {
-                let storeType: NSPersistentStore.StoreType = .inMemory
-                try coordinator.destroyPersistentStore(at: storeURL, type: storeType)
-            } else {
-                let storeType: String = NSInMemoryStoreType
-                try coordinator.destroyPersistentStore(at: storeURL, ofType: storeType)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        onboardingContainer = Self.createContainer(inMemory: true)
     }
 }

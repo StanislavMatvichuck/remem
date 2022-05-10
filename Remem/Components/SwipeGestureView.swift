@@ -83,7 +83,8 @@ class SwipeGestureView: UIView {
 
         let view = UIImageView(image: image)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.transform = CGAffineTransform(rotationAngle: AnimatorCircle.fingerDefaultAngle)
+        let fingerDefaultAngle = -45 * CGFloat.pi / 360
+        view.transform = CGAffineTransform(rotationAngle: fingerDefaultAngle)
         view.layer.anchorPoint = CGPoint(x: 423.0 / 668.0, y: 560.0 / 738.0)
         addSubview(view)
         return view
