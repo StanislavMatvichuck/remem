@@ -7,7 +7,7 @@
 import CoreData.NSFetchedResultsController
 import UIKit
 
-class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
+class EntryDetailsController: UIViewController {
     // MARK: I18n
     static let dayAverage = NSLocalizedString("label.stats.average.day", comment: "EntryDetailsScreen")
     static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "EntryDetailsScreen")
@@ -15,9 +15,12 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EntryDetailsScreen")
 
     // MARK: - Properties
-    var model: EntryDetailsService!
-    private var scrollHappened = false
+    var entry: Entry!
+    var pointsListService: EntryPointsListService!
+    var weekDistributionService: EntryWeekDistributionService!
+
     // TODO: create neat mechanism to observe scrolling
+    private var scrollHappened = false
     var pointsDisplayScrollNotificationSent = false
     var statsDisplayScrollNotificationSent = false
     var weekDisplayScrollNotificationSent = false
@@ -26,8 +29,8 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
-        title = model.name
-        model.fetch()
+        title = entry.name
+        pointsListService.fetch()
         setupViewStats()
 
         viewRoot.viewPointsDisplay.dataSource = self
@@ -40,7 +43,7 @@ class EntryDetailsController: UIViewController, EntryDetailsModelDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setInitialScrolls()
-        model.markAsVisited()
+        entry.markAsVisited()
     }
 }
 
@@ -54,7 +57,7 @@ extension EntryDetailsController {
     }
 
     private func setInitialScrollPositionForDisplay() {
-        let lastCellIndex = IndexPath(row: model.dayCellsAmount - 1, section: 0)
+        let lastCellIndex = IndexPath(row: weekDistributionService.daysAmount - 1, section: 0)
         viewRoot.viewWeekDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
     }
 
@@ -64,10 +67,10 @@ extension EntryDetailsController {
     }
 
     private func setupViewStats() {
-        let viewDayAverage = ViewStatDisplay(value: model.dayAverage, description: Self.dayAverage)
-        let viewWeekAverage = ViewStatDisplay(value: model.weekAverage, description: Self.weekAverage)
-        let viewLastWeekTotal = ViewStatDisplay(value: model.lastWeekTotal, description: Self.lastWeekTotal)
-        let viewThisWeekTotal = ViewStatDisplay(value: model.thisWeekTotal, description: Self.thisWeekTotal)
+        let viewDayAverage = ViewStatDisplay(value: entry.dayAverage as NSNumber, description: Self.dayAverage)
+        let viewWeekAverage = ViewStatDisplay(value: entry.weekAverage as NSNumber, description: Self.weekAverage)
+        let viewLastWeekTotal = ViewStatDisplay(value: entry.lastWeekTotal as NSNumber, description: Self.lastWeekTotal)
+        let viewThisWeekTotal = ViewStatDisplay(value: entry.thisWeekTotal as NSNumber, description: Self.thisWeekTotal)
 
         viewRoot.viewStatsDisplay.contain(views:
             viewDayAverage,
@@ -115,18 +118,16 @@ extension EntryDetailsController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension EntryDetailsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataAmount = model.pointsAmount
-        dataAmount == 0 ? viewRoot.showEmptyState() : viewRoot.hideEmptyState()
-        return dataAmount
+        return pointsListService.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell,
-            let dataRow = model.point(at: indexPath)
+            let pointCell = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell,
+            let point = pointsListService.point(at: indexPath)
         else { return UITableViewCell() }
-        row.update(time: dataRow.time, day: dataRow.timeSince)
-        return row
+        pointCell.update(time: point.time, day: point.timeSince)
+        return pointCell
     }
 }
 
@@ -176,7 +177,7 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.dayCellsAmount
+        return weekDistributionService.daysAmount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,24 +185,11 @@ extension EntryDetailsController: UICollectionViewDelegateFlowLayout, UICollecti
             withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier,
             for: indexPath) as! DayOfTheWeekCell
 
-        let numberInMonth = model.dayInMonth(at: indexPath)
+        let numberInMonth = weekDistributionService.dayOfMonth(for: indexPath)
+        let isToday = indexPath.row == weekDistributionService.todayIndexRow
 
-        let isToday = model.isTodayCell(at: indexPath)
-        cell.update(day: "\(numberInMonth)", isToday: isToday)
-
-        switch model.cellKind(at: indexPath) {
-        case .past:
-            cell.update(amount: nil)
-        case .created:
-            cell.update(amount: nil)
-        case .data:
-            cell.update(amount: model.cellAmount(at: indexPath))
-        case .today:
-            cell.update(amount: nil)
-        case .future:
-            cell.update(amount: nil)
-        }
-
+        cell.update(day: "\(numberInMonth!)", isToday: isToday)
+        cell.update(amount: weekDistributionService.pointsAmount(for: indexPath))
         return cell
     }
 }

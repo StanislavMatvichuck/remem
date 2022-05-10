@@ -19,6 +19,18 @@ enum DayOfWeek: Int {
     var string: String {
         return "\(rawValue)"
     }
+
+    var europeanDayOfWeek: Int {
+        switch self {
+        case .sunday: return 7
+        case .monday: return 1
+        case .tuesday: return 2
+        case .wednesday: return 3
+        case .thursday: return 4
+        case .friday: return 5
+        case .saturday: return 6
+        }
+    }
 }
 
 extension Point {
@@ -36,7 +48,7 @@ extension Point {
 
     var timeSince: String {
         guard let date = dateCreated else { return "-" }
-        
+
         return date.timeAgoDisplay()
     }
 }

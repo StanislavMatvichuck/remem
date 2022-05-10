@@ -13,7 +13,6 @@ class EntriesListController: UIViewController {
     static let delete = NSLocalizedString("button.contextual.delete", comment: "EntriesList swipe gesture actions")
     
     // MARK: - Properties
-
     var service: EntriesListService!
     var coreDataStack: CoreDataStack!
 
@@ -258,21 +257,17 @@ extension EntriesListController: EntryCellDelegate {
             let entry = service.entry(at: index)
         else { return }
         
-        let pointsList = EntryDetailsController()
-        let navigation = UINavigationController(rootViewController: pointsList)
+        let entryDetails = EntryDetailsController()
+        entryDetails.entry = entry
+        entryDetails.pointsListService = EntryPointsListService(entry)
+        entryDetails.weekDistributionService = EntryWeekDistributionService(entry)
         
-        let model = EntryDetailsService(entry, coreDataStack: coreDataStack)
-        
-        // TODO: check if this is okay
-        pointsList.model = model
-        model.delegate = pointsList
-        
+        let navigation = UINavigationController(rootViewController: entryDetails)
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemBackground
         appearance.configureWithOpaqueBackground()
         appearance.shadowImage = nil
         appearance.shadowColor = .clear
-        
         navigation.navigationBar.scrollEdgeAppearance = appearance
         navigation.navigationBar.standardAppearance = appearance
         navigation.navigationBar.compactAppearance = appearance

@@ -69,6 +69,7 @@ class LocalNotificationsServiceTests: XCTestCase {
         )
 
         // Assert added notification
+        // TODO: fix this failing
         testGetNotifications()
         XCTAssertEqual(
             sutDelegate.pendingNotifications!.count,
@@ -158,7 +159,6 @@ extension LocalNotificationsServiceDelegateMock: UNUserNotificationCenterDelegat
         withCompletionHandler completionHandler:
         @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-//        completionHandler([.badge, .sound, .banner])
         arrivedNotification = notification
         expectation?.fulfill()
         expectation = nil

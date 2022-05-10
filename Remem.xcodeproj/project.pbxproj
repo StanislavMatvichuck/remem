@@ -22,6 +22,10 @@
 		0848C947281161F9003ED51D /* ReminderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C946281161F9003ED51D /* ReminderInput.swift */; };
 		0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */; };
 		0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C94A281163C9003ED51D /* SettingsRowView.swift */; };
+		0857A7AA28225B50006CCC99 /* EntryPointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* EntryPointsListService.swift */; };
+		0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */; };
+		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
+		0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */; };
 		085D38DC27FEF3FA00A18912 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DB27FEF3FA00A18912 /* OnboardingController.swift */; };
 		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
 		085D38E027FEFD1E00A18912 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DF27FEFD1E00A18912 /* OnboardingView.swift */; };
@@ -32,6 +36,7 @@
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
+		08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */; };
 		0878819527FF414100CFE362 /* EntryDetailsOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */; };
 		0878819727FF419600CFE362 /* EntryDetailsOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
@@ -91,6 +96,10 @@
 		0848C946281161F9003ED51D /* ReminderInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderInput.swift; sourceTree = "<group>"; };
 		0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithPadding.swift; sourceTree = "<group>"; };
 		0848C94A281163C9003ED51D /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
+		0857A7A928225B50006CCC99 /* EntryPointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPointsListService.swift; sourceTree = "<group>"; };
+		0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPointsListServiceTests.swift; sourceTree = "<group>"; };
+		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
+		0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionService.swift; sourceTree = "<group>"; };
 		085D38DB27FEF3FA00A18912 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		085D38DF27FEFD1E00A18912 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -106,6 +115,7 @@
 		0870EEF82809B81100336759 /* RememTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListServiceTests.swift; sourceTree = "<group>"; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
+		0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsServiceTests.swift; sourceTree = "<group>"; };
 		0878819427FF414100CFE362 /* EntryDetailsOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingController.swift; sourceTree = "<group>"; };
 		0878819627FF419600CFE362 /* EntryDetailsOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsOnboardingView.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -186,6 +196,25 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		0857A7B12822721F006CCC99 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
+				0890627B27A0A2700032847C /* PointTimeCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0857A7B328227236006CCC99 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
+				0857A7A928225B50006CCC99 /* EntryPointsListService.swift */,
+				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +231,10 @@
 			isa = PBXGroup;
 			children = (
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
+				0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */,
+				0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */,
 				08E56DEF280DD77900635887 /* EntryTests.swift */,
+				0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */,
 				08A473FB28201F5400D62194 /* HintsManagerTests.swift */,
 				08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */,
 			);
@@ -212,11 +244,10 @@
 		0890627627A0A1E30032847C /* EntryDetails */ = {
 			isa = PBXGroup;
 			children = (
-				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
+				0857A7B12822721F006CCC99 /* Cells */,
+				0857A7B328227236006CCC99 /* Services */,
 				0890627727A0A2520032847C /* EntryDetailsController.swift */,
-				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
-				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = EntryDetails;
 			sourceTree = "<group>";
@@ -440,8 +471,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E56DF0280DD77900635887 /* EntryTests.swift in Sources */,
+				08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */,
+				0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
+				0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */,
 				08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +500,7 @@
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08975A9927DDF51C0021E0D3 /* AnimatorOnboarding.swift in Sources */,
 				08D512382787153900C2037F /* EntryCell.swift in Sources */,
+				0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */,
 				089A5A4927E7A28000157D26 /* AnimatorCircle.swift in Sources */,
 				0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */,
 				08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */,
@@ -491,6 +526,7 @@
 				08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */,
 				0878819727FF419600CFE362 /* EntryDetailsOnboardingView.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
+				0857A7AA28225B50006CCC99 /* EntryPointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,
 				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
