@@ -11,17 +11,15 @@ class EntryDetailsView: UIView {
     // MARK: - Properties
     let viewPointsDisplay: UITableView = {
         let view = UITableView(al: true)
-
-        view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = .sm
-
         view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
         view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
+        view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
         view.scrollIndicatorInsets = UIEdgeInsets(top: .sm, left: 0, bottom: .sm, right: .sm / 2)
         view.allowsSelection = false
         view.separatorStyle = .none
 
+        view.backgroundColor = .secondarySystemBackground
+        view.layer.cornerRadius = .sm
         return view
     }()
 
@@ -95,6 +93,15 @@ class EntryDetailsView: UIView {
         return view
     }()
 
+    let timeContainer: ViewScroll = {
+        let view = ViewScroll(.horizontal)
+        view.isPagingEnabled = true
+        view.showsHorizontalScrollIndicator = false
+        return view
+    }()
+
+    let clock = Clock()
+
     // MARK: - Init
     init() {
         super.init(frame: .zero)
@@ -104,17 +111,24 @@ class EntryDetailsView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
-        addSubview(viewPointsDisplay)
+        let pointsDisplayContainer = UIView(al: true)
+        pointsDisplayContainer.addAndConstrain(viewPointsDisplay, constant: .sm)
+        timeContainer.contain(views: clock, pointsDisplayContainer)
+
+        addSubview(timeContainer)
         addSubview(viewStatsDisplay)
         addSubview(viewWeekDisplay)
         addSubview(viewWeekdaysLine)
 
         NSLayoutConstraint.activate([
-            viewPointsDisplay.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
-            viewPointsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .sm),
-            viewPointsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
+            clock.widthAnchor.constraint(equalTo: widthAnchor),
+            pointsDisplayContainer.widthAnchor.constraint(equalTo: widthAnchor),
 
-            viewStatsDisplay.topAnchor.constraint(equalTo: viewPointsDisplay.bottomAnchor, constant: .sm),
+            timeContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
+            timeContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            timeContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+
+            viewStatsDisplay.topAnchor.constraint(equalTo: timeContainer.bottomAnchor, constant: .sm),
             viewStatsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewStatsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
 
