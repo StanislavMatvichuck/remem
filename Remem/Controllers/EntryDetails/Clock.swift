@@ -26,44 +26,35 @@ class Clock: UIView {
 
     // MARK: - Drawing
     override func draw(_ rect: CGRect) {
-        let center = CGPoint(x: rect.midX, y: rect.midY)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        drawStitches(context)
+    }
+
+    private func drawStitches(_ context: CGContext) {
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = ((leastDimension - lineWidth / 2) / 2.0) - circleMarginFromBounds
         let toothAngle: CGFloat = 5
         let stitchWidth = 2.0
         let stitchHeight = lineWidth * 0.5
-
-        var path = UIBezierPath()
-
-        // Draw circle
-//        path.move(to: CGPoint(x: center.x + radius, y: center.y))
-//        path.addArc(
-//            withCenter: CGPoint(x: center.x, y: center.y),
-//            radius: radius,
-//            startAngle: 0,
-//            endAngle: 2 * .pi,
-//            clockwise: true)
-//
-//        path.lineWidth = lineWidth
-//        UIColor.secondarySystemBackground.set()
-//        path.stroke()
 
         let stitch = CGRect(x: center.x - stitchWidth,
                             y: center.y - radius - stitchHeight / 2,
                             width: stitchWidth,
                             height: stitchHeight)
 
-        path = UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
-        UIColor.blue.set()
+        let stitchPath = UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
+        context.setFillColor(UIColor.blue.cgColor)
 
         for _ in stride(from: toothAngle, through: 360, by: toothAngle) {
             // Move origin to center of the circle
-            path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
+            stitchPath.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
             // Rotate
-            path.apply(CGAffineTransform(rotationAngle: toothAngle * .pi / 180))
+            stitchPath.apply(CGAffineTransform(rotationAngle: toothAngle * .pi / 180))
             // Move origin back to original location
-            path.apply(CGAffineTransform(translationX: center.x, y: center.y))
+            stitchPath.apply(CGAffineTransform(translationX: center.x, y: center.y))
 
-            path.fill()
+            context.addPath(stitchPath.cgPath)
+            context.fillPath(using: .winding)
         }
     }
 
