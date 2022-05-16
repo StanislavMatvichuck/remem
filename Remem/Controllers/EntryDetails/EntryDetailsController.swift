@@ -32,12 +32,30 @@ class EntryDetailsController: UIViewController {
         viewRoot.viewPointsDisplay.dataSource = self
         viewRoot.viewWeekDisplay.dataSource = self
         viewRoot.viewWeekDisplay.delegate = self
+
+        viewRoot.clockDay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
+        viewRoot.clockNight.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setInitialScrolls()
         entry.markAsVisited()
+    }
+
+    private var isDayClockVisible = true
+}
+
+// MARK: - User input
+extension EntryDetailsController {
+    @objc func handleClockPress() {
+        var stitches: [Clock.StitchVariant] = []
+        for _ in 0...71 {
+            stitches.append(Clock.StitchVariant(rawValue: Int.random(in: 0...3))!)
+        }
+        flipClock()
+        viewRoot.clockDay.update(stitches: stitches)
+        viewRoot.clockNight.update(stitches: stitches)
     }
 }
 
@@ -81,6 +99,17 @@ extension EntryDetailsController {
                                         width: source.width,
                                         height: source.height + weeksView.height))
         return view
+    }
+
+    private func flipClock() {
+        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+        let firstView = isDayClockVisible ? viewRoot.clockDay : viewRoot.clockNight
+        let secondView = isDayClockVisible ? viewRoot.clockNight : viewRoot.clockDay
+
+        UIView.transition(from: firstView, to: secondView, duration: 0.6, options: transitionOptions) { finished in
+            guard finished else { return }
+            self.isDayClockVisible.toggle()
+        }
     }
 }
 

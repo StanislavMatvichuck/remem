@@ -15,16 +15,23 @@ class Clock: UIView {
         case big
     }
 
+    enum ClockVariant {
+        case day
+        case night
+    }
+
+    private static let maximumStitchHeight = 32.0
+    private static let maximumFaceStitchHeight = 10.0
+    private static let clockBoundsOffset = 0.0
+    private static let faceOffset = 5.0
+
     // MARK: - Properties
-    let maximumStitchHeight = 32.0
-    let maximumFaceStitchHeight = 10.0
-    let clockBoundsOffset = 0.0
-    let faceOffset = 5.0
+    let variant: ClockVariant
 
     var leastDimension: CGFloat { min(bounds.width, bounds.height) }
-    var stitchOuterRadius: CGFloat { center.y - clockBoundsOffset }
-    var stitchInnerRadius: CGFloat { stitchOuterRadius - maximumStitchHeight }
-    var faceInnerRadius: CGFloat { stitchInnerRadius - maximumFaceStitchHeight - faceOffset - 3.0 }
+    var stitchOuterRadius: CGFloat { center.y - Self.clockBoundsOffset }
+    var stitchInnerRadius: CGFloat { stitchOuterRadius - Self.maximumStitchHeight }
+    var faceInnerRadius: CGFloat { stitchInnerRadius - Self.maximumFaceStitchHeight - Self.faceOffset - 3.0 }
 
     var stitchVariantsArray: [StitchVariant] = {
         var array: [StitchVariant] = []
@@ -35,11 +42,13 @@ class Clock: UIView {
     }()
 
     // MARK: - Init
-    override init(frame: CGRect) {
+    init(for variant: ClockVariant) {
+        self.variant = variant
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
         addLabels()
+        addIcon()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -73,7 +82,7 @@ class Clock: UIView {
         let stitchHeight = stitchHeight(for: variant)
 
         let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchOuterRadius + maximumStitchHeight - stitchHeight,
+                            y: center.y - stitchOuterRadius + Self.maximumStitchHeight - stitchHeight,
                             width: stitchWidth,
                             height: stitchHeight)
 
@@ -91,10 +100,10 @@ class Clock: UIView {
 
     private func stitchHeight(for variant: StitchVariant) -> CGFloat {
         switch variant {
-        case .empty: return maximumStitchHeight * 0.33
-        case .little: return maximumStitchHeight * 0.33
-        case .mid: return maximumStitchHeight * 0.66
-        case .big: return maximumStitchHeight
+        case .empty: return Self.maximumStitchHeight * 0.33
+        case .little: return Self.maximumStitchHeight * 0.33
+        case .mid: return Self.maximumStitchHeight * 0.66
+        case .big: return Self.maximumStitchHeight
         }
     }
 
@@ -116,10 +125,10 @@ class Clock: UIView {
 
     private func makeFaceStitch(isHour: Bool) -> UIBezierPath {
         let stitchWidth = 1.0
-        let stitchHeight = isHour ? maximumFaceStitchHeight : maximumFaceStitchHeight / 2
+        let stitchHeight = isHour ? Self.maximumFaceStitchHeight : Self.maximumFaceStitchHeight / 2
 
         let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchInnerRadius + faceOffset,
+                            y: center.y - stitchInnerRadius + Self.faceOffset,
                             width: stitchWidth,
                             height: stitchHeight)
 
@@ -136,13 +145,21 @@ class Clock: UIView {
     }
 }
 
+// MARK: - Public
+extension Clock {
+    func update(stitches: [StitchVariant]) {
+        stitchVariantsArray = stitches
+        setNeedsDisplay()
+    }
+}
+
 // MARK: - Private
 extension Clock {
     private func addLabels() {
-        let label12 = makeLabel("12")
-        let label15 = makeLabel("15")
-        let label18 = makeLabel("18")
-        let label21 = makeLabel("21")
+        let label12 = makeLabel(variant == .day ? "12" : "00")
+        let label15 = makeLabel(variant == .day ? "15" : "03")
+        let label18 = makeLabel(variant == .day ? "18" : "06")
+        let label21 = makeLabel(variant == .day ? "21" : "09")
 
         addSubview(label12)
         addSubview(label15)
@@ -169,5 +186,30 @@ extension Clock {
         label.text = text
         label.font = .systemFont(ofSize: 0.8 * .font1)
         return label
+    }
+
+    private func addIcon() {
+        let imageView = UIImageView(image: makeIcon())
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
+    }
+
+    private func makeIcon() -> UIImage {
+        let imageName: String = {
+            if variant == .day { return "sun.max" }
+            else { return "moon.stars" }
+        }()
+
+        let image = UIImage(systemName: imageName)?
+            .withTintColor(.secondarySystemBackground)
+            .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
+
+        return image!
     }
 }

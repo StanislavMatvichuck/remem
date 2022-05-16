@@ -100,7 +100,12 @@ class EntryDetailsView: UIView {
         return view
     }()
 
-    let clock = Clock()
+    let clockDay = Clock(for: .day)
+    let clockNight: Clock = {
+        let clock = Clock(for: .night)
+        clock.isHidden = true
+        return clock
+    }()
 
     // MARK: - Init
     init() {
@@ -113,7 +118,10 @@ class EntryDetailsView: UIView {
     private func setupLayout() {
         let pointsDisplayContainer = UIView(al: true)
         pointsDisplayContainer.addAndConstrain(viewPointsDisplay, constant: .sm)
-        timeContainer.contain(views: clock, pointsDisplayContainer)
+        let clocksContainer = UIView(al: true)
+        clocksContainer.addAndConstrain(clockDay)
+        clocksContainer.addAndConstrain(clockNight)
+        timeContainer.contain(views: clocksContainer, pointsDisplayContainer)
 
         addSubview(timeContainer)
         addSubview(viewStatsDisplay)
@@ -121,7 +129,7 @@ class EntryDetailsView: UIView {
         addSubview(viewWeekdaysLine)
 
         NSLayoutConstraint.activate([
-            clock.widthAnchor.constraint(equalTo: widthAnchor),
+            clocksContainer.widthAnchor.constraint(equalTo: widthAnchor),
             pointsDisplayContainer.widthAnchor.constraint(equalTo: widthAnchor),
 
             timeContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
