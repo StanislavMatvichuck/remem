@@ -10,6 +10,7 @@ import UIKit
 protocol LocalNotificationsServiceDelegate {
     func authorizationRequest(result: Bool)
     func notificationsRequest(result: [UNNotificationRequest])
+    func addNotificationRequest(result: Error?)
 }
 
 // MARK: - Properties
@@ -68,7 +69,11 @@ extension LocalNotificationsService {
                                             content: content,
                                             trigger: trigger)
 
-        center.add(request) { error in print(error?.localizedDescription ?? "") }
+        center.add(request) { [weak self] error in
+            DispatchQueue.main.async {
+                self?.delegate?.addNotificationRequest(result: error)
+            }
+        }
 
         return request
     }

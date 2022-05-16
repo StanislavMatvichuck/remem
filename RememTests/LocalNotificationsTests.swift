@@ -57,13 +57,13 @@ class LocalNotificationsServiceTests: XCTestCase {
         sutDelegate.expectPendingNotificationsCallback()
         sut.requestPendingNotifications()
         waitForExpectations(timeout: 1)
-        
+
         XCTAssertNotNil(sutDelegate.pendingNotifications)
 
         /// get `arrangedNotificationsAmount` before addition and deletion to isolate this test
         let arrangedNotificationsAmount = sutDelegate.pendingNotifications!.count
 
-        // Act: create a notification
+        sutDelegate.expectNotificationAddedWithoutError()
         let addedNotification = sut.addNotification(
             text: "Remem notification",
             hours: currentComponents.hour!,
@@ -71,15 +71,13 @@ class LocalNotificationsServiceTests: XCTestCase {
             seconds: currentComponents.second! + 10,
             repeats: false
         )
+        waitForExpectations(timeout: 1)
 
-        // Assert added notification
-        // TODO: fix this failing
-        
         // testGetNotifications
         sutDelegate.expectPendingNotificationsCallback()
         sut.requestPendingNotifications()
         waitForExpectations(timeout: 1)
-        
+
         XCTAssertEqual(
             sutDelegate.pendingNotifications!.count,
             arrangedNotificationsAmount + 1
@@ -89,12 +87,12 @@ class LocalNotificationsServiceTests: XCTestCase {
         sut.removePendingNotifications(addedNotification.identifier)
 
         // Assert added notification removal
-        
+
         // testGetNotifications
         sutDelegate.expectPendingNotificationsCallback()
         sut.requestPendingNotifications()
         waitForExpectations(timeout: 1)
-        
+
         XCTAssertEqual(
             sutDelegate.pendingNotifications!.count,
             arrangedNotificationsAmount
@@ -102,6 +100,7 @@ class LocalNotificationsServiceTests: XCTestCase {
     }
 
     func testNotificationArrived() {
+        sutDelegate.expectNotificationAddedWithoutError()
         let createdNotification = sut.addNotification(
             text: "Remem notification",
             hours: currentComponents.hour!,
@@ -109,9 +108,9 @@ class LocalNotificationsServiceTests: XCTestCase {
             seconds: currentComponents.second! + 1,
             repeats: false
         )
+        waitForExpectations(timeout: 1)
 
         sutDelegate.expectNotificationArrival()
-
         waitForExpectations(timeout: 2)
 
         XCTAssertNotNil(sutDelegate.arrivedNotification)
@@ -144,6 +143,10 @@ extension LocalNotificationsServiceDelegateMock {
         expectation = testCase.expectation(description: "Waiting for pending notifications")
     }
 
+    func expectNotificationAddedWithoutError() {
+        expectation = testCase.expectation(description: "Notification registered by the system without error")
+    }
+
     func expectNotificationArrival() {
         expectation = testCase.expectation(description: "Wait for notification to arrive")
         UNUserNotificationCenter.current().delegate = self
@@ -163,9 +166,14 @@ extension LocalNotificationsServiceDelegateMock: LocalNotificationsServiceDelega
         expectation?.fulfill()
         expectation = nil
     }
+
+    func addNotificationRequest(result: Error?) {
+        expectation?.fulfill()
+        expectation = nil
+    }
 }
 
-// MARK: - Notifications arrival testing
+// MARK: Notifications arrival testing
 extension LocalNotificationsServiceDelegateMock: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
