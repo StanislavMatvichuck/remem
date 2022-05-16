@@ -137,6 +137,7 @@ extension RemindersController {
 // MARK: - LocalNotificationsServiceDelegate
 extension RemindersController: LocalNotificationsServiceDelegate {
     func authorizationRequest(result: Bool) {}
+    func addNotificationRequest(result: Error?) {}
     func notificationsRequest(result: [UNNotificationRequest]) {
         reminders = result
         tableView.reloadData()
