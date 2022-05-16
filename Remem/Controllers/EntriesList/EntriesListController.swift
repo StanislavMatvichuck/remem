@@ -243,6 +243,7 @@ extension EntriesListController: EntryCellDelegate {
         entryDetails.entry = entry
         entryDetails.pointsListService = EntryPointsListService(entry)
         entryDetails.weekDistributionService = EntryWeekDistributionService(entry)
+        entryDetails.clockService = ClockService(entry, stack: coreDataStack, segmentsCount: 72)
 
         let navigation = UINavigationController(rootViewController: entryDetails)
         let appearance = UINavigationBarAppearance()

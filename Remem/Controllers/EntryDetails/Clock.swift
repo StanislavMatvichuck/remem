@@ -13,6 +13,14 @@ class Clock: UIView {
         case little
         case mid
         case big
+
+        static func make(from: Int) -> StitchVariant {
+            if let stitch = StitchVariant(rawValue: from) {
+                return stitch
+            } else {
+                return .big
+            }
+        }
     }
 
     enum ClockVariant {
@@ -200,12 +208,7 @@ extension Clock {
     }
 
     private func makeIcon() -> UIImage {
-        let imageName: String = {
-            if variant == .day { return "sun.max" }
-            else { return "moon.stars" }
-        }()
-
-        let image = UIImage(systemName: imageName)?
+        let image = UIImage(systemName: variant == .day ? "sun.max" : "moon.stars")?
             .withTintColor(.secondarySystemBackground)
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))

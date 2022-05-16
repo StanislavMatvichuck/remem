@@ -26,6 +26,8 @@
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
+		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
+		086B3D9A28325992006E08CB /* ClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9928325992006E08CB /* ClockService.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -89,6 +91,8 @@
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
+		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
+		086B3D9928325992006E08CB /* ClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockService.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE69281699DF0054266E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 		0857A7B328227236006CCC99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				086B3D9928325992006E08CB /* ClockService.swift */,
 				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
 				0857A7A928225B50006CCC99 /* EntryPointsListService.swift */,
 				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
@@ -191,6 +196,7 @@
 		0870EEF92809B81100336759 /* RememTests */ = {
 			isa = PBXGroup;
 			children = (
+				086B3D9728325903006E08CB /* ClockServiceTests.swift */,
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
 				0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */,
 				0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */,
@@ -431,6 +437,7 @@
 			files = (
 				08E56DF0280DD77900635887 /* EntryTests.swift in Sources */,
 				08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */,
+				086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */,
 				0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
@@ -473,6 +480,7 @@
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
+				086B3D9A28325992006E08CB /* ClockService.swift in Sources */,
 				0857A7AA28225B50006CCC99 /* EntryPointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,

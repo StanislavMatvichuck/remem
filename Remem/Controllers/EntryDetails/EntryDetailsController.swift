@@ -18,6 +18,7 @@ class EntryDetailsController: UIViewController {
     var entry: Entry!
     var pointsListService: EntryPointsListService!
     var weekDistributionService: EntryWeekDistributionService!
+    var clockService: ClockService!
 
     private var scrollHappened = false
     // MARK: - View lifecycle
@@ -26,12 +27,10 @@ class EntryDetailsController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .systemBackground
         title = entry.name
-        pointsListService.fetch()
-        setupViewStats()
 
-        viewRoot.viewPointsDisplay.dataSource = self
-        viewRoot.viewWeekDisplay.dataSource = self
-        viewRoot.viewWeekDisplay.delegate = self
+        setupClocks()
+        setupViewStats()
+        setupDisplays()
 
         viewRoot.clockDay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
         viewRoot.clockNight.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
@@ -49,13 +48,7 @@ class EntryDetailsController: UIViewController {
 // MARK: - User input
 extension EntryDetailsController {
     @objc func handleClockPress() {
-        var stitches: [Clock.StitchVariant] = []
-        for _ in 0...71 {
-            stitches.append(Clock.StitchVariant(rawValue: Int.random(in: 0...3))!)
-        }
         flipClock()
-        viewRoot.clockDay.update(stitches: stitches)
-        viewRoot.clockNight.update(stitches: stitches)
     }
 }
 
@@ -76,6 +69,20 @@ extension EntryDetailsController {
     private func setInitialScrollPositionForStats() {
         let point = CGPoint(x: 2 * .wScreen, y: 0)
         viewRoot.viewStatsDisplay.setContentOffset(point, animated: false)
+    }
+
+    private func setupClocks() {
+        let stitches = clockService.fetch()
+        viewRoot.clockDay.update(stitches: stitches.day)
+        viewRoot.clockNight.update(stitches: stitches.night)
+    }
+
+    private func setupDisplays() {
+        viewRoot.viewPointsDisplay.dataSource = self
+        pointsListService.fetch()
+
+        viewRoot.viewWeekDisplay.dataSource = self
+        viewRoot.viewWeekDisplay.delegate = self
     }
 
     private func setupViewStats() {
