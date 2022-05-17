@@ -28,6 +28,7 @@
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
 		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
 		086B3D9A28325992006E08CB /* ClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9928325992006E08CB /* ClockService.swift */; };
+		086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9B2832AC74006E08CB /* ClockAnimator.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -93,6 +94,7 @@
 		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
 		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
 		086B3D9928325992006E08CB /* ClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockService.swift; sourceTree = "<group>"; };
+		086B3D9B2832AC74006E08CB /* ClockAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAnimator.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE69281699DF0054266E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
 				0857A7A928225B50006CCC99 /* EntryPointsListService.swift */,
 				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
+				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
+				086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08D512382787153900C2037F /* EntryCell.swift in Sources */,
 				0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */,

@@ -21,6 +21,7 @@ class EntryDetailsController: UIViewController {
     var clockService: ClockService!
 
     private var scrollHappened = false
+    private var clockAnimator: ClockAnimator!
     // MARK: - View lifecycle
     private let viewRoot = EntryDetailsView()
     override func loadView() { view = viewRoot }
@@ -42,13 +43,15 @@ class EntryDetailsController: UIViewController {
         entry.markAsVisited()
     }
 
-    private var isDayClockVisible = true
+    override func viewDidAppear(_ animated: Bool) {
+        clockAnimator.appearForward()
+    }
 }
 
 // MARK: - User input
 extension EntryDetailsController {
     @objc func handleClockPress() {
-        flipClock()
+        clockAnimator.flip()
     }
 }
 
@@ -72,6 +75,9 @@ extension EntryDetailsController {
     }
 
     private func setupClocks() {
+        clockAnimator = ClockAnimator(dayClock: viewRoot.clockDay,
+                                      nightClock: viewRoot.clockNight)
+
         let stitches = clockService.fetch()
         viewRoot.clockDay.update(stitches: stitches.day)
         viewRoot.clockNight.update(stitches: stitches.night)
@@ -106,17 +112,6 @@ extension EntryDetailsController {
                                         width: source.width,
                                         height: source.height + weeksView.height))
         return view
-    }
-
-    private func flipClock() {
-        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
-        let firstView = isDayClockVisible ? viewRoot.clockDay : viewRoot.clockNight
-        let secondView = isDayClockVisible ? viewRoot.clockNight : viewRoot.clockDay
-
-        UIView.transition(from: firstView, to: secondView, duration: 0.6, options: transitionOptions) { finished in
-            guard finished else { return }
-            self.isDayClockVisible.toggle()
-        }
     }
 }
 
