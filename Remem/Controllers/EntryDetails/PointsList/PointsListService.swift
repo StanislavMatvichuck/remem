@@ -1,5 +1,5 @@
 //
-//  EntryPointsListService.swift
+//  PointsListService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 04.05.2022.
@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-class EntryPointsListService {
+class PointsListService {
     // MARK: - Properties
     var points: [Point] = []
     var count: Int { points.count }
@@ -24,14 +24,14 @@ class EntryPointsListService {
 }
 
 // MARK: - Public
-extension EntryPointsListService {
+extension PointsListService {
     func fetch() {
         let request = Point.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Point.dateCreated), ascending: false)]
         request.predicate = NSPredicate(format: "entry == %@", argumentArray: [entry])
 
         do { points = try moc.fetch(request) } catch {
-            print("EntryPointsListService.fetchCount() error \(error)")
+            print("PointsListService.fetchCount() error \(error)")
         }
     }
 

@@ -47,7 +47,7 @@ extension ClockService {
         request.predicate = NSPredicate(format: "entry == %@", argumentArray: [entry])
 
         do { return try moc.fetch(request) } catch {
-            print("EntryPointsListService.fetchCount() error \(error)")
+            print("PointsListService.fetchCount() error \(error)")
             return []
         }
     }

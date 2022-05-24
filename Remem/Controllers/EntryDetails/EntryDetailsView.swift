@@ -9,19 +9,6 @@ import UIKit
 
 class EntryDetailsView: UIView {
     // MARK: - Properties
-    let viewPointsDisplay: UITableView = {
-        let view = UITableView(al: true)
-        view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
-        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
-        view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
-        view.scrollIndicatorInsets = UIEdgeInsets(top: .sm, left: 0, bottom: .sm, right: .sm / 2)
-        view.allowsSelection = false
-        view.separatorStyle = .none
-
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = .sm
-        return view
-    }()
 
     let viewWeekDisplay: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -100,6 +87,7 @@ class EntryDetailsView: UIView {
         return view
     }()
 
+    let pointsListContainer = UIView(al: true)
     let clockContainer = UIView(al: true)
 
     // MARK: - Init
@@ -111,9 +99,7 @@ class EntryDetailsView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
-        let pointsDisplayContainer = UIView(al: true)
-        pointsDisplayContainer.addAndConstrain(viewPointsDisplay, constant: .sm)
-        timeContainer.contain(views: clockContainer, pointsDisplayContainer)
+        timeContainer.contain(views: clockContainer, pointsListContainer)
 
         addSubview(timeContainer)
         addSubview(viewStatsDisplay)
@@ -122,7 +108,7 @@ class EntryDetailsView: UIView {
 
         NSLayoutConstraint.activate([
             clockContainer.widthAnchor.constraint(equalTo: widthAnchor),
-            pointsDisplayContainer.widthAnchor.constraint(equalTo: widthAnchor),
+            pointsListContainer.widthAnchor.constraint(equalTo: widthAnchor),
 
             timeContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: .sm),
             timeContainer.leadingAnchor.constraint(equalTo: leadingAnchor),

@@ -16,9 +16,10 @@ class EntryDetailsController: UIViewController {
 
     // MARK: - Properties
     var entry: Entry!
-    var pointsListService: EntryPointsListService!
+
     var weekDistributionService: EntryWeekDistributionService!
     let clockController = ClockController()
+    let pointsListController = PointsListController()
     private var scrollHappened = false
 
     // MARK: - View lifecycle
@@ -31,6 +32,7 @@ class EntryDetailsController: UIViewController {
         setupClock()
         setupViewStats()
         setupDisplays()
+        setupPointsList()
     }
 
     override func viewDidLayoutSubviews() {
@@ -60,9 +62,6 @@ extension EntryDetailsController {
     }
 
     private func setupDisplays() {
-        viewRoot.viewPointsDisplay.dataSource = self
-        pointsListService.fetch()
-
         viewRoot.viewWeekDisplay.dataSource = self
         viewRoot.viewWeekDisplay.delegate = self
     }
@@ -71,6 +70,12 @@ extension EntryDetailsController {
         addChild(clockController)
         viewRoot.clockContainer.addAndConstrain(clockController.view)
         clockController.didMove(toParent: self)
+    }
+
+    private func setupPointsList() {
+        addChild(pointsListController)
+        viewRoot.pointsListContainer.addAndConstrain(pointsListController.view, constant: .sm)
+        pointsListController.didMove(toParent: self)
     }
 
     private func setupViewStats() {
@@ -94,58 +99,6 @@ extension EntryDetailsController {
                                         width: source.width,
                                         height: source.height + weeksView.height))
         return view
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension EntryDetailsController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pointsListService.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let pointCell = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell,
-            let point = pointsListService.point(at: indexPath)
-        else { return UITableViewCell() }
-        pointCell.update(time: point.time, day: point.timeSince)
-        return pointCell
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension EntryDetailsController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewPointsDisplay.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?)
-    {
-        switch type {
-        case .insert:
-            guard let insertIndex = newIndexPath else { return }
-            viewRoot.viewPointsDisplay.insertRows(at: [insertIndex], with: .automatic)
-        case .delete:
-            guard let deleteIndex = indexPath else { return }
-            viewRoot.viewPointsDisplay.deleteRows(at: [deleteIndex], with: .automatic)
-        case .move:
-            guard let fromIndex = indexPath, let toIndex = newIndexPath
-            else { return }
-            viewRoot.viewPointsDisplay.moveRow(at: fromIndex, to: toIndex)
-        case .update:
-            guard let updateIndex = indexPath else { return }
-            viewRoot.viewPointsDisplay.reloadRows(at: [updateIndex], with: .none)
-        @unknown default:
-            fatalError("Unhandled case")
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewPointsDisplay.endUpdates()
     }
 }
 

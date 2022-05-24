@@ -1,5 +1,5 @@
 //
-//  EntryPointsListService.swift
+//  PointsListService.swift
 //  RememTests
 //
 //  Created by Stanislav Matvichuck on 04.05.2022.
@@ -9,11 +9,11 @@ import CoreData
 @testable import Remem
 import XCTest
 
-class EntryPointsListServiceTests: XCTestCase {
+class PointsListServiceTests: XCTestCase {
     var coreDataStack: CoreDataStack!
 
     var entry: Entry!
-    var sut: EntryPointsListService!
+    var sut: PointsListService!
 
     override func setUp() {
         super.setUp()
@@ -24,7 +24,7 @@ class EntryPointsListServiceTests: XCTestCase {
 
         coreDataStack = stack
         self.entry = entry
-        sut = EntryPointsListService(entry)
+        sut = PointsListService(entry)
     }
 
     override func tearDown() {

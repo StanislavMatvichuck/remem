@@ -26,8 +26,10 @@
 		0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C94A281163C9003ED51D /* SettingsRowView.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
-		0857A7AA28225B50006CCC99 /* EntryPointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* EntryPointsListService.swift */; };
-		0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */; };
+		0852C6A2283D570E0027EF3E /* PointsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A1283D570E0027EF3E /* PointsListController.swift */; };
+		0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* PointsListView.swift */; };
+		0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* PointsListService.swift */; };
+		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
 		0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */; };
 		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
@@ -101,8 +103,10 @@
 		0848C94A281163C9003ED51D /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		0852C69F283D39F80027EF3E /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
-		0857A7A928225B50006CCC99 /* EntryPointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPointsListService.swift; sourceTree = "<group>"; };
-		0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPointsListServiceTests.swift; sourceTree = "<group>"; };
+		0852C6A1283D570E0027EF3E /* PointsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListController.swift; sourceTree = "<group>"; };
+		0852C6A3283D57230027EF3E /* PointsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListView.swift; sourceTree = "<group>"; };
+		0857A7A928225B50006CCC99 /* PointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListService.swift; sourceTree = "<group>"; };
+		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionService.swift; sourceTree = "<group>"; };
 		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -176,10 +180,12 @@
 			children = (
 				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
 				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
+				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				080656E9283B946000C09409 /* ClockSectionDescription.swift */,
 				080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */,
 				086B3D9928325992006E08CB /* ClockService.swift */,
 				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
+				0852C69F283D39F80027EF3E /* ClockView.swift */,
 			);
 			path = Clock;
 			sourceTree = "<group>";
@@ -206,6 +212,16 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
+		0852C6A5283D57500027EF3E /* PointsList */ = {
+			isa = PBXGroup;
+			children = (
+				0857A7A928225B50006CCC99 /* PointsListService.swift */,
+				0852C6A1283D570E0027EF3E /* PointsListController.swift */,
+				0852C6A3283D57230027EF3E /* PointsListView.swift */,
+			);
+			path = PointsList;
+			sourceTree = "<group>";
+		};
 		0857A7B12822721F006CCC99 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
-				0857A7A928225B50006CCC99 /* EntryPointsListService.swift */,
 				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
 			);
 			path = Services;
@@ -242,7 +257,7 @@
 				0852C69C283D33F60027EF3E /* Clock */,
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
 				0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */,
-				0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */,
+				0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */,
 				08E56DEF280DD77900635887 /* EntryTests.swift */,
 				0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */,
 				08A473FB28201F5400D62194 /* HintsManagerTests.swift */,
@@ -254,13 +269,12 @@
 		0890627627A0A1E30032847C /* EntryDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0852C6A5283D57500027EF3E /* PointsList */,
 				080656E6283B942C00C09409 /* Clock */,
 				0857A7B12822721F006CCC99 /* Cells */,
-				0890627727A0A2520032847C /* EntryDetailsController.swift */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
+				0890627727A0A2520032847C /* EntryDetailsController.swift */,
 				0857A7B328227236006CCC99 /* Services */,
-				0852C69D283D39CA0027EF3E /* ClockController.swift */,
-				0852C69F283D39F80027EF3E /* ClockView.swift */,
 			);
 			path = EntryDetails;
 			sourceTree = "<group>";
@@ -485,7 +499,7 @@
 				08E56DF0280DD77900635887 /* EntryTests.swift in Sources */,
 				08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */,
 				086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */,
-				0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */,
+				0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */,
 				080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
@@ -518,6 +532,7 @@
 				0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */,
 				08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
+				0852C6A2283D570E0027EF3E /* PointsListController.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
@@ -536,10 +551,11 @@
 				086B3D9A28325992006E08CB /* ClockService.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
-				0857A7AA28225B50006CCC99 /* EntryPointsListService.swift in Sources */,
+				0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,
 				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
+				0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
 				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
