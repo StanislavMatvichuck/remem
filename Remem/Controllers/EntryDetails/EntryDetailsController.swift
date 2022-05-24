@@ -18,10 +18,9 @@ class EntryDetailsController: UIViewController {
     var entry: Entry!
     var pointsListService: EntryPointsListService!
     var weekDistributionService: EntryWeekDistributionService!
-    var clockService: ClockService!
-
+    let clockController = ClockController()
     private var scrollHappened = false
-    private var clockAnimator: ClockAnimator!
+
     // MARK: - View lifecycle
     private let viewRoot = EntryDetailsView()
     override func loadView() { view = viewRoot }
@@ -29,29 +28,15 @@ class EntryDetailsController: UIViewController {
         view.backgroundColor = .systemBackground
         title = entry.name
 
-        setupClocks()
+        setupClock()
         setupViewStats()
         setupDisplays()
-
-        viewRoot.clockDay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
-        viewRoot.clockNight.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setInitialScrolls()
         entry.markAsVisited()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        clockAnimator.appearForward()
-    }
-}
-
-// MARK: - User input
-extension EntryDetailsController {
-    @objc func handleClockPress() {
-        clockAnimator.flip()
     }
 }
 
@@ -74,20 +59,18 @@ extension EntryDetailsController {
         viewRoot.viewStatsDisplay.setContentOffset(point, animated: false)
     }
 
-    private func setupClocks() {
-        clockAnimator = ClockAnimator(dayClock: viewRoot.clockDay,
-                                      nightClock: viewRoot.clockNight)
-        clockService.fetch()
-        viewRoot.clockDay.sectionsList = clockService.daySectionsList
-        viewRoot.clockNight.sectionsList = clockService.nightSectionsList
-    }
-
     private func setupDisplays() {
         viewRoot.viewPointsDisplay.dataSource = self
         pointsListService.fetch()
 
         viewRoot.viewWeekDisplay.dataSource = self
         viewRoot.viewWeekDisplay.delegate = self
+    }
+
+    private func setupClock() {
+        addChild(clockController)
+        viewRoot.clockContainer.addAndConstrain(clockController.view)
+        clockController.didMove(toParent: self)
     }
 
     private func setupViewStats() {
