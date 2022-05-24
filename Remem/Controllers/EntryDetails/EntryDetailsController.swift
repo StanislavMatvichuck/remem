@@ -77,10 +77,9 @@ extension EntryDetailsController {
     private func setupClocks() {
         clockAnimator = ClockAnimator(dayClock: viewRoot.clockDay,
                                       nightClock: viewRoot.clockNight)
-
-        let stitches = clockService.fetch()
-        viewRoot.clockDay.update(stitches: stitches.day)
-        viewRoot.clockNight.update(stitches: stitches.night)
+        clockService.fetch()
+        viewRoot.clockDay.sectionsList = clockService.daySectionsList
+        viewRoot.clockNight.sectionsList = clockService.nightSectionsList
     }
 
     private func setupDisplays() {

@@ -1,0 +1,169 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Feature: User can create an event he wants to track\
+\
+	Scenario: Events list shows event creation form\
+		Given user sees events list screen\
+		When user swipes up and release on "Add" button\
+		Then user should see keyboard\
+		And emojis list\
+		And name of event being edited\
+\
+	Scenario: Event is created\
+		Given user entered a name of event to an input\
+		When user submits an input\
+		Then user should see events list screen with added event\
+\
+Feature: User can save a moment in time\
+	\
+	Scenario: Point is added with events list screen\
+		Given user sees events list screen\
+		And user has at least one event\
+		When user swipes from left to right on an event row\
+		Then point is added to that event\
+\
+	Scenario: Events in IOS show actions list\
+		Given user has at least one event\
+		And user is on home screen\
+		When user invokes actions sheet on an application icon\
+		Then user sees events names\
+\
+	Scenario: Point addition from actions sheet\
+		Given user sees event name in IOS actions list\
+		When user taps the event name\
+		Then point is added to this event\
+\
+	Scenario: Events in WatchOS\
+		Given user has at least one event\
+		When user sees application on iWatch\
+		Then he sees events list\
+\
+	Scenario: Point addition from iWatch\
+		Given user sees event name in iWatch\
+		When user swipes from left to right\
+		Then point is added to that event\
+\
+Feature: User wants to see results\
+\
+	Scenario: Event details screen is shown\
+		Given user sees events list screen\
+		And user has an event\
+		When user taps the event row\
+		Then user sees event details screen\
+\
+	Scenario: User can see time of last added point\
+		Given user has at least one event\
+		And user added at least one point to that event\
+		When user opens details screen\
+		Then user sees an orange point stitch of last added point on a time diagram\
+\
+	Scenario: User can see week distribution\
+		Given user has at least one event\
+		When user opens details screen\
+		Then user sees each day of current week\
+		And user sees points placed during each day\
+\
+	Scenario: User can see total amount of points of event\
+		Given user has at least one event\
+		When user sees events list screen\
+		Then user sees total amount of points of each event\
+\
+	Scenario: User can see details screen on home screen\
+		Given user has at least one event\
+		When user places a widget on home screen\
+		Then he sees details of that event on home screen\
+\
+Feature: Hints are shown to a user\
+\
+	Scenario: "Event creation hint" is shown\
+		Given user has no events in a list\
+		When user opens events list screen\
+		Then user sees "swipe up to add event" hint with animation\
+\
+	Scenario: "Add point to event" hint is shown\
+		Given user has event in a list\
+		And has no points\
+		When user sees events list screen\
+		Then "swipe to add point" hint is shown\
+\
+	Scenario: "Press to see details" hint is shown\
+		Given user has event in a list\
+		And has a point in an event\
+		And did not opened any events yet\
+		When user sees events list screen\
+		Then "press to see details" hint is shown\
+\
+Feature: User wants to be able to edit recordings\
+\
+	Scenario: "Delete event" button is present on events list screen\
+		Given user has at least one event\
+		When user swipes event row from right to left\
+		Then user sees "delete" button\
+\
+	Scenario: Event is deleted\
+		Given user sees "Delete event" button\
+		When user presses "Delete event" button\
+		Then event is deleted\
+\
+	Scenario: "Delete point" button is present on event details screen\
+		Given user has at least one point in event\
+		And user sees event details screen\
+		And user sees points list\
+		When user swipes point row from right to left\
+		Then user sees "Delete point" button\
+\
+	Scenario: Point is deleted\
+		Given user sees "Delete point" button\
+		When user taps "Delete point" button\
+		Then point is deleted from an event\
+\
+	Scenario: "Rename event" button is present on events list screen\
+		Given user sees events list screen\
+		And user has at least one event	\
+		When user swipes from right to left\
+		Then user sees a "Rename event" button\
+\
+	Scenario: Event is renamed\
+		Given user tapped "Rename event" button\
+		And user sees event creation form with corresponding event name\
+		When user edits name and submits it\
+		Then user sees events list screen with edited event name\
+\
+	Scenario: "Add point with specific time" button is present on event details screen\
+		Given user sees event details screen\
+		When user scrolls statistics section from right to left\
+		Then user sees "add point with specific time" button\
+\
+	Scenario: Point in specific time form\
+		Given user sees event details screen\
+		And user sees "add point with specific time" button\
+		When user presses "add point with specific time" button\
+		Then user sees time input\
+\
+	Scenario: Point is added with specific time\
+		Given user sees time input\
+		When user submits time input\
+		Then user sees point added for today at entered time\
+\
+\
+Feature: I want application to facilitate tracking process\
+    Application can ask me to track\
+    Application can ask me if event happened\
+    Application can show me notification on lock screen\
+	Application can show me input on home page with widget\
+\
+Feature: I want application to compare results to goal\
+    I want to set daily goal\
+    I want to set weekly goal\
+    I want application to boost me to reach my goal\
+    I want application to stop me from reaching my goal\
+\
+Feature: I want to share my results with other people\
+    I can create a pdf file with report\
+\
+Feature: Application has pleasant visual design and animations}

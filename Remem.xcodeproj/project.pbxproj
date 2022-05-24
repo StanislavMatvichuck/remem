@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080656E8283B945100C09409 /* ClockSectionDescriptionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */; };
+		080656EA283B946000C09409 /* ClockSectionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSectionDescription.swift */; };
+		080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */; };
+		080656EE283B94DF00C09409 /* ClockStitchDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */; };
+		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
+		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
 		080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
@@ -57,6 +63,7 @@
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
+		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
@@ -73,6 +80,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionsList.swift; sourceTree = "<group>"; };
+		080656E9283B946000C09409 /* ClockSectionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescription.swift; sourceTree = "<group>"; };
+		080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionsContainerTests.swift; sourceTree = "<group>"; };
+		080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionTests.swift; sourceTree = "<group>"; };
+		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
+		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
 		080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsService.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
@@ -130,6 +143,7 @@
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsTests.swift; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
@@ -153,6 +167,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080656E6283B942C00C09409 /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
+				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
+				080656E9283B946000C09409 /* ClockSectionDescription.swift */,
+				080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */,
+				086B3D9928325992006E08CB /* ClockService.swift */,
+				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
+			);
+			path = Clock;
+			sourceTree = "<group>";
+		};
 		0830DA3227C3A6C900479014 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +189,17 @@
 				0830DA3527C3A6E000479014 /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		0852C69C283D33F60027EF3E /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				086B3D9728325903006E08CB /* ClockServiceTests.swift */,
+				080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */,
+				080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */,
+				080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */,
+			);
+			path = Clock;
 			sourceTree = "<group>";
 		};
 		0857A7B12822721F006CCC99 /* Cells */ = {
@@ -176,11 +214,10 @@
 		0857A7B328227236006CCC99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				086B3D9928325992006E08CB /* ClockService.swift */,
+				080656E6283B942C00C09409 /* Clock */,
 				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
 				0857A7A928225B50006CCC99 /* EntryPointsListService.swift */,
 				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
-				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,7 +236,7 @@
 		0870EEF92809B81100336759 /* RememTests */ = {
 			isa = PBXGroup;
 			children = (
-				086B3D9728325903006E08CB /* ClockServiceTests.swift */,
+				0852C69C283D33F60027EF3E /* Clock */,
 				0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */,
 				0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */,
 				0857A7AB28225B8F006CCC99 /* EntryPointsListServiceTests.swift */,
@@ -215,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				0857A7B12822721F006CCC99 /* Cells */,
-				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
 				0890627727A0A2520032847C /* EntryDetailsController.swift */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
 				0857A7B328227236006CCC99 /* Services */,
@@ -271,6 +307,7 @@
 				08D5122B27870D2600C2037F /* Info.plist */,
 				08D5122827870D2600C2037F /* LaunchScreen.storyboard */,
 				086FFE6A281699DF0054266E /* Localizable.strings */,
+				08EC54382837B2B000249DF1 /* Features.rtf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -426,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D5122A27870D2600C2037F /* LaunchScreen.storyboard in Resources */,
+				08EC54392837B2B000249DF1 /* Features.rtf in Resources */,
 				086FFE68281699DF0054266E /* Localizable.strings in Resources */,
 				08D5122727870D2600C2037F /* Assets.xcassets in Resources */,
 			);
@@ -442,10 +480,13 @@
 				08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */,
 				086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */,
 				0857A7AC28225B8F006CCC99 /* EntryPointsListServiceTests.swift in Sources */,
+				080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
 				0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */,
+				080656EE283B94DF00C09409 /* ClockStitchDescriptionTests.swift in Sources */,
 				08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */,
+				080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +496,12 @@
 			files = (
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
+				080656EA283B946000C09409 /* ClockSectionDescription.swift in Sources */,
 				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
 				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
+				080656E8283B945100C09409 /* ClockSectionDescriptionsList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
@@ -493,6 +536,7 @@
 				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
+				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 			);

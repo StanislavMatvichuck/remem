@@ -8,21 +8,6 @@
 import UIKit
 
 class Clock: UIView {
-    enum StitchVariant: Int {
-        case empty
-        case little
-        case mid
-        case big
-
-        static func make(from: Int) -> StitchVariant {
-            if let stitch = StitchVariant(rawValue: from) {
-                return stitch
-            } else {
-                return .big
-            }
-        }
-    }
-
     enum ClockVariant {
         case day
         case night
@@ -40,14 +25,7 @@ class Clock: UIView {
     var stitchOuterRadius: CGFloat { center.y - Self.clockBoundsOffset }
     var stitchInnerRadius: CGFloat { stitchOuterRadius - Self.maximumStitchHeight }
     var faceInnerRadius: CGFloat { stitchInnerRadius - Self.maximumFaceStitchHeight - Self.faceOffset - 3.0 }
-
-    var stitchVariantsArray: [StitchVariant] = {
-        var array: [StitchVariant] = []
-        for i in 0 ... 71 {
-            array.append(StitchVariant(rawValue: Int.random(in: 0 ... 3))!)
-        }
-        return array
-    }()
+    var sectionsList: ClockSectionDescriptionsList?
 
     // MARK: - Init
     init(for variant: ClockVariant) {
@@ -72,7 +50,8 @@ class Clock: UIView {
         let segmentAngle: CGFloat = 5
 
         for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            let stitchVariant = stitchVariantsArray[index]
+            guard let stitchVariant = sectionsList?.description(at: index)?.variant else { continue }
+
             let path = makeStitchPath(for: stitchVariant)
 
             path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
@@ -85,7 +64,7 @@ class Clock: UIView {
         }
     }
 
-    private func makeStitchPath(for variant: StitchVariant) -> UIBezierPath {
+    private func makeStitchPath(for variant: ClockSectionDescription.VisualVariant) -> UIBezierPath {
         let stitchWidth = 4.0
         let stitchHeight = stitchHeight(for: variant)
 
@@ -97,7 +76,7 @@ class Clock: UIView {
         return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
     }
 
-    private func stitchBackgroundColor(for variant: StitchVariant) -> CGColor {
+    private func stitchBackgroundColor(for variant: ClockSectionDescription.VisualVariant) -> CGColor {
         switch variant {
         case .empty: return UIColor.secondarySystemBackground.cgColor
         case .little: return UIColor.systemBlue.cgColor
@@ -106,7 +85,7 @@ class Clock: UIView {
         }
     }
 
-    private func stitchHeight(for variant: StitchVariant) -> CGFloat {
+    private func stitchHeight(for variant: ClockSectionDescription.VisualVariant) -> CGFloat {
         switch variant {
         case .empty: return Self.maximumStitchHeight * 0.33
         case .little: return Self.maximumStitchHeight * 0.33
@@ -155,8 +134,7 @@ class Clock: UIView {
 
 // MARK: - Public
 extension Clock {
-    func update(stitches: [StitchVariant]) {
-        stitchVariantsArray = stitches
+    func redraw() {
         setNeedsDisplay()
     }
 }
