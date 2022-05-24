@@ -63,23 +63,6 @@ class EntryDetailsView: UIView {
         return view
     }()
 
-    let viewStatsDisplay: ViewScroll = {
-        let view = ViewScroll(.horizontal)
-
-        view.isPagingEnabled = true
-        view.showsHorizontalScrollIndicator = false
-
-        view.viewContent.spacing = .sm
-        // to place elements in the center of screen
-        view.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm,
-                                                      bottom: 0, right: .sm)
-        view.viewContent.isLayoutMarginsRelativeArrangement = true
-
-        // to fix vertical scrolling on x3 scale displays
-        view.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -1, right: 0)
-        return view
-    }()
-
     let timeContainer: ViewScroll = {
         let view = ViewScroll(.horizontal)
         view.isPagingEnabled = true
@@ -88,6 +71,7 @@ class EntryDetailsView: UIView {
     }()
 
     let pointsListContainer = UIView(al: true)
+    let beltContainer = UIView(al: true)
     let clockContainer = UIView(al: true)
 
     // MARK: - Init
@@ -102,7 +86,7 @@ class EntryDetailsView: UIView {
         timeContainer.contain(views: clockContainer, pointsListContainer)
 
         addSubview(timeContainer)
-        addSubview(viewStatsDisplay)
+        addSubview(beltContainer)
         addSubview(viewWeekDisplay)
         addSubview(viewWeekdaysLine)
 
@@ -114,11 +98,11 @@ class EntryDetailsView: UIView {
             timeContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             timeContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            viewStatsDisplay.topAnchor.constraint(equalTo: timeContainer.bottomAnchor, constant: .sm),
-            viewStatsDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
-            viewStatsDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
+            beltContainer.topAnchor.constraint(equalTo: timeContainer.bottomAnchor, constant: .sm),
+            beltContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            beltContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            viewWeekDisplay.topAnchor.constraint(equalTo: viewStatsDisplay.bottomAnchor, constant: .sm),
+            viewWeekDisplay.topAnchor.constraint(equalTo: beltContainer.bottomAnchor, constant: .sm),
             viewWeekDisplay.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewWeekDisplay.trailingAnchor.constraint(equalTo: trailingAnchor),
             viewWeekDisplay.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),

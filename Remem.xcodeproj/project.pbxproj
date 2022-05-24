@@ -28,6 +28,8 @@
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
 		0852C6A2283D570E0027EF3E /* PointsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A1283D570E0027EF3E /* PointsListController.swift */; };
 		0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* PointsListView.swift */; };
+		0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A7283D5DB60027EF3E /* BeltController.swift */; };
+		0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A9283D5DC00027EF3E /* BeltView.swift */; };
 		0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* PointsListService.swift */; };
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
@@ -105,6 +107,8 @@
 		0852C69F283D39F80027EF3E /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		0852C6A1283D570E0027EF3E /* PointsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListController.swift; sourceTree = "<group>"; };
 		0852C6A3283D57230027EF3E /* PointsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListView.swift; sourceTree = "<group>"; };
+		0852C6A7283D5DB60027EF3E /* BeltController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltController.swift; sourceTree = "<group>"; };
+		0852C6A9283D5DC00027EF3E /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		0857A7A928225B50006CCC99 /* PointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListService.swift; sourceTree = "<group>"; };
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
@@ -222,6 +226,15 @@
 			path = PointsList;
 			sourceTree = "<group>";
 		};
+		0852C6A6283D5DA80027EF3E /* Belt */ = {
+			isa = PBXGroup;
+			children = (
+				0852C6A7283D5DB60027EF3E /* BeltController.swift */,
+				0852C6A9283D5DC00027EF3E /* BeltView.swift */,
+			);
+			path = Belt;
+			sourceTree = "<group>";
+		};
 		0857A7B12822721F006CCC99 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +282,7 @@
 		0890627627A0A1E30032847C /* EntryDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0852C6A6283D5DA80027EF3E /* Belt */,
 				0852C6A5283D57500027EF3E /* PointsList */,
 				080656E6283B942C00C09409 /* Clock */,
 				0857A7B12822721F006CCC99 /* Cells */,
@@ -543,6 +557,7 @@
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
+				0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
@@ -558,6 +573,7 @@
 				0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
 				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
+				0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,

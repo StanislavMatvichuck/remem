@@ -8,18 +8,13 @@ import CoreData.NSFetchedResultsController
 import UIKit
 
 class EntryDetailsController: UIViewController {
-    // MARK: I18n
-    static let dayAverage = NSLocalizedString("label.stats.average.day", comment: "EntryDetailsScreen")
-    static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "EntryDetailsScreen")
-    static let lastWeekTotal = NSLocalizedString("label.stats.weekLast.total", comment: "EntryDetailsScreen")
-    static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EntryDetailsScreen")
-
     // MARK: - Properties
     var entry: Entry!
 
     var weekDistributionService: EntryWeekDistributionService!
     let clockController = ClockController()
     let pointsListController = PointsListController()
+    let beltController = BeltController()
     private var scrollHappened = false
 
     // MARK: - View lifecycle
@@ -30,9 +25,10 @@ class EntryDetailsController: UIViewController {
         title = entry.name
 
         setupClock()
-        setupViewStats()
-        setupDisplays()
         setupPointsList()
+        setupBelt()
+
+        setupDisplays()
     }
 
     override func viewDidLayoutSubviews() {
@@ -47,18 +43,12 @@ extension EntryDetailsController {
     private func setInitialScrolls() {
         guard !scrollHappened else { return }
         setInitialScrollPositionForDisplay()
-        setInitialScrollPositionForStats()
         scrollHappened = true
     }
 
     private func setInitialScrollPositionForDisplay() {
         let lastCellIndex = IndexPath(row: weekDistributionService.daysAmount - 1, section: 0)
         viewRoot.viewWeekDisplay.scrollToItem(at: lastCellIndex, at: .right, animated: false)
-    }
-
-    private func setInitialScrollPositionForStats() {
-        let point = CGPoint(x: 2 * .wScreen, y: 0)
-        viewRoot.viewStatsDisplay.setContentOffset(point, animated: false)
     }
 
     private func setupDisplays() {
@@ -72,23 +62,17 @@ extension EntryDetailsController {
         clockController.didMove(toParent: self)
     }
 
+    private func setupBelt() {
+        beltController.entry = entry
+        addChild(beltController)
+        viewRoot.beltContainer.addAndConstrain(beltController.view)
+        beltController.didMove(toParent: self)
+    }
+
     private func setupPointsList() {
         addChild(pointsListController)
         viewRoot.pointsListContainer.addAndConstrain(pointsListController.view, constant: .sm)
         pointsListController.didMove(toParent: self)
-    }
-
-    private func setupViewStats() {
-        let viewDayAverage = ViewStatDisplay(value: entry.dayAverage as NSNumber, description: Self.dayAverage)
-        let viewWeekAverage = ViewStatDisplay(value: entry.weekAverage as NSNumber, description: Self.weekAverage)
-        let viewLastWeekTotal = ViewStatDisplay(value: entry.lastWeekTotal as NSNumber, description: Self.lastWeekTotal)
-        let viewThisWeekTotal = ViewStatDisplay(value: entry.thisWeekTotal as NSNumber, description: Self.thisWeekTotal)
-
-        viewRoot.viewStatsDisplay.contain(views:
-            viewDayAverage,
-            viewWeekAverage,
-            viewThisWeekTotal,
-            viewLastWeekTotal)
     }
 
     private func createViewWeekDisplayDescriptor() -> UIView {
