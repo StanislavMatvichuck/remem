@@ -13,19 +13,15 @@ class Clock: UIView {
         case night
     }
 
-    private static let maximumStitchHeight = 32.0
-    private static let maximumFaceStitchHeight = 10.0
-    private static let clockBoundsOffset = 0.0
-    private static let faceOffset = 5.0
-
     // MARK: - Properties
-    let variant: ClockVariant
+    private let variant: ClockVariant
+    private var painter: ClockPainter?
+    var sectionsList: ClockSectionDescriptionsList!
 
-    var leastDimension: CGFloat { min(bounds.width, bounds.height) }
-    var stitchOuterRadius: CGFloat { center.y - Self.clockBoundsOffset }
-    var stitchInnerRadius: CGFloat { stitchOuterRadius - Self.maximumStitchHeight }
-    var faceInnerRadius: CGFloat { stitchInnerRadius - Self.maximumFaceStitchHeight - Self.faceOffset - 3.0 }
-    var sectionsList: ClockSectionDescriptionsList?
+    lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
+    lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
+    lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
+    lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
 
     // MARK: - Init
     init(for variant: ClockVariant) {
@@ -39,96 +35,27 @@ class Clock: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    // MARK: - Drawing
-    override func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        placeStitchesAround(in: context)
-        placeFace(in: context)
-    }
-
-    private func placeStitchesAround(in context: CGContext) {
-        let segmentAngle: CGFloat = 5
-
-        for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            guard let stitchVariant = sectionsList?.description(at: index)?.variant else { continue }
-
-            let path = makeStitchPath(for: stitchVariant)
-
-            path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
-            path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
-            path.apply(CGAffineTransform(translationX: center.x, y: center.y))
-
-            context.addPath(path.cgPath)
-            context.setFillColor(stitchBackgroundColor(for: stitchVariant))
-            context.fillPath(using: .winding)
-        }
-    }
-
-    private func makeStitchPath(for variant: ClockSectionDescription.VisualVariant) -> UIBezierPath {
-        let stitchWidth = 4.0
-        let stitchHeight = stitchHeight(for: variant)
-
-        let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchOuterRadius + Self.maximumStitchHeight - stitchHeight,
-                            width: stitchWidth,
-                            height: stitchHeight)
-
-        return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
-    }
-
-    private func stitchBackgroundColor(for variant: ClockSectionDescription.VisualVariant) -> CGColor {
-        switch variant {
-        case .empty: return UIColor.secondarySystemBackground.cgColor
-        case .little: return UIColor.systemBlue.cgColor
-        case .mid: return UIColor.systemBlue.cgColor
-        case .big: return UIColor.systemBlue.cgColor
-        }
-    }
-
-    private func stitchHeight(for variant: ClockSectionDescription.VisualVariant) -> CGFloat {
-        switch variant {
-        case .empty: return Self.maximumStitchHeight * 0.33
-        case .little: return Self.maximumStitchHeight * 0.33
-        case .mid: return Self.maximumStitchHeight * 0.66
-        case .big: return Self.maximumStitchHeight
-        }
-    }
-
-    private func placeFace(in context: CGContext) {
-        let segmentAngle: CGFloat = 15
-
-        for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            let path = makeFaceStitch(isHour: index % 2 == 0 || index == 0)
-
-            path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
-            path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
-            path.apply(CGAffineTransform(translationX: center.x, y: center.y))
-
-            context.addPath(path.cgPath)
-            context.setFillColor(UIColor.black.cgColor)
-            context.fillPath(using: .winding)
-        }
-    }
-
-    private func makeFaceStitch(isHour: Bool) -> UIBezierPath {
-        let stitchWidth = 1.0
-        let stitchHeight = isHour ? Self.maximumFaceStitchHeight : Self.maximumFaceStitchHeight / 2
-
-        let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchInnerRadius + Self.faceOffset,
-                            width: stitchWidth,
-                            height: stitchHeight)
-
-        return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
-    }
-
+    // MARK: - View lifecycle
     override func layoutSubviews() {
+        if painter == nil {
+            painter = ClockPainter(rect: bounds, sectionsList: sectionsList)
+        }
+
+        let digitsDistanceFromCenter = painter!.faceInnerRadius
         NSLayoutConstraint.activate([
-            subviews[1].trailingAnchor.constraint(equalTo: centerXAnchor, constant: faceInnerRadius),
-            subviews[3].leadingAnchor.constraint(equalTo: centerXAnchor, constant: -faceInnerRadius),
+            topDigits.topAnchor.constraint(equalTo: centerYAnchor, constant: -digitsDistanceFromCenter),
+            rightDigits.trailingAnchor.constraint(equalTo: centerXAnchor, constant: digitsDistanceFromCenter),
+            bottomDigits.bottomAnchor.constraint(equalTo: centerYAnchor, constant: digitsDistanceFromCenter),
+            leftDigits.leadingAnchor.constraint(equalTo: centerXAnchor, constant: -digitsDistanceFromCenter),
         ])
 
         super.layoutSubviews()
+    }
+
+    // MARK: - Drawing
+    override func draw(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        painter?.draw(in: context)
     }
 }
 
@@ -142,28 +69,16 @@ extension Clock {
 // MARK: - Private
 extension Clock {
     private func addLabels() {
-        let label12 = makeLabel(variant == .day ? "12" : "00")
-        let label15 = makeLabel(variant == .day ? "15" : "03")
-        let label18 = makeLabel(variant == .day ? "18" : "06")
-        let label21 = makeLabel(variant == .day ? "21" : "09")
-
-        addSubview(label12)
-        addSubview(label15)
-        addSubview(label18)
-        addSubview(label21)
-
-        let verticalOffset = center.y - faceInnerRadius
+        addSubview(topDigits)
+        addSubview(rightDigits)
+        addSubview(bottomDigits)
+        addSubview(leftDigits)
 
         NSLayoutConstraint.activate([
-            label12.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label12.topAnchor.constraint(equalTo: topAnchor, constant: verticalOffset),
-
-            label15.centerYAnchor.constraint(equalTo: centerYAnchor),
-
-            label18.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label18.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalOffset),
-
-            label21.centerYAnchor.constraint(equalTo: centerYAnchor),
+            topDigits.centerXAnchor.constraint(equalTo: centerXAnchor),
+            rightDigits.centerYAnchor.constraint(equalTo: centerYAnchor),
+            bottomDigits.centerXAnchor.constraint(equalTo: centerXAnchor),
+            leftDigits.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 

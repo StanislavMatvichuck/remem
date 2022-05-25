@@ -30,6 +30,9 @@
 		0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* PointsListView.swift */; };
 		0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A7283D5DB60027EF3E /* BeltController.swift */; };
 		0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A9283D5DC00027EF3E /* BeltView.swift */; };
+		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
+		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
+		0852C6B1283D7B430027EF3E /* ClockPainter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6B0283D7B430027EF3E /* ClockPainter.swift */; };
 		0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* PointsListService.swift */; };
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
@@ -109,6 +112,9 @@
 		0852C6A3283D57230027EF3E /* PointsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListView.swift; sourceTree = "<group>"; };
 		0852C6A7283D5DB60027EF3E /* BeltController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltController.swift; sourceTree = "<group>"; };
 		0852C6A9283D5DC00027EF3E /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
+		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
+		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		0852C6B0283D7B430027EF3E /* ClockPainter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockPainter.swift; sourceTree = "<group>"; };
 		0857A7A928225B50006CCC99 /* PointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListService.swift; sourceTree = "<group>"; };
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
@@ -185,6 +191,7 @@
 				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
 				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
+				0852C6B0283D7B430027EF3E /* ClockPainter.swift */,
 				080656E9283B946000C09409 /* ClockSectionDescription.swift */,
 				080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */,
 				086B3D9928325992006E08CB /* ClockService.swift */,
@@ -235,6 +242,15 @@
 			path = Belt;
 			sourceTree = "<group>";
 		};
+		0852C6AB283D66010027EF3E /* Week */ = {
+			isa = PBXGroup;
+			children = (
+				0852C6AC283D66170027EF3E /* WeekController.swift */,
+				0852C6AE283D66380027EF3E /* WeekView.swift */,
+			);
+			path = Week;
+			sourceTree = "<group>";
+		};
 		0857A7B12822721F006CCC99 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +298,7 @@
 		0890627627A0A1E30032847C /* EntryDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0852C6AB283D66010027EF3E /* Week */,
 				0852C6A6283D5DA80027EF3E /* Belt */,
 				0852C6A5283D57500027EF3E /* PointsList */,
 				080656E6283B942C00C09409 /* Clock */,
@@ -552,9 +569,11 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				08A473FE2820210600D62194 /* HintsManager.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
+				0852C6B1283D7B430027EF3E /* ClockPainter.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
+				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
 				0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */,
@@ -576,6 +595,7 @@
 				0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
+				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
