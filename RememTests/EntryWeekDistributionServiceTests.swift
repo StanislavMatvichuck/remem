@@ -1,5 +1,5 @@
 //
-//  EntryWeekDistributionService.swift
+//  WeekService.swift
 //  RememTests
 //
 //  Created by Stanislav Matvichuck on 04.05.2022.
@@ -12,7 +12,7 @@ import XCTest
 class EntryWeekDistributionTests: XCTestCase {
     var coreDataStack: CoreDataStack!
     var entry: Entry!
-    var sut: EntryWeekDistributionService!
+    var sut: WeekService!
 
     override func setUp() {
         super.setUp()
@@ -26,7 +26,7 @@ class EntryWeekDistributionTests: XCTestCase {
 
         coreDataStack = stack
         self.entry = entry
-        sut = EntryWeekDistributionService(entry)
+        sut = WeekService(entry)
     }
 
     override func tearDown() {
@@ -48,7 +48,7 @@ class EntryWeekDistributionTests: XCTestCase {
         let weekOldEntry = Entry(context: entry.managedObjectContext!)
         weekOldEntry.dateCreated = Date.weekAgo
         weekOldEntry.name = "Week old entry"
-        let sut = EntryWeekDistributionService(weekOldEntry)
+        let sut = WeekService(weekOldEntry)
         XCTAssertEqual(sut.daysAmount, 14)
     }
 
@@ -73,7 +73,7 @@ class EntryWeekDistributionTests: XCTestCase {
         let weekOldEntry = Entry(context: entry.managedObjectContext!)
         weekOldEntry.dateCreated = Date.weekAgo
         weekOldEntry.name = "Week old entry"
-        let sut = EntryWeekDistributionService(weekOldEntry)
+        let sut = WeekService(weekOldEntry)
 
         switch Date.now.weekdayNumber {
         case .monday:

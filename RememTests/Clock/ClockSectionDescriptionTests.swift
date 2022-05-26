@@ -8,7 +8,7 @@
 @testable import Remem
 import XCTest
 
-class ClockStitchDescriptionTests: XCTestCase {
+class ClockSectionDescriptionTests: XCTestCase {
     private var sut: ClockSectionDescription!
 
     override func setUp() {

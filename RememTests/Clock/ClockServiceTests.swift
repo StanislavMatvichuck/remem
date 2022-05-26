@@ -48,60 +48,41 @@ class ClockServiceTests: XCTestCase {
         XCTAssertEqual(sut.nightSectionsList.size, Self.segmentsCount)
     }
 
-    func testArrayIsEmpty() {
+    func testSegmentsAreEmpty() {
         for i in 0 ... sut.daySectionsList.size - 1 { XCTAssertEqual(sut.daySectionsList.description(at: i)?.pointsAmount, 0) }
         for i in 0 ... sut.nightSectionsList.size - 1 { XCTAssertEqual(sut.nightSectionsList.description(at: i)?.pointsAmount, 0) }
     }
 
-    func testFirstSegment() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 0, s: 0))
+    func testFetch() {
+        entry.addDefaultPoint()
+        coreDataStack.save(entry.managedObjectContext!)
+        sut.fetch()
 
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.little)
+        var oneSectionIsNotEmpty = false
+
+        for i in 0 ... sut.daySectionsList.size - 1 {
+            let section = sut.daySectionsList.description(at: i)
+            if section?.variant != .empty { oneSectionIsNotEmpty = true }
+        }
+
+        for i in 0 ... sut.nightSectionsList.size - 1 {
+            let section = sut.nightSectionsList.description(at: i)
+            if section?.variant != .empty { oneSectionIsNotEmpty = true }
+        }
+
+        XCTAssertTrue(oneSectionIsNotEmpty)
     }
 
-    func testSecondSegment() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 11, s: 0))
-
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, .empty)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 1)?.variant, .little)
-    }
-
-    func testThirdSegment() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 21, s: 0))
-
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, .empty)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 1)?.variant, .empty)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 2)?.variant, .little)
-    }
-
-    func testLastSegment() {
-        arrangeEntryWithPoint(inTime: (h: 23, m: 59, s: 59))
-
-        XCTAssertEqual(sut.daySectionsList.description(at: Self.segmentsCount - 1)?.variant, ClockSectionDescription.VisualVariant.little)
-        XCTAssertEqual(sut.daySectionsList.description(at: Self.segmentsCount - 2)?.variant, ClockSectionDescription.VisualVariant.empty)
-    }
-
-    func testBeforeLastSegment() {
-        arrangeEntryWithPoint(inTime: (h: 23, m: 49, s: 39))
-
-        XCTAssertEqual(sut.daySectionsList.description(at: Self.segmentsCount - 1)?.variant, .empty)
-        XCTAssertEqual(sut.daySectionsList.description(at: Self.segmentsCount - 2)?.variant, .little)
-        XCTAssertEqual(sut.daySectionsList.description(at: Self.segmentsCount - 3)?.variant, .empty)
-    }
-
-    func testSegmentSizeMiddle() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 0, s: 0), pointsAmount: 2)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.mid)
-    }
-
-    func testSegmentSizeBig() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 0, s: 0), pointsAmount: 3)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.big)
-    }
-
-    func testSegmentMakingWithBigInt() {
-        arrangeEntryWithPoint(inTime: (h: 0, m: 0, s: 0), pointsAmount: 4)
-        XCTAssertEqual(sut.nightSectionsList.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.big)
+    func testFetchWithBoundaries() {
+        entry.addDefaultPoint(withDate: Date.weekAgo)
+        coreDataStack.save(entry.managedObjectContext!)
+        var dateFrom = Date.now.startOfWeek!
+        let dateTo = Date.now.endOfWeek!
+        XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 0)
+        entry.addDefaultPoint()
+        XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 1)
+        dateFrom = Date.weekAgo.startOfWeek!
+        XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 2)
     }
 }
 

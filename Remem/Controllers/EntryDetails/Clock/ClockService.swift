@@ -37,6 +37,29 @@ extension ClockService {
             nightSectionsList.addPoint(with: point.dateCreated!)
         }
     }
+
+    func fetch(from: Date, to: Date) -> [Point] {
+        let request = Point.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Point.dateCreated), ascending: false)]
+        request.predicate = makeBoundedPredicate(from: from, to: to)
+
+        do {
+            let points = try moc.fetch(request)
+
+            daySectionsList.reset()
+            nightSectionsList.reset()
+
+            for point in points {
+                daySectionsList.addPoint(with: point.dateCreated!)
+                nightSectionsList.addPoint(with: point.dateCreated!)
+            }
+
+            return points
+        } catch {
+            print("PointsListService.fetchCount() error \(error)")
+            return []
+        }
+    }
 }
 
 // MARK: - Private
@@ -50,5 +73,24 @@ extension ClockService {
             print("PointsListService.fetchCount() error \(error)")
             return []
         }
+    }
+
+    private func makeBoundedPredicate(from: Date, to: Date) -> NSPredicate {
+        let calendar = Calendar.current
+        var componentsFrom = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: from)
+        componentsFrom.hour = 00
+        componentsFrom.minute = 00
+        componentsFrom.second = 00
+
+        var componentsTo = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: to)
+        componentsTo.hour = 23
+        componentsTo.minute = 59
+        componentsTo.second = 59
+
+        let startDate = calendar.date(from: componentsFrom)
+        let endDate = calendar.date(from: componentsTo)
+
+        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        return NSPredicate(format: format, argumentArray: [entry, startDate!, endDate!])
     }
 }

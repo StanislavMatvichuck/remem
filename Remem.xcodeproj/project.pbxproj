@@ -10,7 +10,7 @@
 		080656E8283B945100C09409 /* ClockSectionDescriptionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */; };
 		080656EA283B946000C09409 /* ClockSectionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSectionDescription.swift */; };
 		080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */; };
-		080656EE283B94DF00C09409 /* ClockStitchDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */; };
+		080656EE283B94DF00C09409 /* ClockSectionDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */; };
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
@@ -36,7 +36,7 @@
 		0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* PointsListService.swift */; };
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
-		0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */; };
+		0857A7B02822720E006CCC99 /* WeekService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* WeekService.swift */; };
 		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
@@ -92,7 +92,7 @@
 		080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionsList.swift; sourceTree = "<group>"; };
 		080656E9283B946000C09409 /* ClockSectionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescription.swift; sourceTree = "<group>"; };
 		080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionsContainerTests.swift; sourceTree = "<group>"; };
-		080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionTests.swift; sourceTree = "<group>"; };
+		080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionTests.swift; sourceTree = "<group>"; };
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		0857A7A928225B50006CCC99 /* PointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListService.swift; sourceTree = "<group>"; };
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
-		0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionService.swift; sourceTree = "<group>"; };
+		0857A7AF2822720E006CCC99 /* WeekService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekService.swift; sourceTree = "<group>"; };
 		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 			children = (
 				086B3D9728325903006E08CB /* ClockServiceTests.swift */,
 				080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */,
-				080656ED283B94DF00C09409 /* ClockStitchDescriptionTests.swift */,
+				080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */,
 				080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */,
 			);
 			path = Clock;
@@ -245,6 +245,7 @@
 		0852C6AB283D66010027EF3E /* Week */ = {
 			isa = PBXGroup;
 			children = (
+				0857A7AF2822720E006CCC99 /* WeekService.swift */,
 				0852C6AC283D66170027EF3E /* WeekController.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
 			);
@@ -264,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
-				0857A7AF2822720E006CCC99 /* EntryWeekDistributionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
 				0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */,
-				080656EE283B94DF00C09409 /* ClockStitchDescriptionTests.swift in Sources */,
+				080656EE283B94DF00C09409 /* ClockSectionDescriptionTests.swift in Sources */,
 				08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */,
 				080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */,
 			);
@@ -559,7 +559,7 @@
 				086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08D512382787153900C2037F /* EntryCell.swift in Sources */,
-				0857A7B02822720E006CCC99 /* EntryWeekDistributionService.swift in Sources */,
+				0857A7B02822720E006CCC99 /* WeekService.swift in Sources */,
 				0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */,
 				08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,

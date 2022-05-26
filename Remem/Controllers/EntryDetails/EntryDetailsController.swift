@@ -47,6 +47,7 @@ extension EntryDetailsController {
     private func setupWeek() {
         weekController.entry = entry
         contain(controller: weekController, in: viewRoot.week)
+        weekController.delegate = clockController
     }
 
     private func contain(controller: UIViewController, in view: UIView) {

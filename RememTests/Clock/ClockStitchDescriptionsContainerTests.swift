@@ -116,13 +116,49 @@ class ClockSectionDescriptionsListTests: XCTestCase {
         XCTAssertEqual(sut.description(at: 1)?.pointsAmount, 0)
         XCTAssertEqual(sut.description(at: sut.size - 1)?.pointsAmount, 1)
         XCTAssertEqual(sut.description(at: sut.size - 2)?.pointsAmount, 0)
-        
+
         sut.reset()
-        
+
         XCTAssertEqual(sut.description(at: 0)?.pointsAmount, 0)
         XCTAssertEqual(sut.description(at: 1)?.pointsAmount, 0)
         XCTAssertEqual(sut.description(at: sut.size - 1)?.pointsAmount, 0)
         XCTAssertEqual(sut.description(at: sut.size - 2)?.pointsAmount, 0)
+    }
+
+    func testSegmentSizeMiddle() {
+        let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
+        let date2 = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
+
+        sut.addPoint(with: date)
+        sut.addPoint(with: date2)
+
+        XCTAssertEqual(sut.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.mid)
+    }
+
+    func testSegmentSizeBig() {
+        let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
+        let date2 = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
+        let date3 = makeTodayDate(withTime: (h: 0, m: 0, s: 2))
+
+        sut.addPoint(with: date)
+        sut.addPoint(with: date2)
+        sut.addPoint(with: date3)
+
+        XCTAssertEqual(sut.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.big)
+    }
+
+    func testSegmentMakingWithBigInt() {
+        let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
+        let date2 = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
+        let date3 = makeTodayDate(withTime: (h: 0, m: 0, s: 2))
+        let date4 = makeTodayDate(withTime: (h: 0, m: 0, s: 3))
+
+        sut.addPoint(with: date)
+        sut.addPoint(with: date2)
+        sut.addPoint(with: date3)
+        sut.addPoint(with: date4)
+
+        XCTAssertEqual(sut.description(at: 0)?.variant, ClockSectionDescription.VisualVariant.big)
     }
 }
 

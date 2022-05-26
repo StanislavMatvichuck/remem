@@ -54,6 +54,25 @@ extension Date {
     var isInThePast: Bool { self < Date() }
 
     ///
+    /// StackOverflow
+    ///
+		/// might have issues with american calendar
+
+    var startOfWeek: Date? {
+        let c = Calendar.current
+        guard let monday = c.date(from: c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        else { return nil }
+        return c.date(byAdding: .day, value: 0, to: monday)
+    }
+
+    var endOfWeek: Date? {
+        let c = Calendar.current
+        guard let monday = c.date(from: c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        else { return nil }
+        return c.date(byAdding: .day, value: 6, to: monday)
+    }
+
+    ///
     /// Remem methods
     ///
 

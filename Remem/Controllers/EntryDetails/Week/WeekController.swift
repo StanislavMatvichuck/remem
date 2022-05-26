@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol WeekControllerDelegate {
+    func weekControllerNewWeek(from: Date, to: Date)
+}
+
 class WeekController: UIViewController {
     // MARK: - Properties
     var entry: Entry!
-    var weekDistributionService: EntryWeekDistributionService!
+    var weekDistributionService: WeekService!
+    var delegate: WeekControllerDelegate?
 
     private let viewRoot = WeekView()
     private var scrollHappened = false
@@ -21,6 +26,17 @@ class WeekController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollOnce()
+    }
+}
+
+// MARK: - Public
+extension WeekController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let weekNumber = Int(scrollView.contentOffset.x / .wScreen)
+        let weekOffset = entry.weeksSince - 1 - weekNumber
+        let dateStart = Date.now.days(ago: Int(weekOffset) * 7).startOfWeek!
+        let dateEnd = dateStart.endOfWeek!
+        delegate?.weekControllerNewWeek(from: dateStart, to: dateEnd)
     }
 }
 

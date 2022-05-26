@@ -24,8 +24,7 @@ class ClockController: UIViewController {
         viewRoot.clockDay.sectionsList = clockService.daySectionsList
         viewRoot.clockNight.sectionsList = clockService.nightSectionsList
 
-        viewRoot.clockDay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
-        viewRoot.clockNight.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
+        addTapHanders()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -35,7 +34,22 @@ class ClockController: UIViewController {
 
 // MARK: - User input
 extension ClockController {
-    @objc func handleClockPress() {
+    private func addTapHanders() {
+        viewRoot.clockDay.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
+        viewRoot.clockNight.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
+    }
+
+    @objc private func handleClockPress() {
         clockAnimator.flip()
+    }
+}
+
+extension ClockController: WeekControllerDelegate {
+    func weekControllerNewWeek(from: Date, to: Date) {
+        clockService.fetch(from: from, to: to)
+        viewRoot.clockDay.redraw()
+        viewRoot.clockNight.redraw()
     }
 }

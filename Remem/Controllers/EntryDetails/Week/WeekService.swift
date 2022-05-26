@@ -1,5 +1,5 @@
 //
-//  EntryWeekDistributionService.swift
+//  WeekService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 04.05.2022.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-class EntryWeekDistributionService {
+class WeekService {
     enum CellVariant {
         case past
         case filled
@@ -31,7 +31,7 @@ class EntryWeekDistributionService {
 }
 
 // MARK: - Public
-extension EntryWeekDistributionService {
+extension WeekService {
     func dayOfMonth(for index: IndexPath) -> Int? {
         let daysDifference = index.row - todayIndexRow
         if let resultDate = calendar.date(byAdding: .day,
@@ -61,7 +61,7 @@ extension EntryWeekDistributionService {
 }
 
 // MARK: - Private
-extension EntryWeekDistributionService {
+extension WeekService {
     private func makeDayPredicate(for date: Date) -> NSPredicate {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
