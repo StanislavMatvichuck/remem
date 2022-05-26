@@ -20,7 +20,9 @@ class ClockController: UIViewController {
     override func viewDidLoad() {
         clockAnimator = ClockAnimator(dayClock: viewRoot.clockDay,
                                       nightClock: viewRoot.clockNight)
-        clockService.fetch()
+
+        guard let start = Date.now.startOfWeek, let end = Date.now.endOfWeek else { return }
+        clockService.fetch(from: start, to: end)
         viewRoot.clockDay.sectionsList = clockService.daySectionsList
         viewRoot.clockNight.sectionsList = clockService.nightSectionsList
 
