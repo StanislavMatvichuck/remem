@@ -81,11 +81,15 @@ class EntriesListServiceTests: XCTestCase {
         let newEntry = service.create(entryName: "EntryWithPoint")
         service.fetch()
 
-        service.addNewPoint(to: newEntry)
-        XCTAssertEqual(newEntry.points?.count, 1)
+        XCTAssertNil(newEntry.freshPoint)
 
-        service.addNewPoint(to: newEntry)
+        let point = service.addNewPoint(to: newEntry)
+        XCTAssertEqual(newEntry.points?.count, 1)
+        XCTAssertEqual(newEntry.freshPoint, point)
+
+        let secondPoint = service.addNewPoint(to: newEntry)
         XCTAssertEqual(newEntry.points?.count, 2)
+        XCTAssertEqual(newEntry.freshPoint, secondPoint)
     }
 
     func testFilledEntryCreation() {

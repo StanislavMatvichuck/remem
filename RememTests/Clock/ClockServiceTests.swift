@@ -53,26 +53,6 @@ class ClockServiceTests: XCTestCase {
         for i in 0 ... sut.nightSectionsList.size - 1 { XCTAssertEqual(sut.nightSectionsList.description(at: i)?.pointsAmount, 0) }
     }
 
-    func testFetch() {
-        entry.addDefaultPoint()
-        coreDataStack.save(entry.managedObjectContext!)
-        sut.fetch()
-
-        var oneSectionIsNotEmpty = false
-
-        for i in 0 ... sut.daySectionsList.size - 1 {
-            let section = sut.daySectionsList.description(at: i)
-            if section?.variant != .empty { oneSectionIsNotEmpty = true }
-        }
-
-        for i in 0 ... sut.nightSectionsList.size - 1 {
-            let section = sut.nightSectionsList.description(at: i)
-            if section?.variant != .empty { oneSectionIsNotEmpty = true }
-        }
-
-        XCTAssertTrue(oneSectionIsNotEmpty)
-    }
-
     func testFetchWithBoundaries() {
         entry.addDefaultPoint(withDate: Date.weekAgo)
         coreDataStack.save(entry.managedObjectContext!)
@@ -95,17 +75,5 @@ extension ClockServiceTests {
         components.minute = withTime.m
         components.second = withTime.s
         return calendar.date(from: components)!
-    }
-
-    private func arrangeEntryWithPoint(inTime: (h: Int, m: Int, s: Int), pointsAmount: Int = 1) {
-        let date = makeTodayDate(withTime: inTime)
-
-        for _ in 1 ... pointsAmount {
-            entry.addDefaultPoint(withDate: date)
-        }
-
-        coreDataStack.save(entry.managedObjectContext!)
-
-        sut.fetch()
     }
 }

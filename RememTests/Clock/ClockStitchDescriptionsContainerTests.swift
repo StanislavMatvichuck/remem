@@ -105,6 +105,15 @@ class ClockSectionDescriptionsListTests: XCTestCase {
         XCTAssertEqual(sut.description(at: 1)?.pointsAmount, 0)
     }
 
+    func testAddFreshPoint() {
+        let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
+
+        sut.addFreshPoint(with: date)
+
+        XCTAssertEqual(sut.description(at: 0)?.hasFreshPoint, true)
+        XCTAssertEqual(sut.description(at: 1)?.hasFreshPoint, false)
+    }
+
     func testReset() {
         let firstStitchTime = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
         let lastStitchTime = makeTodayDate(withTime: (h: 11, m: 59, s: 1))

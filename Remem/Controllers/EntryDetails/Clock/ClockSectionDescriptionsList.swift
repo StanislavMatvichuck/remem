@@ -8,6 +8,7 @@
 import Foundation
 
 class ClockSectionDescriptionsList {
+    // MARK: - Properties
     let size: Int
 
     private static let secondsPer24h = 24 * 60 * 60
@@ -18,6 +19,7 @@ class ClockSectionDescriptionsList {
     private let secondsPerStitch: Int
     private lazy var descriptions: [ClockSectionDescription] = makeEmptyDescriptionsArray()
 
+    // MARK: - Init
     init(start: ClockTimeDescription, end: ClockTimeDescription, stitchesPer24h: Int) {
         self.start = start
         self.end = end
@@ -41,6 +43,13 @@ extension ClockSectionDescriptionsList {
         }
     }
 
+    func addFreshPoint(with date: Date) {
+        let pointSeconds = seconds(for: date)
+        if let index = index(for: pointSeconds) {
+            addFreshPoint(at: index)
+        }
+    }
+
     func reset() {
         descriptions = makeEmptyDescriptionsArray()
     }
@@ -51,6 +60,13 @@ extension ClockSectionDescriptionsList {
     private func addPoint(at index: Int) {
         guard var description = description(at: index) else { return }
         description.addPoint()
+        descriptions[index] = description
+    }
+
+    private func addFreshPoint(at index: Int) {
+        guard var description = description(at: index) else { return }
+        description.addPoint()
+        description.hasFreshPoint = true
         descriptions[index] = description
     }
 

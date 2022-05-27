@@ -106,8 +106,11 @@ extension EntriesListService {
         coreDataStack.save(moc)
     }
 
-    func addNewPoint(to entry: Entry) {
-        entry.addDefaultPoint()
+    @discardableResult
+    func addNewPoint(to entry: Entry) -> Point? {
+        let point = entry.addDefaultPoint()
+        entry.freshPoint = point
         coreDataStack.save(moc)
+        return point
     }
 }

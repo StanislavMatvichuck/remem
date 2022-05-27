@@ -45,16 +45,16 @@ extension ClockPainter {
         let segmentAngle: CGFloat = 5
 
         for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            guard let stitchVariant = list.description(at: index)?.variant else { continue }
+            guard let section = list.description(at: index) else { continue }
 
-            let path = makeStitchPath(for: stitchVariant)
+            let path = makeStitchPath(for: section)
 
             path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
             path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
             path.apply(CGAffineTransform(translationX: center.x, y: center.y))
 
             context?.addPath(path.cgPath)
-            context?.setFillColor(stitchBackgroundColor(for: stitchVariant))
+            context?.setFillColor(color(for: section))
             context?.fillPath(using: .winding)
         }
     }
@@ -75,9 +75,9 @@ extension ClockPainter {
         }
     }
 
-    private func makeStitchPath(for variant: ClockSectionDescription.VisualVariant) -> UIBezierPath {
+    private func makeStitchPath(for section: ClockSectionDescription) -> UIBezierPath {
         let stitchWidth = 4.0
-        let stitchHeight = stitchHeight(for: variant)
+        let stitchHeight = height(for: section)
 
         let stitch = CGRect(x: center.x - stitchWidth / 2,
                             y: center.y - stitchOuterRadius + Self.maximumStitchHeight - stitchHeight,
@@ -87,8 +87,10 @@ extension ClockPainter {
         return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
     }
 
-    private func stitchBackgroundColor(for variant: ClockSectionDescription.VisualVariant) -> CGColor {
-        switch variant {
+    private func color(for section: ClockSectionDescription) -> CGColor {
+        if section.hasFreshPoint { return UIColor.systemOrange.cgColor }
+
+        switch section.variant {
         case .empty: return UIColor.secondarySystemBackground.cgColor
         case .little: return UIColor.systemBlue.cgColor
         case .mid: return UIColor.systemBlue.cgColor
@@ -96,8 +98,8 @@ extension ClockPainter {
         }
     }
 
-    private func stitchHeight(for variant: ClockSectionDescription.VisualVariant) -> CGFloat {
-        switch variant {
+    private func height(for section: ClockSectionDescription) -> CGFloat {
+        switch section.variant {
         case .empty: return Self.maximumStitchHeight * 0.33
         case .little: return Self.maximumStitchHeight * 0.33
         case .mid: return Self.maximumStitchHeight * 0.66

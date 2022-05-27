@@ -16,6 +16,7 @@ class ClockService {
     private var entry: Entry
     private var coreDataStack: CoreDataStack
     private var moc: NSManagedObjectContext
+    private var calendar: Calendar { .current }
 
     // MARK: - Init
     init(_ entry: Entry, stack: CoreDataStack) {
@@ -27,70 +28,81 @@ class ClockService {
 
 // MARK: - Public
 extension ClockService {
-    func fetch() {
-        daySectionsList.reset()
-        nightSectionsList.reset()
-
-        let points = fetchPoints()
-        for point in points {
-            daySectionsList.addPoint(with: point.dateCreated!)
-            nightSectionsList.addPoint(with: point.dateCreated!)
-        }
-    }
-
     func fetch(from: Date, to: Date) -> [Point] {
-        let request = Point.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Point.dateCreated), ascending: false)]
-        request.predicate = makeBoundedPredicate(from: from, to: to)
+        let request = makeFetchRequest(from: from, to: to)
+        let points = results(for: request)
 
-        do {
-            let points = try moc.fetch(request)
+        resetLists()
+        fillListsWith(points)
 
-            daySectionsList.reset()
-            nightSectionsList.reset()
-
-            for point in points {
-                daySectionsList.addPoint(with: point.dateCreated!)
-                nightSectionsList.addPoint(with: point.dateCreated!)
-            }
-
-            return points
-        } catch {
-            print("PointsListService.fetchCount() error \(error)")
-            return []
-        }
+        return points
     }
 }
 
 // MARK: - Private
 extension ClockService {
-    private func fetchPoints() -> [Point] {
+    private func makeFetchRequest(from: Date, to: Date) -> NSFetchRequest<Point> {
         let request = Point.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Point.dateCreated), ascending: false)]
-        request.predicate = NSPredicate(format: "entry == %@", argumentArray: [entry])
+        request.predicate = makeBoundedPredicate(from: from, to: to)
+        return request
+    }
 
-        do { return try moc.fetch(request) } catch {
+    private func makeBoundedPredicate(from: Date, to: Date) -> NSPredicate {
+        guard
+            let start = makeStartOfTheDay(for: from),
+            let end = makeEndOfTheDay(for: to)
+        else { fatalError("could not process date") }
+
+        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        return NSPredicate(format: format, argumentArray: [entry, start, end])
+    }
+
+    private func makeStartOfTheDay(for date: Date) -> Date? {
+        var components = calendarComponents(for: date)
+        components.hour = 00
+        components.minute = 00
+        components.second = 00
+        return calendar.date(from: components)
+    }
+
+    private func makeEndOfTheDay(for date: Date) -> Date? {
+        var components = calendarComponents(for: date)
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        return calendar.date(from: components)
+    }
+
+    private func calendarComponents(for date: Date) -> DateComponents {
+        return calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+    }
+
+    private func results(for request: NSFetchRequest<Point>) -> [Point] {
+        do {
+            return try moc.fetch(request)
+        } catch {
             print("PointsListService.fetchCount() error \(error)")
             return []
         }
     }
 
-    private func makeBoundedPredicate(from: Date, to: Date) -> NSPredicate {
-        let calendar = Calendar.current
-        var componentsFrom = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: from)
-        componentsFrom.hour = 00
-        componentsFrom.minute = 00
-        componentsFrom.second = 00
+    private func fillListsWith(_ points: [Point]) {
+        for point in points { addToLists(point) }
+    }
 
-        var componentsTo = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: to)
-        componentsTo.hour = 23
-        componentsTo.minute = 59
-        componentsTo.second = 59
+    private func addToLists(_ point: Point) {
+        if point == entry.freshPoint {
+            daySectionsList.addFreshPoint(with: point.dateCreated!)
+            nightSectionsList.addFreshPoint(with: point.dateCreated!)
+        } else {
+            daySectionsList.addPoint(with: point.dateCreated!)
+            nightSectionsList.addPoint(with: point.dateCreated!)
+        }
+    }
 
-        let startDate = calendar.date(from: componentsFrom)
-        let endDate = calendar.date(from: componentsTo)
-
-        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
-        return NSPredicate(format: format, argumentArray: [entry, startDate!, endDate!])
+    private func resetLists() {
+        daySectionsList.reset()
+        nightSectionsList.reset()
     }
 }

@@ -4,6 +4,7 @@
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateVisited" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="freshPoint" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Point"/>
         <relationship name="points" toMany="YES" deletionRule="Cascade" destinationEntity="Point" inverseName="entry" inverseEntity="Point"/>
     </entity>
     <entity name="Point" representedClassName="Point" syncable="YES" codeGenerationType="class">
@@ -12,7 +13,7 @@
         <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="points" inverseEntity="Entry"/>
     </entity>
     <elements>
-        <element name="Entry" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Entry" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="Point" positionX="-63" positionY="0" width="128" height="74"/>
     </elements>
 </model>
