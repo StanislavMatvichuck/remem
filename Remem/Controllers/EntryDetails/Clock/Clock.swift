@@ -16,12 +16,15 @@ class Clock: UIView {
     // MARK: - Properties
     private let variant: ClockVariant
     private var painter: ClockPainter?
+    private var timer: Timer?
+
     var sectionsList: ClockSectionDescriptionsList!
 
-    lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
-    lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
-    lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
-    lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
+    private lazy var iconContainer = UIView(al: true)
+    private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
+    private lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
+    private lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
+    private lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
 
     // MARK: - Init
     init(for variant: ClockVariant) {
@@ -31,25 +34,19 @@ class Clock: UIView {
         backgroundColor = .clear
         addLabels()
         addIcon()
+        setupTickingTimer()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    deinit { timer?.invalidate() }
 
     // MARK: - View lifecycle
     override func layoutSubviews() {
-        if painter == nil {
-            painter = ClockPainter(rect: bounds, sectionsList: sectionsList)
-        }
-
-        let digitsDistanceFromCenter = painter!.faceInnerRadius
-        NSLayoutConstraint.activate([
-            topDigits.topAnchor.constraint(equalTo: centerYAnchor, constant: -digitsDistanceFromCenter),
-            rightDigits.trailingAnchor.constraint(equalTo: centerXAnchor, constant: digitsDistanceFromCenter),
-            bottomDigits.bottomAnchor.constraint(equalTo: centerYAnchor, constant: digitsDistanceFromCenter),
-            leftDigits.leadingAnchor.constraint(equalTo: centerXAnchor, constant: -digitsDistanceFromCenter),
-        ])
-
+        setupPainter()
+        constrainLabelsInsideClockFace()
         super.layoutSubviews()
+
+        iconContainer.layer.cornerRadius = iconContainer.layer.frame.width / 2
     }
 
     // MARK: - Drawing
@@ -61,7 +58,7 @@ class Clock: UIView {
 
 // MARK: - Public
 extension Clock {
-    func redraw() {
+    @objc func redraw() {
         setNeedsDisplay()
     }
 }
@@ -85,7 +82,8 @@ extension Clock {
     private func makeLabel(_ text: String) -> UILabel {
         let label = UILabel(al: true)
         label.text = text
-        label.font = .systemFont(ofSize: 0.8 * .font1)
+        label.font = .systemFont(ofSize: .font1, weight: .bold)
+        label.textColor = .secondarySystemBackground
         return label
     }
 
@@ -93,10 +91,16 @@ extension Clock {
         let imageView = UIImageView(image: makeIcon())
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(imageView)
+        iconContainer.backgroundColor = .systemBackground
+        iconContainer.addAndConstrain(imageView, constant: 5)
+        addSubview(iconContainer)
+
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -40.0),
+
+            iconContainer.widthAnchor.constraint(equalToConstant: 40.0),
+            iconContainer.heightAnchor.constraint(equalToConstant: 40.0),
         ])
     }
 
@@ -104,8 +108,39 @@ extension Clock {
         let image = UIImage(systemName: variant == .day ? "sun.max" : "moon.stars")?
             .withTintColor(.secondarySystemBackground)
             .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
-
         return image!
+    }
+
+    private func setupTickingTimer() {
+        let currentSeconds = Calendar.current.dateComponents([.second], from: Date.now).second ?? 0
+        let secondAfterMinuteUpdates = Double(60 - currentSeconds)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + secondAfterMinuteUpdates) {
+            if self.timer == nil {
+                self.timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                                  target: self,
+                                                  selector: #selector(self.redraw),
+                                                  userInfo: nil,
+                                                  repeats: true)
+                self.timer?.tolerance = 1.0
+            }
+        }
+    }
+
+    private func setupPainter() {
+        if painter == nil {
+            painter = ClockPainter(rect: bounds, sectionsList: sectionsList)
+        }
+    }
+
+    private func constrainLabelsInsideClockFace() {
+        let digitsDistanceFromCenter = painter!.faceLabelsRadius()
+
+        NSLayoutConstraint.activate([
+            topDigits.topAnchor.constraint(equalTo: centerYAnchor, constant: -digitsDistanceFromCenter),
+            rightDigits.trailingAnchor.constraint(equalTo: centerXAnchor, constant: digitsDistanceFromCenter),
+            bottomDigits.bottomAnchor.constraint(equalTo: centerYAnchor, constant: digitsDistanceFromCenter),
+            leftDigits.leadingAnchor.constraint(equalTo: centerXAnchor, constant: -digitsDistanceFromCenter),
+        ])
     }
 }

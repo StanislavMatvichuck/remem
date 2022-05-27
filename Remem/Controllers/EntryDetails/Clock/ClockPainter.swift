@@ -8,24 +8,39 @@
 import UIKit
 
 class ClockPainter {
-    private static let maximumStitchHeight = 32.0
-    private static let maximumFaceStitchHeight = 10.0
-    private static let clockBoundsOffset = 0.0
-    private static let faceOffset = 5.0
+    // Outer sections
+    private static let sectionMaxHeight = 33.0
+    private static let sectionWidth = 4.0
+    private static let sectionCornerRadius = sectionWidth / 2
+    // Face sections
+    private static let faceSectionWidth = 4.0
+    private static let hoursFaceHeight = 12.0
+    private static let minutesFaceHeight = 6.0
+    private static let faceSectionCornerRadius = faceSectionWidth / 2
+    private static let faceSectionOffset = 4.0
+    // Arrows
+    private static let arrowWidth = 5.0
+    private static let arrowCornerRadius = arrowWidth / 2
+    private static let arrowCenterOffset = 10.0
+
+    private static let totalMinutes = 12 * 60
+
+    private static let faceColor = UIColor.secondarySystemBackground
+    private static let arrowColor = UIColor.systemBlue
 
     // MARK: - Properties
-    private var center: CGPoint { CGPoint(x: rect.midX, y: rect.midY) }
-    private var leastDimension: CGFloat { min(rect.width, rect.height) }
-    private var stitchOuterRadius: CGFloat { center.y - Self.clockBoundsOffset }
-    private var stitchInnerRadius: CGFloat { stitchOuterRadius - Self.maximumStitchHeight }
-    var faceInnerRadius: CGFloat { stitchInnerRadius - Self.maximumFaceStitchHeight - Self.faceOffset - 3.0 }
+    private let boundaries: CGRect
+    private var center: CGPoint { CGPoint(x: boundaries.midX, y: boundaries.midY) }
+    private var minutesArrowHeight: CGFloat { faceLabelsRadius() - Self.faceSectionOffset }
+    private var hoursArrowHeight: CGFloat { 0.6 * minutesArrowHeight }
 
-    private var context: CGContext?
-    private let rect: CGRect
     private let list: ClockSectionDescriptionsList
 
+    private var context: CGContext?
+
+    // MARK: - Init
     init(rect: CGRect, sectionsList: ClockSectionDescriptionsList) {
-        self.rect = rect
+        self.boundaries = rect
         self.list = sectionsList
     }
 }
@@ -34,88 +49,180 @@ class ClockPainter {
 extension ClockPainter {
     func draw(in context: CGContext) {
         self.context = context
-        placeStitchesAround()
-        placeFace()
+        drawSections()
+        drawFace()
+        drawArrows()
+    }
+
+    func faceLabelsRadius() -> CGFloat {
+        center.y - Self.sectionMaxHeight - Self.hoursFaceHeight - Self.faceSectionOffset
     }
 }
 
 // MARK: - Private
+
 extension ClockPainter {
-    private func placeStitchesAround() {
+    //
+    // Sections
+    //
+
+    private func drawSections() {
         let segmentAngle: CGFloat = 5
 
         for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
             guard let section = list.description(at: index) else { continue }
 
-            let path = makeStitchPath(for: section)
+            let path = makeSection(for: section)
 
-            path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
-            path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
-            path.apply(CGAffineTransform(translationX: center.x, y: center.y))
-
-            context?.addPath(path.cgPath)
-            context?.setFillColor(color(for: section))
-            context?.fillPath(using: .winding)
+            rotate(path, by: angle)
+            fill(path, with: color(for: section))
         }
     }
 
-    private func placeFace() {
-        let segmentAngle: CGFloat = 15
+    private func makeSection(for section: ClockSectionDescription) -> UIBezierPath {
+        let height = height(for: section)
+        let offset = Self.sectionMaxHeight - height
 
-        for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            let path = makeFaceStitch(isHour: index % 2 == 0 || index == 0)
+        return centeredRect(width: Self.sectionWidth,
+                            height: height,
+                            topOffset: offset,
+                            cornerRadius: Self.sectionCornerRadius)
+    }
 
-            path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
-            path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
-            path.apply(CGAffineTransform(translationX: center.x, y: center.y))
-
-            context?.addPath(path.cgPath)
-            context?.setFillColor(UIColor.black.cgColor)
-            context?.fillPath(using: .winding)
+    private func color(for section: ClockSectionDescription) -> UIColor {
+        if section.hasFreshPoint {
+            return UIColor.systemOrange
         }
-    }
-
-    private func makeStitchPath(for section: ClockSectionDescription) -> UIBezierPath {
-        let stitchWidth = 4.0
-        let stitchHeight = height(for: section)
-
-        let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchOuterRadius + Self.maximumStitchHeight - stitchHeight,
-                            width: stitchWidth,
-                            height: stitchHeight)
-
-        return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
-    }
-
-    private func color(for section: ClockSectionDescription) -> CGColor {
-        if section.hasFreshPoint { return UIColor.systemOrange.cgColor }
 
         switch section.variant {
-        case .empty: return UIColor.secondarySystemBackground.cgColor
-        case .little: return UIColor.systemBlue.cgColor
-        case .mid: return UIColor.systemBlue.cgColor
-        case .big: return UIColor.systemBlue.cgColor
+        case .empty:
+            return UIColor.secondarySystemBackground
+        case .little, .mid, .big:
+            return UIColor.systemBlue
         }
     }
 
     private func height(for section: ClockSectionDescription) -> CGFloat {
         switch section.variant {
-        case .empty: return Self.maximumStitchHeight * 0.33
-        case .little: return Self.maximumStitchHeight * 0.33
-        case .mid: return Self.maximumStitchHeight * 0.66
-        case .big: return Self.maximumStitchHeight
+        case .empty: return Self.sectionMaxHeight * 0.2
+        case .little: return Self.sectionMaxHeight * 0.33
+        case .mid: return Self.sectionMaxHeight * 0.66
+        case .big: return Self.sectionMaxHeight
         }
     }
 
-    private func makeFaceStitch(isHour: Bool) -> UIBezierPath {
-        let stitchWidth = 1.0
-        let stitchHeight = isHour ? Self.maximumFaceStitchHeight : Self.maximumFaceStitchHeight / 2
+    //
+    // Face
+    //
 
-        let stitch = CGRect(x: center.x - stitchWidth / 2,
-                            y: center.y - stitchInnerRadius + Self.faceOffset,
-                            width: stitchWidth,
-                            height: stitchHeight)
+    private func drawFace() {
+        let segmentAngle: CGFloat = 15
 
-        return UIBezierPath(roundedRect: stitch, cornerRadius: stitchWidth / 2)
+        for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
+            let path = makeFaceSection(isHour: index % 2 == 0 || index == 0)
+            rotate(path, by: angle)
+            fill(path, with: Self.faceColor)
+        }
+    }
+
+    private func makeFaceSection(isHour: Bool) -> UIBezierPath {
+        let offset = Self.sectionMaxHeight + Self.faceSectionOffset
+        let height = isHour ? Self.hoursFaceHeight : Self.minutesFaceHeight
+
+        return centeredRect(width: Self.faceSectionWidth,
+                            height: height,
+                            topOffset: offset,
+                            cornerRadius: Self.faceSectionCornerRadius)
+    }
+
+    //
+    // Arrows
+    //
+
+    private func drawArrows() {
+        drawHoursArrow()
+        drawMinutesArrow()
+        drawArrowsCenter()
+    }
+
+    private func drawHoursArrow() {
+        let angle = CGFloat(360 * currentHoursAsMinutes / Self.totalMinutes)
+        paintArrow(height: hoursArrowHeight, and: angle)
+    }
+
+    private func drawMinutesArrow() {
+        let angle = CGFloat(360 * currentMinutes / 60)
+        paintArrow(height: minutesArrowHeight, and: angle)
+    }
+
+    private func paintArrow(height: CGFloat, and angle: CGFloat) {
+        let offset = center.y - height
+        let path = centeredRect(width: Self.arrowWidth,
+                                height: height - Self.arrowCenterOffset,
+                                topOffset: offset,
+                                cornerRadius: Self.arrowCornerRadius)
+
+        rotate(path, by: angle)
+        fill(path, with: Self.faceColor)
+        stroke(path: path)
+
+        drawArrowSupportLine(with: angle)
+    }
+
+    private func drawArrowSupportLine(with angle: CGFloat) {
+        let centerPath = UIBezierPath()
+        centerPath.move(to: center)
+        centerPath.addLine(to: CGPoint(x: center.x, y: center.y - Self.arrowCenterOffset))
+        centerPath.close()
+
+        rotate(centerPath, by: angle)
+        stroke(path: centerPath)
+    }
+
+    private func drawArrowsCenter() {
+        let circle = UIBezierPath(ovalIn: CGRect(x: center.x - 2.5, y: center.y - 2.5, width: 5, height: 5))
+
+        fill(circle, with: .systemBackground)
+        stroke(path: circle)
+    }
+
+    var currentHoursAsMinutes: Int {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: Date.now)
+        let hoursToMinutes = (components.hour ?? 0) * 60
+        let minutes = components.minute ?? 0
+        return hoursToMinutes + minutes
+    }
+
+    var currentMinutes: Int {
+        return Calendar.current.dateComponents([.hour, .minute], from: Date.now).minute ?? 0
+    }
+
+    private func stroke(path: UIBezierPath) {
+        context?.addPath(path.cgPath)
+        context?.setStrokeColor(Self.arrowColor.cgColor)
+        context?.setLineWidth(2)
+        context?.strokePath()
+    }
+
+    //
+    // Common methods
+    //
+
+    private func centeredRect(width: CGFloat, height: CGFloat, topOffset: CGFloat = 0.0, cornerRadius: CGFloat) -> UIBezierPath {
+        let rect = CGRect(x: center.x - width / 2, y: topOffset, width: width, height: height)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
+        return path
+    }
+
+    private func rotate(_ path: UIBezierPath, by angle: CGFloat) {
+        path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
+        path.apply(CGAffineTransform(rotationAngle: angle * .pi / 180))
+        path.apply(CGAffineTransform(translationX: center.x, y: center.y))
+    }
+
+    private func fill(_ path: UIBezierPath, with color: UIColor = UIColor.secondarySystemBackground) {
+        context?.addPath(path.cgPath)
+        context?.setFillColor(color.cgColor)
+        context?.fillPath(using: .winding)
     }
 }
