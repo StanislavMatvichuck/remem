@@ -17,7 +17,7 @@ class ClockAnimator {
     init(dayClock: UIView, nightClock: UIView) {
         self.dayClock = dayClock
         self.nightClock = nightClock
-        dayClock.layer.opacity = 0.0
+        nightClock.isHidden = true
     }
 }
 
@@ -54,7 +54,7 @@ extension ClockAnimator {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = 1
-        animation.duration = 0.5
+        animation.duration = 0.15
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         return animation
     }

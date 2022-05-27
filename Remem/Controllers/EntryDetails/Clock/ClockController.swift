@@ -28,10 +28,6 @@ class ClockController: UIViewController {
 
         addTapHanders()
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        clockAnimator.appearForward()
-    }
 }
 
 // MARK: - User input

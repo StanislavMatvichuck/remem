@@ -19,8 +19,6 @@ class ClockView: UIView {
 
         addAndConstrain(clockDay)
         addAndConstrain(clockNight)
-
-        clockNight.isHidden = true
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
