@@ -15,6 +15,7 @@
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
 		080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */; };
+		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
 		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
@@ -97,6 +98,7 @@
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
 		080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsService.swift; sourceTree = "<group>"; };
+		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0830DA3527C3A6E000479014 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
 				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
+				08286B02284170A900FBC022 /* ClockFace.swift */,
 				0852C6B0283D7B430027EF3E /* ClockPainter.swift */,
 				080656E9283B946000C09409 /* ClockSectionDescription.swift */,
 				080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */,
@@ -588,6 +591,7 @@
 				0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,
+				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08D5122227870D2500C2037F /* EntriesListController.swift in Sources */,
 				0852C6A4283D57230027EF3E /* PointsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,

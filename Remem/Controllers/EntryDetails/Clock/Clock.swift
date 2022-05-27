@@ -15,7 +15,11 @@ class Clock: UIView {
 
     // MARK: - Properties
     private let variant: ClockVariant
-    private var painter: ClockPainter?
+    private let clockFace = ClockFace()
+    private var painter: ClockPainter? {
+        didSet { clockFace.painter = painter }
+    }
+
     private var timer: Timer?
 
     var sectionsList: ClockSectionDescriptionsList!
@@ -34,6 +38,7 @@ class Clock: UIView {
         backgroundColor = .clear
         addLabels()
         addIcon()
+        addClock()
         setupTickingTimer()
     }
 
@@ -48,23 +53,22 @@ class Clock: UIView {
 
         iconContainer.layer.cornerRadius = iconContainer.layer.frame.width / 2
     }
-
-    // MARK: - Drawing
-    override func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        painter?.draw(in: context)
-    }
 }
 
 // MARK: - Public
 extension Clock {
     @objc func redraw() {
-        setNeedsDisplay()
+        clockFace.setNeedsDisplay()
     }
 }
 
 // MARK: - Private
 extension Clock {
+    private func addClock() {
+        clockFace.translatesAutoresizingMaskIntoConstraints = false
+        addAndConstrain(clockFace)
+    }
+
     private func addLabels() {
         addSubview(topDigits)
         addSubview(rightDigits)
