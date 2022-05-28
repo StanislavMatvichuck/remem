@@ -9,8 +9,8 @@ import CoreData
 
 class ClockService {
     // MARK: - Public properties
-    let nightSectionsList = ClockSectionDescriptionsList(start: .makeStartOfDay(), end: .makeMidday(), stitchesPer24h: 144)
-    let daySectionsList = ClockSectionDescriptionsList(start: .makeMidday(), end: .makeEndOfDay(), stitchesPer24h: 144)
+    var nightSectionsList = ClockSectionsList(start: .makeStartOfDay(), end: .makeMidday(), sectionsPer24h: 144)
+    var daySectionsList = ClockSectionsList(start: .makeMidday(), end: .makeEndOfDay(), sectionsPer24h: 144)
 
     // MARK: - Properties
     private var entry: Entry

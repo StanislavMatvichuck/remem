@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ClockSectionDescription: Equatable {
+struct ClockSection: Equatable {
     enum VisualVariant: Int {
         case empty
         case little
@@ -29,7 +29,7 @@ struct ClockSectionDescription: Equatable {
 }
 
 // MARK: - Public
-extension ClockSectionDescription {
+extension ClockSection {
     mutating func addPoint() { pointsAmount += 1 }
     mutating func setHasLastPoint() { hasFreshPoint = true }
 }

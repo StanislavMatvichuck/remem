@@ -22,7 +22,7 @@ class Clock: UIView {
 
     private var timer: Timer?
 
-    var sectionsList: ClockSectionDescriptionsList!
+    var sectionsList: ClockSectionsList!
 
     private lazy var iconContainer = UIView(al: true)
     private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")

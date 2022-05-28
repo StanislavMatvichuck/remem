@@ -1,5 +1,5 @@
 //
-//  ClockStitchesDescriptionTests.swift
+//  ClockSectionTests.swift
 //  RememTests
 //
 //  Created by Stanislav Matvichuck on 23.05.2022.
@@ -8,12 +8,12 @@
 @testable import Remem
 import XCTest
 
-class ClockSectionDescriptionTests: XCTestCase {
-    private var sut: ClockSectionDescription!
+class ClockSectionTests: XCTestCase {
+    private var sut: ClockSection!
 
     override func setUp() {
         super.setUp()
-        sut = ClockSectionDescription()
+        sut = ClockSection()
     }
 
     override func tearDown() {

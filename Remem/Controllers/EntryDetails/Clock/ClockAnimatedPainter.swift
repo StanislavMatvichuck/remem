@@ -10,19 +10,19 @@ import UIKit
 class ClockAnimatedPainter {
     // MARK: - Properties
     private let clockFace: ClockFace
-    private let list: ClockSectionDescriptionsList
+    private let list: ClockSectionsList
     private let painter: ClockPainter
 
     // Getters
     private var bounds: CGRect { clockFace.bounds }
     private var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
-    private var displayedSections: [ClockSectionDescription] = []
+    private var displayedSections: [ClockSection] = []
 
     // MARK: - Init
-    init(clockFace: ClockFace, descriptionsList: ClockSectionDescriptionsList) {
+    init(clockFace: ClockFace, sectionsList: ClockSectionsList) {
         self.clockFace = clockFace
-        self.list = descriptionsList
-        self.painter = ClockPainter(rect: clockFace.bounds, sectionsList: descriptionsList)
+        self.list = sectionsList
+        self.painter = ClockPainter(rect: clockFace.bounds, sectionsList: sectionsList)
         addSectionsLayers()
     }
 }
@@ -46,7 +46,7 @@ extension ClockAnimatedPainter {
 
 // MARK: - Private
 extension ClockAnimatedPainter {
-    private func updateColorIfNeeded(index: Int, updatedSection: ClockSectionDescription) {
+    private func updateColorIfNeeded(index: Int, updatedSection: ClockSection) {
         let displayedSection = displayedSections[index]
 
         if color(for: displayedSection) != color(for: updatedSection) {
@@ -54,7 +54,7 @@ extension ClockAnimatedPainter {
         }
     }
 
-    private func updateLengthIfNeedeed(index: Int, updatedSection: ClockSectionDescription) {
+    private func updateLengthIfNeedeed(index: Int, updatedSection: ClockSection) {
         let displayedSection = displayedSections[index]
         if strokeEnd(for: displayedSection) != strokeEnd(for: updatedSection) {
             addLengthAnimation()
@@ -69,7 +69,7 @@ extension ClockAnimatedPainter {
         print(#function)
     }
 
-    private func updateDisplayedSectionWithUpdatedSection(index: Int, updatedSection: ClockSectionDescription) {
+    private func updateDisplayedSectionWithUpdatedSection(index: Int, updatedSection: ClockSection) {
         displayedSections[index] = updatedSection
     }
 
@@ -91,7 +91,7 @@ extension ClockAnimatedPainter {
     }
 
     private func makeLayer(at index: Int) -> CAShapeLayer? {
-        guard let section = list.description(at: index) else { return nil }
+        guard let section = list.section(at: index) else { return nil }
 
         let layer = CAShapeLayer()
         layer.frame = bounds
@@ -118,7 +118,7 @@ extension ClockAnimatedPainter {
 
 // MARK: - Private
 extension ClockAnimatedPainter {
-    private func strokeEnd(for section: ClockSectionDescription) -> CGFloat {
+    private func strokeEnd(for section: ClockSection) -> CGFloat {
         switch section.variant {
         case .empty: return 0.2
         case .little: return 0.33
@@ -127,7 +127,7 @@ extension ClockAnimatedPainter {
         }
     }
 
-    private func color(for section: ClockSectionDescription) -> UIColor {
+    private func color(for section: ClockSection) -> UIColor {
         if section.hasFreshPoint {
             return UIColor.systemOrange
         }

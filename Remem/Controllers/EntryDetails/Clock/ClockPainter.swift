@@ -34,12 +34,12 @@ class ClockPainter {
     private var minutesArrowHeight: CGFloat { faceLabelsRadius() - Self.faceSectionOffset }
     private var hoursArrowHeight: CGFloat { 0.6 * minutesArrowHeight }
 
-    private let list: ClockSectionDescriptionsList
+    private let list: ClockSectionsList
 
     private var context: CGContext?
 
     // MARK: - Init
-    init(rect: CGRect, sectionsList: ClockSectionDescriptionsList) {
+    init(rect: CGRect, sectionsList: ClockSectionsList) {
         self.boundaries = rect
         self.list = sectionsList
     }
@@ -69,7 +69,7 @@ extension ClockPainter {
         let segmentAngle: CGFloat = 5
 
         for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
-            guard let section = list.description(at: index) else { continue }
+            guard let section = list.section(at: index) else { continue }
 
             let path = makeSection(for: section)
 
@@ -78,7 +78,7 @@ extension ClockPainter {
         }
     }
 
-    private func makeSection(for section: ClockSectionDescription) -> UIBezierPath {
+    private func makeSection(for section: ClockSection) -> UIBezierPath {
         let height = height(for: section)
         let offset = Self.sectionMaxHeight - height
 
@@ -88,7 +88,7 @@ extension ClockPainter {
                             cornerRadius: Self.sectionCornerRadius)
     }
 
-    private func color(for section: ClockSectionDescription) -> UIColor {
+    private func color(for section: ClockSection) -> UIColor {
         if section.hasFreshPoint {
             return UIColor.systemOrange
         }
@@ -101,7 +101,7 @@ extension ClockPainter {
         }
     }
 
-    private func height(for section: ClockSectionDescription) -> CGFloat {
+    private func height(for section: ClockSection) -> CGFloat {
         switch section.variant {
         case .empty: return Self.sectionMaxHeight * 0.2
         case .little: return Self.sectionMaxHeight * 0.33

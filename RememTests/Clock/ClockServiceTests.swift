@@ -49,8 +49,8 @@ class ClockServiceTests: XCTestCase {
     }
 
     func testSegmentsAreEmpty() {
-        for i in 0 ... sut.daySectionsList.size - 1 { XCTAssertEqual(sut.daySectionsList.description(at: i)?.pointsAmount, 0) }
-        for i in 0 ... sut.nightSectionsList.size - 1 { XCTAssertEqual(sut.nightSectionsList.description(at: i)?.pointsAmount, 0) }
+        for i in 0 ... sut.daySectionsList.size - 1 { XCTAssertEqual(sut.daySectionsList.section(at: i)?.pointsAmount, 0) }
+        for i in 0 ... sut.nightSectionsList.size - 1 { XCTAssertEqual(sut.nightSectionsList.section(at: i)?.pointsAmount, 0) }
     }
 
     func testFetchWithBoundaries() {

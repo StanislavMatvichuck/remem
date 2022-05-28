@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080656E8283B945100C09409 /* ClockSectionDescriptionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */; };
-		080656EA283B946000C09409 /* ClockSectionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSectionDescription.swift */; };
+		080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
+		080656EA283B946000C09409 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
 		080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */; };
 		080656EE283B94DF00C09409 /* ClockSectionDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */; };
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
@@ -91,8 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionsList.swift; sourceTree = "<group>"; };
-		080656E9283B946000C09409 /* ClockSectionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescription.swift; sourceTree = "<group>"; };
+		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
+		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
 		080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionsContainerTests.swift; sourceTree = "<group>"; };
 		080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionTests.swift; sourceTree = "<group>"; };
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				08286B02284170A900FBC022 /* ClockFace.swift */,
 				0852C6B0283D7B430027EF3E /* ClockPainter.swift */,
-				080656E9283B946000C09409 /* ClockSectionDescription.swift */,
-				080656E7283B945100C09409 /* ClockSectionDescriptionsList.swift */,
+				080656E9283B946000C09409 /* ClockSection.swift */,
+				080656E7283B945100C09409 /* ClockSectionsList.swift */,
 				086B3D9928325992006E08CB /* ClockService.swift */,
 				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
 				0852C69F283D39F80027EF3E /* ClockView.swift */,
@@ -553,12 +553,12 @@
 			files = (
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
-				080656EA283B946000C09409 /* ClockSectionDescription.swift in Sources */,
+				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
 				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
 				08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */,
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
-				080656E8283B945100C09409 /* ClockSectionDescriptionsList.swift in Sources */,
+				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,

@@ -33,7 +33,7 @@ class ClockController: UIViewController {
         super.viewDidAppear(animated)
         viewRoot.clockDay.clockFace.animatedPainter = ClockAnimatedPainter(
             clockFace: viewRoot.clockDay.clockFace,
-            descriptionsList: viewRoot.clockDay.sectionsList)
+            sectionsList: viewRoot.clockDay.sectionsList)
     }
 }
 
