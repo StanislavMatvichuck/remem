@@ -15,7 +15,7 @@ class Clock: UIView {
 
     // MARK: - Properties
     private let variant: ClockVariant
-    private let clockFace = ClockFace()
+    let clockFace = ClockFace()
     private var painter: ClockPainter? {
         didSet { clockFace.painter = painter }
     }

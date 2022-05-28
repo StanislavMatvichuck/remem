@@ -28,6 +28,13 @@ class ClockController: UIViewController {
 
         addTapHanders()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewRoot.clockDay.clockFace.animatedPainter = ClockAnimatedPainter(
+            clockFace: viewRoot.clockDay.clockFace,
+            descriptionsList: viewRoot.clockDay.sectionsList)
+    }
 }
 
 // MARK: - User input
@@ -47,7 +54,6 @@ extension ClockController {
 extension ClockController: WeekControllerDelegate {
     func weekControllerNewWeek(from: Date, to: Date) {
         clockService.fetch(from: from, to: to)
-        viewRoot.clockDay.redraw()
-        viewRoot.clockNight.redraw()
+        viewRoot.clockDay.clockFace.animatedPainter?.update()
     }
 }

@@ -9,8 +9,8 @@ import UIKit
 
 class ClockPainter {
     // Outer sections
-    private static let sectionMaxHeight = 33.0
-    private static let sectionWidth = 4.0
+    static let sectionMaxHeight = 33.0
+    static let sectionWidth = 4.0
     private static let sectionCornerRadius = sectionWidth / 2
     // Face sections
     private static let faceSectionWidth = 4.0
@@ -49,7 +49,6 @@ class ClockPainter {
 extension ClockPainter {
     func draw(in context: CGContext) {
         self.context = context
-        drawSections()
         drawFace()
         drawArrows()
     }

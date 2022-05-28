@@ -9,6 +9,7 @@ import UIKit
 
 class ClockFace: UIView {
     var painter: ClockPainter?
+    var animatedPainter: ClockAnimatedPainter?
 
     init() {
         super.init(frame: .zero)
