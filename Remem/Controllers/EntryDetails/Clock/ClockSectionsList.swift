@@ -41,22 +41,30 @@ extension ClockSectionsList {
         return sections[index]
     }
 
-    mutating func addPoint(with date: Date) {
+    mutating func fill(with points: [Point], freshPoint: Point?) {
+        reset()
+
+        points.forEach { point in
+            if freshPoint != nil, point == freshPoint {
+                self.addFreshPoint(with: point.dateCreated!)
+            } else {
+                self.addPoint(with: point.dateCreated!)
+            }
+        }
+    }
+
+    private mutating func addPoint(with date: Date) {
         let pointSeconds = seconds(for: date)
         if let index = index(for: pointSeconds) {
             addPoint(at: index)
         }
     }
 
-    mutating func addFreshPoint(with date: Date) {
+    private mutating func addFreshPoint(with date: Date) {
         let pointSeconds = seconds(for: date)
         if let index = index(for: pointSeconds) {
             addFreshPoint(at: index)
         }
-    }
-
-    mutating func reset() {
-        sections = Self.makeEmpty(size: size)
     }
 }
 
@@ -73,6 +81,10 @@ extension ClockSectionsList {
         section.addPoint()
         section.hasFreshPoint = true
         sections[index] = section
+    }
+
+    private mutating func reset() {
+        sections = Self.makeEmpty(size: size)
     }
 
     private func seconds(for date: Date) -> Int {
@@ -103,5 +115,17 @@ extension ClockSectionsList {
 
     private static func makeEmpty(size: Int) -> [ClockSection] {
         Array(repeating: ClockSection(), count: size)
+    }
+
+    //
+    // Creation
+    //
+
+    static func makeForDayClock() -> ClockSectionsList {
+        return ClockSectionsList(start: .makeMidday(), end: .makeEndOfDay(), sectionsPer24h: 144)
+    }
+
+    static func makeForNightClock() -> ClockSectionsList {
+        return ClockSectionsList(start: .makeStartOfDay(), end: .makeMidday(), sectionsPer24h: 144)
     }
 }

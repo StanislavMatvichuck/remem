@@ -77,7 +77,7 @@
 		08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
-		08FF32302842037B002E9F13 /* ClockAnimatedPainter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF322F2842037B002E9F13 /* ClockAnimatedPainter.swift */; };
+		08FF32302842037B002E9F13 /* ClockSectionsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +168,7 @@
 		08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsTests.swift; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
-		08FF322F2842037B002E9F13 /* ClockAnimatedPainter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAnimatedPainter.swift; sourceTree = "<group>"; };
+		08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,12 +193,12 @@
 			isa = PBXGroup;
 			children = (
 				08F9C5EB282BD35F007EAD47 /* Clock.swift */,
-				08FF322F2842037B002E9F13 /* ClockAnimatedPainter.swift */,
 				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				08286B02284170A900FBC022 /* ClockFace.swift */,
 				0852C6B0283D7B430027EF3E /* ClockPainter.swift */,
 				080656E9283B946000C09409 /* ClockSection.swift */,
+				08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */,
 				080656E7283B945100C09409 /* ClockSectionsList.swift */,
 				086B3D9928325992006E08CB /* ClockService.swift */,
 				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
@@ -606,7 +606,7 @@
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
-				08FF32302842037B002E9F13 /* ClockAnimatedPainter.swift in Sources */,
+				08FF32302842037B002E9F13 /* ClockSectionsAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

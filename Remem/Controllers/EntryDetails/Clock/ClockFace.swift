@@ -9,7 +9,6 @@ import UIKit
 
 class ClockFace: UIView {
     var painter: ClockPainter?
-    var animatedPainter: ClockAnimatedPainter?
 
     init() {
         super.init(frame: .zero)
@@ -21,6 +20,11 @@ class ClockFace: UIView {
 
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        painter?.draw(in: context)
+
+        if painter == nil {
+            painter = ClockPainter()
+        }
+
+        painter?.draw(in: context, frame: rect)
     }
 }

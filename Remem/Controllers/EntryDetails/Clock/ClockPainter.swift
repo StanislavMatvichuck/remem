@@ -28,33 +28,35 @@ class ClockPainter {
     private static let faceColor = UIColor.secondarySystemBackground
     private static let arrowColor = UIColor.systemBlue
 
+    // Sections
+    private var list: ClockSectionsList = .makeForDayClock()
+
     // MARK: - Properties
-    private let boundaries: CGRect
-    private var center: CGPoint { CGPoint(x: boundaries.midX, y: boundaries.midY) }
+    private var bounds: CGRect?
+    private var center: CGPoint { CGPoint(x: bounds?.midX ?? 0, y: bounds?.midY ?? 0) }
     private var minutesArrowHeight: CGFloat { faceLabelsRadius() - Self.faceSectionOffset }
     private var hoursArrowHeight: CGFloat { 0.6 * minutesArrowHeight }
 
-    private let list: ClockSectionsList
-
     private var context: CGContext?
-
-    // MARK: - Init
-    init(rect: CGRect, sectionsList: ClockSectionsList) {
-        self.boundaries = rect
-        self.list = sectionsList
-    }
 }
 
 // MARK: - Public
 extension ClockPainter {
-    func draw(in context: CGContext) {
+    func draw(in context: CGContext, frame: CGRect) {
         self.context = context
+        bounds = frame
+
         drawFace()
         drawArrows()
+        drawSections()
     }
 
     func faceLabelsRadius() -> CGFloat {
         center.y - Self.sectionMaxHeight - Self.hoursFaceHeight - Self.faceSectionOffset
+    }
+
+    static func faceLabelsRadius(for rect: CGRect) -> CGFloat {
+        rect.midY - Self.sectionMaxHeight - Self.hoursFaceHeight - Self.faceSectionOffset
     }
 }
 
@@ -103,7 +105,7 @@ extension ClockPainter {
 
     private func height(for section: ClockSection) -> CGFloat {
         switch section.variant {
-        case .empty: return Self.sectionMaxHeight * 0.2
+        case .empty: return Self.sectionMaxHeight * 0.2 + Self.sectionWidth
         case .little: return Self.sectionMaxHeight * 0.33
         case .mid: return Self.sectionMaxHeight * 0.66
         case .big: return Self.sectionMaxHeight

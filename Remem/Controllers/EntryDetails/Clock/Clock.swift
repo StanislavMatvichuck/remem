@@ -16,13 +16,6 @@ class Clock: UIView {
     // MARK: - Properties
     private let variant: ClockVariant
     let clockFace = ClockFace()
-    private var painter: ClockPainter? {
-        didSet { clockFace.painter = painter }
-    }
-
-    private var timer: Timer?
-
-    var sectionsList: ClockSectionsList!
 
     private lazy var iconContainer = UIView(al: true)
     private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
@@ -39,26 +32,16 @@ class Clock: UIView {
         addLabels()
         addIcon()
         addClock()
-        setupTickingTimer()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    deinit { timer?.invalidate() }
 
     // MARK: - View lifecycle
     override func layoutSubviews() {
-        setupPainter()
         constrainLabelsInsideClockFace()
         super.layoutSubviews()
 
         iconContainer.layer.cornerRadius = iconContainer.layer.frame.width / 2
-    }
-}
-
-// MARK: - Public
-extension Clock {
-    @objc func redraw() {
-        clockFace.setNeedsDisplay()
     }
 }
 
@@ -115,30 +98,8 @@ extension Clock {
         return image!
     }
 
-    private func setupTickingTimer() {
-        let currentSeconds = Calendar.current.dateComponents([.second], from: Date.now).second ?? 0
-        let secondAfterMinuteUpdates = Double(60 - currentSeconds)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + secondAfterMinuteUpdates) {
-            if self.timer == nil {
-                self.timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                                  target: self,
-                                                  selector: #selector(self.redraw),
-                                                  userInfo: nil,
-                                                  repeats: true)
-                self.timer?.tolerance = 1.0
-            }
-        }
-    }
-
-    private func setupPainter() {
-        if painter == nil {
-            painter = ClockPainter(rect: bounds, sectionsList: sectionsList)
-        }
-    }
-
     private func constrainLabelsInsideClockFace() {
-        let digitsDistanceFromCenter = painter!.faceLabelsRadius()
+        let digitsDistanceFromCenter = ClockPainter.faceLabelsRadius(for: bounds)
 
         NSLayoutConstraint.activate([
             topDigits.topAnchor.constraint(equalTo: centerYAnchor, constant: -digitsDistanceFromCenter),

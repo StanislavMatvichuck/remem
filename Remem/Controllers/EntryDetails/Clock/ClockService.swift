@@ -8,10 +8,6 @@
 import CoreData
 
 class ClockService {
-    // MARK: - Public properties
-    var nightSectionsList = ClockSectionsList(start: .makeStartOfDay(), end: .makeMidday(), sectionsPer24h: 144)
-    var daySectionsList = ClockSectionsList(start: .makeMidday(), end: .makeEndOfDay(), sectionsPer24h: 144)
-
     // MARK: - Properties
     private var entry: Entry
     private var coreDataStack: CoreDataStack
@@ -31,9 +27,6 @@ extension ClockService {
     func fetch(from: Date, to: Date) -> [Point] {
         let request = makeFetchRequest(from: from, to: to)
         let points = results(for: request)
-
-        resetLists()
-        fillListsWith(points)
 
         return points
     }
@@ -85,24 +78,5 @@ extension ClockService {
             print("PointsListService.fetchCount() error \(error)")
             return []
         }
-    }
-
-    private func fillListsWith(_ points: [Point]) {
-        for point in points { addToLists(point) }
-    }
-
-    private func addToLists(_ point: Point) {
-        if point == entry.freshPoint {
-            daySectionsList.addFreshPoint(with: point.dateCreated!)
-            nightSectionsList.addFreshPoint(with: point.dateCreated!)
-        } else {
-            daySectionsList.addPoint(with: point.dateCreated!)
-            nightSectionsList.addPoint(with: point.dateCreated!)
-        }
-    }
-
-    private func resetLists() {
-        daySectionsList.reset()
-        nightSectionsList.reset()
     }
 }
