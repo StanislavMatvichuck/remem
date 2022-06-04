@@ -32,6 +32,7 @@ class EntryDetailsController: UIViewController {
 // MARK: - Private
 extension EntryDetailsController {
     private func setupClock() {
+        clockController.freshPoint = entry.freshPoint
         contain(controller: clockController, in: viewRoot.clock)
     }
 

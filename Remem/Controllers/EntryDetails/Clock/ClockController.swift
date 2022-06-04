@@ -12,6 +12,7 @@ class ClockController: UIViewController {
     fileprivate let viewRoot = ClockView()
 
     var clockService: ClockService!
+    var freshPoint: Point?
 
     private var clocksAnimator: ClockAnimator?
     private var clocksPainterTimer: Timer?
@@ -80,8 +81,8 @@ extension ClockController {
     private func updateLists(from: Date, to: Date) {
         let points = clockService.fetch(from: from, to: to)
 
-        sectionsListDay.fill(with: points, freshPoint: nil)
-        sectionsListNight.fill(with: points, freshPoint: nil)
+        sectionsListDay.fill(with: points, freshPoint: freshPoint)
+        sectionsListNight.fill(with: points, freshPoint: freshPoint)
     }
 }
 
