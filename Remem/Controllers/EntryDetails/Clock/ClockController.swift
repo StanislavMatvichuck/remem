@@ -40,7 +40,10 @@ class ClockController: UIViewController {
         animateSections()
     }
 
-    deinit { clocksPainterTimer?.invalidate() }
+    deinit {
+        clocksPainterTimer?.invalidate()
+        ClockPainter.drawsSections = true
+    }
 }
 
 // MARK: - User input
@@ -71,6 +74,8 @@ extension ClockController {
     private func installAnimators() {
         sectionsAnimatorDay = ClockSectionsAnimator(clockFace: viewRoot.clockDay.clockFace)
         sectionsAnimatorNight = ClockSectionsAnimator(clockFace: viewRoot.clockNight.clockFace)
+        ClockPainter.drawsSections = false
+        redraw()
     }
 
     private func animateSections() {

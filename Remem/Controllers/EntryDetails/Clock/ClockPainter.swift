@@ -11,6 +11,7 @@ class ClockPainter {
     // Outer sections
     static let sectionMaxHeight = 33.0
     static let sectionWidth = 4.0
+    static var drawsSections = true
     private static let sectionCornerRadius = sectionWidth / 2
     // Face sections
     private static let faceSectionWidth = 4.0
@@ -68,6 +69,8 @@ extension ClockPainter {
     //
 
     private func drawSections() {
+        guard Self.drawsSections else { return }
+
         let segmentAngle: CGFloat = 5
 
         for (index, angle) in stride(from: 0, through: 360 - segmentAngle, by: segmentAngle).enumerated() {
