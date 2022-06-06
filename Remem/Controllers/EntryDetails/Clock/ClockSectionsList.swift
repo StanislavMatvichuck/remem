@@ -46,6 +46,19 @@ extension ClockSectionsList {
         points.forEach { add(point: $0, freshPoint: freshPoint) }
     }
 
+    var currentTimeIsInList: Bool {
+        let currentSeconds = seconds(for: Date.now)
+
+        if
+            currentSeconds >= start.seconds,
+            currentSeconds <= end.seconds
+        {
+            return true
+        }
+
+        return false
+    }
+
     //
     // Creation
     //

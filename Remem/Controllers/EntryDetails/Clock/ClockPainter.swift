@@ -29,8 +29,11 @@ class ClockPainter {
     private static let faceColor = UIColor.secondarySystemBackground
     private static let arrowColor = UIColor.systemBlue
 
+    // TODO: try to get rid of shouldMirror flag in methods
+    private static let arrowsOpacity = 0.15
+
     // Sections
-    private var list: ClockSectionsList = .makeForDayClock()
+    private var list: ClockSectionsList
 
     // MARK: - Properties
     private var bounds: CGRect?
@@ -39,6 +42,22 @@ class ClockPainter {
     private var hoursArrowHeight: CGFloat { 0.6 * minutesArrowHeight }
 
     private var context: CGContext?
+
+    private let variant: Clock.ClockVariant
+
+    init(for variant: Clock.ClockVariant) {
+        self.variant = variant
+
+        // TODO: try to get rid of variant?
+        switch variant {
+        case .day: list = .makeForDayClock()
+        case .night: list = .makeForNightClock()
+        }
+    }
+
+    var shouldMirror: Bool {
+        !list.currentTimeIsInList
+    }
 }
 
 // MARK: - Public
@@ -167,8 +186,15 @@ extension ClockPainter {
                                 cornerRadius: Self.arrowCornerRadius)
 
         rotate(path, by: angle)
-        fill(path, with: Self.faceColor)
-        stroke(path: path)
+
+        var opacity = 1.0
+        if shouldMirror {
+            flipHorizontally(path)
+            opacity = Self.arrowsOpacity
+        }
+
+        fill(path, with: Self.faceColor, and: opacity)
+        stroke(path: path, with: opacity)
 
         drawArrowSupportLine(with: angle)
     }
@@ -180,14 +206,29 @@ extension ClockPainter {
         centerPath.close()
 
         rotate(centerPath, by: angle)
-        stroke(path: centerPath)
+
+        var opacity = 1.0
+        if shouldMirror {
+            flipHorizontally(centerPath)
+            opacity = Self.arrowsOpacity
+        }
+
+        stroke(path: centerPath, with: opacity)
     }
 
     private func drawArrowsCenter() {
         let circle = UIBezierPath(ovalIn: CGRect(x: center.x - 2.5, y: center.y - 2.5, width: 5, height: 5))
 
         fill(circle, with: .systemBackground)
-        stroke(path: circle)
+
+        var opacity = 1.0
+
+        if shouldMirror {
+            opacity = Self.arrowsOpacity
+            flipHorizontally(circle)
+        }
+
+        stroke(path: circle, with: opacity)
     }
 
     var currentHoursAsMinutes: Int {
@@ -201,9 +242,9 @@ extension ClockPainter {
         return Calendar.current.dateComponents([.hour, .minute], from: Date.now).minute ?? 0
     }
 
-    private func stroke(path: UIBezierPath) {
+    private func stroke(path: UIBezierPath, with opacity: CGFloat = 1.0) {
         context?.addPath(path.cgPath)
-        context?.setStrokeColor(Self.arrowColor.cgColor)
+        context?.setStrokeColor(Self.arrowColor.withAlphaComponent(opacity).cgColor)
         context?.setLineWidth(2)
         context?.strokePath()
     }
@@ -224,9 +265,19 @@ extension ClockPainter {
         path.apply(CGAffineTransform(translationX: center.x, y: center.y))
     }
 
-    private func fill(_ path: UIBezierPath, with color: UIColor = UIColor.secondarySystemBackground) {
+    private func flipHorizontally(_ path: UIBezierPath) {
+        path.apply(CGAffineTransform(translationX: -center.x, y: -center.y))
+        path.apply(CGAffineTransform(scaleX: -1, y: 1))
+        path.apply(CGAffineTransform(translationX: center.x, y: center.y))
+    }
+
+    private func fill(
+        _ path: UIBezierPath,
+        with color: UIColor = UIColor.secondarySystemBackground,
+        and opacity: CGFloat = 1.0)
+    {
         context?.addPath(path.cgPath)
-        context?.setFillColor(color.cgColor)
+        context?.setFillColor(color.withAlphaComponent(opacity).cgColor)
         context?.fillPath(using: .winding)
     }
 }

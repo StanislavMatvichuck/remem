@@ -10,7 +10,10 @@ import UIKit
 class ClockFace: UIView {
     var painter: ClockPainter?
 
-    init() {
+    private let variant: Clock.ClockVariant
+
+    init(for variant: Clock.ClockVariant) {
+        self.variant = variant
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
@@ -22,7 +25,7 @@ class ClockFace: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
         if painter == nil {
-            painter = ClockPainter()
+            painter = ClockPainter(for: variant)
         }
 
         painter?.draw(in: context, frame: rect)

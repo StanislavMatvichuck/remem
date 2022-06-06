@@ -15,7 +15,7 @@ class Clock: UIView {
 
     // MARK: - Properties
     private let variant: ClockVariant
-    let clockFace = ClockFace()
+    let clockFace : ClockFace
 
     private lazy var iconContainer = UIView(al: true)
     private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
@@ -28,6 +28,7 @@ class Clock: UIView {
     // MARK: - Init
     init(for variant: ClockVariant) {
         self.variant = variant
+        clockFace = ClockFace(for: variant)
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
@@ -50,6 +51,7 @@ class Clock: UIView {
 // MARK: - Private
 extension Clock {
     private func addClock() {
+        
         clockFace.translatesAutoresizingMaskIntoConstraints = false
         addAndConstrain(clockFace)
     }
