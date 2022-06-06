@@ -25,6 +25,7 @@ struct ClockSection: Equatable {
 
     var pointsAmount: Int = 0
     var hasFreshPoint: Bool = false
+    var isToday: Bool = false
     var variant: Self.VisualVariant { .make(from: pointsAmount) }
 }
 
@@ -32,4 +33,5 @@ struct ClockSection: Equatable {
 extension ClockSection {
     mutating func addPoint() { pointsAmount += 1 }
     mutating func setHasLastPoint() { hasFreshPoint = true }
+    mutating func setToday() { isToday = true }
 }

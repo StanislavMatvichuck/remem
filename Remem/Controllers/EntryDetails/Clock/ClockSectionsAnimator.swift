@@ -11,10 +11,7 @@ struct ClockSectionsAnimator {
     // MARK: - Properties
     private let clockFace: UIView
     private var list: ClockSectionsList
-    private var layers: [CAShapeLayer] = []
-    // Getters
-    private var bounds: CGRect { clockFace.bounds }
-    private var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
+    private var layers: [ClockSectionAnimatedLayer] = []
 
     // MARK: - Init
     init(clockFace: UIView, sectionsList: ClockSectionsList = .makeForDayClock()) {
@@ -34,6 +31,7 @@ extension ClockSectionsAnimator {
         for (index, section) in newList.sections.enumerated() {
             updateColorIfNeeded(at: index, updatedSection: section)
             updateStrokeEndIfNeeded(at: index, updatedSection: section)
+            updateOpacityIfNeeded(at: index, updatedSection: section)
         }
 
         list = newList
@@ -42,22 +40,52 @@ extension ClockSectionsAnimator {
 
 // MARK: - Private
 extension ClockSectionsAnimator {
+    private func installSections() {
+        clockFace.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        layers.forEach { clockFace.layer.addSublayer($0) }
+    }
+
+    private func makeLayers(for sectionsList: ClockSectionsList) -> [ClockSectionAnimatedLayer] {
+        sectionsList.sections.enumerated().map { makeLayer(at: $0, for: $1) }
+    }
+
+    private func makeLayer(at index: Int, for section: ClockSection) -> ClockSectionAnimatedLayer {
+        let layer = ClockSectionAnimatedLayer(frame: clockFace.bounds)
+
+        layer.frame = clockFace.bounds
+        layer.configure(for: section)
+        layer.rotate(for: index)
+
+        return layer
+    }
+
     private func updateColorIfNeeded(at index: Int, updatedSection: ClockSection) {
         guard let displayedSection = list.section(at: index) else { return }
 
-        let displayedColor = color(for: displayedSection)
-        let newColor = color(for: updatedSection)
+        let displayedColor = ClockSectionAnimatedLayer.color(for: displayedSection)
+        let newColor = ClockSectionAnimatedLayer.color(for: updatedSection)
 
         if displayedColor != newColor {
             addColorAnimation(at: index, from: displayedColor, to: newColor)
         }
     }
 
+    private func updateOpacityIfNeeded(at index: Int, updatedSection: ClockSection) {
+        guard let displayedSection = list.section(at: index) else { return }
+
+        let displayedOpacity = ClockSectionAnimatedLayer.opacity(for: displayedSection)
+        let newOpacity = ClockSectionAnimatedLayer.opacity(for: updatedSection)
+
+        if displayedOpacity != newOpacity {
+            addOpacityAnimation(at: index, from: displayedOpacity, to: newOpacity)
+        }
+    }
+
     private func updateStrokeEndIfNeeded(at index: Int, updatedSection: ClockSection) {
         guard let displayedSection = list.section(at: index) else { return }
 
-        let displayedStrokeEnd = strokeEnd(for: displayedSection)
-        let newStrokeEnd = strokeEnd(for: updatedSection)
+        let displayedStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: displayedSection)
+        let newStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: updatedSection)
 
         if displayedStrokeEnd != newStrokeEnd {
             addStrokeEndAnimation(at: index, from: displayedStrokeEnd, to: newStrokeEnd)
@@ -78,6 +106,20 @@ extension ClockSectionsAnimator {
         layer.add(animation, forKey: nil)
     }
 
+    private func addOpacityAnimation(at index: Int, from: Float, to: Float) {
+        let layer = layers[index]
+
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.duration = 0.1
+        animation.fromValue = from
+        animation.toValue = to
+        animation.fillMode = .backwards
+        animation.beginTime = CACurrentMediaTime() + Double(index) * 0.5 / 72
+
+        layer.opacity = to
+        layer.add(animation, forKey: nil)
+    }
+
     private func addStrokeEndAnimation(at index: Int, from: CGFloat, to: CGFloat) {
         let layer = layers[index]
 
@@ -91,63 +133,5 @@ extension ClockSectionsAnimator {
 
         layer.strokeEnd = to
         layer.add(animation, forKey: nil)
-    }
-
-    private func installSections() {
-        clockFace.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        layers.forEach { clockFace.layer.addSublayer($0) }
-    }
-
-    private func makeLayers(for sectionsList: ClockSectionsList) -> [CAShapeLayer] {
-        sectionsList.sections.enumerated().map { makeLayer(at: $0, for: $1) }
-    }
-
-    private func makeLayer(at index: Int, for section: ClockSection) -> CAShapeLayer {
-        let layer = CAShapeLayer()
-        layer.frame = bounds
-        layer.strokeColor = color(for: section).cgColor
-        layer.strokeEnd = strokeEnd(for: section)
-        layer.lineWidth = ClockPainter.sectionWidth
-        layer.lineCap = .round
-
-        let sectionWidthCompensation = ClockPainter.sectionWidth / 2
-        let startOfSectionPoint = CGPoint(x: center.x, y: ClockPainter.sectionMaxHeight - sectionWidthCompensation)
-        let endOfSectionPoint = CGPoint(x: center.x, y: sectionWidthCompensation)
-        let start = UIBezierPath()
-
-        start.move(to: startOfSectionPoint)
-        start.addLine(to: endOfSectionPoint)
-
-        layer.path = start.cgPath
-
-        let angle = (5.0 * CGFloat(index) * CGFloat.pi) / 180.0 // calculate angle
-        layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1)
-
-        return layer
-    }
-}
-
-// MARK: - Private
-extension ClockSectionsAnimator {
-    private func strokeEnd(for section: ClockSection) -> CGFloat {
-        switch section.variant {
-        case .empty: return 0.2
-        case .little: return 0.33
-        case .mid: return 0.66
-        case .big: return 1.0
-        }
-    }
-
-    private func color(for section: ClockSection) -> UIColor {
-        if section.hasFreshPoint {
-            return UIColor.systemOrange
-        }
-
-        switch section.variant {
-        case .empty:
-            return UIColor.secondarySystemBackground
-        case .little, .mid, .big:
-            return UIColor.systemBlue
-        }
     }
 }

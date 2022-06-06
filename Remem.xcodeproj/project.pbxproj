@@ -71,6 +71,7 @@
 		08D512362787144800C2037F /* EntriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EntriesListView.swift */; };
 		08D512382787153900C2037F /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512372787153900C2037F /* EntryCell.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
+		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
@@ -162,6 +163,7 @@
 		08D512352787144800C2037F /* EntriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListView.swift; sourceTree = "<group>"; };
 		08D512372787153900C2037F /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
+		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				08286B02284170A900FBC022 /* ClockFace.swift */,
 				0852C6B0283D7B430027EF3E /* ClockPainter.swift */,
 				080656E9283B946000C09409 /* ClockSection.swift */,
+				08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */,
 				08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */,
 				080656E7283B945100C09409 /* ClockSectionsList.swift */,
 				086B3D9928325992006E08CB /* ClockService.swift */,
@@ -582,6 +585,7 @@
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
+				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
