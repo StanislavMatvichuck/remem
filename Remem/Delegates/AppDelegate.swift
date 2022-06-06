@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
+        /// this call is made to avoid application reinstall
+        registerCustomActions()
         return true
     }
 
@@ -30,27 +32,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-    //
 
     // MARK: - Code data
-
-    //
-
     let coreDataStack = CoreDataStack()
 
     func applicationWillTerminate(_ application: UIApplication) {
         coreDataStack.save(coreDataStack.defaultContext)
     }
+
+    // MARK: - Local notifications
+    private func registerCustomActions() {
+        let add = UNNotificationAction(
+            identifier: ActionIdentifier.add.rawValue,
+            title: "Add")
+
+        let category = UNNotificationCategory(
+            identifier: pointsManipulcationNotificationsCategory,
+            actions: [add],
+            intentIdentifiers: [])
+
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+    }
 }
 
-// MARK: - Foreground notifications handling
+// MARK: - Notifications actions handling
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler:
-        @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
+        @escaping (UNNotificationPresentationOptions) -> Void)
+    {
         completionHandler([.badge, .sound, .banner])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        let identity = response.notification.request.content.categoryIdentifier
+        guard
+            identity == pointsManipulcationNotificationsCategory,
+            let action = ActionIdentifier(rawValue: response.actionIdentifier),
+            action == .add,
+            let entryIdString = response.notification.request.content.userInfo["identifier"] as? String
+        else { return }
+
+        addPoint(byEntryId: entryIdString)
+    }
+
+    private func addPoint(byEntryId: String) {
+        let service = EntriesListService(moc: coreDataStack.defaultContext, stack: coreDataStack)
+        service.fetch()
+
+        guard let entry = service.entry(withId: byEntryId) else { return }
+        service.addNewPoint(to: entry)
     }
 }

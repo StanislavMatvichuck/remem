@@ -74,6 +74,12 @@ extension EntriesListService {
     }
 
     func entry(at: IndexPath) -> Entry? { fetchedResultsController.object(at: at) }
+    
+		func entry(withId: String) -> Entry? {
+        fetchedResultsController.fetchedObjects?.first(where: { entry in
+            entry.objectID.uriRepresentation().absoluteString == withId
+        })
+    }
 
     @discardableResult
     func create(entryName: String) -> Entry {

@@ -102,6 +102,7 @@ extension LocalNotificationsService {
         content.sound = .none
         content.interruptionLevel = .passive
         content.userInfo = ["identifier": identifier]
+        content.categoryIdentifier = pointsManipulcationNotificationsCategory
 
         let identifier = UUID().uuidString
 

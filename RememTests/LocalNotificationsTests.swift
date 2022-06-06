@@ -156,7 +156,6 @@ extension LocalNotificationsServiceDelegateMock {
 // MARK: - LocalNotificationsServiceDelegate
 extension LocalNotificationsServiceDelegateMock: LocalNotificationsServiceDelegate {
     func localNotificationService(authorized: Bool) {
-        authorized = authorized
         expectation?.fulfill()
         expectation = nil
     }

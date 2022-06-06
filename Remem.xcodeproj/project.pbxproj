@@ -50,6 +50,7 @@
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
+		08874562284E5B5C001FBD48 /* LocalNotificationsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08874561284E5B5C001FBD48 /* LocalNotificationsStack.swift */; };
 		0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EntryDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EntryDetailsView.swift */; };
 		0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* PointTimeCell.swift */; };
@@ -140,6 +141,7 @@
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsServiceTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		08874561284E5B5C001FBD48 /* LocalNotificationsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsStack.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EntryDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* PointTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTimeCell.swift; sourceTree = "<group>"; };
@@ -377,8 +379,9 @@
 			children = (
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
-				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
+				08874561284E5B5C001FBD48 /* LocalNotificationsStack.swift */,
+				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
+				08874562284E5B5C001FBD48 /* LocalNotificationsStack.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,

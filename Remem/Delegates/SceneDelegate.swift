@@ -16,13 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let stack = CoreDataStack()
-        let model = EntriesListService(moc: stack.defaultContext, stack: stack)
+        let stack = (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+        let coreDataService = EntriesListService(moc: stack.defaultContext, stack: stack)
         let controller = EntriesListController()
         controller.coreDataStack = stack
         // TODO: check if this is okay
-        controller.service = model
-        model.delegate = controller
+        controller.service = coreDataService
+        coreDataService.delegate = controller
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = controller
