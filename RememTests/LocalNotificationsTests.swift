@@ -47,7 +47,7 @@ class LocalNotificationsServiceTests: XCTestCase {
 
     func testGetNotifications() {
         sutDelegate.expectPendingNotificationsCallback()
-        sut.requestPendingNotifications()
+        sut.requestPendingRequests()
         waitForExpectations(timeout: 1)
     }
 
@@ -101,7 +101,7 @@ class LocalNotificationsServiceTests: XCTestCase {
 
     func testNotificationArrived() {
         sutDelegate.expectNotificationAddedWithoutError()
-        let createdNotification = sut.addNotification(
+        let createdNotification = sut.addReminderNotification(
             text: "Remem notification",
             hours: currentComponents.hour!,
             minutes: currentComponents.minute!,
@@ -155,19 +155,19 @@ extension LocalNotificationsServiceDelegateMock {
 
 // MARK: - LocalNotificationsServiceDelegate
 extension LocalNotificationsServiceDelegateMock: LocalNotificationsServiceDelegate {
-    func authorizationRequest(result: Bool) {
-        authorized = result
+    func localNotificationService(authorized: Bool) {
+        authorized = authorized
         expectation?.fulfill()
         expectation = nil
     }
 
-    func notificationsRequest(result: [UNNotificationRequest]) {
-        pendingNotifications = result
+    func localNotificationService(pendingRequests: [UNNotificationRequest]) {
+        pendingNotifications = pendingRequests
         expectation?.fulfill()
         expectation = nil
     }
 
-    func addNotificationRequest(result: Error?) {
+    func localNotificationServiceAddingRequestFinishedWith(error: Error?) {
         expectation?.fulfill()
         expectation = nil
     }

@@ -14,9 +14,13 @@ class RemindersController: UITableViewController {
     static let existingReminders = NSLocalizedString("label.existingReminders", comment: "Reminders screen second section title")
 
     // MARK: - Properties
+
     let service = LocalNotificationsService()
     var reminders: [UNNotificationRequest]?
     lazy var reminderInput = ReminderInput()
+
+    typealias NotificationRequest = (title: String, hour: Int, minute: Int)
+    var notificationToBeCreated: NotificationRequest?
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -28,7 +32,7 @@ class RemindersController: UITableViewController {
         setupEventHandlers()
 
         service.delegate = self
-        service.requestPendingNotifications()
+        service.requestPendingRequests()
 
         view.backgroundColor = UIColor.secondarySystemBackground
     }
@@ -63,14 +67,17 @@ extension RemindersController {
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: ReminderCell.reuseIdentifier, for: indexPath) as! ReminderCell
-        if
-            let reminder = reminders?[indexPath.row],
-            let trigger = reminder.trigger as? UNCalendarNotificationTrigger,
-            let date = Calendar.current.date(from: trigger.dateComponents)
+
+        guard let reminder = reminders?[indexPath.row] else { return cell }
+
+        cell.textLabel!.text = reminder.content.title
+
+        if let trigger = reminder.trigger as? UNCalendarNotificationTrigger,
+           let date = Calendar.current.date(from: trigger.dateComponents)
         {
-            cell.textLabel!.text = reminder.content.title
             cell.detailTextLabel!.text = ReminderInput.formatter.string(from: date)
         }
+
         cell.heightAnchor.constraint(equalToConstant: 64).isActive = true
         return cell
     }
@@ -124,22 +131,31 @@ extension RemindersController {
             let minute = reminderInput.value.minute
         else { return }
 
-        service.addNotification(text: title,
-                                hours: hour,
-                                minutes: minute,
-                                seconds: 0,
-                                repeats: true)
-
-        service.requestPendingNotifications()
+        notificationToBeCreated = (title, hour, minute)
+        service.requestAuthorization()
     }
 }
 
 // MARK: - LocalNotificationsServiceDelegate
 extension RemindersController: LocalNotificationsServiceDelegate {
-    func authorizationRequest(result: Bool) {}
-    func addNotificationRequest(result: Error?) {}
-    func notificationsRequest(result: [UNNotificationRequest]) {
-        reminders = result
+    func localNotificationService(authorized: Bool) {
+        if authorized, let request = notificationToBeCreated {
+            service.addReminderNotification(text: request.title,
+                                            hours: request.hour,
+                                            minutes: request.minute,
+                                            seconds: 0,
+                                            repeats: true)
+            notificationToBeCreated = nil
+        }
+    }
+
+    func localNotificationServiceAddingRequestFinishedWith(error: Error?) {
+        guard error == nil else { return }
+        service.requestPendingRequests()
+    }
+
+    func localNotificationService(pendingRequests: [UNNotificationRequest]) {
+        reminders = pendingRequests
         tableView.reloadData()
     }
 }
