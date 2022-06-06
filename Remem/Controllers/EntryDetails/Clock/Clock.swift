@@ -22,6 +22,8 @@ class Clock: UIView {
     private lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
     private lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
     private lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
+    
+    private var labelsConstrained = false
 
     // MARK: - Init
     init(for variant: ClockVariant) {
@@ -99,6 +101,8 @@ extension Clock {
     }
 
     private func constrainLabelsInsideClockFace() {
+        guard labelsConstrained == false else { return }
+
         let digitsDistanceFromCenter = ClockPainter.faceLabelsRadius(for: bounds)
 
         NSLayoutConstraint.activate([
@@ -107,5 +111,7 @@ extension Clock {
             bottomDigits.bottomAnchor.constraint(equalTo: centerYAnchor, constant: digitsDistanceFromCenter),
             leftDigits.leadingAnchor.constraint(equalTo: centerXAnchor, constant: -digitsDistanceFromCenter),
         ])
+
+        labelsConstrained = true
     }
 }
