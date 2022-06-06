@@ -10,13 +10,14 @@ import UIKit
 class EntryDetailsController: UIViewController {
     // MARK: - Properties
     var entry: Entry!
+    var coreDataService: EntryDetailsService!
 
     let clockController = ClockController()
     let pointsListController = PointsListController()
     let beltController = BeltController()
     let weekController = WeekController()
 
-    let service = LocalNotificationsService()
+    let notificationsService = LocalNotificationsService()
     var lockScreenNotificationMustBeAdded = false
     var lockScreenNotificationId: String?
 
@@ -26,14 +27,19 @@ class EntryDetailsController: UIViewController {
     override func viewDidLoad() {
         title = entry.name
 
-        service.delegate = self
-        service.requestSettings()
+        notificationsService.delegate = self
+        notificationsService.requestSettings()
 
         setupAddToLockScreenButton()
         setupClock()
         setupPointsList()
         setupBelt()
         setupWeek()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        coreDataService.markAsVisited()
     }
 }
 
@@ -87,18 +93,18 @@ extension EntryDetailsController: LocalNotificationsServiceDelegate {
     var idString: String { entry.objectID.uriRepresentation().absoluteString }
 
     func localNotificationService(settings: UNNotificationSettings) {
-        if settings.authorizationStatus == .authorized { service.requestLockScreenNotification(for: idString) }
+        if settings.authorizationStatus == .authorized { notificationsService.requestLockScreenNotification(for: idString) }
     }
 
     func localNotificationService(authorized: Bool) {
         guard authorized else { return }
         addLockScreenNotificationIfNeeded()
-        service.requestLockScreenNotification(for: idString)
+        notificationsService.requestLockScreenNotification(for: idString)
     }
 
     func localNotificationServiceAddingRequestFinishedWith(error: Error?) {
         guard error == nil else { return }
-        service.requestLockScreenNotification(for: idString)
+        notificationsService.requestLockScreenNotification(for: idString)
     }
 
     func localNotificationService(lockScreenNotification: UNNotificationRequest?, for: String) {
@@ -113,19 +119,19 @@ extension EntryDetailsController: LocalNotificationsServiceDelegate {
     private func addLockScreenNotificationIfNeeded() {
         guard lockScreenNotificationMustBeAdded else { return }
 
-        service.addLockScreenNotification(text: entry.name ?? "repeating notification text",
-                                          identifier: idString)
+        notificationsService.addLockScreenNotification(text: entry.name ?? "repeating notification text",
+                                                       identifier: idString)
         lockScreenNotificationMustBeAdded = false
     }
 
     @objc private func handlePressAddToLockScreen() {
-        service.requestAuthorization()
+        notificationsService.requestAuthorization()
         lockScreenNotificationMustBeAdded = true
     }
 
     @objc private func handlePressRemoveFromLockScreen() {
         guard let id = lockScreenNotificationId else { return }
-        service.removePendingNotifications(id)
-        service.requestLockScreenNotification(for: idString)
+        notificationsService.removePendingNotifications(id)
+        notificationsService.requestLockScreenNotification(for: idString)
     }
 }

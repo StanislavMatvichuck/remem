@@ -241,6 +241,7 @@ extension EntriesListController: EntryCellDelegate {
 
         let entryDetails = EntryDetailsController()
         entryDetails.entry = entry
+        entryDetails.coreDataService = EntryDetailsService(entry, stack: coreDataStack)
         entryDetails.pointsListController.pointsListService = PointsListService(entry)
         entryDetails.weekController.weekDistributionService = WeekService(entry)
         entryDetails.clockController.clockService = ClockService(entry, stack: coreDataStack)
