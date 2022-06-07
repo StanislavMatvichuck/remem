@@ -39,7 +39,7 @@ class UISwipingSelector: UIControl, UISwipingSelectorInterface {
     private lazy var viewSettings = makeButton(text: UISwipingSelector.settings)
 
     fileprivate let defaultButtonBackground = UIColor.clear
-    fileprivate let selectedButtonBackground = UIColor.systemBlue.withAlphaComponent(0.75)
+    fileprivate let selectedButtonBackground = UIHelper.brandDimmed
 
     fileprivate lazy var viewPointer: UIView = {
         let view = UIView(al: true)
@@ -191,13 +191,13 @@ extension UISwipingSelector {
 
     private func makeButton(text: String) -> UIView {
         let view = UIView(al: true)
-        view.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.5)
+        view.backgroundColor = defaultButtonBackground
         view.layer.cornerRadius = .r2 / 2
 
         let label = UILabel(al: true)
-        label.font = .systemFont(ofSize: .font1)
+        label.font = UIHelper.font
         label.textAlignment = .center
-        label.textColor = .label
+        label.textColor = UIHelper.itemFont
         label.text = text
 
         view.addSubview(label)

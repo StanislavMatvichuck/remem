@@ -14,7 +14,7 @@ class SwipeGestureView: UIView {
     }
 
     enum Durations: Double {
-        case position = 0.7
+        case position = 1.0
     }
 
     // MARK: - Properties

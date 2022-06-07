@@ -34,7 +34,8 @@ class EntriesListView: UIView {
         let label = UILabel(al: true)
         label.text = Self.empty
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
         addSubview(label)
         NSLayoutConstraint.activate([
@@ -50,7 +51,8 @@ class EntriesListView: UIView {
         let label = UILabel(al: true)
         label.text = Self.firstPoint
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
         addSubview(label)
         NSLayoutConstraint.activate([
@@ -66,7 +68,8 @@ class EntriesListView: UIView {
         let label = UILabel(al: true)
         label.text = Self.firstDetails
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
         addSubview(label)
         NSLayoutConstraint.activate([
@@ -91,7 +94,7 @@ class EntriesListView: UIView {
     }()
 
     lazy var cellGestureView: SwipeGestureView = {
-        let view = SwipeGestureView(mode: SwipeGestureView.Mode.horizontal, edgeInset: .sm + .r2)
+        let view = SwipeGestureView(mode: SwipeGestureView.Mode.horizontal, edgeInset: .r2 + UIHelper.spacingListHorizontal)
         addSubview(view)
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalTo: widthAnchor),
@@ -105,12 +108,7 @@ class EntriesListView: UIView {
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        backgroundColor = .secondarySystemBackground
-//        let image = UIImage(named: "plus")?.withTintColor(.systemBackground.withAlphaComponent(0.5))
-//        let resizedImage = image?.scalePreservingAspectRatio(targetSize: CGSize(width: 80, height: 80))
-//        let bg = UIImageView(image: resizedImage?.resizableImage(withCapInsets: .zero, resizingMode: .tile))
-//        bg.translatesAutoresizingMaskIntoConstraints = false
-//        addAndConstrain(bg)
+        backgroundColor = UIHelper.background
         setupSwiper()
         setupTableView()
         // these flags configure UIView tree
@@ -155,7 +153,7 @@ extension EntriesListView {
     private func setupSwiper() {
         addSubview(swiper)
         NSLayoutConstraint.activate([
-            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -.delta1),
+            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -UIHelper.spacing / 2),
             swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
             swiper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
         ])

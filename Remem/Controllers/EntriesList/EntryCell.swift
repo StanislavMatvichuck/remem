@@ -16,10 +16,9 @@ protocol EntryCellDelegate: AnyObject {
 final class EntryCell: UITableViewCell {
     // MARK: - Properties
     static let reuseIdentifier = "ViewMainRow"
-    static let backgroundColor = UIColor.systemBackground
-    static let decorationColor = UIColor.secondarySystemBackground.withAlphaComponent(0.5)
-    static let pinColor = UIColor.secondarySystemBackground
-    static let height = .d2 + .sm
+    static let backgroundColor = UIHelper.itemBackground
+    static let pinColor = UIHelper.brandDimmed
+    static let height = .d2 + UIHelper.spacing
     // Public
     weak var delegate: EntryCellDelegate?
     weak var animator: EntryCellAnimator?
@@ -35,46 +34,22 @@ final class EntryCell: UITableViewCell {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r2
         view.backgroundColor = EntryCell.backgroundColor
-
-        let viewDecoration = UIView(al: true)
-        viewDecoration.layer.cornerRadius = .r1
-        viewDecoration.backgroundColor = EntryCell.decorationColor
-        view.addSubview(viewDecoration)
-        NSLayoutConstraint.activate([
-            viewDecoration.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .delta1),
-            viewDecoration.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -2 * .delta1),
-            viewDecoration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            viewDecoration.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
         return view
     }()
 
     let viewMovable: UIView = {
         let view = UIView(al: true)
-        view.layer.cornerRadius = .r2
-        view.backgroundColor = EntryCell.backgroundColor
-
-        let viewDecor = UIView(al: true)
-        viewDecor.layer.cornerRadius = .r1
-        viewDecor.backgroundColor = EntryCell.pinColor
-
-        view.addSubview(viewDecor)
-        NSLayoutConstraint.activate([
-            viewDecor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            viewDecor.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            viewDecor.widthAnchor.constraint(equalToConstant: .d1),
-            viewDecor.heightAnchor.constraint(equalToConstant: .d1),
-        ])
-
+        view.layer.cornerRadius = .r1
+        view.backgroundColor = EntryCell.pinColor
         return view
     }()
 
     let valueLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
         label.numberOfLines = 1
-        label.textColor = .systemBlue
+        label.font = UIHelper.font
+        label.textColor = UIHelper.itemFont
         return label
     }()
 
@@ -82,17 +57,17 @@ final class EntryCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.font = UIHelper.font
+        label.textColor = UIHelper.itemFont
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.textColor = .label
         return label
     }()
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
+        backgroundColor = UIHelper.background
         setupViewRoot()
         setupViewMovable()
         setupEventHandlers()
@@ -123,8 +98,8 @@ final class EntryCell: UITableViewCell {
 
             viewRoot.heightAnchor.constraint(equalToConstant: .d2),
 
-            viewRoot.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
-            viewRoot.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+            viewRoot.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIHelper.spacingListHorizontal),
+            viewRoot.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIHelper.spacingListHorizontal),
             viewRoot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
@@ -133,8 +108,8 @@ final class EntryCell: UITableViewCell {
         viewRoot.addSubview(viewMovable)
 
         NSLayoutConstraint.activate([
-            viewMovable.widthAnchor.constraint(equalToConstant: .d2),
-            viewMovable.heightAnchor.constraint(equalToConstant: .d2),
+            viewMovable.widthAnchor.constraint(equalToConstant: .d1),
+            viewMovable.heightAnchor.constraint(equalToConstant: .d1),
 
             viewMovable.centerXAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: .r2),
             viewMovable.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),

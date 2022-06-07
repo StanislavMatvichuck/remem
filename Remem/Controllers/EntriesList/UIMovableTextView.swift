@@ -28,7 +28,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
     var onboardingHighlight: UIView { viewInput }
 
-    private var input: UITextField { viewInput.subviews[1] as! UITextField }
+    private var input: UITextField { viewInput.subviews[0] as! UITextField }
 
     lazy var viewInputBackground: UIView = {
         let view = UIView(al: true)
@@ -43,61 +43,20 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
 
     private lazy var viewInput: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIHelper.background
         view.layer.cornerRadius = .r2
         view.isOpaque = true
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
         view.layer.shadowOpacity = 1
 
-        let viewDecoration = UIView(al: true)
-        viewDecoration.layer.cornerRadius = .r1
-        viewDecoration.backgroundColor = EntryCell.decorationColor
-        view.addSubview(viewDecoration)
-        NSLayoutConstraint.activate([
-            viewDecoration.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .delta1),
-            viewDecoration.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -2 * .delta1),
-            viewDecoration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            viewDecoration.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-
         let input = UITextField(al: true)
-        input.font = .systemFont(ofSize: .font2, weight: .semibold)
+        input.font = UIHelper.font
         input.textAlignment = .center
         input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
         input.minimumFontSize = .font1
         view.addSubview(input)
-
-        let circle: UIView = {
-            let view = UIView(al: true)
-            view.layer.cornerRadius = .r2
-            view.backgroundColor = EntryCell.backgroundColor
-
-            let viewDecor = UIView(al: true)
-            viewDecor.layer.cornerRadius = .r1
-            viewDecor.backgroundColor = EntryCell.pinColor
-
-            view.addSubview(viewDecor)
-            NSLayoutConstraint.activate([
-                viewDecor.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                viewDecor.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                viewDecor.widthAnchor.constraint(equalToConstant: .d1),
-                viewDecor.heightAnchor.constraint(equalToConstant: .d1),
-            ])
-
-            return view
-        }()
-
-        view.addSubview(circle)
-
-        let label = UILabel(al: true)
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font1_6, weight: .bold)
-        label.numberOfLines = 1
-        label.textColor = .systemBlue
-        label.text = "0"
-        view.addSubview(label)
 
         addSubview(view)
         NSLayoutConstraint.activate([
@@ -109,14 +68,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
             input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             input.heightAnchor.constraint(equalToConstant: .d2),
             input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .d2),
-
-            circle.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            circle.centerXAnchor.constraint(equalTo: view.leadingAnchor, constant: .r2),
-            circle.widthAnchor.constraint(equalToConstant: .d2),
-            circle.heightAnchor.constraint(equalToConstant: .d2),
-
-            label.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -.r2),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
         return view
@@ -143,7 +94,8 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         let label = UILabel(al: true)
         label.text = Self.empty
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: .font2, weight: .semibold)
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
         viewInputBackground.addSubview(label)
         NSLayoutConstraint.activate([
@@ -306,6 +258,14 @@ extension UIMovableTextView {
     private func configureInputAccessoryView() {
         let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
+        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
+        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
+
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
 
         barAdd.isEnabled = !value.isEmpty
 
