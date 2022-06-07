@@ -78,6 +78,17 @@
  */
 "button.contextual.delete" = "Delete";
 
+/*
+    Entry details lock screen button
+ */
+"button.lockScreen.add" = "Add to lock screen";
+"button.lockScreen.remove" = "Remove from lock screen";
+
+/*
+    Notifications actions
+ */
+"notification.action.add" = "Add";
+
 /* UIReminderInput button submit title */
 "button.reminder.submit.title" = "Choose time";
 /* UIReminderInput button cancel time */

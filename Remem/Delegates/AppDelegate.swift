@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func registerCustomActions() {
         let add = UNNotificationAction(
             identifier: ActionIdentifier.add.rawValue,
-            title: "Add")
+            title: NSLocalizedString("notification.action.add", comment: "Notification actions"))
 
         let category = UNNotificationCategory(
             identifier: pointsManipulcationNotificationsCategory,

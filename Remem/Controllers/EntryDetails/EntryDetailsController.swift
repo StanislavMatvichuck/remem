@@ -48,10 +48,17 @@ class EntryDetailsController: UIViewController {
 extension EntryDetailsController {
     private func setupAddToLockScreenButton() {
         beltController.installAddToLockScreenButton()
+        relayoutCollectionView()
     }
 
     private func setupRemoveFromLockScreenButton() {
         beltController.installRemoveFromLockScreenButton()
+        relayoutCollectionView()
+    }
+    
+    private func relayoutCollectionView() {
+        guard let view = weekController.view as? WeekView else { return }
+        view.collection.collectionViewLayout.invalidateLayout()
     }
 
     private func setupClock() {

@@ -18,6 +18,8 @@ class BeltController: UIViewController {
     static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "EntryDetailsScreen")
     static let lastWeekTotal = NSLocalizedString("label.stats.weekLast.total", comment: "EntryDetailsScreen")
     static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EntryDetailsScreen")
+    static let lockScreenAdd = NSLocalizedString("button.lockScreen.add", comment: "EntryDetailsScreen")
+    static let lockScreenRemove = NSLocalizedString("button.lockScreen.remove", comment: "EntryDetailsScreen")
 
     // MARK: - Properties
     var entry: Entry!
@@ -101,16 +103,16 @@ extension BeltController {
     func installAddToLockScreenButton() {
         guard let button = viewButtonLockScreen as? ViewStatDisplay else { return }
         shouldRemoveFromLockScreen = false
-        button.update(color: UIHelper.brandDimmed)
+        button.update(color: UIHelper.brand)
         button.updateImage(color: UIHelper.itemFont)
-        button.update(description: "Add to lock screen")
+        button.update(description: Self.lockScreenAdd)
     }
 
     func installRemoveFromLockScreenButton() {
         guard let button = viewButtonLockScreen as? ViewStatDisplay else { return }
         shouldRemoveFromLockScreen = true
         button.update(color: UIHelper.itemFont)
-        button.updateImage(color: UIHelper.brandDimmed)
-        button.update(description: "Remove from lock screen")
+        button.updateImage(color: UIHelper.brand)
+        button.update(description: Self.lockScreenRemove)
     }
 }

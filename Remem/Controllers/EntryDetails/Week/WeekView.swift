@@ -78,7 +78,6 @@ extension WeekView {
             collection.topAnchor.constraint(equalTo: topAnchor, constant: .sm),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collection.heightAnchor.constraint(equalToConstant: 5 * .wScreen / 7),
 
             weekdaysLine.topAnchor.constraint(equalTo: collection.bottomAnchor),
             weekdaysLine.leadingAnchor.constraint(equalTo: leadingAnchor),

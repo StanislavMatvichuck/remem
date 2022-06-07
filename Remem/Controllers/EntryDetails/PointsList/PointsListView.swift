@@ -29,7 +29,7 @@ class PointsListView: UIView {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        addAndConstrain(table)
+        addAndConstrain(table, constant: UIHelper.spacing)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

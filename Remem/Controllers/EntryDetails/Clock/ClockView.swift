@@ -19,6 +19,8 @@ class ClockView: UIView {
 
         addAndConstrain(clockDay)
         addAndConstrain(clockNight)
+        
+        heightAnchor.constraint(equalToConstant: .hScreen / 3 + 15).isActive = true
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

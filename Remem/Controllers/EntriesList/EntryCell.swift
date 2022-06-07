@@ -175,8 +175,7 @@ extension EntryCell {
 extension EntryCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        viewMovable.layer.backgroundColor = Self.backgroundColor.cgColor
-        viewMovable.subviews.first?.layer.backgroundColor = Self.pinColor.cgColor
+        viewMovable.layer.backgroundColor = Self.pinColor.cgColor
         viewRoot.layer.backgroundColor = Self.backgroundColor.cgColor
     }
 }

@@ -32,8 +32,8 @@ extension EntryCellAnimator {
         group.duration = 0.1
 
         let background = CABasicAnimation(keyPath: "backgroundColor")
-        background.fromValue = UIColor.tertiarySystemBackground.cgColor
-        background.toValue = UIColor.systemBlue.cgColor
+        background.fromValue = UIHelper.brandDimmed.cgColor
+        background.toValue = UIHelper.brand.cgColor
 
         let size = CABasicAnimation(keyPath: "transform.scale")
         size.fromValue = 1

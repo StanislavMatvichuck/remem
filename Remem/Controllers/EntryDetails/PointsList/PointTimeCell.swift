@@ -21,9 +21,9 @@ class PointTimeCell: UITableViewCell {
         let label = UILabel(frame: .zero)
 
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: .font1)
+        label.font = UIHelper.font
+        label.textColor = UIHelper.brand
         label.numberOfLines = 1
-        label.textColor = .systemBlue
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         return label
@@ -34,9 +34,9 @@ class PointTimeCell: UITableViewCell {
 
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = .systemFont(ofSize: .font1)
+        label.font = UIHelper.font
+        label.textColor = UIHelper.itemFont
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.textColor = .label
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         return label

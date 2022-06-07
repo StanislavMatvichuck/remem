@@ -87,10 +87,10 @@ extension Clock {
 
         NSLayoutConstraint.activate([
             iconContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -40.0),
+            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -30.0),
 
-            iconContainer.widthAnchor.constraint(equalToConstant: 40.0),
-            iconContainer.heightAnchor.constraint(equalToConstant: 40.0),
+            iconContainer.widthAnchor.constraint(equalToConstant: 32.0),
+            iconContainer.heightAnchor.constraint(equalToConstant: 32.0),
         ])
     }
 

@@ -69,7 +69,7 @@ extension ClockSectionAnimatedLayer {
     static func opacity(for section: ClockSection) -> Float {
         if section.variant == .empty { return 1.0 }
 
-        return section.isToday ? 1.0 : 0.3
+        return section.isToday ? 1.0 : 1.0
     }
 }
 

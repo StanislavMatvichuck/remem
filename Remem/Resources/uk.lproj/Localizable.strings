@@ -78,6 +78,17 @@
  */
 "button.contextual.delete" = "Видалити";
 
+/*
+    Entry details lock screen button
+ */
+"button.lockScreen.add" = "Додати на екран блокування";
+"button.lockScreen.remove" = "Прибрати з екрану блокування";
+
+/*
+    Notifications actions
+ */
+"notification.action.add" = "Додати";
+
 /* UIReminderInput button submit title */
 "button.reminder.submit.title" = "Обрати час";
 /* UIReminderInput button cancel time */

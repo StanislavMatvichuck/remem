@@ -242,6 +242,7 @@
 				0857A7A928225B50006CCC99 /* PointsListService.swift */,
 				0852C6A1283D570E0027EF3E /* PointsListController.swift */,
 				0852C6A3283D57230027EF3E /* PointsListView.swift */,
+				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = PointsList;
 			sourceTree = "<group>";
@@ -269,7 +270,6 @@
 		0857A7B12822721F006CCC99 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
