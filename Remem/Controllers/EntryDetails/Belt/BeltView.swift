@@ -12,7 +12,6 @@ class BeltView: UIView {
     let scroll: ViewScroll = {
         let view = ViewScroll(.horizontal)
 
-        view.isPagingEnabled = true
         view.showsHorizontalScrollIndicator = false
 
         view.viewContent.spacing = .sm

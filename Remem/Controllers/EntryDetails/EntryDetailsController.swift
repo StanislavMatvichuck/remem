@@ -30,11 +30,12 @@ class EntryDetailsController: UIViewController {
         notificationsService.delegate = self
         notificationsService.requestSettings()
 
-        setupAddToLockScreenButton()
         setupClock()
         setupPointsList()
         setupBelt()
         setupWeek()
+
+        setupAddToLockScreenButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -46,19 +47,11 @@ class EntryDetailsController: UIViewController {
 // MARK: - Private
 extension EntryDetailsController {
     private func setupAddToLockScreenButton() {
-        let leftItem = UIBarButtonItem(title: "Add to lock screen",
-                                       style: .plain,
-                                       target: self,
-                                       action: #selector(handlePressAddToLockScreen))
-        navigationItem.leftBarButtonItem = leftItem
+        beltController.installAddToLockScreenButton()
     }
 
     private func setupRemoveFromLockScreenButton() {
-        let barItem = UIBarButtonItem(title: "Remove",
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(handlePressRemoveFromLockScreen))
-        navigationItem.leftBarButtonItem = barItem
+        beltController.installRemoveFromLockScreenButton()
     }
 
     private func setupClock() {
@@ -72,6 +65,7 @@ extension EntryDetailsController {
 
     private func setupBelt() {
         beltController.entry = entry
+        beltController.delegate = self
         contain(controller: beltController, in: viewRoot.belt)
     }
 
@@ -123,13 +117,16 @@ extension EntryDetailsController: LocalNotificationsServiceDelegate {
                                                        identifier: idString)
         lockScreenNotificationMustBeAdded = false
     }
+}
 
-    @objc private func handlePressAddToLockScreen() {
+// MARK: - BeltController delegate
+extension EntryDetailsController: BeltControllerDelegate {
+    func didPressAddToLockScreen() {
         notificationsService.requestAuthorization()
         lockScreenNotificationMustBeAdded = true
     }
 
-    @objc private func handlePressRemoveFromLockScreen() {
+    func didPressRemoveFromLockScreen() {
         guard let id = lockScreenNotificationId else { return }
         notificationsService.removePendingNotifications(id)
         notificationsService.requestLockScreenNotification(for: idString)

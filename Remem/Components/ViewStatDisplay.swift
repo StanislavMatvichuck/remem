@@ -8,54 +8,98 @@
 import UIKit
 
 class ViewStatDisplay: UIView {
+    static let defaultSpacing = UIHelper.spacing / 2
+    static let defaultWidth = CGFloat.wScreen / 2.5
+
+    // MARK: - Properties
+    var title: UILabel?
+    var image: UIImage?
+    var imageView: UIImageView?
+    var subtitle: UILabel
+
     // MARK: - Init
-    init(value: NSNumber, description: String) {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
+    init(title: String?, description: String) {
+        self.subtitle = Self.makeSubtitle(description)
+        self.title = Self.makeTitle(title ?? "")
 
         super.init(frame: .zero)
+        commonInit(with: self.title!)
+    }
 
+    init(image: UIImage?, description: String) {
+        self.subtitle = Self.makeSubtitle(description)
+        self.image = image
+
+        self.imageView = UIImageView(image: image)
+        imageView!.translatesAutoresizingMaskIntoConstraints = false
+        imageView!.setContentHuggingPriority(.defaultHigh, for: .vertical)
+
+        super.init(frame: .zero)
+        commonInit(with: imageView!)
+    }
+
+    private func commonInit(with view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
 
         backgroundColor = .secondarySystemBackground
         layer.cornerRadius = .sm
 
-        let labelAmount = UILabel(al: true)
-        labelAmount.text = formatter.string(from: value)
-        labelAmount.numberOfLines = 1
-        labelAmount.font = UIHelper.fontBold
-        labelAmount.textColor = UIHelper.itemFont
-        labelAmount.setContentHuggingPriority(.defaultHigh, for: .vertical)
-
-        let labelDescription = UILabel(al: true)
-        labelDescription.text = description
-        labelDescription.font = UIHelper.font
-        labelDescription.textColor = UIHelper.itemFont
-        labelDescription.numberOfLines = 0
-        labelDescription.setContentHuggingPriority(.defaultLow, for: .vertical)
-
         let flexibleSpace = UIView(al: true)
 
         let stack = UIStackView(al: true)
         stack.axis = .vertical
+        stack.alignment = .leading
         stack.spacing = .xs
 
-        stack.addArrangedSubview(labelAmount)
-        stack.addArrangedSubview(labelDescription)
+        stack.addArrangedSubview(view)
+        stack.addArrangedSubview(subtitle)
         stack.addArrangedSubview(flexibleSpace)
-        stack.setCustomSpacing(0, after: labelDescription)
+        stack.setCustomSpacing(0, after: subtitle)
 
-        addSubview(stack)
+        addAndConstrain(stack, constant: Self.defaultSpacing)
 
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: topAnchor),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .xs),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.xs),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.xs),
-            widthAnchor.constraint(equalToConstant: .wScreen / 2.5),
+            widthAnchor.constraint(equalToConstant: Self.defaultWidth),
         ])
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+// MARK: - Public
+extension ViewStatDisplay {
+    func update(color: UIColor) {
+        subtitle.textColor = color
+    }
+
+    func update(description: String) {
+        subtitle.text = description
+    }
+
+    func updateImage(color: UIColor) {
+        imageView?.image = image?.withTintColor(color)
+    }
+}
+
+// MARK: - Private
+extension ViewStatDisplay {
+    private static func makeTitle(_ text: String) -> UILabel {
+        let label = UILabel(al: true)
+        label.text = text
+        label.numberOfLines = 1
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        return label
+    }
+
+    private static func makeSubtitle(_ text: String) -> UILabel {
+        let label = UILabel(al: true)
+        label.text = text
+        label.font = UIHelper.font
+        label.textColor = UIHelper.itemFont
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        return label
+    }
 }
