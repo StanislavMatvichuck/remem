@@ -80,8 +80,8 @@ extension WeekController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
         let numberInMonth = weekDistributionService.dayOfMonth(for: indexPath)
         let isToday = indexPath.row == weekDistributionService.todayIndexRow
 
-        cell.update(day: "\(numberInMonth!)", isToday: isToday)
-        cell.update(amount: weekDistributionService.pointsAmount(for: indexPath))
+        cell.configure(day: "\(numberInMonth!)", isToday: isToday)
+        cell.configure(amount: weekDistributionService.pointsAmount(for: indexPath))
         return cell
     }
 }

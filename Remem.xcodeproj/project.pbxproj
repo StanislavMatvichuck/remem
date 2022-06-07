@@ -261,6 +261,7 @@
 				0857A7AF2822720E006CCC99 /* WeekService.swift */,
 				0852C6AC283D66170027EF3E /* WeekController.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
+				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
 			);
 			path = Week;
 			sourceTree = "<group>";
@@ -268,7 +269,6 @@
 		0857A7B12822721F006CCC99 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
 				0890627B27A0A2700032847C /* PointTimeCell.swift */,
 			);
 			path = Cells;

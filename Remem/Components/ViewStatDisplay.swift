@@ -24,13 +24,14 @@ class ViewStatDisplay: UIView {
         let labelAmount = UILabel(al: true)
         labelAmount.text = formatter.string(from: value)
         labelAmount.numberOfLines = 1
-        labelAmount.font = .systemFont(ofSize: .font2, weight: .bold)
-        labelAmount.textColor = UIColor.label
+        labelAmount.font = UIHelper.fontBold
+        labelAmount.textColor = UIHelper.itemFont
         labelAmount.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
         let labelDescription = UILabel(al: true)
         labelDescription.text = description
-        labelDescription.font = .systemFont(ofSize: .font1)
+        labelDescription.font = UIHelper.font
+        labelDescription.textColor = UIHelper.itemFont
         labelDescription.numberOfLines = 0
         labelDescription.setContentHuggingPriority(.defaultLow, for: .vertical)
 

@@ -26,8 +26,8 @@ class ClockPainter {
 
     private static let totalMinutes = 12 * 60
 
-    private static let faceColor = UIColor.secondarySystemBackground
-    private static let arrowColor = UIColor.systemBlue
+    private static let faceColor = UIHelper.clockSectionBackground
+    private static let arrowColor = UIHelper.brand
 
     // TODO: try to get rid of shouldMirror flag in methods
     private static let arrowsOpacity = 0.15
@@ -68,7 +68,7 @@ extension ClockPainter {
 
         drawFace()
         drawArrows()
-        drawSections()
+//        drawSections()
     }
 
     func faceLabelsRadius() -> CGFloat {
@@ -273,7 +273,7 @@ extension ClockPainter {
 
     private func fill(
         _ path: UIBezierPath,
-        with color: UIColor = UIColor.secondarySystemBackground,
+        with color: UIColor = UIHelper.clockSectionBackground,
         and opacity: CGFloat = 1.0)
     {
         context?.addPath(path.cgPath)

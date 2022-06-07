@@ -15,14 +15,14 @@ class Clock: UIView {
 
     // MARK: - Properties
     private let variant: ClockVariant
-    let clockFace : ClockFace
+    let clockFace: ClockFace
 
     private lazy var iconContainer = UIView(al: true)
     private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
     private lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
     private lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
     private lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
-    
+
     private var labelsConstrained = false
 
     // MARK: - Init
@@ -51,7 +51,6 @@ class Clock: UIView {
 // MARK: - Private
 extension Clock {
     private func addClock() {
-        
         clockFace.translatesAutoresizingMaskIntoConstraints = false
         addAndConstrain(clockFace)
     }
@@ -73,8 +72,8 @@ extension Clock {
     private func makeLabel(_ text: String) -> UILabel {
         let label = UILabel(al: true)
         label.text = text
-        label.font = .systemFont(ofSize: .font1, weight: .bold)
-        label.textColor = .secondarySystemBackground
+        label.font = UIHelper.fontSmallBold
+        label.textColor = UIHelper.clockSectionBackground
         return label
     }
 
@@ -97,7 +96,7 @@ extension Clock {
 
     private func makeIcon() -> UIImage {
         let image = UIImage(systemName: variant == .day ? "sun.max" : "moon.stars")?
-            .withTintColor(.secondarySystemBackground)
+            .withTintColor(UIHelper.clockSectionBackground)
             .withRenderingMode(.alwaysOriginal)
         return image!
     }

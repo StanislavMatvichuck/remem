@@ -45,8 +45,8 @@ class WeekView: UIView {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = day
             label.textAlignment = .center
-            label.font = .systemFont(ofSize: .font1)
-            label.textColor = .tertiaryLabel
+            label.font = UIHelper.fontSmallBold
+            label.textColor = UIHelper.itemFont
 
             view.addArrangedSubview(label)
 
@@ -54,10 +54,6 @@ class WeekView: UIView {
                 label.widthAnchor.constraint(equalToConstant: .wScreen / 7),
             ])
         }
-
-        NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: .wScreen / 7),
-        ])
 
         return view
     }()

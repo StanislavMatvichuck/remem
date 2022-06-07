@@ -55,14 +55,14 @@ extension ClockSectionAnimatedLayer {
 
     static func color(for section: ClockSection) -> UIColor {
         if section.hasFreshPoint {
-            return UIColor.systemOrange
+            return UIHelper.secondary
         }
 
         switch section.variant {
         case .empty:
-            return UIColor.secondarySystemBackground
+            return UIHelper.clockSectionBackground
         case .little, .mid, .big:
-            return UIColor.systemBlue
+            return UIHelper.brand
         }
     }
 
