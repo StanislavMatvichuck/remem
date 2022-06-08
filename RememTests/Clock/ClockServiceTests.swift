@@ -43,16 +43,6 @@ class ClockServiceTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
-    func testSegmentsCount() {
-        XCTAssertEqual(sut.daySectionsList.size, Self.segmentsCount)
-        XCTAssertEqual(sut.nightSectionsList.size, Self.segmentsCount)
-    }
-
-    func testSegmentsAreEmpty() {
-        for i in 0 ... sut.daySectionsList.size - 1 { XCTAssertEqual(sut.daySectionsList.section(at: i)?.pointsAmount, 0) }
-        for i in 0 ... sut.nightSectionsList.size - 1 { XCTAssertEqual(sut.nightSectionsList.section(at: i)?.pointsAmount, 0) }
-    }
-
     func testFetchWithBoundaries() {
         entry.addDefaultPoint(withDate: Date.weekAgo)
         coreDataStack.save(entry.managedObjectContext!)

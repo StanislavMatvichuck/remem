@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
 		080656EA283B946000C09409 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
-		080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */; };
+		080656EC283B94C700C09409 /* ClockSectionsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EB283B94C700C09409 /* ClockSectionsListTests.swift */; };
 		080656EE283B94DF00C09409 /* ClockSectionDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */; };
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
@@ -96,7 +96,7 @@
 /* Begin PBXFileReference section */
 		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
 		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
-		080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStitchDescriptionsContainerTests.swift; sourceTree = "<group>"; };
+		080656EB283B94C700C09409 /* ClockSectionsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsListTests.swift; sourceTree = "<group>"; };
 		080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionTests.swift; sourceTree = "<group>"; };
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				086B3D9728325903006E08CB /* ClockServiceTests.swift */,
-				080656EB283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift */,
+				080656EB283B94C700C09409 /* ClockSectionsListTests.swift */,
 				080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */,
 				080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */,
 			);
@@ -546,7 +546,7 @@
 				08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */,
 				086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */,
 				0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */,
-				080656EC283B94C700C09409 /* ClockStitchDescriptionsContainerTests.swift in Sources */,
+				080656EC283B94C700C09409 /* ClockSectionsListTests.swift in Sources */,
 				0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */,
 				08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */,
 				0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */,
@@ -724,7 +724,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -928,7 +928,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -957,7 +957,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
