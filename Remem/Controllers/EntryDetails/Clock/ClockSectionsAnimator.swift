@@ -14,7 +14,7 @@ struct ClockSectionsAnimator {
     private var layers: [ClockSectionAnimatedLayer] = []
 
     // MARK: - Init
-    init(clockFace: UIView, sectionsList: ClockSectionsList = .makeForDayClock()) {
+    init(clockFace: UIView, sectionsList: ClockSectionsList = .makeForDayClock(freshPoint: nil)) {
         self.clockFace = clockFace
         self.list = sectionsList
 

@@ -239,24 +239,10 @@ extension EntriesListController: EntryCellDelegate {
             let entry = service.entry(at: index)
         else { return }
 
-        let entryDetails = EntryDetailsController()
-        entryDetails.entry = entry
-        entryDetails.coreDataService = EntryDetailsService(entry, stack: coreDataStack)
-        entryDetails.pointsListController.pointsListService = PointsListService(entry)
-        entryDetails.weekController.weekDistributionService = WeekService(entry)
-        entryDetails.clockController.clockService = ClockService(entry, stack: coreDataStack)
+        let detailsController = makeDetailsController(for: entry)
+        let navigationController = makeNavigationController(for: detailsController)
 
-        let navigation = UINavigationController(rootViewController: entryDetails)
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowImage = nil
-        appearance.shadowColor = .clear
-        navigation.navigationBar.scrollEdgeAppearance = appearance
-        navigation.navigationBar.standardAppearance = appearance
-        navigation.navigationBar.compactAppearance = appearance
-
-        present(navigation, animated: true)
+        present(navigationController, animated: true)
     }
 
     func didSwipeAction(_ cell: EntryCell) {
@@ -270,4 +256,45 @@ extension EntriesListController: EntryCellDelegate {
     }
 
     func didAnimation(_ cell: EntryCell) { cellIndexToBeAnimated = nil }
+}
+
+// MARK: - Private
+extension EntriesListController {
+    private func makeDetailsController(for entry: Entry) -> EntryDetailsController {
+        let entryDetailsService = EntryDetailsService(entry, stack: coreDataStack)
+        let clockService = ClockService(entry, stack: coreDataStack)
+        let pointsListService = PointsListService(entry)
+        let weekService = WeekService(entry)
+
+        let beltController = BeltController()
+        let clockController = ClockController(service: clockService, freshPoint: entry.freshPoint)
+        let pointsListController = PointsListController()
+        let weekController = WeekController()
+
+        pointsListController.pointsListService = pointsListService
+        weekController.weekDistributionService = weekService
+
+        return EntryDetailsController(entry: entry,
+                                      service: entryDetailsService,
+                                      clockController: clockController,
+                                      pointsListController: pointsListController,
+                                      weekController: weekController,
+                                      beltController: beltController)
+    }
+
+    private func makeNavigationController(for controller: EntryDetailsController) -> UINavigationController {
+        let navigation = UINavigationController(rootViewController: controller)
+
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemBackground
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowImage = nil
+        appearance.shadowColor = .clear
+
+        navigation.navigationBar.scrollEdgeAppearance = appearance
+        navigation.navigationBar.standardAppearance = appearance
+        navigation.navigationBar.compactAppearance = appearance
+
+        return navigation
+    }
 }

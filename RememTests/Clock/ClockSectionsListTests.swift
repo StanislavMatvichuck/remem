@@ -17,7 +17,8 @@ class ClockSectionsListTests: XCTestCase {
     override func setUp() {
         sut = ClockSectionsList(start: .makeStartOfDay(),
                                 end: .makeMidday(),
-                                sectionsPer24h: stitchesPer24hours)
+                                sectionsPer24h: stitchesPer24hours,
+                                freshPoint: nil)
 
         let container = CoreDataStack.createContainer(inMemory: true)
         context = container.viewContext
@@ -42,7 +43,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 1)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 0)
@@ -52,7 +53,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 0, m: 11, s: 1))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 0)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 1)
@@ -62,7 +63,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 0, m: 21, s: 0))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 0)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 0)
@@ -73,7 +74,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 11, m: 59, s: 0))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 0)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 0)
@@ -87,7 +88,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 11, m: 49, s: 0))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 0)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 0)
@@ -101,7 +102,7 @@ class ClockSectionsListTests: XCTestCase {
         let date = makeTodayDate(withTime: (h: 13, m: 0, s: 0))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         for i in 0 ... sut.size - 1 {
             XCTAssertEqual(sut.section(at: i)?.pointsAmount, 0)
@@ -111,12 +112,13 @@ class ClockSectionsListTests: XCTestCase {
     func testFill_dayRange() {
         sut = ClockSectionsList(start: .makeMidday(),
                                 end: .makeEndOfDay(),
-                                sectionsPer24h: stitchesPer24hours)
+                                sectionsPer24h: stitchesPer24hours,
+                                freshPoint: nil)
 
         let date = makeTodayDate(withTime: (h: 12, m: 1, s: 0))
         let point = makePoint(by: date)
 
-        sut.fill(with: [point], freshPoint: nil)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.pointsAmount, 1)
         XCTAssertEqual(sut.section(at: 1)?.pointsAmount, 0)
@@ -125,8 +127,12 @@ class ClockSectionsListTests: XCTestCase {
     func testFill_freshPoint() {
         let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
         let point = makePoint(by: date)
+        sut = ClockSectionsList(start: .makeStartOfDay(),
+                                end: .makeMidday(),
+                                sectionsPer24h: stitchesPer24hours,
+                                freshPoint: point)
 
-        sut.fill(with: [point], freshPoint: point)
+        sut.fill(with: [point])
 
         XCTAssertEqual(sut.section(at: 0)?.hasFreshPoint, true)
         XCTAssertEqual(sut.section(at: 1)?.hasFreshPoint, false)
@@ -139,7 +145,7 @@ class ClockSectionsListTests: XCTestCase {
         let point = makePoint(by: date)
         let point2 = makePoint(by: date2)
 
-        sut.fill(with: [point, point2], freshPoint: nil)
+        sut.fill(with: [point, point2])
 
         XCTAssertEqual(sut.section(at: 0)?.variant, ClockSection.VisualVariant.mid)
     }
@@ -153,7 +159,7 @@ class ClockSectionsListTests: XCTestCase {
         let point2 = makePoint(by: date2)
         let point3 = makePoint(by: date3)
 
-        sut.fill(with: [point, point2, point3], freshPoint: nil)
+        sut.fill(with: [point, point2, point3])
 
         XCTAssertEqual(sut.section(at: 0)?.variant, ClockSection.VisualVariant.big)
     }
@@ -169,7 +175,7 @@ class ClockSectionsListTests: XCTestCase {
         let point3 = makePoint(by: date3)
         let point4 = makePoint(by: date4)
 
-        sut.fill(with: [point1, point2, point3, point4], freshPoint: nil)
+        sut.fill(with: [point1, point2, point3, point4])
 
         XCTAssertEqual(sut.section(at: 0)?.variant, ClockSection.VisualVariant.big)
     }

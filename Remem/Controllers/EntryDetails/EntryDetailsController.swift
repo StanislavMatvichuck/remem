@@ -9,17 +9,37 @@ import UIKit
 
 class EntryDetailsController: UIViewController {
     // MARK: - Properties
-    var entry: Entry!
-    var coreDataService: EntryDetailsService!
+    var entry: Entry
+    var coreDataService: EntryDetailsService
 
-    let clockController = ClockController()
-    let pointsListController = PointsListController()
-    let beltController = BeltController()
-    let weekController = WeekController()
+    let clockController: ClockController
+    let pointsListController: PointsListController
+    let beltController: BeltController
+    let weekController: WeekController
 
     let notificationsService = LocalNotificationsService()
     var lockScreenNotificationMustBeAdded = false
     var lockScreenNotificationId: String?
+
+    // MARK: - Init
+    init(entry: Entry,
+         service: EntryDetailsService,
+         clockController: ClockController,
+         pointsListController: PointsListController,
+         weekController: WeekController,
+         beltController: BeltController)
+    {
+        self.entry = entry
+        self.clockController = clockController
+        self.pointsListController = pointsListController
+        self.beltController = beltController
+        self.weekController = weekController
+        self.coreDataService = service
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     private let viewRoot = EntryDetailsView()
@@ -55,14 +75,13 @@ extension EntryDetailsController {
         beltController.installRemoveFromLockScreenButton()
         relayoutCollectionView()
     }
-    
+
     private func relayoutCollectionView() {
         guard let view = weekController.view as? WeekView else { return }
         view.collection.collectionViewLayout.invalidateLayout()
     }
 
     private func setupClock() {
-        clockController.freshPoint = entry.freshPoint
         contain(controller: clockController, in: viewRoot.clock)
     }
 
