@@ -11,17 +11,27 @@ class ClockController: UIViewController {
     // MARK: - Properties
     fileprivate let viewRoot = ClockView()
 
-    var clockService: ClockService!
-    var freshPoint: Point?
+    private let clockService: ClockService
+    private var freshPoint: Point?
 
     private var clocksAnimator: ClockAnimator?
     private var clocksPainterTimer: Timer?
 
-    private var sectionsListDay: ClockSectionsList = .makeForDayClock()
-    private var sectionsListNight: ClockSectionsList = .makeForNightClock()
+    private var sectionsListDay: ClockSectionsList
+    private var sectionsListNight: ClockSectionsList
 
     private var sectionsAnimatorDay: ClockSectionsAnimator?
     private var sectionsAnimatorNight: ClockSectionsAnimator?
+
+    // MARK: - Init
+    init(service: ClockService, freshPoint: Point?) {
+        sectionsListDay = .makeForDayClock(freshPoint: freshPoint)
+        sectionsListNight = .makeForNightClock(freshPoint: freshPoint)
+        clockService = service
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -42,7 +52,7 @@ class ClockController: UIViewController {
 
     deinit {
         clocksPainterTimer?.invalidate()
-        ClockPainter.drawsSections = true
+//        ClockPainter.drawsSections = true
     }
 }
 
@@ -74,7 +84,6 @@ extension ClockController {
     private func installAnimators() {
         sectionsAnimatorDay = ClockSectionsAnimator(clockFace: viewRoot.clockDay.clockFace)
         sectionsAnimatorNight = ClockSectionsAnimator(clockFace: viewRoot.clockNight.clockFace)
-        ClockPainter.drawsSections = false
         redraw()
     }
 
@@ -86,8 +95,8 @@ extension ClockController {
     private func updateLists(from: Date, to: Date) {
         let points = clockService.fetch(from: from, to: to)
 
-        sectionsListDay.fill(with: points, freshPoint: freshPoint)
-        sectionsListNight.fill(with: points, freshPoint: freshPoint)
+        sectionsListDay.fill(with: points)
+        sectionsListNight.fill(with: points)
     }
 }
 

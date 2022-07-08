@@ -23,7 +23,7 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
     }
 
     private func commonInit() {
-        lineWidth = ClockPainter.sectionWidth
+        lineWidth = 4.0
         lineCap = .round
         path = path().cgPath
     }
@@ -75,8 +75,11 @@ extension ClockSectionAnimatedLayer {
 
 extension ClockSectionAnimatedLayer {
     private func path() -> UIBezierPath {
-        let sectionWidthCompensation = ClockPainter.sectionWidth / 2
-        let startOfSectionPoint = CGPoint(x: center.x, y: ClockPainter.sectionMaxHeight - sectionWidthCompensation)
+			// TODO: clock layout for different screen sizes
+        let sectionWidth = 4.0
+        let sectionMaxHeight = 32.0
+        let sectionWidthCompensation = sectionWidth / 2
+        let startOfSectionPoint = CGPoint(x: center.x, y: sectionMaxHeight - sectionWidthCompensation)
         let endOfSectionPoint = CGPoint(x: center.x, y: sectionWidthCompensation)
         let start = UIBezierPath()
 

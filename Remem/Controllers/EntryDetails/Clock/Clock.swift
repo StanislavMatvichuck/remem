@@ -28,7 +28,7 @@ class Clock: UIView {
     // MARK: - Init
     init(for variant: ClockVariant) {
         self.variant = variant
-        clockFace = ClockFace(for: variant)
+        clockFace = ClockFace()
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
@@ -104,7 +104,7 @@ extension Clock {
     private func constrainLabelsInsideClockFace() {
         guard labelsConstrained == false else { return }
 
-        let digitsDistanceFromCenter = ClockPainter.faceLabelsRadius(for: bounds)
+        let digitsDistanceFromCenter = bounds.height / 3
 
         NSLayoutConstraint.activate([
             topDigits.topAnchor.constraint(equalTo: centerYAnchor, constant: -digitsDistanceFromCenter),
