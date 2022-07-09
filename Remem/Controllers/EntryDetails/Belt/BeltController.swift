@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol BeltControllerDelegate {
+protocol BeltControllerDelegate: UIViewController {
     func didPressAddToLockScreen()
     func didPressRemoveFromLockScreen()
 }
@@ -23,7 +23,7 @@ class BeltController: UIViewController {
 
     // MARK: - Properties
     var entry: Entry!
-    var delegate: BeltControllerDelegate?
+    weak var delegate: BeltControllerDelegate?
 
     private let viewRoot = BeltView()
     private var scrollHappened = false
