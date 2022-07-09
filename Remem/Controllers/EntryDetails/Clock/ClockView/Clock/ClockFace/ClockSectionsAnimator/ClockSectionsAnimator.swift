@@ -7,26 +7,48 @@
 
 import UIKit
 
-struct ClockSectionsAnimator {
+class ClockSectionsAnimator {
     // MARK: - Properties
-    private let clockFace: UIView
-    private var list: ClockSectionsList
+    private let variant: ClockController.ClockVariant
+
+    private var list: ClockSectionsList?
     private var layers: [ClockSectionAnimatedLayer] = []
+    private var bounds: CGRect?
 
     // MARK: - Init
-    init(clockFace: UIView, sectionsList: ClockSectionsList = .makeForDayClock(freshPoint: nil)) {
-        self.clockFace = clockFace
-        self.list = sectionsList
-
-        self.layers = makeLayers(for: list)
-        installSections()
+    init(variant: ClockController.ClockVariant) {
+        self.variant = variant
     }
 }
 
 // MARK: - Public
 extension ClockSectionsAnimator {
-    mutating func update(newList: ClockSectionsList) {
-        guard newList.size == list.size else { fatalError("must be same size") }
+    func show(_ points: [Point]) {
+        let newSections = makeList(for: points)
+        update(newList: newSections)
+    }
+
+    func installSections(in view: UIView) {
+        bounds = view.bounds
+
+        view.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+
+        let newList = ClockSectionsList.makeForClockVariant(variant, freshPoint: nil)
+        let newLayers = makeLayers(for: newList)
+
+        list = newList
+        layers = newLayers
+        layers.forEach { view.layer.addSublayer($0) }
+    }
+}
+
+// MARK: - Private
+extension ClockSectionsAnimator {
+    private func update(newList: ClockSectionsList) {
+        guard
+            let list = list,
+            newList.size == list.size
+        else { fatalError("must be same size") }
 
         for (index, section) in newList.sections.enumerated() {
             updateColorIfNeeded(at: index, updatedSection: section)
@@ -34,33 +56,34 @@ extension ClockSectionsAnimator {
             updateOpacityIfNeeded(at: index, updatedSection: section)
         }
 
-        list = newList
+        self.list = newList
     }
-}
 
-// MARK: - Private
-extension ClockSectionsAnimator {
-    private func installSections() {
-        clockFace.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        layers.forEach { clockFace.layer.addSublayer($0) }
+    private func makeList(for points: [Point]) -> ClockSectionsList {
+        var list = ClockSectionsList.makeForClockVariant(variant, freshPoint: nil)
+        list.fill(with: points)
+        return list
     }
 
     private func makeLayers(for sectionsList: ClockSectionsList) -> [ClockSectionAnimatedLayer] {
-        sectionsList.sections.enumerated().map { makeLayer(at: $0, for: $1) }
+        var layers: [ClockSectionAnimatedLayer] = []
+        sectionsList.sections.enumerated().forEach {
+            if let layer = makeLayer(at: $0, for: $1) { layers.append(layer) }
+        }
+        return layers
     }
 
-    private func makeLayer(at index: Int, for section: ClockSection) -> ClockSectionAnimatedLayer {
-        let layer = ClockSectionAnimatedLayer(frame: clockFace.bounds)
-
-        layer.frame = clockFace.bounds
+    private func makeLayer(at index: Int, for section: ClockSection) -> ClockSectionAnimatedLayer? {
+        guard let bounds = bounds else { return nil }
+        let layer = ClockSectionAnimatedLayer(frame: bounds)
+        layer.frame = bounds
         layer.configure(for: section)
         layer.rotate(for: index)
-
         return layer
     }
 
     private func updateColorIfNeeded(at index: Int, updatedSection: ClockSection) {
-        guard let displayedSection = list.section(at: index) else { return }
+        guard let displayedSection = list?.section(at: index) else { return }
 
         let displayedColor = ClockSectionAnimatedLayer.color(for: displayedSection)
         let newColor = ClockSectionAnimatedLayer.color(for: updatedSection)
@@ -71,7 +94,7 @@ extension ClockSectionsAnimator {
     }
 
     private func updateOpacityIfNeeded(at index: Int, updatedSection: ClockSection) {
-        guard let displayedSection = list.section(at: index) else { return }
+        guard let displayedSection = list?.section(at: index) else { return }
 
         let displayedOpacity = ClockSectionAnimatedLayer.opacity(for: displayedSection)
         let newOpacity = ClockSectionAnimatedLayer.opacity(for: updatedSection)
@@ -82,7 +105,7 @@ extension ClockSectionsAnimator {
     }
 
     private func updateStrokeEndIfNeeded(at index: Int, updatedSection: ClockSection) {
-        guard let displayedSection = list.section(at: index) else { return }
+        guard let displayedSection = list?.section(at: index) else { return }
 
         let displayedStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: displayedSection)
         let newStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: updatedSection)
@@ -92,8 +115,17 @@ extension ClockSectionsAnimator {
         }
     }
 
+    private func layer(at index: Int) -> ClockSectionAnimatedLayer? {
+        guard
+            index < layers.count,
+            index >= 0
+        else { return nil }
+
+        return layers[index]
+    }
+
     private func addColorAnimation(at index: Int, from: UIColor, to: UIColor) {
-        let layer = layers[index]
+        guard let layer = layer(at: index) else { return }
 
         let animation = CABasicAnimation(keyPath: "strokeColor")
         animation.duration = 0.1
@@ -107,7 +139,7 @@ extension ClockSectionsAnimator {
     }
 
     private func addOpacityAnimation(at index: Int, from: Float, to: Float) {
-        let layer = layers[index]
+        guard let layer = layer(at: index) else { return }
 
         let animation = CABasicAnimation(keyPath: "opacity")
         animation.duration = 0.1
@@ -121,7 +153,7 @@ extension ClockSectionsAnimator {
     }
 
     private func addStrokeEndAnimation(at index: Int, from: CGFloat, to: CGFloat) {
-        let layer = layers[index]
+        guard let layer = layer(at: index) else { return }
 
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.1

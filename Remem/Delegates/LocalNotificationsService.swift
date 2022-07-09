@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-protocol LocalNotificationsServiceDelegate {
+protocol LocalNotificationsServiceDelegate: AnyObject {
     func localNotificationService(authorized: Bool)
     func localNotificationService(settings: UNNotificationSettings)
     func localNotificationService(pendingRequests: [UNNotificationRequest])
@@ -26,7 +26,7 @@ extension LocalNotificationsServiceDelegate {
 
 // MARK: - Properties
 class LocalNotificationsService {
-    var delegate: LocalNotificationsServiceDelegate?
+    weak var delegate: LocalNotificationsServiceDelegate?
     private let center = UNUserNotificationCenter.current()
 }
 

@@ -8,51 +8,46 @@
 import UIKit
 
 class Clock: UIView {
-    enum ClockVariant {
-        case day
-        case night
-    }
-
     // MARK: - Properties
-    private let variant: ClockVariant
-    let clockFace: ClockFace
+    let variant: ClockController.ClockVariant
 
-    private lazy var iconContainer = UIView(al: true)
-    private lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
-    private lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
-    private lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
-    private lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
+    lazy var clockFace = ClockFace(variant: variant)
+    lazy var iconContainer = UIView(al: true)
+    lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
+    lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
+    lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
+    lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
 
     private var labelsConstrained = false
 
     // MARK: - Init
-    init(for variant: ClockVariant) {
+    init(for variant: ClockController.ClockVariant) {
         self.variant = variant
-        clockFace = ClockFace()
+
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
-        addLabels()
-        addIcon()
-        addClock()
+        
+        setupLayout()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func layoutSubviews() {
-        constrainLabelsInsideClockFace()
         super.layoutSubviews()
 
+        constrainLabelsInsideClockFace()
         iconContainer.layer.cornerRadius = iconContainer.layer.frame.width / 2
     }
 }
 
 // MARK: - Private
 extension Clock {
-    private func addClock() {
-        clockFace.translatesAutoresizingMaskIntoConstraints = false
-        addAndConstrain(clockFace)
+    private func setupLayout() {
+        addLabels()
+        addIcon()
+        addClock()
     }
 
     private func addLabels() {
@@ -67,14 +62,6 @@ extension Clock {
             bottomDigits.centerXAnchor.constraint(equalTo: centerXAnchor),
             leftDigits.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
-    }
-
-    private func makeLabel(_ text: String) -> UILabel {
-        let label = UILabel(al: true)
-        label.text = text
-        label.font = UIHelper.fontSmallBold
-        label.textColor = UIHelper.clockSectionBackground
-        return label
     }
 
     private func addIcon() {
@@ -92,6 +79,19 @@ extension Clock {
             iconContainer.widthAnchor.constraint(equalToConstant: 32.0),
             iconContainer.heightAnchor.constraint(equalToConstant: 32.0),
         ])
+    }
+
+    private func addClock() {
+        clockFace.translatesAutoresizingMaskIntoConstraints = false
+        addAndConstrain(clockFace)
+    }
+
+    private func makeLabel(_ text: String) -> UILabel {
+        let label = UILabel(al: true)
+        label.text = text
+        label.font = UIHelper.fontSmallBold
+        label.textColor = UIHelper.clockSectionBackground
+        return label
     }
 
     private func makeIcon() -> UIImage {

@@ -12,14 +12,18 @@ class ClockView: UIView {
     let clockDay = Clock(for: .day)
     let clockNight = Clock(for: .night)
 
+    let animator = ClockAnimator()
+
     // MARK: - Init
     init() {
         super.init(frame: .zero)
+
         translatesAutoresizingMaskIntoConstraints = false
 
         addAndConstrain(clockDay)
         addAndConstrain(clockNight)
-        
+        clockNight.isHidden = true
+
         heightAnchor.constraint(equalToConstant: .hScreen / 3 + 15).isActive = true
     }
 

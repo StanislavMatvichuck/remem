@@ -8,26 +8,19 @@
 import UIKit
 
 class ClockController: UIViewController {
+    enum ClockVariant {
+        case day
+        case night
+    }
+
     // MARK: - Properties
-    fileprivate let viewRoot = ClockView()
-
+    private let viewRoot = ClockView()
     private let clockService: ClockService
-    private var freshPoint: Point?
-
-    private var clocksAnimator: ClockAnimator?
-    private var clocksPainterTimer: Timer?
-
-    private var sectionsListDay: ClockSectionsList
-    private var sectionsListNight: ClockSectionsList
-
-    private var sectionsAnimatorDay: ClockSectionsAnimator?
-    private var sectionsAnimatorNight: ClockSectionsAnimator?
 
     // MARK: - Init
     init(service: ClockService, freshPoint: Point?) {
-        sectionsListDay = .makeForDayClock(freshPoint: freshPoint)
-        sectionsListNight = .makeForNightClock(freshPoint: freshPoint)
         clockService = service
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -35,24 +28,11 @@ class ClockController: UIViewController {
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() {
-        clocksAnimator = ClockAnimator(dayClock: viewRoot.clockDay,
-                                       nightClock: viewRoot.clockNight)
-
-        setupLists()
-        setupTickingTimer()
-        addTapHanders()
-    }
+    override func viewDidLoad() { addTapHanders() }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        installAnimators()
-        animateSections()
-    }
-
-    deinit {
-        clocksPainterTimer?.invalidate()
-//        ClockPainter.drawsSections = true
+        setupLists()
     }
 }
 
@@ -66,7 +46,7 @@ extension ClockController {
     }
 
     @objc private func handleClockPress() {
-        clocksAnimator?.flip()
+        viewRoot.animator.flip(dayClock: viewRoot.clockDay, nightClock: viewRoot.clockNight)
     }
 }
 
@@ -81,22 +61,11 @@ extension ClockController {
         updateLists(from: start, to: end)
     }
 
-    private func installAnimators() {
-        sectionsAnimatorDay = ClockSectionsAnimator(clockFace: viewRoot.clockDay.clockFace)
-        sectionsAnimatorNight = ClockSectionsAnimator(clockFace: viewRoot.clockNight.clockFace)
-        redraw()
-    }
-
-    private func animateSections() {
-        sectionsAnimatorDay?.update(newList: sectionsListDay)
-        sectionsAnimatorNight?.update(newList: sectionsListNight)
-    }
-
     private func updateLists(from: Date, to: Date) {
         let points = clockService.fetch(from: from, to: to)
 
-        sectionsListDay.fill(with: points)
-        sectionsListNight.fill(with: points)
+        viewRoot.clockNight.clockFace.sectionsAnimator.show(points)
+        viewRoot.clockDay.clockFace.sectionsAnimator.show(points)
     }
 }
 
@@ -104,29 +73,5 @@ extension ClockController {
 extension ClockController: WeekControllerDelegate {
     func weekControllerNewWeek(from: Date, to: Date) {
         updateLists(from: from, to: to)
-        animateSections()
-    }
-}
-
-// MARK: - Clock drawing
-extension ClockController {
-    private func setupTickingTimer() {
-        let currentSeconds = Calendar.current.dateComponents([.second], from: Date.now).second ?? 0
-        let secondAfterMinuteUpdates = Double(60 - currentSeconds)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + secondAfterMinuteUpdates) {
-            if self.clocksPainterTimer == nil {
-                self.clocksPainterTimer = Timer.scheduledTimer(timeInterval: 1.0,
-                                                               target: self,
-                                                               selector: #selector(self.redraw),
-                                                               userInfo: nil,
-                                                               repeats: true)
-            }
-        }
-    }
-
-    @objc func redraw() {
-        viewRoot.clockDay.clockFace.setNeedsDisplay()
-        viewRoot.clockNight.clockFace.setNeedsDisplay()
     }
 }

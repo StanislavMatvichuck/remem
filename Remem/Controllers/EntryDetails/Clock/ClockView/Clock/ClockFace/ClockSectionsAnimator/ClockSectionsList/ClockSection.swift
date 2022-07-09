@@ -15,8 +15,8 @@ struct ClockSection: Equatable {
         case big
 
         static func make(from: Int) -> VisualVariant {
-            if let stitch = VisualVariant(rawValue: from) {
-                return stitch
+            if let section = VisualVariant(rawValue: from) {
+                return section
             } else {
                 return .big
             }
