@@ -8,11 +8,11 @@
 import UIKit
 
 class ClockFace: UIView {
-    var variant: ClockController.ClockVariant
+    var variant: ClockSectionsList.ClockVariant
     var sectionsAnimator: ClockSectionsAnimator
     var timer: Timer?
 
-    init(variant: ClockController.ClockVariant) {
+    init(variant: ClockSectionsList.ClockVariant) {
         self.variant = variant
         sectionsAnimator = ClockSectionsAnimator(variant: variant)
         super.init(frame: .zero)

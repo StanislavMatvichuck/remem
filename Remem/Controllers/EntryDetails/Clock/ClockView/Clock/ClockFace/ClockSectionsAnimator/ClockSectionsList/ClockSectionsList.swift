@@ -10,6 +10,11 @@ import Foundation
 struct ClockSectionsList {
     static let secondsPer24h = 24 * 60 * 60
 
+    enum ClockVariant {
+        case day
+        case night
+    }
+
     // MARK: - Properties
     let size: Int
     private let start: ClockTimeDescription
@@ -64,7 +69,7 @@ extension ClockSectionsList {
     // Creation
     //
 
-    static func makeForClockVariant(_ variant: ClockController.ClockVariant, freshPoint: Point?) -> ClockSectionsList {
+    static func makeForClockVariant(_ variant: ClockSectionsList.ClockVariant, freshPoint: Point?) -> ClockSectionsList {
         switch variant {
         case .day: return .makeForDayClock(freshPoint: freshPoint)
         case .night: return .makeForNightClock(freshPoint: freshPoint)

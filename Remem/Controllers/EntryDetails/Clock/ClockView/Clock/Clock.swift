@@ -9,7 +9,7 @@ import UIKit
 
 class Clock: UIView {
     // MARK: - Properties
-    let variant: ClockController.ClockVariant
+    let variant: ClockSectionsList.ClockVariant
 
     lazy var clockFace = ClockFace(variant: variant)
     lazy var iconContainer = UIView(al: true)
@@ -21,7 +21,7 @@ class Clock: UIView {
     private var labelsConstrained = false
 
     // MARK: - Init
-    init(for variant: ClockController.ClockVariant) {
+    init(for variant: ClockSectionsList.ClockVariant) {
         self.variant = variant
 
         super.init(frame: .zero)

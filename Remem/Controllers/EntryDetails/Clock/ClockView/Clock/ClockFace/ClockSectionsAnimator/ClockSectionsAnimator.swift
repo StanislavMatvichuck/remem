@@ -9,14 +9,14 @@ import UIKit
 
 class ClockSectionsAnimator {
     // MARK: - Properties
-    private let variant: ClockController.ClockVariant
+    private let variant: ClockSectionsList.ClockVariant
 
     private var list: ClockSectionsList?
     private var layers: [ClockSectionAnimatedLayer] = []
     private var bounds: CGRect?
 
     // MARK: - Init
-    init(variant: ClockController.ClockVariant) {
+    init(variant: ClockSectionsList.ClockVariant) {
         self.variant = variant
     }
 }

@@ -8,10 +8,7 @@
 import UIKit
 
 class ClockController: UIViewController {
-    enum ClockVariant {
-        case day
-        case night
-    }
+    
 
     // MARK: - Properties
     private let viewRoot = ClockView()
