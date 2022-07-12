@@ -13,14 +13,7 @@ class EntriesListController: UIViewController {
 
     // MARK: - Properties
     private let domain = DomainFacade()
-
     private let viewRoot = EntriesListView()
-    private var cellIndexToBeAnimated: IndexPath?
-    private var newCellIndex: IndexPath?
-    private let cellsAnimator = EntryCellAnimator()
-
-    // MARK: - Init
-    deinit { NotificationCenter.default.removeObserver(self) }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -43,8 +36,103 @@ class EntriesListController: UIViewController {
     }
 }
 
+// MARK: - Events handling
+extension EntriesListController: EntryCellDelegate {
+    private func setupEventHandlers() {
+        viewRoot.buttonAdd.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
+        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
+    }
+
+    @objc private func handleAdd() {
+        domain.makeEntry(name: viewRoot.input.value)
+        updateUI()
+    }
+
+    @objc private func handleAddButton() { viewRoot.input.show() }
+
+    //
+    // EntryCellDelegate actions
+    //
+    func didPressAction(_ cell: EntryCell) {
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let entry = domain.entry(at: index.row)
+        else { return }
+
+        let detailsController = makeDetailsController(for: entry)
+        let navigationController = makeNavigationController(for: detailsController)
+
+        present(navigationController, animated: true)
+    }
+
+    func didSwipeAction(_ cell: EntryCell) {
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let entry = domain.entry(at: index.row)
+        else { return }
+
+        domain.makePoint(for: entry, dateTime: .now)
+        updateUI()
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension EntriesListController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { domain.getEntriesAmount() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
+            let dataRow = domain.entry(at: indexPath.row)
+        else { return UITableViewCell() }
+
+        row.delegate = self
+        row.configure(name: dataRow.name!, value: dataRow.totalAmount)
+
+        return row
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension EntriesListController: UITableViewDelegate {
+    // MARK: Right to left row swipe actions
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: nil) { _, _, completion in
+            self.handleDeleteContextualAction(indexPath)
+            completion(true)
+        }
+
+        let deleteView: UILabel = {
+            let label = UILabel()
+            label.text = Self.delete
+            label.textColor = .white
+            label.font = .systemFont(ofSize: .font1, weight: .regular)
+            label.sizeToFit()
+            return label
+        }()
+
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = UIImage(view: deleteView)
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        config.performsFirstActionWithFullSwipe = true
+        return config
+    }
+
+    private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
+        guard let entry = domain.entry(at: forIndexPath.row) else { return }
+        domain.delete(entry: entry)
+        updateUI()
+    }
+}
+
 // MARK: - Private
 extension EntriesListController {
+    private func updateUI() {
+        viewRoot.viewTable.reloadData()
+        configureHintsVisibility()
+    }
+
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
@@ -75,135 +163,11 @@ extension EntriesListController {
             viewRoot.showFirstPointState()
         case .pressMe:
             viewRoot.showFirstDetails()
-            addPressMeAnimationsForCells()
+//            addPressMeAnimationsForCells()
         case .noHints:
-            removePressMeAnimationsFromCells()
+            print(#function)
+//            removePressMeAnimationsFromCells()
         }
-    }
-
-    private func addPressMeAnimationsForCells() {
-        for cell in viewRoot.viewTable.visibleCells {
-            guard let cell = cell as? EntryCell else { continue }
-            cellsAnimator.pressMe(cell: cell)
-        }
-    }
-
-    private func removePressMeAnimationsFromCells() {
-        for cell in viewRoot.viewTable.visibleCells {
-            guard let cell = cell as? EntryCell else { continue }
-            cellsAnimator.removeAnimations(from: cell)
-        }
-    }
-}
-
-// MARK: - Events handling
-extension EntriesListController {
-    private func setupEventHandlers() {
-        viewRoot.buttonAdd.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
-        viewRoot.input.addTarget(self, action: #selector(handleAdd),
-                                 for: .editingDidEnd)
-    }
-
-    @objc private func handleAdd() {
-        domain.makeEntry(name: viewRoot.input.value)
-        updateUI()
-    }
-
-    @objc private func handleAddButton() { viewRoot.input.show() }
-}
-
-// MARK: - UITableViewDataSource
-extension EntriesListController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { domain.getEntriesAmount() }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
-            let dataRow = domain.entry(at: indexPath.row)
-        else { return UITableViewCell() }
-
-        row.delegate = self
-        row.animator = cellsAnimator
-        row.update(name: dataRow.name!)
-        row.update(value: dataRow.totalAmount)
-
-        return row
-    }
-}
-
-// MARK: - UITableViewDelegate
-extension EntriesListController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cellIndexToBeAnimated == indexPath, let cell = cell as? EntryCell {
-            cellsAnimator.pointAdded(cell: cell)
-        }
-    }
-
-    // MARK: Right to left row swipe actions
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .normal, title: nil) { _, _, completion in
-            self.handleDeleteContextualAction(indexPath)
-            completion(true)
-        }
-
-        let deleteView: UILabel = {
-            let label = UILabel()
-            label.text = Self.delete
-            label.textColor = .white
-            label.font = .systemFont(ofSize: .font1, weight: .regular)
-            label.sizeToFit()
-            return label
-        }()
-
-        deleteAction.backgroundColor = .systemRed
-        deleteAction.image = UIImage(view: deleteView)
-
-        let config = UISwipeActionsConfiguration(actions: [deleteAction])
-        config.performsFirstActionWithFullSwipe = true
-        return config
-    }
-
-    private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
-        guard let entry = domain.entry(at: forIndexPath.row) else { return }
-
-        domain.delete(entry: entry)
-        updateUI()
-    }
-}
-
-// MARK: - EntryCellDelegate
-extension EntriesListController: EntryCellDelegate {
-    func didPressAction(_ cell: EntryCell) {
-        guard
-            let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = domain.entry(at: index.row)
-        else { return }
-
-        let detailsController = makeDetailsController(for: entry)
-        let navigationController = makeNavigationController(for: detailsController)
-
-        present(navigationController, animated: true)
-    }
-
-    func didSwipeAction(_ cell: EntryCell) {
-        guard
-            let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = domain.entry(at: index.row)
-        else { return }
-
-        cellIndexToBeAnimated = index
-        domain.makePoint(for: entry, dateTime: .now)
-        updateUI()
-    }
-
-    func didAnimation(_ cell: EntryCell) { cellIndexToBeAnimated = nil }
-}
-
-// MARK: - Private
-extension EntriesListController {
-    private func updateUI() {
-        viewRoot.viewTable.reloadData()
-        configureHintsVisibility()
     }
 
     private func makeDetailsController(for entry: Entry) -> EntryDetailsController {

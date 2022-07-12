@@ -10,18 +10,17 @@ import UIKit
 protocol EntryCellDelegate: AnyObject {
     func didSwipeAction(_ cell: EntryCell)
     func didPressAction(_ cell: EntryCell)
-    func didAnimation(_ cell: EntryCell)
 }
 
 final class EntryCell: UITableViewCell {
-    // MARK: - Properties
-    static let reuseIdentifier = "ViewMainRow"
+    static let reuseIdentifier = "EntryCell"
     static let backgroundColor = UIHelper.itemBackground
     static let pinColor = UIHelper.brandDimmed
     static let height = .d2 + UIHelper.spacing
-    // Public
+
+    // MARK: - Properties
     weak var delegate: EntryCellDelegate?
-    weak var animator: EntryCellAnimator?
+    var animator = EntryCellAnimator()
 
     var movableCenterXSuccessPosition: CGFloat { viewRoot.bounds.width - .r2 }
     var movableCenterXInitialPosition: CGFloat { .r2 }
@@ -119,18 +118,17 @@ final class EntryCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         movableCenterXPosition = movableCenterXInitialPosition
+        animator.animateIfNeeded(cell: self)
     }
 }
 
 // MARK: - Public
 extension EntryCell {
-    func update(name: String) {
+    func configure(name: String, value: Int) {
         nameLabel.text = name
-    }
-
-    func update(value: Int) {
         valueLabel.text = "\(value)"
     }
+
 }
 
 // MARK: - User input
@@ -164,8 +162,9 @@ extension EntryCell {
         {
             if movableCenterXPosition >= movableCenterXSuccessPosition {
                 delegate?.didSwipeAction(self)
+                animator.scheduleAnimation()
             } else {
-                animator?.handleUnfinishedSwipe(cell: self)
+                animator.handleUnfinishedSwipe(cell: self)
             }
         }
     }

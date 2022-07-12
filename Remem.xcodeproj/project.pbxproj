@@ -356,6 +356,25 @@
 			path = DataFacade;
 			sourceTree = "<group>";
 		};
+		08C6C503287DC572001F522E /* EntriesListView */ = {
+			isa = PBXGroup;
+			children = (
+				08C6C504287DC7F3001F522E /* EntryCell */,
+				08D512352787144800C2037F /* EntriesListView.swift */,
+				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
+			);
+			path = EntriesListView;
+			sourceTree = "<group>";
+		};
+		08C6C504287DC7F3001F522E /* EntryCell */ = {
+			isa = PBXGroup;
+			children = (
+				08D512372787153900C2037F /* EntryCell.swift */,
+				08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */,
+			);
+			path = EntryCell;
+			sourceTree = "<group>";
+		};
 		08D47A4228129D910085826F /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,11 +453,8 @@
 		08D512342787143900C2037F /* EntriesList */ = {
 			isa = PBXGroup;
 			children = (
+				08C6C503287DC572001F522E /* EntriesListView */,
 				08D5122127870D2500C2037F /* EntriesListController.swift */,
-				08D512352787144800C2037F /* EntriesListView.swift */,
-				08D512372787153900C2037F /* EntryCell.swift */,
-				08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */,
-				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
 			);
 			path = EntriesList;
 			sourceTree = "<group>";

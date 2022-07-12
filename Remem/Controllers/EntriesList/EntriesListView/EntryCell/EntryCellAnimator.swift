@@ -7,7 +7,9 @@
 
 import UIKit
 
-class EntryCellAnimator: Animator {}
+class EntryCellAnimator: Animator {
+    private var needsAnimationAfterReuse = false
+}
 
 // MARK: - Public
 extension EntryCellAnimator {
@@ -25,12 +27,6 @@ extension EntryCellAnimator {
     }
 
     func pointAdded(cell: EntryCell) {
-        let group = CAAnimationGroup()
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        group.autoreverses = true
-        group.repeatCount = 1
-        group.duration = 0.1
-
         let background = CABasicAnimation(keyPath: "backgroundColor")
         background.fromValue = UIHelper.brandDimmed.cgColor
         background.toValue = UIHelper.brand.cgColor
@@ -39,12 +35,11 @@ extension EntryCellAnimator {
         size.fromValue = 1
         size.toValue = .r2 / .r1
 
-        let completion: CompletionBlock = {
-            cell.delegate?.didAnimation(cell)
-        }
-
-        group.setValue(completion, forKey: CodingKeys.completionBlock.rawValue)
-        group.delegate = self
+        let group = CAAnimationGroup()
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        group.autoreverses = true
+        group.repeatCount = 1
+        group.duration = 0.1
         group.animations = [background, size]
 
         cell.viewMovable.layer.position.x = cell.movableCenterXSuccessPosition
@@ -65,5 +60,15 @@ extension EntryCellAnimator {
 
     func removeAnimations(from cell: EntryCell) {
         cell.viewRoot.layer.removeAllAnimations()
+    }
+
+    func scheduleAnimation() {
+        needsAnimationAfterReuse = true
+    }
+
+    func animateIfNeeded(cell: EntryCell) {
+        guard needsAnimationAfterReuse else { return }
+        pointAdded(cell: cell)
+        needsAnimationAfterReuse = false
     }
 }
