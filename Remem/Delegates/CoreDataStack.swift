@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import Foundation
 
 class CoreDataStack {
     private static let entries = "EntriesList"
@@ -17,9 +16,9 @@ class CoreDataStack {
         return mom
     }()
 
-    private var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
+    private static var defaultContainer: NSPersistentContainer = { createContainer(inMemory: false) }()
 
-    var defaultContext: NSManagedObjectContext { defaultContainer.viewContext }
+    var defaultContext: NSManagedObjectContext { Self.defaultContainer.viewContext }
 }
 
 // MARK: - Public

@@ -38,6 +38,10 @@ extension DomainFacade {
 
     func delete(entry: Entry) { dataFacade.delete(entry: entry) }
     func visit(entry: Entry) { dataFacade.visit(entry: entry) }
+
+    func getPoints(for entry: Entry, between start: Date, and end: Date) -> [Point] {
+        dataFacade.getPoints(for: entry, between: start, and: end)
+    }
 }
 
 // MARK: - Internal

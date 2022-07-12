@@ -8,20 +8,9 @@
 import UIKit
 
 class ClockController: UIViewController {
-    
-
     // MARK: - Properties
+    var entry: Entry!
     private let viewRoot = ClockView()
-    private let clockService: ClockService
-
-    // MARK: - Init
-    init(service: ClockService, freshPoint: Point?) {
-        clockService = service
-
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -59,7 +48,7 @@ extension ClockController {
     }
 
     private func updateLists(from: Date, to: Date) {
-        let points = clockService.fetch(from: from, to: to)
+        let points = DomainFacade().getPoints(for: entry, between: from, and: to)
 
         viewRoot.clockNight.clockFace.sectionsAnimator.show(points)
         viewRoot.clockDay.clockFace.sectionsAnimator.show(points)
