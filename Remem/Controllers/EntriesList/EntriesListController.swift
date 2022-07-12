@@ -173,7 +173,6 @@ extension EntriesListController {
     private func makeDetailsController(for entry: Entry) -> EntryDetailsController {
         let stack = CoreDataStack()
 
-        let entryDetailsService = EntryDetailsService(entry, stack: stack)
         let clockService = ClockService(entry, stack: stack)
         let pointsListService = PointsListService(entry)
         let weekService = WeekService(entry)
@@ -187,7 +186,6 @@ extension EntriesListController {
         weekController.weekDistributionService = weekService
 
         return EntryDetailsController(entry: entry,
-                                      service: entryDetailsService,
                                       clockController: clockController,
                                       pointsListController: pointsListController,
                                       weekController: weekController,

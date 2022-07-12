@@ -14,7 +14,6 @@
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
 		080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEntry.swift */; };
-		080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
@@ -102,7 +101,6 @@
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080A15EC27A06003001BAFEB /* ExtensionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEntry.swift; sourceTree = "<group>"; };
-		080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsService.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -260,14 +258,6 @@
 			path = Week;
 			sourceTree = "<group>";
 		};
-		0857A7B328227236006CCC99 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				080F0FDD27FC83E2006BFCE8 /* EntryDetailsService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,7 +331,6 @@
 				080656E6283B942C00C09409 /* Clock */,
 				0890627927A0A25E0032847C /* EntryDetailsView.swift */,
 				0890627727A0A2520032847C /* EntryDetailsController.swift */,
-				0857A7B328227236006CCC99 /* Services */,
 			);
 			path = EntryDetails;
 			sourceTree = "<group>";
@@ -628,7 +617,6 @@
 				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
 				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
-				080F0FDE27FC83E2006BFCE8 /* EntryDetailsService.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,

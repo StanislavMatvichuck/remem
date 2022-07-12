@@ -10,7 +10,6 @@ import UIKit
 class EntryDetailsController: UIViewController {
     // MARK: - Properties
     var entry: Entry
-    var coreDataService: EntryDetailsService
 
     let clockController: ClockController
     let pointsListController: PointsListController
@@ -23,7 +22,6 @@ class EntryDetailsController: UIViewController {
 
     // MARK: - Init
     init(entry: Entry,
-         service: EntryDetailsService,
          clockController: ClockController,
          pointsListController: PointsListController,
          weekController: WeekController,
@@ -34,7 +32,6 @@ class EntryDetailsController: UIViewController {
         self.pointsListController = pointsListController
         self.beltController = beltController
         self.weekController = weekController
-        self.coreDataService = service
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,7 +57,8 @@ class EntryDetailsController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        coreDataService.markAsVisited()
+        let domain = DomainFacade()
+        domain.visit(entry: entry)
     }
 }
 
