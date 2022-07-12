@@ -171,16 +171,15 @@ extension EntriesListController {
     }
 
     private func makeDetailsController(for entry: Entry) -> EntryDetailsController {
-        let pointsListService = PointsListService(entry)
         let weekService = WeekService(entry)
 
         let clockController = ClockController()
-        clockController.entry = entry
         let beltController = BeltController()
         let pointsListController = PointsListController()
         let weekController = WeekController()
 
-        pointsListController.pointsListService = pointsListService
+        clockController.entry = entry
+        pointsListController.entry = entry
         weekController.weekDistributionService = weekService
 
         return EntryDetailsController(entry: entry,

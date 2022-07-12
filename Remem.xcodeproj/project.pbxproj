@@ -32,7 +32,6 @@
 		0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A9283D5DC00027EF3E /* BeltView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
-		0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7A928225B50006CCC99 /* PointsListService.swift */; };
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
 		0857A7B02822720E006CCC99 /* WeekService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* WeekService.swift */; };
@@ -118,7 +117,6 @@
 		0852C6A9283D5DC00027EF3E /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
-		0857A7A928225B50006CCC99 /* PointsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListService.swift; sourceTree = "<group>"; };
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AF2822720E006CCC99 /* WeekService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekService.swift; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 		0852C6A5283D57500027EF3E /* PointsList */ = {
 			isa = PBXGroup;
 			children = (
-				0857A7A928225B50006CCC99 /* PointsListService.swift */,
 				0852C6A1283D570E0027EF3E /* PointsListController.swift */,
 				0852C6A3283D57230027EF3E /* PointsListView.swift */,
 				0890627B27A0A2700032847C /* PointTimeCell.swift */,
@@ -645,7 +642,6 @@
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				08C6C4FF287DAC55001F522E /* EntriesService.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
-				0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,

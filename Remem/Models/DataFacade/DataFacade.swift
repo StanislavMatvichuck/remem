@@ -31,7 +31,7 @@ extension DataFacade {
         return entriesService.makePoint(at: entry, dateTime: dateTime)
     }
 
-    func getPointsAmount() -> Int { return pointsService.getTotalPointsAmount() }
+    func getAllPointsAmount() -> Int { return pointsService.getTotalPointsAmount() }
 
     func getPoints(for entry: Entry, between start: Date, and end: Date) -> [Point] {
         pointsService.getPoints(for: entry, between: start, and: end)
