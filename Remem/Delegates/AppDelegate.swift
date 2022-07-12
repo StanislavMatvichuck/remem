@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
     // MARK: - Code data
     let coreDataStack = CoreDataStack()
 
@@ -75,14 +74,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let entryIdString = response.notification.request.content.userInfo["identifier"] as? String
         else { return }
 
-        addPoint(byEntryId: entryIdString)
+        addPoint(entryId: entryIdString)
     }
 
-    private func addPoint(byEntryId: String) {
-        let service = EntriesListService(moc: coreDataStack.defaultContext, stack: coreDataStack)
-        service.fetch()
-
-        guard let entry = service.entry(withId: byEntryId) else { return }
-        service.addNewPoint(to: entry)
+    private func addPoint(entryId: String) {
+        let domain = DomainFacade()
+        guard let entry = domain.entry(by: entryId) else { return }
+        domain.makePoint(for: entry, dateTime: .now)
     }
 }

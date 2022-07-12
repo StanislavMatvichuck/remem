@@ -56,11 +56,14 @@
 		0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionPoint.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
-		08A473FE2820210600D62194 /* HintsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FD2820210600D62194 /* HintsManager.swift */; };
+		08A473FE2820210600D62194 /* HintState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FD2820210600D62194 /* HintState.swift */; };
 		08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */; };
 		08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */; };
-		08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D24E27F5D6250099260D /* EntriesListService.swift */; };
 		08C5D25127F606CF0099260D /* UISwipingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5D25027F606CF0099260D /* UISwipingSelector.swift */; };
+		08C6C4FA287DA15E001F522E /* DomainFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4F9287DA15E001F522E /* DomainFacade.swift */; };
+		08C6C4FC287DA279001F522E /* DataFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4FB287DA279001F522E /* DataFacade.swift */; };
+		08C6C4FF287DAC55001F522E /* EntriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4FE287DAC55001F522E /* EntriesService.swift */; };
+		08C6C502287DB4A1001F522E /* PointsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C501287DB4A1001F522E /* PointsService.swift */; };
 		08D47A4128129D210085826F /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4028129D210085826F /* RemindersController.swift */; };
 		08D47A4428129FC30085826F /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4328129FC30085826F /* ReminderCell.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
@@ -147,11 +150,14 @@
 		0890627D27A0AD460032847C /* EntensionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionPoint.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
-		08A473FD2820210600D62194 /* HintsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManager.swift; sourceTree = "<group>"; };
+		08A473FD2820210600D62194 /* HintState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintState.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellAnimator.swift; sourceTree = "<group>"; };
 		08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionUIImage.swift; sourceTree = "<group>"; };
-		08C5D24E27F5D6250099260D /* EntriesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesListService.swift; sourceTree = "<group>"; };
 		08C5D25027F606CF0099260D /* UISwipingSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipingSelector.swift; sourceTree = "<group>"; };
+		08C6C4F9287DA15E001F522E /* DomainFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFacade.swift; sourceTree = "<group>"; };
+		08C6C4FB287DA279001F522E /* DataFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFacade.swift; sourceTree = "<group>"; };
+		08C6C4FE287DAC55001F522E /* EntriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesService.swift; sourceTree = "<group>"; };
+		08C6C501287DB4A1001F522E /* PointsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsService.swift; sourceTree = "<group>"; };
 		08D47A4028129D210085826F /* RemindersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
 		08D47A4328129FC30085826F /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +348,16 @@
 			path = EntryDetails;
 			sourceTree = "<group>";
 		};
+		08C6C4FD287DAC44001F522E /* DataFacade */ = {
+			isa = PBXGroup;
+			children = (
+				08C6C4FB287DA279001F522E /* DataFacade.swift */,
+				08C6C4FE287DAC55001F522E /* EntriesService.swift */,
+				08C6C501287DB4A1001F522E /* PointsService.swift */,
+			);
+			path = DataFacade;
+			sourceTree = "<group>";
+		};
 		08D47A4228129D910085826F /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,11 +437,9 @@
 			isa = PBXGroup;
 			children = (
 				08D5122127870D2500C2037F /* EntriesListController.swift */,
-				08C5D24E27F5D6250099260D /* EntriesListService.swift */,
 				08D512352787144800C2037F /* EntriesListView.swift */,
 				08D512372787153900C2037F /* EntryCell.swift */,
 				08C1FD72281A8B040051CD48 /* EntryCellAnimator.swift */,
-				08A473FD2820210600D62194 /* HintsManager.swift */,
 				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
 				08C5D25027F606CF0099260D /* UISwipingSelector.swift */,
 			);
@@ -435,9 +449,12 @@
 		08D512392787156500C2037F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				08C6C4FD287DAC44001F522E /* DataFacade */,
+				08C6C4F9287DA15E001F522E /* DomainFacade.swift */,
 				0890627D27A0AD460032847C /* EntensionPoint.swift */,
 				083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */,
 				080A15EC27A06003001BAFEB /* ExtensionEntry.swift */,
+				08A473FD2820210600D62194 /* HintState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -589,6 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6C502287DB4A1001F522E /* PointsService.swift in Sources */,
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
@@ -611,7 +629,7 @@
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
-				08A473FE2820210600D62194 /* HintsManager.swift in Sources */,
+				08A473FE2820210600D62194 /* HintState.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
@@ -620,15 +638,16 @@
 				0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
 				08874562284E5B5C001FBD48 /* LocalNotificationsStack.swift in Sources */,
+				08C6C4FA287DA15E001F522E /* DomainFacade.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
-				08C5D24F27F5D6250099260D /* EntriesListService.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
 				086B3D9A28325992006E08CB /* ClockService.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
+				08C6C4FF287DAC55001F522E /* EntriesService.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				0857A7AA28225B50006CCC99 /* PointsListService.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
@@ -641,6 +660,7 @@
 				0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */,
 				08D512362787144800C2037F /* EntriesListView.swift in Sources */,
 				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
+				08C6C4FC287DA279001F522E /* DataFacade.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,

@@ -5,7 +5,6 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
-import CoreData
 import UIKit
 
 class EntriesListController: UIViewController {
@@ -13,14 +12,12 @@ class EntriesListController: UIViewController {
     static let delete = NSLocalizedString("button.contextual.delete", comment: "EntriesList swipe gesture actions")
 
     // MARK: - Properties
-    var service: EntriesListService!
-    var coreDataStack: CoreDataStack!
+    private let domain = DomainFacade()
 
     private let viewRoot = EntriesListView()
     private var cellIndexToBeAnimated: IndexPath?
     private var newCellIndex: IndexPath?
     private let cellsAnimator = EntryCellAnimator()
-    private lazy var hintsManager = HintsManager(service: service)
 
     // MARK: - Init
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -30,7 +27,6 @@ class EntriesListController: UIViewController {
     override func viewDidLoad() {
         setupTableView()
         setupEventHandlers()
-        service.fetch()
         configureHintsVisibility()
     }
 
@@ -52,7 +48,7 @@ extension EntriesListController {
     private func createManipulationAlert(for entry: Entry) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
-            self.service.remove(entry: entry)
+            self.domain.delete(entry: entry)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alert
@@ -72,7 +68,7 @@ extension EntriesListController {
 
     private func configureHintsVisibility() {
         viewRoot.hideAllHints()
-        switch hintsManager.fetchState() {
+        switch domain.getHintState() {
         case .empty:
             viewRoot.showEmptyState()
         case .placeFirstMark:
@@ -110,7 +106,8 @@ extension EntriesListController {
     }
 
     @objc private func handleAdd() {
-        service.create(entryName: viewRoot.input.value)
+        domain.makeEntry(name: viewRoot.input.value)
+        updateUI()
     }
 
     @objc private func handleSwiperSelection(_ sender: UISwipingSelector) {
@@ -127,11 +124,11 @@ extension EntriesListController {
 // MARK: - UITableViewDataSource
 extension EntriesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { service.dataAmount }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { domain.getEntriesAmount() }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
-            let dataRow = service.entry(at: indexPath)
+            let dataRow = domain.entry(at: indexPath.row)
         else { return UITableViewCell() }
 
         row.delegate = self
@@ -176,47 +173,10 @@ extension EntriesListController: UITableViewDelegate {
     }
 
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
-        if let entry = service.entry(at: forIndexPath) {
-            service.remove(entry: entry)
-        }
-    }
-}
+        guard let entry = domain.entry(at: forIndexPath.row) else { return }
 
-// MARK: - NSFetchedResultsControllerDelegate
-extension EntriesListController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.beginUpdates()
-    }
-
-    func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?)
-    {
-        switch type {
-        case .insert:
-            guard let insertIndex = newIndexPath else { return }
-            newCellIndex = insertIndex
-            viewRoot.viewTable.insertRows(at: [insertIndex], with: .automatic)
-        case .delete:
-            guard let deleteIndex = indexPath else { return }
-            viewRoot.viewTable.deleteRows(at: [deleteIndex], with: .automatic)
-        case .move:
-            guard let fromIndex = indexPath, let toIndex = newIndexPath else { return }
-            viewRoot.viewTable.moveRow(at: fromIndex, to: toIndex)
-        case .update:
-            guard let updateIndex = indexPath else { return }
-            viewRoot.viewTable.reloadRows(at: [updateIndex], with: .none)
-        @unknown default:
-            fatalError("Unhandled case")
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        viewRoot.viewTable.endUpdates()
-        configureHintsVisibility()
+        domain.delete(entry: entry)
+        updateUI()
     }
 }
 
@@ -236,7 +196,7 @@ extension EntriesListController: EntryCellDelegate {
     func didPressAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = service.entry(at: index)
+            let entry = domain.entry(at: index.row)
         else { return }
 
         let detailsController = makeDetailsController(for: entry)
@@ -248,11 +208,12 @@ extension EntriesListController: EntryCellDelegate {
     func didSwipeAction(_ cell: EntryCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = service.entry(at: index)
+            let entry = domain.entry(at: index.row)
         else { return }
 
         cellIndexToBeAnimated = index
-        service.addNewPoint(to: entry)
+        domain.makePoint(for: entry, dateTime: .now)
+        updateUI()
     }
 
     func didAnimation(_ cell: EntryCell) { cellIndexToBeAnimated = nil }
@@ -260,9 +221,16 @@ extension EntriesListController: EntryCellDelegate {
 
 // MARK: - Private
 extension EntriesListController {
+    private func updateUI() {
+        viewRoot.viewTable.reloadData()
+        configureHintsVisibility()
+    }
+
     private func makeDetailsController(for entry: Entry) -> EntryDetailsController {
-        let entryDetailsService = EntryDetailsService(entry, stack: coreDataStack)
-        let clockService = ClockService(entry, stack: coreDataStack)
+        let stack = CoreDataStack()
+
+        let entryDetailsService = EntryDetailsService(entry, stack: stack)
+        let clockService = ClockService(entry, stack: stack)
         let pointsListService = PointsListService(entry)
         let weekService = WeekService(entry)
 
