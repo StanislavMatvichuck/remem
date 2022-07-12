@@ -17,6 +17,7 @@ class EntriesService {
 extension EntriesService {
     func fetch() {
         let fetchRequest = NSFetchRequest<Entry>(entityName: "Entry")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
         do {
             entries = try moc.fetch(fetchRequest)
