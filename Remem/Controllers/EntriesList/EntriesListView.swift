@@ -14,7 +14,21 @@ class EntriesListView: UIView {
     static let firstDetails = NSLocalizedString("empty.entriesList.firstDetailsInspection", comment: "entries list first details opening")
 
     // MARK: - Properties
-    let swiper: UISwipingSelectorInterface = UISwipingSelector()
+    lazy var buttonAdd: UIView = {
+        let view = UIView(al: true)
+        view.backgroundColor = .systemBlue
+        view.layer.cornerRadius = .r2
+
+        let label = UILabel(al: true)
+        label.text = "+"
+        label.textAlignment = .center
+        label.textColor = .white
+
+        view.addAndConstrain(label)
+
+        return view
+    }()
+
     let input: UIMovableTextViewInterface = UIMovableTextView()
 
     let viewTable: UITableView = {
@@ -109,8 +123,7 @@ class EntriesListView: UIView {
     init() {
         super.init(frame: .zero)
         backgroundColor = UIHelper.background
-        setupSwiper()
-        setupTableView()
+        setupLayout()
         // these flags configure UIView tree
         emptyLabel.isHidden = false
         gestureView.isHidden = false
@@ -150,22 +163,21 @@ extension EntriesListView {
 
 // MARK: - Private
 extension EntriesListView {
-    private func setupSwiper() {
-        addSubview(swiper)
-        NSLayoutConstraint.activate([
-            swiper.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -UIHelper.spacing / 2),
-            swiper.leadingAnchor.constraint(equalTo: leadingAnchor),
-            swiper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.sm),
-        ])
-    }
-
-    private func setupTableView() {
+    private func setupLayout() {
+        addSubview(buttonAdd)
         addSubview(viewTable)
+
         NSLayoutConstraint.activate([
+            buttonAdd.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIHelper.spacingListHorizontal),
+            buttonAdd.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIHelper.spacingListHorizontal),
+
+            buttonAdd.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            buttonAdd.heightAnchor.constraint(equalToConstant: .d2),
+
             viewTable.topAnchor.constraint(equalTo: topAnchor),
             viewTable.leadingAnchor.constraint(equalTo: leadingAnchor),
             viewTable.trailingAnchor.constraint(equalTo: trailingAnchor),
-            viewTable.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            viewTable.bottomAnchor.constraint(equalTo: buttonAdd.topAnchor),
         ])
     }
 }

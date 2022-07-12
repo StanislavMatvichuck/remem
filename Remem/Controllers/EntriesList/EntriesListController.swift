@@ -99,8 +99,7 @@ extension EntriesListController {
 // MARK: - Events handling
 extension EntriesListController {
     private func setupEventHandlers() {
-        viewRoot.swiper.addTarget(self, action: #selector(handleSwiperSelection),
-                                  for: .primaryActionTriggered)
+        viewRoot.buttonAdd.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
         viewRoot.input.addTarget(self, action: #selector(handleAdd),
                                  for: .editingDidEnd)
     }
@@ -110,15 +109,7 @@ extension EntriesListController {
         updateUI()
     }
 
-    @objc private func handleSwiperSelection(_ sender: UISwipingSelector) {
-        guard let selectedOption = sender.value else { return }
-        switch selectedOption {
-        case .addEntry:
-            viewRoot.input.show()
-        case .settings:
-            presentSettings()
-        }
-    }
+    @objc private func handleAddButton() { viewRoot.input.show() }
 }
 
 // MARK: - UITableViewDataSource
@@ -177,17 +168,6 @@ extension EntriesListController: UITableViewDelegate {
 
         domain.delete(entry: entry)
         updateUI()
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-extension EntriesListController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        viewRoot.swiper.handleScrollView(contentOffset: scrollView.contentOffset)
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        viewRoot.swiper.handleScrollViewDraggingEnd()
     }
 }
 
