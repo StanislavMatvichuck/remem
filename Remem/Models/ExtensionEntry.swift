@@ -1,5 +1,5 @@
 //
-//  ExtensionEntry.swift
+//  ExtensionCountableEvent.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -9,11 +9,11 @@ import CoreData
 import Foundation
 
 // MARK: - Getters
-extension Entry {
+extension CountableEvent {
     var totalAmount: Int {
-        guard let points = self.points else { return 0 }
-        return points.reduce(0) { partialResult, point in
-            let point = point as! Point
+        guard let happenings = self.happenings else { return 0 }
+        return happenings.reduce(0) { partialResult, point in
+            let point = point as! CountableEventHappeningDescription
             return partialResult + Int(point.value)
         }
     }
@@ -63,11 +63,11 @@ extension Entry {
     var lastWeekTotal: Int { totalAtWeek(previousToCurrent: 1) }
 
     private func totalAtWeek(previousToCurrent: Int) -> Int {
-        guard let points = self.points else { return 0 }
+        guard let happenings = self.happenings else { return 0 }
 
         var result = 0
-        for point in points {
-            guard let point = point as? Point else { continue }
+        for point in happenings {
+            guard let point = point as? CountableEventHappeningDescription else { continue }
             let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
             if weekOffset.isInSameWeek(as: point.dateCreated!) {
                 result += Int(point.value)
@@ -79,26 +79,26 @@ extension Entry {
 }
 
 // MARK: - Public
-extension Entry {
+extension CountableEvent {
     @discardableResult
-    open func addDefaultPoint() -> Point? {
+    open func addDefaultCountableEventHappeningDescription() -> CountableEventHappeningDescription? {
         guard let moc = managedObjectContext else { return nil }
 
-        let point = Point(context: moc)
+        let point = CountableEventHappeningDescription(context: moc)
         point.dateCreated = Date()
-        point.entry = self
+        point.event = self
         point.value = 1
 
         return point
     }
 
     @discardableResult
-    open func addDefaultPoint(withDate: Date) -> Point? {
+    open func addDefaultCountableEventHappeningDescription(withDate: Date) -> CountableEventHappeningDescription? {
         guard let moc = managedObjectContext else { return nil }
 
-        let point = Point(context: moc)
+        let point = CountableEventHappeningDescription(context: moc)
         point.dateCreated = withDate
-        point.entry = self
+        point.event = self
         point.value = 1
 
         return point

@@ -1,5 +1,5 @@
 //
-//  PointsListService.swift
+//  CountableEventHappeningDescriptionsListService.swift
 //  RememTests
 //
 //  Created by Stanislav Matvichuck on 04.05.2022.
@@ -9,69 +9,69 @@ import CoreData
 @testable import Remem
 import XCTest
 
-class PointsListServiceTests: XCTestCase {
+class CountableEventHappeningDescriptionsListServiceTests: XCTestCase {
     var coreDataStack: CoreDataStack!
 
-    var entry: Entry!
-    var sut: PointsListService!
+    var countableEvent: CountableEvent!
+    var sut: CountableEventHappeningDescriptionsListService!
 
     override func setUp() {
         super.setUp()
         let stack = CoreDataStack()
         let container = CoreDataStack.createContainer(inMemory: true)
         let context = container.viewContext
-        let entry = Entry(context: context)
+        let countableEvent = CountableEvent(context: context)
 
         coreDataStack = stack
-        self.entry = entry
-        sut = PointsListService(entry)
+        self.countableEvent = countableEvent
+        sut = CountableEventHappeningDescriptionsListService(countableEvent)
     }
 
     override func tearDown() {
         super.tearDown()
         coreDataStack = nil
-        entry = nil
+        countableEvent = nil
         sut = nil
     }
 
     func testInit() {
         XCTAssertNotNil(coreDataStack)
-        XCTAssertNotNil(entry)
+        XCTAssertNotNil(countableEvent)
         XCTAssertNotNil(sut)
     }
 
     func testAmount() {
         sut.fetch()
         XCTAssertEqual(sut.count, 0)
-        entry.addDefaultPoint()
+        countableEvent.addDefaultCountableEventHappeningDescription()
         sut.fetch()
         XCTAssertEqual(sut.count, 1)
-        entry.addDefaultPoint()
-        entry.addDefaultPoint()
+        countableEvent.addDefaultCountableEventHappeningDescription()
+        countableEvent.addDefaultCountableEventHappeningDescription()
         sut.fetch()
         XCTAssertEqual(sut.count, 3)
     }
 
-    func testPointAt() {
-        let createdPointIndexPath = IndexPath(row: 0, section: 0)
-        let point = entry.addDefaultPoint()
+    func testCountableEventHappeningDescriptionAt() {
+        let createdCountableEventHappeningDescriptionIndexPath = IndexPath(row: 0, section: 0)
+        let point = countableEvent.addDefaultCountableEventHappeningDescription()
 
-        XCTAssertNil(sut.point(at: createdPointIndexPath))
+        XCTAssertNil(sut.point(at: createdCountableEventHappeningDescriptionIndexPath))
         sut.fetch()
-        XCTAssertEqual(sut.point(at: createdPointIndexPath)?.dateCreated, point?.dateCreated)
+        XCTAssertEqual(sut.point(at: createdCountableEventHappeningDescriptionIndexPath)?.dateCreated, point?.dateCreated)
     }
 
-    /// Points must be sorted from new to old in a regular table
+    /// CountableEventHappeningDescriptions must be sorted from new to old in a regular table
     func testSortingByDate() {
-        let firstCreatedPointIndexPath = IndexPath(row: 1, section: 0)
-        let secondCreatedPointIndexPath = IndexPath(row: 0, section: 0)
+        let firstCreatedCountableEventHappeningDescriptionIndexPath = IndexPath(row: 1, section: 0)
+        let secondCreatedCountableEventHappeningDescriptionIndexPath = IndexPath(row: 0, section: 0)
 
-        let firstPoint = entry.addDefaultPoint()
-        let secondPoint = entry.addDefaultPoint()
+        let firstCountableEventHappeningDescription = countableEvent.addDefaultCountableEventHappeningDescription()
+        let secondCountableEventHappeningDescription = countableEvent.addDefaultCountableEventHappeningDescription()
 
         sut.fetch()
 
-        XCTAssertEqual(sut.point(at: firstCreatedPointIndexPath)?.dateCreated, firstPoint?.dateCreated)
-        XCTAssertEqual(sut.point(at: secondCreatedPointIndexPath)?.dateCreated, secondPoint?.dateCreated)
+        XCTAssertEqual(sut.point(at: firstCreatedCountableEventHappeningDescriptionIndexPath)?.dateCreated, firstCountableEventHappeningDescription?.dateCreated)
+        XCTAssertEqual(sut.point(at: secondCreatedCountableEventHappeningDescriptionIndexPath)?.dateCreated, secondCountableEventHappeningDescription?.dateCreated)
     }
 }

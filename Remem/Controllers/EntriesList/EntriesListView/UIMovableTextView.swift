@@ -20,9 +20,9 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     typealias KeyboardHeightChangeDescriptor = (movedBy: CGPoint, duration: Double)
 
     // MARK: I18n
-    static let empty = NSLocalizedString("empty.entriesList.firstName", comment: "Entries list empty state")
+    static let empty = NSLocalizedString("empty.countableEventsList.firstName", comment: "CountableEvents list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
-    static let add = NSLocalizedString("button.add.entry", comment: "movable view accessory button add")
+    static let add = NSLocalizedString("button.add.countableEvent", comment: "movable view accessory button add")
 
     // MARK: - Properties
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }

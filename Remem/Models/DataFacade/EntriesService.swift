@@ -1,5 +1,5 @@
 //
-//  EntriesService.swift
+//  CountableEventsService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 12.07.2022.
@@ -7,32 +7,32 @@
 
 import CoreData
 
-class EntriesService {
-    private var entries: [Entry] = []
+class CountableEventsService {
+    private var entries: [CountableEvent] = []
     private let coreDataStack = CoreDataStack()
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
 
 // MARK: - Public
-extension EntriesService {
+extension CountableEventsService {
     func fetch() {
-        let fetchRequest = NSFetchRequest<Entry>(entityName: "Entry")
+        let fetchRequest = NSFetchRequest<CountableEvent>(entityName: "CountableEvent")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
         do {
             entries = try moc.fetch(fetchRequest)
         } catch let error as NSError {
-            print("Unable to fetch Entries \(error), \(error.userInfo)")
+            print("Unable to fetch CountableEvents \(error), \(error.userInfo)")
         }
     }
 
     func getAmount() -> Int { return entries.count }
 
     func getVisitedAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Entry")
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "CountableEvent")
         fetchRequest.resultType = .countResultType
 
-        let predicate = NSPredicate(format: "%K != nil", #keyPath(Entry.dateVisited))
+        let predicate = NSPredicate(format: "%K != nil", #keyPath(CountableEvent.dateVisited))
         fetchRequest.predicate = predicate
 
         do {
@@ -40,12 +40,12 @@ extension EntriesService {
             let count = countResult.first?.intValue ?? 0
             return count
         } catch let error as NSError {
-            print("Unable to fetch visited Entries \(error), \(error.userInfo)")
+            print("Unable to fetch visited CountableEvents \(error), \(error.userInfo)")
             return 0
         }
     }
 
-    func entry(at index: Int) -> Entry? {
+    func countableEvent(at index: Int) -> CountableEvent? {
         guard
             index <= entries.count,
             index >= 0
@@ -54,41 +54,41 @@ extension EntriesService {
         return entries[index]
     }
 
-    func entry(by id: String) -> Entry? {
+    func countableEvent(by id: String) -> CountableEvent? {
         fetch()
 
-        return entries.first(where: { entry in
-            entry.objectID.uriRepresentation().absoluteString == id
+        return entries.first(where: { countableEvent in
+            countableEvent.objectID.uriRepresentation().absoluteString == id
         })
     }
 
-    func make(name: String) -> Entry {
-        let newEntry = Entry(context: moc)
-        newEntry.name = name
-        newEntry.dateCreated = NSDate.now
+    func make(name: String) -> CountableEvent {
+        let newCountableEvent = CountableEvent(context: moc)
+        newCountableEvent.name = name
+        newCountableEvent.dateCreated = NSDate.now
 
         coreDataStack.save(moc)
 
-        return newEntry
+        return newCountableEvent
     }
 
-    func makePoint(at entry: Entry, dateTime: Date) -> Point {
-        let newPoint = Point(context: moc)
-        newPoint.dateCreated = dateTime
-        newPoint.entry = entry
+    func makeCountableEventHappeningDescription(at countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
+        let newCountableEventHappeningDescription = CountableEventHappeningDescription(context: moc)
+        newCountableEventHappeningDescription.dateCreated = dateTime
+        newCountableEventHappeningDescription.event = countableEvent
 
         coreDataStack.save(moc)
 
-        return newPoint
+        return newCountableEventHappeningDescription
     }
 
-    func delete(_ entry: Entry) {
-        moc.delete(entry)
+    func delete(_ countableEvent: CountableEvent) {
+        moc.delete(countableEvent)
         coreDataStack.save(moc)
     }
 
-    func visit(_ entry: Entry) {
-        entry.markAsVisited()
+    func visit(_ countableEvent: CountableEvent) {
+        countableEvent.markAsVisited()
         coreDataStack.save(moc)
     }
 }

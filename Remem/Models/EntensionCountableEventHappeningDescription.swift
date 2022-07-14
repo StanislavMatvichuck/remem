@@ -1,5 +1,5 @@
 //
-//  EntensionPoint.swift
+//  EntensionCountableEventHappeningDescription.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 26.01.2022.
@@ -33,7 +33,7 @@ enum DayOfWeek: Int {
     }
 }
 
-extension Point {
+extension CountableEventHappeningDescription {
     var time: String {
         guard let date = dateCreated else { return "time" }
 

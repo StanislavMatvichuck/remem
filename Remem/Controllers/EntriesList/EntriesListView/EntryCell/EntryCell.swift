@@ -7,20 +7,20 @@
 
 import UIKit
 
-protocol EntryCellDelegate: AnyObject {
-    func didSwipeAction(_ cell: EntryCell)
-    func didPressAction(_ cell: EntryCell)
+protocol CountableEventCellDelegate: AnyObject {
+    func didSwipeAction(_ cell: CountableEventCell)
+    func didPressAction(_ cell: CountableEventCell)
 }
 
-final class EntryCell: UITableViewCell {
-    static let reuseIdentifier = "EntryCell"
+final class CountableEventCell: UITableViewCell {
+    static let reuseIdentifier = "CountableEventCell"
     static let backgroundColor = UIHelper.itemBackground
     static let pinColor = UIHelper.brandDimmed
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    weak var delegate: EntryCellDelegate?
-    var animator = EntryCellAnimator()
+    weak var delegate: CountableEventCellDelegate?
+    var animator = CountableEventCellAnimator()
 
     var movableCenterXSuccessPosition: CGFloat { viewRoot.bounds.width - .r2 }
     var movableCenterXInitialPosition: CGFloat { .r2 }
@@ -32,14 +32,14 @@ final class EntryCell: UITableViewCell {
     let viewRoot: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r2
-        view.backgroundColor = EntryCell.backgroundColor
+        view.backgroundColor = CountableEventCell.backgroundColor
         return view
     }()
 
     let viewMovable: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r1
-        view.backgroundColor = EntryCell.pinColor
+        view.backgroundColor = CountableEventCell.pinColor
         return view
     }()
 
@@ -123,16 +123,15 @@ final class EntryCell: UITableViewCell {
 }
 
 // MARK: - Public
-extension EntryCell {
+extension CountableEventCell {
     func configure(name: String, value: Int) {
         nameLabel.text = name
         valueLabel.text = "\(value)"
     }
-
 }
 
 // MARK: - User input
-extension EntryCell {
+extension CountableEventCell {
     private func setupEventHandlers() {
         viewMovable.addGestureRecognizer(UIPanGestureRecognizer(
             target: self, action: #selector(handlePan)))
@@ -171,7 +170,7 @@ extension EntryCell {
 }
 
 // MARK: - Dark mode
-extension EntryCell {
+extension CountableEventCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         viewMovable.layer.backgroundColor = Self.pinColor.cgColor

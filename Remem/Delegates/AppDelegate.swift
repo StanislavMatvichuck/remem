@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             title: NSLocalizedString("notification.action.add", comment: "Notification actions"))
 
         let category = UNNotificationCategory(
-            identifier: pointsManipulcationNotificationsCategory,
+            identifier: happeningsManipulcationNotificationsCategory,
             actions: [add],
             intentIdentifiers: [])
 
@@ -68,18 +68,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let identity = response.notification.request.content.categoryIdentifier
         guard
-            identity == pointsManipulcationNotificationsCategory,
+            identity == happeningsManipulcationNotificationsCategory,
             let action = ActionIdentifier(rawValue: response.actionIdentifier),
             action == .add,
-            let entryIdString = response.notification.request.content.userInfo["identifier"] as? String
+            let countableEventIdString = response.notification.request.content.userInfo["identifier"] as? String
         else { return }
 
-        addPoint(entryId: entryIdString)
+        addCountableEventHappeningDescription(countableEventId: countableEventIdString)
     }
 
-    private func addPoint(entryId: String) {
+    private func addCountableEventHappeningDescription(countableEventId: String) {
         let domain = DomainFacade()
-        guard let entry = domain.entry(by: entryId) else { return }
-        domain.makePoint(for: entry, dateTime: .now)
+        guard let countableEvent = domain.countableEvent(by: countableEventId) else { return }
+        domain.makeCountableEventHappeningDescription(for: countableEvent, dateTime: .now)
     }
 }

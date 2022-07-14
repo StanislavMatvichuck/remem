@@ -1,5 +1,5 @@
 //
-//  EntryCellAnimator.swift
+//  CountableEventCellAnimator.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 28.04.2022.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class EntryCellAnimator: Animator {
+class CountableEventCellAnimator: Animator {
     private var needsAnimationAfterReuse = false
 }
 
 // MARK: - Public
-extension EntryCellAnimator {
-    func handleUnfinishedSwipe(cell: EntryCell, delay: Double = 0.0) {
+extension CountableEventCellAnimator {
+    func handleUnfinishedSwipe(cell: CountableEventCell, delay: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "position.x")
         animation.fromValue = cell.movableCenterXPosition
         animation.toValue = cell.movableCenterXInitialPosition
@@ -26,7 +26,7 @@ extension EntryCellAnimator {
         cell.viewMovable.layer.add(animation, forKey: nil)
     }
 
-    func pointAdded(cell: EntryCell) {
+    func pointAdded(cell: CountableEventCell) {
         let background = CABasicAnimation(keyPath: "backgroundColor")
         background.fromValue = UIHelper.brandDimmed.cgColor
         background.toValue = UIHelper.brand.cgColor
@@ -47,7 +47,7 @@ extension EntryCellAnimator {
         handleUnfinishedSwipe(cell: cell, delay: 0.2)
     }
 
-    func pressMe(cell: EntryCell) {
+    func pressMe(cell: CountableEventCell) {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.fromValue = 1.0
         animation.toValue = 0.9
@@ -58,7 +58,7 @@ extension EntryCellAnimator {
         cell.viewRoot.layer.add(animation, forKey: "pressMe")
     }
 
-    func removeAnimations(from cell: EntryCell) {
+    func removeAnimations(from cell: CountableEventCell) {
         cell.viewRoot.layer.removeAllAnimations()
     }
 
@@ -66,7 +66,7 @@ extension EntryCellAnimator {
         needsAnimationAfterReuse = true
     }
 
-    func animateIfNeeded(cell: EntryCell) {
+    func animateIfNeeded(cell: CountableEventCell) {
         guard needsAnimationAfterReuse else { return }
         pointAdded(cell: cell)
         needsAnimationAfterReuse = false

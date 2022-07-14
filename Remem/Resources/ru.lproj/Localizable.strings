@@ -14,46 +14,46 @@
 "onboarding.close" = "Закрыть";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "Я приложение-счетчик. Это значит я помогаю считать штуки и смотреть на результаты";
+"onboarding.countableEventsList.start" = "Я приложение-счетчик. Это значит я помогаю считать штуки и смотреть на результаты";
 /* onboarding entries list question 01 */
-//"onboarding.entriesList.question1" = "- when did an event last happened?";
+//"onboarding.countableEventsList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
-//"onboarding.entriesList.question2" = "- how many events happen in a week?";
+//"onboarding.countableEventsList.question2" = "- how many events happen in a week?";
 /* onboarding entries list use cases description */
-"onboarding.entriesList.useCases" = "Используй меня для того чтобы считать такие события как выкуренная сигарета, выпитая чашка кофе, сделанная утром зарядка или выпитые таблетки.\nЛюбые периодичные события, которые хотелось бы зафиксировать во времени";
-/* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "Сперва нужно создать событие. Потяни вверх чтобы это сделать";
-/* onboarding entries list entry creation naming */
-"onboarding.entriesList.entryCreation.name" = "Дай ему небольшое имя. Использование эмодзи поощряется!";
-/* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Событие создано. Следующий шаг это добавление отметки во времени";
-/* onboarding entries list entry add points */
-"onboarding.entriesList.addPoints" = "Ты делаешь это проводя кругом вправо, точно также как принятие звонка. Попробуй пожалуйста";
-/* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Успех! Пожалуйста добавь еще 4 отметки";
-/* onboarding entries list test entry appeared */
-"onboarding.entriesList.filledEntry.description" = "Теперь ты знаешь как предоставлять мне информацию. Давай посмотрим что я смогу показать тебе, например, через месяц";
-/* onboarding entries list test entry inspect */
-"onboarding.entriesList.filledEntry.inspect" = "Нажми на круг чтобы увидеть подробности";
+"onboarding.countableEventsList.useCases" = "Используй меня для того чтобы считать такие события как выкуренная сигарета, выпитая чашка кофе, сделанная утром зарядка или выпитые таблетки.\nЛюбые периодичные события, которые хотелось бы зафиксировать во времени";
+/* onboarding entries list countableEvent creation start */
+"onboarding.countableEventsList.countableEventCreation.start" = "Сперва нужно создать событие. Потяни вверх чтобы это сделать";
+/* onboarding entries list countableEvent creation naming */
+"onboarding.countableEventsList.countableEventCreation.name" = "Дай ему небольшое имя. Использование эмодзи поощряется!";
+/* onboarding entries list countableEvent creation finished */
+"onboarding.countableEventsList.countableEventCreation.finish" = "Событие создано. Следующий шаг это добавление отметки во времени";
+/* onboarding entries list countableEvent add happenings */
+"onboarding.countableEventsList.addCountableEventHappeningDescriptions" = "Ты делаешь это проводя кругом вправо, точно также как принятие звонка. Попробуй пожалуйста";
+/* onboarding entries list countableEvent add additional happenings */
+"onboarding.countableEventsList.addAdditionalCountableEventHappeningDescriptions" = "Успех! Пожалуйста добавь еще 4 отметки";
+/* onboarding entries list test countableEvent appeared */
+"onboarding.countableEventsList.filledCountableEvent.description" = "Теперь ты знаешь как предоставлять мне информацию. Давай посмотрим что я смогу показать тебе, например, через месяц";
+/* onboarding entries list test countableEvent inspect */
+"onboarding.countableEventsList.filledCountableEvent.inspect" = "Нажми на круг чтобы увидеть подробности";
 
-/* onboarding entry details title */
-"onboarding.entryDetails.title" = "Подробности";
-/* onboarding entry details start */
-"onboarding.entryDetails.start" = "Ты посещаешь этот экран чтобы смотреть записанные данные. Он состоит из трёх частей";
-/* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "Список отметок. Каждый свайп круга просто фиксируется во времени";
-/* onboarding entry details points display scrollable */
-"onboarding.entryDetails.pointsList.scrollable" = "Он прокручивается вертикально. Попробуй пожалуйста";
-/* onboarding entry details stats display description */
-"onboarding.entryDetails.stats.description" = "Статистика. Дневные и недельные цифры, которые могут быть тебе интересны";
-/* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "Она прокручивается горизонтально. Попробуй пожалуйста";
-/* onboarding entry details week display description */
-"onboarding.entryDetails.week.description" = "Недельное распределение. Очень полезно для создания полезных привычек на 7-дневной основе";
-/* onboarding entry details week display scrollable */
-"onboarding.entryDetails.week.scrollable" = "Оно тоже прокручивается горизонтально. Попробуй пожалуйста";
-/* onboarding entry details final */
-"onboarding.entryDetails.final" = "Это всё что нужно знать чтобы это приложение было тебе полезно.\n\nВ конце я рекомендую зайти в настройки (потяни вверх на основном экране чтобы открыть) и добавить себе напоминание, оно тебе точно пригодится!\n\nУдачных подсчетов!";
+/* onboarding countableEvent details title */
+"onboarding.countableEventDetails.title" = "Подробности";
+/* onboarding countableEvent details start */
+"onboarding.countableEventDetails.start" = "Ты посещаешь этот экран чтобы смотреть записанные данные. Он состоит из трёх частей";
+/* onboarding countableEvent details happenings display description */
+"onboarding.countableEventDetails.happeningsList.description" = "Список отметок. Каждый свайп круга просто фиксируется во времени";
+/* onboarding countableEvent details happenings display scrollable */
+"onboarding.countableEventDetails.happeningsList.scrollable" = "Он прокручивается вертикально. Попробуй пожалуйста";
+/* onboarding countableEvent details stats display description */
+"onboarding.countableEventDetails.stats.description" = "Статистика. Дневные и недельные цифры, которые могут быть тебе интересны";
+/* onboarding countableEvent details stats display scrollable */
+"onboarding.countableEventDetails.stats.scrollable" = "Она прокручивается горизонтально. Попробуй пожалуйста";
+/* onboarding countableEvent details week display description */
+"onboarding.countableEventDetails.week.description" = "Недельное распределение. Очень полезно для создания полезных привычек на 7-дневной основе";
+/* onboarding countableEvent details week display scrollable */
+"onboarding.countableEventDetails.week.scrollable" = "Оно тоже прокручивается горизонтально. Попробуй пожалуйста";
+/* onboarding countableEvent details final */
+"onboarding.countableEventDetails.final" = "Это всё что нужно знать чтобы это приложение было тебе полезно.\n\nВ конце я рекомендую зайти в настройки (потяни вверх на основном экране чтобы открыть) и добавить себе напоминание, оно тебе точно пригодится!\n\nУдачных подсчетов!";
 
 /*
     UISwipingSelector button settings
@@ -65,7 +65,7 @@
     UISwipingSelector accessory
     UIMovableTextView accessory
  */
-"button.add.entry" = "Добавить";
+"button.add.countableEvent" = "Добавить";
 
 /*
     UIReminderInput accessory
@@ -74,12 +74,12 @@
  */
 "button.cancel" = "Отменить";
 /*
-    EntriesList swipe gesture actions
+    CountableEventsList swipe gesture actions
  */
 "button.contextual.delete" = "Удалить";
 
 /*
-    Entry details lock screen button
+    CountableEvent details lock screen button
  */
 "button.lockScreen.add" = "Добавить на экран блокировки";
 "button.lockScreen.remove" = "Удалить с экрана блокировки";
@@ -104,10 +104,10 @@
 "label.footer" = "Выковано с ❤️ в 🇺🇦";
 
 /* entries list empty */
-"empty.entriesList" = "Добавь событие которое хочешь отслеживать";
-"empty.entriesList.firstName" = "Короткое название или emoji";
-"empty.entriesList.firstPoint" = "Отметь когда событие произошло";
-"empty.entriesList.firstDetailsInspection" = "Нажми чтобы посмотреть отметки";
+"empty.countableEventsList" = "Добавь событие которое хочешь отслеживать";
+"empty.countableEventsList.firstName" = "Короткое название или emoji";
+"empty.countableEventsList.firstCountableEventHappeningDescription" = "Отметь когда событие произошло";
+"empty.countableEventsList.firstDetailsInspection" = "Нажми чтобы посмотреть отметки";
 
 /*
     Reminders screen
@@ -118,7 +118,7 @@
 "placeholder.inputReminder.title" = "Текст напоминания";
 
 /*
-    EntryDetails screen
+    CountableEventDetails screen
  */
 "label.stats.average.week" = "Среднее за неделю";
 "label.stats.average.day" = "Среднее за день";

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public let pointsManipulcationNotificationsCategory = "PointsManipulation"
+public let happeningsManipulcationNotificationsCategory = "CountableEventHappeningDescriptionsManipulation"
 
 public enum ActionIdentifier: String {
     case add

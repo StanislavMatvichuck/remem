@@ -9,7 +9,7 @@ import UIKit
 
 extension UIImage {
     /// This method creates an image of a view
-    /// it is used in `EntriesListController` to create `UIContextualAction` views for flipped upside down table view
+    /// it is used in `CountableEventsListController` to create `UIContextualAction` views for flipped upside down table view
     convenience init?(view: UIView) {
         let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
         let image = renderer.image { rendererContext in

@@ -7,12 +7,12 @@
 import CoreData.NSFetchedResultsController
 import UIKit
 
-class EntryDetailsController: UIViewController {
+class CountableEventDetailsController: UIViewController {
     // MARK: - Properties
-    var entry: Entry
+    var countableEvent: CountableEvent
 
     let clockController: ClockController
-    let pointsListController: PointsListController
+    let happeningsListController: CountableEventHappeningDescriptionsListController
     let beltController: BeltController
     let weekController: WeekController
 
@@ -21,15 +21,15 @@ class EntryDetailsController: UIViewController {
     var lockScreenNotificationId: String?
 
     // MARK: - Init
-    init(entry: Entry,
+    init(countableEvent: CountableEvent,
          clockController: ClockController,
-         pointsListController: PointsListController,
+         happeningsListController: CountableEventHappeningDescriptionsListController,
          weekController: WeekController,
          beltController: BeltController)
     {
-        self.entry = entry
+        self.countableEvent = countableEvent
         self.clockController = clockController
-        self.pointsListController = pointsListController
+        self.happeningsListController = happeningsListController
         self.beltController = beltController
         self.weekController = weekController
 
@@ -39,16 +39,16 @@ class EntryDetailsController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
-    private let viewRoot = EntryDetailsView()
+    private let viewRoot = CountableEventDetailsView()
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        title = entry.name
+        title = countableEvent.name
 
         notificationsService.delegate = self
         notificationsService.requestSettings()
 
         setupClock()
-        setupPointsList()
+        setupCountableEventHappeningDescriptionsList()
         setupBelt()
         setupWeek()
 
@@ -58,12 +58,12 @@ class EntryDetailsController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let domain = DomainFacade()
-        domain.visit(entry: entry)
+        domain.visit(countableEvent: countableEvent)
     }
 }
 
 // MARK: - Private
-extension EntryDetailsController {
+extension CountableEventDetailsController {
     private func setupAddToLockScreenButton() {
         beltController.installAddToLockScreenButton()
         relayoutCollectionView()
@@ -83,18 +83,18 @@ extension EntryDetailsController {
         contain(controller: clockController, in: viewRoot.clock)
     }
 
-    private func setupPointsList() {
-        contain(controller: pointsListController, in: viewRoot.pointsList)
+    private func setupCountableEventHappeningDescriptionsList() {
+        contain(controller: happeningsListController, in: viewRoot.happeningsList)
     }
 
     private func setupBelt() {
-        beltController.entry = entry
+        beltController.countableEvent = countableEvent
         beltController.delegate = self
         contain(controller: beltController, in: viewRoot.belt)
     }
 
     private func setupWeek() {
-        weekController.entry = entry
+        weekController.countableEvent = countableEvent
         contain(controller: weekController, in: viewRoot.week)
         weekController.delegate = clockController
     }
@@ -107,8 +107,8 @@ extension EntryDetailsController {
 }
 
 // MARK: - Lock screen notification handling
-extension EntryDetailsController: LocalNotificationsServiceDelegate {
-    var idString: String { entry.objectID.uriRepresentation().absoluteString }
+extension CountableEventDetailsController: LocalNotificationsServiceDelegate {
+    var idString: String { countableEvent.objectID.uriRepresentation().absoluteString }
 
     func localNotificationService(settings: UNNotificationSettings) {
         if settings.authorizationStatus == .authorized { notificationsService.requestLockScreenNotification(for: idString) }
@@ -137,14 +137,14 @@ extension EntryDetailsController: LocalNotificationsServiceDelegate {
     private func addLockScreenNotificationIfNeeded() {
         guard lockScreenNotificationMustBeAdded else { return }
 
-        notificationsService.addLockScreenNotification(text: entry.name ?? "repeating notification text",
+        notificationsService.addLockScreenNotification(text: countableEvent.name ?? "repeating notification text",
                                                        identifier: idString)
         lockScreenNotificationMustBeAdded = false
     }
 }
 
 // MARK: - BeltController delegate
-extension EntryDetailsController: BeltControllerDelegate {
+extension CountableEventDetailsController: BeltControllerDelegate {
     func didPressAddToLockScreen() {
         notificationsService.requestAuthorization()
         lockScreenNotificationMustBeAdded = true

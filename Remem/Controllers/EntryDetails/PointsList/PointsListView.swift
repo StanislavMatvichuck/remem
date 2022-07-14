@@ -1,5 +1,5 @@
 //
-//  PointsListView.swift
+//  CountableEventHappeningDescriptionsListView.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 24.05.2022.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class PointsListView: UIView {
+class CountableEventHappeningDescriptionsListView: UIView {
     // MARK: - Properties
     let table: UITableView = {
         let view = UITableView(al: true)
         view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
         view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
-        view.register(PointTimeCell.self, forCellReuseIdentifier: PointTimeCell.reuseIdentifier)
+        view.register(CountableEventHappeningDescriptionTimeCell.self, forCellReuseIdentifier: CountableEventHappeningDescriptionTimeCell.reuseIdentifier)
         view.scrollIndicatorInsets = UIEdgeInsets(top: .sm, left: 0, bottom: .sm, right: .sm / 2)
         view.allowsSelection = false
         view.separatorStyle = .none

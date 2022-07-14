@@ -9,7 +9,7 @@ import UIKit
 
 class ClockController: UIViewController {
     // MARK: - Properties
-    var entry: Entry!
+    var countableEvent: CountableEvent!
     private let viewRoot = ClockView()
 
     // MARK: - View lifecycle
@@ -48,10 +48,10 @@ extension ClockController {
     }
 
     private func updateLists(from: Date, to: Date) {
-        let points = DomainFacade().getPoints(for: entry, between: from, and: to)
+        let happenings = DomainFacade().getCountableEventHappeningDescriptions(for: countableEvent, between: from, and: to)
 
-        viewRoot.clockNight.clockFace.sectionsAnimator.show(points)
-        viewRoot.clockDay.clockFace.sectionsAnimator.show(points)
+        viewRoot.clockNight.clockFace.sectionsAnimator.show(happenings)
+        viewRoot.clockDay.clockFace.sectionsAnimator.show(happenings)
     }
 }
 

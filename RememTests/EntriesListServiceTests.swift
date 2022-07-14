@@ -10,15 +10,15 @@
 import CoreData
 import XCTest
 
-class EntriesListServiceTests: XCTestCase {
+class CountableEventsListServiceTests: XCTestCase {
     var coreDataStack: CoreDataStack!
-    var service: EntriesListService!
+    var service: CountableEventsListService!
 
     override func setUp() {
         super.setUp()
         coreDataStack = CoreDataStack()
         let container = CoreDataStack.createContainer(inMemory: true)
-        service = EntriesListService(moc: container.viewContext, stack: coreDataStack)
+        service = CountableEventsListService(moc: container.viewContext, stack: coreDataStack)
     }
 
     override func tearDown() {
@@ -33,21 +33,21 @@ class EntriesListServiceTests: XCTestCase {
     }
 
     func testCreatedStoreIsEmpty() {
-        let count = try? service.moc.count(for: Entry.fetchRequest())
+        let count = try? service.moc.count(for: CountableEvent.fetchRequest())
         XCTAssertEqual(count, 0)
 
         XCTAssertEqual(service.dataAmount, 0)
     }
 
-    func testEntryCreation() {
+    func testCountableEventCreation() {
         // Arrange
-        let createdEntryName = "DefaultName"
-        let createdEntryIndex = IndexPath(row: 0, section: 0)
+        let createdCountableEventName = "DefaultName"
+        let createdCountableEventIndex = IndexPath(row: 0, section: 0)
 
         expectation(forNotification: .NSManagedObjectContextDidSave, object: service.moc)
 
         // Act
-        service.create(entryName: createdEntryName)
+        service.create(countableEventName: createdCountableEventName)
         // Assert
         waitForExpectations(timeout: 1.0) { error in
             XCTAssertNil(error, "Save did not occur")
@@ -55,100 +55,100 @@ class EntriesListServiceTests: XCTestCase {
             self.service.fetch()
 
             XCTAssertEqual(self.service.dataAmount, 1)
-            let entryFromModel = self.service.entry(at: createdEntryIndex)
-            XCTAssertNotNil(entryFromModel)
-            XCTAssertEqual(entryFromModel?.name, createdEntryName)
-            XCTAssertEqual(entryFromModel?.points?.count, 0)
+            let countableEventFromModel = self.service.countableEvent(at: createdCountableEventIndex)
+            XCTAssertNotNil(countableEventFromModel)
+            XCTAssertEqual(countableEventFromModel?.name, createdCountableEventName)
+            XCTAssertEqual(countableEventFromModel?.happenings?.count, 0)
         }
     }
 
-    func testEntryDeletion() {
-        service.create(entryName: "ToBeDeleted")
+    func testCountableEventDeletion() {
+        service.create(countableEventName: "ToBeDeleted")
         service.fetch()
 
         XCTAssertEqual(service.dataAmount, 1)
 
         let deletedCellIndex = IndexPath(row: 0, section: 0)
-        let deletedEntry = service.entry(at: deletedCellIndex)
+        let deletedCountableEvent = service.countableEvent(at: deletedCellIndex)
 
-        service.remove(entry: deletedEntry!)
+        service.remove(countableEvent: deletedCountableEvent!)
         service.fetch()
 
         XCTAssertEqual(service.dataAmount, 0)
     }
 
-    func testPointAddition() {
-        let newEntry = service.create(entryName: "EntryWithPoint")
+    func testCountableEventHappeningDescriptionAddition() {
+        let newCountableEvent = service.create(countableEventName: "CountableEventWithCountableEventHappeningDescription")
         service.fetch()
 
-        XCTAssertNil(newEntry.freshPoint)
+        XCTAssertNil(newCountableEvent.freshCountableEventHappeningDescription)
 
-        let point = service.addNewPoint(to: newEntry)
-        XCTAssertEqual(newEntry.points?.count, 1)
-        XCTAssertEqual(newEntry.freshPoint, point)
+        let point = service.addNewCountableEventHappeningDescription(to: newCountableEvent)
+        XCTAssertEqual(newCountableEvent.happenings?.count, 1)
+        XCTAssertEqual(newCountableEvent.freshCountableEventHappeningDescription, point)
 
-        let secondPoint = service.addNewPoint(to: newEntry)
-        XCTAssertEqual(newEntry.points?.count, 2)
-        XCTAssertEqual(newEntry.freshPoint, secondPoint)
+        let secondCountableEventHappeningDescription = service.addNewCountableEventHappeningDescription(to: newCountableEvent)
+        XCTAssertEqual(newCountableEvent.happenings?.count, 2)
+        XCTAssertEqual(newCountableEvent.freshCountableEventHappeningDescription, secondCountableEventHappeningDescription)
     }
 
-    func testFilledEntryCreation() {
-        let filledEntry = service.create(filledEntryName: "Filled entry", withDaysAmount: 18)
+    func testFilledCountableEventCreation() {
+        let filledCountableEvent = service.create(filledCountableEventName: "Filled countableEvent", withDaysAmount: 18)
 
         coreDataStack.save(service.moc)
 
-        XCTAssertEqual(filledEntry.name, "Filled entry")
-        XCTAssertEqual(filledEntry.daysSince, 19)
-        XCTAssertNotEqual(filledEntry.weeksSince, 1)
-        XCTAssertNotEqual(filledEntry.totalAmount, 0)
-        XCTAssertNotEqual(filledEntry.dayAverage, 0)
-        XCTAssertNotEqual(filledEntry.thisWeekTotal, 0)
-        XCTAssertNotEqual(filledEntry.lastWeekTotal, 0)
-        XCTAssertNotEqual(filledEntry.weekAverage, 0)
+        XCTAssertEqual(filledCountableEvent.name, "Filled countableEvent")
+        XCTAssertEqual(filledCountableEvent.daysSince, 19)
+        XCTAssertNotEqual(filledCountableEvent.weeksSince, 1)
+        XCTAssertNotEqual(filledCountableEvent.totalAmount, 0)
+        XCTAssertNotEqual(filledCountableEvent.dayAverage, 0)
+        XCTAssertNotEqual(filledCountableEvent.thisWeekTotal, 0)
+        XCTAssertNotEqual(filledCountableEvent.lastWeekTotal, 0)
+        XCTAssertNotEqual(filledCountableEvent.weekAverage, 0)
     }
 
-    func testVisitedEntriesAmount() {
-        XCTAssertEqual(service.fetchVisitedEntries(), 0)
-        let entry = service.create(entryName: "Entry")
-        let entry2 = service.create(entryName: "Entry")
-        let entry3 = service.create(entryName: "Entry")
+    func testVisitedCountableEventsAmount() {
+        XCTAssertEqual(service.fetchVisitedCountableEvents(), 0)
+        let countableEvent = service.create(countableEventName: "CountableEvent")
+        let countableEvent2 = service.create(countableEventName: "CountableEvent")
+        let countableEvent3 = service.create(countableEventName: "CountableEvent")
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchVisitedEntries(), 0)
-        entry.markAsVisited()
+        XCTAssertEqual(service.fetchVisitedCountableEvents(), 0)
+        countableEvent.markAsVisited()
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchVisitedEntries(), 1)
-        entry2.markAsVisited()
-        entry3.markAsVisited()
-        XCTAssertEqual(service.fetchVisitedEntries(), 3)
+        XCTAssertEqual(service.fetchVisitedCountableEvents(), 1)
+        countableEvent2.markAsVisited()
+        countableEvent3.markAsVisited()
+        XCTAssertEqual(service.fetchVisitedCountableEvents(), 3)
     }
 
-    func testPointsAmount() {
-        XCTAssertEqual(service.fetchPointsCount(), 0)
-        let entry = service.create(entryName: "Entry")
+    func testCountableEventHappeningDescriptionsAmount() {
+        XCTAssertEqual(service.fetchCountableEventHappeningDescriptionsCount(), 0)
+        let countableEvent = service.create(countableEventName: "CountableEvent")
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchPointsCount(), 0)
-        entry.addDefaultPoint()
+        XCTAssertEqual(service.fetchCountableEventHappeningDescriptionsCount(), 0)
+        countableEvent.addDefaultCountableEventHappeningDescription()
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchPointsCount(), 1)
-        entry.addDefaultPoint()
+        XCTAssertEqual(service.fetchCountableEventHappeningDescriptionsCount(), 1)
+        countableEvent.addDefaultCountableEventHappeningDescription()
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchPointsCount(), 2)
-        let entry2 = service.create(entryName: "Entry2")
-        entry2.addDefaultPoint()
+        XCTAssertEqual(service.fetchCountableEventHappeningDescriptionsCount(), 2)
+        let countableEvent2 = service.create(countableEventName: "CountableEvent2")
+        countableEvent2.addDefaultCountableEventHappeningDescription()
         coreDataStack.save(service.moc)
-        XCTAssertEqual(service.fetchPointsCount(), 3)
+        XCTAssertEqual(service.fetchCountableEventHappeningDescriptionsCount(), 3)
     }
 }
 
-class EntriesListServiceDelegateMock: NSObject {
-    var newPointEntryIndex: IndexPath?
+class CountableEventsListServiceDelegateMock: NSObject {
+    var newCountableEventHappeningDescriptionCountableEventIndex: IndexPath?
 
     private let testCase: XCTestCase
     private var expectation: XCTestExpectation?
 
     init(_ testCase: XCTestCase) { self.testCase = testCase }
 
-    func expectNewPointNotification() {
+    func expectNewCountableEventHappeningDescriptionNotification() {
         expectation = testCase.expectation(description: "Waiting for new point index")
     }
 }

@@ -16,17 +16,17 @@ class WeekService {
     }
 
     // MARK: - Properties
-    var daysAmount: Int { entry.weeksSince * 7 }
+    var daysAmount: Int { countableEvent.weeksSince * 7 }
     var todayIndexRow: Int { daysAmount + Date.now.weekdayNumber.europeanDayOfWeek - 8 }
 
-    private var entry: Entry
+    private var countableEvent: CountableEvent
     private var moc: NSManagedObjectContext
     private var calendar: Calendar { Calendar.current }
 
     // MARK: - Init
-    init(_ entry: Entry) {
-        self.entry = entry
-        moc = entry.managedObjectContext!
+    init(_ countableEvent: CountableEvent) {
+        self.countableEvent = countableEvent
+        moc = countableEvent.managedObjectContext!
     }
 }
 
@@ -43,18 +43,18 @@ extension WeekService {
     }
 
     // TODO: load test
-    func pointsAmount(for index: IndexPath) -> Int? {
+    func happeningsAmount(for index: IndexPath) -> Int? {
         let daysDifference = index.row - todayIndexRow
         guard let resultDate = calendar.date(byAdding: .day, value: daysDifference, to: Date.now) else { return nil }
 
-        let request = NSFetchRequest<NSNumber>(entityName: "Point")
+        let request = NSFetchRequest<NSNumber>(entityName: "CountableEventHappeningDescription")
         request.predicate = makeDayPredicate(for: resultDate)
         request.resultType = .countResultType
 
         do {
             return try moc.fetch(request).first?.intValue
         } catch {
-            print("points fetching error \(error)")
+            print("happenings fetching error \(error)")
             return nil
         }
     }
@@ -73,7 +73,7 @@ extension WeekService {
         components.minute = 59
         components.second = 59
         let endDate = calendar.date(from: components)
-        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
-        return NSPredicate(format: format, argumentArray: [entry, startDate!, endDate!])
+        let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        return NSPredicate(format: format, argumentArray: [countableEvent, startDate!, endDate!])
     }
 }

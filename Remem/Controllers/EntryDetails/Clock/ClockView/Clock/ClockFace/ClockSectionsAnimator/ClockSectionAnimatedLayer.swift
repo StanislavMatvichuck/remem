@@ -54,7 +54,7 @@ extension ClockSectionAnimatedLayer {
     }
 
     static func color(for section: ClockSection) -> UIColor {
-        if section.hasFreshPoint {
+        if section.hasFreshCountableEventHappeningDescription {
             return UIHelper.secondary
         }
 

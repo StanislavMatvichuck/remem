@@ -28,24 +28,24 @@ class ClockSectionTests: XCTestCase {
     }
 
     func testAmount_empty() {
-        XCTAssertEqual(sut.pointsAmount, 0)
+        XCTAssertEqual(sut.happeningsAmount, 0)
     }
 
-    func testHasLastPoint_false() {
-        XCTAssertEqual(sut.hasFreshPoint, false)
+    func testHasLastCountableEventHappeningDescription_false() {
+        XCTAssertEqual(sut.hasFreshCountableEventHappeningDescription, false)
     }
 
     // MARK: - Behaviour
 
-    func testAddPoint() {
-        sut.addPoint()
-        sut.addPoint()
-        sut.addPoint()
-        XCTAssertEqual(sut.pointsAmount, 3)
+    func testAddCountableEventHappeningDescription() {
+        sut.addCountableEventHappeningDescription()
+        sut.addCountableEventHappeningDescription()
+        sut.addCountableEventHappeningDescription()
+        XCTAssertEqual(sut.happeningsAmount, 3)
     }
 
-    func testSetHasLastPoint() {
-        sut.setHasLastPoint()
-        XCTAssertEqual(sut.hasFreshPoint, true)
+    func testSetHasLastCountableEventHappeningDescription() {
+        sut.setHasLastCountableEventHappeningDescription()
+        XCTAssertEqual(sut.hasFreshCountableEventHappeningDescription, true)
     }
 }

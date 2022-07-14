@@ -19,7 +19,7 @@
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
 		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
 		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
-		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
+		083D3895279AE81100134A15 /* DomainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* DomainModel.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		0848C947281161F9003ED51D /* ReminderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C946281161F9003ED51D /* ReminderInput.swift */; };
 		0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */; };
@@ -50,7 +50,7 @@
 		0890627827A0A2520032847C /* EntryDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EntryDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EntryDetailsView.swift */; };
 		0890627C27A0A2700032847C /* PointTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* PointTimeCell.swift */; };
-		0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionPoint.swift */; };
+		0890627E27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
 		08A473FE2820210600D62194 /* HintState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FD2820210600D62194 /* HintState.swift */; };
@@ -140,7 +140,7 @@
 		0890627727A0A2520032847C /* EntryDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* PointTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTimeCell.swift; sourceTree = "<group>"; };
-		0890627D27A0AD460032847C /* EntensionPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionPoint.swift; sourceTree = "<group>"; };
+		0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionCountableEventHappeningDescription.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
 		08A473FD2820210600D62194 /* HintState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintState.swift; sourceTree = "<group>"; };
@@ -447,8 +447,8 @@
 			children = (
 				08C6C4FD287DAC44001F522E /* DataFacade */,
 				08C6C4F9287DA15E001F522E /* DomainFacade.swift */,
-				0890627D27A0AD460032847C /* EntensionPoint.swift */,
-				083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */,
+				0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */,
+				083D3893279AE81100134A15 /* DomainModel.xcdatamodeld */,
 				080A15EC27A06003001BAFEB /* ExtensionEntry.swift */,
 				08A473FD2820210600D62194 /* HintState.swift */,
 			);
@@ -608,7 +608,7 @@
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
 				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
-				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
+				083D3895279AE81100134A15 /* DomainModel.xcdatamodeld in Sources */,
 				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EntryCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
@@ -621,7 +621,7 @@
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0852C6A2283D570E0027EF3E /* PointsListController.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
-				0890627E27A0AD460032847C /* EntensionPoint.swift in Sources */,
+				0890627E27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				08A473FE2820210600D62194 /* HintState.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEntry.swift in Sources */,
@@ -1056,13 +1056,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */ = {
+		083D3893279AE81100134A15 /* DomainModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				083D3894279AE81100134A15 /* Entry.xcdatamodel */,
 			);
 			currentVersion = 083D3894279AE81100134A15 /* Entry.xcdatamodel */;
-			path = EntriesList.xcdatamodeld;
+			path = DomainModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

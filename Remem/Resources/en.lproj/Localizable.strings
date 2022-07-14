@@ -14,46 +14,46 @@
 "onboarding.close" = "Close";
 
 /* onboarding entries list start */
-"onboarding.entriesList.start" = "I am an application-counter. That means I help count things and inspect results";
+"onboarding.countableEventsList.start" = "I am an application-counter. That means I help count things and inspect results";
 /* onboarding entries list question 01 */
-//"onboarding.entriesList.question1" = "- when did an event last happened?";
+//"onboarding.countableEventsList.question1" = "- when did an event last happened?";
 /* onboarding entries list question 02 */
-//"onboarding.entriesList.question2" = "- how many events happen in a week?";
+//"onboarding.countableEventsList.question2" = "- how many events happen in a week?";
 // onboarding entries list use cases description
-"onboarding.entriesList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want fix in time";
-/* onboarding entries list entry creation start */
-"onboarding.entriesList.entryCreation.start" = "First, you have to create an event. Swipe up to do it";
-/* onboarding entries list entry creation naming */
-"onboarding.entriesList.entryCreation.name" = "Give it a short name. Using emoji is encouraged!";
-/* onboarding entries list entry creation finished */
-"onboarding.entriesList.entryCreation.finish" = "Now event is created. Next step is to place a mark in time";
-/* onboarding entries list entry add points */
-"onboarding.entriesList.addPoints" = "You do it by swiping a circle, just like accepting a call. Please try";
-/* onboarding entries list entry add additional points */
-"onboarding.entriesList.addAdditionalPoints" = "Success! Please add a mark 4 more times";
-/* onboarding entries list test entry appeared */
-"onboarding.entriesList.filledEntry.description" = "Now you know how to provide me with information. Look what I can show you after a month, for example";
-/* onboarding entries list test entry inspect */
-"onboarding.entriesList.filledEntry.inspect" = "Tap the circle to view event details";
+"onboarding.countableEventsList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want fix in time";
+/* onboarding entries list countableEvent creation start */
+"onboarding.countableEventsList.countableEventCreation.start" = "First, you have to create an event. Swipe up to do it";
+/* onboarding entries list countableEvent creation naming */
+"onboarding.countableEventsList.countableEventCreation.name" = "Give it a short name. Using emoji is encouraged!";
+/* onboarding entries list countableEvent creation finished */
+"onboarding.countableEventsList.countableEventCreation.finish" = "Now event is created. Next step is to place a mark in time";
+/* onboarding entries list countableEvent add happenings */
+"onboarding.countableEventsList.addCountableEventHappeningDescriptions" = "You do it by swiping a circle, just like accepting a call. Please try";
+/* onboarding entries list countableEvent add additional happenings */
+"onboarding.countableEventsList.addAdditionalCountableEventHappeningDescriptions" = "Success! Please add a mark 4 more times";
+/* onboarding entries list test countableEvent appeared */
+"onboarding.countableEventsList.filledCountableEvent.description" = "Now you know how to provide me with information. Look what I can show you after a month, for example";
+/* onboarding entries list test countableEvent inspect */
+"onboarding.countableEventsList.filledCountableEvent.inspect" = "Tap the circle to view event details";
 
-/* onboarding entry details title */
-"onboarding.entryDetails.title" = "Details";
-/* onboarding entry details start */
-"onboarding.entryDetails.start" = "You visit this screen to see recorded data. There are 3 displays available.";
-/* onboarding entry details points display description */
-"onboarding.entryDetails.pointsList.description" = "A list of marks. Each circle swipe is simply fixed in time";
-/* onboarding entry details points display scrollable */
-"onboarding.entryDetails.pointsList.scrollable" = "It is vertically scrollable. Please try to scroll";
-/* onboarding entry details stats display description */
-"onboarding.entryDetails.stats.description" = "Statistics. Daily and weekly numbers that you might me interested in";
-/* onboarding entry details stats display scrollable */
-"onboarding.entryDetails.stats.scrollable" = "It is scrollable horizontally. Please try to scroll";
-/* onboarding entry details week display description */
-"onboarding.entryDetails.week.description" = "Week distribution. Very useful to make up a good habit discipline on a 7-day basis";
-/* onboarding entry details week display scrollable */
-"onboarding.entryDetails.week.scrollable" = "It is also scrollable horizontally. Please try scrolling";
-/* onboarding entry details final */
-"onboarding.entryDetails.final" = "That is all you need to know to find this application useful.\n\nIn conclusion, I recommend to check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
+/* onboarding countableEvent details title */
+"onboarding.countableEventDetails.title" = "Details";
+/* onboarding countableEvent details start */
+"onboarding.countableEventDetails.start" = "You visit this screen to see recorded data. There are 3 displays available.";
+/* onboarding countableEvent details happenings display description */
+"onboarding.countableEventDetails.happeningsList.description" = "A list of marks. Each circle swipe is simply fixed in time";
+/* onboarding countableEvent details happenings display scrollable */
+"onboarding.countableEventDetails.happeningsList.scrollable" = "It is vertically scrollable. Please try to scroll";
+/* onboarding countableEvent details stats display description */
+"onboarding.countableEventDetails.stats.description" = "Statistics. Daily and weekly numbers that you might me interested in";
+/* onboarding countableEvent details stats display scrollable */
+"onboarding.countableEventDetails.stats.scrollable" = "It is scrollable horizontally. Please try to scroll";
+/* onboarding countableEvent details week display description */
+"onboarding.countableEventDetails.week.description" = "Week distribution. Very useful to make up a good habit discipline on a 7-day basis";
+/* onboarding countableEvent details week display scrollable */
+"onboarding.countableEventDetails.week.scrollable" = "It is also scrollable horizontally. Please try scrolling";
+/* onboarding countableEvent details final */
+"onboarding.countableEventDetails.final" = "That is all you need to know to find this application useful.\n\nIn conclusion, I recommend to check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
 
 /*
     UISwipingSelector button settings
@@ -65,7 +65,7 @@
     UISwipingSelector accessory
     UIMovableTextView accessory
  */
-"button.add.entry" = "Add";
+"button.add.countableEvent" = "Add";
 
 /*
     UIReminderInput accessory
@@ -74,12 +74,12 @@
  */
 "button.cancel" = "Cancel";
 /*
-    EntriesList swipe gesture actions
+    CountableEventsList swipe gesture actions
  */
 "button.contextual.delete" = "Delete";
 
 /*
-    Entry details lock screen button
+    CountableEvent details lock screen button
  */
 "button.lockScreen.add" = "Add to lock screen";
 "button.lockScreen.remove" = "Remove from lock screen";
@@ -104,11 +104,11 @@
 "label.footer" = "Forged with ❤️ in 🇺🇦";
 
 /* entries list empty */
-//"empty.entriesList" = "You have no entries yet. Swipe up to create";
-"empty.entriesList" = "Add an event you want to track";
-"empty.entriesList.firstName" = "Short name or emodji";
-"empty.entriesList.firstPoint" = "Place a mark when event happened";
-"empty.entriesList.firstDetailsInspection" = "Press to see marks";
+//"empty.countableEventsList" = "You have no entries yet. Swipe up to create";
+"empty.countableEventsList" = "Add an event you want to track";
+"empty.countableEventsList.firstName" = "Short name or emodji";
+"empty.countableEventsList.firstCountableEventHappeningDescription" = "Place a mark when event happened";
+"empty.countableEventsList.firstDetailsInspection" = "Press to see marks";
 
 /*
     Reminders screen
@@ -119,7 +119,7 @@
 "placeholder.inputReminder.title" = "Reminder text";
 
 /*
-    EntryDetails screen
+    CountableEventDetails screen
  */
 "label.stats.average.week" = "Week average";
 "label.stats.average.day" = "Day average";

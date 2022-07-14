@@ -14,39 +14,39 @@ class DomainFacade {
 // MARK: - Public
 extension DomainFacade {
     func getHintState() -> HintState {
-        if getEntriesAmount() == 0 { return .empty }
-        if getAllPointsAmount() == 0 { return .placeFirstMark }
-        if getVisitedEntriesAmount() == 0 { return .pressMe }
+        if getCountableEventsAmount() == 0 { return .empty }
+        if getAllCountableEventHappeningDescriptionsAmount() == 0 { return .placeFirstMark }
+        if getVisitedCountableEventsAmount() == 0 { return .pressMe }
         return .noHints
     }
 
-    func getEntriesAmount() -> Int { dataFacade.getEntriesAmount() }
+    func getCountableEventsAmount() -> Int { dataFacade.getCountableEventsAmount() }
 
-    func entry(at index: Int) -> Entry? { dataFacade.entry(at: index) }
+    func countableEvent(at index: Int) -> CountableEvent? { dataFacade.countableEvent(at: index) }
 
-    func entry(by id: String) -> Entry? { dataFacade.entry(by: id) }
+    func countableEvent(by id: String) -> CountableEvent? { dataFacade.countableEvent(by: id) }
 
-    func getPoints(for entry: Entry) -> [Point] { dataFacade.getPoints(for: entry, between: entry.dateCreated!, and: .now) }
-
-    @discardableResult
-    func makeEntry(name: String) -> Entry { dataFacade.makeEntry(name: name) }
+    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent) -> [CountableEventHappeningDescription] { dataFacade.getCountableEventHappeningDescriptions(for: countableEvent, between: countableEvent.dateCreated!, and: .now) }
 
     @discardableResult
-    func makePoint(for entry: Entry, dateTime: Date) -> Point {
-        dataFacade.makePoint(at: entry, dateTime: dateTime)
+    func makeCountableEvent(name: String) -> CountableEvent { dataFacade.makeCountableEvent(name: name) }
+
+    @discardableResult
+    func makeCountableEventHappeningDescription(for countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
+        dataFacade.makeCountableEventHappeningDescription(at: countableEvent, dateTime: dateTime)
     }
 
-    func delete(entry: Entry) { dataFacade.delete(entry: entry) }
-    func visit(entry: Entry) { dataFacade.visit(entry: entry) }
+    func delete(countableEvent: CountableEvent) { dataFacade.delete(countableEvent: countableEvent) }
+    func visit(countableEvent: CountableEvent) { dataFacade.visit(countableEvent: countableEvent) }
 
-    func getPoints(for entry: Entry, between start: Date, and end: Date) -> [Point] {
-        dataFacade.getPoints(for: entry, between: start, and: end)
+    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
+        dataFacade.getCountableEventHappeningDescriptions(for: countableEvent, between: start, and: end)
     }
 }
 
 // MARK: - Internal
 extension DomainFacade {
-    private func getAllPointsAmount() -> Int { dataFacade.getAllPointsAmount() }
+    private func getAllCountableEventHappeningDescriptionsAmount() -> Int { dataFacade.getAllCountableEventHappeningDescriptionsAmount() }
 
-    private func getVisitedEntriesAmount() -> Int { dataFacade.getVisitedEntriesAmount() }
+    private func getVisitedCountableEventsAmount() -> Int { dataFacade.getVisitedCountableEventsAmount() }
 }

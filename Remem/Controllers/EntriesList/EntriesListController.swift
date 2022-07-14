@@ -7,13 +7,13 @@
 
 import UIKit
 
-class EntriesListController: UIViewController {
+class CountableEventsListController: UIViewController {
     // MARK: I18n
-    static let delete = NSLocalizedString("button.contextual.delete", comment: "EntriesList swipe gesture actions")
+    static let delete = NSLocalizedString("button.contextual.delete", comment: "CountableEventsList swipe gesture actions")
 
     // MARK: - Properties
     private let domain = DomainFacade()
-    private let viewRoot = EntriesListView()
+    private let viewRoot = CountableEventsListView()
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -28,62 +28,62 @@ class EntriesListController: UIViewController {
         viewRoot.viewTable.delegate = self
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // TODO: maybe move this to didAppear?
-        viewRoot.gestureView.start()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewRoot.cellGestureView.start()
     }
 }
 
 // MARK: - Events handling
-extension EntriesListController: EntryCellDelegate {
+extension CountableEventsListController: CountableEventCellDelegate {
     private func setupEventHandlers() {
         viewRoot.buttonAdd.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
     }
 
     @objc private func handleAdd() {
-        domain.makeEntry(name: viewRoot.input.value)
+        domain.makeCountableEvent(name: viewRoot.input.value)
         updateUI()
     }
 
     @objc private func handleAddButton() { viewRoot.input.show() }
 
     //
-    // EntryCellDelegate actions
+    // CountableEventCellDelegate actions
     //
-    func didPressAction(_ cell: EntryCell) {
+    func didPressAction(_ cell: CountableEventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = domain.entry(at: index.row)
+            let countableEvent = domain.countableEvent(at: index.row)
         else { return }
 
-        let detailsController = makeDetailsController(for: entry)
+        let detailsController = makeDetailsController(for: countableEvent)
         let navigationController = makeNavigationController(for: detailsController)
 
-        present(navigationController, animated: true)
+        present(navigationController, animated: true) {
+            self.updateUI()
+        }
     }
 
-    func didSwipeAction(_ cell: EntryCell) {
+    func didSwipeAction(_ cell: CountableEventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let entry = domain.entry(at: index.row)
+            let countableEvent = domain.countableEvent(at: index.row)
         else { return }
 
-        domain.makePoint(for: entry, dateTime: .now)
+        domain.makeCountableEventHappeningDescription(for: countableEvent, dateTime: .now)
         updateUI()
     }
 }
 
 // MARK: - UITableViewDataSource
-extension EntriesListController: UITableViewDataSource {
+extension CountableEventsListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { domain.getEntriesAmount() }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { domain.getCountableEventsAmount() }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier: EntryCell.reuseIdentifier) as? EntryCell,
-            let dataRow = domain.entry(at: indexPath.row)
+            let row = tableView.dequeueReusableCell(withIdentifier: CountableEventCell.reuseIdentifier) as? CountableEventCell,
+            let dataRow = domain.countableEvent(at: indexPath.row)
         else { return UITableViewCell() }
 
         row.delegate = self
@@ -94,7 +94,7 @@ extension EntriesListController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension EntriesListController: UITableViewDelegate {
+extension CountableEventsListController: UITableViewDelegate {
     // MARK: Right to left row swipe actions
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: nil) { _, _, completion in
@@ -120,23 +120,23 @@ extension EntriesListController: UITableViewDelegate {
     }
 
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
-        guard let entry = domain.entry(at: forIndexPath.row) else { return }
-        domain.delete(entry: entry)
+        guard let countableEvent = domain.countableEvent(at: forIndexPath.row) else { return }
+        domain.delete(countableEvent: countableEvent)
         updateUI()
     }
 }
 
 // MARK: - Private
-extension EntriesListController {
+extension CountableEventsListController {
     private func updateUI() {
         viewRoot.viewTable.reloadData()
         configureHintsVisibility()
     }
 
-    private func createManipulationAlert(for entry: Entry) -> UIAlertController {
+    private func createManipulationAlert(for countableEvent: CountableEvent) -> UIAlertController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete row", style: .destructive, handler: { _ in
-            self.domain.delete(entry: entry)
+            self.domain.delete(countableEvent: countableEvent)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alert
@@ -160,7 +160,7 @@ extension EntriesListController {
         case .empty:
             viewRoot.showEmptyState()
         case .placeFirstMark:
-            viewRoot.showFirstPointState()
+            viewRoot.showFirstCountableEventHappeningDescriptionState()
         case .pressMe:
             viewRoot.showFirstDetails()
 //            addPressMeAnimationsForCells()
@@ -170,26 +170,26 @@ extension EntriesListController {
         }
     }
 
-    private func makeDetailsController(for entry: Entry) -> EntryDetailsController {
-        let weekService = WeekService(entry)
+    private func makeDetailsController(for countableEvent: CountableEvent) -> CountableEventDetailsController {
+        let weekService = WeekService(countableEvent)
 
         let clockController = ClockController()
         let beltController = BeltController()
-        let pointsListController = PointsListController()
+        let happeningsListController = CountableEventHappeningDescriptionsListController()
         let weekController = WeekController()
 
-        clockController.entry = entry
-        pointsListController.entry = entry
+        clockController.countableEvent = countableEvent
+        happeningsListController.countableEvent = countableEvent
         weekController.weekDistributionService = weekService
 
-        return EntryDetailsController(entry: entry,
+        return CountableEventDetailsController(countableEvent: countableEvent,
                                       clockController: clockController,
-                                      pointsListController: pointsListController,
+                                      happeningsListController: happeningsListController,
                                       weekController: weekController,
                                       beltController: beltController)
     }
 
-    private func makeNavigationController(for controller: EntryDetailsController) -> UINavigationController {
+    private func makeNavigationController(for controller: CountableEventDetailsController) -> UINavigationController {
         let navigation = UINavigationController(rootViewController: controller)
 
         let appearance = UINavigationBarAppearance()

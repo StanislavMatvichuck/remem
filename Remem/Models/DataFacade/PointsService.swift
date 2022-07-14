@@ -1,5 +1,5 @@
 //
-//  PointsService.swift
+//  CountableEventHappeningDescriptionsService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 12.07.2022.
@@ -7,16 +7,16 @@
 
 import CoreData
 
-class PointsService {
+class CountableEventHappeningDescriptionsService {
     private let coreDataStack = CoreDataStack()
     private var calendar: Calendar { .current }
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
 
 // MARK: - Public
-extension PointsService {
-    func getTotalPointsAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Point")
+extension CountableEventHappeningDescriptionsService {
+    func getTotalCountableEventHappeningDescriptionsAmount() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "CountableEventHappeningDescription")
         fetchRequest.resultType = .countResultType
 
         do {
@@ -24,35 +24,35 @@ extension PointsService {
             let count = countResult.first?.intValue ?? 0
             return count
         } catch let error as NSError {
-            print("Unable to fetch points amount: \(error), \(error.userInfo)")
+            print("Unable to fetch happenings amount: \(error), \(error.userInfo)")
             return 0
         }
     }
 
-    func getPoints(for entry: Entry, between start: Date, and end: Date) -> [Point] {
+    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
         guard
             let start = makeStartOfTheDay(for: start),
             let end = makeEndOfTheDay(for: end)
-        else { fatalError("PointsService.getPoints invalid date") }
+        else { fatalError("CountableEventHappeningDescriptionsService.getCountableEventHappeningDescriptions invalid date") }
 
-        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
-        let predicate = NSPredicate(format: format, argumentArray: [entry, start, end])
+        let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        let predicate = NSPredicate(format: format, argumentArray: [countableEvent, start, end])
 
-        let request = Point.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Point.dateCreated), ascending: false)]
+        let request = CountableEventHappeningDescription.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(CountableEventHappeningDescription.dateCreated), ascending: false)]
         request.predicate = predicate
 
         do {
             return try moc.fetch(request)
         } catch {
-            print("PointsService.getPoints() error \(error)")
+            print("CountableEventHappeningDescriptionsService.getCountableEventHappeningDescriptions() error \(error)")
             return []
         }
     }
 }
 
 // MARK: - Private
-extension PointsService {
+extension CountableEventHappeningDescriptionsService {
     private func makeStartOfTheDay(for date: Date) -> Date? {
         var components = calendarComponents(for: date)
         components.hour = 00

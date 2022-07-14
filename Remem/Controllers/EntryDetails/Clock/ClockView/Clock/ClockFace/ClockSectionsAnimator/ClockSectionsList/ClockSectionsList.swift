@@ -21,15 +21,15 @@ struct ClockSectionsList {
     private let end: ClockTimeDescription
     private let secondsPerSection: Int
     var sections: [ClockSection]
-    private let freshPoint: Point?
+    private let freshCountableEventHappeningDescription: CountableEventHappeningDescription?
 
     // MARK: - Init
-    init(start: ClockTimeDescription, end: ClockTimeDescription, sectionsPer24h: Int, freshPoint: Point?) {
+    init(start: ClockTimeDescription, end: ClockTimeDescription, sectionsPer24h: Int, freshCountableEventHappeningDescription: CountableEventHappeningDescription?) {
         self.start = start
         self.end = end
         self.secondsPerSection = Self.secondsPer24h / sectionsPer24h
 
-        self.freshPoint = freshPoint
+        self.freshCountableEventHappeningDescription = freshCountableEventHappeningDescription
 
         self.size = (end.seconds - start.seconds) / secondsPerSection
         self.sections = Self.makeEmpty(size: size)
@@ -47,9 +47,9 @@ extension ClockSectionsList {
         return sections[index]
     }
 
-    mutating func fill(with points: [Point]) {
+    mutating func fill(with happenings: [CountableEventHappeningDescription]) {
         reset()
-        points.forEach { add(point: $0) }
+        happenings.forEach { add(point: $0) }
     }
 
     var currentTimeIsInList: Bool {
@@ -69,37 +69,37 @@ extension ClockSectionsList {
     // Creation
     //
 
-    static func makeForClockVariant(_ variant: ClockSectionsList.ClockVariant, freshPoint: Point?) -> ClockSectionsList {
+    static func makeForClockVariant(_ variant: ClockSectionsList.ClockVariant, freshCountableEventHappeningDescription: CountableEventHappeningDescription?) -> ClockSectionsList {
         switch variant {
-        case .day: return .makeForDayClock(freshPoint: freshPoint)
-        case .night: return .makeForNightClock(freshPoint: freshPoint)
+        case .day: return .makeForDayClock(freshCountableEventHappeningDescription: freshCountableEventHappeningDescription)
+        case .night: return .makeForNightClock(freshCountableEventHappeningDescription: freshCountableEventHappeningDescription)
         }
     }
 
-    static func makeForDayClock(freshPoint: Point?) -> ClockSectionsList {
-        return ClockSectionsList(start: .makeMidday(), end: .makeEndOfDay(), sectionsPer24h: 144, freshPoint: freshPoint)
+    static func makeForDayClock(freshCountableEventHappeningDescription: CountableEventHappeningDescription?) -> ClockSectionsList {
+        return ClockSectionsList(start: .makeMidday(), end: .makeEndOfDay(), sectionsPer24h: 144, freshCountableEventHappeningDescription: freshCountableEventHappeningDescription)
     }
 
-    static func makeForNightClock(freshPoint: Point?) -> ClockSectionsList {
-        return ClockSectionsList(start: .makeStartOfDay(), end: .makeMidday(), sectionsPer24h: 144, freshPoint: freshPoint)
+    static func makeForNightClock(freshCountableEventHappeningDescription: CountableEventHappeningDescription?) -> ClockSectionsList {
+        return ClockSectionsList(start: .makeStartOfDay(), end: .makeMidday(), sectionsPer24h: 144, freshCountableEventHappeningDescription: freshCountableEventHappeningDescription)
     }
 }
 
 // MARK: - Private
 extension ClockSectionsList {
-    private mutating func add(point: Point) {
+    private mutating func add(point: CountableEventHappeningDescription) {
         guard
             let date = point.dateCreated,
             let index = index(for: seconds(for: date)),
             var section = section(at: index)
         else { return }
 
-        let isFreshPoint = freshPoint != nil && point == freshPoint
+        let isFreshCountableEventHappeningDescription = freshCountableEventHappeningDescription != nil && point == freshCountableEventHappeningDescription
         let isToday = date.isInToday
 
-        section.addPoint()
+        section.addCountableEventHappeningDescription()
 
-        if isFreshPoint { section.setHasLastPoint() }
+        if isFreshCountableEventHappeningDescription { section.setHasLastCountableEventHappeningDescription() }
         if isToday { section.setToday() }
 
         sections[index] = section

@@ -1,5 +1,5 @@
 //
-//  ViewPointsList.swift
+//  ViewCountableEventHappeningDescriptionsList.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EntryDetailsView: UIView {
+class CountableEventDetailsView: UIView {
     // MARK: - Properties
 
     let time: ViewScroll = {
@@ -18,7 +18,7 @@ class EntryDetailsView: UIView {
     }()
 
     let week = UIView(al: true)
-    let pointsList = UIView(al: true)
+    let happeningsList = UIView(al: true)
     let belt = UIView(al: true)
     let clock = UIView(al: true)
 
@@ -32,7 +32,7 @@ class EntryDetailsView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
-        time.contain(views: clock, pointsList)
+        time.contain(views: clock, happeningsList)
 
         let stack = UIStackView(al: true)
         stack.axis = .vertical
@@ -43,7 +43,7 @@ class EntryDetailsView: UIView {
         addSubview(stack)
         NSLayoutConstraint.activate([
             clock.widthAnchor.constraint(equalTo: widthAnchor),
-            pointsList.widthAnchor.constraint(equalTo: widthAnchor),
+            happeningsList.widthAnchor.constraint(equalTo: widthAnchor),
 
             stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor),

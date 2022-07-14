@@ -1,5 +1,5 @@
 //
-//  CellPoint.swift
+//  CellCountableEventHappeningDescription.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class PointTimeCell: UITableViewCell {
-    static let reuseIdentifier = "CellPoint"
+class CountableEventHappeningDescriptionTimeCell: UITableViewCell {
+    static let reuseIdentifier = "CellCountableEventHappeningDescription"
 
     // MARK: - Properties
     fileprivate var viewRoot: UIView = {
@@ -78,7 +78,7 @@ class PointTimeCell: UITableViewCell {
 }
 
 // MARK: - Public
-extension PointTimeCell {
+extension CountableEventHappeningDescriptionTimeCell {
     func update(time: String, day: String) {
         labelDay.text = day
         labelTime.text = time

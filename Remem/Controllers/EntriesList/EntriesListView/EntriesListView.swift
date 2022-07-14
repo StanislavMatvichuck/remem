@@ -7,11 +7,11 @@
 
 import UIKit
 
-class EntriesListView: UIView {
+class CountableEventsListView: UIView {
     // MARK: I18n
-    static let empty = NSLocalizedString("empty.entriesList", comment: "entries list empty")
-    static let firstPoint = NSLocalizedString("empty.entriesList.firstPoint", comment: "entries list first point")
-    static let firstDetails = NSLocalizedString("empty.entriesList.firstDetailsInspection", comment: "entries list first details opening")
+    static let empty = NSLocalizedString("empty.countableEventsList", comment: "entries list empty")
+    static let firstCountableEventHappeningDescription = NSLocalizedString("empty.countableEventsList.firstCountableEventHappeningDescription", comment: "entries list first point")
+    static let firstDetails = NSLocalizedString("empty.countableEventsList.firstDetailsInspection", comment: "entries list first details opening")
 
     // MARK: - Properties
     lazy var buttonAdd: UIView = {
@@ -33,7 +33,7 @@ class EntriesListView: UIView {
 
     let viewTable: UITableView = {
         let view = UITableView(al: true)
-        view.register(EntryCell.self, forCellReuseIdentifier: EntryCell.reuseIdentifier)
+        view.register(CountableEventCell.self, forCellReuseIdentifier: CountableEventCell.reuseIdentifier)
         view.transform = CGAffineTransform(scaleX: 1, y: -1)
         view.contentInsetAdjustmentBehavior = .never
         view.showsVerticalScrollIndicator = false
@@ -61,9 +61,9 @@ class EntriesListView: UIView {
         return label
     }()
 
-    private lazy var firstPointLabel: UILabel = {
+    private lazy var firstCountableEventHappeningDescriptionLabel: UILabel = {
         let label = UILabel(al: true)
-        label.text = Self.firstPoint
+        label.text = Self.firstCountableEventHappeningDescription
         label.textAlignment = .center
         label.font = UIHelper.fontBold
         label.textColor = UIHelper.itemFont
@@ -78,7 +78,7 @@ class EntriesListView: UIView {
         return label
     }()
 
-    private lazy var inspectEntryLabel: UILabel = {
+    private lazy var inspectCountableEventLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.firstDetails
         label.textAlignment = .center
@@ -95,25 +95,13 @@ class EntriesListView: UIView {
         return label
     }()
 
-    lazy var gestureView: SwipeGestureView = {
-        let view = SwipeGestureView(mode: SwipeGestureView.Mode.vertical, edgeInset: 0)
-        addSubview(view)
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: widthAnchor),
-            view.topAnchor.constraint(equalTo: emptyLabel.bottomAnchor),
-            view.heightAnchor.constraint(equalToConstant: .hScreen / 3),
-            view.centerXAnchor.constraint(equalTo: centerXAnchor),
-        ])
-        return view
-    }()
-
     lazy var cellGestureView: SwipeGestureView = {
         let view = SwipeGestureView(mode: SwipeGestureView.Mode.horizontal, edgeInset: .r2 + UIHelper.spacingListHorizontal)
         addSubview(view)
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalTo: widthAnchor),
-            view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            view.heightAnchor.constraint(equalToConstant: EntryCell.height),
+            view.bottomAnchor.constraint(equalTo: viewTable.bottomAnchor),
+            view.heightAnchor.constraint(equalToConstant: CountableEventCell.height),
             view.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
         return view
@@ -126,10 +114,9 @@ class EntriesListView: UIView {
         setupLayout()
         // these flags configure UIView tree
         emptyLabel.isHidden = false
-        gestureView.isHidden = false
         cellGestureView.isHidden = false
-        firstPointLabel.isHidden = true
-        inspectEntryLabel.isHidden = true
+        firstCountableEventHappeningDescriptionLabel.isHidden = true
+        inspectCountableEventLabel.isHidden = true
         addAndConstrain(input)
     }
 
@@ -137,32 +124,30 @@ class EntriesListView: UIView {
 }
 
 // MARK: - Public
-extension EntriesListView {
+extension CountableEventsListView {
     func showEmptyState() {
         emptyLabel.isHidden = false
-        gestureView.isHidden = false
     }
 
-    func showFirstPointState() {
-        firstPointLabel.isHidden = false
+    func showFirstCountableEventHappeningDescriptionState() {
+        firstCountableEventHappeningDescriptionLabel.isHidden = false
         cellGestureView.isHidden = false
     }
 
     func showFirstDetails() {
-        inspectEntryLabel.isHidden = false
+        inspectCountableEventLabel.isHidden = false
     }
 
     func hideAllHints() {
-        inspectEntryLabel.isHidden = true
-        firstPointLabel.isHidden = true
+        inspectCountableEventLabel.isHidden = true
+        firstCountableEventHappeningDescriptionLabel.isHidden = true
         cellGestureView.isHidden = true
         emptyLabel.isHidden = true
-        gestureView.isHidden = true
     }
 }
 
 // MARK: - Private
-extension EntriesListView {
+extension CountableEventsListView {
     private func setupLayout() {
         addSubview(buttonAdd)
         addSubview(viewTable)

@@ -8,38 +8,39 @@
 import CoreData
 
 class DataFacade {
-    private let entriesService = EntriesService()
-    private let pointsService = PointsService()
+    private let entriesService = CountableEventsService()
+    private let happeningsService = CountableEventHappeningDescriptionsService()
 }
 
 // MARK: - Public
 extension DataFacade {
-    func getEntriesAmount() -> Int {
+    func getCountableEventsAmount() -> Int {
         entriesService.fetch()
         return entriesService.getAmount()
     }
 
-    func entry(at index: Int) -> Entry? { return entriesService.entry(at: index) }
+    func countableEvent(at index: Int) -> CountableEvent? { return entriesService.countableEvent(at: index) }
 
-    func entry(by id: String) -> Entry? { return entriesService.entry(by: id) }
-
-    @discardableResult
-    func makeEntry(name: String) -> Entry { return entriesService.make(name: name) }
+    func countableEvent(by id: String) -> CountableEvent? { return entriesService.countableEvent(by: id) }
 
     @discardableResult
-    func makePoint(at entry: Entry, dateTime: Date) -> Point {
-        return entriesService.makePoint(at: entry, dateTime: dateTime)
+    func makeCountableEvent(name: String) -> CountableEvent { return entriesService.make(name: name) }
+
+    @discardableResult
+    func makeCountableEventHappeningDescription(at countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
+        return entriesService.makeCountableEventHappeningDescription(at: countableEvent, dateTime: dateTime)
     }
 
-    func getAllPointsAmount() -> Int { return pointsService.getTotalPointsAmount() }
+    func getAllCountableEventHappeningDescriptionsAmount() -> Int { return happeningsService.getTotalCountableEventHappeningDescriptionsAmount() }
 
-    func getPoints(for entry: Entry, between start: Date, and end: Date) -> [Point] {
-        pointsService.getPoints(for: entry, between: start, and: end)
+    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
+        print(#function)
+        return happeningsService.getCountableEventHappeningDescriptions(for: countableEvent, between: start, and: end)
     }
 
-    func getVisitedEntriesAmount() -> Int { return entriesService.getVisitedAmount() }
+    func getVisitedCountableEventsAmount() -> Int { return entriesService.getVisitedAmount() }
 
-    func delete(entry: Entry) { entriesService.delete(entry) }
+    func delete(countableEvent: CountableEvent) { entriesService.delete(countableEvent) }
 
-    func visit(entry: Entry) { entriesService.visit(entry) }
+    func visit(countableEvent: CountableEvent) { entriesService.visit(countableEvent) }
 }

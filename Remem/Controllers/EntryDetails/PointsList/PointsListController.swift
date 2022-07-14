@@ -1,5 +1,5 @@
 //
-//  PointsListController.swift
+//  CountableEventHappeningDescriptionsListController.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 24.05.2022.
@@ -8,10 +8,10 @@
 import CoreData
 import UIKit
 
-class PointsListController: UIViewController {
+class CountableEventHappeningDescriptionsListController: UIViewController {
     // MARK: - Properties
-    let viewRoot = PointsListView()
-    var entry: Entry!
+    let viewRoot = CountableEventHappeningDescriptionsListView()
+    var countableEvent: CountableEvent!
 
     private var domain = DomainFacade()
 
@@ -23,17 +23,17 @@ class PointsListController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension PointsListController: UITableViewDataSource {
+extension CountableEventHappeningDescriptionsListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return domain.getPoints(for: entry).count
+        return domain.getCountableEventHappeningDescriptions(for: countableEvent).count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let pointCell = tableView.dequeueReusableCell(withIdentifier: PointTimeCell.reuseIdentifier) as? PointTimeCell
+            let pointCell = tableView.dequeueReusableCell(withIdentifier: CountableEventHappeningDescriptionTimeCell.reuseIdentifier) as? CountableEventHappeningDescriptionTimeCell
         else { return UITableViewCell() }
 
-        let point = domain.getPoints(for: entry)[indexPath.row]
+        let point = domain.getCountableEventHappeningDescriptions(for: countableEvent)[indexPath.row]
         pointCell.update(time: point.time, day: point.timeSince)
         return pointCell
     }
