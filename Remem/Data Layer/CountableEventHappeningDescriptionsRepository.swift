@@ -7,14 +7,14 @@
 
 import CoreData
 
-class CountableEventHappeningDescriptionsService {
+class CountableEventHappeningDescriptionsRepository {
     private let coreDataStack = CoreDataStack()
     private var calendar: Calendar { .current }
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
 
 // MARK: - Public
-extension CountableEventHappeningDescriptionsService {
+extension CountableEventHappeningDescriptionsRepository {
     func getTotalCountableEventHappeningDescriptionsAmount() -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "CountableEventHappeningDescription")
         fetchRequest.resultType = .countResultType
@@ -52,7 +52,7 @@ extension CountableEventHappeningDescriptionsService {
 }
 
 // MARK: - Private
-extension CountableEventHappeningDescriptionsService {
+extension CountableEventHappeningDescriptionsRepository {
     private func makeStartOfTheDay(for date: Date) -> Date? {
         var components = calendarComponents(for: date)
         components.hour = 00

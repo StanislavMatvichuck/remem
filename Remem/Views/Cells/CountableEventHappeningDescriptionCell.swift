@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CountableEventHappeningDescriptionTimeCell: UITableViewCell {
-    static let reuseIdentifier = "CellCountableEventHappeningDescription"
+class CountableEventHappeningDescriptionCell: UITableViewCell {
+    static let reuseIdentifier = "CountableEventHappeningDescriptionCell"
 
     // MARK: - Properties
     fileprivate var viewRoot: UIView = {
@@ -78,7 +78,7 @@ class CountableEventHappeningDescriptionTimeCell: UITableViewCell {
 }
 
 // MARK: - Public
-extension CountableEventHappeningDescriptionTimeCell {
+extension CountableEventHappeningDescriptionCell {
     func update(time: String, day: String) {
         labelDay.text = day
         labelTime.text = time
