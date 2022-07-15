@@ -30,7 +30,7 @@ extension CountableEventHappeningDescriptionsListController: UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let pointCell = tableView.dequeueReusableCell(withIdentifier: CountableEventHappeningDescriptionTimeCell.reuseIdentifier) as? CountableEventHappeningDescriptionTimeCell
+            let pointCell = tableView.dequeueReusableCell(withIdentifier: CountableEventHappeningDescriptionCell.reuseIdentifier) as? CountableEventHappeningDescriptionCell
         else { return UITableViewCell() }
 
         let point = domain.getCountableEventHappeningDescriptions(for: countableEvent)[indexPath.row]

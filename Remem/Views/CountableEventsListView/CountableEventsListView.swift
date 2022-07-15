@@ -16,7 +16,7 @@ class CountableEventsListView: UIView {
     // MARK: - Properties
     lazy var buttonAdd: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .systemGray
         view.layer.cornerRadius = .r2
 
         let label = UILabel(al: true)
@@ -44,7 +44,7 @@ class CountableEventsListView: UIView {
         return view
     }()
 
-    private lazy var emptyLabel: UILabel = {
+    lazy var emptyLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.empty
         label.textAlignment = .center
@@ -61,7 +61,7 @@ class CountableEventsListView: UIView {
         return label
     }()
 
-    private lazy var firstCountableEventHappeningDescriptionLabel: UILabel = {
+    lazy var firstCountableEventHappeningDescriptionLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.firstCountableEventHappeningDescription
         label.textAlignment = .center
@@ -78,7 +78,7 @@ class CountableEventsListView: UIView {
         return label
     }()
 
-    private lazy var inspectCountableEventLabel: UILabel = {
+    lazy var inspectCountableEventLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.firstDetails
         label.textAlignment = .center
@@ -121,29 +121,6 @@ class CountableEventsListView: UIView {
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-
-// MARK: - Public
-extension CountableEventsListView {
-    func showEmptyState() {
-        emptyLabel.isHidden = false
-    }
-
-    func showFirstCountableEventHappeningDescriptionState() {
-        firstCountableEventHappeningDescriptionLabel.isHidden = false
-        cellGestureView.isHidden = false
-    }
-
-    func showFirstDetails() {
-        inspectCountableEventLabel.isHidden = false
-    }
-
-    func hideAllHints() {
-        inspectCountableEventLabel.isHidden = true
-        firstCountableEventHappeningDescriptionLabel.isHidden = true
-        cellGestureView.isHidden = true
-        emptyLabel.isHidden = true
-    }
 }
 
 // MARK: - Private

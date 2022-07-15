@@ -13,7 +13,7 @@ class CountableEventHappeningDescriptionsListView: UIView {
         let view = UITableView(al: true)
         view.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
         view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: .sm, height: .sm / 2))
-        view.register(CountableEventHappeningDescriptionTimeCell.self, forCellReuseIdentifier: CountableEventHappeningDescriptionTimeCell.reuseIdentifier)
+        view.register(CountableEventHappeningDescriptionCell.self, forCellReuseIdentifier: CountableEventHappeningDescriptionCell.reuseIdentifier)
         view.scrollIndicatorInsets = UIEdgeInsets(top: .sm, left: 0, bottom: .sm, right: .sm / 2)
         view.allowsSelection = false
         view.separatorStyle = .none

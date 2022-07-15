@@ -119,6 +119,7 @@ final class CountableEventCell: UITableViewCell {
         super.prepareForReuse()
         movableCenterXPosition = movableCenterXInitialPosition
         animator.animateIfNeeded(cell: self)
+        delegate = nil
     }
 }
 

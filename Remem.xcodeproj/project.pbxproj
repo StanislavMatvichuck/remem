@@ -41,6 +41,8 @@
 		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
 		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
 		086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9B2832AC74006E08CB /* ClockAnimator.swift */; };
+		086DC6D628805F1E0048F22F /* CountableEventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* CountableEventsListViewModel.swift */; };
+		086DC6D8288063BB0048F22F /* CountableEventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D7288063BB0048F22F /* CountableEventsListService.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870EEFB2809B81100336759 /* EntriesListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870EEFA2809B81100336759 /* EntriesListServiceTests.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -53,7 +55,6 @@
 		0890627E27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
-		08A473FE2820210600D62194 /* HintState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FD2820210600D62194 /* HintState.swift */; };
 		08C1FD73281A8B040051CD48 /* CountableEventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* CountableEventCellAnimator.swift */; };
 		08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */; };
 		08C6C4FA287DA15E001F522E /* DomainFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4F9287DA15E001F522E /* DomainFacade.swift */; };
@@ -64,7 +65,7 @@
 		08D47A4428129FC30085826F /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4328129FC30085826F /* ReminderCell.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
-		08D5122227870D2500C2037F /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EventsListController.swift */; };
+		08D5122227870D2500C2037F /* CountableEventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* CountableEventsListController.swift */; };
 		08D5122727870D2600C2037F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		08D5122A27870D2600C2037F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122827870D2600C2037F /* LaunchScreen.storyboard */; };
 		08D512362787144800C2037F /* CountableEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* CountableEventsListView.swift */; };
@@ -126,6 +127,8 @@
 		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
 		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
 		086B3D9B2832AC74006E08CB /* ClockAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAnimator.swift; sourceTree = "<group>"; };
+		086DC6D528805F1E0048F22F /* CountableEventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableEventsListViewModel.swift; sourceTree = "<group>"; };
+		086DC6D7288063BB0048F22F /* CountableEventsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableEventsListService.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE69281699DF0054266E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -143,7 +146,6 @@
 		0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntensionCountableEventHappeningDescription.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
-		08A473FD2820210600D62194 /* HintState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintState.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* CountableEventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableEventCellAnimator.swift; sourceTree = "<group>"; };
 		08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionUIImage.swift; sourceTree = "<group>"; };
 		08C6C4F9287DA15E001F522E /* DomainFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFacade.swift; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		08D5122127870D2500C2037F /* EventsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListController.swift; sourceTree = "<group>"; };
+		08D5122127870D2500C2037F /* CountableEventsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableEventsListController.swift; sourceTree = "<group>"; };
 		08D5122627870D2600C2037F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08D5122927870D2600C2037F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08D5122B27870D2600C2037F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		086DC6CE2880570D0048F22F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				086DC6D528805F1E0048F22F /* CountableEventsListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 		086DC6CF288057130048F22F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				086DC6D7288063BB0048F22F /* CountableEventsListService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -444,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				0890627627A0A1E30032847C /* CountableEventDetails */,
-				08D5122127870D2500C2037F /* EventsListController.swift */,
+				08D5122127870D2500C2037F /* CountableEventsListController.swift */,
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
 				08D47A4028129D210085826F /* RemindersController.swift */,
 			);
@@ -458,7 +462,6 @@
 				083D3893279AE81100134A15 /* DomainModel.xcdatamodeld */,
 				0890627D27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift */,
 				080A15EC27A06003001BAFEB /* ExtensionCountableEvent.swift */,
-				08A473FD2820210600D62194 /* HintState.swift */,
 			);
 			path = DomainModel;
 			sourceTree = "<group>";
@@ -631,7 +634,7 @@
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionCountableEventHappeningDescription.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
-				08A473FE2820210600D62194 /* HintState.swift in Sources */,
+				086DC6D8288063BB0048F22F /* CountableEventsListService.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionCountableEvent.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
@@ -653,7 +656,7 @@
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* CountableEventDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
-				08D5122227870D2500C2037F /* EventsListController.swift in Sources */,
+				08D5122227870D2500C2037F /* CountableEventsListController.swift in Sources */,
 				0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
 				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
@@ -667,6 +670,7 @@
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08FF32302842037B002E9F13 /* ClockSectionsAnimator.swift in Sources */,
+				086DC6D628805F1E0048F22F /* CountableEventsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

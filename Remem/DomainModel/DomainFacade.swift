@@ -13,13 +13,6 @@ class DomainFacade {
 
 // MARK: - Public
 extension DomainFacade {
-    func getHintState() -> HintState {
-        if getCountableEventsAmount() == 0 { return .empty }
-        if getAllCountableEventHappeningDescriptionsAmount() == 0 { return .placeFirstMark }
-        if getVisitedCountableEventsAmount() == 0 { return .pressMe }
-        return .noHints
-    }
-
     func getCountableEventsAmount() -> Int { dataFacade.getCountableEventsAmount() }
 
     func countableEvent(at index: Int) -> CountableEvent? { dataFacade.countableEvent(at: index) }

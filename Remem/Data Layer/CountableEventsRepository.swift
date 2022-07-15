@@ -8,7 +8,7 @@
 import CoreData
 
 class CountableEventsRepository {
-    private var entries: [CountableEvent] = []
+    private var events: [CountableEvent] = []
     private let coreDataStack = CoreDataStack()
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
@@ -20,13 +20,13 @@ extension CountableEventsRepository {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
         do {
-            entries = try moc.fetch(fetchRequest)
+            events = try moc.fetch(fetchRequest)
         } catch let error as NSError {
             print("Unable to fetch CountableEvents \(error), \(error.userInfo)")
         }
     }
 
-    func getAmount() -> Int { return entries.count }
+    func getAmount() -> Int { return events.count }
 
     func getVisitedAmount() -> Int {
         let fetchRequest = NSFetchRequest<NSNumber>(entityName: "CountableEvent")
@@ -47,21 +47,22 @@ extension CountableEventsRepository {
 
     func countableEvent(at index: Int) -> CountableEvent? {
         guard
-            index <= entries.count,
+            index <= events.count,
             index >= 0
         else { return nil }
 
-        return entries[index]
+        return events[index]
     }
 
     func countableEvent(by id: String) -> CountableEvent? {
         fetch()
 
-        return entries.first(where: { countableEvent in
+        return events.first(where: { countableEvent in
             countableEvent.objectID.uriRepresentation().absoluteString == id
         })
     }
 
+    @discardableResult
     func make(name: String) -> CountableEvent {
         let newCountableEvent = CountableEvent(context: moc)
         newCountableEvent.name = name
@@ -72,10 +73,13 @@ extension CountableEventsRepository {
         return newCountableEvent
     }
 
+    @discardableResult
     func makeCountableEventHappeningDescription(at countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
         let newCountableEventHappeningDescription = CountableEventHappeningDescription(context: moc)
         newCountableEventHappeningDescription.dateCreated = dateTime
         newCountableEventHappeningDescription.event = countableEvent
+
+        countableEvent.lastHappening = newCountableEventHappeningDescription
 
         coreDataStack.save(moc)
 
@@ -90,5 +94,10 @@ extension CountableEventsRepository {
     func visit(_ countableEvent: CountableEvent) {
         countableEvent.markAsVisited()
         coreDataStack.save(moc)
+    }
+
+    func getList() -> [CountableEvent] {
+        fetch()
+        return events
     }
 }
