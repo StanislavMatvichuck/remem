@@ -24,14 +24,14 @@ struct ClockSection: Equatable {
     }
 
     var happeningsAmount: Int = 0
-    var hasFreshCountableEventHappeningDescription: Bool = false
+    var hasFreshHappening: Bool = false
     var isToday: Bool = false
     var variant: Self.VisualVariant { .make(from: happeningsAmount) }
 }
 
 // MARK: - Public
 extension ClockSection {
-    mutating func addCountableEventHappeningDescription() { happeningsAmount += 1 }
-    mutating func setHasLastCountableEventHappeningDescription() { hasFreshCountableEventHappeningDescription = true }
+    mutating func addHappening() { happeningsAmount += 1 }
+    mutating func setHasLastHappening() { hasFreshHappening = true }
     mutating func setToday() { isToday = true }
 }

@@ -7,17 +7,17 @@
 
 import UIKit
 
-class CountableEventsListController: UIViewController {
+class EventsListController: UIViewController {
     // MARK: I18n
-    static let delete = NSLocalizedString("button.contextual.delete", comment: "CountableEventsList swipe gesture actions")
+    static let delete = NSLocalizedString("button.contextual.delete", comment: "EventsList swipe gesture actions")
 
     // MARK: - Properties
-    private let viewRoot = CountableEventsListView()
-    private var viewModel: CountableEventsListViewModel! {
+    private let viewRoot = EventsListView()
+    private var viewModel: EventsListViewModel! {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    private let service = CountableEventsListService(CountableEventsRepository())
+    private let service = EventsListService(CountableEventsRepository())
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -39,7 +39,7 @@ class CountableEventsListController: UIViewController {
 }
 
 // MARK: - Events handling
-extension CountableEventsListController: CountableEventCellDelegate {
+extension EventsListController: CountableEventCellDelegate {
     private func setupEventHandlers() {
         viewRoot.buttonAdd.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
@@ -80,7 +80,7 @@ extension CountableEventsListController: CountableEventCellDelegate {
 }
 
 // MARK: - UITableViewDelegate
-extension CountableEventsListController: UITableViewDelegate {
+extension EventsListController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
@@ -100,10 +100,10 @@ extension CountableEventsListController: UITableViewDelegate {
 }
 
 // MARK: - Private
-extension CountableEventsListController {
+extension EventsListController {
     private func update() {
         let newList = service.getList()
-        viewModel = CountableEventsListViewModel(model: newList)
+        viewModel = EventsListViewModel(model: newList)
     }
 
     private func presentSettings() {

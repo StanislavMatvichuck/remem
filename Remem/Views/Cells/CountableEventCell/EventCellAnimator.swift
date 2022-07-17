@@ -1,5 +1,5 @@
 //
-//  CountableEventCellAnimator.swift
+//  EventCellAnimator.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 28.04.2022.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class CountableEventCellAnimator: Animator {
+class EventCellAnimator: Animator {
     private var needsAnimationAfterReuse = false
 }
 
 // MARK: - Public
-extension CountableEventCellAnimator {
-    func handleUnfinishedSwipe(cell: CountableEventCell, delay: Double = 0.0) {
+extension EventCellAnimator {
+    func handleUnfinishedSwipe(cell: EventCell, delay: Double = 0.0) {
         let animation = CABasicAnimation(keyPath: "position.x")
         animation.fromValue = cell.movableCenterXPosition
         animation.toValue = cell.movableCenterXInitialPosition
@@ -26,7 +26,7 @@ extension CountableEventCellAnimator {
         cell.viewMovable.layer.add(animation, forKey: nil)
     }
 
-    func pointAdded(cell: CountableEventCell) {
+    func pointAdded(cell: EventCell) {
         let background = CABasicAnimation(keyPath: "backgroundColor")
         background.fromValue = UIHelper.brandDimmed.cgColor
         background.toValue = UIHelper.brand.cgColor
@@ -47,7 +47,7 @@ extension CountableEventCellAnimator {
         handleUnfinishedSwipe(cell: cell, delay: 0.2)
     }
 
-    func pressMe(cell: CountableEventCell) {
+    func pressMe(cell: EventCell) {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.fromValue = 1.0
         animation.toValue = 0.9
@@ -58,7 +58,7 @@ extension CountableEventCellAnimator {
         cell.viewRoot.layer.add(animation, forKey: "pressMe")
     }
 
-    func removeAnimations(from cell: CountableEventCell) {
+    func removeAnimations(from cell: EventCell) {
         cell.viewRoot.layer.removeAllAnimations()
     }
 
@@ -66,7 +66,7 @@ extension CountableEventCellAnimator {
         needsAnimationAfterReuse = true
     }
 
-    func animateIfNeeded(cell: CountableEventCell) {
+    func animateIfNeeded(cell: EventCell) {
         guard needsAnimationAfterReuse else { return }
         pointAdded(cell: cell)
         needsAnimationAfterReuse = false

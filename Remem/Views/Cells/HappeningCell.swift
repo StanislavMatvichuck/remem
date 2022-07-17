@@ -1,5 +1,5 @@
 //
-//  CellCountableEventHappeningDescription.swift
+//  CellHappening.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CountableEventHappeningDescriptionCell: UITableViewCell {
-    static let reuseIdentifier = "CountableEventHappeningDescriptionCell"
+class HappeningCell: UITableViewCell {
+    static let reuseIdentifier = "HappeningCell"
 
     // MARK: - Properties
     fileprivate var viewRoot: UIView = {
@@ -78,7 +78,7 @@ class CountableEventHappeningDescriptionCell: UITableViewCell {
 }
 
 // MARK: - Public
-extension CountableEventHappeningDescriptionCell {
+extension HappeningCell {
     func update(time: String, day: String) {
         labelDay.text = day
         labelTime.text = time

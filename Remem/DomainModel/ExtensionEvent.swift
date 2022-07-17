@@ -1,5 +1,5 @@
 //
-//  ExtensionCountableEvent.swift
+//  ExtensionEvent.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -9,11 +9,11 @@ import CoreData
 import Foundation
 
 // MARK: - Getters
-extension CountableEvent {
+extension Event {
     var totalAmount: Int {
         guard let happenings = self.happenings else { return 0 }
         return happenings.reduce(0) { partialResult, point in
-            let point = point as! CountableEventHappeningDescription
+            let point = point as! Happening
             return partialResult + Int(point.value)
         }
     }
@@ -67,7 +67,7 @@ extension CountableEvent {
 
         var result = 0
         for point in happenings {
-            guard let point = point as? CountableEventHappeningDescription else { continue }
+            guard let point = point as? Happening else { continue }
             let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
             if weekOffset.isInSameWeek(as: point.dateCreated!) {
                 result += Int(point.value)
@@ -79,12 +79,12 @@ extension CountableEvent {
 }
 
 // MARK: - Public
-extension CountableEvent {
+extension Event {
     @discardableResult
-    open func addDefaultCountableEventHappeningDescription() -> CountableEventHappeningDescription? {
+    open func addDefaultHappening() -> Happening? {
         guard let moc = managedObjectContext else { return nil }
 
-        let point = CountableEventHappeningDescription(context: moc)
+        let point = Happening(context: moc)
         point.dateCreated = Date()
         point.event = self
         point.value = 1
@@ -93,10 +93,10 @@ extension CountableEvent {
     }
 
     @discardableResult
-    open func addDefaultCountableEventHappeningDescription(withDate: Date) -> CountableEventHappeningDescription? {
+    open func addDefaultHappening(withDate: Date) -> Happening? {
         guard let moc = managedObjectContext else { return nil }
 
-        let point = CountableEventHappeningDescription(context: moc)
+        let point = Happening(context: moc)
         point.dateCreated = withDate
         point.event = self
         point.value = 1

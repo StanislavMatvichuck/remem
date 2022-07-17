@@ -1,5 +1,5 @@
 //
-//  CountableEventsListService.swift
+//  EventsListService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 14.07.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CountableEventsListService {
+class EventsListService {
     typealias Repository = CountableEventsRepository
 
     // MARK: - Properties
@@ -20,7 +20,7 @@ class CountableEventsListService {
 }
 
 // MARK: - Public
-extension CountableEventsListService {
+extension EventsListService {
     func add(name: String) { repository.make(name: name) }
 
     func delete(at index: Int) {

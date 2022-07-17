@@ -1,5 +1,5 @@
 //
-//  CountableEventHappeningDescriptionsService.swift
+//  HappeningsService.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 12.07.2022.
@@ -7,16 +7,16 @@
 
 import CoreData
 
-class CountableEventHappeningDescriptionsRepository {
+class HappeningsRepository {
     private let coreDataStack = CoreDataStack()
     private var calendar: Calendar { .current }
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
 
 // MARK: - Public
-extension CountableEventHappeningDescriptionsRepository {
-    func getTotalCountableEventHappeningDescriptionsAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "CountableEventHappeningDescription")
+extension HappeningsRepository {
+    func getTotalHappeningsAmount() -> Int {
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Happening")
         fetchRequest.resultType = .countResultType
 
         do {
@@ -29,30 +29,30 @@ extension CountableEventHappeningDescriptionsRepository {
         }
     }
 
-    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
+    func getHappenings(for event: Event, between start: Date, and end: Date) -> [Happening] {
         guard
             let start = makeStartOfTheDay(for: start),
             let end = makeEndOfTheDay(for: end)
-        else { fatalError("CountableEventHappeningDescriptionsService.getCountableEventHappeningDescriptions invalid date") }
+        else { fatalError("HappeningsService.getHappenings invalid date") }
 
         let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
-        let predicate = NSPredicate(format: format, argumentArray: [countableEvent, start, end])
+        let predicate = NSPredicate(format: format, argumentArray: [event, start, end])
 
-        let request = CountableEventHappeningDescription.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(CountableEventHappeningDescription.dateCreated), ascending: false)]
+        let request = Happening.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Happening.dateCreated), ascending: false)]
         request.predicate = predicate
 
         do {
             return try moc.fetch(request)
         } catch {
-            print("CountableEventHappeningDescriptionsService.getCountableEventHappeningDescriptions() error \(error)")
+            print("HappeningsService.getHappenings() error \(error)")
             return []
         }
     }
 }
 
 // MARK: - Private
-extension CountableEventHappeningDescriptionsRepository {
+extension HappeningsRepository {
     private func makeStartOfTheDay(for date: Date) -> Date? {
         var components = calendarComponents(for: date)
         components.hour = 00

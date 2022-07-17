@@ -23,7 +23,7 @@ class ClockSectionsAnimator {
 
 // MARK: - Public
 extension ClockSectionsAnimator {
-    func show(_ happenings: [CountableEventHappeningDescription]) {
+    func show(_ happenings: [Happening]) {
         let newSections = makeList(for: happenings)
         update(newList: newSections)
     }
@@ -33,7 +33,7 @@ extension ClockSectionsAnimator {
 
         view.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 
-        let newList = ClockSectionsList.makeForClockVariant(variant, freshCountableEventHappeningDescription: nil)
+        let newList = ClockSectionsList.makeForClockVariant(variant, freshHappening: nil)
         let newLayers = makeLayers(for: newList)
 
         list = newList
@@ -59,8 +59,8 @@ extension ClockSectionsAnimator {
         self.list = newList
     }
 
-    private func makeList(for happenings: [CountableEventHappeningDescription]) -> ClockSectionsList {
-        var list = ClockSectionsList.makeForClockVariant(variant, freshCountableEventHappeningDescription: nil)
+    private func makeList(for happenings: [Happening]) -> ClockSectionsList {
+        var list = ClockSectionsList.makeForClockVariant(variant, freshHappening: nil)
         list.fill(with: happenings)
         return list
     }

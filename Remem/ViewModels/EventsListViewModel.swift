@@ -1,5 +1,5 @@
 //
-//  CountableEventsListViewModel.swift
+//  EventsListViewModel.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 14.07.2022.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CountableEventsListViewModel: NSObject {
-    typealias View = CountableEventsListView
+class EventsListViewModel: NSObject {
+    typealias View = EventsListView
     typealias Model = [CountableEvent]
 
     enum HintState {
@@ -33,7 +33,7 @@ class CountableEventsListViewModel: NSObject {
 }
 
 // MARK: - Public
-extension CountableEventsListViewModel {
+extension EventsListViewModel {
     func configure(_ view: View) {
         self.view = view
 
@@ -46,7 +46,7 @@ extension CountableEventsListViewModel {
 }
 
 // MARK: - Private
-extension CountableEventsListViewModel {
+extension EventsListViewModel {
     private func configureEventsAddingButton() {
         if isEventsAddingHighlighted {
             view?.buttonAdd.backgroundColor = .systemBlue
@@ -99,7 +99,7 @@ extension CountableEventsListViewModel {
 }
 
 // MARK: - UITableViewDataSource
-extension CountableEventsListViewModel: UITableViewDataSource {
+extension EventsListViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { model.count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

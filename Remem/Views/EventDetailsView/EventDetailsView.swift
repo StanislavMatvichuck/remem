@@ -1,5 +1,5 @@
 //
-//  ViewCountableEventHappeningDescriptionsList.swift
+//  ViewHappeningsList.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 25.01.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CountableEventDetailsView: UIView {
+class EventDetailsView: UIView {
     // MARK: - Properties
 
     let time: ViewScroll = {

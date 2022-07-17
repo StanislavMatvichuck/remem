@@ -7,14 +7,14 @@
 
 import CoreData
 
-class CountableEventsRepository {
+class EventsRepository {
     private var events: [CountableEvent] = []
     private let coreDataStack = CoreDataStack()
     private var moc: NSManagedObjectContext { coreDataStack.defaultContext }
 }
 
 // MARK: - Public
-extension CountableEventsRepository {
+extension EventsRepository {
     func fetch() {
         let fetchRequest = NSFetchRequest<CountableEvent>(entityName: "CountableEvent")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]

@@ -7,12 +7,12 @@
 
 import UIKit
 
-class CountableEventDetailsController: UIViewController {
+class EventDetailsController: UIViewController {
     // MARK: - Properties
-    var countableEvent: CountableEvent
+    var countableEvent: Event
 
     let clockController: ClockController
-    let happeningsListController: CountableEventHappeningDescriptionsListController
+    let happeningsListController: HappeningsListController
     let beltController: BeltController
     let weekController: WeekController
 
@@ -21,9 +21,9 @@ class CountableEventDetailsController: UIViewController {
     var lockScreenNotificationId: String?
 
     // MARK: - Init
-    init(countableEvent: CountableEvent,
+    init(countableEvent: Event,
          clockController: ClockController,
-         happeningsListController: CountableEventHappeningDescriptionsListController,
+         happeningsListController: HappeningsListController,
          weekController: WeekController,
          beltController: BeltController)
     {
@@ -39,7 +39,7 @@ class CountableEventDetailsController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
-    private let viewRoot = CountableEventDetailsView()
+    private let viewRoot = EventDetailsView()
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = countableEvent.name
@@ -48,7 +48,7 @@ class CountableEventDetailsController: UIViewController {
         notificationsService.requestSettings()
 
         setupClock()
-        setupCountableEventHappeningDescriptionsList()
+        setupHappeningsList()
         setupBelt()
         setupWeek()
 
@@ -63,7 +63,7 @@ class CountableEventDetailsController: UIViewController {
 }
 
 // MARK: - Private
-extension CountableEventDetailsController {
+extension EventDetailsController {
     private func setupAddToLockScreenButton() {
         beltController.installAddToLockScreenButton()
         relayoutCollectionView()
@@ -83,7 +83,7 @@ extension CountableEventDetailsController {
         contain(controller: clockController, in: viewRoot.clock)
     }
 
-    private func setupCountableEventHappeningDescriptionsList() {
+    private func setupHappeningsList() {
         contain(controller: happeningsListController, in: viewRoot.happeningsList)
     }
 
@@ -107,7 +107,7 @@ extension CountableEventDetailsController {
 }
 
 // MARK: - Lock screen notification handling
-extension CountableEventDetailsController: LocalNotificationsServiceDelegate {
+extension EventDetailsController: LocalNotificationsServiceDelegate {
     var idString: String { countableEvent.objectID.uriRepresentation().absoluteString }
 
     func localNotificationService(settings: UNNotificationSettings) {
@@ -144,7 +144,7 @@ extension CountableEventDetailsController: LocalNotificationsServiceDelegate {
 }
 
 // MARK: - BeltController delegate
-extension CountableEventDetailsController: BeltControllerDelegate {
+extension EventDetailsController: BeltControllerDelegate {
     func didPressAddToLockScreen() {
         notificationsService.requestAuthorization()
         lockScreenNotificationMustBeAdded = true
