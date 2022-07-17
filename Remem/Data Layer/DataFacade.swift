@@ -8,39 +8,39 @@
 import Foundation
 
 class DataFacade {
-    private let eventsRepository = CountableEventsRepository()
-    private let happeningsRepository = CountableEventHappeningDescriptionsRepository()
+    private let eventsRepository = EventsRepository()
+    private let happeningsRepository = HappeningsRepository()
 }
 
 // MARK: - Public
 extension DataFacade {
-    func getCountableEventsAmount() -> Int {
+    func getEventsAmount() -> Int {
         eventsRepository.fetch()
         return eventsRepository.getAmount()
     }
 
-    func countableEvent(at index: Int) -> CountableEvent? { return eventsRepository.countableEvent(at: index) }
+    func event(at index: Int) -> Event? { return eventsRepository.event(at: index) }
 
-    func countableEvent(by id: String) -> CountableEvent? { return eventsRepository.countableEvent(by: id) }
-
-    @discardableResult
-    func makeCountableEvent(name: String) -> CountableEvent { return eventsRepository.make(name: name) }
+    func event(by id: String) -> Event? { return eventsRepository.event(by: id) }
 
     @discardableResult
-    func makeCountableEventHappeningDescription(at countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
-        return eventsRepository.makeCountableEventHappeningDescription(at: countableEvent, dateTime: dateTime)
+    func makeEvent(name: String) -> Event { return eventsRepository.make(name: name) }
+
+    @discardableResult
+    func makeHappening(at event: Event, dateTime: Date) -> Happening {
+        return eventsRepository.makeHappening(at: event, dateTime: dateTime)
     }
 
-    func getAllCountableEventHappeningDescriptionsAmount() -> Int { return happeningsRepository.getTotalCountableEventHappeningDescriptionsAmount() }
+    func getAllHappeningsAmount() -> Int { return happeningsRepository.getTotalHappeningsAmount() }
 
-    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
+    func getHappenings(for event: Event, between start: Date, and end: Date) -> [Happening] {
         print(#function)
-        return happeningsRepository.getCountableEventHappeningDescriptions(for: countableEvent, between: start, and: end)
+        return happeningsRepository.getHappenings(for: event, between: start, and: end)
     }
 
-    func getVisitedCountableEventsAmount() -> Int { return eventsRepository.getVisitedAmount() }
+    func getVisitedEventsAmount() -> Int { return eventsRepository.getVisitedAmount() }
 
-    func delete(countableEvent: CountableEvent) { eventsRepository.delete(countableEvent) }
+    func delete(event: Event) { eventsRepository.delete(event) }
 
-    func visit(countableEvent: CountableEvent) { eventsRepository.visit(countableEvent) }
+    func visit(event: Event) { eventsRepository.visit(event) }
 }

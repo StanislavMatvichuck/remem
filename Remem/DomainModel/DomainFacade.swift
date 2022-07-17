@@ -13,33 +13,33 @@ class DomainFacade {
 
 // MARK: - Public
 extension DomainFacade {
-    func getCountableEventsAmount() -> Int { dataFacade.getCountableEventsAmount() }
+    func getEventsAmount() -> Int { dataFacade.getEventsAmount() }
 
-    func countableEvent(at index: Int) -> CountableEvent? { dataFacade.countableEvent(at: index) }
+    func event(at index: Int) -> Event? { dataFacade.event(at: index) }
 
-    func countableEvent(by id: String) -> CountableEvent? { dataFacade.countableEvent(by: id) }
+    func event(by id: String) -> Event? { dataFacade.event(by: id) }
 
-    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent) -> [CountableEventHappeningDescription] { dataFacade.getCountableEventHappeningDescriptions(for: countableEvent, between: countableEvent.dateCreated!, and: .now) }
-
-    @discardableResult
-    func makeCountableEvent(name: String) -> CountableEvent { dataFacade.makeCountableEvent(name: name) }
+    func getHappenings(for event: Event) -> [Happening] { dataFacade.getHappenings(for: event, between: event.dateCreated!, and: .now) }
 
     @discardableResult
-    func makeCountableEventHappeningDescription(for countableEvent: CountableEvent, dateTime: Date) -> CountableEventHappeningDescription {
-        dataFacade.makeCountableEventHappeningDescription(at: countableEvent, dateTime: dateTime)
+    func makeEvent(name: String) -> Event { dataFacade.makeEvent(name: name) }
+
+    @discardableResult
+    func makeHappening(for event: Event, dateTime: Date) -> Happening {
+        dataFacade.makeHappening(at: event, dateTime: dateTime)
     }
 
-    func delete(countableEvent: CountableEvent) { dataFacade.delete(countableEvent: countableEvent) }
-    func visit(countableEvent: CountableEvent) { dataFacade.visit(countableEvent: countableEvent) }
+    func delete(event: Event) { dataFacade.delete(event: event) }
+    func visit(event: Event) { dataFacade.visit(event: event) }
 
-    func getCountableEventHappeningDescriptions(for countableEvent: CountableEvent, between start: Date, and end: Date) -> [CountableEventHappeningDescription] {
-        dataFacade.getCountableEventHappeningDescriptions(for: countableEvent, between: start, and: end)
+    func getHappenings(for event: Event, between start: Date, and end: Date) -> [Happening] {
+        dataFacade.getHappenings(for: event, between: start, and: end)
     }
 }
 
 // MARK: - Internal
 extension DomainFacade {
-    private func getAllCountableEventHappeningDescriptionsAmount() -> Int { dataFacade.getAllCountableEventHappeningDescriptionsAmount() }
+    private func getAllHappeningsAmount() -> Int { dataFacade.getAllHappeningsAmount() }
 
-    private func getVisitedCountableEventsAmount() -> Int { dataFacade.getVisitedCountableEventsAmount() }
+    private func getVisitedEventsAmount() -> Int { dataFacade.getVisitedEventsAmount() }
 }

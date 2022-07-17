@@ -11,14 +11,14 @@ import Foundation
 import XCTest
 
 class HintsManagerTests: XCTestCase {
-    var service: CountableEventsListService!
+    var service: EventsListService!
     var sut: HintsManager!
 
     override func setUp() {
         super.setUp()
         let coreDataStack = CoreDataStack()
         let moc = CoreDataStack.createContainer(inMemory: true).viewContext
-        service = CountableEventsListService(moc: moc, stack: coreDataStack)
+        service = EventsListService(moc: moc, stack: coreDataStack)
         sut = HintsManager(service: service)
     }
 
@@ -38,24 +38,24 @@ class HintsManagerTests: XCTestCase {
     }
 
     func testFirstMarkState() {
-        service.create(countableEventName: "CountableEvent")
+        service.create(eventName: "Event")
         service.fetch()
         sut = HintsManager(service: service)
         XCTAssertEqual(sut.fetchState(), .placeFirstMark)
     }
 
     func testPressMeState() {
-        let countableEvent = service.create(countableEventName: "CountableEvent")
-        countableEvent.addDefaultCountableEventHappeningDescription()
+        let event = service.create(eventName: "Event")
+        event.addDefaultHappening()
         service.fetch()
         sut = HintsManager(service: service)
         XCTAssertEqual(sut.fetchState(), .pressMe)
     }
 
     func testNoHintsState() {
-        let countableEvent = service.create(countableEventName: "CountableEvent")
-        countableEvent.addDefaultCountableEventHappeningDescription()
-        countableEvent.dateVisited = Date.now
+        let event = service.create(eventName: "Event")
+        event.addDefaultHappening()
+        event.dateVisited = Date.now
         service.fetch()
         sut = HintsManager(service: service)
         XCTAssertEqual(sut.fetchState(), .noHints)

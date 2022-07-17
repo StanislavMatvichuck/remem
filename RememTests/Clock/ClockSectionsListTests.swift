@@ -18,7 +18,7 @@ class ClockSectionsListTests: XCTestCase {
         sut = ClockSectionsList(start: .makeStartOfDay(),
                                 end: .makeMidday(),
                                 sectionsPer24h: stitchesPer24hours,
-                                freshCountableEventHappeningDescription: nil)
+                                freshHappening: nil)
 
         let container = CoreDataStack.createContainer(inMemory: true)
         context = container.viewContext
@@ -41,7 +41,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_firstSection() {
         let date = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -51,7 +51,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_secondSection() {
         let date = makeTodayDate(withTime: (h: 0, m: 11, s: 1))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -61,7 +61,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_thirdSection() {
         let date = makeTodayDate(withTime: (h: 0, m: 21, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -72,7 +72,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_lastSection() {
         let date = makeTodayDate(withTime: (h: 11, m: 59, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -86,7 +86,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_beforeLastSection() {
         let date = makeTodayDate(withTime: (h: 11, m: 49, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -100,7 +100,7 @@ class ClockSectionsListTests: XCTestCase {
 
     func testFill_notInRange() {
         let date = makeTodayDate(withTime: (h: 13, m: 0, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -113,10 +113,10 @@ class ClockSectionsListTests: XCTestCase {
         sut = ClockSectionsList(start: .makeMidday(),
                                 end: .makeEndOfDay(),
                                 sectionsPer24h: stitchesPer24hours,
-                                freshCountableEventHappeningDescription: nil)
+                                freshHappening: nil)
 
         let date = makeTodayDate(withTime: (h: 12, m: 1, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
 
         sut.fill(with: [point])
 
@@ -124,26 +124,26 @@ class ClockSectionsListTests: XCTestCase {
         XCTAssertEqual(sut.section(at: 1)?.happeningsAmount, 0)
     }
 
-    func testFill_freshCountableEventHappeningDescription() {
+    func testFill_freshHappening() {
         let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
-        let point = makeCountableEventHappeningDescription(by: date)
+        let point = makeHappening(by: date)
         sut = ClockSectionsList(start: .makeStartOfDay(),
                                 end: .makeMidday(),
                                 sectionsPer24h: stitchesPer24hours,
-                                freshCountableEventHappeningDescription: point)
+                                freshHappening: point)
 
         sut.fill(with: [point])
 
-        XCTAssertEqual(sut.section(at: 0)?.hasFreshCountableEventHappeningDescription, true)
-        XCTAssertEqual(sut.section(at: 1)?.hasFreshCountableEventHappeningDescription, false)
+        XCTAssertEqual(sut.section(at: 0)?.hasFreshHappening, true)
+        XCTAssertEqual(sut.section(at: 1)?.hasFreshHappening, false)
     }
 
     func testSegmentSizeMiddle() {
         let date = makeTodayDate(withTime: (h: 0, m: 0, s: 0))
         let date2 = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
 
-        let point = makeCountableEventHappeningDescription(by: date)
-        let point2 = makeCountableEventHappeningDescription(by: date2)
+        let point = makeHappening(by: date)
+        let point2 = makeHappening(by: date2)
 
         sut.fill(with: [point, point2])
 
@@ -155,9 +155,9 @@ class ClockSectionsListTests: XCTestCase {
         let date2 = makeTodayDate(withTime: (h: 0, m: 0, s: 1))
         let date3 = makeTodayDate(withTime: (h: 0, m: 0, s: 2))
 
-        let point = makeCountableEventHappeningDescription(by: date)
-        let point2 = makeCountableEventHappeningDescription(by: date2)
-        let point3 = makeCountableEventHappeningDescription(by: date3)
+        let point = makeHappening(by: date)
+        let point2 = makeHappening(by: date2)
+        let point3 = makeHappening(by: date3)
 
         sut.fill(with: [point, point2, point3])
 
@@ -170,10 +170,10 @@ class ClockSectionsListTests: XCTestCase {
         let date3 = makeTodayDate(withTime: (h: 0, m: 0, s: 2))
         let date4 = makeTodayDate(withTime: (h: 0, m: 0, s: 3))
 
-        let point1 = makeCountableEventHappeningDescription(by: date)
-        let point2 = makeCountableEventHappeningDescription(by: date2)
-        let point3 = makeCountableEventHappeningDescription(by: date3)
-        let point4 = makeCountableEventHappeningDescription(by: date4)
+        let point1 = makeHappening(by: date)
+        let point2 = makeHappening(by: date2)
+        let point3 = makeHappening(by: date3)
+        let point4 = makeHappening(by: date4)
 
         sut.fill(with: [point1, point2, point3, point4])
 
@@ -192,8 +192,8 @@ extension ClockSectionsListTests {
         return calendar.date(from: components)!
     }
 
-    private func makeCountableEventHappeningDescription(by date: Date) -> CountableEventHappeningDescription {
-        let point = CountableEventHappeningDescription(context: context)
+    private func makeHappening(by date: Date) -> Happening {
+        let point = Happening(context: context)
         point.dateCreated = date
         return point
     }

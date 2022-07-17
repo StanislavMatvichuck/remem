@@ -9,7 +9,7 @@ import UIKit
 
 class EventsListViewModel: NSObject {
     typealias View = EventsListView
-    typealias Model = [CountableEvent]
+    typealias Model = [Event]
 
     enum HintState {
         case empty
@@ -62,7 +62,7 @@ extension EventsListViewModel {
         case .empty:
             showEmptyState()
         case .placeFirstMark:
-            showFirstCountableEventHappeningDescriptionState()
+            showFirstHappeningState()
         case .pressMe:
             showFirstDetails()
         case .noHints:
@@ -81,18 +81,18 @@ extension EventsListViewModel {
         view?.emptyLabel.isHidden = false
     }
 
-    private func showFirstCountableEventHappeningDescriptionState() {
-        view?.firstCountableEventHappeningDescriptionLabel.isHidden = false
+    private func showFirstHappeningState() {
+        view?.firstHappeningLabel.isHidden = false
         view?.cellGestureView.isHidden = false
     }
 
     private func showFirstDetails() {
-        view?.inspectCountableEventLabel.isHidden = false
+        view?.inspectEventLabel.isHidden = false
     }
 
     private func hideAllHints() {
-        view?.inspectCountableEventLabel.isHidden = true
-        view?.firstCountableEventHappeningDescriptionLabel.isHidden = true
+        view?.inspectEventLabel.isHidden = true
+        view?.firstHappeningLabel.isHidden = true
         view?.cellGestureView.isHidden = true
         view?.emptyLabel.isHidden = true
     }
@@ -105,7 +105,7 @@ extension EventsListViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let row = tableView.dequeueReusableCell(withIdentifier:
-                CountableEventCell.reuseIdentifier) as? CountableEventCell
+                EventCell.reuseIdentifier) as? EventCell
         else { return UITableViewCell() }
 
         let dataRow = model[indexPath.row]

@@ -22,7 +22,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
     // MARK: I18n
     static let empty = NSLocalizedString("empty.EventsList.firstName", comment: "Events list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
-    static let add = NSLocalizedString("button.add.countableEvent", comment: "movable view accessory button add")
+    static let add = NSLocalizedString("button.add.event", comment: "movable view accessory button add")
 
     // MARK: - Properties
     var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }

@@ -71,15 +71,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             identity == happeningsManipulcationNotificationsCategory,
             let action = ActionIdentifier(rawValue: response.actionIdentifier),
             action == .add,
-            let countableEventIdString = response.notification.request.content.userInfo["identifier"] as? String
+            let eventIdString = response.notification.request.content.userInfo["identifier"] as? String
         else { return }
 
-        addCountableEventHappeningDescription(countableEventId: countableEventIdString)
+        addHappening(eventId: eventIdString)
     }
 
-    private func addCountableEventHappeningDescription(countableEventId: String) {
+    private func addHappening(eventId: String) {
         let domain = DomainFacade()
-        guard let countableEvent = domain.countableEvent(by: countableEventId) else { return }
-        domain.makeCountableEventHappeningDescription(for: countableEvent, dateTime: .now)
+        guard let event = domain.event(by: eventId) else { return }
+        domain.makeHappening(for: event, dateTime: .now)
     }
 }

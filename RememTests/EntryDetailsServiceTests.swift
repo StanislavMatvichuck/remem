@@ -1,5 +1,5 @@
 //
-//  CountableEventDetailsServiceTests.swift
+//  EventDetailsServiceTests.swift
 //  RememTests
 //
 //  Created by Stanislav Matvichuck on 10.05.2022.
@@ -9,43 +9,43 @@ import CoreData
 @testable import Remem
 import XCTest
 
-class CountableEventDetailsServiceTests: XCTestCase {
+class EventDetailsServiceTests: XCTestCase {
     var coreDataStack: CoreDataStack!
-    var countableEvent: CountableEvent!
-    var sut: CountableEventDetailsService!
+    var event: Event!
+    var sut: EventDetailsService!
 
     override func setUp() {
         super.setUp()
         let stack = CoreDataStack()
         let container = CoreDataStack.createContainer(inMemory: true)
         let context = container.viewContext
-        let countableEvent = CountableEvent(context: context)
+        let event = Event(context: context)
 
         coreDataStack = stack
-        self.countableEvent = countableEvent
-        countableEvent.dateCreated = Date.now
-        countableEvent.name = "CountableEvent"
-        sut = CountableEventDetailsService(countableEvent, stack: coreDataStack)
+        self.event = event
+        event.dateCreated = Date.now
+        event.name = "Event"
+        sut = EventDetailsService(event, stack: coreDataStack)
     }
 
     override func tearDown() {
         super.tearDown()
         coreDataStack = nil
-        countableEvent = nil
+        event = nil
         sut = nil
     }
 
     func testInit() {
         XCTAssertNotNil(coreDataStack)
-        XCTAssertNotNil(countableEvent)
+        XCTAssertNotNil(event)
         XCTAssertNotNil(sut)
     }
 
     func testMarkAsVisited() {
-        XCTAssertEqual(countableEvent.dateVisited, nil)
+        XCTAssertEqual(event.dateVisited, nil)
 
         sut.markAsVisited()
 
-        XCTAssertNotNil(countableEvent.dateVisited)
+        XCTAssertNotNil(event.dateVisited)
     }
 }

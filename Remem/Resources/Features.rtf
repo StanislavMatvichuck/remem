@@ -21,7 +21,7 @@
 \
 Feature: User can save a moment in time\
 	\
-	Scenario: CountableEventHappeningDescription is added with events list screen\
+	Scenario: Happening is added with events list screen\
 		Given user sees events list screen\
 		And user has at least one event\
 		When user swipes from left to right on an event row\
@@ -33,7 +33,7 @@ Feature: User can save a moment in time\
 		When user invokes actions sheet on an application icon\
 		Then user sees events names\
 \
-	Scenario: CountableEventHappeningDescription addition from actions sheet\
+	Scenario: Happening addition from actions sheet\
 		Given user sees event name in IOS actions list\
 		When user taps the event name\
 		Then point is added to this event\
@@ -43,7 +43,7 @@ Feature: User can save a moment in time\
 		When user sees application on iWatch\
 		Then he sees events list\
 \
-	Scenario: CountableEventHappeningDescription addition from iWatch\
+	Scenario: Happening addition from iWatch\
 		Given user sees event name in iWatch\
 		When user swipes from left to right\
 		Then point is added to that event\
@@ -117,7 +117,7 @@ Feature: User wants to be able to edit recordings\
 		When user swipes point row from right to left\
 		Then user sees "Delete point" button\
 \
-	Scenario: CountableEventHappeningDescription is deleted\
+	Scenario: Happening is deleted\
 		Given user sees "Delete point" button\
 		When user taps "Delete point" button\
 		Then point is deleted from an event\
@@ -139,13 +139,13 @@ Feature: User wants to be able to edit recordings\
 		When user scrolls statistics section from right to left\
 		Then user sees "add point with specific time" button\
 \
-	Scenario: CountableEventHappeningDescription in specific time form\
+	Scenario: Happening in specific time form\
 		Given user sees event details screen\
 		And user sees "add point with specific time" button\
 		When user presses "add point with specific time" button\
 		Then user sees time input\
 \
-	Scenario: CountableEventHappeningDescription is added with specific time\
+	Scenario: Happening is added with specific time\
 		Given user sees time input\
 		When user submits time input\
 		Then user sees point added for today at entered time\

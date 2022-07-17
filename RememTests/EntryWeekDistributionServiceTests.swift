@@ -9,9 +9,9 @@ import CoreData
 @testable import Remem
 import XCTest
 
-class CountableEventWeekDistributionTests: XCTestCase {
+class EventWeekDistributionTests: XCTestCase {
     var coreDataStack: CoreDataStack!
-    var countableEvent: CountableEvent!
+    var event: Event!
     var sut: WeekService!
 
     override func setUp() {
@@ -19,36 +19,36 @@ class CountableEventWeekDistributionTests: XCTestCase {
         let stack = CoreDataStack()
         let container = CoreDataStack.createContainer(inMemory: true)
         let context = container.viewContext
-        let countableEvent = CountableEvent(context: context)
-        countableEvent.name = "CountableEvent"
-        countableEvent.dateCreated = Date.now
+        let event = Event(context: context)
+        event.name = "Event"
+        event.dateCreated = Date.now
         stack.save(context)
 
         coreDataStack = stack
-        self.countableEvent = countableEvent
-        sut = WeekService(countableEvent)
+        self.event = event
+        sut = WeekService(event)
     }
 
     override func tearDown() {
         super.tearDown()
         coreDataStack = nil
-        countableEvent = nil
+        event = nil
         sut = nil
     }
 
     func testInit() {
         XCTAssertNotNil(coreDataStack)
-        XCTAssertNotNil(countableEvent)
+        XCTAssertNotNil(event)
         XCTAssertNotNil(sut)
     }
 
     func testDaysAmount() {
         XCTAssertEqual(sut.daysAmount, 7)
 
-        let weekOldCountableEvent = CountableEvent(context: countableEvent.managedObjectContext!)
-        weekOldCountableEvent.dateCreated = Date.weekAgo
-        weekOldCountableEvent.name = "Week old countableEvent"
-        let sut = WeekService(weekOldCountableEvent)
+        let weekOldEvent = Event(context: event.managedObjectContext!)
+        weekOldEvent.dateCreated = Date.weekAgo
+        weekOldEvent.name = "Week old event"
+        let sut = WeekService(weekOldEvent)
         XCTAssertEqual(sut.daysAmount, 14)
     }
 
@@ -70,10 +70,10 @@ class CountableEventWeekDistributionTests: XCTestCase {
             XCTAssertEqual(sut.todayIndexRow, 6)
         }
 
-        let weekOldCountableEvent = CountableEvent(context: countableEvent.managedObjectContext!)
-        weekOldCountableEvent.dateCreated = Date.weekAgo
-        weekOldCountableEvent.name = "Week old countableEvent"
-        let sut = WeekService(weekOldCountableEvent)
+        let weekOldEvent = Event(context: event.managedObjectContext!)
+        weekOldEvent.dateCreated = Date.weekAgo
+        weekOldEvent.name = "Week old event"
+        let sut = WeekService(weekOldEvent)
 
         switch Date.now.weekdayNumber {
         case .monday:
@@ -124,33 +124,33 @@ class CountableEventWeekDistributionTests: XCTestCase {
         XCTAssertEqual(tomorrowDayOfMonthFromSUT, tomorrowDayOfMonthFromCalendar)
     }
 
-    func testCountableEventHappeningDescriptionsAmountForIndex() {
+    func testHappeningsAmountForIndex() {
         let todayIndexPath = IndexPath(row: sut.todayIndexRow, section: 0)
         XCTAssertEqual(sut.happeningsAmount(for: todayIndexPath), 0)
-        countableEvent.addDefaultCountableEventHappeningDescription()
+        event.addDefaultHappening()
         XCTAssertEqual(sut.happeningsAmount(for: todayIndexPath), 1)
-        countableEvent.addDefaultCountableEventHappeningDescription()
-        countableEvent.addDefaultCountableEventHappeningDescription()
+        event.addDefaultHappening()
+        event.addDefaultHappening()
         XCTAssertEqual(sut.happeningsAmount(for: todayIndexPath), 3)
 
         // Yesterday check
         guard sut.todayIndexRow > 0 else { return }
         let yesterdayIndexPath = IndexPath(row: sut.todayIndexRow - 1, section: 0)
         XCTAssertEqual(sut.happeningsAmount(for: yesterdayIndexPath), 0)
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: .yesterday)
+        event.addDefaultHappening(withDate: .yesterday)
         XCTAssertEqual(sut.happeningsAmount(for: yesterdayIndexPath), 1)
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: .yesterday)
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: .yesterday)
+        event.addDefaultHappening(withDate: .yesterday)
+        event.addDefaultHappening(withDate: .yesterday)
         XCTAssertEqual(sut.happeningsAmount(for: yesterdayIndexPath), 3)
 
         // Tomorrow check
         guard sut.todayIndexRow < sut.daysAmount - 1 else { return }
         let tomorrowIndexPath = IndexPath(row: sut.todayIndexRow + 1, section: 0)
         XCTAssertEqual(sut.happeningsAmount(for: tomorrowIndexPath), 0)
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: Date.now.days(ago: -1))
+        event.addDefaultHappening(withDate: Date.now.days(ago: -1))
         XCTAssertEqual(sut.happeningsAmount(for: tomorrowIndexPath), 1)
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: Date.now.days(ago: -1))
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: Date.now.days(ago: -1))
+        event.addDefaultHappening(withDate: Date.now.days(ago: -1))
+        event.addDefaultHappening(withDate: Date.now.days(ago: -1))
         XCTAssertEqual(sut.happeningsAmount(for: tomorrowIndexPath), 3)
     }
 }

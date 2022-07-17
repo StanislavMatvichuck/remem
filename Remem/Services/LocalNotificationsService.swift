@@ -7,7 +7,7 @@
 
 import UIKit
 
-public let happeningsManipulcationNotificationsCategory = "CountableEventHappeningDescriptionsManipulation"
+public let happeningsManipulcationNotificationsCategory = "HappeningsManipulation"
 
 public enum ActionIdentifier: String {
     case add

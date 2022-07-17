@@ -9,7 +9,7 @@ import UIKit
 
 class EventDetailsController: UIViewController {
     // MARK: - Properties
-    var countableEvent: Event
+    var event: Event
 
     let clockController: ClockController
     let happeningsListController: HappeningsListController
@@ -21,13 +21,13 @@ class EventDetailsController: UIViewController {
     var lockScreenNotificationId: String?
 
     // MARK: - Init
-    init(countableEvent: Event,
+    init(event: Event,
          clockController: ClockController,
          happeningsListController: HappeningsListController,
          weekController: WeekController,
          beltController: BeltController)
     {
-        self.countableEvent = countableEvent
+        self.event = event
         self.clockController = clockController
         self.happeningsListController = happeningsListController
         self.beltController = beltController
@@ -42,7 +42,7 @@ class EventDetailsController: UIViewController {
     private let viewRoot = EventDetailsView()
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        title = countableEvent.name
+        title = event.name
 
         notificationsService.delegate = self
         notificationsService.requestSettings()
@@ -58,7 +58,7 @@ class EventDetailsController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let domain = DomainFacade()
-        domain.visit(countableEvent: countableEvent)
+        domain.visit(event: event)
     }
 }
 
@@ -88,13 +88,13 @@ extension EventDetailsController {
     }
 
     private func setupBelt() {
-        beltController.countableEvent = countableEvent
+        beltController.event = event
         beltController.delegate = self
         contain(controller: beltController, in: viewRoot.belt)
     }
 
     private func setupWeek() {
-        weekController.countableEvent = countableEvent
+        weekController.event = event
         contain(controller: weekController, in: viewRoot.week)
         weekController.delegate = clockController
     }
@@ -108,7 +108,7 @@ extension EventDetailsController {
 
 // MARK: - Lock screen notification handling
 extension EventDetailsController: LocalNotificationsServiceDelegate {
-    var idString: String { countableEvent.objectID.uriRepresentation().absoluteString }
+    var idString: String { event.objectID.uriRepresentation().absoluteString }
 
     func localNotificationService(settings: UNNotificationSettings) {
         if settings.authorizationStatus == .authorized { notificationsService.requestLockScreenNotification(for: idString) }
@@ -137,7 +137,7 @@ extension EventDetailsController: LocalNotificationsServiceDelegate {
     private func addLockScreenNotificationIfNeeded() {
         guard lockScreenNotificationMustBeAdded else { return }
 
-        notificationsService.addLockScreenNotification(text: countableEvent.name ?? "repeating notification text",
+        notificationsService.addLockScreenNotification(text: event.name ?? "repeating notification text",
                                                        identifier: idString)
         lockScreenNotificationMustBeAdded = false
     }

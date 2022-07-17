@@ -13,7 +13,7 @@ protocol WeekControllerDelegate {
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    var countableEvent: CountableEvent!
+    var event: Event!
     var weekDistributionService: WeekService!
     var delegate: WeekControllerDelegate?
 
@@ -33,7 +33,7 @@ class WeekController: UIViewController {
 extension WeekController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let weekNumber = Int(scrollView.contentOffset.x / .wScreen)
-        let weekOffset = countableEvent.weeksSince - 1 - weekNumber
+        let weekOffset = event.weeksSince - 1 - weekNumber
         let dateStart = Date.now.days(ago: Int(weekOffset) * 7).startOfWeek!
         let dateEnd = dateStart.endOfWeek!
         delegate?.weekControllerNewWeek(from: dateStart, to: dateEnd)

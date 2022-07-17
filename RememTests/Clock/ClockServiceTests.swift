@@ -13,7 +13,7 @@ class ClockServiceTests: XCTestCase {
     static let segmentsCount = 72
 
     var coreDataStack: CoreDataStack!
-    var countableEvent: CountableEvent!
+    var event: Event!
     var sut: ClockService!
 
     override func setUp() {
@@ -21,35 +21,35 @@ class ClockServiceTests: XCTestCase {
         let stack = CoreDataStack()
         let container = CoreDataStack.createContainer(inMemory: true)
         let context = container.viewContext
-        let countableEvent = CountableEvent(context: context)
+        let event = Event(context: context)
 
         coreDataStack = stack
-        self.countableEvent = countableEvent
-        countableEvent.dateCreated = Date.now
-        countableEvent.name = "CountableEvent"
-        sut = ClockService(countableEvent, stack: coreDataStack)
+        self.event = event
+        event.dateCreated = Date.now
+        event.name = "Event"
+        sut = ClockService(event, stack: coreDataStack)
     }
 
     override func tearDown() {
         super.tearDown()
         coreDataStack = nil
-        countableEvent = nil
+        event = nil
         sut = nil
     }
 
     func testInit() {
         XCTAssertNotNil(coreDataStack)
-        XCTAssertNotNil(countableEvent)
+        XCTAssertNotNil(event)
         XCTAssertNotNil(sut)
     }
 
     func testFetchWithBoundaries() {
-        countableEvent.addDefaultCountableEventHappeningDescription(withDate: Date.weekAgo)
-        coreDataStack.save(countableEvent.managedObjectContext!)
+        event.addDefaultHappening(withDate: Date.weekAgo)
+        coreDataStack.save(event.managedObjectContext!)
         var dateFrom = Date.now.startOfWeek!
         let dateTo = Date.now.endOfWeek!
         XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 0)
-        countableEvent.addDefaultCountableEventHappeningDescription()
+        event.addDefaultHappening()
         XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 1)
         dateFrom = Date.weekAgo.startOfWeek!
         XCTAssertEqual(sut.fetch(from: dateFrom, to: dateTo).count, 2)

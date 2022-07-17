@@ -8,7 +8,7 @@
 import Foundation
 
 class EventsListService {
-    typealias Repository = CountableEventsRepository
+    typealias Repository = EventsRepository
 
     // MARK: - Properties
     private var repository: Repository
@@ -24,16 +24,16 @@ extension EventsListService {
     func add(name: String) { repository.make(name: name) }
 
     func delete(at index: Int) {
-        guard let countableEvent = repository.countableEvent(at: index) else { return }
-        repository.delete(countableEvent)
+        guard let event = repository.event(at: index) else { return }
+        repository.delete(event)
     }
 
-    func get(at index: Int) -> CountableEvent? { repository.countableEvent(at: index) }
+    func get(at index: Int) -> Event? { repository.event(at: index) }
 
     func makeHappening(at index: Int) {
-        guard let countableEvent = repository.countableEvent(at: index) else { return }
-        repository.makeCountableEventHappeningDescription(at: countableEvent, dateTime: .now)
+        guard let event = repository.event(at: index) else { return }
+        repository.makeHappening(at: event, dateTime: .now)
     }
 
-    func getList() -> [CountableEvent] { repository.getList() }
+    func getList() -> [Event] { repository.getList() }
 }

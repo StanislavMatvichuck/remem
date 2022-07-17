@@ -17,7 +17,7 @@ class EventsListController: UIViewController {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    private let service = EventsListService(CountableEventsRepository())
+    private let service = EventsListService(EventsRepository())
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -39,7 +39,7 @@ class EventsListController: UIViewController {
 }
 
 // MARK: - Events handling
-extension EventsListController: CountableEventCellDelegate {
+extension EventsListController: EventCellDelegate {
     private func setupEventHandlers() {
         viewRoot.buttonAdd.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
@@ -54,19 +54,19 @@ extension EventsListController: CountableEventCellDelegate {
 
     @objc private func handleAddButton() { viewRoot.input.show() }
 
-    // CountableEventCellDelegate actions
-    func didPressAction(_ cell: CountableEventCell) {
+    // EventCellDelegate actions
+    func didPressAction(_ cell: EventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let countableEvent = service.get(at: index.row)
+            let event = service.get(at: index.row)
         else { return }
 
-        let detailsController = makeDetailsController(for: countableEvent)
+        let detailsController = makeDetailsController(for: event)
 
         navigationController?.pushViewController(detailsController, animated: true)
     }
 
-    func didSwipeAction(_ cell: CountableEventCell) {
+    func didSwipeAction(_ cell: EventCell) {
         guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
         service.makeHappening(at: index.row)
         update()
@@ -94,7 +94,7 @@ extension EventsListController: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath)
     {
-        guard let cell = cell as? CountableEventCell else { return }
+        guard let cell = cell as? EventCell else { return }
         cell.delegate = self
     }
 }
@@ -118,19 +118,19 @@ extension EventsListController {
         present(nav, animated: true, completion: nil)
     }
 
-    private func makeDetailsController(for countableEvent: CountableEvent) -> CountableEventDetailsController {
-        let weekService = WeekService(countableEvent)
+    private func makeDetailsController(for event: Event) -> EventDetailsController {
+        let weekService = WeekService(event)
 
         let clockController = ClockController()
         let beltController = BeltController()
-        let happeningsListController = CountableEventHappeningDescriptionsListController()
+        let happeningsListController = HappeningsListController()
         let weekController = WeekController()
 
-        clockController.countableEvent = countableEvent
-        happeningsListController.countableEvent = countableEvent
+        clockController.event = event
+        happeningsListController.event = event
         weekController.weekDistributionService = weekService
 
-        return CountableEventDetailsController(countableEvent: countableEvent,
+        return EventDetailsController(event: event,
                                                clockController: clockController,
                                                happeningsListController: happeningsListController,
                                                weekController: weekController,

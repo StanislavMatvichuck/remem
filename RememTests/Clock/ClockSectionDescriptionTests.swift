@@ -31,21 +31,21 @@ class ClockSectionTests: XCTestCase {
         XCTAssertEqual(sut.happeningsAmount, 0)
     }
 
-    func testHasLastCountableEventHappeningDescription_false() {
-        XCTAssertEqual(sut.hasFreshCountableEventHappeningDescription, false)
+    func testHasLastHappening_false() {
+        XCTAssertEqual(sut.hasFreshHappening, false)
     }
 
     // MARK: - Behaviour
 
-    func testAddCountableEventHappeningDescription() {
-        sut.addCountableEventHappeningDescription()
-        sut.addCountableEventHappeningDescription()
-        sut.addCountableEventHappeningDescription()
+    func testAddHappening() {
+        sut.addHappening()
+        sut.addHappening()
+        sut.addHappening()
         XCTAssertEqual(sut.happeningsAmount, 3)
     }
 
-    func testSetHasLastCountableEventHappeningDescription() {
-        sut.setHasLastCountableEventHappeningDescription()
-        XCTAssertEqual(sut.hasFreshCountableEventHappeningDescription, true)
+    func testSetHasLastHappening() {
+        sut.setHasLastHappening()
+        XCTAssertEqual(sut.hasFreshHappening, true)
     }
 }

@@ -16,17 +16,17 @@ class WeekService {
     }
 
     // MARK: - Properties
-    var daysAmount: Int { countableEvent.weeksSince * 7 }
+    var daysAmount: Int { event.weeksSince * 7 }
     var todayIndexRow: Int { daysAmount + Date.now.weekdayNumber.europeanDayOfWeek - 8 }
 
-    private var countableEvent: CountableEvent
+    private var event: Event
     private var moc: NSManagedObjectContext
     private var calendar: Calendar { Calendar.current }
 
     // MARK: - Init
-    init(_ countableEvent: CountableEvent) {
-        self.countableEvent = countableEvent
-        moc = countableEvent.managedObjectContext!
+    init(_ event: Event) {
+        self.event = event
+        moc = event.managedObjectContext!
     }
 }
 
@@ -47,7 +47,7 @@ extension WeekService {
         let daysDifference = index.row - todayIndexRow
         guard let resultDate = calendar.date(byAdding: .day, value: daysDifference, to: Date.now) else { return nil }
 
-        let request = NSFetchRequest<NSNumber>(entityName: "CountableEventHappeningDescription")
+        let request = NSFetchRequest<NSNumber>(entityName: "Happening")
         request.predicate = makeDayPredicate(for: resultDate)
         request.resultType = .countResultType
 
@@ -74,6 +74,6 @@ extension WeekService {
         components.second = 59
         let endDate = calendar.date(from: components)
         let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
-        return NSPredicate(format: format, argumentArray: [countableEvent, startDate!, endDate!])
+        return NSPredicate(format: format, argumentArray: [event, startDate!, endDate!])
     }
 }

@@ -14,15 +14,15 @@ protocol BeltControllerDelegate: UIViewController {
 
 class BeltController: UIViewController {
     // MARK: I18n
-    static let dayAverage = NSLocalizedString("label.stats.average.day", comment: "CountableEventDetailsScreen")
-    static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "CountableEventDetailsScreen")
-    static let lastWeekTotal = NSLocalizedString("label.stats.weekLast.total", comment: "CountableEventDetailsScreen")
-    static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "CountableEventDetailsScreen")
-    static let lockScreenAdd = NSLocalizedString("button.lockScreen.add", comment: "CountableEventDetailsScreen")
-    static let lockScreenRemove = NSLocalizedString("button.lockScreen.remove", comment: "CountableEventDetailsScreen")
+    static let dayAverage = NSLocalizedString("label.stats.average.day", comment: "EventDetailsScreen")
+    static let weekAverage = NSLocalizedString("label.stats.average.week", comment: "EventDetailsScreen")
+    static let lastWeekTotal = NSLocalizedString("label.stats.weekLast.total", comment: "EventDetailsScreen")
+    static let thisWeekTotal = NSLocalizedString("label.stats.weekThis.total", comment: "EventDetailsScreen")
+    static let lockScreenAdd = NSLocalizedString("button.lockScreen.add", comment: "EventDetailsScreen")
+    static let lockScreenRemove = NSLocalizedString("button.lockScreen.remove", comment: "EventDetailsScreen")
 
     // MARK: - Properties
-    var countableEvent: CountableEvent!
+    var event: Event!
     weak var delegate: BeltControllerDelegate?
 
     private let viewRoot = BeltView()
@@ -72,10 +72,10 @@ extension BeltController {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
 
-        let dayAverage = formatter.string(from: countableEvent.dayAverage as NSNumber)
-        let weekAverage = formatter.string(from: countableEvent.weekAverage as NSNumber)
-        let lastWeekTotal = formatter.string(from: countableEvent.lastWeekTotal as NSNumber)
-        let thisWeekTotal = formatter.string(from: countableEvent.thisWeekTotal as NSNumber)
+        let dayAverage = formatter.string(from: event.dayAverage as NSNumber)
+        let weekAverage = formatter.string(from: event.weekAverage as NSNumber)
+        let lastWeekTotal = formatter.string(from: event.lastWeekTotal as NSNumber)
+        let thisWeekTotal = formatter.string(from: event.thisWeekTotal as NSNumber)
 
         let viewDayAverage = ViewStatDisplay(title: dayAverage, description: Self.dayAverage)
         let viewWeekAverage = ViewStatDisplay(title: weekAverage, description: Self.weekAverage)
