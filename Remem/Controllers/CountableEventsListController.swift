@@ -22,6 +22,7 @@ class CountableEventsListController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
+        title = "Events list"
         update()
         setupTableView()
         setupEventHandlers()
@@ -61,11 +62,8 @@ extension CountableEventsListController: CountableEventCellDelegate {
         else { return }
 
         let detailsController = makeDetailsController(for: countableEvent)
-        let navigationController = makeNavigationController(for: detailsController)
 
-        present(navigationController, animated: true) {
-            self.update()
-        }
+        navigationController?.pushViewController(detailsController, animated: true)
     }
 
     func didSwipeAction(_ cell: CountableEventCell) {
@@ -137,22 +135,6 @@ extension CountableEventsListController {
                                                happeningsListController: happeningsListController,
                                                weekController: weekController,
                                                beltController: beltController)
-    }
-
-    private func makeNavigationController(for controller: CountableEventDetailsController) -> UINavigationController {
-        let navigation = UINavigationController(rootViewController: controller)
-
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowImage = nil
-        appearance.shadowColor = .clear
-
-        navigation.navigationBar.scrollEdgeAppearance = appearance
-        navigation.navigationBar.standardAppearance = appearance
-        navigation.navigationBar.compactAppearance = appearance
-
-        return navigation
     }
 
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {

@@ -17,9 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let controller = CountableEventsListController()
+        let navigation = UINavigationController(rootViewController: controller)
 
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = controller
+        window.rootViewController = navigation
         window.makeKeyAndVisible()
 
         self.window = window

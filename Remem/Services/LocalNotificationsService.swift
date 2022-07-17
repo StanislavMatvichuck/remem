@@ -5,8 +5,13 @@
 //  Created by Stanislav Matvichuck on 20.04.2022.
 //
 
-import CoreData
 import UIKit
+
+public let happeningsManipulcationNotificationsCategory = "CountableEventHappeningDescriptionsManipulation"
+
+public enum ActionIdentifier: String {
+    case add
+}
 
 protocol LocalNotificationsServiceDelegate: AnyObject {
     func localNotificationService(authorized: Bool)
