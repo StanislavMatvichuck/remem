@@ -12,25 +12,15 @@ class EventDetailsController: UIViewController {
     var event: Event
 
     let clockController: ClockController
-    let happeningsListController: HappeningsListController
-    let beltController: BeltController
     let weekController: WeekController
-
-    let notificationsService = LocalNotificationsService()
-    var lockScreenNotificationMustBeAdded = false
-    var lockScreenNotificationId: String?
 
     // MARK: - Init
     init(event: Event,
          clockController: ClockController,
-         happeningsListController: HappeningsListController,
-         weekController: WeekController,
-         beltController: BeltController)
+         weekController: WeekController)
     {
         self.event = event
         self.clockController = clockController
-        self.happeningsListController = happeningsListController
-        self.beltController = beltController
         self.weekController = weekController
 
         super.init(nibName: nil, bundle: nil)
@@ -44,15 +34,8 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         title = event.name
 
-        notificationsService.delegate = self
-        notificationsService.requestSettings()
-
         setupClock()
-        setupHappeningsList()
-        setupBelt()
         setupWeek()
-
-        setupAddToLockScreenButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,16 +47,6 @@ class EventDetailsController: UIViewController {
 
 // MARK: - Private
 extension EventDetailsController {
-    private func setupAddToLockScreenButton() {
-        beltController.installAddToLockScreenButton()
-        relayoutCollectionView()
-    }
-
-    private func setupRemoveFromLockScreenButton() {
-        beltController.installRemoveFromLockScreenButton()
-        relayoutCollectionView()
-    }
-
     private func relayoutCollectionView() {
         guard let view = weekController.view as? WeekView else { return }
         view.collection.collectionViewLayout.invalidateLayout()
@@ -81,16 +54,6 @@ extension EventDetailsController {
 
     private func setupClock() {
         contain(controller: clockController, in: viewRoot.clock)
-    }
-
-    private func setupHappeningsList() {
-        contain(controller: happeningsListController, in: viewRoot.happeningsList)
-    }
-
-    private func setupBelt() {
-        beltController.event = event
-        beltController.delegate = self
-        contain(controller: beltController, in: viewRoot.belt)
     }
 
     private func setupWeek() {
@@ -103,56 +66,5 @@ extension EventDetailsController {
         addChild(controller)
         view.addAndConstrain(controller.view)
         controller.didMove(toParent: self)
-    }
-}
-
-// MARK: - Lock screen notification handling
-extension EventDetailsController: LocalNotificationsServiceDelegate {
-    var idString: String { event.objectID.uriRepresentation().absoluteString }
-
-    func localNotificationService(settings: UNNotificationSettings) {
-        if settings.authorizationStatus == .authorized { notificationsService.requestLockScreenNotification(for: idString) }
-    }
-
-    func localNotificationService(authorized: Bool) {
-        guard authorized else { return }
-        addLockScreenNotificationIfNeeded()
-        notificationsService.requestLockScreenNotification(for: idString)
-    }
-
-    func localNotificationServiceAddingRequestFinishedWith(error: Error?) {
-        guard error == nil else { return }
-        notificationsService.requestLockScreenNotification(for: idString)
-    }
-
-    func localNotificationService(lockScreenNotification: UNNotificationRequest?, for: String) {
-        if let notification = lockScreenNotification {
-            lockScreenNotificationId = notification.identifier
-            setupRemoveFromLockScreenButton()
-        } else {
-            setupAddToLockScreenButton()
-        }
-    }
-
-    private func addLockScreenNotificationIfNeeded() {
-        guard lockScreenNotificationMustBeAdded else { return }
-
-        notificationsService.addLockScreenNotification(text: event.name ?? "repeating notification text",
-                                                       identifier: idString)
-        lockScreenNotificationMustBeAdded = false
-    }
-}
-
-// MARK: - BeltController delegate
-extension EventDetailsController: BeltControllerDelegate {
-    func didPressAddToLockScreen() {
-        notificationsService.requestAuthorization()
-        lockScreenNotificationMustBeAdded = true
-    }
-
-    func didPressRemoveFromLockScreen() {
-        guard let id = lockScreenNotificationId else { return }
-        notificationsService.removePendingNotifications(id)
-        notificationsService.requestLockScreenNotification(for: idString)
     }
 }

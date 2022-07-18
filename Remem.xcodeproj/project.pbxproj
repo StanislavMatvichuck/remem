@@ -29,7 +29,6 @@
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
 		0852C6A2283D570E0027EF3E /* HappeningsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A1283D570E0027EF3E /* HappeningsListController.swift */; };
 		0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* HappeningsListView.swift */; };
-		0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A7283D5DB60027EF3E /* BeltController.swift */; };
 		0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A9283D5DC00027EF3E /* BeltView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
@@ -39,7 +38,6 @@
 		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
-		0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */; };
 		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
 		086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9B2832AC74006E08CB /* ClockAnimator.swift */; };
 		086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
@@ -115,7 +113,6 @@
 		0852C69F283D39F80027EF3E /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		0852C6A1283D570E0027EF3E /* HappeningsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsListController.swift; sourceTree = "<group>"; };
 		0852C6A3283D57230027EF3E /* HappeningsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsListView.swift; sourceTree = "<group>"; };
-		0852C6A7283D5DB60027EF3E /* BeltController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltController.swift; sourceTree = "<group>"; };
 		0852C6A9283D5DC00027EF3E /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
@@ -125,7 +122,6 @@
 		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
-		0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatDisplay.swift; sourceTree = "<group>"; };
 		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
 		086B3D9B2832AC74006E08CB /* ClockAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAnimator.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
@@ -237,7 +233,6 @@
 				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 				0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */,
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
-				0868209827BFDE2D00551F6A /* ViewStatDisplay.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -361,7 +356,6 @@
 		0890627627A0A1E30032847C /* EventDetails */ = {
 			isa = PBXGroup;
 			children = (
-				0852C6A7283D5DB60027EF3E /* BeltController.swift */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
 				0852C6A1283D570E0027EF3E /* HappeningsListController.swift */,
@@ -669,9 +663,7 @@
 				0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
 				08D47A4428129FC30085826F /* ReminderCell.swift in Sources */,
-				0852C6A8283D5DB60027EF3E /* BeltController.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
-				0868209927BFDE2D00551F6A /* ViewStatDisplay.swift in Sources */,
 				08C6C4FC287DA279001F522E /* DataFacade.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,

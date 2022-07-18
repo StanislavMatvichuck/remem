@@ -21,13 +21,24 @@ class ClockFace: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        installAnimatedSublayers()
+    }
+}
+
+// MARK: - Private
+extension ClockFace {
+    private func installAnimatedSublayers() {
         if layer.sublayers == nil {
             for index in 0 ... ClockSectionsList.size - 1 {
-                let newSectionLayer = ClockSectionAnimatedLayer(frame: bounds)
-                newSectionLayer.rotate(for: index)
-
+                let newSectionLayer = makeAnimatedLayer(for: index)
                 layer.addSublayer(newSectionLayer)
             }
         }
+    }
+
+    private func makeAnimatedLayer(for index: Int) -> ClockSectionAnimatedLayer {
+        let layer = ClockSectionAnimatedLayer(frame: bounds)
+        layer.rotate(for: index)
+        return layer
     }
 }

@@ -122,7 +122,6 @@ extension EventsListController {
         let weekService = WeekService(event)
 
         let clockController = ClockController()
-        let beltController = BeltController()
         let happeningsListController = HappeningsListController()
         let weekController = WeekController()
 
@@ -131,10 +130,8 @@ extension EventsListController {
         weekController.weekDistributionService = weekService
 
         return EventDetailsController(event: event,
-                                               clockController: clockController,
-                                               happeningsListController: happeningsListController,
-                                               weekController: weekController,
-                                               beltController: beltController)
+                                      clockController: clockController,
+                                      weekController: weekController)
     }
 
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {

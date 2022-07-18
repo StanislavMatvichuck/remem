@@ -44,7 +44,11 @@ extension Clock {
     private func setupLayout() {
         addLabels()
         addIcon()
-        addClock()
+        addAndConstrain(clockFace)
+
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalTo: heightAnchor),
+        ])
     }
 
     private func addLabels() {
@@ -76,11 +80,6 @@ extension Clock {
             iconContainer.widthAnchor.constraint(equalToConstant: 32.0),
             iconContainer.heightAnchor.constraint(equalToConstant: 32.0),
         ])
-    }
-
-    private func addClock() {
-        clockFace.translatesAutoresizingMaskIntoConstraints = false
-        addAndConstrain(clockFace)
     }
 
     private func makeLabel(_ text: String) -> UILabel {
