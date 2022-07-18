@@ -8,6 +8,10 @@
 import UIKit
 
 class ClockSectionAnimatedLayer: CAShapeLayer {
+    static let length = 48.0
+    static let width = 4.0
+
+    // MARK: - Properties
     private var section = ClockSection(happeningsAmount: 0,
                                        hasFreshHappening: false,
                                        isToday: true)
@@ -49,8 +53,9 @@ extension ClockSectionAnimatedLayer {
     }
 
     func rotate(for index: Int) {
-        let angle = (5.0 * CGFloat(index) * CGFloat.pi) / 180.0 // calculate angle
-        transform = CATransform3DMakeRotation(angle, 0, 0, 1)
+        let angleDegrees = 360.0 / CGFloat(ClockSectionsList.size) * CGFloat(index)
+        let angleRad = ((angleDegrees + 180.0) * CGFloat.pi) / 180.0
+        transform = CATransform3DMakeRotation(angleRad, 0, 0, 1)
     }
 }
 
@@ -58,8 +63,8 @@ extension ClockSectionAnimatedLayer {
 extension ClockSectionAnimatedLayer {
     private func path() -> UIBezierPath {
         // TODO: clock layout for different screen sizes
-        let sectionWidth = 4.0
-        let sectionMaxHeight = 32.0
+        let sectionWidth = Self.width
+        let sectionMaxHeight = Self.length
         let sectionWidthCompensation = sectionWidth / 2
         let startOfSectionPoint = CGPoint(x: center.x, y: sectionMaxHeight - sectionWidthCompensation)
         let endOfSectionPoint = CGPoint(x: center.x, y: sectionWidthCompensation)

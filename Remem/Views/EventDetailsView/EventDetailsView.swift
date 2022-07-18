@@ -25,7 +25,14 @@ class EventDetailsView: UIView {
 
     private func setupLayout() {
         let scroll = ViewScroll(.vertical)
-        addAndConstrain(scroll)
         scroll.contain(views: clock)
+
+        addSubview(scroll)
+        NSLayoutConstraint.activate([
+            scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scroll.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scroll.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
 }

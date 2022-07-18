@@ -10,7 +10,6 @@ import UIKit
 class ClockView: UIView {
     // MARK: - Properties
     let clock = Clock()
-    let animator = ClockAnimator()
 
     // MARK: - Init
     init() {

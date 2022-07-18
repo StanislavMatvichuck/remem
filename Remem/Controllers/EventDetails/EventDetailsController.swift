@@ -11,8 +11,9 @@ class EventDetailsController: UIViewController {
     // MARK: - Properties
     var event: Event
 
-    let clockController: ClockController
-    let weekController: WeekController
+    private let viewRoot = EventDetailsView()
+    private let clockController: ClockController
+    private let weekController: WeekController
 
     // MARK: - Init
     init(event: Event,
@@ -29,12 +30,10 @@ class EventDetailsController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
-    private let viewRoot = EventDetailsView()
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = event.name
-
-        setupClock()
+        contain(controller: clockController, in: viewRoot.clock)
         setupWeek()
     }
 
@@ -47,15 +46,6 @@ class EventDetailsController: UIViewController {
 
 // MARK: - Private
 extension EventDetailsController {
-    private func relayoutCollectionView() {
-        guard let view = weekController.view as? WeekView else { return }
-        view.collection.collectionViewLayout.invalidateLayout()
-    }
-
-    private func setupClock() {
-        contain(controller: clockController, in: viewRoot.clock)
-    }
-
     private func setupWeek() {
         weekController.event = event
         contain(controller: weekController, in: viewRoot.week)

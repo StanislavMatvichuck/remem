@@ -38,7 +38,6 @@
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
-		086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9B2832AC74006E08CB /* ClockAnimator.swift */; };
 		086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
 		086DC6D8288063BB0048F22F /* EventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D7288063BB0048F22F /* EventsListService.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -121,7 +120,6 @@
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
-		086B3D9B2832AC74006E08CB /* ClockAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockAnimator.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086DC6D7288063BB0048F22F /* EventsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListService.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -484,7 +482,6 @@
 			isa = PBXGroup;
 			children = (
 				0879AC8F2879B12400D8DD8E /* Clock */,
-				086B3D9B2832AC74006E08CB /* ClockAnimator.swift */,
 				0852C69F283D39F80027EF3E /* ClockView.swift */,
 			);
 			path = ClockView;
@@ -622,7 +619,6 @@
 				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
-				086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,

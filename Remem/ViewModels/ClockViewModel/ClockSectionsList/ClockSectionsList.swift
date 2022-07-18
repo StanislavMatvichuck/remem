@@ -11,7 +11,7 @@ struct ClockSectionsList {
     static let size = 72
 
     private static let startSeconds = 0
-    private static let endSeconds = 59 * 60 * 60 + 59 * 60 + 59
+    private static let endSeconds = 24 * 60 * 60
 
     // MARK: - Properties
     var sections: [ClockSection] = Array(repeating: ClockSection(), count: Self.size)
@@ -49,7 +49,7 @@ extension ClockSectionsList {
     }
 
     private mutating func reset() {
-        sections = Array(repeating: ClockSection(), count: 72)
+        sections = Array(repeating: ClockSection(), count: Self.size)
     }
 
     private func seconds(for date: Date) -> Int {
