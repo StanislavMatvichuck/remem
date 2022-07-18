@@ -14,6 +14,7 @@
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
 		080A15ED27A06003001BAFEB /* ExtensionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEvent.swift */; };
+		080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
@@ -48,6 +49,7 @@
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
+		088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A60FB28857D3C0062EB9E /* ClockService.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0890627C27A0A2700032847C /* HappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* HappeningCell.swift */; };
@@ -78,7 +80,6 @@
 		08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
-		08FF32302842037B002E9F13 /* ClockSectionsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080A15EC27A06003001BAFEB /* ExtensionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEvent.swift; sourceTree = "<group>"; };
+		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsServiceTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		088A60FB28857D3C0062EB9E /* ClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockService.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* HappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningCell.swift; sourceTree = "<group>"; };
@@ -170,7 +173,6 @@
 		08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsTests.swift; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
-		08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,15 @@
 				0830DA3527C3A6E000479014 /* SettingsView.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		080BF1462884A30400DDF55F /* ClockViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0879AC912879B27200D8DD8E /* ClockSectionsList */,
+				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
+			);
+			path = ClockViewModel;
 			sourceTree = "<group>";
 		};
 		0852C69C283D33F60027EF3E /* Clock */ = {
@@ -234,6 +245,7 @@
 		086DC6CE2880570D0048F22F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				080BF1462884A30400DDF55F /* ClockViewModel */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 			);
 			path = ViewModels;
@@ -245,6 +257,7 @@
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
 				086DC6D7288063BB0048F22F /* EventsListService.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
+				088A60FB28857D3C0062EB9E /* ClockService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -320,8 +333,8 @@
 		0879AC8E2879B0E800D8DD8E /* ClockFace */ = {
 			isa = PBXGroup;
 			children = (
+				08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */,
 				08286B02284170A900FBC022 /* ClockFace.swift */,
-				0879AC902879B22F00D8DD8E /* ClockSectionsAnimator */,
 			);
 			path = ClockFace;
 			sourceTree = "<group>";
@@ -335,16 +348,6 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
-		0879AC902879B22F00D8DD8E /* ClockSectionsAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */,
-				08FF322F2842037B002E9F13 /* ClockSectionsAnimator.swift */,
-				0879AC912879B27200D8DD8E /* ClockSectionsList */,
-			);
-			path = ClockSectionsAnimator;
-			sourceTree = "<group>";
-		};
 		0879AC912879B27200D8DD8E /* ClockSectionsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,7 +358,7 @@
 			path = ClockSectionsList;
 			sourceTree = "<group>";
 		};
-		0890627627A0A1E30032847C /* CountableEventDetails */ = {
+		0890627627A0A1E30032847C /* EventDetails */ = {
 			isa = PBXGroup;
 			children = (
 				0852C6A7283D5DB60027EF3E /* BeltController.swift */,
@@ -364,15 +367,15 @@
 				0852C6A1283D570E0027EF3E /* HappeningsListController.swift */,
 				0852C6AB283D66010027EF3E /* WeekController */,
 			);
-			path = CountableEventDetails;
+			path = EventDetails;
 			sourceTree = "<group>";
 		};
 		08C6C4FD287DAC44001F522E /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
-				08C6C501287DB4A1001F522E /* HappeningsRepository.swift */,
 				08C6C4FB287DA279001F522E /* DataFacade.swift */,
 				08C6C4FE287DAC55001F522E /* EventsRepository.swift */,
+				08C6C501287DB4A1001F522E /* HappeningsRepository.swift */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -452,7 +455,7 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0890627627A0A1E30032847C /* CountableEventDetails */,
+				0890627627A0A1E30032847C /* EventDetails */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
 				08D47A4028129D210085826F /* RemindersController.swift */,
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
@@ -630,6 +633,7 @@
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086B3D9C2832AC74006E08CB /* ClockAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
+				088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0857A7B02822720E006CCC99 /* WeekService.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
@@ -655,6 +659,7 @@
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
+				080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */,
 				08C6C4FF287DAC55001F522E /* EventsRepository.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
@@ -673,7 +678,6 @@
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
-				08FF32302842037B002E9F13 /* ClockSectionsAnimator.swift in Sources */,
 				086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

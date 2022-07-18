@@ -11,28 +11,18 @@ class ClockController: UIViewController {
     // MARK: - Properties
     var event: Event!
     private let viewRoot = ClockView()
+    private let service = ClockService(HappeningsRepository())
+    private var viewModel: ClockViewModel! {
+        didSet { viewModel.configure(viewRoot) }
+    }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() { addTapHanders() }
+    override func viewDidLoad() {}
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLists()
-    }
-}
-
-// MARK: - User input
-extension ClockController {
-    private func addTapHanders() {
-        viewRoot.clockDay.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
-        viewRoot.clockNight.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleClockPress)))
-    }
-
-    @objc private func handleClockPress() {
-        viewRoot.animator.flip(dayClock: viewRoot.clockDay, nightClock: viewRoot.clockNight)
     }
 }
 
@@ -48,10 +38,11 @@ extension ClockController {
     }
 
     private func updateLists(from: Date, to: Date) {
-        let happenings = DomainFacade().getHappenings(for: event, between: from, and: to)
+        let happenings = service.getList(for: event, between: from, and: to)
+        var newList = ClockSectionsList()
+        newList.fill(with: happenings)
 
-        viewRoot.clockNight.clockFace.sectionsAnimator.show(happenings)
-        viewRoot.clockDay.clockFace.sectionsAnimator.show(happenings)
+        viewModel = ClockViewModel(model: newList)
     }
 }
 

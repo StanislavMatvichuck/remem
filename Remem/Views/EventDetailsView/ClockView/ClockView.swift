@@ -9,9 +9,7 @@ import UIKit
 
 class ClockView: UIView {
     // MARK: - Properties
-    let clockDay = Clock(for: .day)
-    let clockNight = Clock(for: .night)
-
+    let clock = Clock()
     let animator = ClockAnimator()
 
     // MARK: - Init
@@ -20,9 +18,7 @@ class ClockView: UIView {
 
         translatesAutoresizingMaskIntoConstraints = false
 
-        addAndConstrain(clockDay)
-        addAndConstrain(clockNight)
-        clockNight.isHidden = true
+        addAndConstrain(clock)
 
         heightAnchor.constraint(equalToConstant: .hScreen / 3 + 15).isActive = true
     }

@@ -9,25 +9,22 @@ import UIKit
 
 class Clock: UIView {
     // MARK: - Properties
-    let variant: ClockSectionsList.ClockVariant
 
-    lazy var clockFace = ClockFace(variant: variant)
+    lazy var clockFace = ClockFace()
     lazy var iconContainer = UIView(al: true)
-    lazy var topDigits: UILabel = makeLabel(variant == .day ? "12" : "00")
-    lazy var rightDigits: UILabel = makeLabel(variant == .day ? "15" : "03")
-    lazy var bottomDigits: UILabel = makeLabel(variant == .day ? "18" : "06")
-    lazy var leftDigits: UILabel = makeLabel(variant == .day ? "21" : "09")
+    lazy var topDigits: UILabel = makeLabel("12")
+    lazy var rightDigits: UILabel = makeLabel("18")
+    lazy var bottomDigits: UILabel = makeLabel("00")
+    lazy var leftDigits: UILabel = makeLabel("06")
 
     private var labelsConstrained = false
 
     // MARK: - Init
-    init(for variant: ClockSectionsList.ClockVariant) {
-        self.variant = variant
-
+    init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
-        
+
         setupLayout()
     }
 
@@ -95,7 +92,8 @@ extension Clock {
     }
 
     private func makeIcon() -> UIImage {
-        let image = UIImage(systemName: variant == .day ? "sun.max" : "moon.stars")?
+        let image = UIImage(systemName: "moon.stars")?
+//        let image = UIImage(systemName: "sun.max")?
             .withTintColor(UIHelper.clockSectionBackground)
             .withRenderingMode(.alwaysOriginal)
         return image!
