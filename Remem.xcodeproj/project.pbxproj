@@ -27,7 +27,6 @@
 		0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C94A281163C9003ED51D /* SettingsRowView.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
-		0852C6A2283D570E0027EF3E /* HappeningsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A1283D570E0027EF3E /* HappeningsListController.swift */; };
 		0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* HappeningsListView.swift */; };
 		0852C6AA283D5DC00027EF3E /* BeltView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A9283D5DC00027EF3E /* BeltView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
@@ -111,7 +110,6 @@
 		0848C94A281163C9003ED51D /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		0852C69F283D39F80027EF3E /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
-		0852C6A1283D570E0027EF3E /* HappeningsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsListController.swift; sourceTree = "<group>"; };
 		0852C6A3283D57230027EF3E /* HappeningsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsListView.swift; sourceTree = "<group>"; };
 		0852C6A9283D5DC00027EF3E /* BeltView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeltView.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
@@ -358,7 +356,6 @@
 			children = (
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
-				0852C6A1283D570E0027EF3E /* HappeningsListController.swift */,
 				0852C6AB283D66010027EF3E /* WeekController */,
 			);
 			path = EventDetails;
@@ -633,7 +630,6 @@
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
 				08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
-				0852C6A2283D570E0027EF3E /* HappeningsListController.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0890627E27A0AD460032847C /* EntensionHappening.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,

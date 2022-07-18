@@ -122,11 +122,9 @@ extension EventsListController {
         let weekService = WeekService(event)
 
         let clockController = ClockController()
-        let happeningsListController = HappeningsListController()
         let weekController = WeekController()
 
         clockController.event = event
-        happeningsListController.event = event
         weekController.weekDistributionService = weekService
 
         return EventDetailsController(event: event,
