@@ -8,9 +8,8 @@
 import Foundation
 
 struct ClockSectionsList {
-    static let size = 72
+    static let size = 48
 
-    private static let startSeconds = 0
     private static let endSeconds = 24 * 60 * 60
 
     // MARK: - Properties
@@ -65,14 +64,14 @@ extension ClockSectionsList {
 
     private func index(for seconds: Int) -> Int? {
         guard
-            seconds >= Self.startSeconds,
+            seconds >= 0,
             seconds <= Self.endSeconds
         else { return nil }
 
         let secondsPerSection = Self.endSeconds / Self.size
 
         for i in 1 ... Self.size {
-            if seconds <= Self.startSeconds + i * secondsPerSection {
+            if seconds <= i * secondsPerSection {
                 return i - 1
             }
         }

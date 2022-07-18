@@ -9,7 +9,7 @@ import UIKit
 
 class ClockSectionAnimatedLayer: CAShapeLayer {
     static let length = 48.0
-    static let width = 4.0
+    static let width = 16.0
 
     // MARK: - Properties
     private var section = ClockSection(happeningsAmount: 0,
@@ -31,7 +31,7 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
     }
 
     private func commonInit() {
-        lineWidth = 4.0
+        lineWidth = Self.width
         lineCap = .round
         path = path().cgPath
         strokeColor = Self.color(for: section).cgColor
@@ -109,7 +109,7 @@ extension ClockSectionAnimatedLayer {
         animation.fromValue = from.cgColor
         animation.toValue = to.cgColor
         animation.fillMode = .backwards
-        animation.beginTime = CACurrentMediaTime() + Double(index) * 0.5 / 72
+        animation.beginTime = beginTime(for: index)
 
         strokeColor = to.cgColor
         add(animation, forKey: nil)
@@ -121,7 +121,7 @@ extension ClockSectionAnimatedLayer {
         animation.fromValue = from
         animation.toValue = to
         animation.fillMode = .backwards
-        animation.beginTime = CACurrentMediaTime() + Double(index) * 0.5 / 72
+        animation.beginTime = beginTime(for: index)
 
         opacity = to
         add(animation, forKey: nil)
@@ -134,10 +134,15 @@ extension ClockSectionAnimatedLayer {
         animation.toValue = to
         animation.fillMode = .backwards
 
-        animation.beginTime = CACurrentMediaTime() + Double(index) * 0.5 / 72
+        animation.beginTime = beginTime(for: index)
 
         strokeEnd = to
         add(animation, forKey: nil)
+    }
+
+    private func beginTime(for index: Int) -> CFTimeInterval {
+//        return CACurrentMediaTime() + Double(index) * 0.5 / 72
+        return CACurrentMediaTime() + Double(index) * 0.5 / CGFloat(ClockSectionsList.size)
     }
 
     // Static methods

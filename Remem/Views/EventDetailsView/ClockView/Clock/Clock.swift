@@ -36,10 +36,16 @@ extension Clock {
     private func setupLayout() {
         addLabels()
         addIcons()
-        addAndConstrain(clockFace)
+        addSubview(clockFace)
 
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalTo: heightAnchor),
+
+            clockFace.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
+            clockFace.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
+
+            clockFace.topAnchor.constraint(equalTo: topAnchor),
+            clockFace.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 
