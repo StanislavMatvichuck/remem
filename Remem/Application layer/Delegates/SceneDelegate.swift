@@ -19,6 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let controller = EventsListController()
         let navigation = UINavigationController(rootViewController: controller)
         navigation.navigationBar.prefersLargeTitles = true
+        navigation.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
+            NSAttributedString.Key.font: UIHelper.fontBold,
+        ]
+        navigation.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
+            NSAttributedString.Key.font: UIHelper.fontSmallBold,
+        ]
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navigation

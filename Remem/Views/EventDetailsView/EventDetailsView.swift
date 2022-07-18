@@ -9,7 +9,6 @@ import UIKit
 
 class EventDetailsView: UIView {
     // MARK: - Properties
-
     let week = UIView(al: true)
     let happeningsList = UIView(al: true)
     let clock = UIView(al: true)
@@ -17,7 +16,7 @@ class EventDetailsView: UIView {
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        backgroundColor = .systemBackground
+        backgroundColor = .secondarySystemBackground
         setupLayout()
     }
 
@@ -25,7 +24,10 @@ class EventDetailsView: UIView {
 
     private func setupLayout() {
         let scroll = ViewScroll(.vertical)
+        scroll.contain(views: make(title: "By hours"))
         scroll.contain(views: clock)
+        scroll.contain(views: make(title: "By days of week"))
+        scroll.contain(views: week)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -34,5 +36,23 @@ class EventDetailsView: UIView {
             scroll.trailingAnchor.constraint(equalTo: trailingAnchor),
             scroll.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+
+    private func make(title: String) -> UIView {
+        let label = UILabel(al: true)
+        label.text = title
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
+
+        let view = UIView(al: true)
+        view.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor),
+            label.topAnchor.constraint(equalTo: view.topAnchor),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+
+        return view
     }
 }

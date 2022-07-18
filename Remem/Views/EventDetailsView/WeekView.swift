@@ -75,6 +75,8 @@ extension WeekView {
         addSubview(weekdaysLine)
 
         NSLayoutConstraint.activate([
+            collection.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+            
             collection.topAnchor.constraint(equalTo: topAnchor, constant: .sm),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),
