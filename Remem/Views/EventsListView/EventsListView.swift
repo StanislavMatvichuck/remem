@@ -110,7 +110,7 @@ class EventsListView: UIView {
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        backgroundColor = UIHelper.background
+        backgroundColor = UIHelper.itemBackground
         setupLayout()
         // these flags configure UIView tree
         emptyLabel.isHidden = false

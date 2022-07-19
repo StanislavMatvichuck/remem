@@ -26,7 +26,7 @@ class EventDetailsView: UIView {
         let statsView = makeStatsView()
         let scroll = ViewScroll(.vertical)
         scroll.contain(views:
-            make(title: "By hours"),
+//            make(title: "By hours"),
             clock,
             make(title: "Stats"),
             statsView,

@@ -14,7 +14,7 @@ protocol EventCellDelegate: AnyObject {
 
 final class EventCell: UITableViewCell {
     static let reuseIdentifier = "EventCell"
-    static let backgroundColor = UIHelper.itemBackground
+    static let backgroundColor = UIHelper.background
     static let pinColor = UIHelper.brandDimmed
     static let height = .d2 + UIHelper.spacing
 
@@ -66,7 +66,7 @@ final class EventCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIHelper.background
+        backgroundColor = .clear
         setupViewRoot()
         setupViewMovable()
         setupEventHandlers()
