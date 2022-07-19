@@ -47,7 +47,7 @@ extension WeekService {
         let daysDifference = index.row - todayIndexRow
         guard let resultDate = calendar.date(byAdding: .day, value: daysDifference, to: Date.now) else { return nil }
 
-        let request = NSFetchRequest<NSNumber>(entityName: "Happening")
+        let request = NSFetchRequest<NSNumber>(entityName: "Point")
         request.predicate = makeDayPredicate(for: resultDate)
         request.resultType = .countResultType
 
@@ -73,7 +73,7 @@ extension WeekService {
         components.minute = 59
         components.second = 59
         let endDate = calendar.date(from: components)
-        let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
         return NSPredicate(format: format, argumentArray: [event, startDate!, endDate!])
     }
 }

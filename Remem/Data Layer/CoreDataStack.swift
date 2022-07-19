@@ -8,7 +8,7 @@
 import CoreData
 
 class CoreDataStack {
-    private static let entries = "DomainModel"
+    private static let entries = "EntriesList"
 
     private static let model: NSManagedObjectModel = {
         let url = Bundle.main.url(forResource: entries, withExtension: "momd")!
