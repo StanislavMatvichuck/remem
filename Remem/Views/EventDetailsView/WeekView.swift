@@ -11,19 +11,15 @@ class WeekView: UIView {
     // MARK: - Properties
     let collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isPagingEnabled = true
-
+        view.backgroundColor = .clear
         view.register(DayOfTheWeekCell.self, forCellWithReuseIdentifier: DayOfTheWeekCell.reuseIdentifier)
-
-        view.backgroundColor = .systemBackground
 
         return view
     }()
@@ -76,7 +72,7 @@ extension WeekView {
 
         NSLayoutConstraint.activate([
             collection.heightAnchor.constraint(equalToConstant: .hScreen / 3),
-            
+
             collection.topAnchor.constraint(equalTo: topAnchor, constant: .sm),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),

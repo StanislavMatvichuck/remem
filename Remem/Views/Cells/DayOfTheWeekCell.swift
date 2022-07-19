@@ -42,7 +42,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureViews() {
-        backgroundContainer.backgroundColor = UIHelper.itemBackground
+        backgroundContainer.backgroundColor = UIHelper.background
         backgroundContainer.layer.cornerRadius = UIHelper.spacing / 1.5
 
         sectionsContainer.transform = CGAffineTransform(scaleX: 1, y: -1)

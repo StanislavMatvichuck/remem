@@ -23,11 +23,15 @@ class EventDetailsView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
+        let statsView = makeStatsView()
         let scroll = ViewScroll(.vertical)
-        scroll.contain(views: make(title: "By hours"))
-        scroll.contain(views: clock)
-        scroll.contain(views: make(title: "By days of week"))
-        scroll.contain(views: week)
+        scroll.contain(views:
+            make(title: "By hours"),
+            clock,
+            make(title: "Stats"),
+            statsView,
+            make(title: "By days of week"),
+            week)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -52,6 +56,64 @@ class EventDetailsView: UIView {
             label.topAnchor.constraint(equalTo: view.topAnchor),
             label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+
+        return view
+    }
+}
+
+// MARK: - Private
+extension EventDetailsView {
+    private func makeStatsView() -> UIView {
+        let statRow01 = makeStatsRow(amounts: [1.0, 23.4], descriptions: ["Some text", "Another label"])
+        let statRow02 = makeStatsRow(amounts: [45.6, 789.0], descriptions: ["Some text", "Another much longer label"])
+        let statsView = UIView(al: true)
+        statsView.addSubview(statRow01)
+        statsView.addSubview(statRow02)
+
+        NSLayoutConstraint.activate([
+            statRow01.topAnchor.constraint(equalTo: statsView.topAnchor),
+            statRow01.leadingAnchor.constraint(equalTo: statsView.readableContentGuide.leadingAnchor),
+            statRow01.trailingAnchor.constraint(equalTo: statsView.readableContentGuide.trailingAnchor),
+
+            statRow02.topAnchor.constraint(equalTo: statRow01.bottomAnchor, constant: UIHelper.spacing),
+            statRow02.leadingAnchor.constraint(equalTo: statsView.readableContentGuide.leadingAnchor),
+            statRow02.trailingAnchor.constraint(equalTo: statsView.readableContentGuide.trailingAnchor),
+            statRow02.bottomAnchor.constraint(equalTo: statsView.bottomAnchor),
+        ])
+
+        return statsView
+    }
+
+    private func makeStatsRow(amounts: [Double], descriptions: [String]) -> UIStackView {
+        let stack = UIStackView(al: true)
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.alignment = .firstBaseline
+        stack.spacing = UIHelper.spacing
+
+        for (index, amount) in amounts.enumerated() {
+            stack.addArrangedSubview(makeStatTile(amount: amount, description: descriptions[index]))
+        }
+
+        return stack
+    }
+
+    private func makeStatTile(amount: Double, description: String) -> UIView {
+        let labelAmount = UILabel(al: true)
+        labelAmount.text = "\(amount)"
+        labelAmount.font = UIHelper.fontBold
+        labelAmount.textColor = UIHelper.itemFont
+
+        let labelDescription = UILabel(al: true)
+        labelDescription.text = description
+        labelDescription.numberOfLines = 0
+        labelDescription.font = UIHelper.font
+        labelDescription.textColor = UIHelper.itemFont
+
+        let view = UIStackView(al: true)
+        view.axis = .vertical
+        view.addArrangedSubview(labelAmount)
+        view.addArrangedSubview(labelDescription)
 
         return view
     }
