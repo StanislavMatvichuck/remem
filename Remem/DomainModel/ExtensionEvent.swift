@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Getters
 extension Event {
     var totalAmount: Int {
-        guard let happenings = self.points else { return 0 }
+        guard let happenings = self.happenings else { return 0 }
         return happenings.reduce(0) { partialResult, point in
             let point = point as! Happening
             return partialResult + Int(point.value)
@@ -62,7 +62,7 @@ extension Event {
     var lastWeekTotal: Int { totalAtWeek(previousToCurrent: 1) }
 
     private func totalAtWeek(previousToCurrent: Int) -> Int {
-        guard let happenings = self.points else { return 0 }
+        guard let happenings = self.happenings else { return 0 }
 
         var result = 0
         for point in happenings {
@@ -85,7 +85,7 @@ extension Event {
 
         let point = Happening(context: moc)
         point.dateCreated = Date()
-        point.entry = self
+        point.event = self
         point.value = 1
 
         return point
@@ -97,7 +97,7 @@ extension Event {
 
         let point = Happening(context: moc)
         point.dateCreated = withDate
-        point.entry = self
+        point.event = self
         point.value = 1
 
         return point

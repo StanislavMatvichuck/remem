@@ -72,7 +72,7 @@ extension EventsListViewModel {
 
     private func getHintState() -> HintState {
         if model.count == 0 { return .empty }
-        if model.filter({ $0.freshPoint != nil }).count == 0 { return .placeFirstMark }
+        if model.filter({ $0.lastHappening != nil }).count == 0 { return .placeFirstMark }
         if model.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
         return .noHints
     }

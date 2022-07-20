@@ -16,7 +16,7 @@ class HappeningsRepository {
 // MARK: - Public
 extension HappeningsRepository {
     func getTotalHappeningsAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Point")
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Happening")
         fetchRequest.resultType = .countResultType
 
         do {
@@ -35,7 +35,7 @@ extension HappeningsRepository {
             let end = makeEndOfTheDay(for: end)
         else { fatalError("HappeningsService.getHappenings invalid date") }
 
-        let format = "entry == %@ AND dateCreated >= %@ AND dateCreated =< %@"
+        let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
         let predicate = NSPredicate(format: format, argumentArray: [event, start, end])
 
         let request = Happening.fetchRequest()

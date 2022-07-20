@@ -16,7 +16,7 @@ class EventsRepository {
 // MARK: - Public
 extension EventsRepository {
     func fetch() {
-        let fetchRequest = NSFetchRequest<Event>(entityName: "Entry")
+        let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
 
         do {
@@ -29,7 +29,7 @@ extension EventsRepository {
     func getAmount() -> Int { return events.count }
 
     func getVisitedAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Entry")
+        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Event")
         fetchRequest.resultType = .countResultType
 
         let predicate = NSPredicate(format: "%K != nil", #keyPath(Event.dateVisited))
@@ -77,9 +77,9 @@ extension EventsRepository {
     func makeHappening(at event: Event, dateTime: Date) -> Happening {
         let newHappening = Happening(context: moc)
         newHappening.dateCreated = dateTime
-        newHappening.entry = event
+        newHappening.event = event
 
-        event.freshPoint = newHappening
+        event.lastHappening = newHappening
 
         coreDataStack.save(moc)
 
