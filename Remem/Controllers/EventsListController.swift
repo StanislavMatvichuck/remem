@@ -119,13 +119,10 @@ extension EventsListController {
     }
 
     private func makeDetailsController(for event: Event) -> EventDetailsController {
-        let weekService = WeekService(event)
-
         let clockController = ClockController()
         let weekController = WeekController()
 
         clockController.event = event
-        weekController.weekDistributionService = weekService
 
         return EventDetailsController(event: event,
                                       clockController: clockController,

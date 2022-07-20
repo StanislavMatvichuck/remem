@@ -20,7 +20,7 @@
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
 		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
 		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
-		083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */; };
+		083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		0848C947281161F9003ED51D /* ReminderInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C946281161F9003ED51D /* ReminderInput.swift */; };
 		0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848C948281162DD003ED51D /* UITextFieldWithPadding.swift */; };
@@ -68,6 +68,9 @@
 		08D512362787144800C2037F /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EventsListView.swift */; };
 		08D512382787153900C2037F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512372787153900C2037F /* EventCell.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
+		08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
+		08D6E1D8288807DC003BF595 /* WeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D7288807DC003BF595 /* WeekList.swift */; };
+		08D6E1DA288807F0003BF595 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D9288807F0003BF595 /* WeekDay.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
@@ -158,6 +161,9 @@
 		08D512372787153900C2037F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming01.xcdatamodel; sourceTree = "<group>"; };
+		08D6E1D3288806FA003BF595 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
+		08D6E1D7288807DC003BF595 /* WeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekList.swift; sourceTree = "<group>"; };
+		08D6E1D9288807F0003BF595 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
@@ -215,15 +221,6 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
-		0852C6AB283D66010027EF3E /* WeekController */ = {
-			isa = PBXGroup;
-			children = (
-				0852C6AC283D66170027EF3E /* WeekController.swift */,
-				0857A7AF2822720E006CCC99 /* WeekService.swift */,
-			);
-			path = WeekController;
-			sourceTree = "<group>";
-		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +236,7 @@
 			children = (
 				080BF1462884A30400DDF55F /* ClockViewModel */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
+				08D6E1D5288807BB003BF595 /* WeekViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -246,6 +244,7 @@
 		086DC6CF288057130048F22F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0857A7AF2822720E006CCC99 /* WeekService.swift */,
 				086DC6D7288063BB0048F22F /* EventsListService.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 				088A60FB28857D3C0062EB9E /* ClockService.swift */,
@@ -353,8 +352,8 @@
 			isa = PBXGroup;
 			children = (
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
+				0852C6AC283D66170027EF3E /* WeekController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
-				0852C6AB283D66010027EF3E /* WeekController */,
 			);
 			path = EventDetails;
 			sourceTree = "<group>";
@@ -457,7 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				08C6C4F9287DA15E001F522E /* DomainFacade.swift */,
-				083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */,
+				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 				0890627D27A0AD460032847C /* EntensionHappening.swift */,
 				080A15EC27A06003001BAFEB /* ExtensionEvent.swift */,
 			);
@@ -477,6 +476,24 @@
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		08D6E1D5288807BB003BF595 /* WeekViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				08D6E1D6288807C8003BF595 /* WeekList */,
+				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+			);
+			path = WeekViewModel;
+			sourceTree = "<group>";
+		};
+		08D6E1D6288807C8003BF595 /* WeekList */ = {
+			isa = PBXGroup;
+			children = (
+				08D6E1D7288807DC003BF595 /* WeekList.swift */,
+				08D6E1D9288807F0003BF595 /* WeekDay.swift */,
+			);
+			path = WeekList;
 			sourceTree = "<group>";
 		};
 		08F63FB5287894A700984781 /* ClockView */ = {
@@ -613,11 +630,13 @@
 				08C6C502287DB4A1001F522E /* HappeningsRepository.swift in Sources */,
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
+				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
 				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
-				083D3895279AE81100134A15 /* EntriesList.xcdatamodeld in Sources */,
+				083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */,
 				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
+				08D6E1D8288807DC003BF595 /* WeekList.swift in Sources */,
 				08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
@@ -659,6 +678,7 @@
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08C6C4FC287DA279001F522E /* DataFacade.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
+				08D6E1DA288807F0003BF595 /* WeekDay.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
@@ -1061,14 +1081,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		083D3893279AE81100134A15 /* EntriesList.xcdatamodeld */ = {
+		083D3893279AE81100134A15 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */,
 				083D3894279AE81100134A15 /* Entry.xcdatamodel */,
 			);
 			currentVersion = 08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */;
-			path = EntriesList.xcdatamodeld;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
