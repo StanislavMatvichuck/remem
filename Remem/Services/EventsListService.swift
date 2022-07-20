@@ -35,5 +35,10 @@ extension EventsListService {
         repository.makeHappening(at: event, dateTime: .now)
     }
 
+    func makeHappening(by id: String) {
+        guard let event = repository.event(by: id) else { return }
+        repository.makeHappening(at: event, dateTime: .now)
+    }
+
     func getList() -> [Event] { repository.getList() }
 }

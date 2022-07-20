@@ -12,6 +12,7 @@ class EventDetailsController: UIViewController {
     var event: Event
 
     private let viewRoot = EventDetailsView()
+    private let service = EventDetailsService(EventsRepository())
     private let clockController: ClockController
     private let weekController: WeekController
 
@@ -39,8 +40,7 @@ class EventDetailsController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let domain = DomainFacade()
-        domain.visit(event: event)
+        service.visit(event)
     }
 }
 

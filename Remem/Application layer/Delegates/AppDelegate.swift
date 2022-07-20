@@ -78,8 +78,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     private func addHappening(eventId: String) {
-        let domain = DomainFacade()
-        guard let event = domain.event(by: eventId) else { return }
-        domain.makeHappening(for: event, dateTime: .now)
+        let service = EventsListService(EventsRepository())
+        service.makeHappening(by: eventId)
     }
 }
