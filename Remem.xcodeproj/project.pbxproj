@@ -201,15 +201,6 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
-		080BF1462884A30400DDF55F /* ClockViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0879AC912879B27200D8DD8E /* ClockSectionsList */,
-				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
-			);
-			path = ClockViewModel;
-			sourceTree = "<group>";
-		};
 		0852C69C283D33F60027EF3E /* Clock */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,9 +225,9 @@
 		086DC6CE2880570D0048F22F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				080BF1462884A30400DDF55F /* ClockViewModel */,
+				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
-				08D6E1D5288807BB003BF595 /* WeekViewModel */,
+				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -244,10 +235,12 @@
 		086DC6CF288057130048F22F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0857A7AF2822720E006CCC99 /* WeekService.swift */,
+				08D6E1DC28881A6C003BF595 /* ClockService */,
+				088A60FB28857D3C0062EB9E /* ClockService.swift */,
 				086DC6D7288063BB0048F22F /* EventsListService.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
-				088A60FB28857D3C0062EB9E /* ClockService.swift */,
+				08D6E1DB28881A3C003BF595 /* WeekService */,
+				0857A7AF2822720E006CCC99 /* WeekService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,16 +329,6 @@
 				0879AC8E2879B0E800D8DD8E /* ClockFace */,
 			);
 			path = Clock;
-			sourceTree = "<group>";
-		};
-		0879AC912879B27200D8DD8E /* ClockSectionsList */ = {
-			isa = PBXGroup;
-			children = (
-				080656E9283B946000C09409 /* ClockSection.swift */,
-				080656E7283B945100C09409 /* ClockSectionsList.swift */,
-				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
-			);
-			path = ClockSectionsList;
 			sourceTree = "<group>";
 		};
 		0890627627A0A1E30032847C /* EventDetails */ = {
@@ -478,22 +461,23 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		08D6E1D5288807BB003BF595 /* WeekViewModel */ = {
+		08D6E1DB28881A3C003BF595 /* WeekService */ = {
 			isa = PBXGroup;
 			children = (
-				08D6E1D6288807C8003BF595 /* WeekList */,
-				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				08D6E1D9288807F0003BF595 /* WeekDay.swift */,
+				08D6E1D7288807DC003BF595 /* WeekList.swift */,
 			);
-			path = WeekViewModel;
+			path = WeekService;
 			sourceTree = "<group>";
 		};
-		08D6E1D6288807C8003BF595 /* WeekList */ = {
+		08D6E1DC28881A6C003BF595 /* ClockService */ = {
 			isa = PBXGroup;
 			children = (
-				08D6E1D7288807DC003BF595 /* WeekList.swift */,
-				08D6E1D9288807F0003BF595 /* WeekDay.swift */,
+				080656E9283B946000C09409 /* ClockSection.swift */,
+				080656E7283B945100C09409 /* ClockSectionsList.swift */,
+				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
 			);
-			path = WeekList;
+			path = ClockService;
 			sourceTree = "<group>";
 		};
 		08F63FB5287894A700984781 /* ClockView */ = {
