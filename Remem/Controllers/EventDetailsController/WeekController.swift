@@ -16,16 +16,14 @@ class WeekController: UIViewController {
     var event: Event!
     weak var delegate: WeekControllerDelegate?
 
-    private var service = WeekService(HappeningsRepository())
+    private var service: WeekService!
     private let viewRoot = WeekView()
     private var viewModel: WeekViewModel!
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        let model = service.weekList(for: event)
-        viewModel = WeekViewModel(model: model)
-        viewModel.configure(viewRoot)
+        setupServiceAndViewModel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -42,5 +40,16 @@ extension WeekController: UIScrollViewDelegate {
         let dateStart = Date.now.days(ago: Int(weekOffset) * 7).startOfWeek!
         let dateEnd = dateStart.endOfWeek!
         delegate?.weekControllerNewWeek(from: dateStart, to: dateEnd)
+    }
+}
+
+// MARK: - Private
+extension WeekController {
+    private func setupServiceAndViewModel() {
+        service = WeekService(event)
+
+        guard let weekList = service.weekList() else { fatalError("Unable to create week list") }
+        viewModel = WeekViewModel(model: weekList)
+        viewModel.configure(viewRoot)
     }
 }

@@ -8,7 +8,20 @@
 import Foundation
 
 struct WeekDay {
-    let amount: Int
-    let dayNumber: Int
-    let isToday: Bool
+    var amount: Int = 0
+    let date: DateComponents
+}
+
+// MARK: - Public
+extension WeekDay {
+    var isToday: Bool {
+        let calendar = Calendar.current
+        if let date = calendar.date(from: date) {
+            return calendar.isDateInToday(date)
+        } else { return false }
+    }
+
+    var dayNumber: Int {
+        return date.day ?? 0
+    }
 }

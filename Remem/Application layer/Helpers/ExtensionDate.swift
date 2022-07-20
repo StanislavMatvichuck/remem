@@ -56,19 +56,25 @@ extension Date {
     ///
     /// StackOverflow
     ///
-		/// might have issues with american calendar
+    /// might have issues with american calendar
 
     var startOfWeek: Date? {
-        let c = Calendar.current
-        guard let monday = c.date(from: c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-        else { return nil }
+        let c = Calendar(identifier: .iso8601)
+        var weekComponents = c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        weekComponents.hour = 0
+        weekComponents.minute = 0
+        weekComponents.second = 0
+        guard let monday = c.date(from: weekComponents) else { return nil }
         return c.date(byAdding: .day, value: 0, to: monday)
     }
 
     var endOfWeek: Date? {
-        let c = Calendar.current
-        guard let monday = c.date(from: c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-        else { return nil }
+        let c = Calendar(identifier: .iso8601)
+        var weekComponents = c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        weekComponents.hour = 23
+        weekComponents.minute = 59
+        weekComponents.second = 59
+        guard let monday = c.date(from: weekComponents) else { return nil }
         return c.date(byAdding: .day, value: 6, to: monday)
     }
 
@@ -92,5 +98,16 @@ extension Calendar {
         let numberOfDays = dateComponents([.day], from: fromDate, to: toDate)
 
         return numberOfDays.day! + 1
+    }
+}
+
+// MARK: - StackOverflow helpers
+extension Date: Strideable {
+    public func distance(to other: Date) -> TimeInterval {
+        return other.timeIntervalSinceReferenceDate - timeIntervalSinceReferenceDate
+    }
+
+    public func advanced(by n: TimeInterval) -> Date {
+        return self + n
     }
 }
