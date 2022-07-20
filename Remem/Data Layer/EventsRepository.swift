@@ -15,35 +15,7 @@ class EventsRepository {
 
 // MARK: - Public
 extension EventsRepository {
-    func fetch() {
-        let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-
-        do {
-            events = try moc.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Unable to fetch Events \(error), \(error.userInfo)")
-        }
-    }
-
     func getAmount() -> Int { return events.count }
-
-    func getVisitedAmount() -> Int {
-        let fetchRequest = NSFetchRequest<NSNumber>(entityName: "Event")
-        fetchRequest.resultType = .countResultType
-
-        let predicate = NSPredicate(format: "%K != nil", #keyPath(Event.dateVisited))
-        fetchRequest.predicate = predicate
-
-        do {
-            let countResult = try moc.fetch(fetchRequest)
-            let count = countResult.first?.intValue ?? 0
-            return count
-        } catch let error as NSError {
-            print("Unable to fetch visited Events \(error), \(error.userInfo)")
-            return 0
-        }
-    }
 
     func event(at index: Int) -> Event? {
         guard
@@ -92,12 +64,26 @@ extension EventsRepository {
     }
 
     func visit(_ event: Event) {
-        event.markAsVisited()
+        event.dateVisited = .now
         coreDataStack.save(moc)
     }
 
     func getList() -> [Event] {
         fetch()
         return events
+    }
+}
+
+// MARK: - Private
+extension EventsRepository {
+    private func fetch() {
+        let fetchRequest = NSFetchRequest<Event>(entityName: "Event")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+
+        do {
+            events = try moc.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Unable to fetch Events \(error), \(error.userInfo)")
+        }
     }
 }

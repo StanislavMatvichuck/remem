@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 04.05.2022.
 //
 
-import CoreData
+import Foundation
 
 class WeekService {
     typealias Repository = HappeningsRepository

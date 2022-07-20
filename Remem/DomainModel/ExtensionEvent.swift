@@ -76,35 +76,3 @@ extension Event {
         return result
     }
 }
-
-// MARK: - Public
-extension Event {
-    @discardableResult
-    open func addDefaultHappening() -> Happening? {
-        guard let moc = managedObjectContext else { return nil }
-
-        let point = Happening(context: moc)
-        point.dateCreated = Date()
-        point.event = self
-        point.value = 1
-
-        return point
-    }
-
-    @discardableResult
-    open func addDefaultHappening(withDate: Date) -> Happening? {
-        guard let moc = managedObjectContext else { return nil }
-
-        let point = Happening(context: moc)
-        point.dateCreated = withDate
-        point.event = self
-        point.value = 1
-
-        return point
-    }
-
-    open func markAsVisited() {
-        guard dateVisited == nil else { return }
-        dateVisited = Date.now
-    }
-}
