@@ -277,7 +277,7 @@
 		086DC6D3288058E70048F22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				08C6C504287DC7F3001F522E /* CountableEventCell */,
+				08C6C504287DC7F3001F522E /* EventCell */,
 				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
 				0890627B27A0A2700032847C /* HappeningCell.swift */,
 				08D47A4328129FC30085826F /* ReminderCell.swift */,
@@ -358,13 +358,13 @@
 			path = EventsListView;
 			sourceTree = "<group>";
 		};
-		08C6C504287DC7F3001F522E /* CountableEventCell */ = {
+		08C6C504287DC7F3001F522E /* EventCell */ = {
 			isa = PBXGroup;
 			children = (
 				08D512372787153900C2037F /* EventCell.swift */,
 				08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */,
 			);
-			path = CountableEventCell;
+			path = EventCell;
 			sourceTree = "<group>";
 		};
 		08D5121127870D2500C2037F = {
