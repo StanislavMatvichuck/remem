@@ -12,6 +12,8 @@ class EventsListController: UIViewController {
     static let delete = NSLocalizedString("button.contextual.delete", comment: "EventsList swipe gesture actions")
 
     // MARK: - Properties
+    weak var coordinator: Coordinator?
+    
     private let viewRoot = EventsListView()
     private var viewModel: EventsListViewModel! {
         didSet { viewModel.configure(viewRoot) }
@@ -30,6 +32,14 @@ class EventsListController: UIViewController {
 
     private func setupTableView() {
         viewRoot.viewTable.delegate = self
+    }
+}
+
+// MARK: - Public
+extension EventsListController {
+    func update() {
+        let newList = service.getList()
+        viewModel = EventsListViewModel(model: newList)
     }
 }
 
@@ -54,9 +64,7 @@ extension EventsListController:
             let event = service.get(at: index.row)
         else { return }
 
-        let detailsController = makeDetailsController(for: event)
-
-        navigationController?.pushViewController(detailsController, animated: true)
+        coordinator?.showDetails(for: event)
     }
 
     func didSwipeAction(_ cell: EventCell) {
@@ -100,37 +108,6 @@ extension EventsListController: UITableViewDelegate {
 
 // MARK: - Private
 extension EventsListController {
-    private func update() {
-        let newList = service.getList()
-        viewModel = EventsListViewModel(model: newList)
-    }
-
-    private func presentSettings() {
-        let controller = SettingsController()
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .pageSheet
-
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
-
-        present(nav, animated: true, completion: nil)
-    }
-
-    private func makeDetailsController(for event: Event) -> EventDetailsController {
-        let clockController = ClockController()
-        let weekController = WeekController()
-
-        clockController.event = event
-
-        let details = EventDetailsController(event: event,
-                                             clockController: clockController,
-                                             weekController: weekController)
-        details.delegate = self
-
-        return details
-    }
-
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {
         let deleteAction =
             UIContextualAction(
@@ -143,13 +120,5 @@ extension EventsListController {
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = true
         return config
-    }
-}
-
-// MARK: - EventDetailsControllerDelegate
-extension EventsListController: EventDetailsControllerDelegate {
-    func didUpdate(event: Event) {
-        // update row at index
-        update()
     }
 }

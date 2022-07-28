@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EventDetailsControllerDelegate: UIViewController {
+protocol EventDetailsControllerDelegate: AnyObject {
     func didUpdate(event: Event)
 }
 
