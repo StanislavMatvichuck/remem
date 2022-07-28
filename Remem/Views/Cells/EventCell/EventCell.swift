@@ -75,8 +75,6 @@ final class EventCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupViewRoot() {
-        contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-
         viewRoot.addSubview(nameLabel)
         viewRoot.addSubview(valueLabel)
 

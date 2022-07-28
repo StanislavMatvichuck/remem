@@ -31,19 +31,14 @@ class EventsListController: UIViewController {
     private func setupTableView() {
         viewRoot.viewTable.delegate = self
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewRoot.cellGestureView.start()
-    }
 }
 
 // MARK: - Events handling
-extension EventsListController: EventCellDelegate {
+extension EventsListController:
+    EventCellDelegate,
+    EventsListFooterCellDelegate
+{
     private func setupEventHandlers() {
-        viewRoot.buttonAdd.addGestureRecognizer(
-            UITapGestureRecognizer(target: self, action: #selector(handleAddButton)))
-
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
     }
 
@@ -51,8 +46,6 @@ extension EventsListController: EventCellDelegate {
         service.add(name: viewRoot.input.value)
         update()
     }
-
-    @objc private func handleAddButton() { viewRoot.input.show() }
 
     // EventCellDelegate actions
     func didPressAction(_ cell: EventCell) {
@@ -71,6 +64,9 @@ extension EventsListController: EventCellDelegate {
         service.makeHappening(at: index.row)
         update()
     }
+
+    // EventsListFooterCellDelegate
+    func add() { viewRoot.input.show() }
 
     // Swipe to left actions
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
@@ -94,8 +90,11 @@ extension EventsListController: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath)
     {
-        guard let cell = cell as? EventCell else { return }
-        cell.delegate = self
+        if let cell = cell as? EventCell {
+            cell.delegate = self
+        } else if let cell = cell as? EventsListFooterCell {
+            cell.delegate = self
+        }
     }
 }
 
@@ -130,22 +129,13 @@ extension EventsListController {
     }
 
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {
-        let deleteAction = UIContextualAction(style: .normal, title: nil) { _, _, completion in
-            self.handleDeleteContextualAction(index)
-            completion(true)
-        }
-
-        let deleteView: UILabel = {
-            let label = UILabel()
-            label.text = Self.delete
-            label.textColor = .white
-            label.font = .systemFont(ofSize: .font1, weight: .regular)
-            label.sizeToFit()
-            return label
-        }()
-
-        deleteAction.backgroundColor = .systemRed
-        deleteAction.image = UIImage(view: deleteView)
+        let deleteAction =
+            UIContextualAction(
+                style: .destructive,
+                title: Self.delete) { _, _, completion in
+                    self.handleDeleteContextualAction(index)
+                    completion(true)
+            }
 
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = true

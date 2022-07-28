@@ -18,17 +18,24 @@ class EventsListViewModel: NSObject {
         case noHints
     }
 
+    enum Section: Int {
+        case hint
+        case events
+        case footer
+    }
+
     // MARK: - Properties
     private var model: Model
     private weak var view: View?
 
-    private var isEventsAddingHighlighted = true
+    private var isEventsAddingHighlighted: Bool
+    private var hintsState: HintState
 
     // MARK: - Init
     init(model: Model) {
+        self.isEventsAddingHighlighted = model.count == 0
+        self.hintsState = Self.getHintState(for: model)
         self.model = model
-
-        isEventsAddingHighlighted = model.count == 0
     }
 }
 
@@ -37,11 +44,11 @@ extension EventsListViewModel {
     func configure(_ view: View) {
         self.view = view
 
+        configureHintText()
+        configureEventsAddingButton()
+
         view.viewTable.dataSource = self
         view.viewTable.reloadData()
-
-        configureEventsAddingButton()
-        configureHints()
     }
 }
 
@@ -49,69 +56,98 @@ extension EventsListViewModel {
 extension EventsListViewModel {
     private func configureEventsAddingButton() {
         if isEventsAddingHighlighted {
-            view?.buttonAdd.backgroundColor = .systemBlue
+            view?.footer.buttonAdd.backgroundColor = .systemBlue
         } else {
-            view?.buttonAdd.backgroundColor = .systemGray
+            view?.footer.buttonAdd.backgroundColor = .systemGray
         }
     }
 
-    // Hints configuration
-    private func configureHints() {
-        hideAllHints()
-        switch getHintState() {
+    private func configureHintText() {
+        switch hintsState {
         case .empty:
-            showEmptyState()
+            view?.hint.label.text = EventsListView.empty
         case .placeFirstMark:
-            showFirstHappeningState()
+            view?.hint.label.text = EventsListView.firstHappening
         case .pressMe:
-            showFirstDetails()
+            view?.hint.label.text = EventsListView.firstDetails
         case .noHints:
-            hideAllHints()
+            view?.hint.label.text = nil
         }
     }
 
-    private func getHintState() -> HintState {
+    private static func getHintState(for model: Model) -> HintState {
         if model.count == 0 { return .empty }
         if model.filter({ $0.lastHappening != nil }).count == 0 { return .placeFirstMark }
         if model.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
         return .noHints
     }
 
-    private func showEmptyState() {
-        view?.emptyLabel.isHidden = false
+    private func setupSwipeHint(_ indexPath: IndexPath, _ row: EventCell) {
+        guard
+            indexPath.row == 0,
+            indexPath.section == 1,
+            hintsState == .placeFirstMark
+        else {
+            removeSwipeHint(from: row)
+            return
+        }
+        let swipeView = SwipeGestureView(mode: .horizontal, edgeInset: .r2 + UIHelper.spacingListHorizontal)
+        row.contentView.addAndConstrain(swipeView)
+        swipeView.start()
     }
 
-    private func showFirstHappeningState() {
-        view?.firstHappeningLabel.isHidden = false
-        view?.cellGestureView.isHidden = false
+    private func removeSwipeHint(from row: EventCell) {
+        for view in row.contentView.subviews where view is SwipeGestureView {
+            view.removeFromSuperview()
+        }
     }
 
-    private func showFirstDetails() {
-        view?.inspectEventLabel.isHidden = false
-    }
+    private func makeEventCellFor(_ index: IndexPath) -> UITableViewCell {
+        guard
+            let row = view?.viewTable.dequeueReusableCell(withIdentifier:
+                EventCell.reuseIdentifier) as? EventCell
+        else { return UITableViewCell() }
 
-    private func hideAllHints() {
-        view?.inspectEventLabel.isHidden = true
-        view?.firstHappeningLabel.isHidden = true
-        view?.cellGestureView.isHidden = true
-        view?.emptyLabel.isHidden = true
+        let dataRow = model[index.row]
+        row.configure(name: dataRow.name!, value: dataRow.totalAmount)
+        setupSwipeHint(index, row)
+        return row
     }
 }
 
 // MARK: - UITableViewDataSource
 extension EventsListViewModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { model.count }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        Section(rawValue: indexPath.section) == .events
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int { 3 }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if Section(rawValue: section) == .hint {
+            return 1
+        } else if Section(rawValue: section) == .events {
+            return model.count
+        } else if Section(rawValue: section) == .footer {
+            return 1
+        }
+        return 0
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let row = tableView.dequeueReusableCell(withIdentifier:
-                EventCell.reuseIdentifier) as? EventCell
+            let footer = view?.footer,
+            let hint = view?.hint
         else { return UITableViewCell() }
 
-        let dataRow = model[indexPath.row]
+        if Section(rawValue: indexPath.section) == .hint {
+            return hint
+        } else if Section(rawValue: indexPath.section) == .events {
+            return makeEventCellFor(indexPath)
+        } else if Section(rawValue: indexPath.section) == .footer {
+            return footer
+        }
 
-        row.configure(name: dataRow.name!, value: dataRow.totalAmount)
-
-        return row
+        return UITableViewCell()
     }
 }

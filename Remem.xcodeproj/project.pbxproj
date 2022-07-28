@@ -51,9 +51,10 @@
 		0890627C27A0A2700032847C /* HappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* HappeningCell.swift */; };
 		0890627E27A0AD460032847C /* ExtensionHappening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627D27A0AD460032847C /* ExtensionHappening.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
+		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
+		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
 		08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */; };
-		08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */; };
 		08C6C4FF287DAC55001F522E /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4FE287DAC55001F522E /* EventsRepository.swift */; };
 		08C6C502287DB4A1001F522E /* HappeningsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C501287DB4A1001F522E /* HappeningsRepository.swift */; };
 		08D47A4128129D210085826F /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D47A4028129D210085826F /* RemindersController.swift */; };
@@ -140,9 +141,10 @@
 		0890627B27A0A2700032847C /* HappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningCell.swift; sourceTree = "<group>"; };
 		0890627D27A0AD460032847C /* ExtensionHappening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionHappening.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
+		08A19D282890125B0085DC6F /* EventsListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFooterCell.swift; sourceTree = "<group>"; };
+		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellAnimator.swift; sourceTree = "<group>"; };
-		08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionUIImage.swift; sourceTree = "<group>"; };
 		08C6C4FE287DAC55001F522E /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		08C6C501287DB4A1001F522E /* HappeningsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsRepository.swift; sourceTree = "<group>"; };
 		08D47A4028129D210085826F /* RemindersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
@@ -277,8 +279,10 @@
 		086DC6D3288058E70048F22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				08C6C504287DC7F3001F522E /* EventCell */,
 				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
+				08C6C504287DC7F3001F522E /* EventCell */,
+				08A19D282890125B0085DC6F /* EventsListFooterCell.swift */,
+				08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */,
 				0890627B27A0A2700032847C /* HappeningCell.swift */,
 				08D47A4328129FC30085826F /* ReminderCell.swift */,
 			);
@@ -451,7 +455,6 @@
 				083A415F27BE603800AF2098 /* ExtensionDate.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
-				08C1FD74281A9C950051CD48 /* ExtenstionUIImage.swift */,
 				08E620832787406400BBABFD /* Metrics.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
@@ -613,6 +616,7 @@
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
+				08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */,
 				0848C947281161F9003ED51D /* ReminderInput.swift in Sources */,
 				08D47A4128129D210085826F /* RemindersController.swift in Sources */,
 				083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */,
@@ -626,7 +630,6 @@
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0857A7B02822720E006CCC99 /* WeekService.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
-				08C1FD75281A9C950051CD48 /* ExtenstionUIImage.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0890627E27A0AD460032847C /* ExtensionHappening.swift in Sources */,
@@ -648,6 +651,7 @@
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */,
 				08C6C4FF287DAC55001F522E /* EventsRepository.swift in Sources */,
+				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsController.swift in Sources */,
