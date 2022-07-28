@@ -123,9 +123,12 @@ extension EventsListController {
 
         clockController.event = event
 
-        return EventDetailsController(event: event,
-                                      clockController: clockController,
-                                      weekController: weekController)
+        let details = EventDetailsController(event: event,
+                                             clockController: clockController,
+                                             weekController: weekController)
+        details.delegate = self
+
+        return details
     }
 
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {
@@ -140,5 +143,13 @@ extension EventsListController {
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = true
         return config
+    }
+}
+
+// MARK: - EventDetailsControllerDelegate
+extension EventsListController: EventDetailsControllerDelegate {
+    func didUpdate(event: Event) {
+        // update row at index
+        update()
     }
 }
