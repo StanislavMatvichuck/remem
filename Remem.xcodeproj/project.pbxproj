@@ -253,9 +253,7 @@
 		086DC6D02880571A0048F22F /* Application layer */ = {
 			isa = PBXGroup;
 			children = (
-				08D512322787136B00C2037F /* Delegates */,
-				08D5123E278716DA00C2037F /* Helpers */,
-				0823D233289283A8005B4BE3 /* Coordinator.swift */,
+				08D512392787156500C2037F /* DomainModel */,
 			);
 			path = "Application layer";
 			sourceTree = "<group>";
@@ -397,10 +395,11 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
+				08D5123E278716DA00C2037F /* Helpers */,
+				08D512322787136B00C2037F /* UIKitDelegates */,
 				086DC6D02880571A0048F22F /* Application layer */,
 				08D512332787140D00C2037F /* Controllers */,
 				08C6C4FD287DAC44001F522E /* Data Layer */,
-				08D512392787156500C2037F /* DomainModel */,
 				08D512312787135300C2037F /* Resources */,
 				086DC6CF288057130048F22F /* Services */,
 				086DC6CE2880570D0048F22F /* ViewModels */,
@@ -421,13 +420,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		08D512322787136B00C2037F /* Delegates */ = {
+		08D512322787136B00C2037F /* UIKitDelegates */ = {
 			isa = PBXGroup;
 			children = (
+				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
 				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
 			);
-			path = Delegates;
+			path = UIKitDelegates;
 			sourceTree = "<group>";
 		};
 		08D512332787140D00C2037F /* Controllers */ = {
