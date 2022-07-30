@@ -7,6 +7,16 @@
 
 import CoreData
 
+protocol EventsRepositoryInput {
+    func allEvents() -> [Event]
+    func event(at: Int) -> Event?
+    func event(by: String) -> Event?
+    func add(name: String)
+    func remove(_: Event)
+
+    @discardableResult func addHappening(to: Event, date: Date) -> Happening
+}
+
 class EventsRepository {
     private var events: [Event] = []
     private let coreDataStack = CoreDataStack()
@@ -14,8 +24,11 @@ class EventsRepository {
 }
 
 // MARK: - Public
-extension EventsRepository {
-    func getAmount() -> Int { return events.count }
+extension EventsRepository: EventsRepositoryInput {
+    func allEvents() -> [Event] {
+        fetch()
+        return events
+    }
 
     func event(at index: Int) -> Event? {
         guard
@@ -34,43 +47,26 @@ extension EventsRepository {
         })
     }
 
-    @discardableResult
-    func make(name: String) -> Event {
+    func add(name: String) {
         let newEvent = Event(context: moc)
+        newEvent.dateCreated = .now
         newEvent.name = name
-        newEvent.dateCreated = NSDate.now
-
         coreDataStack.save(moc)
-
-        return newEvent
     }
 
-    @discardableResult
-    func makeHappening(at event: Event, dateTime: Date) -> Happening {
-        let newHappening = Happening(context: moc)
-        newHappening.dateCreated = dateTime
-        newHappening.event = event
-
-        event.lastHappening = newHappening
-
-        coreDataStack.save(moc)
-
-        return newHappening
-    }
-
-    func delete(_ event: Event) {
+    func remove(_ event: Event) {
         moc.delete(event)
         coreDataStack.save(moc)
     }
 
-    func visit(_ event: Event) {
-        event.dateVisited = .now
+    @discardableResult
+    func addHappening(to event: Event, date: Date) -> Happening {
+        let newHappening = Happening(context: moc)
+        newHappening.dateCreated = date
+        newHappening.event = event // TODO: delete this relation?
+        event.happenings?.adding(newHappening)
         coreDataStack.save(moc)
-    }
-
-    func getList() -> [Event] {
-        fetch()
-        return events
+        return newHappening
     }
 }
 

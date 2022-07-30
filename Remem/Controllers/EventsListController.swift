@@ -13,33 +13,38 @@ class EventsListController: UIViewController {
 
     // MARK: - Properties
     weak var coordinator: Coordinator?
-    
+
     private let viewRoot = EventsListView()
     private var viewModel: EventsListViewModel! {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    private let service = EventsListService(EventsRepository())
+    private let eventsListUseCase: EventsListUseCaseInput
+    private let eventEditUseCase: EventEditUseCaseInput
+
+    // MARK: - Init
+    init(
+        eventsListUseCase: EventsListUseCaseInput,
+        eventEditUseCase: EventEditUseCaseInput)
+    {
+        self.eventsListUseCase = eventsListUseCase
+        self.eventEditUseCase = eventEditUseCase
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = "Events list"
-        update()
+        viewModel = EventsListViewModel(model: eventsListUseCase.list())
         setupTableView()
         setupEventHandlers()
     }
 
     private func setupTableView() {
         viewRoot.viewTable.delegate = self
-    }
-}
-
-// MARK: - Public
-extension EventsListController {
-    func update() {
-        let newList = service.getList()
-        viewModel = EventsListViewModel(model: newList)
     }
 }
 
@@ -52,25 +57,23 @@ extension EventsListController:
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
     }
 
-    @objc private func handleAdd() {
-        service.add(name: viewRoot.input.value)
-        update()
-    }
+    @objc private func handleAdd() { eventsListUseCase.add(name: viewRoot.input.value) }
 
     // EventCellDelegate actions
     func didPressAction(_ cell: EventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let event = service.get(at: index.row)
+            let event = eventsListUseCase.event(at: index.row)
         else { return }
-
         coordinator?.showDetails(for: event)
     }
 
     func didSwipeAction(_ cell: EventCell) {
-        guard let index = viewRoot.viewTable.indexPath(for: cell) else { return }
-        service.makeHappening(at: index.row)
-        update()
+        guard
+            let index = viewRoot.viewTable.indexPath(for: cell),
+            let event = eventsListUseCase.event(at: index.row)
+        else { return }
+        eventEditUseCase.addHappening(to: event, .now)
     }
 
     // EventsListFooterCellDelegate
@@ -78,8 +81,8 @@ extension EventsListController:
 
     // Swipe to left actions
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
-        service.delete(at: forIndexPath.row)
-        update()
+        guard let event = eventsListUseCase.event(at: forIndexPath.row) else { return }
+        eventsListUseCase.remove(event)
     }
 }
 
@@ -103,6 +106,18 @@ extension EventsListController: UITableViewDelegate {
         } else if let cell = cell as? EventsListFooterCell {
             cell.delegate = self
         }
+    }
+}
+
+extension EventsListController: EventsListUseCaseOutput {
+    func eventsListUpdated(_ list: [Event]) {
+        viewModel = EventsListViewModel(model: list)
+    }
+}
+
+extension EventsListController: EventEditUseCaseOutput {
+    func updated(_: Event) {
+        viewModel = EventsListViewModel(model: eventsListUseCase.list())
     }
 }
 

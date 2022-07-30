@@ -34,8 +34,15 @@ extension Coordinator {
 // MARK: - Private
 extension Coordinator {
     private func makeStartController() -> UIViewController {
-        let controller = EventsListController()
+        let eventsRepository = EventsRepository()
+        let eventsListUseCase = EventsListUseCase(repository: eventsRepository)
+        let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
+
+        let controller = EventsListController(eventsListUseCase: eventsListUseCase,
+                                              eventEditUseCase: eventEditUseCase)
         controller.coordinator = self
+        eventsListUseCase.delegate = controller
+        eventEditUseCase.delegate = controller
         eventsList = controller
 
         return controller
@@ -85,7 +92,6 @@ extension Coordinator {
 // MARK: - EventDetailsControllerDelegate
 extension Coordinator: EventDetailsControllerDelegate {
     func didUpdate(event: Event) {
-        // TODO: update row at index
-        eventsList.update()
+        // TODO: move this to core
     }
 }

@@ -17,7 +17,6 @@ class EventDetailsController: UIViewController {
     weak var delegate: EventDetailsControllerDelegate?
 
     private let viewRoot = EventDetailsView()
-    private let domain = DomainFacade()
     private let clockController: ClockController
     private let weekController: WeekController
 
@@ -45,9 +44,7 @@ class EventDetailsController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        domain.visit(event: event) { [weak self] event in
-            self?.delegate?.didUpdate(event: event)
-        }
+        // visit
     }
 }
 
