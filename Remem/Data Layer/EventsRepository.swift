@@ -61,10 +61,23 @@ extension EventsRepository: EventsRepositoryInput {
 
     @discardableResult
     func addHappening(to event: Event, date: Date) -> Happening {
-        let newHappening = Happening(context: moc)
-        newHappening.dateCreated = date
+        let newHappening = Happening(context: moc) // creation logic
+        newHappening.dateCreated = date // creation logic
         newHappening.event = event // TODO: delete this relation?
-        event.happenings?.adding(newHappening)
+
+        event.happenings?.adding(newHappening) // creation logic
+
+        let isFirstHappening = event.lastHappening == nil
+        var isLatestHappening = false
+
+        if let lastDate = event.lastHappening?.dateCreated, lastDate < date {
+            isLatestHappening = true
+        }
+
+        if isFirstHappening || isLatestHappening {
+            event.lastHappening = newHappening // creation logic
+        }
+
         coreDataStack.save(moc)
         return newHappening
     }
