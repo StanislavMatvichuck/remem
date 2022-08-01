@@ -250,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				08D10F49289587AF005453DD /* UseCases */,
-				08D512392787156500C2037F /* DomainModel */,
 			);
 			path = "Application layer";
 			sourceTree = "<group>";
@@ -334,6 +333,25 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
+		087BFF042897C8AC0029B8FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				08C6C501287DB4A1001F522E /* HappeningsRepository.swift */,
+				08C6C4FE287DAC55001F522E /* EventsRepository.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		087BFF052897C8B60029B8FC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				080A15EC27A06003001BAFEB /* ExtensionEvent.swift */,
+				0890627D27A0AD460032847C /* ExtensionHappening.swift */,
+				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0890627627A0A1E30032847C /* EventDetailsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,8 +365,6 @@
 			isa = PBXGroup;
 			children = (
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
-				08C6C4FE287DAC55001F522E /* EventsRepository.swift */,
-				08C6C501287DB4A1001F522E /* HappeningsRepository.swift */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -401,13 +417,14 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
-				08D5123E278716DA00C2037F /* Helpers */,
-				08D512322787136B00C2037F /* UIKitDelegates */,
 				086DC6D02880571A0048F22F /* Application layer */,
 				08D512332787140D00C2037F /* Controllers */,
 				08C6C4FD287DAC44001F522E /* Data Layer */,
+				08D512392787156500C2037F /* Domain layer */,
+				08D5123E278716DA00C2037F /* Helpers */,
 				08D512312787135300C2037F /* Resources */,
 				086DC6CF288057130048F22F /* Services */,
+				08D512322787136B00C2037F /* UIKitDelegates */,
 				086DC6CE2880570D0048F22F /* ViewModels */,
 				086DC6D12880578E0048F22F /* Views */,
 			);
@@ -448,14 +465,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		08D512392787156500C2037F /* DomainModel */ = {
+		08D512392787156500C2037F /* Domain layer */ = {
 			isa = PBXGroup;
 			children = (
-				080A15EC27A06003001BAFEB /* ExtensionEvent.swift */,
-				0890627D27A0AD460032847C /* ExtensionHappening.swift */,
-				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
+				087BFF052897C8B60029B8FC /* Model */,
+				087BFF042897C8AC0029B8FC /* Services */,
 			);
-			path = DomainModel;
+			path = "Domain layer";
 			sourceTree = "<group>";
 		};
 		08D5123E278716DA00C2037F /* Helpers */ = {
