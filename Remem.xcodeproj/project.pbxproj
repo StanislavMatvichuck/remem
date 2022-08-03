@@ -220,6 +220,34 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
+		085C4E96289AB56A0094388C /* Domain services layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Domain services layer";
+			sourceTree = "<group>";
+		};
+		085C4E97289AB57A0094388C /* Infrastructure layer */ = {
+			isa = PBXGroup;
+			children = (
+				08C6C4FD287DAC44001F522E /* Data Layer */,
+				085C4E98289AB5940094388C /* UIKit GUI */,
+			);
+			path = "Infrastructure layer";
+			sourceTree = "<group>";
+		};
+		085C4E98289AB5940094388C /* UIKit GUI */ = {
+			isa = PBXGroup;
+			children = (
+				08D512322787136B00C2037F /* UIKitDelegates */,
+				08D5123E278716DA00C2037F /* Helpers */,
+				086DC6D12880578E0048F22F /* Views */,
+				086DC6CE2880570D0048F22F /* ViewModels */,
+				08D512332787140D00C2037F /* Controllers */,
+			);
+			path = "UIKit GUI";
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,7 +380,6 @@
 			children = (
 				080A15EC27A06003001BAFEB /* ExtensionEvent.swift */,
 				0890627D27A0AD460032847C /* ExtensionHappening.swift */,
-				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -370,8 +397,8 @@
 			isa = PBXGroup;
 			children = (
 				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
-				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
 				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
+				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -424,16 +451,12 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
-				086DC6D02880571A0048F22F /* Application layer */,
-				08D512332787140D00C2037F /* Controllers */,
-				08C6C4FD287DAC44001F522E /* Data Layer */,
 				08D512392787156500C2037F /* Domain layer */,
-				08D5123E278716DA00C2037F /* Helpers */,
+				085C4E96289AB56A0094388C /* Domain services layer */,
+				086DC6D02880571A0048F22F /* Application layer */,
+				085C4E97289AB57A0094388C /* Infrastructure layer */,
 				08D512312787135300C2037F /* Resources */,
 				086DC6CF288057130048F22F /* Services */,
-				08D512322787136B00C2037F /* UIKitDelegates */,
-				086DC6CE2880570D0048F22F /* ViewModels */,
-				086DC6D12880578E0048F22F /* Views */,
 			);
 			path = Remem;
 			sourceTree = "<group>";
@@ -518,6 +541,7 @@
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
 			isa = PBXGroup;
 			children = (
+				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 				08E5B91828998053000B08BC /* EntityMapper.swift */,
 				08E5B91A28998088000B08BC /* EventEntityMapper.swift */,
 			);

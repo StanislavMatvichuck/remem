@@ -80,12 +80,12 @@
          <EnvironmentVariable
             key = "SQLITE_ENABLE_THREAD_ASSERTIONS"
             value = "1"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SQLITE_ENABLE_FILE_ASSERTIONS"
             value = ""
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>

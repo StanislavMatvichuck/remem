@@ -78,7 +78,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     private func addHappening(eventId: String) {
-        let service = EventsListService(EventsRepository())
-        service.makeHappening(by: eventId)
+//        let service = EventsListService(EventsRepository())
+//        service.makeHappening(by: eventId)
     }
 }
