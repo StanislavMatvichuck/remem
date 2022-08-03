@@ -45,10 +45,3 @@ extension ClockController {
         viewModel = ClockViewModel(model: newList)
     }
 }
-
-// MARK: - WeekControllerDelegate
-extension ClockController: WeekControllerDelegate {
-    func weekControllerNewWeek(from: Date, to: Date) {
-        updateLists(from: from, to: to)
-    }
-}
