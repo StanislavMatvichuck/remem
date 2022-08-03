@@ -7,13 +7,6 @@
 
 import CoreData
 
-protocol EventsRepositoryInterface {
-    func save(_: DomainEvent)
-    func save(_: [DomainEvent])
-    func all() -> [DomainEvent]
-    func delete(_: DomainEvent)
-}
-
 class CoreDataEventsRepository {
     private let stack = CoreDataStack()
     private let entityMapper = EventEntityMapper()
@@ -31,15 +24,15 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
 
         data.forEach {
             let accessor = self.entityMapper.entityAccessorKey($0)
-            // 3
+
             let entityForUpdate: CDEvent? =
                 existingObjects[accessor] ??
                 NSEntityDescription.insertNewObject(forEntityName: "Event", into: moc) as? CDEvent
-            // 4
+
             guard let entity = entityForUpdate else { return }
             self.entityMapper.update(entity, by: $0)
         }
-        // 5
+
         applyChanges()
     }
 
@@ -102,33 +95,16 @@ extension CoreDataEventsRepository {
     private func applyChanges() {
         moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
-        // print("\n\n")
-        // print("applyChanges moc registered objects")
-        // print(moc.registeredObjects)
-
-        // print("\n\n")
-        // print("applyChanges moc updated objects")
-        // print(moc.updatedObjects)
-        
-        // print("\n\n")
-        // print("applyChanges moc deleted objects")
-        // print(moc.deletedObjects)
-        
-        // print("\n\n")
-        // print("applyChanges moc inserted objects")
-        // print(moc.insertedObjects)
-
         switch moc.hasChanges {
         case true:
             do {
-                // 2
                 try moc.save()
             } catch {
                 fatalError("")
             }
             print("Saved")
         case false:
-            // 3
+
             print("No changes to save in repository")
         }
     }

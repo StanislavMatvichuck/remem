@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventCellAnimator: Animator {
+class EventCellAnimator {
     private var needsAnimationAfterReuse = false
 }
 
