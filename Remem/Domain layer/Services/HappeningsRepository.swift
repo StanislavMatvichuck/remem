@@ -29,7 +29,7 @@ extension HappeningsRepository {
         }
     }
 
-    func getHappenings(for event: Event, between start: Date, and end: Date) -> [Happening] {
+    func getHappenings(for event: CDEvent, between start: Date, and end: Date) -> [CDHappening] {
         guard
             let start = makeStartOfTheDay(for: start),
             let end = makeEndOfTheDay(for: end)
@@ -38,8 +38,8 @@ extension HappeningsRepository {
         let format = "event == %@ AND dateCreated >= %@ AND dateCreated =< %@"
         let predicate = NSPredicate(format: format, argumentArray: [event, start, end])
 
-        let request = Happening.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Happening.dateCreated), ascending: false)]
+        let request = CDHappening.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: #keyPath(CDHappening.dateCreated), ascending: false)]
         request.predicate = predicate
 
         do {

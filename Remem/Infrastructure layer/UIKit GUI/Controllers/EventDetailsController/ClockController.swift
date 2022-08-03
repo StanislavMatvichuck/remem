@@ -9,7 +9,7 @@ import UIKit
 
 class ClockController: UIViewController {
     // MARK: - Properties
-    var event: Event!
+    var event: CDEvent!
     private let viewRoot = ClockView()
     private let service = ClockService(HappeningsRepository())
     private var viewModel: ClockViewModel! {

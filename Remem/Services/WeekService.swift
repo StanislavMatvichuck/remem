@@ -10,10 +10,10 @@ import Foundation
 class WeekService {
     // MARK: - Properties
     private var repository = HappeningsRepository()
-    private var event: Event
+    private var event: CDEvent
 
     // MARK: - Init
-    init(_ event: Event) {
+    init(_ event: CDEvent) {
         self.event = event
     }
 }
@@ -28,7 +28,7 @@ extension WeekService {
 
 // MARK: - Private
 extension WeekService {
-    private func get(for event: Event) -> [Happening] {
+    private func get(for event: CDEvent) -> [CDHappening] {
         guard
             let start = event.dateCreated,
             let end = Date.now.endOfWeek
@@ -37,7 +37,7 @@ extension WeekService {
         return repository.getHappenings(for: event, between: start, and: end)
     }
 
-    private func makeWeekList(for happenings: [Happening]) -> WeekList? {
+    private func makeWeekList(for happenings: [CDHappening]) -> WeekList? {
         guard
             let dateStart = event.dateCreated?.startOfWeek,
             let dateEnd = Date.now.endOfWeek

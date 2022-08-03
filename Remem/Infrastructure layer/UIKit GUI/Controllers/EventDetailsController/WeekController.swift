@@ -13,7 +13,7 @@ protocol WeekControllerDelegate: UIViewController {
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    var event: Event!
+    var event: CDEvent!
     weak var delegate: WeekControllerDelegate?
 
     private var service: WeekService!

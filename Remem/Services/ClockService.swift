@@ -22,10 +22,10 @@ class ClockService {
 // MARK: - Public
 extension ClockService {
     func getList(
-        for event: Event,
+        for event: CDEvent,
         between start: Date,
         and end: Date)
-        -> [Happening]
+        -> [CDHappening]
     {
         repository.getHappenings(for: event, between: start, and: end)
     }

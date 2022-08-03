@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK: - Getters
-extension Event {
+extension CDEvent {
     var totalAmount: Int {
         guard let happenings = self.happenings else { return 0 }
         return happenings.reduce(0) { partialResult, point in
-            let point = point as! Happening
+            let point = point as! CDHappening
             return partialResult + Int(point.value)
         }
     }
@@ -66,7 +66,7 @@ extension Event {
 
         var result = 0
         for point in happenings {
-            guard let point = point as? Happening else { continue }
+            guard let point = point as? CDHappening else { continue }
             let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
             if weekOffset.isInSameWeek(as: point.dateCreated!) {
                 result += Int(point.value)

@@ -22,7 +22,7 @@ class CoreDataEventsRepository {
 
 extension CoreDataEventsRepository: EventsRepositoryInterface {
     func save(_ data: [DomainEvent]) {
-        var existingObjects: [String: Event] = [:]
+        var existingObjects: [String: CDEvent] = [:]
 
         allEvents.forEach {
             let accessor = self.entityMapper.entityAccessorKey($0)
@@ -32,9 +32,9 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         data.forEach {
             let accessor = self.entityMapper.entityAccessorKey($0)
             // 3
-            let entityForUpdate: Event? =
+            let entityForUpdate: CDEvent? =
                 existingObjects[accessor] ??
-                NSEntityDescription.insertNewObject(forEntityName: "Event", into: moc) as? Event
+                NSEntityDescription.insertNewObject(forEntityName: "Event", into: moc) as? CDEvent
             // 4
             guard let entity = entityForUpdate else { return }
             self.entityMapper.update(entity, by: $0)
@@ -50,7 +50,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         }) {
             entityMapper.update(existingEvent, by: event)
         } else {
-            let newCdEvent = Event(context: moc)
+            let newCdEvent = CDEvent(context: moc)
             entityMapper.update(newCdEvent, by: event)
         }
 
@@ -58,7 +58,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
     }
 
     func all() -> [DomainEvent] {
-        let request = Event.fetchRequest()
+        let request = CDEvent.fetchRequest()
 
         do {
             return try moc.fetch(request).compactMap { entityMapper.convert($0) }
@@ -69,7 +69,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
     }
 
     func delete(_ event: DomainEvent) {
-        let request = Event.fetchRequest()
+        let request = CDEvent.fetchRequest()
 
         do {
             let allCdEvents = try moc.fetch(request)
@@ -89,8 +89,8 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
 
 // MARK: - Private
 extension CoreDataEventsRepository {
-    private var allEvents: [Event] {
-        let request = Event.fetchRequest()
+    private var allEvents: [CDEvent] {
+        let request = CDEvent.fetchRequest()
 
         do {
             return try moc.fetch(request)

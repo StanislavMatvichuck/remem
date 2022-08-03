@@ -8,11 +8,11 @@
 import CoreData
 import Foundation
 
-class EventEntityMapper: EntityMapper<DomainEvent, Event> {
-    override func convert(_ entity: Event) -> DomainEvent? {
+class EventEntityMapper: EntityMapper<DomainEvent, CDEvent> {
+    override func convert(_ entity: CDEvent) -> DomainEvent? {
         var happenings = [DomainHappening]()
         for cdHappening in entity.happenings! {
-            guard let cdHappening = cdHappening as? Happening else { continue }
+            guard let cdHappening = cdHappening as? CDHappening else { continue }
             let happening = DomainHappening(dateCreated: cdHappening.dateCreated!)
             happenings.append(happening)
         }
@@ -25,7 +25,7 @@ class EventEntityMapper: EntityMapper<DomainEvent, Event> {
         return model
     }
 
-    override func update(_ entity: Event, by model: DomainEvent) {
+    override func update(_ entity: CDEvent, by model: DomainEvent) {
         entity.name = model.name
         entity.dateCreated = model.dateCreated
         entity.dateVisited = model.dateVisited
@@ -36,10 +36,10 @@ class EventEntityMapper: EntityMapper<DomainEvent, Event> {
             context.delete(existingCdHappening as! NSManagedObject)
         }
 
-        var cdHappenings = NSSet(set: Set<Happening>())
+        var cdHappenings = NSSet(set: Set<CDHappening>())
 
         for happening in model.happenings {
-            let newCdHappening = Happening(entity: Happening.entity(), insertInto: context)
+            let newCdHappening = CDHappening(entity: CDHappening.entity(), insertInto: context)
             newCdHappening.dateCreated = happening.dateCreated
             newCdHappening.value = happening.value
             newCdHappening.event = entity
@@ -49,7 +49,7 @@ class EventEntityMapper: EntityMapper<DomainEvent, Event> {
         entity.happenings = cdHappenings
     }
 
-    override func entityAccessorKey(_ entity: Event) -> String {
+    override func entityAccessorKey(_ entity: CDEvent) -> String {
         entity.dateCreated!.description
     }
 

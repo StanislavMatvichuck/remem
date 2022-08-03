@@ -11,7 +11,7 @@ struct WeekList {
     let days: [WeekDay]
 
     // TODO: refactor this to improve performance
-    init(from: Date, to: Date, happenings: [Happening]) {
+    init(from: Date, to: Date, happenings: [CDHappening]) {
         let dayDurationInSeconds: TimeInterval = 60*60*24
         var days: [WeekDay] = []
 

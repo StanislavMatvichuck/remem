@@ -33,7 +33,7 @@ enum DayOfWeek: Int {
     }
 }
 
-extension Happening {
+extension CDHappening {
     var time: String {
         guard let date = dateCreated else { return "time" }
 

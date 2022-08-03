@@ -27,7 +27,7 @@ extension ClockSectionsList {
         return sections[index]
     }
 
-    mutating func fill(with happenings: [Happening]) {
+    mutating func fill(with happenings: [CDHappening]) {
         reset()
         happenings.forEach { add(point: $0) }
     }
@@ -35,7 +35,7 @@ extension ClockSectionsList {
 
 // MARK: - Private
 extension ClockSectionsList {
-    private mutating func add(point: Happening) {
+    private mutating func add(point: CDHappening) {
         guard
             let date = point.dateCreated,
             let index = index(for: seconds(for: date)),
