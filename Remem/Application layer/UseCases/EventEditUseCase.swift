@@ -8,13 +8,13 @@
 import Foundation
 
 protocol EventEditUseCaseInput {
-    func visit(_: DomainEvent)
-    func addHappening(to: DomainEvent, date: Date)
+    func visit(_: Event)
+    func addHappening(to: Event, date: Date)
 //    func rename(_: DomainEvent, to: String)
 }
 
 protocol EventEditUseCaseOutput: AnyObject {
-    func updated(_: DomainEvent)
+    func updated(_: Event)
 }
 
 class EventEditUseCase {
@@ -29,16 +29,16 @@ class EventEditUseCase {
 
 // MARK: - Private
 extension EventEditUseCase: EventEditUseCaseInput {
-    func visit(_ event: DomainEvent) {
+    func visit(_ event: Event) {
         var editedEvent = event
         editedEvent.dateVisited = .now
         repository.save(editedEvent)
         delegate?.updated(editedEvent)
     }
 
-    func addHappening(to event: DomainEvent, date: Date) {
+    func addHappening(to event: Event, date: Date) {
         var editedEvent = event
-        editedEvent.happenings.append(DomainHappening(dateCreated: date))
+        editedEvent.happenings.append(Happening(dateCreated: date))
         repository.save(editedEvent)
         delegate?.updated(editedEvent)
     }

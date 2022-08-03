@@ -25,7 +25,7 @@ extension Coordinator {
         navController.pushViewController(controller, animated: false)
     }
 
-    func showDetails(for event: DomainEvent) {
+    func showDetails(for event: Event) {
         let details = makeDetailsController(for: event)
         navController.pushViewController(details, animated: true)
     }
@@ -74,7 +74,7 @@ extension Coordinator {
         navController.present(nav, animated: true, completion: nil)
     }
 
-    private func makeDetailsController(for event: DomainEvent) -> EventDetailsController {
+    private func makeDetailsController(for event: Event) -> EventDetailsController {
         let eventsRepository = CoreDataEventsRepository()
         let editUseCase = EventEditUseCase(repository: eventsRepository)
         editUseCase.delegate = eventsList

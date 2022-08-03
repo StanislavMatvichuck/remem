@@ -9,7 +9,7 @@ import UIKit
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    var event: DomainEvent!
+    var event: Event!
 
     private let viewRoot = WeekView()
     private var viewModel: WeekViewModel!

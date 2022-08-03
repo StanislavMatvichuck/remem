@@ -8,16 +8,16 @@
 import CoreData
 import Foundation
 
-class EventEntityMapper: EntityMapper<DomainEvent, CDEvent> {
-    override func convert(_ entity: CDEvent) -> DomainEvent? {
-        var happenings = [DomainHappening]()
+class EventEntityMapper: EntityMapper<Event, CDEvent> {
+    override func convert(_ entity: CDEvent) -> Event? {
+        var happenings = [Happening]()
         for cdHappening in entity.happenings! {
             guard let cdHappening = cdHappening as? CDHappening else { continue }
-            let happening = DomainHappening(dateCreated: cdHappening.dateCreated!)
+            let happening = Happening(dateCreated: cdHappening.dateCreated!)
             happenings.append(happening)
         }
 
-        let model = DomainEvent(id: entity.dateCreated!.description,
+        let model = Event(id: entity.dateCreated!.description,
                                 name: entity.name!,
                                 happenings: happenings,
                                 dateCreated: entity.dateCreated!,
@@ -25,7 +25,7 @@ class EventEntityMapper: EntityMapper<DomainEvent, CDEvent> {
         return model
     }
 
-    override func update(_ entity: CDEvent, by model: DomainEvent) {
+    override func update(_ entity: CDEvent, by model: Event) {
         entity.name = model.name
         entity.dateCreated = model.dateCreated
         entity.dateVisited = model.dateVisited
@@ -53,7 +53,7 @@ class EventEntityMapper: EntityMapper<DomainEvent, CDEvent> {
         entity.dateCreated!.description
     }
 
-    override func entityAccessorKey(_ object: DomainEvent) -> String {
+    override func entityAccessorKey(_ object: Event) -> String {
         object.dateCreated.description
     }
 }

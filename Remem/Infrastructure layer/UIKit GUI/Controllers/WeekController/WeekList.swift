@@ -10,7 +10,7 @@ import Foundation
 struct WeekList {
     let days: [WeekDay]
 
-    init(from: Date, to: Date, happenings: [DomainHappening]) {
+    init(from: Date, to: Date, happenings: [Happening]) {
         let dayDurationInSeconds: TimeInterval = 60*60*24
         var days: [WeekDay] = []
 

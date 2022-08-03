@@ -8,12 +8,12 @@
 import UIKit
 
 protocol EventDetailsControllerDelegate: AnyObject {
-    func didUpdate(event: DomainEvent)
+    func didUpdate(event: Event)
 }
 
 class EventDetailsController: UIViewController {
     // MARK: - Properties
-    var event: DomainEvent
+    var event: Event
     weak var delegate: EventDetailsControllerDelegate?
 
     private let viewRoot = EventDetailsView()
@@ -22,7 +22,7 @@ class EventDetailsController: UIViewController {
     private let clockController: ClockController
 
     // MARK: - Init
-    init(event: DomainEvent,
+    init(event: Event,
          editUseCase: EventEditUseCase,
          clockController: ClockController,
          weekController: WeekController)

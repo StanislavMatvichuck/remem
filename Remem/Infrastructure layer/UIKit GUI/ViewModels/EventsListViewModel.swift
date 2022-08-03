@@ -9,7 +9,7 @@ import UIKit
 
 class EventsListViewModel: NSObject {
     typealias View = EventsListView
-    typealias Model = [DomainEvent]
+    typealias Model = [Event]
 
     enum HintState {
         case empty

@@ -34,6 +34,7 @@
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
 		085C4E9C289AC27F0094388C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9B289AC27F0094388C /* EventsRepository.swift */; };
+		085C4E9E289AC4F00094388C /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9D289AC4F00094388C /* Happening.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		086B3D9828325903006E08CB /* ClockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B3D9728325903006E08CB /* ClockServiceTests.swift */; };
@@ -70,7 +71,7 @@
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
 		08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
-		08E5B91628997F5C000B08BC /* DomainEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91528997F5C000B08BC /* DomainEvent.swift */; };
+		08E5B91628997F5C000B08BC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91528997F5C000B08BC /* Event.swift */; };
 		08E5B91928998053000B08BC /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
 		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
@@ -118,6 +119,7 @@
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
 		085C4E9B289AC27F0094388C /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
+		085C4E9D289AC4F00094388C /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086B3D9728325903006E08CB /* ClockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockServiceTests.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
-		08E5B91528997F5C000B08BC /* DomainEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainEvent.swift; sourceTree = "<group>"; };
+		08E5B91528997F5C000B08BC /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
@@ -481,7 +483,8 @@
 		08D512392787156500C2037F /* Domain layer */ = {
 			isa = PBXGroup;
 			children = (
-				08E5B91528997F5C000B08BC /* DomainEvent.swift */,
+				08E5B91528997F5C000B08BC /* Event.swift */,
+				085C4E9D289AC4F00094388C /* Happening.swift */,
 			);
 			path = "Domain layer";
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 			files = (
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
+				085C4E9E289AC4F00094388C /* Happening.swift in Sources */,
 				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
 				08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */,
@@ -662,7 +666,7 @@
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
-				08E5B91628997F5C000B08BC /* DomainEvent.swift in Sources */,
+				08E5B91628997F5C000B08BC /* Event.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,

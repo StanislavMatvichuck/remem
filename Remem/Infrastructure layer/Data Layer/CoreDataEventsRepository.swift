@@ -14,7 +14,7 @@ class CoreDataEventsRepository {
 }
 
 extension CoreDataEventsRepository: EventsRepositoryInterface {
-    func save(_ data: [DomainEvent]) {
+    func save(_ data: [Event]) {
         var existingObjects: [String: CDEvent] = [:]
 
         allEvents.forEach {
@@ -36,7 +36,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         applyChanges()
     }
 
-    func save(_ event: DomainEvent) {
+    func save(_ event: Event) {
         if let existingEvent = allEvents.first(where: {
             entityMapper.entityAccessorKey($0) ==
                 entityMapper.entityAccessorKey(event)
@@ -50,7 +50,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         applyChanges()
     }
 
-    func all() -> [DomainEvent] {
+    func all() -> [Event] {
         let request = CDEvent.fetchRequest()
 
         do {
@@ -61,7 +61,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         }
     }
 
-    func delete(_ event: DomainEvent) {
+    func delete(_ event: Event) {
         let request = CDEvent.fetchRequest()
 
         do {

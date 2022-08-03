@@ -8,14 +8,14 @@
 import Foundation
 
 protocol EventsListUseCaseInput {
-    func list() -> [DomainEvent]
-    func event(at: Int) -> DomainEvent?
+    func list() -> [Event]
+    func event(at: Int) -> Event?
     func add(name: String)
-    func remove(_: DomainEvent)
+    func remove(_: Event)
 }
 
 protocol EventsListUseCaseOutput: AnyObject {
-    func eventsListUpdated(_: [DomainEvent])
+    func eventsListUpdated(_: [Event])
 }
 
 class EventsListUseCase {
@@ -32,13 +32,13 @@ class EventsListUseCase {
 
 // MARK: - Public
 extension EventsListUseCase: EventsListUseCaseInput {
-    func list() -> [DomainEvent] { repository.all() }
+    func list() -> [Event] { repository.all() }
 
-    func event(at index: Int) -> DomainEvent? { repository.all()[index] }
+    func event(at index: Int) -> Event? { repository.all()[index] }
 
     func add(name: String) {
         var allEvents = repository.all()
-        let newEvent = DomainEvent(id: UUID().uuidString,
+        let newEvent = Event(id: UUID().uuidString,
                                    name: name, happenings: [],
                                    dateCreated: .now)
         allEvents.append(newEvent)
@@ -46,7 +46,7 @@ extension EventsListUseCase: EventsListUseCaseInput {
         delegate?.eventsListUpdated(repository.all())
     }
 
-    func remove(_ event: DomainEvent) {
+    func remove(_ event: Event) {
         repository.delete(event)
         delegate?.eventsListUpdated(repository.all())
     }

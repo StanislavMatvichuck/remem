@@ -8,8 +8,8 @@
 import Foundation
 
 protocol EventsRepositoryInterface {
-    func save(_: DomainEvent)
-    func save(_: [DomainEvent])
-    func all() -> [DomainEvent]
-    func delete(_: DomainEvent)
+    func save(_: Event)
+    func save(_: [Event])
+    func all() -> [Event]
+    func delete(_: Event)
 }

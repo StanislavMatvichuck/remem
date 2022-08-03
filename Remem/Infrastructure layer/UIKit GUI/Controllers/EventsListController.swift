@@ -110,13 +110,13 @@ extension EventsListController: UITableViewDelegate {
 }
 
 extension EventsListController: EventsListUseCaseOutput {
-    func eventsListUpdated(_ list: [DomainEvent]) {
+    func eventsListUpdated(_ list: [Event]) {
         viewModel = EventsListViewModel(model: list)
     }
 }
 
 extension EventsListController: EventEditUseCaseOutput {
-    func updated(_: DomainEvent) {
+    func updated(_: Event) {
         viewModel = EventsListViewModel(model: eventsListUseCase.list())
     }
 }

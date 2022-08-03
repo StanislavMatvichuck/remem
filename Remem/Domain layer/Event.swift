@@ -7,22 +7,17 @@
 
 import Foundation
 
-struct DomainEvent {
+struct Event {
     let id: String
     var name: String
-    var happenings: [DomainHappening]
+    var happenings: [Happening]
 
     let dateCreated: Date
     var dateVisited: Date?
 }
 
-struct DomainHappening {
-    let dateCreated: Date
-    var value: Int32 = 1
-}
-
 // MARK: - Old getters
-extension DomainEvent {
+extension Event {
     var totalAmount: Int {
         happenings.reduce(0) { partialResult, happening in
             partialResult + Int(happening.value)
