@@ -38,7 +38,7 @@ class EventsListController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = "Events list"
-        viewModel = EventsListViewModel(model: eventsListUseCase.list())
+        viewModel = EventsListViewModel(model: eventsListUseCase.allEvents())
         setupTableView()
         setupEventHandlers()
     }
@@ -63,7 +63,7 @@ extension EventsListController:
     func didPressAction(_ cell: EventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let event = eventsListUseCase.event(at: index.row)
+            let event = viewModel.event(at: index)
         else { return }
         coordinator?.showDetails(for: event)
     }
@@ -71,7 +71,7 @@ extension EventsListController:
     func didSwipeAction(_ cell: EventCell) {
         guard
             let index = viewRoot.viewTable.indexPath(for: cell),
-            let event = eventsListUseCase.event(at: index.row)
+            let event = viewModel.event(at: index)
         else { return }
         eventEditUseCase.addHappening(to: event, date: .now)
     }
@@ -81,7 +81,7 @@ extension EventsListController:
 
     // Swipe to left actions
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
-        guard let event = eventsListUseCase.event(at: forIndexPath.row) else { return }
+        guard let event = viewModel.event(at: forIndexPath) else { return }
         eventsListUseCase.remove(event)
     }
 }
@@ -117,7 +117,7 @@ extension EventsListController: EventsListUseCaseOutput {
 
 extension EventsListController: EventEditUseCaseOutput {
     func updated(_: Event) {
-        viewModel = EventsListViewModel(model: eventsListUseCase.list())
+        viewModel = EventsListViewModel(model: eventsListUseCase.allEvents())
     }
 }
 

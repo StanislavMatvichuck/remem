@@ -50,6 +50,15 @@ extension EventsListViewModel {
         view.viewTable.dataSource = self
         view.viewTable.reloadData()
     }
+
+    func event(at index: IndexPath) -> Event? {
+        guard
+            index.row < model.count,
+            index.row >= 0
+        else { return nil }
+
+        return model[index.row]
+    }
 }
 
 // MARK: - Private
