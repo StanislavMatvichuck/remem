@@ -384,15 +384,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0890627627A0A1E30032847C /* EventDetailsController */ = {
-			isa = PBXGroup;
-			children = (
-				0852C69D283D39CA0027EF3E /* ClockController.swift */,
-				0852C6AC283D66170027EF3E /* WeekController.swift */,
-			);
-			path = EventDetailsController;
-			sourceTree = "<group>";
-		};
 		08C6C4FD287DAC44001F522E /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,8 +477,9 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0852C69D283D39CA0027EF3E /* ClockController.swift */,
+				0852C6AC283D66170027EF3E /* WeekController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
-				0890627627A0A1E30032847C /* EventDetailsController */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
 				08D47A4028129D210085826F /* RemindersController.swift */,
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
