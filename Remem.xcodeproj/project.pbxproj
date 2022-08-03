@@ -55,7 +55,6 @@
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
 		08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */; };
-		08C6C4FF287DAC55001F522E /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C4FE287DAC55001F522E /* EventsRepository.swift */; };
 		08C6C502287DB4A1001F522E /* HappeningsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6C501287DB4A1001F522E /* HappeningsRepository.swift */; };
 		08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
 		08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
@@ -75,6 +74,10 @@
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E56DF0280DD77900635887 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E56DEF280DD77900635887 /* EntryTests.swift */; };
+		08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
+		08E5B91628997F5C000B08BC /* DomainEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91528997F5C000B08BC /* DomainEvent.swift */; };
+		08E5B91928998053000B08BC /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
+		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F239FF2810326200AD7688 /* LocalNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */; };
@@ -146,7 +149,6 @@
 		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellAnimator.swift; sourceTree = "<group>"; };
-		08C6C4FE287DAC55001F522E /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		08C6C501287DB4A1001F522E /* HappeningsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsRepository.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
 		08D10F4C289598A0005453DD /* EventEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditUseCase.swift; sourceTree = "<group>"; };
@@ -169,6 +171,10 @@
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E56DEF280DD77900635887 /* EntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTests.swift; sourceTree = "<group>"; };
+		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
+		08E5B91528997F5C000B08BC /* DomainEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainEvent.swift; sourceTree = "<group>"; };
+		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
+		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F239FE2810326200AD7688 /* LocalNotificationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsTests.swift; sourceTree = "<group>"; };
@@ -337,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				08C6C501287DB4A1001F522E /* HappeningsRepository.swift */,
-				08C6C4FE287DAC55001F522E /* EventsRepository.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -364,7 +369,9 @@
 		08C6C4FD287DAC44001F522E /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
+				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -470,6 +477,7 @@
 			children = (
 				087BFF052897C8B60029B8FC /* Model */,
 				087BFF042897C8AC0029B8FC /* Services */,
+				08E5B91528997F5C000B08BC /* DomainEvent.swift */,
 			);
 			path = "Domain layer";
 			sourceTree = "<group>";
@@ -505,6 +513,15 @@
 				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
 			);
 			path = ClockService;
+			sourceTree = "<group>";
+		};
+		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
+			isa = PBXGroup;
+			children = (
+				08E5B91828998053000B08BC /* EntityMapper.swift */,
+				08E5B91A28998088000B08BC /* EventEntityMapper.swift */,
+			);
+			path = CoreDataEventsRepository;
 			sourceTree = "<group>";
 		};
 		08F63FB5287894A700984781 /* ClockView */ = {
@@ -652,6 +669,7 @@
 				08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
+				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0857A7B02822720E006CCC99 /* WeekService.swift in Sources */,
@@ -664,9 +682,11 @@
 				08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */,
 				080A15ED27A06003001BAFEB /* ExtensionEvent.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
+				08E5B91628997F5C000B08BC /* DomainEvent.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
+				08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				085D38DE27FEF45700A18912 /* Animator.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
@@ -678,7 +698,6 @@
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */,
 				080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */,
-				08C6C4FF287DAC55001F522E /* EventsRepository.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
@@ -692,6 +711,7 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				08D6E1DA288807F0003BF595 /* WeekDay.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
+				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,

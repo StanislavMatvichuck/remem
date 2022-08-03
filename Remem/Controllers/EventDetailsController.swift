@@ -8,26 +8,29 @@
 import UIKit
 
 protocol EventDetailsControllerDelegate: AnyObject {
-    func didUpdate(event: Event)
+    func didUpdate(event: DomainEvent)
 }
 
 class EventDetailsController: UIViewController {
     // MARK: - Properties
-    var event: Event
+    var event: DomainEvent
     weak var delegate: EventDetailsControllerDelegate?
 
     private let viewRoot = EventDetailsView()
-    private let clockController: ClockController
-    private let weekController: WeekController
+    private let editUseCase: EventEditUseCase
+//    private let clockController: ClockController
+//    private let weekController: WeekController
 
     // MARK: - Init
-    init(event: Event,
-         clockController: ClockController,
-         weekController: WeekController)
+    init(event: DomainEvent,
+         editUseCase: EventEditUseCase)
+//         clockController: ClockController,
+//         weekController: WeekController)
     {
         self.event = event
-        self.clockController = clockController
-        self.weekController = weekController
+        self.editUseCase = editUseCase
+//        self.clockController = clockController
+//        self.weekController = weekController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,22 +41,22 @@ class EventDetailsController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = event.name
-        contain(controller: clockController, in: viewRoot.clock)
+//        contain(controller: clockController, in: viewRoot.clock)
         setupWeek()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // visit
+        editUseCase.visit(event)
     }
 }
 
 // MARK: - Private
 extension EventDetailsController {
     private func setupWeek() {
-        weekController.event = event
-        contain(controller: weekController, in: viewRoot.week)
-        weekController.delegate = clockController
+//        weekController.event = event
+//        contain(controller: weekController, in: viewRoot.week)
+//        weekController.delegate = clockController
     }
 
     private func contain(controller: UIViewController, in view: UIView) {

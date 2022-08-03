@@ -8,17 +8,17 @@
 import Foundation
 
 protocol EventEditUseCaseInput {
-    func visit(_: Event)
-    func addHappening(to: Event, _: Date)
-    func rename(_: Event, to: String)
+    func visit(_: DomainEvent)
+    func addHappening(to: DomainEvent, date: Date)
+//    func rename(_: DomainEvent, to: String)
 }
 
 protocol EventEditUseCaseOutput: AnyObject {
-    func updated(_: Event)
+    func updated(_: DomainEvent)
 }
 
 class EventEditUseCase {
-    typealias Repository = EventsRepository
+    typealias Repository = EventsRepositoryInterface
 
     weak var delegate: EventEditUseCaseOutput?
     // MARK: - Properties
@@ -29,18 +29,22 @@ class EventEditUseCase {
 
 // MARK: - Private
 extension EventEditUseCase: EventEditUseCaseInput {
-    func visit(_ event: Event) {
-        event.dateVisited = .now
-        delegate?.updated(event)
+    func visit(_ event: DomainEvent) {
+        var editedEvent = event
+        editedEvent.dateVisited = .now
+        repository.save(editedEvent)
+        delegate?.updated(editedEvent)
     }
 
-    func addHappening(to event: Event, _ date: Date) {
-        repository.addHappening(to: event, date: date)
-        delegate?.updated(event)
+    func addHappening(to event: DomainEvent, date: Date) {
+        var editedEvent = event
+        editedEvent.happenings.append(DomainHappening(dateCreated: date))
+        repository.save(editedEvent)
+        delegate?.updated(editedEvent)
     }
 
-    func rename(_ event: Event, to newName: String) {
-        event.name = newName
-        delegate?.updated(event)
-    }
+//    func rename(_ event: DomainEvent, to newName: String) {
+//        event.name = newName
+//        delegate?.updated(event)
+//    }
 }

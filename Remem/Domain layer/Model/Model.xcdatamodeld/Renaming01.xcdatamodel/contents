@@ -10,7 +10,7 @@
     <entity name="Happening" representedClassName="Happening" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="value" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
-        <relationship name="event" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="happenings" inverseEntity="Event"/>
+        <relationship name="event" maxCount="1" deletionRule="Cascade" destinationEntity="Event" inverseName="happenings" inverseEntity="Event"/>
     </entity>
     <elements>
         <element name="Event" positionX="-63" positionY="-18" width="128" height="104"/>

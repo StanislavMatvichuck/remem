@@ -25,7 +25,7 @@ extension Coordinator {
         navController.pushViewController(controller, animated: false)
     }
 
-    func showDetails(for event: Event) {
+    func showDetails(for event: DomainEvent) {
         let details = makeDetailsController(for: event)
         navController.pushViewController(details, animated: true)
     }
@@ -34,7 +34,7 @@ extension Coordinator {
 // MARK: - Private
 extension Coordinator {
     private func makeStartController() -> UIViewController {
-        let eventsRepository = EventsRepository()
+        let eventsRepository = CoreDataEventsRepository()
         let eventsListUseCase = EventsListUseCase(repository: eventsRepository)
         let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
 
@@ -74,24 +74,29 @@ extension Coordinator {
         navController.present(nav, animated: true, completion: nil)
     }
 
-    private func makeDetailsController(for event: Event) -> EventDetailsController {
-        let clockController = ClockController()
-        let weekController = WeekController()
+    private func makeDetailsController(for event: DomainEvent) -> EventDetailsController {
+        let eventsRepository = CoreDataEventsRepository()
+        let editUseCase = EventEditUseCase(repository: eventsRepository)
+        editUseCase.delegate = eventsList
 
-        clockController.event = event
+//        let clockController = ClockController()
+//        let weekController = WeekController()
+
+//        clockController.event = event
 
         let details = EventDetailsController(event: event,
-                                             clockController: clockController,
-                                             weekController: weekController)
-        details.delegate = self
+                                             editUseCase: editUseCase)
+//                                             clockController: clockController,
+//                                             weekController: weekController)
+//        details.delegate = self
 
         return details
     }
 }
 
 // MARK: - EventDetailsControllerDelegate
-extension Coordinator: EventDetailsControllerDelegate {
-    func didUpdate(event: Event) {
-        // TODO: move this to core
-    }
-}
+//extension Coordinator: EventDetailsControllerDelegate {
+//    func didUpdate(event: Event) {
+//        // TODO: move this to core
+//    }
+//}

@@ -8,41 +8,46 @@
 import Foundation
 
 protocol EventsListUseCaseInput {
-    func list() -> [Event]
-    func event(at: Int) -> Event?
+    func list() -> [DomainEvent]
+    func event(at: Int) -> DomainEvent?
     func add(name: String)
-    func remove(_: Event)
+    func remove(_: DomainEvent)
 }
 
 protocol EventsListUseCaseOutput: AnyObject {
-    func eventsListUpdated(_: [Event])
+    func eventsListUpdated(_: [DomainEvent])
 }
 
 class EventsListUseCase {
     // MARK: - Properties
     weak var delegate: EventsListUseCaseOutput?
 
-    private var repository: EventsRepositoryInput
+    private var repository: EventsRepositoryInterface
 
     // MARK: - Init
-    init(repository: EventsRepositoryInput) {
+    init(repository: EventsRepositoryInterface) {
         self.repository = repository
     }
 }
 
 // MARK: - Public
 extension EventsListUseCase: EventsListUseCaseInput {
-    func list() -> [Event] { repository.allEvents() }
+    func list() -> [DomainEvent] { repository.all() }
 
-    func event(at index: Int) -> Event? { repository.event(at: index) }
+    func event(at index: Int) -> DomainEvent? { repository.all()[index] }
 
     func add(name: String) {
-        repository.add(name: name)
-        delegate?.eventsListUpdated(repository.allEvents())
+        var allEvents = repository.all()
+        let newEvent = DomainEvent(id: UUID().uuidString,
+                                   name: name, happenings: [],
+                                   dateCreated: .now)
+        allEvents.append(newEvent)
+        repository.save(allEvents)
+        delegate?.eventsListUpdated(repository.all())
     }
 
-    func remove(_ event: Event) {
-        repository.remove(event)
-        delegate?.eventsListUpdated(repository.allEvents())
+    func remove(_ event: DomainEvent) {
+        repository.delete(event)
+        delegate?.eventsListUpdated(repository.all())
     }
 }

@@ -73,7 +73,7 @@ extension EventsListController:
             let index = viewRoot.viewTable.indexPath(for: cell),
             let event = eventsListUseCase.event(at: index.row)
         else { return }
-        eventEditUseCase.addHappening(to: event, .now)
+        eventEditUseCase.addHappening(to: event, date: .now)
     }
 
     // EventsListFooterCellDelegate
@@ -110,13 +110,13 @@ extension EventsListController: UITableViewDelegate {
 }
 
 extension EventsListController: EventsListUseCaseOutput {
-    func eventsListUpdated(_ list: [Event]) {
+    func eventsListUpdated(_ list: [DomainEvent]) {
         viewModel = EventsListViewModel(model: list)
     }
 }
 
 extension EventsListController: EventEditUseCaseOutput {
-    func updated(_: Event) {
+    func updated(_: DomainEvent) {
         viewModel = EventsListViewModel(model: eventsListUseCase.list())
     }
 }

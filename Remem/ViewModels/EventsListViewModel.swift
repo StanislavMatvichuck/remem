@@ -9,7 +9,7 @@ import UIKit
 
 class EventsListViewModel: NSObject {
     typealias View = EventsListView
-    typealias Model = [Event]
+    typealias Model = [DomainEvent]
 
     enum HintState {
         case empty
@@ -77,7 +77,7 @@ extension EventsListViewModel {
 
     private static func getHintState(for model: Model) -> HintState {
         if model.count == 0 { return .empty }
-        if model.filter({ $0.lastHappening != nil }).count == 0 { return .placeFirstMark }
+        if model.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
         if model.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
         return .noHints
     }
@@ -109,7 +109,7 @@ extension EventsListViewModel {
         else { return UITableViewCell() }
 
         let dataRow = model[index.row]
-        row.configure(name: dataRow.name!, value: dataRow.totalAmount)
+        row.configure(name: dataRow.name, value: dataRow.happenings.count)
         setupSwipeHint(index, row)
         return row
     }
