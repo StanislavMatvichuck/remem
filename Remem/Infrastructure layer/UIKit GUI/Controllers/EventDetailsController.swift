@@ -18,19 +18,16 @@ class EventDetailsController: UIViewController {
 
     private let viewRoot = EventDetailsView()
     private let editUseCase: EventEditUseCase
-//    private let clockController: ClockController
-//    private let weekController: WeekController
+    private let weekController: WeekController
 
     // MARK: - Init
     init(event: DomainEvent,
-         editUseCase: EventEditUseCase)
-//         clockController: ClockController,
-//         weekController: WeekController)
+         editUseCase: EventEditUseCase,
+         weekController: WeekController)
     {
         self.event = event
         self.editUseCase = editUseCase
-//        self.clockController = clockController
-//        self.weekController = weekController
+        self.weekController = weekController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,8 +38,7 @@ class EventDetailsController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = event.name
-//        contain(controller: clockController, in: viewRoot.clock)
-        setupWeek()
+        contain(controller: weekController, in: viewRoot.week)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,12 +49,6 @@ class EventDetailsController: UIViewController {
 
 // MARK: - Private
 extension EventDetailsController {
-    private func setupWeek() {
-//        weekController.event = event
-//        contain(controller: weekController, in: viewRoot.week)
-//        weekController.delegate = clockController
-    }
-
     private func contain(controller: UIViewController, in view: UIView) {
         addChild(controller)
         view.addAndConstrain(controller.view)

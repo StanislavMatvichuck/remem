@@ -13,10 +13,9 @@ protocol WeekControllerDelegate: UIViewController {
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    var event: CDEvent!
+    var event: DomainEvent!
     weak var delegate: WeekControllerDelegate?
 
-    private var service: WeekService!
     private let viewRoot = WeekView()
     private var viewModel: WeekViewModel!
 
@@ -46,9 +45,15 @@ extension WeekController: UIScrollViewDelegate {
 // MARK: - Private
 extension WeekController {
     private func setupServiceAndViewModel() {
-        service = WeekService(event)
+        guard
+            let endOfCurrentWeek = Date.now.endOfWeek,
+            let startOfCreationWeek = event.dateCreated.startOfWeek
+        else { return }
 
-        guard let weekList = service.weekList() else { fatalError("Unable to create week list") }
+        let weekList = WeekList(from: startOfCreationWeek,
+                                to: endOfCurrentWeek,
+                                happenings: event.happenings)
+
         viewModel = WeekViewModel(model: weekList)
         viewModel.configure(viewRoot)
     }

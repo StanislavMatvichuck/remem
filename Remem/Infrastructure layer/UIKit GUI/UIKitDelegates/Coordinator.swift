@@ -79,24 +79,13 @@ extension Coordinator {
         let editUseCase = EventEditUseCase(repository: eventsRepository)
         editUseCase.delegate = eventsList
 
-//        let clockController = ClockController()
-//        let weekController = WeekController()
-
-//        clockController.event = event
+        let weekController = WeekController()
+        weekController.event = event
 
         let details = EventDetailsController(event: event,
-                                             editUseCase: editUseCase)
-//                                             clockController: clockController,
-//                                             weekController: weekController)
-//        details.delegate = self
+                                             editUseCase: editUseCase,
+                                             weekController: weekController)
 
         return details
     }
 }
-
-// MARK: - EventDetailsControllerDelegate
-//extension Coordinator: EventDetailsControllerDelegate {
-//    func didUpdate(event: Event) {
-//        // TODO: move this to core
-//    }
-//}

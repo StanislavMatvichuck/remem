@@ -10,8 +10,7 @@ import Foundation
 struct WeekList {
     let days: [WeekDay]
 
-    // TODO: refactor this to improve performance
-    init(from: Date, to: Date, happenings: [CDHappening]) {
+    init(from: Date, to: Date, happenings: [DomainHappening]) {
         let dayDurationInSeconds: TimeInterval = 60*60*24
         var days: [WeekDay] = []
 
@@ -21,7 +20,7 @@ struct WeekList {
 
             for happening in happenings {
                 guard let weekDayDate = Calendar.current.date(from: components) else { continue }
-                if happening.dateCreated!.isInSameDay(as: weekDayDate) { weekDay.amount += 1 }
+                if happening.dateCreated.isInSameDay(as: weekDayDate) { weekDay.amount += 1 }
             }
 
             days.append(weekDay)

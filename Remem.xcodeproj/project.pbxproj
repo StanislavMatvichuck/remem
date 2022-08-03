@@ -13,7 +13,6 @@
 		080656EE283B94DF00C09409 /* ClockSectionDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */; };
 		080656F0283BB88200C09409 /* ClockTimeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */; };
 		080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656F1283BB92200C09409 /* ClockTimeDescription.swift */; };
-		080A15ED27A06003001BAFEB /* ExtensionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A15EC27A06003001BAFEB /* ExtensionEvent.swift */; };
 		080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
@@ -34,7 +33,6 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		0857A7AC28225B8F006CCC99 /* PointsListServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */; };
 		0857A7AE28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */; };
-		0857A7B02822720E006CCC99 /* WeekService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A7AF2822720E006CCC99 /* WeekService.swift */; };
 		085D38DE27FEF45700A18912 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D38DD27FEF45600A18912 /* Animator.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
@@ -102,7 +100,6 @@
 		080656ED283B94DF00C09409 /* ClockSectionDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionDescriptionTests.swift; sourceTree = "<group>"; };
 		080656EF283BB88200C09409 /* ClockTimeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescriptionTests.swift; sourceTree = "<group>"; };
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
-		080A15EC27A06003001BAFEB /* ExtensionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEvent.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
@@ -123,7 +120,6 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		0857A7AB28225B8F006CCC99 /* PointsListServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsListServiceTests.swift; sourceTree = "<group>"; };
 		0857A7AD28226C39006CCC99 /* EntryWeekDistributionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWeekDistributionServiceTests.swift; sourceTree = "<group>"; };
-		0857A7AF2822720E006CCC99 /* WeekService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekService.swift; sourceTree = "<group>"; };
 		085D38DD27FEF45600A18912 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
@@ -248,6 +244,15 @@
 			path = "UIKit GUI";
 			sourceTree = "<group>";
 		};
+		085C4E99289ABCEF0094388C /* WeekController */ = {
+			isa = PBXGroup;
+			children = (
+				08D6E1D9288807F0003BF595 /* WeekDay.swift */,
+				08D6E1D7288807DC003BF595 /* WeekList.swift */,
+			);
+			path = WeekController;
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,8 +279,6 @@
 				08D6E1DC28881A6C003BF595 /* ClockService */,
 				088A60FB28857D3C0062EB9E /* ClockService.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
-				08D6E1DB28881A3C003BF595 /* WeekService */,
-				0857A7AF2822720E006CCC99 /* WeekService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -378,7 +381,6 @@
 		087BFF052897C8B60029B8FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				080A15EC27A06003001BAFEB /* ExtensionEvent.swift */,
 				0890627D27A0AD460032847C /* ExtensionHappening.swift */,
 			);
 			path = Model;
@@ -478,11 +480,12 @@
 			isa = PBXGroup;
 			children = (
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
-				0852C6AC283D66170027EF3E /* WeekController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
 				08D47A4028129D210085826F /* RemindersController.swift */,
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
+				085C4E99289ABCEF0094388C /* WeekController */,
+				0852C6AC283D66170027EF3E /* WeekController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -509,15 +512,6 @@
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		08D6E1DB28881A3C003BF595 /* WeekService */ = {
-			isa = PBXGroup;
-			children = (
-				08D6E1D9288807F0003BF595 /* WeekDay.swift */,
-				08D6E1D7288807DC003BF595 /* WeekList.swift */,
-			);
-			path = WeekService;
 			sourceTree = "<group>";
 		};
 		08D6E1DC28881A6C003BF595 /* ClockService */ = {
@@ -688,7 +682,6 @@
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
-				0857A7B02822720E006CCC99 /* WeekService.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
@@ -696,7 +689,6 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */,
-				080A15ED27A06003001BAFEB /* ExtensionEvent.swift in Sources */,
 				0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */,
 				08E5B91628997F5C000B08BC /* DomainEvent.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
