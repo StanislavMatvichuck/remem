@@ -82,8 +82,12 @@ extension Coordinator {
         let weekController = WeekController()
         weekController.event = event
 
+        let clockController = ClockController()
+        clockController.event = event
+
         let details = EventDetailsController(event: event,
                                              editUseCase: editUseCase,
+                                             clockController: clockController,
                                              weekController: weekController)
 
         return details

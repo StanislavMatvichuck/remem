@@ -19,15 +19,18 @@ class EventDetailsController: UIViewController {
     private let viewRoot = EventDetailsView()
     private let editUseCase: EventEditUseCase
     private let weekController: WeekController
+    private let clockController: ClockController
 
     // MARK: - Init
     init(event: DomainEvent,
          editUseCase: EventEditUseCase,
+         clockController: ClockController,
          weekController: WeekController)
     {
         self.event = event
         self.editUseCase = editUseCase
         self.weekController = weekController
+        self.clockController = clockController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,7 +41,9 @@ class EventDetailsController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         title = event.name
+
         contain(controller: weekController, in: viewRoot.week)
+        contain(controller: clockController, in: viewRoot.clock)
     }
 
     override func viewDidAppear(_ animated: Bool) {

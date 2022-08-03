@@ -9,9 +9,9 @@ import UIKit
 
 class ClockController: UIViewController {
     // MARK: - Properties
-    var event: CDEvent!
+    var event: DomainEvent!
+
     private let viewRoot = ClockView()
-    private let service = ClockService(HappeningsRepository())
     private var viewModel: ClockViewModel! {
         didSet { viewModel.configure(viewRoot) }
     }
@@ -29,19 +29,8 @@ class ClockController: UIViewController {
 // MARK: - Private
 extension ClockController {
     private func setupLists() {
-        guard
-            let start = Date.now.startOfWeek,
-            let end = Date.now.endOfWeek
-        else { return }
-
-        updateLists(from: start, to: end)
-    }
-
-    private func updateLists(from: Date, to: Date) {
-        let happenings = service.getList(for: event, between: from, and: to)
         var newList = ClockSectionsList()
-        newList.fill(with: happenings)
-
+        newList.fill(with: event.happenings)
         viewModel = ClockViewModel(model: newList)
     }
 }

@@ -43,7 +43,6 @@
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		08787260282A8D70007AE7A8 /* EntryDetailsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
-		088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A60FB28857D3C0062EB9E /* ClockService.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0890627C27A0A2700032847C /* HappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627B27A0A2700032847C /* HappeningCell.swift */; };
@@ -135,7 +134,6 @@
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0878725F282A8D70007AE7A8 /* EntryDetailsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsServiceTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		088A60FB28857D3C0062EB9E /* ClockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockService.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		0890627B27A0A2700032847C /* HappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningCell.swift; sourceTree = "<group>"; };
@@ -253,6 +251,16 @@
 			path = WeekController;
 			sourceTree = "<group>";
 		};
+		085C4E9A289AC0DD0094388C /* ClockController */ = {
+			isa = PBXGroup;
+			children = (
+				080656E9283B946000C09409 /* ClockSection.swift */,
+				080656E7283B945100C09409 /* ClockSectionsList.swift */,
+				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
+			);
+			path = ClockController;
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,8 +284,6 @@
 		086DC6CF288057130048F22F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				08D6E1DC28881A6C003BF595 /* ClockService */,
-				088A60FB28857D3C0062EB9E /* ClockService.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 			);
 			path = Services;
@@ -479,6 +485,7 @@
 		08D512332787140D00C2037F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				085C4E9A289AC0DD0094388C /* ClockController */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
@@ -512,16 +519,6 @@
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		08D6E1DC28881A6C003BF595 /* ClockService */ = {
-			isa = PBXGroup;
-			children = (
-				080656E9283B946000C09409 /* ClockSection.swift */,
-				080656E7283B945100C09409 /* ClockSectionsList.swift */,
-				080656F1283BB92200C09409 /* ClockTimeDescription.swift */,
-			);
-			path = ClockService;
 			sourceTree = "<group>";
 		};
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
@@ -680,7 +677,6 @@
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
-				088A60FC28857D3C0062EB9E /* ClockService.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
