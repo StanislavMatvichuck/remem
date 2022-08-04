@@ -26,12 +26,11 @@ class EventDetailsView: UIView {
         let statsView = makeStatsView()
         let scroll = ViewScroll(.vertical)
         scroll.contain(views:
-//            make(title: "By hours"),
+            week,
+            make(title: "Hours distribution"),
             clock,
             make(title: "Stats"),
-            statsView,
-            make(title: "By days of week"),
-            week)
+            statsView)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -78,7 +77,7 @@ extension EventDetailsView {
             statRow02.topAnchor.constraint(equalTo: statRow01.bottomAnchor, constant: UIHelper.spacing),
             statRow02.leadingAnchor.constraint(equalTo: statsView.readableContentGuide.leadingAnchor),
             statRow02.trailingAnchor.constraint(equalTo: statsView.readableContentGuide.trailingAnchor),
-            statRow02.bottomAnchor.constraint(equalTo: statsView.bottomAnchor),
+            statRow02.bottomAnchor.constraint(equalTo: statsView.bottomAnchor, constant: -UIHelper.spacing),
         ])
 
         return statsView

@@ -80,7 +80,7 @@ extension WeekView {
             weekdaysLine.topAnchor.constraint(equalTo: collection.bottomAnchor),
             weekdaysLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             weekdaysLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            weekdaysLine.bottomAnchor.constraint(equalTo: bottomAnchor),
+            weekdaysLine.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIHelper.spacing),
         ])
     }
 }
