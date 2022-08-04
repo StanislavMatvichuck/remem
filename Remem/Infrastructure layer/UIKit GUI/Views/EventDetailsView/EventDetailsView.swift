@@ -8,10 +8,40 @@
 import UIKit
 
 class EventDetailsView: UIView {
+    enum EventStat: CaseIterable {
+        case total
+        case average
+        case weekTotal
+        case weekAverage
+
+				// TODO: localization
+        func localizedDescription() -> String {
+            switch self {
+            case .total: return "Total"
+            case .average: return "Average"
+            case .weekTotal: return "Week total"
+            case .weekAverage: return "Week average"
+            }
+        }
+    }
+
     // MARK: - Properties
     let week = UIView(al: true)
-    let happeningsList = UIView(al: true)
     let clock = UIView(al: true)
+
+    lazy var statsView: UIView = {
+        let view = UIStackView(al: true)
+        view.axis = .vertical
+
+        for stat in EventStat.allCases {
+            let statView = makeStatTile(stat: stat)
+            view.addArrangedSubview(statView)
+        }
+
+        return view
+    }()
+
+    var statsLabels = [EventStat: UILabel]()
 
     // MARK: - Init
     init() {
@@ -23,14 +53,24 @@ class EventDetailsView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
-        let statsView = makeStatsView()
+        let statsMarginContainer = UIView(al: true)
+        statsMarginContainer.addSubview(statsView)
+
+        NSLayoutConstraint.activate([
+            statsView.leadingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.leadingAnchor),
+            statsView.trailingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.trailingAnchor),
+
+            statsView.topAnchor.constraint(equalTo: statsMarginContainer.topAnchor),
+            statsView.bottomAnchor.constraint(equalTo: statsMarginContainer.bottomAnchor, constant: -UIHelper.spacing),
+        ])
+
         let scroll = ViewScroll(.vertical)
         scroll.contain(views:
             week,
             make(title: "Hours distribution"),
             clock,
             make(title: "Stats"),
-            statsView)
+            statsMarginContainer)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -62,49 +102,14 @@ class EventDetailsView: UIView {
 
 // MARK: - Private
 extension EventDetailsView {
-    private func makeStatsView() -> UIView {
-        let statRow01 = makeStatsRow(amounts: [1.0, 23.4], descriptions: ["Some text", "Another label"])
-        let statRow02 = makeStatsRow(amounts: [45.6, 789.0], descriptions: ["Some text", "Another much longer label"])
-        let statsView = UIView(al: true)
-        statsView.addSubview(statRow01)
-        statsView.addSubview(statRow02)
-
-        NSLayoutConstraint.activate([
-            statRow01.topAnchor.constraint(equalTo: statsView.topAnchor),
-            statRow01.leadingAnchor.constraint(equalTo: statsView.readableContentGuide.leadingAnchor),
-            statRow01.trailingAnchor.constraint(equalTo: statsView.readableContentGuide.trailingAnchor),
-
-            statRow02.topAnchor.constraint(equalTo: statRow01.bottomAnchor, constant: UIHelper.spacing),
-            statRow02.leadingAnchor.constraint(equalTo: statsView.readableContentGuide.leadingAnchor),
-            statRow02.trailingAnchor.constraint(equalTo: statsView.readableContentGuide.trailingAnchor),
-            statRow02.bottomAnchor.constraint(equalTo: statsView.bottomAnchor, constant: -UIHelper.spacing),
-        ])
-
-        return statsView
-    }
-
-    private func makeStatsRow(amounts: [Double], descriptions: [String]) -> UIStackView {
-        let stack = UIStackView(al: true)
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.alignment = .firstBaseline
-        stack.spacing = UIHelper.spacing
-
-        for (index, amount) in amounts.enumerated() {
-            stack.addArrangedSubview(makeStatTile(amount: amount, description: descriptions[index]))
-        }
-
-        return stack
-    }
-
-    private func makeStatTile(amount: Double, description: String) -> UIView {
+    private func makeStatTile(stat: EventStat) -> UIView {
         let labelAmount = UILabel(al: true)
-        labelAmount.text = "\(amount)"
+        labelAmount.text = "\(0.0)"
         labelAmount.font = UIHelper.fontBold
         labelAmount.textColor = UIHelper.itemFont
 
         let labelDescription = UILabel(al: true)
-        labelDescription.text = description
+        labelDescription.text = stat.localizedDescription()
         labelDescription.numberOfLines = 0
         labelDescription.font = UIHelper.font
         labelDescription.textColor = UIHelper.itemFont
@@ -113,6 +118,8 @@ extension EventDetailsView {
         view.axis = .vertical
         view.addArrangedSubview(labelAmount)
         view.addArrangedSubview(labelDescription)
+
+        statsLabels[stat] = labelAmount
 
         return view
     }

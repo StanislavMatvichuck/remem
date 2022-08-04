@@ -17,6 +17,10 @@ class EventDetailsController: UIViewController {
     weak var delegate: EventDetailsControllerDelegate?
 
     private let viewRoot = EventDetailsView()
+    private var viewModel: EventDetailsViewModel! {
+        didSet { viewModel.configure(viewRoot) }
+    }
+
     private let editUseCase: EventEditUseCase
     private let weekController: WeekController
     private let clockController: ClockController
@@ -44,6 +48,8 @@ class EventDetailsController: UIViewController {
 
         contain(controller: weekController, in: viewRoot.week)
         contain(controller: clockController, in: viewRoot.clock)
+
+        viewModel = EventDetailsViewModel(event)
     }
 
     override func viewDidAppear(_ animated: Bool) {
