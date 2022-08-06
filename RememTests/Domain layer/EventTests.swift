@@ -72,6 +72,24 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings.count, 0)
     }
 
+    func test_addHappening_sorted() {
+        var sut = makeDefaultEvent()
+        let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
+        let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
+        let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
+
+        do {
+            try sut.addHappening(date: thirdHappeningDate)
+            try sut.addHappening(date: secondHappeningDate)
+            try sut.addHappening(date: firstHappeningDate)
+        } catch {}
+
+        XCTAssertEqual(sut.happenings.count, 3)
+        XCTAssertEqual(sut.happenings[0], Happening(dateCreated: firstHappeningDate))
+        XCTAssertEqual(sut.happenings[1], Happening(dateCreated: secondHappeningDate))
+        XCTAssertEqual(sut.happenings[2], Happening(dateCreated: thirdHappeningDate))
+    }
+
     func test_visit() {
         var sut = makeDefaultEvent()
 

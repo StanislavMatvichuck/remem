@@ -26,8 +26,12 @@ extension Event {
     func addHappening(date: Date) throws -> Happening {
         if date < dateCreated { throw EventManipulationError.incorrectHappeningDate }
 
+        let insertIndex = happenings.firstIndex { happening in
+            happening.dateCreated < date
+        } ?? 0
+
         let newHappening = Happening(dateCreated: date)
-        happenings.append(newHappening)
+        happenings.insert(newHappening, at: insertIndex)
 
         return newHappening
     }
