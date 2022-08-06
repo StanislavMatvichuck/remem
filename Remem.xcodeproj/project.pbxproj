@@ -52,6 +52,8 @@
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
+		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
+		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */; };
 		08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
 		08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
@@ -143,6 +145,8 @@
 		08A19D282890125B0085DC6F /* EventsListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFooterCell.swift; sourceTree = "<group>"; };
 		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
+		08B26A0F289E919F00DFBAC8 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
+		08B26A11289E91D400DFBAC8 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellAnimator.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
 		08D10F4C289598A0005453DD /* EventEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditUseCase.swift; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 				086DC6D428805D070048F22F /* EventDetailsView */,
 				08C6C503287DC572001F522E /* EventsListView */,
 				080BF143288499E800DDF55F /* SettingsView */,
+				08B26A11289E91D400DFBAC8 /* DayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 			children = (
 				085C4E9A289AC0DD0094388C /* ClockController */,
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
+				08B26A0F289E919F00DFBAC8 /* DayController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
 				08D47A4028129D210085826F /* RemindersController.swift */,
@@ -639,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0848C94B281163C9003ED51D /* SettingsRowView.swift in Sources */,
+				08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */,
 				0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */,
 				085C4E9E289AC4F00094388C /* Happening.swift in Sources */,
 				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
@@ -691,6 +698,7 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				08D6E1DA288807F0003BF595 /* WeekDay.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
+				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
 				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,

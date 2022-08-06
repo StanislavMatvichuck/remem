@@ -28,13 +28,17 @@ extension WeekViewModel {
         self.view = view
 
         view.collection.dataSource = self
-        view.collection.delegate = self
     }
 
     func scrollToCurrentWeek() {
         guard !scrollHappened else { return }
         setInitialScrollPosition()
         scrollHappened = true
+    }
+
+    func day(for cell: DayOfTheWeekCell) -> DateComponents? {
+        guard let index = view?.collection.indexPath(for: cell) else { return nil }
+        return model.days[index.row].date
     }
 }
 
@@ -58,16 +62,6 @@ extension WeekViewModel: UICollectionViewDataSource {
         cell.configure(amount: weekDay.amount)
 
         return cell
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension WeekViewModel: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        return CGSize(width: .wScreen / 7, height: collectionView.bounds.height)
     }
 }
 

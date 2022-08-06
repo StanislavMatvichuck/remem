@@ -29,6 +29,19 @@ extension Coordinator {
         let details = makeDetailsController(for: event)
         navController.pushViewController(details, animated: true)
     }
+
+    func showDayController(for day: DateComponents, event: Event) {
+        let day = makeDayController(day, event)
+
+        let nav = UINavigationController(rootViewController: day)
+        nav.modalPresentationStyle = .pageSheet
+
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+
+        navController.present(nav, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Private
@@ -81,6 +94,7 @@ extension Coordinator {
 
         let weekController = WeekController()
         weekController.event = event
+        weekController.coordinator = self
 
         let clockController = ClockController()
         clockController.event = event
@@ -91,5 +105,11 @@ extension Coordinator {
                                              weekController: weekController)
 
         return details
+    }
+
+    private func makeDayController(_ day: DateComponents, _ event: Event) -> DayController {
+        let controller = DayController()
+
+        return controller
     }
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DayOfTheWeekCellDelegate: AnyObject {
+    func didPress(cell: DayOfTheWeekCell)
+}
+
 class DayOfTheWeekCell: UICollectionViewCell {
     static let reuseIdentifier = "CellDay"
 
@@ -23,6 +27,8 @@ class DayOfTheWeekCell: UICollectionViewCell {
     }
 
     // MARK: - Properties
+    weak var delegate: DayOfTheWeekCellDelegate?
+
     private var viewRoot = UIView(al: true)
     private var backgroundContainer = UIView(al: true)
     private var sectionsContainer = UIView(al: true)
@@ -37,6 +43,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
         super.init(frame: frame)
         configureViewsHierarchy()
         configureViews()
+        viewRoot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -85,6 +92,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
         super.prepareForReuse()
         backgroundColor = .clear
         sectionsAmount = 0
+        delegate = nil
     }
 
     override func layoutSubviews() {
@@ -158,5 +166,9 @@ extension DayOfTheWeekCell {
         label.text = " "
 
         return label
+    }
+
+    @objc private func handlePress() {
+        delegate?.didPress(cell: self)
     }
 }
