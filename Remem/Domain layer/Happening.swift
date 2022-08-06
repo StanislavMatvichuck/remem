@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Happening {
+struct Happening: Equatable {
     let dateCreated: Date
     var value: Int32 = 1
 }

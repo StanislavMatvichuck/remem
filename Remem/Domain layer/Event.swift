@@ -15,3 +15,25 @@ struct Event {
     let dateCreated: Date
     var dateVisited: Date?
 }
+
+enum EventManipulationError: Error {
+    case incorrectHappeningDate
+}
+
+// MARK: - Public
+extension Event {
+    @discardableResult mutating
+    func addHappening(date: Date) throws -> Happening {
+        if date < dateCreated { throw EventManipulationError.incorrectHappeningDate }
+
+        let newHappening = Happening(dateCreated: date)
+        happenings.append(newHappening)
+
+        return newHappening
+    }
+
+    mutating
+    func visit() {
+        dateVisited = Date.now
+    }
+}
