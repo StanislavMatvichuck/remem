@@ -9,11 +9,19 @@ import UIKit
 
 class DayView: UIView {
     // MARK: - Properties
-    // MARK: Private
+    var happenings: UITableView = {
+        let table = UITableView(al: true)
+
+        table.register(DayHappeningCell.self, forCellReuseIdentifier: DayHappeningCell.reuseIdentifier)
+
+        return table
+    }()
+
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
+
+        addAndConstrain(happenings)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

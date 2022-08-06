@@ -109,7 +109,8 @@ extension Coordinator {
 
     private func makeDayController(_ day: DateComponents, _ event: Event) -> DayController {
         let controller = DayController()
-
+        controller.day = day
+        controller.event = event
         return controller
     }
 }

@@ -54,6 +54,8 @@
 		08A473FC28201F5400D62194 /* HintsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A473FB28201F5400D62194 /* HintsManagerTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
+		08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
+		08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */; };
 		08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */; };
 		08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
 		08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
@@ -147,6 +149,8 @@
 		08A473FB28201F5400D62194 /* HintsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsManagerTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		08B26A11289E91D400DFBAC8 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		08B26A13289E975900DFBAC8 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
+		08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHappeningCell.swift; sourceTree = "<group>"; };
 		08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellAnimator.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
 		08D10F4C289598A0005453DD /* EventEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditUseCase.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				08B26A13289E975900DFBAC8 /* DayViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 		086DC6D3288058E70048F22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */,
 				08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */,
 				08C6C504287DC7F3001F522E /* EventCell */,
 				08A19D282890125B0085DC6F /* EventsListFooterCell.swift */,
@@ -659,6 +665,7 @@
 				08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
+				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
@@ -700,6 +707,7 @@
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
 				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
+				08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */,
 				080656F2283BB92200C09409 /* ClockTimeDescription.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,

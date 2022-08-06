@@ -5,13 +5,17 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-import Foundation
-
 import UIKit
 
 class DayController: UIViewController {
     // MARK: - Properties
-    fileprivate let viewRoot = DayView()
+    var event: Event!
+    var day: DateComponents!
+
+    private let viewRoot = DayView()
+    private var viewModel: DayViewModel! {
+        didSet { viewModel.configure(viewRoot) }
+    }
 
     // MARK: - Init
     init() { super.init(nibName: nil, bundle: nil) }
@@ -19,10 +23,18 @@ class DayController: UIViewController {
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-
     override func viewDidLoad() {
-        view.backgroundColor = .red
+        view.backgroundColor = UIHelper.background
+        viewModel = DayViewModel(model: event, day: day)
+        configureTitle()
+    }
+}
 
-        title = "Day controller"
+// MARK: - Private
+extension DayController {
+    private func configureTitle() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM"
+        title = dateFormatter.string(for: Calendar.current.date(from: day))
     }
 }
