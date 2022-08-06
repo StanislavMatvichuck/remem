@@ -13,6 +13,8 @@ class DayView: UIView {
         let table = UITableView(al: true)
 
         table.register(DayHappeningCell.self, forCellReuseIdentifier: DayHappeningCell.reuseIdentifier)
+        table.separatorStyle = .none
+        table.tableFooterView = UIView(al: true)
 
         return table
     }()

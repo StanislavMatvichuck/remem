@@ -17,10 +17,13 @@ class DayController: UIViewController {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    private var picker: UIDatePicker = {
+    private lazy var picker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
         picker.preferredDatePickerStyle = .wheels
+
+        if let date = Calendar.current.date(from: day) { picker.date = date }
+
         return picker
     }()
 

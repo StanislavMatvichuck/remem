@@ -47,7 +47,14 @@ extension DayViewModel: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DayHappeningCell.reuseIdentifier, for: indexPath)
             as? DayHappeningCell else { return UITableViewCell() }
 
-        cell.label.text = "\(shownHappenings[indexPath.row].dateCreated)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
+
+        let happeningDate = shownHappenings[indexPath.row].dateCreated
+        let displayedText = dateFormatter.string(from: happeningDate)
+
+        cell.label.text = displayedText
 
         return cell
     }
