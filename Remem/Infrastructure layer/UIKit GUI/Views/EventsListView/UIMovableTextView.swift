@@ -8,40 +8,56 @@
 import UIKit
 
 protocol UIMovableTextViewInterface: UIControl {
-    var onboardingHighlight: UIView { get }
-    var value: String { get set }
+    var value: String { get }
 
-    func show()
-    func disableCancelButton()
-    func enableCancelButton()
+    func show(value: String)
+    func rename(oldName: String)
+    func dismiss()
 }
 
-class UIMovableTextView: UIControl, UIMovableTextViewInterface {
-    typealias KeyboardHeightChangeDescriptor = (movedBy: CGPoint, duration: Double)
-
+class UIMovableTextView: UIControl {
     // MARK: I18n
     static let empty = NSLocalizedString("empty.EventsList.firstName", comment: "Events list empty state")
     static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
     static let add = NSLocalizedString("button.add.event", comment: "movable view accessory button add")
 
     // MARK: - Properties
-    var value: String = "" { didSet { barAdd.isEnabled = !value.isEmpty } }
-    var onboardingHighlight: UIView { viewInput }
+    var value: String = "" {
+        didSet {
+            input.text = value
+            barSubmit.isEnabled = !value.isEmpty
+        }
+    }
+
+    private lazy var barCancel = UIBarButtonItem(
+        title: Self.cancel,
+        style: .plain,
+        target: self,
+        action: #selector(handlePressCancel))
+
+    private lazy var barSubmit = UIBarButtonItem(
+        title: Self.add,
+        style: .done,
+        target: self,
+        action: #selector(handlePressSubmit))
 
     private var input: UITextField { viewInput.subviews[0] as! UITextField }
+    private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
+        let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
+        return constraint
+    }()
 
-    lazy var viewInputBackground: UIView = {
+    let viewInputBackground: UIView = {
         let view = UIView(al: true)
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.addAndConstrain(blurView)
-        addAndConstrain(view)
         return view
     }()
 
-    private lazy var viewInput: UIView = {
+    let viewInput: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = UIHelper.background
         view.layer.cornerRadius = .r2
@@ -58,12 +74,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         input.minimumFontSize = .font1
         view.addSubview(input)
 
-        addSubview(view)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .sm),
-            view.heightAnchor.constraint(equalToConstant: .d2),
-            view.centerXAnchor.constraint(equalTo: centerXAnchor),
-
             input.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             input.heightAnchor.constraint(equalToConstant: .d2),
@@ -73,23 +84,6 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         return view
     }()
 
-    private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
-        let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
-        return constraint
-    }()
-
-    private lazy var barCancel = UIBarButtonItem(
-        title: Self.cancel,
-        style: .plain,
-        target: self,
-        action: #selector(handlePressCancel))
-
-    private lazy var barAdd = UIBarButtonItem(
-        title: Self.add,
-        style: .done,
-        target: self,
-        action: #selector(handlePressCreate))
-
     private lazy var namingHintLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = Self.empty
@@ -97,13 +91,14 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         label.font = UIHelper.fontBold
         label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
+
         viewInputBackground.addSubview(label)
         NSLayoutConstraint.activate([
             label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
             label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
             label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            label.heightAnchor.constraint(equalToConstant: .hScreen / 3),
         ])
+
         return label
     }()
 
@@ -130,6 +125,7 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
             scroll.centerXAnchor.constraint(equalTo: centerXAnchor),
             scroll.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
         ])
+
         return scroll
     }()
 
@@ -138,44 +134,74 @@ class UIMovableTextView: UIControl, UIMovableTextViewInterface {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
 
-        setupView()
-        configureInputAccessoryView()
+        setupLayoutAndVisibility()
+        setupInputAccessoryView()
         setupEventHandlers()
-
-        isUserInteractionEnabled = false
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     deinit { NotificationCenter.default.removeObserver(self) }
+}
 
-    private func setupView() {
+// MARK: - Public
+extension UIMovableTextView: UIMovableTextViewInterface {
+    func show(value: String) {
+        self.value = value
+        isUserInteractionEnabled = true
+        input.becomeFirstResponder()
+    }
+
+    func rename(oldName: String) {
+        show(value: oldName)
+        barSubmit.title = "Rename"
+    }
+
+    func dismiss() { handlePressCancel() }
+}
+
+// MARK: - Private
+extension UIMovableTextView {
+    private func setupLayoutAndVisibility() {
+        addAndConstrain(viewInputBackground)
+
+        addSubview(viewInput)
+        NSLayoutConstraint.activate([
+            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .sm),
+            viewInput.heightAnchor.constraint(equalToConstant: .d2),
+            viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
+
         viewInputBackground.isHidden = true
         viewInput.isHidden = false
         namingHintLabel.isHidden = false
         emojiContainer.isHidden = true
 
+        isUserInteractionEnabled = false
+
         NSLayoutConstraint.activate([inputAnimatedConstraint])
     }
-}
 
-// MARK: - Public
-extension UIMovableTextView {
-    func show() {
-        isUserInteractionEnabled = true
-        input.becomeFirstResponder()
+    private func setupInputAccessoryView() {
+        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
+        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
+        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
+
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
+        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
+
+        barSubmit.isEnabled = !value.isEmpty
+
+        bar.items = [barCancel, space, barSubmit]
+        bar.sizeToFit()
+
+        input.inputAccessoryView = bar
     }
 
-    func disableCancelButton() {
-        barCancel.isEnabled = false
-    }
-
-    func enableCancelButton() {
-        barCancel.isEnabled = true
-    }
-}
-
-// MARK: - Private
-extension UIMovableTextView {
+    // Events handlers
     private func setupEventHandlers() {
         input.delegate = self
 
@@ -190,11 +216,49 @@ extension UIMovableTextView {
         viewInputBackground.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePressCancel)))
 
-        input.addTarget(self, action: #selector(textViewDidChange), for: .editingChanged)
+        input.addTarget(self, action: #selector(handleInputChange), for: .editingChanged)
     }
 
-    @objc
-    private func handleKeyboardWillShow(notification: NSNotification) {
+    @objc private func handleTapEmoji(_ sender: UITapGestureRecognizer) {
+        if
+            let label = sender.view as? UILabel,
+            let emoji = label.text
+        {
+            value += emoji
+        }
+    }
+
+    @objc private
+    func handlePressCancel() {
+        sendActions(for: .editingDidEndOnExit)
+        hideInput()
+    }
+
+    @objc private
+    func handlePressSubmit() {
+        sendActions(for: .editingDidEnd)
+        hideInput()
+    }
+
+    @objc private
+    func handleInputChange() {
+        value = input.text ?? ""
+    }
+
+    private
+    func hideInput() {
+        input.resignFirstResponder()
+
+        isUserInteractionEnabled = false
+        value = ""
+        barSubmit.title = Self.add
+    }
+}
+
+// MARK: - Keyboard handling
+extension UIMovableTextView {
+    @objc private
+    func handleKeyboardWillShow(notification: NSNotification) {
         guard
             let userInfo = notification.userInfo,
             let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
@@ -208,34 +272,15 @@ extension UIMovableTextView {
 
         let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .sm
 
-        postWillShowNotification(newConstant: newConstant, duration: duration)
-
-        let animator = UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
+        UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = newConstant
             self.viewInputBackground.alpha = 1
             self.layoutIfNeeded()
-        })
-
-        animator.addCompletion { _ in
-            NotificationCenter.default.post(name: .UIMovableTextViewShown, object: self.viewInput)
-        }
-
-        animator.startAnimation()
+        }).startAnimation()
     }
 
-    private func postWillShowNotification(newConstant: CGFloat, duration: Double) {
-        let existingConstant = inputAnimatedConstraint.constant
-        let constantDifference = newConstant - existingConstant
-
-        let notificationObject: KeyboardHeightChangeDescriptor = (
-            movedBy: CGPoint(x: 0, y: constantDifference),
-            duration: duration)
-
-        NotificationCenter.default.post(name: .UIMovableTextViewWillShow, object: notificationObject)
-    }
-
-    @objc
-    private func handleKeyboardWillHide(notification: NSNotification) {
+    @objc private
+    func handleKeyboardWillHide(notification: NSNotification) {
         guard
             let userInfo = notification.userInfo,
             let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
@@ -243,83 +288,15 @@ extension UIMovableTextView {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        let animator = UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
-            self.inputAnimatedConstraint.constant = 0
-            self.viewInputBackground.alpha = 0
-            self.layoutIfNeeded()
-        })
-
         viewInputBackground.isHidden = true
         emojiContainer.isHidden = true
 
-        animator.startAnimation()
+        UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
+            self.inputAnimatedConstraint.constant = 0
+            self.viewInputBackground.alpha = 0
+            self.layoutIfNeeded()
+        }).startAnimation()
     }
-
-    private func configureInputAccessoryView() {
-        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
-        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
-        barAdd.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
-
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
-
-        barAdd.isEnabled = !value.isEmpty
-
-        bar.items = [barCancel, space, barAdd]
-        bar.sizeToFit()
-
-        input.inputAccessoryView = bar
-    }
-
-    @objc
-    private func handleEmojiPress(_ barItem: UIBarButtonItem) {
-        input.text? += barItem.title!
-        textViewDidChange(input)
-    }
-
-    @objc private func handleTapEmoji(_ sender: UITapGestureRecognizer) {
-        if
-            let label = sender.view as? UILabel,
-            let emoji = label.text
-        {
-            input.text? += emoji
-            textViewDidChange(input)
-        }
-    }
-
-    @objc
-    private func handlePressCancel(_ sender: UITapGestureRecognizer) {
-        sendActions(for: .editingDidEndOnExit)
-        hideInput()
-    }
-
-    @objc
-    private func handlePressCreate() {
-        sendActions(for: .editingDidEnd)
-        hideInput()
-    }
-
-    private func hideInput() {
-        input.resignFirstResponder()
-
-        isUserInteractionEnabled = false
-        input.text = ""
-        textViewDidChange(input)
-    }
-
-    @objc func textViewDidChange(_ textView: UITextField) {
-        value = textView.text ?? ""
-    }
-}
-
-// MARK: - Notifications
-extension Notification.Name {
-    static let UIMovableTextViewShown = Notification.Name(rawValue: "UISwipingInputShown")
-    static let UIMovableTextViewWillShow = Notification.Name(rawValue: "UIMovableTextViewWillShow")
 }
 
 // MARK: - Dark mode
@@ -333,7 +310,7 @@ extension UIMovableTextView {
 // MARK: - UITextFieldDelegate
 extension UIMovableTextView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handlePressCreate()
+        handlePressSubmit()
         return true
     }
 }

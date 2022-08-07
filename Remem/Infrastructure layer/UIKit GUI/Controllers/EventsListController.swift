@@ -22,6 +22,8 @@ class EventsListController: UIViewController {
     private let eventsListUseCase: EventsListUseCaseInput
     private let eventEditUseCase: EventEditUseCaseInput
 
+    private var renamedEvent: Event?
+
     // MARK: - Init
     init(
         eventsListUseCase: EventsListUseCaseInput,
@@ -55,9 +57,20 @@ extension EventsListController:
 {
     private func setupEventHandlers() {
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
+        viewRoot.input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
     }
 
-    @objc private func handleAdd() { eventsListUseCase.add(name: viewRoot.input.value) }
+    @objc private func handleAdd() {
+        if let event = renamedEvent {
+            eventEditUseCase.rename(event, to: viewRoot.input.value)
+        } else {
+            eventsListUseCase.add(name: viewRoot.input.value)
+        }
+    }
+
+    @objc private func handleCancel() {
+        renamedEvent = nil
+    }
 
     // EventCellDelegate actions
     func didPressAction(_ cell: EventCell) {
@@ -77,12 +90,19 @@ extension EventsListController:
     }
 
     // EventsListFooterCellDelegate
-    func add() { viewRoot.input.show() }
+    func add() { viewRoot.input.show(value: "") }
 
     // Swipe to left actions
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
         guard let event = viewModel.event(at: forIndexPath) else { return }
         eventsListUseCase.remove(event)
+    }
+
+    private func handleRenameContextualAction(_ forIndexPath: IndexPath) {
+        guard let event = viewModel.event(at: forIndexPath) else { return }
+
+        renamedEvent = event
+        viewRoot.input.rename(oldName: event.name)
     }
 }
 
@@ -124,15 +144,21 @@ extension EventsListController: EventEditUseCaseOutput {
 // MARK: - Private
 extension EventsListController {
     private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {
-        let deleteAction =
-            UIContextualAction(
-                style: .destructive,
-                title: Self.delete) { _, _, completion in
-                    self.handleDeleteContextualAction(index)
-                    completion(true)
-            }
+        let renameAction = UIContextualAction(
+            style: .normal,
+            title: "Rename") { _, _, completion in
+                self.handleRenameContextualAction(index)
+                completion(true)
+        }
 
-        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: Self.delete) { _, _, completion in
+                self.handleDeleteContextualAction(index)
+                completion(true)
+        }
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
         config.performsFirstActionWithFullSwipe = true
         return config
     }

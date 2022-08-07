@@ -11,7 +11,7 @@ protocol EventEditUseCaseInput {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
-//    func rename(_: DomainEvent, to: String)
+    func rename(_: Event, to: String)
 }
 
 protocol EventEditUseCaseOutput: AnyObject {
@@ -71,8 +71,12 @@ extension EventEditUseCase: EventEditUseCaseInput {
         }
     }
 
-//    func rename(_ event: DomainEvent, to newName: String) {
-//        event.name = newName
-//        delegate?.updated(event)
-//    }
+    func rename(_ event: Event, to newName: String) {
+        var updatedEvent = event
+
+        updatedEvent.name = newName
+
+        repository.save(updatedEvent)
+        delegate?.updated(event)
+    }
 }
