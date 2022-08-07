@@ -9,10 +9,29 @@ import UIKit
 
 class Coordinator {
     private let navController: UINavigationController
-    private var eventsList: EventsListController!
+
+    // Domain events distribution
+    private var eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseOutput>()
+    private var eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseOutput>()
+
+    private let eventsListUseCase: EventsListUseCaseInput
+    private let eventEditUseCase: EventEditUseCaseInput
 
     init(_ navController: UINavigationController) {
         self.navController = navController
+
+        let container = CoreDataStack.createContainer(inMemory: false)
+        let mapper = EventEntityMapper()
+        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
+
+        let eventsListUseCase = EventsListUseCase(repository: eventsRepository)
+        let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
+
+        self.eventsListUseCase = eventsListUseCase
+        self.eventEditUseCase = eventEditUseCase
+
+        eventEditUseCase.delegate = self
+        eventsListUseCase.delegate = self
     }
 }
 
@@ -47,18 +66,12 @@ extension Coordinator {
 // MARK: - Private
 extension Coordinator {
     private func makeStartController() -> UIViewController {
-        let container = CoreDataStack.createContainer(inMemory: false)
-        let mapper = EventEntityMapper()
-        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
-        let eventsListUseCase = EventsListUseCase(repository: eventsRepository)
-        let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
-
         let controller = EventsListController(eventsListUseCase: eventsListUseCase,
                                               eventEditUseCase: eventEditUseCase)
         controller.coordinator = self
-        eventsListUseCase.delegate = controller
-        eventEditUseCase.delegate = controller
-        eventsList = controller
+
+        eventsListMulticastDelegate.addDelegate(controller)
+        eventEditMulticastDelegate.addDelegate(controller)
 
         return controller
     }
@@ -90,12 +103,6 @@ extension Coordinator {
     }
 
     private func makeDetailsController(for event: Event) -> EventDetailsController {
-        let container = CoreDataStack.createContainer(inMemory: false)
-        let mapper = EventEntityMapper()
-        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
-        let editUseCase = EventEditUseCase(repository: eventsRepository)
-        editUseCase.delegate = eventsList
-
         let weekController = WeekController()
         weekController.event = event
         weekController.coordinator = self
@@ -104,20 +111,37 @@ extension Coordinator {
         clockController.event = event
 
         let details = EventDetailsController(event: event,
-                                             editUseCase: editUseCase,
+                                             editUseCase: eventEditUseCase,
                                              clockController: clockController,
                                              weekController: weekController)
+
+        eventEditMulticastDelegate.addDelegate(weekController)
 
         return details
     }
 
     private func makeDayController(_ day: DateComponents, _ event: Event) -> DayController {
-        let container = CoreDataStack.createContainer(inMemory: false)
-        let mapper = EventEntityMapper()
-        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
-        let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
         let controller = DayController(event: event, day: day, editUseCase: eventEditUseCase)
-        eventEditUseCase.delegate = controller
+
+        eventEditMulticastDelegate.addDelegate(controller)
+
         return controller
+    }
+}
+
+// MARK: - Domain events distribution
+extension Coordinator: EventsListUseCaseOutput {
+    func eventsListUpdated(_ newList: [Event]) {
+        eventsListMulticastDelegate.invokeDelegates { delegate in
+            delegate.eventsListUpdated(newList)
+        }
+    }
+}
+
+extension Coordinator: EventEditUseCaseOutput {
+    func updated(_ event: Event) {
+        eventEditMulticastDelegate.invokeDelegates { delegate in
+            delegate.updated(event)
+        }
     }
 }

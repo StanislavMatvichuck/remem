@@ -21,13 +21,13 @@ class EventDetailsController: UIViewController {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    private let editUseCase: EventEditUseCase
+    private let editUseCase: EventEditUseCaseInput
     private let weekController: WeekController
     private let clockController: ClockController
 
     // MARK: - Init
     init(event: Event,
-         editUseCase: EventEditUseCase,
+         editUseCase: EventEditUseCaseInput,
          clockController: ClockController,
          weekController: WeekController)
     {

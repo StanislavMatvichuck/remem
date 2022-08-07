@@ -72,3 +72,11 @@ extension WeekController: DayOfTheWeekCellDelegate {
         coordinator?.showDayController(for: day, event: event)
     }
 }
+
+// MARK: - EventEditUseCaseOutput
+extension WeekController: EventEditUseCaseOutput {
+    func updated(_ event: Event) {
+        self.event = event
+        setupServiceAndViewModel()
+    }
+}
