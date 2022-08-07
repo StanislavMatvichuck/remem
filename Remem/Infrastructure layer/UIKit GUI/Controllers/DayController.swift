@@ -9,12 +9,16 @@ import UIKit
 
 class DayController: UIViewController {
     // MARK: - Properties
-    var event: Event!
-    var day: DateComponents!
+    var event: Event
+    let day: DateComponents
+    let editUseCase: EventEditUseCaseInput
 
     private let viewRoot = DayView()
     private var viewModel: DayViewModel! {
-        didSet { viewModel.configure(viewRoot) }
+        didSet {
+            viewModel.configure(viewRoot)
+            viewModel.delegate = self
+        }
     }
 
     private lazy var picker: UIDatePicker = {
@@ -39,8 +43,14 @@ class DayController: UIViewController {
     }
 
     // MARK: - Init
-    init() { super.init(nibName: nil, bundle: nil) }
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    init(event: Event, day: DateComponents, editUseCase: EventEditUseCaseInput) {
+        self.event = event
+        self.day = day
+        self.editUseCase = editUseCase
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -103,7 +113,7 @@ extension DayController {
                                       preferredStyle: .alert)
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let submit = UIAlertAction(title: "Add", style: .default, handler: nil)
+        let submit = UIAlertAction(title: "Add", style: .default, handler: handleTimeSelectionSubmit)
 
         alert.addTextField { field in self.textField = field }
         alert.addAction(cancel)
@@ -122,5 +132,25 @@ extension DayController {
         dateFormatter.timeStyle = .short
 
         field.text = dateFormatter.string(for: picker.date)
+    }
+
+    @objc private func handleTimeSelectionSubmit(_: UIAlertAction) {
+        let date = picker.date
+        editUseCase.addHappening(to: event, date: date)
+    }
+}
+
+// MARK: - DayViewModelDelegate
+extension DayController: DayViewModelDelegate {
+    func remove(happening: Happening) {
+        editUseCase.removeHappening(from: event, happening: happening)
+    }
+}
+
+// MARK: - EventEditUseCaseOutput
+extension DayController: EventEditUseCaseOutput {
+    func updated(_ event: Event) {
+        self.event = event
+        viewModel = DayViewModel(model: event, day: day)
     }
 }

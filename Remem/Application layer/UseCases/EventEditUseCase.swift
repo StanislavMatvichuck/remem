@@ -10,6 +10,7 @@ import Foundation
 protocol EventEditUseCaseInput {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
+    func removeHappening(from: Event, happening: Happening)
 //    func rename(_: DomainEvent, to: String)
 }
 
@@ -49,6 +50,23 @@ extension EventEditUseCase: EventEditUseCaseInput {
                 fatalError("Date of happening must be greater than date of creation")
             default:
                 fatalError("Error adding happening to event")
+            }
+        }
+    }
+
+    func removeHappening(from event: Event, happening: Happening) {
+        do {
+            var updatedEvent = event
+            try updatedEvent.remove(happening: happening)
+
+            repository.save(updatedEvent)
+            delegate?.updated(updatedEvent)
+        } catch {
+            switch error {
+            case EventManipulationError.invalidHappeningDeletion:
+                fatalError("Unable to find happening to delete")
+            default:
+                fatalError("Error deleting happening \(error)")
             }
         }
     }

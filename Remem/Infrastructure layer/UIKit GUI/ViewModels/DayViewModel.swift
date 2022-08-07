@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol DayViewModelDelegate: AnyObject {
+    func remove(happening: Happening)
+}
+
 class DayViewModel: NSObject {
     typealias View = DayView
     typealias Model = Event
 
     // MARK: - Properties
+    weak var delegate: DayViewModelDelegate?
+
     private let model: Model
     private let day: DateComponents
     private weak var view: View?
@@ -57,5 +63,30 @@ extension DayViewModel: UITableViewDataSource {
         cell.label.text = displayedText
 
         return cell
+    }
+
+    // Cells deletion
+    func tableView(_: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath)
+    {
+        if
+            editingStyle == .delete,
+            let happening = happening(at: indexPath)
+        {
+            delegate?.remove(happening: happening)
+        }
+    }
+}
+
+// MARK: - Private
+extension DayViewModel {
+    private func happening(at index: IndexPath) -> Happening? {
+        guard
+            index.row <= shownHappenings.count,
+            index.row >= 0
+        else { return nil }
+
+        return shownHappenings[index.row]
     }
 }

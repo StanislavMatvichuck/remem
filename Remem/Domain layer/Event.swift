@@ -18,6 +18,7 @@ struct Event: Equatable {
 
 enum EventManipulationError: Error {
     case incorrectHappeningDate
+    case invalidHappeningDeletion
 }
 
 // MARK: - Public
@@ -39,6 +40,21 @@ extension Event {
     mutating
     func visit() {
         dateVisited = Date.now
+    }
+
+    mutating
+    func remove(happening: Happening) throws {
+        var happeningDeleted = false
+
+        for (index, existingHappening) in happenings.enumerated() {
+            if existingHappening == happening {
+                happenings.remove(at: index)
+                happeningDeleted = true
+                break
+            }
+        }
+
+        if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
     }
 
     static func make(name: String) -> Event {
