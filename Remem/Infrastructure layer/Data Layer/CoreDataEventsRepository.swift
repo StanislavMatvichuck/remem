@@ -8,9 +8,15 @@
 import CoreData
 
 class CoreDataEventsRepository {
-    private let stack = CoreDataStack()
-    private let entityMapper = EventEntityMapper()
-    private var moc: NSManagedObjectContext { stack.defaultContext }
+    private let container: NSPersistentContainer
+    private let entityMapper: EntityMapper<Event, CDEvent>
+    private var moc: NSManagedObjectContext { container.viewContext }
+
+    // MARK: - Init
+    init(container: NSPersistentContainer, mapper: EntityMapper<Event, CDEvent>) {
+        self.container = container
+        self.entityMapper = mapper
+    }
 }
 
 extension CoreDataEventsRepository: EventsRepositoryInterface {
@@ -59,6 +65,14 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
             print("Cant fetch events")
             return []
         }
+    }
+
+    func event(byId: String) -> Event? {
+        guard let existingEvent = allEvents.first(where: {
+            entityMapper.entityAccessorKey($0) == byId
+        }) else { return nil }
+
+        return entityMapper.convert(existingEvent)
     }
 
     func delete(_ event: Event) {

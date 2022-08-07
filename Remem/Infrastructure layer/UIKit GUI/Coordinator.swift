@@ -47,7 +47,9 @@ extension Coordinator {
 // MARK: - Private
 extension Coordinator {
     private func makeStartController() -> UIViewController {
-        let eventsRepository = CoreDataEventsRepository()
+        let container = CoreDataStack.createContainer(inMemory: false)
+        let mapper = EventEntityMapper()
+        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
         let eventsListUseCase = EventsListUseCase(repository: eventsRepository)
         let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
 
@@ -88,7 +90,9 @@ extension Coordinator {
     }
 
     private func makeDetailsController(for event: Event) -> EventDetailsController {
-        let eventsRepository = CoreDataEventsRepository()
+        let container = CoreDataStack.createContainer(inMemory: false)
+        let mapper = EventEntityMapper()
+        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
         let editUseCase = EventEditUseCase(repository: eventsRepository)
         editUseCase.delegate = eventsList
 
@@ -108,9 +112,12 @@ extension Coordinator {
     }
 
     private func makeDayController(_ day: DateComponents, _ event: Event) -> DayController {
-        let controller = DayController()
-        controller.day = day
-        controller.event = event
+        let container = CoreDataStack.createContainer(inMemory: false)
+        let mapper = EventEntityMapper()
+        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
+        let eventEditUseCase = EventEditUseCase(repository: eventsRepository)
+        let controller = DayController(event: event, day: day, editUseCase: eventEditUseCase)
+        eventEditUseCase.delegate = controller
         return controller
     }
 }

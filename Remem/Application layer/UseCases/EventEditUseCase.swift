@@ -37,10 +37,20 @@ extension EventEditUseCase: EventEditUseCaseInput {
     }
 
     func addHappening(to event: Event, date: Date) {
-        var editedEvent = event
-        editedEvent.happenings.append(Happening(dateCreated: date))
-        repository.save(editedEvent)
-        delegate?.updated(editedEvent)
+        do {
+            var editedEvent = event
+            try editedEvent.addHappening(date: date)
+
+            repository.save(editedEvent)
+            delegate?.updated(editedEvent)
+        } catch {
+            switch error {
+            case EventManipulationError.incorrectHappeningDate:
+                fatalError("Date of happening must be greater than date of creation")
+            default:
+                fatalError("Error adding happening to event")
+            }
+        }
     }
 
 //    func rename(_ event: DomainEvent, to newName: String) {

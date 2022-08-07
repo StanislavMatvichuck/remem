@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event {
+struct Event: Equatable {
     let id: String
     var name: String
     var happenings: [Happening]
@@ -39,5 +39,16 @@ extension Event {
     mutating
     func visit() {
         dateVisited = Date.now
+    }
+
+    static func make(name: String) -> Event {
+        let id = UUID().uuidString
+        let happenings = [Happening]()
+        let dateCreated = Date.now
+
+        return Event(id: id,
+                     name: name,
+                     happenings: happenings,
+                     dateCreated: dateCreated)
     }
 }

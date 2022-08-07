@@ -10,6 +10,9 @@ import Foundation
 protocol EventsRepositoryInterface {
     func save(_: Event)
     func save(_: [Event])
+
     func all() -> [Event]
+    func event(byId: String) -> Event?
+
     func delete(_: Event)
 }
