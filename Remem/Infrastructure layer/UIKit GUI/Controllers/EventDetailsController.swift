@@ -49,7 +49,7 @@ class EventDetailsController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        editUseCase.visit(event)
+        visitIfNeeded()
     }
 }
 
@@ -59,5 +59,9 @@ extension EventDetailsController {
         addChild(controller)
         view.addAndConstrain(controller.view)
         controller.didMove(toParent: self)
+    }
+
+    private func visitIfNeeded() {
+        if event.dateVisited == nil { editUseCase.visit(event) }
     }
 }

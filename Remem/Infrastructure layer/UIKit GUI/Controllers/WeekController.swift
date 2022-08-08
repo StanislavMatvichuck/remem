@@ -42,7 +42,8 @@ extension WeekController:
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: .wScreen / 7, height: collectionView.bounds.height)
+        return CGSize(width: collectionView.bounds.width / 7,
+                      height: collectionView.bounds.height)
     }
 }
 

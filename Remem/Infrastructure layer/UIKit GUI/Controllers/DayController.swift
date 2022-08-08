@@ -34,8 +34,6 @@ class DayController: UIViewController {
     private lazy var textField: UITextField? = nil {
         didSet {
             textField?.inputView = picker
-            textField?.borderStyle = .none
-            textField?.backgroundColor = .clear
             textField?.font = UIHelper.fontBold
             textField?.textColor = UIHelper.itemFont
             textField?.textAlignment = .center

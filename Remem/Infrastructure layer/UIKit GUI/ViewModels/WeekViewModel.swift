@@ -70,10 +70,9 @@ extension WeekViewModel: UICollectionViewDataSource {
 
         if amount == 0 {
             cell.labelAmount.text = ""
-            cell.sectionsAmount = 0
         } else {
             cell.labelAmount.text = String(amount)
-            cell.sectionsAmount = amount
+            cell.showSections(amount: amount)
         }
 
         return cell

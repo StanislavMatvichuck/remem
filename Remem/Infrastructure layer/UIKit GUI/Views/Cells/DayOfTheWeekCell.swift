@@ -32,8 +32,6 @@ class DayOfTheWeekCell: UICollectionViewCell {
     var viewRoot = UIView(al: true)
     var backgroundContainer = UIView(al: true)
     var sectionsContainer = UIView(al: true)
-    var sectionsAmount: Int = 0
-    var sectionLayersInstalled = false
 
     var labelDay: UILabel = DayOfTheWeekCell.makeLabel()
     var labelAmount: UILabel = DayOfTheWeekCell.makeLabel()
@@ -44,6 +42,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
         configureViewsHierarchy()
         configureViews()
         viewRoot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
+        configureSectionsLayers()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -89,53 +88,64 @@ class DayOfTheWeekCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
-        super.prepareForReuse()
-        backgroundColor = .clear
-        sectionsAmount = 0
+        hideAllSections()
         delegate = nil
+        super.prepareForReuse()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        installSectionsLayersIfNeeded()
-        configureSectionsVisibility()
-    }
+    private func configureSectionsLayers() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
 
-    private func installSectionsLayersIfNeeded() {
-        guard !sectionLayersInstalled else { return }
-
-        for i in 0 ... 20 {
-            let layer = CAShapeLayer()
-            let offset = Double(i) * (Self.sectionsHeight + Self.sectionsSpacing)
-            let rect = CGRect(x: 0, y: offset, width: bounds.width - 2 * UIHelper.spacing, height: Self.sectionsHeight)
-            let path = UIBezierPath(roundedRect: rect, cornerRadius: Self.sectionsHeight / 2)
-            layer.path = path.cgPath
-            layer.fillColor = UIHelper.brandDimmed.cgColor
+        for i in 0 ... 19 {
+            let layer = makeSectionLayer(for: i)
             sectionsContainer.layer.addSublayer(layer)
         }
 
-        sectionLayersInstalled = true
+        CATransaction.commit()
+    }
+
+    private func makeSectionLayer(for index: Int) -> CALayer {
+        let offset = Double(index) * (Self.sectionsHeight + Self.sectionsSpacing)
+        let rect = CGRect(x: 0, y: offset, width: bounds.width - 2 * UIHelper.spacing, height: Self.sectionsHeight)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: Self.sectionsHeight / 2)
+
+        let layer = CAShapeLayer()
+        layer.fillColor = UIHelper.brandDimmed.cgColor
+        layer.path = path.cgPath
+        layer.opacity = 0.0
+
+        return layer
+    }
+}
+
+// MARK: - Public
+extension DayOfTheWeekCell {
+    func showSections(amount: Int) {
+        guard let sublayers = sectionsContainer.layer.sublayers else { return }
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+
+        for (index, sublayer) in sublayers.enumerated() {
+            if index < amount { sublayer.opacity = 1.0 }
+        }
+
+        CATransaction.commit()
     }
 }
 
 // MARK: - Private
 extension DayOfTheWeekCell {
-    private func configureSectionsVisibility() {
-        hideAllSections()
-        enableSections()
-    }
-
     private func hideAllSections() {
         guard let sublayers = sectionsContainer.layer.sublayers else { return }
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+
         for sublayer in sublayers { sublayer.opacity = 0.0 }
-    }
 
-    private func enableSections() {
-        guard let sublayers = sectionsContainer.layer.sublayers else { return }
-
-        for (index, sublayer) in sublayers.enumerated() {
-            if index < sectionsAmount { sublayer.opacity = 1.0 }
-        }
+        CATransaction.commit()
     }
 
     private static func makeLabel() -> UILabel {
