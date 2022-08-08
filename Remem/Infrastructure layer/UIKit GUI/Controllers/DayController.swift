@@ -149,7 +149,7 @@ extension DayController: DayViewModelDelegate {
 
 // MARK: - EventEditUseCaseOutput
 extension DayController: EventEditUseCaseOutput {
-    func updated(_ event: Event) {
+    func updated(event: Event) {
         self.event = event
         viewModel = DayViewModel(model: event, day: day)
     }

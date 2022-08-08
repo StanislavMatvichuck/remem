@@ -7,14 +7,9 @@
 
 import UIKit
 
-protocol EventDetailsControllerDelegate: AnyObject {
-    func didUpdate(event: Event)
-}
-
 class EventDetailsController: UIViewController {
     // MARK: - Properties
     var event: Event
-    weak var delegate: EventDetailsControllerDelegate?
 
     private let viewRoot = EventDetailsView()
     private var viewModel: EventDetailsViewModel! {

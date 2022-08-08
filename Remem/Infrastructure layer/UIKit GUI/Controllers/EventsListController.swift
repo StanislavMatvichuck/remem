@@ -136,7 +136,7 @@ extension EventsListController: EventsListUseCaseOutput {
 }
 
 extension EventsListController: EventEditUseCaseOutput {
-    func updated(_: Event) {
+    func updated(event: Event) {
         viewModel = EventsListViewModel(model: eventsListUseCase.allEvents())
     }
 }

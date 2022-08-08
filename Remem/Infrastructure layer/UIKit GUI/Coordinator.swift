@@ -139,9 +139,9 @@ extension Coordinator: EventsListUseCaseOutput {
 }
 
 extension Coordinator: EventEditUseCaseOutput {
-    func updated(_ event: Event) {
+    func updated(event: Event) {
         eventEditMulticastDelegate.invokeDelegates { delegate in
-            delegate.updated(event)
+            delegate.updated(event: event)
         }
     }
 }

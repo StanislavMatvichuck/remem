@@ -15,7 +15,7 @@ protocol EventEditUseCaseInput {
 }
 
 protocol EventEditUseCaseOutput: AnyObject {
-    func updated(_: Event)
+    func updated(event: Event)
 }
 
 class EventEditUseCase {
@@ -34,7 +34,7 @@ extension EventEditUseCase: EventEditUseCaseInput {
         var editedEvent = event
         editedEvent.dateVisited = .now
         repository.save(editedEvent)
-        delegate?.updated(editedEvent)
+        delegate?.updated(event: editedEvent)
     }
 
     func addHappening(to event: Event, date: Date) {
@@ -43,7 +43,7 @@ extension EventEditUseCase: EventEditUseCaseInput {
             try editedEvent.addHappening(date: date)
 
             repository.save(editedEvent)
-            delegate?.updated(editedEvent)
+            delegate?.updated(event: editedEvent)
         } catch {
             switch error {
             case EventManipulationError.incorrectHappeningDate:
@@ -60,7 +60,7 @@ extension EventEditUseCase: EventEditUseCaseInput {
             try updatedEvent.remove(happening: happening)
 
             repository.save(updatedEvent)
-            delegate?.updated(updatedEvent)
+            delegate?.updated(event: updatedEvent)
         } catch {
             switch error {
             case EventManipulationError.invalidHappeningDeletion:
@@ -77,6 +77,6 @@ extension EventEditUseCase: EventEditUseCaseInput {
         updatedEvent.name = newName
 
         repository.save(updatedEvent)
-        delegate?.updated(event)
+        delegate?.updated(event: event)
     }
 }
