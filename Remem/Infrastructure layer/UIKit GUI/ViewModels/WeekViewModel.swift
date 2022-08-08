@@ -9,16 +9,22 @@ import UIKit
 
 class WeekViewModel: NSObject {
     typealias View = WeekView
-    typealias Model = WeekList
+    typealias Model = Event
 
     // MARK: - Properties
     private let model: Model
     private weak var view: View?
     private var scrollHappened = false
+    private let happeningsList: WeekList
 
     // MARK: - Init
     init(model: Model) {
         self.model = model
+
+        let start = model.dateCreated.startOfWeek!
+        let end = Date.now.endOfWeek!
+
+        happeningsList = WeekList(from: start, to: end, happenings: model.happenings)
     }
 }
 
@@ -28,6 +34,7 @@ extension WeekViewModel {
         self.view = view
 
         view.collection.dataSource = self
+        view.collection.reloadData()
     }
 
     func scrollToCurrentWeek() {
@@ -38,28 +45,36 @@ extension WeekViewModel {
 
     func day(for cell: DayOfTheWeekCell) -> DateComponents? {
         guard let index = view?.collection.indexPath(for: cell) else { return nil }
-        return model.days[index.row].date
+        return happeningsList.days[index.row].date
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension WeekViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.days.count
+        return happeningsList.days.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier,
-                for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier, for: indexPath)
             as? DayOfTheWeekCell
         else { return UICollectionViewCell() }
 
-        let weekDay = model.days[indexPath.row]
+        let weekDay = happeningsList.days[indexPath.row]
 
-        cell.configure(day: "\(weekDay.dayNumber)", isToday: weekDay.isToday)
-        cell.configure(amount: weekDay.amount)
+        cell.labelDay.text = String(weekDay.dayNumber)
+        cell.labelDay.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
+
+        let amount = weekDay.amount
+
+        if amount == 0 {
+            cell.labelAmount.text = ""
+            cell.sectionsAmount = 0
+        } else {
+            cell.labelAmount.text = String(amount)
+            cell.sectionsAmount = amount
+        }
 
         return cell
     }
@@ -68,7 +83,7 @@ extension WeekViewModel: UICollectionViewDataSource {
 // MARK: - Private
 extension WeekViewModel {
     private func setInitialScrollPosition() {
-        let lastCellIndex = IndexPath(row: model.days.count - 1, section: 0)
+        let lastCellIndex = IndexPath(row: happeningsList.days.count - 1, section: 0)
         view?.collection.scrollToItem(at: lastCellIndex, at: .right, animated: false)
     }
 }

@@ -29,14 +29,14 @@ class DayOfTheWeekCell: UICollectionViewCell {
     // MARK: - Properties
     weak var delegate: DayOfTheWeekCellDelegate?
 
-    private var viewRoot = UIView(al: true)
-    private var backgroundContainer = UIView(al: true)
-    private var sectionsContainer = UIView(al: true)
-    private var sectionsAmount: Int = 0
-    private var sectionLayersInstalled = false
+    var viewRoot = UIView(al: true)
+    var backgroundContainer = UIView(al: true)
+    var sectionsContainer = UIView(al: true)
+    var sectionsAmount: Int = 0
+    var sectionLayersInstalled = false
 
-    private var labelDay: UILabel = DayOfTheWeekCell.makeLabel()
-    private var labelAmount: UILabel = DayOfTheWeekCell.makeLabel()
+    var labelDay: UILabel = DayOfTheWeekCell.makeLabel()
+    var labelAmount: UILabel = DayOfTheWeekCell.makeLabel()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -115,24 +115,6 @@ class DayOfTheWeekCell: UICollectionViewCell {
         }
 
         sectionLayersInstalled = true
-    }
-}
-
-// MARK: - Public
-extension DayOfTheWeekCell {
-    func configure(day: String, isToday: Bool = false) {
-        labelDay.text = day
-        labelDay.textColor = isToday ? UIHelper.brand : UIHelper.itemFont
-    }
-
-    func configure(amount: Int?) {
-        if amount == nil || amount == 0 {
-            labelAmount.text = " "
-            sectionsAmount = 0
-        } else {
-            labelAmount.text = "\(amount!)"
-            sectionsAmount = amount!
-        }
     }
 }
 

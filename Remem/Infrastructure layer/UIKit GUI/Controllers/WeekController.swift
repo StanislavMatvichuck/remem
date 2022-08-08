@@ -9,39 +9,21 @@ import UIKit
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    var event: Event!
     weak var coordinator: Coordinator?
+    var event: Event! { didSet { viewModel = WeekViewModel(model: event) }}
 
     private let viewRoot = WeekView()
-    private var viewModel: WeekViewModel!
+    private var viewModel: WeekViewModel! { didSet { viewModel.configure(viewRoot) }}
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        setupServiceAndViewModel()
         viewRoot.collection.delegate = self
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewModel.scrollToCurrentWeek()
-    }
-}
-
-// MARK: - Private
-extension WeekController {
-    private func setupServiceAndViewModel() {
-        guard
-            let endOfCurrentWeek = Date.now.endOfWeek,
-            let startOfCreationWeek = event.dateCreated.startOfWeek
-        else { return }
-
-        let weekList = WeekList(from: startOfCreationWeek,
-                                to: endOfCurrentWeek,
-                                happenings: event.happenings)
-
-        viewModel = WeekViewModel(model: weekList)
-        viewModel.configure(viewRoot)
     }
 }
 
@@ -68,15 +50,11 @@ extension WeekController:
 extension WeekController: DayOfTheWeekCellDelegate {
     func didPress(cell: DayOfTheWeekCell) {
         guard let day = viewModel.day(for: cell) else { return }
-
         coordinator?.showDayController(for: day, event: event)
     }
 }
 
 // MARK: - EventEditUseCaseOutput
 extension WeekController: EventEditUseCaseOutput {
-    func updated(_ event: Event) {
-        self.event = event
-        setupServiceAndViewModel()
-    }
+    func updated(event: Event) { self.event = event }
 }
