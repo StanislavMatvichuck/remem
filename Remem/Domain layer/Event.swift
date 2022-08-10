@@ -7,13 +7,53 @@
 
 import Foundation
 
-struct Event: Equatable {
+class Event: Equatable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.dateCreated == rhs.dateCreated &&
+            lhs.dateVisited == rhs.dateVisited &&
+            lhs.happenings == rhs.happenings
+    }
+
     let id: String
     var name: String
     var happenings: [Happening]
 
     let dateCreated: Date
     var dateVisited: Date?
+
+    // MARK: - Init
+    init(name: String) {
+        self.name = name
+
+        id = UUID().uuidString
+        happenings = [Happening]()
+        dateCreated = {
+            let c = Calendar.current
+            let creationDate = Date.now
+            var components = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: creationDate)
+            components.hour = 0
+            components.minute = 0
+            components.second = 0
+
+            if let date = c.date(from: components) { return date }
+            else { return creationDate }
+        }()
+    }
+
+    init(id: String,
+         name: String,
+         happenings: [Happening],
+         dateCreated: Date,
+         dateVisited: Date?)
+    {
+        self.id = id
+        self.name = name
+        self.happenings = happenings
+        self.dateCreated = dateCreated
+        self.dateVisited = dateVisited
+    }
 }
 
 enum EventManipulationError: Error {
@@ -23,7 +63,7 @@ enum EventManipulationError: Error {
 
 // MARK: - Public
 extension Event {
-    @discardableResult mutating
+    @discardableResult
     func addHappening(date: Date) throws -> Happening {
         if date < dateCreated { throw EventManipulationError.incorrectHappeningDate }
 
@@ -37,12 +77,10 @@ extension Event {
         return newHappening
     }
 
-    mutating
     func visit() {
         dateVisited = Date.now
     }
 
-    mutating
     func remove(happening: Happening) throws {
         var happeningDeleted = false
 
@@ -55,28 +93,5 @@ extension Event {
         }
 
         if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
-    }
-
-    // MARK: - Factory method
-    static func make(name: String) -> Event {
-        let id = UUID().uuidString
-        let happenings = [Happening]()
-
-        let dateCreated: Date = {
-            let c = Calendar.current
-            let creationDate = Date.now
-            var components = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: creationDate)
-            components.hour = 0
-            components.minute = 0
-            components.second = 0
-
-            if let date = c.date(from: components) { return date }
-            else { return creationDate }
-        }()
-
-        return Event(id: id,
-                     name: name,
-                     happenings: happenings,
-                     dateCreated: dateCreated)
     }
 }

@@ -34,10 +34,7 @@ extension EventsListUseCase: EventsListUseCaseInput {
     func allEvents() -> [Event] { repository.all() }
 
     func add(name: String) {
-        let newEvent = Event(id: UUID().uuidString,
-                             name: name,
-                             happenings: [],
-                             dateCreated: .now)
+        let newEvent = Event(name: name)
 
         repository.save(newEvent)
         delegate?.eventsListUpdated(repository.all())

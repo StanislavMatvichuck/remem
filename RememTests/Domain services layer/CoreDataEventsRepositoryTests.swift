@@ -37,7 +37,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_eventWithHappening() {
-        var newEvent = givenSavedDefaultEvent()
+        let newEvent = givenSavedDefaultEvent()
 
         do {
             try newEvent.addHappening(date: .now)
@@ -49,7 +49,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_eventWith_N_Happenings() {
-        var newEvent = givenSavedDefaultEvent()
+        let newEvent = givenSavedDefaultEvent()
 
         do {
             for i in 0 ... 10 {
@@ -63,7 +63,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_renamedEvent() {
-        var newEvent = givenSavedDefaultEvent()
+        let newEvent = givenSavedDefaultEvent()
 
         newEvent.name = "Updated name"
 
@@ -73,7 +73,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_allPossibleModifications() {
-        var newEvent = givenSavedDefaultEvent()
+        let newEvent = givenSavedDefaultEvent()
 
         // renaming
         newEvent.name = "UpdatedName"
@@ -111,7 +111,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
 // MARK: - Private
 extension CoreDataEventsRepositoryTests {
     private func givenSavedDefaultEvent() -> Event {
-        let newEvent = Event.make(name: "Event")
+        let newEvent = Event(name: "Event")
         sut.save(newEvent)
         return newEvent
     }

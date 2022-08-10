@@ -31,19 +31,17 @@ class EventEditUseCase {
 // MARK: - Private
 extension EventEditUseCase: EventEditUseCaseInput {
     func visit(_ event: Event) {
-        var editedEvent = event
-        editedEvent.dateVisited = .now
-        repository.save(editedEvent)
-        delegate?.updated(event: editedEvent)
+        event.dateVisited = .now
+        repository.save(event)
+        delegate?.updated(event: event)
     }
 
     func addHappening(to event: Event, date: Date) {
         do {
-            var editedEvent = event
-            try editedEvent.addHappening(date: date)
+            try event.addHappening(date: date)
 
-            repository.save(editedEvent)
-            delegate?.updated(event: editedEvent)
+            repository.save(event)
+            delegate?.updated(event: event)
         } catch {
             switch error {
             case EventManipulationError.incorrectHappeningDate:
@@ -56,11 +54,10 @@ extension EventEditUseCase: EventEditUseCaseInput {
 
     func removeHappening(from event: Event, happening: Happening) {
         do {
-            var updatedEvent = event
-            try updatedEvent.remove(happening: happening)
+            try event.remove(happening: happening)
 
-            repository.save(updatedEvent)
-            delegate?.updated(event: updatedEvent)
+            repository.save(event)
+            delegate?.updated(event: event)
         } catch {
             switch error {
             case EventManipulationError.invalidHappeningDeletion:
@@ -72,11 +69,9 @@ extension EventEditUseCase: EventEditUseCaseInput {
     }
 
     func rename(_ event: Event, to newName: String) {
-        var updatedEvent = event
+        event.name = newName
 
-        updatedEvent.name = newName
-
-        repository.save(updatedEvent)
+        repository.save(event)
         delegate?.updated(event: event)
     }
 }
