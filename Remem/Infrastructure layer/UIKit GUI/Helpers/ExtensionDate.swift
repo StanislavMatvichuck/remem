@@ -12,27 +12,25 @@ extension Date {
     // Stack overflow helpers
     //
 
-    func isEqual(to date: Date, toGranularity component: Calendar.Component, in calendar: Calendar = .current) -> Bool {
-        calendar.isDate(self, equalTo: date, toGranularity: component)
-    }
-
     func isInSameYear(as date: Date) -> Bool { isEqual(to: date, toGranularity: .year) }
     func isInSameMonth(as date: Date) -> Bool { isEqual(to: date, toGranularity: .month) }
     func isInSameWeek(as date: Date) -> Bool { isEqual(to: date, toGranularity: .weekOfYear) }
-
     func isInSameDay(as date: Date) -> Bool { Calendar.current.isDate(self, inSameDayAs: date) }
 
-    var isInThisYear: Bool { isInSameYear(as: Date()) }
-    var isInThisMonth: Bool { isInSameMonth(as: Date()) }
-    var isInThisWeek: Bool { isInSameWeek(as: Date()) }
+    private func isEqual(to date: Date,
+                         toGranularity component: Calendar.Component,
+                         in calendar: Calendar = .current) -> Bool
+    {
+        calendar.isDate(self, equalTo: date, toGranularity: component)
+    }
 
     ///
     /// StackOverflow
     ///
-    /// might have issues with american calendar
+    /// might have issues with American calendar
 
     var startOfWeek: Date? {
-        let c = Calendar(identifier: .iso8601)
+        let c = Calendar.current
         var weekComponents = c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         weekComponents.hour = 0
         weekComponents.minute = 0
@@ -42,7 +40,7 @@ extension Date {
     }
 
     var endOfWeek: Date? {
-        let c = Calendar(identifier: .iso8601)
+        let c = Calendar.current
         var weekComponents = c.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         weekComponents.hour = 23
         weekComponents.minute = 59

@@ -18,21 +18,28 @@ class EventTests: XCTestCase {
     }
 
     func testInit() {
-        let id = UUID().uuidString
         let name = "EventName"
-        let happenings = [Happening]()
-        let dateCreated = Date.now
-        let sut = Event(id: id,
-                        name: name,
-                        happenings: happenings,
-                        dateCreated: dateCreated)
+        let sut = Event.make(name: name)
 
-        XCTAssertEqual(sut.id, id)
+        XCTAssertEqual(sut.id.count, 36)
         XCTAssertEqual(sut.name, name)
-        XCTAssertEqual(sut.happenings, happenings)
         XCTAssertEqual(sut.happenings.count, 0)
-        XCTAssertEqual(sut.dateCreated, dateCreated)
         XCTAssertNil(sut.dateVisited)
+    }
+
+    func testInit_dateCreatedIsStartOfDay() {
+        let sut = makeDefaultEvent()
+
+        let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
+
+        XCTAssertEqual(components.hour, 0)
+        XCTAssertEqual(components.minute, 0)
+        XCTAssertEqual(components.second, 0)
+
+        XCTAssertEqual(components.day, todayComponents.day)
+        XCTAssertEqual(components.month, todayComponents.month)
+        XCTAssertEqual(components.year, todayComponents.year)
     }
 
     func test_addHappening_addedOne() {
@@ -102,13 +109,6 @@ class EventTests: XCTestCase {
 // MARK: - Private
 extension EventTests {
     private func makeDefaultEvent() -> Event {
-        let id = UUID().uuidString
-        let name = "EventName"
-        let happenings = [Happening]()
-        let dateCreated = Date.now
-        return Event(id: id,
-                     name: name,
-                     happenings: happenings,
-                     dateCreated: dateCreated)
+        return Event.make(name: "EventName")
     }
 }

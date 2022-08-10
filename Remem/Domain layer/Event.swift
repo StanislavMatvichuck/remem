@@ -57,10 +57,22 @@ extension Event {
         if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
     }
 
+    // MARK: - Factory method
     static func make(name: String) -> Event {
         let id = UUID().uuidString
         let happenings = [Happening]()
-        let dateCreated = Date.now
+
+        let dateCreated: Date = {
+            let c = Calendar.current
+            let creationDate = Date.now
+            var components = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: creationDate)
+            components.hour = 0
+            components.minute = 0
+            components.second = 0
+
+            if let date = c.date(from: components) { return date }
+            else { return creationDate }
+        }()
 
         return Event(id: id,
                      name: name,
