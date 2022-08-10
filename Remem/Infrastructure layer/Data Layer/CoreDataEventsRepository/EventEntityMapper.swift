@@ -8,6 +8,9 @@
 import CoreData
 
 class EventEntityMapper: EntityMapper<Event, CDEvent> {
+    override func entityAccessorKey(_ entity: CDEvent) -> String { entity.uuid! }
+    override func entityAccessorKey(_ object: Event) -> String { object.id }
+
     override func convert(_ entity: CDEvent) -> Event? {
         var happenings = [Happening]()
 
@@ -32,28 +35,17 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
 
         guard let context = entity.managedObjectContext else { return }
 
-        for existingCdHappening in entity.happenings! {
-            context.delete(existingCdHappening as! NSManagedObject)
-        }
+        entity.happenings = nil
 
-        var cdHappenings = NSSet(set: Set<CDHappening>())
+        var cdHappenings = [CDHappening]()
 
         for happening in model.happenings {
             let newCdHappening = CDHappening(entity: CDHappening.entity(), insertInto: context)
             newCdHappening.dateCreated = happening.dateCreated
             newCdHappening.value = happening.value
-
-            cdHappenings = cdHappenings.adding(newCdHappening) as NSSet
+            cdHappenings.append(newCdHappening)
         }
 
-        entity.happenings = cdHappenings
-    }
-
-    override func entityAccessorKey(_ entity: CDEvent) -> String {
-        entity.uuid!
-    }
-
-    override func entityAccessorKey(_ object: Event) -> String {
-        object.id
+        entity.happenings = NSOrderedSet(array: cdHappenings)
     }
 }

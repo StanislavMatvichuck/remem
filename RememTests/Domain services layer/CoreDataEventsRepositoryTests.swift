@@ -36,7 +36,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.all().count, 1)
     }
 
-    func test_save_eventWithNewHappening() {
+    func test_save_eventWithHappening() {
         var newEvent = givenSavedDefaultEvent()
 
         do {
@@ -48,10 +48,51 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
+    func test_save_eventWith_N_Happenings() {
+        var newEvent = givenSavedDefaultEvent()
+
+        do {
+            for i in 0 ... 10 {
+                try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
+            }
+        } catch {}
+
+        sut.save(newEvent)
+
+        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+    }
+
     func test_save_renamedEvent() {
         var newEvent = givenSavedDefaultEvent()
 
         newEvent.name = "Updated name"
+
+        sut.save(newEvent)
+
+        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+    }
+
+    func test_save_allPossibleModifications() {
+        var newEvent = givenSavedDefaultEvent()
+
+        // renaming
+        newEvent.name = "UpdatedName"
+
+        sut.save(newEvent)
+
+        // adding happenings
+        do {
+            for i in 0 ... 10 {
+                try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
+            }
+        } catch {}
+
+        sut.save(newEvent)
+
+        // removing happening
+        do {
+            try newEvent.remove(happening: Happening(dateCreated: Date.now))
+        } catch {}
 
         sut.save(newEvent)
 
@@ -71,9 +112,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
 extension CoreDataEventsRepositoryTests {
     private func givenSavedDefaultEvent() -> Event {
         let newEvent = Event.make(name: "Event")
-
         sut.save(newEvent)
-
         return newEvent
     }
 }

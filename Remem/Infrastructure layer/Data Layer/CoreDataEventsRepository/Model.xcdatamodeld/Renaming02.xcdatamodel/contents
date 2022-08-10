@@ -5,7 +5,7 @@
         <attribute name="dateVisited" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="uuid" attributeType="String" defaultValueString="uuidDefaultValue"/>
-        <relationship name="happenings" toMany="YES" deletionRule="Cascade" destinationEntity="Happening"/>
+        <relationship name="happenings" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Happening"/>
     </entity>
     <entity name="Happening" representedClassName=".CDHappening" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
