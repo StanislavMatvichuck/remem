@@ -19,16 +19,20 @@ class EventTests: XCTestCase {
 
     func testInit() {
         let name = "EventName"
-        let sut = Event.make(name: name)
+        let sut = Event(name: name)
 
         XCTAssertEqual(sut.id.count, 36)
         XCTAssertEqual(sut.name, name)
         XCTAssertEqual(sut.happenings.count, 0)
         XCTAssertNil(sut.dateVisited)
+
+        for weekday in Goal.WeekDay.allCases {
+            XCTAssertNil(sut.goal(at: weekday))
+        }
     }
 
     func testInit_dateCreatedIsStartOfDay() {
-        let sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
 
         let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
@@ -43,7 +47,7 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_addedOne() {
-        var sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
         let happeningDate = Date.now
 
         do {
@@ -54,7 +58,7 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_addedTwo() {
-        var sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
 
@@ -67,7 +71,7 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_incorrectDate() {
-        var sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
         let date = Date.distantPast
 
         do {
@@ -80,7 +84,7 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_sorted() {
-        var sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
         let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
@@ -98,17 +102,29 @@ class EventTests: XCTestCase {
     }
 
     func test_visit() {
-        var sut = makeDefaultEvent()
+        let sut = Event(name: "EventName")
 
         sut.visit()
 
         XCTAssertNotNil(sut.dateVisited)
     }
-}
 
-// MARK: - Private
-extension EventTests {
-    private func makeDefaultEvent() -> Event {
-        return Event.make(name: "EventName")
+    func test_addGoal_eachDay() {
+        let sut = Event(name: "EventName")
+
+        for weekday in Goal.WeekDay.allCases {
+            let goal = sut.addGoal(weekDay: weekday, amount: 1)
+
+            XCTAssertEqual(sut.goal(at: weekday), goal)
+        }
+
+        XCTAssertNotNil(sut.goal(at: .now))
     }
+
+    func test_disableGoal() {}
+    func test_addGoal_updateExistingGoalAmount_newGoalAdded() {}
+    func test_addGoal_updateExistingGoalAmount_oldGoalDisabled() {}
+
+    func test_addHappening_goalIsReached() {}
+    func test_removeHappening_goalIsNotReached() {}
 }

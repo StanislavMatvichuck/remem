@@ -23,13 +23,19 @@ class Event: Equatable {
     let dateCreated: Date
     var dateVisited: Date?
 
-    // MARK: - Init
-    init(name: String) {
-        self.name = name
+    private var goals: [Goal.WeekDay: [Goal]] = [
+        Goal.WeekDay.monday: [],
+        Goal.WeekDay.tuesday: [],
+        Goal.WeekDay.wednesday: [],
+        Goal.WeekDay.thursday: [],
+        Goal.WeekDay.friday: [],
+        Goal.WeekDay.saturday: [],
+        Goal.WeekDay.sunday: [],
+    ]
 
-        id = UUID().uuidString
-        happenings = [Happening]()
-        dateCreated = {
+    // MARK: - Init
+    convenience init(name: String) {
+        let dateCreated: Date = {
             let c = Calendar.current
             let creationDate = Date.now
             var components = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: creationDate)
@@ -40,6 +46,12 @@ class Event: Equatable {
             if let date = c.date(from: components) { return date }
             else { return creationDate }
         }()
+
+        self.init(id: UUID().uuidString,
+                  name: name,
+                  happenings: [Happening](),
+                  dateCreated: dateCreated,
+                  dateVisited: nil)
     }
 
     init(id: String,
@@ -93,5 +105,40 @@ extension Event {
         }
 
         if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
+    }
+
+    // Goals
+    func goal(at date: Date) -> Goal? {
+        guard
+            let day = Calendar.current.dateComponents([.weekday], from: date).weekday,
+            let accessorDay = Goal.WeekDay(rawValue: day)
+        else { return nil }
+
+        return goal(at: accessorDay)
+    }
+
+    func goal(at weekday: Goal.WeekDay) -> Goal? {
+        guard
+            let goal = goals[weekday]?.last
+        else { return nil }
+
+        return goal
+    }
+
+    @discardableResult
+    func addGoal(weekDay: Goal.WeekDay, amount: Int) -> Goal {
+        let dateCreated = Date.now
+        let newGoal = Goal(amount: amount,
+                           event: self,
+                           dateCreated: dateCreated,
+                           dateRemoved: nil)
+
+        if var existingGoal = goals[weekDay]?.last {
+            existingGoal.dateRemoved = dateCreated
+        }
+
+        goals[weekDay]?.append(newGoal)
+
+        return newGoal
     }
 }
