@@ -12,6 +12,9 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
     override func entityAccessorKey(_ object: Event) -> String { object.id }
 
     override func convert(_ entity: CDEvent) -> Event? {
+        //
+        // Happenings
+        //
         var happenings = [Happening]()
 
         for cdHappening in entity.happenings! {
@@ -20,11 +23,22 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
             happenings.append(happening)
         }
 
-        return Event(id: entity.uuid!,
-                     name: entity.name!,
-                     happenings: happenings,
-                     dateCreated: entity.dateCreated!,
-                     dateVisited: entity.dateVisited)
+        let newEvent = Event(id: entity.uuid!,
+                             name: entity.name!,
+                             happenings: happenings,
+                             dateCreated: entity.dateCreated!,
+                             dateVisited: entity.dateVisited)
+
+        //
+        // Goals
+        //
+
+        for cdGoal in entity.goals! {
+            guard let goal = cdGoal as? CDGoal else { continue }
+            newEvent.addGoal(at: goal.dateCreated!, amount: Int(exactly: goal.value)!)
+        }
+
+        return newEvent
     }
 
     override func update(_ entity: CDEvent, by model: Event) {
@@ -34,6 +48,10 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
         entity.dateVisited = model.dateVisited
 
         guard let context = entity.managedObjectContext else { return }
+
+        //
+        // Happenings
+        //
 
         entity.happenings = nil
 
@@ -47,5 +65,27 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
         }
 
         entity.happenings = NSOrderedSet(array: cdHappenings)
+
+        //
+        // Goals
+        //
+
+        entity.goals = nil
+
+        var cdGoals = [CDGoal]()
+
+        for weekday in Goal.WeekDay.allCases {
+            for goal in model.goals(at: weekday) {
+                let newCdGoal = CDGoal(entity: CDGoal.entity(), insertInto: context)
+                newCdGoal.dateCreated = goal.dateCreated
+                newCdGoal.dateDisabled = goal.dateDisabled
+                newCdGoal.value = Int32(goal.amount)
+                newCdGoal.event = entity
+
+                cdGoals.append(newCdGoal)
+            }
+        }
+
+        entity.goals = NSOrderedSet(array: cdGoals)
     }
 }

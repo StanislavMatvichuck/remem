@@ -96,6 +96,7 @@
 		080656F1283BB92200C09409 /* ClockTimeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTimeDescription.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -1097,11 +1098,12 @@
 		083D3893279AE81100134A15 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */,
 				08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */,
 				08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */,
 				083D3894279AE81100134A15 /* Entry.xcdatamodel */,
 			);
-			currentVersion = 08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */;
+			currentVersion = 08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

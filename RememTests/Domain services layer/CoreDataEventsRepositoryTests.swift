@@ -48,14 +48,11 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
-    func test_save_eventWith_N_Happenings() {
+    func test_save_eventWith_N_Happenings() throws {
         let newEvent = givenSavedDefaultEvent()
-
-        do {
-            for i in 0 ... 10 {
-                try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
-            }
-        } catch {}
+        for i in 0 ... 10 {
+            try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
+        }
 
         sut.save(newEvent)
 
@@ -64,7 +61,6 @@ class CoreDataEventsRepositoryTests: XCTestCase {
 
     func test_save_renamedEvent() {
         let newEvent = givenSavedDefaultEvent()
-
         newEvent.name = "Updated name"
 
         sut.save(newEvent)
@@ -72,38 +68,53 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
-    func test_save_allPossibleModifications() {
+    func test_save_eventWithGoal() {
+        let newEvent = givenSavedDefaultEvent()
+        let goal = newEvent.addGoal(at: .now, amount: 1)
+
+        sut.save(newEvent)
+
+        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now), goal)
+    }
+
+    func test_save_eventWithGoals() {
+        let newEvent = givenSavedDefaultEvent()
+        let goal = newEvent.addGoal(at: .now, amount: 1)
+        let goal2 = newEvent.addGoal(at: .now.addingTimeInterval(5.0), amount: 2)
+        let goal3 = newEvent.addGoal(at: .now.addingTimeInterval(60 * 60 * 24), amount: 3)
+
+        sut.save(newEvent)
+
+        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now.addingTimeInterval(5.0)), goal2)
+        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now.addingTimeInterval(60 * 60 * 24)), goal3)
+    }
+
+    func test_save_allPossibleModifications() throws {
         let newEvent = givenSavedDefaultEvent()
 
         // renaming
         newEvent.name = "UpdatedName"
-
         sut.save(newEvent)
-
         // adding happenings
-        do {
-            for i in 0 ... 10 {
-                try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
-            }
-        } catch {}
-
+        for i in 0 ... 10 { try newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0)) }
         sut.save(newEvent)
-
         // removing happening
-        do {
-            try newEvent.remove(happening: Happening(dateCreated: Date.now))
-        } catch {}
-
+        if let removedHappening = newEvent.happenings.first {
+            try newEvent.remove(happening: removedHappening)
+        }
         sut.save(newEvent)
-
+        // adding goal
+        newEvent.addGoal(at: .now, amount: 1)
+        sut.save(newEvent)
+        // updating goal
+        newEvent.addGoal(at: .now.addingTimeInterval(5.0), amount: 2)
+        sut.save(newEvent)
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
     func test_delete_success() {
         let event = givenSavedDefaultEvent()
-
         sut.delete(event)
-
         XCTAssertEqual(sut.all().count, 0)
     }
 }
