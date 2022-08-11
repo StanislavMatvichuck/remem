@@ -109,36 +109,48 @@ extension Event {
 
     // Goals
     func goal(at date: Date) -> Goal? {
-        guard
-            let day = Calendar.current.dateComponents([.weekday], from: date).weekday,
-            let accessorDay = Goal.WeekDay(rawValue: day)
-        else { return nil }
+        let accessorDay = Goal.WeekDay.make(date)
+        var resultingGoal: Goal?
 
-        return goal(at: accessorDay)
-    }
+        if let goals = goals[accessorDay] {
+            for goal in goals { if date >= goal.dateCreated { resultingGoal = goal } }
+        }
 
-    func goal(at weekday: Goal.WeekDay) -> Goal? {
-        guard
-            let goal = goals[weekday]?.last
-        else { return nil }
-
-        return goal
+        return resultingGoal
     }
 
     @discardableResult
-    func addGoal(weekDay: Goal.WeekDay, amount: Int) -> Goal {
-        let dateCreated = Date.now
+    func addGoal(at dateCreated: Date, amount: Int) -> Goal {
         let newGoal = Goal(amount: amount,
                            event: self,
                            dateCreated: dateCreated,
-                           dateRemoved: nil)
+                           dateDisabled: nil)
 
-        if var existingGoal = goals[weekDay]?.last {
-            existingGoal.dateRemoved = dateCreated
+        var mutableGoalsArray = goals[Goal.WeekDay.make(dateCreated)]
+
+        if let goalsArray = mutableGoalsArray, !goalsArray.isEmpty {
+            mutableGoalsArray?[goalsArray.count - 1].dateDisabled = dateCreated
         }
 
-        goals[weekDay]?.append(newGoal)
+        mutableGoalsArray?.append(newGoal)
+
+        goals[Goal.WeekDay.make(dateCreated)] = mutableGoalsArray
 
         return newGoal
     }
+
+    func disableGoal(at date: Date) {
+        var mutableGoalsArray = goals[Goal.WeekDay.make(date)]
+
+        if let goalsArray = mutableGoalsArray, !goalsArray.isEmpty {
+            mutableGoalsArray?[goalsArray.count - 1].dateDisabled = date
+        }
+
+        goals[Goal.WeekDay.make(date)] = mutableGoalsArray
+    }
+}
+
+// MARK: - Private
+extension Event {
+    private func add(goal: Goal, at date: Date) {}
 }

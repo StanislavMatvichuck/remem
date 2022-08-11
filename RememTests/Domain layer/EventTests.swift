@@ -26,14 +26,13 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings.count, 0)
         XCTAssertNil(sut.dateVisited)
 
-        for weekday in Goal.WeekDay.allCases {
-            XCTAssertNil(sut.goal(at: weekday))
+        for date in Date.now.dayByDayWeekForward {
+            XCTAssertNil(sut.goal(at: date))
         }
     }
 
     func testInit_dateCreatedIsStartOfDay() {
         let sut = Event(name: "EventName")
-
         let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
 
@@ -46,27 +45,22 @@ class EventTests: XCTestCase {
         XCTAssertEqual(components.year, todayComponents.year)
     }
 
-    func test_addHappening_addedOne() {
+    func test_addHappening_addedOne() throws {
         let sut = Event(name: "EventName")
         let happeningDate = Date.now
 
-        do {
-            try sut.addHappening(date: happeningDate)
-        } catch {}
+        try sut.addHappening(date: happeningDate)
 
         XCTAssertEqual(sut.happenings.count, 1)
     }
 
-    func test_addHappening_addedTwo() {
+    func test_addHappening_addedTwo() throws {
         let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
 
-        do {
-            try sut.addHappening(date: firstHappeningDate)
-            try sut.addHappening(date: secondHappeningDate)
-        } catch {}
-
+        try sut.addHappening(date: firstHappeningDate)
+        try sut.addHappening(date: secondHappeningDate)
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
@@ -83,17 +77,15 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings.count, 0)
     }
 
-    func test_addHappening_sorted() {
+    func test_addHappening_sorted() throws {
         let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
         let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
 
-        do {
-            try sut.addHappening(date: thirdHappeningDate)
-            try sut.addHappening(date: secondHappeningDate)
-            try sut.addHappening(date: firstHappeningDate)
-        } catch {}
+        try sut.addHappening(date: thirdHappeningDate)
+        try sut.addHappening(date: secondHappeningDate)
+        try sut.addHappening(date: firstHappeningDate)
 
         XCTAssertEqual(sut.happenings.count, 3)
         XCTAssertEqual(sut.happenings[0], Happening(dateCreated: firstHappeningDate))
@@ -103,28 +95,7 @@ class EventTests: XCTestCase {
 
     func test_visit() {
         let sut = Event(name: "EventName")
-
         sut.visit()
-
         XCTAssertNotNil(sut.dateVisited)
     }
-
-    func test_addGoal_eachDay() {
-        let sut = Event(name: "EventName")
-
-        for weekday in Goal.WeekDay.allCases {
-            let goal = sut.addGoal(weekDay: weekday, amount: 1)
-
-            XCTAssertEqual(sut.goal(at: weekday), goal)
-        }
-
-        XCTAssertNotNil(sut.goal(at: .now))
-    }
-
-    func test_disableGoal() {}
-    func test_addGoal_updateExistingGoalAmount_newGoalAdded() {}
-    func test_addGoal_updateExistingGoalAmount_oldGoalDisabled() {}
-
-    func test_addHappening_goalIsReached() {}
-    func test_removeHappening_goalIsNotReached() {}
 }

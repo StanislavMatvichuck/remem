@@ -71,4 +71,8 @@ extension Date: Strideable {
     public func advanced(by n: TimeInterval) -> Date {
         return self + n
     }
+
+    var dayByDayWeekForward: StrideTo<Date> {
+        return stride(from: days(ago: -7), to: self, by: 60 * 60 * 24)
+    }
 }
