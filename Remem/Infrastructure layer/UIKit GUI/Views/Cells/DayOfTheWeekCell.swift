@@ -49,39 +49,43 @@ class DayOfTheWeekCell: UICollectionViewCell {
 
     private func configureViews() {
         backgroundContainer.backgroundColor = UIHelper.background
-        backgroundContainer.layer.cornerRadius = UIHelper.spacing / 1.5
+        backgroundContainer.layer.cornerRadius = UIHelper.radius
 
         sectionsContainer.transform = CGAffineTransform(scaleX: 1, y: -1)
         sectionsContainer.clipsToBounds = true
     }
 
     private func configureViewsHierarchy() {
+        let spacing = UIHelper.spacing / 8
+
         let stack = UIStackView(al: true)
         stack.axis = .vertical
-        stack.spacing = UIHelper.spacing / 2
+        stack.spacing = spacing
         stack.distribution = .fill
-
-        stack.addArrangedSubview(labelAmount)
         stack.addArrangedSubview(sectionsContainer)
         stack.addArrangedSubview(labelDay)
 
         backgroundContainer.addSubview(stack)
+        viewRoot.addSubview(labelAmount)
         viewRoot.addSubview(backgroundContainer)
         contentView.addAndConstrain(viewRoot)
 
-        labelAmount.setContentHuggingPriority(UILayoutPriority(250), for: .vertical)
         labelDay.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         sectionsContainer.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
         sectionsContainer.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
         NSLayoutConstraint.activate([
-            backgroundContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: UIHelper.spacing / 2),
-            backgroundContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.spacing / 2),
-            backgroundContainer.topAnchor.constraint(equalTo: viewRoot.topAnchor),
-            backgroundContainer.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -UIHelper.spacing),
+            backgroundContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: spacing),
+            backgroundContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -spacing),
 
-            stack.widthAnchor.constraint(equalTo: backgroundContainer.widthAnchor, constant: -UIHelper.spacing),
-            stack.heightAnchor.constraint(equalTo: backgroundContainer.heightAnchor, constant: -UIHelper.spacing),
+            labelAmount.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: spacing),
+            labelAmount.widthAnchor.constraint(equalTo: viewRoot.widthAnchor),
+
+            backgroundContainer.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: spacing),
+            backgroundContainer.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -UIHelper.spacing / 2),
+
+            stack.widthAnchor.constraint(equalTo: backgroundContainer.widthAnchor, constant: -spacing),
+            stack.heightAnchor.constraint(equalTo: backgroundContainer.heightAnchor, constant: -spacing),
             stack.centerXAnchor.constraint(equalTo: backgroundContainer.centerXAnchor),
             stack.centerYAnchor.constraint(equalTo: backgroundContainer.centerYAnchor),
         ])
