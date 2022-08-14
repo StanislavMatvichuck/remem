@@ -11,17 +11,16 @@ class GoalsInputView: UIView {
     // MARK: - Properties
     let enabled: UISwitch = {
         let view = UISwitch(al: true)
-
         view.isOn = false
         view.preferredStyle = .checkbox
-
         return view
     }()
 
     let title: UILabel = {
         let label = UILabel(al: true)
         label.text = "Goal enabled"
-        label.font = UIHelper.font
+        label.font = UIHelper.fontBold
+        label.textColor = UIHelper.itemFont
         return label
     }()
 
@@ -37,7 +36,6 @@ class GoalsInputView: UIView {
         view.backgroundColor = UIHelper.brand
         view.heightAnchor.constraint(equalToConstant: .d2).isActive = true
         view.layer.cornerRadius = .d2 / 2
-
         return view
     }()
 

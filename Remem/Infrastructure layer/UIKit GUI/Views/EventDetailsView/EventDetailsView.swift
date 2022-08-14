@@ -58,19 +58,27 @@ extension EventDetailsView {
         let statsMarginContainer = UIView(al: true)
         statsMarginContainer.addSubview(statsView)
 
+        let goalsInputMarginContainer = UIView(al: true)
+        goalsInputMarginContainer.addSubview(goalsInput)
+
         NSLayoutConstraint.activate([
             statsView.leadingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.leadingAnchor),
             statsView.trailingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.trailingAnchor),
 
             statsView.topAnchor.constraint(equalTo: statsMarginContainer.topAnchor),
             statsView.bottomAnchor.constraint(equalTo: statsMarginContainer.bottomAnchor, constant: -UIHelper.spacing),
+
+            goalsInput.leadingAnchor.constraint(equalTo: goalsInputMarginContainer.readableContentGuide.leadingAnchor),
+            goalsInput.trailingAnchor.constraint(equalTo: goalsInputMarginContainer.readableContentGuide.trailingAnchor),
+
+            goalsInput.topAnchor.constraint(equalTo: goalsInputMarginContainer.topAnchor),
+            goalsInput.bottomAnchor.constraint(equalTo: goalsInputMarginContainer.bottomAnchor, constant: -UIHelper.spacing),
         ])
 
         let scroll = ViewScroll(.vertical)
         scroll.contain(views:
             week,
-            make(title: "Add goal"),
-            goalsInput,
+            goalsInputMarginContainer,
             make(title: "Hours distribution"),
             clock,
             make(title: "Stats"),
