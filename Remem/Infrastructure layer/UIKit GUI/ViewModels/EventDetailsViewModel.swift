@@ -106,7 +106,6 @@ extension EventDetailsViewModel {
     private func setStats() {
         view?.statsLabels[.total]?.text = "\(totalAmount)"
         view?.statsLabels[.average]?.text = "\(dayAverage)"
-        view?.statsLabels[.weekTotal]?.text = "\(thisWeekTotal)"
         view?.statsLabels[.weekAverage]?.text = "\(weekAverage)"
     }
 }

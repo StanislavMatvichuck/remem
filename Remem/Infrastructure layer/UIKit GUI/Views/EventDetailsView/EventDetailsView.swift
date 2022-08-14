@@ -11,15 +11,13 @@ class EventDetailsView: UIView {
     enum EventStat: CaseIterable {
         case total
         case average
-        case weekTotal
         case weekAverage
 
-				// TODO: localization
+        // TODO: localization
         func localizedDescription() -> String {
             switch self {
             case .total: return "Total"
             case .average: return "Average"
-            case .weekTotal: return "Week total"
             case .weekAverage: return "Week average"
             }
         }
@@ -51,7 +49,10 @@ class EventDetailsView: UIView {
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
 
+// MARK: - Private
+extension EventDetailsView {
     private func setupLayout() {
         let statsMarginContainer = UIView(al: true)
         statsMarginContainer.addSubview(statsView)
@@ -98,10 +99,7 @@ class EventDetailsView: UIView {
 
         return view
     }
-}
 
-// MARK: - Private
-extension EventDetailsView {
     private func makeStatTile(stat: EventStat) -> UIView {
         let labelAmount = UILabel(al: true)
         labelAmount.text = "\(0.0)"
