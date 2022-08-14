@@ -16,6 +16,7 @@
 		08293CC127B670FC0039E432 /* DayOfTheWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */; };
 		0830DA3427C3A6DA00479014 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3327C3A6DA00479014 /* SettingsController.swift */; };
 		0830DA3627C3A6E000479014 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0830DA3527C3A6E000479014 /* SettingsView.swift */; };
+		08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
 		083265FE28A51F940023288B /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083265FD28A51F940023288B /* GoalTests.swift */; };
 		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
 		083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
@@ -102,6 +103,7 @@
 		08293CC027B670FC0039E432 /* DayOfTheWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfTheWeekCell.swift; sourceTree = "<group>"; };
 		0830DA3327C3A6DA00479014 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0830DA3527C3A6E000479014 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
 		083265FD28A51F940023288B /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		083A415F27BE603800AF2098 /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				08B26A13289E975900DFBAC8 /* DayViewModel.swift */,
+				08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
 				08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */,
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
+				08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,

@@ -28,15 +28,21 @@ class GoalsInputView: UIView {
         let label = UILabel(al: true)
         label.text = "Submit new goal"
         label.font = UIHelper.font
-        label.textColor = UIHelper.background
         label.textAlignment = .center
 
         let view = UIView(al: true)
         view.addAndConstrain(label)
-        view.backgroundColor = UIHelper.brand
         view.heightAnchor.constraint(equalToConstant: .d2).isActive = true
         view.layer.cornerRadius = .d2 / 2
         return view
+    }()
+
+    lazy var picker: UIPickerView = {
+        let picker = UIPickerView(al: true)
+        picker.backgroundColor = UIHelper.background
+        picker.layer.cornerRadius = UIHelper.spacing / 2
+        picker.dataSource = self
+        return picker
     }()
 
     // MARK: - Init
@@ -57,43 +63,25 @@ extension GoalsInputView {
         titleContainer.addArrangedSubview(title)
         titleContainer.addArrangedSubview(enabled)
 
-        let picker = makePickerView()
-
         let container = UIStackView(al: true)
         container.axis = .vertical
+        container.spacing = UIHelper.spacing
+
         container.addArrangedSubview(titleContainer)
         container.addArrangedSubview(picker)
         container.addArrangedSubview(submit)
 
         addAndConstrain(container)
     }
-
-    private func makePickerView() -> UIPickerView {
-        let picker = UIPickerView(al: true)
-        picker.dataSource = self
-        picker.delegate = self
-        return picker
-    }
 }
 
 // MARK: - Picker
-extension GoalsInputView:
-    UIPickerViewDataSource,
-    UIPickerViewDelegate
-{
+extension GoalsInputView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         Goal.WeekDay.allCases.count
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         20
-    }
-
-    // UIPickerViewDelegate
-    func pickerView(_ pickerView: UIPickerView,
-                    titleForRow row: Int,
-                    forComponent component: Int) -> String?
-    {
-        return "\(row)"
     }
 }

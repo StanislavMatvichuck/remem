@@ -110,7 +110,7 @@ extension Coordinator {
         let clockController = ClockController()
         clockController.event = event
 
-        let goalsInputController = GoalsInputController()
+        let goalsInputController = GoalsInputController(event)
 
         let details = EventDetailsController(event: event,
                                              editUseCase: eventEditUseCase,
