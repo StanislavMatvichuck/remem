@@ -110,10 +110,13 @@ extension Coordinator {
         let clockController = ClockController()
         clockController.event = event
 
+        let goalsInputController = GoalsInputController()
+
         let details = EventDetailsController(event: event,
                                              editUseCase: eventEditUseCase,
                                              clockController: clockController,
-                                             weekController: weekController)
+                                             weekController: weekController,
+                                             goalsInputController: goalsInputController)
 
         eventEditMulticastDelegate.addDelegate(weekController)
 

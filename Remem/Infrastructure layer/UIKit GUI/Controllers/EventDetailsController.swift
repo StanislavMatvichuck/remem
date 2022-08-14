@@ -19,17 +19,20 @@ class EventDetailsController: UIViewController {
     private let editUseCase: EventEditUseCaseInput
     private let weekController: WeekController
     private let clockController: ClockController
+    private let goalsInputController: GoalsInputController
 
     // MARK: - Init
     init(event: Event,
          editUseCase: EventEditUseCaseInput,
          clockController: ClockController,
-         weekController: WeekController)
+         weekController: WeekController,
+         goalsInputController: GoalsInputController)
     {
         self.event = event
         self.editUseCase = editUseCase
         self.weekController = weekController
         self.clockController = clockController
+        self.goalsInputController = goalsInputController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,6 +46,7 @@ class EventDetailsController: UIViewController {
 
         contain(controller: weekController, in: viewRoot.week)
         contain(controller: clockController, in: viewRoot.clock)
+        contain(controller: goalsInputController, in: viewRoot.goalsInput)
 
         viewModel = EventDetailsViewModel(event)
     }

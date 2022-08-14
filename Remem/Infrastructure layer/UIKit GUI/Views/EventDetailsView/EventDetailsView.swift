@@ -26,6 +26,7 @@ class EventDetailsView: UIView {
     // MARK: - Properties
     let week = UIView(al: true)
     let clock = UIView(al: true)
+    let goalsInput = UIView(al: true)
 
     lazy var statsView: UIView = {
         let view = UIStackView(al: true)
@@ -68,6 +69,8 @@ extension EventDetailsView {
         let scroll = ViewScroll(.vertical)
         scroll.contain(views:
             week,
+            make(title: "Add goal"),
+            goalsInput,
             make(title: "Hours distribution"),
             clock,
             make(title: "Stats"),

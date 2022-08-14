@@ -66,6 +66,8 @@
 		08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
 		08D6E1D8288807DC003BF595 /* WeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D7288807DC003BF595 /* WeekList.swift */; };
 		08D6E1DA288807F0003BF595 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D9288807F0003BF595 /* WeekDay.swift */; };
+		08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8BCD228A90C4300A50664 /* GoalsInputView.swift */; };
+		08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8BCD428A90CFF00A50664 /* GoalsInputController.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
@@ -159,6 +161,8 @@
 		08D6E1D3288806FA003BF595 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
 		08D6E1D7288807DC003BF595 /* WeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekList.swift; sourceTree = "<group>"; };
 		08D6E1D9288807F0003BF595 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		08D8BCD228A90C4300A50664 /* GoalsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputView.swift; sourceTree = "<group>"; };
+		08D8BCD428A90CFF00A50664 /* GoalsInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputController.swift; sourceTree = "<group>"; };
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
 				0852C6A3283D57230027EF3E /* HappeningsListView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
+				08D8BCD228A90C4300A50664 /* GoalsInputView.swift */,
 			);
 			path = EventDetailsView;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				0830DA3327C3A6DA00479014 /* SettingsController.swift */,
 				085C4E99289ABCEF0094388C /* WeekController */,
 				0852C6AC283D66170027EF3E /* WeekController.swift */,
+				08D8BCD428A90CFF00A50664 /* GoalsInputController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -647,6 +653,7 @@
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
+				08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */,
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
@@ -676,6 +683,7 @@
 				0848C949281162DD003ED51D /* UITextFieldWithPadding.swift in Sources */,
 				085C4E9C289AC27F0094388C /* EventsRepository.swift in Sources */,
 				08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */,
+				08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */,
 				08961F50289BA99900F3E179 /* EventDetailsViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
