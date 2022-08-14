@@ -63,15 +63,15 @@ extension WeekViewModel: UICollectionViewDataSource {
 
         let weekDay = happeningsList.days[indexPath.row]
 
-        cell.labelDay.text = String(weekDay.dayNumber)
-        cell.labelDay.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
+        cell.day.text = String(weekDay.dayNumber)
+        cell.day.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
 
         let amount = weekDay.amount
 
         if amount == 0 {
-            cell.labelAmount.text = " "
+            cell.amount.text = " "
         } else {
-            cell.labelAmount.text = String(amount)
+            cell.amount.text = String(amount)
             cell.showSections(amount: amount)
         }
 

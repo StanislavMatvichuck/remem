@@ -19,7 +19,7 @@ struct UIHelper {
     // metrics
     static let spacing = 16.0
     static let spacingListHorizontal = 32.0
-    static let radius = 8.0
+    static let radius = 4.0
     // fonts
     static let font: UIFont = makeFont()
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)

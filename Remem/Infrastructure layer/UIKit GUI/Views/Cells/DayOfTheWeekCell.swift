@@ -13,10 +13,8 @@ protocol DayOfTheWeekCellDelegate: AnyObject {
 
 class DayOfTheWeekCell: UICollectionViewCell {
     static let reuseIdentifier = "CellDay"
-
-    static let sectionsSpacing = 2.0
-    static let sectionsHeight = 12.0
-    static let sectionsAmount = 20
+    static let spacing = UIHelper.spacing / 8
+    static let sectionsAmount = 12 /// must define layout height
 
     enum Kind {
         case past
@@ -29,142 +27,131 @@ class DayOfTheWeekCell: UICollectionViewCell {
     // MARK: - Properties
     weak var delegate: DayOfTheWeekCellDelegate?
 
-    var viewRoot = UIView(al: true)
-    var backgroundContainer = UIView(al: true)
-    var sectionsContainer = UIView(al: true)
+    var day: UILabel = DayOfTheWeekCell.makeLabel()
+    var amount: UILabel = DayOfTheWeekCell.makeLabel()
 
-    var labelDay: UILabel = DayOfTheWeekCell.makeLabel()
-    var labelAmount: UILabel = DayOfTheWeekCell.makeLabel()
+    lazy var happeningsContainer: UIView = {
+        let timings: [UIView] = (0 ... Self.sectionsAmount - 1).map { index in
+            Self.makeLabel(for: index)
+        }
+
+        let timingsStack = makeVerticalStack(views: timings)
+
+        let view = UIView(al: true)
+        view.addSubview(timingsStack)
+        view.clipsToBounds = true
+        NSLayoutConstraint.activate([
+            timingsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            timingsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            timingsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        return view
+    }()
+
+    lazy var background: UIView = {
+        let stack = makeVerticalStack(views: happeningsContainer, day)
+
+        let background = UIView(al: true)
+        background.addAndConstrain(stack, constant: Self.spacing)
+        background.backgroundColor = UIHelper.background
+        background.layer.cornerRadius = UIHelper.radius
+
+        let view = UIView(al: true)
+        view.addAndConstrain(background, constant: Self.spacing)
+        return view
+    }()
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureViewsHierarchy()
-        configureViews()
-        viewRoot.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
-        configureSectionsLayers()
+
+        configureLayout()
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    private func configureViews() {
-        backgroundContainer.backgroundColor = UIHelper.background
-        backgroundContainer.layer.cornerRadius = UIHelper.radius
-
-        sectionsContainer.transform = CGAffineTransform(scaleX: 1, y: -1)
-        sectionsContainer.clipsToBounds = true
-    }
-
-    private func configureViewsHierarchy() {
-        let spacing = UIHelper.spacing / 8
-
-        let stack = UIStackView(al: true)
-        stack.axis = .vertical
-        stack.spacing = spacing
-        stack.distribution = .fill
-        stack.addArrangedSubview(sectionsContainer)
-        stack.addArrangedSubview(labelDay)
-
-        backgroundContainer.addSubview(stack)
-        viewRoot.addSubview(labelAmount)
-        viewRoot.addSubview(backgroundContainer)
-        contentView.addAndConstrain(viewRoot)
-
-        labelDay.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
-        sectionsContainer.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
-        sectionsContainer.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-
-        NSLayoutConstraint.activate([
-            backgroundContainer.leadingAnchor.constraint(equalTo: viewRoot.leadingAnchor, constant: spacing),
-            backgroundContainer.trailingAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -spacing),
-
-            labelAmount.topAnchor.constraint(equalTo: viewRoot.topAnchor, constant: spacing),
-            labelAmount.widthAnchor.constraint(equalTo: viewRoot.widthAnchor),
-
-            backgroundContainer.topAnchor.constraint(equalTo: labelAmount.bottomAnchor, constant: spacing),
-            backgroundContainer.bottomAnchor.constraint(equalTo: viewRoot.bottomAnchor, constant: -UIHelper.spacing / 2),
-
-            stack.widthAnchor.constraint(equalTo: backgroundContainer.widthAnchor, constant: -spacing),
-            stack.heightAnchor.constraint(equalTo: backgroundContainer.heightAnchor, constant: -spacing),
-            stack.centerXAnchor.constraint(equalTo: backgroundContainer.centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: backgroundContainer.centerYAnchor),
-        ])
-    }
-
+    // MARK: - View lifecycle
     override func prepareForReuse() {
-        hideAllSections()
         delegate = nil
         super.prepareForReuse()
-    }
-
-    private func configureSectionsLayers() {
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-
-        for i in 0 ... 19 {
-            let layer = makeSectionLayer(for: i)
-            sectionsContainer.layer.addSublayer(layer)
-        }
-
-        CATransaction.commit()
-    }
-
-    private func makeSectionLayer(for index: Int) -> CALayer {
-        let offset = Double(index) * (Self.sectionsHeight + Self.sectionsSpacing)
-        let rect = CGRect(x: 0, y: offset, width: bounds.width - 2 * UIHelper.spacing, height: Self.sectionsHeight)
-        let path = UIBezierPath(roundedRect: rect, cornerRadius: Self.sectionsHeight / 2)
-
-        let layer = CAShapeLayer()
-        layer.fillColor = UIHelper.brandDimmed.cgColor
-        layer.path = path.cgPath
-        layer.opacity = 0.0
-
-        return layer
     }
 }
 
 // MARK: - Public
 extension DayOfTheWeekCell {
-    func showSections(amount: Int) {
-        guard let sublayers = sectionsContainer.layer.sublayers else { return }
+    func showSections(amount: Int) {}
+}
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-
-        for (index, sublayer) in sublayers.enumerated() {
-            if index < amount { sublayer.opacity = 1.0 }
-        }
-
-        CATransaction.commit()
+// MARK: - Events handling
+extension DayOfTheWeekCell {
+    @objc private func handlePress() {
+        UIDevice.vibrate(.medium)
+        animate()
+        delegate?.didPress(cell: self)
     }
 }
 
 // MARK: - Private
 extension DayOfTheWeekCell {
-    private func hideAllSections() {
-        guard let sublayers = sectionsContainer.layer.sublayers else { return }
+    private func configureLayout() {
+        amount.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
+        background.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)
+        background.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
+        let content = makeVerticalStack(views: amount, background)
+        contentView.addSubview(content)
+        NSLayoutConstraint.activate([
+            content.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            content.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-        for sublayer in sublayers { sublayer.opacity = 0.0 }
-
-        CATransaction.commit()
+            content.topAnchor.constraint(equalTo: contentView.topAnchor),
+            content.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIHelper.spacing / 2),
+        ])
     }
 
     private static func makeLabel() -> UILabel {
         let label = UILabel(al: true)
-
         label.textAlignment = .center
         label.numberOfLines = 1
         label.font = UIHelper.fontSmallBold
         label.textColor = UIHelper.itemFont
         label.text = " "
-
         return label
     }
 
-    @objc private func handlePress() {
-        delegate?.didPress(cell: self)
+    private static func makeLabel(for index: Int) -> UILabel {
+        let newLabel = UILabel(al: true)
+        newLabel.text = " "
+        newLabel.textAlignment = .center
+        newLabel.font = UIHelper.font
+        newLabel.textColor = UIHelper.itemFont
+        newLabel.adjustsFontSizeToFitWidth = true
+        newLabel.minimumScaleFactor = 0.1
+        newLabel.numberOfLines = 1
+        newLabel.layer.cornerRadius = UIHelper.radius
+        newLabel.clipsToBounds = true
+        newLabel.backgroundColor = UIHelper.itemBackground
+        return newLabel
+    }
+
+    private func animate() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 1.0
+        animation.toValue = 0.9
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.duration = 0.07
+        animation.autoreverses = true
+        animation.repeatCount = 1
+        contentView.layer.add(animation, forKey: nil)
+    }
+
+    private func makeVerticalStack(views: UIView...) -> UIStackView { makeVerticalStack(views: views) }
+    private func makeVerticalStack(views: [UIView]) -> UIStackView {
+        let stack = UIStackView(al: true)
+        stack.spacing = Self.spacing
+        stack.axis = .vertical
+        for view in views { stack.addArrangedSubview(view) }
+        return stack
     }
 }
