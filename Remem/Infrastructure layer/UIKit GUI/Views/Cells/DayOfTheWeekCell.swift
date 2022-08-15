@@ -36,6 +36,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
         }
 
         let timingsStack = makeVerticalStack(views: timings)
+        timingsStack.transform = CGAffineTransform(scaleX: 1, y: -1)
 
         let view = UIView(al: true)
         view.addSubview(timingsStack)
@@ -45,6 +46,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
             timingsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             timingsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+
         return view
     }()
 
@@ -74,13 +76,17 @@ class DayOfTheWeekCell: UICollectionViewCell {
     // MARK: - View lifecycle
     override func prepareForReuse() {
         delegate = nil
+        hideAll()
         super.prepareForReuse()
     }
 }
 
 // MARK: - Public
 extension DayOfTheWeekCell {
-    func showSections(amount: Int) {}
+    func showSections(amount: Int) {
+        hideAll()
+        showGoal(amount: amount)
+    }
 }
 
 // MARK: - Events handling
@@ -131,7 +137,7 @@ extension DayOfTheWeekCell {
         newLabel.numberOfLines = 1
         newLabel.layer.cornerRadius = UIHelper.radius
         newLabel.clipsToBounds = true
-        newLabel.backgroundColor = UIHelper.itemBackground
+        newLabel.backgroundColor = .clear
         return newLabel
     }
 
@@ -153,5 +159,17 @@ extension DayOfTheWeekCell {
         stack.axis = .vertical
         for view in views { stack.addArrangedSubview(view) }
         return stack
+    }
+
+    private func hideAll() {
+        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
+        labels.forEach { label in label.backgroundColor = .clear }
+    }
+
+    private func showGoal(amount: Int) {
+        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
+        for i in 0 ... amount - 1 {
+            labels[i].backgroundColor = UIHelper.itemBackground
+        }
     }
 }
