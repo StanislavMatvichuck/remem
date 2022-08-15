@@ -33,7 +33,7 @@ extension WeekController:
     UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? DayOfTheWeekCell else { return }
+        guard let cell = cell as? WeekCell else { return }
         cell.delegate = self
     }
 
@@ -47,9 +47,9 @@ extension WeekController:
     }
 }
 
-// MARK: - DayOfTheWeekCellDelegate
-extension WeekController: DayOfTheWeekCellDelegate {
-    func didPress(cell: DayOfTheWeekCell) {
+// MARK: - WeekCellDelegate
+extension WeekController: WeekCellDelegate {
+    func didPress(cell: WeekCell) {
         guard let day = viewModel.day(for: cell) else { return }
         coordinator?.showDayController(for: day, event: event)
     }

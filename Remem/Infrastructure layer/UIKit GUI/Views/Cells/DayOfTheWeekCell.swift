@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol DayOfTheWeekCellDelegate: AnyObject {
-    func didPress(cell: DayOfTheWeekCell)
+protocol WeekCellDelegate: AnyObject {
+    func didPress(cell: WeekCell)
 }
 
-class DayOfTheWeekCell: UICollectionViewCell {
+class WeekCell: UICollectionViewCell {
     static let reuseIdentifier = "CellDay"
     static let spacing = UIHelper.spacing / 8
     static let sectionsAmount = 12 /// must define layout height
@@ -25,10 +25,10 @@ class DayOfTheWeekCell: UICollectionViewCell {
     }
 
     // MARK: - Properties
-    weak var delegate: DayOfTheWeekCellDelegate?
+    weak var delegate: WeekCellDelegate?
 
-    var day: UILabel = DayOfTheWeekCell.makeLabel()
-    var amount: UILabel = DayOfTheWeekCell.makeLabel()
+    var day: UILabel = WeekCell.makeLabel()
+    var amount: UILabel = WeekCell.makeLabel()
 
     lazy var happeningsContainer: UIView = {
         let timings: [UIView] = (0 ... Self.sectionsAmount - 1).map { index in
@@ -82,7 +82,7 @@ class DayOfTheWeekCell: UICollectionViewCell {
 }
 
 // MARK: - Public
-extension DayOfTheWeekCell {
+extension WeekCell {
     func showSections(amount: Int, happenings: [Happening]) {
         hideAll()
         showGoal(amount: amount)
@@ -91,7 +91,7 @@ extension DayOfTheWeekCell {
 }
 
 // MARK: - Events handling
-extension DayOfTheWeekCell {
+extension WeekCell {
     @objc private func handlePress() {
         UIDevice.vibrate(.medium)
         animate()
@@ -100,7 +100,7 @@ extension DayOfTheWeekCell {
 }
 
 // MARK: - Private
-extension DayOfTheWeekCell {
+extension WeekCell {
     private func configureLayout() {
         amount.setContentHuggingPriority(UILayoutPriority(251), for: .vertical)
         background.setContentHuggingPriority(UILayoutPriority(249), for: .vertical)

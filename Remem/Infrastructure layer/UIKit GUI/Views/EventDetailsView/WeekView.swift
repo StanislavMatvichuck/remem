@@ -19,7 +19,7 @@ class WeekView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
-        view.register(DayOfTheWeekCell.self, forCellWithReuseIdentifier: DayOfTheWeekCell.reuseIdentifier)
+        view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
 
         return view
     }()

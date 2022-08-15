@@ -43,7 +43,7 @@ extension WeekViewModel {
         scrollHappened = true
     }
 
-    func day(for cell: DayOfTheWeekCell) -> DateComponents? {
+    func day(for cell: WeekCell) -> DateComponents? {
         guard let index = view?.collection.indexPath(for: cell) else { return nil }
         return happeningsList.days[index.row].date
     }
@@ -57,8 +57,8 @@ extension WeekViewModel: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayOfTheWeekCell.reuseIdentifier, for: indexPath)
-            as? DayOfTheWeekCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.reuseIdentifier, for: indexPath)
+            as? WeekCell
         else { return UICollectionViewCell() }
 
         let weekDay = happeningsList.days[indexPath.row]
