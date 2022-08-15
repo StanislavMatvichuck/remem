@@ -15,7 +15,7 @@ struct WeekList {
         var days: [WeekDay] = []
 
         for date in stride(from: from, to: to, by: dayDurationInSeconds) {
-            let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
+            let components = Calendar.current.dateComponents([.second, .minute, .hour, .day, .month, .year], from: date)
             var weekDay = WeekDay(date: components)
 
             for happening in happenings {

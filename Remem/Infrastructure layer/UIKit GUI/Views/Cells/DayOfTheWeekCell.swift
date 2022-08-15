@@ -83,9 +83,10 @@ class DayOfTheWeekCell: UICollectionViewCell {
 
 // MARK: - Public
 extension DayOfTheWeekCell {
-    func showSections(amount: Int) {
+    func showSections(amount: Int, happenings: [Happening]) {
         hideAll()
         showGoal(amount: amount)
+        showHappenings(happenings: happenings)
     }
 }
 
@@ -131,13 +132,14 @@ extension DayOfTheWeekCell {
         newLabel.text = " "
         newLabel.textAlignment = .center
         newLabel.font = UIHelper.font
-        newLabel.textColor = UIHelper.itemFont
+        newLabel.textColor = UIHelper.background
         newLabel.adjustsFontSizeToFitWidth = true
         newLabel.minimumScaleFactor = 0.1
         newLabel.numberOfLines = 1
         newLabel.layer.cornerRadius = UIHelper.radius
         newLabel.clipsToBounds = true
         newLabel.backgroundColor = .clear
+        newLabel.transform = CGAffineTransform(scaleX: 1, y: -1)
         return newLabel
     }
 
@@ -163,13 +165,29 @@ extension DayOfTheWeekCell {
 
     private func hideAll() {
         guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
-        labels.forEach { label in label.backgroundColor = .clear }
+        labels.forEach { label in
+            label.backgroundColor = .clear
+            label.text = " "
+        }
     }
 
     private func showGoal(amount: Int) {
         guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
         for i in 0 ... amount - 1 {
             labels[i].backgroundColor = UIHelper.itemBackground
+        }
+    }
+
+    private func showHappenings(happenings: [Happening]) {
+        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+
+        for (index, happening) in happenings.enumerated() {
+            labels[index].backgroundColor = UIHelper.brandDimmed
+            labels[index].text = formatter.string(from: happening.dateCreated)
         }
     }
 }

@@ -72,7 +72,11 @@ extension WeekViewModel: UICollectionViewDataSource {
             cell.amount.text = " "
         } else {
             cell.amount.text = String(amount)
-            cell.showSections(amount: amount)
+
+            if let date = Calendar.current.date(from: weekDay.date) {
+                let happeningsForDay = model.happenings(forDay: date)
+                cell.showSections(amount: amount, happenings: happeningsForDay)
+            }
         }
 
         return cell

@@ -107,6 +107,12 @@ extension Event {
         if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
     }
 
+    func happenings(forDay: Date) -> [Happening] {
+        happenings
+            .filter { $0.dateCreated.isInSameDay(as: forDay) }
+            .sorted(by: { $0.dateCreated > $1.dateCreated })
+    }
+
     // Goals
     func goal(at date: Date) -> Goal? {
         let accessorDay = Goal.WeekDay.make(date)
