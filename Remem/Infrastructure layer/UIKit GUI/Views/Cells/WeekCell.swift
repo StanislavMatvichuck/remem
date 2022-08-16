@@ -83,10 +83,31 @@ class WeekCell: UICollectionViewCell {
 
 // MARK: - Public
 extension WeekCell {
-    func showSections(amount: Int, happenings: [Happening]) {
+    func showGoal(amount: Int?) {
         hideAll()
-        showGoal(amount: amount)
-        showHappenings(happenings: happenings)
+
+        guard
+            let amount = amount, amount >= 1,
+            let labels = happeningsContainer.subviews[0].subviews as? [UILabel]
+        else { return }
+
+        for i in 0 ... amount - 1 {
+            labels[i].backgroundColor = UIHelper.itemBackground
+        }
+    }
+
+    func showHappenings(happenings: [Happening]) {
+        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+
+        for (index, happening) in happenings.enumerated() {
+            guard index < labels.count - 1 else { break }
+            labels[index].backgroundColor = UIHelper.brandDimmed
+            labels[index].text = formatter.string(from: happening.dateCreated)
+        }
     }
 }
 
@@ -168,26 +189,6 @@ extension WeekCell {
         labels.forEach { label in
             label.backgroundColor = .clear
             label.text = " "
-        }
-    }
-
-    private func showGoal(amount: Int) {
-        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
-        for i in 0 ... amount - 1 {
-            labels[i].backgroundColor = UIHelper.itemBackground
-        }
-    }
-
-    private func showHappenings(happenings: [Happening]) {
-        guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
-
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-
-        for (index, happening) in happenings.enumerated() {
-            labels[index].backgroundColor = UIHelper.brandDimmed
-            labels[index].text = formatter.string(from: happening.dateCreated)
         }
     }
 }

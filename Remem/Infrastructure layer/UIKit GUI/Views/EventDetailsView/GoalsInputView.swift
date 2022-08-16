@@ -81,7 +81,5 @@ extension GoalsInputView: UIPickerViewDataSource {
         Goal.WeekDay.allCases.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        20
-    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { WeekCell.sectionsAmount + 1 }
 }

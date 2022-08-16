@@ -16,15 +16,17 @@ class WeekViewModel: NSObject {
     private weak var view: View?
     private var scrollHappened = false
     private let happeningsList: WeekList
+    private let shownDaysForward = 14
 
     // MARK: - Init
     init(model: Model) {
         self.model = model
 
         let start = model.dateCreated.startOfWeek!
-        let end = Date.now.endOfWeek!
+        let futureDays = Double(60*60*24*shownDaysForward)
+        let end = Date.now.endOfWeek!.addingTimeInterval(futureDays)
 
-        happeningsList = WeekList(from: start, to: end, happenings: model.happenings)
+        happeningsList = WeekList(from: start, to: end, event: model)
     }
 }
 
@@ -45,7 +47,10 @@ extension WeekViewModel {
 
     func day(for cell: WeekCell) -> DateComponents? {
         guard let index = view?.collection.indexPath(for: cell) else { return nil }
-        return happeningsList.days[index.row].date
+        let calendar = Calendar.current
+        let cellDate = happeningsList.days[index.row].date
+        let components = calendar.dateComponents([.day], from: cellDate)
+        return components
     }
 }
 
@@ -65,19 +70,9 @@ extension WeekViewModel: UICollectionViewDataSource {
 
         cell.day.text = String(weekDay.dayNumber)
         cell.day.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
-
-        let amount = weekDay.amount
-
-        if amount == 0 {
-            cell.amount.text = " "
-        } else {
-            cell.amount.text = String(amount)
-
-            if let date = Calendar.current.date(from: weekDay.date) {
-                let happeningsForDay = model.happenings(forDay: date)
-                cell.showSections(amount: amount, happenings: happeningsForDay)
-            }
-        }
+        cell.amount.text = String(weekDay.happenings.count)
+        cell.showGoal(amount: weekDay.goal?.amount)
+        cell.showHappenings(happenings: weekDay.happenings)
 
         return cell
     }
@@ -87,6 +82,7 @@ extension WeekViewModel: UICollectionViewDataSource {
 extension WeekViewModel {
     private func setInitialScrollPosition() {
         let lastCellIndex = IndexPath(row: happeningsList.days.count - 1, section: 0)
-        view?.collection.scrollToItem(at: lastCellIndex, at: .right, animated: false)
+        let scrollToIndex = IndexPath(row: lastCellIndex.row - shownDaysForward, section: 0)
+        view?.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
     }
 }

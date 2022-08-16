@@ -9,16 +9,18 @@ import UIKit
 
 class GoalsInputController: UIViewController {
     // MARK: - Properties
+    let event: Event
+
+    private let editUseCase: EventEditUseCaseInput
     private let viewRoot = GoalsInputView()
     private var viewModel: GoalsInputViewModel! {
         didSet { viewModel.configure(viewRoot) }
     }
 
-    let event: Event
-
     // MARK: - Init
-    init(_ event: Event) {
+    init(_ event: Event, editUseCase: EventEditUseCaseInput) {
         self.event = event
+        self.editUseCase = editUseCase
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -55,6 +57,21 @@ extension GoalsInputController: UIPickerViewDelegate {
                     didSelectRow row: Int,
                     inComponent component: Int)
     {
-        viewModel.isSubmitEnabled = row.isMultiple(of: 2)
+        let todayWeekDay = Goal.WeekDay.make(.now)
+        let todayPickerIndex = componentForWeekDay(weekDay: todayWeekDay)
+        let daysDifference = todayPickerIndex - component
+        editUseCase.addGoal(to: event, at: .now.days(ago: daysDifference), amount: row)
+    }
+
+    private func componentForWeekDay(weekDay: Goal.WeekDay) -> Int {
+        switch weekDay {
+        case .monday: return 0
+        case .tuesday: return 1
+        case .wednesday: return 2
+        case .thursday: return 3
+        case .friday: return 4
+        case .saturday: return 5
+        case .sunday: return 6
+        }
     }
 }

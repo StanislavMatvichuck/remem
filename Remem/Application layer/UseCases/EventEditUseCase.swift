@@ -11,6 +11,7 @@ protocol EventEditUseCaseInput {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
+    func addGoal(to: Event, at: Date, amount: Int)
     func rename(_: Event, to: String)
 }
 
@@ -72,6 +73,11 @@ extension EventEditUseCase: EventEditUseCaseInput {
         event.name = newName
 
         repository.save(event)
+        delegate?.updated(event: event)
+    }
+
+    func addGoal(to event: Event, at date: Date, amount: Int) {
+        event.addGoal(at: date, amount: amount)
         delegate?.updated(event: event)
     }
 }
