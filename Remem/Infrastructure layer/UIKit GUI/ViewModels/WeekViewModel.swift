@@ -49,7 +49,7 @@ extension WeekViewModel {
         guard let index = view?.collection.indexPath(for: cell) else { return nil }
         let calendar = Calendar.current
         let cellDate = happeningsList.days[index.row].date
-        let components = calendar.dateComponents([.day], from: cellDate)
+        let components = calendar.dateComponents([.year, .month, .day], from: cellDate)
         return components
     }
 }
