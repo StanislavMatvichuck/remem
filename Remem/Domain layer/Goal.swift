@@ -39,6 +39,6 @@ extension Goal {
             partialResult + h.value
         }
 
-        return happeningsTotalValue >= amount
+        return happeningsTotalValue >= amount && dateDisabled == nil
     }
 }

@@ -96,6 +96,17 @@ extension WeekCell {
         }
     }
 
+    func showGoalAchieved() {
+        guard
+            let labels = happeningsContainer.subviews[0].subviews as? [UILabel]
+        else { return }
+
+        for label in labels {
+            guard label.backgroundColor != .clear else { continue }
+            label.backgroundColor = .systemGreen
+        }
+    }
+
     func showHappenings(happenings: [Happening]) {
         guard let labels = happeningsContainer.subviews[0].subviews as? [UILabel] else { return }
 

@@ -60,7 +60,12 @@ extension GoalsInputController: UIPickerViewDelegate {
         let todayWeekDay = Goal.WeekDay.make(.now)
         let todayPickerIndex = componentForWeekDay(weekDay: todayWeekDay)
         let daysDifference = todayPickerIndex - component
-        editUseCase.addGoal(to: event, at: .now.days(ago: daysDifference), amount: row)
+
+        if row > 0 {
+            editUseCase.addGoal(to: event, at: .now.days(ago: daysDifference), amount: row)
+        } else {
+            editUseCase.disableGoal(at: event, at: .now.days(ago: daysDifference))
+        }
     }
 
     private func componentForWeekDay(weekDay: Goal.WeekDay) -> Int {

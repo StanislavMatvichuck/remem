@@ -43,7 +43,7 @@ class GoalTests: XCTestCase {
         XCTAssertEqual(sut.goal(at: Date.now.days(ago: -7))?.amount, 2)
     }
 
-    func test_addGoal_currentWeekPreserved() {
+    func test_addGoal_pastWeekPreserved() {
         let sut = makeEventWithGoal()
 
         sut.addGoal(at: Date.now.days(ago: -7), amount: 2)

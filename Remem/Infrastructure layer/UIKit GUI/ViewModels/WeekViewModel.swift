@@ -70,9 +70,17 @@ extension WeekViewModel: UICollectionViewDataSource {
 
         cell.day.text = String(weekDay.dayNumber)
         cell.day.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
+
+        if let goal = weekDay.goal, goal.dateDisabled == nil {
+            cell.showGoal(amount: weekDay.goal?.amount)
+        }
+
         cell.amount.text = String(weekDay.happenings.count)
-        cell.showGoal(amount: weekDay.goal?.amount)
         cell.showHappenings(happenings: weekDay.happenings)
+
+        if let goal = weekDay.goal, goal.isReached(at: weekDay.date) {
+            cell.showGoalAchieved()
+        }
 
         return cell
     }

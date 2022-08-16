@@ -12,6 +12,7 @@ protocol EventEditUseCaseInput {
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
     func addGoal(to: Event, at: Date, amount: Int)
+    func disableGoal(at: Event, at: Date)
     func rename(_: Event, to: String)
 }
 
@@ -78,6 +79,11 @@ extension EventEditUseCase: EventEditUseCaseInput {
 
     func addGoal(to event: Event, at date: Date, amount: Int) {
         event.addGoal(at: date, amount: amount)
+        delegate?.updated(event: event)
+    }
+
+    func disableGoal(at event: Event, at date: Date) {
+        event.disableGoal(at: date)
         delegate?.updated(event: event)
     }
 }
