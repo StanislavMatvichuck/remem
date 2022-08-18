@@ -53,7 +53,7 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
         // Happenings
         //
 
-        entity.happenings = nil
+        for existingCdHappening in entity.happenings! { context.delete(existingCdHappening as! NSManagedObject) }
 
         var cdHappenings = [CDHappening]()
 
@@ -70,7 +70,7 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
         // Goals
         //
 
-        entity.goals = nil
+        for existingCdGoal in entity.goals! { context.delete(existingCdGoal as! NSManagedObject) }
 
         var cdGoals = [CDGoal]()
 
