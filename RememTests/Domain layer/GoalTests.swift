@@ -9,15 +9,19 @@
 import XCTest
 
 class GoalTests: XCTestCase {
+    var sut: Event!
+
     override func setUp() {
         super.setUp()
+        sut = makeEventWithGoal()
     }
 
     override func tearDown() {
         super.tearDown()
+        sut = nil
     }
 
-    func test_createOneGoal_eachDay() {
+    func test_addGoal_eachDay() {
         for date in Date.now.dayByDayWeekForward {
             let sut = Event(name: "EventName")
 
@@ -27,25 +31,19 @@ class GoalTests: XCTestCase {
         }
     }
 
-    func test_addGoal_added() {
-        let sut = makeEventWithGoal()
+    func test_addGoal_addedOverExistingGoal() {
+        let secondGoal = sut.addGoal(at: .now, amount: 2)
 
-        let goalUpdate = sut.addGoal(at: .now, amount: 2)
-
-        XCTAssertEqual(sut.goal(at: .now.addingTimeInterval(1.0)), goalUpdate)
+        XCTAssertEqual(sut.goal(at: .now.addingTimeInterval(1.0)), secondGoal)
     }
 
     func test_addGoal_affectsNextWeek() {
-        let sut = makeEventWithGoal()
-
         sut.addGoal(at: .now, amount: 2)
 
         XCTAssertEqual(sut.goal(at: Date.now.days(ago: -7))?.amount, 2)
     }
 
     func test_addGoal_pastWeekPreserved() {
-        let sut = makeEventWithGoal()
-
         sut.addGoal(at: Date.now.days(ago: -7), amount: 2)
 
         XCTAssertEqual(sut.goal(at: .now)?.amount, 1)
@@ -86,16 +84,12 @@ class GoalTests: XCTestCase {
     }
 
     func test_disableGoal_disabled() {
-        let sut = makeEventWithGoal()
-
         sut.disableGoal(at: .now)
 
         XCTAssertNotNil(sut.goal(at: .now)?.dateDisabled)
     }
 
     func test_disableGoal_twoGoalsDisabled() {
-        let sut = makeEventWithGoal()
-
         sut.addGoal(at: .now, amount: 1)
 
         sut.disableGoal(at: .now)
