@@ -7,15 +7,7 @@
 
 import Foundation
 
-class Event: Equatable {
-    static func == (lhs: Event, rhs: Event) -> Bool {
-        return lhs.id == rhs.id &&
-            lhs.name == rhs.name &&
-            lhs.dateCreated == rhs.dateCreated &&
-            lhs.dateVisited == rhs.dateVisited &&
-            lhs.happenings == rhs.happenings
-    }
-
+class Event {
     let id: String
     var name: String
     var happenings: [Happening]
@@ -133,10 +125,7 @@ extension Event {
     func addGoal(at dateCreated: Date, amount: Int) -> Goal {
         let newGoal = Goal(amount: amount,
                            event: self,
-                           dateCreated: dateCreated,
-                           dateDisabled: nil)
-
-        disableGoal(at: dateCreated)
+                           dateCreated: dateCreated)
 
         var mutableGoalsArray = goals[Goal.WeekDay.make(dateCreated)]
 
@@ -146,19 +135,15 @@ extension Event {
 
         return newGoal
     }
-
-    func disableGoal(at date: Date) {
-        var mutableGoalsArray = goals[Goal.WeekDay.make(date)]
-
-        if let goalsArray = mutableGoalsArray, !goalsArray.isEmpty {
-            mutableGoalsArray?[goalsArray.count - 1].dateDisabled = date
-        }
-
-        goals[Goal.WeekDay.make(date)] = mutableGoalsArray
-    }
 }
 
-// MARK: - Private
-extension Event {
-    private func add(goal: Goal, at date: Date) {}
+// MARK: - Equatable
+extension Event: Equatable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.dateCreated == rhs.dateCreated &&
+            lhs.dateVisited == rhs.dateVisited &&
+            lhs.happenings == rhs.happenings
+    }
 }

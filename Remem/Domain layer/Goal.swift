@@ -25,20 +25,19 @@ struct Goal: Equatable {
     let amount: Int
     let event: Event
     let dateCreated: Date
-    var dateDisabled: Date?
 }
 
 // MARK: - Public
 extension Goal {
     func isReached(at date: Date) -> Bool {
-        let filteredHappenings = event.happenings.filter { h in
-            h.dateCreated.isInSameDay(as: date)
-        }
+        guard amount != 0 else { return false } // think about this condition
 
-        let happeningsTotalValue = filteredHappenings.reduce(0) { partialResult, h in
+        let happenings = event.happenings(forDay: date)
+
+        let happeningsTotalValue = happenings.reduce(0) { partialResult, h in
             partialResult + h.value
         }
 
-        return happeningsTotalValue >= amount && dateDisabled == nil
+        return happeningsTotalValue >= amount
     }
 }

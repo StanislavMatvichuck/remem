@@ -82,20 +82,6 @@ class GoalTests: XCTestCase {
             XCTAssertEqual(sut.goal(at: .now)?.isReached(at: .now), goalReached)
         }
     }
-
-    func test_disableGoal_disabled() {
-        sut.disableGoal(at: .now)
-
-        XCTAssertNotNil(sut.goal(at: .now)?.dateDisabled)
-    }
-
-    func test_disableGoal_twoGoalsDisabled() {
-        sut.addGoal(at: .now, amount: 1)
-
-        sut.disableGoal(at: .now)
-
-        XCTAssertNotNil(sut.goal(at: .now)?.dateDisabled)
-    }
 }
 
 // MARK: - Private

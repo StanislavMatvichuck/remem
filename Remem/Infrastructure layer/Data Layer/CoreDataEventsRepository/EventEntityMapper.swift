@@ -78,10 +78,8 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
             for goal in model.goals(at: weekday) {
                 let newCdGoal = CDGoal(entity: CDGoal.entity(), insertInto: context)
                 newCdGoal.dateCreated = goal.dateCreated
-                newCdGoal.dateDisabled = goal.dateDisabled
                 newCdGoal.value = Int32(goal.amount)
                 newCdGoal.event = entity
-
                 cdGoals.append(newCdGoal)
             }
         }
