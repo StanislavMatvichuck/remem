@@ -9,20 +9,21 @@
 import XCTest
 
 class EventTests: XCTestCase {
+    var sut: Event!
+
     override func setUp() {
         super.setUp()
+        sut = Event(name: "Event")
     }
 
     override func tearDown() {
         super.tearDown()
+        sut = nil
     }
 
     func testInit() {
-        let name = "EventName"
-        let sut = Event(name: name)
-
         XCTAssertEqual(sut.id.count, 36)
-        XCTAssertEqual(sut.name, name)
+        XCTAssertEqual(sut.name, "Event")
         XCTAssertEqual(sut.happenings.count, 0)
         XCTAssertNil(sut.dateVisited)
 
@@ -32,9 +33,8 @@ class EventTests: XCTestCase {
     }
 
     func testInit_dateCreatedIsStartOfDay() {
-        let sut = Event(name: "EventName")
-        let todayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
+        let todayComponents = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
+        let components = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
 
         XCTAssertEqual(components.hour, 0)
         XCTAssertEqual(components.minute, 0)
@@ -46,7 +46,6 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_addedOne() throws {
-        let sut = Event(name: "EventName")
         let happeningDate = Date.now
 
         try sut.addHappening(date: happeningDate)
@@ -55,7 +54,6 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_addedTwo() throws {
-        let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
 
@@ -65,7 +63,6 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_incorrectDate() {
-        let sut = Event(name: "EventName")
         let date = Date.distantPast
 
         do {
@@ -78,7 +75,6 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_sorted() throws {
-        let sut = Event(name: "EventName")
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
         let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
@@ -94,8 +90,12 @@ class EventTests: XCTestCase {
     }
 
     func test_visit() {
-        let sut = Event(name: "EventName")
         sut.visit()
         XCTAssertNotNil(sut.dateVisited)
     }
+}
+
+// MARK: - Private
+extension EventTests {
+    var cal: Calendar { Calendar.current }
 }
