@@ -67,20 +67,8 @@ extension WeekViewModel: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
 
         let weekDay = happeningsList.days[indexPath.row]
-
-        cell.day.text = String(weekDay.dayNumber)
-        cell.day.textColor = weekDay.isToday ? UIHelper.brand : UIHelper.itemFont
-
-        if let goal = weekDay.goal, goal.dateDisabled == nil {
-            cell.showGoal(amount: weekDay.goal?.amount)
-        }
-
-        cell.amount.text = String(weekDay.happenings.count)
-        cell.showHappenings(happenings: weekDay.happenings)
-
-        if let goal = weekDay.goal, goal.isReached(at: weekDay.date) {
-            cell.showGoalAchieved()
-        }
+        let weekCellViewModel = WeekCellViewModel(model: weekDay)
+        weekCellViewModel.configure(cell)
 
         return cell
     }
