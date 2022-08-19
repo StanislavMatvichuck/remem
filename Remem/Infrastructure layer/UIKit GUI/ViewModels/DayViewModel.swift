@@ -29,10 +29,7 @@ class DayViewModel: NSObject {
         self.model = model
         self.day = day
 
-        shownHappenings = model.happenings.filter { happening in
-            guard let dayDate = Calendar.current.date(from: day) else { return false }
-            return happening.dateCreated.isInSameDay(as: dayDate)
-        }
+        shownHappenings = model.happenings(forDay: Calendar.current.date(from: day)!).reversed()
     }
 }
 
