@@ -61,16 +61,13 @@ class Event {
 }
 
 enum EventManipulationError: Error {
-    case incorrectHappeningDate
     case invalidHappeningDeletion
 }
 
 // MARK: - Public
 extension Event {
     @discardableResult
-    func addHappening(date: Date) throws -> Happening {
-        if date < dateCreated { throw EventManipulationError.incorrectHappeningDate }
-
+    func addHappening(date: Date) -> Happening {
         let insertIndex = happenings.firstIndex { happening in
             happening.dateCreated < date
         } ?? 0

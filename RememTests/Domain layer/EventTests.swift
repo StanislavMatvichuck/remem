@@ -62,18 +62,6 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
-    func test_addHappening_incorrectDate() {
-        let date = Date.distantPast
-
-        do {
-            try sut.addHappening(date: date)
-        } catch {
-            XCTAssertEqual(error as! EventManipulationError, EventManipulationError.incorrectHappeningDate)
-        }
-
-        XCTAssertEqual(sut.happenings.count, 0)
-    }
-
     func test_addHappening_sorted() throws {
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
