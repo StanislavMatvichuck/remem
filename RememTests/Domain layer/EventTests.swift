@@ -48,7 +48,7 @@ class EventTests: XCTestCase {
     func test_addHappening_addedOne() throws {
         let happeningDate = Date.now
 
-        try sut.addHappening(date: happeningDate)
+        sut.addHappening(date: happeningDate)
 
         XCTAssertEqual(sut.happenings.count, 1)
     }
@@ -57,8 +57,8 @@ class EventTests: XCTestCase {
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
 
-        try sut.addHappening(date: firstHappeningDate)
-        try sut.addHappening(date: secondHappeningDate)
+        sut.addHappening(date: firstHappeningDate)
+        sut.addHappening(date: secondHappeningDate)
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
@@ -67,9 +67,9 @@ class EventTests: XCTestCase {
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
         let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
 
-        try sut.addHappening(date: thirdHappeningDate)
-        try sut.addHappening(date: secondHappeningDate)
-        try sut.addHappening(date: firstHappeningDate)
+        sut.addHappening(date: thirdHappeningDate)
+        sut.addHappening(date: secondHappeningDate)
+        sut.addHappening(date: firstHappeningDate)
 
         XCTAssertEqual(sut.happenings.count, 3)
         XCTAssertEqual(sut.happenings[0], Happening(dateCreated: firstHappeningDate))
