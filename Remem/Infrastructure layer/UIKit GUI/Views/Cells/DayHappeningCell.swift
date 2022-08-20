@@ -15,7 +15,7 @@ class DayHappeningCell: UITableViewCell {
         let label = UILabel(al: true)
 
         label.numberOfLines = 1
-        label.font = UIHelper.font
+        label.font = UIHelper.fontBold
         label.textColor = UIHelper.itemFont
 
         return label

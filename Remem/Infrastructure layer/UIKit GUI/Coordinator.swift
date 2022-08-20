@@ -62,6 +62,7 @@ extension Coordinator {
             sheet.detents = [.medium(), .large()]
         }
 
+        configureAppearance(for: nav)
         navController.present(nav, animated: true, completion: nil)
     }
 
@@ -80,12 +81,37 @@ extension Coordinator {
                                     height: sourceView.bounds.height - UIHelper.font.pointSize)
         }
 
+        configureAppearance(for: vc)
         navController.present(vc, animated: true)
     }
 }
 
 // MARK: - Private
 extension Coordinator {
+    private func configureAppearance(for navigationController: UINavigationController) {
+        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
+        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
+
+        let doneAppearance = UIBarButtonItemAppearance(style: .done)
+        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
+                                               NSAttributedString.Key.font: UIHelper.fontBold]
+
+        appearance.backButtonAppearance = cancelAppearance
+        appearance.doneButtonAppearance = doneAppearance
+        appearance.buttonAppearance = cancelAppearance
+
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.compactAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.compactScrollEdgeAppearance = appearance
+    }
+
     private func makeStartController() -> UIViewController {
         let controller = EventsListController(eventsListUseCase: eventsListUseCase,
                                               eventEditUseCase: eventEditUseCase)
@@ -99,16 +125,7 @@ extension Coordinator {
 
     private func configureNavigationControllerStyle() {
         navController.navigationBar.prefersLargeTitles = true
-
-        navController.navigationBar.largeTitleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
-            NSAttributedString.Key.font: UIHelper.fontBold,
-        ]
-
-        navController.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
-            NSAttributedString.Key.font: UIHelper.fontSmallBold,
-        ]
+        configureAppearance(for: navController)
     }
 
     private func presentSettings() {

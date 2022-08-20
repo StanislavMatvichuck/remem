@@ -15,6 +15,7 @@ class DayView: UIView {
         table.register(DayHappeningCell.self, forCellReuseIdentifier: DayHappeningCell.reuseIdentifier)
         table.separatorStyle = .none
         table.tableFooterView = UIView(al: true)
+        table.allowsSelection = false
 
         return table
     }()

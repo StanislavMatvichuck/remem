@@ -22,7 +22,6 @@ class GoalsInputController: UIViewController {
         self.event = event
         self.editUseCase = editUseCase
         super.init(nibName: nil, bundle: nil)
-        title = "Daily goal"
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -31,19 +30,12 @@ class GoalsInputController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         viewModel = GoalsInputViewModel(model: event)
-        setupEventHandlers()
+        configureEventHandlers()
+        configureNavBar()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        setupAppearance()
-        super.viewWillAppear(animated)
-    }
-}
-
-// MARK: - Events handling
-extension GoalsInputController {
-    private func setupEventHandlers() {
-        viewRoot.picker.delegate = self
+    private func configureNavBar() {
+        title = "Daily goal"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
                                                            target: self,
@@ -53,6 +45,13 @@ extension GoalsInputController {
                                                             target: self,
                                                             action: #selector(onPressSaveGoal))
     }
+}
+
+// MARK: - Events handling
+extension GoalsInputController {
+    private func configureEventHandlers() {
+        viewRoot.picker.delegate = self
+    }
 
     @objc private func onPressSaveGoal(sender: UIBarButtonItem) {
         print("saved")
@@ -61,29 +60,6 @@ extension GoalsInputController {
 
     @objc private func onPressCancelGoal(sender: UIBarButtonItem) {
         dismiss(animated: true)
-    }
-}
-
-// MARK: - Private
-extension GoalsInputController {
-    private func setupAppearance() {
-        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
-        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
-
-        let doneAppearance = UIBarButtonItemAppearance(style: .done)
-        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
-
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
-                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
-        appearance.backButtonAppearance = cancelAppearance
-        appearance.doneButtonAppearance = doneAppearance
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
     }
 }
 
