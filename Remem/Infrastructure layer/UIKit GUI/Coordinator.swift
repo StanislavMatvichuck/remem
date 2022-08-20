@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Coordinator {
+class Coordinator: NSObject {
     private let navController: UINavigationController
 
     // Domain events distribution
@@ -30,6 +30,8 @@ class Coordinator {
         self.eventsListUseCase = eventsListUseCase
         self.eventEditUseCase = eventEditUseCase
 
+        super.init()
+
         eventEditUseCase.delegate = self
         eventsListUseCase.delegate = self
     }
@@ -46,6 +48,7 @@ extension Coordinator {
 
     func showDetails(for event: Event) {
         let details = makeDetailsController(for: event)
+        details.coordinator = self
         navController.pushViewController(details, animated: true)
     }
 
@@ -60,6 +63,24 @@ extension Coordinator {
         }
 
         navController.present(nav, animated: true, completion: nil)
+    }
+
+    func showGoalsInputController(event: Event, sourceView: UIView) {
+        let goalsInputController = GoalsInputController(event, editUseCase: eventEditUseCase)
+        let nav = UINavigationController(rootViewController: goalsInputController)
+        let vc = nav
+        vc.preferredContentSize = CGSize(width: .wScreen, height: 250)
+        vc.modalPresentationStyle = .popover
+        if let pc = vc.presentationController { pc.delegate = self }
+        if let pop = vc.popoverPresentationController {
+            pop.sourceView = sourceView
+            pop.sourceRect = CGRect(x: sourceView.bounds.minX,
+                                    y: sourceView.bounds.minY,
+                                    width: sourceView.bounds.width,
+                                    height: sourceView.bounds.height - UIHelper.font.pointSize)
+        }
+
+        navController.present(vc, animated: true)
     }
 }
 
@@ -110,13 +131,10 @@ extension Coordinator {
         let clockController = ClockController()
         clockController.event = event
 
-        let goalsInputController = GoalsInputController(event, editUseCase: eventEditUseCase)
-
         let details = EventDetailsController(event: event,
                                              editUseCase: eventEditUseCase,
                                              clockController: clockController,
-                                             weekController: weekController,
-                                             goalsInputController: goalsInputController)
+                                             weekController: weekController)
 
         eventEditMulticastDelegate.addDelegate(weekController)
 
@@ -147,4 +165,11 @@ extension Coordinator: EventEditUseCaseOutput {
             delegate.updated(event: event)
         }
     }
+}
+
+// MARK: - Popover styling
+extension Coordinator: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController,
+                                   traitCollection: UITraitCollection) -> UIModalPresentationStyle
+    { return .none }
 }

@@ -26,4 +26,15 @@ extension UIView {
 
         translatesAutoresizingMaskIntoConstraints = !al
     }
+
+    func animate() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 1.0
+        animation.toValue = 0.9
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.duration = 0.07
+        animation.autoreverses = true
+        animation.repeatCount = 1
+        layer.add(animation, forKey: nil)
+    }
 }

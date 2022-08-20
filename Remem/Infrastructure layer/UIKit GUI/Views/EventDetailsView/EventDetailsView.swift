@@ -26,7 +26,41 @@ class EventDetailsView: UIView {
     // MARK: - Properties
     let week = UIView(al: true)
     let clock = UIView(al: true)
-    let goalsInput = UIView(al: true)
+    let goalsInput: UIView = {
+        let image = UIImage(systemName: "plus.circle")?
+            .withTintColor(UIHelper.brand)
+            .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
+        let imageView = UIImageView(al: true)
+        imageView.image = image
+
+        let label = UILabel(al: true)
+        label.text = "Add daily goal"
+        label.font = UIHelper.fontSmallBold
+        label.textColor = UIHelper.brand
+
+        let buttonStack = UIStackView(al: true)
+        buttonStack.axis = .horizontal
+        buttonStack.alignment = .center
+
+        buttonStack.backgroundColor = UIHelper.background
+        buttonStack.layer.cornerRadius = 10
+
+        buttonStack.addArrangedSubview(imageView)
+        buttonStack.addArrangedSubview(label)
+
+        buttonStack.spacing = UIHelper.spacing
+        buttonStack.isLayoutMarginsRelativeArrangement = true
+        buttonStack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: UIHelper.spacing,
+                                                                       leading: UIHelper.spacing,
+                                                                       bottom: UIHelper.spacing,
+                                                                       trailing: UIHelper.spacing)
+
+        let view = UIView(al: true)
+        view.addAndConstrain(buttonStack, constant: UIHelper.spacing)
+
+        return view
+    }()
 
     lazy var statsView: UIView = {
         let view = UIStackView(al: true)
