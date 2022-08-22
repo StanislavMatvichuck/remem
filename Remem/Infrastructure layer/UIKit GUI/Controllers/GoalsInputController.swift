@@ -32,6 +32,7 @@ class GoalsInputController: UIViewController {
         viewModel = GoalsInputViewModel(model: event)
         configureEventHandlers()
         configureNavBar()
+        configurePickerDefaultValue()
     }
 
     private func configureNavBar() {
@@ -95,6 +96,14 @@ extension GoalsInputController: UIPickerViewDelegate {
         case .friday: return 4
         case .saturday: return 5
         case .sunday: return 6
+        }
+    }
+
+    private func configurePickerDefaultValue() {
+        for weekday in Goal.WeekDay.allCases {
+            let pickerComponent = componentForWeekDay(weekDay: weekday)
+            guard let goalAmount = event.goals(at: weekday).last?.amount else { return }
+            viewRoot.picker.selectRow(goalAmount, inComponent: pickerComponent, animated: false)
         }
     }
 }
