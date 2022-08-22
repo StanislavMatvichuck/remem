@@ -7,15 +7,13 @@
 
 import Foundation
 
+enum EventManipulationError: Error {
+    case invalidHappeningDeletion
+}
+
 class Event {
-    let id: String
-    var name: String
-    var happenings: [Happening]
-
-    let dateCreated: Date
-    var dateVisited: Date?
-
-    private var goals: [Goal.WeekDay: [Goal]] = [
+    typealias Goals = [Goal.WeekDay: [Goal]]
+    static let defaultGoals: Goals = [
         Goal.WeekDay.monday: [],
         Goal.WeekDay.tuesday: [],
         Goal.WeekDay.wednesday: [],
@@ -24,6 +22,15 @@ class Event {
         Goal.WeekDay.saturday: [],
         Goal.WeekDay.sunday: [],
     ]
+
+    let id: String
+    var name: String
+    var happenings: [Happening]
+
+    let dateCreated: Date
+    var dateVisited: Date?
+
+    private var goals: Goals = Event.defaultGoals
 
     // MARK: - Init
     convenience init(name: String) {
@@ -50,18 +57,16 @@ class Event {
          name: String,
          happenings: [Happening],
          dateCreated: Date,
-         dateVisited: Date?)
+         dateVisited: Date?,
+         goals: Goals = defaultGoals)
     {
         self.id = id
         self.name = name
         self.happenings = happenings
         self.dateCreated = dateCreated
         self.dateVisited = dateVisited
+        self.goals = goals
     }
-}
-
-enum EventManipulationError: Error {
-    case invalidHappeningDeletion
 }
 
 // MARK: - Public
