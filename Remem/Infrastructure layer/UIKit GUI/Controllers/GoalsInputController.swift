@@ -107,3 +107,9 @@ extension GoalsInputController: UIPickerViewDelegate {
         }
     }
 }
+
+extension GoalsInputController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController,
+                                   traitCollection: UITraitCollection) -> UIModalPresentationStyle
+    { return .none }
+}

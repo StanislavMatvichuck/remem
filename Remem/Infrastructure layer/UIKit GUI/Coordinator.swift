@@ -29,7 +29,6 @@ class Coordinator: NSObject {
         self.eventsListMulticastDelegate = eventsListMulticastDelegate
         self.eventEditMulticastDelegate = eventEditMulticastDelegate
         super.init()
-        configureNavigationControllerStyle()
     }
 }
 
@@ -42,48 +41,21 @@ extension Coordinator {
 
     func showDayController(for day: DateComponents, event: Event) {
         let dayController = controllersFactory.makeDay(at: day, for: event)
-        guard let nav = dayController.navigationController else { return }
-        configureAppearance(for: nav)
-        navController.present(nav, animated: true, completion: nil)
+        presentModally(dayController)
     }
 
     func showGoalsInputController(event: Event, sourceView: UIView) {
         let goalsController = controllersFactory.makeGoalsInput(for: event, sourceView: sourceView)
-        guard let nav = goalsController.navigationController else { return }
-        configureAppearance(for: nav)
-        navController.present(nav, animated: true)
+        presentModally(goalsController)
     }
 }
 
 // MARK: - Private
 extension Coordinator {
-    private func configureAppearance(for navigationController: UINavigationController) {
-        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
-        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
-
-        let doneAppearance = UIBarButtonItemAppearance(style: .done)
-        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
-
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
-                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
-                                               NSAttributedString.Key.font: UIHelper.fontBold]
-
-        appearance.backButtonAppearance = cancelAppearance
-        appearance.doneButtonAppearance = doneAppearance
-        appearance.buttonAppearance = cancelAppearance
-
-        navigationController.navigationBar.standardAppearance = appearance
-        navigationController.navigationBar.compactAppearance = appearance
-        navigationController.navigationBar.scrollEdgeAppearance = appearance
-        navigationController.navigationBar.compactScrollEdgeAppearance = appearance
-    }
-
-    private func configureNavigationControllerStyle() {
-        navController.navigationBar.prefersLargeTitles = true
-        configureAppearance(for: navController)
+    private func presentModally(_ controller: UIViewController) {
+        if let nav = controller.navigationController {
+            navController.present(nav, animated: true)
+        }
     }
 }
 
@@ -102,11 +74,4 @@ extension Coordinator: EventEditUseCaseOutput {
             delegate.updated(event: event)
         }
     }
-}
-
-// MARK: - Popover styling
-extension Coordinator: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController,
-                                   traitCollection: UITraitCollection) -> UIModalPresentationStyle
-    { return .none }
 }
