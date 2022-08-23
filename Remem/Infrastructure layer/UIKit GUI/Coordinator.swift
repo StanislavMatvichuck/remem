@@ -7,64 +7,48 @@
 
 import UIKit
 
-class Coordinator: NSObject {
-    typealias EventsListFactory = () -> UIViewController
-    typealias EventDetailsFactory = (_ event: Event) -> EventDetailsController
-    typealias DayFactory = (_ day: DateComponents, _ event: Event) -> DayController
-    typealias GoalsFactory = (_ event: Event, _ sourceView: UIView) -> GoalsInputController
-    typealias EventsListDelegate = MulticastDelegate<EventsListUseCaseOutput>
-    typealias EventEditDelegate = MulticastDelegate<EventEditUseCaseOutput>
+protocol CoordinatorFactories {
+    func makeEventDetails(for event: Event) -> EventDetailsController
+    func makeDay(at day: DateComponents, for event: Event) -> DayController
+    func makeGoalsInput(for event: Event, sourceView: UIView) -> GoalsInputController
+}
 
+class Coordinator: NSObject {
     let navController: UINavigationController
-    let makeEventsListController: EventsListFactory
-    let makeDetailsController: EventDetailsFactory
-    let makeDayController: DayFactory
-    let makeGoalsInputController: GoalsFactory
-    let eventsListMulticastDelegate: EventsListDelegate
-    let eventEditMulticastDelegate: EventEditDelegate
+    let controllersFactory: CoordinatorFactories
+    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
+    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
 
     init(navController: UINavigationController,
-         eventsListFactory: @escaping EventsListFactory,
-         eventDetailsFactory: @escaping EventDetailsFactory,
-         dayFactory: @escaping DayFactory,
-         goalsFactory: @escaping GoalsFactory,
-         eventsListMulticastDelegate: EventsListDelegate,
-         eventEditMulticastDelegate: EventEditDelegate)
+         controllersFactory: CoordinatorFactories,
+         eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
+         eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>)
     {
         self.navController = navController
-        self.makeEventsListController = eventsListFactory
-        self.makeDetailsController = eventDetailsFactory
-        self.makeDayController = dayFactory
-        self.makeGoalsInputController = goalsFactory
-
+        self.controllersFactory = controllersFactory
         self.eventsListMulticastDelegate = eventsListMulticastDelegate
         self.eventEditMulticastDelegate = eventEditMulticastDelegate
         super.init()
+        configureNavigationControllerStyle()
     }
 }
 
 // MARK: - Public
 extension Coordinator {
-    func start() { // is it needed at all?
-        configureNavigationControllerStyle()
-        let controller = makeEventsListController()
-        navController.pushViewController(controller, animated: false)
-    }
-
     func showDetails(for event: Event) {
-        let details = makeDetailsController(event)
+        let details = controllersFactory.makeEventDetails(for: event)
         navController.pushViewController(details, animated: true)
     }
 
     func showDayController(for day: DateComponents, event: Event) {
-        let dayController = makeDayController(day, event)
+        let dayController = controllersFactory.makeDay(at: day, for: event)
         guard let nav = dayController.navigationController else { return }
         configureAppearance(for: nav)
         navController.present(nav, animated: true, completion: nil)
     }
 
     func showGoalsInputController(event: Event, sourceView: UIView) {
-        let goalsController = makeGoalsInputController(event, sourceView)
+        let goalsController = controllersFactory.makeGoalsInput(for: event, sourceView: sourceView)
         guard let nav = goalsController.navigationController else { return }
         configureAppearance(for: nav)
         navController.present(nav, animated: true)

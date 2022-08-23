@@ -17,60 +17,36 @@ class ApplicationContainer {
 
     // MARK: - Init
     init() {
-        let container = CoreDataStack.createContainer(inMemory: false)
-        let mapper = EventEntityMapper()
-        let eventsRepository = CoreDataEventsRepository(container: container, mapper: mapper)
+        func makeEventsRepository() -> EventsRepositoryInterface {
+            let container = CoreDataStack.createContainer(inMemory: false)
+            let mapper = EventEntityMapper()
+            return CoreDataEventsRepository(container: container, mapper: mapper)
+        }
 
-        self.eventsListUseCase = EventsListUseCase(repository: eventsRepository)
-        self.eventEditUseCase = EventEditUseCase(repository: eventsRepository)
+        let repository = makeEventsRepository()
+        self.eventsListUseCase = EventsListUseCase(repository: repository)
+        self.eventEditUseCase = EventEditUseCase(repository: repository)
     }
 }
 
-// MARK: - Controllers factories
+// MARK: - Public
 extension ApplicationContainer {
     func makeCoordinator() -> Coordinator {
-        let nav = UINavigationController()
-
-        let makeEventsListController = {
-            self.makeEventsListController()
-        }
-
-        let makeDetailsController = { event in
-            self.makeDetailsController(event: event)
-        }
-
-        let makeDayController = { day, event in
-            self.makeDayController(day: day, event: event)
-        }
-
-        let makeGoalsInputController = { event, view in
-            self.makeGoalsInputController(event: event, sourceView: view)
-        }
-
+        let rootController = makeEventsList()
+        let nav = UINavigationController(rootViewController: rootController)
         let coordinator = Coordinator(navController: nav,
-                                      eventsListFactory: makeEventsListController,
-                                      eventDetailsFactory: makeDetailsController,
-                                      dayFactory: makeDayController,
-                                      goalsFactory: makeGoalsInputController,
+                                      controllersFactory: self,
                                       eventsListMulticastDelegate: eventsListMulticastDelegate,
                                       eventEditMulticastDelegate: eventEditMulticastDelegate)
+        rootController.coordinator = coordinator
         self.coordinator = coordinator
-        coordinator.start()
         return coordinator
     }
+}
 
-    private func makeEventsListController() -> EventsListController {
-        let controller = EventsListController(eventsListUseCase: eventsListUseCase,
-                                              eventEditUseCase: eventEditUseCase)
-        controller.coordinator = coordinator
-
-        eventsListMulticastDelegate.addDelegate(controller)
-        eventEditMulticastDelegate.addDelegate(controller)
-
-        return controller
-    }
-
-    private func makeDetailsController(event: Event) -> EventDetailsController {
+// MARK: - CoordinatorFactories
+extension ApplicationContainer: CoordinatorFactories {
+    func makeEventDetails(for event: Event) -> EventDetailsController {
         let weekController = WeekController()
         weekController.event = event
         weekController.coordinator = coordinator
@@ -87,7 +63,7 @@ extension ApplicationContainer {
         return details
     }
 
-    private func makeDayController(day: DateComponents, event: Event) -> DayController {
+    func makeDay(at day: DateComponents, for event: Event) -> DayController {
         let controller = DayController(event: event, day: day, editUseCase: eventEditUseCase)
         eventEditMulticastDelegate.addDelegate(controller)
 
@@ -99,7 +75,7 @@ extension ApplicationContainer {
         return controller
     }
 
-    private func makeGoalsInputController(event: Event, sourceView: UIView) -> GoalsInputController {
+    func makeGoalsInput(for event: Event, sourceView: UIView) -> GoalsInputController {
         let goalsInputController = GoalsInputController(event, editUseCase: eventEditUseCase)
         let nav = UINavigationController(rootViewController: goalsInputController)
 
@@ -116,5 +92,18 @@ extension ApplicationContainer {
         }
 
         return goalsInputController
+    }
+}
+
+// MARK: - Private
+extension ApplicationContainer {
+    private func makeEventsList() -> EventsListController {
+        let controller = EventsListController(eventsListUseCase: eventsListUseCase,
+                                              eventEditUseCase: eventEditUseCase)
+
+        eventsListMulticastDelegate.addDelegate(controller)
+        eventEditMulticastDelegate.addDelegate(controller)
+
+        return controller
     }
 }
