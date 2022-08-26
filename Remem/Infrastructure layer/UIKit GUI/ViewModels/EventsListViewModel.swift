@@ -7,156 +7,91 @@
 
 import UIKit
 
-class EventsListViewModel: NSObject {
-    typealias View = EventsListView
-    typealias Model = [Event]
+enum HintState {
+    case empty
+    case placeFirstMark
+    case pressMe
+    case noHints
+}
 
-    enum HintState {
-        case empty
-        case placeFirstMark
-        case pressMe
-        case noHints
-    }
+protocol EventsListViewModelState {
+    var isAddButtonHighlighted: Bool { get }
+    var hint: HintState { get }
+    var eventsAmount: Int { get }
+    func event(at: IndexPath) -> Event?
+}
 
-    enum Section: Int {
-        case hint
-        case events
-        case footer
-    }
+protocol EventsListViewModelEvents: EventsListControllerInput {
+    func selectedForRenaming(event: Event)
+    func cancelEditing()
+}
 
+protocol EventsListViewModelOutput: UIView {
+    func update()
+    func addEvent(at: IndexPath)
+    func remove(event: Event)
+    func rename(event: Event, to: String)
+    func askNewName(byOldName: String)
+}
+
+class EventsListViewModel: EventsListViewModelEvents & EventsListViewModelState {
     // MARK: - Properties
-    private var model: Model
-    private weak var view: View?
+    weak var view: EventsListViewModelOutput?
+    weak var controller: EventsListControllerInput?
 
-    private var isEventsAddingHighlighted: Bool
-    private var hintsState: HintState
-
-    // MARK: - Init
-    init(model: Model) {
-        self.isEventsAddingHighlighted = model.count == 0
-        self.hintsState = Self.getHintState(for: model)
-        self.model = model
-    }
-}
-
-// MARK: - Public
-extension EventsListViewModel {
-    func configure(_ view: View) {
-        self.view = view
-
-        configureHintText()
-        configureEventsAddingButton()
-
-        view.viewTable.dataSource = self
-        view.viewTable.reloadData()
-    }
-
-    func event(at index: IndexPath) -> Event? {
-        guard
-            index.row < model.count,
-            index.row >= 0
-        else { return nil }
-
-        return model[index.row]
-    }
-}
-
-// MARK: - Private
-extension EventsListViewModel {
-    private func configureEventsAddingButton() {
-        if isEventsAddingHighlighted {
-            view?.footer.buttonAdd.backgroundColor = .systemBlue
-        } else {
-            view?.footer.buttonAdd.backgroundColor = .systemGray
-        }
-    }
-
-    private func configureHintText() {
-        switch hintsState {
-        case .empty:
-            view?.hint.label.text = EventsListView.empty
-        case .placeFirstMark:
-            view?.hint.label.text = EventsListView.firstHappening
-        case .pressMe:
-            view?.hint.label.text = EventsListView.firstDetails
-        case .noHints:
-            view?.hint.label.text = nil
-        }
-    }
-
-    private static func getHintState(for model: Model) -> HintState {
-        if model.count == 0 { return .empty }
-        if model.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
-        if model.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
+    // EventsListViewModelState
+    var eventsAmount: Int { events.count }
+    var isAddButtonHighlighted: Bool { events.count == 0 }
+    var hint: HintState {
+        if events.count == 0 { return .empty }
+        if events.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
+        if events.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
         return .noHints
     }
 
-    private func setupSwipeHint(_ indexPath: IndexPath, _ row: EventCell) {
-        guard
-            indexPath.row == 0,
-            indexPath.section == 1,
-            hintsState == .placeFirstMark
-        else {
-            removeSwipeHint(from: row)
-            return
+    var renamedEvent: Event?
+
+    private var events: [Event]
+
+    // MARK: - Init
+    init(events: [Event]) {
+        self.events = events
+        view?.update()
+    }
+
+    func event(at index: IndexPath) -> Event? {
+        guard index.row < events.count, index.row >= 0 else { return nil }
+        return events[index.row]
+    }
+
+    // MARK: - EventsListViewModelEvents
+    func selectedForRenaming(event: Event) {
+        renamedEvent = event
+        view?.askNewName(byOldName: event.name)
+    }
+
+    func cancelEditing() { renamedEvent = nil }
+
+    // EventsListControllerInput
+    func handleSubmit(name: String) {
+        if let renamedEvent = renamedEvent {
+            controller?.rename(event: renamedEvent, to: name)
+            self.renamedEvent = nil
+        } else {
+            controller?.handleSubmit(name: name)
         }
-        let swipeView = SwipeGestureView(mode: .horizontal, edgeInset: .r2 + UIHelper.spacingListHorizontal)
-        row.contentView.addAndConstrain(swipeView)
-        swipeView.start()
     }
 
-    private func removeSwipeHint(from row: EventCell) {
-        for view in row.contentView.subviews where view is SwipeGestureView {
-            view.removeFromSuperview()
-        }
-    }
-
-    private func makeEventCellFor(_ index: IndexPath) -> UITableViewCell {
-        guard
-            let row = view?.viewTable.dequeueReusableCell(withIdentifier:
-                EventCell.reuseIdentifier) as? EventCell
-        else { return UITableViewCell() }
-
-        let dataRow = model[index.row]
-        row.configure(name: dataRow.name, value: dataRow.happenings.count)
-        setupSwipeHint(index, row)
-        return row
-    }
+    func addHappening(to event: Event) { controller?.addHappening(to: event) }
+    func remove(event: Event) { controller?.remove(event: event) }
+    func rename(event: Event, to newName: String) { controller?.rename(event: event, to: newName) }
+    func select(event: Event) { controller?.select(event: event) }
 }
 
-// MARK: - UITableViewDataSource
-extension EventsListViewModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        Section(rawValue: indexPath.section) == .events
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int { 3 }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Section(rawValue: section) == .hint {
-            return 1
-        } else if Section(rawValue: section) == .events {
-            return model.count
-        } else if Section(rawValue: section) == .footer {
-            return 1
-        }
-        return 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let footer = view?.footer,
-            let hint = view?.hint
-        else { return UITableViewCell() }
-
-        if Section(rawValue: indexPath.section) == .hint {
-            return hint
-        } else if Section(rawValue: indexPath.section) == .events {
-            return makeEventCellFor(indexPath)
-        } else if Section(rawValue: indexPath.section) == .footer {
-            return footer
-        }
-
-        return UITableViewCell()
+// MARK: - EventsListControllerOutput
+extension EventsListViewModel: EventsListControllerOutput {
+    func update(events: [Event]) {
+        self.events = events
+        view?.update()
     }
 }

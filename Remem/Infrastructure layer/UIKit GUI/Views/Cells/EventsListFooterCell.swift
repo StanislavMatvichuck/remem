@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EventsListFooterCellDelegate: UIViewController {
+protocol EventsListFooterCellDelegate: AnyObject {
     func add()
 }
 
