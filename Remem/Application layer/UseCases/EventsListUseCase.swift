@@ -14,7 +14,8 @@ protocol EventsListUseCaseInput {
 }
 
 protocol EventsListUseCaseOutput: AnyObject {
-    func eventsListUpdated(_: [Event])
+    func added(event: Event)
+    func removed(event: Event)
 }
 
 class EventsListUseCase {
@@ -35,13 +36,14 @@ extension EventsListUseCase: EventsListUseCaseInput {
 
     func add(name: String) {
         let newEvent = Event(name: name)
-
         repository.save(newEvent)
-        delegate?.eventsListUpdated(repository.all())
+
+        guard let addedEvent = repository.event(byId: newEvent.id) else { return }
+        delegate?.added(event: addedEvent)
     }
 
     func remove(_ event: Event) {
         repository.delete(event)
-        delegate?.eventsListUpdated(repository.all())
+        delegate?.removed(event: event)
     }
 }

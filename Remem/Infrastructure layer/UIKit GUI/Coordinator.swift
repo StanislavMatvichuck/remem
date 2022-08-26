@@ -61,9 +61,15 @@ extension Coordinator {
 
 // MARK: - Domain events distribution
 extension Coordinator: EventsListUseCaseOutput {
-    func eventsListUpdated(_ newList: [Event]) {
+    func added(event: Event) {
         eventsListMulticastDelegate.invokeDelegates { delegate in
-            delegate.eventsListUpdated(newList)
+            delegate.added(event: event)
+        }
+    }
+
+    func removed(event: Event) {
+        eventsListMulticastDelegate.invokeDelegates { delegate in
+            delegate.removed(event: event)
         }
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol EventsListControllerInput: AnyObject {
-    func handleSubmit(name: String)
+    func addEvent(name: String)
     func addHappening(to: Event)
     func select(event: Event)
     func remove(event: Event)
@@ -16,7 +16,9 @@ protocol EventsListControllerInput: AnyObject {
 }
 
 protocol EventsListControllerOutput: AnyObject {
-    func update(events: [Event])
+    func added(event: Event, newList: [Event])
+    func removed(event: Event, newList: [Event])
+    func updated(event: Event, newList: [Event])
 }
 
 class EventsListController: UIViewController {
@@ -52,21 +54,39 @@ class EventsListController: UIViewController {
 }
 
 extension EventsListController: EventsListControllerInput {
-    func handleSubmit(name: String) { listUseCase.add(name: name) }
-    func addHappening(to event: Event) { editUseCase.addHappening(to: event, date: .now) }
-    func select(event: Event) { coordinator?.showDetails(for: event) }
-    func remove(event: Event) { listUseCase.remove(event) }
-    func rename(event: Event, to name: String) { editUseCase.rename(event, to: name) }
+    func addEvent(name: String) {
+        listUseCase.add(name: name)
+    }
+
+    func addHappening(to event: Event) {
+        editUseCase.addHappening(to: event, date: .now)
+    }
+
+    func select(event: Event) {
+        coordinator?.showDetails(for: event)
+    }
+
+    func remove(event: Event) {
+        listUseCase.remove(event)
+    }
+
+    func rename(event: Event, to name: String) {
+        editUseCase.rename(event, to: name)
+    }
 }
 
 extension EventsListController: EventsListUseCaseOutput {
-    func eventsListUpdated(_ list: [Event]) {
-        viewModel.update(events: list)
+    func added(event: Event) {
+        viewModel.added(event: event, newList: listUseCase.allEvents())
+    }
+
+    func removed(event: Event) {
+        viewModel.removed(event: event, newList: listUseCase.allEvents())
     }
 }
 
 extension EventsListController: EventEditUseCaseOutput {
     func updated(event: Event) {
-        viewModel.update(events: listUseCase.allEvents())
+        viewModel.updated(event: event, newList: listUseCase.allEvents())
     }
 }

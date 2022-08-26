@@ -60,6 +60,7 @@ class EventsListView: UIView {
         setupLayout()
         addAndConstrain(input)
         setupEventHandlers()
+        update()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -72,8 +73,8 @@ extension EventsListView: EventCellDelegate, EventsListFooterCellDelegate {
         input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
     }
 
-    @objc private func handleAdd() { viewModel.handleSubmit(name: input.value) }
-    @objc private func handleCancel() { viewModel.cancelEditing() }
+    @objc private func handleAdd() { viewModel.submitNameEditing(name: input.value) }
+    @objc private func handleCancel() { viewModel.cancelNameEditing() }
 
     // EventCellDelegate actions
     func didPressAction(_ cell: EventCell) {
@@ -98,12 +99,12 @@ extension EventsListView: EventCellDelegate, EventsListFooterCellDelegate {
     // Swipe to left actions
     private func handleDeleteContextualAction(_ forIndexPath: IndexPath) {
         guard let event = viewModel.event(at: forIndexPath) else { return }
-        viewModel.remove(event: event)
+        viewModel.selectForRemoving(event: event)
     }
 
     private func handleRenameContextualAction(_ forIndexPath: IndexPath) {
         guard let event = viewModel.event(at: forIndexPath) else { return }
-        viewModel.selectedForRenaming(event: event)
+        viewModel.selectForRenaming(event: event)
     }
 }
 
@@ -123,17 +124,44 @@ extension EventsListView {
 
 extension EventsListView: EventsListViewModelOutput {
     func update() {
-        configure(addButton: viewModel.isAddButtonHighlighted)
-        configure(hintState: viewModel.hint)
-        viewTable.reloadData()
+        configureAddButton()
+        configureHintText()
     }
 
-    func addEvent(at: IndexPath) {}
-    func remove(event: Event) {}
-    func rename(event: Event, to: String) {}
+    func addEvent(at: Int) {
+        let path = IndexPath(row: at, section: Section.events.rawValue)
+        viewTable.insertRows(at: [path], with: .automatic)
+    }
 
-    func askNewName(byOldName: String) {
-        input.rename(oldName: byOldName)
+    func remove(at: Int) {
+        let path = IndexPath(row: at, section: Section.events.rawValue)
+        viewTable.deleteRows(at: [path], with: .automatic)
+    }
+
+    func update(at: Int) {
+        let path = IndexPath(row: at, section: Section.events.rawValue)
+        viewTable.reloadRows(at: [path], with: .automatic)
+    }
+
+    func askNewName(withOldName: String) {
+        input.rename(oldName: withOldName)
+    }
+
+    private func configureAddButton() {
+        footer.buttonAdd.backgroundColor = viewModel.isAddButtonHighlighted ? .systemBlue : .systemGray
+    }
+
+    private func configureHintText() {
+        switch viewModel.hint {
+        case .empty:
+            hint.label.text = EventsListView.empty
+        case .placeFirstMark:
+            hint.label.text = EventsListView.firstHappening
+        case .pressMe:
+            hint.label.text = EventsListView.firstDetails
+        case .noHints:
+            hint.label.text = nil
+        }
     }
 }
 
@@ -237,22 +265,5 @@ extension EventsListView {
         let config = UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
         config.performsFirstActionWithFullSwipe = true
         return config
-    }
-
-    private func configure(addButton: Bool) {
-        footer.buttonAdd.backgroundColor = addButton ? .systemBlue : .systemGray
-    }
-
-    private func configure(hintState: HintState) {
-        switch hintState {
-        case .empty:
-            hint.label.text = EventsListView.empty
-        case .placeFirstMark:
-            hint.label.text = EventsListView.firstHappening
-        case .pressMe:
-            hint.label.text = EventsListView.firstDetails
-        case .noHints:
-            hint.label.text = nil
-        }
     }
 }
