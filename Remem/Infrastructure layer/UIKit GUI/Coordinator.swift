@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CoordinatorFactories {
+protocol CoordinatorFactory {
     func makeEventDetails(for event: Event) -> EventDetailsController
     func makeDay(at day: DateComponents, for event: Event) -> DayController
     func makeGoalsInput(for event: Event, sourceView: UIView) -> GoalsInputController
@@ -15,17 +15,17 @@ protocol CoordinatorFactories {
 
 class Coordinator: NSObject {
     let navController: UINavigationController
-    let controllersFactory: CoordinatorFactories
+    let factory: CoordinatorFactory
     let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
     let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
 
     init(navController: UINavigationController,
-         controllersFactory: CoordinatorFactories,
+         coordinatorFactory: CoordinatorFactory,
          eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
          eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>)
     {
         self.navController = navController
-        self.controllersFactory = controllersFactory
+        self.factory = coordinatorFactory
         self.eventsListMulticastDelegate = eventsListMulticastDelegate
         self.eventEditMulticastDelegate = eventEditMulticastDelegate
         super.init()
@@ -35,17 +35,17 @@ class Coordinator: NSObject {
 // MARK: - Public
 extension Coordinator {
     func showDetails(for event: Event) {
-        let details = controllersFactory.makeEventDetails(for: event)
+        let details = factory.makeEventDetails(for: event)
         navController.pushViewController(details, animated: true)
     }
 
     func showDayController(for day: DateComponents, event: Event) {
-        let dayController = controllersFactory.makeDay(at: day, for: event)
+        let dayController = factory.makeDay(at: day, for: event)
         presentModally(dayController)
     }
 
     func showGoalsInputController(event: Event, sourceView: UIView) {
-        let goalsController = controllersFactory.makeGoalsInput(for: event, sourceView: sourceView)
+        let goalsController = factory.makeGoalsInput(for: event, sourceView: sourceView)
         presentModally(goalsController)
     }
 }

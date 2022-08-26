@@ -30,6 +30,7 @@
 		0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6A3283D57230027EF3E /* HappeningsListView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
+		085543F728B82BA5004E16ED /* CoordinatorContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085543F628B82BA5004E16ED /* CoordinatorContainer.swift */; };
 		085C4E9C289AC27F0094388C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9B289AC27F0094388C /* EventsRepository.swift */; };
 		085C4E9E289AC4F00094388C /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9D289AC4F00094388C /* Happening.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
@@ -119,6 +120,7 @@
 		0852C6A3283D57230027EF3E /* HappeningsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappeningsListView.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		085543F628B82BA5004E16ED /* CoordinatorContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorContainer.swift; sourceTree = "<group>"; };
 		085C4E9B289AC27F0094388C /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		085C4E9D289AC4F00094388C /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				08D512322787136B00C2037F /* UIKitDelegates */,
 				086DC6CE2880570D0048F22F /* ViewModels */,
 				086DC6D12880578E0048F22F /* Views */,
+				085543F628B82BA5004E16ED /* CoordinatorContainer.swift */,
 			);
 			path = "UIKit GUI";
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
 				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
 				08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */,
+				085543F728B82BA5004E16ED /* CoordinatorContainer.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */,
