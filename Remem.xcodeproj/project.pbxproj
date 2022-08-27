@@ -78,6 +78,7 @@
 		08E5B91928998053000B08BC /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
 		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
+		08EAB70E28BA172A0001EE35 /* EventsListViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAB70D28BA172A0001EE35 /* EventsListViewFactory.swift */; };
 		08EBA79A28A3DACA008480B0 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EBA79928A3DACA008480B0 /* Goal.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
@@ -177,6 +178,7 @@
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		08EAB70D28BA172A0001EE35 /* EventsListViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewFactory.swift; sourceTree = "<group>"; };
 		08EBA79928A3DACA008480B0 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				08D512352787144800C2037F /* EventsListView.swift */,
 				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
+				08EAB70D28BA172A0001EE35 /* EventsListViewFactory.swift */,
 			);
 			path = EventsListView;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
+				08EAB70E28BA172A0001EE35 /* EventsListViewFactory.swift in Sources */,
 				0890627C27A0A2700032847C /* HappeningCell.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,

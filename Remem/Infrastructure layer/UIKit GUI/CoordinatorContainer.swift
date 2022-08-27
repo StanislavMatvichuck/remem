@@ -38,7 +38,8 @@ class CoordinatorContainer {
     func makeEventsList() -> EventsListController {
         let events = eventsListUseCase.allEvents()
         let viewModel = EventsListViewModel(events: events)
-        let view = EventsListView(viewModel: viewModel)
+        let viewContainer = EventsListViewFactory(viewModel: viewModel)
+        let view = viewContainer.makeEventsListView()
         let controller = EventsListController(view: view,
                                               viewModel: viewModel,
                                               listUseCase: eventsListUseCase,

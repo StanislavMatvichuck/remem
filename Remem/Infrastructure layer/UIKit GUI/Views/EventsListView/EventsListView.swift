@@ -23,30 +23,29 @@ class EventsListView: UIView {
     }
 
     // MARK: - Properties
-    let input: UIMovableTextViewInterface = UIMovableTextView()
-
-    lazy var viewTable: UITableView = {
-        let view = UITableView(al: true)
-        view.register(EventCell.self, forCellReuseIdentifier: EventCell.reuseIdentifier)
-        view.register(EventsListHintCell.self, forCellReuseIdentifier: EventsListHintCell.reuseIdentifier)
-        view.register(EventsListFooterCell.self, forCellReuseIdentifier: EventsListFooterCell.reuseIdentifier)
-        view.backgroundColor = .clear
-        view.separatorStyle = .none
-        view.dataSource = self
-        view.delegate = self
-        return view
-    }()
-
-    lazy var swipeHint = SwipeGestureView(mode: .horizontal, edgeInset: .r2 + UIHelper.spacingListHorizontal)
-
-    private let viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents
+    let input: UIMovableTextViewInterface
+    let table: UITableView
+    let swipeHint: SwipeGestureView
+    let viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents
+    let container: EventsListViewFactory
 
     // MARK: - Init
-    init(viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents) {
+    init(viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents,
+         container: EventsListViewFactory,
+         input: UIMovableTextViewInterface,
+         table: UITableView,
+         swipeHint: SwipeGestureView)
+    {
+        self.input = input
         self.viewModel = viewModel
+        self.container = container
+        self.table = table
+        self.swipeHint = swipeHint
         super.init(frame: .zero)
+        table.dataSource = self
+        table.delegate = self
         backgroundColor = UIHelper.itemBackground
-        addAndConstrain(viewTable)
+        addAndConstrain(table)
         addAndConstrain(input)
         setupEventHandlers()
         update()
@@ -76,7 +75,7 @@ extension EventsListView: EventCellDelegate {
 
     private func event(for cell: UITableViewCell) -> Event? {
         guard
-            let index = viewTable.indexPath(for: cell),
+            let index = table.indexPath(for: cell),
             let event = viewModel.event(at: index)
         else { return nil }
         return event
@@ -92,7 +91,7 @@ extension EventsListView: EventsListViewModelOutput {
         func updateHintsAndFooter() {
             let hintIndex = IndexPath(row: 0, section: Section.hint.rawValue)
             let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
-            viewTable.reloadRows(at: [hintIndex, footerIndex], with: .none)
+            table.reloadRows(at: [hintIndex, footerIndex], with: .none)
         }
 
         func hideSwipeHintIfNeeded() {
@@ -102,17 +101,17 @@ extension EventsListView: EventsListViewModelOutput {
 
     func addEvent(at: Int) {
         let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewTable.insertRows(at: [path], with: .automatic)
+        table.insertRows(at: [path], with: .automatic)
     }
 
     func remove(at: Int) {
         let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewTable.deleteRows(at: [path], with: .automatic)
+        table.deleteRows(at: [path], with: .automatic)
     }
 
     func update(at: Int) {
         let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewTable.reloadRows(at: [path], with: .none)
+        table.reloadRows(at: [path], with: .none)
     }
 
     func askNewName(withOldName: String) {
@@ -134,11 +133,13 @@ extension EventsListView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if Section(rawValue: indexPath.section) == .hint {
-            return makeHintCell()
+            return container.makeHintCell()
         } else if Section(rawValue: indexPath.section) == .events {
-            return makeEventCellFor(indexPath)
+            let cell = container.makeEventCellFor(indexPath)
+            if let eventCell = cell as? EventCell { eventCell.delegate = self }
+            return cell
         } else if Section(rawValue: indexPath.section) == .footer {
-            return makeFooterCell()
+            return container.makeFooterCell()
         }
 
         return UITableViewCell()
@@ -148,7 +149,7 @@ extension EventsListView: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension EventsListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        makeSwipeActionsConfiguration(for: indexPath)
+        container.makeSwipeActionsConfiguration(for: indexPath)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -159,68 +160,5 @@ extension EventsListView: UITableViewDelegate {
         UIDevice.vibrate(.medium)
         footer.animate()
         input.show(value: "")
-    }
-}
-
-// MARK: - Private
-extension EventsListView {
-    private func makeFooterCell() -> EventsListFooterCell {
-        let cell = viewTable.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
-        cell.buttonAdd.backgroundColor = viewModel.isAddButtonHighlighted ? .systemBlue : .systemGray
-        return cell
-    }
-
-    private func makeHintCell() -> EventsListHintCell {
-        let cell = viewTable.dequeueReusableCell(withIdentifier: EventsListHintCell.reuseIdentifier) as! EventsListHintCell
-        switch viewModel.hint {
-        case .empty:
-            cell.label.text = EventsListView.empty
-        case .placeFirstMark:
-            cell.label.text = EventsListView.firstHappening
-        case .pressMe:
-            cell.label.text = EventsListView.firstDetails
-        case .noHints:
-            cell.label.text = "-"
-        }
-        return cell
-    }
-
-    private func makeEventCellFor(_ index: IndexPath) -> UITableViewCell {
-        guard
-            let row = viewTable.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
-            let dataRow = viewModel.event(at: index)
-        else { return UITableViewCell() }
-        row.configure(name: dataRow.name, value: dataRow.happenings.count)
-        configureSwipeHintIfNeeded(index, row)
-        row.delegate = self
-        return row
-    }
-
-    private func configureSwipeHintIfNeeded(_ indexPath: IndexPath, _ row: EventCell) {
-        guard
-            indexPath.row == 0,
-            indexPath.section == Section.events.rawValue,
-            viewModel.hint == .placeFirstMark
-        else { return }
-        row.contentView.addAndConstrain(swipeHint)
-        swipeHint.start()
-    }
-
-    private func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration {
-        let renameAction = UIContextualAction(style: .normal, title: Self.rename) { _, _, completion in
-            guard let event = self.viewModel.event(at: index) else { return }
-            self.viewModel.selectForRenaming(event: event)
-            completion(true)
-        }
-
-        let deleteAction = UIContextualAction(style: .destructive, title: Self.delete) { _, _, completion in
-            guard let event = self.viewModel.event(at: index) else { return }
-            self.viewModel.selectForRemoving(event: event)
-            completion(true)
-        }
-
-        let config = UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
-        config.performsFirstActionWithFullSwipe = true
-        return config
     }
 }

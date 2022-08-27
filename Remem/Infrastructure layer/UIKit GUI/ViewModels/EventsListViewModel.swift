@@ -12,6 +12,19 @@ enum HintState {
     case placeFirstMark
     case pressMe
     case noHints
+
+    var text: String? {
+        switch self {
+        case .empty:
+            return EventsListView.empty
+        case .placeFirstMark:
+            return EventsListView.firstHappening
+        case .pressMe:
+            return EventsListView.firstDetails
+        case .noHints:
+            return nil
+        }
+    }
 }
 
 class EventsListViewModel {
