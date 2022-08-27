@@ -81,7 +81,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         do {
             let allCdEvents = try moc.fetch(request)
             guard
-                let cdEventToDelete = allCdEvents.filter({ self.entityMapper.entityAccessorKey($0) == event.id })
+                let cdEventToDelete = allCdEvents.filter({ self.entityMapper.entityAccessorKey($0) == self.entityMapper.entityAccessorKey(event) })
                 .first
             else { fatalError("Cant find object to delete") }
 
