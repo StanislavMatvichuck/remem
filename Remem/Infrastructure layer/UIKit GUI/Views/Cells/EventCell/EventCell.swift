@@ -66,6 +66,7 @@ final class EventCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         backgroundColor = .clear
         setupViewRoot()
         setupViewMovable()

@@ -77,6 +77,7 @@
     EventsList swipe gesture actions
  */
 "button.contextual.delete" = "Delete";
+"button.contextual.rename" = "Rename";
 
 /*
     Event details lock screen button
