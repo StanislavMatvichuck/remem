@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol EventsListUseCaseInput {
-    func allEvents() -> [Event]
-    func add(name: String)
-    func remove(_: Event)
-}
-
 protocol EventsListUseCaseOutput: AnyObject {
     func added(event: Event)
     func removed(event: Event)
@@ -28,6 +22,12 @@ class EventsListUseCase {
     init(repository: EventsRepositoryInterface) {
         self.repository = repository
     }
+}
+
+protocol EventsListUseCaseInput {
+    func allEvents() -> [Event]
+    func add(name: String)
+    func remove(_: Event)
 }
 
 // MARK: - Public

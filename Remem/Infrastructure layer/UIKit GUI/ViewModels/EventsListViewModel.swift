@@ -14,36 +14,27 @@ enum HintState {
     case noHints
 }
 
-protocol EventsListViewModelState {
+class EventsListViewModel {
+    // MARK: - Properties
+    weak var view: EventsListViewModelOutput?
+    weak var controller: EventsListControllerInput?
+    var renamedEvent: Event?
+    var events: [Event]
+    // MARK: - Init
+    init(events: [Event]) {
+        self.events = events
+        view?.update()
+    }
+}
+
+protocol EventsListViewModelInputState {
     var isAddButtonHighlighted: Bool { get }
     var hint: HintState { get }
     var eventsAmount: Int { get }
     func event(at: IndexPath) -> Event?
 }
 
-protocol EventsListViewModelEvents {
-    func select(event: Event)
-    func selectForRenaming(event: Event)
-    func selectForRemoving(event: Event)
-    func addHappening(to: Event)
-    func cancelNameEditing()
-    func submitNameEditing(name: String)
-}
-
-protocol EventsListViewModelOutput: UIView {
-    func update()
-    func addEvent(at: Int)
-    func remove(at: Int)
-    func update(at: Int)
-    func askNewName(withOldName: String)
-}
-
-class EventsListViewModel: EventsListViewModelState {
-    // MARK: - Properties
-    weak var view: EventsListViewModelOutput?
-    weak var controller: EventsListControllerInput?
-
-    // EventsListViewModelState
+extension EventsListViewModel: EventsListViewModelInputState {
     var eventsAmount: Int { events.count }
     var isAddButtonHighlighted: Bool { events.count == 0 }
     var hint: HintState {
@@ -53,24 +44,22 @@ class EventsListViewModel: EventsListViewModelState {
         return .noHints
     }
 
-    var renamedEvent: Event?
-
-    private var events: [Event]
-
-    // MARK: - Init
-    init(events: [Event]) {
-        self.events = events
-        view?.update()
-    }
-
     func event(at index: IndexPath) -> Event? {
         guard index.row < events.count, index.row >= 0 else { return nil }
         return events[index.row]
     }
 }
 
-// MARK: - EventsListViewModelEvents
-extension EventsListViewModel: EventsListViewModelEvents {
+protocol EventsListViewModelInputEvents {
+    func select(event: Event)
+    func selectForRenaming(event: Event)
+    func selectForRemoving(event: Event)
+    func addHappening(to: Event)
+    func cancelNameEditing()
+    func submitNameEditing(name: String)
+}
+
+extension EventsListViewModel: EventsListViewModelInputEvents {
     func select(event: Event) {
         controller?.select(event: event)
     }
@@ -98,6 +87,14 @@ extension EventsListViewModel: EventsListViewModelEvents {
             controller?.addEvent(name: name)
         }
     }
+}
+
+protocol EventsListViewModelOutput: UIView {
+    func update()
+    func addEvent(at: Int)
+    func remove(at: Int)
+    func update(at: Int)
+    func askNewName(withOldName: String)
 }
 
 // MARK: - EventsListControllerOutput

@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol EventsListControllerInput: AnyObject {
-    func addEvent(name: String)
-    func addHappening(to: Event)
-    func select(event: Event)
-    func remove(event: Event)
-    func rename(event: Event, to: String)
-}
-
 protocol EventsListControllerOutput: AnyObject {
     func added(event: Event, newList: [Event])
     func removed(event: Event, newList: [Event])
@@ -51,6 +43,14 @@ class EventsListController: UIViewController {
     override func viewDidLoad() {
         title = "Events list"
     }
+}
+
+protocol EventsListControllerInput: AnyObject {
+    func addEvent(name: String)
+    func addHappening(to: Event)
+    func select(event: Event)
+    func remove(event: Event)
+    func rename(event: Event, to: String)
 }
 
 extension EventsListController: EventsListControllerInput {
