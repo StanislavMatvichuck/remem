@@ -27,12 +27,17 @@ enum HintState {
     }
 }
 
-class EventsListViewModel {
+protocol EventsListViewModelInput:
+    EventsListViewModelInputState &
+    EventsListViewModelInputEvents {}
+
+class EventsListViewModel: EventsListViewModelInput {
     // MARK: - Properties
     weak var view: EventsListViewModelOutput?
     weak var controller: EventsListControllerInput?
-    var renamedEvent: Event?
-    var events: [Event]
+
+    private var renamedEvent: Event?
+    private var events: [Event]
     // MARK: - Init
     init(events: [Event]) {
         self.events = events
@@ -63,7 +68,7 @@ extension EventsListViewModel: EventsListViewModelInputState {
     }
 }
 
-protocol EventsListViewModelInputEvents {
+protocol EventsListViewModelInputEvents: AnyObject {
     func select(event: Event)
     func selectForRenaming(event: Event)
     func selectForRemoving(event: Event)

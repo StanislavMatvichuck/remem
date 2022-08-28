@@ -55,7 +55,7 @@ class EventsListView: UIView {
 }
 
 // MARK: - Sending user actions to view model
-extension EventsListView: EventCellDelegate {
+extension EventsListView {
     private func setupEventHandlers() {
         input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
         input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
@@ -63,23 +63,6 @@ extension EventsListView: EventCellDelegate {
 
     @objc private func handleAdd() { viewModel.submitNameEditing(name: input.value) }
     @objc private func handleCancel() { viewModel.cancelNameEditing() }
-
-    // EventCellDelegate actions
-    func didPressAction(_ cell: EventCell) {
-        if let event = event(for: cell) { viewModel.select(event: event) }
-    }
-
-    func didSwipeAction(_ cell: EventCell) {
-        if let event = event(for: cell) { viewModel.addHappening(to: event) }
-    }
-
-    private func event(for cell: UITableViewCell) -> Event? {
-        guard
-            let index = table.indexPath(for: cell),
-            let event = viewModel.event(at: index)
-        else { return nil }
-        return event
-    }
 }
 
 // MARK: - EventsListViewModelOutput
@@ -135,9 +118,7 @@ extension EventsListView: UITableViewDataSource {
         if Section(rawValue: indexPath.section) == .hint {
             return container.makeHintCell()
         } else if Section(rawValue: indexPath.section) == .events {
-            let cell = container.makeEventCellFor(indexPath)
-            if let eventCell = cell as? EventCell { eventCell.delegate = self }
-            return cell
+            return container.makeEventCellFor(indexPath)
         } else if Section(rawValue: indexPath.section) == .footer {
             return container.makeFooterCell()
         }

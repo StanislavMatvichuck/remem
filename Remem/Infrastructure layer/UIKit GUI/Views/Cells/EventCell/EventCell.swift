@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol EventCellDelegate: AnyObject {
-    func didSwipeAction(_ cell: EventCell)
-    func didPressAction(_ cell: EventCell)
-}
-
 final class EventCell: UITableViewCell {
     static let reuseIdentifier = "EventCell"
     static let backgroundColor = UIHelper.background
@@ -19,7 +14,14 @@ final class EventCell: UITableViewCell {
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    weak var delegate: EventCellDelegate?
+    var viewModel: EventCellViewModelInput! {
+        didSet {
+            guard viewModel != nil else { return }
+            nameLabel.text = viewModel.name
+            valueLabel.text = viewModel.amount
+        }
+    }
+
     var animator = EventCellAnimator()
 
     var movableCenterXSuccessPosition: CGFloat { viewRoot.bounds.width - .r2 }
@@ -118,15 +120,7 @@ final class EventCell: UITableViewCell {
         super.prepareForReuse()
         movableCenterXPosition = movableCenterXInitialPosition
         animator.animateIfNeeded(cell: self)
-        delegate = nil
-    }
-}
-
-// MARK: - Public
-extension EventCell {
-    func configure(name: String, value: Int) {
-        nameLabel.text = name
-        valueLabel.text = "\(value)"
+        viewModel = nil
     }
 }
 
@@ -140,7 +134,7 @@ extension EventCell {
     }
 
     @objc private func handlePress(_ gestureRecognizer: UITapGestureRecognizer) {
-        delegate?.didPressAction(self)
+        viewModel.press()
     }
 
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -160,12 +154,18 @@ extension EventCell {
             gestureRecognizer.state == .cancelled
         {
             if movableCenterXPosition >= movableCenterXSuccessPosition {
-                delegate?.didSwipeAction(self)
+                viewModel.swipe()
                 animator.scheduleAnimation()
             } else {
                 animator.handleUnfinishedSwipe(cell: self)
             }
         }
+    }
+}
+
+extension EventCell: EventCellViewModelOutput {
+    func animateAfterSwipe() {
+        animate()
     }
 }
 

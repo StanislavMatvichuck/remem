@@ -8,11 +8,12 @@
 import UIKit
 
 class EventsListViewFactory {
-    let viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents
+    lazy var view = makeEventsListView()
+    let viewModel: EventsListViewModel
     let table: UITableView
     let swipeView: SwipeGestureView
 
-    init(viewModel: EventsListViewModelInputState & EventsListViewModelInputEvents) {
+    init(viewModel: EventsListViewModel) {
         func makeTableView() -> UITableView {
             let table = UITableView(al: true)
             table.register(EventCell.self, forCellReuseIdentifier: EventCell.reuseIdentifier)
@@ -54,12 +55,20 @@ extension EventsListViewFactory {
     func makeEventCellFor(_ index: IndexPath) -> UITableViewCell {
         guard
             let row = table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
-            let dataRow = viewModel.event(at: index)
+            let vm = makeEventCellViewModel(for: index, row: row)
         else { return UITableViewCell() }
 
-        row.configure(name: dataRow.name, value: dataRow.happenings.count)
+        row.viewModel = vm
+
         configureSwipeHintIfNeeded(index, row)
         return row
+    }
+
+    func makeEventCellViewModel(for index: IndexPath, row: EventCell) -> EventCellViewModel? {
+        guard let event = viewModel.event(at: index) else { return nil }
+        let vm = EventCellViewModel(event: event, delegate: viewModel, view: row)
+        vm.view = row
+        return vm
     }
 
     func makeSwipeActionsConfiguration(for index: IndexPath) -> UISwipeActionsConfiguration? {
