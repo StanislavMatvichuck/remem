@@ -14,13 +14,7 @@ final class EventCell: UITableViewCell {
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    var viewModel: EventCellViewModelInput! {
-        didSet {
-            guard viewModel != nil else { return }
-            nameLabel.text = viewModel.name
-            valueLabel.text = viewModel.amount
-        }
-    }
+    var viewModel: EventCellVMInput! { didSet { update() } }
 
     var animator = EventCellAnimator()
 
@@ -134,7 +128,7 @@ extension EventCell {
     }
 
     @objc private func handlePress(_ gestureRecognizer: UITapGestureRecognizer) {
-        viewModel.press()
+        viewModel.select()
     }
 
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -163,9 +157,11 @@ extension EventCell {
     }
 }
 
-extension EventCell: EventCellViewModelOutput {
-    func animateAfterSwipe() {
-        animate()
+extension EventCell: EventCellVMOutput {
+    func update() {
+        guard viewModel != nil else { return }
+        nameLabel.text = viewModel.name
+        valueLabel.text = viewModel.amount
     }
 }
 

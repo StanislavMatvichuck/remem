@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ApplicationContainer {
+class ApplicationFactory {
     // MARK: - Long-lived dependencies
     let eventsListUseCase: EventsListUseCase
     let eventEditUseCase: EventEditUseCase
@@ -32,7 +32,8 @@ class ApplicationContainer {
     }
 
     func makeCoordinator() -> Coordinator {
-        let coordinatorContainer = CoordinatorContainer(applicationContainer: self)
-        return coordinatorContainer.coordinator
+        let coordinatorContainer = CoordinatorFactory(applicationFactory: self)
+        let coordinator = coordinatorContainer.makeCoordinator()
+        return coordinator
     }
 }

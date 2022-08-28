@@ -33,15 +33,19 @@ protocol EventsListViewModelInput:
 
 class EventsListViewModel: EventsListViewModelInput {
     // MARK: - Properties
-    weak var view: EventsListViewModelOutput?
-    weak var controller: EventsListControllerInput?
-
+    weak var delegate: EventsListViewModelOutput?
+    weak var coordinator: Coordinator?
     private var renamedEvent: Event?
     private var events: [Event]
+    private let listUseCase: EventsListUseCaseInput
+    private let editUseCase: EventEditUseCaseInput
     // MARK: - Init
-    init(events: [Event]) {
-        self.events = events
-        view?.update()
+    init(listUseCase: EventsListUseCaseInput,
+         editUseCase: EventEditUseCaseInput)
+    {
+        self.events = listUseCase.allEvents()
+        self.listUseCase = listUseCase
+        self.editUseCase = editUseCase
     }
 }
 
@@ -72,77 +76,71 @@ protocol EventsListViewModelInputEvents: AnyObject {
     func select(event: Event)
     func selectForRenaming(event: Event)
     func selectForRemoving(event: Event)
-    func addHappening(to: Event)
     func cancelNameEditing()
     func submitNameEditing(name: String)
 }
 
 extension EventsListViewModel: EventsListViewModelInputEvents {
     func select(event: Event) {
-        controller?.select(event: event)
-    }
-
-    func addHappening(to: Event) {
-        controller?.addHappening(to: to)
+        coordinator?.showDetails(for: event)
     }
 
     func selectForRemoving(event: Event) {
-        controller?.remove(event: event)
+        listUseCase.remove(event)
     }
 
     func selectForRenaming(event: Event) {
         renamedEvent = event
-        view?.askNewName(withOldName: event.name)
+        delegate?.askNewName(withOldName: event.name)
     }
 
     func cancelNameEditing() { renamedEvent = nil }
 
     func submitNameEditing(name: String) {
         if let renamedEvent = renamedEvent {
-            controller?.rename(event: renamedEvent, to: name)
-            self.renamedEvent = nil
+            editUseCase.rename(renamedEvent, to: name)
         } else {
-            controller?.addEvent(name: name)
+            listUseCase.add(name: name)
         }
     }
 }
 
-protocol EventsListViewModelOutput: UIView {
+// MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
+extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
+    func added(event: Event) {
+        events = listUseCase.allEvents()
+
+        if let index = events.firstIndex(of: event) {
+            delegate?.addEvent(at: index)
+        }
+
+        delegate?.update()
+    }
+
+    func removed(event: Event) {
+        if let index = events.firstIndex(of: event) {
+            events = listUseCase.allEvents()
+            delegate?.remove(at: index)
+        }
+
+        delegate?.update()
+    }
+
+    func updated(event: Event) {
+        events = listUseCase.allEvents()
+
+        if let index = events.firstIndex(of: event) {
+            delegate?.update(at: index)
+        }
+
+        delegate?.update()
+    }
+}
+
+protocol EventsListViewModelOutput: AnyObject {
     func update()
     func addEvent(at: Int)
     func remove(at: Int)
     func update(at: Int)
     func askNewName(withOldName: String)
-}
-
-// MARK: - EventsListControllerOutput
-extension EventsListViewModel: EventsListControllerOutput {
-    func added(event: Event, newList: [Event]) {
-        events = newList
-
-        if let index = events.firstIndex(of: event) {
-            view?.addEvent(at: index)
-        }
-
-        view?.update()
-    }
-
-    func removed(event: Event, newList: [Event]) {
-        if let index = events.firstIndex(of: event) {
-            events = newList
-            view?.remove(at: index)
-        }
-
-        view?.update()
-    }
-
-    func updated(event: Event, newList: [Event]) {
-        events = newList
-
-        if let index = events.firstIndex(of: event) {
-            view?.update(at: index)
-        }
-
-        view?.update()
-    }
 }

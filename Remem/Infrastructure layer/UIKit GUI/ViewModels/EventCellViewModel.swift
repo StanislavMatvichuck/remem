@@ -7,46 +7,53 @@
 
 import Foundation
 
-protocol EventCellViewModelInput:
-    EventCellViewModelInputState &
-    EventCellViewModelInputEvents {}
+protocol EventCellVMInput:
+    EventCellVMInputState &
+    EventCellVMInputEvents {}
 
-class EventCellViewModel: EventCellViewModelInput {
-    // MARK: - Private
-    let event: Event
-    weak var delegate: EventsListViewModelInputEvents?
-    weak var view: EventCellViewModelOutput?
+class EventCellViewModel: EventCellVMInput {
+    // MARK: - Properties
+    weak var coordinator: Coordinator? { didSet { print("coordinator assigned to \(coordinator)") } }
+    weak var delegate: EventCellVMOutput?
+
+    private var renamedEvent: Event?
+    private let event: Event
+    private let editUseCase: EventEditUseCaseInput
     // MARK: - Init
-    init(event: Event, delegate: EventsListViewModelInputEvents, view: EventCellViewModelOutput) {
+    init(event: Event, editUseCase: EventEditUseCaseInput) {
         self.event = event
-        self.delegate = delegate
-        self.view = view
+        self.editUseCase = editUseCase
     }
 }
 
-// MARK: - EventCellViewModelInputState
-protocol EventCellViewModelInputState {
+// MARK: - EventCellVMInputState
+protocol EventCellVMInputState {
     var name: String { get }
     var amount: String { get }
 }
 
-extension EventCellViewModel: EventCellViewModelInputState {
+extension EventCellViewModel: EventCellVMInputState {
     var name: String { event.name }
     var amount: String { String(event.happenings.count) }
 }
 
-// MARK: - EventCellViewModelInputEvents
-protocol EventCellViewModelInputEvents: AnyObject {
-    func press()
+protocol EventCellVMInputEvents {
+    func select()
     func swipe()
 }
 
-extension EventCellViewModel: EventCellViewModelInputEvents {
-    func press() { delegate?.select(event: event) }
-    func swipe() { delegate?.addHappening(to: event) }
+// MARK: - EventCellVMInputEvents
+extension EventCellViewModel: EventCellVMInputEvents {
+    func select() {
+        coordinator?.showDetails(for: event)
+    }
+
+    func swipe() {
+        editUseCase.addHappening(to: event, date: .now)
+    }
 }
 
-// MARK: - EventCellViewModelOutput
-protocol EventCellViewModelOutput: AnyObject {
-    func animateAfterSwipe()
+// MARK: - EventCellVMOutput
+protocol EventCellVMOutput: AnyObject {
+    func update()
 }

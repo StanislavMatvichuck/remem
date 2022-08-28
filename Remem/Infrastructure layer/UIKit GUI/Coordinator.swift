@@ -7,20 +7,20 @@
 
 import UIKit
 
-protocol CoordinatorFactory {
-    func makeEventDetails(for event: Event) -> EventDetailsController
-    func makeDay(at day: DateComponents, for event: Event) -> DayController
-    func makeGoalsInput(for event: Event, sourceView: UIView) -> GoalsInputController
+protocol CoordinatorFactoryInterface {
+    func makeEventDetailsController(for event: Event) -> EventDetailsController
+    func makeDayController(at day: DateComponents, for event: Event) -> DayController
+    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController
 }
 
 class Coordinator: NSObject {
     let navController: UINavigationController
-    let factory: CoordinatorFactory
+    let factory: CoordinatorFactoryInterface
     let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
     let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
 
     init(navController: UINavigationController,
-         coordinatorFactory: CoordinatorFactory,
+         coordinatorFactory: CoordinatorFactoryInterface,
          eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
          eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>)
     {
@@ -35,17 +35,17 @@ class Coordinator: NSObject {
 // MARK: - Public
 extension Coordinator {
     func showDetails(for event: Event) {
-        let details = factory.makeEventDetails(for: event)
+        let details = factory.makeEventDetailsController(for: event)
         navController.pushViewController(details, animated: true)
     }
 
     func showDayController(for day: DateComponents, event: Event) {
-        let dayController = factory.makeDay(at: day, for: event)
+        let dayController = factory.makeDayController(at: day, for: event)
         presentModally(dayController)
     }
 
     func showGoalsInputController(event: Event, sourceView: UIView) {
-        let goalsController = factory.makeGoalsInput(for: event, sourceView: sourceView)
+        let goalsController = factory.makeGoalsInputController(for: event, sourceView: sourceView)
         presentModally(goalsController)
     }
 }
@@ -59,25 +59,10 @@ extension Coordinator {
     }
 }
 
-// MARK: - Domain events distribution
-extension Coordinator: EventsListUseCaseOutput {
-    func added(event: Event) {
-        eventsListMulticastDelegate.invokeDelegates { delegate in
-            delegate.added(event: event)
-        }
-    }
-
-    func removed(event: Event) {
-        eventsListMulticastDelegate.invokeDelegates { delegate in
-            delegate.removed(event: event)
-        }
-    }
-}
-
-extension Coordinator: EventEditUseCaseOutput {
-    func updated(event: Event) {
-        eventEditMulticastDelegate.invokeDelegates { delegate in
-            delegate.updated(event: event)
-        }
-    }
+// MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
+/// distributes events across all controllers
+extension Coordinator: EventsListUseCaseOutput, EventEditUseCaseOutput {
+    func added(event: Event) { eventsListMulticastDelegate.invokeDelegates { $0.added(event: event) } }
+    func removed(event: Event) { eventsListMulticastDelegate.invokeDelegates { $0.removed(event: event) } }
+    func updated(event: Event) { eventEditMulticastDelegate.invokeDelegates { $0.updated(event: event) } }
 }

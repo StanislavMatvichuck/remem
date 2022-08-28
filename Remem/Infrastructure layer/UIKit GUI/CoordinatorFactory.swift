@@ -7,54 +7,38 @@
 
 import UIKit
 
-class CoordinatorContainer {
-    let applicationContainer: ApplicationContainer
-    lazy var coordinator = makeCoordinator()
-
-    var eventsListUseCase: EventsListUseCase { applicationContainer.eventsListUseCase }
-    var eventEditUseCase: EventEditUseCase { applicationContainer.eventEditUseCase }
-    var eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput> { applicationContainer.eventsListMulticastDelegate }
-    var eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput> { applicationContainer.eventEditMulticastDelegate }
-
-    init(applicationContainer: ApplicationContainer) {
-        self.applicationContainer = applicationContainer
+class CoordinatorFactory: CoordinatorFactoryInterface {
+    // MARK: - Properties
+    let applicationFactory: ApplicationFactory
+    var eventsListUseCase: EventsListUseCase { applicationFactory.eventsListUseCase }
+    var eventEditUseCase: EventEditUseCase { applicationFactory.eventEditUseCase }
+    var eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput> { applicationFactory.eventsListMulticastDelegate }
+    var eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput> { applicationFactory.eventEditMulticastDelegate }
+    // MARK: - Init
+    init(applicationFactory: ApplicationFactory) {
+        self.applicationFactory = applicationFactory
     }
 
     func makeCoordinator() -> Coordinator {
-        let rootController = makeEventsList()
-        let nav = makeStyledNavigationController(for: rootController)
-        nav.navigationBar.prefersLargeTitles = true
-
-        let coordinator = Coordinator(navController: nav,
+        let navController = makeStyledNavigationController()
+        let coordinator = Coordinator(navController: navController,
                                       coordinatorFactory: self,
                                       eventsListMulticastDelegate: eventsListMulticastDelegate,
                                       eventEditMulticastDelegate: eventEditMulticastDelegate)
-        rootController.coordinator = coordinator
         eventsListUseCase.delegate = coordinator
         eventEditUseCase.delegate = coordinator
-        return coordinator
-    }
 
-    func makeEventsList() -> EventsListController {
-        let events = eventsListUseCase.allEvents()
-        let viewModel = EventsListViewModel(events: events)
-        let viewContainer = EventsListViewFactory(viewModel: viewModel)
-        let view = viewContainer.makeEventsListView()
-        let controller = EventsListController(view: view,
-                                              viewModel: viewModel,
-                                              listUseCase: eventsListUseCase,
-                                              editUseCase: eventEditUseCase)
-        eventsListMulticastDelegate.addDelegate(controller)
-        eventEditMulticastDelegate.addDelegate(controller)
-        viewModel.controller = controller
-        viewModel.view = view
-        return controller
+        let eventsListFactory = EventsListFactory(coordinatorFactory: self, coordinator: coordinator)
+        let eventsListController = eventsListFactory.makeEventsListController()
+
+        coordinator.navController.pushViewController(eventsListController, animated: false)
+
+        return coordinator
     }
 
     func makeWeekController(for event: Event) -> WeekController {
         let weekController = WeekController()
         weekController.event = event
-        weekController.coordinator = coordinator
         eventEditMulticastDelegate.addDelegate(weekController)
         return weekController
     }
@@ -65,15 +49,9 @@ class CoordinatorContainer {
         return clockController
     }
 
-    func makeDayController(at day: DateComponents, for event: Event) -> DayController {
-        let dayController = DayController(event: event, day: day, editUseCase: eventEditUseCase)
-        eventEditMulticastDelegate.addDelegate(dayController)
-        return dayController
-    }
-
-    func makeStyledNavigationController(for rootViewController: UIViewController) -> UINavigationController {
+    func makeStyledNavigationController() -> UINavigationController {
         let appearance = makeNavigationBarAppearance()
-        let nav = UINavigationController(rootViewController: rootViewController)
+        let nav = UINavigationController()
         nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.compactAppearance = appearance
         nav.navigationBar.scrollEdgeAppearance = appearance
@@ -101,24 +79,26 @@ class CoordinatorContainer {
         appearance.buttonAppearance = cancelAppearance
         return appearance
     }
-}
 
-// MARK: - CoordinatorFactories
-extension CoordinatorContainer: CoordinatorFactory {
-    func makeEventDetails(for event: Event) -> EventDetailsController {
+    func makeEventDetailsController(for event: Event) -> EventDetailsController {
         let week = makeWeekController(for: event)
         let clock = makeClockController(for: event)
         let details = EventDetailsController(event: event,
                                              editUseCase: eventEditUseCase,
                                              clockController: clock,
                                              weekController: week)
-        details.coordinator = coordinator
         return details
     }
 
-    func makeDay(at day: DateComponents, for event: Event) -> DayController {
-        let day = makeDayController(at: day, for: event)
-        let nav = makeStyledNavigationController(for: day)
+    func makeDayController(at day: DateComponents, for event: Event) -> DayController {
+        let day: DayController = {
+            let dayController = DayController(event: event, day: day, editUseCase: eventEditUseCase)
+            eventEditMulticastDelegate.addDelegate(dayController)
+            return dayController
+        }()
+
+        let nav = makeStyledNavigationController()
+        nav.pushViewController(day, animated: false)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
@@ -127,10 +107,10 @@ extension CoordinatorContainer: CoordinatorFactory {
         return day
     }
 
-    func makeGoalsInput(for event: Event, sourceView: UIView) -> GoalsInputController {
+    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
         let goalsInputController = GoalsInputController(event, editUseCase: eventEditUseCase)
-        let nav = makeStyledNavigationController(for: goalsInputController)
-
+        let nav = makeStyledNavigationController()
+        nav.pushViewController(goalsInputController, animated: false)
         nav.preferredContentSize = CGSize(width: .wScreen, height: 250)
         nav.modalPresentationStyle = .popover
 
