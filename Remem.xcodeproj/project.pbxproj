@@ -252,14 +252,13 @@
 		085C4E98289AB5940094388C /* UIKit GUI */ = {
 			isa = PBXGroup;
 			children = (
-				08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */,
+				08E194FE28BBE618001BCCC9 /* Factories */,
 				08D512332787140D00C2037F /* Controllers */,
 				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D5123E278716DA00C2037F /* Helpers */,
 				08D512322787136B00C2037F /* UIKitDelegates */,
 				086DC6CE2880570D0048F22F /* ViewModels */,
 				086DC6D12880578E0048F22F /* Views */,
-				085543F628B82BA5004E16ED /* CoordinatorFactory.swift */,
 			);
 			path = "UIKit GUI";
 			sourceTree = "<group>";
@@ -406,7 +405,6 @@
 			children = (
 				08D512352787144800C2037F /* EventsListView.swift */,
 				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
-				08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */,
 			);
 			path = EventsListView;
 			sourceTree = "<group>";
@@ -518,6 +516,16 @@
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		08E194FE28BBE618001BCCC9 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */,
+				085543F628B82BA5004E16ED /* CoordinatorFactory.swift */,
+				08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {

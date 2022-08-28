@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol EventCellVMInput:
-    EventCellVMInputState &
+protocol EventCellViewModelInput:
+    EventCellViewModelInputState &
     EventCellVMInputEvents {}
 
-class EventCellViewModel: EventCellVMInput {
+class EventCellViewModel: EventCellViewModelInput {
     // MARK: - Properties
-    weak var coordinator: Coordinator? { didSet { print("coordinator assigned to \(coordinator)") } }
+    weak var coordinator: Coordinator?
     weak var delegate: EventCellVMOutput?
 
     private var renamedEvent: Event?
@@ -27,12 +27,12 @@ class EventCellViewModel: EventCellVMInput {
 }
 
 // MARK: - EventCellVMInputState
-protocol EventCellVMInputState {
+protocol EventCellViewModelInputState {
     var name: String { get }
     var amount: String { get }
 }
 
-extension EventCellViewModel: EventCellVMInputState {
+extension EventCellViewModel: EventCellViewModelInputState {
     var name: String { event.name }
     var amount: String { String(event.happenings.count) }
 }

@@ -14,7 +14,7 @@ final class EventCell: UITableViewCell {
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    var viewModel: EventCellVMInput! { didSet { update() } }
+    var viewModel: EventCellViewModelInput! { didSet { update() } }
 
     var animator = EventCellAnimator()
 
