@@ -21,6 +21,7 @@ class CoordinatorFactory: CoordinatorFactoryInterface {
 
     func makeCoordinator() -> Coordinator {
         let navController = makeStyledNavigationController()
+        navController.navigationBar.prefersLargeTitles = true
         let coordinator = Coordinator(navController: navController,
                                       coordinatorFactory: self,
                                       eventsListMulticastDelegate: eventsListMulticastDelegate,
