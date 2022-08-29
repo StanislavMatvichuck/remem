@@ -8,10 +8,7 @@
 import UIKit
 
 protocol EventsListFactoryInterface {
-    func makeHintCell() -> UITableViewCell
-    func makeFooterCell() -> UITableViewCell
-    func makeEventCell(for: IndexPath) -> UITableViewCell
-    func makeSwipeActionsConfiguration(for: IndexPath) -> UISwipeActionsConfiguration?
+    func makeEventCellViewModel(event: Event) -> EventCellViewModel
 }
 
 class EventsListController: UIViewController {
@@ -55,11 +52,11 @@ extension EventsListController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if EventsListView.Section(rawValue: indexPath.section) == .hint {
-            return factory.makeHintCell()
+            return makeHintCell()
         } else if EventsListView.Section(rawValue: indexPath.section) == .events {
-            return factory.makeEventCell(for: indexPath)
+            return makeEventCell(for: indexPath)
         } else if EventsListView.Section(rawValue: indexPath.section) == .footer {
-            return factory.makeFooterCell()
+            return makeFooterCell()
         }
 
         return UITableViewCell()
@@ -69,7 +66,19 @@ extension EventsListController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension EventsListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        factory.makeSwipeActionsConfiguration(for: indexPath)
+        guard let event = viewModel.event(at: indexPath) else { return nil }
+
+        let renameAction = UIContextualAction(style: .normal, title: EventsListView.rename) { _, _, completion in
+            self.viewModel.selectForRenaming(event: event)
+            completion(true)
+        }
+
+        let deleteAction = UIContextualAction(style: .destructive, title: EventsListView.delete) { _, _, completion in
+            self.viewModel.selectForRemoving(event: event)
+            completion(true)
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -128,5 +137,58 @@ extension EventsListController: EventsListViewModelOutput {
 
     func askNewName(withOldName: String) {
         viewRoot.input.rename(oldName: withOldName)
+    }
+}
+
+// MARK: - Private
+extension EventsListController {
+    private func makeHintCell() -> UITableViewCell {
+        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListHintCell.reuseIdentifier) as! EventsListHintCell
+        cell.label.text = viewModel.hint.text
+
+        if viewModel.hint == .swipeLeft {
+            cell.label.font = UIHelper.fontSmall
+            cell.label.textColor = UIHelper.hint
+        } else {
+            cell.label.font = UIHelper.fontBold
+            cell.label.textColor = UIHelper.itemFont
+        }
+
+        return cell
+    }
+
+    private func makeFooterCell() -> UITableViewCell {
+        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
+        cell.buttonAdd.backgroundColor = viewModel.isAddButtonHighlighted ? .systemBlue : UIHelper.background
+        cell.buttonAdd.layer.borderColor = viewModel.isAddButtonHighlighted ? UIHelper.background.cgColor : UIHelper.brand.cgColor
+        if let label = cell.buttonAdd.subviews[0] as? UILabel {
+            label.textColor = viewModel.isAddButtonHighlighted ? UIHelper.background : UIHelper.brand
+        }
+
+        return cell
+    }
+
+    private func makeEventCell(for index: IndexPath) -> UITableViewCell {
+        guard
+            let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
+            let event = viewModel.event(at: index)
+        else { return UITableViewCell() }
+
+        let viewModel = factory.makeEventCellViewModel(event: event)
+        viewModel.delegate = eventCell
+        eventCell.viewModel = viewModel
+
+        configureSwipeHintIfNeeded(at: index, cell: eventCell)
+        return eventCell
+    }
+
+    private func configureSwipeHintIfNeeded(at indexPath: IndexPath, cell: EventCell) {
+        guard
+            indexPath.row == 0,
+            indexPath.section == EventsListView.Section.events.rawValue,
+            viewModel.hint == .placeFirstMark
+        else { return }
+        cell.contentView.addAndConstrain(viewRoot.swipeHint)
+        viewRoot.swipeHint.start()
     }
 }

@@ -23,18 +23,30 @@ class EventsListView: UIView {
     }
 
     // MARK: - Properties
-    let input: UIMovableTextViewInterface
-    let table: UITableView
-    let swipeHint: SwipeGestureView
+    let input: UIMovableTextViewInterface = {
+        UIMovableTextView()
+    }()
+
+    let table: UITableView = {
+        let table = UITableView(al: true)
+        table.register(EventCell.self,
+                       forCellReuseIdentifier: EventCell.reuseIdentifier)
+        table.register(EventsListHintCell.self,
+                       forCellReuseIdentifier: EventsListHintCell.reuseIdentifier)
+        table.register(EventsListFooterCell.self,
+                       forCellReuseIdentifier: EventsListFooterCell.reuseIdentifier)
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
+        return table
+    }()
+
+    let swipeHint: SwipeGestureView = {
+        SwipeGestureView(mode: .horizontal,
+                         edgeInset: .r2 + UIHelper.spacingListHorizontal)
+    }()
 
     // MARK: - Init
-    init(input: UIMovableTextViewInterface,
-         table: UITableView,
-         swipeHint: SwipeGestureView)
-    {
-        self.input = input
-        self.table = table
-        self.swipeHint = swipeHint
+    init() {
         super.init(frame: .zero)
         backgroundColor = UIHelper.itemBackground
         addAndConstrain(table)

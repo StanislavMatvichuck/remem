@@ -9,12 +9,12 @@ import Foundation
 
 protocol EventCellViewModelInput:
     EventCellViewModelInputState &
-    EventCellVMInputEvents {}
+    EventCellViewModelInputEvents {}
 
 class EventCellViewModel: EventCellViewModelInput {
     // MARK: - Properties
     weak var coordinator: Coordinator?
-    weak var delegate: EventCellVMOutput?
+    weak var delegate: EventCellViewModelOutput?
 
     private var renamedEvent: Event?
     private let event: Event
@@ -37,13 +37,13 @@ extension EventCellViewModel: EventCellViewModelInputState {
     var amount: String { String(event.happenings.count) }
 }
 
-protocol EventCellVMInputEvents {
+protocol EventCellViewModelInputEvents {
     func select()
     func swipe()
 }
 
 // MARK: - EventCellVMInputEvents
-extension EventCellViewModel: EventCellVMInputEvents {
+extension EventCellViewModel: EventCellViewModelInputEvents {
     func select() {
         coordinator?.showDetails(for: event)
     }
@@ -53,7 +53,12 @@ extension EventCellViewModel: EventCellVMInputEvents {
     }
 }
 
+// MARK: - EventEditUseCaseOutput
+extension EventCellViewModel: EventEditUseCaseOutput {
+    func updated(event: Event) { delegate?.update() }
+}
+
 // MARK: - EventCellVMOutput
-protocol EventCellVMOutput: AnyObject {
+protocol EventCellViewModelOutput: AnyObject {
     func update()
 }

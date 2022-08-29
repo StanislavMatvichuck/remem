@@ -96,7 +96,7 @@ class UIMovableTextView: UIControl {
         NSLayoutConstraint.activate([
             label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
             label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
-            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: UIHelper.spacing),
         ])
 
         return label

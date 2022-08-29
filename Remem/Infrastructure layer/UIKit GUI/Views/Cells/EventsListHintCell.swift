@@ -35,6 +35,6 @@ extension EventsListHintCell {
     private func setup() {
         backgroundColor = .clear
 
-        contentView.addAndConstrain(label)
+        contentView.addAndConstrain(label, constant: UIHelper.spacing)
     }
 }

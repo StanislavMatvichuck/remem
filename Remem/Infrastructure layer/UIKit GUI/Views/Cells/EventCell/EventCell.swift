@@ -157,7 +157,7 @@ extension EventCell {
     }
 }
 
-extension EventCell: EventCellVMOutput {
+extension EventCell: EventCellViewModelOutput {
     func update() {
         guard viewModel != nil else { return }
         nameLabel.text = viewModel.name

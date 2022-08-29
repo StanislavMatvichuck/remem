@@ -13,13 +13,13 @@ class EventsListFooterCell: UITableViewCell {
     // MARK: - Properties
     lazy var buttonAdd: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .systemGray
         view.layer.cornerRadius = .r2
+        view.layer.borderWidth = 3
 
         let label = UILabel(al: true)
         label.text = "+"
         label.textAlignment = .center
-        label.textColor = .white
+        label.font = UIHelper.fontBold
 
         view.addAndConstrain(label)
 

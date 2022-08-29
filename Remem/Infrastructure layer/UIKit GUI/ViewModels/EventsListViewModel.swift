@@ -7,11 +7,11 @@
 
 import UIKit
 
-enum HintState {
+enum HintState: String {
     case empty
     case placeFirstMark
     case pressMe
-    case noHints
+    case swipeLeft
 
     var text: String? {
         switch self {
@@ -21,8 +21,8 @@ enum HintState {
             return EventsListView.firstHappening
         case .pressMe:
             return EventsListView.firstDetails
-        case .noHints:
-            return nil
+        case .swipeLeft:
+            return "swipe left to modify"
         }
     }
 }
@@ -63,7 +63,7 @@ extension EventsListViewModel: EventsListViewModelInputState {
         if events.count == 0 { return .empty }
         if events.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
         if events.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
-        return .noHints
+        return .swipeLeft
     }
 
     func event(at index: IndexPath) -> Event? {
