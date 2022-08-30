@@ -10,13 +10,12 @@ import UIKit
 class EventsListFactory: EventsListFactoryInterface {
     // MARK: - Properties
     let coordinator: Coordinator
-
     let coordinatorFactory: CoordinatorFactory
+
     var eventsListUseCase: EventsListUseCase { coordinatorFactory.eventsListUseCase }
     var eventEditUseCase: EventEditUseCase { coordinatorFactory.eventEditUseCase }
     var eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput> { coordinatorFactory.eventsListMulticastDelegate }
     var eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput> { coordinatorFactory.eventEditMulticastDelegate }
-
     // MARK: - Init
     init(coordinatorFactory: CoordinatorFactory, coordinator: Coordinator) {
         self.coordinatorFactory = coordinatorFactory
@@ -37,7 +36,6 @@ class EventsListFactory: EventsListFactoryInterface {
         let viewModel = EventsListViewModel(listUseCase: eventsListUseCase,
                                             editUseCase: eventEditUseCase)
         eventsListMulticastDelegate.addDelegate(viewModel)
-        eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = coordinator
         return viewModel
     }

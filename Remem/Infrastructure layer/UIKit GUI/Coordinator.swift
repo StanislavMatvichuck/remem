@@ -16,8 +16,8 @@ protocol CoordinatorFactoryInterface {
 class Coordinator: NSObject {
     let navController: UINavigationController
     let factory: CoordinatorFactoryInterface
-    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
-    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
+    let listDelegates: MulticastDelegate<EventsListUseCaseOutput>
+    let editDelegates: MulticastDelegate<EventEditUseCaseOutput>
 
     init(navController: UINavigationController,
          coordinatorFactory: CoordinatorFactoryInterface,
@@ -26,8 +26,8 @@ class Coordinator: NSObject {
     {
         self.navController = navController
         self.factory = coordinatorFactory
-        self.eventsListMulticastDelegate = eventsListMulticastDelegate
-        self.eventEditMulticastDelegate = eventEditMulticastDelegate
+        self.listDelegates = eventsListMulticastDelegate
+        self.editDelegates = eventEditMulticastDelegate
         super.init()
     }
 }
@@ -62,7 +62,13 @@ extension Coordinator {
 // MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
 /// distributes events across all controllers
 extension Coordinator: EventsListUseCaseOutput, EventEditUseCaseOutput {
-    func added(event: Event) { eventsListMulticastDelegate.invokeDelegates { $0.added(event: event) } }
-    func removed(event: Event) { eventsListMulticastDelegate.invokeDelegates { $0.removed(event: event) } }
-    func updated(event: Event) { eventEditMulticastDelegate.invokeDelegates { $0.updated(event: event) } }
+    // EventsListUseCaseOutput
+    func added(event: Event) { listDelegates.call { $0.added(event: event) } }
+    func removed(event: Event) { listDelegates.call { $0.removed(event: event) } }
+    // EventEditUseCaseOutput
+    func added(happening: Happening, to: Event) { editDelegates.call { $0.added(happening: happening, to: to) } }
+    func removed(happening: Happening, from: Event) { editDelegates.call { $0.removed(happening: happening, from: from) }}
+    func renamed(event: Event) { editDelegates.call { $0.renamed(event: event) } }
+    func visited(event: Event) { editDelegates.call { $0.visited(event: event) }}
+    func added(goal: Goal, to: Event) { editDelegates.call { $0.added(goal: goal, to: to) } }
 }

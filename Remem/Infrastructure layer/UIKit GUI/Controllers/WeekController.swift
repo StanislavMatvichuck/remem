@@ -57,5 +57,9 @@ extension WeekController: WeekCellDelegate {
 
 // MARK: - EventEditUseCaseOutput
 extension WeekController: EventEditUseCaseOutput {
-    func updated(event: Event) { self.event = event }
+    func added(happening: Happening, to: Event) { event = to }
+    func removed(happening: Happening, from: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }

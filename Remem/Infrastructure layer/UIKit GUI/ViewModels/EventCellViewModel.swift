@@ -11,30 +11,9 @@ protocol EventCellViewModelInput:
     EventCellViewModelInputState &
     EventCellViewModelInputEvents {}
 
-class EventCellViewModel: EventCellViewModelInput {
-    // MARK: - Properties
-    weak var coordinator: Coordinator?
-    weak var delegate: EventCellViewModelOutput?
-
-    private var renamedEvent: Event?
-    private let event: Event
-    private let editUseCase: EventEditUseCaseInput
-    // MARK: - Init
-    init(event: Event, editUseCase: EventEditUseCaseInput) {
-        self.event = event
-        self.editUseCase = editUseCase
-    }
-}
-
-// MARK: - EventCellVMInputState
 protocol EventCellViewModelInputState {
     var name: String { get }
     var amount: String { get }
-}
-
-extension EventCellViewModel: EventCellViewModelInputState {
-    var name: String { event.name }
-    var amount: String { String(event.happenings.count) }
 }
 
 protocol EventCellViewModelInputEvents {
@@ -42,23 +21,43 @@ protocol EventCellViewModelInputEvents {
     func swipe()
 }
 
-// MARK: - EventCellVMInputEvents
-extension EventCellViewModel: EventCellViewModelInputEvents {
-    func select() {
-        coordinator?.showDetails(for: event)
+class EventCellViewModel: EventCellViewModelInput {
+    // MARK: - Properties
+    weak var coordinator: Coordinator?
+    weak var delegate: EventCellViewModelOutput?
+
+    private let event: Event
+    private let editUseCase: EventEditUseCaseInput
+    private var renamedEvent: Event?
+    // MARK: - Init
+    init(event: Event, editUseCase: EventEditUseCaseInput) {
+        self.event = event
+        self.editUseCase = editUseCase
     }
 
-    func swipe() {
-        editUseCase.addHappening(to: event, date: .now)
-    }
+    // EventCellViewModelInputState
+    var name: String { event.name }
+    var amount: String { String(event.happenings.count) }
+
+    // EventCellViewModelInputEvents
+    func select() { coordinator?.showDetails(for: event) }
+    func swipe() { editUseCase.addHappening(to: event, date: .now) }
 }
 
 // MARK: - EventEditUseCaseOutput
 extension EventCellViewModel: EventEditUseCaseOutput {
-    func updated(event: Event) { delegate?.update() }
+    func added(happening: Happening, to: Event) {
+        guard event == to else { return }
+        delegate?.addedHappening()
+    }
+
+    func removed(happening: Happening, from: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
 
 // MARK: - EventCellVMOutput
 protocol EventCellViewModelOutput: AnyObject {
-    func update()
+    func addedHappening()
 }

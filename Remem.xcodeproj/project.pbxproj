@@ -51,7 +51,6 @@
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */; };
-		08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */; };
 		08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
@@ -82,6 +81,7 @@
 		08EBA79A28A3DACA008480B0 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EBA79928A3DACA008480B0 /* Goal.swift */; };
 		08EC438228BA365400755B54 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
+		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
 /* End PBXBuildFile section */
@@ -149,7 +149,6 @@
 		08B26A11289E91D400DFBAC8 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		08B26A13289E975900DFBAC8 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHappeningCell.swift; sourceTree = "<group>"; };
-		08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellAnimator.swift; sourceTree = "<group>"; };
 		08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationFactory.swift; sourceTree = "<group>"; };
 		08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
@@ -183,6 +182,7 @@
 		08EBA79928A3DACA008480B0 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
+		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -413,7 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				08D512372787153900C2037F /* EventCell.swift */,
-				08C1FD72281A8B040051CD48 /* EventCellAnimator.swift */,
+				08F1960128BCC1DF0051A83E /* Swiper.swift */,
 			);
 			path = EventCell;
 			sourceTree = "<group>";
@@ -675,7 +675,6 @@
 				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08D6E1D8288807DC003BF595 /* WeekList.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */,
-				08C1FD73281A8B040051CD48 /* EventCellAnimator.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
@@ -716,6 +715,7 @@
 				08961F50289BA99900F3E179 /* EventDetailsViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
+				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
 				08D5122227870D2500C2037F /* EventsListController.swift in Sources */,
 				0852C6A4283D57230027EF3E /* HappeningsListView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,

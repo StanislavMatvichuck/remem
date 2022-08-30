@@ -15,41 +15,34 @@ protocol EventEditUseCaseInput {
     func rename(_: Event, to: String)
 }
 
-protocol EventEditUseCaseOutput: AnyObject {
-    func updated(event: Event)
-}
-
 class EventEditUseCase {
-    typealias Repository = EventsRepositoryInterface
-
-    weak var delegate: EventEditUseCaseOutput?
     // MARK: - Properties
-    private let repository: Repository
+    weak var delegate: EventEditUseCaseOutput?
+    private let repository: EventsRepositoryInterface
     // MARK: - Init
-    init(repository: Repository) { self.repository = repository }
-}
+    init(repository: EventsRepositoryInterface) {
+        self.repository = repository
+    }
 
-// MARK: - Private
-extension EventEditUseCase: EventEditUseCaseInput {
+    // EventEditUseCaseInput
     func visit(_ event: Event) {
         event.dateVisited = .now
         repository.save(event)
-        delegate?.updated(event: event)
+        delegate?.visited(event: event)
     }
 
     func addHappening(to event: Event, date: Date) {
-        event.addHappening(date: date)
-
+        let addedHappening = event.addHappening(date: date)
         repository.save(event)
-        delegate?.updated(event: event)
+        delegate?.added(happening: addedHappening, to: event)
     }
 
     func removeHappening(from event: Event, happening: Happening) {
         do {
-            try event.remove(happening: happening)
-
-            repository.save(event)
-            delegate?.updated(event: event)
+            if let removedHappening = try event.remove(happening: happening) {
+                repository.save(event)
+                delegate?.removed(happening: removedHappening, from: event)
+            }
         } catch {
             switch error {
             case EventManipulationError.invalidHappeningDeletion:
@@ -62,13 +55,20 @@ extension EventEditUseCase: EventEditUseCaseInput {
 
     func rename(_ event: Event, to newName: String) {
         event.name = newName
-
         repository.save(event)
-        delegate?.updated(event: event)
+        delegate?.renamed(event: event)
     }
 
     func addGoal(to event: Event, at date: Date, amount: Int) {
-        event.addGoal(at: date, amount: amount)
-        delegate?.updated(event: event)
+        let addedGoal = event.addGoal(at: date, amount: amount)
+        delegate?.added(goal: addedGoal, to: event)
     }
+}
+
+protocol EventEditUseCaseOutput: AnyObject {
+    func added(happening: Happening, to: Event)
+    func removed(happening: Happening, from: Event)
+    func renamed(event: Event)
+    func visited(event: Event)
+    func added(goal: Goal, to: Event)
 }

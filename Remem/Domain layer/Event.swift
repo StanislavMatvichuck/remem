@@ -87,18 +87,20 @@ extension Event {
         dateVisited = Date.now
     }
 
-    func remove(happening: Happening) throws {
-        var happeningDeleted = false
+    @discardableResult
+    func remove(happening: Happening) throws -> Happening? {
+        var happeningDeleted: Happening?
 
         for (index, existingHappening) in happenings.enumerated() {
             if existingHappening == happening {
-                happenings.remove(at: index)
-                happeningDeleted = true
+                happeningDeleted = happenings.remove(at: index)
                 break
             }
         }
 
-        if !happeningDeleted { throw EventManipulationError.invalidHappeningDeletion }
+        if happeningDeleted == nil { throw EventManipulationError.invalidHappeningDeletion }
+
+        return happeningDeleted
     }
 
     func happenings(forDay: Date) -> [Happening] {

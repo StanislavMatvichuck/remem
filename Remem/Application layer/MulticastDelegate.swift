@@ -43,7 +43,7 @@ public class MulticastDelegate<ProtocolType> {
         delegateWrappers.remove(at: index)
     }
 
-    public func invokeDelegates(_ closure: (ProtocolType) -> ()) {
+    public func call(_ closure: (ProtocolType) -> ()) {
         delegates.forEach { closure($0) }
     }
 }

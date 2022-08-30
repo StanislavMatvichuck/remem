@@ -9,7 +9,7 @@ import UIKit
 
 class DayController: UIViewController {
     // MARK: - Properties
-    var event: Event
+    var event: Event { didSet { viewModel = DayViewModel(model: event, day: day) }}
     let day: DateComponents
     let editUseCase: EventEditUseCaseInput
 
@@ -56,7 +56,7 @@ class DayController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = UIHelper.background
         viewModel = DayViewModel(model: event, day: day)
-				configureNavBar()
+        configureNavBar()
         picker.addTarget(self,
                          action: #selector(handleTimeChange),
                          for: .valueChanged)
@@ -138,8 +138,9 @@ extension DayController: DayViewModelDelegate {
 
 // MARK: - EventEditUseCaseOutput
 extension DayController: EventEditUseCaseOutput {
-    func updated(event: Event) {
-        self.event = event
-        viewModel = DayViewModel(model: event, day: day)
-    }
+    func added(happening: Happening, to: Event) { event = to }
+    func removed(happening: Happening, from: Event) { event = from }
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
