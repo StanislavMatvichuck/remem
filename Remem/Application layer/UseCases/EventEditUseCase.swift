@@ -15,7 +15,7 @@ protocol EventEditUseCaseInput {
     func rename(_: Event, to: String)
 }
 
-class EventEditUseCase {
+class EventEditUseCase: EventEditUseCaseInput {
     // MARK: - Properties
     weak var delegate: EventEditUseCaseOutput?
     private let repository: EventsRepositoryInterface

@@ -7,33 +7,23 @@
 
 import Foundation
 
-protocol EventsListUseCaseOutput: AnyObject {
-    func added(event: Event)
-    func removed(event: Event)
-}
-
-class EventsListUseCase {
-    // MARK: - Properties
-    weak var delegate: EventsListUseCaseOutput?
-
-    private var repository: EventsRepositoryInterface
-
-    // MARK: - Init
-    init(repository: EventsRepositoryInterface) {
-        self.repository = repository
-    }
-}
-
 protocol EventsListUseCaseInput {
     func allEvents() -> [Event]
     func add(name: String)
     func remove(_: Event)
 }
 
-// MARK: - Public
-extension EventsListUseCase: EventsListUseCaseInput {
-    func allEvents() -> [Event] { repository.all() }
+class EventsListUseCase: EventsListUseCaseInput {
+    // MARK: - Properties
+    weak var delegate: EventsListUseCaseOutput?
+    private var repository: EventsRepositoryInterface
+    // MARK: - Init
+    init(repository: EventsRepositoryInterface) {
+        self.repository = repository
+    }
 
+    // EventsListUseCaseInput
+    func allEvents() -> [Event] { repository.all() }
     func add(name: String) {
         let newEvent = Event(name: name)
         repository.save(newEvent)
@@ -46,4 +36,9 @@ extension EventsListUseCase: EventsListUseCaseInput {
         repository.delete(event)
         delegate?.removed(event: event)
     }
+}
+
+protocol EventsListUseCaseOutput: AnyObject {
+    func added(event: Event)
+    func removed(event: Event)
 }
