@@ -78,8 +78,9 @@ class EventsListViewModel: EventsListViewModelInput {
     }
 }
 
-// MARK: - EventsListUseCaseOutput
-extension EventsListViewModel: EventsListUseCaseOutput {
+// MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
+extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
+    // EventsListUseCaseOutput
     func added(event: Event) {
         events = listUseCase.allEvents()
 
@@ -98,6 +99,13 @@ extension EventsListViewModel: EventsListUseCaseOutput {
 
         delegate?.update()
     }
+
+    // EventEditUseCaseOutput
+    func added(happening: Happening, to: Event) { delegate?.update() }
+    func visited(event: Event) { delegate?.update() }
+    func removed(happening: Happening, from: Event) { delegate?.update() }
+    func renamed(event: Event) { fatalError("Missing implementation") }
+    func added(goal: Goal, to: Event) { fatalError("Missing implementation") }
 }
 
 protocol EventsListViewModelOutput: AnyObject {

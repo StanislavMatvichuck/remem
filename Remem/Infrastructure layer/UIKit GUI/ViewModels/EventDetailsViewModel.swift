@@ -7,105 +7,114 @@
 
 import Foundation
 
-class EventDetailsViewModel {
-    typealias Model = Event
-    typealias View = EventDetailsView
+protocol EventDetailsViewModelInput:
+    EventDetailsViewModelState &
+    EventDetailsViewModelEvents {}
 
-    var totalAmount: Int
-    var dayAverage: Double
-    var thisWeekTotal: Int
-    var weekAverage: Double
+protocol EventDetailsViewModelState {
+    var totalAmount: String { get }
+    var dayAverage: String { get }
+    var thisWeekTotal: String { get }
+    var lastWeekTotal: String { get }
+    var weekAverage: String { get }
+}
 
-    private var model: Model
-    private weak var view: View?
+protocol EventDetailsViewModelEvents {
+    func showGoalsInput()
+    func visitIfNeeded()
+}
 
-    init(_ model: Model) {
-        self.model = model
+class EventDetailsViewModel: EventDetailsViewModelInput {
+    weak var delegate: EventDetailsViewModelOutput?
+    weak var coordinator: Coordinator?
 
-        let totalAmount: Int = {
-            model.happenings.reduce(0) { partialResult, happening in
-                partialResult + Int(happening.value)
-            }
-        }()
+    private let event: Event
+    private let editUseCase: EventEditUseCaseInput
 
-        var daysSince: Int {
-            let cal = Calendar.current
-            let fromDate = cal.startOfDay(for: model.dateCreated)
-            let toDate = cal.startOfDay(for: Date())
-            let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate).day!
-            return numberOfDays + 1
+    init(event: Event, editUseCase: EventEditUseCaseInput) {
+        self.event = event
+        self.editUseCase = editUseCase
+    }
+
+    private var daysSince: Int {
+        let cal = Calendar.current
+        let fromDate = cal.startOfDay(for: event.dateCreated)
+        let toDate = cal.startOfDay(for: Date())
+        let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate).day!
+        return numberOfDays + 1
+    }
+
+    private var weeksSince: Int {
+        var iterationDate = Date.now
+        var result = 1
+
+        while !iterationDate.isInSameWeek(as: event.dateCreated) {
+            iterationDate = iterationDate.days(ago: 7)
+            result += 1
         }
 
-        var weeksSince: Int {
-            var iterationDate = Date.now
-            var result = 1
+        return result
+    }
 
-            while !iterationDate.isInSameWeek(as: model.dateCreated) {
-                iterationDate = iterationDate.days(ago: 7)
-                result += 1
+    private func totalAtWeek(previousToCurrent: Int) -> Int {
+        var result = 0
+
+        for happening in event.happenings {
+            let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
+            if weekOffset.isInSameWeek(as: happening.dateCreated) {
+                result += Int(happening.value)
             }
-
-            return result
         }
 
-        let dayAverage: Double = {
-            let total = Double(totalAmount)
-            let daysAmount = Double(daysSince)
-            return total / daysAmount
-        }()
+        return result
+    }
 
-        var weekAverage: Double {
-            var weeksTotals: [Double] = []
+    // EventDetailsViewModelState
+    var totalAmount: String {
+        String(event.happenings.reduce(0) { partialResult, happening in
+            partialResult + Int(happening.value)
+        })
+    }
 
-            for i in 0 ... weeksSince - 1 {
-                let totalAtWeek = Double(totalAtWeek(previousToCurrent: i))
-                weeksTotals.append(totalAtWeek)
-            }
+    var dayAverage: String {
+        let total = Double(totalAmount)
+        let daysAmount = Double(daysSince)
+        return String(total! / daysAmount)
+    }
 
-            let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
-                result + iterationAverage
-            }
+    var weekAverage: String {
+        var weeksTotals: [Double] = []
 
-            return total / Double(weeksTotals.count)
+        for i in 0 ... weeksSince - 1 {
+            let totalAtWeek = Double(totalAtWeek(previousToCurrent: i))
+            weeksTotals.append(totalAtWeek)
         }
 
-        var thisWeekTotal: Int { totalAtWeek(previousToCurrent: 0) }
-        var lastWeekTotal: Int { totalAtWeek(previousToCurrent: 1) }
-
-        func totalAtWeek(previousToCurrent: Int) -> Int {
-            var result = 0
-
-            for happening in model.happenings {
-                let weekOffset = Date.now.days(ago: 7 * previousToCurrent)
-                if weekOffset.isInSameWeek(as: happening.dateCreated) {
-                    result += Int(happening.value)
-                }
-            }
-
-            return result
+        let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
+            result + iterationAverage
         }
 
-        self.totalAmount = totalAmount
-        self.dayAverage = dayAverage
-        self.thisWeekTotal = thisWeekTotal
-        self.weekAverage = weekAverage
+        return String(total / Double(weeksTotals.count))
+    }
+
+    var thisWeekTotal: String { String(totalAtWeek(previousToCurrent: 0)) }
+    var lastWeekTotal: String { String(totalAtWeek(previousToCurrent: 1)) }
+
+    // EventDetailsViewModelEvents
+    func showGoalsInput() { coordinator?.showGoalsInputController(event: event, callingViewModel: self) }
+    func visitIfNeeded() {
+        if event.dateVisited == nil { editUseCase.visit(event) }
     }
 }
 
-// MARK: - Public
-extension EventDetailsViewModel {
-    func configure(_ view: View) {
-        self.view = view
-
-        setStats()
-    }
+extension EventDetailsViewModel: EventEditUseCaseOutput {
+    func added(happening: Happening, to: Event) { fatalError("missing implementation") }
+    func removed(happening: Happening, from: Event) { fatalError("missing implementation") }
+    func renamed(event: Event) { fatalError("missing implementation") }
+    func visited(event: Event) { fatalError("missing implementation") }
+    func added(goal: Goal, to: Event) { fatalError("missing implementation") }
 }
 
-// MARK: - Private
-extension EventDetailsViewModel {
-    private func setStats() {
-        view?.statsLabels[.total]?.text = "\(totalAmount)"
-        view?.statsLabels[.average]?.text = "\(dayAverage)"
-        view?.statsLabels[.weekAverage]?.text = "\(weekAverage)"
-    }
+protocol EventDetailsViewModelOutput: AnyObject {
+    func update()
 }

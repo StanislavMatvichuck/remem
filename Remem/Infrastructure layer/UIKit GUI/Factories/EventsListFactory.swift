@@ -7,19 +7,16 @@
 
 import UIKit
 
+protocol EventsListFactoryInterface {
+    func makeEventCellViewModel(event: Event) -> EventCellViewModel
+}
+
 class EventsListFactory: EventsListFactoryInterface {
     // MARK: - Properties
-    let coordinator: Coordinator
-    let coordinatorFactory: CoordinatorFactory
-
-    var eventsListUseCase: EventsListUseCase { coordinatorFactory.eventsListUseCase }
-    var eventEditUseCase: EventEditUseCase { coordinatorFactory.eventEditUseCase }
-    var eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput> { coordinatorFactory.eventsListMulticastDelegate }
-    var eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput> { coordinatorFactory.eventEditMulticastDelegate }
+    let applicationFactory: ApplicationFactory
     // MARK: - Init
-    init(coordinatorFactory: CoordinatorFactory, coordinator: Coordinator) {
-        self.coordinatorFactory = coordinatorFactory
-        self.coordinator = coordinator
+    init(applicationFactory: ApplicationFactory) {
+        self.applicationFactory = applicationFactory
     }
 
     func makeEventsListController() -> EventsListController {
@@ -33,17 +30,18 @@ class EventsListFactory: EventsListFactoryInterface {
     }
 
     func makeEventsListViewModel() -> EventsListViewModel {
-        let viewModel = EventsListViewModel(listUseCase: eventsListUseCase,
-                                            editUseCase: eventEditUseCase)
-        eventsListMulticastDelegate.addDelegate(viewModel)
-        viewModel.coordinator = coordinator
+        let viewModel = EventsListViewModel(listUseCase: applicationFactory.eventsListUseCase,
+                                            editUseCase: applicationFactory.eventEditUseCase)
+        applicationFactory.eventsListMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        viewModel.coordinator = applicationFactory.coordinator
         return viewModel
     }
 
     func makeEventCellViewModel(event: Event) -> EventCellViewModel {
-        let viewModel = EventCellViewModel(event: event, editUseCase: eventEditUseCase)
-        eventEditMulticastDelegate.addDelegate(viewModel)
-        viewModel.coordinator = coordinator
+        let viewModel = EventCellViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
+        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        viewModel.coordinator = applicationFactory.coordinator
         return viewModel
     }
 }

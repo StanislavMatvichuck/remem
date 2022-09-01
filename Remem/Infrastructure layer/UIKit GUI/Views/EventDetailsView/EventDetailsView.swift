@@ -8,25 +8,11 @@
 import UIKit
 
 class EventDetailsView: UIView {
-    enum EventStat: CaseIterable {
-        case total
-        case average
-        case weekAverage
-
-        // TODO: localization
-        func localizedDescription() -> String {
-            switch self {
-            case .total: return "Total"
-            case .average: return "Average"
-            case .weekAverage: return "Week average"
-            }
-        }
-    }
-
     // MARK: - Properties
     let week = UIView(al: true)
     let clock = UIView(al: true)
-    let goalsInput: UIView = {
+
+    let goalsButton: UIView = {
         let image = UIImage(systemName: "plus.circle")?
             .withTintColor(UIHelper.brand)
             .withRenderingMode(.alwaysOriginal)
@@ -62,61 +48,46 @@ class EventDetailsView: UIView {
         return view
     }()
 
-    lazy var statsView: UIView = {
-        let view = UIStackView(al: true)
-        view.axis = .vertical
+    let total: UILabel = makeAmountLabel()
+    let thisWeekTotal: UILabel = makeAmountLabel()
+    let lastWeekTotal: UILabel = makeAmountLabel()
+    let dayAverage: UILabel = makeAmountLabel()
+    let weekAverage: UILabel = makeAmountLabel()
 
-        for stat in EventStat.allCases {
-            let statView = makeStatTile(stat: stat)
-            view.addArrangedSubview(statView)
-        }
-
-        return view
-    }()
-
-    var statsLabels = [EventStat: UILabel]()
+    private let viewModel: EventDetailsViewModelInput
 
     // MARK: - Init
-    init() {
+    init(viewModel: EventDetailsViewModelInput) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
-        backgroundColor = .secondarySystemBackground
-        setupLayout()
+        configureLayout()
+        configureAppearance()
+        configureContent()
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
-
-// MARK: - Private
-extension EventDetailsView {
-    private func setupLayout() {
-        let statsMarginContainer = UIView(al: true)
-        statsMarginContainer.addSubview(statsView)
-
-        let goalsInputMarginContainer = UIView(al: true)
-        goalsInputMarginContainer.addSubview(goalsInput)
+    private func configureLayout() {
+        let goalsButtonMargin = UIView(al: true)
+        goalsButtonMargin.addSubview(goalsButton)
 
         NSLayoutConstraint.activate([
-            statsView.leadingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.leadingAnchor),
-            statsView.trailingAnchor.constraint(equalTo: statsMarginContainer.readableContentGuide.trailingAnchor),
+            goalsButton.leadingAnchor.constraint(equalTo: goalsButtonMargin.readableContentGuide.leadingAnchor),
+            goalsButton.trailingAnchor.constraint(equalTo: goalsButtonMargin.readableContentGuide.trailingAnchor),
 
-            statsView.topAnchor.constraint(equalTo: statsMarginContainer.topAnchor),
-            statsView.bottomAnchor.constraint(equalTo: statsMarginContainer.bottomAnchor, constant: -UIHelper.spacing),
-
-            goalsInput.leadingAnchor.constraint(equalTo: goalsInputMarginContainer.readableContentGuide.leadingAnchor),
-            goalsInput.trailingAnchor.constraint(equalTo: goalsInputMarginContainer.readableContentGuide.trailingAnchor),
-
-            goalsInput.topAnchor.constraint(equalTo: goalsInputMarginContainer.topAnchor),
-            goalsInput.bottomAnchor.constraint(equalTo: goalsInputMarginContainer.bottomAnchor, constant: -UIHelper.spacing),
+            goalsButton.topAnchor.constraint(equalTo: goalsButtonMargin.topAnchor),
+            goalsButton.bottomAnchor.constraint(equalTo: goalsButtonMargin.bottomAnchor, constant: -UIHelper.spacing),
         ])
 
         let scroll = ViewScroll(.vertical)
-        scroll.contain(views:
-            week,
-            goalsInputMarginContainer,
-            make(title: "Hours distribution"),
-            clock,
-            make(title: "Stats"),
-            statsMarginContainer)
+        scroll.contain(views: week,
+                       goalsButtonMargin,
+                       make(title: "Hours distribution"),
+                       clock,
+                       make(title: "Stats"),
+                       makeStatRow(labelAmount: total, description: "Total"),
+                       makeStatRow(labelAmount: thisWeekTotal, description: "This week total"),
+                       makeStatRow(labelAmount: lastWeekTotal, description: "Last week total"),
+                       makeStatRow(labelAmount: dayAverage, description: "Day average"),
+                       makeStatRow(labelAmount: weekAverage, description: "Week average"))
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -125,6 +96,18 @@ extension EventDetailsView {
             scroll.trailingAnchor.constraint(equalTo: trailingAnchor),
             scroll.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+
+    private func configureAppearance() {
+        backgroundColor = .secondarySystemBackground
+    }
+
+    func configureContent() {
+        total.text = viewModel.totalAmount
+        thisWeekTotal.text = viewModel.thisWeekTotal
+        lastWeekTotal.text = viewModel.lastWeekTotal
+        dayAverage.text = viewModel.dayAverage
+        weekAverage.text = viewModel.weekAverage
     }
 
     private func make(title: String) -> UIView {
@@ -145,25 +128,28 @@ extension EventDetailsView {
         return view
     }
 
-    private func makeStatTile(stat: EventStat) -> UIView {
-        let labelAmount = UILabel(al: true)
-        labelAmount.text = "\(0.0)"
-        labelAmount.font = UIHelper.fontBold
-        labelAmount.textColor = UIHelper.itemFont
-
+    private func makeStatRow(labelAmount: UILabel, description: String) -> UIView {
         let labelDescription = UILabel(al: true)
-        labelDescription.text = stat.localizedDescription()
+        labelDescription.text = description
         labelDescription.numberOfLines = 0
         labelDescription.font = UIHelper.font
         labelDescription.textColor = UIHelper.itemFont
 
         let view = UIStackView(al: true)
-        view.axis = .vertical
+        view.axis = .horizontal
         view.addArrangedSubview(labelAmount)
         view.addArrangedSubview(labelDescription)
 
-        statsLabels[stat] = labelAmount
-
         return view
     }
+
+    private static func makeAmountLabel() -> UILabel {
+        let labelAmount = UILabel(al: true)
+        labelAmount.text = "\(0.0)"
+        labelAmount.font = UIHelper.fontBold
+        labelAmount.textColor = UIHelper.itemFont
+        return labelAmount
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

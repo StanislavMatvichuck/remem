@@ -5,17 +5,39 @@
 //  Created by Stanislav Matvichuck on 23.08.2022.
 //
 
-import Foundation
+import UIKit
 
-class ApplicationFactory {
+protocol CoordinatorFactoryInterface: AnyObject {
+    func makeEventDetailsController(for event: Event) -> EventDetailsController
+    func makeDayController(at day: DateComponents, for event: Event) -> DayController
+    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController
+}
+
+class ApplicationFactory: CoordinatorFactoryInterface {
     // MARK: - Long-lived dependencies
+    let coordinator: Coordinator
     let eventsListUseCase: EventsListUseCase
     let eventEditUseCase: EventEditUseCase
-    let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseOutput>()
-    let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseOutput>()
+    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
+    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
 
     // MARK: - Init
     init() {
+        func makeCoordinator(listUseCase: EventsListUseCase,
+                             editUseCase: EventEditUseCase,
+                             eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
+                             eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>) -> Coordinator
+        {
+            let navController = Self.makeStyledNavigationController()
+            navController.navigationBar.prefersLargeTitles = true
+            let coordinator = Coordinator(navController: navController,
+                                          eventsListMulticastDelegate: eventsListMulticastDelegate,
+                                          eventEditMulticastDelegate: eventEditMulticastDelegate)
+            listUseCase.delegate = coordinator
+            editUseCase.delegate = coordinator
+            return coordinator
+        }
+
         func makeEventsRepository() -> EventsRepositoryInterface {
             let container = CoreDataStack.createContainer(inMemory: false)
             let mapper = EventEntityMapper()
@@ -29,11 +51,115 @@ class ApplicationFactory {
 
         self.eventsListUseCase = listUseCase
         self.eventEditUseCase = editUseCase
+
+        let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseOutput>()
+        let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseOutput>()
+
+        self.eventsListMulticastDelegate = eventsListMulticastDelegate
+        self.eventEditMulticastDelegate = eventEditMulticastDelegate
+
+        self.coordinator = makeCoordinator(listUseCase: listUseCase,
+                                           editUseCase: editUseCase,
+                                           eventsListMulticastDelegate: eventsListMulticastDelegate,
+                                           eventEditMulticastDelegate: eventEditMulticastDelegate)
+
+        coordinator.factory = self
     }
 
-    func makeCoordinator() -> Coordinator {
-        let coordinatorContainer = CoordinatorFactory(applicationFactory: self)
-        let coordinator = coordinatorContainer.makeCoordinator()
-        return coordinator
+    // Controllers factories
+
+    func makeRootViewController() -> UIViewController {
+        let eventsListFactory = EventsListFactory(applicationFactory: self)
+        let eventsListController = eventsListFactory.makeEventsListController()
+        coordinator.navController.pushViewController(eventsListController, animated: false)
+        return coordinator.navController
+    }
+
+    func makeWeekController(for event: Event) -> WeekController {
+        let weekController = WeekController()
+        weekController.event = event
+        eventEditMulticastDelegate.addDelegate(weekController)
+        return weekController
+    }
+
+    func makeClockController(for event: Event) -> ClockController {
+        let clockController = ClockController()
+        clockController.event = event
+        return clockController
+    }
+
+    static func makeStyledNavigationController() -> UINavigationController {
+        let appearance = makeNavigationBarAppearance()
+        let nav = UINavigationController()
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.compactAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = appearance
+        nav.navigationBar.compactScrollEdgeAppearance = appearance
+        return nav
+    }
+
+    static func makeNavigationBarAppearance() -> UINavigationBarAppearance {
+        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
+        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
+
+        let doneAppearance = UIBarButtonItemAppearance(style: .done)
+        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+
+        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
+                                               NSAttributedString.Key.font: UIHelper.fontBold]
+
+        appearance.backButtonAppearance = cancelAppearance
+        appearance.doneButtonAppearance = doneAppearance
+        appearance.buttonAppearance = cancelAppearance
+        return appearance
+    }
+
+    func makeEventDetailsController(for event: Event) -> EventDetailsController {
+        let eventDetailsFactory = EventDetailsFactory(applicationFactory: self, event: event)
+        let controller = eventDetailsFactory.makeEventDetailsController()
+        return controller
+    }
+
+    func makeDayController(at day: DateComponents, for event: Event) -> DayController {
+        let day: DayController = {
+            let dayController = DayController(event: event, day: day, editUseCase: eventEditUseCase)
+            eventEditMulticastDelegate.addDelegate(dayController)
+            return dayController
+        }()
+
+        let nav = Self.makeStyledNavigationController()
+        nav.pushViewController(day, animated: false)
+        nav.modalPresentationStyle = .pageSheet
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+
+        return day
+    }
+
+    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
+        let viewModel = GoalsInputViewModel(event: event)
+        let viewRoot = GoalsInputView(viewModel: viewModel)
+        let goalsInputController = GoalsInputController(viewRoot: viewRoot, viewModel: viewModel)
+
+        let nav = Self.makeStyledNavigationController()
+        nav.pushViewController(goalsInputController, animated: false)
+        nav.preferredContentSize = CGSize(width: .wScreen, height: 250)
+        nav.modalPresentationStyle = .popover
+
+        if let pc = nav.presentationController { pc.delegate = goalsInputController }
+        if let pop = nav.popoverPresentationController {
+            pop.sourceView = sourceView
+            pop.sourceRect = CGRect(x: sourceView.bounds.minX,
+                                    y: sourceView.bounds.minY,
+                                    width: sourceView.bounds.width,
+                                    height: sourceView.bounds.height - UIHelper.font.pointSize)
+        }
+        return goalsInputController
     }
 }

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol EventsListFactoryInterface {
-    func makeEventCellViewModel(event: Event) -> EventCellViewModel
-}
-
 class EventsListController: UIViewController {
     // MARK: - Properties
     private let viewModel: EventsListViewModelInput

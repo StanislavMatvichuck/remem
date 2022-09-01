@@ -9,18 +9,13 @@ import UIKit
 
 class GoalsInputController: UIViewController {
     // MARK: - Properties
-    let event: Event
-
-    private let editUseCase: EventEditUseCaseInput
-    private let viewRoot = GoalsInputView()
-    private var viewModel: GoalsInputViewModel! {
-        didSet { viewModel.configure(viewRoot) }
-    }
+    private let viewRoot: GoalsInputView
+    private var viewModel: GoalsInputViewModel
 
     // MARK: - Init
-    init(_ event: Event, editUseCase: EventEditUseCaseInput) {
-        self.event = event
-        self.editUseCase = editUseCase
+    init(viewRoot: GoalsInputView, viewModel: GoalsInputViewModel) {
+        self.viewRoot = viewRoot
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,7 +24,6 @@ class GoalsInputController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        viewModel = GoalsInputViewModel(model: event)
         configureEventHandlers()
         configureNavBar()
         configurePickerDefaultValue()
@@ -67,13 +61,7 @@ extension GoalsInputController {
 // MARK: - Picker delegate
 extension GoalsInputController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label = UILabel()
-        label.font = UIHelper.font
-        label.textColor = UIHelper.itemFont
-        label.textAlignment = .center
-        label.text = "\(row)"
-
-        return label
+        return viewRoot.makePickerLabel(forRow: row)
     }
 
     func pickerView(_ pickerView: UIPickerView,
@@ -83,8 +71,8 @@ extension GoalsInputController: UIPickerViewDelegate {
         let todayWeekDay = Goal.WeekDay.make(.now)
         let todayPickerIndex = componentForWeekDay(weekDay: todayWeekDay)
         let daysDifference = todayPickerIndex - component
-
-        editUseCase.addGoal(to: event, at: .now.days(ago: daysDifference), amount: row)
+        let weekday = Goal.WeekDay.make(.now.days(ago: daysDifference))
+        viewModel.select(weekday: weekday, value: row)
     }
 
     private func componentForWeekDay(weekDay: Goal.WeekDay) -> Int {
@@ -102,7 +90,7 @@ extension GoalsInputController: UIPickerViewDelegate {
     private func configurePickerDefaultValue() {
         for weekday in Goal.WeekDay.allCases {
             let pickerComponent = componentForWeekDay(weekDay: weekday)
-            guard let goalAmount = event.goals(at: weekday).last?.amount else { return }
+            guard let goalAmount = viewModel.values[weekday] else { return }
             viewRoot.picker.selectRow(goalAmount, inComponent: pickerComponent, animated: false)
         }
     }

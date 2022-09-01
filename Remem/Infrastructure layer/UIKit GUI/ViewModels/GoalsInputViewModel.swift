@@ -5,29 +5,36 @@
 //  Created by Stanislav Matvichuck on 14.08.2022.
 //
 
-import UIKit
+import Foundation
 
-class GoalsInputViewModel: NSObject {
-    typealias View = GoalsInputView
-    typealias Model = Event
+protocol GoalsInputViewModelInput:
+    GoalsInputViewModelState &
+    GoalsInputViewModelEvents {}
 
+protocol GoalsInputViewModelState {
+    var values: [Goal.WeekDay: Int] { get }
+}
+
+protocol GoalsInputViewModelEvents {
+    func select(weekday: Goal.WeekDay, value: Int)
+    func submit()
+    func cancel()
+}
+
+class GoalsInputViewModel: GoalsInputViewModelInput {
     // MARK: - Properties
-
-    private let model: Model
-    private weak var view: View?
+    private let event: Event
+    weak var delegate: GoalsInputViewModelOutput?
 
     // MARK: - Init
-    init(model: Model) {
-        self.model = model
-    }
+    init(event: Event) { self.event = event }
+
+    // GoalsInputViewModelState
+    var values: [Goal.WeekDay: Int] = [:]
+    // GoalsInputViewModelEvents
+    func select(weekday: Goal.WeekDay, value: Int) {}
+    func submit() {}
+    func cancel() {}
 }
 
-// MARK: - Public
-extension GoalsInputViewModel {
-    func configure(_ view: View) {
-        self.view = view
-    }
-}
-
-// MARK: - Private
-extension GoalsInputViewModel {}
+protocol GoalsInputViewModelOutput: AnyObject {}
