@@ -108,6 +108,7 @@ extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
     func added(goal: Goal, to: Event) { fatalError("Missing implementation") }
 }
 
+// MARK: - EventsListViewModelOutput
 protocol EventsListViewModelOutput: AnyObject {
     func update()
     func addEvent(at: Int)

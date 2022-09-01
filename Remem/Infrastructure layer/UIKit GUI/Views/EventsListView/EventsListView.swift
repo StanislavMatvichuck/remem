@@ -15,13 +15,6 @@ class EventsListView: UIView {
     static let delete = NSLocalizedString("button.contextual.delete", comment: "EventsList swipe gesture actions")
     static let rename = NSLocalizedString("button.contextual.rename", comment: "EventsList swipe gesture actions")
 
-    // MARK: - Related types
-    enum Section: Int {
-        case hint
-        case events
-        case footer
-    }
-
     // MARK: - Properties
     let input: UIMovableTextViewInterface = {
         UIMovableTextView()
