@@ -242,7 +242,6 @@
 		085C4E97289AB57A0094388C /* Infrastructure layer */ = {
 			isa = PBXGroup;
 			children = (
-				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 				08C6C4FD287DAC44001F522E /* Data Layer */,
 				085C4E98289AB5940094388C /* UIKit GUI */,
 			);
@@ -252,13 +251,13 @@
 		085C4E98289AB5940094388C /* UIKit GUI */ = {
 			isa = PBXGroup;
 			children = (
-				08E194FE28BBE618001BCCC9 /* Factories */,
-				08D512332787140D00C2037F /* Controllers */,
-				0823D233289283A8005B4BE3 /* Coordinator.swift */,
-				08D5123E278716DA00C2037F /* Helpers */,
 				08D512322787136B00C2037F /* UIKitDelegates */,
+				08E194FE28BBE618001BCCC9 /* Factories */,
 				086DC6CE2880570D0048F22F /* ViewModels */,
+				0823D233289283A8005B4BE3 /* Coordinator.swift */,
+				08D512332787140D00C2037F /* Controllers */,
 				086DC6D12880578E0048F22F /* Views */,
+				08D5123E278716DA00C2037F /* Helpers */,
 			);
 			path = "UIKit GUI";
 			sourceTree = "<group>";
@@ -309,8 +308,8 @@
 		086DC6D02880571A0048F22F /* Application layer */ = {
 			isa = PBXGroup;
 			children = (
-				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
-				08D10F49289587AF005453DD /* UseCases */,
+				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
+				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
 			);
 			path = "Application layer";
 			sourceTree = "<group>";
@@ -418,15 +417,6 @@
 			path = EventCell;
 			sourceTree = "<group>";
 		};
-		08D10F49289587AF005453DD /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
-				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +498,8 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
+				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				083A415F27BE603800AF2098 /* ExtensionDate.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,

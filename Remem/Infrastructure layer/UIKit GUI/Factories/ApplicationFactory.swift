@@ -62,17 +62,22 @@ class ApplicationFactory: CoordinatorFactoryInterface {
                                            editUseCase: editUseCase,
                                            eventsListMulticastDelegate: eventsListMulticastDelegate,
                                            eventEditMulticastDelegate: eventEditMulticastDelegate)
-
         coordinator.factory = self
     }
 
-    // Controllers factories
+    // MARK: - Controllers creation
 
     func makeRootViewController() -> UIViewController {
         let eventsListFactory = EventsListFactory(applicationFactory: self)
         let eventsListController = eventsListFactory.makeEventsListController()
         coordinator.navController.pushViewController(eventsListController, animated: false)
         return coordinator.navController
+    }
+
+    func makeEventDetailsController(for event: Event) -> EventDetailsController {
+        let eventDetailsFactory = EventDetailsFactory(applicationFactory: self, event: event)
+        let controller = eventDetailsFactory.makeEventDetailsController()
+        return controller
     }
 
     func makeWeekController(for event: Event) -> WeekController {
@@ -86,43 +91,6 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         let clockController = ClockController()
         clockController.event = event
         return clockController
-    }
-
-    static func makeStyledNavigationController() -> UINavigationController {
-        let appearance = makeNavigationBarAppearance()
-        let nav = UINavigationController()
-        nav.navigationBar.standardAppearance = appearance
-        nav.navigationBar.compactAppearance = appearance
-        nav.navigationBar.scrollEdgeAppearance = appearance
-        nav.navigationBar.compactScrollEdgeAppearance = appearance
-        return nav
-    }
-
-    static func makeNavigationBarAppearance() -> UINavigationBarAppearance {
-        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
-        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
-
-        let doneAppearance = UIBarButtonItemAppearance(style: .done)
-        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
-
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-
-        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
-                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
-                                               NSAttributedString.Key.font: UIHelper.fontBold]
-
-        appearance.backButtonAppearance = cancelAppearance
-        appearance.doneButtonAppearance = doneAppearance
-        appearance.buttonAppearance = cancelAppearance
-        return appearance
-    }
-
-    func makeEventDetailsController(for event: Event) -> EventDetailsController {
-        let eventDetailsFactory = EventDetailsFactory(applicationFactory: self, event: event)
-        let controller = eventDetailsFactory.makeEventDetailsController()
-        return controller
     }
 
     func makeDayController(at day: DateComponents, for event: Event) -> DayController {
@@ -161,5 +129,38 @@ class ApplicationFactory: CoordinatorFactoryInterface {
                                     height: sourceView.bounds.height - UIHelper.font.pointSize)
         }
         return goalsInputController
+    }
+
+    // MARK: - UINavigationController styling
+
+    static func makeStyledNavigationController() -> UINavigationController {
+        let appearance = makeNavigationBarAppearance()
+        let nav = UINavigationController()
+        nav.navigationBar.standardAppearance = appearance
+        nav.navigationBar.compactAppearance = appearance
+        nav.navigationBar.scrollEdgeAppearance = appearance
+        nav.navigationBar.compactScrollEdgeAppearance = appearance
+        return nav
+    }
+
+    static func makeNavigationBarAppearance() -> UINavigationBarAppearance {
+        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
+        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
+
+        let doneAppearance = UIBarButtonItemAppearance(style: .done)
+        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+
+        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
+                                               NSAttributedString.Key.font: UIHelper.fontBold]
+
+        appearance.backButtonAppearance = cancelAppearance
+        appearance.doneButtonAppearance = doneAppearance
+        appearance.buttonAppearance = cancelAppearance
+        return appearance
     }
 }

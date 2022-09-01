@@ -30,6 +30,7 @@ class EventDetailsFactory: EventDetailsFactoryInterface {
                                                 viewModel: viewModel,
                                                 clockController: clockController,
                                                 weekController: weekController)
+        controller.title = event.name
         viewModel.delegate = controller
         return controller
     }

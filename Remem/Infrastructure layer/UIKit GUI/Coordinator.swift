@@ -55,7 +55,7 @@ extension Coordinator {
 }
 
 // MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
-/// distributes events across all controllers
+/// distributes domain events across all viewModels
 extension Coordinator: EventsListUseCaseOutput, EventEditUseCaseOutput {
     // EventsListUseCaseOutput
     func added(event: Event) { listDelegates.call { $0.added(event: event) } }
