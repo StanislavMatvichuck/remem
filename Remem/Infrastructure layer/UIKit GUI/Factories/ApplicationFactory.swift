@@ -111,9 +111,13 @@ class ApplicationFactory: CoordinatorFactoryInterface {
     }
 
     func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
-        let viewModel = GoalsInputViewModel(event: event)
+        let viewModel = GoalsInputViewModel(event: event, editUseCase: eventEditUseCase)
+        viewModel.coordinator = coordinator
+
         let viewRoot = GoalsInputView(viewModel: viewModel)
+
         let goalsInputController = GoalsInputController(viewRoot: viewRoot, viewModel: viewModel)
+        viewModel.delegate = goalsInputController
 
         let nav = Self.makeStyledNavigationController()
         nav.pushViewController(goalsInputController, animated: false)

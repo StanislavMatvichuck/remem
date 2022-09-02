@@ -10,10 +10,9 @@ import UIKit
 class GoalsInputController: UIViewController {
     // MARK: - Properties
     private let viewRoot: GoalsInputView
-    private var viewModel: GoalsInputViewModel
-
+    private let viewModel: GoalsInputViewModelInput
     // MARK: - Init
-    init(viewRoot: GoalsInputView, viewModel: GoalsInputViewModel) {
+    init(viewRoot: GoalsInputView, viewModel: GoalsInputViewModelInput) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -29,6 +28,13 @@ class GoalsInputController: UIViewController {
         configurePickerDefaultValue()
     }
 
+    private func configureEventHandlers() {
+        viewRoot.picker.delegate = self
+    }
+
+    @objc private func onPressSaveGoal(sender: UIBarButtonItem) { viewModel.submit() }
+    @objc private func onPressCancelGoal(sender: UIBarButtonItem) { viewModel.cancel() }
+
     private func configureNavBar() {
         title = "Daily goal"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
@@ -40,27 +46,21 @@ class GoalsInputController: UIViewController {
                                                             target: self,
                                                             action: #selector(onPressSaveGoal))
     }
-}
 
-// MARK: - Events handling
-extension GoalsInputController {
-    private func configureEventHandlers() {
-        viewRoot.picker.delegate = self
-    }
-
-    @objc private func onPressSaveGoal(sender: UIBarButtonItem) {
-        print("saved")
-        dismiss(animated: true)
-    }
-
-    @objc private func onPressCancelGoal(sender: UIBarButtonItem) {
-        dismiss(animated: true)
+    private func configurePickerDefaultValue() {
+        for weekday in Goal.WeekDay.allCases {
+            let pickerComponent = componentForWeekDay(weekDay: weekday)
+            let goalAmount = viewModel.amount(forWeekDay: weekday)
+            viewRoot.picker.selectRow(goalAmount, inComponent: pickerComponent, animated: false)
+        }
     }
 }
 
 // MARK: - Picker delegate
 extension GoalsInputController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int,
+                    forComponent component: Int, reusing view: UIView?) -> UIView
+    {
         return viewRoot.makePickerLabel(forRow: row)
     }
 
@@ -86,15 +86,10 @@ extension GoalsInputController: UIPickerViewDelegate {
         case .sunday: return 6
         }
     }
-
-    private func configurePickerDefaultValue() {
-        for weekday in Goal.WeekDay.allCases {
-            let pickerComponent = componentForWeekDay(weekDay: weekday)
-            guard let goalAmount = viewModel.values[weekday] else { return }
-            viewRoot.picker.selectRow(goalAmount, inComponent: pickerComponent, animated: false)
-        }
-    }
 }
+
+// MARK: - GoalsInputViewModelOutput
+extension GoalsInputController: GoalsInputViewModelOutput {}
 
 extension GoalsInputController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController,

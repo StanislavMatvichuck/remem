@@ -12,7 +12,7 @@ protocol GoalsInputViewModelInput:
     GoalsInputViewModelEvents {}
 
 protocol GoalsInputViewModelState {
-    var values: [Goal.WeekDay: Int] { get }
+    func amount(forWeekDay: Goal.WeekDay) -> Int
 }
 
 protocol GoalsInputViewModelEvents {
@@ -23,18 +23,31 @@ protocol GoalsInputViewModelEvents {
 
 class GoalsInputViewModel: GoalsInputViewModelInput {
     // MARK: - Properties
-    private let event: Event
     weak var delegate: GoalsInputViewModelOutput?
-
+    weak var coordinator: Coordinator?
+    private let event: Event
+    private let editUseCase: EventEditUseCaseInput
     // MARK: - Init
-    init(event: Event) { self.event = event }
+    init(event: Event, editUseCase: EventEditUseCaseInput) {
+        self.event = event
+        self.editUseCase = editUseCase
+    }
 
     // GoalsInputViewModelState
-    var values: [Goal.WeekDay: Int] = [:]
+    func amount(forWeekDay: Goal.WeekDay) -> Int {
+        event.goals(at: forWeekDay).last?.amount ?? 0
+    }
+
     // GoalsInputViewModelEvents
     func select(weekday: Goal.WeekDay, value: Int) {}
-    func submit() {}
-    func cancel() {}
+
+    func submit() {
+        coordinator?.navController.dismiss(animated: true)
+    }
+
+    func cancel() {
+        coordinator?.navController.dismiss(animated: true)
+    }
 }
 
 protocol GoalsInputViewModelOutput: AnyObject {}
