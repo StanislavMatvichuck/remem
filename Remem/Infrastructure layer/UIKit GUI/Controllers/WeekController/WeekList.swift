@@ -9,8 +9,13 @@ import Foundation
 
 struct WeekList {
     let days: [WeekDay]
+    let shownDaysForward = 14
 
-    init(from: Date, to: Date, event: Event) {
+    init(event: Event) {
+        let from = event.dateCreated.startOfWeek!
+        let futureDays = Double(60*60*24*shownDaysForward)
+        let to = Date.now.endOfWeek!.addingTimeInterval(futureDays)
+
         let dayDurationInSeconds: TimeInterval = 60*60*24
         var days: [WeekDay] = []
 

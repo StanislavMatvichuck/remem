@@ -25,22 +25,17 @@ class WeekViewModel: WeekViewModelInput {
     weak var delegate: WeekViewModelOutput?
     weak var coordinator: Coordinator?
 
-    private var event: Event
+    private var event: Event { didSet { happeningsList = WeekList(event: event) }}
 
     // MARK: - Init
     init(event: Event) {
         self.event = event
+        happeningsList = WeekList(event: event)
     }
 
     // WeekViewModelState
-    var happeningsList: WeekList {
-        let start = event.dateCreated.startOfWeek!
-        let futureDays = Double(60*60*24*shownDaysForward)
-        let end = Date.now.endOfWeek!.addingTimeInterval(futureDays)
-        return WeekList(from: start, to: end, event: event)
-    }
-
-    let shownDaysForward = 14
+    var happeningsList: WeekList
+    var shownDaysForward: Int { happeningsList.shownDaysForward }
 
     // WeekViewModelEvents
     func select(day: DateComponents) {
