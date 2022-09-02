@@ -25,7 +25,7 @@ class WeekCell: UICollectionViewCell {
     }
 
     // MARK: - Properties
-    weak var delegate: WeekCellDelegate?
+    var viewModel: WeekCellViewModelInput! { didSet { configureContent() }}
 
     var day: UILabel = WeekCell.makeAmountLabel()
     var amount: UILabel = WeekCell.makeAmountLabel()
@@ -66,7 +66,6 @@ class WeekCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         configureLayout()
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
     }
@@ -75,9 +74,21 @@ class WeekCell: UICollectionViewCell {
 
     // MARK: - View lifecycle
     override func prepareForReuse() {
-        delegate = nil
-        hideAll()
         super.prepareForReuse()
+        viewModel = nil
+        hideAll()
+    }
+
+    func configureContent() {
+        guard let viewModel = viewModel else { return }
+        day.text = viewModel.dayNumber
+        day.textColor = viewModel.isToday ? UIHelper.brand : UIHelper.itemFont
+        amount.text = viewModel.amount
+
+        showGoal(amount: viewModel.goalsAmount)
+        show(timings: viewModel.happeningsTimings)
+
+        if viewModel.isAchieved { show(achievedGoalAmount: viewModel.goalsAmount) }
     }
 }
 
@@ -120,7 +131,14 @@ extension WeekCell {
     @objc private func handlePress() {
         UIDevice.vibrate(.medium)
         animate()
-        delegate?.didPress(cell: self)
+        viewModel.select()
+    }
+}
+
+// MARK: - WeekCellViewModelOutput
+extension WeekCell: WeekCellViewModelOutput {
+    func update() {
+        configureContent()
     }
 }
 

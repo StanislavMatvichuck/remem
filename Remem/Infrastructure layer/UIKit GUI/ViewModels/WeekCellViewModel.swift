@@ -5,51 +5,75 @@
 //  Created by Stanislav Matvichuck on 19.08.2022.
 //
 
-import UIKit
+import Foundation
 
-class WeekCellViewModel: NSObject {
-    typealias View = WeekCell
-    typealias Model = WeekDay
+protocol WeekCellViewModelInput:
+    WeekCellViewModelState &
+    WeekCellViewModelEvents {}
 
+protocol WeekCellViewModelState {
+    var goalsAmount: Int { get }
+    var happeningsTimings: [String] { get }
+    var isAchieved: Bool { get }
+    var isToday: Bool { get }
+    var dayNumber: String { get }
+    var amount: String { get }
+}
+
+protocol WeekCellViewModelEvents {
+    func select()
+}
+
+class WeekCellViewModel: WeekCellViewModelInput {
     // MARK: - Properties
-    private let model: Model
-    private weak var view: View?
+    weak var delegate: WeekCellViewModelOutput?
+    weak var coordinator: Coordinator?
 
-    // testable data
-    private var goalsAmount: Int
-    private var happeningsTimings: [String]
-    private var isAchieved: Bool
+    private var weekDay: WeekDay
 
     // MARK: - Init
-    init(model: Model) {
-        self.model = model
+    init(weekDay: WeekDay) {
+        self.weekDay = weekDay
 
-        goalsAmount = model.goal?.amount ?? 0
+        goalsAmount = weekDay.goal?.amount ?? 0
 
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .short
 
-        happeningsTimings = model.happenings.map { happening in
+        happeningsTimings = weekDay.happenings.map { happening in
             formatter.string(from: happening.dateCreated)
         }
 
         isAchieved = happeningsTimings.count >= goalsAmount && goalsAmount > 0
+        isToday = weekDay.isToday
+        amount = String(weekDay.happenings.count)
+        dayNumber = String(weekDay.dayNumber)
+    }
+
+    // WeekCellViewModelState
+    var goalsAmount: Int
+    var happeningsTimings: [String]
+    var isAchieved: Bool
+    var isToday: Bool
+    var amount: String
+    var dayNumber: String
+
+    // WeekCellViewModelEvents
+    func select() {
+        print(#function)
     }
 }
 
-// MARK: - Public
-extension WeekCellViewModel {
-    func configure(_ view: View) {
-        self.view = view
+extension WeekCellViewModel: EventEditUseCaseOutput {
+    func renamed(event: Event) { delegate?.update() }
+    func added(goal: Goal, to: Event) { delegate?.update() }
+    func added(happening: Happening, to: Event) { delegate?.update() }
+    func removed(happening: Happening, from: Event) { delegate?.update() }
 
-        view.day.text = String(model.dayNumber)
-        view.day.textColor = model.isToday ? UIHelper.brand : UIHelper.itemFont
-        view.amount.text = String(model.happenings.count)
+    func visited(event: Event) {}
+}
 
-        view.showGoal(amount: goalsAmount)
-        view.show(timings: happeningsTimings)
-
-        if isAchieved { view.show(achievedGoalAmount: goalsAmount) }
-    }
+protocol WeekCellViewModelOutput: AnyObject {
+    func update()
 }

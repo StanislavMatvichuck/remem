@@ -23,7 +23,8 @@ class EventDetailsFactory: EventDetailsFactoryInterface {
         let viewModel = makeEventDetailsViewModel()
         let view = EventDetailsView(viewModel: viewModel)
 
-        let weekController = applicationFactory.makeWeekController(for: event)
+        let weekFactory = WeekFactory(eventDetailsFactory: self)
+        let weekController = weekFactory.makeWeekController()
         let clockController = applicationFactory.makeClockController(for: event)
 
         let controller = EventDetailsController(viewRoot: view,

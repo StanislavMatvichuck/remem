@@ -13,10 +13,12 @@ class WeekController: UIViewController {
 
     private let viewRoot: WeekView
     private let viewModel: WeekViewModelInput
+    private let factory: WeekFactoryInterface
     // MARK: - Init
-    init(viewRoot: WeekView, viewModel: WeekViewModelInput) {
+    init(viewRoot: WeekView, viewModel: WeekViewModelInput, factory: WeekFactoryInterface) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
+        self.factory = factory
         super.init(nibName: nil, bundle: nil)
         viewRoot.collection.dataSource = self
         viewRoot.collection.delegate = self
@@ -27,6 +29,7 @@ class WeekController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
+        super.viewDidLoad()
         viewRoot.collection.delegate = self
     }
 
@@ -68,9 +71,10 @@ extension WeekController: UICollectionViewDataSource {
             as? WeekCell
         else { return UICollectionViewCell() }
 
-        let weekDay = viewModel.happeningsList.days[indexPath.row]
-        let weekCellViewModel = WeekCellViewModel(model: weekDay)
-        weekCellViewModel.configure(cell)
+        let day = viewModel.happeningsList.days[indexPath.row]
+        let viewModel = factory.makeWeekCellViewModel(weekDay: day)
+        cell.viewModel = viewModel
+        viewModel.delegate = cell
 
         return cell
     }
@@ -81,11 +85,6 @@ extension WeekController:
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout
 {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? WeekCell else { return }
-        cell.delegate = self
-    }
-
     // UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
