@@ -36,6 +36,36 @@ class EventDetailsViewModel: EventDetailsViewModelInput {
         self.editUseCase = editUseCase
     }
 
+    // EventDetailsViewModelState
+    var thisWeekTotal: String { String(totalAtWeek(previousToCurrent: 0)) }
+    var lastWeekTotal: String { String(totalAtWeek(previousToCurrent: 1)) }
+    var totalAmount: String {
+        String(event.happenings.reduce(0) { partialResult, happening in
+            partialResult + Int(happening.value)
+        })
+    }
+
+    var dayAverage: String {
+        let total = Double(totalAmount)
+        let daysAmount = Double(daysSince)
+        return String(total! / daysAmount)
+    }
+
+    var weekAverage: String {
+        var weeksTotals: [Double] = []
+
+        for i in 0 ... weeksSince - 1 {
+            let totalAtWeek = Double(totalAtWeek(previousToCurrent: i))
+            weeksTotals.append(totalAtWeek)
+        }
+
+        let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
+            result + iterationAverage
+        }
+
+        return String(total / Double(weeksTotals.count))
+    }
+
     private var daysSince: Int {
         let cal = Calendar.current
         let fromDate = cal.startOfDay(for: event.dateCreated)
@@ -68,37 +98,6 @@ class EventDetailsViewModel: EventDetailsViewModelInput {
 
         return result
     }
-
-    // EventDetailsViewModelState
-    var totalAmount: String {
-        String(event.happenings.reduce(0) { partialResult, happening in
-            partialResult + Int(happening.value)
-        })
-    }
-
-    var dayAverage: String {
-        let total = Double(totalAmount)
-        let daysAmount = Double(daysSince)
-        return String(total! / daysAmount)
-    }
-
-    var weekAverage: String {
-        var weeksTotals: [Double] = []
-
-        for i in 0 ... weeksSince - 1 {
-            let totalAtWeek = Double(totalAtWeek(previousToCurrent: i))
-            weeksTotals.append(totalAtWeek)
-        }
-
-        let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
-            result + iterationAverage
-        }
-
-        return String(total / Double(weeksTotals.count))
-    }
-
-    var thisWeekTotal: String { String(totalAtWeek(previousToCurrent: 0)) }
-    var lastWeekTotal: String { String(totalAtWeek(previousToCurrent: 1)) }
 
     // EventDetailsViewModelEvents
     func showGoalsInput() { coordinator?.showGoalsInputController(event: event, callingViewModel: self) }
