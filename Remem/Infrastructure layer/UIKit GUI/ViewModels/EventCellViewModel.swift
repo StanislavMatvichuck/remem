@@ -51,10 +51,10 @@ extension EventCellViewModel: EventEditUseCaseOutput {
         delegate?.addedHappening()
     }
 
-    func removed(happening: Happening, from: Event) { fatalError("Missing implementation") }
-    func renamed(event: Event) { fatalError("Missing implementation") }
-    func visited(event: Event) { fatalError("Missing implementation") }
-    func added(goal: Goal, to: Event) { fatalError("Missing implementation") }
+    func removed(happening: Happening, from: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
 
 // MARK: - EventCellVMOutput

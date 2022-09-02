@@ -58,7 +58,7 @@ class WeekView: UIView {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        setupLayout()
+        configureLayout()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -66,7 +66,7 @@ class WeekView: UIView {
 
 // MARK: - Private
 extension WeekView {
-    private func setupLayout() {
+    private func configureLayout() {
         addSubview(collection)
         addSubview(weekdaysLine)
 

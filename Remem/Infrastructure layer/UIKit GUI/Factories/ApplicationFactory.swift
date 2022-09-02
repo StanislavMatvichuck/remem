@@ -81,10 +81,15 @@ class ApplicationFactory: CoordinatorFactoryInterface {
     }
 
     func makeWeekController(for event: Event) -> WeekController {
-        let weekController = WeekController()
-        weekController.event = event
-        eventEditMulticastDelegate.addDelegate(weekController)
-        return weekController
+        let view = WeekView()
+        let viewModel = WeekViewModel(event: event)
+        viewModel.coordinator = coordinator
+        eventEditMulticastDelegate.addDelegate(viewModel)
+
+        let controller = WeekController(viewRoot: view, viewModel: viewModel)
+        viewModel.delegate = controller
+
+        return controller
     }
 
     func makeClockController(for event: Event) -> ClockController {

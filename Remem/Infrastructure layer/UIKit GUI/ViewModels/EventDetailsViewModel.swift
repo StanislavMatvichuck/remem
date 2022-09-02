@@ -107,11 +107,14 @@ class EventDetailsViewModel: EventDetailsViewModelInput {
 }
 
 extension EventDetailsViewModel: EventEditUseCaseOutput {
-    func added(happening: Happening, to: Event) { fatalError("missing implementation") }
-    func removed(happening: Happening, from: Event) { fatalError("missing implementation") }
-    func renamed(event: Event) { fatalError("missing implementation") }
-    func visited(event: Event) { fatalError("missing implementation") }
-    func added(goal: Goal, to: Event) { fatalError("missing implementation") }
+    func added(happening: Happening, to: Event) {
+        delegate?.update()
+    }
+
+    func removed(happening: Happening, from: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
 
 protocol EventDetailsViewModelOutput: AnyObject {

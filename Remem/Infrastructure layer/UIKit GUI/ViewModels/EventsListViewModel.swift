@@ -104,8 +104,8 @@ extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
     func added(happening: Happening, to: Event) { delegate?.update() }
     func visited(event: Event) { delegate?.update() }
     func removed(happening: Happening, from: Event) { delegate?.update() }
-    func renamed(event: Event) { fatalError("Missing implementation") }
-    func added(goal: Goal, to: Event) { fatalError("Missing implementation") }
+    func renamed(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
 
 // MARK: - EventsListViewModelOutput
