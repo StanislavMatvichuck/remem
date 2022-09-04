@@ -27,7 +27,7 @@ protocol WeekCellViewModelEvents {
 class WeekCellViewModel: WeekCellViewModelInput {
     // MARK: - Properties
     weak var delegate: WeekCellViewModelOutput?
-    weak var coordinator: Coordinator?
+    weak var coordinator: Coordinating?
 
     let date: Date
     let event: Event
@@ -54,7 +54,7 @@ class WeekCellViewModel: WeekCellViewModelInput {
     }
 
     // WeekCellViewModelEvents
-    func select() { coordinator?.showDayController(date: date, event: event) }
+    func select() { coordinator?.showDay(event: event, date: date) }
 }
 
 extension WeekCellViewModel: EventEditUseCaseOutput {

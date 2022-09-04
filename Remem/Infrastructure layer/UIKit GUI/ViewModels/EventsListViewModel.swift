@@ -29,7 +29,7 @@ protocol EventsListViewModelInputEvents: AnyObject {
 class EventsListViewModel: EventsListViewModelInput {
     // MARK: - Properties
     weak var delegate: EventsListViewModelOutput?
-    weak var coordinator: Coordinator?
+    weak var coordinator: Coordinating?
 
     private let listUseCase: EventsListUseCaseInput
     private let editUseCase: EventEditUseCaseInput
@@ -61,7 +61,7 @@ class EventsListViewModel: EventsListViewModelInput {
     }
 
     // EventsListViewModelInputEvents
-    func select(event: Event) { coordinator?.showDetails(for: event) }
+    func select(event: Event) { coordinator?.showDetails(event: event) }
     func cancelNameEditing() { renamedEvent = nil }
     func selectForRemoving(event: Event) { listUseCase.remove(event) }
     func selectForRenaming(event: Event) {

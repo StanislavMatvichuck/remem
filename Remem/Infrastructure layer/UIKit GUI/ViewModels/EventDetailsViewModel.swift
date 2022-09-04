@@ -26,7 +26,7 @@ protocol EventDetailsViewModelEvents {
 
 class EventDetailsViewModel: EventDetailsViewModelInput {
     weak var delegate: EventDetailsViewModelOutput?
-    weak var coordinator: Coordinator?
+    weak var coordinator: Coordinating?
 
     private let event: Event
     private let editUseCase: EventEditUseCaseInput
@@ -100,7 +100,7 @@ class EventDetailsViewModel: EventDetailsViewModelInput {
     }
 
     // EventDetailsViewModelEvents
-    func showGoalsInput() { coordinator?.showGoalsInputController(event: event, callingViewModel: self) }
+    func showGoalsInput() { coordinator?.showGoalsInput(event: event, callingViewModel: self) }
     func visitIfNeeded() {
         if event.dateVisited == nil { editUseCase.visit(event) }
     }

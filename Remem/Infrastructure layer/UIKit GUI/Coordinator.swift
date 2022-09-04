@@ -7,7 +7,13 @@
 
 import UIKit
 
-class Coordinator: NSObject {
+protocol Coordinating: AnyObject {
+    func showDetails(event: Event)
+    func showDay(event: Event, date: Date)
+    func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel)
+}
+
+class Coordinator: NSObject, Coordinating {
     weak var factory: CoordinatorFactoryInterface?
     let navController: UINavigationController
     let listDelegates: MulticastDelegate<EventsListUseCaseOutput>
@@ -26,17 +32,17 @@ class Coordinator: NSObject {
 
 // MARK: - Public
 extension Coordinator {
-    func showDetails(for event: Event) {
+    func showDetails(event: Event) {
         guard let details = factory?.makeEventDetailsController(for: event) else { return }
         navController.pushViewController(details, animated: true)
     }
 
-    func showDayController(date: Date, event: Event) {
+    func showDay(event: Event, date: Date) {
         guard let dayController = factory?.makeDayController(date: date, event: event) else { return }
         presentModally(dayController)
     }
 
-    func showGoalsInputController(event: Event, callingViewModel: EventDetailsViewModel) {
+    func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel) {
         guard
             let callingController = callingViewModel.delegate as? EventDetailsController,
             let goalsController = factory?.makeGoalsInputController(for: event, sourceView: callingController.goalsInputView)

@@ -23,7 +23,7 @@ protocol EventCellViewModelInputEvents {
 
 class EventCellViewModel: EventCellViewModelInput {
     // MARK: - Properties
-    weak var coordinator: Coordinator?
+    weak var coordinator: Coordinating?
     weak var delegate: EventCellViewModelOutput?
 
     private let event: Event
@@ -40,7 +40,7 @@ class EventCellViewModel: EventCellViewModelInput {
     var amount: String { String(event.happenings.count) }
 
     // EventCellViewModelInputEvents
-    func select() { coordinator?.showDetails(for: event) }
+    func select() { coordinator?.showDetails(event: event) }
     func swipe() { editUseCase.addHappening(to: event, date: .now) }
 }
 
