@@ -5,32 +5,53 @@
 //  Created by Stanislav Matvichuck on 17.07.2022.
 //
 
-import UIKit
+import Foundation
 
-class ClockViewModel {
-    typealias View = ClockView
-    typealias Model = ClockSectionsList
+protocol ClockViewModelInput:
+    ClockViewModelState &
+    ClockViewModelEvents {}
 
-    // MARK: - Properties
-    private var model: Model
-    private var view: View?
-
-    // MARK: - Init
-    init(model: Model) { self.model = model }
+protocol ClockViewModelState {
+    func section(at: Int) -> ClockSection?
 }
 
-// MARK: - Public
-extension ClockViewModel {
-    func configure(_ view: View) {
-        self.view = view
+protocol ClockViewModelEvents {}
 
-        for i in 0 ... ClockSectionsList.size - 1 {
-            guard
-                let layers = view.clock.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],
-                let section = model.section(at: i)
-            else { continue }
+class ClockViewModel: ClockViewModelInput {
+    weak var delegate: ClockViewModelOutput?
+    private var event: Event { didSet {
+        list = ClockSectionsList(happenings: event.happenings)
+    }}
 
-            layers[i].animate(at: i, to: section)
-        }
+    private var list: ClockSectionsList
+    // MARK: - Init
+    init(event: Event) {
+        self.event = event
+        list = ClockSectionsList(happenings: event.happenings)
     }
+
+    // ClockViewModelState
+    func section(at: Int) -> ClockSection? {
+        list.section(at: at)
+    }
+}
+
+extension ClockViewModel: EventEditUseCaseOutput {
+    func added(happening: Happening, to: Event) {
+        event = to
+        delegate?.update()
+    }
+
+    func removed(happening: Happening, from: Event) {
+        event = from
+        delegate?.update()
+    }
+
+    func added(goal: Goal, to: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+}
+
+protocol ClockViewModelOutput: AnyObject {
+    func update()
 }

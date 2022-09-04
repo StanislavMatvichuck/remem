@@ -14,6 +14,10 @@ struct ClockSectionsList {
 
     // MARK: - Properties
     var sections: [ClockSection] = Array(repeating: ClockSection(), count: Self.size)
+
+    init(happenings: [Happening]) {
+        happenings.forEach { add(happening: $0) }
+    }
 }
 
 // MARK: - Public
@@ -26,29 +30,18 @@ extension ClockSectionsList {
 
         return sections[index]
     }
-
-    mutating func fill(with happenings: [Happening]) {
-        reset()
-        happenings.forEach { add(point: $0) }
-    }
 }
 
 // MARK: - Private
 extension ClockSectionsList {
-    private mutating func add(point: Happening) {
-        let date = point.dateCreated
+    private mutating func add(happening: Happening) {
+        let date = happening.dateCreated
         guard
             let index = index(for: seconds(for: date)),
             var section = section(at: index)
         else { return }
-
         section.addHappening()
-
         sections[index] = section
-    }
-
-    private mutating func reset() {
-        sections = Array(repeating: ClockSection(), count: Self.size)
     }
 
     private func seconds(for date: Date) -> Int {

@@ -86,12 +86,6 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         return controller
     }
 
-    func makeClockController(for event: Event) -> ClockController {
-        let clockController = ClockController()
-        clockController.event = event
-        return clockController
-    }
-
     func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
         let viewModel = GoalsInputViewModel(event: event, editUseCase: eventEditUseCase)
         viewModel.coordinator = coordinator
