@@ -31,8 +31,8 @@ extension Coordinator {
         navController.pushViewController(details, animated: true)
     }
 
-    func showDayController(for day: DateComponents, event: Event) {
-        guard let dayController = factory?.makeDayController(at: day, for: event) else { return }
+    func showDayController(date: Date, event: Event) {
+        guard let dayController = factory?.makeDayController(date: date, event: event) else { return }
         presentModally(dayController)
     }
 

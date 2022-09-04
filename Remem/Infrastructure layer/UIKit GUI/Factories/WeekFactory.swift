@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeekFactoryInterface: AnyObject {
-    func makeWeekCellViewModel(weekDay: WeekDay) -> WeekCellViewModel
+    func makeWeekCellViewModel(date: Date, event: Event) -> WeekCellViewModel
 }
 
 class WeekFactory: WeekFactoryInterface {
@@ -28,15 +28,15 @@ class WeekFactory: WeekFactoryInterface {
     }
 
     func makeWeekViewModel() -> WeekViewModel {
-        let viewModel = WeekViewModel(event: eventDetailsFactory.event)
+        let viewModel = WeekViewModel(event: eventDetailsFactory.event, factory: self)
         eventDetailsFactory.applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = eventDetailsFactory.applicationFactory.coordinator
         return viewModel
     }
 
     // WeekFactoryInterface
-    func makeWeekCellViewModel(weekDay: WeekDay) -> WeekCellViewModel {
-        let viewModel = WeekCellViewModel(weekDay: weekDay)
+    func makeWeekCellViewModel(date: Date, event: Event) -> WeekCellViewModel {
+        let viewModel = WeekCellViewModel(date: date, event: event)
         eventDetailsFactory.applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = eventDetailsFactory.applicationFactory.coordinator
         return viewModel

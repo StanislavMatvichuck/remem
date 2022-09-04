@@ -25,7 +25,7 @@ class WeekCell: UICollectionViewCell {
     }
 
     // MARK: - Properties
-    var viewModel: WeekCellViewModelInput! { didSet { configureContent() }}
+    var viewModel: WeekCellViewModelInput? { didSet { configureContent() }}
 
     var day: UILabel = WeekCell.makeAmountLabel()
     var amount: UILabel = WeekCell.makeAmountLabel()
@@ -131,7 +131,7 @@ extension WeekCell {
     @objc private func handlePress() {
         UIDevice.vibrate(.medium)
         animate()
-        viewModel.select()
+        viewModel?.select()
     }
 }
 

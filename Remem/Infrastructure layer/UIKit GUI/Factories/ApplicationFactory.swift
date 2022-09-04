@@ -9,7 +9,7 @@ import UIKit
 
 protocol CoordinatorFactoryInterface: AnyObject {
     func makeEventDetailsController(for event: Event) -> EventDetailsController
-    func makeDayController(at day: DateComponents, for event: Event) -> DayController
+    func makeDayController(date: Date, event: Event) -> DayController
     func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController
 }
 
@@ -80,27 +80,16 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         return controller
     }
 
+    func makeDayController(date: Date, event: Event) -> DayController {
+        let factory = DayFactory(applicationFactory: self, date: date, event: event)
+        let controller = factory.makeDayController()
+        return controller
+    }
+
     func makeClockController(for event: Event) -> ClockController {
         let clockController = ClockController()
         clockController.event = event
         return clockController
-    }
-
-    func makeDayController(at day: DateComponents, for event: Event) -> DayController {
-        let day: DayController = {
-            let dayController = DayController(event: event, day: day, editUseCase: eventEditUseCase)
-            eventEditMulticastDelegate.addDelegate(dayController)
-            return dayController
-        }()
-
-        let nav = Self.makeStyledNavigationController()
-        nav.pushViewController(day, animated: false)
-        nav.modalPresentationStyle = .pageSheet
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
-
-        return day
     }
 
     func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {

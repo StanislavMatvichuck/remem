@@ -29,40 +29,32 @@ class WeekCellViewModel: WeekCellViewModelInput {
     weak var delegate: WeekCellViewModelOutput?
     weak var coordinator: Coordinator?
 
-    private var weekDay: WeekDay
-
+    let date: Date
+    let event: Event
     // MARK: - Init
-    init(weekDay: WeekDay) {
-        self.weekDay = weekDay
+    init(date: Date, event: Event) {
+        self.date = date
+        self.event = event
+    }
 
-        goalsAmount = weekDay.goal?.amount ?? 0
-
+    // WeekCellViewModelState
+    var dayNumber: String { String(Calendar.current.dateComponents([.day], from: date).day ?? 0) }
+    var isAchieved: Bool { event.happenings(forDay: date).count >= goalsAmount && goalsAmount > 0 }
+    var amount: String { String(event.happenings(forDay: date).count) }
+    var goalsAmount: Int { event.goal(at: date)?.amount ?? 0 }
+    var isToday: Bool { Calendar.current.isDateInToday(date) }
+    var happeningsTimings: [String] {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .short
 
-        happeningsTimings = weekDay.happenings.map { happening in
+        return event.happenings(forDay: date).map { happening in
             formatter.string(from: happening.dateCreated)
         }
-
-        isAchieved = happeningsTimings.count >= goalsAmount && goalsAmount > 0
-        isToday = weekDay.isToday
-        amount = String(weekDay.happenings.count)
-        dayNumber = String(weekDay.dayNumber)
     }
-
-    // WeekCellViewModelState
-    var goalsAmount: Int
-    var happeningsTimings: [String]
-    var isAchieved: Bool
-    var isToday: Bool
-    var amount: String
-    var dayNumber: String
 
     // WeekCellViewModelEvents
-    func select() {
-        print(#function)
-    }
+    func select() { coordinator?.showDayController(date: date, event: event) }
 }
 
 extension WeekCellViewModel: EventEditUseCaseOutput {

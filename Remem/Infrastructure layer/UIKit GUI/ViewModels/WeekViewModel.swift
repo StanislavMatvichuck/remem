@@ -12,35 +12,59 @@ protocol WeekViewModelInput:
     WeekViewModelEvents {}
 
 protocol WeekViewModelState {
-    var happeningsList: WeekList { get }
-    var shownDaysForward: Int { get }
+    func cellViewModel(at: Int) -> WeekCellViewModel?
+    var count: Int { get }
 }
 
-protocol WeekViewModelEvents {
-    func select(day: DateComponents)
-}
+protocol WeekViewModelEvents {}
 
 class WeekViewModel: WeekViewModelInput {
+    static let shownDaysForward = 14
     // MARK: - Properties
     weak var delegate: WeekViewModelOutput?
     weak var coordinator: Coordinator?
 
-    private var event: Event { didSet { happeningsList = WeekList(event: event) }}
+    private var event: Event
+    private let factory: WeekFactoryInterface
+    private var weekCellViewModels: [WeekCellViewModel]
 
     // MARK: - Init
-    init(event: Event) {
+    init(event: Event, factory: WeekFactoryInterface) {
         self.event = event
-        happeningsList = WeekList(event: event)
+        self.factory = factory
+        self.weekCellViewModels = makeWeekCellViewModels()
+
+        func makeWeekCellViewModels() -> [WeekCellViewModel] {
+            let from = event.dateCreated.startOfWeek!
+            let futureDays = Double(60*60*24*Self.shownDaysForward)
+            let to = Date.now.endOfWeek!.addingTimeInterval(futureDays)
+
+            let dayDurationInSeconds: TimeInterval = 60*60*24
+            var viewModels = [WeekCellViewModel]()
+
+            for date in stride(from: from, to: to, by: dayDurationInSeconds) {
+                var endOfTheDayComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+                endOfTheDayComponents.hour = 23
+                endOfTheDayComponents.minute = 59
+                endOfTheDayComponents.second = 59
+
+                guard let endOfTheDayDate = Calendar.current.date(from: endOfTheDayComponents) else { continue }
+                let viewModel = factory.makeWeekCellViewModel(date: endOfTheDayDate, event: event)
+                viewModels.append(viewModel)
+            }
+
+            return viewModels
+        }
     }
 
     // WeekViewModelState
-    var happeningsList: WeekList
-    var shownDaysForward: Int { happeningsList.shownDaysForward }
-
-    // WeekViewModelEvents
-    func select(day: DateComponents) {
-        coordinator?.showDayController(for: day, event: event)
+    func cellViewModel(at index: Int) -> WeekCellViewModel? {
+        guard index < weekCellViewModels.count, index >= 0 else { return nil }
+        let date = weekCellViewModels[index].date
+        return factory.makeWeekCellViewModel(date: date, event: event)
     }
+
+    var count: Int { weekCellViewModels.count }
 }
 
 // MARK: - EventEditUseCaseOutput

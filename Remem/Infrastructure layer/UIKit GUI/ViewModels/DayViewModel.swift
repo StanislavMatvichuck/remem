@@ -5,85 +5,85 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-import UIKit
+import Foundation
 
-protocol DayViewModelDelegate: AnyObject {
-    func remove(happening: Happening)
+protocol DayViewModelInput:
+    DayViewModelState &
+    DayViewModelEvents {}
+
+protocol DayViewModelState {
+    var title: String? { get }
+    var date: Date { get }
+    func time(at: Int) -> String
+    var count: Int { get }
 }
 
-class DayViewModel: NSObject {
-    typealias View = DayView
-    typealias Model = Event
+protocol DayViewModelEvents {
+    func remove(at: Int)
+    func add(at: Date)
+}
 
+class DayViewModel: DayViewModelInput {
     // MARK: - Properties
-    weak var delegate: DayViewModelDelegate?
+    weak var delegate: DayViewModelOutput?
 
-    private let model: Model
-    private let day: DateComponents
-    private weak var view: View?
-
-    private var shownHappenings = [Happening]()
-
+    let date: Date
+    private var event: Event
+    private let editUseCase: EventEditUseCaseInput
+    private var shownHappenings: [Happening] { event.happenings(forDay: date) }
     // MARK: - Init
-    init(model: Model, day: DateComponents) {
-        self.model = model
-        self.day = day
-
-        shownHappenings = model.happenings(forDay: Calendar.current.date(from: day)!).reversed()
+    init(date: Date, event: Event, editUseCase: EventEditUseCaseInput) {
+        self.date = date
+        self.event = event
+        self.editUseCase = editUseCase
     }
-}
 
-// MARK: - Public
-extension DayViewModel {
-    func configure(_ view: View) {
-        self.view = view
-        view.happenings.dataSource = self
-        view.happenings.reloadData()
+    // DayViewModelState
+    var title: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMMM"
+        return dateFormatter.string(for: date)
     }
-}
 
-// MARK: - UITableViewDataSource
-extension DayViewModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { shownHappenings.count }
+    var count: Int { shownHappenings.count }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DayHappeningCell.reuseIdentifier, for: indexPath)
-            as? DayHappeningCell else { return UITableViewCell() }
-
+    func time(at: Int) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
 
-        let happeningDate = shownHappenings[indexPath.row].dateCreated
-        let displayedText = dateFormatter.string(from: happeningDate)
-
-        cell.label.text = displayedText
-
-        return cell
+        let happeningDate = shownHappenings[at].dateCreated
+        return dateFormatter.string(from: happeningDate)
     }
 
-    // Cells deletion
-    func tableView(_: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath)
-    {
-        if
-            editingStyle == .delete,
-            let happening = happening(at: indexPath)
-        {
-            delegate?.remove(happening: happening)
-        }
+    // DayViewModelEvents
+    func remove(at: Int) {
+        // this consist of error in time by day
+        let happening = event.happenings(forDay: date)[at]
+        editUseCase.removeHappening(from: event, happening: happening)
+    }
+
+    func add(at: Date) {
+        editUseCase.addHappening(to: event, date: at)
     }
 }
 
-// MARK: - Private
-extension DayViewModel {
-    private func happening(at index: IndexPath) -> Happening? {
-        guard
-            index.row <= shownHappenings.count,
-            index.row >= 0
-        else { return nil }
-
-        return shownHappenings[index.row]
+extension DayViewModel: EventEditUseCaseOutput {
+    func added(happening: Happening, to: Event) {
+        event = to
+        delegate?.update()
     }
+
+    func removed(happening: Happening, from: Event) {
+        event = from
+        delegate?.update()
+    }
+
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
+    func added(goal: Goal, to: Event) {}
+}
+
+protocol DayViewModelOutput: AnyObject {
+    func update()
 }
