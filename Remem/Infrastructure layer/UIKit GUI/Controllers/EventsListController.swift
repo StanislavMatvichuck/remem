@@ -20,11 +20,11 @@ class EventsListController: UIViewController {
     private let factory: EventsListFactoryInterface
 
     // MARK: - Init
-    init(view: EventsListView,
+    init(viewRoot: EventsListView,
          viewModel: EventsListViewModelInput,
          factory: EventsListFactoryInterface)
     {
-        self.viewRoot = view
+        self.viewRoot = viewRoot
         self.viewModel = viewModel
         self.factory = factory
         super.init(nibName: nil, bundle: nil)

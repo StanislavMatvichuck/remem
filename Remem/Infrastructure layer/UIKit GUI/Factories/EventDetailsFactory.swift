@@ -19,7 +19,9 @@ class EventDetailsFactory: EventDetailsFactoryInterface {
         self.event = event
     }
 
-    func makeEventDetailsController(weekController: WeekController, clockController: ClockController) -> EventDetailsController {
+    func makeEventDetailsController(weekController: WeekController,
+                                    clockController: ClockController) -> EventDetailsController
+    {
         let viewModel = makeEventDetailsViewModel()
         let view = EventDetailsView(viewModel: viewModel)
 

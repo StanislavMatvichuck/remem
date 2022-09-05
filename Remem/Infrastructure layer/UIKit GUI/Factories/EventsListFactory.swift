@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 27.08.2022.
 //
 
-import UIKit
+import Foundation
 
 protocol EventsListFactoryInterface {
     func makeEventCellViewModel(event: Event) -> EventCellViewModel
@@ -20,11 +20,9 @@ class EventsListFactory: EventsListFactoryInterface {
     }
 
     func makeEventsListController() -> EventsListController {
-        let view = EventsListView()
+        let viewRoot = EventsListView()
         let viewModel = makeEventsListViewModel()
-        let controller = EventsListController(view: view,
-                                              viewModel: viewModel,
-                                              factory: self)
+        let controller = EventsListController(viewRoot: viewRoot, viewModel: viewModel, factory: self)
         viewModel.delegate = controller
         return controller
     }
@@ -38,6 +36,7 @@ class EventsListFactory: EventsListFactoryInterface {
         return viewModel
     }
 
+    // EventsListFactoryInterface
     func makeEventCellViewModel(event: Event) -> EventCellViewModel {
         let viewModel = EventCellViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)

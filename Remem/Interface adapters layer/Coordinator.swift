@@ -16,8 +16,8 @@ protocol Coordinating: AnyObject {
 class Coordinator: NSObject, Coordinating {
     weak var factory: CoordinatorFactoryInterface?
     let navController: UINavigationController
-    let listDelegates: MulticastDelegate<EventsListUseCaseOutput>
-    let editDelegates: MulticastDelegate<EventEditUseCaseOutput>
+    private let listDelegates: MulticastDelegate<EventsListUseCaseOutput>
+    private let editDelegates: MulticastDelegate<EventEditUseCaseOutput>
 
     init(navController: UINavigationController,
          eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,

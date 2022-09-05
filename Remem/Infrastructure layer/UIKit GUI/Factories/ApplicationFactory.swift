@@ -49,19 +49,20 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         let listUseCase = EventsListUseCase(repository: repository)
         let editUseCase = EventEditUseCase(repository: repository)
 
-        self.eventsListUseCase = listUseCase
-        self.eventEditUseCase = editUseCase
-
         let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseOutput>()
         let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseOutput>()
 
+        let coordinator = makeCoordinator(listUseCase: listUseCase,
+                                          editUseCase: editUseCase,
+                                          eventsListMulticastDelegate: eventsListMulticastDelegate,
+                                          eventEditMulticastDelegate: eventEditMulticastDelegate)
+
+        self.eventsListUseCase = listUseCase
+        self.eventEditUseCase = editUseCase
         self.eventsListMulticastDelegate = eventsListMulticastDelegate
         self.eventEditMulticastDelegate = eventEditMulticastDelegate
+        self.coordinator = coordinator
 
-        self.coordinator = makeCoordinator(listUseCase: listUseCase,
-                                           editUseCase: editUseCase,
-                                           eventsListMulticastDelegate: eventsListMulticastDelegate,
-                                           eventEditMulticastDelegate: eventEditMulticastDelegate)
         coordinator.factory = self
     }
 

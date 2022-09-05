@@ -32,13 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-    // MARK: - Code data
-    let coreDataStack = CoreDataStack()
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        coreDataStack.save(coreDataStack.defaultContext)
-    }
-
     // MARK: - Local notifications
     private func registerCustomActions() {
         let add = UNNotificationAction(
