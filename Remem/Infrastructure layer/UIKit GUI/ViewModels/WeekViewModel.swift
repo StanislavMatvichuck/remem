@@ -27,7 +27,6 @@ class WeekViewModel: WeekViewModelInput {
     private var event: Event
     private let factory: WeekFactoryInterface
     private var weekCellViewModels: [WeekCellViewModel]
-
     // MARK: - Init
     init(event: Event, factory: WeekFactoryInterface) {
         self.event = event
@@ -49,7 +48,7 @@ class WeekViewModel: WeekViewModelInput {
                 endOfTheDayComponents.second = 59
 
                 guard let endOfTheDayDate = Calendar.current.date(from: endOfTheDayComponents) else { continue }
-                let viewModel = factory.makeWeekCellViewModel(date: endOfTheDayDate, event: event)
+                let viewModel = factory.makeWeekCellViewModel(date: endOfTheDayDate)
                 viewModels.append(viewModel)
             }
 
@@ -61,7 +60,7 @@ class WeekViewModel: WeekViewModelInput {
     func cellViewModel(at index: Int) -> WeekCellViewModel? {
         guard index < weekCellViewModels.count, index >= 0 else { return nil }
         let date = weekCellViewModels[index].date
-        return factory.makeWeekCellViewModel(date: date, event: event)
+        return factory.makeWeekCellViewModel(date: date)
     }
 
     var count: Int { weekCellViewModels.count }

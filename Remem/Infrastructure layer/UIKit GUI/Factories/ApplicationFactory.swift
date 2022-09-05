@@ -75,8 +75,15 @@ class ApplicationFactory: CoordinatorFactoryInterface {
     }
 
     func makeEventDetailsController(for event: Event) -> EventDetailsController {
+        let weekFactory = WeekFactory(applicationFactory: self, event: event)
+        let weekController = weekFactory.makeWeekController()
+
+        let clockFactory = ClockFactory(applicationFactory: self, event: event)
+        let clockController = clockFactory.makeClockController()
+
         let eventDetailsFactory = EventDetailsFactory(applicationFactory: self, event: event)
-        let controller = eventDetailsFactory.makeEventDetailsController()
+        let controller = eventDetailsFactory.makeEventDetailsController(weekController: weekController,
+                                                                        clockController: clockController)
         return controller
     }
 

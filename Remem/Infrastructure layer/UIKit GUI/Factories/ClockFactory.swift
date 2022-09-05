@@ -8,9 +8,13 @@
 import Foundation
 
 class ClockFactory {
-    private let eventDetailsFactory: EventDetailsFactory
-    init(eventDetailsFactory: EventDetailsFactory) {
-        self.eventDetailsFactory = eventDetailsFactory
+    // MARK: - Properties
+    private let applicationFactory: ApplicationFactory
+    private let event: Event
+    // MARK: - Init
+    init(applicationFactory: ApplicationFactory, event: Event) {
+        self.applicationFactory = applicationFactory
+        self.event = event
     }
 
     func makeClockController() -> ClockController {
@@ -22,8 +26,8 @@ class ClockFactory {
     }
 
     private func makeClockViewModel() -> ClockViewModel {
-        let viewModel = ClockViewModel(event: eventDetailsFactory.event)
-        eventDetailsFactory.applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        let viewModel = ClockViewModel(event: event)
+        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         return viewModel
     }
 
