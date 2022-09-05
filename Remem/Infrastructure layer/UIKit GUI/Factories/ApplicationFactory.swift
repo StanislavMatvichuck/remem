@@ -87,28 +87,9 @@ class ApplicationFactory: CoordinatorFactoryInterface {
     }
 
     func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
-        let viewModel = GoalsInputViewModel(event: event, editUseCase: eventEditUseCase)
-        viewModel.coordinator = coordinator
-
-        let viewRoot = GoalsInputView(viewModel: viewModel)
-
-        let goalsInputController = GoalsInputController(viewRoot: viewRoot, viewModel: viewModel)
-        viewModel.delegate = goalsInputController
-
-        let nav = Self.makeStyledNavigationController()
-        nav.pushViewController(goalsInputController, animated: false)
-        nav.preferredContentSize = CGSize(width: .wScreen, height: 250)
-        nav.modalPresentationStyle = .popover
-
-        if let pc = nav.presentationController { pc.delegate = goalsInputController }
-        if let pop = nav.popoverPresentationController {
-            pop.sourceView = sourceView
-            pop.sourceRect = CGRect(x: sourceView.bounds.minX,
-                                    y: sourceView.bounds.minY,
-                                    width: sourceView.bounds.width,
-                                    height: sourceView.bounds.height - UIHelper.font.pointSize)
-        }
-        return goalsInputController
+        let factory = GoalsFactory(applicationFactory: self, event: event, sourceView: sourceView)
+        let controller = factory.makeGoalsInputController()
+        return controller
     }
 
     // MARK: - UINavigationController styling

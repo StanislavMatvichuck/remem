@@ -11,6 +11,7 @@
 		080656EA283B946000C09409 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
 		080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
+		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
 		08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
@@ -102,6 +103,7 @@
 		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
+		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsFactory.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
@@ -506,11 +508,12 @@
 			isa = PBXGroup;
 			children = (
 				08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */,
-				08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */,
-				08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */,
-				085622FA28C24FF9002331AB /* WeekFactory.swift */,
-				085622FC28C25B9F002331AB /* DayFactory.swift */,
 				0816320D28C4B6B1008B51F8 /* ClockFactory.swift */,
+				085622FC28C25B9F002331AB /* DayFactory.swift */,
+				08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */,
+				08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */,
+				08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */,
+				085622FA28C24FF9002331AB /* WeekFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
+				08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				085622FD28C25B9F002331AB /* DayFactory.swift in Sources */,
 				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
