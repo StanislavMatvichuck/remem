@@ -14,7 +14,7 @@ class EventCell: UITableViewCell {
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    var viewModel: EventCellViewModelInput? { didSet { handleViewStateUpdate() } }
+    var viewModel: EventCellViewModeling? { didSet { handleViewStateUpdate() } }
     weak var swiper: Swiper?
 
     let viewRoot: UIView = {
@@ -122,7 +122,7 @@ extension EventCell {
     }
 }
 
-extension EventCell: EventCellViewModelOutput {
+extension EventCell: EventCellViewModelDelegate {
     func addedHappening() {
         handleViewStateUpdate()
     }

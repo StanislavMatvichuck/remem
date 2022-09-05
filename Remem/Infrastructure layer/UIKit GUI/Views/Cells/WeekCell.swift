@@ -25,7 +25,7 @@ class WeekCell: UICollectionViewCell {
     }
 
     // MARK: - Properties
-    var viewModel: WeekCellViewModelInput? { didSet { configureContent() }}
+    var viewModel: WeekCellViewModeling? { didSet { configureContent() }}
 
     var day: UILabel = WeekCell.makeAmountLabel()
     var amount: UILabel = WeekCell.makeAmountLabel()
@@ -135,8 +135,8 @@ extension WeekCell {
     }
 }
 
-// MARK: - WeekCellViewModelOutput
-extension WeekCell: WeekCellViewModelOutput {
+// MARK: - WeekCellViewModelDelegate
+extension WeekCell: WeekCellViewModelDelegate {
     func update() {
         configureContent()
     }

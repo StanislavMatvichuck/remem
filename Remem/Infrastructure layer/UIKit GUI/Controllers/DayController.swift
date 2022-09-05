@@ -26,10 +26,10 @@ class DayController: UIViewController {
     }
 
     private let viewRoot: DayView
-    private let viewModel: DayViewModelInput
+    private let viewModel: DayViewModeling
 
     // MARK: - Init
-    init(viewRoot: DayView, viewModel: DayViewModelInput) {
+    init(viewRoot: DayView, viewModel: DayViewModeling) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -64,7 +64,7 @@ extension DayController: UITableViewDataSource {
     }
 }
 
-extension DayController: DayViewModelOutput {
+extension DayController: DayViewModelDelegate {
     func update() { viewRoot.happenings.reloadData() }
 }
 

@@ -11,14 +11,14 @@ class EventDetailsController: UIViewController {
     var goalsInputView: UIView { viewRoot.week }
     // MARK: - Properties
     private let viewRoot: EventDetailsView
-    private let viewModel: EventDetailsViewModelInput
+    private let viewModel: EventDetailsViewModeling
 
     private let weekController: WeekController
     private let clockController: ClockController
 
     // MARK: - Init
     init(viewRoot: EventDetailsView,
-         viewModel: EventDetailsViewModelInput,
+         viewModel: EventDetailsViewModeling,
          clockController: ClockController,
          weekController: WeekController)
     {
@@ -58,6 +58,6 @@ class EventDetailsController: UIViewController {
     @objc private func onPressAddGoal() { viewModel.showGoalsInput() }
 }
 
-extension EventDetailsController: EventDetailsViewModelOutput {
+extension EventDetailsController: EventDetailsViewModelDelegate {
     func update() { viewRoot.configureContent() }
 }

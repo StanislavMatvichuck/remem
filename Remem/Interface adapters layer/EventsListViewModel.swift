@@ -7,18 +7,18 @@
 
 import Foundation
 
-protocol EventsListViewModelInput:
-    EventsListViewModelInputState &
-    EventsListViewModelInputEvents {}
+protocol EventsListViewModeling:
+    EventsListViewModelState &
+    EventsListViewModelEvents {}
 
-protocol EventsListViewModelInputState {
+protocol EventsListViewModelState {
     var isAddButtonHighlighted: Bool { get }
     var hint: HintState { get }
     var eventsAmount: Int { get }
     func event(at: IndexPath) -> Event?
 }
 
-protocol EventsListViewModelInputEvents: AnyObject {
+protocol EventsListViewModelEvents: AnyObject {
     func select(event: Event)
     func selectForRenaming(event: Event)
     func selectForRemoving(event: Event)
@@ -26,26 +26,26 @@ protocol EventsListViewModelInputEvents: AnyObject {
     func submitNameEditing(name: String)
 }
 
-class EventsListViewModel: EventsListViewModelInput {
+class EventsListViewModel: EventsListViewModeling {
     // MARK: - Properties
-    weak var delegate: EventsListViewModelOutput?
+    weak var delegate: EventsListViewModelDelegate?
     weak var coordinator: Coordinating?
 
-    private let listUseCase: EventsListUseCaseInput
-    private let editUseCase: EventEditUseCaseInput
+    private let listUseCase: EventsListUseCasing
+    private let editUseCase: EventEditUseCasing
 
     private var renamedEvent: Event?
     private var events: [Event]
     // MARK: - Init
-    init(listUseCase: EventsListUseCaseInput,
-         editUseCase: EventEditUseCaseInput)
+    init(listUseCase: EventsListUseCasing,
+         editUseCase: EventEditUseCasing)
     {
         self.events = listUseCase.allEvents()
         self.listUseCase = listUseCase
         self.editUseCase = editUseCase
     }
 
-    // EventsListViewModelInputState
+    // EventsListViewModelState
     var eventsAmount: Int { events.count }
     var isAddButtonHighlighted: Bool { events.count == 0 }
     var hint: HintState {
@@ -60,7 +60,7 @@ class EventsListViewModel: EventsListViewModelInput {
         return events[index.row]
     }
 
-    // EventsListViewModelInputEvents
+    // EventsListViewModelEvents
     func select(event: Event) { coordinator?.showDetails(event: event) }
     func cancelNameEditing() { renamedEvent = nil }
     func selectForRemoving(event: Event) { listUseCase.remove(event) }
@@ -78,9 +78,9 @@ class EventsListViewModel: EventsListViewModelInput {
     }
 }
 
-// MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
-extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
-    // EventsListUseCaseOutput
+// MARK: - EventsListUseCaseDelegate & EventEditUseCaseDelegate
+extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelegate {
+    // EventsListUseCaseDelegate
     func added(event: Event) {
         events = listUseCase.allEvents()
 
@@ -100,7 +100,7 @@ extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
         delegate?.update()
     }
 
-    // EventEditUseCaseOutput
+    // EventEditUseCaseDelegate
     func added(happening: Happening, to: Event) { delegate?.update() }
     func visited(event: Event) { delegate?.update() }
     func removed(happening: Happening, from: Event) { delegate?.update() }
@@ -108,8 +108,8 @@ extension EventsListViewModel: EventsListUseCaseOutput, EventEditUseCaseOutput {
     func added(goal: Goal, to: Event) {}
 }
 
-// MARK: - EventsListViewModelOutput
-protocol EventsListViewModelOutput: AnyObject {
+// MARK: - EventsListViewModelDelegate
+protocol EventsListViewModelDelegate: AnyObject {
     func update()
     func addEvent(at: Int)
     func remove(at: Int)

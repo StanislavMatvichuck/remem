@@ -18,15 +18,15 @@ class ApplicationFactory: CoordinatorFactoryInterface {
     let coordinator: Coordinator
     let eventsListUseCase: EventsListUseCase
     let eventEditUseCase: EventEditUseCase
-    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>
-    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>
+    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>
+    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>
 
     // MARK: - Init
     init() {
         func makeCoordinator(listUseCase: EventsListUseCase,
                              editUseCase: EventEditUseCase,
-                             eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
-                             eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>) -> Coordinator
+                             eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
+                             eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>) -> Coordinator
         {
             let navController = Self.makeStyledNavigationController()
             navController.navigationBar.prefersLargeTitles = true
@@ -49,8 +49,8 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         let listUseCase = EventsListUseCase(repository: repository)
         let editUseCase = EventEditUseCase(repository: repository)
 
-        let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseOutput>()
-        let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseOutput>()
+        let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseDelegate>()
+        let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseDelegate>()
 
         let coordinator = makeCoordinator(listUseCase: listUseCase,
                                           editUseCase: editUseCase,

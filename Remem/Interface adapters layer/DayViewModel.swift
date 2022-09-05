@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DayViewModelInput:
+protocol DayViewModeling:
     DayViewModelState &
     DayViewModelEvents {}
 
@@ -23,16 +23,16 @@ protocol DayViewModelEvents {
     func add(at: Date)
 }
 
-class DayViewModel: DayViewModelInput {
+class DayViewModel: DayViewModeling {
     // MARK: - Properties
-    weak var delegate: DayViewModelOutput?
+    weak var delegate: DayViewModelDelegate?
 
     let date: Date
     private var event: Event
-    private let editUseCase: EventEditUseCaseInput
+    private let editUseCase: EventEditUseCasing
     private var shownHappenings: [Happening] { event.happenings(forDay: date) }
     // MARK: - Init
-    init(date: Date, event: Event, editUseCase: EventEditUseCaseInput) {
+    init(date: Date, event: Event, editUseCase: EventEditUseCasing) {
         self.date = date
         self.event = event
         self.editUseCase = editUseCase
@@ -68,7 +68,7 @@ class DayViewModel: DayViewModelInput {
     }
 }
 
-extension DayViewModel: EventEditUseCaseOutput {
+extension DayViewModel: EventEditUseCaseDelegate {
     func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()
@@ -84,6 +84,6 @@ extension DayViewModel: EventEditUseCaseOutput {
     func added(goal: Goal, to: Event) {}
 }
 
-protocol DayViewModelOutput: AnyObject {
+protocol DayViewModelDelegate: AnyObject {
     func update()
 }

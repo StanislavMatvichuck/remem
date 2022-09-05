@@ -10,9 +10,9 @@ import UIKit
 class ClockController: UIViewController {
     // MARK: - Properties
     private let viewRoot: ClockView
-    private var viewModel: ClockViewModelInput
+    private var viewModel: ClockViewModeling
     // MARK: - Init
-    init(viewRoot: ClockView, viewModel: ClockViewModelInput) {
+    init(viewRoot: ClockView, viewModel: ClockViewModeling) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -29,7 +29,7 @@ class ClockController: UIViewController {
     }
 }
 
-extension ClockController: ClockViewModelOutput {
+extension ClockController: ClockViewModelDelegate {
     func update() {
         for i in 0 ... ClockSectionsList.size - 1 {
             guard

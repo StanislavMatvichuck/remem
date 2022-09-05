@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ClockViewModelInput:
+protocol ClockViewModeling:
     ClockViewModelState &
     ClockViewModelEvents {}
 
@@ -17,8 +17,8 @@ protocol ClockViewModelState {
 
 protocol ClockViewModelEvents {}
 
-class ClockViewModel: ClockViewModelInput {
-    weak var delegate: ClockViewModelOutput?
+class ClockViewModel: ClockViewModeling {
+    weak var delegate: ClockViewModelDelegate?
     private var event: Event { didSet {
         list = ClockSectionsList(happenings: event.happenings)
     }}
@@ -36,7 +36,7 @@ class ClockViewModel: ClockViewModelInput {
     }
 }
 
-extension ClockViewModel: EventEditUseCaseOutput {
+extension ClockViewModel: EventEditUseCaseDelegate {
     func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()
@@ -52,6 +52,6 @@ extension ClockViewModel: EventEditUseCaseOutput {
     func visited(event: Event) {}
 }
 
-protocol ClockViewModelOutput: AnyObject {
+protocol ClockViewModelDelegate: AnyObject {
     func update()
 }

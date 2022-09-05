@@ -10,9 +10,9 @@ import UIKit
 class GoalsInputController: UIViewController {
     // MARK: - Properties
     private let viewRoot: GoalsInputView
-    private let viewModel: GoalsInputViewModelInput
+    private let viewModel: GoalsInputViewModeling
     // MARK: - Init
-    init(viewRoot: GoalsInputView, viewModel: GoalsInputViewModelInput) {
+    init(viewRoot: GoalsInputView, viewModel: GoalsInputViewModeling) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -88,8 +88,8 @@ extension GoalsInputController: UIPickerViewDelegate {
     }
 }
 
-// MARK: - GoalsInputViewModelOutput
-extension GoalsInputController: GoalsInputViewModelOutput {}
+// MARK: - GoalsInputViewModelDelegate
+extension GoalsInputController: GoalsInputViewModelDelegate {}
 
 extension GoalsInputController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController,

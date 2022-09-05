@@ -16,12 +16,12 @@ protocol Coordinating: AnyObject {
 class Coordinator: NSObject, Coordinating {
     weak var factory: CoordinatorFactoryInterface?
     let navController: UINavigationController
-    private let listDelegates: MulticastDelegate<EventsListUseCaseOutput>
-    private let editDelegates: MulticastDelegate<EventEditUseCaseOutput>
+    private let listDelegates: MulticastDelegate<EventsListUseCaseDelegate>
+    private let editDelegates: MulticastDelegate<EventEditUseCaseDelegate>
 
     init(navController: UINavigationController,
-         eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseOutput>,
-         eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseOutput>)
+         eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
+         eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>)
     {
         self.navController = navController
         self.listDelegates = eventsListMulticastDelegate
@@ -60,13 +60,13 @@ extension Coordinator {
     }
 }
 
-// MARK: - EventsListUseCaseOutput & EventEditUseCaseOutput
+// MARK: - EventsListUseCaseDelegate & EventEditUseCaseDelegate
 /// distributes domain events across all viewModels
-extension Coordinator: EventsListUseCaseOutput, EventEditUseCaseOutput {
-    // EventsListUseCaseOutput
+extension Coordinator: EventsListUseCaseDelegate, EventEditUseCaseDelegate {
+    // EventsListUseCaseDelegate
     func added(event: Event) { listDelegates.call { $0.added(event: event) } }
     func removed(event: Event) { listDelegates.call { $0.removed(event: event) } }
-    // EventEditUseCaseOutput
+    // EventEditUseCaseDelegate
     func added(happening: Happening, to: Event) { editDelegates.call { $0.added(happening: happening, to: to) } }
     func removed(happening: Happening, from: Event) { editDelegates.call { $0.removed(happening: happening, from: from) }}
     func renamed(event: Event) { editDelegates.call { $0.renamed(event: event) } }

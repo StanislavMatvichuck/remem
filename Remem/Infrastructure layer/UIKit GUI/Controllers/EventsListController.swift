@@ -15,13 +15,13 @@ class EventsListController: UIViewController {
     }
 
     // MARK: - Properties
-    private let viewModel: EventsListViewModelInput
+    private let viewModel: EventsListViewModeling
     private let viewRoot: EventsListView
     private let factory: EventsListFactoryInterface
 
     // MARK: - Init
     init(viewRoot: EventsListView,
-         viewModel: EventsListViewModelInput,
+         viewModel: EventsListViewModeling,
          factory: EventsListFactoryInterface)
     {
         self.viewRoot = viewRoot
@@ -105,8 +105,8 @@ extension EventsListController {
     @objc private func handleCancel() { viewModel.cancelNameEditing() }
 }
 
-// MARK: - EventsListViewModelOutput
-extension EventsListController: EventsListViewModelOutput {
+// MARK: - EventsListViewModelDelegate
+extension EventsListController: EventsListViewModelDelegate {
     func update() {
         updateHintsAndFooter()
         hideSwipeHintIfNeeded()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol EventDetailsViewModelInput:
+protocol EventDetailsViewModeling:
     EventDetailsViewModelState &
     EventDetailsViewModelEvents {}
 
@@ -24,14 +24,14 @@ protocol EventDetailsViewModelEvents {
     func visitIfNeeded()
 }
 
-class EventDetailsViewModel: EventDetailsViewModelInput {
-    weak var delegate: EventDetailsViewModelOutput?
+class EventDetailsViewModel: EventDetailsViewModeling {
+    weak var delegate: EventDetailsViewModelDelegate?
     weak var coordinator: Coordinating?
 
     private let event: Event
-    private let editUseCase: EventEditUseCaseInput
+    private let editUseCase: EventEditUseCasing
 
-    init(event: Event, editUseCase: EventEditUseCaseInput) {
+    init(event: Event, editUseCase: EventEditUseCasing) {
         self.event = event
         self.editUseCase = editUseCase
     }
@@ -106,7 +106,7 @@ class EventDetailsViewModel: EventDetailsViewModelInput {
     }
 }
 
-extension EventDetailsViewModel: EventEditUseCaseOutput {
+extension EventDetailsViewModel: EventEditUseCaseDelegate {
     func added(happening: Happening, to: Event) {
         delegate?.update()
     }
@@ -117,6 +117,6 @@ extension EventDetailsViewModel: EventEditUseCaseOutput {
     func added(goal: Goal, to: Event) {}
 }
 
-protocol EventDetailsViewModelOutput: AnyObject {
+protocol EventDetailsViewModelDelegate: AnyObject {
     func update()
 }

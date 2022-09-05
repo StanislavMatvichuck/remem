@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WeekViewModelInput:
+protocol WeekViewModeling:
     WeekViewModelState &
     WeekViewModelEvents {}
 
@@ -18,10 +18,10 @@ protocol WeekViewModelState {
 
 protocol WeekViewModelEvents {}
 
-class WeekViewModel: WeekViewModelInput {
+class WeekViewModel: WeekViewModeling {
     static let shownDaysForward = 14
     // MARK: - Properties
-    weak var delegate: WeekViewModelOutput?
+    weak var delegate: WeekViewModelDelegate?
     weak var coordinator: Coordinator?
 
     private var event: Event
@@ -66,8 +66,8 @@ class WeekViewModel: WeekViewModelInput {
     var count: Int { weekCellViewModels.count }
 }
 
-// MARK: - EventEditUseCaseOutput
-extension WeekViewModel: EventEditUseCaseOutput {
+// MARK: - EventEditUseCaseDelegate
+extension WeekViewModel: EventEditUseCaseDelegate {
     func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()
@@ -87,7 +87,7 @@ extension WeekViewModel: EventEditUseCaseOutput {
     func visited(event: Event) {}
 }
 
-protocol WeekViewModelOutput: AnyObject {
+protocol WeekViewModelDelegate: AnyObject {
     func animate(at: IndexPath)
     func update()
 }

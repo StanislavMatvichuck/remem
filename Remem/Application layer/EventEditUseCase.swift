@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol EventEditUseCaseInput {
+protocol EventEditUseCasing {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
@@ -15,16 +15,16 @@ protocol EventEditUseCaseInput {
     func rename(_: Event, to: String)
 }
 
-class EventEditUseCase: EventEditUseCaseInput {
+class EventEditUseCase: EventEditUseCasing {
     // MARK: - Properties
-    weak var delegate: EventEditUseCaseOutput?
+    weak var delegate: EventEditUseCaseDelegate?
     private let repository: EventsRepositoryInterface
     // MARK: - Init
     init(repository: EventsRepositoryInterface) {
         self.repository = repository
     }
 
-    // EventEditUseCaseInput
+    // EventEditUseCasing
     func visit(_ event: Event) {
         event.dateVisited = .now
         repository.save(event)
@@ -65,7 +65,7 @@ class EventEditUseCase: EventEditUseCaseInput {
     }
 }
 
-protocol EventEditUseCaseOutput: AnyObject {
+protocol EventEditUseCaseDelegate: AnyObject {
     func added(happening: Happening, to: Event)
     func removed(happening: Happening, from: Event)
     func renamed(event: Event)

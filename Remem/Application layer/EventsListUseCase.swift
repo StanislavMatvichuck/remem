@@ -7,22 +7,22 @@
 
 import Foundation
 
-protocol EventsListUseCaseInput {
+protocol EventsListUseCasing {
     func allEvents() -> [Event]
     func add(name: String)
     func remove(_: Event)
 }
 
-class EventsListUseCase: EventsListUseCaseInput {
+class EventsListUseCase: EventsListUseCasing {
     // MARK: - Properties
-    weak var delegate: EventsListUseCaseOutput?
+    weak var delegate: EventsListUseCaseDelegate?
     private var repository: EventsRepositoryInterface
     // MARK: - Init
     init(repository: EventsRepositoryInterface) {
         self.repository = repository
     }
 
-    // EventsListUseCaseInput
+    // EventsListUseCasing
     func allEvents() -> [Event] { repository.all() }
     func add(name: String) {
         let newEvent = Event(name: name)
@@ -38,7 +38,7 @@ class EventsListUseCase: EventsListUseCaseInput {
     }
 }
 
-protocol EventsListUseCaseOutput: AnyObject {
+protocol EventsListUseCaseDelegate: AnyObject {
     func added(event: Event)
     func removed(event: Event)
 }

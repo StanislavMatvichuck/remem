@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GoalsInputViewModelInput:
+protocol GoalsInputViewModeling:
     GoalsInputViewModelState &
     GoalsInputViewModelEvents {}
 
@@ -21,14 +21,14 @@ protocol GoalsInputViewModelEvents {
     func cancel()
 }
 
-class GoalsInputViewModel: GoalsInputViewModelInput {
+class GoalsInputViewModel: GoalsInputViewModeling {
     // MARK: - Properties
-    weak var delegate: GoalsInputViewModelOutput?
+    weak var delegate: GoalsInputViewModelDelegate?
     weak var coordinator: Coordinator?
     private let event: Event
-    private let editUseCase: EventEditUseCaseInput
+    private let editUseCase: EventEditUseCasing
     // MARK: - Init
-    init(event: Event, editUseCase: EventEditUseCaseInput) {
+    init(event: Event, editUseCase: EventEditUseCasing) {
         self.event = event
         self.editUseCase = editUseCase
     }
@@ -50,4 +50,4 @@ class GoalsInputViewModel: GoalsInputViewModelInput {
     }
 }
 
-protocol GoalsInputViewModelOutput: AnyObject {}
+protocol GoalsInputViewModelDelegate: AnyObject {}

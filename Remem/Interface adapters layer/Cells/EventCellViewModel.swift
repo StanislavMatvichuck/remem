@@ -7,45 +7,45 @@
 
 import Foundation
 
-protocol EventCellViewModelInput:
-    EventCellViewModelInputState &
-    EventCellViewModelInputEvents {}
+protocol EventCellViewModeling:
+    EventCellViewModelingState &
+    EventCellViewModelingEvents {}
 
-protocol EventCellViewModelInputState {
+protocol EventCellViewModelingState {
     var name: String { get }
     var amount: String { get }
 }
 
-protocol EventCellViewModelInputEvents {
+protocol EventCellViewModelingEvents {
     func select()
     func swipe()
 }
 
-class EventCellViewModel: EventCellViewModelInput {
+class EventCellViewModel: EventCellViewModeling {
     // MARK: - Properties
     weak var coordinator: Coordinating?
-    weak var delegate: EventCellViewModelOutput?
+    weak var delegate: EventCellViewModelDelegate?
 
     private let event: Event
-    private let editUseCase: EventEditUseCaseInput
+    private let editUseCase: EventEditUseCasing
     private var renamedEvent: Event?
     // MARK: - Init
-    init(event: Event, editUseCase: EventEditUseCaseInput) {
+    init(event: Event, editUseCase: EventEditUseCasing) {
         self.event = event
         self.editUseCase = editUseCase
     }
 
-    // EventCellViewModelInputState
+    // EventCellViewModelingState
     var name: String { event.name }
     var amount: String { String(event.happenings.count) }
 
-    // EventCellViewModelInputEvents
+    // EventCellViewModelingEvents
     func select() { coordinator?.showDetails(event: event) }
     func swipe() { editUseCase.addHappening(to: event, date: .now) }
 }
 
-// MARK: - EventEditUseCaseOutput
-extension EventCellViewModel: EventEditUseCaseOutput {
+// MARK: - EventEditUseCaseDelegate
+extension EventCellViewModel: EventEditUseCaseDelegate {
     func added(happening: Happening, to: Event) {
         guard event == to else { return }
         delegate?.addedHappening()
@@ -57,7 +57,7 @@ extension EventCellViewModel: EventEditUseCaseOutput {
     func added(goal: Goal, to: Event) {}
 }
 
-// MARK: - EventCellVMOutput
-protocol EventCellViewModelOutput: AnyObject {
+// MARK: - EventCellViewModelDelegate
+protocol EventCellViewModelDelegate: AnyObject {
     func addedHappening()
 }

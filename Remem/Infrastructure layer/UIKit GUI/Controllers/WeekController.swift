@@ -12,10 +12,10 @@ class WeekController: UIViewController {
     private var scrollHappened = false
 
     private let viewRoot: WeekView
-    private let viewModel: WeekViewModelInput
+    private let viewModel: WeekViewModeling
     private let factory: WeekFactoryInterface
     // MARK: - Init
-    init(viewRoot: WeekView, viewModel: WeekViewModelInput, factory: WeekFactoryInterface) {
+    init(viewRoot: WeekView, viewModel: WeekViewModeling, factory: WeekFactoryInterface) {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         self.factory = factory
@@ -86,8 +86,8 @@ extension WeekController:
     }
 }
 
-// MARK: - WeekViewModelOutput
-extension WeekController: WeekViewModelOutput {
+// MARK: - WeekViewModelDelegate
+extension WeekController: WeekViewModelDelegate {
     func animate(at: IndexPath) {
         // GOAL ADDED
     }
