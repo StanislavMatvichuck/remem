@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol CoordinatorFactoryInterface: AnyObject {
-    func makeEventDetailsController(for event: Event) -> EventDetailsController
-    func makeDayController(date: Date, event: Event) -> DayController
-    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController
-}
-
-class ApplicationFactory: CoordinatorFactoryInterface {
+class ApplicationFactory {
     // MARK: - Long-lived dependencies
     let coordinator: Coordinator
     let eventsListUseCase: EventsListUseCase
@@ -63,7 +57,7 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         self.eventEditMulticastDelegate = eventEditMulticastDelegate
         self.coordinator = coordinator
 
-        coordinator.factory = self
+        coordinator.applicationFactory = self
     }
 
     // MARK: - Controllers creation
@@ -75,29 +69,9 @@ class ApplicationFactory: CoordinatorFactoryInterface {
         return coordinator.navController
     }
 
-    func makeEventDetailsController(for event: Event) -> EventDetailsController {
-        let weekFactory = WeekFactory(applicationFactory: self, event: event)
-        let weekController = weekFactory.makeWeekController()
-
-        let clockFactory = ClockFactory(applicationFactory: self, event: event)
-        let clockController = clockFactory.makeClockController()
-
-        let eventDetailsFactory = EventDetailsFactory(applicationFactory: self, event: event)
-        let controller = eventDetailsFactory.makeEventDetailsController(weekController: weekController,
-                                                                        clockController: clockController)
-        return controller
-    }
-
-    func makeDayController(date: Date, event: Event) -> DayController {
-        let factory = DayFactory(applicationFactory: self, date: date, event: event)
-        let controller = factory.makeDayController()
-        return controller
-    }
-
-    func makeGoalsInputController(for event: Event, sourceView: UIView) -> GoalsInputController {
-        let factory = GoalsFactory(applicationFactory: self, event: event, sourceView: sourceView)
-        let controller = factory.makeGoalsInputController()
-        return controller
+    func makeEventDetailsFactory(event: Event) -> EventDetailsFactoring {
+        let factory = EventDetailsFactory(applicationFactory: self, event: event)
+        return factory
     }
 
     // MARK: - UINavigationController styling

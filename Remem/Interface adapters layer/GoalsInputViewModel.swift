@@ -16,7 +16,7 @@ protocol GoalsInputViewModelState {
 }
 
 protocol GoalsInputViewModelEvents {
-    func select(weekday: Goal.WeekDay, value: Int)
+    func select(newAmount: Int, date: Date)
     func submit()
     func cancel()
 }
@@ -25,12 +25,13 @@ class GoalsInputViewModel: GoalsInputViewModeling {
     // MARK: - Properties
     weak var delegate: GoalsInputViewModelDelegate?
     weak var coordinator: Coordinator?
+
     private let event: Event
-    private let editUseCase: EventEditUseCasing
+    private let goalEditUseCase: GoalEditUseCasing
     // MARK: - Init
-    init(event: Event, editUseCase: EventEditUseCasing) {
+    init(event: Event, goalEditUseCase: GoalEditUseCasing) {
         self.event = event
-        self.editUseCase = editUseCase
+        self.goalEditUseCase = goalEditUseCase
     }
 
     // GoalsInputViewModelState
@@ -39,13 +40,17 @@ class GoalsInputViewModel: GoalsInputViewModeling {
     }
 
     // GoalsInputViewModelEvents
-    func select(weekday: Goal.WeekDay, value: Int) {}
+    func select(newAmount: Int, date: Date) {
+        goalEditUseCase.update(amount: newAmount, forDate: date)
+    }
 
     func submit() {
+        goalEditUseCase.submit()
         coordinator?.navController.dismiss(animated: true)
     }
 
     func cancel() {
+        goalEditUseCase.cancel()
         coordinator?.navController.dismiss(animated: true)
     }
 }

@@ -5,27 +5,36 @@
 //  Created by Stanislav Matvichuck on 31.08.2022.
 //
 
-import Foundation
+import UIKit
 
-protocol EventDetailsFactoryInterface {}
+protocol EventDetailsFactoring: AnyObject {
+    func makeEventDetailsController() -> EventDetailsController
+    func makeDayController(date: Date) -> DayController
+    func makeGoalsInputController() -> GoalsInputController
+}
 
-class EventDetailsFactory: EventDetailsFactoryInterface {
+class EventDetailsFactory: EventDetailsFactoring {
     // MARK: - Properties
-    let applicationFactory: ApplicationFactory
     let event: Event
+    let applicationFactory: ApplicationFactory
+    let goalEditUseCase: GoalEditUseCase
+    var goalInputSourceView: UIView?
     // MARK: - Init
     init(applicationFactory: ApplicationFactory, event: Event) {
         self.applicationFactory = applicationFactory
         self.event = event
+        self.goalEditUseCase = GoalEditUseCase(event: event, eventEditUseCase: applicationFactory.eventEditUseCase)
     }
 
-    func makeEventDetailsController(weekController: WeekController,
-                                    clockController: ClockController) -> EventDetailsController
-    {
+    func makeEventDetailsController() -> EventDetailsController {
         let viewModel = makeEventDetailsViewModel()
-        let view = EventDetailsView(viewModel: viewModel)
 
-        let controller = EventDetailsController(viewRoot: view,
+        let viewRoot = EventDetailsView(viewModel: viewModel)
+        goalInputSourceView = viewRoot.week
+
+        let clockController = makeClockController()
+        let weekController = makeWeekController()
+        let controller = EventDetailsController(viewRoot: viewRoot,
                                                 viewModel: viewModel,
                                                 clockController: clockController,
                                                 weekController: weekController)
@@ -39,5 +48,31 @@ class EventDetailsFactory: EventDetailsFactoryInterface {
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
         return viewModel
+    }
+
+    func makeClockController() -> ClockController {
+        let factory = ClockFactory(applicationFactory: applicationFactory, event: event)
+        return factory.makeClockController()
+    }
+
+    func makeWeekController() -> WeekController {
+        let factory = WeekFactory(applicationFactory: applicationFactory, event: event, goalEditUseCase: goalEditUseCase)
+        let controller = factory.makeWeekController()
+        return controller
+    }
+
+    func makeDayController(date: Date) -> DayController {
+        let factory = DayFactory(applicationFactory: applicationFactory, date: date, event: event)
+        let controller = factory.makeDayController()
+        return controller
+    }
+
+    func makeGoalsInputController() -> GoalsInputController {
+        let factory = GoalsInputFactory(applicationFactory: applicationFactory,
+                                        goalEditUseCase: goalEditUseCase,
+                                        sourceView: goalInputSourceView,
+                                        event: event)
+        let controller = factory.makeGoalsInputController()
+        return controller
     }
 }

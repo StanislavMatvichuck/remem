@@ -71,8 +71,8 @@ extension GoalsInputController: UIPickerViewDelegate {
         let todayWeekDay = Goal.WeekDay.make(.now)
         let todayPickerIndex = componentForWeekDay(weekDay: todayWeekDay)
         let daysDifference = todayPickerIndex - component
-        let weekday = Goal.WeekDay.make(.now.days(ago: daysDifference))
-        viewModel.select(weekday: weekday, value: row)
+        let date = Date.now.days(ago: daysDifference)
+        viewModel.select(newAmount: row, date: date)
     }
 
     private func componentForWeekDay(weekDay: Goal.WeekDay) -> Int {

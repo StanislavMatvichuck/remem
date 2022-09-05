@@ -93,6 +93,7 @@ extension WeekController: WeekViewModelDelegate {
     }
 
     func update() {
+        print("WeekController can update cells")
         viewRoot.collection.reloadData()
     }
 }

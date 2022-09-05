@@ -87,6 +87,13 @@ extension WeekViewModel: EventEditUseCaseDelegate {
     func visited(event: Event) {}
 }
 
+// MARK: - GoalEditUseCaseDelegate
+extension WeekViewModel: GoalEditUseCaseDelegate {
+    func update(amount: Int, forDay: Goal.WeekDay) {
+        delegate?.update()
+    }
+}
+
 protocol WeekViewModelDelegate: AnyObject {
     func animate(at: IndexPath)
     func update()

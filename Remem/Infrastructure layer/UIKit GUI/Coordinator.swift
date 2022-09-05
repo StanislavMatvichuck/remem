@@ -7,18 +7,16 @@
 
 import UIKit
 
-protocol Coordinating: AnyObject {
-    func showDetails(event: Event)
-    func showDay(event: Event, date: Date)
-    func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel)
-}
-
 class Coordinator: NSObject, Coordinating {
-    weak var factory: CoordinatorFactoryInterface?
+    // MARK: - Properties
+    weak var applicationFactory: ApplicationFactory?
+    var detailsFactory: EventDetailsFactoring?
+
     let navController: UINavigationController
     private let listDelegates: MulticastDelegate<EventsListUseCaseDelegate>
     private let editDelegates: MulticastDelegate<EventEditUseCaseDelegate>
 
+    // MARK: - Init
     init(navController: UINavigationController,
          eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
          eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>)
@@ -33,20 +31,20 @@ class Coordinator: NSObject, Coordinating {
 // MARK: - Public
 extension Coordinator {
     func showDetails(event: Event) {
-        guard let details = factory?.makeEventDetailsController(for: event) else { return }
-        navController.pushViewController(details, animated: true)
+        guard let detailsFactory = applicationFactory?.makeEventDetailsFactory(event: event) else { return }
+        self.detailsFactory = detailsFactory
+
+        let controller = detailsFactory.makeEventDetailsController()
+        navController.pushViewController(controller, animated: true)
     }
 
     func showDay(event: Event, date: Date) {
-        guard let dayController = factory?.makeDayController(date: date, event: event) else { return }
+        guard let dayController = detailsFactory?.makeDayController(date: date) else { return }
         presentModally(dayController)
     }
 
     func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel) {
-        guard
-            let callingController = callingViewModel.delegate as? EventDetailsController,
-            let goalsController = factory?.makeGoalsInputController(for: event, sourceView: callingController.goalsInputView)
-        else { return }
+        guard let goalsController = detailsFactory?.makeGoalsInputController() else { return }
         presentModally(goalsController)
     }
 }
@@ -54,9 +52,7 @@ extension Coordinator {
 // MARK: - Private
 extension Coordinator {
     private func presentModally(_ controller: UIViewController) {
-        if let nav = controller.navigationController {
-            navController.present(nav, animated: true)
-        }
+        if let nav = controller.navigationController { navController.present(nav, animated: true) }
     }
 }
 

@@ -14,10 +14,12 @@ protocol WeekFactoryInterface: AnyObject {
 class WeekFactory: WeekFactoryInterface {
     // MARK: - Properties
     let applicationFactory: ApplicationFactory
+    let goalEditUseCase: GoalEditUseCase
     let event: Event
     // MARK: - Init
-    init(applicationFactory: ApplicationFactory, event: Event) {
+    init(applicationFactory: ApplicationFactory, event: Event, goalEditUseCase: GoalEditUseCase) {
         self.applicationFactory = applicationFactory
+        self.goalEditUseCase = goalEditUseCase
         self.event = event
     }
 
@@ -33,6 +35,7 @@ class WeekFactory: WeekFactoryInterface {
         let viewModel = WeekViewModel(event: event, factory: self)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
+        goalEditUseCase.delegate = viewModel
         return viewModel
     }
 
