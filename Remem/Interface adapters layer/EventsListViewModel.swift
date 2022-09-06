@@ -101,9 +101,21 @@ extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelega
     }
 
     // EventEditUseCaseDelegate
-    func added(happening: Happening, to: Event) { delegate?.update() }
-    func visited(event: Event) { delegate?.update() }
-    func removed(happening: Happening, from: Event) { delegate?.update() }
+    func added(happening: Happening, to: Event) {
+        events = listUseCase.allEvents()
+        delegate?.update()
+    }
+
+    func visited(event: Event) {
+        events = listUseCase.allEvents()
+        delegate?.update()
+    }
+
+    func removed(happening: Happening, from: Event) {
+        events = listUseCase.allEvents()
+        delegate?.update()
+    }
+
     func renamed(event: Event) {}
     func added(goal: Goal, to: Event) {}
 }

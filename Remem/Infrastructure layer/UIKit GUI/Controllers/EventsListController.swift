@@ -108,13 +108,12 @@ extension EventsListController {
 // MARK: - EventsListViewModelDelegate
 extension EventsListController: EventsListViewModelDelegate {
     func update() {
-        updateHintsAndFooter()
+        updateHints()
         hideSwipeHintIfNeeded()
 
-        func updateHintsAndFooter() {
+        func updateHints() {
             let hintIndex = IndexPath(row: 0, section: Section.hint.rawValue)
-            let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
-            viewRoot.table.reloadRows(at: [hintIndex, footerIndex], with: .none)
+            viewRoot.table.reloadRows(at: [hintIndex], with: .right)
         }
 
         func hideSwipeHintIfNeeded() {
@@ -124,12 +123,22 @@ extension EventsListController: EventsListViewModelDelegate {
 
     func addEvent(at: Int) {
         let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewRoot.table.insertRows(at: [path], with: .automatic)
+        viewRoot.table.insertRows(at: [path], with: .top)
+
+        if viewModel.eventsAmount <= 1 {
+            let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
+            viewRoot.table.reloadRows(at: [footerIndex], with: .none)
+        }
     }
 
     func remove(at: Int) {
         let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewRoot.table.deleteRows(at: [path], with: .automatic)
+        viewRoot.table.deleteRows(at: [path], with: .none)
+
+        if viewModel.eventsAmount == 0 {
+            let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
+            viewRoot.table.reloadRows(at: [footerIndex], with: .none)
+        }
     }
 
     func update(at: Int) {
