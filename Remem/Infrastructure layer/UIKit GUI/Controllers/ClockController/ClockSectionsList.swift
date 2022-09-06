@@ -8,7 +8,7 @@
 import Foundation
 
 struct ClockSectionsList {
-    static let size = 48
+    static let size = 144
 
     private static let endSeconds = 24 * 60 * 60
 

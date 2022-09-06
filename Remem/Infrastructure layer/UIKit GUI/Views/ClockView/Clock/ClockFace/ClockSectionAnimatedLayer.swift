@@ -9,7 +9,7 @@ import UIKit
 
 class ClockSectionAnimatedLayer: CAShapeLayer {
     static let length = 48.0
-    static let width = 16.0
+    static let width = 3.0
 
     // MARK: - Properties
     private var section = ClockSection(happeningsAmount: 0,
