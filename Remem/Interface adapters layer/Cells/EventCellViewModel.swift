@@ -14,6 +14,8 @@ protocol EventCellViewModeling:
 protocol EventCellViewModelingState {
     var name: String { get }
     var amount: String { get }
+    var hasGoal: Bool { get }
+    var goalReached: Bool { get }
 }
 
 protocol EventCellViewModelingEvents {
@@ -37,7 +39,28 @@ class EventCellViewModel: EventCellViewModeling {
 
     // EventCellViewModelingState
     var name: String { event.name }
-    var amount: String { String(event.happenings.count) }
+    var amount: String {
+        let todayDate = Date.now
+        let todayHappeningsCount = event.happenings(forDay: todayDate).count
+        if let todayGoal = event.goal(at: todayDate), todayGoal.amount > 0 {
+            return "\(todayHappeningsCount)/\(todayGoal.amount)"
+        } else {
+            return "\(todayHappeningsCount)"
+        }
+    }
+
+    var hasGoal: Bool {
+        let todayDate = Date.now
+        if let goal = event.goal(at: todayDate) {
+            return goal.amount > 0
+        }
+        return false
+    }
+
+    var goalReached: Bool {
+        let todayDate = Date.now
+        return event.goal(at: todayDate)?.isReached(at: todayDate) ?? false
+    }
 
     // EventCellViewModelingEvents
     func select() { coordinator?.showDetails(event: event) }
@@ -51,13 +74,22 @@ extension EventCellViewModel: EventEditUseCaseDelegate {
         delegate?.addedHappening()
     }
 
-    func removed(happening: Happening, from: Event) {}
+    func removed(happening: Happening, from: Event) {
+        guard event == from else { return }
+        delegate?.removedHappening()
+    }
+
     func renamed(event: Event) {}
     func visited(event: Event) {}
-    func added(goal: Goal, to: Event) {}
+    func added(goal: Goal, to: Event) {
+        guard event == to else { return }
+        delegate?.addedHappening()
+    }
 }
 
 // MARK: - EventCellViewModelDelegate
 protocol EventCellViewModelDelegate: AnyObject {
+    func removedHappening()
     func addedHappening()
+    func addedGoal()
 }

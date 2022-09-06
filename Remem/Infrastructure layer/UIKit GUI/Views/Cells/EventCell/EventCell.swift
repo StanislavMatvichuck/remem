@@ -9,7 +9,9 @@ import UIKit
 
 class EventCell: UITableViewCell {
     static let reuseIdentifier = "EventCell"
-    static let backgroundColor = UIHelper.background
+    static let backgroundDefault = UIHelper.background
+    static let backgroundGoalReached = UIHelper.goalReachedBackground
+    static let backgroundGoalNotReached = UIHelper.goalNotReachedBackground
     static let pinColor = UIHelper.brandDimmed
     static let height = .d2 + UIHelper.spacing
 
@@ -20,7 +22,7 @@ class EventCell: UITableViewCell {
     let viewRoot: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r2
-        view.backgroundColor = EventCell.backgroundColor
+        view.backgroundColor = EventCell.backgroundDefault
         return view
     }()
 
@@ -101,6 +103,16 @@ class EventCell: UITableViewCell {
     private func handleViewStateUpdate() {
         nameLabel.text = viewModel?.name
         valueLabel.text = viewModel?.amount
+
+        if let vm = viewModel, vm.hasGoal {
+            if vm.goalReached {
+                viewRoot.backgroundColor = Self.backgroundGoalReached
+            } else {
+                viewRoot.backgroundColor = Self.backgroundGoalNotReached
+            }
+        } else {
+            viewRoot.backgroundColor = Self.backgroundDefault
+        }
     }
 
     // MARK: - View lifecycle
@@ -126,12 +138,20 @@ extension EventCell: EventCellViewModelDelegate {
         handleViewStateUpdate()
         swiper?.animateSuccess()
     }
+
+    func addedGoal() {
+        handleViewStateUpdate()
+    }
+
+    func removedHappening() {
+        handleViewStateUpdate()
+    }
 }
 
 // MARK: - Dark mode
 extension EventCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        viewRoot.layer.backgroundColor = Self.backgroundColor.cgColor
+        handleViewStateUpdate()
     }
 }

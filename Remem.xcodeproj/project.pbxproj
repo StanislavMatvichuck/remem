@@ -411,6 +411,7 @@
 		08D512312787135300C2037F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				08D5122627870D2600C2037F /* Assets.xcassets */,
 				08EC54382837B2B000249DF1 /* Features.rtf */,
 				08D5122B27870D2600C2037F /* Info.plist */,
@@ -462,7 +463,6 @@
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 				08E620832787406400BBABFD /* Metrics.swift */,
 				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
-				08DA2C11284F559200FC418B /* UIHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
