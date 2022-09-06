@@ -127,15 +127,19 @@ extension Event {
 
     @discardableResult
     func addGoal(at dateCreated: Date, amount: Int) -> Goal {
-        let newGoal = Goal(amount: amount,
-                           event: self,
-                           dateCreated: dateCreated)
+        let accessWeekday = Goal.WeekDay.make(dateCreated)
 
-        var mutableGoalsArray = goals[Goal.WeekDay.make(dateCreated)]
+        if let existingGoal = goals[accessWeekday]?.last,
+           existingGoal.amount == amount
+        {
+            return existingGoal
+        }
 
+        let newGoal = Goal(amount: amount, event: self, dateCreated: dateCreated)
+
+        var mutableGoalsArray = goals[accessWeekday]
         mutableGoalsArray?.append(newGoal)
-
-        goals[Goal.WeekDay.make(dateCreated)] = mutableGoalsArray
+        goals[accessWeekday] = mutableGoalsArray
 
         return newGoal
     }

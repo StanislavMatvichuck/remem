@@ -31,6 +31,8 @@ class WeekCellViewModel: WeekCellViewModeling {
 
     let date: Date
     let event: Event
+    /// Used by GoalEditUseCase
+    private var overriddenGoalsAmount: Int?
     // MARK: - Init
     init(date: Date, event: Event) {
         self.date = date
@@ -39,9 +41,18 @@ class WeekCellViewModel: WeekCellViewModeling {
 
     // WeekCellViewModelState
     var dayNumber: String { String(Calendar.current.dateComponents([.day], from: date).day ?? 0) }
-    var isAchieved: Bool { event.happenings(forDay: date).count >= goalsAmount && goalsAmount > 0 }
+    var isAchieved: Bool {
+        if let overriddenGoalsAmount = overriddenGoalsAmount {
+            if overriddenGoalsAmount == 0 { return false }
+            return happeningsTimings.count >= overriddenGoalsAmount
+        } else {
+            return event.goal(at: date)?.isReached(at: date) ?? false
+        }
+    }
+
     var amount: String { String(event.happenings(forDay: date).count) }
-    var goalsAmount: Int { event.goal(at: date)?.amount ?? 0 }
+    var goalsAmount: Int { overriddenGoalsAmount ?? event.goal(at: date)?.amount ?? 0 }
+
     var isToday: Bool { Calendar.current.isDateInToday(date) }
     var happeningsTimings: [String] {
         let formatter = DateFormatter()
@@ -66,6 +77,22 @@ extension WeekCellViewModel: EventEditUseCaseDelegate {
     func visited(event: Event) {}
 }
 
+// MARK: - GoalEditUseCaseDelegate
+extension WeekCellViewModel: GoalEditUseCaseDelegate {
+    func update(amount: Int, forDay: Goal.WeekDay) {
+        if Goal.WeekDay.make(date) == forDay {
+            overriddenGoalsAmount = amount
+            delegate?.highlightGoalSelection(amount: amount)
+        }
+    }
+
+    func dismiss() {
+        overriddenGoalsAmount = nil
+        delegate?.update()
+    }
+}
+
 protocol WeekCellViewModelDelegate: AnyObject {
     func update()
+    func highlightGoalSelection(amount: Int)
 }

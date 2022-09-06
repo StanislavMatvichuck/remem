@@ -28,6 +28,11 @@ class GoalsInputController: UIViewController {
         configurePickerDefaultValue()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.cancel()
+    }
+
     private func configureEventHandlers() {
         viewRoot.picker.delegate = self
     }

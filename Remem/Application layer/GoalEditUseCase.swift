@@ -15,10 +15,12 @@ protocol GoalEditUseCasing {
 
 class GoalEditUseCase: GoalEditUseCasing {
     // MARK: - Properties
-    weak var delegate: GoalEditUseCaseDelegate?
 
+    let delegates = MulticastDelegate<GoalEditUseCaseDelegate>()
     let event: Event
     let eventEditUseCase: EventEditUseCasing
+
+    private var state = [Goal.WeekDay: (Int, Date)]()
     // MARK: - Init
     init(event: Event, eventEditUseCase: EventEditUseCasing) {
         self.event = event
@@ -26,19 +28,22 @@ class GoalEditUseCase: GoalEditUseCasing {
     }
 
     func submit() {
-        print("submit")
+        for weekday in state.keys {
+            guard let (newGoalAmount, newGoalDate) = state[weekday] else { continue }
+            eventEditUseCase.addGoal(to: event, at: newGoalDate, amount: newGoalAmount)
+        }
     }
 
-    func cancel() {
-        print("cancel")
-    }
+    func cancel() { delegates.call { $0.dismiss() } }
 
     func update(amount: Int, forDate: Date) {
-        print("amount \(amount) forDate \(forDate)")
-        delegate?.update(amount: amount, forDay: .make(forDate))
+        let weekday = Goal.WeekDay.make(forDate)
+        state.updateValue((amount, forDate), forKey: weekday)
+        delegates.call { $0.update(amount: amount, forDay: .make(forDate)) }
     }
 }
 
 protocol GoalEditUseCaseDelegate: AnyObject {
     func update(amount: Int, forDay: Goal.WeekDay)
+    func dismiss()
 }

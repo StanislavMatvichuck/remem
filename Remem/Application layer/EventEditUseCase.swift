@@ -61,6 +61,7 @@ class EventEditUseCase: EventEditUseCasing {
 
     func addGoal(to event: Event, at date: Date, amount: Int) {
         let addedGoal = event.addGoal(at: date, amount: amount)
+        repository.save(event)
         delegate?.added(goal: addedGoal, to: event)
     }
 }

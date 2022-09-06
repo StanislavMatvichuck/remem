@@ -35,7 +35,6 @@ class WeekFactory: WeekFactoryInterface {
         let viewModel = WeekViewModel(event: event, factory: self)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
-        goalEditUseCase.delegate = viewModel
         return viewModel
     }
 
@@ -44,6 +43,7 @@ class WeekFactory: WeekFactoryInterface {
         let viewModel = WeekCellViewModel(date: date, event: event)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
+        goalEditUseCase.delegates.addDelegate(viewModel)
         return viewModel
     }
 }

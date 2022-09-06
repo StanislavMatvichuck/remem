@@ -17,6 +17,7 @@ class WeekView: UIView {
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
         view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
