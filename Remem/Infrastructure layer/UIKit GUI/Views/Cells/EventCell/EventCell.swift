@@ -47,9 +47,9 @@ class EventCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        makeSwiper()
         configureLayout()
         configureAppearance()
+        makeSwiper()
         configureEventsHandlers()
     }
 
@@ -63,7 +63,6 @@ class EventCell: UITableViewCell {
     private func configureLayout() {
         viewRoot.addSubview(nameLabel)
         viewRoot.addSubview(valueLabel)
-
         contentView.addSubview(viewRoot)
 
         let height = contentView.heightAnchor.constraint(equalToConstant: Self.height)
@@ -125,6 +124,7 @@ extension EventCell {
 extension EventCell: EventCellViewModelDelegate {
     func addedHappening() {
         handleViewStateUpdate()
+        swiper?.animateSuccess()
     }
 }
 
