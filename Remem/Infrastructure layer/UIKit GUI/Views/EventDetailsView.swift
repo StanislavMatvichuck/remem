@@ -13,38 +13,15 @@ class EventDetailsView: UIView {
     let clock = UIView(al: true)
 
     let goalsButton: UIView = {
-        let image = UIImage(systemName: "plus.circle")?
-            .withTintColor(UIHelper.brand)
-            .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
-        let imageView = UIImageView(al: true)
-        imageView.image = image
-
         let label = UILabel(al: true)
-        label.text = "Add daily goal"
+        label.text = "Configure goal"
+        label.textAlignment = .center
         label.font = UIHelper.fontSmallBold
         label.textColor = UIHelper.brand
 
-        let buttonStack = UIStackView(al: true)
-        buttonStack.axis = .horizontal
-        buttonStack.alignment = .center
-
-        buttonStack.backgroundColor = UIHelper.background
-        buttonStack.layer.cornerRadius = 10
-
-        buttonStack.addArrangedSubview(imageView)
-        buttonStack.addArrangedSubview(label)
-
-        buttonStack.spacing = UIHelper.spacing
-        buttonStack.isLayoutMarginsRelativeArrangement = true
-        buttonStack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: UIHelper.spacing,
-                                                                       leading: UIHelper.spacing,
-                                                                       bottom: UIHelper.spacing,
-                                                                       trailing: UIHelper.spacing)
-
         let view = UIView(al: true)
-        view.addAndConstrain(buttonStack, constant: UIHelper.spacing)
-
+        view.addAndConstrain(label, constant: UIHelper.spacing)
+        view.backgroundColor = UIHelper.background
         return view
     }()
 
@@ -66,28 +43,22 @@ class EventDetailsView: UIView {
     }
 
     private func configureLayout() {
-        let goalsButtonMargin = UIView(al: true)
-        goalsButtonMargin.addSubview(goalsButton)
-
-        NSLayoutConstraint.activate([
-            goalsButton.leadingAnchor.constraint(equalTo: goalsButtonMargin.readableContentGuide.leadingAnchor),
-            goalsButton.trailingAnchor.constraint(equalTo: goalsButtonMargin.readableContentGuide.trailingAnchor),
-
-            goalsButton.topAnchor.constraint(equalTo: goalsButtonMargin.topAnchor),
-            goalsButton.bottomAnchor.constraint(equalTo: goalsButtonMargin.bottomAnchor, constant: -UIHelper.spacing),
-        ])
+        let bottomSpacing = UIView(al: true)
 
         let scroll = ViewScroll(.vertical)
-        scroll.contain(views: week,
-                       goalsButtonMargin,
-                       make(title: "Hours distribution"),
-                       clock,
-                       make(title: "Stats"),
-                       makeStatRow(labelAmount: total, description: "Total"),
-                       makeStatRow(labelAmount: thisWeekTotal, description: "This week total"),
-                       makeStatRow(labelAmount: lastWeekTotal, description: "Last week total"),
-                       makeStatRow(labelAmount: dayAverage, description: "Day average"),
-                       makeStatRow(labelAmount: weekAverage, description: "Week average"))
+        scroll.contain(views:
+            week,
+            goalsButton,
+            clock,
+            makeStatRow(labelAmount: total, description: "Total"),
+            makeStatRow(labelAmount: thisWeekTotal, description: "This week total"),
+            makeStatRow(labelAmount: lastWeekTotal, description: "Last week total"),
+            makeStatRow(labelAmount: dayAverage, description: "Day average"),
+            makeStatRow(labelAmount: weekAverage, description: "Week average"),
+            bottomSpacing)
+
+        scroll.viewContent.setCustomSpacing(UIHelper.spacing, after: goalsButton)
+        scroll.viewContent.setCustomSpacing(UIHelper.spacing, after: clock)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -95,6 +66,7 @@ class EventDetailsView: UIView {
             scroll.leadingAnchor.constraint(equalTo: leadingAnchor),
             scroll.trailingAnchor.constraint(equalTo: trailingAnchor),
             scroll.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            bottomSpacing.heightAnchor.constraint(equalToConstant: UIHelper.spacingListHorizontal)
         ])
     }
 
@@ -110,24 +82,6 @@ class EventDetailsView: UIView {
         weekAverage.text = viewModel.weekAverage
     }
 
-    private func make(title: String) -> UIView {
-        let label = UILabel(al: true)
-        label.text = title
-        label.font = UIHelper.fontBold
-        label.textColor = UIHelper.itemFont
-
-        let view = UIView(al: true)
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor),
-            label.topAnchor.constraint(equalTo: view.topAnchor),
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-
-        return view
-    }
-
     private func makeStatRow(labelAmount: UILabel, description: String) -> UIView {
         let labelDescription = UILabel(al: true)
         labelDescription.text = description
@@ -139,6 +93,11 @@ class EventDetailsView: UIView {
         view.axis = .horizontal
         view.addArrangedSubview(labelAmount)
         view.addArrangedSubview(labelDescription)
+        view.spacing = UIHelper.spacing
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(top: 0, left: UIHelper.spacing, bottom: 0, right: UIHelper.spacing)
+
+        labelAmount.widthAnchor.constraint(equalToConstant: .wScreen / 4).isActive = true
 
         return view
     }
@@ -148,6 +107,9 @@ class EventDetailsView: UIView {
         labelAmount.text = "\(0.0)"
         labelAmount.font = UIHelper.fontBold
         labelAmount.textColor = UIHelper.itemFont
+        labelAmount.textAlignment = .right
+        labelAmount.adjustsFontSizeToFitWidth = true
+        labelAmount.minimumScaleFactor = 0.5
         return labelAmount
     }
 

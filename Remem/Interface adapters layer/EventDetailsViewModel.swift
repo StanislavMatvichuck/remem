@@ -31,6 +31,13 @@ class EventDetailsViewModel: EventDetailsViewModeling {
     private let event: Event
     private let editUseCase: EventEditUseCasing
 
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+
     init(event: Event, editUseCase: EventEditUseCasing) {
         self.event = event
         self.editUseCase = editUseCase
@@ -48,7 +55,8 @@ class EventDetailsViewModel: EventDetailsViewModeling {
     var dayAverage: String {
         let total = Double(totalAmount)
         let daysAmount = Double(daysSince)
-        return String(total! / daysAmount)
+        let number = NSNumber(value: total! / daysAmount)
+        return formatter.string(from: number)!
     }
 
     var weekAverage: String {
@@ -62,8 +70,8 @@ class EventDetailsViewModel: EventDetailsViewModeling {
         let total: Double = weeksTotals.reduce(0) { result, iterationAverage in
             result + iterationAverage
         }
-
-        return String(total / Double(weeksTotals.count))
+        let number = NSNumber(value: total / Double(weeksTotals.count))
+        return formatter.string(from: number)!
     }
 
     private var daysSince: Int {

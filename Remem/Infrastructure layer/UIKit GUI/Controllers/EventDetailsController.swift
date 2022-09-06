@@ -55,7 +55,11 @@ class EventDetailsController: UIViewController {
         controller.didMove(toParent: self)
     }
 
-    @objc private func onPressAddGoal() { viewModel.showGoalsInput() }
+    @objc private func onPressAddGoal() {
+        UIDevice.vibrate(.medium)
+        viewRoot.goalsButton.animate()
+        viewModel.showGoalsInput()
+    }
 }
 
 extension EventDetailsController: EventDetailsViewModelDelegate {
