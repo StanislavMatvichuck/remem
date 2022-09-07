@@ -14,6 +14,11 @@
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
 		08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */; };
+		0826AC9228C86ECE0021D607 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9128C86ECE0021D607 /* WidgetKit.framework */; };
+		0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9328C86ECE0021D607 /* SwiftUI.framework */; };
+		0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826AC9628C86ECE0021D607 /* RememWidgets.swift */; };
+		0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0826AC9828C86ECF0021D607 /* Assets.xcassets */; };
+		0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
@@ -82,6 +87,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0826AC8E28C86ECE0021D607;
+			remoteInfo = RememWidgetsExtension;
+		};
 		0870EEFC2809B81100336759 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -90,6 +102,20 @@
 			remoteInfo = Remem;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0826AC9E28C86ECF0021D607 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
@@ -100,6 +126,12 @@
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsFactory.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
+		0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RememWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0826AC9128C86ECE0021D607 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0826AC9328C86ECE0021D607 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0826AC9628C86ECE0021D607 /* RememWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememWidgets.swift; sourceTree = "<group>"; };
+		0826AC9828C86ECF0021D607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0826AC9A28C86ECF0021D607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
@@ -178,6 +210,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0826AC8C28C86ECE0021D607 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */,
+				0826AC9228C86ECE0021D607 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF52809B81100336759 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +258,25 @@
 				088E88C228AF916000400180 /* WeekCellViewModel.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		0826AC9028C86ECE0021D607 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0826AC9128C86ECE0021D607 /* WidgetKit.framework */,
+				0826AC9328C86ECE0021D607 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0826AC9528C86ECE0021D607 /* RememWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				0826AC9628C86ECE0021D607 /* RememWidgets.swift */,
+				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
+				0826AC9A28C86ECF0021D607 /* Info.plist */,
+			);
+			path = RememWidgets;
 			sourceTree = "<group>";
 		};
 		08485BA7289EDD760045B9F2 /* Domain layer */ = {
@@ -382,6 +442,8 @@
 			children = (
 				08D5121C27870D2500C2037F /* Remem */,
 				0870EEF92809B81100336759 /* RememTests */,
+				0826AC9528C86ECE0021D607 /* RememWidgets */,
+				0826AC9028C86ECE0021D607 /* Frameworks */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -391,6 +453,7 @@
 			children = (
 				08D5121A27870D2500C2037F /* Remem.app */,
 				0870EEF82809B81100336759 /* RememTests.xctest */,
+				0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -503,6 +566,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */;
+			buildPhases = (
+				0826AC8B28C86ECE0021D607 /* Sources */,
+				0826AC8C28C86ECE0021D607 /* Frameworks */,
+				0826AC8D28C86ECE0021D607 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RememWidgetsExtension;
+			productName = RememWidgetsExtension;
+			productReference = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		0870EEF72809B81100336759 /* RememTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */;
@@ -528,10 +608,12 @@
 				08D5121627870D2500C2037F /* Sources */,
 				08D5121727870D2500C2037F /* Frameworks */,
 				08D5121827870D2500C2037F /* Resources */,
+				0826AC9E28C86ECF0021D607 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0826AC9C28C86ECF0021D607 /* PBXTargetDependency */,
 			);
 			name = Remem;
 			productName = Remem;
@@ -545,9 +627,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					0826AC8E28C86ECE0021D607 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					0870EEF72809B81100336759 = {
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = 08D5121927870D2500C2037F;
@@ -574,11 +659,20 @@
 			targets = (
 				08D5121927870D2500C2037F /* Remem */,
 				0870EEF72809B81100336759 /* RememTests */,
+				0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0826AC8D28C86ECE0021D607 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF62809B81100336759 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -600,6 +694,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0826AC8B28C86ECE0021D607 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF42809B81100336759 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -685,6 +787,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0826AC9C28C86ECF0021D607 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */;
+			targetProxy = 0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */;
+		};
 		0870EEFD2809B81100336759 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 08D5121927870D2500C2037F /* Remem */;
@@ -716,6 +823,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0826AC9F28C86ECF0021D607 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0826ACA028C86ECF0021D607 /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Onboarding;
+		};
+		0826ACA128C86ECF0021D607 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0831EB9027DA974F00A910D5 /* Onboarding */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -781,6 +972,7 @@
 		0831EB9127DA974F00A910D5 /* Onboarding */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -985,6 +1177,7 @@
 		08D5122F27870D2600C2037F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1014,6 +1207,7 @@
 		08D5123027870D2600C2037F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1043,6 +1237,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0826AC9F28C86ECF0021D607 /* Debug */,
+				0826ACA028C86ECF0021D607 /* Onboarding */,
+				0826ACA128C86ECF0021D607 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
