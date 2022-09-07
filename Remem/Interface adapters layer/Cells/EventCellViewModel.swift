@@ -79,7 +79,11 @@ extension EventCellViewModel: EventEditUseCaseDelegate {
         delegate?.removedHappening()
     }
 
-    func renamed(event: Event) {}
+    func renamed(event: Event) {
+        guard self.event == event else { return }
+        delegate?.renamed()
+    }
+
     func visited(event: Event) {}
     func added(goal: Goal, to: Event) {
         guard event == to else { return }
@@ -92,4 +96,5 @@ protocol EventCellViewModelDelegate: AnyObject {
     func removedHappening()
     func addedHappening()
     func addedGoal()
+    func renamed()
 }

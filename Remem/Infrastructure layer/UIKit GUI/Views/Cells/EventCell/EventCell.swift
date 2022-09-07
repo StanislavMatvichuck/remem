@@ -139,13 +139,9 @@ extension EventCell: EventCellViewModelDelegate {
         swiper?.animateSuccess()
     }
 
-    func addedGoal() {
-        handleViewStateUpdate()
-    }
-
-    func removedHappening() {
-        handleViewStateUpdate()
-    }
+    func addedGoal() { handleViewStateUpdate() }
+    func removedHappening() { handleViewStateUpdate() }
+    func renamed() { handleViewStateUpdate() }
 }
 
 // MARK: - Dark mode
