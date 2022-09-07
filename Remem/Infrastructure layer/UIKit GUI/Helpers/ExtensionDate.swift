@@ -49,6 +49,16 @@ extension Date {
         return c.date(byAdding: .day, value: 6, to: monday)
     }
 
+    var endOfDay: Date? {
+        let c = Calendar.current
+        var dayComponents = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        dayComponents.hour = 23
+        dayComponents.minute = 59
+        dayComponents.second = 59
+        guard let endOfDay = c.date(from: dayComponents) else { return nil }
+        return endOfDay
+    }
+
     ///
     /// Remem methods
     ///

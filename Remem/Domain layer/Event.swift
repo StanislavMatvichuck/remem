@@ -112,10 +112,15 @@ extension Event {
     // Goals
     func goal(at date: Date) -> Goal? {
         let accessorDay = Goal.WeekDay.make(date)
+
         var resultingGoal: Goal?
 
-        if let goals = goals[accessorDay] {
-            for goal in goals { if date >= goal.dateCreated { resultingGoal = goal } }
+        if let goals = goals[accessorDay],
+           let endOfDayDate = date.endOfDay
+        {
+            for goal in goals {
+                if endOfDayDate >= goal.dateCreated { resultingGoal = goal }
+            }
         }
 
         return resultingGoal
