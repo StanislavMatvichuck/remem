@@ -12,8 +12,8 @@ struct UIHelper {
     static let background = UIColor.systemBackground
     static let itemBackground = UIColor.secondarySystemBackground
     static let clockSectionBackground = UIColor.systemGray4
-    static let goalReachedBackground = UIColor(named: "goalReachedBackground")
-    static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")
+    static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
+    static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!
     static let brand = UIColor.systemBlue
     static let brandDimmed = brand.withAlphaComponent(0.3)
     static let secondary = UIColor.systemOrange

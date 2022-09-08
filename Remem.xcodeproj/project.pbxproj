@@ -19,6 +19,12 @@
 		0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826AC9628C86ECE0021D607 /* RememWidgets.swift */; };
 		0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0826AC9828C86ECF0021D607 /* Assets.xcassets */; };
 		0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0826ACA628C885E30021D607 /* MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACA328C8858D0021D607 /* MediumView.swift */; };
+		0826ACA928C889DF0021D607 /* MediumEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACA728C8899B0021D607 /* MediumEntry.swift */; };
+		0826ACAC28C889FD0021D607 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAA28C889FA0021D607 /* Provider.swift */; };
+		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
+		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
+		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
@@ -132,6 +138,10 @@
 		0826AC9628C86ECE0021D607 /* RememWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememWidgets.swift; sourceTree = "<group>"; };
 		0826AC9828C86ECF0021D607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0826AC9A28C86ECF0021D607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0826ACA328C8858D0021D607 /* MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumView.swift; sourceTree = "<group>"; };
+		0826ACA728C8899B0021D607 /* MediumEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumEntry.swift; sourceTree = "<group>"; };
+		0826ACAA28C889FA0021D607 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		0826ACAF28C88EF20021D607 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
@@ -272,11 +282,23 @@
 		0826AC9528C86ECE0021D607 /* RememWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				0826ACAA28C889FA0021D607 /* Provider.swift */,
+				0826ACA728C8899B0021D607 /* MediumEntry.swift */,
+				0826ACA328C8858D0021D607 /* MediumView.swift */,
 				0826AC9628C86ECE0021D607 /* RememWidgets.swift */,
-				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
-				0826AC9A28C86ECF0021D607 /* Info.plist */,
+				0826ACAF28C88EF20021D607 /* Helpers.swift */,
+				0826ACA528C885970021D607 /* Resources */,
 			);
 			path = RememWidgets;
+			sourceTree = "<group>";
+		};
+		0826ACA528C885970021D607 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0826AC9A28C86ECF0021D607 /* Info.plist */,
+				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		08485BA7289EDD760045B9F2 /* Domain layer */ = {
@@ -669,6 +691,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */,
 				0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,7 +721,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0826ACAC28C889FD0021D607 /* Provider.swift in Sources */,
+				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
+				0826ACA928C889DF0021D607 /* MediumEntry.swift in Sources */,
 				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
+				0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */,
+				0826ACA628C885E30021D607 /* MediumView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,10 +857,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -857,10 +885,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -885,10 +913,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Info.plist;
+				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
@@ -976,7 +1004,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -1181,7 +1209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -1211,7 +1239,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
