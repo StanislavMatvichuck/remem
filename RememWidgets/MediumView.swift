@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct MediumView: View {
-    var entry: SimpleEntry
+    var entry: MediumEntry
 
     var body: some View {
         ZStack(alignment: .center, content: {
@@ -18,8 +18,9 @@ struct MediumView: View {
                 row(name: "smoking", amount: 2, goal: 2, bg: Color(UIHelper.goalReachedBackground))
                 row(name: "coffee", amount: 0, goal: 5, bg: Color(UIHelper.goalNotReachedBackground))
                 row(name: "regular item", amount: 1, goal: 2, bg: Color(UIHelper.background))
-            }.padding()
-
+            }
+            .padding(.vertical, 11)
+            .padding(.horizontal)
         })
     }
 
@@ -43,7 +44,7 @@ struct MediumView: View {
 
 struct RememWidgets_Previews: PreviewProvider {
     static var previews: some View {
-        MediumView(entry: SimpleEntry(date: Date()))
+        MediumView(entry: MediumEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

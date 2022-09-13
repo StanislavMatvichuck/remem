@@ -7,6 +7,6 @@
 
 import WidgetKit
 
-struct SimpleEntry: TimelineEntry {
+struct MediumEntry: TimelineEntry {
     let date: Date
 }
