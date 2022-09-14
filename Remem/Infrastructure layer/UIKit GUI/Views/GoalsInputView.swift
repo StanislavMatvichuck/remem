@@ -40,9 +40,6 @@ class GoalsInputView: UIView {
 
 // MARK: - Picker
 extension GoalsInputView: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        Goal.WeekDay.allCases.count
-    }
-
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 7 }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { WeekCell.sectionsAmount + 1 }
 }

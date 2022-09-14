@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RememDomain
 
 struct ClockSectionsList {
     static let size = 144

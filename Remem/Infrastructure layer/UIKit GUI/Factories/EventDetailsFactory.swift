@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RememDomain
 
 protocol EventDetailsFactoring: AnyObject {
     func makeEventDetailsController() -> EventDetailsController

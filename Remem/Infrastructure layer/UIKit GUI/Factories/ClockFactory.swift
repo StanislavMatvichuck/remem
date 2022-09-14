@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RememDomain
 
 class ClockFactory {
     // MARK: - Properties

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RememDomain
 
 class GoalsInputController: UIViewController {
     // MARK: - Properties

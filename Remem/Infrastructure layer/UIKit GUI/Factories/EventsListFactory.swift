@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RememDomain
 
 protocol EventsListFactoryInterface {
     func makeEventCellViewModel(event: Event) -> EventCellViewModel

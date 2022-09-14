@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
 		080656EA283B946000C09409 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
+		080A678F28D1E2AA00889A97 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
 		080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
@@ -29,7 +30,7 @@
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
 		083265FE28A51F940023288B /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083265FD28A51F940023288B /* GoalTests.swift */; };
-		083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A415F27BE603800AF2098 /* ExtensionDate.swift */; };
+		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		08485BAA289EDD960045B9F2 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BA9289EDD960045B9F2 /* EventTests.swift */; };
@@ -40,13 +41,18 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
-		085C4E9C289AC27F0094388C /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9B289AC27F0094388C /* EventsRepository.swift */; };
-		085C4E9E289AC4F00094388C /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4E9D289AC4F00094388C /* Happening.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
+		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
+		087ED41028D0A4060085A37D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* Goal.swift */; };
+		087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41128D0A4510085A37D /* ExtenstionsDate.swift */; };
+		087ED41E28D0A54C0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
+		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
+		087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
 		088E88C328AF916000400180 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekCellViewModel.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
@@ -79,12 +85,10 @@
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
 		08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
-		08E5B91628997F5C000B08BC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91528997F5C000B08BC /* Event.swift */; };
 		08E5B91928998053000B08BC /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
 		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */; };
-		08EBA79A28A3DACA008480B0 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EBA79928A3DACA008480B0 /* Goal.swift */; };
 		08EC438228BA365400755B54 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
@@ -107,6 +111,27 @@
 			remoteGlobalIDString = 08D5121927870D2500C2037F;
 			remoteInfo = Remem;
 		};
+		087ED41F28D0A54C0085A37D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = RememDomain;
+		};
+		087ED42828D0A77A0085A37D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = RememDomain;
+		};
+		087ED42B28D0A78A0085A37D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = RememDomain;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -121,11 +146,21 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		083BECEF28D0A319009157FD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
 		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
+		080A678E28D1E2AA00889A97 /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
 		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
@@ -146,7 +181,8 @@
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
 		083265FD28A51F940023288B /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
-		083A415F27BE603800AF2098 /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
+		083BECF128D0A319009157FD /* libRememDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRememDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		08485BA9289EDD960045B9F2 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
@@ -158,8 +194,6 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
-		085C4E9B289AC27F0094388C /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
-		085C4E9D289AC4F00094388C /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +204,12 @@
 		086FFE6D28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0870EEF82809B81100336759 /* RememTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
+		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
+		087ED40F28D0A4060085A37D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		087ED41128D0A4510085A37D /* ExtenstionsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionsDate.swift; sourceTree = "<group>"; };
+		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		087ED42628D0A5A00085A37D /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		088E88C228AF916000400180 /* WeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellViewModel.swift; sourceTree = "<group>"; };
 		088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalRemovedDateDisabled04.xcdatamodel; sourceTree = "<group>"; };
@@ -206,12 +246,10 @@
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionAnimatedLayer.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
-		08E5B91528997F5C000B08BC /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFactory.swift; sourceTree = "<group>"; };
-		08EBA79928A3DACA008480B0 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
@@ -229,6 +267,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		083BECEE28D0A319009157FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF52809B81100336759 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,16 +281,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		087ED41728D0A54C0085A37D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				087ED41E28D0A54C0085A37D /* libRememDomain.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D5121727870D2500C2037F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080A679028D1E2DA00889A97 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				083BECF328D0A31A009157FD /* Event.swift */,
+				087ED40D28D0A3F60085A37D /* Happening.swift */,
+				087ED40F28D0A4060085A37D /* Goal.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		08235E7128C5CC3F0026DED2 /* Interface adapters layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +365,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		083BECF228D0A31A009157FD /* RememDomain */ = {
+			isa = PBXGroup;
+			children = (
+				080A679028D1E2DA00889A97 /* Model */,
+				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
+				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
+			);
+			path = RememDomain;
+			sourceTree = "<group>";
+		};
 		08485BA7289EDD760045B9F2 /* Domain layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,14 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
-			);
-			path = "Domain services layer";
-			sourceTree = "<group>";
-		};
-		085C4E96289AB56A0094388C /* Domain services layer */ = {
-			isa = PBXGroup;
-			children = (
-				085C4E9B289AC27F0094388C /* EventsRepository.swift */,
 			);
 			path = "Domain services layer";
 			sourceTree = "<group>";
@@ -431,6 +497,15 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
+		087ED41B28D0A54C0085A37D /* RememDomainTests */ = {
+			isa = PBXGroup;
+			children = (
+				087ED41428D0A4F20085A37D /* EventTests.swift */,
+				087ED42628D0A5A00085A37D /* GoalTests.swift */,
+			);
+			path = RememDomainTests;
+			sourceTree = "<group>";
+		};
 		08C6C4FD287DAC44001F522E /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +540,8 @@
 				08D5121C27870D2500C2037F /* Remem */,
 				0870EEF92809B81100336759 /* RememTests */,
 				0826AC9528C86ECE0021D607 /* RememWidgets */,
+				083BECF228D0A31A009157FD /* RememDomain */,
+				087ED41B28D0A54C0085A37D /* RememDomainTests */,
 				0826AC9028C86ECE0021D607 /* Frameworks */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
@@ -476,6 +553,8 @@
 				08D5121A27870D2500C2037F /* Remem.app */,
 				0870EEF82809B81100336759 /* RememTests.xctest */,
 				0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */,
+				083BECF128D0A319009157FD /* libRememDomain.a */,
+				087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,8 +562,6 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
-				08D512392787156500C2037F /* Domain layer */,
-				085C4E96289AB56A0094388C /* Domain services layer */,
 				086DC6D02880571A0048F22F /* Application layer */,
 				08235E7128C5CC3F0026DED2 /* Interface adapters layer */,
 				085C4E97289AB57A0094388C /* Infrastructure layer */,
@@ -528,21 +605,10 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		08D512392787156500C2037F /* Domain layer */ = {
-			isa = PBXGroup;
-			children = (
-				08E5B91528997F5C000B08BC /* Event.swift */,
-				085C4E9D289AC4F00094388C /* Happening.swift */,
-				08EBA79928A3DACA008480B0 /* Goal.swift */,
-			);
-			path = "Domain layer";
-			sourceTree = "<group>";
-		};
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
-				083A415F27BE603800AF2098 /* ExtensionDate.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
@@ -605,6 +671,23 @@
 			productReference = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		083BECF028D0A319009157FD /* RememDomain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "RememDomain" */;
+			buildPhases = (
+				083BECED28D0A319009157FD /* Sources */,
+				083BECEE28D0A319009157FD /* Frameworks */,
+				083BECEF28D0A319009157FD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RememDomain;
+			productName = RememDomain;
+			productReference = 083BECF128D0A319009157FD /* libRememDomain.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		0870EEF72809B81100336759 /* RememTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */;
@@ -623,6 +706,24 @@
 			productReference = 0870EEF82809B81100336759 /* RememTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		087ED41928D0A54C0085A37D /* RememDomainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "RememDomainTests" */;
+			buildPhases = (
+				087ED41628D0A54C0085A37D /* Sources */,
+				087ED41728D0A54C0085A37D /* Frameworks */,
+				087ED41828D0A54C0085A37D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				087ED42028D0A54C0085A37D /* PBXTargetDependency */,
+			);
+			name = RememDomainTests;
+			productName = RememDomainTests;
+			productReference = 087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		08D5121927870D2500C2037F /* Remem */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Remem" */;
@@ -635,7 +736,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				087ED42928D0A77A0085A37D /* PBXTargetDependency */,
 				0826AC9C28C86ECF0021D607 /* PBXTargetDependency */,
+				087ED42C28D0A78A0085A37D /* PBXTargetDependency */,
 			);
 			name = Remem;
 			productName = Remem;
@@ -655,9 +758,15 @@
 					0826AC8E28C86ECE0021D607 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					083BECF028D0A319009157FD = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					0870EEF72809B81100336759 = {
 						CreatedOnToolsVersion = 13.3;
 						TestTargetID = 08D5121927870D2500C2037F;
+					};
+					087ED41928D0A54C0085A37D = {
+						CreatedOnToolsVersion = 13.4.1;
 					};
 					08D5121927870D2500C2037F = {
 						CreatedOnToolsVersion = 13.1;
@@ -682,6 +791,8 @@
 				08D5121927870D2500C2037F /* Remem */,
 				0870EEF72809B81100336759 /* RememTests */,
 				0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */,
+				083BECF028D0A319009157FD /* RememDomain */,
+				087ED41928D0A54C0085A37D /* RememDomainTests */,
 			);
 		};
 /* End PBXProject section */
@@ -697,6 +808,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0870EEF62809B81100336759 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		087ED41828D0A54C0085A37D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -730,6 +848,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		083BECED28D0A319009157FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080A678F28D1E2AA00889A97 /* EventsRepository.swift in Sources */,
+				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
+				087ED41028D0A4060085A37D /* Goal.swift in Sources */,
+				087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */,
+				083BECF428D0A31A009157FD /* Event.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF42809B81100336759 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -740,12 +870,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		087ED41628D0A54C0085A37D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */,
+				087ED42528D0A5530085A37D /* EventTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D5121627870D2500C2037F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */,
-				085C4E9E289AC4F00094388C /* Happening.swift in Sources */,
 				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
 				08EC438228BA365400755B54 /* EventCellViewModel.swift in Sources */,
 				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
@@ -769,7 +907,6 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */,
-				08E5B91628997F5C000B08BC /* Event.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */,
@@ -783,14 +920,11 @@
 				08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				085622FD28C25B9F002331AB /* DayFactory.swift in Sources */,
-				083A416027BE603800AF2098 /* ExtensionDate.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */,
 				080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */,
-				08EBA79A28A3DACA008480B0 /* Goal.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
-				085C4E9C289AC27F0094388C /* EventsRepository.swift in Sources */,
 				08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */,
 				08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */,
 				08961F50289BA99900F3E179 /* EventDetailsViewModel.swift in Sources */,
@@ -824,6 +958,21 @@
 			isa = PBXTargetDependency;
 			target = 08D5121927870D2500C2037F /* Remem */;
 			targetProxy = 0870EEFC2809B81100336759 /* PBXContainerItemProxy */;
+		};
+		087ED42028D0A54C0085A37D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* RememDomain */;
+			targetProxy = 087ED41F28D0A54C0085A37D /* PBXContainerItemProxy */;
+		};
+		087ED42928D0A77A0085A37D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* RememDomain */;
+			targetProxy = 087ED42828D0A77A0085A37D /* PBXContainerItemProxy */;
+		};
+		087ED42C28D0A78A0085A37D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* RememDomain */;
+			targetProxy = 087ED42B28D0A78A0085A37D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1027,6 +1176,48 @@
 			};
 			name = Onboarding;
 		};
+		083BECF628D0A31A009157FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		083BECF728D0A31A009157FD /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Onboarding;
+		};
+		083BECF828D0A31A009157FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0870EEFE2809B81100336759 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1081,6 +1272,60 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+			};
+			name = Release;
+		};
+		087ED42228D0A54C0085A37D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		087ED42328D0A54C0085A37D /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Onboarding;
+		};
+		087ED42428D0A54C0085A37D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1275,12 +1520,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "RememDomain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				083BECF628D0A31A009157FD /* Debug */,
+				083BECF728D0A31A009157FD /* Onboarding */,
+				083BECF828D0A31A009157FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0870EEFE2809B81100336759 /* Debug */,
 				0870EEFF2809B81100336759 /* Onboarding */,
 				0870EF002809B81100336759 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "RememDomainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				087ED42228D0A54C0085A37D /* Debug */,
+				087ED42328D0A54C0085A37D /* Onboarding */,
+				087ED42428D0A54C0085A37D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

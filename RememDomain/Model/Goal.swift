@@ -1,14 +1,14 @@
 //
 //  Goal.swift
-//  Remem
+//  RememDomain
 //
-//  Created by Stanislav Matvichuck on 10.08.2022.
+//  Created by Stanislav Matvichuck on 13.09.2022.
 //
 
 import Foundation
 
-struct Goal: Equatable {
-    enum WeekDay: Int, CaseIterable {
+public struct Goal: Equatable {
+    public enum WeekDay: Int, CaseIterable {
         case monday = 2
         case tuesday = 3
         case wednesday = 4
@@ -17,18 +17,19 @@ struct Goal: Equatable {
         case saturday = 7
         case sunday = 1
 
-        static func make(_ date: Date) -> WeekDay {
+        public static func make(_ date: Date) -> WeekDay {
             WeekDay(rawValue: Calendar.current.dateComponents([.weekday], from: date).weekday!)!
         }
     }
 
-    let amount: Int
-    let event: Event
-    let dateCreated: Date
+    public let amount: Int
+    public let event: Event
+    public let dateCreated: Date
 }
 
 // MARK: - Public
 extension Goal {
+    public
     func isReached(at date: Date) -> Bool {
         guard amount != 0 else { return false } // think about this condition
 

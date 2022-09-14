@@ -1,13 +1,13 @@
 //
-//  ExtensionDate.swift
-//  Remem
+//  DateExtenstions.swift
+//  RememDomain
 //
-//  Created by Stanislav Matvichuck on 17.02.2022.
+//  Created by Stanislav Matvichuck on 13.09.2022.
 //
 
 import Foundation
 
-extension Date {
+public extension Date {
     //
     // Stack overflow helpers
     //

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RememDomain
 
 protocol EventsListUseCasing {
     func allEvents() -> [Event]

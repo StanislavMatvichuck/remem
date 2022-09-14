@@ -1,19 +1,19 @@
 //
-//  DomainEvent.swift
-//  Remem
+//  RememDomain.swift
+//  RememDomain
 //
-//  Created by Stanislav Matvichuck on 02.08.2022.
+//  Created by Stanislav Matvichuck on 13.09.2022.
 //
 
 import Foundation
 
-enum EventManipulationError: Error {
+public enum EventManipulationError: Error {
     case invalidHappeningDeletion
 }
 
-class Event {
-    typealias Goals = [Goal.WeekDay: [Goal]]
-    static let defaultGoals: Goals = [
+public class Event {
+    public typealias Goals = [Goal.WeekDay: [Goal]]
+    public static let defaultGoals: Goals = [
         Goal.WeekDay.monday: [],
         Goal.WeekDay.tuesday: [],
         Goal.WeekDay.wednesday: [],
@@ -23,17 +23,19 @@ class Event {
         Goal.WeekDay.sunday: [],
     ]
 
-    let id: String
-    var name: String
-    var happenings: [Happening]
+    public let id: String
+    public var name: String
+    public var happenings: [Happening]
 
-    let dateCreated: Date
-    var dateVisited: Date?
+    public let dateCreated: Date
+    public var dateVisited: Date?
 
     private var goals: Goals = Event.defaultGoals
 
     // MARK: - Init
-    convenience init(name: String) {
+    public
+    convenience
+    init(name: String) {
         let dateCreated: Date = {
             let c = Calendar.current
             let creationDate = Date.now
@@ -53,6 +55,7 @@ class Event {
                   dateVisited: nil)
     }
 
+    public
     init(id: String,
          name: String,
          happenings: [Happening],
@@ -70,8 +73,9 @@ class Event {
 }
 
 // MARK: - Public
-extension Event {
+public extension Event {
     @discardableResult
+
     func addHappening(date: Date) -> Happening {
         let insertIndex = happenings.firstIndex { happening in
             happening.dateCreated < date
@@ -88,6 +92,7 @@ extension Event {
     }
 
     @discardableResult
+
     func remove(happening: Happening) throws -> Happening? {
         var happeningDeleted: Happening?
 
@@ -110,6 +115,7 @@ extension Event {
     }
 
     // Goals
+
     func goal(at date: Date) -> Goal? {
         let accessorDay = Goal.WeekDay.make(date)
 
@@ -131,6 +137,7 @@ extension Event {
     }
 
     @discardableResult
+
     func addGoal(at dateCreated: Date, amount: Int) -> Goal {
         let accessWeekday = Goal.WeekDay.make(dateCreated)
 
@@ -152,7 +159,7 @@ extension Event {
 
 // MARK: - Equatable
 extension Event: Equatable {
-    static func == (lhs: Event, rhs: Event) -> Bool {
+    public static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id &&
             lhs.name == rhs.name &&
             lhs.dateCreated == rhs.dateCreated &&

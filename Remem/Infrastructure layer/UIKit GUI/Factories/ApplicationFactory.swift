@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RememDomain
 
 class ApplicationFactory {
     // MARK: - Long-lived dependencies

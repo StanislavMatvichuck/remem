@@ -1,13 +1,11 @@
 //
 //  EventsRepository.swift
-//  Remem
+//  RememDomain
 //
-//  Created by Stanislav Matvichuck on 03.08.2022.
+//  Created by Stanislav Matvichuck on 14.09.2022.
 //
 
-import Foundation
-
-protocol EventsRepositoryInterface {
+public protocol EventsRepositoryInterface {
     func save(_: Event)
     func save(_: [Event])
 

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import RememDomain
 
 class EventEntityMapper: EntityMapper<Event, CDEvent> {
     override func entityAccessorKey(_ entity: CDEvent) -> String { entity.uuid! }

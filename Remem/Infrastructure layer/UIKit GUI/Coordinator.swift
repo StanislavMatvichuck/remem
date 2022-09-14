@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RememDomain
 
 class Coordinator: NSObject, Coordinating {
     // MARK: - Properties
