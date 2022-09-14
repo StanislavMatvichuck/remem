@@ -1,0 +1,49 @@
+//
+//  WeekFactory.swift
+//  Remem
+//
+//  Created by Stanislav Matvichuck on 02.09.2022.
+//
+
+import Foundation
+import IOSInterfaceAdapters
+import RememDomain
+
+class WeekFactory: WeekFactoryInterface {
+    // MARK: - Properties
+    let applicationFactory: ApplicationFactory
+    let useCase: GoalEditUseCase
+    let useCaseDelegates: MulticastDelegate<GoalEditUseCaseDelegate>
+    let event: Event
+    // MARK: - Init
+    init(applicationFactory: ApplicationFactory, event: Event, goalEditUseCase: GoalEditUseCase) {
+        self.useCaseDelegates = MulticastDelegate<GoalEditUseCaseDelegate>()
+        self.applicationFactory = applicationFactory
+        self.useCase = goalEditUseCase
+        self.event = event
+    }
+
+    func makeWeekController() -> WeekController {
+        let view = WeekView()
+        let viewModel = makeWeekViewModel()
+        let controller = WeekController(viewRoot: view, viewModel: viewModel, factory: self)
+        viewModel.delegate = controller
+        return controller
+    }
+
+    func makeWeekViewModel() -> WeekViewModel {
+        let viewModel = WeekViewModel(event: event, factory: self)
+        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        viewModel.coordinator = applicationFactory.coordinator
+        return viewModel
+    }
+
+    // WeekFactoryInterface
+    func makeWeekCellViewModel(date: Date) -> WeekCellViewModel {
+        let viewModel = WeekCellViewModel(date: date, event: event)
+        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        viewModel.coordinator = applicationFactory.coordinator
+        useCaseDelegates.addDelegate(viewModel)
+        return viewModel
+    }
+}

@@ -7,10 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
-		080656EA283B946000C09409 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
 		080A678F28D1E2AA00889A97 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
-		080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
+		080A67A428D1E46800889A97 /* IOSInterfaceAdaptersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */; };
+		080A67A528D1E46800889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
+		080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */; };
+		080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
+		080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
+		080A67AF28D1E4DB00889A97 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC4A0E28C5F35300294C59 /* Coordinating.swift */; };
+		080A67B028D1E4E000889A97 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
+		080A67B128D1E4E000889A97 /* EventDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */; };
+		080A67B228D1E4E000889A97 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
+		080A67B328D1E4E000889A97 /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
+		080A67B428D1E4E000889A97 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
+		080A67B528D1E4E000889A97 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekCellViewModel.swift */; };
+		080A67B628D1E4E000889A97 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
+		080A67B728D1E4E000889A97 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
+		080A67B928D1EDBF00889A97 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
+		080A67BA28D1EDBF00889A97 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
+		080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
@@ -28,12 +42,9 @@
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
-		08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
-		083265FE28A51F940023288B /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083265FD28A51F940023288B /* GoalTests.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
-		08485BAA289EDD960045B9F2 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BA9289EDD960045B9F2 /* EventTests.swift */; };
 		08485BAC289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
@@ -43,7 +54,6 @@
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
-		086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
@@ -54,23 +64,16 @@
 		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
 		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
-		088E88C328AF916000400180 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekCellViewModel.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
-		08961F50289BA99900F3E179 /* EventDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
-		08AC4A0F28C5F35300294C59 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC4A0E28C5F35300294C59 /* Coordinating.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
-		08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */; };
-		08B651AF28C624E500A2F158 /* GoalEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */; };
 		08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
-		08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
-		08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EventsListController.swift */; };
@@ -79,7 +82,6 @@
 		08D512362787144800C2037F /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EventsListView.swift */; };
 		08D512382787153900C2037F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512372787153900C2037F /* EventCell.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
-		08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
 		08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8BCD228A90C4300A50664 /* GoalsInputView.swift */; };
 		08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8BCD428A90CFF00A50664 /* GoalsInputController.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
@@ -89,7 +91,6 @@
 		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */; };
-		08EC438228BA365400755B54 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
@@ -97,6 +98,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		080A67A628D1E46800889A97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080A679428D1E44C00889A97;
+			remoteInfo = IOSInterfaceAdapters;
+		};
+		080A67BB28D1F1A700889A97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080A679428D1E44C00889A97;
+			remoteInfo = IOSInterfaceAdapters;
+		};
+		080A67BE28D1F1B100889A97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080A679428D1E44C00889A97;
+			remoteInfo = IOSInterfaceAdapters;
+		};
+		080A67C028D1F66D00889A97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = RememDomain;
+		};
 		0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -125,16 +154,18 @@
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
 		};
-		087ED42B28D0A78A0085A37D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 083BECF028D0A319009157FD;
-			remoteInfo = RememDomain;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		080A679328D1E44C00889A97 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0826AC9E28C86ECF0021D607 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,6 +192,9 @@
 		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
 		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
 		080A678E28D1E2AA00889A97 /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
+		080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIOSInterfaceAdapters.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSInterfaceAdaptersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSInterfaceAdaptersTests.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
 		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
@@ -180,12 +214,10 @@
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
-		083265FD28A51F940023288B /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libRememDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRememDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
-		08485BA9289EDD960045B9F2 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepositoryTests.swift; sourceTree = "<group>"; };
 		08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming02.xcdatamodel; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
@@ -258,6 +290,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		080A679228D1E44C00889A97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080A679E28D1E46800889A97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080A67A528D1E46800889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0826AC8C28C86ECE0021D607 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -294,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */,
+				080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,12 +358,39 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		080A679628D1E44C00889A97 /* IOSInterfaceAdapters */ = {
+			isa = PBXGroup;
+			children = (
+				086DC6D02880571A0048F22F /* Application layer */,
+				08235E7128C5CC3F0026DED2 /* Interface adapters layer */,
+			);
+			path = IOSInterfaceAdapters;
+			sourceTree = "<group>";
+		};
+		080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */ = {
+			isa = PBXGroup;
+			children = (
+				080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */,
+			);
+			path = IOSInterfaceAdaptersTests;
+			sourceTree = "<group>";
+		};
+		080A67B828D1EDB300889A97 /* ClockViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				080656E9283B946000C09409 /* ClockSection.swift */,
+				080656E7283B945100C09409 /* ClockSectionsList.swift */,
+				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
+			);
+			path = ClockViewModel;
+			sourceTree = "<group>";
+		};
 		08235E7128C5CC3F0026DED2 /* Interface adapters layer */ = {
 			isa = PBXGroup;
 			children = (
-				08AC4A0E28C5F35300294C59 /* Coordinating.swift */,
 				08235E7228C5CC680026DED2 /* Cells */,
-				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
+				080A67B828D1EDB300889A97 /* ClockViewModel */,
+				08AC4A0E28C5F35300294C59 /* Coordinating.swift */,
 				08B26A13289E975900DFBAC8 /* DayViewModel.swift */,
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
@@ -375,15 +450,6 @@
 			path = RememDomain;
 			sourceTree = "<group>";
 		};
-		08485BA7289EDD760045B9F2 /* Domain layer */ = {
-			isa = PBXGroup;
-			children = (
-				08485BA9289EDD960045B9F2 /* EventTests.swift */,
-				083265FD28A51F940023288B /* GoalTests.swift */,
-			);
-			path = "Domain layer";
-			sourceTree = "<group>";
-		};
 		08485BA8289EDD840045B9F2 /* Domain services layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,34 +458,10 @@
 			path = "Domain services layer";
 			sourceTree = "<group>";
 		};
-		085C4E97289AB57A0094388C /* Infrastructure layer */ = {
-			isa = PBXGroup;
-			children = (
-				08C6C4FD287DAC44001F522E /* Data Layer */,
-				085C4E98289AB5940094388C /* UIKit GUI */,
-			);
-			path = "Infrastructure layer";
-			sourceTree = "<group>";
-		};
-		085C4E98289AB5940094388C /* UIKit GUI */ = {
-			isa = PBXGroup;
-			children = (
-				0823D233289283A8005B4BE3 /* Coordinator.swift */,
-				08D512322787136B00C2037F /* Delegates */,
-				08E194FE28BBE618001BCCC9 /* Factories */,
-				08D512332787140D00C2037F /* Controllers */,
-				086DC6D12880578E0048F22F /* Views */,
-				08D5123E278716DA00C2037F /* Helpers */,
-			);
-			path = "UIKit GUI";
-			sourceTree = "<group>";
-		};
 		085C4E9A289AC0DD0094388C /* ClockController */ = {
 			isa = PBXGroup;
 			children = (
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
-				080656E9283B946000C09409 /* ClockSection.swift */,
-				080656E7283B945100C09409 /* ClockSectionsList.swift */,
 			);
 			path = ClockController;
 			sourceTree = "<group>";
@@ -474,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				08485BA8289EDD840045B9F2 /* Domain services layer */,
-				08485BA7289EDD760045B9F2 /* Domain layer */,
 			);
 			path = RememTests;
 			sourceTree = "<group>";
@@ -542,6 +583,8 @@
 				0826AC9528C86ECE0021D607 /* RememWidgets */,
 				083BECF228D0A31A009157FD /* RememDomain */,
 				087ED41B28D0A54C0085A37D /* RememDomainTests */,
+				080A679628D1E44C00889A97 /* IOSInterfaceAdapters */,
+				080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */,
 				0826AC9028C86ECE0021D607 /* Frameworks */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
@@ -555,6 +598,8 @@
 				0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */,
 				083BECF128D0A319009157FD /* libRememDomain.a */,
 				087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */,
+				080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */,
+				080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -562,9 +607,13 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
-				086DC6D02880571A0048F22F /* Application layer */,
-				08235E7128C5CC3F0026DED2 /* Interface adapters layer */,
-				085C4E97289AB57A0094388C /* Infrastructure layer */,
+				0823D233289283A8005B4BE3 /* Coordinator.swift */,
+				08D512322787136B00C2037F /* Delegates */,
+				08E194FE28BBE618001BCCC9 /* Factories */,
+				08D512332787140D00C2037F /* Controllers */,
+				086DC6D12880578E0048F22F /* Views */,
+				08D5123E278716DA00C2037F /* Helpers */,
+				08C6C4FD287DAC44001F522E /* Data Layer */,
 				08D512312787135300C2037F /* Resources */,
 			);
 			path = Remem;
@@ -654,6 +703,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		080A679428D1E44C00889A97 /* IOSInterfaceAdapters */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdapters" */;
+			buildPhases = (
+				080A679128D1E44C00889A97 /* Sources */,
+				080A679228D1E44C00889A97 /* Frameworks */,
+				080A679328D1E44C00889A97 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				080A67C128D1F66D00889A97 /* PBXTargetDependency */,
+			);
+			name = IOSInterfaceAdapters;
+			productName = IOSInterfaceAdapters;
+			productReference = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		080A67A028D1E46800889A97 /* IOSInterfaceAdaptersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdaptersTests" */;
+			buildPhases = (
+				080A679D28D1E46800889A97 /* Sources */,
+				080A679E28D1E46800889A97 /* Frameworks */,
+				080A679F28D1E46800889A97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				080A67A728D1E46800889A97 /* PBXTargetDependency */,
+			);
+			name = IOSInterfaceAdaptersTests;
+			productName = RememIOSInterfaceAdaptersTests;
+			productReference = 080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */;
@@ -736,9 +821,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				080A67BC28D1F1A700889A97 /* PBXTargetDependency */,
 				087ED42928D0A77A0085A37D /* PBXTargetDependency */,
 				0826AC9C28C86ECF0021D607 /* PBXTargetDependency */,
-				087ED42C28D0A78A0085A37D /* PBXTargetDependency */,
+				080A67BF28D1F1B100889A97 /* PBXTargetDependency */,
 			);
 			name = Remem;
 			productName = Remem;
@@ -755,6 +841,12 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					080A679428D1E44C00889A97 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					080A67A028D1E46800889A97 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					0826AC8E28C86ECE0021D607 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -793,11 +885,20 @@
 				0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */,
 				083BECF028D0A319009157FD /* RememDomain */,
 				087ED41928D0A54C0085A37D /* RememDomainTests */,
+				080A679428D1E44C00889A97 /* IOSInterfaceAdapters */,
+				080A67A028D1E46800889A97 /* IOSInterfaceAdaptersTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		080A679F28D1E46800889A97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0826AC8D28C86ECE0021D607 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -835,6 +936,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		080A679128D1E44C00889A97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080A67BA28D1EDBF00889A97 /* ClockSectionsList.swift in Sources */,
+				080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */,
+				080A67B028D1E4E000889A97 /* EventCellViewModel.swift in Sources */,
+				080A67B528D1E4E000889A97 /* WeekCellViewModel.swift in Sources */,
+				080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */,
+				080A67AF28D1E4DB00889A97 /* Coordinating.swift in Sources */,
+				080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */,
+				080A67B128D1E4E000889A97 /* EventDetailsViewModel.swift in Sources */,
+				080A67B928D1EDBF00889A97 /* ClockSection.swift in Sources */,
+				080A67B328D1E4E000889A97 /* GoalsInputViewModel.swift in Sources */,
+				080A67B728D1E4E000889A97 /* EventsListViewModel.swift in Sources */,
+				080A67B428D1E4E000889A97 /* WeekViewModel.swift in Sources */,
+				080A67B228D1E4E000889A97 /* ClockViewModel.swift in Sources */,
+				080A67B628D1E4E000889A97 /* DayViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080A679D28D1E46800889A97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080A67A428D1E46800889A97 /* IOSInterfaceAdaptersTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0826AC8B28C86ECE0021D607 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -864,8 +994,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08485BAA289EDD960045B9F2 /* EventTests.swift in Sources */,
-				083265FE28A51F940023288B /* GoalTests.swift in Sources */,
 				08485BAC289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -884,36 +1012,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */,
-				08D6E1D4288806FA003BF595 /* WeekViewModel.swift in Sources */,
-				08EC438228BA365400755B54 /* EventCellViewModel.swift in Sources */,
-				080656EA283B946000C09409 /* ClockSection.swift in Sources */,
 				08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */,
 				083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */,
-				080656E8283B945100C09409 /* ClockSectionsList.swift in Sources */,
 				08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
-				088E88C328AF916000400180 /* WeekCellViewModel.swift in Sources */,
-				08AC4A0F28C5F35300294C59 /* Coordinating.swift in Sources */,
 				08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */,
 				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
-				08319DA728A922A700AFE3CB /* GoalsInputViewModel.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
-				08D10F4D289598A0005453DD /* EventEditUseCase.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
 				08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
-				08B651AF28C624E500A2F158 /* GoalEditUseCase.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
@@ -921,13 +1040,10 @@
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				085622FD28C25B9F002331AB /* DayFactory.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
-				08D10F4B289587CC005453DD /* EventsListUseCase.swift in Sources */,
-				080BF1452884A22C00DDF55F /* ClockViewModel.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */,
 				08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */,
-				08961F50289BA99900F3E179 /* EventDetailsViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
@@ -939,16 +1055,34 @@
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
 				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
-				08B26A14289E975900DFBAC8 /* DayViewModel.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
-				086DC6D628805F1E0048F22F /* EventsListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		080A67A728D1E46800889A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			targetProxy = 080A67A628D1E46800889A97 /* PBXContainerItemProxy */;
+		};
+		080A67BC28D1F1A700889A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			targetProxy = 080A67BB28D1F1A700889A97 /* PBXContainerItemProxy */;
+		};
+		080A67BF28D1F1B100889A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			targetProxy = 080A67BE28D1F1B100889A97 /* PBXContainerItemProxy */;
+		};
+		080A67C128D1F66D00889A97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* RememDomain */;
+			targetProxy = 080A67C028D1F66D00889A97 /* PBXContainerItemProxy */;
+		};
 		0826AC9C28C86ECF0021D607 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */;
@@ -968,11 +1102,6 @@
 			isa = PBXTargetDependency;
 			target = 083BECF028D0A319009157FD /* RememDomain */;
 			targetProxy = 087ED42828D0A77A0085A37D /* PBXContainerItemProxy */;
-		};
-		087ED42C28D0A78A0085A37D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
-			targetProxy = 087ED42B28D0A78A0085A37D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1000,6 +1129,105 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		080A679A28D1E44C00889A97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		080A679B28D1E44C00889A97 /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Onboarding;
+		};
+		080A679C28D1E44C00889A97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		080A67A928D1E46800889A97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememIOSInterfaceAdaptersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		080A67AA28D1E46800889A97 /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememIOSInterfaceAdaptersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Onboarding;
+		};
+		080A67AB28D1E46800889A97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememIOSInterfaceAdaptersTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0826AC9F28C86ECF0021D607 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1510,6 +1738,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdapters" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				080A679A28D1E44C00889A97 /* Debug */,
+				080A679B28D1E44C00889A97 /* Onboarding */,
+				080A679C28D1E44C00889A97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdaptersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				080A67A928D1E46800889A97 /* Debug */,
+				080A67AA28D1E46800889A97 /* Onboarding */,
+				080A67AB28D1E46800889A97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

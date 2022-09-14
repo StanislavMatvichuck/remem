@@ -40,7 +40,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         let newEvent = givenSavedDefaultEvent()
 
         do {
-            try newEvent.addHappening(date: .now)
+            try newEvent.addHappening(date: Date.now)
         } catch {}
 
         sut.save(newEvent)
