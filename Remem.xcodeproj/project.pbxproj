@@ -361,6 +361,7 @@
 		080A679628D1E44C00889A97 /* IOSInterfaceAdapters */ = {
 			isa = PBXGroup;
 			children = (
+				080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */,
 				086DC6D02880571A0048F22F /* Application layer */,
 				08235E7128C5CC3F0026DED2 /* Interface adapters layer */,
 			);
@@ -443,6 +444,7 @@
 		083BECF228D0A31A009157FD /* RememDomain */ = {
 			isa = PBXGroup;
 			children = (
+				087ED41B28D0A54C0085A37D /* RememDomainTests */,
 				080A679028D1E2DA00889A97 /* Model */,
 				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
 				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
@@ -579,12 +581,9 @@
 			isa = PBXGroup;
 			children = (
 				08D5121C27870D2500C2037F /* Remem */,
-				0870EEF92809B81100336759 /* RememTests */,
 				0826AC9528C86ECE0021D607 /* RememWidgets */,
 				083BECF228D0A31A009157FD /* RememDomain */,
-				087ED41B28D0A54C0085A37D /* RememDomainTests */,
 				080A679628D1E44C00889A97 /* IOSInterfaceAdapters */,
-				080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */,
 				0826AC9028C86ECE0021D607 /* Frameworks */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
@@ -607,6 +606,7 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
+				0870EEF92809B81100336759 /* RememTests */,
 				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D512322787136B00C2037F /* Delegates */,
 				08E194FE28BBE618001BCCC9 /* Factories */,
