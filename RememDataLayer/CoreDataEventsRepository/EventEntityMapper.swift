@@ -8,11 +8,13 @@
 import CoreData
 import RememDomain
 
-class EventEntityMapper: EntityMapper<Event, CDEvent> {
-    override func entityAccessorKey(_ entity: CDEvent) -> String { entity.uuid! }
-    override func entityAccessorKey(_ object: Event) -> String { object.id }
+public class EventEntityMapper: EntityMapper<Event, CDEvent> {
+    override public init() { super.init() }
 
-    override func convert(_ entity: CDEvent) -> Event? {
+    override public func entityAccessorKey(_ entity: CDEvent) -> String { entity.uuid! }
+    override public func entityAccessorKey(_ object: Event) -> String { object.id }
+
+    override public func convert(_ entity: CDEvent) -> Event? {
         //
         // Happenings
         //
@@ -42,7 +44,7 @@ class EventEntityMapper: EntityMapper<Event, CDEvent> {
         return newEvent
     }
 
-    override func update(_ entity: CDEvent, by model: Event) {
+    override public func update(_ entity: CDEvent, by model: Event) {
         entity.uuid = model.id
         entity.name = model.name
         entity.dateCreated = model.dateCreated

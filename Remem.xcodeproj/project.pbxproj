@@ -45,7 +45,6 @@
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
-		083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		08485BAC289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
@@ -55,6 +54,16 @@
 		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
+		0867A2D128D469F500E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
+		0867A2D828D469F500E0842C /* RememDataLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2D728D469F500E0842C /* RememDataLayerTests.swift */; };
+		0867A2DC28D469F500E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
+		0867A2DE28D469F500E0842C /* RememDataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
+		0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
+		0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
+		0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
+		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
+		0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -65,7 +74,6 @@
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
-		0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
@@ -88,9 +96,6 @@
 		08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8BCD428A90CFF00A50664 /* GoalsInputController.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
-		08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
-		08E5B91928998053000B08BC /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
-		08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAB70D28BA172A0001EE35 /* EventsListFactory.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
@@ -108,13 +113,6 @@
 			remoteInfo = IOSInterfaceAdapters;
 		};
 		080A67BB28D1F1A700889A97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 080A679428D1E44C00889A97;
-			remoteInfo = IOSInterfaceAdapters;
-		};
-		080A67BE28D1F1B100889A97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
 			proxyType = 1;
@@ -148,6 +146,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0826AC8E28C86ECE0021D607;
 			remoteInfo = RememWidgetsExtension;
+		};
+		0867A2D228D469F500E0842C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0867A2C828D469F400E0842C;
+			remoteInfo = RememDataLayer;
+		};
+		0867A2D428D469F500E0842C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08D5121927870D2500C2037F;
+			remoteInfo = Remem;
+		};
+		0867A2DA28D469F500E0842C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0867A2C828D469F400E0842C;
+			remoteInfo = RememDataLayer;
+		};
+		0867A2F128D46A6400E0842C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = RememDomain;
 		};
 		0870EEFC2809B81100336759 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -202,6 +228,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0867A2DD28D469F500E0842C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0867A2DE28D469F500E0842C /* RememDataLayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -243,6 +280,9 @@
 		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
+		0867A2C928D469F400E0842C /* RememDataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RememDataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0867A2D728D469F500E0842C /* RememDataLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememDataLayerTests.swift; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -339,6 +379,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0867A2C628D469F400E0842C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0867A2CD28D469F500E0842C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A2D128D469F500E0842C /* RememDataLayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF52809B81100336759 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,6 +414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0867A2DC28D469F500E0842C /* RememDataLayer.framework in Frameworks */,
 				087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */,
 				080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
 			);
@@ -486,6 +543,24 @@
 			path = ClockController;
 			sourceTree = "<group>";
 		};
+		0867A2CA28D469F400E0842C /* RememDataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
+				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
+				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
+			);
+			path = RememDataLayer;
+			sourceTree = "<group>";
+		};
+		0867A2D628D469F500E0842C /* RememDataLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0867A2D728D469F500E0842C /* RememDataLayerTests.swift */,
+			);
+			path = RememDataLayerTests;
+			sourceTree = "<group>";
+		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,16 +642,6 @@
 			path = RememDomainTests;
 			sourceTree = "<group>";
 		};
-		08C6C4FD287DAC44001F522E /* Data Layer */ = {
-			isa = PBXGroup;
-			children = (
-				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
-				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
-				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
-			);
-			path = "Data Layer";
-			sourceTree = "<group>";
-		};
 		08C6C503287DC572001F522E /* EventsListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +667,8 @@
 				0826AC9528C86ECE0021D607 /* RememWidgets */,
 				083BECF228D0A31A009157FD /* RememDomain */,
 				080A679628D1E44C00889A97 /* IOSInterfaceAdapters */,
+				0867A2CA28D469F400E0842C /* RememDataLayer */,
+				0867A2D628D469F500E0842C /* RememDataLayerTests */,
 				0826AC9028C86ECE0021D607 /* Frameworks */,
 				08D5121B27870D2500C2037F /* Products */,
 			);
@@ -617,6 +684,8 @@
 				087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */,
 				080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */,
 				080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */,
+				0867A2C928D469F400E0842C /* RememDataLayer.framework */,
+				0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,7 +700,6 @@
 				08D512332787140D00C2037F /* Controllers */,
 				086DC6D12880578E0048F22F /* Views */,
 				08D5123E278716DA00C2037F /* Helpers */,
-				08C6C4FD287DAC44001F522E /* Data Layer */,
 				08D512312787135300C2037F /* Resources */,
 			);
 			path = Remem;
@@ -720,6 +788,16 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		0867A2C428D469F400E0842C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		080A679428D1E44C00889A97 /* IOSInterfaceAdapters */ = {
 			isa = PBXNativeTarget;
@@ -793,6 +871,44 @@
 			productReference = 083BECF128D0A319009157FD /* libRememDomain.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		0867A2C828D469F400E0842C /* RememDataLayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayer" */;
+			buildPhases = (
+				0867A2C428D469F400E0842C /* Headers */,
+				0867A2C528D469F400E0842C /* Sources */,
+				0867A2C628D469F400E0842C /* Frameworks */,
+				0867A2C728D469F400E0842C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0867A2F228D46A6400E0842C /* PBXTargetDependency */,
+			);
+			name = RememDataLayer;
+			productName = RememDataLayer;
+			productReference = 0867A2C928D469F400E0842C /* RememDataLayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0867A2CF28D469F500E0842C /* RememDataLayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayerTests" */;
+			buildPhases = (
+				0867A2CC28D469F500E0842C /* Sources */,
+				0867A2CD28D469F500E0842C /* Frameworks */,
+				0867A2CE28D469F500E0842C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0867A2D328D469F500E0842C /* PBXTargetDependency */,
+				0867A2D528D469F500E0842C /* PBXTargetDependency */,
+			);
+			name = RememDataLayerTests;
+			productName = RememDataLayerTests;
+			productReference = 0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0870EEF72809B81100336759 /* RememTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */;
@@ -837,6 +953,7 @@
 				08D5121727870D2500C2037F /* Frameworks */,
 				08D5121827870D2500C2037F /* Resources */,
 				0826AC9E28C86ECF0021D607 /* Embed App Extensions */,
+				0867A2DD28D469F500E0842C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -844,7 +961,7 @@
 				080A67BC28D1F1A700889A97 /* PBXTargetDependency */,
 				087ED42928D0A77A0085A37D /* PBXTargetDependency */,
 				0826AC9C28C86ECF0021D607 /* PBXTargetDependency */,
-				080A67BF28D1F1B100889A97 /* PBXTargetDependency */,
+				0867A2DB28D469F500E0842C /* PBXTargetDependency */,
 			);
 			name = Remem;
 			productName = Remem;
@@ -858,7 +975,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					080A679428D1E44C00889A97 = {
@@ -872,6 +989,13 @@
 					};
 					083BECF028D0A319009157FD = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					0867A2C828D469F400E0842C = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					0867A2CF28D469F500E0842C = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 08D5121927870D2500C2037F;
 					};
 					0870EEF72809B81100336759 = {
 						CreatedOnToolsVersion = 13.3;
@@ -907,6 +1031,8 @@
 				087ED41928D0A54C0085A37D /* RememDomainTests */,
 				080A679428D1E44C00889A97 /* IOSInterfaceAdapters */,
 				080A67A028D1E46800889A97 /* IOSInterfaceAdaptersTests */,
+				0867A2C828D469F400E0842C /* RememDataLayer */,
+				0867A2CF28D469F500E0842C /* RememDataLayerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -925,6 +1051,20 @@
 			files = (
 				0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */,
 				0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0867A2C728D469F400E0842C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0867A2CE28D469F500E0842C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1150,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0867A2C528D469F400E0842C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */,
+				0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */,
+				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
+				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
+				0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0867A2CC28D469F500E0842C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A2D828D469F500E0842C /* RememDataLayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0870EEF42809B81100336759 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1033,25 +1193,21 @@
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */,
 				08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */,
-				083D3895279AE81100134A15 /* Model.xcdatamodeld in Sources */,
 				08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
 				08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */,
-				08E5B91B28998088000B08BC /* EventEntityMapper.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
-				0880C3B628009DFA00970254 /* CoreDataStack.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
-				08E5B91428997E1F000B08BC /* CoreDataEventsRepository.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -1074,7 +1230,6 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
-				08E5B91928998053000B08BC /* EntityMapper.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 			);
@@ -1092,11 +1247,6 @@
 			isa = PBXTargetDependency;
 			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
 			targetProxy = 080A67BB28D1F1A700889A97 /* PBXContainerItemProxy */;
-		};
-		080A67BF28D1F1B100889A97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
-			targetProxy = 080A67BE28D1F1B100889A97 /* PBXContainerItemProxy */;
 		};
 		080A67C128D1F66D00889A97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1117,6 +1267,26 @@
 			isa = PBXTargetDependency;
 			target = 0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */;
 			targetProxy = 0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */;
+		};
+		0867A2D328D469F500E0842C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			targetProxy = 0867A2D228D469F500E0842C /* PBXContainerItemProxy */;
+		};
+		0867A2D528D469F500E0842C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08D5121927870D2500C2037F /* Remem */;
+			targetProxy = 0867A2D428D469F500E0842C /* PBXContainerItemProxy */;
+		};
+		0867A2DB28D469F500E0842C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			targetProxy = 0867A2DA28D469F500E0842C /* PBXContainerItemProxy */;
+		};
+		0867A2F228D46A6400E0842C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* RememDomain */;
+			targetProxy = 0867A2F128D46A6400E0842C /* PBXContainerItemProxy */;
 		};
 		0870EEFD2809B81100336759 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1476,6 +1646,162 @@
 			};
 			name = Release;
 		};
+		0867A2DF28D469F500E0842C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0867A2E028D469F500E0842C /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Onboarding;
+		};
+		0867A2E128D469F500E0842C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayer;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0867A2E228D469F500E0842C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8J6H38BVYL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+			};
+			name = Debug;
+		};
+		0867A2E328D469F500E0842C /* Onboarding */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8J6H38BVYL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+			};
+			name = Onboarding;
+		};
+		0867A2E428D469F500E0842C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8J6H38BVYL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+			};
+			name = Release;
+		};
 		0870EEFE2809B81100336759 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1804,6 +2130,26 @@
 				083BECF628D0A31A009157FD /* Debug */,
 				083BECF728D0A31A009157FD /* Onboarding */,
 				083BECF828D0A31A009157FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0867A2DF28D469F500E0842C /* Debug */,
+				0867A2E028D469F500E0842C /* Onboarding */,
+				0867A2E128D469F500E0842C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0867A2E228D469F500E0842C /* Debug */,
+				0867A2E328D469F500E0842C /* Onboarding */,
+				0867A2E428D469F500E0842C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

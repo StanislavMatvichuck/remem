@@ -6,6 +6,7 @@
 //
 
 import IOSInterfaceAdapters
+import RememDataLayer
 import RememDomain
 import UIKit
 

@@ -7,11 +7,11 @@
 
 import CoreData
 
-class CoreDataStack {
+public class CoreDataStack {
     private static let entries = "Model"
 
     private static let model: NSManagedObjectModel = {
-        let url = Bundle.main.url(forResource: entries, withExtension: "momd")!
+        let url = Bundle(for: CoreDataStack.self).url(forResource: entries, withExtension: "momd")!
         let mom = NSManagedObjectModel(contentsOf: url)!
         return mom
     }()
@@ -22,7 +22,7 @@ class CoreDataStack {
 }
 
 // MARK: - Public
-extension CoreDataStack {
+public extension CoreDataStack {
     func save(_ context: NSManagedObjectContext) {
         context.perform {
             do {

@@ -8,20 +8,20 @@
 import CoreData
 import RememDomain
 
-class CoreDataEventsRepository {
+public class CoreDataEventsRepository {
     private let container: NSPersistentContainer
     private let entityMapper: EntityMapper<Event, CDEvent>
     private var moc: NSManagedObjectContext { container.viewContext }
 
     // MARK: - Init
-    init(container: NSPersistentContainer, mapper: EntityMapper<Event, CDEvent>) {
+    public init(container: NSPersistentContainer, mapper: EntityMapper<Event, CDEvent>) {
         self.container = container
         self.entityMapper = mapper
     }
 }
 
 extension CoreDataEventsRepository: EventsRepositoryInterface {
-    func save(_ data: [Event]) {
+    public func save(_ data: [Event]) {
         var existingObjects: [String: CDEvent] = [:]
 
         allEvents.forEach {
@@ -43,7 +43,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         applyChanges()
     }
 
-    func save(_ event: Event) {
+    public func save(_ event: Event) {
         if let existingEvent = allEvents.first(where: {
             entityMapper.entityAccessorKey($0) ==
                 entityMapper.entityAccessorKey(event)
@@ -57,7 +57,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         applyChanges()
     }
 
-    func all() -> [Event] {
+    public func all() -> [Event] {
         let request = CDEvent.fetchRequest()
 
         do {
@@ -68,7 +68,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         }
     }
 
-    func event(byId: String) -> Event? {
+    public func event(byId: String) -> Event? {
         guard let existingEvent = allEvents.first(where: {
             entityMapper.entityAccessorKey($0) == byId
         }) else { return nil }
@@ -76,7 +76,7 @@ extension CoreDataEventsRepository: EventsRepositoryInterface {
         return entityMapper.convert(existingEvent)
     }
 
-    func delete(_ event: Event) {
+    public func delete(_ event: Event) {
         let request = CDEvent.fetchRequest()
 
         do {
