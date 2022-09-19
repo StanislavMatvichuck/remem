@@ -12,13 +12,13 @@ class EventTests: XCTestCase {
     var sut: Event!
 
     override func setUp() {
-        super.setUp()
         sut = Event(name: "Event")
+        super.setUp()
     }
 
     override func tearDown() {
-        super.tearDown()
         sut = nil
+        super.tearDown()
     }
 
     func testInit() {
@@ -59,6 +59,7 @@ class EventTests: XCTestCase {
 
         sut.addHappening(date: firstHappeningDate)
         sut.addHappening(date: secondHappeningDate)
+        
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
@@ -71,7 +72,6 @@ class EventTests: XCTestCase {
         sut.addHappening(date: secondHappeningDate)
         sut.addHappening(date: firstHappeningDate)
 
-        XCTAssertEqual(sut.happenings.count, 3)
         XCTAssertEqual(sut.happenings[0], Happening(dateCreated: firstHappeningDate))
         XCTAssertEqual(sut.happenings[1], Happening(dateCreated: secondHappeningDate))
         XCTAssertEqual(sut.happenings[2], Happening(dateCreated: thirdHappeningDate))

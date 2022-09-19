@@ -12,13 +12,13 @@ class GoalTests: XCTestCase {
     var sut: Event!
 
     override func setUp() {
-        super.setUp()
         sut = makeEventWithGoal()
+        super.setUp()
     }
 
     override func tearDown() {
-        super.tearDown()
         sut = nil
+        super.tearDown()
     }
 
     func test_addGoal_eachDay() {
@@ -49,11 +49,11 @@ class GoalTests: XCTestCase {
         XCTAssertEqual(sut.goal(at: .now)?.amount, 1)
     }
 
-    func test_addGoal_canBeReached() throws {
+    func test_addGoal_canBeReached() {
         for goalReached in [true, false] {
             let sut = makeEventWithGoal()
-            try sut.addHappening(date: .now)
-            _ = goalReached ? try sut.addHappening(date: .now) : nil
+            sut.addHappening(date: .now)
+            _ = goalReached ? sut.addHappening(date: .now) : nil
 
             sut.addGoal(at: .now, amount: 2)
 
@@ -65,7 +65,7 @@ class GoalTests: XCTestCase {
         for goalReached in [true, false] {
             let sut = makeEventWithGoal(amount: goalReached ? 1 : 2)
 
-            try sut.addHappening(date: .now)
+            sut.addHappening(date: .now)
 
             XCTAssertEqual(sut.goal(at: .now)?.isReached(at: .now), goalReached)
         }
@@ -74,8 +74,8 @@ class GoalTests: XCTestCase {
     func test_removeHappening_goalCanBeReached() throws {
         for goalReached in [true, false] {
             let sut = makeEventWithGoal()
-            let happening = try sut.addHappening(date: .now)
-            _ = goalReached ? try sut.addHappening(date: .now.addingTimeInterval(0.5)) : nil
+            let happening = sut.addHappening(date: .now)
+            _ = goalReached ? sut.addHappening(date: .now.addingTimeInterval(0.5)) : nil
 
             try sut.remove(happening: happening)
 

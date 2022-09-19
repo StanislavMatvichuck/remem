@@ -5,6 +5,8 @@
 //  Created by Stanislav Matvichuck on 14.09.2022.
 //
 
+import RememDomain
+
 public protocol EventsRepositoryInterface {
     func save(_: Event)
     func save(_: [Event])

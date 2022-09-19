@@ -9,39 +9,41 @@ import IOSInterfaceAdapters
 import WidgetKit
 
 struct Provider: TimelineProvider {
-    let listViewModel: EventsListViewModel
+    private let repository: WidgetRepositoryInterface
+    private let listViewModel: EventsListViewModelState
 
-    init(listViewModel: EventsListViewModel) {
-        self.listViewModel = listViewModel
+    init(repository: WidgetRepositoryInterface) {
+        self.repository = repository
+        self.listViewModel = WidgetEventsListViewModel(events: [])
     }
 
     //
     // TimelineProvider
     //
 
-    typealias Entry = WidgetEventsListViewModel
+    typealias Entry = WidgetViewModel
 
-    func placeholder(in context: Context) -> WidgetEventsListViewModel {
-        WidgetEventsListViewModel(listViewModel: listViewModel)
+    func placeholder(in context: Context) -> WidgetViewModel {
+        WidgetViewModel(listViewModel: listViewModel)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (WidgetEventsListViewModel) -> ()) {
-        let entry = WidgetEventsListViewModel(listViewModel: listViewModel)
+    func getSnapshot(in context: Context, completion: @escaping (WidgetViewModel) -> ()) {
+        let entry = WidgetViewModel(listViewModel: listViewModel)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [WidgetEventsListViewModel] = []
+        var entries: [WidgetViewModel] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = WidgetEventsListViewModel(date: entryDate, listViewModel: listViewModel)
+            let entry = WidgetViewModel(date: entryDate, listViewModel: listViewModel)
             entries.append(entry)
         }
 
-        let timeline = Timeline(entries: entries, policy: .never)
+        let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 }

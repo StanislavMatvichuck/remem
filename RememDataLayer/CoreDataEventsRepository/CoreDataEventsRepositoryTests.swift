@@ -5,7 +5,8 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-@testable import Remem
+@testable import RememDataLayer
+import RememDomain
 import XCTest
 
 class CoreDataEventsRepositoryTests: XCTestCase {

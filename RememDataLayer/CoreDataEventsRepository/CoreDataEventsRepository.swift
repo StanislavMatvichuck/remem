@@ -7,6 +7,7 @@
 
 import CoreData
 import RememDomain
+import IOSInterfaceAdapters
 
 public class CoreDataEventsRepository {
     private let container: NSPersistentContainer

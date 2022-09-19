@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080A678F28D1E2AA00889A97 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
 		080A67A428D1E46800889A97 /* IOSInterfaceAdaptersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */; };
 		080A67A528D1E46800889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
 		080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */; };
@@ -27,6 +26,7 @@
 		080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
 		080A67C428D1FCD500889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
 		080A67C728D1FCDD00889A97 /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		080AA96D28D768350038C21A /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA96C28D768350038C21A /* EventRowView.swift */; };
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
@@ -37,7 +37,6 @@
 		0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0826AC9828C86ECF0021D607 /* Assets.xcassets */; };
 		0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0826ACA628C885E30021D607 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACA328C8858D0021D607 /* EventsListView.swift */; };
-		0826ACA928C889DF0021D607 /* WidgetEventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACA728C8899B0021D607 /* WidgetEventsListViewModel.swift */; };
 		0826ACAC28C889FD0021D607 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAA28C889FA0021D607 /* Provider.swift */; };
 		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
@@ -46,7 +45,6 @@
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
-		08485BAC289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
@@ -64,7 +62,9 @@
 		0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		0867A2F928D4921200E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
+		08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
@@ -74,6 +74,11 @@
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		0889669228D8899D0075A51D /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
+		0889669628D88A080075A51D /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669528D88A080075A51D /* WidgetViewModel.swift */; };
+		0889669828D88A8E0075A51D /* WidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669728D88A8E0075A51D /* WidgetRepository.swift */; };
+		0889669B28D88D230075A51D /* FileWidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669A28D88D230075A51D /* FileWidgetRepository.swift */; };
+		0889669C28D8992A0075A51D /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
@@ -154,13 +159,6 @@
 			remoteGlobalIDString = 0867A2C828D469F400E0842C;
 			remoteInfo = RememDataLayer;
 		};
-		0867A2D428D469F500E0842C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 08D5121927870D2500C2037F;
-			remoteInfo = Remem;
-		};
 		0867A2DA28D469F500E0842C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -174,6 +172,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
+		};
+		0867A2F728D4920C00E0842C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0867A2C828D469F400E0842C;
+			remoteInfo = RememDataLayer;
 		};
 		0870EEFC2809B81100336759 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -195,6 +200,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
+		};
+		0889669D28D8992A0075A51D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080A679428D1E44C00889A97;
+			remoteInfo = IOSInterfaceAdapters;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -248,6 +260,7 @@
 		080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIOSInterfaceAdapters.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSInterfaceAdaptersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSInterfaceAdaptersTests.swift; sourceTree = "<group>"; };
+		080AA96C28D768350038C21A /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
 		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
@@ -261,7 +274,6 @@
 		0826AC9828C86ECF0021D607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0826AC9A28C86ECF0021D607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0826ACA328C8858D0021D607 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
-		0826ACA728C8899B0021D607 /* WidgetEventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEventsListViewModel.swift; sourceTree = "<group>"; };
 		0826ACAA28C889FA0021D607 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0826ACAF28C88EF20021D607 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
@@ -283,6 +295,8 @@
 		0867A2C928D469F400E0842C /* RememDataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RememDataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2D728D469F500E0842C /* RememDataLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememDataLayerTests.swift; sourceTree = "<group>"; };
+		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Remem.entitlements; sourceTree = "<group>"; };
+		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememWidgetsExtension.entitlements; sourceTree = "<group>"; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -299,6 +313,9 @@
 		087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		087ED42628D0A5A00085A37D /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		0889669528D88A080075A51D /* WidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewModel.swift; sourceTree = "<group>"; };
+		0889669728D88A8E0075A51D /* WidgetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRepository.swift; sourceTree = "<group>"; };
+		0889669A28D88D230075A51D /* FileWidgetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWidgetRepository.swift; sourceTree = "<group>"; };
 		088E88C228AF916000400180 /* WeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellViewModel.swift; sourceTree = "<group>"; };
 		088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalRemovedDateDisabled04.xcdatamodel; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
@@ -365,6 +382,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0867A2F928D4921200E0842C /* RememDataLayer.framework in Frameworks */,
 				080A67C728D1FCDD00889A97 /* libRememDomain.a in Frameworks */,
 				080A67C428D1FCD500889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
 				0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */,
@@ -384,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */,
+				0889669C28D8992A0075A51D /* libIOSInterfaceAdapters.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +491,7 @@
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				0889669528D88A080075A51D /* WidgetViewModel.swift */,
 			);
 			path = "Interface adapters layer";
 			sourceTree = "<group>";
@@ -497,10 +517,10 @@
 		0826AC9528C86ECE0021D607 /* RememWidgets */ = {
 			isa = PBXGroup;
 			children = (
-				0826ACAA28C889FA0021D607 /* Provider.swift */,
-				0826ACA728C8899B0021D607 /* WidgetEventsListViewModel.swift */,
-				0826ACA328C8858D0021D607 /* EventsListView.swift */,
 				0826AC9628C86ECE0021D607 /* RememWidgets.swift */,
+				0826ACAA28C889FA0021D607 /* Provider.swift */,
+				0826ACA328C8858D0021D607 /* EventsListView.swift */,
+				080AA96C28D768350038C21A /* EventRowView.swift */,
 				0826ACAF28C88EF20021D607 /* Helpers.swift */,
 				0826ACA528C885970021D607 /* Resources */,
 			);
@@ -522,17 +542,8 @@
 				087ED41B28D0A54C0085A37D /* RememDomainTests */,
 				080A679028D1E2DA00889A97 /* Model */,
 				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
-				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
 			);
 			path = RememDomain;
-			sourceTree = "<group>";
-		};
-		08485BA8289EDD840045B9F2 /* Domain services layer */ = {
-			isa = PBXGroup;
-			children = (
-				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
-			);
-			path = "Domain services layer";
 			sourceTree = "<group>";
 		};
 		085C4E9A289AC0DD0094388C /* ClockController */ = {
@@ -547,8 +558,8 @@
 			isa = PBXGroup;
 			children = (
 				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
-				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
+				0889669A28D88D230075A51D /* FileWidgetRepository.swift */,
 			);
 			path = RememDataLayer;
 			sourceTree = "<group>";
@@ -573,9 +584,10 @@
 		086DC6D02880571A0048F22F /* Application layer */ = {
 			isa = PBXGroup;
 			children = (
-				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
 				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
+				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
 				08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */,
+				0889669928D88AC30075A51D /* Repositories */,
 			);
 			path = "Application layer";
 			sourceTree = "<group>";
@@ -610,7 +622,6 @@
 		0870EEF92809B81100336759 /* RememTests */ = {
 			isa = PBXGroup;
 			children = (
-				08485BA8289EDD840045B9F2 /* Domain services layer */,
 			);
 			path = RememTests;
 			sourceTree = "<group>";
@@ -642,6 +653,15 @@
 			path = RememDomainTests;
 			sourceTree = "<group>";
 		};
+		0889669928D88AC30075A51D /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
+				0889669728D88A8E0075A51D /* WidgetRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		08C6C503287DC572001F522E /* EventsListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +683,7 @@
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
+				0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */,
 				08D5121C27870D2500C2037F /* Remem */,
 				0826AC9528C86ECE0021D607 /* RememWidgets */,
 				083BECF228D0A31A009157FD /* RememDomain */,
@@ -693,6 +714,7 @@
 		08D5121C27870D2500C2037F /* Remem */ = {
 			isa = PBXGroup;
 			children = (
+				0867A2F628D481C300E0842C /* Remem.entitlements */,
 				0870EEF92809B81100336759 /* RememTests */,
 				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D512322787136B00C2037F /* Delegates */,
@@ -770,9 +792,11 @@
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
 			isa = PBXGroup;
 			children = (
-				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
+				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
+				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
 				08E5B91828998053000B08BC /* EntityMapper.swift */,
 				08E5B91A28998088000B08BC /* EventEntityMapper.swift */,
+				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 			);
 			path = CoreDataEventsRepository;
 			sourceTree = "<group>";
@@ -846,6 +870,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0867A2F828D4920C00E0842C /* PBXTargetDependency */,
 				080A67C328D1FCCF00889A97 /* PBXTargetDependency */,
 				080A67C928D1FCDD00889A97 /* PBXTargetDependency */,
 			);
@@ -884,6 +909,7 @@
 			);
 			dependencies = (
 				0867A2F228D46A6400E0842C /* PBXTargetDependency */,
+				0889669E28D8992A0075A51D /* PBXTargetDependency */,
 			);
 			name = RememDataLayer;
 			productName = RememDataLayer;
@@ -902,7 +928,6 @@
 			);
 			dependencies = (
 				0867A2D328D469F500E0842C /* PBXTargetDependency */,
-				0867A2D528D469F500E0842C /* PBXTargetDependency */,
 			);
 			name = RememDataLayerTests;
 			productName = RememDataLayerTests;
@@ -1105,8 +1130,11 @@
 				080A67B028D1E4E000889A97 /* EventCellViewModel.swift in Sources */,
 				080A67B528D1E4E000889A97 /* WeekCellViewModel.swift in Sources */,
 				080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */,
+				0889669228D8899D0075A51D /* EventsRepository.swift in Sources */,
 				080A67AF28D1E4DB00889A97 /* Coordinating.swift in Sources */,
+				0889669828D88A8E0075A51D /* WidgetRepository.swift in Sources */,
 				080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */,
+				0889669628D88A080075A51D /* WidgetViewModel.swift in Sources */,
 				080A67B128D1E4E000889A97 /* EventDetailsViewModel.swift in Sources */,
 				080A67B928D1EDBF00889A97 /* ClockSection.swift in Sources */,
 				080A67B328D1E4E000889A97 /* GoalsInputViewModel.swift in Sources */,
@@ -1130,8 +1158,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0826ACAC28C889FD0021D607 /* Provider.swift in Sources */,
+				080AA96D28D768350038C21A /* EventRowView.swift in Sources */,
 				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
-				0826ACA928C889DF0021D607 /* WidgetEventsListViewModel.swift in Sources */,
 				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
 				0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */,
 				0826ACA628C885E30021D607 /* EventsListView.swift in Sources */,
@@ -1142,7 +1170,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				080A678F28D1E2AA00889A97 /* EventsRepository.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
 				087ED41028D0A4060085A37D /* Goal.swift in Sources */,
 				087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */,
@@ -1158,6 +1185,7 @@
 				0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */,
 				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
 				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
+				0889669B28D88D230075A51D /* FileWidgetRepository.swift in Sources */,
 				0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1167,6 +1195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0867A2D828D469F500E0842C /* RememDataLayerTests.swift in Sources */,
+				08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1174,7 +1203,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08485BAC289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1273,11 +1301,6 @@
 			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
 			targetProxy = 0867A2D228D469F500E0842C /* PBXContainerItemProxy */;
 		};
-		0867A2D528D469F500E0842C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 08D5121927870D2500C2037F /* Remem */;
-			targetProxy = 0867A2D428D469F500E0842C /* PBXContainerItemProxy */;
-		};
 		0867A2DB28D469F500E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
@@ -1287,6 +1310,11 @@
 			isa = PBXTargetDependency;
 			target = 083BECF028D0A319009157FD /* RememDomain */;
 			targetProxy = 0867A2F128D46A6400E0842C /* PBXContainerItemProxy */;
+		};
+		0867A2F828D4920C00E0842C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			targetProxy = 0867A2F728D4920C00E0842C /* PBXContainerItemProxy */;
 		};
 		0870EEFD2809B81100336759 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1302,6 +1330,11 @@
 			isa = PBXTargetDependency;
 			target = 083BECF028D0A319009157FD /* RememDomain */;
 			targetProxy = 087ED42828D0A77A0085A37D /* PBXContainerItemProxy */;
+		};
+		0889669E28D8992A0075A51D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			targetProxy = 0889669D28D8992A0075A51D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1433,6 +1466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
@@ -1461,6 +1495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
@@ -1489,6 +1524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
@@ -1580,8 +1616,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -1751,7 +1788,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J6H38BVYL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1771,7 +1808,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J6H38BVYL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1791,7 +1828,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8J6H38BVYL;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2037,8 +2074,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
@@ -2067,8 +2105,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Remem/Resources/Info.plist;
