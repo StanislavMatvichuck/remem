@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>IOSInterfaceAdapters.xcscheme_^#shared#^_</key>
+		<key>DataLayer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>IOSInterfaceAdapters.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>IosUseCases.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>Remem onboarding.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,7 +32,7 @@
 		<key>RememDataLayer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
 		</dict>
 		<key>RememDomain.xcscheme_^#shared#^_</key>
 		<dict>
@@ -40,6 +50,11 @@
 			<integer>6</integer>
 		</dict>
 		<key>RememWidgetsExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Widgets.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>

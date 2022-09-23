@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "08D5121927870D2500C2037F"
-               BuildableName = "Remem.app"
-               BlueprintName = "Remem"
+               BuildableName = "Application.app"
+               BlueprintName = "Application"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0870EEF72809B81100336759"
-               BuildableName = "RememTests.xctest"
-               BlueprintName = "RememTests"
+               BuildableName = "ApplicationTests.xctest"
+               BlueprintName = "ApplicationTests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -45,8 +45,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0867A2CF28D469F500E0842C"
-               BuildableName = "RememDataLayerTests.xctest"
-               BlueprintName = "RememDataLayerTests"
+               BuildableName = "DataLayerTests.xctest"
+               BlueprintName = "DataLayerTests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -67,8 +67,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08D5121927870D2500C2037F"
-            BuildableName = "Remem.app"
-            BlueprintName = "Remem"
+            BuildableName = "Application.app"
+            BlueprintName = "Application"
             ReferencedContainer = "container:Remem.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -84,8 +84,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08D5121927870D2500C2037F"
-            BuildableName = "Remem.app"
-            BlueprintName = "Remem"
+            BuildableName = "Application.app"
+            BlueprintName = "Application"
             ReferencedContainer = "container:Remem.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

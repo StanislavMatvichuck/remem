@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "087ED41928D0A54C0085A37D"
-               BuildableName = "RememDomainTests.xctest"
-               BlueprintName = "RememDomainTests"
+               BuildableName = "DomainTests.xctest"
+               BlueprintName = "DomainTests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>

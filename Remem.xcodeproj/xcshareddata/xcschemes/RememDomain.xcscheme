@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "083BECF028D0A319009157FD"
-               BuildableName = "libRememDomain.a"
-               BlueprintName = "RememDomain"
+               BuildableName = "libDomain.a"
+               BlueprintName = "Domain"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "087ED41928D0A54C0085A37D"
-               BuildableName = "RememDomainTests.xctest"
-               BlueprintName = "RememDomainTests"
+               BuildableName = "DomainTests.xctest"
+               BlueprintName = "DomainTests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "083BECF028D0A319009157FD"
-            BuildableName = "libRememDomain.a"
-            BlueprintName = "RememDomain"
+            BuildableName = "libDomain.a"
+            BlueprintName = "Domain"
             ReferencedContainer = "container:Remem.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

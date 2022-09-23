@@ -7,25 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080A67A428D1E46800889A97 /* IOSInterfaceAdaptersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */; };
-		080A67A528D1E46800889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
+		080A67A528D1E46800889A97 /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
 		080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */; };
 		080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
 		080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
-		080A67AF28D1E4DB00889A97 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC4A0E28C5F35300294C59 /* Coordinating.swift */; };
-		080A67B028D1E4E000889A97 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
-		080A67B128D1E4E000889A97 /* EventDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */; };
-		080A67B228D1E4E000889A97 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
-		080A67B328D1E4E000889A97 /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
-		080A67B428D1E4E000889A97 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
-		080A67B528D1E4E000889A97 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekCellViewModel.swift */; };
-		080A67B628D1E4E000889A97 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
-		080A67B728D1E4E000889A97 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
-		080A67B928D1EDBF00889A97 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
-		080A67BA28D1EDBF00889A97 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
-		080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
-		080A67C428D1FCD500889A97 /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
-		080A67C728D1FCDD00889A97 /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		080A67BD28D1F1B100889A97 /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
+		080A67C728D1FCDD00889A97 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		080AA96D28D768350038C21A /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA96C28D768350038C21A /* EventRowView.swift */; };
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
@@ -35,7 +22,6 @@
 		0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9328C86ECE0021D607 /* SwiftUI.framework */; };
 		0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826AC9628C86ECE0021D607 /* RememWidgets.swift */; };
 		0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0826AC9828C86ECF0021D607 /* Assets.xcassets */; };
-		0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0826ACA628C885E30021D607 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACA328C8858D0021D607 /* EventsListView.swift */; };
 		0826ACAC28C889FD0021D607 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAA28C889FA0021D607 /* Provider.swift */; };
 		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
@@ -51,18 +37,19 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
+		085888E428DC8040004A8184 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085888E328DC8040004A8184 /* WidgetPreview.plist */; };
+		085888E928DC8EE5004A8184 /* FileWidgetRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085888E728DC8ED0004A8184 /* FileWidgetRepositoryTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
-		0867A2D128D469F500E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
-		0867A2D828D469F500E0842C /* RememDataLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2D728D469F500E0842C /* RememDataLayerTests.swift */; };
-		0867A2DC28D469F500E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
-		0867A2DE28D469F500E0842C /* RememDataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
+		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
+		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
 		0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
 		0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
 		0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
-		0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
-		0867A2F928D4921200E0842C /* RememDataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* RememDataLayer.framework */; };
+		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
+		0867A2F928D4921200E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -70,20 +57,21 @@
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41028D0A4060085A37D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* Goal.swift */; };
 		087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41128D0A4510085A37D /* ExtenstionsDate.swift */; };
-		087ED41E28D0A54C0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
-		087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libRememDomain.a */; };
+		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0889669228D8899D0075A51D /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
-		0889669628D88A080075A51D /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669528D88A080075A51D /* WidgetViewModel.swift */; };
-		0889669828D88A8E0075A51D /* WidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669728D88A8E0075A51D /* WidgetRepository.swift */; };
-		0889669B28D88D230075A51D /* FileWidgetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669A28D88D230075A51D /* FileWidgetRepository.swift */; };
-		0889669C28D8992A0075A51D /* libIOSInterfaceAdapters.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */; };
+		0889669828D88A8E0075A51D /* WidgetFileWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669728D88A8E0075A51D /* WidgetFileWriting.swift */; };
+		0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
+		088EAD0B28DDDD55001EE985 /* WidgetFileReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */; };
+		088EAD0D28DDE020001EE985 /* WidgetFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EAD0C28DDE020001EE985 /* WidgetFileWriter.swift */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
+		08A29F8128DC9043003B4E9C /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669528D88A080075A51D /* WidgetViewModel.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */; };
@@ -107,6 +95,19 @@
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
+		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		08FEA38F28DC95C100BAA196 /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
+		08FEA39328DC989A00BAA196 /* EventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventCellViewModel.swift */; };
+		08FEA39428DC989E00BAA196 /* WeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekCellViewModel.swift */; };
+		08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */; };
+		08FEA39628DC98A600BAA196 /* ClockSectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E7283B945100C09409 /* ClockSectionsList.swift */; };
+		08FEA39728DC98A600BAA196 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC4A0E28C5F35300294C59 /* Coordinating.swift */; };
+		08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A13289E975900DFBAC8 /* DayViewModel.swift */; };
+		08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6D528805F1E0048F22F /* EventsListViewModel.swift */; };
+		08FEA39A28DC98A600BAA196 /* GoalsInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */; };
+		08FEA39B28DC98A600BAA196 /* ClockSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockSection.swift */; };
+		08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
+		08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1D3288806FA003BF595 /* WeekViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,26 +132,12 @@
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
 		};
-		080A67C228D1FCCF00889A97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 080A679428D1E44C00889A97;
-			remoteInfo = IOSInterfaceAdapters;
-		};
 		080A67C828D1FCDD00889A97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
-		};
-		0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0826AC8E28C86ECE0021D607;
-			remoteInfo = RememWidgetsExtension;
 		};
 		0867A2D228D469F500E0842C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -208,6 +195,20 @@
 			remoteGlobalIDString = 080A679428D1E44C00889A97;
 			remoteInfo = IOSInterfaceAdapters;
 		};
+		08FEA38C28DC94F600BAA196 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0826AC8E28C86ECE0021D607;
+			remoteInfo = RememWidgetsExtension;
+		};
+		08FEA39028DC95C100BAA196 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080A679428D1E44C00889A97;
+			remoteInfo = IOSInterfaceAdapters;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -218,17 +219,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0826AC9E28C86ECF0021D607 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				0826AC9D28C86ECF0021D607 /* RememWidgetsExtension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		083BECEF28D0A319009157FD /* CopyFiles */ = {
@@ -246,9 +236,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0867A2DE28D469F500E0842C /* RememDataLayer.framework in Embed Frameworks */,
+				0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08FEA38E28DC94F600BAA196 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -257,9 +258,8 @@
 		080656E7283B945100C09409 /* ClockSectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSectionsList.swift; sourceTree = "<group>"; };
 		080656E9283B946000C09409 /* ClockSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSection.swift; sourceTree = "<group>"; };
 		080A678E28D1E2AA00889A97 /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
-		080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIOSInterfaceAdapters.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSInterfaceAdaptersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSInterfaceAdaptersTests.swift; sourceTree = "<group>"; };
+		080A679528D1E44C00889A97 /* libIosUseCases.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIosUseCases.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		080A67A128D1E46800889A97 /* IosUseCasesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IosUseCasesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080AA96C28D768350038C21A /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsFactory.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
-		0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RememWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0826AC8F28C86ECE0021D607 /* Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0826AC9128C86ECE0021D607 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0826AC9328C86ECE0021D607 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		0826AC9628C86ECE0021D607 /* RememWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememWidgets.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputViewModel.swift; sourceTree = "<group>"; };
-		083BECF128D0A319009157FD /* libRememDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRememDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
@@ -291,12 +291,13 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
+		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WidgetPreview.plist; sourceTree = "<group>"; };
+		085888E728DC8ED0004A8184 /* FileWidgetRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWidgetRepositoryTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
-		0867A2C928D469F400E0842C /* RememDataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RememDataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0867A2D728D469F500E0842C /* RememDataLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememDataLayerTests.swift; sourceTree = "<group>"; };
-		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Remem.entitlements; sourceTree = "<group>"; };
-		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0867A2D028D469F500E0842C /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
+		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -304,20 +305,21 @@
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6C28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE6D28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0870EEF82809B81100336759 /* RememTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED40F28D0A4060085A37D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		087ED41128D0A4510085A37D /* ExtenstionsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionsDate.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
-		087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememDomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		087ED42628D0A5A00085A37D /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		0889669528D88A080075A51D /* WidgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewModel.swift; sourceTree = "<group>"; };
-		0889669728D88A8E0075A51D /* WidgetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetRepository.swift; sourceTree = "<group>"; };
-		0889669A28D88D230075A51D /* FileWidgetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWidgetRepository.swift; sourceTree = "<group>"; };
+		0889669728D88A8E0075A51D /* WidgetFileWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWriting.swift; sourceTree = "<group>"; };
 		088E88C228AF916000400180 /* WeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellViewModel.swift; sourceTree = "<group>"; };
 		088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalRemovedDateDisabled04.xcdatamodel; sourceTree = "<group>"; };
+		088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileReading.swift; sourceTree = "<group>"; };
+		088EAD0C28DDE020001EE985 /* WidgetFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWriter.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -334,13 +336,13 @@
 		08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
 		08D10F4C289598A0005453DD /* EventEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditUseCase.swift; sourceTree = "<group>"; };
-		08D5121A27870D2500C2037F /* Remem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remem.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08D5121A27870D2500C2037F /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08D5121F27870D2500C2037F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		08D5122127870D2500C2037F /* EventsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListController.swift; sourceTree = "<group>"; };
 		08D5122627870D2600C2037F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08D5122927870D2600C2037F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		08D5122B27870D2600C2037F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08D5122B27870D2600C2037F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Application/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		08D512352787144800C2037F /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
 		08D512372787153900C2037F /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
@@ -374,7 +376,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				080A67A528D1E46800889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
+				080A67A528D1E46800889A97 /* libIosUseCases.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,9 +384,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0867A2F928D4921200E0842C /* RememDataLayer.framework in Frameworks */,
-				080A67C728D1FCDD00889A97 /* libRememDomain.a in Frameworks */,
-				080A67C428D1FCD500889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
+				08FEA38F28DC95C100BAA196 /* libIosUseCases.a in Frameworks */,
+				0867A2F928D4921200E0842C /* DataLayer.framework in Frameworks */,
+				080A67C728D1FCDD00889A97 /* libDomain.a in Frameworks */,
 				0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */,
 				0826AC9228C86ECE0021D607 /* WidgetKit.framework in Frameworks */,
 			);
@@ -401,8 +403,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0867A2F328D46A6A00E0842C /* libRememDomain.a in Frameworks */,
-				0889669C28D8992A0075A51D /* libIOSInterfaceAdapters.a in Frameworks */,
+				0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */,
+				0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0867A2D128D469F500E0842C /* RememDataLayer.framework in Frameworks */,
+				0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				087ED41E28D0A54C0085A37D /* libRememDomain.a in Frameworks */,
+				087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,9 +435,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0867A2DC28D469F500E0842C /* RememDataLayer.framework in Frameworks */,
-				087ED42A28D0A78A0085A37D /* libRememDomain.a in Frameworks */,
-				080A67BD28D1F1B100889A97 /* libIOSInterfaceAdapters.a in Frameworks */,
+				0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */,
+				087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */,
+				080A67BD28D1F1B100889A97 /* libIosUseCases.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,22 +454,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		080A679628D1E44C00889A97 /* IOSInterfaceAdapters */ = {
+		080A679628D1E44C00889A97 /* IosUseCases */ = {
 			isa = PBXGroup;
 			children = (
-				080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */,
-				086DC6D02880571A0048F22F /* Application layer */,
-				08235E7128C5CC3F0026DED2 /* Interface adapters layer */,
+				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
+				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
+				08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */,
+				0889669928D88AC30075A51D /* Repositories */,
 			);
-			path = IOSInterfaceAdapters;
+			path = IosUseCases;
 			sourceTree = "<group>";
 		};
-		080A67A228D1E46800889A97 /* IOSInterfaceAdaptersTests */ = {
+		080A67A228D1E46800889A97 /* IosUseCasesTests */ = {
 			isa = PBXGroup;
 			children = (
-				080A67A328D1E46800889A97 /* IOSInterfaceAdaptersTests.swift */,
 			);
-			path = IOSInterfaceAdaptersTests;
+			path = IosUseCasesTests;
 			sourceTree = "<group>";
 		};
 		080A67B828D1EDB300889A97 /* ClockViewModel */ = {
@@ -480,7 +482,7 @@
 			path = ClockViewModel;
 			sourceTree = "<group>";
 		};
-		08235E7128C5CC3F0026DED2 /* Interface adapters layer */ = {
+		08235E7128C5CC3F0026DED2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				08235E7228C5CC680026DED2 /* Cells */,
@@ -491,9 +493,8 @@
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
-				0889669528D88A080075A51D /* WidgetViewModel.swift */,
 			);
-			path = "Interface adapters layer";
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		08235E7228C5CC680026DED2 /* Cells */ = {
@@ -514,36 +515,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0826AC9528C86ECE0021D607 /* RememWidgets */ = {
+		0826AC9528C86ECE0021D607 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				0826AC9628C86ECE0021D607 /* RememWidgets.swift */,
-				0826ACAA28C889FA0021D607 /* Provider.swift */,
-				0826ACA328C8858D0021D607 /* EventsListView.swift */,
 				080AA96C28D768350038C21A /* EventRowView.swift */,
+				0826ACA328C8858D0021D607 /* EventsListView.swift */,
 				0826ACAF28C88EF20021D607 /* Helpers.swift */,
+				0826ACAA28C889FA0021D607 /* Provider.swift */,
+				0826AC9628C86ECE0021D607 /* RememWidgets.swift */,
+				088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */,
+				0889669528D88A080075A51D /* WidgetViewModel.swift */,
 				0826ACA528C885970021D607 /* Resources */,
 			);
-			path = RememWidgets;
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 		0826ACA528C885970021D607 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */,
+				085888E328DC8040004A8184 /* WidgetPreview.plist */,
 				0826AC9A28C86ECF0021D607 /* Info.plist */,
 				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		083BECF228D0A31A009157FD /* RememDomain */ = {
+		083BECF228D0A31A009157FD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				087ED41B28D0A54C0085A37D /* RememDomainTests */,
 				080A679028D1E2DA00889A97 /* Model */,
 				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
 			);
-			path = RememDomain;
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		085C4E9A289AC0DD0094388C /* ClockController */ = {
@@ -554,22 +558,20 @@
 			path = ClockController;
 			sourceTree = "<group>";
 		};
-		0867A2CA28D469F400E0842C /* RememDataLayer */ = {
+		0867A2CA28D469F400E0842C /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
 				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
-				0889669A28D88D230075A51D /* FileWidgetRepository.swift */,
 			);
-			path = RememDataLayer;
+			path = DataLayer;
 			sourceTree = "<group>";
 		};
-		0867A2D628D469F500E0842C /* RememDataLayerTests */ = {
+		0867A2D628D469F500E0842C /* DataLayerTests */ = {
 			isa = PBXGroup;
 			children = (
-				0867A2D728D469F500E0842C /* RememDataLayerTests.swift */,
 			);
-			path = RememDataLayerTests;
+			path = DataLayerTests;
 			sourceTree = "<group>";
 		};
 		0868209327BFAD6500551F6A /* Components */ = {
@@ -579,17 +581,6 @@
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		086DC6D02880571A0048F22F /* Application layer */ = {
-			isa = PBXGroup;
-			children = (
-				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
-				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
-				08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */,
-				0889669928D88AC30075A51D /* Repositories */,
-			);
-			path = "Application layer";
 			sourceTree = "<group>";
 		};
 		086DC6D12880578E0048F22F /* Views */ = {
@@ -619,11 +610,12 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		0870EEF92809B81100336759 /* RememTests */ = {
+		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				085888E728DC8ED0004A8184 /* FileWidgetRepositoryTests.swift */,
 			);
-			path = RememTests;
+			path = ApplicationTests;
 			sourceTree = "<group>";
 		};
 		0879AC8E2879B0E800D8DD8E /* ClockFace */ = {
@@ -644,20 +636,20 @@
 			path = Clock;
 			sourceTree = "<group>";
 		};
-		087ED41B28D0A54C0085A37D /* RememDomainTests */ = {
+		087ED41B28D0A54C0085A37D /* DomainTests */ = {
 			isa = PBXGroup;
 			children = (
 				087ED41428D0A4F20085A37D /* EventTests.swift */,
 				087ED42628D0A5A00085A37D /* GoalTests.swift */,
 			);
-			path = RememDomainTests;
+			path = DomainTests;
 			sourceTree = "<group>";
 		};
 		0889669928D88AC30075A51D /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
-				0889669728D88A8E0075A51D /* WidgetRepository.swift */,
+				0889669728D88A8E0075A51D /* WidgetFileWriting.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -683,53 +675,52 @@
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
-				0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */,
-				08D5121C27870D2500C2037F /* Remem */,
-				0826AC9528C86ECE0021D607 /* RememWidgets */,
-				083BECF228D0A31A009157FD /* RememDomain */,
-				080A679628D1E44C00889A97 /* IOSInterfaceAdapters */,
-				0867A2CA28D469F400E0842C /* RememDataLayer */,
-				0867A2D628D469F500E0842C /* RememDataLayerTests */,
-				0826AC9028C86ECE0021D607 /* Frameworks */,
+				083BECF228D0A31A009157FD /* Domain */,
+				080A679628D1E44C00889A97 /* IosUseCases */,
+				08D5121C27870D2500C2037F /* Application */,
+				0826AC9528C86ECE0021D607 /* Widgets */,
+				0867A2CA28D469F400E0842C /* DataLayer */,
+				08FEA39E28DC9A4000BAA196 /* Tests */,
 				08D5121B27870D2500C2037F /* Products */,
+				0826AC9028C86ECE0021D607 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		08D5121B27870D2500C2037F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				08D5121A27870D2500C2037F /* Remem.app */,
-				0870EEF82809B81100336759 /* RememTests.xctest */,
-				0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */,
-				083BECF128D0A319009157FD /* libRememDomain.a */,
-				087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */,
-				080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */,
-				080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */,
-				0867A2C928D469F400E0842C /* RememDataLayer.framework */,
-				0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */,
+				08D5121A27870D2500C2037F /* Application.app */,
+				0870EEF82809B81100336759 /* ApplicationTests.xctest */,
+				0826AC8F28C86ECE0021D607 /* Widgets.appex */,
+				083BECF128D0A319009157FD /* libDomain.a */,
+				087ED41A28D0A54C0085A37D /* DomainTests.xctest */,
+				080A679528D1E44C00889A97 /* libIosUseCases.a */,
+				080A67A128D1E46800889A97 /* IosUseCasesTests.xctest */,
+				0867A2C928D469F400E0842C /* DataLayer.framework */,
+				0867A2D028D469F500E0842C /* DataLayerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		08D5121C27870D2500C2037F /* Remem */ = {
+		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				0867A2F628D481C300E0842C /* Remem.entitlements */,
-				0870EEF92809B81100336759 /* RememTests */,
+				08D512332787140D00C2037F /* Controllers */,
 				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D512322787136B00C2037F /* Delegates */,
 				08E194FE28BBE618001BCCC9 /* Factories */,
-				08D512332787140D00C2037F /* Controllers */,
-				086DC6D12880578E0048F22F /* Views */,
 				08D5123E278716DA00C2037F /* Helpers */,
 				08D512312787135300C2037F /* Resources */,
+				08235E7128C5CC3F0026DED2 /* ViewModels */,
+				086DC6D12880578E0048F22F /* Views */,
 			);
-			path = Remem;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		08D512312787135300C2037F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0867A2F628D481C300E0842C /* Remem.entitlements */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				08D5122627870D2600C2037F /* Assets.xcassets */,
 				08EC54382837B2B000249DF1 /* Features.rtf */,
@@ -771,6 +762,7 @@
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 				08E620832787406400BBABFD /* Metrics.swift */,
 				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
+				088EAD0C28DDE020001EE985 /* WidgetFileWriter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -810,6 +802,17 @@
 			path = ClockView;
 			sourceTree = "<group>";
 		};
+		08FEA39E28DC9A4000BAA196 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0870EEF92809B81100336759 /* ApplicationTests */,
+				0867A2D628D469F500E0842C /* DataLayerTests */,
+				080A67A228D1E46800889A97 /* IosUseCasesTests */,
+				087ED41B28D0A54C0085A37D /* DomainTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -823,9 +826,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		080A679428D1E44C00889A97 /* IOSInterfaceAdapters */ = {
+		080A679428D1E44C00889A97 /* IosUseCases */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdapters" */;
+			buildConfigurationList = 080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IosUseCases" */;
 			buildPhases = (
 				080A679128D1E44C00889A97 /* Sources */,
 				080A679228D1E44C00889A97 /* Frameworks */,
@@ -836,14 +839,14 @@
 			dependencies = (
 				080A67C128D1F66D00889A97 /* PBXTargetDependency */,
 			);
-			name = IOSInterfaceAdapters;
+			name = IosUseCases;
 			productName = IOSInterfaceAdapters;
-			productReference = 080A679528D1E44C00889A97 /* libIOSInterfaceAdapters.a */;
+			productReference = 080A679528D1E44C00889A97 /* libIosUseCases.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		080A67A028D1E46800889A97 /* IOSInterfaceAdaptersTests */ = {
+		080A67A028D1E46800889A97 /* IosUseCasesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdaptersTests" */;
+			buildConfigurationList = 080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IosUseCasesTests" */;
 			buildPhases = (
 				080A679D28D1E46800889A97 /* Sources */,
 				080A679E28D1E46800889A97 /* Frameworks */,
@@ -854,14 +857,14 @@
 			dependencies = (
 				080A67A728D1E46800889A97 /* PBXTargetDependency */,
 			);
-			name = IOSInterfaceAdaptersTests;
+			name = IosUseCasesTests;
 			productName = RememIOSInterfaceAdaptersTests;
-			productReference = 080A67A128D1E46800889A97 /* IOSInterfaceAdaptersTests.xctest */;
+			productReference = 080A67A128D1E46800889A97 /* IosUseCasesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */ = {
+		0826AC8E28C86ECE0021D607 /* Widgets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */;
+			buildConfigurationList = 0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "Widgets" */;
 			buildPhases = (
 				0826AC8B28C86ECE0021D607 /* Sources */,
 				0826AC8C28C86ECE0021D607 /* Frameworks */,
@@ -871,17 +874,17 @@
 			);
 			dependencies = (
 				0867A2F828D4920C00E0842C /* PBXTargetDependency */,
-				080A67C328D1FCCF00889A97 /* PBXTargetDependency */,
 				080A67C928D1FCDD00889A97 /* PBXTargetDependency */,
+				08FEA39128DC95C100BAA196 /* PBXTargetDependency */,
 			);
-			name = RememWidgetsExtension;
+			name = Widgets;
 			productName = RememWidgetsExtension;
-			productReference = 0826AC8F28C86ECE0021D607 /* RememWidgetsExtension.appex */;
+			productReference = 0826AC8F28C86ECE0021D607 /* Widgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		083BECF028D0A319009157FD /* RememDomain */ = {
+		083BECF028D0A319009157FD /* Domain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "RememDomain" */;
+			buildConfigurationList = 083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "Domain" */;
 			buildPhases = (
 				083BECED28D0A319009157FD /* Sources */,
 				083BECEE28D0A319009157FD /* Frameworks */,
@@ -891,14 +894,14 @@
 			);
 			dependencies = (
 			);
-			name = RememDomain;
+			name = Domain;
 			productName = RememDomain;
-			productReference = 083BECF128D0A319009157FD /* libRememDomain.a */;
+			productReference = 083BECF128D0A319009157FD /* libDomain.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		0867A2C828D469F400E0842C /* RememDataLayer */ = {
+		0867A2C828D469F400E0842C /* DataLayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayer" */;
+			buildConfigurationList = 0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayer" */;
 			buildPhases = (
 				0867A2C428D469F400E0842C /* Headers */,
 				0867A2C528D469F400E0842C /* Sources */,
@@ -911,14 +914,14 @@
 				0867A2F228D46A6400E0842C /* PBXTargetDependency */,
 				0889669E28D8992A0075A51D /* PBXTargetDependency */,
 			);
-			name = RememDataLayer;
+			name = DataLayer;
 			productName = RememDataLayer;
-			productReference = 0867A2C928D469F400E0842C /* RememDataLayer.framework */;
+			productReference = 0867A2C928D469F400E0842C /* DataLayer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0867A2CF28D469F500E0842C /* RememDataLayerTests */ = {
+		0867A2CF28D469F500E0842C /* DataLayerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayerTests" */;
+			buildConfigurationList = 0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayerTests" */;
 			buildPhases = (
 				0867A2CC28D469F500E0842C /* Sources */,
 				0867A2CD28D469F500E0842C /* Frameworks */,
@@ -929,14 +932,14 @@
 			dependencies = (
 				0867A2D328D469F500E0842C /* PBXTargetDependency */,
 			);
-			name = RememDataLayerTests;
+			name = DataLayerTests;
 			productName = RememDataLayerTests;
-			productReference = 0867A2D028D469F500E0842C /* RememDataLayerTests.xctest */;
+			productReference = 0867A2D028D469F500E0842C /* DataLayerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0870EEF72809B81100336759 /* RememTests */ = {
+		0870EEF72809B81100336759 /* ApplicationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */;
+			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "ApplicationTests" */;
 			buildPhases = (
 				0870EEF42809B81100336759 /* Sources */,
 				0870EEF52809B81100336759 /* Frameworks */,
@@ -947,14 +950,14 @@
 			dependencies = (
 				0870EEFD2809B81100336759 /* PBXTargetDependency */,
 			);
-			name = RememTests;
+			name = ApplicationTests;
 			productName = RememTests;
-			productReference = 0870EEF82809B81100336759 /* RememTests.xctest */;
+			productReference = 0870EEF82809B81100336759 /* ApplicationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		087ED41928D0A54C0085A37D /* RememDomainTests */ = {
+		087ED41928D0A54C0085A37D /* DomainTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "RememDomainTests" */;
+			buildConfigurationList = 087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "DomainTests" */;
 			buildPhases = (
 				087ED41628D0A54C0085A37D /* Sources */,
 				087ED41728D0A54C0085A37D /* Frameworks */,
@@ -965,32 +968,32 @@
 			dependencies = (
 				087ED42028D0A54C0085A37D /* PBXTargetDependency */,
 			);
-			name = RememDomainTests;
+			name = DomainTests;
 			productName = RememDomainTests;
-			productReference = 087ED41A28D0A54C0085A37D /* RememDomainTests.xctest */;
+			productReference = 087ED41A28D0A54C0085A37D /* DomainTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		08D5121927870D2500C2037F /* Remem */ = {
+		08D5121927870D2500C2037F /* Application */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Remem" */;
+			buildConfigurationList = 08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Application" */;
 			buildPhases = (
 				08D5121627870D2500C2037F /* Sources */,
 				08D5121727870D2500C2037F /* Frameworks */,
 				08D5121827870D2500C2037F /* Resources */,
-				0826AC9E28C86ECF0021D607 /* Embed App Extensions */,
 				0867A2DD28D469F500E0842C /* Embed Frameworks */,
+				08FEA38E28DC94F600BAA196 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				080A67BC28D1F1A700889A97 /* PBXTargetDependency */,
 				087ED42928D0A77A0085A37D /* PBXTargetDependency */,
-				0826AC9C28C86ECF0021D607 /* PBXTargetDependency */,
 				0867A2DB28D469F500E0842C /* PBXTargetDependency */,
+				08FEA38D28DC94F600BAA196 /* PBXTargetDependency */,
 			);
-			name = Remem;
+			name = Application;
 			productName = Remem;
-			productReference = 08D5121A27870D2500C2037F /* Remem.app */;
+			productReference = 08D5121A27870D2500C2037F /* Application.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1049,15 +1052,15 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				08D5121927870D2500C2037F /* Remem */,
-				0870EEF72809B81100336759 /* RememTests */,
-				0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */,
-				083BECF028D0A319009157FD /* RememDomain */,
-				087ED41928D0A54C0085A37D /* RememDomainTests */,
-				080A679428D1E44C00889A97 /* IOSInterfaceAdapters */,
-				080A67A028D1E46800889A97 /* IOSInterfaceAdaptersTests */,
-				0867A2C828D469F400E0842C /* RememDataLayer */,
-				0867A2CF28D469F500E0842C /* RememDataLayerTests */,
+				083BECF028D0A319009157FD /* Domain */,
+				080A679428D1E44C00889A97 /* IosUseCases */,
+				08D5121927870D2500C2037F /* Application */,
+				0826AC8E28C86ECE0021D607 /* Widgets */,
+				0867A2C828D469F400E0842C /* DataLayer */,
+				087ED41928D0A54C0085A37D /* DomainTests */,
+				080A67A028D1E46800889A97 /* IosUseCasesTests */,
+				0870EEF72809B81100336759 /* ApplicationTests */,
+				0867A2CF28D469F500E0842C /* DataLayerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1075,6 +1078,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */,
+				085888E428DC8040004A8184 /* WidgetPreview.plist in Resources */,
 				0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1125,23 +1129,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				080A67BA28D1EDBF00889A97 /* ClockSectionsList.swift in Sources */,
 				080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */,
-				080A67B028D1E4E000889A97 /* EventCellViewModel.swift in Sources */,
-				080A67B528D1E4E000889A97 /* WeekCellViewModel.swift in Sources */,
 				080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */,
 				0889669228D8899D0075A51D /* EventsRepository.swift in Sources */,
-				080A67AF28D1E4DB00889A97 /* Coordinating.swift in Sources */,
-				0889669828D88A8E0075A51D /* WidgetRepository.swift in Sources */,
+				0889669828D88A8E0075A51D /* WidgetFileWriting.swift in Sources */,
 				080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */,
-				0889669628D88A080075A51D /* WidgetViewModel.swift in Sources */,
-				080A67B128D1E4E000889A97 /* EventDetailsViewModel.swift in Sources */,
-				080A67B928D1EDBF00889A97 /* ClockSection.swift in Sources */,
-				080A67B328D1E4E000889A97 /* GoalsInputViewModel.swift in Sources */,
-				080A67B728D1E4E000889A97 /* EventsListViewModel.swift in Sources */,
-				080A67B428D1E4E000889A97 /* WeekViewModel.swift in Sources */,
-				080A67B228D1E4E000889A97 /* ClockViewModel.swift in Sources */,
-				080A67B628D1E4E000889A97 /* DayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1149,7 +1141,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				080A67A428D1E46800889A97 /* IOSInterfaceAdaptersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,6 +1148,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088EAD0B28DDDD55001EE985 /* WidgetFileReading.swift in Sources */,
+				08A29F8128DC9043003B4E9C /* WidgetViewModel.swift in Sources */,
 				0826ACAC28C889FD0021D607 /* Provider.swift in Sources */,
 				080AA96D28D768350038C21A /* EventRowView.swift in Sources */,
 				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
@@ -1185,7 +1178,6 @@
 				0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */,
 				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
 				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
-				0889669B28D88D230075A51D /* FileWidgetRepository.swift in Sources */,
 				0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,7 +1186,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0867A2D828D469F500E0842C /* RememDataLayerTests.swift in Sources */,
 				08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1203,6 +1194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085888E928DC8EE5004A8184 /* FileWidgetRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1221,13 +1213,16 @@
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */,
 				08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */,
+				08FEA39428DC989E00BAA196 /* WeekCellViewModel.swift in Sources */,
 				08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
+				08FEA39A28DC98A600BAA196 /* GoalsInputViewModel.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
 				08D8BCD328A90C4300A50664 /* GoalsInputView.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
+				088EAD0D28DDE020001EE985 /* WidgetFileWriter.swift in Sources */,
 				08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */,
 				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
@@ -1236,27 +1231,36 @@
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
+				08FEA39B28DC98A600BAA196 /* ClockSection.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */,
+				08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
+				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				085622FD28C25B9F002331AB /* DayFactory.swift in Sources */,
 				0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
+				08FEA39728DC98A600BAA196 /* Coordinating.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
 				08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */,
+				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */,
+				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
+				08FEA39628DC98A600BAA196 /* ClockSectionsList.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
 				08D5122227870D2500C2037F /* EventsListController.swift in Sources */,
+				08FEA39328DC989A00BAA196 /* EventCellViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
 				085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
+				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
@@ -1268,73 +1272,73 @@
 /* Begin PBXTargetDependency section */
 		080A67A728D1E46800889A97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			target = 080A679428D1E44C00889A97 /* IosUseCases */;
 			targetProxy = 080A67A628D1E46800889A97 /* PBXContainerItemProxy */;
 		};
 		080A67BC28D1F1A700889A97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			target = 080A679428D1E44C00889A97 /* IosUseCases */;
 			targetProxy = 080A67BB28D1F1A700889A97 /* PBXContainerItemProxy */;
 		};
 		080A67C128D1F66D00889A97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
+			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 080A67C028D1F66D00889A97 /* PBXContainerItemProxy */;
-		};
-		080A67C328D1FCCF00889A97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
-			targetProxy = 080A67C228D1FCCF00889A97 /* PBXContainerItemProxy */;
 		};
 		080A67C928D1FCDD00889A97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
+			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 080A67C828D1FCDD00889A97 /* PBXContainerItemProxy */;
-		};
-		0826AC9C28C86ECF0021D607 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0826AC8E28C86ECE0021D607 /* RememWidgetsExtension */;
-			targetProxy = 0826AC9B28C86ECF0021D607 /* PBXContainerItemProxy */;
 		};
 		0867A2D328D469F500E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			target = 0867A2C828D469F400E0842C /* DataLayer */;
 			targetProxy = 0867A2D228D469F500E0842C /* PBXContainerItemProxy */;
 		};
 		0867A2DB28D469F500E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			target = 0867A2C828D469F400E0842C /* DataLayer */;
 			targetProxy = 0867A2DA28D469F500E0842C /* PBXContainerItemProxy */;
 		};
 		0867A2F228D46A6400E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
+			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 0867A2F128D46A6400E0842C /* PBXContainerItemProxy */;
 		};
 		0867A2F828D4920C00E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0867A2C828D469F400E0842C /* RememDataLayer */;
+			target = 0867A2C828D469F400E0842C /* DataLayer */;
 			targetProxy = 0867A2F728D4920C00E0842C /* PBXContainerItemProxy */;
 		};
 		0870EEFD2809B81100336759 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 08D5121927870D2500C2037F /* Remem */;
+			target = 08D5121927870D2500C2037F /* Application */;
 			targetProxy = 0870EEFC2809B81100336759 /* PBXContainerItemProxy */;
 		};
 		087ED42028D0A54C0085A37D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
+			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 087ED41F28D0A54C0085A37D /* PBXContainerItemProxy */;
 		};
 		087ED42928D0A77A0085A37D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* RememDomain */;
+			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 087ED42828D0A77A0085A37D /* PBXContainerItemProxy */;
 		};
 		0889669E28D8992A0075A51D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 080A679428D1E44C00889A97 /* IOSInterfaceAdapters */;
+			target = 080A679428D1E44C00889A97 /* IosUseCases */;
 			targetProxy = 0889669D28D8992A0075A51D /* PBXContainerItemProxy */;
+		};
+		08FEA38D28DC94F600BAA196 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0826AC8E28C86ECE0021D607 /* Widgets */;
+			targetProxy = 08FEA38C28DC94F600BAA196 /* PBXContainerItemProxy */;
+		};
+		08FEA39128DC95C100BAA196 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080A679428D1E44C00889A97 /* IosUseCases */;
+			targetProxy = 08FEA39028DC95C100BAA196 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1466,21 +1470,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_FILE = Widgets/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1495,21 +1499,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_FILE = Widgets/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1524,21 +1528,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = RememWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RememWidgets/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RememWidgets;
+				INFOPLIST_FILE = Widgets/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1616,12 +1620,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Remem/Resources/Info.plist;
+				INFOPLIST_FILE = Application/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -2074,12 +2078,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Remem/Resources/Info.plist;
+				INFOPLIST_FILE = Application/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -2105,12 +2109,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Remem/Remem.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Remem/Resources/Info.plist;
+				INFOPLIST_FILE = Application/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -2133,7 +2137,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdapters" */ = {
+		080A679928D1E44C00889A97 /* Build configuration list for PBXNativeTarget "IosUseCases" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				080A679A28D1E44C00889A97 /* Debug */,
@@ -2143,7 +2147,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IOSInterfaceAdaptersTests" */ = {
+		080A67A828D1E46800889A97 /* Build configuration list for PBXNativeTarget "IosUseCasesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				080A67A928D1E46800889A97 /* Debug */,
@@ -2153,7 +2157,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "RememWidgetsExtension" */ = {
+		0826ACA228C86ECF0021D607 /* Build configuration list for PBXNativeTarget "Widgets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0826AC9F28C86ECF0021D607 /* Debug */,
@@ -2163,7 +2167,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "RememDomain" */ = {
+		083BECF528D0A31A009157FD /* Build configuration list for PBXNativeTarget "Domain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				083BECF628D0A31A009157FD /* Debug */,
@@ -2173,7 +2177,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayer" */ = {
+		0867A2E528D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0867A2DF28D469F500E0842C /* Debug */,
@@ -2183,7 +2187,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "RememDataLayerTests" */ = {
+		0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0867A2E228D469F500E0842C /* Debug */,
@@ -2193,7 +2197,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "RememTests" */ = {
+		0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "ApplicationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0870EEFE2809B81100336759 /* Debug */,
@@ -2203,7 +2207,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "RememDomainTests" */ = {
+		087ED42128D0A54C0085A37D /* Build configuration list for PBXNativeTarget "DomainTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				087ED42228D0A54C0085A37D /* Debug */,
@@ -2223,7 +2227,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Remem" */ = {
+		08D5122E27870D2600C2037F /* Build configuration list for PBXNativeTarget "Application" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08D5122F27870D2600C2037F /* Debug */,

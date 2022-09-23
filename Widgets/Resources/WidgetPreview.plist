@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>viewModel</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>💊</string>
+			<key>amount</key>
+			<string>0</string>
+			<key>hasGoal</key>
+			<false/>
+			<key>goalAchieved</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Event name</string>
+			<key>amount</key>
+			<string>1/2</string>
+			<key>hasGoal</key>
+			<true/>
+			<key>goalAchieved</key>
+			<false/>
+		</dict>
+	</array>
+	<key>date</key>
+	<date>2022-09-22T11:39:05Z</date>
+</dict>
+</plist>
