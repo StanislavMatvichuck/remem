@@ -4,10 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Application.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>DataLayer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
+		</dict>
+		<key>Domain.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>DomainTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>IOSInterfaceAdapters.xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,32 +32,12 @@
 		<key>IosUseCases.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Remem onboarding.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>Remem.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>5</integer>
 		</dict>
 		<key>RememDataLayer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
-		</dict>
-		<key>RememDomain.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>RememDomainTests.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>RememIOSInterfaceAdaptersTests.xcscheme_^#shared#^_</key>
 		<dict>
@@ -62,7 +57,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0826AC8E28C86ECE0021D607</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>083BECF028D0A319009157FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0867A2CF28D469F500E0842C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0870EEF72809B81100336759</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -139,6 +139,13 @@
 			remoteGlobalIDString = 083BECF028D0A319009157FD;
 			remoteInfo = RememDomain;
 		};
+		080DF8C628DDE9D5001377A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08D5121927870D2500C2037F;
+			remoteInfo = Application;
+		};
 		0867A2D228D469F500E0842C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -931,6 +938,7 @@
 			);
 			dependencies = (
 				0867A2D328D469F500E0842C /* PBXTargetDependency */,
+				080DF8C728DDE9D5001377A9 /* PBXTargetDependency */,
 			);
 			name = DataLayerTests;
 			productName = RememDataLayerTests;
@@ -1289,6 +1297,11 @@
 			isa = PBXTargetDependency;
 			target = 083BECF028D0A319009157FD /* Domain */;
 			targetProxy = 080A67C828D1FCDD00889A97 /* PBXContainerItemProxy */;
+		};
+		080DF8C728DDE9D5001377A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08D5121927870D2500C2037F /* Application */;
+			targetProxy = 080DF8C628DDE9D5001377A9 /* PBXContainerItemProxy */;
 		};
 		0867A2D328D469F500E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1799,7 +1812,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Debug;
 		};
@@ -1819,7 +1832,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Onboarding;
 		};
@@ -1839,7 +1852,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Release;
 		};
@@ -1858,7 +1871,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Debug;
 		};
@@ -1877,7 +1890,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Onboarding;
 		};
@@ -1896,7 +1909,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remem.app/Remem";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Release;
 		};

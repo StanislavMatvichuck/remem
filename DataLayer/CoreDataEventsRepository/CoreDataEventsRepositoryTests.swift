@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-@testable import RememDataLayer
+@testable import DataLayer
 import Domain
 import XCTest
 
