@@ -18,13 +18,9 @@ public class EventsListUseCase: EventsListUseCasing {
     // MARK: - Properties
     public weak var delegate: EventsListUseCaseDelegate?
     private var repository: EventsRepositoryInterface
-    private var widgetRepository: WidgetFileWriting
     // MARK: - Init
-    public init(repository: EventsRepositoryInterface,
-                widgetRepository: WidgetFileWriting)
-    {
+    public init(repository: EventsRepositoryInterface) {
         self.repository = repository
-        self.widgetRepository = widgetRepository
     }
 
     // EventsListUseCasing
@@ -36,13 +32,11 @@ public class EventsListUseCase: EventsListUseCasing {
 
         guard let addedEvent = repository.event(byId: newEvent.id) else { return }
         delegate?.added(event: addedEvent)
-        widgetRepository.update(eventsList: repository.all())
     }
 
     public func remove(_ event: Event) {
         repository.delete(event)
         delegate?.removed(event: event)
-        widgetRepository.update(eventsList: repository.all())
     }
 }
 

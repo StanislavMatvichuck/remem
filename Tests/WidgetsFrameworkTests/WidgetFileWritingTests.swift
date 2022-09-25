@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 22.09.2022.
 //
 
-@testable import Application
+import WidgetsFramework
 import IosUseCases
 import XCTest
 

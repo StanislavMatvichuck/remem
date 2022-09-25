@@ -42,10 +42,8 @@ class ApplicationFactory {
         }
 
         let repository = makeEventsRepository()
-        let widgetRepository = WidgetFileWriter()
 
-        let listUseCase = EventsListUseCase(repository: repository,
-                                            widgetRepository: widgetRepository)
+        let listUseCase = EventsListUseCase(repository: repository)
         let editUseCase = EventEditUseCase(repository: repository)
 
         let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseDelegate>()

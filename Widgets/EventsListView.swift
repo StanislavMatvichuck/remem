@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WidgetKit
+import WidgetsFramework
 
 struct EventRow: Identifiable {
     let id = UUID()

@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 07.09.2022.
 //
 
-import Domain
+import WidgetsFramework
 import SwiftUI
 import WidgetKit
 
@@ -38,7 +38,7 @@ struct RememWidgets: Widget, PreviewProvider {
     //
 
     static var previews: some View {
-        let widgetViewModel = WidgetViewModel(date: .now, viewModel: [])
+        let widgetViewModel = WidgetViewModel(date: Date.now, viewModel: [])
         EventsListView(viewModel: widgetViewModel)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }

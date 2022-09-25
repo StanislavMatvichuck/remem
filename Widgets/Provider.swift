@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 07.09.2022.
 //
 
+import WidgetsFramework
 import WidgetKit
 
 struct Provider: TimelineProvider {
