@@ -27,17 +27,24 @@ class WidgetFileWritingTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
-    func test_writeToLocalFile() {
+    func test_update_readerReadsUpdate() {
+        // given
+        let reader = WidgetFileReader()
+        let mockViewModel = WidgetViewModel(
+            date: .now,
+            viewModel: [
+                WidgetRowViewModel(name: "Event name",
+                                   amount: "0",
+                                   hasGoal: false,
+                                   goalReached: false),
+            ]
+        )
+
+        // when
         sut.update(eventsList: [Event(name: "Event name")])
 
-        let reader = WidgetFileReader()
-
-        let fileDecodedViewModel = reader.readApplicationDataContainer()
-
-        let mockViewModel = WidgetViewModel(date: .now, viewModel: [
-            WidgetRowViewModel(name: "Event name", amount: "0", hasGoal: false, goalReached: false),
-        ])
-
+        // then
+        let fileDecodedViewModel = reader.read()
         XCTAssertEqual(fileDecodedViewModel?.count, mockViewModel.count)
         XCTAssertEqual(fileDecodedViewModel?.rowViewModel(at: 0)?.name,
                        mockViewModel.rowViewModel(at: 0)?.name)
@@ -51,7 +58,8 @@ extension WidgetFileWritingTests {
         guard
             let documentsDirContent = try? FileManager.default.contentsOfDirectory(
                 at: documentsDir,
-                includingPropertiesForKeys: nil)
+                includingPropertiesForKeys: nil
+            )
         else { return }
 
         for file in documentsDirContent {

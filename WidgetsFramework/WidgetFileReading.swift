@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol WidgetFileReading {
-    func readApplicationDataContainer() -> WidgetViewModel?
+    func read() -> WidgetViewModel?
     func readStaticPreview() -> WidgetViewModel
 }
 
@@ -20,7 +20,7 @@ public class WidgetFileReader: WidgetFileReading {
         return viewModel
     }
     
-    public func readApplicationDataContainer() -> WidgetViewModel? {
+    public func read() -> WidgetViewModel? {
         guard
             let documentsDirectory = FileManager.default.urls(
                 for: .documentDirectory,

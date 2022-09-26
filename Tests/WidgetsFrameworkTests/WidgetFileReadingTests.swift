@@ -31,7 +31,7 @@ class WidgetFileReadingTests: XCTestCase {
         XCTAssertNotNil(widgetPreview)
     }
 
-    func test_readApplicationDataContainer_nil() {
-        XCTAssertNil(sut.readApplicationDataContainer())
+    func test_read_nil() {
+        XCTAssertNil(sut.read())
     }
 }
