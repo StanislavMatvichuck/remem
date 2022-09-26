@@ -11,14 +11,9 @@ import WidgetsFramework
 struct Provider: TimelineProvider {
     private let repository: WidgetFileReading
 
-    init(repository: WidgetFileReading) {
-        self.repository = repository
-    }
+    init(repository: WidgetFileReading) { self.repository = repository }
 
-    //
     // TimelineProvider
-    //
-
     typealias Entry = WidgetViewModel
 
     func placeholder(in context: Context) -> WidgetViewModel {

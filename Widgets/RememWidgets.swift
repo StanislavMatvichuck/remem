@@ -5,13 +5,19 @@
 //  Created by Stanislav Matvichuck on 07.09.2022.
 //
 
-import WidgetsFramework
 import SwiftUI
 import WidgetKit
+import WidgetsFramework
 
 @main
 struct RememWidgets: Widget, PreviewProvider {
     let kind: String = "RememWidgets"
+    let provider: Provider
+
+    init() {
+        let repository = WidgetFileReader()
+        self.provider = Provider(repository: repository)
+    }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: provider) { entry in
@@ -22,24 +28,10 @@ struct RememWidgets: Widget, PreviewProvider {
         .supportedFamilies([.systemMedium])
     }
 
-    //
-    //
-    //
-
-    let provider: Provider
-
-    init() {
-        let repository = WidgetFileReader()
-        self.provider = Provider(repository: repository)
-    }
-
-    //
     // PreviewProvider
-    //
-
     static var previews: some View {
-        let widgetViewModel = WidgetViewModel(date: Date.now, viewModel: [])
-        EventsListView(viewModel: widgetViewModel)
+        let reader = WidgetFileReader()
+        EventsListView(viewModel: reader.readStaticPreview())
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

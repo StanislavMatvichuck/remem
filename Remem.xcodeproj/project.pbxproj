@@ -62,6 +62,7 @@
 		0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
+		0895FB6028E23C66006716F4 /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		089699F128E1C53300E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		089699F428E1D3E400E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
@@ -360,6 +361,7 @@
 		088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileReading.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
+		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
 		0898F52728E212B9006745B6 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
@@ -717,6 +719,7 @@
 				0889669728D88A8E0075A51D /* WidgetFileWriting.swift */,
 				088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */,
 				0889669528D88A080075A51D /* WidgetViewModel.swift */,
+				0895FB5F28E23C66006716F4 /* WidgetDescription.swift */,
 			);
 			path = WidgetsFramework;
 			sourceTree = "<group>";
@@ -1360,6 +1363,7 @@
 			files = (
 				08B3572628E06AD500770B9A /* WidgetViewModel.swift in Sources */,
 				08B3572528E06AD500770B9A /* WidgetFileReading.swift in Sources */,
+				0895FB6028E23C66006716F4 /* WidgetDescription.swift in Sources */,
 				08B3572728E06B1100770B9A /* WidgetFileWriting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

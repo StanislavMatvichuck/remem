@@ -32,6 +32,6 @@ class WidgetFileReadingTests: XCTestCase {
     }
 
     func test_read_nil() {
-        XCTAssertNil(sut.read())
+        XCTAssertNil(sut.read(for: .test))
     }
 }

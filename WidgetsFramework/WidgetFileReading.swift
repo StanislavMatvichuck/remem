@@ -8,11 +8,13 @@
 import Foundation
 
 public protocol WidgetFileReading {
-    func read() -> WidgetViewModel?
+    func read(for: WidgetDescription) -> WidgetViewModel?
     func readStaticPreview() -> WidgetViewModel
 }
 
 public class WidgetFileReader: WidgetFileReading {
+    public init() {}
+    
     public func readStaticPreview() -> WidgetViewModel {
         let localURL = Bundle(for: Self.self).url(forResource: "WidgetPreview", withExtension: "plist")!
         let fileContent = try! Data(contentsOf: localURL)
@@ -20,12 +22,15 @@ public class WidgetFileReader: WidgetFileReading {
         return viewModel
     }
     
-    public func read() -> WidgetViewModel? {
+    public func read(for description: WidgetDescription) -> WidgetViewModel? {
         guard
-            let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
+            let directoryURL = FileManager.default.containerURL(
+                forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return nil }
         
-        let fileURL = documentsDirectory.appendingPathComponent("WidgetData.plist")
+        let fileName = description.rawValue
+        let filePath = fileName + ".plist"
+        let fileURL = directoryURL.appendingPathComponent(filePath)
         
         guard let fileContent = try? Data(contentsOf: fileURL) else { return nil }
         
@@ -35,6 +40,4 @@ public class WidgetFileReader: WidgetFileReading {
         
         return viewModel
     }
-
-    public init() {}
 }

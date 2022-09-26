@@ -44,7 +44,7 @@ class WidgetFileWritingTests: XCTestCase {
         sut.update(eventsList: [Event(name: "Event name")])
 
         // then
-        let fileDecodedViewModel = reader.read()
+        let fileDecodedViewModel = reader.read(for: .test)
         XCTAssertEqual(fileDecodedViewModel?.count, mockViewModel.count)
         XCTAssertEqual(fileDecodedViewModel?.rowViewModel(at: 0)?.name,
                        mockViewModel.rowViewModel(at: 0)?.name)
