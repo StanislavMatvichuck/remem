@@ -11,7 +11,7 @@
 			<string>0</string>
 			<key>hasGoal</key>
 			<false/>
-			<key>goalAchieved</key>
+			<key>goalReached</key>
 			<false/>
 		</dict>
 		<dict>
@@ -21,7 +21,7 @@
 			<string>1/2</string>
 			<key>hasGoal</key>
 			<true/>
-			<key>goalAchieved</key>
+			<key>goalReached</key>
 			<false/>
 		</dict>
 	</array>

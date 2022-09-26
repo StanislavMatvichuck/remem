@@ -36,7 +36,6 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
-		085888E428DC8040004A8184 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085888E328DC8040004A8184 /* WidgetPreview.plist */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -49,6 +48,7 @@
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
 		08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
+		086937FD28E1B1E5000F5A56 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085888E328DC8040004A8184 /* WidgetPreview.plist */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
@@ -327,7 +327,7 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
-		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = Widgets/Resources/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
+		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -585,7 +585,6 @@
 			isa = PBXGroup;
 			children = (
 				0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */,
-				085888E328DC8040004A8184 /* WidgetPreview.plist */,
 				0826AC9A28C86ECF0021D607 /* Info.plist */,
 				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
 			);
@@ -706,6 +705,7 @@
 		08B356FC28E06A7B00770B9A /* WidgetsFramework */ = {
 			isa = PBXGroup;
 			children = (
+				085888E328DC8040004A8184 /* WidgetPreview.plist */,
 				0889669728D88A8E0075A51D /* WidgetFileWriting.swift */,
 				088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */,
 				0889669528D88A080075A51D /* WidgetViewModel.swift */,
@@ -746,10 +746,10 @@
 				083BECF228D0A31A009157FD /* Domain */,
 				080A679628D1E44C00889A97 /* IosUseCases */,
 				08D5121C27870D2500C2037F /* Application */,
+				08B356FC28E06A7B00770B9A /* WidgetsFramework */,
 				0826AC9528C86ECE0021D607 /* Widgets */,
 				0867A2CA28D469F400E0842C /* DataLayer */,
 				08FEA39E28DC9A4000BAA196 /* Tests */,
-				08B356FC28E06A7B00770B9A /* WidgetsFramework */,
 				08D5121B27870D2500C2037F /* Products */,
 				0826AC9028C86ECE0021D607 /* Frameworks */,
 			);
@@ -1204,7 +1204,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */,
-				085888E428DC8040004A8184 /* WidgetPreview.plist in Resources */,
 				0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1241,6 +1240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086937FD28E1B1E5000F5A56 /* WidgetPreview.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

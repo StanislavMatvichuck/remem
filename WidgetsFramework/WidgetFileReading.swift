@@ -9,6 +9,7 @@ import Foundation
 
 public protocol WidgetFileReading {
     func read(url: URL) throws -> WidgetViewModel
+    func readStaticPreview() -> WidgetViewModel
 }
 
 public class WidgetFileReader: WidgetFileReading {
@@ -24,6 +25,13 @@ public class WidgetFileReader: WidgetFileReading {
 //                let loadedFriends = (try? decoder.decode([Friend].self, from: codeData)) ?? [Friend]()
 //
 //                return loadedFriends
+    }
+    
+    public func readStaticPreview() -> WidgetViewModel {
+        let localURL = Bundle(for: Self.self).url(forResource: "WidgetPreview", withExtension: "plist")!
+        let fileContent = try! Data(contentsOf: localURL)
+        let viewModel = try! PropertyListDecoder().decode(WidgetViewModel.self, from: fileContent)
+        return viewModel
     }
 
     public init() {}
