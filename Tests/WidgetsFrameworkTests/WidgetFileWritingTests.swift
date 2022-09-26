@@ -19,7 +19,7 @@ class WidgetFileWritingTests: XCTestCase {
 
     override func tearDown() {
         sut = nil
-        clearDocumentsDirectory()
+        try? removeFileFromDirectory()
         super.tearDown()
     }
 
@@ -52,18 +52,12 @@ class WidgetFileWritingTests: XCTestCase {
 }
 
 extension WidgetFileWritingTests {
-    private func clearDocumentsDirectory() {
-        let documentsDir = FileManager.default.urls(for: .documentDirectory,
-                                                    in: .userDomainMask).first!
-        guard
-            let documentsDirContent = try? FileManager.default.contentsOfDirectory(
-                at: documentsDir,
-                includingPropertiesForKeys: nil
-            )
+    private func removeFileFromDirectory() throws {
+        guard let documentsDir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return }
+        
+        let fileURL = documentsDir.appendingPathComponent("WidgetData.plist")
 
-        for file in documentsDirContent {
-            try? FileManager.default.removeItem(at: file)
-        }
+        try FileManager.default.removeItem(at: fileURL)
     }
 }

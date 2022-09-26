@@ -17,9 +17,7 @@ public class WidgetFileWriter: WidgetFileWriting {
 
     public func update(eventsList: [Event]) {
         guard
-            let documentsDirectory = FileManager.default.urls(
-                for: .documentDirectory,
-                in: .userDomainMask).first
+            let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return }
 
         let fileURL = documentsDirectory.appendingPathComponent("WidgetData.plist")

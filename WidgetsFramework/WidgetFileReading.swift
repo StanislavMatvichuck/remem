@@ -22,9 +22,7 @@ public class WidgetFileReader: WidgetFileReading {
     
     public func read() -> WidgetViewModel? {
         guard
-            let documentsDirectory = FileManager.default.urls(
-                for: .documentDirectory,
-                in: .userDomainMask).first
+            let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return nil }
         
         let fileURL = documentsDirectory.appendingPathComponent("WidgetData.plist")
