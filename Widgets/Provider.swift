@@ -5,16 +5,14 @@
 //  Created by Stanislav Matvichuck on 07.09.2022.
 //
 
-import WidgetsFramework
 import WidgetKit
+import WidgetsFramework
 
 struct Provider: TimelineProvider {
     private let repository: WidgetFileReading
-    private let viewModel: WidgetViewModel
 
     init(repository: WidgetFileReading) {
         self.repository = repository
-        self.viewModel = WidgetViewModel(date: .now, viewModel: [])
     }
 
     //
@@ -24,11 +22,11 @@ struct Provider: TimelineProvider {
     typealias Entry = WidgetViewModel
 
     func placeholder(in context: Context) -> WidgetViewModel {
-        viewModel
+        repository.readStaticPreview()
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetViewModel) -> ()) {
-        completion(viewModel)
+        completion(repository.readStaticPreview())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -38,7 +36,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = WidgetViewModel(date: entryDate, viewModel: [])
+            let entry = repository.readStaticPreview()
             entries.append(entry)
         }
 
