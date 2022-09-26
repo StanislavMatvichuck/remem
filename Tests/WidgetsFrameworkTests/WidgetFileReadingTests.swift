@@ -1,6 +1,6 @@
 //
 //  WidgetFileReadingTests.swift
-//  ApplicationTests
+//  WidgetsFrameworkTests
 //
 //  Created by Stanislav Matvichuck on 23.09.2022.
 //
@@ -29,5 +29,9 @@ class WidgetFileReadingTests: XCTestCase {
         let widgetPreview = sut.readStaticPreview()
 
         XCTAssertNotNil(widgetPreview)
+    }
+
+    func test_readApplicationDataContainer_nil() {
+        XCTAssertNil(sut.readApplicationDataContainer())
     }
 }

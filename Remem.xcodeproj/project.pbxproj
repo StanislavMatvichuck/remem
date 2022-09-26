@@ -62,7 +62,11 @@
 		0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
+		089699F128E1C53300E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
+		089699F428E1D3E400E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
+		0898F52828E212B9006745B6 /* ApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F52728E212B9006745B6 /* ApplicationTests.swift */; };
+		0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F52928E212DC006745B6 /* IosUseCasesTests.swift */; };
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
@@ -76,7 +80,6 @@
 		08B3572728E06B1100770B9A /* WidgetFileWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669728D88A8E0075A51D /* WidgetFileWriting.swift */; };
 		08B3572828E06BB100770B9A /* WidgetsFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B356FB28E06A7B00770B9A /* WidgetsFramework.framework */; };
 		08B3572928E06BB100770B9A /* WidgetsFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08B356FB28E06A7B00770B9A /* WidgetsFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08B3572D28E06C0400770B9A /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08B3573228E06D8000770B9A /* WidgetFileReadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B356F028DDEC0900770B9A /* WidgetFileReadingTests.swift */; };
 		08B3573328E06D8000770B9A /* WidgetFileWritingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */; };
@@ -191,6 +194,13 @@
 			remoteGlobalIDString = 080A679428D1E44C00889A97;
 			remoteInfo = IOSInterfaceAdapters;
 		};
+		089699F228E1C53300E90432 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08D5121227870D2500C2037F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 083BECF028D0A319009157FD;
+			remoteInfo = Domain;
+		};
 		08B3570428E06A7B00770B9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -218,13 +228,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 08B356FA28E06A7B00770B9A;
 			remoteInfo = WidgetsFramework;
-		};
-		08B3572E28E06C0400770B9A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 083BECF028D0A319009157FD;
-			remoteInfo = Domain;
 		};
 		08FEA38C28DC94F600BAA196 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -359,6 +362,8 @@
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
+		0898F52728E212B9006745B6 /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
+		0898F52928E212DC006745B6 /* IosUseCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosUseCasesTests.swift; sourceTree = "<group>"; };
 		08A19D282890125B0085DC6F /* EventsListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFooterCell.swift; sourceTree = "<group>"; };
 		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
 		08AC4A0E28C5F35300294C59 /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
@@ -471,7 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08B3572D28E06C0400770B9A /* libDomain.a in Frameworks */,
+				089699F128E1C53300E90432 /* libDomain.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +484,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089699F428E1D3E400E90432 /* libDomain.a in Frameworks */,
 				08B3570328E06A7B00770B9A /* WidgetsFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +527,7 @@
 		080A67A228D1E46800889A97 /* IosUseCasesTests */ = {
 			isa = PBXGroup;
 			children = (
+				0898F52928E212DC006745B6 /* IosUseCasesTests.swift */,
 			);
 			path = IosUseCasesTests;
 			sourceTree = "<group>";
@@ -663,6 +670,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				0898F52728E212B9006745B6 /* ApplicationTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -1063,7 +1071,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				08B3572F28E06C0400770B9A /* PBXTargetDependency */,
+				089699F328E1C53300E90432 /* PBXTargetDependency */,
 			);
 			name = WidgetsFramework;
 			productName = WidgetsFramework;
@@ -1144,6 +1152,7 @@
 					};
 					0870EEF72809B81100336759 = {
 						CreatedOnToolsVersion = 13.3;
+						LastSwiftMigration = 1400;
 						TestTargetID = 08D5121927870D2500C2037F;
 					};
 					087ED41928D0A54C0085A37D = {
@@ -1331,6 +1340,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0898F52828E212B9006745B6 /* ApplicationTests.swift in Sources */,
+				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,6 +1490,11 @@
 			target = 080A679428D1E44C00889A97 /* IosUseCases */;
 			targetProxy = 0889669D28D8992A0075A51D /* PBXContainerItemProxy */;
 		};
+		089699F328E1C53300E90432 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 083BECF028D0A319009157FD /* Domain */;
+			targetProxy = 089699F228E1C53300E90432 /* PBXContainerItemProxy */;
+		};
 		08B3570528E06A7B00770B9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 08B356FA28E06A7B00770B9A /* WidgetsFramework */;
@@ -1498,11 +1514,6 @@
 			isa = PBXTargetDependency;
 			target = 08B356FA28E06A7B00770B9A /* WidgetsFramework */;
 			targetProxy = 08B3572A28E06BB100770B9A /* PBXContainerItemProxy */;
-		};
-		08B3572F28E06C0400770B9A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 083BECF028D0A319009157FD /* Domain */;
-			targetProxy = 08B3572E28E06C0400770B9A /* PBXContainerItemProxy */;
 		};
 		08FEA38D28DC94F600BAA196 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2016,15 +2027,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
@@ -2035,15 +2053,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
@@ -2054,11 +2079,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
