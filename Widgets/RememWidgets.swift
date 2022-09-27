@@ -21,7 +21,7 @@ struct RememWidgets: Widget, PreviewProvider {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: provider) { entry in
-            EventsListView(viewModel: entry)
+            MediumWidgetView(viewModel: entry)
         }
         .configurationDisplayName("Today goals")
         .description("A list of events with defined goals")
@@ -31,7 +31,7 @@ struct RememWidgets: Widget, PreviewProvider {
     // PreviewProvider
     static var previews: some View {
         let reader = WidgetFileReader()
-        EventsListView(viewModel: reader.readStaticPreview())
+        MediumWidgetView(viewModel: reader.readStaticPreview())
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

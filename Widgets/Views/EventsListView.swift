@@ -1,12 +1,11 @@
 //
-//  MediumView.swift
-//  Remem
+//  EventsListView.swift
+//  Widgets
 //
-//  Created by Stanislav Matvichuck on 07.09.2022.
+//  Created by Stanislav Matvichuck on 27.09.2022.
 //
 
 import SwiftUI
-import WidgetKit
 import WidgetsFramework
 
 struct EventRow: Identifiable {
@@ -15,17 +14,13 @@ struct EventRow: Identifiable {
 }
 
 struct EventsListView: View {
-    var viewModel: WidgetViewModel
+    private let viewModel: WidgetViewModel
+
+    init(_ viewModel: WidgetViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
-        if viewModel.count == 0 {
-            ZStack(alignment: .center, content: {
-                Color(UIHelper.itemBackground).ignoresSafeArea()
-                Text("Add event to track")
-                    .padding()
-            })
-        }
-
         let eventsRows = eventsRows()
 
         ZStack(alignment: .center, content: {
