@@ -41,7 +41,7 @@ class WidgetFileWritingTests: XCTestCase {
         )
 
         // when
-        sut.update(eventsList: [Event(name: "Event name")])
+        sut.update(eventsList: [Event(name: "Event name")], for: .test)
 
         // then
         let fileDecodedViewModel = reader.read(for: .test)
@@ -55,7 +55,7 @@ extension WidgetFileWritingTests {
     private func removeFileFromDirectory() throws {
         guard let documentsDir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return }
-        
+
         let fileURL = documentsDir.appendingPathComponent("WidgetData.plist")
 
         try FileManager.default.removeItem(at: fileURL)

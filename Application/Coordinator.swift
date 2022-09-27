@@ -5,14 +5,15 @@
 //  Created by Stanislav Matvichuck on 28.07.2022.
 //
 
-import IosUseCases
 import Domain
+import IosUseCases
 import UIKit
 
 class Coordinator: NSObject, Coordinating {
     // MARK: - Properties
     weak var applicationFactory: ApplicationFactory?
     var detailsFactory: EventDetailsFactoring?
+    var widgetUseCase: WidgetsUseCasing?
 
     let navController: UINavigationController
     private let listDelegates: MulticastDelegate<EventsListUseCaseDelegate>
@@ -21,11 +22,13 @@ class Coordinator: NSObject, Coordinating {
     // MARK: - Init
     init(navController: UINavigationController,
          eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
-         eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>)
+         eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>,
+         widgetsUseCase: WidgetsUseCasing)
     {
         self.navController = navController
         self.listDelegates = eventsListMulticastDelegate
         self.editDelegates = eventEditMulticastDelegate
+        self.widgetUseCase = widgetsUseCase
         super.init()
     }
 }
@@ -66,12 +69,39 @@ extension Coordinator {
 /// distributes domain events across all viewModels
 extension Coordinator: EventsListUseCaseDelegate, EventEditUseCaseDelegate {
     // EventsListUseCaseDelegate
-    func added(event: Event) { listDelegates.call { $0.added(event: event) } }
-    func removed(event: Event) { listDelegates.call { $0.removed(event: event) } }
+    func added(event: Event) {
+        listDelegates.call { $0.added(event: event) }
+        widgetUseCase?.update()
+    }
+
+    func removed(event: Event) {
+        listDelegates.call { $0.removed(event: event) }
+        widgetUseCase?.update()
+    }
+
     // EventEditUseCaseDelegate
-    func added(happening: Happening, to: Event) { editDelegates.call { $0.added(happening: happening, to: to) } }
-    func removed(happening: Happening, from: Event) { editDelegates.call { $0.removed(happening: happening, from: from) }}
-    func renamed(event: Event) { editDelegates.call { $0.renamed(event: event) } }
-    func visited(event: Event) { editDelegates.call { $0.visited(event: event) }}
-    func added(goal: Goal, to: Event) { editDelegates.call { $0.added(goal: goal, to: to) } }
+    func added(happening: Happening, to: Event) {
+        editDelegates.call { $0.added(happening: happening, to: to) }
+        widgetUseCase?.update()
+    }
+
+    func removed(happening: Happening, from: Event) {
+        editDelegates.call { $0.removed(happening: happening, from: from) }
+        widgetUseCase?.update()
+    }
+
+    func renamed(event: Event) {
+        editDelegates.call { $0.renamed(event: event) }
+        widgetUseCase?.update()
+    }
+
+    func visited(event: Event) {
+        editDelegates.call { $0.visited(event: event) }
+        widgetUseCase?.update()
+    }
+
+    func added(goal: Goal, to: Event) {
+        editDelegates.call { $0.added(goal: goal, to: to) }
+        widgetUseCase?.update()
+    }
 }

@@ -22,6 +22,7 @@ class ApplicationFactory {
     init() {
         func makeCoordinator(listUseCase: EventsListUseCase,
                              editUseCase: EventEditUseCase,
+                             widgetsUseCase: WidgetsUseCasing,
                              eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
                              eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>) -> Coordinator
         {
@@ -29,7 +30,8 @@ class ApplicationFactory {
             navController.navigationBar.prefersLargeTitles = true
             let coordinator = Coordinator(navController: navController,
                                           eventsListMulticastDelegate: eventsListMulticastDelegate,
-                                          eventEditMulticastDelegate: eventEditMulticastDelegate)
+                                          eventEditMulticastDelegate: eventEditMulticastDelegate,
+                                          widgetsUseCase: widgetsUseCase)
             listUseCase.delegate = coordinator
             editUseCase.delegate = coordinator
             return coordinator
@@ -45,12 +47,14 @@ class ApplicationFactory {
 
         let listUseCase = EventsListUseCase(repository: repository)
         let editUseCase = EventEditUseCase(repository: repository)
+        let widgetsUseCase = WidgetsUseCase(repository: repository)
 
         let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseDelegate>()
         let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseDelegate>()
 
         let coordinator = makeCoordinator(listUseCase: listUseCase,
                                           editUseCase: editUseCase,
+                                          widgetsUseCase: widgetsUseCase,
                                           eventsListMulticastDelegate: eventsListMulticastDelegate,
                                           eventEditMulticastDelegate: eventEditMulticastDelegate)
 

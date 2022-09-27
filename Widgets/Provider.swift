@@ -9,33 +9,28 @@ import WidgetKit
 import WidgetsFramework
 
 struct Provider: TimelineProvider {
-    private let repository: WidgetFileReading
+    private let fileReader: WidgetFileReading
 
-    init(repository: WidgetFileReading) { self.repository = repository }
+    init(repository: WidgetFileReading) { self.fileReader = repository }
 
     // TimelineProvider
     typealias Entry = WidgetViewModel
 
     func placeholder(in context: Context) -> WidgetViewModel {
-        repository.readStaticPreview()
+        fileReader.readStaticPreview()
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WidgetViewModel) -> ()) {
-        completion(repository.readStaticPreview())
+        completion(fileReader.readStaticPreview())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [WidgetViewModel] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = repository.readStaticPreview()
-            entries.append(entry)
-        }
+        if let entry = fileReader.read(for: .medium) { entries.append(entry) }
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: entries, policy: .never)
+
         completion(timeline)
     }
 }

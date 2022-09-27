@@ -9,18 +9,21 @@ import Domain
 import Foundation
 
 public protocol WidgetFileWriting {
-    func update(eventsList: [Event])
+    func update(eventsList: [Event], for: WidgetDescription)
 }
 
 public class WidgetFileWriter: WidgetFileWriting {
     public init() {}
 
-    public func update(eventsList: [Event]) {
+    public func update(eventsList: [Event], for description: WidgetDescription) {
         guard
-            let documentsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
+            let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return }
 
-        let fileURL = documentsDirectory.appendingPathComponent("WidgetData.plist")
+        let fileName = description.rawValue
+        let filePath = fileName + ".plist"
+        let fileURL = directory.appendingPathComponent(filePath)
+
         let encoder = PropertyListEncoder()
 
         let widgetEventRows: [WidgetRowViewModel] = {
