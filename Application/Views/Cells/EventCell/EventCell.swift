@@ -42,6 +42,7 @@ class EventCell: UITableViewCell {
         label.textColor = UIHelper.itemFont
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
+        label.numberOfLines = 3
         return label
     }()
 

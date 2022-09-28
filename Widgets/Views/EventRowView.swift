@@ -28,16 +28,21 @@ struct EventRowView: View {
 
             ZStack {
                 backgroundColor.clipShape(Capsule())
-                ZStack {
+                HStack {
+                    Color(.clear)
+                        .aspectRatio(1.0, contentMode: .fit)
+                    Spacer(minLength: 0)
                     Text(viewModel.name)
                         .font(Font(uiFont: UIHelper.fontSmall))
                         .foregroundColor(Color(UIHelper.itemFont))
-                    HStack {
-                        Spacer()
+                    Spacer(minLength: 0)
+                    ZStack {
+                        Color(.clear)
+                            .aspectRatio(1.0, contentMode: .fit)
                         Text(viewModel.amount)
                             .font(Font(uiFont: UIHelper.fontSmall))
                             .foregroundColor(Color(UIHelper.itemFont))
-                    }.padding(.trailing)
+                    }.aspectRatio(1.0, contentMode: .fit)
                 }
             }
         } else {
