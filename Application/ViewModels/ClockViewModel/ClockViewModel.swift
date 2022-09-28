@@ -38,7 +38,7 @@ public class ClockViewModel: ClockViewModeling {
     }
 }
 
-extension ClockViewModel: EventEditUseCaseDelegate {
+extension ClockViewModel: EventEditUseCasingDelegate {
     public func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()

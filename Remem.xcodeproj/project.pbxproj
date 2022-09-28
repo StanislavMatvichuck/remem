@@ -38,6 +38,7 @@
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
 		0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */; };
 		0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */; };
+		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -91,7 +92,6 @@
 		08B89A2828E3191A00F4B63B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2728E3191A00F4B63B /* EmptyView.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsListView.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */; };
-		08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EventsListController.swift */; };
@@ -532,6 +532,7 @@
 		080A679628D1E44C00889A97 /* IosUseCases */ = {
 			isa = PBXGroup;
 			children = (
+				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
 				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
 				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
 				08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */,
@@ -871,7 +872,6 @@
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
 				08E620832787406400BBABFD /* Metrics.swift */,
-				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
 				08AA964728E2FF58005BF90A /* WidgetUseCase.swift */,
 			);
 			path = Helpers;
@@ -1315,6 +1315,7 @@
 				0889669228D8899D0075A51D /* EventsRepository.swift in Sources */,
 				0895FB6228E24623006716F4 /* WidgetsUseCase.swift in Sources */,
 				080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */,
+				0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,7 +1451,6 @@
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				08FEA39728DC98A600BAA196 /* Coordinating.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,
-				08CCF4F1289FDBF1003576B8 /* MulticastDelegate.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08D8BCD528A90CFF00A50664 /* GoalsInputController.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,

@@ -5,8 +5,8 @@
 //  Created by Stanislav Matvichuck on 31.08.2022.
 //
 
-import IosUseCases
 import Domain
+import IosUseCases
 import UIKit
 
 protocol EventDetailsFactoring: AnyObject {
@@ -19,7 +19,7 @@ class EventDetailsFactory: EventDetailsFactoring {
     // MARK: - Properties
     let event: Event
     let applicationFactory: ApplicationFactory
-    let goalEditUseCase: GoalEditUseCase
+    let goalEditUseCase: GoalEditUseCasing
     var goalInputSourceView: UIView?
     // MARK: - Init
     init(applicationFactory: ApplicationFactory, event: Event) {
@@ -47,7 +47,7 @@ class EventDetailsFactory: EventDetailsFactoring {
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel {
         let viewModel = EventDetailsViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
-        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventEditUseCase.add(delegate: viewModel)
         viewModel.coordinator = applicationFactory.coordinator
         return viewModel
     }

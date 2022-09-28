@@ -89,8 +89,8 @@ extension WeekSummaryViewModel {
     }
 }
 
-// MARK: - EventEditUseCaseDelegate
-extension WeekSummaryViewModel: EventEditUseCaseDelegate {
+// MARK: - EventEditUseCasingDelegate
+extension WeekSummaryViewModel: EventEditUseCasingDelegate {
     public func added(happening: Happening, to: Event) {
         event = to
         delegate?.updateTotalAmount()

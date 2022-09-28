@@ -5,19 +5,19 @@
 //  Created by Stanislav Matvichuck on 05.09.2022.
 //
 
-import IosUseCases
 import Domain
+import IosUseCases
 import UIKit
 
 class GoalsInputFactory {
     // MARK: - Properties
     let applicationFactory: ApplicationFactory
-    let goalEditUseCase: GoalEditUseCase
+    let goalEditUseCase: GoalEditUseCasing
     let sourceView: UIView?
     let event: Event
     // MARK: - Init
     init(applicationFactory: ApplicationFactory,
-         goalEditUseCase: GoalEditUseCase,
+         goalEditUseCase: GoalEditUseCasing,
          sourceView: UIView?,
          event: Event)
     {

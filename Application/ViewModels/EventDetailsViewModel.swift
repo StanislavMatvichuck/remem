@@ -71,7 +71,7 @@ public class EventDetailsViewModel: EventDetailsViewModeling {
     }
 }
 
-extension EventDetailsViewModel: EventEditUseCaseDelegate {
+extension EventDetailsViewModel: EventEditUseCasingDelegate {
     public func added(happening: Happening, to: Event) {
         delegate?.update()
     }

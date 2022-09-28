@@ -5,9 +5,9 @@
 //  Created by Stanislav Matvichuck on 04.09.2022.
 //
 
+import Domain
 import Foundation
 import IosUseCases
-import Domain
 
 class ClockFactory {
     // MARK: - Properties
@@ -29,7 +29,7 @@ class ClockFactory {
 
     private func makeClockViewModel() -> ClockViewModel {
         let viewModel = ClockViewModel(event: event)
-        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventEditUseCase.add(delegate: viewModel)
         return viewModel
     }
 

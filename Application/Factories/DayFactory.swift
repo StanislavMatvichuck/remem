@@ -5,9 +5,9 @@
 //  Created by Stanislav Matvichuck on 02.09.2022.
 //
 
+import Domain
 import Foundation
 import IosUseCases
-import Domain
 
 class DayFactory {
     // MARK: - Properties
@@ -41,7 +41,7 @@ class DayFactory {
         let viewModel = DayViewModel(date: date,
                                      event: event,
                                      editUseCase: applicationFactory.eventEditUseCase)
-        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventEditUseCase.add(delegate: viewModel)
         return viewModel
     }
 }

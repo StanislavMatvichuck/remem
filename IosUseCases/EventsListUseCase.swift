@@ -12,15 +12,23 @@ public protocol EventsListUseCasing {
     func allEvents() -> [Event]
     func add(name: String)
     func remove(_: Event)
+
+    func add(delegate: EventsListUseCasingDelegate)
+    func remove(delegate: EventsListUseCasingDelegate)
 }
 
 public class EventsListUseCase: EventsListUseCasing {
     // MARK: - Properties
-    public weak var delegate: EventsListUseCaseDelegate?
     private var repository: EventsRepositoryInterface
+    private var delegates: MulticastDelegate<EventsListUseCasingDelegate>
+    private let widgetUseCase: WidgetsUseCasing
     // MARK: - Init
-    public init(repository: EventsRepositoryInterface) {
+    public init(repository: EventsRepositoryInterface,
+                widgetUseCase: WidgetsUseCasing)
+    {
         self.repository = repository
+        self.widgetUseCase = widgetUseCase
+        self.delegates = MulticastDelegate<EventsListUseCasingDelegate>()
     }
 
     // EventsListUseCasing
@@ -31,16 +39,21 @@ public class EventsListUseCase: EventsListUseCasing {
         repository.save(newEvent)
 
         guard let addedEvent = repository.event(byId: newEvent.id) else { return }
-        delegate?.added(event: addedEvent)
+        delegates.call { $0.added(event: addedEvent) }
+        widgetUseCase.update()
     }
 
     public func remove(_ event: Event) {
         repository.delete(event)
-        delegate?.removed(event: event)
+        delegates.call { $0.removed(event: event) }
+        widgetUseCase.update()
     }
+
+    public func add(delegate: EventsListUseCasingDelegate) { delegates.addDelegate(delegate) }
+    public func remove(delegate: EventsListUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }
 
-public protocol EventsListUseCaseDelegate: AnyObject {
+public protocol EventsListUseCasingDelegate: AnyObject {
     func added(event: Event)
     func removed(event: Event)
 }

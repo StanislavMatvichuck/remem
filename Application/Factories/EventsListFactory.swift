@@ -33,8 +33,8 @@ class EventsListFactory: EventsListFactoryInterface {
         let viewModel = EventsListViewModel(listUseCase: applicationFactory.eventsListUseCase,
                                             editUseCase: applicationFactory.eventEditUseCase,
                                             factory: self)
-        applicationFactory.eventsListMulticastDelegate.addDelegate(viewModel)
-        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventsListUseCase.add(delegate: viewModel)
+        applicationFactory.eventEditUseCase.add(delegate: viewModel)
         viewModel.coordinator = applicationFactory.coordinator
         return viewModel
     }
@@ -42,7 +42,7 @@ class EventsListFactory: EventsListFactoryInterface {
     // EventsListFactoryInterface
     func makeEventCellViewModel(event: Event) -> EventCellViewModel {
         let viewModel = EventCellViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
-        applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
+        applicationFactory.eventEditUseCase.add(delegate: viewModel)
         viewModel.coordinator = applicationFactory.coordinator
         return viewModel
     }

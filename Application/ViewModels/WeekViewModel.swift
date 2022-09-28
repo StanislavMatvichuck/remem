@@ -9,37 +9,35 @@ import Domain
 import Foundation
 import IosUseCases
 
-public protocol WeekViewModeling:
+protocol WeekViewModeling:
     WeekViewModelState &
     WeekViewModelEvents {}
 
-public protocol WeekViewModelState {
+protocol WeekViewModelState {
     func cellViewModel(at: Int) -> WeekCellViewModel?
     var count: Int { get }
 }
 
-public protocol WeekViewModelEvents {}
+protocol WeekViewModelEvents {}
 
-public protocol WeekFactoryInterface: AnyObject {
+protocol WeekFactoryInterface: AnyObject {
     func makeWeekCellViewModel(date: Date) -> WeekCellViewModel
 }
 
-public class WeekViewModel: WeekViewModeling {
-    public static let shownDaysForward = 14
+class WeekViewModel: WeekViewModeling {
+    static let shownDaysForward = 14
     // MARK: - Properties
-    public weak var delegate: WeekViewModelDelegate?
-    public weak var coordinator: Coordinating?
+    weak var delegate: WeekViewModelDelegate?
+    weak var coordinator: Coordinating?
 
     private var event: Event
     private let factory: WeekFactoryInterface
     private var weekCellViewModels: [WeekCellViewModel]
-    private let multicastDelegate: MulticastDelegate<GoalEditUseCaseDelegate>
     // MARK: - Init
-    public init(event: Event, factory: WeekFactoryInterface, multicastDelegate: MulticastDelegate<GoalEditUseCaseDelegate>) {
+    init(event: Event, factory: WeekFactoryInterface) {
         self.event = event
         self.factory = factory
         self.weekCellViewModels = makeWeekCellViewModels()
-        self.multicastDelegate = multicastDelegate
 
         func makeWeekCellViewModels() -> [WeekCellViewModel] {
             let from = event.dateCreated.startOfWeek!
@@ -65,49 +63,38 @@ public class WeekViewModel: WeekViewModeling {
     }
 
     // WeekViewModelState
-    public func cellViewModel(at index: Int) -> WeekCellViewModel? {
+    func cellViewModel(at index: Int) -> WeekCellViewModel? {
         guard index < weekCellViewModels.count, index >= 0 else { return nil }
         let date = weekCellViewModels[index].date
         let viewModel = factory.makeWeekCellViewModel(date: date)
-        multicastDelegate.addDelegate(viewModel)
         return viewModel
     }
 
-    public var count: Int { weekCellViewModels.count }
+    var count: Int { weekCellViewModels.count }
 }
 
-// MARK: - EventEditUseCaseDelegate
-extension WeekViewModel: EventEditUseCaseDelegate {
-    public func added(happening: Happening, to: Event) {
+// MARK: - EventEditUseCasingDelegate
+extension WeekViewModel: EventEditUseCasingDelegate {
+    func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()
     }
 
-    public func removed(happening: Happening, from: Event) {
+    func removed(happening: Happening, from: Event) {
         event = from
         delegate?.update()
     }
 
-    public func added(goal: Goal, to: Event) {
+    func added(goal: Goal, to: Event) {
         event = to
         delegate?.update()
     }
 
-    public func renamed(event: Event) {}
-    public func visited(event: Event) {}
+    func renamed(event: Event) {}
+    func visited(event: Event) {}
 }
 
-extension WeekViewModel: GoalEditUseCaseDelegate {
-    public func update(amount: Int, forDay: Domain.Goal.WeekDay) {
-        multicastDelegate.call { $0.update(amount: amount, forDay: forDay) }
-    }
-
-    public func dismiss() {
-        multicastDelegate.call { $0.dismiss() }
-    }
-}
-
-public protocol WeekViewModelDelegate: AnyObject {
+protocol WeekViewModelDelegate: AnyObject {
     func animate(at: IndexPath)
     func update()
 }

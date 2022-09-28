@@ -70,7 +70,7 @@ public class DayViewModel: DayViewModeling {
     }
 }
 
-extension DayViewModel: EventEditUseCaseDelegate {
+extension DayViewModel: EventEditUseCasingDelegate {
     public func added(happening: Happening, to: Event) {
         event = to
         delegate?.update()

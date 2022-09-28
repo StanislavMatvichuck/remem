@@ -13,27 +13,15 @@ import UIKit
 class ApplicationFactory {
     // MARK: - Long-lived dependencies
     let coordinator: Coordinator
-    let eventsListUseCase: EventsListUseCase
-    let eventEditUseCase: EventEditUseCase
-    let eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>
-    let eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>
-
+    let eventsListUseCase: EventsListUseCasing
+    let eventEditUseCase: EventEditUseCasing
     // MARK: - Init
     init() {
-        func makeCoordinator(listUseCase: EventsListUseCase,
-                             editUseCase: EventEditUseCase,
-                             widgetsUseCase: WidgetsUseCasing,
-                             eventsListMulticastDelegate: MulticastDelegate<EventsListUseCaseDelegate>,
-                             eventEditMulticastDelegate: MulticastDelegate<EventEditUseCaseDelegate>) -> Coordinator
-        {
+        func makeCoordinator(widgetsUseCase: WidgetsUseCasing) -> Coordinator {
             let navController = Self.makeStyledNavigationController()
             navController.navigationBar.prefersLargeTitles = true
             let coordinator = Coordinator(navController: navController,
-                                          eventsListMulticastDelegate: eventsListMulticastDelegate,
-                                          eventEditMulticastDelegate: eventEditMulticastDelegate,
                                           widgetsUseCase: widgetsUseCase)
-            listUseCase.delegate = coordinator
-            editUseCase.delegate = coordinator
             return coordinator
         }
 
@@ -44,24 +32,14 @@ class ApplicationFactory {
         }
 
         let repository = makeEventsRepository()
-
-        let listUseCase = EventsListUseCase(repository: repository)
-        let editUseCase = EventEditUseCase(repository: repository)
         let widgetsUseCase = WidgetsUseCase(repository: repository)
+        self.eventsListUseCase = EventsListUseCase(repository: repository,
+                                                   widgetUseCase: widgetsUseCase)
+        self.eventEditUseCase = EventEditUseCase(repository: repository,
+                                                 widgetUseCase: widgetsUseCase)
 
-        let eventsListMulticastDelegate = MulticastDelegate<EventsListUseCaseDelegate>()
-        let eventEditMulticastDelegate = MulticastDelegate<EventEditUseCaseDelegate>()
+        let coordinator = makeCoordinator(widgetsUseCase: widgetsUseCase)
 
-        let coordinator = makeCoordinator(listUseCase: listUseCase,
-                                          editUseCase: editUseCase,
-                                          widgetsUseCase: widgetsUseCase,
-                                          eventsListMulticastDelegate: eventsListMulticastDelegate,
-                                          eventEditMulticastDelegate: eventEditMulticastDelegate)
-
-        self.eventsListUseCase = listUseCase
-        self.eventEditUseCase = editUseCase
-        self.eventsListMulticastDelegate = eventsListMulticastDelegate
-        self.eventEditMulticastDelegate = eventEditMulticastDelegate
         self.coordinator = coordinator
 
         coordinator.applicationFactory = self

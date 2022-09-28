@@ -69,8 +69,8 @@ public class EventCellViewModel: EventCellViewModeling {
     public func swipe() { editUseCase.addHappening(to: event, date: .now) }
 }
 
-// MARK: - EventEditUseCaseDelegate
-extension EventCellViewModel: EventEditUseCaseDelegate {
+// MARK: - EventEditUseCasingDelegate
+extension EventCellViewModel: EventEditUseCasingDelegate {
     public func added(happening: Happening, to: Event) {
         guard event == to else { return }
         delegate?.addedHappening()

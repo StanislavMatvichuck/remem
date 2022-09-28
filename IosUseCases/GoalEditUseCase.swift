@@ -5,27 +5,30 @@
 //  Created by Stanislav Matvichuck on 05.09.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 
 public protocol GoalEditUseCasing {
     func submit()
     func cancel()
     func update(amount: Int, forDate: Date)
+
+    func add(delegate: GoalEditUseCasingDelegate)
+    func remove(delegate: GoalEditUseCasingDelegate)
 }
 
 public class GoalEditUseCase: GoalEditUseCasing {
     // MARK: - Properties
-
-    public weak var delegate: GoalEditUseCaseDelegate?
-    let event: Event
-    let eventEditUseCase: EventEditUseCasing
+    private let event: Event
+    private let eventEditUseCase: EventEditUseCasing
+    private let delegates: MulticastDelegate<GoalEditUseCasingDelegate>
 
     private var state = [Goal.WeekDay: (Int, Date)]()
     // MARK: - Init
     public init(event: Event, eventEditUseCase: EventEditUseCasing) {
         self.event = event
         self.eventEditUseCase = eventEditUseCase
+        self.delegates = MulticastDelegate<GoalEditUseCasingDelegate>()
     }
 
     public func submit() {
@@ -35,16 +38,19 @@ public class GoalEditUseCase: GoalEditUseCasing {
         }
     }
 
-    public func cancel() { delegate?.dismiss() }
+    public func cancel() { delegates.call { $0.dismiss() } }
 
     public func update(amount: Int, forDate: Date) {
         let weekday = Goal.WeekDay.make(forDate)
         state.updateValue((amount, forDate), forKey: weekday)
-        delegate?.update(amount: amount, forDay: Goal.WeekDay.make(forDate))
+        delegates.call { $0.update(amount: amount, forDay: Goal.WeekDay.make(forDate)) }
     }
+
+    public func add(delegate: GoalEditUseCasingDelegate) { delegates.addDelegate(delegate) }
+    public func remove(delegate: GoalEditUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }
 
-public protocol GoalEditUseCaseDelegate: AnyObject {
+public protocol GoalEditUseCasingDelegate: AnyObject {
     func update(amount: Int, forDay: Goal.WeekDay)
     func dismiss()
 }

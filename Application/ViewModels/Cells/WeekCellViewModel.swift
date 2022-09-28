@@ -70,7 +70,7 @@ public class WeekCellViewModel: WeekCellViewModeling {
     public func select() { coordinator?.showDay(event: event, date: date) }
 }
 
-extension WeekCellViewModel: EventEditUseCaseDelegate {
+extension WeekCellViewModel: EventEditUseCasingDelegate {
     public func renamed(event: Event) { delegate?.update() }
     public func added(goal: Goal, to: Event) { delegate?.update() }
     public func added(happening: Happening, to: Event) { delegate?.update() }
@@ -79,8 +79,8 @@ extension WeekCellViewModel: EventEditUseCaseDelegate {
     public func visited(event: Event) {}
 }
 
-// MARK: - GoalEditUseCaseDelegate
-extension WeekCellViewModel: GoalEditUseCaseDelegate {
+// MARK: - GoalEditUseCasingDelegate
+extension WeekCellViewModel: GoalEditUseCasingDelegate {
     public func update(amount: Int, forDay: Goal.WeekDay) {
         if Goal.WeekDay.make(date) == forDay {
             overriddenGoalsAmount = amount
@@ -94,6 +94,7 @@ extension WeekCellViewModel: GoalEditUseCaseDelegate {
     }
 }
 
+// MARK: - EventEditUseCasingDelegate
 public protocol WeekCellViewModelDelegate: AnyObject {
     func update()
     func highlightGoalSelection(amount: Int)

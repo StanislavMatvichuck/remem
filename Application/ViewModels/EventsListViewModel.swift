@@ -91,8 +91,8 @@ class EventsListViewModel: EventsListViewModeling {
     }
 }
 
-// MARK: - EventsListUseCaseDelegate & EventEditUseCaseDelegate
-extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelegate {
+// MARK: - EventsListUseCaseDelegate & EventEditUseCasingDelegate
+extension EventsListViewModel: EventsListUseCasingDelegate, EventEditUseCasingDelegate {
     // EventsListUseCaseDelegate
     func added(event: Event) {
         events = listUseCase.allEvents()
@@ -113,7 +113,7 @@ extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelega
         delegate?.update()
     }
 
-    // EventEditUseCaseDelegate
+    // EventEditUseCasingDelegate
     func added(happening: Happening, to: Event) {
         events = listUseCase.allEvents()
         delegate?.update()

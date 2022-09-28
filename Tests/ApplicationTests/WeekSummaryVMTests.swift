@@ -42,6 +42,6 @@ class WeekSummaryVMTests: XCTestCase {
     }
 
     func test_hasEventDelegation() {
-        XCTAssertTrue(sut is EventEditUseCaseDelegate)
+        XCTAssertTrue(sut is EventEditUseCasingDelegate)
     }
 }
