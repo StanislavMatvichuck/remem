@@ -5,8 +5,8 @@
 //  Created by Stanislav Matvichuck on 19.08.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 import IosUseCases
 
 public protocol WeekCellViewModeling:

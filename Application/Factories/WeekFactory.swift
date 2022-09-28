@@ -5,19 +5,17 @@
 //  Created by Stanislav Matvichuck on 02.09.2022.
 //
 
+import Domain
 import Foundation
 import IosUseCases
-import Domain
 
 class WeekFactory: WeekFactoryInterface {
     // MARK: - Properties
     let applicationFactory: ApplicationFactory
     let useCase: GoalEditUseCase
-    let useCaseDelegates: MulticastDelegate<GoalEditUseCaseDelegate>
     let event: Event
     // MARK: - Init
     init(applicationFactory: ApplicationFactory, event: Event, goalEditUseCase: GoalEditUseCase) {
-        self.useCaseDelegates = MulticastDelegate<GoalEditUseCaseDelegate>()
         self.applicationFactory = applicationFactory
         self.useCase = goalEditUseCase
         self.event = event
@@ -32,9 +30,11 @@ class WeekFactory: WeekFactoryInterface {
     }
 
     func makeWeekViewModel() -> WeekViewModel {
-        let viewModel = WeekViewModel(event: event, factory: self)
+        let goalEditMulticastDelegate = MulticastDelegate<GoalEditUseCaseDelegate>()
+        let viewModel = WeekViewModel(event: event, factory: self, multicastDelegate: goalEditMulticastDelegate)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
+        useCase.delegate = viewModel
         return viewModel
     }
 
@@ -43,7 +43,6 @@ class WeekFactory: WeekFactoryInterface {
         let viewModel = WeekCellViewModel(date: date, event: event)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator
-        useCaseDelegates.addDelegate(viewModel)
         return viewModel
     }
 }

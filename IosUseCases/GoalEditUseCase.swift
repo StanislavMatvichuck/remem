@@ -17,7 +17,7 @@ public protocol GoalEditUseCasing {
 public class GoalEditUseCase: GoalEditUseCasing {
     // MARK: - Properties
 
-    weak var delegate: GoalEditUseCaseDelegate?
+    public weak var delegate: GoalEditUseCaseDelegate?
     let event: Event
     let eventEditUseCase: EventEditUseCasing
 

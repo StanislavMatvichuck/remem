@@ -5,8 +5,8 @@
 //  Created by Stanislav Matvichuck on 20.07.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 import IosUseCases
 
 public protocol WeekViewModeling:
@@ -33,11 +33,13 @@ public class WeekViewModel: WeekViewModeling {
     private var event: Event
     private let factory: WeekFactoryInterface
     private var weekCellViewModels: [WeekCellViewModel]
+    private let multicastDelegate: MulticastDelegate<GoalEditUseCaseDelegate>
     // MARK: - Init
-    public init(event: Event, factory: WeekFactoryInterface) {
+    public init(event: Event, factory: WeekFactoryInterface, multicastDelegate: MulticastDelegate<GoalEditUseCaseDelegate>) {
         self.event = event
         self.factory = factory
         self.weekCellViewModels = makeWeekCellViewModels()
+        self.multicastDelegate = multicastDelegate
 
         func makeWeekCellViewModels() -> [WeekCellViewModel] {
             let from = event.dateCreated.startOfWeek!
@@ -66,7 +68,9 @@ public class WeekViewModel: WeekViewModeling {
     public func cellViewModel(at index: Int) -> WeekCellViewModel? {
         guard index < weekCellViewModels.count, index >= 0 else { return nil }
         let date = weekCellViewModels[index].date
-        return factory.makeWeekCellViewModel(date: date)
+        let viewModel = factory.makeWeekCellViewModel(date: date)
+        multicastDelegate.addDelegate(viewModel)
+        return viewModel
     }
 
     public var count: Int { weekCellViewModels.count }
@@ -91,6 +95,16 @@ extension WeekViewModel: EventEditUseCaseDelegate {
 
     public func renamed(event: Event) {}
     public func visited(event: Event) {}
+}
+
+extension WeekViewModel: GoalEditUseCaseDelegate {
+    public func update(amount: Int, forDay: Domain.Goal.WeekDay) {
+        multicastDelegate.call { $0.update(amount: amount, forDay: forDay) }
+    }
+
+    public func dismiss() {
+        multicastDelegate.call { $0.dismiss() }
+    }
 }
 
 public protocol WeekViewModelDelegate: AnyObject {
