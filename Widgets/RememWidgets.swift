@@ -21,7 +21,7 @@ struct RememWidgets: Widget, PreviewProvider {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: provider) { entry in
-            MediumWidgetView(viewModel: entry)
+            MediumWidgetView(viewModel: entry.vm)
         }
         .configurationDisplayName("Today goals")
         .description("A list of events with defined goals")

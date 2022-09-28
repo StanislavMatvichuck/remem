@@ -85,7 +85,6 @@
 		08B3572628E06AD500770B9A /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669528D88A080075A51D /* WidgetViewModel.swift */; };
 		08B3572728E06B1100770B9A /* WidgetFileWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669728D88A8E0075A51D /* WidgetFileWriting.swift */; };
 		08B3572828E06BB100770B9A /* WidgetsFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B356FB28E06A7B00770B9A /* WidgetsFramework.framework */; };
-		08B3572928E06BB100770B9A /* WidgetsFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08B356FB28E06A7B00770B9A /* WidgetsFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		08B3573228E06D8000770B9A /* WidgetFileReadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B356F028DDEC0900770B9A /* WidgetFileReadingTests.swift */; };
 		08B3573328E06D8000770B9A /* WidgetFileWritingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
@@ -273,17 +272,6 @@
 			files = (
 				0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */,
 				08B3570F28E06A7C00770B9A /* WidgetsFramework.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08B3572C28E06BB100770B9A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				08B3572928E06BB100770B9A /* WidgetsFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -987,7 +975,6 @@
 				0826AC8B28C86ECE0021D607 /* Sources */,
 				0826AC8C28C86ECE0021D607 /* Frameworks */,
 				0826AC8D28C86ECE0021D607 /* Resources */,
-				08B3572C28E06BB100770B9A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

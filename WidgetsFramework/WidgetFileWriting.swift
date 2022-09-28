@@ -35,7 +35,7 @@ public class WidgetFileWriter: WidgetFileWriting {
             return result
         }()
 
-        let widgetViewModel = WidgetViewModel(date: .now, viewModel: widgetEventRows)
+        let widgetViewModel = WidgetViewModel(viewModel: widgetEventRows)
 
         do {
             let dataToWrite = try encoder.encode(widgetViewModel)

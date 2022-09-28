@@ -9,9 +9,7 @@ import Domain
 import Foundation
 import WidgetKit
 
-public protocol WidgetViewModeling: TimelineEntry {
-    var date: Date { get }
-
+public protocol WidgetViewModeling {
     var count: Int { get }
     func rowViewModel(at: Int) -> WidgetRowViewModeling?
 }
@@ -25,12 +23,9 @@ public protocol WidgetRowViewModeling {
 
 public struct WidgetViewModel: WidgetViewModeling, Codable, Equatable {
     // MARK: - Properties
-    public var date: Date
     private var viewModel: [WidgetRowViewModel]
-
     // MARK: - Init
-    public init(date: Date, viewModel: [WidgetRowViewModel]) {
-        self.date = date
+    public init(viewModel: [WidgetRowViewModel]) {
         self.viewModel = viewModel
     }
 
@@ -49,14 +44,11 @@ public struct WidgetViewModel: WidgetViewModeling, Codable, Equatable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(date, forKey: .date)
         try container.encode(viewModel, forKey: .viewModel)
     }
 
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.date = try values.decode(Date.self, forKey: .date)
         self.viewModel = try values.decode([WidgetRowViewModel].self, forKey: .viewModel)
     }
 }
@@ -101,6 +93,9 @@ public extension WidgetRowViewModel {
             return event.goal(at: todayDate)?.isReached(at: todayDate) ?? false
         }()
 
-        self.init(name: name, amount: amount, hasGoal: hasGoal, goalReached: goalReached)
+        self.init(name: name,
+                  amount: amount,
+                  hasGoal: hasGoal,
+                  goalReached: goalReached)
     }
 }

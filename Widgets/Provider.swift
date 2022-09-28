@@ -8,26 +8,40 @@
 import WidgetKit
 import WidgetsFramework
 
+struct MediumWidgetTimelineEntry: TimelineEntry {
+    var date: Date
+    var vm: WidgetViewModel
+
+    init(_ vm: WidgetViewModel) {
+        self.date = .now
+        self.vm = vm
+    }
+}
+
 struct Provider: TimelineProvider {
     private let fileReader: WidgetFileReading
 
     init(repository: WidgetFileReading) { self.fileReader = repository }
 
     // TimelineProvider
-    typealias Entry = WidgetViewModel
+    typealias Entry = MediumWidgetTimelineEntry
 
-    func placeholder(in context: Context) -> WidgetViewModel {
-        fileReader.readStaticPreview()
+    func placeholder(in context: Context) -> MediumWidgetTimelineEntry {
+        MediumWidgetTimelineEntry(fileReader.readStaticPreview())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (WidgetViewModel) -> ()) {
-        completion(fileReader.readStaticPreview())
+    func getSnapshot(in context: Context,
+                     completion: @escaping (MediumWidgetTimelineEntry) -> ())
+    {
+        completion(MediumWidgetTimelineEntry(fileReader.readStaticPreview()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [WidgetViewModel] = []
+        var entries: [MediumWidgetTimelineEntry] = []
 
-        if let entry = fileReader.read(for: .medium) { entries.append(entry) }
+        if let viewModel = fileReader.read(for: .medium) {
+            entries.append(MediumWidgetTimelineEntry(viewModel))
+        }
 
         let timeline = Timeline(entries: entries, policy: .never)
 
