@@ -26,10 +26,7 @@ class EventDetailsView: UIView {
     }()
 
     let total: UILabel = makeAmountLabel()
-    let thisWeekTotal: UILabel = makeAmountLabel()
-    let lastWeekTotal: UILabel = makeAmountLabel()
     let dayAverage: UILabel = makeAmountLabel()
-    let weekAverage: UILabel = makeAmountLabel()
 
     private let viewModel: EventDetailsViewModeling
 
@@ -51,10 +48,7 @@ class EventDetailsView: UIView {
             goalsButton,
             clock,
             makeStatRow(labelAmount: total, description: "Total"),
-            makeStatRow(labelAmount: thisWeekTotal, description: "This week total"),
-            makeStatRow(labelAmount: lastWeekTotal, description: "Last week total"),
             makeStatRow(labelAmount: dayAverage, description: "Day average"),
-            makeStatRow(labelAmount: weekAverage, description: "Week average"),
             bottomSpacing)
 
         scroll.viewContent.setCustomSpacing(UIHelper.spacing, after: goalsButton)
@@ -76,10 +70,7 @@ class EventDetailsView: UIView {
 
     func configureContent() {
         total.text = viewModel.totalAmount
-        thisWeekTotal.text = viewModel.thisWeekTotal
-        lastWeekTotal.text = viewModel.lastWeekTotal
         dayAverage.text = viewModel.dayAverage
-        weekAverage.text = viewModel.weekAverage
     }
 
     private func makeStatRow(labelAmount: UILabel, description: String) -> UIView {

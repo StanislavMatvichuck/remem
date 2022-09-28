@@ -562,15 +562,15 @@
 		08235E7128C5CC3F0026DED2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				08235E7228C5CC680026DED2 /* Cells */,
-				080A67B828D1EDB300889A97 /* ClockViewModel */,
 				08AC4A0E28C5F35300294C59 /* Coordinating.swift */,
 				08B26A13289E975900DFBAC8 /* DayViewModel.swift */,
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */,
-				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */,
+				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				08235E7228C5CC680026DED2 /* Cells */,
+				080A67B828D1EDB300889A97 /* ClockViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

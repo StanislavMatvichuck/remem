@@ -5,9 +5,9 @@
 //  Created by Stanislav Matvichuck on 27.08.2022.
 //
 
+import Domain
 import Foundation
 import IosUseCases
-import Domain
 
 protocol EventsListFactoryInterface {
     func makeEventCellViewModel(event: Event) -> EventCellViewModel

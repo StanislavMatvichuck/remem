@@ -8,6 +8,7 @@
 import Application
 import Domain
 import Foundation
+import IosUseCases
 import XCTest
 
 class WeekSummaryVMTests: XCTestCase {
@@ -38,5 +39,9 @@ class WeekSummaryVMTests: XCTestCase {
         let goal = sut.goalAmount(at: .now)
 
         XCTAssertEqual(goal, "0")
+    }
+
+    func test_hasEventDelegation() {
+        XCTAssertTrue(sut is EventEditUseCaseDelegate)
     }
 }
