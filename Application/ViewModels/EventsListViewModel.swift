@@ -5,22 +5,24 @@
 //  Created by Stanislav Matvichuck on 14.07.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 import IosUseCases
 
-public protocol EventsListViewModeling:
+protocol EventsListViewModeling:
     EventsListViewModelState &
     EventsListViewModelEvents {}
 
-public protocol EventsListViewModelState {
+protocol EventsListViewModelState {
     var isAddButtonHighlighted: Bool { get }
     var hint: HintState { get }
-    var eventsAmount: Int { get }
+
+    var count: Int { get }
     func event(at: Int) -> Event?
+    func cellVM(at: Int) -> EventCellViewModel?
 }
 
-public protocol EventsListViewModelEvents: AnyObject {
+protocol EventsListViewModelEvents: AnyObject {
     func select(event: Event)
     func selectForRenaming(event: Event)
     func selectForRemoving(event: Event)
@@ -28,50 +30,59 @@ public protocol EventsListViewModelEvents: AnyObject {
     func submitNameEditing(name: String)
 }
 
-public class EventsListViewModel: EventsListViewModeling {
+class EventsListViewModel: EventsListViewModeling {
     // MARK: - Properties
-    public weak var delegate: EventsListViewModelDelegate?
-    public weak var coordinator: Coordinating?
+    weak var delegate: EventsListViewModelDelegate?
+    weak var coordinator: Coordinating?
 
     private let listUseCase: EventsListUseCasing
     private let editUseCase: EventEditUseCasing
+    private let factory: EventsListFactoryInterface
 
     private var renamedEvent: Event?
     private var events: [Event]
     // MARK: - Init
-    public init(listUseCase: EventsListUseCasing,
-         editUseCase: EventEditUseCasing)
+    init(listUseCase: EventsListUseCasing,
+         editUseCase: EventEditUseCasing,
+         factory: EventsListFactoryInterface)
     {
         self.events = listUseCase.allEvents()
+        self.factory = factory
         self.listUseCase = listUseCase
         self.editUseCase = editUseCase
     }
 
     // EventsListViewModelState
-    public var eventsAmount: Int { events.count }
-    public var isAddButtonHighlighted: Bool { events.count == 0 }
-    public var hint: HintState {
+    var count: Int { events.count }
+    var isAddButtonHighlighted: Bool { events.count == 0 }
+    var hint: HintState {
         if events.count == 0 { return .empty }
         if events.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
         if events.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
         return .swipeLeft
     }
 
-    public func event(at index: Int) -> Event? {
+    func cellVM(at index: Int) -> EventCellViewModel? {
+        guard let event = event(at: index) else { return nil }
+        let viewModel = factory.makeEventCellViewModel(event: event)
+        return viewModel
+    }
+
+    func event(at index: Int) -> Event? {
         guard index < events.count, index >= 0 else { return nil }
         return events[index]
     }
 
     // EventsListViewModelEvents
-    public func select(event: Event) { coordinator?.showDetails(event: event) }
-    public func cancelNameEditing() { renamedEvent = nil }
-    public func selectForRemoving(event: Event) { listUseCase.remove(event) }
-    public func selectForRenaming(event: Event) {
+    func select(event: Event) { coordinator?.showDetails(event: event) }
+    func cancelNameEditing() { renamedEvent = nil }
+    func selectForRemoving(event: Event) { listUseCase.remove(event) }
+    func selectForRenaming(event: Event) {
         renamedEvent = event
         delegate?.askNewName(withOldName: event.name)
     }
 
-    public func submitNameEditing(name: String) {
+    func submitNameEditing(name: String) {
         if let renamedEvent = renamedEvent {
             editUseCase.rename(renamedEvent, to: name)
         } else {
@@ -83,7 +94,7 @@ public class EventsListViewModel: EventsListViewModeling {
 // MARK: - EventsListUseCaseDelegate & EventEditUseCaseDelegate
 extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelegate {
     // EventsListUseCaseDelegate
-    public func added(event: Event) {
+    func added(event: Event) {
         events = listUseCase.allEvents()
 
         if let index = events.firstIndex(of: event) {
@@ -93,7 +104,7 @@ extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelega
         delegate?.update()
     }
 
-    public func removed(event: Event) {
+    func removed(event: Event) {
         if let index = events.firstIndex(of: event) {
             events = listUseCase.allEvents()
             delegate?.remove(at: index)
@@ -103,27 +114,27 @@ extension EventsListViewModel: EventsListUseCaseDelegate, EventEditUseCaseDelega
     }
 
     // EventEditUseCaseDelegate
-    public func added(happening: Happening, to: Event) {
+    func added(happening: Happening, to: Event) {
         events = listUseCase.allEvents()
         delegate?.update()
     }
 
-    public func visited(event: Event) {
+    func visited(event: Event) {
         events = listUseCase.allEvents()
         delegate?.update()
     }
 
-    public func removed(happening: Happening, from: Event) {
+    func removed(happening: Happening, from: Event) {
         events = listUseCase.allEvents()
         delegate?.update()
     }
 
-    public func renamed(event: Event) {}
-    public func added(goal: Goal, to: Event) {}
+    func renamed(event: Event) {}
+    func added(goal: Goal, to: Event) {}
 }
 
 // MARK: - EventsListViewModelDelegate
-public protocol EventsListViewModelDelegate: AnyObject {
+protocol EventsListViewModelDelegate: AnyObject {
     func update()
     func addEvent(at: Int)
     func remove(at: Int)
@@ -131,13 +142,13 @@ public protocol EventsListViewModelDelegate: AnyObject {
     func askNewName(withOldName: String)
 }
 
-public enum HintState: String {
+enum HintState: String {
     case empty
     case placeFirstMark
     case pressMe
     case swipeLeft
 
-    public var text: String? {
+    var text: String? {
         switch self {
         case .empty:
             return NSLocalizedString("empty.EventsList", comment: "entries list empty")

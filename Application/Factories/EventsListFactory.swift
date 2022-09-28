@@ -24,14 +24,15 @@ class EventsListFactory: EventsListFactoryInterface {
     func makeEventsListController() -> EventsListController {
         let viewRoot = EventsListView()
         let viewModel = makeEventsListViewModel()
-        let controller = EventsListController(viewRoot: viewRoot, viewModel: viewModel, factory: self)
+        let controller = EventsListController(viewRoot: viewRoot, viewModel: viewModel)
         viewModel.delegate = controller
         return controller
     }
 
     func makeEventsListViewModel() -> EventsListViewModel {
         let viewModel = EventsListViewModel(listUseCase: applicationFactory.eventsListUseCase,
-                                            editUseCase: applicationFactory.eventEditUseCase)
+                                            editUseCase: applicationFactory.eventEditUseCase,
+                                            factory: self)
         applicationFactory.eventsListMulticastDelegate.addDelegate(viewModel)
         applicationFactory.eventEditMulticastDelegate.addDelegate(viewModel)
         viewModel.coordinator = applicationFactory.coordinator

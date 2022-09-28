@@ -17,16 +17,13 @@ class EventsListController: UIViewController {
     // MARK: - Properties
     private let viewModel: EventsListViewModeling
     private let viewRoot: EventsListView
-    private let factory: EventsListFactoryInterface
 
     // MARK: - Init
     init(viewRoot: EventsListView,
-         viewModel: EventsListViewModeling,
-         factory: EventsListFactoryInterface)
+         viewModel: EventsListViewModeling)
     {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
-        self.factory = factory
         super.init(nibName: nil, bundle: nil)
         viewRoot.table.dataSource = self
         viewRoot.table.delegate = self
@@ -49,7 +46,7 @@ extension EventsListController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Section(rawValue: section) == .events ? viewModel.eventsAmount : 1
+        Section(rawValue: section) == .events ? viewModel.count : 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,7 +122,7 @@ extension EventsListController: EventsListViewModelDelegate {
         let path = IndexPath(row: at, section: Section.events.rawValue)
         viewRoot.table.insertRows(at: [path], with: .top)
 
-        if viewModel.eventsAmount <= 1 {
+        if viewModel.count <= 1 {
             let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
             viewRoot.table.reloadRows(at: [footerIndex], with: .none)
         }
@@ -135,7 +132,7 @@ extension EventsListController: EventsListViewModelDelegate {
         let path = IndexPath(row: at, section: Section.events.rawValue)
         viewRoot.table.deleteRows(at: [path], with: .none)
 
-        if viewModel.eventsAmount == 0 {
+        if viewModel.count == 0 {
             let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
             viewRoot.table.reloadRows(at: [footerIndex], with: .none)
         }
@@ -182,10 +179,9 @@ extension EventsListController {
     private func makeEventCell(for index: IndexPath) -> UITableViewCell {
         guard
             let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
-            let event = viewModel.event(at: index.row)
+            let viewModel = viewModel.cellVM(at: index.row)
         else { return UITableViewCell() }
 
-        let viewModel = factory.makeEventCellViewModel(event: event)
         viewModel.delegate = eventCell
         eventCell.viewModel = viewModel
 
