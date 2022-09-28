@@ -9,34 +9,45 @@ import SwiftUI
 import WidgetsFramework
 
 struct EventRowView: View {
-    let viewModel: WidgetRowViewModeling
+    let viewModel: WidgetRowViewModeling?
 
+    @ViewBuilder
     var body: some View {
-        let defaultColor = Color(uiColor: UIHelper.background)
-        let reachedColor = Color(uiColor: UIHelper.goalReachedBackground)
-        let notReachedColor = Color(uiColor: UIHelper.goalNotReachedBackground)
+        if let viewModel = viewModel {
+            let defaultColor = Color(uiColor: UIHelper.background)
+            let reachedColor = Color(uiColor: UIHelper.goalReachedBackground)
+            let notReachedColor = Color(uiColor: UIHelper.goalNotReachedBackground)
 
-        let backgroundColor: Color = {
-            switch (viewModel.hasGoal, viewModel.goalReached) {
-            case (true, true): return reachedColor
-            case (true, false): return notReachedColor
-            default: return defaultColor
-            }
-        }()
+            let backgroundColor: Color = {
+                switch (viewModel.hasGoal, viewModel.goalReached) {
+                case (true, true): return reachedColor
+                case (true, false): return notReachedColor
+                default: return defaultColor
+                }
+            }()
 
-        ZStack {
-            backgroundColor.clipShape(Capsule())
             ZStack {
-                Text(viewModel.name)
-                    .font(Font(uiFont: UIHelper.fontSmall))
-                    .foregroundColor(Color(UIHelper.itemFont))
-                HStack {
-                    Spacer()
-                    Text(viewModel.amount)
+                backgroundColor.clipShape(Capsule())
+                ZStack {
+                    Text(viewModel.name)
                         .font(Font(uiFont: UIHelper.fontSmall))
                         .foregroundColor(Color(UIHelper.itemFont))
-                }.padding(.trailing)
+                    HStack {
+                        Spacer()
+                        Text(viewModel.amount)
+                            .font(Font(uiFont: UIHelper.fontSmall))
+                            .foregroundColor(Color(UIHelper.itemFont))
+                    }.padding(.trailing)
+                }
             }
+        } else {
+            EventRowEmptyView()
         }
+    }
+}
+
+struct EventRowEmptyView: View {
+    var body: some View {
+        Color(uiColor: UIHelper.itemBackground)
     }
 }

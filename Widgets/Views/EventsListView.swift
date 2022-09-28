@@ -10,7 +10,7 @@ import WidgetsFramework
 
 struct EventRow: Identifiable {
     let id = UUID()
-    let viewModel: WidgetRowViewModeling
+    let viewModel: WidgetRowViewModeling?
 }
 
 struct EventsListView: View {
@@ -21,17 +21,16 @@ struct EventsListView: View {
     }
 
     var body: some View {
+        let spacing: CGFloat = 5
         let eventsRows = eventsRows()
 
         ZStack(alignment: .center, content: {
             Color(UIHelper.itemBackground).ignoresSafeArea()
-            VStack {
+            VStack(spacing: spacing) {
                 ForEach(eventsRows) { row in
                     EventRowView(viewModel: row.viewModel)
                 }
-            }
-            .padding(.vertical, 11)
-            .padding(.horizontal)
+            }.padding(EdgeInsets(top: spacing, leading: 5 * spacing, bottom: spacing, trailing: 5 * spacing))
         })
     }
 
@@ -39,7 +38,11 @@ struct EventsListView: View {
         var eventsRows = [EventRow]()
 
         for i in 0 ... 2 {
-            guard let eventViewModel = viewModel.rowViewModel(at: i) else { continue }
+            guard let eventViewModel = viewModel.rowViewModel(at: i) else {
+                eventsRows.append(EventRow(viewModel: nil))
+                continue
+            }
+
             eventsRows.append(EventRow(viewModel: eventViewModel))
         }
 
