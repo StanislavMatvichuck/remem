@@ -36,6 +36,8 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
+		0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */; };
+		0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -336,6 +338,8 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
+		0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryViewModel.swift; sourceTree = "<group>"; };
+		0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryVMTests.swift; sourceTree = "<group>"; };
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -566,6 +570,7 @@
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08319DA628A922A700AFE3CB /* GoalsInputViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 			isa = PBXGroup;
 			children = (
 				0898F52728E212B9006745B6 /* ApplicationTests.swift */,
+				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -1372,6 +1378,7 @@
 			files = (
 				0898F52828E212B9006745B6 /* ApplicationTests.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
+				0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1433,6 +1440,7 @@
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
+				0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */,
 				08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */,
 				08E620842787406400BBABFD /* Metrics.swift in Sources */,
