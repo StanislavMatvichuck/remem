@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 19.09.2022.
 //
 
+import Domain
 import Foundation
 import WidgetKit
 
@@ -70,5 +71,36 @@ public struct WidgetRowViewModel: WidgetRowViewModeling, Codable, Equatable {
         self.amount = amount
         self.hasGoal = hasGoal
         self.goalReached = goalReached
+    }
+}
+
+// duplicates EventCellViewModel from Application
+public extension WidgetRowViewModel {
+    init(event: Event) {
+        let name: String = { event.name }()
+        let amount: String = {
+            let todayDate = Date.now
+            let todayHappeningsCount = event.happenings(forDay: todayDate).count
+            if let todayGoal = event.goal(at: todayDate), todayGoal.amount > 0 {
+                return "\(todayHappeningsCount)/\(todayGoal.amount)"
+            } else {
+                return "\(todayHappeningsCount)"
+            }
+        }()
+
+        let hasGoal: Bool = {
+            let todayDate = Date.now
+            if let goal = event.goal(at: todayDate) {
+                return goal.amount > 0
+            }
+            return false
+        }()
+
+        let goalReached: Bool = {
+            let todayDate = Date.now
+            return event.goal(at: todayDate)?.isReached(at: todayDate) ?? false
+        }()
+
+        self.init(name: name, amount: amount, hasGoal: hasGoal, goalReached: goalReached)
     }
 }

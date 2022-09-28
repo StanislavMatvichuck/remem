@@ -29,11 +29,7 @@ public class WidgetFileWriter: WidgetFileWriting {
         let widgetEventRows: [WidgetRowViewModel] = {
             var result = [WidgetRowViewModel]()
             for event in eventsList {
-                // TODO: make nice init for this
-                let row = WidgetRowViewModel(name: event.name,
-                                             amount: String(event.happenings.count),
-                                             hasGoal: false,
-                                             goalReached: false)
+                let row = WidgetRowViewModel(event: event)
                 result.append(row)
             }
             return result
