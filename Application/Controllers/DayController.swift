@@ -73,15 +73,16 @@ extension DayController {
     // Navigation bar setup
     private func configureNavBar() {
         title = viewModel.title
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add",
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(handleAdd))
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(handleEdit))
+        navigationItem.leftBarButtonItem =
+            UIBarButtonItem(title: String(localizationId: "button.create"),
+                            style: .plain,
+                            target: self,
+                            action: #selector(handleAdd))
+        navigationItem.rightBarButtonItem =
+            UIBarButtonItem(title: String(localizationId: "button.edit"),
+                            style: .plain,
+                            target: self,
+                            action: #selector(handleEdit))
     }
 
     // Navigation bar events handling
@@ -96,12 +97,15 @@ extension DayController {
 
     // Time selection alert
     private func makeTimeSelectionAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Add a happening",
+        let alert = UIAlertController(title: String(localizationId: "button.create"),
                                       message: nil,
                                       preferredStyle: .alert)
-
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let submit = UIAlertAction(title: "Add", style: .default, handler: handleTimeSelectionSubmit)
+        let cancel = UIAlertAction(title: String(localizationId: "button.cancel"),
+                                   style: .cancel,
+                                   handler: nil)
+        let submit = UIAlertAction(title: String(localizationId: "button.create"),
+                                   style: .default,
+                                   handler: handleTimeSelectionSubmit)
 
         alert.addTextField { field in self.textField = field }
         alert.addAction(cancel)

@@ -8,10 +8,6 @@
 import UIKit
 
 class EventsListView: UIView {
-    // MARK: I18n
-    static let delete = NSLocalizedString("button.contextual.delete", comment: "EventsList swipe gesture actions")
-    static let rename = NSLocalizedString("button.contextual.rename", comment: "EventsList swipe gesture actions")
-
     // MARK: - Properties
     let input: UIMovableTextViewInterface = {
         UIMovableTextView()

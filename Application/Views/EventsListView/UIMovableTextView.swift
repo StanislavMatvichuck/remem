@@ -16,11 +16,6 @@ protocol UIMovableTextViewInterface: UIControl {
 }
 
 class UIMovableTextView: UIControl {
-    // MARK: I18n
-    static let empty = NSLocalizedString("empty.EventsList.firstName", comment: "Events list empty state")
-    static let cancel = NSLocalizedString("button.cancel", comment: "movable view accessory button cancel")
-    static let add = NSLocalizedString("button.add.event", comment: "movable view accessory button add")
-
     // MARK: - Properties
     var value: String = "" {
         didSet {
@@ -30,13 +25,13 @@ class UIMovableTextView: UIControl {
     }
 
     private lazy var barCancel = UIBarButtonItem(
-        title: Self.cancel,
+        title: String(localizationId: "button.cancel"),
         style: .plain,
         target: self,
         action: #selector(handlePressCancel))
 
     private lazy var barSubmit = UIBarButtonItem(
-        title: Self.add,
+        title: String(localizationId: "button.create"),
         style: .done,
         target: self,
         action: #selector(handlePressSubmit))
@@ -86,7 +81,7 @@ class UIMovableTextView: UIControl {
 
     private lazy var namingHintLabel: UILabel = {
         let label = UILabel(al: true)
-        label.text = Self.empty
+        label.text = String(localizationId: "eventsList.new")
         label.textAlignment = .center
         label.font = UIHelper.fontBold
         label.textColor = UIHelper.itemFont
@@ -153,7 +148,7 @@ extension UIMovableTextView: UIMovableTextViewInterface {
 
     func rename(oldName: String) {
         show(value: oldName)
-        barSubmit.title = "Rename"
+        barSubmit.title = String(localizationId: "button.rename")
     }
 
     func dismiss() { handlePressCancel() }
@@ -251,7 +246,7 @@ extension UIMovableTextView {
 
         isUserInteractionEnabled = false
         value = ""
-        barSubmit.title = Self.add
+        barSubmit.title = String(localizationId: "button.create")
     }
 }
 

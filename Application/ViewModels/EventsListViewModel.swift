@@ -151,13 +151,13 @@ enum HintState: String {
     var text: String? {
         switch self {
         case .empty:
-            return NSLocalizedString("empty.EventsList", comment: "entries list empty")
+            return String(localizationId: "eventsList.hint.empty")
         case .placeFirstMark:
-            return NSLocalizedString("empty.EventsList.firstHappening", comment: "entries list first point")
+            return String(localizationId: "eventsList.hint.firstHappening")
         case .pressMe:
-            return NSLocalizedString("empty.EventsList.firstDetailsInspection", comment: "entries list first details opening")
+            return String(localizationId: "eventsList.hint.firstVisit")
         case .swipeLeft:
-            return "swipe left to modify"
+            return String(localizationId: "eventsList.hint.swipeLeft")
         }
     }
 }

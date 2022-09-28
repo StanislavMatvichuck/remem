@@ -1,128 +1,19 @@
-/* 
-  Localizable.strings
-  Remem
-
-  Created by Stanislav Matvichuck on 25.04.2022.
-  
-*/
-
-/* onboarding hello */
-"onboarding.greeting" = "Greetings!";
-/* onboarding tap to proceed */
-"onboarding.tapToProceed" = "tap to proceed 👆";
-/* onboarding close */
-"onboarding.close" = "Close";
-
-/* onboarding entries list start */
-"onboarding.EventsList.start" = "I am an application-counter. That means I help count things and inspect results";
-/* onboarding entries list question 01 */
-//"onboarding.EventsList.question1" = "- when did an event last happened?";
-/* onboarding entries list question 02 */
-//"onboarding.EventsList.question2" = "- how many events happen in a week?";
-// onboarding entries list use cases description
-"onboarding.EventsList.useCases" = "Use me to track things like smoking a cigarette, drinking cup of coffee, doing morning exercises or taking pills.\nWhatever periodic event you want fix in time";
-/* onboarding entries list event creation start */
-"onboarding.EventsList.eventCreation.start" = "First, you have to create an event. Swipe up to do it";
-/* onboarding entries list event creation naming */
-"onboarding.EventsList.eventCreation.name" = "Give it a short name. Using emoji is encouraged!";
-/* onboarding entries list event creation finished */
-"onboarding.EventsList.eventCreation.finish" = "Now event is created. Next step is to place a mark in time";
-/* onboarding entries list event add happenings */
-"onboarding.EventsList.addHappenings" = "You do it by swiping a circle, just like accepting a call. Please try";
-/* onboarding entries list event add additional happenings */
-"onboarding.EventsList.addAdditionalHappenings" = "Success! Please add a mark 4 more times";
-/* onboarding entries list test event appeared */
-"onboarding.EventsList.filledEvent.description" = "Now you know how to provide me with information. Look what I can show you after a month, for example";
-/* onboarding entries list test event inspect */
-"onboarding.EventsList.filledEvent.inspect" = "Tap the circle to view event details";
-
-/* onboarding event details title */
-"onboarding.eventDetails.title" = "Details";
-/* onboarding event details start */
-"onboarding.eventDetails.start" = "You visit this screen to see recorded data. There are 3 displays available.";
-/* onboarding event details happenings display description */
-"onboarding.eventDetails.happeningsList.description" = "A list of marks. Each circle swipe is simply fixed in time";
-/* onboarding event details happenings display scrollable */
-"onboarding.eventDetails.happeningsList.scrollable" = "It is vertically scrollable. Please try to scroll";
-/* onboarding event details stats display description */
-"onboarding.eventDetails.stats.description" = "Statistics. Daily and weekly numbers that you might me interested in";
-/* onboarding event details stats display scrollable */
-"onboarding.eventDetails.stats.scrollable" = "It is scrollable horizontally. Please try to scroll";
-/* onboarding event details week display description */
-"onboarding.eventDetails.week.description" = "Week distribution. Very useful to make up a good habit discipline on a 7-day basis";
-/* onboarding event details week display scrollable */
-"onboarding.eventDetails.week.scrollable" = "It is also scrollable horizontally. Please try scrolling";
-/* onboarding event details final */
-"onboarding.eventDetails.final" = "That is all you need to know to find this application useful.\n\nIn conclusion, I recommend to check out the settings section (swipe up to open) and try to set up a reminder, you will find it really helpful!\n\nHappy counting!";
-
-/*
-    UISwipingSelector button settings
-    Settings screen title
-*/
-"button.settings" = "Settings";
-/*
-    UISwipingSelector button
-    UISwipingSelector accessory
-    UIMovableTextView accessory
- */
-"button.add.event" = "Add";
-
-/*
-    UIReminderInput accessory
-    UISwipingSelector accessory
-    UIMovableTextView accessory
- */
+"button.create" = "Create";
 "button.cancel" = "Cancel";
-/*
-    EventsList swipe gesture actions
- */
-"button.contextual.delete" = "Delete";
-"button.contextual.rename" = "Rename";
+"button.delete" = "Delete";
+"button.rename" = "Rename";
+"button.save" = "Save";
+"button.edit" = "Edit";
 
-/*
-    Event details lock screen button
- */
-"button.lockScreen.add" = "Add to lock screen";
-"button.lockScreen.remove" = "Remove from lock screen";
+"eventsList.hint.empty" = "Add an event you want to track";
+"eventsList.hint.firstHappening" = "Swipe when event happened";
+"eventsList.hint.firstVisit" = "Press to see details";
+"eventsList.hint.swipeLeft" = "swipe left";
+"eventsList.title" = "Events";
+"eventsList.new" = "Short name or emoji";
 
-/*
-    Notifications actions
- */
-"notification.action.add" = "Add";
+"eventDetails.dayAverage" = "Day average";
+"eventDetails.buttonGoalsInput" = "Configure daily goal";
+"eventDetails.total" = "Total";
 
-/* UIReminderInput button submit title */
-"button.reminder.submit.title" = "Choose time";
-/* UIReminderInput button cancel time */
-"button.reminder.cancel.time" = "Back";
-/* UIReminderInput button submit time */
-"button.reminder.submit.time" = "Add reminder";
-
-/* settings button onboarding */
-"button.settings.onboarding" = "Watch onboarding";
-/* settings button reminders */
-"button.settings.reminders" = "Configure reminders";
-/* settings footer */
-"label.footer" = "Forged with ❤️ in 🇺🇦";
-
-/* entries list empty */
-//"empty.EventsList" = "You have no entries yet. Swipe up to create";
-"empty.EventsList" = "Add an event you want to track";
-"empty.EventsList.firstName" = "Short name or emodji";
-"empty.EventsList.firstHappening" = "Place a mark when event happened";
-"empty.EventsList.firstDetailsInspection" = "Press to see marks";
-
-/*
-    Reminders screen
- */
-"label.remindersTitle" = "Reminders";
-"label.addReminder" = "Add reminder";
-"label.existingReminders" = "Existing reminders (swipe left to delete)";
-"placeholder.inputReminder.title" = "Reminder text";
-
-/*
-    EventDetails screen
- */
-"label.stats.average.week" = "Week average";
-"label.stats.average.day" = "Day average";
-"label.stats.weekThis.total" = "This week total";
-"label.stats.weekLast.total" = "Last week total";
+"goalsInput.title" = "Daily goal";

@@ -42,12 +42,12 @@ class GoalsInputController: UIViewController {
     @objc private func onPressCancelGoal(sender: UIBarButtonItem) { viewModel.cancel() }
 
     private func configureNavBar() {
-        title = "Daily goal"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
+        title = String(localizationId: "goalsInput.title")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: String(localizationId: "button.cancel"),
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(onPressCancelGoal))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: String(localizationId: "button.save"),
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(onPressSaveGoal))

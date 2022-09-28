@@ -1,127 +1,19 @@
-/* 
-  Localizable.strings
-  Remem
+"button.create" = "Створити";
+"button.cancel" = "Скасувати";
+"button.delete" = "Видалити";
+"button.rename" = "Переіменувати";
+"button.save" = "Зберегти";
+"button.edit" = "Редагувати";
 
-  Created by Stanislav Matvichuck on 25.04.2022.
-  
-*/
+"eventsList.hint.empty" = "Додай подію яку будемо відслідковувати";
+"eventsList.hint.firstHappening" = "Свайп коли подія сталася";
+"eventsList.hint.firstVisit" = "Тиць щоб подивитись подробиці";
+"eventsList.hint.swipeLeft" = "свайп ліворуч";
+"eventsList.title" = "Події";
+"eventsList.new" = "Коротке ім'я або емодзі";
 
-/* onboarding hello */
-"onboarding.greeting" = "Вітання!";
-/* onboarding tap to proceed */
-"onboarding.tapToProceed" = "тицьніть щоб продовжити 👆";
-/* onboarding close */
-"onboarding.close" = "Закрити";
+"eventDetails.dayAverage" = "Середнє за день";
+"eventDetails.buttonGoalsInput" = "Налаштувати завдання на день";
+"eventDetails.total" = "Всього";
 
-/* onboarding entries list start */
-"onboarding.EventsList.start" = "Я застосунок-лічильник. Це означає що я допомогаю рахувати штуки та дивитися на результати";
-/* onboarding entries list question 01 */
-//"onboarding.EventsList.question1" = "- when did an event last happened?";
-/* onboarding entries list question 02 */
-//"onboarding.EventsList.question2" = "- how many events happen in a week?";
-/* onboarding entries list use cases description */
-"onboarding.EventsList.useCases" = "Використовуй мене для того щоб відслідковувати події як то зпалена сигарета, випита чашка кави, зроблена зранку зарядка чи випита таблетка.\nБудь-які періодичні події які ти бажаеш зафіксувати у часі";
-/* onboarding entries list event creation start */
-"onboarding.EventsList.eventCreation.start" = "Спершу тобі потрібно створити подію. Проведи догори щоб це зробити";
-/* onboarding entries list event creation naming */
-"onboarding.EventsList.eventCreation.name" = "Дай їй коротеньке ім'я. Використання емодзі заохочується!";
-/* onboarding entries list event creation finished */
-"onboarding.EventsList.eventCreation.finish" = "Подію створено. Наступний крок це розмістити відмітку у часі";
-/* onboarding entries list event add happenings */
-"onboarding.EventsList.addHappenings" = "Ти можеш це зробити проводячи коло праворуч, так само як прийняти дзвінок. Спробуй будь ласка";
-/* onboarding entries list event add additional happenings */
-"onboarding.EventsList.addAdditionalHappenings" = "Успіх! Будь ласка додай ще 4 відмітки";
-/* onboarding entries list test event appeared */
-"onboarding.EventsList.filledEvent.description" = "Тепер ти вміеш надавати мені інформацію. Давай подивимось, що я зможу тобі показати, наприклад, через місяць";
-/* onboarding entries list test event inspect */
-"onboarding.EventsList.filledEvent.inspect" = "Тицьни по колу щоб подивитись на подробиці події";
-
-/* onboarding event details title */
-"onboarding.eventDetails.title" = "Подробиці";
-/* onboarding event details start */
-"onboarding.eventDetails.start" = "Ти відвідуєш цей екран щоб подивитися на записані дані. Наразі він має три секції";
-/* onboarding event details happenings display description */
-"onboarding.eventDetails.happeningsList.description" = "Список відміток. Кожен свайп кола просто фіксується у часі";
-/* onboarding event details happenings display scrollable */
-"onboarding.eventDetails.happeningsList.scrollable" = "Він прокручується вертикально. Спробуй будь ласка";
-/* onboarding event details stats display description */
-"onboarding.eventDetails.stats.description" = "Статистика. Денні та тижневі цифри, які можуть бути тобі цікаві";
-/* onboarding event details stats display scrollable */
-"onboarding.eventDetails.stats.scrollable" = "Вона прокручується горизонтально. Спробуй будь ласка";
-/* onboarding event details week display description */
-"onboarding.eventDetails.week.description" = "Розподілення по тижнях. Дуже корисно для будування корисної звички на тижневій основі";
-/* onboarding event details week display scrollable */
-"onboarding.eventDetails.week.scrollable" = "Воно також прокручується горизонтально. Спробуй будь ласка";
-/* onboarding event details final */
-"onboarding.eventDetails.final" = "Це все що потрібно знати для того щоб цей застосунок був корисним.\n\nНа завершення я рекомендую відвідати розділ з налаштуваннями (проведіть вгору на основному екрані щоб відкрити) і встановити собі нагадайку, вона точно стане у нагоді!\n\nВдалого рахування!";
-
-/*
-    UISwipingSelector button settings
-    Settings screen title
-*/
-"button.settings" = "Налаштування";
-/*
-    UISwipingSelector button
-    UISwipingSelector accessory
-    UIMovableTextView accessory
- */
-"button.add.event" = "Додати";
-
-/*
-    UIReminderInput accessory
-    UISwipingSelector accessory
-    UIMovableTextView accessory
- */
-"button.cancel" = "Відмінити";
-/*
-    EventsList swipe gesture actions
- */
-"button.contextual.delete" = "Видалити";
-"button.contextual.rename" = "Перейменувати";
-
-/*
-    Event details lock screen button
- */
-"button.lockScreen.add" = "Додати на екран блокування";
-"button.lockScreen.remove" = "Прибрати з екрану блокування";
-
-/*
-    Notifications actions
- */
-"notification.action.add" = "Додати";
-
-/* UIReminderInput button submit title */
-"button.reminder.submit.title" = "Обрати час";
-/* UIReminderInput button cancel time */
-"button.reminder.cancel.time" = "Назад";
-/* UIReminderInput button submit time */
-"button.reminder.submit.time" = "Додати нагадайку";
-
-/* settings button onboarding */
-"button.settings.onboarding" = "Подивитись обучалку";
-/* settings button reminders */
-"button.settings.reminders" = "Налаштувати нагадайку";
-/* settings footer */
-"label.footer" = "Виковано з ❤️ в 🇺🇦";
-
-/* entries list empty */
-"empty.EventsList" = "Додай подію яку хочеш відслідковувати";
-"empty.EventsList.firstName" = "Коротка назва чи emoji";
-"empty.EventsList.firstHappening" = "Проведи коли подія сталася";
-"empty.EventsList.firstDetailsInspection" = "Натисни щоб подивитись відмітки";
-
-/*
-    Reminders screen
- */
-"label.remindersTitle" = "Нагадайки";
-"label.addReminder" = "Додати нагадайку";
-"label.existingReminders" = "Існуючі нагадайки (проведіть ліворуч щоб видалити)";
-"placeholder.inputReminder.title" = "Текст нагадайки";
-
-/*
-    EventDetails screen
- */
-"label.stats.average.week" = "Середнє за тиждень";
-"label.stats.average.day" = "Середнє за день";
-"label.stats.weekThis.total" = "Всього за цей тиждень";
-"label.stats.weekLast.total" = "Всього за минулий тиждень";
+"goalsInput.title" = "Завдання на день";

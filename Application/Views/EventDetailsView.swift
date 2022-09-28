@@ -14,7 +14,7 @@ class EventDetailsView: UIView {
 
     let goalsButton: UIView = {
         let label = UILabel(al: true)
-        label.text = "Configure goal"
+        label.text = String(localizationId: "eventDetails.buttonGoalsInput")
         label.textAlignment = .center
         label.font = UIHelper.fontSmallBold
         label.textColor = UIHelper.brand
@@ -47,8 +47,10 @@ class EventDetailsView: UIView {
             week,
             goalsButton,
             clock,
-            makeStatRow(labelAmount: total, description: "Total"),
-            makeStatRow(labelAmount: dayAverage, description: "Day average"),
+            makeStatRow(labelAmount: total,
+                        description: String(localizationId: "eventDetails.total")),
+            makeStatRow(labelAmount: dayAverage,
+                        description: String(localizationId: "eventDetails.dayAverage")),
             bottomSpacing)
 
         scroll.viewContent.setCustomSpacing(UIHelper.spacing, after: goalsButton)

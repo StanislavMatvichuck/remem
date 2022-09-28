@@ -34,7 +34,7 @@ class EventsListController: UIViewController {
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() { title = "Events list" }
+    override func viewDidLoad() { title = String(localizationId: "eventsList.title") }
 }
 
 // MARK: - UITableViewDataSource
@@ -67,12 +67,16 @@ extension EventsListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let event = viewModel.event(at: indexPath.row) else { return nil }
 
-        let renameAction = UIContextualAction(style: .normal, title: EventsListView.rename) { _, _, completion in
+        let renameAction = UIContextualAction(style: .normal,
+                                              title: String(localizationId: "button.rename")) {
+            _, _, completion in
             self.viewModel.selectForRenaming(event: event)
             completion(true)
         }
 
-        let deleteAction = UIContextualAction(style: .destructive, title: EventsListView.delete) { _, _, completion in
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: String(localizationId: "button.delete")) {
+            _, _, completion in
             self.viewModel.selectForRemoving(event: event)
             completion(true)
         }
