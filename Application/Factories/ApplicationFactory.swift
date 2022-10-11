@@ -17,11 +17,10 @@ class ApplicationFactory {
     let eventEditUseCase: EventEditUseCasing
     // MARK: - Init
     init() {
-        func makeCoordinator(widgetsUseCase: WidgetsUseCasing) -> Coordinator {
+        func makeCoordinator() -> Coordinator {
             let navController = Self.makeStyledNavigationController()
             navController.navigationBar.prefersLargeTitles = true
-            let coordinator = Coordinator(navController: navController,
-                                          widgetsUseCase: widgetsUseCase)
+            let coordinator = Coordinator(navController: navController)
             return coordinator
         }
 
@@ -38,7 +37,7 @@ class ApplicationFactory {
         self.eventEditUseCase = EventEditUseCase(repository: repository,
                                                  widgetUseCase: widgetsUseCase)
 
-        let coordinator = makeCoordinator(widgetsUseCase: widgetsUseCase)
+        let coordinator = makeCoordinator()
 
         self.coordinator = coordinator
 

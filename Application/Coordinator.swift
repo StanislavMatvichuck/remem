@@ -13,16 +13,12 @@ class Coordinator: NSObject, Coordinating {
     // MARK: - Properties
     weak var applicationFactory: ApplicationFactory?
     var detailsFactory: EventDetailsFactoring?
-    var widgetUseCase: WidgetsUseCasing?
 
     let navController: UINavigationController
 
     // MARK: - Init
-    init(navController: UINavigationController,
-         widgetsUseCase: WidgetsUseCasing)
-    {
+    init(navController: UINavigationController) {
         self.navController = navController
-        self.widgetUseCase = widgetsUseCase
         super.init()
     }
 }
