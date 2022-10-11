@@ -31,7 +31,6 @@ class WidgetFileWritingTests: XCTestCase {
         // given
         let reader = WidgetFileReader()
         let mockViewModel = WidgetViewModel(
-            date: .now,
             viewModel: [
                 WidgetRowViewModel(name: "Event name",
                                    amount: "0",

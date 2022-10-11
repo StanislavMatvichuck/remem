@@ -64,6 +64,7 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
             let newCdHappening = CDHappening(entity: CDHappening.entity(), insertInto: context)
             newCdHappening.dateCreated = happening.dateCreated
             newCdHappening.value = happening.value
+            newCdHappening.event = entity
             cdHappenings.append(newCdHappening)
         }
 
@@ -77,7 +78,7 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
 
         var cdGoals = [CDGoal]()
 
-        for weekday in Goal.WeekDay.allCases {
+        for weekday in WeekDay.allCases {
             for goal in model.goals(at: weekday) {
                 let newCdGoal = CDGoal(entity: CDGoal.entity(), insertInto: context)
                 newCdGoal.dateCreated = goal.dateCreated

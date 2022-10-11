@@ -89,7 +89,7 @@ public extension WidgetRowViewModel {
         }()
 
         let goalReached: Bool = {
-            event.goal(at: todayDate)?.isReached(at: todayDate) ?? false
+            event.isGoalReached(at: todayDate)
         }()
 
         self.init(name: name,

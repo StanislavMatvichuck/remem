@@ -12,16 +12,7 @@ public enum EventManipulationError: Error {
 }
 
 public class Event {
-    public typealias Goals = [Goal.WeekDay: [Goal]]
-    public static let defaultGoals: Goals = [
-        Goal.WeekDay.monday: [],
-        Goal.WeekDay.tuesday: [],
-        Goal.WeekDay.wednesday: [],
-        Goal.WeekDay.thursday: [],
-        Goal.WeekDay.friday: [],
-        Goal.WeekDay.saturday: [],
-        Goal.WeekDay.sunday: [],
-    ]
+    public typealias Goals = [WeekDay: [Goal]]
 
     public let id: String
     public var name: String
@@ -30,7 +21,15 @@ public class Event {
     public let dateCreated: Date
     public var dateVisited: Date?
 
-    private var goals: Goals = Event.defaultGoals
+    private var goals1: Goals = [
+        WeekDay.monday: [],
+        WeekDay.tuesday: [],
+        WeekDay.wednesday: [],
+        WeekDay.thursday: [],
+        WeekDay.friday: [],
+        WeekDay.saturday: [],
+        WeekDay.sunday: [],
+    ]
 
     // MARK: - Init
     public
@@ -60,15 +59,13 @@ public class Event {
          name: String,
          happenings: [Happening],
          dateCreated: Date,
-         dateVisited: Date?,
-         goals: Goals = defaultGoals)
+         dateVisited: Date?)
     {
         self.id = id
         self.name = name
         self.happenings = happenings
         self.dateCreated = dateCreated
         self.dateVisited = dateVisited
-        self.goals = goals
     }
 }
 
@@ -117,13 +114,12 @@ public extension Event {
     // Goals
 
     func goal(at date: Date) -> Goal? {
-        let accessorDay = Goal.WeekDay.make(date)
+        let accessorDay = WeekDay.make(date)
+        let goals = goals(at: accessorDay)
 
         var resultingGoal: Goal?
 
-        if let goals = goals[accessorDay],
-           let endOfDayDate = date.endOfDay
-        {
+        if let endOfDayDate = date.endOfDay {
             for goal in goals {
                 if endOfDayDate >= goal.dateCreated { resultingGoal = goal }
             }
@@ -132,28 +128,42 @@ public extension Event {
         return resultingGoal
     }
 
-    func goals(at accessDay: Goal.WeekDay) -> [Goal] {
-        goals[accessDay] ?? [Goal]()
+    func goals(at accessDay: WeekDay) -> [Goal] {
+        return goals1[accessDay] ?? [Goal]()
     }
 
     @discardableResult
-
     func addGoal(at dateCreated: Date, amount: Int) -> Goal {
-        let accessWeekday = Goal.WeekDay.make(dateCreated)
+        let accessWeekday = WeekDay.make(dateCreated)
 
-        if let existingGoal = goals[accessWeekday]?.last,
+        if let existingGoal = goals1[accessWeekday]?.last,
            existingGoal.amount == amount
         {
             return existingGoal
         }
 
-        let newGoal = Goal(amount: amount, event: self, dateCreated: dateCreated)
+        let newGoal = Goal(amount: amount, dateCreated: dateCreated)
 
-        var mutableGoalsArray = goals[accessWeekday]
+        var mutableGoalsArray = goals1[accessWeekday]
         mutableGoalsArray?.append(newGoal)
-        goals[accessWeekday] = mutableGoalsArray
+        goals1[accessWeekday] = mutableGoalsArray
 
         return newGoal
+    }
+
+    func isGoalReached(at date: Date) -> Bool {
+        guard
+            let goal = goal(at: date),
+            goal.amount != 0 // think about this condition
+        else { return false }
+
+        let happenings = happenings(forDay: date)
+
+        let happeningsTotalValue = happenings.reduce(0) { partialResult, h in
+            partialResult + h.value
+        }
+
+        return happeningsTotalValue >= goal.amount
     }
 }
 

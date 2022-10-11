@@ -5,8 +5,8 @@
 //  Created by Stanislav Matvichuck on 27.08.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 import IosUseCases
 
 public protocol EventCellViewModeling:
@@ -61,7 +61,7 @@ public class EventCellViewModel: EventCellViewModeling {
 
     public var goalReached: Bool {
         let todayDate = Date.now
-        return event.goal(at: todayDate)?.isReached(at: todayDate) ?? false
+        return event.isGoalReached(at: todayDate)
     }
 
     // EventCellViewModelingEvents

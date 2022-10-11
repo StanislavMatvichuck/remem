@@ -26,6 +26,7 @@
 		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
+		0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
@@ -50,7 +51,6 @@
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
-		08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		086937FD28E1B1E5000F5A56 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 085888E328DC8040004A8184 /* WidgetPreview.plist */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -298,6 +298,7 @@
 		080A67A128D1E46800889A97 /* IosUseCasesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IosUseCasesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080AA96C28D768350038C21A /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
+		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
 		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -635,6 +636,7 @@
 		0867A2D628D469F500E0842C /* DataLayerTests */ = {
 			isa = PBXGroup;
 			children = (
+				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
 			);
 			path = DataLayerTests;
 			sourceTree = "<group>";
@@ -885,7 +887,6 @@
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
 			isa = PBXGroup;
 			children = (
-				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
 				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
 				08E5B91828998053000B08BC /* EntityMapper.swift */,
 				08E5B91A28998088000B08BC /* EventEntityMapper.swift */,
@@ -1359,7 +1360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08690C3328D8CD7C00901E54 /* CoreDataEventsRepositoryTests.swift in Sources */,
+				0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,21 +1593,6 @@
 			};
 			name = Debug;
 		};
-		080A679B28D1E44C00889A97 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Onboarding;
-		};
 		080A679C28D1E44C00889A97 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1639,24 +1625,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		080A67AA28D1E46800889A97 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememIOSInterfaceAdaptersTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Onboarding;
 		};
 		080A67AB28D1E46800889A97 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1705,35 +1673,6 @@
 			};
 			name = Debug;
 		};
-		0826ACA028C86ECF0021D607 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Widgets/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Onboarding;
-		};
 		0826ACA128C86ECF0021D607 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1763,100 +1702,6 @@
 			};
 			name = Release;
 		};
-		0831EB9027DA974F00A910D5 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Onboarding;
-		};
-		0831EB9127DA974F00A910D5 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Application/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Remem;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.remem.onboarding;
-				PRODUCT_NAME = Onboarding;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Onboarding;
-		};
 		083BECF628D0A31A009157FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1870,20 +1715,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		083BECF728D0A31A009157FD /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Onboarding;
 		};
 		083BECF828D0A31A009157FD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1930,38 +1761,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		0867A2E028D469F500E0842C /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayer;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Onboarding;
 		};
 		0867A2E128D469F500E0842C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2015,26 +1814,6 @@
 			};
 			name = Debug;
 		};
-		0867A2E328D469F500E0842C /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6H38BVYL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
-			};
-			name = Onboarding;
-		};
 		0867A2E428D469F500E0842C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2081,32 +1860,6 @@
 			};
 			name = Debug;
 		};
-		0870EEFF2809B81100336759 /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
-			};
-			name = Onboarding;
-		};
 		0870EF002809B81100336759 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2149,24 +1902,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		087ED42328D0A54C0085A37D /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Onboarding;
 		};
 		087ED42428D0A54C0085A37D /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2217,38 +1952,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		08B3571228E06A7C00770B9A /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.WidgetsFramework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Onboarding;
 		};
 		08B3571328E06A7C00770B9A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2301,26 +2004,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Debug;
-		};
-		08B3571628E06A7C00770B9A /* Onboarding */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6H38BVYL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.WidgetsFrameworkTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
-			};
-			name = Onboarding;
 		};
 		08B3571728E06A7C00770B9A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2531,7 +2214,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				080A679A28D1E44C00889A97 /* Debug */,
-				080A679B28D1E44C00889A97 /* Onboarding */,
 				080A679C28D1E44C00889A97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2541,7 +2223,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				080A67A928D1E46800889A97 /* Debug */,
-				080A67AA28D1E46800889A97 /* Onboarding */,
 				080A67AB28D1E46800889A97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2551,7 +2232,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0826AC9F28C86ECF0021D607 /* Debug */,
-				0826ACA028C86ECF0021D607 /* Onboarding */,
 				0826ACA128C86ECF0021D607 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2561,7 +2241,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				083BECF628D0A31A009157FD /* Debug */,
-				083BECF728D0A31A009157FD /* Onboarding */,
 				083BECF828D0A31A009157FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2571,7 +2250,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0867A2DF28D469F500E0842C /* Debug */,
-				0867A2E028D469F500E0842C /* Onboarding */,
 				0867A2E128D469F500E0842C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2581,7 +2259,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0867A2E228D469F500E0842C /* Debug */,
-				0867A2E328D469F500E0842C /* Onboarding */,
 				0867A2E428D469F500E0842C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2591,7 +2268,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0870EEFE2809B81100336759 /* Debug */,
-				0870EEFF2809B81100336759 /* Onboarding */,
 				0870EF002809B81100336759 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2601,7 +2277,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				087ED42228D0A54C0085A37D /* Debug */,
-				087ED42328D0A54C0085A37D /* Onboarding */,
 				087ED42428D0A54C0085A37D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2611,7 +2286,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08B3571128E06A7C00770B9A /* Debug */,
-				08B3571228E06A7C00770B9A /* Onboarding */,
 				08B3571328E06A7C00770B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2621,7 +2295,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08B3571528E06A7C00770B9A /* Debug */,
-				08B3571628E06A7C00770B9A /* Onboarding */,
 				08B3571728E06A7C00770B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2631,7 +2304,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08D5122C27870D2600C2037F /* Debug */,
-				0831EB9027DA974F00A910D5 /* Onboarding */,
 				08D5122D27870D2600C2037F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2641,7 +2313,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				08D5122F27870D2600C2037F /* Debug */,
-				0831EB9127DA974F00A910D5 /* Onboarding */,
 				08D5123027870D2600C2037F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2653,6 +2324,7 @@
 		083D3893279AE81100134A15 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */,
 				088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */,
 				08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */,
 				08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */,

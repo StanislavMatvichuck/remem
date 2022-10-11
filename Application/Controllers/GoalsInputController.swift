@@ -54,7 +54,7 @@ class GoalsInputController: UIViewController {
     }
 
     private func configurePickerDefaultValue() {
-        for weekday in Goal.WeekDay.allCases {
+        for weekday in WeekDay.allCases {
             let pickerComponent = componentForWeekDay(weekDay: weekday)
             let goalAmount = viewModel.amount(forWeekDay: weekday)
             viewRoot.picker.selectRow(goalAmount, inComponent: pickerComponent, animated: false)
@@ -74,14 +74,14 @@ extension GoalsInputController: UIPickerViewDelegate {
                     didSelectRow row: Int,
                     inComponent component: Int)
     {
-        let todayWeekDay = Goal.WeekDay.make(.now)
+        let todayWeekDay = WeekDay.make(.now)
         let todayPickerIndex = componentForWeekDay(weekDay: todayWeekDay)
         let daysDifference = todayPickerIndex - component
         let date = Date.now.days(ago: daysDifference)
         viewModel.select(newAmount: row, date: date)
     }
 
-    private func componentForWeekDay(weekDay: Goal.WeekDay) -> Int {
+    private func componentForWeekDay(weekDay: WeekDay) -> Int {
         switch weekDay {
         case .monday: return 0
         case .tuesday: return 1

@@ -57,7 +57,7 @@ class GoalTests: XCTestCase {
 
             sut.addGoal(at: .now, amount: 2)
 
-            XCTAssertEqual(sut.goal(at: .now)?.isReached(at: .now), goalReached)
+            XCTAssertEqual(sut.isGoalReached(at: .now), goalReached)
         }
     }
 
@@ -67,7 +67,7 @@ class GoalTests: XCTestCase {
 
             sut.addHappening(date: .now)
 
-            XCTAssertEqual(sut.goal(at: .now)?.isReached(at: .now), goalReached)
+            XCTAssertEqual(sut.isGoalReached(at: .now), goalReached)
         }
     }
 
@@ -79,8 +79,15 @@ class GoalTests: XCTestCase {
 
             try sut.remove(happening: happening)
 
-            XCTAssertEqual(sut.goal(at: .now)?.isReached(at: .now), goalReached)
+            XCTAssertEqual(sut.isGoalReached(at: .now), goalReached)
         }
+    }
+
+    func test_goalProducesMemoryLeak() {
+        var sut: Event? = makeEventWithGoal()
+        XCTAssertNotNil(sut)
+        sut = nil
+        XCTAssertNil(sut)
     }
 }
 

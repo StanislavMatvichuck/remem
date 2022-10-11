@@ -48,7 +48,7 @@ public class WeekCellViewModel: WeekCellViewModeling {
             if overriddenGoalsAmount == 0 { return false }
             return happeningsTimings.count >= overriddenGoalsAmount
         } else {
-            return event.goal(at: date)?.isReached(at: date) ?? false
+            return event.isGoalReached(at: date)
         }
     }
 
@@ -81,8 +81,8 @@ extension WeekCellViewModel: EventEditUseCasingDelegate {
 
 // MARK: - GoalEditUseCasingDelegate
 extension WeekCellViewModel: GoalEditUseCasingDelegate {
-    public func update(amount: Int, forDay: Goal.WeekDay) {
-        if Goal.WeekDay.make(date) == forDay {
+    public func update(amount: Int, forDay: WeekDay) {
+        if WeekDay.make(date) == forDay {
             overriddenGoalsAmount = amount
             delegate?.highlightGoalSelection(amount: amount)
         }

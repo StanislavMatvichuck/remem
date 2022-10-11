@@ -14,7 +14,7 @@ public protocol GoalsInputViewModeling:
     GoalsInputViewModelEvents {}
 
 public protocol GoalsInputViewModelState {
-    func amount(forWeekDay: Goal.WeekDay) -> Int
+    func amount(forWeekDay: WeekDay) -> Int
 }
 
 public protocol GoalsInputViewModelEvents {
@@ -37,7 +37,7 @@ public class GoalsInputViewModel: GoalsInputViewModeling {
     }
 
     // GoalsInputViewModelState
-    public func amount(forWeekDay: Goal.WeekDay) -> Int {
+    public func amount(forWeekDay: WeekDay) -> Int {
         event.goals(at: forWeekDay).last?.amount ?? 0
     }
 

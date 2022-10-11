@@ -23,7 +23,7 @@ public class GoalEditUseCase: GoalEditUseCasing {
     private let eventEditUseCase: EventEditUseCasing
     private let delegates: MulticastDelegate<GoalEditUseCasingDelegate>
 
-    private var state = [Goal.WeekDay: (Int, Date)]()
+    private var state = [WeekDay: (Int, Date)]()
     // MARK: - Init
     public init(event: Event, eventEditUseCase: EventEditUseCasing) {
         self.event = event
@@ -41,9 +41,9 @@ public class GoalEditUseCase: GoalEditUseCasing {
     public func cancel() { delegates.call { $0.dismiss() } }
 
     public func update(amount: Int, forDate: Date) {
-        let weekday = Goal.WeekDay.make(forDate)
+        let weekday = WeekDay.make(forDate)
         state.updateValue((amount, forDate), forKey: weekday)
-        delegates.call { $0.update(amount: amount, forDay: Goal.WeekDay.make(forDate)) }
+        delegates.call { $0.update(amount: amount, forDay: WeekDay.make(forDate)) }
     }
 
     public func add(delegate: GoalEditUseCasingDelegate) { delegates.addDelegate(delegate) }
@@ -51,6 +51,6 @@ public class GoalEditUseCase: GoalEditUseCasing {
 }
 
 public protocol GoalEditUseCasingDelegate: AnyObject {
-    func update(amount: Int, forDay: Goal.WeekDay)
+    func update(amount: Int, forDay: WeekDay)
     func dismiss()
 }
