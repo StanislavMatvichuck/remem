@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 public protocol EventsListUseCasing {
-    func allEvents() -> [Event]
+    func makeAllEvents() -> [Event]
     func add(name: String)
     func remove(_: Event)
 
@@ -32,14 +32,12 @@ public class EventsListUseCase: EventsListUseCasing {
     }
 
     // EventsListUseCasing
-    public func allEvents() -> [Event] { repository.makeAllEvents() }
+    public func makeAllEvents() -> [Event] { repository.makeAllEvents() }
     public func add(name: String) {
-        let newEvent = Event(name: name)
+        let createdEvent = Event(name: name)
 
-        repository.save(newEvent)
-
-        guard let addedEvent = repository.event(byId: newEvent.id) else { return }
-        delegates.call { $0.added(event: addedEvent) }
+        repository.save(createdEvent)
+        delegates.call { $0.added(event: createdEvent) }
         widgetUseCase.update()
     }
 

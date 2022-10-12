@@ -78,7 +78,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
 
     func test_save_eventWithGoals() {
         let newEvent = givenSavedDefaultEvent()
-        let _ = newEvent.addGoal(at: .now, amount: 1)
+        _ = newEvent.addGoal(at: .now, amount: 1)
         let goal2 = newEvent.addGoal(at: .now.addingTimeInterval(5.0), amount: 2)
         let goal3 = newEvent.addGoal(at: .now.addingTimeInterval(60 * 60 * 24), amount: 3)
 

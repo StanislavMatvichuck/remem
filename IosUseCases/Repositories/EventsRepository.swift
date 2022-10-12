@@ -8,10 +8,7 @@
 import Domain
 
 public protocol EventsRepositoryInterface {
-    func save(_: Event)
-
     func makeAllEvents() -> [Event]
-    func event(byId: String) -> Event?
-
+    func save(_: Event)
     func delete(_: Event)
 }

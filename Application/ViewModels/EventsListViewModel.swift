@@ -46,7 +46,7 @@ class EventsListViewModel: EventsListViewModeling {
          editUseCase: EventEditUseCasing,
          factory: EventsListFactoryInterface)
     {
-        self.events = listUseCase.allEvents()
+        self.events = listUseCase.makeAllEvents()
         self.factory = factory
         self.listUseCase = listUseCase
         self.editUseCase = editUseCase
@@ -95,7 +95,7 @@ class EventsListViewModel: EventsListViewModeling {
 extension EventsListViewModel: EventsListUseCasingDelegate, EventEditUseCasingDelegate {
     // EventsListUseCaseDelegate
     func added(event: Event) {
-        events = listUseCase.allEvents()
+        events = listUseCase.makeAllEvents()
 
         if let index = events.firstIndex(of: event) {
             delegate?.addEvent(at: index)
@@ -106,7 +106,7 @@ extension EventsListViewModel: EventsListUseCasingDelegate, EventEditUseCasingDe
 
     func removed(event: Event) {
         if let index = events.firstIndex(of: event) {
-            events = listUseCase.allEvents()
+            events = listUseCase.makeAllEvents()
             delegate?.remove(at: index)
         }
 
@@ -115,22 +115,29 @@ extension EventsListViewModel: EventsListUseCasingDelegate, EventEditUseCasingDe
 
     // EventEditUseCasingDelegate
     func added(happening: Happening, to: Event) {
-        events = listUseCase.allEvents()
+        events = listUseCase.makeAllEvents()
         delegate?.update()
     }
 
     func visited(event: Event) {
-        events = listUseCase.allEvents()
+        events = listUseCase.makeAllEvents()
         delegate?.update()
     }
 
     func removed(happening: Happening, from: Event) {
-        events = listUseCase.allEvents()
+        events = listUseCase.makeAllEvents()
         delegate?.update()
     }
 
-    func renamed(event: Event) {}
-    func added(goal: Goal, to: Event) {}
+    func renamed(event: Event) {
+        guard let index = events.firstIndex(of: event) else { return }
+        delegate?.update(at: index)
+    }
+
+    func added(goal: Goal, to event: Event) {
+        guard let index = events.firstIndex(of: event) else { return }
+        delegate?.update(at: index)
+    }
 }
 
 // MARK: - EventsListViewModelDelegate
