@@ -25,8 +25,6 @@ class EventsListController: UIViewController {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        viewRoot.table.dataSource = self
-        viewRoot.table.delegate = self
         setupEventHandlers()
     }
 
@@ -34,7 +32,16 @@ class EventsListController: UIViewController {
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() { title = String(localizationId: "eventsList.title") }
+    override func viewDidLoad() {
+        title = String(localizationId: "eventsList.title")
+        setupTableView()
+    }
+
+    private func setupTableView() {
+        viewRoot.table.dataSource = self
+        viewRoot.table.delegate = self
+        viewRoot.table.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource
