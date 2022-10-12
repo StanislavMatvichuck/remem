@@ -32,7 +32,7 @@ public class EventsListUseCase: EventsListUseCasing {
     }
 
     // EventsListUseCasing
-    public func allEvents() -> [Event] { repository.all() }
+    public func allEvents() -> [Event] { repository.makeAllEvents() }
     public func add(name: String) {
         let newEvent = Event(name: name)
 

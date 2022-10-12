@@ -27,14 +27,14 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func testInit() {
-        XCTAssertEqual(sut.all().count, 0)
+        XCTAssertEqual(sut.makeAllEvents().count, 0)
     }
 
     func test_save_newEvent() {
         let newEvent = givenSavedDefaultEvent()
 
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
-        XCTAssertEqual(sut.all().count, 1)
+        XCTAssertEqual(sut.makeAllEvents().count, 1)
     }
 
     func test_save_eventWithHappening() {
@@ -114,7 +114,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     func test_delete_success() {
         let event = givenSavedDefaultEvent()
         sut.delete(event)
-        XCTAssertEqual(sut.all().count, 0)
+        XCTAssertEqual(sut.makeAllEvents().count, 0)
     }
 }
 

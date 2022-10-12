@@ -17,7 +17,7 @@ public class WidgetsUseCase: WidgetsUseCasing {
     }
 
     public func update() {
-        let events = repository.all()
+        let events = repository.makeAllEvents()
         let writer = WidgetFileWriter()
         writer.update(eventsList: events, for: .medium)
         WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
