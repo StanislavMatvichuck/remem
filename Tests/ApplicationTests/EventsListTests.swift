@@ -22,8 +22,7 @@ class EventsListTests: XCTestCase {
 
     func test_viewDidLoad_tableIsConfigured() throws {
         let sut = try makeSUT()
-
-        let view = try XCTUnwrap(sut.view as? EventsListView)
+        let view = try getView(of: sut)
 
         XCTAssertNotNil(view.table.dataSource)
         XCTAssertNotNil(view.table.delegate)
@@ -31,8 +30,7 @@ class EventsListTests: XCTestCase {
 
     func test_viewDidLoad_hasThreeSections() throws {
         let sut = try makeSUT()
-
-        let view = try XCTUnwrap(sut.view as? EventsListView)
+        let view = try getView(of: sut)
 
         XCTAssertEqual(view.table.numberOfSections, EventsListController.Section.allCases.count)
         XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.hint.rawValue), 1)
