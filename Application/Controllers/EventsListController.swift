@@ -8,7 +8,7 @@
 import UIKit
 
 class EventsListController: UIViewController {
-    enum Section: Int {
+    enum Section: Int, CaseIterable {
         case hint
         case events
         case footer

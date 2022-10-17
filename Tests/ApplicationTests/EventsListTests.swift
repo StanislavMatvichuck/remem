@@ -34,20 +34,25 @@ class EventsListTests: XCTestCase {
 
         let view = try XCTUnwrap(sut.view as? EventsListView)
 
-        XCTAssertEqual(view.table.numberOfSections, 3)
-        XCTAssertEqual(view.table.numberOfRows(inSection: 0), 1)
-        XCTAssertEqual(view.table.numberOfRows(inSection: 1), 0)
-        XCTAssertEqual(view.table.numberOfRows(inSection: 2), 1)
+        XCTAssertEqual(view.table.numberOfSections, EventsListController.Section.allCases.count)
+        XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.hint.rawValue), 1)
+        XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.events.rawValue), 0)
+        XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.footer.rawValue), 1)
     }
 
     func test_viewDidLoad_rendersEmptyHint() throws {
         let sut = try makeSUT()
+        let view = try getView(of: sut)
+        let hintText = try hintText(of: view)
 
-        let view = try XCTUnwrap(sut.view as? EventsListView)
-        let cellIndex = IndexPath(row: 0, section: 0)
-        let hintCell = try XCTUnwrap(view.table.cellForRow(at: cellIndex) as? EventsListHintCell)
+        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.empty"))
+    }
 
-        XCTAssertEqual(hintCell.label.text, String(localizationId: "eventsList.hint.empty"))
+    func test_viewDidLoad_gestureHintIsNotVisible() throws {
+        let sut = try makeSUT()
+        let gestureHint = try getView(of: sut).swipeHint
+
+        XCTAssertNil(gestureHint.superview)
     }
 }
 
@@ -61,5 +66,18 @@ private extension EventsListTests {
         eventsListVC.loadViewIfNeeded()
 
         return eventsListVC
+    }
+
+    func getView(of controller: EventsListController) throws -> EventsListView {
+        let view = try XCTUnwrap(controller.view as? EventsListView)
+        return view
+    }
+
+    func hintText(of view: EventsListView) throws -> String? {
+        let table = view.table
+        let dataSource = table.dataSource
+        let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
+        let hintCell = try XCTUnwrap(dataSource?.tableView(table, cellForRowAt: index) as? EventsListHintCell)
+        return hintCell.label.text
     }
 }
