@@ -54,6 +54,16 @@ class EventsListTests: XCTestCase {
 
         XCTAssertNil(gestureHint.superview)
     }
+
+    func test_viewDidLoad_rendersAddButton() throws {
+        let sut = try makeSUT()
+        let view = try getView(of: sut)
+        let button = try addButton(of: view)
+        let buttonText = (button.subviews.first as! UILabel).text
+
+        XCTAssertEqual(buttonText, "+")
+        XCTAssertEqual(button.backgroundColor?.cgColor, UIHelper.brand.cgColor)
+    }
 }
 
 private extension EventsListTests {
@@ -79,5 +89,13 @@ private extension EventsListTests {
         let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
         let hintCell = try XCTUnwrap(dataSource?.tableView(table, cellForRowAt: index) as? EventsListHintCell)
         return hintCell.label.text
+    }
+
+    func addButton(of view: EventsListView) throws -> UIView {
+        let table = view.table
+        let dataSource = table.dataSource
+        let index = IndexPath(row: 0, section: EventsListController.Section.footer.rawValue)
+        let footerCell = try XCTUnwrap(dataSource?.tableView(table, cellForRowAt: index) as? EventsListFooterCell)
+        return footerCell.buttonAdd
     }
 }
