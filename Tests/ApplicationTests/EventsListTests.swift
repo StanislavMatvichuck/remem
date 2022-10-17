@@ -84,18 +84,20 @@ private extension EventsListTests {
     }
 
     func hintText(of view: EventsListView) throws -> String? {
-        let table = view.table
-        let dataSource = table.dataSource
         let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
-        let hintCell = try XCTUnwrap(dataSource?.tableView(table, cellForRowAt: index) as? EventsListHintCell)
+        let hintCell = try XCTUnwrap(cell(of: view, at: index) as? EventsListHintCell)
         return hintCell.label.text
     }
 
     func addButton(of view: EventsListView) throws -> UIView {
+        let index = IndexPath(row: 0, section: EventsListController.Section.footer.rawValue)
+        let footerCell = try XCTUnwrap(cell(of: view, at: index) as? EventsListFooterCell)
+        return footerCell.buttonAdd
+    }
+
+    func cell(of view: EventsListView, at indexPath: IndexPath) -> UITableViewCell? {
         let table = view.table
         let dataSource = table.dataSource
-        let index = IndexPath(row: 0, section: EventsListController.Section.footer.rawValue)
-        let footerCell = try XCTUnwrap(dataSource?.tableView(table, cellForRowAt: index) as? EventsListFooterCell)
-        return footerCell.buttonAdd
+        return dataSource?.tableView(table, cellForRowAt: indexPath)
     }
 }
