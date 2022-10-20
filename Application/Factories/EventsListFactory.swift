@@ -22,11 +22,16 @@ class EventsListFactory: EventsListFactoryInterface {
     }
 
     func makeEventsListController() -> EventsListController {
-        let viewRoot = EventsListView()
+        let viewRoot = makeView()
         let viewModel = makeEventsListViewModel()
         let controller = EventsListController(viewRoot: viewRoot, viewModel: viewModel)
         viewModel.delegate = controller
         return controller
+    }
+
+    func makeView() -> EventsListView {
+        let view = EventsListView()
+        return view
     }
 
     func makeEventsListViewModel() -> EventsListViewModel {

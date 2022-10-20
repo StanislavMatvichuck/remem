@@ -16,7 +16,15 @@ class ApplicationFactory {
     let eventsListUseCase: EventsListUseCasing
     let eventEditUseCase: EventEditUseCasing
     // MARK: - Init
-    init(inMemory: Bool = false) {
+    init() {
+        let inMemory: Bool = {
+            #if DEBUG
+            return CommandLine.arguments.contains("-inMemory")
+            #else
+            return false
+            #endif
+        }()
+
         func makeCoordinator() -> Coordinator {
             let navController = Self.makeStyledNavigationController()
             navController.navigationBar.prefersLargeTitles = true

@@ -66,10 +66,11 @@ class EventsListTests: XCTestCase {
 
 private extension EventsListTests {
     func makeSUT() throws -> EventsListController {
-        let applicationFactory = ApplicationFactory(inMemory: true)
-        let rootController = applicationFactory.makeRootViewController()
+        let scene = UIApplication.shared.connectedScenes.first
+        let windowScene = try XCTUnwrap(scene as? UIWindowScene)
+        let window = windowScene.keyWindow
 
-        let navigationVC = try XCTUnwrap(rootController as? UINavigationController)
+        let navigationVC = try XCTUnwrap(window?.rootViewController as? UINavigationController)
         let eventsListVC = try XCTUnwrap(navigationVC.viewControllers[0] as? EventsListController)
         eventsListVC.loadViewIfNeeded()
 
