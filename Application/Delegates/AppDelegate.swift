@@ -5,10 +5,8 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
-import CoreData
 import UIKit
 
-@main
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool

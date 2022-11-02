@@ -92,6 +92,9 @@
 		08B89A2828E3191A00F4B63B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2728E3191A00F4B63B /* EmptyView.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsListView.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */; };
+		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
+		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
+		08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
 		08D5122227870D2500C2037F /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5122127870D2500C2037F /* EventsListController.swift */; };
@@ -384,6 +387,9 @@
 		08B89A2728E3191A00F4B63B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
 		08C85FF128B4FB7800FF37D9 /* ApplicationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationFactory.swift; sourceTree = "<group>"; };
+		08CC50692906DE8200840385 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		08CC506B2906DEEC00840385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSceneDelegate.swift; sourceTree = "<group>"; };
 		08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		08D10F4A289587CC005453DD /* EventsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUseCase.swift; sourceTree = "<group>"; };
 		08D10F4C289598A0005453DD /* EventEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditUseCase.swift; sourceTree = "<group>"; };
@@ -682,6 +688,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				08CC50682906DE6300840385 /* Helpers */,
 				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListTests.swift */,
 			);
@@ -774,6 +781,15 @@
 			path = EventCell;
 			sourceTree = "<group>";
 		};
+		08CC50682906DE6300840385 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
+				08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
@@ -818,6 +834,7 @@
 				08D512312787135300C2037F /* Resources */,
 				08235E7128C5CC3F0026DED2 /* ViewModels */,
 				086DC6D12880578E0048F22F /* Views */,
+				08CC506B2906DEEC00840385 /* main.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1372,6 +1389,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0844342728F6DFF900A30FB2 /* EventsListTests.swift in Sources */,
+				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
+				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
 				0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */,
 			);
@@ -1460,6 +1479,7 @@
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
+				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
