@@ -10,54 +10,53 @@ import Domain
 import IosUseCases
 import XCTest
 
-class EventsListTests: XCTestCase {
-    func testInit() throws {
-        let sut = try makeSUT()
-        XCTAssertNotNil(sut)
+class EmptyEventsListControllerTests: XCTestCase {
+    private var sut: EventsListController!
+
+    override func setUp() {
+        super.setUp()
+        sut = makeSUT()
     }
 
-    func test_viewDidLoad_rendersTitle() throws {
-        let sut = try makeSUT()
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+
+    func test_viewDidLoad_hasTitle() {
         XCTAssertEqual(sut.title, String(localizationId: "eventsList.title"))
     }
 
     func test_viewDidLoad_tableIsConfigured() throws {
-        let sut = try makeSUT()
-        let view = try getView(of: sut)
-
         XCTAssertNotNil(view.table.dataSource)
         XCTAssertNotNil(view.table.delegate)
     }
 
-    func test_viewDidLoad_hasThreeSections() throws {
-        let sut = try makeSUT()
-        let view = try getView(of: sut)
+    func test_viewDidLoad_tableHasThreeSections() throws {
+        XCTAssertEqual(
+            view.table.numberOfSections,
+            EventsListController.Section.allCases.count
+        )
 
-        XCTAssertEqual(view.table.numberOfSections, EventsListController.Section.allCases.count)
         XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.hint.rawValue), 1)
         XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.events.rawValue), 0)
         XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.footer.rawValue), 1)
     }
 
     func test_viewDidLoad_rendersEmptyHint() throws {
-        let sut = try makeSUT()
-        let view = try getView(of: sut)
-        let hintText = try hintText(of: view)
+        let hintText = try hintText()
 
         XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.empty"))
     }
 
-    func test_viewDidLoad_gestureHintIsNotVisible() throws {
-        let sut = try makeSUT()
-        let gestureHint = try getView(of: sut).swipeHint
+    func test_viewDidLoad_gestureHintIsNotVisible() {
+        let gestureHint = view.swipeHint
 
         XCTAssertNil(gestureHint.superview)
     }
 
     func test_viewDidLoad_rendersAddButton() throws {
-        let sut = try makeSUT()
-        let view = try getView(of: sut)
-        let button = try addButton(of: view)
+        let button = try addButton()
         let buttonText = (button.subviews.first as! UILabel).text
 
         XCTAssertEqual(buttonText, "+")
@@ -65,8 +64,9 @@ class EventsListTests: XCTestCase {
     }
 }
 
-private extension EventsListTests {
-    func makeSUT() throws -> EventsListController {
+// MARK: - Private
+private extension EmptyEventsListControllerTests {
+    func makeSUT() -> EventsListController {
         let view = EventsListView()
         let viewModel = EventsListViewModelFake()
         let sut = EventsListController(viewRoot: view, viewModel: viewModel)
@@ -74,24 +74,21 @@ private extension EventsListTests {
         return sut
     }
 
-    func getView(of controller: EventsListController) throws -> EventsListView {
-        let view = try XCTUnwrap(controller.view as? EventsListView)
-        return view
-    }
+    var view: EventsListView { sut.view as! EventsListView }
 
-    func hintText(of view: EventsListView) throws -> String? {
+    func hintText() throws -> String? {
         let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
-        let hintCell = try XCTUnwrap(cell(of: view, at: index) as? EventsListHintCell)
+        let hintCell = try XCTUnwrap(cell(at: index) as? EventsListHintCell)
         return hintCell.label.text
     }
 
-    func addButton(of view: EventsListView) throws -> UIView {
+    func addButton() throws -> UIView {
         let index = IndexPath(row: 0, section: EventsListController.Section.footer.rawValue)
-        let footerCell = try XCTUnwrap(cell(of: view, at: index) as? EventsListFooterCell)
+        let footerCell = try XCTUnwrap(cell(at: index) as? EventsListFooterCell)
         return footerCell.buttonAdd
     }
 
-    func cell(of view: EventsListView, at indexPath: IndexPath) -> UITableViewCell? {
+    func cell(at indexPath: IndexPath) -> UITableViewCell? {
         let table = view.table
         let dataSource = table.dataSource
         return dataSource?.tableView(table, cellForRowAt: indexPath)
