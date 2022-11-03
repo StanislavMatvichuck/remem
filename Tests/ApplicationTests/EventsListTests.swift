@@ -10,8 +10,11 @@ import Domain
 import IosUseCases
 import XCTest
 
-class EmptyEventsListControllerTests: XCTestCase {
-    private var sut: EventsListController!
+class EmptyEventsListControllerTests:
+    XCTestCase,
+    EventsListControllerTestsHelpers
+{
+    var sut: EventsListController!
 
     override func setUp() {
         super.setUp()
@@ -68,10 +71,54 @@ class EmptyEventsListControllerTests: XCTestCase {
     }
 }
 
-private extension EmptyEventsListControllerTests {
-    func makeSUT() -> EventsListController {
+class SingleEventEventsListControllerTests:
+    XCTestCase,
+    EventsListControllerTestsHelpers
+{
+    var sut: EventsListController!
+
+    override func setUp() {
+        super.setUp()
+        sut = makeSUT(events: [Event(name: "event")])
+    }
+
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+
+    func test_viewDidLoad_rendersNormalAddButton() throws {
+        let footerIndex = IndexPath(
+            row: 0,
+            section: EventsListController.Section.footer.rawValue
+        )
+        let footerCell = sut.viewRoot.table.dataSource?.tableView(
+            sut.viewRoot.table,
+            cellForRowAt: footerIndex
+        )
+        let footer = try XCTUnwrap(footerCell as? EventsListFooterCell)
+        let button = footer.createEvent
+
+        XCTAssertFalse(button.isHighlighted)
+        XCTAssertEqual(
+            button.backgroundColor?.cgColor,
+            UIHelper.itemBackground.cgColor
+        )
+    }
+
+    func test_viewDidLoad_rendersFirstHappeningHint() {
+        XCTAssertEqual(hintText(), String(localizationId: "eventsList.hint.firstHappening"))
+    }
+}
+
+protocol EventsListControllerTestsHelpers {
+    var sut: EventsListController! { get set }
+}
+
+extension EventsListControllerTestsHelpers {
+    func makeSUT(events: [Event] = []) -> EventsListController {
         let view = EventsListView()
-        let viewModel = EventsListViewModelFake()
+        let viewModel = EventsListViewModelFake(events: events)
         let sut = EventsListController(viewRoot: view, viewModel: viewModel)
         sut.loadViewIfNeeded()
         return sut
@@ -100,38 +147,6 @@ private extension EmptyEventsListControllerTests {
         let table = view.table
         let dataSource = table.dataSource
         return dataSource?.tableView(table, cellForRowAt: indexPath)
-    }
-}
-
-
-class SingleEventEventsListControllerTests: XCTestCase {
-    func test_viewDidLoad_rendersNormalAddButton() throws {
-        let sut = makeSUT()
-
-        let footerIndex = IndexPath(
-            row: 0,
-            section: EventsListController.Section.footer.rawValue
-        )
-        let footerCell = sut.viewRoot.table.dataSource?.tableView(
-            sut.viewRoot.table,
-            cellForRowAt: footerIndex
-        )
-        let footer = try XCTUnwrap(footerCell as? EventsListFooterCell)
-        let button = footer.createEvent
-
-        XCTAssertFalse(button.isHighlighted)
-        XCTAssertEqual(
-            button.backgroundColor?.cgColor,
-            UIHelper.itemBackground.cgColor
-        )
-    }
-
-    private func makeSUT() -> EventsListController {
-        let view = EventsListView()
-        let viewModel = EventsListViewModelFake(events: [Event(name: "BOGUS")])
-        let sut = EventsListController(viewRoot: view, viewModel: viewModel)
-        sut.loadViewIfNeeded()
-        return sut
     }
 }
 
