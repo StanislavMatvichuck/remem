@@ -43,10 +43,8 @@ class EmptyEventsListControllerTests: XCTestCase {
         XCTAssertEqual(view.table.numberOfRows(inSection: EventsListController.Section.footer.rawValue), 1)
     }
 
-    func test_viewDidLoad_rendersEmptyHint() throws {
-        let hintText = try hintText()
-
-        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.empty"))
+    func test_viewDidLoad_rendersEmptyHint() {
+        XCTAssertEqual(hintText(), String(localizationId: "eventsList.hint.empty"))
     }
 
     func test_viewDidLoad_gestureHintIsNotVisible() {
@@ -76,10 +74,15 @@ private extension EmptyEventsListControllerTests {
 
     var view: EventsListView { sut.view as! EventsListView }
 
-    func hintText() throws -> String? {
+    func hintText() -> String {
         let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
-        let hintCell = try XCTUnwrap(cell(at: index) as? EventsListHintCell)
-        return hintCell.label.text
+
+        do {
+            let hintCell = try XCTUnwrap(cell(at: index) as? EventsListHintCell)
+            return hintCell.label.text ?? ""
+        } catch {
+            return ""
+        }
     }
 
     func addButton() throws -> UIView {

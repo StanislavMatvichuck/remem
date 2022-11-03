@@ -7,11 +7,16 @@
 
 import UIKit
 
+// enabled/disabled state must be expressed in code
+// variant: UIButton
+// variant: custom UIView subclass
+// variant: getter of UIKit properties of view
+
 class EventsListFooterCell: UITableViewCell {
     static let reuseIdentifier = "EventsListFooterCell"
 
     // MARK: - Properties
-    lazy var buttonAdd: UIView = {
+    var buttonAdd: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = .r2
         view.layer.borderWidth = 3
@@ -30,7 +35,7 @@ class EventsListFooterCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        setup()
+        setupLayout()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -38,7 +43,7 @@ class EventsListFooterCell: UITableViewCell {
 
 // MARK: - Private
 extension EventsListFooterCell {
-    private func setup() {
+    private func setupLayout() {
         backgroundColor = .clear
 
         contentView.addSubview(buttonAdd)
