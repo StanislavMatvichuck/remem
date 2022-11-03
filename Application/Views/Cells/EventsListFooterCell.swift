@@ -7,28 +7,28 @@
 
 import UIKit
 
-// enabled/disabled state must be expressed in code
-// variant: UIButton
-// variant: custom UIView subclass
-// variant: getter of UIKit properties of view
-
 class EventsListFooterCell: UITableViewCell {
     static let reuseIdentifier = "EventsListFooterCell"
 
     // MARK: - Properties
-    var buttonAdd: UIView = {
-        let view = UIView(al: true)
-        view.layer.cornerRadius = .r2
-        view.layer.borderWidth = 3
+    var createEvent: UIButton = {
+        let button = UIButton(al: true)
+        let title = NSAttributedString(
+            string: String(localizationId: "button.create"),
+            attributes: [
+                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+            ])
 
-        let label = UILabel(al: true)
-        label.text = "+"
-        label.textAlignment = .center
-        label.font = UIHelper.fontBold
+        button.setAttributedTitle(title, for: .normal)
+        button.setAttributedTitle(title, for: .highlighted)
+        
+        button.isHighlighted = true
 
-        view.addAndConstrain(label)
+        button.backgroundColor = UIHelper.brand
+        button.layer.cornerRadius = .r2
+        button.layer.borderWidth = 3
 
-        return view
+        return button
     }()
 
     // MARK: - Init
@@ -46,16 +46,16 @@ extension EventsListFooterCell {
     private func setupLayout() {
         backgroundColor = .clear
 
-        contentView.addSubview(buttonAdd)
+        contentView.addSubview(createEvent)
 
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(equalToConstant: EventCell.height),
-            buttonAdd.heightAnchor.constraint(equalToConstant: .d2),
-            buttonAdd.widthAnchor.constraint(equalTo: widthAnchor,
-                                             constant: -2 * UIHelper.spacingListHorizontal),
+            createEvent.heightAnchor.constraint(equalToConstant: .d2),
+            createEvent.widthAnchor.constraint(equalTo: contentView.widthAnchor,
+                                               constant: -2 * UIHelper.spacingListHorizontal),
 
-            buttonAdd.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonAdd.centerYAnchor.constraint(equalTo: centerYAnchor),
+            createEvent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            createEvent.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
 }

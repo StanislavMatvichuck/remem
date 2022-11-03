@@ -53,12 +53,18 @@ class EmptyEventsListControllerTests: XCTestCase {
         XCTAssertNil(gestureHint.superview)
     }
 
-    func test_viewDidLoad_rendersAddButton() throws {
+    func test_viewDidLoad_rendersHighlightedAddButton() throws {
         let button = try addButton()
-        let buttonText = (button.subviews.first as! UILabel).text
 
-        XCTAssertEqual(buttonText, "+")
-        XCTAssertEqual(button.backgroundColor?.cgColor, UIHelper.brand.cgColor)
+        let title = NSAttributedString(
+            string: String(localizationId: "button.create"),
+            attributes: [
+                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+            ]
+        )
+
+        XCTAssertEqual(button.attributedTitle(for: .normal), title, "Button text and styling")
+        XCTAssertTrue(button.isHighlighted, "Button must be highlighted when list is empty")
     }
 }
 
@@ -85,10 +91,10 @@ private extension EmptyEventsListControllerTests {
         }
     }
 
-    func addButton() throws -> UIView {
+    func addButton() throws -> UIButton {
         let index = IndexPath(row: 0, section: EventsListController.Section.footer.rawValue)
         let footerCell = try XCTUnwrap(cell(at: index) as? EventsListFooterCell)
-        return footerCell.buttonAdd
+        return footerCell.createEvent
     }
 
     func cell(at indexPath: IndexPath) -> UITableViewCell? {
