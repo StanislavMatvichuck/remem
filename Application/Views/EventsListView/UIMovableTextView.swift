@@ -24,19 +24,19 @@ class UIMovableTextView: UIControl {
         }
     }
 
-    private lazy var barCancel = UIBarButtonItem(
+    lazy var barCancel = UIBarButtonItem(
         title: String(localizationId: "button.cancel"),
         style: .plain,
         target: self,
         action: #selector(handlePressCancel))
 
-    private lazy var barSubmit = UIBarButtonItem(
+    lazy var barSubmit = UIBarButtonItem(
         title: String(localizationId: "button.create"),
         style: .done,
         target: self,
         action: #selector(handlePressSubmit))
 
-    private var input: UITextField { viewInput.subviews[0] as! UITextField }
+    var input: UITextField { viewInput.subviews[0] as! UITextField }
     private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
         let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
         return constraint
@@ -79,7 +79,7 @@ class UIMovableTextView: UIControl {
         return view
     }()
 
-    private lazy var namingHintLabel: UILabel = {
+    lazy var namingHintLabel: UILabel = {
         let label = UILabel(al: true)
         label.text = String(localizationId: "eventsList.new")
         label.textAlignment = .center
@@ -97,7 +97,7 @@ class UIMovableTextView: UIControl {
         return label
     }()
 
-    private lazy var emojiContainer: UIScrollView = {
+    lazy var emojiContainer: UIScrollView = {
         let scroll = ViewScroll(.horizontal, spacing: .sm)
         scroll.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm, bottom: 0, right: .sm)
         scroll.viewContent.isLayoutMarginsRelativeArrangement = true

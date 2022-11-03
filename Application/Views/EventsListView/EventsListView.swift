@@ -9,9 +9,7 @@ import UIKit
 
 class EventsListView: UIView {
     // MARK: - Properties
-    let input: UIMovableTextViewInterface = {
-        UIMovableTextView()
-    }()
+    let input = UIMovableTextView()
 
     let table: UITableView = {
         let table = UITableView(al: true)

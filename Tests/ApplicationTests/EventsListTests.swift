@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import IosUseCases
 import XCTest
 
@@ -66,15 +67,11 @@ class EventsListTests: XCTestCase {
 
 private extension EventsListTests {
     func makeSUT() throws -> EventsListController {
-        let scene = UIApplication.shared.connectedScenes.first
-        let windowScene = try XCTUnwrap(scene as? UIWindowScene)
-        let window = windowScene.keyWindow
-
-        let navigationVC = try XCTUnwrap(window?.rootViewController as? UINavigationController)
-        let eventsListVC = try XCTUnwrap(navigationVC.viewControllers[0] as? EventsListController)
-        eventsListVC.loadViewIfNeeded()
-
-        return eventsListVC
+        let view = EventsListView()
+        let viewModel = EventsListViewModelFake()
+        let sut = EventsListController(viewRoot: view, viewModel: viewModel)
+        sut.loadViewIfNeeded()
+        return sut
     }
 
     func getView(of controller: EventsListController) throws -> EventsListView {
@@ -98,5 +95,27 @@ private extension EventsListTests {
         let table = view.table
         let dataSource = table.dataSource
         return dataSource?.tableView(table, cellForRowAt: indexPath)
+    }
+}
+
+class EventsListViewModelFake: EventsListViewModeling {
+    init() {}
+
+    func select(event: Domain.Event) {}
+    func selectForRenaming(event: Domain.Event) {}
+    func selectForRemoving(event: Domain.Event) {}
+    func cancelNameEditing() {}
+    func submitNameEditing(name: String) {}
+
+    var isAddButtonHighlighted: Bool = true
+    var hint: Application.HintState = .empty
+    var count: Int = 0
+
+    func event(at: Int) -> Domain.Event? {
+        nil
+    }
+
+    func cellVM(at: Int) -> Application.EventCellViewModel? {
+        nil
     }
 }
