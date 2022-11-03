@@ -68,7 +68,6 @@ class EmptyEventsListControllerTests: XCTestCase {
     }
 }
 
-// MARK: - Private
 private extension EmptyEventsListControllerTests {
     func makeSUT() -> EventsListController {
         let view = EventsListView()
@@ -78,7 +77,7 @@ private extension EmptyEventsListControllerTests {
         return sut
     }
 
-    var view: EventsListView { sut.view as! EventsListView }
+    var view: EventsListView { sut.viewRoot }
 
     func hintText() -> String {
         let index = IndexPath(row: 0, section: EventsListController.Section.hint.rawValue)
@@ -104,24 +103,93 @@ private extension EmptyEventsListControllerTests {
     }
 }
 
-class EventsListViewModelFake: EventsListViewModeling {
-    init() {}
 
-    func select(event: Domain.Event) {}
-    func selectForRenaming(event: Domain.Event) {}
-    func selectForRemoving(event: Domain.Event) {}
-    func cancelNameEditing() {}
-    func submitNameEditing(name: String) {}
+class SingleEventEventsListControllerTests: XCTestCase {
+    func test_viewDidLoad_rendersNormalAddButton() throws {
+        let sut = makeSUT()
 
-    var isAddButtonHighlighted: Bool = true
-    var hint: Application.HintState = .empty
-    var count: Int = 0
+        let footerIndex = IndexPath(
+            row: 0,
+            section: EventsListController.Section.footer.rawValue
+        )
+        let footerCell = sut.viewRoot.table.dataSource?.tableView(
+            sut.viewRoot.table,
+            cellForRowAt: footerIndex
+        )
+        let footer = try XCTUnwrap(footerCell as? EventsListFooterCell)
+        let button = footer.createEvent
 
-    func event(at: Int) -> Domain.Event? {
-        nil
+        XCTAssertFalse(button.isHighlighted)
+        XCTAssertEqual(
+            button.backgroundColor?.cgColor,
+            UIHelper.itemBackground.cgColor
+        )
     }
 
-    func cellVM(at: Int) -> Application.EventCellViewModel? {
-        nil
+    private func makeSUT() -> EventsListController {
+        let view = EventsListView()
+        let viewModel = EventsListViewModelFake(events: [Event(name: "BOGUS")])
+        let sut = EventsListController(viewRoot: view, viewModel: viewModel)
+        sut.loadViewIfNeeded()
+        return sut
+    }
+}
+
+class EventsListViewModelFake: EventsListViewModel {
+    init(events: [Event] = []) {
+        let repository = EventsRepositoryFake(events: events)
+        let widgetUC = WidgetUseCaseStub()
+        let factoryStub = EventsListFactoryStub()
+
+        let listUC = EventsListUseCase(
+            repository: repository,
+            widgetUseCase: widgetUC
+        )
+        let editUC = EventEditUseCase(
+            repository: repository,
+            widgetUseCase: widgetUC
+        )
+
+        super.init(
+            listUseCase: listUC,
+            editUseCase: editUC,
+            factory: factoryStub
+        )
+    }
+}
+
+class EventsRepositoryFake: EventsRepositoryInterface {
+    private var events: [Event]
+
+    init(events: [Event]) {
+        self.events = events
+    }
+
+    func makeAllEvents() -> [Domain.Event] { events }
+
+    func save(_ event: Domain.Event) {
+        events.append(event)
+    }
+
+    func delete(_ event: Domain.Event) {
+        if let index = events.firstIndex(of: event) {
+            events.remove(at: index)
+        }
+    }
+}
+
+class WidgetUseCaseStub: WidgetsUseCasing {
+    func update() {}
+}
+
+class EventsListFactoryStub: EventsListFactoryInterface {
+    func makeEventCellViewModel(event: Domain.Event) -> Application.EventCellViewModel {
+        EventCellViewModel(
+            event: event,
+            editUseCase: EventEditUseCase(
+                repository: EventsRepositoryFake(events: []),
+                widgetUseCase: WidgetUseCaseStub()
+            )
+        )
     }
 }

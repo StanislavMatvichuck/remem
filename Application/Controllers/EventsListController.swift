@@ -16,7 +16,7 @@ class EventsListController: UIViewController {
 
     // MARK: - Properties
     private let viewModel: EventsListViewModeling
-    private let viewRoot: EventsListView
+    let viewRoot: EventsListView
 
     // MARK: - Init
     init(viewRoot: EventsListView,
@@ -76,16 +76,16 @@ extension EventsListController: UITableViewDelegate {
 
         let renameAction = UIContextualAction(style: .normal,
                                               title: String(localizationId: "button.rename")) {
-                _, _, completion in
-                self.viewModel.selectForRenaming(event: event)
-                completion(true)
+            _, _, completion in
+            self.viewModel.selectForRenaming(event: event)
+            completion(true)
         }
 
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: String(localizationId: "button.delete")) {
-                _, _, completion in
-                self.viewModel.selectForRemoving(event: event)
-                completion(true)
+            _, _, completion in
+            self.viewModel.selectForRemoving(event: event)
+            completion(true)
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
@@ -179,19 +179,11 @@ extension EventsListController {
     private func makeFooterCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
 
-        cell.createEvent.backgroundColor =
-            viewModel.isAddButtonHighlighted ?
-            .systemBlue :
-            UIHelper.background
-        cell.createEvent.layer.borderColor =
-            viewModel.isAddButtonHighlighted ?
-            UIHelper.background.cgColor :
-            UIHelper.brand.cgColor
-        cell.createEvent.setTitleColor(
-            viewModel.isAddButtonHighlighted ?
-                UIHelper.background :
-                UIHelper.brand,
-            for: .normal)
+        if viewModel.isAddButtonHighlighted {
+            cell.highlight()
+        } else {
+            cell.resignHighlight()
+        }
 
         return cell
     }

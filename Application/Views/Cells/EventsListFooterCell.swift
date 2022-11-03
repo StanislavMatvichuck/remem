@@ -21,7 +21,7 @@ class EventsListFooterCell: UITableViewCell {
 
         button.setAttributedTitle(title, for: .normal)
         button.setAttributedTitle(title, for: .highlighted)
-        
+
         button.isHighlighted = true
 
         button.backgroundColor = UIHelper.brand
@@ -39,6 +39,16 @@ class EventsListFooterCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    func resignHighlight() {
+        createEvent.isHighlighted = false
+        createEvent.backgroundColor = UIHelper.itemBackground
+    }
+
+    func highlight() {
+        createEvent.isHighlighted = true
+        createEvent.backgroundColor = UIHelper.brand
+    }
 }
 
 // MARK: - Private
