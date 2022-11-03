@@ -69,6 +69,16 @@ class EmptyEventsListControllerTests:
         XCTAssertEqual(button.attributedTitle(for: .normal), title, "Button text and styling")
         XCTAssertTrue(button.isHighlighted, "Button must be highlighted when list is empty")
     }
+
+    func test_addButtonTapped_keyboardShown() throws {
+        putInViewHierarchy(sut)
+
+        XCTAssertFalse(view.input.input.isFirstResponder, "precondition")
+
+        tap(try addButton())
+
+        XCTAssertTrue(view.input.input.isFirstResponder, "keyboard is shown")
+    }
 }
 
 class SingleEventEventsListControllerTests:
@@ -88,16 +98,7 @@ class SingleEventEventsListControllerTests:
     }
 
     func test_viewDidLoad_rendersNormalAddButton() throws {
-        let footerIndex = IndexPath(
-            row: 0,
-            section: EventsListController.Section.footer.rawValue
-        )
-        let footerCell = sut.viewRoot.table.dataSource?.tableView(
-            sut.viewRoot.table,
-            cellForRowAt: footerIndex
-        )
-        let footer = try XCTUnwrap(footerCell as? EventsListFooterCell)
-        let button = footer.createEvent
+        let button = try addButton()
 
         XCTAssertFalse(button.isHighlighted)
         XCTAssertEqual(
@@ -108,6 +109,38 @@ class SingleEventEventsListControllerTests:
 
     func test_viewDidLoad_rendersFirstHappeningHint() {
         XCTAssertEqual(hintText(), String(localizationId: "eventsList.hint.firstHappening"))
+    }
+
+    func test_viewDidLoad_rendersOneEventCell() {
+        XCTAssertNotNil(cell(at: IndexPath(row: 0, section: 1)))
+    }
+
+    func test_viewDidLoad_rendersRenameButton() {
+        let renameAction = view.table.delegate?.tableView?(
+            view.table,
+            trailingSwipeActionsConfigurationForRowAt: IndexPath(
+                row: 0, section: 1
+            )
+        )
+
+        XCTAssertEqual(
+            renameAction?.actions[1].title,
+            String(localizationId: "button.rename")
+        )
+    }
+
+    func test_viewDidLoad_rendersDeleteButton() {
+        let renameAction = view.table.delegate?.tableView?(
+            view.table,
+            trailingSwipeActionsConfigurationForRowAt: IndexPath(
+                row: 0, section: 1
+            )
+        )
+
+        XCTAssertEqual(
+            renameAction?.actions[0].title,
+            String(localizationId: "button.delete")
+        )
     }
 }
 

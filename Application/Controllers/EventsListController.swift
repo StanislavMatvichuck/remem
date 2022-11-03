@@ -25,7 +25,6 @@ class EventsListController: UIViewController {
         self.viewRoot = viewRoot
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        setupEventHandlers()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -35,12 +34,12 @@ class EventsListController: UIViewController {
     override func viewDidLoad() {
         title = String(localizationId: "eventsList.title")
         setupTableView()
+        setupEventHandlers()
     }
 
     private func setupTableView() {
         viewRoot.table.dataSource = self
         viewRoot.table.delegate = self
-        viewRoot.table.reloadData()
     }
 }
 
@@ -91,13 +90,9 @@ extension EventsListController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            indexPath.section == Section.footer.rawValue,
-            let footer = viewRoot.table.cellForRow(at: indexPath) as? EventsListFooterCell
-        else { return }
+    @objc private func handleAddButton(sender: UIButton) {
         UIDevice.vibrate(.medium)
-        footer.animate()
+        sender.animate()
         viewRoot.input.show(value: "")
     }
 }
@@ -178,6 +173,12 @@ extension EventsListController {
 
     private func makeFooterCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
+
+        cell.createEvent.addTarget(
+            self,
+            action: #selector(handleAddButton),
+            for: .touchUpInside
+        )
 
         if viewModel.isAddButtonHighlighted {
             cell.highlight()
