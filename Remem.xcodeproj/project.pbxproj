@@ -72,7 +72,8 @@
 		0895FB6228E24623006716F4 /* WidgetsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB6128E24623006716F4 /* WidgetsUseCase.swift */; };
 		089699F128E1C53300E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		089699F428E1D3E400E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
-		0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* UIMovableTextView.swift */; };
+		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
+		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
 		0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898F52928E212DC006745B6 /* IosUseCasesTests.swift */; };
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
@@ -371,7 +372,8 @@
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		0895FB6128E24623006716F4 /* WidgetsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsUseCase.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
-		0898017827FAF17C0014E110 /* UIMovableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMovableTextView.swift; sourceTree = "<group>"; };
+		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
+		0898017827FAF17C0014E110 /* EventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInput.swift; sourceTree = "<group>"; };
 		0898F52928E212DC006745B6 /* IosUseCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosUseCasesTests.swift; sourceTree = "<group>"; };
 		08A19D282890125B0085DC6F /* EventsListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFooterCell.swift; sourceTree = "<group>"; };
 		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 				08CC50682906DE6300840385 /* Helpers */,
 				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListTests.swift */,
+				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -769,7 +772,7 @@
 			isa = PBXGroup;
 			children = (
 				08D512352787144800C2037F /* EventsListView.swift */,
-				0898017827FAF17C0014E110 /* UIMovableTextView.swift */,
+				0898017827FAF17C0014E110 /* EventInput.swift */,
 			);
 			path = EventsListView;
 			sourceTree = "<group>";
@@ -1392,6 +1395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0844342728F6DFF900A30FB2 /* EventsListTests.swift in Sources */,
+				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
@@ -1446,7 +1450,7 @@
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
 				0838B2D928FDD59A0076E08B /* ExtensionUIViewController.swift in Sources */,
 				08EAB70E28BA172A0001EE35 /* EventsListFactory.swift in Sources */,
-				0898017927FAF17C0014E110 /* UIMovableTextView.swift in Sources */,
+				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,

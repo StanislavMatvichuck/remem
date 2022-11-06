@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol UIMovableTextViewInterface: UIControl {
+protocol EventInputing: UIControl {
     var value: String { get }
 
     func show(value: String)
@@ -15,12 +15,12 @@ protocol UIMovableTextViewInterface: UIControl {
     func dismiss()
 }
 
-class UIMovableTextView: UIControl {
+class EventInput: UIControl {
     // MARK: - Properties
     var value: String = "" {
         didSet {
-            input.text = value
-            barSubmit.isEnabled = !value.isEmpty
+            textField.text = value
+            barSubmit.isEnabled = !value.isEmpty // barSubmit behaviour
         }
     }
 
@@ -36,13 +36,14 @@ class UIMovableTextView: UIControl {
         target: self,
         action: #selector(handlePressSubmit))
 
-    var input: UITextField { viewInput.subviews[0] as! UITextField }
+    var textField: UITextField { viewInput.subviews[0] as! UITextField }
+
     private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
         let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
         return constraint
     }()
 
-    let viewInputBackground: UIView = {
+    let background: UIView = {
         let view = UIView(al: true)
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurView = UIVisualEffectView(effect: blurEffect)
@@ -87,7 +88,7 @@ class UIMovableTextView: UIControl {
         label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
 
-        viewInputBackground.addSubview(label)
+        background.addSubview(label)
         NSLayoutConstraint.activate([
             label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
             label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
@@ -106,12 +107,10 @@ class UIMovableTextView: UIControl {
         for emoji in [
             "📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭",
         ] {
-            let label = UILabel(al: true)
-            label.text = emoji
-            label.font = .systemFont(ofSize: 48)
-            label.isUserInteractionEnabled = true
-            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapEmoji)))
-            scroll.contain(views: label)
+            let button = UIButton(al: true)
+            button.setTitle(emoji, for: .normal)
+            button.addTarget(self, action: #selector(handleTapEmoji), for: .touchUpInside)
+            scroll.contain(views: button)
         }
 
         addSubview(scroll)
@@ -127,6 +126,7 @@ class UIMovableTextView: UIControl {
     // MARK: - Init
     init() {
         super.init(frame: .zero)
+
         translatesAutoresizingMaskIntoConstraints = false
 
         setupLayoutAndVisibility()
@@ -139,11 +139,13 @@ class UIMovableTextView: UIControl {
 }
 
 // MARK: - Public
-extension UIMovableTextView: UIMovableTextViewInterface {
+extension EventInput: EventInputing {
     func show(value: String) {
         self.value = value
+        background.isHidden = false
+        emojiContainer.isHidden = false
         isUserInteractionEnabled = true
-        input.becomeFirstResponder()
+        textField.becomeFirstResponder()
     }
 
     func rename(oldName: String) {
@@ -155,9 +157,9 @@ extension UIMovableTextView: UIMovableTextViewInterface {
 }
 
 // MARK: - Private
-extension UIMovableTextView {
+extension EventInput {
     private func setupLayoutAndVisibility() {
-        addAndConstrain(viewInputBackground)
+        addAndConstrain(background)
 
         addSubview(viewInput)
         NSLayoutConstraint.activate([
@@ -166,7 +168,7 @@ extension UIMovableTextView {
             viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
 
-        viewInputBackground.isHidden = true
+        background.isHidden = true
         viewInput.isHidden = false
         namingHintLabel.isHidden = false
         emojiContainer.isHidden = true
@@ -193,12 +195,12 @@ extension UIMovableTextView {
         bar.items = [barCancel, space, barSubmit]
         bar.sizeToFit()
 
-        input.inputAccessoryView = bar
+        textField.inputAccessoryView = bar
     }
 
     // Events handlers
     private func setupEventHandlers() {
-        input.delegate = self
+        textField.delegate = self
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(handleKeyboardWillShow(notification:)),
@@ -208,19 +210,16 @@ extension UIMovableTextView {
             self, selector: #selector(handleKeyboardWillHide(notification:)),
             name: UIResponder.keyboardWillHideNotification, object: nil)
 
-        viewInputBackground.addGestureRecognizer(UITapGestureRecognizer(
+        background.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePressCancel)))
 
-        input.addTarget(self, action: #selector(handleInputChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleInputChange), for: .editingChanged)
     }
 
-    @objc private func handleTapEmoji(_ sender: UITapGestureRecognizer) {
-        if
-            let label = sender.view as? UILabel,
-            let emoji = label.text
-        {
-            value += emoji
-        }
+    @objc private func handleTapEmoji(_ sender: UIButton) {
+        guard let emojiString = sender.titleLabel?.text else { return }
+
+        value += emojiString
     }
 
     @objc private
@@ -237,21 +236,20 @@ extension UIMovableTextView {
 
     @objc private
     func handleInputChange() {
-        value = input.text ?? ""
+        value = textField.text ?? ""
     }
 
-    private
-    func hideInput() {
-        input.resignFirstResponder()
-
-        isUserInteractionEnabled = false
+    private func hideInput() {
+        textField.resignFirstResponder()
         value = ""
+        background.isHidden = true
+        isUserInteractionEnabled = false
         barSubmit.title = String(localizationId: "button.create")
     }
 }
 
 // MARK: - Keyboard handling
-extension UIMovableTextView {
+extension EventInput {
     @objc private
     func handleKeyboardWillShow(notification: NSNotification) {
         guard
@@ -262,14 +260,11 @@ extension UIMovableTextView {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        viewInputBackground.isHidden = false
-        emojiContainer.isHidden = false
-
         let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .sm
 
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = newConstant
-            self.viewInputBackground.alpha = 1
+            self.background.alpha = 1
             self.layoutIfNeeded()
         }).startAnimation()
     }
@@ -283,19 +278,19 @@ extension UIMovableTextView {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        viewInputBackground.isHidden = true
+        background.isHidden = true
         emojiContainer.isHidden = true
 
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = 0
-            self.viewInputBackground.alpha = 0
+            self.background.alpha = 0
             self.layoutIfNeeded()
         }).startAnimation()
     }
 }
 
 // MARK: - Dark mode
-extension UIMovableTextView {
+extension EventInput {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         viewInput.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
@@ -303,7 +298,7 @@ extension UIMovableTextView {
 }
 
 // MARK: - UITextFieldDelegate
-extension UIMovableTextView: UITextFieldDelegate {
+extension EventInput: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handlePressSubmit()
         return true

@@ -22,6 +22,7 @@ class EmptyEventsListControllerTests:
     }
 
     override func tearDown() {
+        executeRunLoop()
         sut = nil
         super.tearDown()
     }
@@ -73,11 +74,11 @@ class EmptyEventsListControllerTests:
     func test_addButtonTapped_keyboardShown() throws {
         putInViewHierarchy(sut)
 
-        XCTAssertFalse(view.input.input.isFirstResponder, "precondition")
+        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
         tap(try addButton())
 
-        XCTAssertTrue(view.input.input.isFirstResponder, "keyboard is shown")
+        XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
     }
 }
 
