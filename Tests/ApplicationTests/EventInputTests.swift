@@ -48,15 +48,10 @@ class EventInputTests: XCTestCase {
         XCTAssertEqual(hintText, String(localizationId: "eventsList.new"))
     }
 
-    func test_hasEmojiContainer() {
-        guard let container = sut.emojiContainer.subviews.first as? UIStackView else {
-            XCTFail("no emojis in place")
-            return
-        }
+    func test_hasEmojisInHorizontalStackInScrollView() {
+        let emojis = emojis()
 
-        let emojis = container.arrangedSubviews
-
-        XCTAssertEqual(emojis.count, 9, "several emoji views must be in vertical stack")
+        XCTAssertEqual(emojis.count, 9)
     }
 
     func test_hasBlurredBackground() {
@@ -103,7 +98,7 @@ class EventInputTests: XCTestCase {
         XCTAssertEqual(sut.textField.text, "", "text must match show argument")
         XCTAssertFalse(sut.background.isHidden, "background is immediately visible")
         XCTAssertTrue(sut.textField.isFirstResponder, "input must show keyboard")
-        XCTAssertTrue(sut.isUserInteractionEnabled)
+        XCTAssertTrue(sut.isUserInteractionEnabled, "must receive touches")
     }
 
     func test_show_canBeCancelled() {
@@ -114,29 +109,47 @@ class EventInputTests: XCTestCase {
 
         XCTAssertFalse(sut.textField.isFirstResponder, "keyboard must hide")
         XCTAssertTrue(sut.background.isHidden, "background hides immediately")
-    }
-    
-    func test_cancel() {
-        sut.show(value: "")
-        tap(sut.barCancel)
-        
-        XCTAssertTrue(sut.background.isHidden, "background hides after cancel")
-        XCTAssertFalse(sut.isUserInteractionEnabled, "must not cover screen")
+        XCTAssertFalse(sut.isUserInteractionEnabled, "must be transparent for touches")
     }
 
-    func test_emojiTapAddsItToTextfield() throws {
-        // arrange
+    func test_show_emojiTapped_addsItToTextfield() {
         sut.show(value: "")
+        guard let emoji = emojis().first else {
+            XCTFail("must be at least one tappable emoji")
+            return
+        }
 
-        let container = sut.emojiContainer.subviews.first as! UIStackView
-        let containerChild = container.arrangedSubviews.first!
-
-        let emoji = try XCTUnwrap(containerChild as? UIButton, "emoji must be a button")
-
-        // act
         tap(emoji)
 
-        // assert
         XCTAssertEqual(sut.value, emoji.titleLabel?.text)
+    }
+}
+
+private extension EventInputTests {
+    func emojis(
+        file: StaticString = #file,
+        line: UInt = #line
+    ) -> [UIButton] {
+        guard let container = sut.emojiContainer.subviews.first as? UIStackView else {
+            XCTFail("emojis container must be a stack", file: file, line: line)
+            return []
+        }
+
+        XCTAssertEqual(container.axis, .horizontal,
+                       "axis must be horizontal",
+                       file: file, line: line)
+
+        var result = [UIButton]()
+
+        for emoji in container.subviews {
+            do {
+                let button = try XCTUnwrap(emoji as? UIButton)
+                result.append(button)
+            } catch {
+                XCTFail("emoji must be a tappable button")
+            }
+        }
+
+        return result
     }
 }
