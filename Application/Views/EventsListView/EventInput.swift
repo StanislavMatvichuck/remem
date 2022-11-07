@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EventInputing {
+protocol EventInputing: UIControl {
     var value: String { get }
 
     func show(value: String)
@@ -35,11 +35,14 @@ class EventInput: UIControl {
         title: String(localizationId: "button.create"),
         style: .done, target: nil, action: nil)
 
-    var textField: UITextField { viewInput.subviews[0] as! UITextField }
-
-    private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
-        let constraint = viewInput.topAnchor.constraint(equalTo: bottomAnchor)
-        return constraint
+    let textField: UITextField = {
+        let input = UITextField(al: true)
+        input.font = UIHelper.font
+        input.textAlignment = .center
+        input.backgroundColor = .clear
+        input.adjustsFontSizeToFitWidth = true
+        input.minimumFontSize = .font1
+        return input
     }()
 
     let background: UIView = {
@@ -47,6 +50,8 @@ class EventInput: UIControl {
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.isHidden = true
         view.backgroundColor = .clear
         view.addAndConstrain(blurView)
         return view
@@ -60,66 +65,37 @@ class EventInput: UIControl {
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
         view.layer.shadowOpacity = 1
-
-        let input = UITextField(al: true)
-        input.font = UIHelper.font
-        input.textAlignment = .center
-        input.backgroundColor = .clear
-        input.adjustsFontSizeToFitWidth = true
-        input.minimumFontSize = .font1
-        view.addSubview(input)
-
-        NSLayoutConstraint.activate([
-            input.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            input.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            input.heightAnchor.constraint(equalToConstant: .d2),
-            input.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -2 * .d2),
-        ])
-
         return view
     }()
 
-    lazy var namingHintLabel: UILabel = {
+    let hint: UILabel = {
         let label = UILabel(al: true)
         label.text = String(localizationId: "eventsList.new")
         label.textAlignment = .center
         label.font = UIHelper.fontBold
         label.textColor = UIHelper.itemFont
         label.numberOfLines = 0
-
-        background.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.widthAnchor.constraint(equalTo: readableContentGuide.widthAnchor),
-            label.centerXAnchor.constraint(equalTo: readableContentGuide.centerXAnchor),
-            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: UIHelper.spacing),
-        ])
-
         return label
     }()
 
-    lazy var emojiContainer: UIScrollView = {
+    let emojiContainer: UIScrollView = {
         let scroll = ViewScroll(.horizontal, spacing: .sm)
         scroll.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm, bottom: 0, right: .sm)
         scroll.viewContent.isLayoutMarginsRelativeArrangement = true
         scroll.showsHorizontalScrollIndicator = false
 
-        for emoji in [
-            "📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭",
-        ] {
+        for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
             let button = UIButton(al: true)
             button.setTitle(emoji, for: .normal)
-            button.addTarget(self, action: #selector(handleTapEmoji), for: .touchUpInside)
             scroll.contain(views: button)
         }
 
-        addSubview(scroll)
-        NSLayoutConstraint.activate([
-            scroll.widthAnchor.constraint(equalTo: widthAnchor),
-            scroll.centerXAnchor.constraint(equalTo: centerXAnchor),
-            scroll.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
-        ])
-
         return scroll
+    }()
+
+    private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
+        let constraint = emojiContainer.topAnchor.constraint(equalTo: bottomAnchor)
+        return constraint
     }()
 
     // MARK: - Init
@@ -129,8 +105,7 @@ class EventInput: UIControl {
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
 
-        setupLayoutAndVisibility()
-        isUserInteractionEnabled = false
+        setupLayout()
         setupInputAccessoryView()
         setupEventHandlers()
     }
@@ -144,6 +119,7 @@ extension EventInput: EventInputing {
     func show(value: String = "") {
         self.value = value
         background.isHidden = false
+        background.alpha = 0.0
         isUserInteractionEnabled = true
         textField.becomeFirstResponder()
     }
@@ -158,8 +134,23 @@ extension EventInput: EventInputing {
 
 // MARK: - Private
 extension EventInput {
-    private func setupLayoutAndVisibility() {
+    private func setupLayout() {
+        background.addSubview(hint)
+        NSLayoutConstraint.activate([
+            hint.widthAnchor.constraint(equalTo: background.readableContentGuide.widthAnchor),
+            hint.centerXAnchor.constraint(equalTo: background.readableContentGuide.centerXAnchor),
+            hint.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor, constant: UIHelper.spacing),
+        ])
+
         addAndConstrain(background)
+
+        viewInput.addSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.centerXAnchor.constraint(equalTo: viewInput.centerXAnchor),
+            textField.centerYAnchor.constraint(equalTo: viewInput.centerYAnchor),
+            textField.heightAnchor.constraint(equalToConstant: .d2),
+            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * .d2),
+        ])
 
         addSubview(viewInput)
         NSLayoutConstraint.activate([
@@ -168,7 +159,12 @@ extension EventInput {
             viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
 
-        background.isHidden = true
+        addSubview(emojiContainer)
+        NSLayoutConstraint.activate([
+            emojiContainer.widthAnchor.constraint(equalTo: widthAnchor),
+            emojiContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
+        ])
 
         NSLayoutConstraint.activate([inputAnimatedConstraint])
     }
@@ -195,12 +191,33 @@ extension EventInput {
     private func setupEventHandlers() {
         textField.delegate = self
 
-        barCancel.target = self
-        barCancel.action = #selector(handlePressCancel)
+        background.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(handlePressCancel))
+        )
 
-        barSubmit.target = self
-        barSubmit.action = #selector(handlePressSubmit)
+        textField.addTarget(
+            self,
+            action: #selector(handleInputChange),
+            for: .editingChanged)
 
+        setupToolbarButtons()
+        setupEmojiButtons()
+        setupKeyboardNotificationsHandlers()
+    }
+
+    private func setupEmojiButtons() {
+        if let emojiContainer = emojiContainer.subviews.first as? UIStackView,
+           let emojiButtons = emojiContainer.arrangedSubviews as? [UIButton]
+        {
+            for button in emojiButtons {
+                button.addTarget(self, action: #selector(handleTapEmoji), for: .touchUpInside)
+            }
+        }
+    }
+
+    private func setupKeyboardNotificationsHandlers() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleKeyboardWillShow(notification:)),
@@ -212,17 +229,14 @@ extension EventInput {
             selector: #selector(handleKeyboardWillHide(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
+    }
 
-        background.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(handlePressCancel))
-        )
+    private func setupToolbarButtons() {
+        barCancel.target = self
+        barCancel.action = #selector(handlePressCancel)
 
-        textField.addTarget(
-            self,
-            action: #selector(handleInputChange),
-            for: .editingChanged)
+        barSubmit.target = self
+        barSubmit.action = #selector(handlePressSubmit)
     }
 
     @objc private func handleTapEmoji(_ sender: UIButton) {
@@ -247,8 +261,8 @@ extension EventInput {
 
     private func dismiss() {
         value = ""
-//        textField.resignFirstResponder()
-        background.isHidden = true
+//        background.isHidden = true
+        textField.resignFirstResponder()
         isUserInteractionEnabled = false
         barSubmit.title = String(localizationId: "button.create")
     }
@@ -266,10 +280,14 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        let newConstant = -keyboardSize.cgRectValue.size.height - .d2 - .sm
+        let emojiContainerHeight = emojiContainer.bounds.height
+        let viewInputHeight = viewInput.bounds.height
+        let keyboardHeight = keyboardSize.cgRectValue.size.height
+        let newConstant = -keyboardHeight - emojiContainerHeight - viewInputHeight
 
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = newConstant
+            self.background.alpha = 1
             self.layoutIfNeeded()
         }).startAnimation()
     }
@@ -285,6 +303,7 @@ extension EventInput {
 
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = 0
+            self.background.alpha = 0
             self.layoutIfNeeded()
         }).startAnimation()
     }

@@ -41,9 +41,9 @@ class EventInputTests: XCTestCase {
         XCTAssertTrue(sut.background.isHidden, "background initially hidden")
     }
 
-    func test_displays_hintLabel() {
+    func test_displays_hint() {
         XCTAssertEqual(
-            sut.namingHintLabel.text,
+            sut.hint.text,
             String(localizationId: "eventsList.new")
         )
     }
@@ -113,6 +113,20 @@ class EventInputTests: XCTestCase {
         sut.show()
 
         XCTAssertTrue(sut.textField.isFirstResponder)
+    }
+
+    func test_show_backgroundIsNotHidden() {
+        XCTAssertTrue(sut.background.isHidden, "precondition")
+
+        sut.show()
+
+        XCTAssertFalse(sut.background.isHidden)
+    }
+
+    func test_show_backgroundIsTransparent() {
+        sut.show()
+
+        XCTAssertEqual(sut.background.alpha, 0)
     }
 
     func test_whenShown_tappingEmoji_addsEmojiToTextfield() {
@@ -217,6 +231,7 @@ private extension EventInputTests {
             "background hides immediately",
             file: file, line: line
         )
+        // that has an influence on first responder
         XCTAssertFalse(
             sut.isUserInteractionEnabled,
             "must be transparent for touches",
