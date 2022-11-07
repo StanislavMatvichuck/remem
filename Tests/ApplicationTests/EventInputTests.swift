@@ -29,36 +29,35 @@ class EventInputTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_init() {
-        XCTAssertNotNil(sut)
+    func test_addedAsSubview() {
+        XCTAssertNotNil(sut.superview)
     }
 
-    func test_installedToControllerRootView() {
-        XCTAssertNotNil(sut.superview)
+    func test_addedAsSubview_shouldNotReceiveTouches() {
         XCTAssertFalse(sut.isUserInteractionEnabled, "must not cover screen initially")
     }
 
-    func test_backgroundInitiallyNotVisible() {
-        XCTAssertTrue(sut.background.isHidden)
+    func test_addedAsSubview_backgroundIsNotCoveringScreen() {
+        XCTAssertTrue(sut.background.isHidden, "background initially hidden")
     }
 
-    func test_hasHintLabel() {
-        let hintText = sut.namingHintLabel.text ?? ""
-
-        XCTAssertEqual(hintText, String(localizationId: "eventsList.new"))
+    func test_displays_hintLabel() {
+        XCTAssertEqual(
+            sut.namingHintLabel.text,
+            String(localizationId: "eventsList.new")
+        )
     }
 
-    func test_hasEmojisInHorizontalStackInScrollView() {
-        let emojis = emojis()
-
-        XCTAssertEqual(emojis.count, 9)
+    func test_displays_9emojis() {
+        XCTAssertEqual(emojis().count, 9)
     }
 
-    func test_hasBlurredBackground() {
+    func test_displays_blurredBackground() {
         guard let background = sut.background.subviews.first as? UIVisualEffectView else {
             XCTFail("no blur for background")
             return
         }
+
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
 
         XCTAssertEqual(background.effect, blurEffect)
@@ -68,7 +67,11 @@ class EventInputTests: XCTestCase {
         )
     }
 
-    func test_hasInputAccessories() {
+    func test_displays_textField() {
+        XCTAssertNotNil(sut.textField.delegate, "textField delegate must be set")
+    }
+
+    func test_displays_keyboardToolbar() {
         let cancel = sut.barCancel
         let submit = sut.barSubmit
         let input = sut.textField
@@ -92,28 +95,29 @@ class EventInputTests: XCTestCase {
         )
     }
 
-    func test_show_empty() {
-        sut.show(value: "")
+    func test_show_backgroundCoversScreen() {
+        sut.show()
 
-        XCTAssertEqual(sut.textField.text, "", "text must match show argument")
-        XCTAssertFalse(sut.background.isHidden, "background is immediately visible")
-        XCTAssertTrue(sut.textField.isFirstResponder, "input must show keyboard")
-        XCTAssertTrue(sut.isUserInteractionEnabled, "must receive touches")
+        XCTAssertFalse(sut.background.isHidden)
     }
 
-    func test_show_canBeCancelled() {
-        sut.show(value: "")
-        XCTAssertTrue(sut.textField.isFirstResponder, "precondition")
+    func test_show_shouldReceiveTouches() {
+        sut.show()
 
-        tap(sut.barCancel)
-
-        XCTAssertFalse(sut.textField.isFirstResponder, "keyboard must hide")
-        XCTAssertTrue(sut.background.isHidden, "background hides immediately")
-        XCTAssertFalse(sut.isUserInteractionEnabled, "must be transparent for touches")
+        XCTAssertTrue(sut.isUserInteractionEnabled)
     }
 
-    func test_show_emojiTapped_addsItToTextfield() {
-        sut.show(value: "")
+    func test_show_keyboardShouldAppear() {
+        XCTAssertFalse(sut.textField.isFirstResponder, "precondition")
+
+        sut.show()
+
+        XCTAssertTrue(sut.textField.isFirstResponder)
+    }
+
+    func test_whenShown_tappingEmoji_addsEmojiToTextfield() {
+        sut.show()
+
         guard let emoji = emojis().first else {
             XCTFail("must be at least one tappable emoji")
             return
@@ -122,6 +126,52 @@ class EventInputTests: XCTestCase {
         tap(emoji)
 
         XCTAssertEqual(sut.value, emoji.titleLabel?.text)
+    }
+
+    func test_whenShown_tappingCancel_hidesInput() {
+        sut.show(value: "")
+        XCTAssertTrue(sut.textField.isFirstResponder, "precondition")
+
+        tap(sut.barCancel)
+
+        assertInputIsHidden()
+    }
+
+    func test_whenShown_tappingSubmit_hidesInput() {
+        sut.show(value: "")
+        XCTAssertTrue(sut.textField.isFirstResponder, "precondition")
+
+        tap(sut.barSubmit)
+
+        assertInputIsHidden()
+    }
+
+    func test_whenShown_tappingKeyboardReturn_shouldSubmit() {
+        sut.show(value: "BOGUS")
+
+        assertInputIsShown(value: "BOGUS")
+
+        _ = sut.textField.delegate?.textFieldShouldReturn?(sut.textField)
+
+        assertInputIsHidden()
+    }
+
+    func test_settingValue_empty_submitDisabled() {
+        sut.value = ""
+
+        XCTAssertFalse(sut.barSubmit.isEnabled)
+    }
+
+    func test_settingValue_notEmpty_submitEnabled() {
+        sut.value = "_"
+
+        XCTAssertTrue(sut.barSubmit.isEnabled)
+    }
+
+    func test_gettingValue_returnsTextFieldText() {
+        sut.textField.text = "BOGUS"
+
+        XCTAssertEqual(sut.value, "BOGUS")
     }
 }
 
@@ -151,5 +201,58 @@ private extension EventInputTests {
         }
 
         return result
+    }
+
+    func assertInputIsHidden(
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        XCTAssertFalse(
+            sut.textField.isFirstResponder,
+            "keyboard must hide",
+            file: file, line: line
+        )
+        XCTAssertTrue(
+            sut.background.isHidden,
+            "background hides immediately",
+            file: file, line: line
+        )
+        XCTAssertFalse(
+            sut.isUserInteractionEnabled,
+            "must be transparent for touches",
+            file: file, line: line
+        )
+        XCTAssertEqual(
+            sut.value, "",
+            "text field text must be empty",
+            file: file, line: line
+        )
+    }
+
+    func assertInputIsShown(
+        value: String = "",
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        XCTAssertEqual(
+            sut.textField.text, value,
+            "text must match show argument",
+            file: file, line: line
+        )
+        XCTAssertFalse(
+            sut.background.isHidden,
+            "background is immediately visible",
+            file: file, line: line
+        )
+        XCTAssertTrue(
+            sut.textField.isFirstResponder,
+            "input must show keyboard",
+            file: file, line: line
+        )
+        XCTAssertTrue(
+            sut.isUserInteractionEnabled,
+            "must receive touches",
+            file: file, line: line
+        )
     }
 }

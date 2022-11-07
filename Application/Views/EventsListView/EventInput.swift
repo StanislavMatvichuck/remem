@@ -7,34 +7,33 @@
 
 import UIKit
 
-protocol EventInputing: UIControl {
+protocol EventInputing {
     var value: String { get }
 
     func show(value: String)
     func rename(oldName: String)
-    func dismiss()
+    func hide()
 }
 
 class EventInput: UIControl {
     // MARK: - Properties
-    var value: String = "" {
-        didSet {
-            textField.text = value
-            barSubmit.isEnabled = !value.isEmpty // barSubmit behaviour
+    var value: String {
+        get {
+            textField.text ?? ""
+        }
+        set {
+            textField.text = newValue
+            barSubmit.isEnabled = !value.isEmpty
         }
     }
 
-    lazy var barCancel = UIBarButtonItem(
+    let barCancel = UIBarButtonItem(
         title: String(localizationId: "button.cancel"),
-        style: .plain,
-        target: self,
-        action: #selector(handlePressCancel))
+        style: .plain, target: nil, action: nil)
 
-    lazy var barSubmit = UIBarButtonItem(
+    let barSubmit = UIBarButtonItem(
         title: String(localizationId: "button.create"),
-        style: .done,
-        target: self,
-        action: #selector(handlePressSubmit))
+        style: .done, target: nil, action: nil)
 
     var textField: UITextField { viewInput.subviews[0] as! UITextField }
 
@@ -128,8 +127,10 @@ class EventInput: UIControl {
         super.init(frame: .zero)
 
         translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = false
 
         setupLayoutAndVisibility()
+        isUserInteractionEnabled = false
         setupInputAccessoryView()
         setupEventHandlers()
     }
@@ -140,10 +141,9 @@ class EventInput: UIControl {
 
 // MARK: - Public
 extension EventInput: EventInputing {
-    func show(value: String) {
+    func show(value: String = "") {
         self.value = value
         background.isHidden = false
-        emojiContainer.isHidden = false
         isUserInteractionEnabled = true
         textField.becomeFirstResponder()
     }
@@ -153,7 +153,7 @@ extension EventInput: EventInputing {
         barSubmit.title = String(localizationId: "button.rename")
     }
 
-    func dismiss() { handlePressCancel() }
+    func hide() { handlePressCancel() }
 }
 
 // MARK: - Private
@@ -169,11 +169,6 @@ extension EventInput {
         ])
 
         background.isHidden = true
-        viewInput.isHidden = false
-        namingHintLabel.isHidden = false
-        emojiContainer.isHidden = true
-
-        isUserInteractionEnabled = false
 
         NSLayoutConstraint.activate([inputAnimatedConstraint])
     }
@@ -190,8 +185,6 @@ extension EventInput {
         barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
         barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
 
-        barSubmit.isEnabled = !value.isEmpty
-
         bar.items = [barCancel, space, barSubmit]
         bar.sizeToFit()
 
@@ -202,18 +195,34 @@ extension EventInput {
     private func setupEventHandlers() {
         textField.delegate = self
 
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(handleKeyboardWillShow(notification:)),
-            name: UIResponder.keyboardWillShowNotification, object: nil)
+        barCancel.target = self
+        barCancel.action = #selector(handlePressCancel)
+
+        barSubmit.target = self
+        barSubmit.action = #selector(handlePressSubmit)
 
         NotificationCenter.default.addObserver(
-            self, selector: #selector(handleKeyboardWillHide(notification:)),
-            name: UIResponder.keyboardWillHideNotification, object: nil)
+            self,
+            selector: #selector(handleKeyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
 
-        background.addGestureRecognizer(UITapGestureRecognizer(
-            target: self, action: #selector(handlePressCancel)))
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
 
-        textField.addTarget(self, action: #selector(handleInputChange), for: .editingChanged)
+        background.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(handlePressCancel))
+        )
+
+        textField.addTarget(
+            self,
+            action: #selector(handleInputChange),
+            for: .editingChanged)
     }
 
     @objc private func handleTapEmoji(_ sender: UIButton) {
@@ -222,26 +231,23 @@ extension EventInput {
         value += emojiString
     }
 
-    @objc private
-    func handlePressCancel() {
+    @objc private func handlePressCancel() {
         sendActions(for: .editingDidEndOnExit)
-        hideInput()
+        dismiss()
     }
 
-    @objc private
-    func handlePressSubmit() {
+    @objc private func handlePressSubmit() {
         sendActions(for: .editingDidEnd)
-        hideInput()
+        dismiss()
     }
 
-    @objc private
-    func handleInputChange() {
+    @objc private func handleInputChange() {
         value = textField.text ?? ""
     }
 
-    private func hideInput() {
-        textField.resignFirstResponder()
+    private func dismiss() {
         value = ""
+//        textField.resignFirstResponder()
         background.isHidden = true
         isUserInteractionEnabled = false
         barSubmit.title = String(localizationId: "button.create")
@@ -264,7 +270,6 @@ extension EventInput {
 
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = newConstant
-            self.background.alpha = 1
             self.layoutIfNeeded()
         }).startAnimation()
     }
@@ -278,12 +283,8 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        background.isHidden = true
-        emojiContainer.isHidden = true
-
         UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
             self.inputAnimatedConstraint.constant = 0
-            self.background.alpha = 0
             self.layoutIfNeeded()
         }).startAnimation()
     }
