@@ -130,9 +130,9 @@ class EventInputTests: XCTestCase {
     }
 
     func test_show_blurBackgroundAndMoveInputWithKeyboardAnimation() {
-        arrangeSUTAfterShowAnimation()
+        arrange_afterShowAnimation()
 
-        assertInputIsShown()
+        assert_inputIsShown()
         XCTAssertEqual(
             sut.background.alpha, 1,
             "background is opaque after animation"
@@ -144,9 +144,9 @@ class EventInputTests: XCTestCase {
     }
 
     func test_hide_dissolveBackgroundAndMoveInputWithKeyboardAnimation() {
-        arrangeSUTAfterShowAndHideAnimation()
+        arrange_afterShowAndHideAnimation()
 
-        assertInputIsHidden()
+        assert_inputIsHidden()
         XCTAssertEqual(
             sut.background.alpha, 0,
             "background is transparent after animation"
@@ -176,7 +176,11 @@ class EventInputTests: XCTestCase {
 
         tap(sut.barCancel)
 
-        assertInputIsHidden()
+        assert_inputIsHidden()
+    }
+
+    func test_whenShown_tappingCancel_sendsEditingDidEndOnExitEvent() {
+        assert(thatButton: sut.barCancel, sendsActionsFor: .editingDidEndOnExit)
     }
 
     func test_whenShown_tappingSubmit_hidesInput() {
@@ -185,17 +189,21 @@ class EventInputTests: XCTestCase {
 
         tap(sut.barSubmit)
 
-        assertInputIsHidden()
+        assert_inputIsHidden()
+    }
+
+    func test_whenShown_tappingSubmit_sendsEditingDidEndEvent() {
+        assert(thatButton: sut.barSubmit, sendsActionsFor: .editingDidEnd)
     }
 
     func test_whenShown_tappingKeyboardReturn_shouldSubmit() {
         sut.show(value: "BOGUS")
 
-        assertInputIsShown(value: "BOGUS")
+        assert_inputIsShown(value: "BOGUS")
 
         _ = sut.textField.delegate?.textFieldShouldReturn?(sut.textField)
 
-        assertInputIsHidden()
+        assert_inputIsHidden()
     }
 
     func test_settingValue_empty_submitDisabled() {
@@ -214,6 +222,20 @@ class EventInputTests: XCTestCase {
         sut.textField.text = "BOGUS"
 
         XCTAssertEqual(sut.value, "BOGUS")
+    }
+
+    func test_rename_submitButtonChangesTitle() {
+        sut.rename(oldName: "OldName")
+
+        XCTAssertEqual(sut.barSubmit.title, String(localizationId: "button.rename"))
+    }
+
+    func test_hide_restoresSubmitButtonTitle() {
+        sut.rename(oldName: "OldName")
+
+        sut.hide()
+
+        XCTAssertEqual(sut.barSubmit.title, String(localizationId: "button.create"))
     }
 }
 
@@ -246,7 +268,7 @@ private extension EventInputTests {
         return result
     }
 
-    func assertInputIsHidden(
+    func assert_inputIsHidden(
         file: StaticString = #file,
         line: UInt = #line
     ) {
@@ -268,7 +290,7 @@ private extension EventInputTests {
         )
     }
 
-    func assertInputIsShown(
+    func assert_inputIsShown(
         value: String = "",
         file: StaticString = #file,
         line: UInt = #line
@@ -296,7 +318,19 @@ private extension EventInputTests {
         )
     }
 
-    func arrangeSUTAfterShowAnimation() {
+    func assert(thatButton: UIBarButtonItem, sendsActionsFor: UIControl.Event) {
+        let exp = XCTestExpectation(description: "action must be sent by sut")
+        let spy = ActionSpy(exp)
+        sut.addTarget(spy, action: #selector(ActionSpy.catchAction), for: sendsActionsFor)
+
+        sut.show(value: "SomeValue")
+
+        tap(thatButton)
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    func arrange_afterShowAnimation() {
         let exp = XCTestExpectation(description: "background updated asynchronously")
         sut.animationCompletionHandler = { exp.fulfill() }
 
@@ -312,8 +346,8 @@ private extension EventInputTests {
         wait(for: [exp], timeout: 0.1)
     }
 
-    func arrangeSUTAfterShowAndHideAnimation() {
-        arrangeSUTAfterShowAnimation()
+    func arrange_afterShowAndHideAnimation() {
+        arrange_afterShowAnimation()
 
         let exp = XCTestExpectation(description: "background disappears asynchronously")
         sut.animationCompletionHandler = { exp.fulfill() }
@@ -346,5 +380,16 @@ private extension EventInputTests {
                 UIResponder.keyboardAnimationCurveUserInfoKey: Int(0),
             ]
         )
+    }
+}
+
+class ActionSpy {
+    private var exp: XCTestExpectation
+    init(_ exp: XCTestExpectation) {
+        self.exp = exp
+    }
+
+    @objc func catchAction() {
+        exp.fulfill()
     }
 }
