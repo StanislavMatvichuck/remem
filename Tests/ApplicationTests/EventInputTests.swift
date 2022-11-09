@@ -129,6 +129,34 @@ class EventInputTests: XCTestCase {
         XCTAssertEqual(sut.background.alpha, 0)
     }
 
+    func test_show_blurBackgroundAndMoveInputWithKeyboardAnimation() {
+        arrangeSUTAfterShowAnimation()
+
+        assertInputIsShown()
+        XCTAssertEqual(
+            sut.background.alpha, 1,
+            "background is opaque after animation"
+        )
+        XCTAssertNotEqual(
+            sut.constraint.constant, 0,
+            "must use keyboard height"
+        )
+    }
+
+    func test_hide_dissolveBackgroundAndMoveInputWithKeyboardAnimation() {
+        arrangeSUTAfterShowAndHideAnimation()
+
+        assertInputIsHidden()
+        XCTAssertEqual(
+            sut.background.alpha, 0,
+            "background is transparent after animation"
+        )
+        XCTAssertEqual(
+            sut.constraint.constant, 0,
+            "everything must be hidden under screen"
+        )
+    }
+
     func test_whenShown_tappingEmoji_addsEmojiToTextfield() {
         sut.show()
 
@@ -189,6 +217,7 @@ class EventInputTests: XCTestCase {
     }
 }
 
+// MARK: - Private
 private extension EventInputTests {
     func emojis(
         file: StaticString = #file,
@@ -226,11 +255,6 @@ private extension EventInputTests {
             "keyboard must hide",
             file: file, line: line
         )
-        XCTAssertTrue(
-            sut.background.isHidden,
-            "background hides immediately",
-            file: file, line: line
-        )
         // that has an influence on first responder
         XCTAssertFalse(
             sut.isUserInteractionEnabled,
@@ -264,10 +288,63 @@ private extension EventInputTests {
             "input must show keyboard",
             file: file, line: line
         )
+        // that has an influence on first responder
         XCTAssertTrue(
             sut.isUserInteractionEnabled,
             "must receive touches",
             file: file, line: line
+        )
+    }
+
+    func arrangeSUTAfterShowAnimation() {
+        let exp = XCTestExpectation(description: "background updated asynchronously")
+        sut.animationCompletionHandler = { exp.fulfill() }
+
+        sut.show()
+
+        // simulating UIResponder notification dispatch
+        DispatchQueue.main.async {
+            self.sut.animateShowingKeyboard(
+                notification: self.makeKeyboardNotificationFake()
+            )
+        }
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    func arrangeSUTAfterShowAndHideAnimation() {
+        arrangeSUTAfterShowAnimation()
+
+        let exp = XCTestExpectation(description: "background disappears asynchronously")
+        sut.animationCompletionHandler = { exp.fulfill() }
+
+        sut.hide()
+
+        // simulating UIResponder notification dispatch
+        DispatchQueue.main.async {
+            self.sut.animateHidingKeyboard(
+                notification: self.makeKeyboardNotificationFake()
+            )
+        }
+
+        wait(for: [exp], timeout: 0.1)
+    }
+
+    func makeKeyboardNotificationFake() -> NSNotification {
+        let keyboardRect = CGRect(
+            x: 0, y: 0,
+            width: UIScreen.main.bounds.width,
+            height: 300
+        )
+
+        return NSNotification(
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            userInfo: [
+                UIResponder.keyboardFrameEndUserInfoKey: NSValue(cgRect: keyboardRect),
+                UIResponder.keyboardAnimationDurationUserInfoKey: Double(0.1),
+                UIResponder.keyboardAnimationCurveUserInfoKey: Int(0),
+            ]
         )
     }
 }

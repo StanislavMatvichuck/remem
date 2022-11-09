@@ -27,14 +27,9 @@ class EventInput: UIControl {
         }
     }
 
-    let barCancel = UIBarButtonItem(
-        title: String(localizationId: "button.cancel"),
-        style: .plain, target: nil, action: nil)
+    var animationCompletionHandler: (() -> Void)?
 
-    let barSubmit = UIBarButtonItem(
-        title: String(localizationId: "button.create"),
-        style: .done, target: nil, action: nil)
-
+    /// Layout
     let textField: UITextField = {
         let input = UITextField(al: true)
         input.font = UIHelper.font
@@ -93,10 +88,14 @@ class EventInput: UIControl {
         return scroll
     }()
 
-    private lazy var inputAnimatedConstraint: NSLayoutConstraint = {
-        let constraint = emojiContainer.topAnchor.constraint(equalTo: bottomAnchor)
-        return constraint
-    }()
+    /// Animated constraint that pins textField bottom to keyboard top
+    lazy var constraint: NSLayoutConstraint = { emojiContainer.topAnchor.constraint(equalTo: bottomAnchor) }()
+
+    /// Keyboard toolbar items
+    let barCancel = UIBarButtonItem(title: String(localizationId: "button.cancel"),
+                                    style: .plain, target: nil, action: nil)
+    let barSubmit = UIBarButtonItem(title: String(localizationId: "button.create"),
+                                    style: .done, target: nil, action: nil)
 
     // MARK: - Init
     init() {
@@ -166,7 +165,7 @@ extension EventInput {
             emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
         ])
 
-        NSLayoutConstraint.activate([inputAnimatedConstraint])
+        NSLayoutConstraint.activate([constraint])
     }
 
     private func setupInputAccessoryView() {
@@ -194,13 +193,15 @@ extension EventInput {
         background.addGestureRecognizer(
             UITapGestureRecognizer(
                 target: self,
-                action: #selector(handlePressCancel))
+                action: #selector(handlePressCancel)
+            )
         )
 
         textField.addTarget(
             self,
             action: #selector(handleInputChange),
-            for: .editingChanged)
+            for: .editingChanged
+        )
 
         setupToolbarButtons()
         setupEmojiButtons()
@@ -222,13 +223,15 @@ extension EventInput {
             self,
             selector: #selector(handleKeyboardWillShow(notification:)),
             name: UIResponder.keyboardWillShowNotification,
-            object: nil)
+            object: nil
+        )
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleKeyboardWillHide(notification:)),
             name: UIResponder.keyboardWillHideNotification,
-            object: nil)
+            object: nil
+        )
     }
 
     private func setupToolbarButtons() {
@@ -261,7 +264,6 @@ extension EventInput {
 
     private func dismiss() {
         value = ""
-//        background.isHidden = true
         textField.resignFirstResponder()
         isUserInteractionEnabled = false
         barSubmit.title = String(localizationId: "button.create")
@@ -270,8 +272,15 @@ extension EventInput {
 
 // MARK: - Keyboard handling
 extension EventInput {
-    @objc private
-    func handleKeyboardWillShow(notification: NSNotification) {
+    @objc func handleKeyboardWillShow(notification: NSNotification) {
+        animateShowingKeyboard(notification: notification)
+    }
+
+    @objc func handleKeyboardWillHide(notification: NSNotification) {
+        animateHidingKeyboard(notification: notification)
+    }
+
+    func animateShowingKeyboard(notification: NSNotification) {
         guard
             let userInfo = notification.userInfo,
             let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
@@ -280,20 +289,28 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        let emojiContainerHeight = emojiContainer.bounds.height
-        let viewInputHeight = viewInput.bounds.height
+        let heightAboveKeyboard = viewInput.bounds.height + emojiContainer.bounds.height
         let keyboardHeight = keyboardSize.cgRectValue.size.height
-        let newConstant = -keyboardHeight - emojiContainerHeight - viewInputHeight
+        let newConstant = -keyboardHeight - heightAboveKeyboard
 
-        UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
-            self.inputAnimatedConstraint.constant = newConstant
-            self.background.alpha = 1
-            self.layoutIfNeeded()
-        }).startAnimation()
+        let animator = UIViewPropertyAnimator(
+            duration: duration,
+            curve: curve,
+            animations: {
+                self.constraint.constant = newConstant
+                self.background.alpha = 1
+                self.layoutIfNeeded()
+            }
+        )
+
+        animator.addCompletion { _ in
+            self.animationCompletionHandler?()
+        }
+
+        animator.startAnimation()
     }
 
-    @objc private
-    func handleKeyboardWillHide(notification: NSNotification) {
+    func animateHidingKeyboard(notification: NSNotification) {
         guard
             let userInfo = notification.userInfo,
             let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
@@ -301,11 +318,21 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        UIViewPropertyAnimator(duration: duration, curve: curve, animations: {
-            self.inputAnimatedConstraint.constant = 0
-            self.background.alpha = 0
-            self.layoutIfNeeded()
-        }).startAnimation()
+        let animator = UIViewPropertyAnimator(
+            duration: duration,
+            curve: curve,
+            animations: {
+                self.constraint.constant = 0
+                self.background.alpha = 0
+                self.layoutIfNeeded()
+            }
+        )
+
+        animator.addCompletion { _ in
+            self.animationCompletionHandler?()
+        }
+
+        animator.startAnimation()
     }
 }
 
