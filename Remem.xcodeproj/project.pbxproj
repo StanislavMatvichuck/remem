@@ -117,6 +117,7 @@
 		08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE4291E5DB10033AB0D /* Fakes.swift */; };
 		08F82FE7291E5E000033AB0D /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE6291E5E000033AB0D /* Stubs.swift */; };
 		08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE8291E70060033AB0D /* SwiperTests.swift */; };
+		08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FEA291E71E10033AB0D /* Mocks.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -428,6 +429,7 @@
 		08F82FE4291E5DB10033AB0D /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		08F82FE6291E5E000033AB0D /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		08F82FE8291E70060033AB0D /* SwiperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperTests.swift; sourceTree = "<group>"; };
+		08F82FEA291E71E10033AB0D /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -943,6 +945,7 @@
 			children = (
 				08F82FE4291E5DB10033AB0D /* Fakes.swift */,
 				08F82FE6291E5E000033AB0D /* Stubs.swift */,
+				08F82FEA291E71E10033AB0D /* Mocks.swift */,
 			);
 			path = StubsFakesSpiesMocks;
 			sourceTree = "<group>";
@@ -1416,6 +1419,7 @@
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
+				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,

@@ -27,9 +27,18 @@ class SwiperTests: XCTestCase {
         _ = try XCTUnwrap(gr as? UIPanGestureRecognizer)
     }
 
+//    func test_hasNonZeroSize() {
+//        XCTAssertNotEqual(sut.bounds.width, 0)
+//        XCTAssertNotEqual(sut.bounds.height, 0)
+//    }
+
     func test_eventCellSwipe_notFull_returnsPinToStart() {
         // create mock class
         // change real class to mock
         // use mock to test behaviour
     }
+}
+
+class SwiperTargetSpy {
+    @objc func handlePan(_: UIPanGestureRecognizer) {}
 }

@@ -13,6 +13,10 @@ class Swiper: UIControl {
     let initialConstant: CGFloat = .r2
     var successConstant: CGFloat { parent.bounds.width - .r2 }
     var horizontalConstraint: NSLayoutConstraint!
+    lazy var recognizer = UIPanGestureRecognizer(
+        target: self,
+        action: #selector(handlePan)
+    )
 
     // MARK: - Init
     init(parent: UIView) {
@@ -21,7 +25,7 @@ class Swiper: UIControl {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
-        configurePanHandler()
+        addGestureRecognizer(recognizer)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -42,11 +46,6 @@ class Swiper: UIControl {
     private func configureAppearance() {
         layer.backgroundColor = EventCell.pinColor.cgColor
         layer.cornerRadius = .r1
-    }
-
-    private func configurePanHandler() {
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        addGestureRecognizer(pan)
     }
 }
 
