@@ -95,6 +95,7 @@ class EventCell: UITableViewCell {
     }
 
     private func configureEventsHandlers() {
+        /// backlog: change gr to cell selection?
         viewRoot.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePress)))
 
