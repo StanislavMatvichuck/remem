@@ -33,7 +33,7 @@
 		0838B2D928FDD59A0076E08B /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
-		0844342728F6DFF900A30FB2 /* EventsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListTests.swift */; };
+		0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
@@ -114,6 +114,8 @@
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
+		08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE4291E5DB10033AB0D /* Fakes.swift */; };
+		08F82FE7291E5E000033AB0D /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE6291E5E000033AB0D /* Stubs.swift */; };
 		08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* Clock.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -328,7 +330,7 @@
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
 		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
-		0844342628F6DFF900A30FB2 /* EventsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListTests.swift; sourceTree = "<group>"; };
+		0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListControllerTests.swift; sourceTree = "<group>"; };
 		08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepositoryTests.swift; sourceTree = "<group>"; };
 		08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming02.xcdatamodel; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
@@ -422,6 +424,8 @@
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
 		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
+		08F82FE4291E5DB10033AB0D /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		08F82FE6291E5E000033AB0D /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -692,9 +696,10 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
 				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
-				0844342628F6DFF900A30FB2 /* EventsListTests.swift */,
+				0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */,
 				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 			);
 			path = ApplicationTests;
@@ -928,6 +933,15 @@
 				0852C69F283D39F80027EF3E /* ClockView.swift */,
 			);
 			path = ClockView;
+			sourceTree = "<group>";
+		};
+		08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */ = {
+			isa = PBXGroup;
+			children = (
+				08F82FE4291E5DB10033AB0D /* Fakes.swift */,
+				08F82FE6291E5E000033AB0D /* Stubs.swift */,
+			);
+			path = StubsFakesSpiesMocks;
 			sourceTree = "<group>";
 		};
 		08FEA39E28DC9A4000BAA196 /* Tests */ = {
@@ -1394,8 +1408,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0844342728F6DFF900A30FB2 /* EventsListTests.swift in Sources */,
+				08F82FE7291E5E000033AB0D /* Stubs.swift in Sources */,
+				0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */,
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
+				08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
