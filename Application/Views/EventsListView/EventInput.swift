@@ -242,6 +242,13 @@ extension EventInput {
         barSubmit.action = #selector(handlePressSubmit)
     }
 
+    private func dismiss() {
+        value = ""
+        textField.resignFirstResponder()
+        isUserInteractionEnabled = false
+        barSubmit.title = String(localizationId: "button.create")
+    }
+
     @objc private func handleTapEmoji(_ sender: UIButton) {
         guard let emojiString = sender.titleLabel?.text else { return }
 
@@ -260,13 +267,6 @@ extension EventInput {
 
     @objc private func handleInputChange() {
         value = textField.text ?? ""
-    }
-
-    private func dismiss() {
-        value = ""
-        textField.resignFirstResponder()
-        isUserInteractionEnabled = false
-        barSubmit.title = String(localizationId: "button.create")
     }
 }
 
