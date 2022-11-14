@@ -23,28 +23,22 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
             viewModel: viewModel
         )
 
-        let nav = ApplicationFactory.makeStyledNavigationController()
-        nav.pushViewController(sut, animated: false)
-        nav.navigationBar.prefersLargeTitles = true
-
-        putInViewHierarchy(nav)
+        putInViewHierarchy(sut)
     }
 
     override func tearDown() {
-        sut = nil
         executeRunLoop()
+        sut = nil
         super.tearDown()
     }
 
-    var sutContainer: UIViewController { sut.navigationController! }
-
     func test_empty() {
-        FBSnapshotVerifyViewController(sutContainer)
+        FBSnapshotVerifyViewController(sut)
     }
 
     func test_empty_dark() {
-        sutContainer.view.window?.overrideUserInterfaceStyle = .dark
+        sut.view.window?.overrideUserInterfaceStyle = .dark
 
-        FBSnapshotVerifyViewController(sutContainer)
+        FBSnapshotVerifyViewController(sut)
     }
 }
