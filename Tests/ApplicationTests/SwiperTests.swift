@@ -10,6 +10,7 @@ import XCTest
 
 class SwiperTests: XCTestCase {
     var sut: Swiper!
+    var mockGestureRecognizer: UIPanGestureRecognizerMock?
 
     override func setUp() {
         super.setUp()
@@ -44,16 +45,36 @@ class SwiperTests: XCTestCase {
     }
 
     func test_swipingRight_movesCircleRight() {
+        arrangeLittleSwipeRightInProgress()
+
+        XCTAssertLessThan(sut.initialX, sut.horizontalConstraint.constant)
+    }
+
+    func test_swipingRight_notComplete_movesCircleToInitialPosition() {
+        arrangeLittleSwipeRightInProgress()
+
+        let exp = XCTestExpectation(description: "animation completed")
+        sut.animationCompletionHandler = { _ in
+            exp.fulfill()
+        }
+
+        mockGestureRecognizer?.pan(location: nil, translation: nil, state: .ended)
+
+        wait(for: [exp], timeout: 0.1)
+
+        XCTAssertEqual(sut.horizontalConstraint.constant, sut.initialX)
+    }
+
+    private func arrangeLittleSwipeRightInProgress() {
         let mockGR = UIPanGestureRecognizerMock(
             target: sut,
             action: #selector(Swiper.handlePan)
         )
 
+        mockGestureRecognizer = mockGR
         sut.addGestureRecognizer(mockGR)
 
         let someTranslation = CGPoint(x: 20, y: 0)
         mockGR.pan(location: nil, translation: someTranslation, state: .changed)
-
-        XCTAssertLessThan(sut.initialX, sut.horizontalConstraint.constant)
     }
 }

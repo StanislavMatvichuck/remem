@@ -54,6 +54,8 @@ class Swiper: UIControl {
         layer.backgroundColor = EventCell.pinColor.cgColor
         layer.cornerRadius = .r1
     }
+
+    var animationCompletionHandler: ((Bool) -> Void)?
 }
 
 // MARK: - Pan handling
@@ -85,7 +87,7 @@ extension Swiper {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut, animations: {
             self.horizontalConstraint.constant = self.initialX
             self.superview?.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: animationCompletionHandler)
     }
 
     func animateSuccess() {
