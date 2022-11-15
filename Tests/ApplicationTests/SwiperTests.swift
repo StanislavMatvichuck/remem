@@ -13,7 +13,12 @@ class SwiperTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = Swiper(parent: UIView())
+        sut = Swiper()
+        let parentView = UIView(frame: CGRect(x: 0, y: 0,
+                                              width: UIScreen.main.bounds.width * 0.8,
+                                              height: EventCell.height))
+        parentView.addSubview(sut)
+        parentView.layoutIfNeeded()
     }
 
     override func tearDown() {
@@ -27,10 +32,10 @@ class SwiperTests: XCTestCase {
         _ = try XCTUnwrap(gr as? UIPanGestureRecognizer)
     }
 
-//    func test_hasNonZeroSize() {
-//        XCTAssertNotEqual(sut.bounds.width, 0)
-//        XCTAssertNotEqual(sut.bounds.height, 0)
-//    }
+    func test_hasNonZeroSize() {
+        XCTAssertNotEqual(sut.bounds.width, 0)
+        XCTAssertNotEqual(sut.bounds.height, 0)
+    }
 
     func test_eventCellSwipe_notFull_returnsPinToStart() {
         // create mock class

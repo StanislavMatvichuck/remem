@@ -9,37 +9,41 @@ import UIKit
 
 class Swiper: UIControl {
     // MARK: - Properties
-    let parent: UIView
-    let initialConstant: CGFloat = .r2
-    var successConstant: CGFloat { parent.bounds.width - .r2 }
+    let initialX: CGFloat = .r2
+    var successX: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude - .r2 }
     var horizontalConstraint: NSLayoutConstraint!
+
     lazy var recognizer = UIPanGestureRecognizer(
         target: self,
         action: #selector(handlePan)
     )
 
     // MARK: - Init
-    init(parent: UIView) {
-        self.parent = parent
+    init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         configureLayout()
         configureAppearance()
         addGestureRecognizer(recognizer)
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
     private func configureLayout() {
-        horizontalConstraint = centerXAnchor.constraint(equalTo: parent.leadingAnchor, constant: .r2)
+        guard let superview else { return }
 
-        parent.addSubview(self)
+        horizontalConstraint = centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: .r2)
+
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: .d1),
             heightAnchor.constraint(equalToConstant: .d1),
 
             horizontalConstraint,
-            centerYAnchor.constraint(equalTo: parent.centerYAnchor),
+            centerYAnchor.constraint(equalTo: superview.centerYAnchor),
         ])
     }
 
@@ -52,6 +56,8 @@ class Swiper: UIControl {
 // MARK: - Pan handling
 extension Swiper {
     @objc func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
+        guard let parent = gestureRecognizer.view else { return }
+
         switch gestureRecognizer.state {
         case .began:
             UIDevice.vibrate(.light)
@@ -60,10 +66,10 @@ extension Swiper {
             let xDelta = translation.x * 2
             let newXPosition = horizontalConstraint.constant + xDelta
 
-            horizontalConstraint.constant = newXPosition.clamped(to: initialConstant ... successConstant)
+            horizontalConstraint.constant = newXPosition.clamped(to: initialX ... successX)
             gestureRecognizer.setTranslation(CGPoint.zero, in: parent)
         case .ended, .cancelled:
-            if horizontalConstraint.constant >= successConstant {
+            if horizontalConstraint.constant >= successX {
                 sendActions(for: .primaryActionTriggered)
             } else {
                 animateToInitialConstant()
@@ -74,8 +80,8 @@ extension Swiper {
 
     func animateToInitialConstant() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.horizontalConstraint.constant = self.initialConstant
-            self.parent.layoutIfNeeded()
+            self.horizontalConstraint.constant = self.initialX
+            self.superview?.layoutIfNeeded()
         }, completion: nil)
     }
 

@@ -17,7 +17,7 @@ class EventCell: UITableViewCell {
 
     // MARK: - Properties
     var viewModel: EventCellViewModeling? { didSet { handleViewStateUpdate() } }
-    weak var swiper: Swiper?
+    let swiper = Swiper()
 
     let viewRoot: UIView = {
         let view = UIView(al: true)
@@ -52,18 +52,13 @@ class EventCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
         configureAppearance()
-        makeSwiper()
         configureEventsHandlers()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    private func makeSwiper() {
-        let swiper = Swiper(parent: viewRoot)
-        self.swiper = swiper
-    }
-
     private func configureLayout() {
+        viewRoot.addSubview(swiper)
         viewRoot.addSubview(nameLabel)
         viewRoot.addSubview(valueLabel)
         contentView.addSubview(viewRoot)
@@ -99,7 +94,7 @@ class EventCell: UITableViewCell {
         viewRoot.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handlePress)))
 
-        swiper?.addTarget(self, action: #selector(handleSwipe), for: .primaryActionTriggered)
+        swiper.addTarget(self, action: #selector(handleSwipe), for: .primaryActionTriggered)
     }
 
     private func handleViewStateUpdate() {
@@ -138,7 +133,7 @@ extension EventCell {
 extension EventCell: EventCellViewModelDelegate {
     func addedHappening() {
         handleViewStateUpdate()
-        swiper?.animateSuccess()
+        swiper.animateSuccess()
     }
 
     func addedGoal() { handleViewStateUpdate() }
