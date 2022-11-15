@@ -37,7 +37,13 @@ class SwiperTests: XCTestCase {
         XCTAssertNotEqual(sut.bounds.height, 0)
     }
 
-    func test_eventCellSwipe_notFull_returnsPinToStart() {
+    func test_layoutRules() {
+        XCTAssertLessThanOrEqual(sut.size / 2, sut.initialX)
+        XCTAssertLessThanOrEqual(sut.initialX, sut.successX)
+        XCTAssertLessThanOrEqual(sut.successX, sut.width - sut.size / 2)
+    }
+
+    func test_swipingRight_movesCircleRight() {
         let mockGR = UIPanGestureRecognizerMock(
             target: sut,
             action: #selector(Swiper.handlePan)
@@ -48,9 +54,6 @@ class SwiperTests: XCTestCase {
         let someTranslation = CGPoint(x: 20, y: 0)
         mockGR.pan(location: nil, translation: someTranslation, state: .changed)
 
-        XCTAssertTrue(
-            sut.horizontalConstraint.constant > sut.initialX,
-            "\(sut.horizontalConstraint.constant) > \(sut.initialX)"
-        )
+        XCTAssertLessThan(sut.initialX, sut.horizontalConstraint.constant)
     }
 }

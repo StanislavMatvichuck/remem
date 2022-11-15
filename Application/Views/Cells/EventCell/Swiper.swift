@@ -10,7 +10,10 @@ import UIKit
 class Swiper: UIControl {
     // MARK: - Properties
     let initialX: CGFloat = .r2
-    var successX: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude - .r2 }
+    let size: CGFloat = .d1
+    var width: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude }
+    var successX: CGFloat { width - .r2 }
+
     var horizontalConstraint: NSLayoutConstraint!
 
     // MARK: - Init
@@ -28,18 +31,19 @@ class Swiper: UIControl {
         addGestureRecognizer(
             UIPanGestureRecognizer(
                 target: self,
-                action: #selector(handlePan)
-            ))
+                action: #selector(handlePan)))
     }
 
     private func configureLayout() {
         guard let superview else { return }
 
-        horizontalConstraint = centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: .r2)
+        horizontalConstraint = centerXAnchor.constraint(
+            equalTo: superview.leadingAnchor,
+            constant: initialX)
 
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: .d1),
-            heightAnchor.constraint(equalToConstant: .d1),
+            widthAnchor.constraint(equalToConstant: size),
+            heightAnchor.constraint(equalToConstant: size),
 
             horizontalConstraint,
             centerYAnchor.constraint(equalTo: superview.centerYAnchor),
@@ -68,7 +72,7 @@ extension Swiper {
             horizontalConstraint.constant = newXPosition.clamped(to: initialX ... successX)
             gestureRecognizer.setTranslation(CGPoint.zero, in: parent)
         case .ended, .cancelled:
-            if horizontalConstraint.constant >= successX {
+            if horizontalConstraint.constant == successX {
                 sendActions(for: .primaryActionTriggered)
             } else {
                 animateToInitialConstant()
