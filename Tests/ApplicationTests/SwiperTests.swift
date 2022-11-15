@@ -38,12 +38,19 @@ class SwiperTests: XCTestCase {
     }
 
     func test_eventCellSwipe_notFull_returnsPinToStart() {
-        // create mock class
-        // change real class to mock
-        // use mock to test behaviour
-    }
-}
+        let mockGR = UIPanGestureRecognizerMock(
+            target: sut,
+            action: #selector(Swiper.handlePan)
+        )
 
-class SwiperTargetSpy {
-    @objc func handlePan(_: UIPanGestureRecognizer) {}
+        sut.addGestureRecognizer(mockGR)
+
+        let someTranslation = CGPoint(x: 20, y: 0)
+        mockGR.pan(location: nil, translation: someTranslation, state: .changed)
+
+        XCTAssertTrue(
+            sut.horizontalConstraint.constant > sut.initialX,
+            "\(sut.horizontalConstraint.constant) > \(sut.initialX)"
+        )
+    }
 }

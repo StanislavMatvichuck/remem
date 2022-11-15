@@ -13,11 +13,6 @@ class Swiper: UIControl {
     var successX: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude - .r2 }
     var horizontalConstraint: NSLayoutConstraint!
 
-    lazy var recognizer = UIPanGestureRecognizer(
-        target: self,
-        action: #selector(handlePan)
-    )
-
     // MARK: - Init
     init() {
         super.init(frame: .zero)
@@ -30,7 +25,11 @@ class Swiper: UIControl {
         super.didMoveToSuperview()
         configureLayout()
         configureAppearance()
-        addGestureRecognizer(recognizer)
+        addGestureRecognizer(
+            UIPanGestureRecognizer(
+                target: self,
+                action: #selector(handlePan)
+            ))
     }
 
     private func configureLayout() {
