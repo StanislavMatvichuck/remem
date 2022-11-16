@@ -133,7 +133,6 @@ extension EventCell {
 extension EventCell: EventCellViewModelDelegate {
     func addedHappening() {
         handleViewStateUpdate()
-        swiper.animateSuccess()
     }
 
     func addedGoal() { handleViewStateUpdate() }

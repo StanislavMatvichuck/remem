@@ -15,6 +15,7 @@ class Swiper: UIControl {
     var successX: CGFloat { width - .r2 }
 
     var horizontalConstraint: NSLayoutConstraint!
+    var animationCompletionHandler: ((Bool) -> Void)?
 
     // MARK: - Init
     init() {
@@ -54,8 +55,6 @@ class Swiper: UIControl {
         layer.backgroundColor = EventCell.pinColor.cgColor
         layer.cornerRadius = .r1
     }
-
-    var animationCompletionHandler: ((Bool) -> Void)?
 }
 
 // MARK: - Pan handling
@@ -76,6 +75,7 @@ extension Swiper {
         case .ended, .cancelled:
             if horizontalConstraint.constant == successX {
                 sendActions(for: .primaryActionTriggered)
+                animateSuccess()
             } else {
                 animateToInitialConstant()
             }
@@ -83,14 +83,19 @@ extension Swiper {
         }
     }
 
-    func animateToInitialConstant() {
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.horizontalConstraint.constant = self.initialX
-            self.superview?.layoutIfNeeded()
-        }, completion: animationCompletionHandler)
+    private func animateToInitialConstant() {
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0.0,
+            options: .curveEaseInOut,
+            animations: {
+                self.horizontalConstraint.constant = self.initialX
+                self.superview?.layoutIfNeeded()
+            },
+            completion: animationCompletionHandler)
     }
 
-    func animateSuccess() {
+    private func animateSuccess() {
         let background = CABasicAnimation(keyPath: "backgroundColor")
         background.fromValue = layer.backgroundColor
         background.toValue = UIHelper.brand.cgColor

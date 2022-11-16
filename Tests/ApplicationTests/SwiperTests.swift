@@ -10,10 +10,9 @@ import XCTest
 
 class SwiperTests: XCTestCase {
     var sut: Swiper!
-    /// Created by `arrangeLittleSwipeRightInProgress()`
     var mockGestureRecognizer: UIPanGestureRecognizerMock?
-    /// Reference must be held for parent during pan gestures tests
-    private var parent: UIView!
+    var parent: UIView! /// Reference must be held for parent during pan gestures tests
+    var circlePosition: CGFloat { sut.horizontalConstraint.constant }
 
     override func setUp() {
         super.setUp()
@@ -28,6 +27,7 @@ class SwiperTests: XCTestCase {
 
     override func tearDown() {
         parent = nil
+        mockGestureRecognizer = nil
         sut = nil
         super.tearDown()
     }
@@ -45,29 +45,37 @@ class SwiperTests: XCTestCase {
 
     func test_layoutRules() {
         XCTAssertLessThanOrEqual(sut.size / 2, sut.initialX)
-        XCTAssertLessThanOrEqual(sut.initialX, sut.successX)
+        XCTAssertLessThan(sut.initialX, sut.successX)
         XCTAssertLessThanOrEqual(sut.successX, sut.width - sut.size / 2)
     }
 
     func test_swipingRight_movesCircleRight() {
-        arrangeLittleSwipeRightInProgress()
+        XCTAssertEqual(sut.initialX, circlePosition, "precondition")
+        addMockGestureRecognizer()
 
-        XCTAssertLessThan(sut.initialX, sut.horizontalConstraint.constant)
+        mockGestureRecognizer?.pan(
+            location: nil,
+            translation: CGPoint(x: 20, y: 0),
+            state: .changed
+        )
+
+        XCTAssertLessThan(sut.initialX, circlePosition)
     }
 
     func test_swipingRight_releaseAtMiddle_movesCircleToInitialPosition() {
-        arrangeLittleSwipeRightInProgress()
+        addMockGestureRecognizer()
 
-        let exp = XCTestExpectation(description: "animation completed")
-        sut.animationCompletionHandler = { _ in
-            exp.fulfill()
-        }
+        mockGestureRecognizer?.pan(
+            location: nil,
+            translation: CGPoint(x: 20, y: 0),
+            state: .changed
+        )
+
+        XCTAssertLessThan(sut.initialX, circlePosition, "precondition")
 
         mockGestureRecognizer?.pan(location: nil, translation: nil, state: .ended)
 
-        wait(for: [exp], timeout: 0.1)
-
-        XCTAssertEqual(sut.horizontalConstraint.constant, sut.initialX)
+        XCTAssertEqual(sut.initialX, circlePosition)
     }
 
     func test_swipingRight_releaseAtEnd_sendsAction() {
@@ -75,23 +83,47 @@ class SwiperTests: XCTestCase {
         let spy = Spy(exp)
         sut.addTarget(spy, action: #selector(Spy.handleAction), for: .primaryActionTriggered)
 
-        arrangeLittleSwipeRightInProgress(moveBy: .greatestFiniteMagnitude)
-        mockGestureRecognizer?.pan(location: nil, translation: nil, state: .ended)
+        releaseFingerAtEnd()
 
-        wait(for: [exp], timeout: 0.1)
+        wait(for: [exp], timeout: 0.001)
     }
 
-    private func arrangeLittleSwipeRightInProgress(moveBy: CGFloat = 20) {
+    func test_swipingRight_releaseAtEnd_returnsCircleBackAfterAnimation() {
+        let exp02 = XCTestExpectation(description: "circle returns to initial position")
+        sut.animationCompletionHandler = { _ in exp02.fulfill() }
+
+        releaseFingerAtEnd()
+
+        XCTAssertLessThan(sut.initialX, circlePosition, "circle is not returned immediately")
+
+        wait(for: [exp02], timeout: 0.001)
+
+        XCTAssertEqual(sut.initialX, circlePosition)
+    }
+
+    private func releaseFingerAtEnd() {
+        addMockGestureRecognizer()
+
+        mockGestureRecognizer?.pan(
+            location: nil,
+            translation: CGPoint(x: CGFloat.greatestFiniteMagnitude, y: 0),
+            state: .changed
+        )
+
+        mockGestureRecognizer?.pan(
+            location: nil,
+            translation: nil,
+            state: .ended
+        )
+    }
+
+    private func addMockGestureRecognizer() {
         let mockGR = UIPanGestureRecognizerMock(
             target: sut,
             action: #selector(Swiper.handlePan)
         )
-        mockGestureRecognizer = mockGR
-
         sut.addGestureRecognizer(mockGR)
-
-        let someTranslation = CGPoint(x: moveBy, y: 0)
-        mockGR.pan(location: nil, translation: someTranslation, state: .changed)
+        mockGestureRecognizer = mockGR
     }
 }
 
