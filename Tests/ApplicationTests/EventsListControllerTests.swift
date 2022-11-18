@@ -14,9 +14,14 @@ class EventsListControllerTests: XCTestCase {
     // MARK: - Test fixture
     var sut: EventsListController!
 
-    private var view: EventsListView { sut.viewRoot }
-    private var table: UITableView { view.table }
-    private var firstCellIndex: IndexPath { IndexPath(row: 0, section: EventsListController.Section.events.rawValue) }
+    var view: EventsListView { sut.viewRoot }
+    var table: UITableView { view.table }
+    var firstCellIndex: IndexPath {
+        IndexPath(
+            row: 0,
+            section: EventsListController.Section.events.rawValue
+        )
+    }
 
     override func setUp() {
         super.setUp()
@@ -24,21 +29,21 @@ class EventsListControllerTests: XCTestCase {
     }
 
     override func tearDown() {
-        executeRunLoop()
         sut = nil
+        executeRunLoop()
         super.tearDown()
     }
 
-    func test_viewDidLoad_empty_hasTitle() {
+    func test_empty_hasTitle() {
         XCTAssertEqual(sut.title, String(localizationId: "eventsList.title"))
     }
 
-    func test_viewDidLoad_empty_tableIsConfigured() throws {
+    func test_empty_tableIsConfigured() throws {
         XCTAssertNotNil(table.dataSource)
         XCTAssertNotNil(table.delegate)
     }
 
-    func test_viewDidLoad_empty_tableHasThreeSections() throws {
+    func test_empty_tableHasThreeSections() throws {
         XCTAssertEqual(
             table.numberOfSections,
             EventsListController.Section.allCases.count
@@ -49,20 +54,20 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertEqual(table.numberOfRows(inSection: EventsListController.Section.footer.rawValue), 1)
     }
 
-    func test_viewDidLoad_empty_rendersEmptyHint() {
+    func test_empty_rendersEmptyHint() {
         XCTAssertEqual(
             sut.hintText(),
             String(localizationId: "eventsList.hint.empty")
         )
     }
 
-    func test_viewDidLoad_empty_gestureHintIsNotVisible() {
+    func test_empty_gestureHintIsNotVisible() {
         let gestureHint = view.swipeHint
 
         XCTAssertNil(gestureHint.superview)
     }
 
-    func test_viewDidLoad_empty_rendersHighlightedAddButton() throws {
+    func test_empty_rendersHighlightedAddButton() throws {
         let button = sut.addButton()
 
         let title = NSAttributedString(
@@ -76,7 +81,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertTrue(button.isHighlighted, "Button must be highlighted when list is empty")
     }
 
-    func test_viewDidLoad_singleEvent_rendersNormalAddButton() throws {
+    func test_singleEvent_rendersNormalAddButton() throws {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
 
         let button = sut.addButton()
@@ -88,21 +93,20 @@ class EventsListControllerTests: XCTestCase {
         )
     }
 
-    func test_viewDidLoad_singleEvent_rendersFirstHappeningHint() {
+    func test_singleEvent_rendersFirstHappeningHint() {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
 
         XCTAssertEqual(sut.hintText(), String(localizationId: "eventsList.hint.firstHappening"))
     }
 
-    func test_viewDidLoad_singleEvent_rendersOneEventCell() throws {
+    func test_singleEvent_rendersOneEventCell() throws {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
 
         _ = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
     }
 
-    func test_viewDidLoad_singleEvent_rendersRenameButton() {
+    func test_singleEvent_rendersRenameButton() {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
-
         let renameAction = table.delegate?.tableView?(
             table,
             trailingSwipeActionsConfigurationForRowAt: firstCellIndex
@@ -114,9 +118,8 @@ class EventsListControllerTests: XCTestCase {
         )
     }
 
-    func test_viewDidLoad_singleEvent_rendersDeleteButton() {
+    func test_singleEvent_rendersDeleteButton() {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
-
         let renameAction = table.delegate?.tableView?(
             table,
             trailingSwipeActionsConfigurationForRowAt: firstCellIndex
@@ -126,6 +129,16 @@ class EventsListControllerTests: XCTestCase {
             renameAction?.actions[0].title,
             String(localizationId: "button.delete")
         )
+    }
+
+    func test_singleEvent_swipe_increasesLabelAmountByOne() throws {
+        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        let cell = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+        XCTAssertEqual(cell.valueLabel.text, "0", "precondition")
+
+        cell.swiper.sendActions(for: .primaryActionTriggered)
+
+        XCTAssertEqual(cell.valueLabel.text, "1")
     }
 
     func test_addButtonTapped_keyboardShown() throws {

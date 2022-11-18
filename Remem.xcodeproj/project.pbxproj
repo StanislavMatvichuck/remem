@@ -70,7 +70,7 @@
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42728D0A5A00085A37D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED42628D0A5A00085A37D /* GoalTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
-		0889669228D8899D0075A51D /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
+		08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
 		0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
@@ -571,7 +571,6 @@
 				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
 				08B651AE28C624E500A2F158 /* GoalEditUseCase.swift */,
 				0895FB6128E24623006716F4 /* WidgetsUseCase.swift */,
-				0889669928D88AC30075A51D /* Repositories */,
 			);
 			path = IosUseCases;
 			sourceTree = "<group>";
@@ -653,6 +652,7 @@
 		083BECF228D0A31A009157FD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
 				080A679028D1E2DA00889A97 /* Model */,
 				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
 			);
@@ -766,14 +766,6 @@
 				087ED42628D0A5A00085A37D /* GoalTests.swift */,
 			);
 			path = DomainTests;
-			sourceTree = "<group>";
-		};
-		0889669928D88AC30075A51D /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		08B356FC28E06A7B00770B9A /* WidgetsFramework */ = {
@@ -1419,7 +1411,6 @@
 			files = (
 				080A67AC28D1E4CC00889A97 /* GoalEditUseCase.swift in Sources */,
 				080A67AD28D1E4CC00889A97 /* EventsListUseCase.swift in Sources */,
-				0889669228D8899D0075A51D /* EventsRepository.swift in Sources */,
 				0895FB6228E24623006716F4 /* WidgetsUseCase.swift in Sources */,
 				080A67AE28D1E4CC00889A97 /* EventEditUseCase.swift in Sources */,
 				0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */,
@@ -1453,6 +1444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
 				087ED41028D0A4060085A37D /* Goal.swift in Sources */,
 				087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */,

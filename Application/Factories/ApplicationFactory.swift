@@ -17,14 +17,6 @@ class ApplicationFactory {
     let eventEditUseCase: EventEditUseCasing
     // MARK: - Init
     init() {
-        let inMemory: Bool = {
-            #if DEBUG
-            return CommandLine.arguments.contains("-inMemory")
-            #else
-            return false
-            #endif
-        }()
-
         func makeCoordinator() -> Coordinator {
             let navController = Self.makeStyledNavigationController()
             navController.navigationBar.prefersLargeTitles = true
@@ -33,7 +25,7 @@ class ApplicationFactory {
         }
 
         func makeEventsRepository() -> EventsRepositoryInterface {
-            let container = CoreDataStack.createContainer(inMemory: inMemory)
+            let container = CoreDataStack.createContainer(inMemory: false)
             let mapper = EventEntityMapper()
             return CoreDataEventsRepository(container: container, mapper: mapper)
         }

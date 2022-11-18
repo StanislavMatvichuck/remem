@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 27.09.2022.
 //
 
+import Domain
 import IosUseCases
 import WidgetKit
 import WidgetsFramework
