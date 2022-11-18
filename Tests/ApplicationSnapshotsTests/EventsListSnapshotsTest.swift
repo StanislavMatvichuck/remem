@@ -6,7 +6,9 @@
 //
 
 @testable import Application
+import Domain
 import iOSSnapshotTestCase
+import IosUseCases
 
 class EventsListSnapshotsTest: FBSnapshotTestCase {
     var sut: EventsListController!
@@ -15,12 +17,10 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = false
 
-        let viewModel = EventsListViewModelFake()
-        let view = EventsListView()
-
         sut = EventsListController(
-            viewRoot: view,
-            viewModel: viewModel
+            viewRoot: EventsListView(),
+            listUseCase: EventsListUseCasingStub(),
+            editUseCase: EventEditUseCasingStub()
         )
 
         putInViewHierarchy(sut)

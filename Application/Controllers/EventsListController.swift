@@ -5,6 +5,8 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
+import Domain
+import IosUseCases
 import UIKit
 
 class EventsListController: UIViewController {
@@ -15,15 +17,22 @@ class EventsListController: UIViewController {
     }
 
     // MARK: - Properties
-    private let viewModel: EventsListViewModeling
+    let viewModel: EventsListViewModel
+    let listUseCase: EventsListUseCasing
+    let editUseCase: EventEditUseCasing
     let viewRoot: EventsListView
 
     // MARK: - Init
     init(viewRoot: EventsListView,
-         viewModel: EventsListViewModeling)
+         listUseCase: EventsListUseCasing,
+         editUseCase: EventEditUseCasing)
     {
         self.viewRoot = viewRoot
-        self.viewModel = viewModel
+        self.listUseCase = listUseCase
+        self.editUseCase = editUseCase
+
+        self.viewModel = EventsListViewModel(events: listUseCase.makeAllEvents())
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -76,14 +85,14 @@ extension EventsListController: UITableViewDelegate {
         let renameAction = UIContextualAction(style: .normal,
                                               title: String(localizationId: "button.rename")) {
             _, _, completion in
-            self.viewModel.selectForRenaming(event: event)
+//            self.viewModel.selectForRenaming(event: event)
             completion(true)
         }
 
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: String(localizationId: "button.delete")) {
             _, _, completion in
-            self.viewModel.selectForRemoving(event: event)
+//            self.viewModel.selectForRemoving(event: event)
             completion(true)
         }
 
@@ -104,12 +113,17 @@ extension EventsListController {
         viewRoot.input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
     }
 
-    @objc private func handleAdd() { viewModel.submitNameEditing(name: viewRoot.input.value) }
-    @objc private func handleCancel() { viewModel.cancelNameEditing() }
+    @objc private func handleAdd() { listUseCase.add(name: viewRoot.input.value) }
+    @objc private func handleCancel() {}
 }
 
 // MARK: - EventsListViewModelDelegate
-extension EventsListController: EventsListViewModelDelegate {
+extension EventsListController: EventsListUseCasingDelegate {
+    func update(events: [Event]) {
+        update()
+        viewRoot.table.reloadData()
+    }
+
     func update() {
         updateHints()
         hideSwipeHintIfNeeded()
@@ -122,35 +136,6 @@ extension EventsListController: EventsListViewModelDelegate {
         func hideSwipeHintIfNeeded() {
             if viewModel.hint != .placeFirstMark { viewRoot.swipeHint.removeFromSuperview() }
         }
-    }
-
-    func addEvent(at: Int) {
-        let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewRoot.table.insertRows(at: [path], with: .top)
-
-        if viewModel.count <= 1 {
-            let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
-            viewRoot.table.reloadRows(at: [footerIndex], with: .none)
-        }
-    }
-
-    func remove(at: Int) {
-        let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewRoot.table.deleteRows(at: [path], with: .none)
-
-        if viewModel.count == 0 {
-            let footerIndex = IndexPath(row: 0, section: Section.footer.rawValue)
-            viewRoot.table.reloadRows(at: [footerIndex], with: .none)
-        }
-    }
-
-    func update(at: Int) {
-        let path = IndexPath(row: at, section: Section.events.rawValue)
-        viewRoot.table.reloadRows(at: [path], with: .none)
-    }
-
-    func askNewName(withOldName: String) {
-        viewRoot.input.rename(oldName: withOldName)
     }
 }
 
@@ -192,12 +177,10 @@ extension EventsListController {
     private func makeEventCell(for index: IndexPath) -> UITableViewCell {
         guard
             let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
-            let viewModel = viewModel.cellVM(at: index.row)
+            let viewModel = viewModel.eventViewModel(at: index.row)
         else { return UITableViewCell() }
 
-        viewModel.delegate = eventCell
         eventCell.viewModel = viewModel
-
         configureSwipeHintIfNeeded(at: index, cell: eventCell)
         return eventCell
     }

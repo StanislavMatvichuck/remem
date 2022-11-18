@@ -9,11 +9,7 @@ import Domain
 import Foundation
 import IosUseCases
 
-protocol EventsListFactoryInterface {
-    func makeEventCellViewModel(event: Event) -> EventCellViewModel
-}
-
-class EventsListFactory: EventsListFactoryInterface {
+class EventsListFactory {
     // MARK: - Properties
     let applicationFactory: ApplicationFactory
     // MARK: - Init
@@ -24,8 +20,11 @@ class EventsListFactory: EventsListFactoryInterface {
     func makeEventsListController() -> EventsListController {
         let viewRoot = makeView()
         let viewModel = makeEventsListViewModel()
-        let controller = EventsListController(viewRoot: viewRoot, viewModel: viewModel)
-        viewModel.delegate = controller
+        let controller = EventsListController(
+            viewRoot: viewRoot,
+            listUseCase: applicationFactory.eventsListUseCase,
+            editUseCase: applicationFactory.eventEditUseCase
+        )
         return controller
     }
 
@@ -35,20 +34,8 @@ class EventsListFactory: EventsListFactoryInterface {
     }
 
     func makeEventsListViewModel() -> EventsListViewModel {
-        let viewModel = EventsListViewModel(listUseCase: applicationFactory.eventsListUseCase,
-                                            editUseCase: applicationFactory.eventEditUseCase,
-                                            factory: self)
-        applicationFactory.eventsListUseCase.add(delegate: viewModel)
-        applicationFactory.eventEditUseCase.add(delegate: viewModel)
-        viewModel.coordinator = applicationFactory.coordinator
-        return viewModel
-    }
-
-    // EventsListFactoryInterface
-    func makeEventCellViewModel(event: Event) -> EventCellViewModel {
-        let viewModel = EventCellViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
-        applicationFactory.eventEditUseCase.add(delegate: viewModel)
-        viewModel.coordinator = applicationFactory.coordinator
+        let events = applicationFactory.eventsListUseCase.makeAllEvents()
+        let viewModel = EventsListViewModel(events: events)
         return viewModel
     }
 }

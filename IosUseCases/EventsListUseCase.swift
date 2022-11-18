@@ -37,13 +37,13 @@ public class EventsListUseCase: EventsListUseCasing {
         let createdEvent = Event(name: name)
 
         repository.save(createdEvent)
-        delegates.call { $0.added(event: createdEvent) }
+        delegates.call { $0.update(events: repository.makeAllEvents()) }
         widgetUseCase.update()
     }
 
     public func remove(_ event: Event) {
         repository.delete(event)
-        delegates.call { $0.removed(event: event) }
+        delegates.call { $0.update(events: repository.makeAllEvents()) }
         widgetUseCase.update()
     }
 
@@ -52,6 +52,5 @@ public class EventsListUseCase: EventsListUseCasing {
 }
 
 public protocol EventsListUseCasingDelegate: AnyObject {
-    func added(event: Event)
-    func removed(event: Event)
+    func update(events: [Event])
 }

@@ -154,9 +154,11 @@ class EventsListControllerTests: XCTestCase {
 
 private extension EventsListController {
     static func make(events: [Event] = []) -> EventsListController {
-        let view = EventsListView()
-        let viewModel = EventsListViewModelFake(events: events)
-        let sut = EventsListController(viewRoot: view, viewModel: viewModel)
+        let sut = EventsListController(
+            viewRoot: EventsListView(),
+            listUseCase: EventsListUseCasingStub(events: events),
+            editUseCase: EventEditUseCasingStub()
+        )
         sut.loadViewIfNeeded()
         return sut
     }

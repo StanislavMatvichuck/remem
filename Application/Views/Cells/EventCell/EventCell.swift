@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
+import IosUseCases
 import UIKit
 
 class EventCell: UITableViewCell {
@@ -16,7 +17,9 @@ class EventCell: UITableViewCell {
     static let height = .d2 + UIHelper.spacing
 
     // MARK: - Properties
-    var viewModel: EventCellViewModeling? { didSet { handleViewStateUpdate() } }
+    var viewModel: EventViewModel? { didSet { handleViewStateUpdate() } }
+    var useCase: EventEditUseCasing?
+    weak var coordinator: Coordinating?
     let swiper = Swiper()
 
     let viewRoot: UIView = {
@@ -122,22 +125,14 @@ class EventCell: UITableViewCell {
 // MARK: - User input
 extension EventCell {
     @objc private func handleSwipe(_ swiper: Swiper) {
-        viewModel?.swipe()
+        guard let useCase, let viewModel else { return }
+        useCase.addHappening(to: viewModel.event, date: .now)
     }
 
     @objc private func handlePress(_ gestureRecognizer: UITapGestureRecognizer) {
-        viewModel?.select()
+        guard let viewModel else { return }
+        coordinator?.showDetails(event: viewModel.event)
     }
-}
-
-extension EventCell: EventCellViewModelDelegate {
-    func addedHappening() {
-        handleViewStateUpdate()
-    }
-
-    func addedGoal() { handleViewStateUpdate() }
-    func removedHappening() { handleViewStateUpdate() }
-    func renamed() { handleViewStateUpdate() }
 }
 
 // MARK: - Dark mode
