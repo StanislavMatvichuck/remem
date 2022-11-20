@@ -47,8 +47,11 @@ class ApplicationFactory {
     // MARK: - Controllers creation
 
     func makeRootViewController() -> UIViewController {
-        let eventsListFactory = EventsListFactory(applicationFactory: self)
-        let eventsListController = eventsListFactory.makeEventsListController()
+        let eventsListController = EventsListController(
+            viewRoot: EventsListView(),
+            listUseCase: eventsListUseCase,
+            editUseCase: eventEditUseCase
+        )
         coordinator.navController.pushViewController(eventsListController, animated: false)
         return coordinator.navController
     }

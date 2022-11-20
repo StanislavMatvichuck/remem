@@ -10,7 +10,7 @@ import Domain
 struct EventsListViewModel {
     // MARK: - Properties
     var renamedEvent: Event?
-    var events: [Event]
+    let events: [Event]
     // MARK: - Init
     init(events: [Event]) {
         self.events = events

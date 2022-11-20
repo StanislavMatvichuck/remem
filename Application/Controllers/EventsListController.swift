@@ -34,6 +34,9 @@ class EventsListController: UIViewController {
         self.viewModel = EventsListViewModel(events: listUseCase.makeAllEvents())
 
         super.init(nibName: nil, bundle: nil)
+
+        listUseCase.add(delegate: self)
+        editUseCase.add(delegate: self)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -84,16 +87,16 @@ extension EventsListController: UITableViewDelegate {
 
         let renameAction = UIContextualAction(style: .normal,
                                               title: String(localizationId: "button.rename")) {
-            _, _, completion in
+                _, _, completion in
 //            self.viewModel.selectForRenaming(event: event)
-            completion(true)
+                completion(true)
         }
 
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: String(localizationId: "button.delete")) {
-            _, _, completion in
+                _, _, completion in
 //            self.viewModel.selectForRemoving(event: event)
-            completion(true)
+                completion(true)
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
@@ -124,22 +127,28 @@ extension EventsListController:
 {
     func update(event: Domain.Event) {
         if let index = viewModel.events.firstIndex(of: event) {
-            viewModel.events[index] = event
+            var newEvents = viewModel.events
+            newEvents[index] = event
+            viewModel = EventsListViewModel(events: newEvents)
+            viewRoot.table.reloadRows(
+                at: [IndexPath(
+                    row: index,
+                    section: Section.events.rawValue)],
+                with: .none)
+            hideSwipeHintIfNeeded()
         }
-        update()
     }
 
     func update(events: [Event]) {
         viewModel = EventsListViewModel(events: events)
-        update()
+        hideSwipeHintIfNeeded()
+        viewRoot.table.reloadData()
     }
 
-    private func update() {
+    private func hideSwipeHintIfNeeded() {
         if viewModel.hint != .placeFirstMark {
             viewRoot.swipeHint.removeFromSuperview()
         }
-
-        viewRoot.table.reloadData()
     }
 }
 
@@ -166,8 +175,7 @@ extension EventsListController {
         cell.createEvent.addTarget(
             self,
             action: #selector(handleAddButton),
-            for: .touchUpInside
-        )
+            for: .touchUpInside)
 
         if viewModel.isAddButtonHighlighted {
             cell.highlight()

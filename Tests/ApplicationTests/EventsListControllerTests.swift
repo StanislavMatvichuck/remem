@@ -199,8 +199,6 @@ private extension EventsListController {
             listUseCase: listUCfake,
             editUseCase: editUCfake
         )
-        listUCfake.add(delegate: sut)
-        editUCfake.add(delegate: sut)
         sut.loadViewIfNeeded()
         return sut
     }
