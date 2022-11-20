@@ -5,8 +5,8 @@
 //  Created by Stanislav Matvichuck on 17.07.2022.
 //
 
-import Foundation
 import Domain
+import Foundation
 import IosUseCases
 
 public protocol ClockViewModeling:
@@ -39,19 +39,10 @@ public class ClockViewModel: ClockViewModeling {
 }
 
 extension ClockViewModel: EventEditUseCasingDelegate {
-    public func added(happening: Happening, to: Event) {
-        event = to
+    public func update(event: Event) {
+        self.event = event
         delegate?.update()
     }
-
-    public func removed(happening: Happening, from: Event) {
-        event = from
-        delegate?.update()
-    }
-
-    public func added(goal: Goal, to: Event) {}
-    public func renamed(event: Event) {}
-    public func visited(event: Event) {}
 }
 
 public protocol ClockViewModelDelegate: AnyObject {

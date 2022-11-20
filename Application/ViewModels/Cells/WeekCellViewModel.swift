@@ -71,12 +71,9 @@ public class WeekCellViewModel: WeekCellViewModeling {
 }
 
 extension WeekCellViewModel: EventEditUseCasingDelegate {
-    public func renamed(event: Event) { delegate?.update() }
-    public func added(goal: Goal, to: Event) { delegate?.update() }
-    public func added(happening: Happening, to: Event) { delegate?.update() }
-    public func removed(happening: Happening, from: Event) { delegate?.update() }
-
-    public func visited(event: Event) {}
+    public func update(event: Event) {
+        delegate?.update()
+    }
 }
 
 // MARK: - GoalEditUseCasingDelegate

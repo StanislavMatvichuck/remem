@@ -37,13 +37,13 @@ public class EventEditUseCase: EventEditUseCasing {
     public func visit(_ event: Event) {
         event.dateVisited = .now
         repository.save(event)
-        delegates.call { $0.visited(event: event) }
+        delegates.call { $0.update(event: event) }
     }
 
     public func addHappening(to event: Event, date: Date) {
         let addedHappening = event.addHappening(date: date)
         repository.save(event)
-        delegates.call { $0.added(happening: addedHappening, to: event) }
+        delegates.call { $0.update(event: event) }
         widgetUseCase.update()
     }
 
@@ -51,7 +51,7 @@ public class EventEditUseCase: EventEditUseCasing {
         do {
             if let removedHappening = try event.remove(happening: happening) {
                 repository.save(event)
-                delegates.call { $0.removed(happening: removedHappening, from: event) }
+                delegates.call { $0.update(event: event) }
                 widgetUseCase.update()
             }
         } catch {
@@ -67,14 +67,14 @@ public class EventEditUseCase: EventEditUseCasing {
     public func rename(_ event: Event, to newName: String) {
         event.name = newName
         repository.save(event)
-        delegates.call { $0.renamed(event: event) }
+        delegates.call { $0.update(event: event) }
         widgetUseCase.update()
     }
 
     public func addGoal(to event: Event, at date: Date, amount: Int) {
         let addedGoal = event.addGoal(at: date, amount: amount)
         repository.save(event)
-        delegates.call { $0.added(goal: addedGoal, to: event) }
+        delegates.call { $0.update(event: event) }
         widgetUseCase.update()
     }
 
@@ -83,9 +83,5 @@ public class EventEditUseCase: EventEditUseCasing {
 }
 
 public protocol EventEditUseCasingDelegate: AnyObject {
-    func added(happening: Happening, to: Event)
-    func removed(happening: Happening, from: Event)
-    func renamed(event: Event)
-    func visited(event: Event)
-    func added(goal: Goal, to: Event)
+    func update(event: Event)
 }

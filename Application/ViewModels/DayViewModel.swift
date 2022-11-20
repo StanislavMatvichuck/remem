@@ -81,19 +81,10 @@ public class DayViewModel: DayViewModeling {
 }
 
 extension DayViewModel: EventEditUseCasingDelegate {
-    public func added(happening: Happening, to: Event) {
-        event = to
+    public func update(event: Event) {
+        self.event = event
         delegate?.update()
     }
-
-    public func removed(happening: Happening, from: Event) {
-        event = from
-        delegate?.update()
-    }
-
-    public func renamed(event: Event) {}
-    public func visited(event: Event) {}
-    public func added(goal: Goal, to: Event) {}
 }
 
 public protocol DayViewModelDelegate: AnyObject {

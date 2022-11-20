@@ -72,14 +72,9 @@ public class EventDetailsViewModel: EventDetailsViewModeling {
 }
 
 extension EventDetailsViewModel: EventEditUseCasingDelegate {
-    public func added(happening: Happening, to: Event) {
+    public func update(event: Event) {
         delegate?.update()
     }
-
-    public func removed(happening: Happening, from: Event) {}
-    public func renamed(event: Event) {}
-    public func visited(event: Event) {}
-    public func added(goal: Goal, to: Event) {}
 }
 
 public protocol EventDetailsViewModelDelegate: AnyObject {

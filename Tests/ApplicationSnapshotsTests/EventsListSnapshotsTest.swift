@@ -19,8 +19,8 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
 
         sut = EventsListController(
             viewRoot: EventsListView(),
-            listUseCase: EventsListUseCasingStub(),
-            editUseCase: EventEditUseCasingStub()
+            listUseCase: EventsListUseCasingFake(),
+            editUseCase: EventEditUseCasingFake()
         )
 
         putInViewHierarchy(sut)

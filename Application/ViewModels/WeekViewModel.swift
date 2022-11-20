@@ -75,23 +75,10 @@ class WeekViewModel: WeekViewModeling {
 
 // MARK: - EventEditUseCasingDelegate
 extension WeekViewModel: EventEditUseCasingDelegate {
-    func added(happening: Happening, to: Event) {
-        event = to
+    func update(event: Event) {
+        self.event = event
         delegate?.update()
     }
-
-    func removed(happening: Happening, from: Event) {
-        event = from
-        delegate?.update()
-    }
-
-    func added(goal: Goal, to: Event) {
-        event = to
-        delegate?.update()
-    }
-
-    func renamed(event: Event) {}
-    func visited(event: Event) {}
 }
 
 protocol WeekViewModelDelegate: AnyObject {

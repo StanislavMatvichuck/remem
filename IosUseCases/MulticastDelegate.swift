@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MulticastDelegate<ProtocolType> {
+public class MulticastDelegate<ProtocolType> {
     private class DelegateWrapper {
         weak var delegate: AnyObject?
 
@@ -25,17 +25,17 @@ class MulticastDelegate<ProtocolType> {
     }
 
     // MARK: - Object Lifecycle
-    init(delegates: [ProtocolType] = []) {
+    public init(delegates: [ProtocolType] = []) {
         delegateWrappers = delegates.map { DelegateWrapper($0 as AnyObject) }
     }
 
     // MARK: - Delegate Management
-    func addDelegate(_ delegate: ProtocolType) {
+    public func addDelegate(_ delegate: ProtocolType) {
         let wrapper = DelegateWrapper(delegate as AnyObject)
         delegateWrappers.append(wrapper)
     }
 
-    func removeDelegate(_ delegate: ProtocolType) {
+    public func removeDelegate(_ delegate: ProtocolType) {
         guard let index = delegateWrappers.firstIndex(where:
             { $0.delegate === (delegate as AnyObject) })
         else { return }
@@ -43,7 +43,7 @@ class MulticastDelegate<ProtocolType> {
         delegateWrappers.remove(at: index)
     }
 
-    func call(_ closure: (ProtocolType) -> ()) {
+    public func call(_ closure: (ProtocolType) -> ()) {
         delegates.forEach { closure($0) }
     }
 }

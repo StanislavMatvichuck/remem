@@ -14,26 +14,40 @@ class WidgetUseCaseStub: WidgetsUseCasing {
     func update() {}
 }
 
-struct EventsListUseCasingStub: EventsListUseCasing {
-    let events: [Event]
+class EventsListUseCasingFake: EventsListUseCasing {
+    var events: [Event]
 
     init(events: [Event] = []) { self.events = events }
 
     func makeAllEvents() -> [Domain.Event] { events }
 
-    func add(name: String) {}
+    func add(name: String) {
+        events.append(Event(name: name))
+        delegates.call { $0.update(events: events) }
+    }
 
-    func remove(_: Domain.Event) {}
+    func remove(_ event: Domain.Event) {
+        if let index = events.firstIndex(of: event) {
+            events.remove(at: index)
+            delegates.call { $0.update(events: events) }
+        }
+    }
 
-    func add(delegate: IosUseCases.EventsListUseCasingDelegate) {}
-
-    func remove(delegate: IosUseCases.EventsListUseCasingDelegate) {}
+    var delegates = MulticastDelegate<EventsListUseCasingDelegate>()
+    func add(delegate: EventsListUseCasingDelegate) { delegates.addDelegate(delegate) }
+    func remove(delegate: EventsListUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }
 
-struct EventEditUseCasingStub: EventEditUseCasing {
-    func visit(_: Domain.Event) {}
+struct EventEditUseCasingFake: EventEditUseCasing {
+    func visit(_ event: Domain.Event) {
+        event.visit()
+        delegates.call { $0.update(event: event) }
+    }
 
-    func addHappening(to: Domain.Event, date: Date) {}
+    func addHappening(to: Domain.Event, date: Date) {
+        to.addHappening(date: date)
+        delegates.call { $0.update(event: to) }
+    }
 
     func removeHappening(from: Domain.Event, happening: Domain.Happening) {}
 
@@ -41,7 +55,7 @@ struct EventEditUseCasingStub: EventEditUseCasing {
 
     func rename(_: Domain.Event, to: String) {}
 
-    func add(delegate: IosUseCases.EventEditUseCasingDelegate) {}
-
-    func remove(delegate: IosUseCases.EventEditUseCasingDelegate) {}
+    var delegates = MulticastDelegate<EventEditUseCasingDelegate>()
+    func add(delegate: EventEditUseCasingDelegate) { delegates.addDelegate(delegate) }
+    func remove(delegate: EventEditUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }

@@ -91,22 +91,10 @@ extension WeekSummaryViewModel {
 
 // MARK: - EventEditUseCasingDelegate
 extension WeekSummaryViewModel: EventEditUseCasingDelegate {
-    public func added(happening: Happening, to: Event) {
-        event = to
+    public func update(event: Event) {
+        self.event = event
         delegate?.updateTotalAmount()
     }
-
-    public func removed(happening: Happening, from: Event) {
-        event = from
-        delegate?.updateTotalAmount()
-    }
-
-    public func added(goal: Goal, to: Event) {
-        delegate?.updateGoalAmount()
-    }
-
-    public func renamed(event: Event) {}
-    public func visited(event: Event) {}
 }
 
 public protocol WeekSummaryViewModelDelegate: AnyObject {

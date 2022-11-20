@@ -117,8 +117,9 @@ class EventCell: UITableViewCell {
 
     // MARK: - View lifecycle
     override func prepareForReuse() {
-        super.prepareForReuse()
         viewModel = nil
+        useCase = nil
+        super.prepareForReuse()
     }
 }
 

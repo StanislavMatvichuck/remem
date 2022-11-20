@@ -17,7 +17,7 @@ class EventsListController: UIViewController {
     }
 
     // MARK: - Properties
-    let viewModel: EventsListViewModel
+    var viewModel: EventsListViewModel
     let listUseCase: EventsListUseCasing
     let editUseCase: EventEditUseCasing
     let viewRoot: EventsListView
@@ -117,25 +117,29 @@ extension EventsListController {
     @objc private func handleCancel() {}
 }
 
-// MARK: - EventsListViewModelDelegate
-extension EventsListController: EventsListUseCasingDelegate {
-    func update(events: [Event]) {
+// MARK: - EventsListUseCasingDelegate, EventEditUseCasingDelegate
+extension EventsListController:
+    EventsListUseCasingDelegate,
+    EventEditUseCasingDelegate
+{
+    func update(event: Domain.Event) {
+        if let index = viewModel.events.firstIndex(of: event) {
+            viewModel.events[index] = event
+        }
         update()
-        viewRoot.table.reloadData()
     }
 
-    func update() {
-        updateHints()
-        hideSwipeHintIfNeeded()
+    func update(events: [Event]) {
+        viewModel = EventsListViewModel(events: events)
+        update()
+    }
 
-        func updateHints() {
-            let hintIndex = IndexPath(row: 0, section: Section.hint.rawValue)
-            viewRoot.table.reloadRows(at: [hintIndex], with: .right)
+    private func update() {
+        if viewModel.hint != .placeFirstMark {
+            viewRoot.swipeHint.removeFromSuperview()
         }
 
-        func hideSwipeHintIfNeeded() {
-            if viewModel.hint != .placeFirstMark { viewRoot.swipeHint.removeFromSuperview() }
-        }
+        viewRoot.table.reloadData()
     }
 }
 
@@ -181,6 +185,8 @@ extension EventsListController {
         else { return UITableViewCell() }
 
         eventCell.viewModel = viewModel
+        eventCell.useCase = editUseCase
+
         configureSwipeHintIfNeeded(at: index, cell: eventCell)
         return eventCell
     }

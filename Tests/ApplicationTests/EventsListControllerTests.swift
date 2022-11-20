@@ -105,6 +105,16 @@ class EventsListControllerTests: XCTestCase {
         _ = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
     }
 
+    func test_singleEvent_rendersGestureHint() throws {
+        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+
+        /// this required to trigger data source methods that mutate the view
+        /// needs fix?
+        _ = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+
+        XCTAssertNotNil(sut.viewRoot.swipeHint.superview)
+    }
+
     func test_singleEvent_rendersRenameButton() {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
         let renameAction = table.delegate?.tableView?(
@@ -133,12 +143,39 @@ class EventsListControllerTests: XCTestCase {
 
     func test_singleEvent_swipe_increasesLabelAmountByOne() throws {
         sut = EventsListController.make(events: [Event(name: "SingleEvent")])
-        let cell = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
-        XCTAssertEqual(cell.valueLabel.text, "0", "precondition")
 
-        cell.swiper.sendActions(for: .primaryActionTriggered)
+        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
 
-        XCTAssertEqual(cell.valueLabel.text, "1")
+        XCTAssertEqual(cellBeforeSwipe.valueLabel.text, "0", "precondition")
+
+        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
+
+        let cellAfterSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+
+        XCTAssertEqual(cellAfterSwipe.valueLabel.text, "1")
+    }
+
+    func test_singleEvent_swipe_rendersPressToSeeDetailsHint() throws {
+        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+
+        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+
+        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
+
+        XCTAssertEqual(
+            sut.hintText(),
+            String(localizationId: "eventsList.hint.firstVisit")
+        )
+    }
+
+    func test_singleEvent_swipe_gestureHintIsNotVisible() throws {
+        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+
+        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+
+        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
+
+        XCTAssertNil(sut.viewRoot.swipeHint.superview)
     }
 
     func test_addButtonTapped_keyboardShown() throws {
@@ -154,11 +191,16 @@ class EventsListControllerTests: XCTestCase {
 
 private extension EventsListController {
     static func make(events: [Event] = []) -> EventsListController {
+        let listUCfake = EventsListUseCasingFake(events: events)
+        let editUCfake = EventEditUseCasingFake()
+
         let sut = EventsListController(
             viewRoot: EventsListView(),
-            listUseCase: EventsListUseCasingStub(events: events),
-            editUseCase: EventEditUseCasingStub()
+            listUseCase: listUCfake,
+            editUseCase: editUCfake
         )
+        listUCfake.add(delegate: sut)
+        editUCfake.add(delegate: sut)
         sut.loadViewIfNeeded()
         return sut
     }
