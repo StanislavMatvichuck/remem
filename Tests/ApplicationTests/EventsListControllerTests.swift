@@ -82,7 +82,7 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersNormalAddButton() throws {
-        arrangeSingleEvent()
+        submitEvent()
 
         let button = sut.addButton()
 
@@ -94,19 +94,19 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersFirstHappeningHint() {
-        arrangeSingleEvent()
+        submitEvent()
 
         XCTAssertEqual(sut.hintText(), String(localizationId: "eventsList.hint.firstHappening"))
     }
 
     func test_singleEvent_rendersOneEventCell() throws {
-        arrangeSingleEvent()
+        submitEvent()
 
         _ = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
     }
 
     func test_singleEvent_rendersGestureHint() throws {
-        arrangeSingleEvent()
+        submitEvent()
 
         /// this required to trigger data source methods that mutate the view
         /// needs fix?
@@ -116,7 +116,7 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersRenameButton() {
-        arrangeSingleEvent()
+        submitEvent()
 
         let renameAction = table.delegate?.tableView?(
             table,
@@ -130,7 +130,7 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersDeleteButton() {
-        arrangeSingleEvent()
+        submitEvent()
 
         let renameAction = table.delegate?.tableView?(
             table,
@@ -181,10 +181,22 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
     }
 
+    func test_empty_submittingEvent_addsEventToList() {
+        submitEvent()
+
+        XCTAssertEqual(table.numberOfRows(inSection: firstCellIndex.section), 1)
+
+        if let cell = sut.cell(at: firstCellIndex) as? EventCell {
+            XCTAssertEqual(cell.nameLabel.text, "SubmittedEventName")
+        } else {
+            XCTFail("submitted name must appear in list")
+        }
+    }
+
     @discardableResult
     private func arrangeSingleEventSwiped() -> EventCell {
         do {
-            arrangeSingleEvent()
+            submitEvent()
             let cell = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
             XCTAssertEqual(cell.valueLabel.text, "0", "precondition")
             cell.swiper.sendActions(for: .primaryActionTriggered)
@@ -192,8 +204,15 @@ class EventsListControllerTests: XCTestCase {
         } catch { fatalError("failed to arrange single event in a list") }
     }
 
-    private func arrangeSingleEvent() {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+    private func submitEvent() {
+        view.input.value = "SubmittedEventName"
+
+        XCTAssertEqual(
+            table.numberOfRows(inSection: firstCellIndex.section), 0,
+            "precondition"
+        )
+
+        _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
     }
 }
 
