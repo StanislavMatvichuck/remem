@@ -82,7 +82,7 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersNormalAddButton() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
 
         let button = sut.addButton()
 
@@ -94,19 +94,19 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersFirstHappeningHint() {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
 
         XCTAssertEqual(sut.hintText(), String(localizationId: "eventsList.hint.firstHappening"))
     }
 
     func test_singleEvent_rendersOneEventCell() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
 
         _ = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
     }
 
     func test_singleEvent_rendersGestureHint() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
 
         /// this required to trigger data source methods that mutate the view
         /// needs fix?
@@ -116,7 +116,8 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersRenameButton() {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
+
         let renameAction = table.delegate?.tableView?(
             table,
             trailingSwipeActionsConfigurationForRowAt: firstCellIndex
@@ -129,7 +130,8 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersDeleteButton() {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+        arrangeSingleEvent()
+
         let renameAction = table.delegate?.tableView?(
             table,
             trailingSwipeActionsConfigurationForRowAt: firstCellIndex
@@ -142,38 +144,29 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_swipe_increasesLabelAmountByOne() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
-
-        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
-
-        XCTAssertEqual(cellBeforeSwipe.valueLabel.text, "0", "precondition")
-
-        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
+        arrangeSingleEventSwiped()
 
         let cellAfterSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
-
         XCTAssertEqual(cellAfterSwipe.valueLabel.text, "1")
     }
 
-    func test_singleEvent_swipe_rendersPressToSeeDetailsHint() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+    func test_singleEvent_swipe_swipe_increasesLabelAmountByTwo() throws {
+        let eventCell = arrangeSingleEventSwiped()
 
-        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+        eventCell.swiper.sendActions(for: .primaryActionTriggered)
 
-        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
-
-        XCTAssertEqual(
-            sut.hintText(),
-            String(localizationId: "eventsList.hint.firstVisit")
-        )
+        let cellAfterSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+        XCTAssertEqual(cellAfterSwipe.valueLabel.text, "2")
     }
 
-    func test_singleEvent_swipe_gestureHintIsNotVisible() throws {
-        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
+    func test_singleEvent_swipe_rendersPressToSeeDetailsHint() {
+        arrangeSingleEventSwiped()
 
-        let cellBeforeSwipe = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+        XCTAssertEqual(sut.hintText(), String(localizationId: "eventsList.hint.firstVisit"))
+    }
 
-        cellBeforeSwipe.swiper.sendActions(for: .primaryActionTriggered)
+    func test_singleEvent_swipe_gestureHintIsNotVisible() {
+        arrangeSingleEventSwiped()
 
         XCTAssertNil(sut.viewRoot.swipeHint.superview)
     }
@@ -186,6 +179,21 @@ class EventsListControllerTests: XCTestCase {
         tap(sut.addButton())
 
         XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
+    }
+
+    @discardableResult
+    private func arrangeSingleEventSwiped() -> EventCell {
+        do {
+            arrangeSingleEvent()
+            let cell = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+            XCTAssertEqual(cell.valueLabel.text, "0", "precondition")
+            cell.swiper.sendActions(for: .primaryActionTriggered)
+            return cell
+        } catch { fatalError("failed to arrange single event in a list") }
+    }
+
+    private func arrangeSingleEvent() {
+        sut = EventsListController.make(events: [Event(name: "SingleEvent")])
     }
 }
 
