@@ -91,7 +91,8 @@ extension EventsListController: UITableViewDelegate {
         let renameAction = UIContextualAction(style: .normal,
                                               title: String(localizationId: "button.rename")) {
                 _, _, completion in
-//            self.viewModel.selectForRenaming(event: event)
+                self.viewModel.renamedEvent = event
+                self.viewRoot.input.rename(oldName: event.name)
                 completion(true)
         }
 
@@ -128,7 +129,15 @@ extension EventsListController {
         viewRoot.input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
     }
 
-    @objc private func handleAdd() { listUseCase.add(name: viewRoot.input.value) }
+    @objc private func handleAdd() {
+        if let renaming = viewModel.renamedEvent {
+            editUseCase.rename(renaming, to: viewRoot.input.value)
+            viewModel.renamedEvent = nil
+        } else {
+            listUseCase.add(name: viewRoot.input.value)
+        }
+    }
+
     @objc private func handleCancel() {}
 }
 

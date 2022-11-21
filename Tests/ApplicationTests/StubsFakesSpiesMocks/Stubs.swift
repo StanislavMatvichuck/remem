@@ -53,7 +53,10 @@ struct EventEditUseCasingFake: EventEditUseCasing {
 
     func addGoal(to: Domain.Event, at: Date, amount: Int) {}
 
-    func rename(_: Domain.Event, to: String) {}
+    func rename(_ event: Domain.Event, to: String) {
+        event.name = to
+        delegates.call { $0.update(event: event) }
+    }
 
     var delegates = MulticastDelegate<EventEditUseCasingDelegate>()
     func add(delegate: EventEditUseCasingDelegate) { delegates.addDelegate(delegate) }

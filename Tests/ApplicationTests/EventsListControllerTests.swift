@@ -154,6 +154,29 @@ class EventsListControllerTests: XCTestCase {
         )
     }
 
+    func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
+        putInViewHierarchy(sut)
+        let renameButton = arrangeFirstEventSwipeAction(number: 1)
+        XCTAssertFalse(view.input.textField.isFirstResponder)
+
+        renameButton.handler(renameButton, UIView()) { _ in }
+
+        XCTAssertTrue(view.input.textField.isFirstResponder)
+        XCTAssertEqual(view.input.value, "SubmittedEventName")
+    }
+
+    func test_singleEvent_submittingRename_changesEventName() throws {
+        putInViewHierarchy(sut)
+        let renameButton = arrangeFirstEventSwipeAction(number: 1)
+        renameButton.handler(renameButton, UIView()) { _ in }
+        view.input.value = "ChangedName"
+
+        view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
+
+        let eventCell = try XCTUnwrap(sut.cell(at: firstCellIndex) as? EventCell)
+        XCTAssertEqual(eventCell.nameLabel.text, "ChangedName")
+    }
+
     func test_singleEvent_rendersDeleteButton() {
         let deleteButton = arrangeFirstEventSwipeAction(number: 0)
 
