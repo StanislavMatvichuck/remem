@@ -16,6 +16,7 @@
 		0816320E28C4B6B1008B51F8 /* ClockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816320D28C4B6B1008B51F8 /* ClockFactory.swift */; };
 		081BAF9D292B60B200112C76 /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081BAF9C292B60B200112C76 /* ViewControllerPresentationSpy.xcframework */; };
 		081BAF9F292B60D700112C76 /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 081BAF9C292B60B200112C76 /* ViewControllerPresentationSpy.xcframework */; };
+		081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */; };
 		08235E7028C5C5BC0026DED2 /* GoalsInputFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
 		08263E6428BF5F5600C58FC8 /* EventDetailsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */; };
@@ -335,6 +336,7 @@
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
 		0816320D28C4B6B1008B51F8 /* ClockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFactory.swift; sourceTree = "<group>"; };
 		081BAF9C292B60B200112C76 /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
+		081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsControllerTests.swift; sourceTree = "<group>"; };
 		08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsInputFactory.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsFactory.swift; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				08CC50682906DE6300840385 /* Helpers */,
 				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */,
+				081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */,
 				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 				08F82FE8291E70060033AB0D /* SwiperTests.swift */,
 			);
@@ -1506,6 +1509,7 @@
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
+				081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
