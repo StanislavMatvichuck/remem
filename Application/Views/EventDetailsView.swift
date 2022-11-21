@@ -16,6 +16,7 @@ class EventDetailsView: UIView {
         self.scroll = ViewScroll(.vertical)
         super.init(frame: .zero)
         backgroundColor = .secondarySystemBackground
+        configureLayout()
     }
 
     private func configureLayout() {

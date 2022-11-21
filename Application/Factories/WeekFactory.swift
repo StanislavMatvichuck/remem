@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import IosUseCases
 
-class WeekFactory: WeekFactoryInterface {
+class WeekFactory {
     // MARK: - Properties
     let applicationFactory: ApplicationFactory
     let useCase: GoalEditUseCasing
@@ -24,18 +24,8 @@ class WeekFactory: WeekFactoryInterface {
         self.event = event
     }
 
-    func makeWeekController() -> WeekController {
-        let view = WeekView()
-        let viewModel = makeWeekViewModel()
-        let controller = WeekController(viewRoot: view, viewModel: viewModel, factory: self)
-        viewModel.delegate = controller
-        return controller
-    }
-
-    func makeWeekViewModel() -> WeekViewModel {
-        let viewModel = WeekViewModel(event: event, factory: self)
-        viewModel.coordinator = applicationFactory.coordinator
-        return viewModel
+    func makeWeekController(event: Event) -> WeekController {
+        WeekController(event: event, useCase: applicationFactory.eventEditUseCase)
     }
 
     // WeekFactoryInterface

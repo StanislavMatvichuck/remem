@@ -5,33 +5,41 @@
 //  Created by Stanislav Matvichuck on 24.05.2022.
 //
 
+import Domain
+import IosUseCases
 import UIKit
 
 class WeekController: UIViewController {
     // MARK: - Properties
-    private var scrollHappened = false
+    var scrollHappened = false
 
-    private let viewRoot: WeekView
-    private let viewModel: WeekViewModeling
-    private let factory: WeekFactoryInterface
+    let viewRoot = WeekView()
+    let useCase: EventEditUseCasing
+    var viewModel: WeekViewModel
+    var event: Event
     // MARK: - Init
-    init(viewRoot: WeekView, viewModel: WeekViewModeling, factory: WeekFactoryInterface) {
-        self.viewRoot = viewRoot
-        self.viewModel = viewModel
-        self.factory = factory
+
+    init(event: Event, useCase: EventEditUseCasing) {
+        self.useCase = useCase
+        self.event = event
+        self.viewModel = WeekViewModel(event: event)
+
         super.init(nibName: nil, bundle: nil)
-        viewRoot.collection.dataSource = self
-        viewRoot.collection.delegate = self
+        useCase.add(delegate: self)
+
+        configureCollection()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    // MARK: - View lifecycle
-    override func loadView() { view = viewRoot }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func configureCollection() {
+        viewRoot.collection.dataSource = self
         viewRoot.collection.delegate = self
     }
+
+    // MARK: - View lifecycle
+    override func loadView() { view = viewRoot }
+    override func viewDidLoad() { super.viewDidLoad() }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -45,9 +53,18 @@ class WeekController: UIViewController {
     }
 
     private func setInitialScrollPosition() {
-        let lastCellIndex = IndexPath(row: viewModel.count - 1, section: 0)
-        let scrollToIndex = IndexPath(row: lastCellIndex.row - WeekViewModel.shownDaysForward, section: 0)
-        viewRoot.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
+//        let lastCellIndex = IndexPath(row: viewModel.count - 1, section: 0)
+//        let scrollToIndex = IndexPath(row: lastCellIndex.row - WeekViewModel.shownDaysForward, section: 0)
+//        viewRoot.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
+    }
+}
+
+// MARK: - EditUseCaseDelegating
+extension WeekController: EventEditUseCasingDelegate {
+    func update(event: Domain.Event) {
+        self.event = event
+        viewModel = WeekViewModel(event: event)
+        viewRoot.collection.reloadData()
     }
 }
 
@@ -83,17 +100,5 @@ extension WeekController:
     {
         return CGSize(width: collectionView.bounds.width / 7,
                       height: collectionView.bounds.height)
-    }
-}
-
-// MARK: - WeekViewModelDelegate
-extension WeekController: WeekViewModelDelegate {
-    func animate(at: IndexPath) {
-        // GOAL ADDED
-    }
-
-    func update() {
-        print("WeekController can update cells")
-        viewRoot.collection.reloadData()
     }
 }

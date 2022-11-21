@@ -77,6 +77,7 @@
 		0889669C28D8992A0075A51D /* libIosUseCases.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080A679528D1E44C00889A97 /* libIosUseCases.a */; };
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
+		0891377A292BCDEF00EFD23D /* WeekControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekControllerTests.swift */; };
 		0895FB6028E23C66006716F4 /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0895FB6228E24623006716F4 /* WidgetsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB6128E24623006716F4 /* WidgetsUseCase.swift */; };
 		089699F128E1C53300E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -402,6 +403,7 @@
 		088EAD0A28DDDD55001EE985 /* WidgetFileReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileReading.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
+		08913779292BCDEF00EFD23D /* WeekControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekControllerTests.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		0895FB6128E24623006716F4 /* WidgetsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsUseCase.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */,
 				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 				08F82FE8291E70060033AB0D /* SwiperTests.swift */,
+				08913779292BCDEF00EFD23D /* WeekControllerTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -1508,6 +1511,7 @@
 				0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */,
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */,
+				0891377A292BCDEF00EFD23D /* WeekControllerTests.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,

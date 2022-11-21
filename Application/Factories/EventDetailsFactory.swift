@@ -35,7 +35,7 @@ class EventDetailsFactory: EventDetailsFactoring {
             event: event,
             useCase: factory.eventEditUseCase,
             coordinator: factory.coordinator!,
-            controllers: [clockController, weekController]
+            controllers: [weekController]
         )
         return controller
     }
@@ -47,7 +47,7 @@ class EventDetailsFactory: EventDetailsFactoring {
 
     func makeWeekController() -> WeekController {
         let factory = WeekFactory(applicationFactory: factory, event: event, goalEditUseCase: goalEditUseCase)
-        let controller = factory.makeWeekController()
+        let controller = factory.makeWeekController(event: event)
         return controller
     }
 
