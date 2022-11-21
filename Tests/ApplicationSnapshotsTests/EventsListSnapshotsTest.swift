@@ -17,10 +17,13 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = false
 
+        let coordinator = ApplicationFactory().makeCoordinator()
+
         sut = EventsListController(
             viewRoot: EventsListView(),
             listUseCase: EventsListUseCasingFake(),
-            editUseCase: EventEditUseCasingFake()
+            editUseCase: EventEditUseCasingFake(),
+            coordinator: coordinator
         )
 
         putInViewHierarchy(sut)

@@ -11,14 +11,16 @@ import UIKit
 
 class Coordinator: NSObject, Coordinating {
     // MARK: - Properties
-    weak var applicationFactory: ApplicationFactory?
-    var detailsFactory: EventDetailsFactoring?
-
+    let factory: ApplicationFactory
     let navController: UINavigationController
 
     // MARK: - Init
-    init(navController: UINavigationController) {
+    init(
+        navController: UINavigationController,
+        applicationFactory: ApplicationFactory
+    ) {
         self.navController = navController
+        self.factory = applicationFactory
         super.init()
     }
 }
@@ -26,21 +28,18 @@ class Coordinator: NSObject, Coordinating {
 // MARK: - Public
 extension Coordinator {
     func showDetails(event: Event) {
-        guard let detailsFactory = applicationFactory?.makeEventDetailsFactory(event: event) else { return }
-        self.detailsFactory = detailsFactory
-
-        let controller = detailsFactory.makeEventDetailsController()
-        navController.pushViewController(controller, animated: true)
+        navController.pushViewController(
+            factory.makeEventDetailsController(event: event),
+            animated: true
+        )
     }
 
     func showDay(event: Event, date: Date) {
-        guard let dayController = detailsFactory?.makeDayController(date: date) else { return }
-        presentModally(dayController)
+        presentModally(factory.makeDayController(event: event, date: date))
     }
 
     func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel) {
-        guard let goalsController = detailsFactory?.makeGoalsInputController() else { return }
-        presentModally(goalsController)
+        presentModally(factory.makeGoalsInputController(event: event))
     }
 
     func dismiss() {

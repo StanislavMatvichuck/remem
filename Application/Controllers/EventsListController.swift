@@ -20,16 +20,19 @@ class EventsListController: UIViewController {
     var viewModel: EventsListViewModel
     let listUseCase: EventsListUseCasing
     let editUseCase: EventEditUseCasing
+    weak var coordinator: Coordinating?
     let viewRoot: EventsListView
 
     // MARK: - Init
     init(viewRoot: EventsListView,
          listUseCase: EventsListUseCasing,
-         editUseCase: EventEditUseCasing)
+         editUseCase: EventEditUseCasing,
+         coordinator: Coordinating)
     {
         self.viewRoot = viewRoot
         self.listUseCase = listUseCase
         self.editUseCase = editUseCase
+        self.coordinator = coordinator
 
         self.viewModel = EventsListViewModel(events: listUseCase.makeAllEvents())
 
@@ -106,6 +109,15 @@ extension EventsListController: UITableViewDelegate {
         UIDevice.vibrate(.medium)
         sender.animate()
         viewRoot.input.show(value: "")
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard
+            indexPath.section == Section.events.rawValue,
+            let event = viewModel.event(at: indexPath.row)
+        else { return }
+
+        coordinator?.showDetails(event: event)
     }
 }
 

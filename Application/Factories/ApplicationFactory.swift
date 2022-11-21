@@ -12,18 +12,11 @@ import UIKit
 
 class ApplicationFactory {
     // MARK: - Long-lived dependencies
-    let coordinator: Coordinator
     let eventsListUseCase: EventsListUseCasing
     let eventEditUseCase: EventEditUseCasing
+    var coordinator: Coordinator?
     // MARK: - Init
     init() {
-        func makeCoordinator() -> Coordinator {
-            let navController = Self.makeStyledNavigationController()
-            navController.navigationBar.prefersLargeTitles = true
-            let coordinator = Coordinator(navController: navController)
-            return coordinator
-        }
-
         func makeEventsRepository() -> EventsRepositoryInterface {
             let container = CoreDataStack.createContainer(inMemory: false)
             let mapper = EventEntityMapper()
@@ -36,29 +29,47 @@ class ApplicationFactory {
                                                    widgetUseCase: widgetsUseCase)
         self.eventEditUseCase = EventEditUseCase(repository: repository,
                                                  widgetUseCase: widgetsUseCase)
-
-        let coordinator = makeCoordinator()
-
-        self.coordinator = coordinator
-
-        coordinator.applicationFactory = self
     }
 
     // MARK: - Controllers creation
 
-    func makeRootViewController() -> UIViewController {
+    func makeCoordinator() -> Coordinator {
+        let navController = Self.makeStyledNavigationController()
+        navController.navigationBar.prefersLargeTitles = true
+        let coordinator = Coordinator(
+            navController: navController,
+            applicationFactory: self
+        )
+        self.coordinator = coordinator
+        return coordinator
+    }
+
+    func makeRootViewController(coordinator: Coordinator) -> UIViewController {
         let eventsListController = EventsListController(
             viewRoot: EventsListView(),
             listUseCase: eventsListUseCase,
-            editUseCase: eventEditUseCase
+            editUseCase: eventEditUseCase,
+            coordinator: coordinator
         )
         coordinator.navController.pushViewController(eventsListController, animated: false)
         return coordinator.navController
     }
 
-    func makeEventDetailsFactory(event: Event) -> EventDetailsFactoring {
+    func makeEventDetailsController(event: Event) -> EventDetailsController {
         let factory = EventDetailsFactory(applicationFactory: self, event: event)
-        return factory
+        let controller = factory.makeEventDetailsController()
+        return controller
+    }
+
+    func makeDayController(event: Event, date: Date) -> DayController {
+        let factory = DayFactory(applicationFactory: self, date: date, event: event)
+        return factory.makeDayController()
+    }
+
+    func makeGoalsInputController(event: Event) -> GoalsInputController {
+        let goalUC = GoalEditUseCase(event: event, eventEditUseCase: eventEditUseCase)
+        let factory = GoalsInputFactory(applicationFactory: self, goalEditUseCase: goalUC, sourceView: nil, event: event)
+        return factory.makeGoalsInputController()
     }
 
     // MARK: - UINavigationController styling

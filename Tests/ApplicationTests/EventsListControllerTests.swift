@@ -8,10 +8,12 @@
 @testable import Application
 import Domain
 import IosUseCases
+import ViewControllerPresentationSpy
 import XCTest
 
 class EventsListControllerTests: XCTestCase {
     // MARK: - Test fixture
+    var coordinator: Coordinator!
     var sut: EventsListController!
 
     var view: EventsListView { sut.viewRoot }
@@ -25,10 +27,16 @@ class EventsListControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = EventsListController.make()
+
+        let coordinator = ApplicationFactory().makeCoordinator()
+        self.coordinator = coordinator
+
+        sut = EventsListController.make(coordinator: coordinator)
+        coordinator.navController.pushViewController(sut, animated: false)
     }
 
     override func tearDown() {
+        coordinator = nil
         sut = nil
         executeRunLoop()
         super.tearDown()
@@ -79,6 +87,28 @@ class EventsListControllerTests: XCTestCase {
 
         XCTAssertEqual(button.attributedTitle(for: .normal), title, "Button text and styling")
         XCTAssertTrue(button.isHighlighted, "Button must be highlighted when list is empty")
+    }
+
+    func test_empty_addButtonTapped_keyboardShown() throws {
+        putInViewHierarchy(sut)
+
+        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
+
+        tap(sut.addButton())
+
+        XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
+    }
+
+    func test_empty_submittingEvent_addsEventToList() {
+        submitEvent()
+
+        XCTAssertEqual(table.numberOfRows(inSection: firstCellIndex.section), 1)
+
+        if let cell = sut.cell(at: firstCellIndex) as? EventCell {
+            XCTAssertEqual(cell.nameLabel.text, "SubmittedEventName")
+        } else {
+            XCTFail("submitted name must appear in list")
+        }
     }
 
     func test_singleEvent_rendersNormalAddButton() throws {
@@ -171,26 +201,18 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertNil(sut.viewRoot.swipeHint.superview)
     }
 
-    func test_addButtonTapped_keyboardShown() throws {
-        putInViewHierarchy(sut)
+    func test_singleEvent_eventTapped_opensEventDetails() throws {
+        let navigationController = sut.navigationController
 
-        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
+        XCTAssertEqual(navigationController?.viewControllers.count, 1, "precondition")
 
-        tap(sut.addButton())
-
-        XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
-    }
-
-    func test_empty_submittingEvent_addsEventToList() {
         submitEvent()
 
-        XCTAssertEqual(table.numberOfRows(inSection: firstCellIndex.section), 1)
+        table.delegate?.tableView?(table, didSelectRowAt: firstCellIndex)
 
-        if let cell = sut.cell(at: firstCellIndex) as? EventCell {
-            XCTAssertEqual(cell.nameLabel.text, "SubmittedEventName")
-        } else {
-            XCTFail("submitted name must appear in list")
-        }
+        executeRunLoop()
+
+        XCTAssertEqual(navigationController?.viewControllers.count, 2)
     }
 
     @discardableResult
@@ -217,16 +239,19 @@ class EventsListControllerTests: XCTestCase {
 }
 
 private extension EventsListController {
-    static func make(events: [Event] = []) -> EventsListController {
+    static func make(events: [Event] = [], coordinator: Coordinating) -> EventsListController {
         let listUCfake = EventsListUseCasingFake(events: events)
         let editUCfake = EventEditUseCasingFake()
 
         let sut = EventsListController(
             viewRoot: EventsListView(),
             listUseCase: listUCfake,
-            editUseCase: editUCfake
+            editUseCase: editUCfake,
+            coordinator: coordinator
         )
+
         sut.loadViewIfNeeded()
+
         return sut
     }
 
