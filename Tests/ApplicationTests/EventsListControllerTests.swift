@@ -146,31 +146,31 @@ class EventsListControllerTests: XCTestCase {
     }
 
     func test_singleEvent_rendersRenameButton() {
-        submitEvent()
-
-        let renameAction = table.delegate?.tableView?(
-            table,
-            trailingSwipeActionsConfigurationForRowAt: firstCellIndex
-        )
+        let renameButton = arrangeFirstEventSwipeAction(number: 1)
 
         XCTAssertEqual(
-            renameAction?.actions[1].title,
+            renameButton.title,
             String(localizationId: "button.rename")
         )
     }
 
     func test_singleEvent_rendersDeleteButton() {
-        submitEvent()
-
-        let renameAction = table.delegate?.tableView?(
-            table,
-            trailingSwipeActionsConfigurationForRowAt: firstCellIndex
-        )
+        let deleteButton = arrangeFirstEventSwipeAction(number: 0)
 
         XCTAssertEqual(
-            renameAction?.actions[0].title,
+            deleteButton.title,
             String(localizationId: "button.delete")
         )
+    }
+
+    func test_singleEvent_deletePressed_removesEventFromList() throws {
+        let deleteButton = arrangeFirstEventSwipeAction(number: 0)
+
+        XCTAssertEqual(table.numberOfRows(inSection: firstCellIndex.section), 1, "precondition")
+
+        deleteButton.handler(deleteButton, UIView()) { _ in }
+
+        XCTAssertEqual(table.numberOfRows(inSection: firstCellIndex.section), 0, "precondition")
     }
 
     func test_singleEvent_swipe_increasesLabelAmountByOne() throws {
@@ -235,6 +235,17 @@ class EventsListControllerTests: XCTestCase {
         )
 
         _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
+    }
+
+    private func arrangeFirstEventSwipeAction(number: Int) -> UIContextualAction {
+        submitEvent()
+
+        let configuration = table.delegate?.tableView?(
+            table,
+            trailingSwipeActionsConfigurationForRowAt: firstCellIndex
+        )
+
+        return configuration!.actions[number]
     }
 }
 

@@ -98,7 +98,7 @@ extension EventsListController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: String(localizationId: "button.delete")) {
                 _, _, completion in
-//            self.viewModel.selectForRemoving(event: event)
+                self.listUseCase.remove(event)
                 completion(true)
         }
 
