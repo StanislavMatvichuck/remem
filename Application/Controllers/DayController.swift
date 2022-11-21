@@ -5,6 +5,8 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
+import Domain
+import IosUseCases
 import UIKit
 
 class DayController: UIViewController {
@@ -16,7 +18,7 @@ class DayController: UIViewController {
         return picker
     }()
 
-    private lazy var textField: UITextField? = nil {
+    lazy var textField: UITextField? = nil {
         didSet {
             textField?.inputView = picker
             textField?.font = UIHelper.fontBold
@@ -25,14 +27,18 @@ class DayController: UIViewController {
         }
     }
 
-    private let viewRoot: DayView
-    private let viewModel: DayViewModeling
+    let useCase: EventEditUseCasing
+    let viewRoot = DayView()
+    var event: Event
+    var viewModel: DayViewModel
 
     // MARK: - Init
-    init(viewRoot: DayView, viewModel: DayViewModeling) {
-        self.viewRoot = viewRoot
-        self.viewModel = viewModel
+    init(date: Date, event: Event, useCase: EventEditUseCasing) {
+        self.useCase = useCase
+        self.event = event
+        self.viewModel = DayViewModel(date: date, event: event)
         super.init(nibName: nil, bundle: nil)
+        title = viewModel.title
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -60,12 +66,9 @@ extension DayController: UITableViewDataSource {
 
     // Cells deletion
     func tableView(_: UITableView, commit _: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        viewModel.remove(at: indexPath.row)
+        let happening = viewModel.shownHappenings[indexPath.row]
+        useCase.removeHappening(from: event, happening: happening)
     }
-}
-
-extension DayController: DayViewModelDelegate {
-    func update() { viewRoot.happenings.reloadData() }
 }
 
 // MARK: - Private
@@ -127,6 +130,6 @@ extension DayController {
     }
 
     @objc private func handleTimeSelectionSubmit(_: UIAlertAction) {
-        viewModel.add(at: picker.date)
+        useCase.addHappening(to: event, date: picker.date)
     }
 }

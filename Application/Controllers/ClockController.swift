@@ -5,16 +5,18 @@
 //  Created by Stanislav Matvichuck on 24.05.2022.
 //
 
+import Domain
 import UIKit
 
 class ClockController: UIViewController {
     // MARK: - Properties
-    private let viewRoot: ClockView
-    private var viewModel: ClockViewModeling
+    let viewRoot = ClockView()
+    var event: Event
+    var viewModel: ClockViewModel
     // MARK: - Init
-    init(viewRoot: ClockView, viewModel: ClockViewModeling) {
-        self.viewRoot = viewRoot
-        self.viewModel = viewModel
+    init(event: Event) {
+        self.event = event
+        self.viewModel = ClockViewModel(event: event)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,10 +29,8 @@ class ClockController: UIViewController {
         super.viewDidAppear(animated)
         update()
     }
-}
 
-extension ClockController: ClockViewModelDelegate {
-    func update() {
+    private func update() {
         for i in 0 ... ClockSectionsList.size - 1 {
             guard
                 let layers = viewRoot.clock.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],

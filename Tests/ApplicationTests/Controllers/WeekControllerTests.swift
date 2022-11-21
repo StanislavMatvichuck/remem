@@ -18,8 +18,15 @@ class WeekControllerTests: XCTestCase {
         super.setUp()
         let spy = PresentationVerifier()
         let event = Event(name: "Event")
+        let factory = ApplicationFactory()
+        let coordinator = factory.makeCoordinator()
         let useCase = EventEditUseCasingFake()
-        let sut = WeekController(event: event, useCase: useCase)
+
+        let sut = WeekController(
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
 
         self.sut = sut
         presentationSpy = spy
@@ -56,6 +63,6 @@ class WeekControllerTests: XCTestCase {
             didSelectItemAt: firstCellIndex
         )
 
-        presentationSpy.verify(animated: true, presentingViewController: sut)
+        presentationSpy.verify(animated: true)
     }
 }

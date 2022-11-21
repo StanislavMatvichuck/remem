@@ -9,6 +9,12 @@ import Domain
 import IosUseCases
 import UIKit
 
+public protocol Coordinating: AnyObject {
+    func showDetails(event: Event)
+    func showDay(event: Event, date: Date)
+    func dismiss()
+}
+
 class Coordinator: NSObject, Coordinating {
     // MARK: - Properties
     let factory: ApplicationFactory
@@ -35,11 +41,7 @@ extension Coordinator {
     }
 
     func showDay(event: Event, date: Date) {
-        presentModally(factory.makeDayController(event: event, date: date))
-    }
-
-    func showGoalsInput(event: Event) {
-        presentModally(factory.makeGoalsInputController(event: event))
+        presentModally(factory.makeDayController(date: date, event: event))
     }
 
     func dismiss() {

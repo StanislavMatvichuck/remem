@@ -56,20 +56,14 @@ class ApplicationFactory {
     }
 
     func makeEventDetailsController(event: Event) -> EventDetailsController {
-        let factory = EventDetailsFactory(applicationFactory: self, event: event)
-        let controller = factory.makeEventDetailsController()
-        return controller
-    }
-
-    func makeDayController(event: Event, date: Date) -> DayController {
-        let factory = DayFactory(applicationFactory: self, date: date, event: event)
-        return factory.makeDayController()
-    }
-
-    func makeGoalsInputController(event: Event) -> GoalsInputController {
-        let goalUC = GoalEditUseCase(event: event, eventEditUseCase: eventEditUseCase)
-        let factory = GoalsInputFactory(applicationFactory: self, goalEditUseCase: goalUC, sourceView: nil, event: event)
-        return factory.makeGoalsInputController()
+        EventDetailsController(
+            event: event,
+            useCase: eventEditUseCase,
+            coordinator: coordinator!,
+            controllers: [
+                makeWeekController(event: event),
+            ]
+        )
     }
 
     func makeWeekController(event: Event) -> WeekController {
@@ -78,6 +72,27 @@ class ApplicationFactory {
             useCase: eventEditUseCase,
             coordinator: coordinator!
         )
+    }
+
+    func makeClockController(event: Event) -> ClockController {
+        ClockController(event: event)
+    }
+
+    func makeDayController(date: Date, event: Event) -> DayController {
+        let controller = DayController(
+            date: date,
+            event: event,
+            useCase: eventEditUseCase
+        )
+
+        let nav = ApplicationFactory.makeStyledNavigationController()
+        nav.pushViewController(controller, animated: false)
+        nav.modalPresentationStyle = .pageSheet
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+
+        return controller
     }
 
     // MARK: - UINavigationController styling

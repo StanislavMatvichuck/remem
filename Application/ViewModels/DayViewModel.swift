@@ -7,34 +7,14 @@
 
 import Domain
 import Foundation
-import IosUseCases
 
-public protocol DayViewModeling:
-    DayViewModelState &
-    DayViewModelEvents {}
+struct DayViewModel {
+    let date: Date
+    var event: Event
 
-public protocol DayViewModelState {
-    var title: String? { get }
-    var date: Date { get }
-    func time(at: Int) -> String
-    var count: Int { get }
-}
-
-public protocol DayViewModelEvents {
-    func remove(at: Int)
-    func add(at: Date)
-}
-
-public class DayViewModel: DayViewModeling {
-    // MARK: - Properties
-    public weak var delegate: DayViewModelDelegate?
-
-    public let date: Date
-    private var event: Event
-    private let editUseCase: EventEditUseCasing
-    private var shownHappenings: [Happening] { event.happenings(forDay: date) }
+    var shownHappenings: [Happening] { event.happenings(forDay: date) }
     // MARK: - Init
-    public init(date: Date, event: Event, editUseCase: EventEditUseCasing) {
+    init(date: Date, event: Event) {
         func updateTimeToCurrent(forDate: Date) -> Date {
             let c = Calendar.current
             let currentDate = Date.now
@@ -47,19 +27,17 @@ public class DayViewModel: DayViewModeling {
 
         self.date = updateTimeToCurrent(forDate: date)
         self.event = event
-        self.editUseCase = editUseCase
     }
 
-    // DayViewModelState
-    public var title: String? {
+    var title: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d MMMM"
         return dateFormatter.string(for: date)
     }
 
-    public var count: Int { shownHappenings.count }
+    var count: Int { shownHappenings.count }
 
-    public func time(at: Int) -> String {
+    func time(at: Int) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
@@ -67,26 +45,4 @@ public class DayViewModel: DayViewModeling {
         let happeningDate = shownHappenings[at].dateCreated
         return dateFormatter.string(from: happeningDate)
     }
-
-    // DayViewModelEvents
-    public func remove(at: Int) {
-        // this consist of error in time by day
-        let happening = event.happenings(forDay: date)[at]
-        editUseCase.removeHappening(from: event, happening: happening)
-    }
-
-    public func add(at: Date) {
-        editUseCase.addHappening(to: event, date: at)
-    }
-}
-
-extension DayViewModel: EventEditUseCasingDelegate {
-    public func update(event: Event) {
-        self.event = event
-        delegate?.update()
-    }
-}
-
-public protocol DayViewModelDelegate: AnyObject {
-    func update()
 }
