@@ -68,31 +68,32 @@ extension WeekController: EventEditUseCasingDelegate {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-extension WeekController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.reuseIdentifier, for: indexPath)
-            as? WeekCell
-        else { return UICollectionViewCell() }
-
-        let viewModel = viewModel.cellViewModel(at: indexPath.row)
-        cell.viewModel = viewModel
-        viewModel?.delegate = cell
-
-        return cell
-    }
-}
-
-// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension WeekController:
+    UICollectionViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout
 {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int) -> Int
+    {
+        viewModel.count
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: WeekCell.reuseIdentifier,
+                for: indexPath) as? WeekCell
+        else { fatalError("cell type") }
+        cell.viewModel = viewModel.cellViewModel(at: indexPath.row)
+        return cell
+    }
+
     // UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

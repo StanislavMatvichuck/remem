@@ -30,10 +30,6 @@ class WeekFactory {
 
     // WeekFactoryInterface
     func makeWeekCellViewModel(date: Date) -> WeekCellViewModel {
-        let viewModel = WeekCellViewModel(date: date, event: event)
-        viewModel.coordinator = applicationFactory.coordinator
-        useCase.add(delegate: viewModel)
-        applicationFactory.eventEditUseCase.add(delegate: viewModel)
-        return viewModel
+        WeekCellViewModel(date: date, event: event)
     }
 }

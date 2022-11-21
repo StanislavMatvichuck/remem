@@ -13,7 +13,7 @@ class WeekCell: UICollectionViewCell {
     static let sectionsAmount = 12 /// must define layout height
 
     // MARK: - Properties
-    var viewModel: WeekCellViewModeling? { didSet { configureContent() }}
+    var viewModel: WeekCellViewModel? { didSet { configureContent() }}
 
     let day: UILabel
     let amount: UILabel
@@ -97,7 +97,6 @@ class WeekCell: UICollectionViewCell {
         self.background = makeBackground()
         super.init(frame: frame)
         configureLayout()
-        configureEventHandlers()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -119,16 +118,6 @@ class WeekCell: UICollectionViewCell {
         ])
     }
 
-    private func configureEventHandlers() {
-        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePress)))
-    }
-
-    @objc private func handlePress() {
-        UIDevice.vibrate(.medium)
-        animate()
-        viewModel?.select()
-    }
-
     // MARK: - View lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -148,15 +137,6 @@ class WeekCell: UICollectionViewCell {
         show(timings: viewModel.happeningsTimings)
 
         if viewModel.isAchieved { show(achievedGoalAmount: viewModel.goalsAmount) }
-    }
-}
-
-// MARK: - WeekCellViewModelDelegate
-extension WeekCell: WeekCellViewModelDelegate {
-    func update() { configureContent() }
-    func highlightGoalSelection(amount: Int) {
-        configureContent()
-        catchAttentionWithAnimation()
     }
 }
 
