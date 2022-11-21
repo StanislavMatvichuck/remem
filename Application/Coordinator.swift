@@ -35,7 +35,7 @@ class Coordinator: NSObject, Coordinating {
 extension Coordinator {
     func showDetails(event: Event) {
         navController.pushViewController(
-            factory.makeEventDetailsController(event: event),
+            factory.makeEventDetailsController(event: event, coordinator: self),
             animated: true
         )
     }

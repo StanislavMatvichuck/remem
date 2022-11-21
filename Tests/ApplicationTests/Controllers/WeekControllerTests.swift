@@ -52,11 +52,6 @@ class WeekControllerTests: XCTestCase {
     func test_tap_presentsDayController() throws {
         let collection = sut.viewRoot.collection
         let firstCellIndex = IndexPath(row: 0, section: 0)
-//        let cell = collection.dataSource?.collectionView(
-//            collection,
-//            cellForItemAt: firstCellIndex
-//        )
-//        let item = try XCTUnwrap(cell as? WeekCell)
 
         collection.delegate?.collectionView?(
             collection,

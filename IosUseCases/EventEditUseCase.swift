@@ -43,7 +43,7 @@ public class EventEditUseCase: EventEditUseCasing {
     }
 
     public func addHappening(to event: Event, date: Date) {
-        let addedHappening = event.addHappening(date: date)
+        _ = event.addHappening(date: date)
         repository.save(event)
         delegates.call { $0.update(event: event) }
         widgetUseCase.update()
@@ -51,7 +51,7 @@ public class EventEditUseCase: EventEditUseCasing {
 
     public func removeHappening(from event: Event, happening: Happening) {
         do {
-            if let removedHappening = try event.remove(happening: happening) {
+            if let _ = try event.remove(happening: happening) {
                 repository.save(event)
                 delegates.call { $0.update(event: event) }
                 widgetUseCase.update()
@@ -74,7 +74,7 @@ public class EventEditUseCase: EventEditUseCasing {
     }
 
     public func addGoal(to event: Event, at date: Date, amount: Int) {
-        let addedGoal = event.addGoal(at: date, amount: amount)
+        _ = event.addGoal(at: date, amount: amount)
         repository.save(event)
         delegates.call { $0.update(event: event) }
         widgetUseCase.update()

@@ -14,7 +14,6 @@ class ApplicationFactory {
     // MARK: - Long-lived dependencies
     let eventsListUseCase: EventsListUseCasing
     let eventEditUseCase: EventEditUseCasing
-    var coordinator: Coordinator?
     // MARK: - Init
     init() {
         func makeEventsRepository() -> EventsRepositoryInterface {
@@ -40,7 +39,6 @@ class ApplicationFactory {
             navController: navController,
             applicationFactory: self
         )
-        self.coordinator = coordinator
         return coordinator
     }
 
@@ -55,22 +53,30 @@ class ApplicationFactory {
         return coordinator.navController
     }
 
-    func makeEventDetailsController(event: Event) -> EventDetailsController {
+    func makeEventDetailsController(
+        event: Event,
+        coordinator: Coordinating
+    ) -> EventDetailsController {
         EventDetailsController(
             event: event,
             useCase: eventEditUseCase,
-            coordinator: coordinator!,
+            coordinator: coordinator,
             controllers: [
-                makeWeekController(event: event),
+                makeWeekController(
+                    event: event, coordinator: coordinator
+                ),
             ]
         )
     }
 
-    func makeWeekController(event: Event) -> WeekController {
+    func makeWeekController(
+        event: Event,
+        coordinator: Coordinating
+    ) -> WeekController {
         WeekController(
             event: event,
             useCase: eventEditUseCase,
-            coordinator: coordinator!
+            coordinator: coordinator
         )
     }
 

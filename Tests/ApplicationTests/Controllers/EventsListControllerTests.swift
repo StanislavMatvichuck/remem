@@ -13,7 +13,6 @@ import XCTest
 
 class EventsListControllerTests: XCTestCase {
     // MARK: - Test fixture
-    var coordinator: Coordinator!
     var sut: EventsListController!
 
     var view: EventsListView { sut.viewRoot }
@@ -29,14 +28,11 @@ class EventsListControllerTests: XCTestCase {
         super.setUp()
 
         let coordinator = ApplicationFactory().makeCoordinator()
-        self.coordinator = coordinator
-
         sut = EventsListController.make(coordinator: coordinator)
         coordinator.navController.pushViewController(sut, animated: false)
     }
 
     override func tearDown() {
-        coordinator = nil
         sut = nil
         executeRunLoop()
         super.tearDown()
