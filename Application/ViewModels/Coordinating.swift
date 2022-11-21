@@ -11,6 +11,6 @@ import Domain
 public protocol Coordinating: AnyObject {
     func showDetails(event: Event)
     func showDay(event: Event, date: Date)
-    func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel)
+    func showGoalsInput(event: Event)
     func dismiss()
 }

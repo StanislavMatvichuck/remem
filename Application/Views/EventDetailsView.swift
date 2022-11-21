@@ -28,10 +28,10 @@ class EventDetailsView: UIView {
     let total: UILabel = makeAmountLabel()
     let dayAverage: UILabel = makeAmountLabel()
 
-    private let viewModel: EventDetailsViewModeling
+    private let viewModel: EventDetailsViewModel
 
     // MARK: - Init
-    init(viewModel: EventDetailsViewModeling) {
+    init(viewModel: EventDetailsViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureLayout()

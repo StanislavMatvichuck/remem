@@ -18,59 +18,52 @@ protocol EventDetailsFactoring: AnyObject {
 class EventDetailsFactory: EventDetailsFactoring {
     // MARK: - Properties
     let event: Event
-    let applicationFactory: ApplicationFactory
+    let factory: ApplicationFactory
     let goalEditUseCase: GoalEditUseCasing
     var goalInputSourceView: UIView?
     // MARK: - Init
     init(applicationFactory: ApplicationFactory, event: Event) {
-        self.applicationFactory = applicationFactory
+        self.factory = applicationFactory
         self.event = event
         self.goalEditUseCase = GoalEditUseCase(event: event, eventEditUseCase: applicationFactory.eventEditUseCase)
     }
 
     func makeEventDetailsController() -> EventDetailsController {
-        let viewModel = makeEventDetailsViewModel()
+        let viewModel = EventDetailsViewModel(event: event)
 
         let viewRoot = EventDetailsView(viewModel: viewModel)
         goalInputSourceView = viewRoot.week
 
         let clockController = makeClockController()
         let weekController = makeWeekController()
-        let controller = EventDetailsController(viewRoot: viewRoot,
-                                                viewModel: viewModel,
-                                                clockController: clockController,
-                                                weekController: weekController)
-        controller.title = event.name
-        viewModel.delegate = controller
+        let controller = EventDetailsController(
+            event: event,
+            useCase: factory.eventEditUseCase,
+            coordinator: factory.coordinator!,
+            controllers: [clockController, weekController]
+        )
         return controller
     }
 
-    func makeEventDetailsViewModel() -> EventDetailsViewModel {
-        let viewModel = EventDetailsViewModel(event: event, editUseCase: applicationFactory.eventEditUseCase)
-        applicationFactory.eventEditUseCase.add(delegate: viewModel)
-        viewModel.coordinator = applicationFactory.coordinator
-        return viewModel
-    }
-
     func makeClockController() -> ClockController {
-        let factory = ClockFactory(applicationFactory: applicationFactory, event: event)
+        let factory = ClockFactory(applicationFactory: factory, event: event)
         return factory.makeClockController()
     }
 
     func makeWeekController() -> WeekController {
-        let factory = WeekFactory(applicationFactory: applicationFactory, event: event, goalEditUseCase: goalEditUseCase)
+        let factory = WeekFactory(applicationFactory: factory, event: event, goalEditUseCase: goalEditUseCase)
         let controller = factory.makeWeekController()
         return controller
     }
 
     func makeDayController(date: Date) -> DayController {
-        let factory = DayFactory(applicationFactory: applicationFactory, date: date, event: event)
+        let factory = DayFactory(applicationFactory: factory, date: date, event: event)
         let controller = factory.makeDayController()
         return controller
     }
 
     func makeGoalsInputController() -> GoalsInputController {
-        let factory = GoalsInputFactory(applicationFactory: applicationFactory,
+        let factory = GoalsInputFactory(applicationFactory: factory,
                                         goalEditUseCase: goalEditUseCase,
                                         sourceView: goalInputSourceView,
                                         event: event)

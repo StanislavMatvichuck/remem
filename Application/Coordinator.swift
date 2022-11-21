@@ -38,7 +38,7 @@ extension Coordinator {
         presentModally(factory.makeDayController(event: event, date: date))
     }
 
-    func showGoalsInput(event: Event, callingViewModel: EventDetailsViewModel) {
+    func showGoalsInput(event: Event) {
         presentModally(factory.makeGoalsInputController(event: event))
     }
 

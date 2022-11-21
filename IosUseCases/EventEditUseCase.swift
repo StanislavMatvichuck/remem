@@ -35,6 +35,8 @@ public class EventEditUseCase: EventEditUseCasing {
 
     // EventEditUseCasing
     public func visit(_ event: Event) {
+        guard event.dateVisited == nil else { return }
+
         event.dateVisited = .now
         repository.save(event)
         delegates.call { $0.update(event: event) }
