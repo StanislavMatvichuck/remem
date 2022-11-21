@@ -11,30 +11,34 @@ import ViewControllerPresentationSpy
 import XCTest
 
 class WeekControllerTests: XCTestCase {
-    var presentationSpy: PresentationVerifier!
+    var spy: PresentationVerifier!
     var sut: WeekController!
+    var coordinator: Coordinating!
 
     override func setUp() {
         super.setUp()
-        let spy = PresentationVerifier()
+
         let event = Event(name: "Event")
-        let factory = ApplicationFactory()
-        let coordinator = factory.makeCoordinator()
         let useCase = EventEditUseCasingFake()
+
+        let spy = PresentationVerifier()
+        self.spy = spy
+
+        let coordinator = ApplicationFactory().makeCoordinator()
+        self.coordinator = coordinator
 
         let sut = WeekController(
             event: event,
             useCase: useCase,
             coordinator: coordinator
         )
-
         self.sut = sut
-        presentationSpy = spy
     }
 
     override func tearDown() {
-        presentationSpy = nil
+        spy = nil
         sut = nil
+        coordinator = nil
         executeRunLoop()
         super.tearDown()
     }
@@ -58,6 +62,6 @@ class WeekControllerTests: XCTestCase {
             didSelectItemAt: firstCellIndex
         )
 
-        presentationSpy.verify(animated: true)
+        spy.verify(animated: true)
     }
 }
