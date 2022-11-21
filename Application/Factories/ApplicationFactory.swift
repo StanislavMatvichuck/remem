@@ -72,6 +72,14 @@ class ApplicationFactory {
         return factory.makeGoalsInputController()
     }
 
+    func makeWeekController(event: Event) -> WeekController {
+        WeekController(
+            event: event,
+            useCase: eventEditUseCase,
+            coordinator: coordinator!
+        )
+    }
+
     // MARK: - UINavigationController styling
 
     static func makeStyledNavigationController() -> UINavigationController {

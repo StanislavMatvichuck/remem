@@ -15,14 +15,16 @@ class WeekController: UIViewController {
 
     let viewRoot = WeekView()
     let useCase: EventEditUseCasing
+    weak var coordinator: Coordinating?
     var viewModel: WeekViewModel
     var event: Event
     // MARK: - Init
 
-    init(event: Event, useCase: EventEditUseCasing) {
+    init(event: Event, useCase: EventEditUseCasing, coordinator: Coordinating) {
         self.useCase = useCase
         self.event = event
         self.viewModel = WeekViewModel(event: event)
+        self.coordinator = coordinator
 
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
@@ -92,6 +94,14 @@ extension WeekController:
         else { fatalError("cell type") }
         cell.viewModel = viewModel.cellViewModel(at: indexPath.row)
         return cell
+    }
+
+    // UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let cellViewModel = viewModel.cellViewModel(at: indexPath.row)
+        else { return }
+        coordinator?.showDay(event: cellViewModel.event, date: cellViewModel.date)
     }
 
     // UICollectionViewDelegateFlowLayout

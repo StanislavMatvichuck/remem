@@ -47,7 +47,6 @@
 		0852C6A0283D39F80027EF3E /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69F283D39F80027EF3E /* ClockView.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
-		085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FA28C24FF9002331AB /* WeekFactory.swift */; };
 		085622FD28C25B9F002331AB /* DayFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085622FC28C25B9F002331AB /* DayFactory.swift */; };
 		0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */; };
 		0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */; };
@@ -369,7 +368,6 @@
 		0852C69F283D39F80027EF3E /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
-		085622FA28C24FF9002331AB /* WeekFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekFactory.swift; sourceTree = "<group>"; };
 		085622FC28C25B9F002331AB /* DayFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFactory.swift; sourceTree = "<group>"; };
 		0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryViewModel.swift; sourceTree = "<group>"; };
 		0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryVMTests.swift; sourceTree = "<group>"; };
@@ -957,7 +955,6 @@
 				085622FC28C25B9F002331AB /* DayFactory.swift */,
 				08263E6328BF5F5600C58FC8 /* EventDetailsFactory.swift */,
 				08235E6F28C5C5BC0026DED2 /* GoalsInputFactory.swift */,
-				085622FA28C24FF9002331AB /* WeekFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -1601,7 +1598,6 @@
 				08D5122227870D2500C2037F /* EventsListController.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* Clock.swift in Sources */,
-				085622FB28C24FF9002331AB /* WeekFactory.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
