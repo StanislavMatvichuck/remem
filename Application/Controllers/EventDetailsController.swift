@@ -10,9 +10,8 @@ import IosUseCases
 import UIKit
 
 class EventDetailsController: UIViewController {
-    var goalsInputView: UIView { viewRoot.week }
     // MARK: - Properties
-    let viewRoot: EventDetailsView
+    let viewRoot = EventDetailsView()
     let useCase: EventEditUseCasing
     var viewModel: EventDetailsViewModel
     weak var coordinator: Coordinating?
@@ -25,15 +24,17 @@ class EventDetailsController: UIViewController {
         controllers: [UIViewController])
     {
         self.viewModel = EventDetailsViewModel(event: event)
-        self.viewRoot = EventDetailsView(viewModel: viewModel)
         self.coordinator = coordinator
         self.useCase = useCase
 
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
 
-        configureEventsHandlers()
         title = viewModel.event.name /// move title to viewModel
+
+        for controller in controllers {
+            contain(controller: controller)
+        }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -45,26 +46,16 @@ class EventDetailsController: UIViewController {
         useCase.visit(viewModel.event)
     }
 
-    // MARK: - Private
-    private func configureEventsHandlers() {
-        viewRoot.goalsButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onPressAddGoal)))
-    }
-
-    private func contain(controller: UIViewController, in view: UIView) {
+    private func contain(controller: UIViewController) {
         addChild(controller)
-        view.addAndConstrain(controller.view)
+        viewRoot.scroll.viewContent.addArrangedSubview(controller.view)
         controller.didMove(toParent: self)
-    }
-
-    @objc private func onPressAddGoal() {
-        UIDevice.vibrate(.medium)
-        viewRoot.goalsButton.animate()
-        coordinator?.showGoalsInput(event: viewModel.event)
     }
 }
 
 extension EventDetailsController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
+        // this has no visible result. used for event visit testing
         viewModel = EventDetailsViewModel(event: event)
     }
 }

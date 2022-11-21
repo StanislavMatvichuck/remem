@@ -23,7 +23,7 @@ class EventDetailsControllerTests: XCTestCase {
             event: event,
             useCase: ucFake,
             coordinator: coordinator,
-            controllers: []
+            controllers: [UIViewController(), UIViewController()]
         )
     }
 
@@ -45,5 +45,9 @@ class EventDetailsControllerTests: XCTestCase {
         executeRunLoop()
 
         XCTAssertNotNil(sut.viewModel.event.dateVisited)
+    }
+
+    func test_rendersSeveralControllersWithScroll() {
+        XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count)
     }
 }

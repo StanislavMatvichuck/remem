@@ -20,7 +20,7 @@ class EventDetailsFactory: EventDetailsFactoring {
     let event: Event
     let factory: ApplicationFactory
     let goalEditUseCase: GoalEditUseCasing
-    var goalInputSourceView: UIView?
+
     // MARK: - Init
     init(applicationFactory: ApplicationFactory, event: Event) {
         self.factory = applicationFactory
@@ -29,11 +29,6 @@ class EventDetailsFactory: EventDetailsFactoring {
     }
 
     func makeEventDetailsController() -> EventDetailsController {
-        let viewModel = EventDetailsViewModel(event: event)
-
-        let viewRoot = EventDetailsView(viewModel: viewModel)
-        goalInputSourceView = viewRoot.week
-
         let clockController = makeClockController()
         let weekController = makeWeekController()
         let controller = EventDetailsController(
@@ -65,7 +60,7 @@ class EventDetailsFactory: EventDetailsFactoring {
     func makeGoalsInputController() -> GoalsInputController {
         let factory = GoalsInputFactory(applicationFactory: factory,
                                         goalEditUseCase: goalEditUseCase,
-                                        sourceView: goalInputSourceView,
+                                        sourceView: nil,
                                         event: event)
         let controller = factory.makeGoalsInputController()
         return controller
