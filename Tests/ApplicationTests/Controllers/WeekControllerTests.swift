@@ -32,6 +32,7 @@ class WeekControllerTests: XCTestCase {
             useCase: useCase,
             coordinator: coordinator
         )
+
         self.sut = sut
     }
 

@@ -9,7 +9,7 @@
 import XCTest
 
 class EventInputTests: XCTestCase {
-    private var sut: EventInput!
+    var sut: EventInput!
 
     override func setUp() {
         super.setUp()
@@ -18,14 +18,15 @@ class EventInputTests: XCTestCase {
         controller.loadViewIfNeeded()
         putInViewHierarchy(controller)
 
-        sut = EventInput()
+        let sut = EventInput()
+        self.sut = sut
 
         controller.view.addSubview(sut)
     }
 
     override func tearDown() {
-        executeRunLoop()
         sut = nil
+        executeRunLoop()
         super.tearDown()
     }
 

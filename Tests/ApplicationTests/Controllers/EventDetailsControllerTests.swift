@@ -15,20 +15,20 @@ class EventDetailsControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let event = Event(name: "EventName")
-        let factory = ApplicationFactory()
-        let coordinator = factory.makeCoordinator()
         let ucFake = EventEditUseCasingFake()
 
-        sut = EventDetailsController(
+        let sut = EventDetailsController(
             event: event,
             useCase: ucFake,
-            coordinator: coordinator,
             controllers: [UIViewController(), UIViewController()]
         )
+
+        self.sut = sut
     }
 
     override func tearDown() {
         sut = nil
+        executeRunLoop()
         super.tearDown()
     }
 

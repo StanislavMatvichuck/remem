@@ -44,7 +44,6 @@ class ApplicationFactory {
 
     func makeRootViewController(coordinator: Coordinator) -> UIViewController {
         let eventsListController = EventsListController(
-            viewRoot: EventsListView(),
             listUseCase: eventsListUseCase,
             editUseCase: eventEditUseCase,
             coordinator: coordinator
@@ -60,7 +59,6 @@ class ApplicationFactory {
         EventDetailsController(
             event: event,
             useCase: eventEditUseCase,
-            coordinator: coordinator,
             controllers: [
                 makeWeekController(
                     event: event, coordinator: coordinator

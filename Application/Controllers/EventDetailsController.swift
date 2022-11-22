@@ -13,18 +13,17 @@ class EventDetailsController: UIViewController {
     // MARK: - Properties
     let viewRoot = EventDetailsView()
     let useCase: EventEditUseCasing
+    var event: Event
     var viewModel: EventDetailsViewModel
-    weak var coordinator: Coordinating?
 
     // MARK: - Init
     init(
         event: Event,
         useCase: EventEditUseCasing,
-        coordinator: Coordinating,
         controllers: [UIViewController])
     {
+        self.event = event
         self.viewModel = EventDetailsViewModel(event: event)
-        self.coordinator = coordinator
         self.useCase = useCase
 
         super.init(nibName: nil, bundle: nil)
@@ -39,11 +38,13 @@ class EventDetailsController: UIViewController {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    deinit { print(#function) }
+
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        useCase.visit(viewModel.event)
+        useCase.visit(event)
     }
 
     private func contain(controller: UIViewController) {

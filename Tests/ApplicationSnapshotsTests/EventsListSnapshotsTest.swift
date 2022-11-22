@@ -20,7 +20,6 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         let coordinator = ApplicationFactory().makeCoordinator()
 
         sut = EventsListController(
-            viewRoot: EventsListView(),
             listUseCase: EventsListUseCasingFake(),
             editUseCase: EventEditUseCasingFake(),
             coordinator: coordinator

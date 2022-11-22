@@ -17,19 +17,20 @@ class EventsListController: UIViewController {
     }
 
     // MARK: - Properties
-    var viewModel: EventsListViewModel
     let listUseCase: EventsListUseCasing
     let editUseCase: EventEditUseCasing
-    weak var coordinator: Coordinating?
     let viewRoot: EventsListView
 
+    weak var coordinator: Coordinating?
+    var viewModel: EventsListViewModel
+
     // MARK: - Init
-    init(viewRoot: EventsListView,
-         listUseCase: EventsListUseCasing,
-         editUseCase: EventEditUseCasing,
-         coordinator: Coordinating)
+    init(
+        listUseCase: EventsListUseCasing,
+        editUseCase: EventEditUseCasing,
+        coordinator: Coordinating)
     {
-        self.viewRoot = viewRoot
+        self.viewRoot = EventsListView()
         self.listUseCase = listUseCase
         self.editUseCase = editUseCase
         self.coordinator = coordinator
@@ -43,6 +44,8 @@ class EventsListController: UIViewController {
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    deinit { print(#function) }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }

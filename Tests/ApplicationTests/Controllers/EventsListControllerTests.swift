@@ -38,9 +38,9 @@ class EventsListControllerTests: XCTestCase {
     }
 
     override func tearDown() {
+        executeRunLoop()
         sut = nil
         coordinator = nil
-        executeRunLoop()
         super.tearDown()
     }
 
@@ -280,7 +280,6 @@ private extension EventsListController {
         let editUCfake = EventEditUseCasingFake()
 
         let sut = EventsListController(
-            viewRoot: EventsListView(),
             listUseCase: listUCfake,
             editUseCase: editUCfake,
             coordinator: coordinator

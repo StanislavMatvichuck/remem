@@ -16,7 +16,9 @@ class SwiperTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = Swiper()
+        let sut = Swiper()
+        self.sut = sut
+
         let parentView = UIView(frame: CGRect(x: 0, y: 0,
                                               width: UIScreen.main.bounds.width * 0.8,
                                               height: EventCell.height))
@@ -26,6 +28,7 @@ class SwiperTests: XCTestCase {
     }
 
     override func tearDown() {
+        executeRunLoop()
         parent = nil
         mockGestureRecognizer = nil
         sut = nil
