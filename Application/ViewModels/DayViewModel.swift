@@ -11,9 +11,8 @@ import Foundation
 struct DayViewModel {
     let date: Date
     var event: Event
-
     var shownHappenings: [Happening] { event.happenings(forDay: date) }
-    // MARK: - Init
+
     init(date: Date, event: Event) {
         func updateTimeToCurrent(forDate: Date) -> Date {
             let c = Calendar.current

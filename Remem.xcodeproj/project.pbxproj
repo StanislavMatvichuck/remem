@@ -31,7 +31,6 @@
 		08292EC7292E24F700F46A32 /* ClockSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC6292E24F700F46A32 /* ClockSnapshotsTests.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		083141D229142DCE00D5AB8A /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083141D129142DCE00D5AB8A /* UIKit.swift */; };
-		0838B2D928FDD59A0076E08B /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */; };
@@ -44,8 +43,6 @@
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
-		0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */; };
-		0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */; };
 		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -113,10 +110,8 @@
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */; };
-		08E620842787406400BBABFD /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E620832787406400BBABFD /* Metrics.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
-		08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F23A00281032F200AD7688 /* LocalNotificationsService.swift */; };
 		08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE4291E5DB10033AB0D /* Fakes.swift */; };
 		08F82FE7291E5E000033AB0D /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE6291E5E000033AB0D /* Stubs.swift */; };
 		08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE8291E70060033AB0D /* SwiperTests.swift */; };
@@ -343,7 +338,6 @@
 		08292EC6292E24F700F46A32 /* ClockSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSnapshotsTests.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
-		0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -356,8 +350,6 @@
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
-		0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryViewModel.swift; sourceTree = "<group>"; };
-		0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryVMTests.swift; sourceTree = "<group>"; };
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -433,11 +425,9 @@
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
-		08E620832787406400BBABFD /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
-		08F23A00281032F200AD7688 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		08F82FE4291E5DB10033AB0D /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		08F82FE6291E5E000033AB0D /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		08F82FE8291E70060033AB0D /* SwiperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperTests.swift; sourceTree = "<group>"; };
@@ -595,7 +585,6 @@
 				08B26A13289E975900DFBAC8 /* DayViewModel.swift */,
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
-				0857DC3C28E47B4200D3F4E5 /* WeekSummaryViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				08235E7228C5CC680026DED2 /* Cells */,
 				080A67B828D1EDB300889A97 /* ClockViewModel */,
@@ -682,6 +671,8 @@
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0898017827FAF17C0014E110 /* EventInput.swift */,
+				08F1960128BCC1DF0051A83E /* Swiper.swift */,
 				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 			);
@@ -691,12 +682,12 @@
 		086DC6D12880578E0048F22F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				086DC6D3288058E70048F22F /* Cells */,
-				08F63FB5287894A700984781 /* ClockView */,
 				0868209327BFAD6500551F6A /* Components */,
+				086DC6D3288058E70048F22F /* Cells */,
+				0879AC8F2879B12400D8DD8E /* Clock */,
 				08B26A11289E91D400DFBAC8 /* DayView.swift */,
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
-				08C6C503287DC572001F522E /* EventsListView */,
+				08D512352787144800C2037F /* EventsListView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
 			);
 			path = Views;
@@ -705,9 +696,9 @@
 		086DC6D3288058E70048F22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				08D512372787153900C2037F /* EventCell.swift */,
 				08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */,
 				08293CC027B670FC0039E432 /* WeekCell.swift */,
-				08C6C504287DC7F3001F522E /* EventCell */,
 				08A19D282890125B0085DC6F /* EventsListFooterCell.swift */,
 				08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */,
 			);
@@ -721,25 +712,16 @@
 				0891377B292BE55600EFD23D /* Controllers */,
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
-				0857DC3E28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift */,
 			);
 			path = ApplicationTests;
-			sourceTree = "<group>";
-		};
-		0879AC8E2879B0E800D8DD8E /* ClockFace */ = {
-			isa = PBXGroup;
-			children = (
-				08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */,
-				08286B02284170A900FBC022 /* ClockFace.swift */,
-			);
-			path = ClockFace;
 			sourceTree = "<group>";
 		};
 		0879AC8F2879B12400D8DD8E /* Clock */ = {
 			isa = PBXGroup;
 			children = (
 				08F9C5EB282BD35F007EAD47 /* ClockView.swift */,
-				0879AC8E2879B0E800D8DD8E /* ClockFace */,
+				08286B02284170A900FBC022 /* ClockFace.swift */,
+				08DC51F8284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift */,
 			);
 			path = Clock;
 			sourceTree = "<group>";
@@ -805,24 +787,6 @@
 				08B89A2528E3190600F4B63B /* StyledText.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		08C6C503287DC572001F522E /* EventsListView */ = {
-			isa = PBXGroup;
-			children = (
-				08D512352787144800C2037F /* EventsListView.swift */,
-				0898017827FAF17C0014E110 /* EventInput.swift */,
-			);
-			path = EventsListView;
-			sourceTree = "<group>";
-		};
-		08C6C504287DC7F3001F522E /* EventCell */ = {
-			isa = PBXGroup;
-			children = (
-				08D512372787153900C2037F /* EventCell.swift */,
-				08F1960128BCC1DF0051A83E /* Swiper.swift */,
-			);
-			path = EventCell;
 			sourceTree = "<group>";
 		};
 		08CC50682906DE6300840385 /* Helpers */ = {
@@ -926,11 +890,8 @@
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
-				08F23A00281032F200AD7688 /* LocalNotificationsService.swift */,
-				08E620832787406400BBABFD /* Metrics.swift */,
 				08AA964728E2FF58005BF90A /* WidgetUseCase.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
-				0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -944,14 +905,6 @@
 				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 			);
 			path = CoreDataEventsRepository;
-			sourceTree = "<group>";
-		};
-		08F63FB5287894A700984781 /* ClockView */ = {
-			isa = PBXGroup;
-			children = (
-				0879AC8F2879B12400D8DD8E /* Clock */,
-			);
-			path = ClockView;
 			sourceTree = "<group>";
 		};
 		08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */ = {
@@ -1494,7 +1447,6 @@
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayControllerTests.swift in Sources */,
-				0857DC3F28E47DAE00D3F4E5 /* WeekSummaryVMTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1539,11 +1491,9 @@
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */,
 				08D512382787153900C2037F /* EventCell.swift in Sources */,
-				0838B2D928FDD59A0076E08B /* ExtensionUIViewController.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
-				08F23A01281032F200AD7688 /* LocalNotificationsService.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekController.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockSection.swift in Sources */,
@@ -1552,9 +1502,7 @@
 				08DC51F9284BD2BD00DEDFBD /* ClockSectionAnimatedLayer.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
-				0857DC3D28E47B4200D3F4E5 /* WeekSummaryViewModel.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */,
-				08E620842787406400BBABFD /* Metrics.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */,

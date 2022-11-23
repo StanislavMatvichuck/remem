@@ -9,10 +9,10 @@ import UIKit
 
 class Swiper: UIControl {
     // MARK: - Properties
-    let initialX: CGFloat = .r2
-    let size: CGFloat = .d1
+    let initialX: CGFloat = UIHelper.r2
+    let size: CGFloat = UIHelper.d1
     var width: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude }
-    var successX: CGFloat { width - .r2 }
+    var successX: CGFloat { width - UIHelper.r2 }
 
     var horizontalConstraint: NSLayoutConstraint!
     var animationCompletionHandler: ((Bool) -> Void)?
@@ -53,7 +53,7 @@ class Swiper: UIControl {
 
     private func configureAppearance() {
         layer.backgroundColor = EventCell.pinColor.cgColor
-        layer.cornerRadius = .r1
+        layer.cornerRadius = UIHelper.r1
     }
 }
 
@@ -102,7 +102,7 @@ extension Swiper {
 
         let scale = CABasicAnimation(keyPath: "transform.scale")
         scale.fromValue = 1.0
-        scale.toValue = CGFloat.r2 / CGFloat.r1
+        scale.toValue = UIHelper.r2 / UIHelper.r1
 
         let group = CAAnimationGroup()
         group.autoreverses = true

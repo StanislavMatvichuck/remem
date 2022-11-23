@@ -14,7 +14,7 @@ class EventCell: UITableViewCell {
     static let backgroundGoalReached = UIHelper.goalReachedBackground
     static let backgroundGoalNotReached = UIHelper.goalNotReachedBackground
     static let pinColor = UIHelper.brandDimmed
-    static let height = .d2 + UIHelper.spacing
+    static let height = UIHelper.d2 + UIHelper.spacing
 
     // MARK: - Properties
     var viewModel: EventViewModel? { didSet { handleViewStateUpdate() } }
@@ -24,7 +24,7 @@ class EventCell: UITableViewCell {
 
     let viewRoot: UIView = {
         let view = UIView(al: true)
-        view.layer.cornerRadius = .r2
+        view.layer.cornerRadius = UIHelper.r2
         view.backgroundColor = EventCell.backgroundDefault
         return view
     }()
@@ -73,13 +73,13 @@ class EventCell: UITableViewCell {
             height,
             nameLabel.centerXAnchor.constraint(equalTo: viewRoot.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
-            nameLabel.heightAnchor.constraint(equalToConstant: .d2),
-            nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * .d2),
+            nameLabel.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * UIHelper.d2),
 
-            valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.r2),
+            valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
 
-            viewRoot.heightAnchor.constraint(equalToConstant: .d2),
+            viewRoot.heightAnchor.constraint(equalToConstant: UIHelper.d2),
 
             viewRoot.leadingAnchor.constraint(equalTo: leadingAnchor, constant: UIHelper.spacingListHorizontal),
             viewRoot.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -UIHelper.spacingListHorizontal),

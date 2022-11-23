@@ -36,7 +36,7 @@ class EventInput: UIControl {
         input.textAlignment = .center
         input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
-        input.minimumFontSize = .font1
+        input.minimumFontSize = UIHelper.fontSmall.pointSize
         return input
     }()
 
@@ -55,7 +55,7 @@ class EventInput: UIControl {
     let viewInput: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = UIHelper.background
-        view.layer.cornerRadius = .r2
+        view.layer.cornerRadius = UIHelper.r2
         view.isOpaque = true
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
@@ -74,8 +74,13 @@ class EventInput: UIControl {
     }()
 
     let emojiContainer: UIScrollView = {
-        let scroll = ViewScroll(.horizontal, spacing: .sm)
-        scroll.viewContent.layoutMargins = UIEdgeInsets(top: 0, left: .sm, bottom: 0, right: .sm)
+        let scroll = ViewScroll(.horizontal, spacing: UIHelper.delta1)
+        scroll.viewContent.layoutMargins = UIEdgeInsets(
+            top: 0,
+            left: UIHelper.delta1,
+            bottom: 0,
+            right: UIHelper.delta1
+        )
         scroll.viewContent.isLayoutMarginsRelativeArrangement = true
         scroll.showsHorizontalScrollIndicator = false
 
@@ -147,14 +152,14 @@ extension EventInput {
         NSLayoutConstraint.activate([
             textField.centerXAnchor.constraint(equalTo: viewInput.centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: viewInput.centerYAnchor),
-            textField.heightAnchor.constraint(equalToConstant: .d2),
-            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * .d2),
+            textField.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * UIHelper.d2),
         ])
 
         addSubview(viewInput)
         NSLayoutConstraint.activate([
-            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .sm),
-            viewInput.heightAnchor.constraint(equalToConstant: .d2),
+            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.delta1),
+            viewInput.heightAnchor.constraint(equalToConstant: UIHelper.d2),
             viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
 
@@ -162,14 +167,15 @@ extension EventInput {
         NSLayoutConstraint.activate([
             emojiContainer.widthAnchor.constraint(equalTo: widthAnchor),
             emojiContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.sm),
+            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -UIHelper.delta1),
         ])
 
         NSLayoutConstraint.activate([constraint])
     }
 
     private func setupInputAccessoryView() {
-        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: .wScreen, height: 44))
+        let screenW = UIScreen.main.bounds.width
+        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: screenW, height: 44))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .normal)

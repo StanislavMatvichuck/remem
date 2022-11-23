@@ -48,7 +48,7 @@ class WeekView: UIView {
             view.addArrangedSubview(label)
 
             NSLayoutConstraint.activate([
-                label.widthAnchor.constraint(equalToConstant: .wScreen / 7),
+                label.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7),
             ])
         }
 
@@ -71,10 +71,12 @@ extension WeekView {
         addSubview(collection)
         addSubview(weekdaysLine)
 
-        NSLayoutConstraint.activate([
-            collection.heightAnchor.constraint(equalToConstant: .hScreen / 3),
+        let height = UIScreen.main.bounds.height / 3
 
-            collection.topAnchor.constraint(equalTo: topAnchor, constant: .sm),
+        NSLayoutConstraint.activate([
+            collection.heightAnchor.constraint(equalToConstant: height),
+
+            collection.topAnchor.constraint(equalTo: topAnchor, constant: UIHelper.delta1),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
             collection.trailingAnchor.constraint(equalTo: trailingAnchor),
 

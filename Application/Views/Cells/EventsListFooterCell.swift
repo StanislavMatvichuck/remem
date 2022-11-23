@@ -25,7 +25,7 @@ class EventsListFooterCell: UITableViewCell {
         button.isHighlighted = true
 
         button.backgroundColor = UIHelper.brand
-        button.layer.cornerRadius = .r2
+        button.layer.cornerRadius = UIHelper.r2
         button.layer.borderWidth = 3
 
         return button
@@ -60,7 +60,7 @@ extension EventsListFooterCell {
 
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(equalToConstant: EventCell.height),
-            createEvent.heightAnchor.constraint(equalToConstant: .d2),
+            createEvent.heightAnchor.constraint(equalToConstant: UIHelper.d2),
             createEvent.widthAnchor.constraint(equalTo: contentView.widthAnchor,
                                                constant: -2 * UIHelper.spacingListHorizontal),
 

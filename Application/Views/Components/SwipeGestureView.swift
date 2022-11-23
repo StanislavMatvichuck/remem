@@ -49,10 +49,10 @@ class SwipeGestureView: UIView {
     private lazy var viewCircle: UIView = {
         let view = UIView(al: true)
         view.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
-        view.layer.cornerRadius = .r2 / 2
+        view.layer.cornerRadius = UIHelper.r2 / 2
         view.isUserInteractionEnabled = false
 
-        let littleSize = CGFloat.xs * 1.5
+        let littleSize = UIHelper.delta1 * 1.5
         let littleCenter = UIView(al: true)
         littleCenter.layer.backgroundColor = UIColor.systemBlue.cgColor
         littleCenter.layer.cornerRadius = littleSize / 2
@@ -67,8 +67,8 @@ class SwipeGestureView: UIView {
 
         addSubview(view)
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: .r2),
-            view.heightAnchor.constraint(equalToConstant: .r2),
+            view.widthAnchor.constraint(equalToConstant: UIHelper.r2),
+            view.heightAnchor.constraint(equalToConstant: UIHelper.r2),
         ])
 
         return view
@@ -181,7 +181,7 @@ extension SwipeGestureView {
     private func setupViewFingerConstraints() {
         let finger = viewFinger
         let circle = viewCircle
-        let labelSize = finger.sizeThatFits(CGSize(width: .wScreen, height: .hScreen))
+        let labelSize = finger.sizeThatFits(UIScreen.main.bounds.size)
         NSLayoutConstraint.activate([
             finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: 0.75 * labelSize.width),
             finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: 0.56 * labelSize.height),

@@ -26,7 +26,7 @@ class EventsListView: UIView {
 
     let swipeHint: SwipeGestureView = {
         SwipeGestureView(mode: .horizontal,
-                         edgeInset: .r2 + UIHelper.spacingListHorizontal)
+                         edgeInset: UIHelper.r2 + UIHelper.spacingListHorizontal)
     }()
 
     // MARK: - Init

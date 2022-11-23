@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-class EventDetailsViewModel {
+struct EventDetailsViewModel {
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

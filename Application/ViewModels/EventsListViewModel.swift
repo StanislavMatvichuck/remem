@@ -8,15 +8,11 @@
 import Domain
 
 struct EventsListViewModel {
-    // MARK: - Properties
     var renamedEvent: Event?
     let events: [Event]
-    // MARK: - Init
-    init(events: [Event]) {
-        self.events = events
-    }
 
-    // EventsListViewModelState
+    init(events: [Event]) { self.events = events }
+
     var count: Int { events.count }
     var isAddButtonHighlighted: Bool { events.count == 0 }
     var hint: HintState {
