@@ -27,6 +27,7 @@
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
 		0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
+		08292EC5292E1F6100F46A32 /* ClockControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC4292E1F6100F46A32 /* ClockControllerTests.swift */; };
 		08293CC127B670FC0039E432 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekCell.swift */; };
 		083141D229142DCE00D5AB8A /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083141D129142DCE00D5AB8A /* UIKit.swift */; };
 		0838B2D928FDD59A0076E08B /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */; };
@@ -340,6 +341,7 @@
 		0826ACAA28C889FA0021D607 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0826ACAF28C88EF20021D607 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
+		08292EC4292E1F6100F46A32 /* ClockControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockControllerTests.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		0838B2D828FDD59A0076E08B /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 				0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */,
 				081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */,
 				08913779292BCDEF00EFD23D /* WeekControllerTests.swift */,
+				08292EC4292E1F6100F46A32 /* ClockControllerTests.swift */,
 				0891377C292BE57400EFD23D /* DayControllerTests.swift */,
 			);
 			path = Controllers;
@@ -1485,6 +1488,7 @@
 				08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */,
 				0891377A292BCDEF00EFD23D /* WeekControllerTests.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
+				08292EC5292E1F6100F46A32 /* ClockControllerTests.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
