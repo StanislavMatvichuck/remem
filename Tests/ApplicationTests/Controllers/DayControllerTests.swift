@@ -30,6 +30,10 @@ class DayControllerTests: XCTestCase {
         super.tearDown()
     }
 
+    func test_tableViewIsConfigured() {
+        XCTAssertNotNil(sut.viewRoot.happenings.dataSource)
+    }
+
     func test_hasTitle() {
         let numberString = sut.title!.split(separator: " ").first
         let wordString = sut.title!.split(separator: " ").last
@@ -88,7 +92,25 @@ class DayControllerTests: XCTestCase {
         )
     }
 
-    func test_empty_showsNothing() {}
-    func test_oneHappening_showsFirstHappeningTime() {}
+    func test_empty_showsNothing() {
+        XCTAssertEqual(sut.viewRoot.happenings.numberOfRows(inSection: 0), 0)
+    }
+
+    func test_oneHappening_showsFirstHappeningTime() throws {
+        let event = Event(name: "EventWithOneHappening")
+        event.addHappening(date: .now)
+
+        let useCase = EventEditUseCasingFake()
+        sut = DayController(date: .now, event: event, useCase: useCase)
+        sut.loadViewIfNeeded()
+
+        let table = sut.viewRoot.happenings
+        let firstCellIndex = IndexPath(row: 0, section: 0)
+        let cell = try XCTUnwrap(table.dataSource?.tableView(table, cellForRowAt: firstCellIndex) as? DayHappeningCell)
+
+        XCTAssertNotNil(cell.label.text?.firstIndex(of: ":"))
+        XCTAssertLessThanOrEqual(5, cell.label.text?.count ?? 0)
+    }
+
     func test_manyHappenings_showsFewHappenings() {}
 }
