@@ -7,11 +7,13 @@
 
 import UIKit
 
+// bullshit class. what is its responsibility?
 class ClockFace: UIView {
-    // MARK: - Init
-    init() {
-        super.init(frame: .zero)
+    let viewModel: ClockViewModel
 
+    init(viewModel: ClockViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -20,7 +22,6 @@ class ClockFace: UIView {
     // MARK: - View lifecycle
     override func layoutSubviews() {
         super.layoutSubviews()
-
         installAnimatedSublayers()
     }
 }
@@ -29,7 +30,7 @@ class ClockFace: UIView {
 extension ClockFace {
     private func installAnimatedSublayers() {
         if layer.sublayers == nil {
-            for index in 0 ... ClockSectionsList.size - 1 {
+            for index in 0 ... ClockViewModel.size - 1 {
                 let newSectionLayer = makeAnimatedLayer(for: index)
                 layer.addSublayer(newSectionLayer)
             }
@@ -37,7 +38,10 @@ extension ClockFace {
     }
 
     private func makeAnimatedLayer(for index: Int) -> ClockSectionAnimatedLayer {
-        let layer = ClockSectionAnimatedLayer(frame: bounds)
+        let layer = ClockSectionAnimatedLayer(
+            section: viewModel.section(at: index)!,
+            frame: bounds
+        )
         layer.rotate(for: index)
         return layer
     }

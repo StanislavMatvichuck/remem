@@ -18,6 +18,7 @@ class ClockControllerTests: XCTestCase {
         super.setUp()
         let event = Event(name: "Event")
         sut = ClockController(event: event)
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
@@ -25,7 +26,43 @@ class ClockControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testInit() {
-        XCTAssertNotNil(sut)
+    func test_empty_has144sections() {
+        forceViewToLayoutInScreenSize()
+
+        XCTAssertEqual(sut.viewRoot.clockFace.layer.sublayers?.count, 144)
+    }
+
+    func test_empty_allSectionsAreEmpty() throws {
+        forceViewToLayoutInScreenSize()
+
+        let allSectionLayers = try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer])
+
+        let filteredSectionsLayers = allSectionLayers.filter {
+            $0.section.variant != .empty
+        }
+
+        XCTAssertEqual(filteredSectionsLayers.count, 0)
+    }
+
+    func test_singleHappening_hasOneNotEmptySection() throws {
+        let event = Event(name: "EventWithOneHappening")
+        event.addHappening(date: .now.addingTimeInterval(-1))
+        sut = ClockController(event: event)
+
+        forceViewToLayoutInScreenSize()
+
+        let allSectionLayers = try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer])
+
+        let filteredSectionsLayers = allSectionLayers.filter {
+            $0.section.variant != .empty
+        }
+
+        XCTAssertEqual(filteredSectionsLayers.count, 1)
+    }
+
+    /// Method makes layoutSubviews() work
+    private func forceViewToLayoutInScreenSize() {
+        sut.view.bounds = UIScreen.main.bounds
+        sut.view.layoutIfNeeded()
     }
 }

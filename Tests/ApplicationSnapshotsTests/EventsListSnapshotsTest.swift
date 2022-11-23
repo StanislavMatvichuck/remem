@@ -61,7 +61,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
 
         wait(for: [exp], timeout: 0.1)
 
-        FBSnapshotVerifyViewController(sut)
+        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
     }
 
     /// Duplicates with EventInput tests

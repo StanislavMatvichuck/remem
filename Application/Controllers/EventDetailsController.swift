@@ -38,8 +38,6 @@ class EventDetailsController: UIViewController {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    deinit { print(#function) }
-
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidAppear(_ animated: Bool) {

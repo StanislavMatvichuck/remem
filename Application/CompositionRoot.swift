@@ -63,6 +63,7 @@ class ApplicationFactory {
                 makeWeekController(
                     event: event, coordinator: coordinator
                 ),
+                makeClockController(event: event),
             ]
         )
     }

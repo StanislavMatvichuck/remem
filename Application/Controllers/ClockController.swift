@@ -9,14 +9,12 @@ import Domain
 import UIKit
 
 class ClockController: UIViewController {
-    // MARK: - Properties
-    let viewRoot = ClockView()
-    var event: Event
+    let viewRoot: ClockView
     var viewModel: ClockViewModel
-    // MARK: - Init
+
     init(event: Event) {
-        self.event = event
-        self.viewModel = ClockViewModel(event: event)
+        self.viewModel = ClockViewModel(happenings: event.happenings)
+        self.viewRoot = ClockView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,10 +28,11 @@ class ClockController: UIViewController {
         update()
     }
 
+    /// bullshit method. too much details about view and viewModel
     private func update() {
-        for i in 0 ... ClockSectionsList.size - 1 {
+        for i in 0 ... ClockViewModel.size - 1 {
             guard
-                let layers = viewRoot.clock.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],
+                let layers = viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],
                 let section = viewModel.section(at: i)
             else { continue }
 

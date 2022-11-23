@@ -12,23 +12,18 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
     static let width = 3.0
 
     // MARK: - Properties
-    private var section = ClockSection()
-
-    private var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
+    var section: ClockSection
+    var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
 
     // MARK: - Init
-    override init(layer: Any) {
-        super.init(layer: layer)
-        commonInit()
-    }
-
-    init(frame: CGRect) {
+    init(section: ClockSection, frame: CGRect) {
+        self.section = section
         super.init()
         self.frame = frame
-        commonInit()
+        configureAppearance()
     }
 
-    private func commonInit() {
+    private func configureAppearance() {
         lineWidth = Self.width
         lineCap = .round
         path = path().cgPath
@@ -51,7 +46,7 @@ extension ClockSectionAnimatedLayer {
     }
 
     func rotate(for index: Int) {
-        let angleDegrees = 360.0 / CGFloat(ClockSectionsList.size) * CGFloat(index)
+        let angleDegrees = 360.0 / CGFloat(ClockViewModel.size) * CGFloat(index)
         let angleRad = ((angleDegrees + 180.0) * CGFloat.pi) / 180.0
         transform = CATransform3DMakeRotation(angleRad, 0, 0, 1)
     }
@@ -139,8 +134,7 @@ extension ClockSectionAnimatedLayer {
     }
 
     private func beginTime(for index: Int) -> CFTimeInterval {
-//        return CACurrentMediaTime() + Double(index) * 0.5 / 72
-        return CACurrentMediaTime() + Double(index) * 0.5 / CGFloat(ClockSectionsList.size)
+        return CACurrentMediaTime() + Double(index) * 0.5 / CGFloat(ClockViewModel.size)
     }
 
     // Static methods
