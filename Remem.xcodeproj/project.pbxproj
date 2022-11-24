@@ -45,6 +45,7 @@
 		0852C69E283D39CA0027EF3E /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockController.swift */; };
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
+		0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A017292FD73000924530 /* WeekSnapshotsTests.swift */; };
 		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -353,6 +354,7 @@
 		0852C69D283D39CA0027EF3E /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		0857A017292FD73000924530 /* WeekSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSnapshotsTests.swift; sourceTree = "<group>"; };
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				0850075529216ECF007B272C /* EventsListSnapshotsTest.swift */,
+				0857A017292FD73000924530 /* WeekSnapshotsTests.swift */,
 				08292EC6292E24F700F46A32 /* ClockSnapshotsTests.swift */,
 			);
 			path = ApplicationSnapshotsTests;
@@ -1409,6 +1412,7 @@
 				0850075929216F74007B272C /* Fakes.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshotsTest.swift in Sources */,
+				0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */,
 				0850075729216F74007B272C /* Stubs.swift in Sources */,
 				0850075829216F74007B272C /* Mocks.swift in Sources */,
 			);
