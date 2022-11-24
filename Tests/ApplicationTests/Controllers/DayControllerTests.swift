@@ -89,7 +89,7 @@ class DayControllerTests: XCTestCase {
         XCTAssertEqual(sut.viewRoot.happenings.numberOfRows(inSection: 0), 0)
     }
 
-    func test_oneHappening_showsFirstHappeningTime() {
+    func test_singleHappening_showsTime() {
         let event = Event(name: "EventWithOneHappening")
         event.addHappening(date: .now)
 
@@ -97,6 +97,9 @@ class DayControllerTests: XCTestCase {
 
         assertCellHasTimeText(at: sut.firstCellIndex)
     }
+
+    func test_singleHappening_hasSwipeToDelete() {}
+    func test_singleHappening_swipedToDelete_removesHappeningFromList() {}
 
     func test_manyHappenings_showsFewHappenings() {
         let event = Event(name: "EventWithThreeHappenings")

@@ -42,18 +42,18 @@ class EventInputTests: XCTestCase {
         XCTAssertTrue(sut.background.isHidden, "background initially hidden")
     }
 
-    func test_displays_hint() {
+    func test_showsHint() {
         XCTAssertEqual(
             sut.hint.text,
             String(localizationId: "eventsList.new")
         )
     }
 
-    func test_displays_9emojis() {
+    func test_shows_9emojis() {
         XCTAssertEqual(emojis().count, 9)
     }
 
-    func test_displays_blurredBackground() {
+    func test_shows_blurredBackground() {
         guard let background = sut.background.subviews.first as? UIVisualEffectView else {
             XCTFail("no blur for background")
             return
@@ -68,11 +68,11 @@ class EventInputTests: XCTestCase {
         )
     }
 
-    func test_displays_textField() {
+    func test_shows_textField() {
         XCTAssertNotNil(sut.textField.delegate, "textField delegate must be set")
     }
 
-    func test_displays_keyboardToolbar() {
+    func test_shows_keyboardToolbar() {
         let cancel = sut.barCancel
         let submit = sut.barSubmit
         let input = sut.textField

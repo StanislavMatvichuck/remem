@@ -29,7 +29,6 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
         path = path().cgPath
         strokeColor = Self.color(for: section).cgColor
         strokeEnd = Self.strokeEnd(for: section)
-        opacity = Self.opacity(for: section)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -39,7 +38,6 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
 extension ClockSectionAnimatedLayer {
     func animate(at index: Int, to section: ClockSection) {
         updateColorIfNeeded(at: index, updatedSection: section)
-        updateOpacityIfNeeded(at: index, updatedSection: section)
         updateStrokeEndIfNeeded(at: index, updatedSection: section)
         rotate(for: index)
         self.section = section
@@ -75,15 +73,6 @@ extension ClockSectionAnimatedLayer {
 
         if displayedColor != newColor {
             addColorAnimation(at: index, from: displayedColor, to: newColor)
-        }
-    }
-
-    private func updateOpacityIfNeeded(at index: Int, updatedSection: ClockSection) {
-        let displayedOpacity = ClockSectionAnimatedLayer.opacity(for: section)
-        let newOpacity = ClockSectionAnimatedLayer.opacity(for: updatedSection)
-
-        if displayedOpacity != newOpacity {
-            addOpacityAnimation(at: index, from: displayedOpacity, to: newOpacity)
         }
     }
 
@@ -148,21 +137,11 @@ extension ClockSectionAnimatedLayer {
     }
 
     private static func color(for section: ClockSection) -> UIColor {
-        if section.hasFreshHappening {
-            return UIHelper.secondary
-        }
-
         switch section.variant {
         case .empty:
             return UIHelper.clockSectionBackground
         case .little, .mid, .big:
             return UIHelper.brand
         }
-    }
-
-    private static func opacity(for section: ClockSection) -> Float {
-        if section.variant == .empty { return 1.0 }
-
-        return section.isToday ? 1.0 : 1.0
     }
 }

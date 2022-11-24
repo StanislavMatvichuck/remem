@@ -44,16 +44,6 @@ class WeekControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_empty_displays21Columns() {
-        XCTAssertEqual(sut.viewRoot.collection.numberOfItems(inSection: 0), 21)
-    }
-
-    func test_empty_hasTodayColumn() {
-        let todays = sut.viewModel.weekCellViewModels.filter { $0.isToday }
-
-        XCTAssertEqual(todays.count, 1)
-    }
-
     func test_tap_presentsDayController() throws {
         let collection = sut.viewRoot.collection
         let firstCellIndex = IndexPath(row: 0, section: 0)
@@ -64,5 +54,23 @@ class WeekControllerTests: XCTestCase {
         )
 
         spy.verify(animated: true)
+    }
+
+    func test_firstDayIsMonday() {}
+    func test_lastDayIsSunday() {}
+    func test_hasTodayDay() {
+        let todays = sut.viewModel.weekCellViewModels.filter { $0.isToday }
+
+        XCTAssertEqual(todays.count, 1)
+    }
+
+    func test_todayDayIsVisible() {}
+    func test_numberOfDaysDependsOnEventCreationDate() {}
+    func test_numberOfDaysIsDividedBy7() {}
+    func test_numberOfDaysAtLeast21() {
+        XCTAssertLessThanOrEqual(
+            21,
+            sut.viewRoot.collection.numberOfItems(inSection: 0)
+        )
     }
 }

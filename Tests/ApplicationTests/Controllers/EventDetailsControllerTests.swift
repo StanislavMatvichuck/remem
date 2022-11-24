@@ -32,7 +32,7 @@ class EventDetailsControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_titleIsNameOfEvent() {
+    func test_showsTitle_nameOfEvent() {
         XCTAssertEqual(sut.title, "EventName")
     }
 
@@ -47,7 +47,7 @@ class EventDetailsControllerTests: XCTestCase {
         XCTAssertNotNil(sut.viewModel.event.dateVisited)
     }
 
-    func test_rendersSeveralControllersWithScroll() {
+    func test_showsControllersInScroll() {
         XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count)
     }
 }

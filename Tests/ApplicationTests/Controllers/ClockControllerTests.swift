@@ -44,7 +44,7 @@ class ClockControllerTests: XCTestCase {
         XCTAssertEqual(filteredSectionsLayers.count, 0)
     }
 
-    func test_singleHappening_hasOneNotEmptySection() throws {
+    func test_singleHappening_oneSectionIsNotEmpty() throws {
         let event = Event(name: "EventWithOneHappening")
         event.addHappening(date: .now.addingTimeInterval(-1))
         sut = ClockController(event: event)
@@ -59,6 +59,13 @@ class ClockControllerTests: XCTestCase {
 
         XCTAssertEqual(filteredSectionsLayers.count, 1)
     }
+
+    func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
+    func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
+    func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {}
+    func test_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {}
+    func test_manyHappenings_randomlyDistributed_oneSectionFull() {}
+    func test_manyHappenings_randomlyDistributed_oneSectionEmpty() {}
 
     /// Method makes layoutSubviews() work
     private func forceViewToLayoutInScreenSize() {

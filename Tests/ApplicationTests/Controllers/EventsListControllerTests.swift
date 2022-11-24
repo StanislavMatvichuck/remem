@@ -38,7 +38,7 @@ class EventsListControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_empty_hasTitle() {
+    func test_empty_showsTitle() {
         XCTAssertEqual(sut.title, String(localizationId: "eventsList.title"))
     }
 
@@ -72,7 +72,7 @@ class EventsListControllerTests: XCTestCase {
         ), 0)
     }
 
-    func test_empty_rendersEmptyHint() {
+    func test_empty_showsHint_empty() {
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.empty"))
     }
 
@@ -82,7 +82,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertNil(gestureHint.superview)
     }
 
-    func test_empty_rendersHighlightedAddButton() throws {
+    func test_empty_showsHighlightedAddButton() throws {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
@@ -94,7 +94,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertTrue(sut.addButton.isHighlighted, "Button must be highlighted when list is empty")
     }
 
-    func test_empty_addButtonTapped_keyboardShown() throws {
+    func test_empty_addButtonTapped_showsKeyboard() throws {
         putInViewHierarchy(sut)
 
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
@@ -111,7 +111,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertEqual(sut.firstEvent.nameLabel.text, "SubmittedEventName")
     }
 
-    func test_singleEvent_rendersNormalAddButton() throws {
+    func test_singleEvent_showsNormalAddButton() throws {
         sut.submitEvent()
 
         XCTAssertFalse(sut.addButton.isHighlighted)
@@ -121,19 +121,19 @@ class EventsListControllerTests: XCTestCase {
         )
     }
 
-    func test_singleEvent_rendersFirstHappeningHint() {
+    func test_singleEvent_showsHint_firstHappening() {
         sut.submitEvent()
 
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.firstHappening"))
     }
 
-    func test_singleEvent_rendersOneEvent() throws {
+    func test_singleEvent_showsOneEvent() {
         sut.submitEvent()
 
         XCTAssertNotNil(sut.event(at: 0))
     }
 
-    func test_singleEvent_rendersGestureHint() throws {
+    func test_singleEvent_showsGestureHint() {
         sut.submitEvent()
 
         /// this required to trigger data source methods that mutate the view
@@ -142,7 +142,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertNotNil(sut.viewRoot.swipeHint.superview)
     }
 
-    func test_singleEvent_rendersRenameButton() {
+    func test_singleEvent_hasRenameSwipeAction() {
         let renameButton = arrangeFirstEventSwipeAction(number: 1)
 
         XCTAssertEqual(
@@ -176,7 +176,7 @@ class EventsListControllerTests: XCTestCase {
         renameButton.handler(renameButton, UIView()) { _ in }
     }
 
-    func test_singleEvent_rendersDeleteButton() {
+    func test_singleEvent_hasDeleteSwipeAction() {
         let deleteButton = arrangeFirstEventSwipeAction(number: 0)
 
         XCTAssertEqual(
@@ -212,7 +212,7 @@ class EventsListControllerTests: XCTestCase {
         XCTAssertEqual(sut.firstEvent.valueLabel.text, "2")
     }
 
-    func test_singleEvent_swipe_rendersPressToSeeDetailsHint() {
+    func test_singleEvent_swipe_showsHint_pressToSeeDetails() {
         sut.arrangeSingleEventSwiped()
 
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.firstVisit"))
