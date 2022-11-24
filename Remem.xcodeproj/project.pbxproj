@@ -47,6 +47,9 @@
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A017292FD73000924530 /* WeekSnapshotsTests.swift */; };
 		0857A01A292FD8A900924530 /* DayDetailsSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */; };
+		0857A01C292FE66F00924530 /* EventDetailsSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01B292FE66F00924530 /* EventDetailsSnapshotTests.swift */; };
+		0857A01E292FFD5900924530 /* ClockControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockControllerHelpers.swift */; };
+		0857A01F292FFD5900924530 /* ClockControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockControllerHelpers.swift */; };
 		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -74,7 +77,7 @@
 		0890627827A0A2520032847C /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		0891377A292BCDEF00EFD23D /* WeekControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekControllerTests.swift */; };
-		0891377D292BE57400EFD23D /* DayControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891377C292BE57400EFD23D /* DayControllerTests.swift */; };
+		0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */; };
 		0895FB6028E23C66006716F4 /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0895FB6228E24623006716F4 /* WidgetsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB6128E24623006716F4 /* WidgetsUseCase.swift */; };
 		089699F128E1C53300E90432 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -357,6 +360,8 @@
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		0857A017292FD73000924530 /* WeekSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSnapshotsTests.swift; sourceTree = "<group>"; };
 		0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsSnapshotsTests.swift; sourceTree = "<group>"; };
+		0857A01B292FE66F00924530 /* EventDetailsSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsSnapshotTests.swift; sourceTree = "<group>"; };
+		0857A01D292FFD5900924530 /* ClockControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockControllerHelpers.swift; sourceTree = "<group>"; };
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -388,7 +393,7 @@
 		0890627727A0A2520032847C /* EventDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		08913779292BCDEF00EFD23D /* WeekControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekControllerTests.swift; sourceTree = "<group>"; };
-		0891377C292BE57400EFD23D /* DayControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayControllerTests.swift; sourceTree = "<group>"; };
+		0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		0895FB6128E24623006716F4 /* WidgetsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsUseCase.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -653,6 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				0850075529216ECF007B272C /* EventsListSnapshotsTest.swift */,
+				0857A01B292FE66F00924530 /* EventDetailsSnapshotTests.swift */,
 				0857A017292FD73000924530 /* WeekSnapshotsTests.swift */,
 				08292EC6292E24F700F46A32 /* ClockSnapshotsTests.swift */,
 				0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */,
@@ -751,7 +757,7 @@
 				081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */,
 				08913779292BCDEF00EFD23D /* WeekControllerTests.swift */,
 				08292EC4292E1F6100F46A32 /* ClockControllerTests.swift */,
-				0891377C292BE57400EFD23D /* DayControllerTests.swift */,
+				0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -801,10 +807,11 @@
 		08CC50682906DE6300840385 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0857A01D292FFD5900924530 /* ClockControllerHelpers.swift */,
+				08292EC8292E5B8500F46A32 /* EventsListControllerHelpers.swift */,
+				083141D129142DCE00D5AB8A /* UIKit.swift */,
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
 				08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */,
-				083141D129142DCE00D5AB8A /* UIKit.swift */,
-				08292EC8292E5B8500F46A32 /* EventsListControllerHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1415,6 +1422,8 @@
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
 				0850075929216F74007B272C /* Fakes.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshotsTests.swift in Sources */,
+				0857A01C292FE66F00924530 /* EventDetailsSnapshotTests.swift in Sources */,
+				0857A01F292FFD5900924530 /* ClockControllerHelpers.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshotsTest.swift in Sources */,
 				0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */,
 				0850075729216F74007B272C /* Stubs.swift in Sources */,
@@ -1456,11 +1465,12 @@
 				08292EC5292E1F6100F46A32 /* ClockControllerTests.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
+				0857A01E292FFD5900924530 /* ClockControllerHelpers.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
-				0891377D292BE57400EFD23D /* DayControllerTests.swift in Sources */,
+				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,7 @@
 
 @testable import Application
 import Domain
-import Foundation
-
+import IosUseCases
 import XCTest
 
 class ClockControllerTests: XCTestCase {
@@ -17,7 +16,7 @@ class ClockControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let event = Event(name: "Event")
-        sut = ClockController(event: event)
+        sut = ClockController.make(event: event)
         sut.loadViewIfNeeded()
     }
 
@@ -47,7 +46,7 @@ class ClockControllerTests: XCTestCase {
     func test_singleHappening_oneSectionIsNotEmpty() throws {
         let event = Event(name: "EventWithOneHappening")
         event.addHappening(date: .now.addingTimeInterval(-1))
-        sut = ClockController(event: event)
+        sut = ClockController.make(event: event)
 
         forceViewToLayoutInScreenSize()
 
@@ -66,6 +65,24 @@ class ClockControllerTests: XCTestCase {
     func test_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {}
     func test_manyHappenings_randomlyDistributed_oneSectionFull() {}
     func test_manyHappenings_randomlyDistributed_oneSectionEmpty() {}
+
+    func test_receivesUpdatesFromEditUseCasing() throws {
+        let event = Event(name: "Event")
+        let useCase = EventEditUseCasingFake()
+
+        sut = ClockController(event: event, useCase: useCase)
+
+        forceViewToLayoutInScreenSize()
+
+        useCase.addHappening(to: event, date: .now)
+
+        let allSectionLayers = try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer])
+        let filteredSectionsLayers = allSectionLayers.filter {
+            $0.section.variant != .empty
+        }
+
+        XCTAssertEqual(filteredSectionsLayers.count, 1)
+    }
 
     /// Method makes layoutSubviews() work
     private func forceViewToLayoutInScreenSize() {

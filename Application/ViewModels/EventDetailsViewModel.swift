@@ -16,16 +16,20 @@ struct EventDetailsViewModel {
         return formatter
     }()
 
-    let event: Event
+    private let event: Event
 
     init(event: Event) { self.event = event }
 
+    var title: String { event.name }
+
+    /// deprecated. move to `StatsViewModel`
     var totalAmount: String {
         String(event.happenings.reduce(0) { partialResult, happening in
             partialResult + Int(happening.value)
         })
     }
 
+    /// deprecated. move to `StatsViewModel`
     var dayAverage: String {
         let total = Double(totalAmount)
         let daysAmount = Double(daysSince)
@@ -33,6 +37,7 @@ struct EventDetailsViewModel {
         return formatter.string(from: number)!
     }
 
+    /// deprecated. move to `StatsViewModel`
     var daysSince: Int {
         let cal = Calendar.current
         let fromDate = cal.startOfDay(for: event.dateCreated)

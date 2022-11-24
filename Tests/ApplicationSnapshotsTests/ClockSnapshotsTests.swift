@@ -16,7 +16,7 @@ class ClockSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = true
 
-        sut = ClockController(event: Event(name: "Event"))
+        sut = ClockController.make(event: Event(name: "Event"))
 
         putInViewHierarchy(sut)
     }

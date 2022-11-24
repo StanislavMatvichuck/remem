@@ -20,9 +20,10 @@ class EventDetailsView: UIView {
     }
 
     private func configureLayout() {
-        let bottomSpacing = UIView(al: true)
+        let spacing = UIView(al: true)
+        spacing.backgroundColor = .red
 
-        scroll.contain(views: bottomSpacing)
+        scroll.contain(views: spacing)
 
         addSubview(scroll)
         NSLayoutConstraint.activate([
@@ -30,7 +31,7 @@ class EventDetailsView: UIView {
             scroll.leadingAnchor.constraint(equalTo: leadingAnchor),
             scroll.trailingAnchor.constraint(equalTo: trailingAnchor),
             scroll.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            bottomSpacing.heightAnchor.constraint(equalToConstant: UIHelper.spacingListHorizontal)
+            spacing.heightAnchor.constraint(equalToConstant: UIHelper.spacingListHorizontal)
         ])
     }
 

@@ -170,10 +170,6 @@ public extension Event {
 // MARK: - Equatable
 extension Event: Equatable {
     public static func == (lhs: Event, rhs: Event) -> Bool {
-        return lhs.id == rhs.id &&
-            lhs.name == rhs.name &&
-            lhs.dateCreated == rhs.dateCreated &&
-            lhs.dateVisited == rhs.dateVisited &&
-            lhs.happenings == rhs.happenings
+        return lhs.id == rhs.id
     }
 }

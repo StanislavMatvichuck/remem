@@ -20,8 +20,8 @@ class EventDetailsController: UIViewController {
     init(
         event: Event,
         useCase: EventEditUseCasing,
-        controllers: [UIViewController])
-    {
+        controllers: [UIViewController]
+    ) {
         self.event = event
         self.viewModel = EventDetailsViewModel(event: event)
         self.useCase = useCase
@@ -29,7 +29,7 @@ class EventDetailsController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
 
-        title = viewModel.event.name /// move title to viewModel
+        title = viewModel.title
 
         for controller in controllers {
             contain(controller: controller)
@@ -54,7 +54,8 @@ class EventDetailsController: UIViewController {
 
 extension EventDetailsController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
-        // this has no visible result. used for event visit testing
-        viewModel = EventDetailsViewModel(event: event)
+        if self.event == event {
+            viewModel = EventDetailsViewModel(event: event)
+        }
     }
 }
