@@ -46,6 +46,7 @@
 		0852C6AD283D66170027EF3E /* WeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekController.swift */; };
 		0852C6AF283D66380027EF3E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AE283D66380027EF3E /* WeekView.swift */; };
 		0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A017292FD73000924530 /* WeekSnapshotsTests.swift */; };
+		0857A01A292FD8A900924530 /* DayDetailsSnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */; };
 		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
@@ -84,7 +85,7 @@
 		08A19D292890125B0085DC6F /* EventsListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D282890125B0085DC6F /* EventsListFooterCell.swift */; };
 		08A19D2B28901AEC0085DC6F /* EventsListHintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */; };
 		08AA964828E2FF58005BF90A /* WidgetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AA964728E2FF58005BF90A /* WidgetUseCase.swift */; };
-		08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayController.swift */; };
+		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayHappeningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */; };
 		08B3570328E06A7B00770B9A /* WidgetsFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08B356FB28E06A7B00770B9A /* WidgetsFramework.framework */; };
@@ -355,6 +356,7 @@
 		0852C6AC283D66170027EF3E /* WeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekController.swift; sourceTree = "<group>"; };
 		0852C6AE283D66380027EF3E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		0857A017292FD73000924530 /* WeekSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSnapshotsTests.swift; sourceTree = "<group>"; };
+		0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsSnapshotsTests.swift; sourceTree = "<group>"; };
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -396,7 +398,7 @@
 		08A19D282890125B0085DC6F /* EventsListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListFooterCell.swift; sourceTree = "<group>"; };
 		08A19D2A28901AEC0085DC6F /* EventsListHintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintCell.swift; sourceTree = "<group>"; };
 		08AA964728E2FF58005BF90A /* WidgetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUseCase.swift; sourceTree = "<group>"; };
-		08B26A0F289E919F00DFBAC8 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
+		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
 		08B26A11289E91D400DFBAC8 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		08B26A13289E975900DFBAC8 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		08B26A15289E98B700DFBAC8 /* DayHappeningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHappeningCell.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				0850075529216ECF007B272C /* EventsListSnapshotsTest.swift */,
 				0857A017292FD73000924530 /* WeekSnapshotsTests.swift */,
 				08292EC6292E24F700F46A32 /* ClockSnapshotsTests.swift */,
+				0857A019292FD8A900924530 /* DayDetailsSnapshotsTests.swift */,
 			);
 			path = ApplicationSnapshotsTests;
 			sourceTree = "<group>";
@@ -883,7 +886,7 @@
 			isa = PBXGroup;
 			children = (
 				0852C69D283D39CA0027EF3E /* ClockController.swift */,
-				08B26A0F289E919F00DFBAC8 /* DayController.swift */,
+				08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */,
 				0890627727A0A2520032847C /* EventDetailsController.swift */,
 				08D5122127870D2500C2037F /* EventsListController.swift */,
 				0852C6AC283D66170027EF3E /* WeekController.swift */,
@@ -1408,6 +1411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08292ECA292E5B8500F46A32 /* EventsListControllerHelpers.swift in Sources */,
+				0857A01A292FD8A900924530 /* DayDetailsSnapshotsTests.swift in Sources */,
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
 				0850075929216F74007B272C /* Fakes.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshotsTests.swift in Sources */,
@@ -1530,7 +1534,7 @@
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
-				08B26A10289E919F00DFBAC8 /* DayController.swift in Sources */,
+				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 			);

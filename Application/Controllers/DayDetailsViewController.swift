@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class DayController: UIViewController {
+class DayDetailsViewController: UIViewController {
     // MARK: - Properties
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -38,6 +38,7 @@ class DayController: UIViewController {
         self.event = event
         self.viewModel = DayViewModel(date: date, event: event)
         super.init(nibName: nil, bundle: nil)
+        useCase.add(delegate: self)
         title = viewModel.title
     }
 
@@ -54,7 +55,7 @@ class DayController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension DayController: UITableViewDataSource {
+extension DayDetailsViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int { viewModel.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,8 +72,17 @@ extension DayController: UITableViewDataSource {
     }
 }
 
+extension DayDetailsViewController: EventEditUseCasingDelegate {
+    func update(event: Domain.Event) {
+        guard self.event == event else { return }
+
+        self.event = event
+        viewRoot.happenings.reloadData()
+    }
+}
+
 // MARK: - Private
-extension DayController {
+extension DayDetailsViewController {
     // Navigation bar setup
     private func configureNavBar() {
         title = viewModel.title

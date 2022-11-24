@@ -11,7 +11,7 @@ import ViewControllerPresentationSpy
 import XCTest
 
 class DayControllerTests: XCTestCase {
-    var sut: DayController!
+    var sut: DayDetailsViewController!
 
     override func setUp() {
         super.setUp()
@@ -117,9 +117,9 @@ class DayControllerTests: XCTestCase {
         assertCellHasTimeText(at: thirdCellIndex)
     }
 
-    private func makeSut(event: Event = Event(name: "EventName")) -> DayController {
+    private func makeSut(event: Event = Event(name: "EventName")) -> DayDetailsViewController {
         let useCase = EventEditUseCasingFake()
-        let sut = DayController(date: .now, event: event, useCase: useCase)
+        let sut = DayDetailsViewController(date: .now, event: event, useCase: useCase)
         sut.loadViewIfNeeded()
 
         _ = UINavigationController(rootViewController: sut)
@@ -138,7 +138,7 @@ class DayControllerTests: XCTestCase {
     }
 }
 
-private extension DayController {
+private extension DayDetailsViewController {
     var table: UITableView { viewRoot.happenings }
     var firstCellIndex: IndexPath { IndexPath(row: 0, section: 0) }
 

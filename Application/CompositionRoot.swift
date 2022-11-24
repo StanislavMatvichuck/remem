@@ -83,8 +83,8 @@ class ApplicationFactory {
         ClockController(event: event)
     }
 
-    func makeDayController(date: Date, event: Event) -> DayController {
-        let controller = DayController(
+    func makeDayController(date: Date, event: Event) -> DayDetailsViewController {
+        let controller = DayDetailsViewController(
             date: date,
             event: event,
             useCase: eventEditUseCase
