@@ -11,7 +11,7 @@ class EventsListFooterCell: UITableViewCell {
     static let reuseIdentifier = "EventsListFooterCell"
 
     // MARK: - Properties
-    var createEvent: UIButton = {
+    var button: UIButton = {
         let button = UIButton(al: true)
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
@@ -41,13 +41,13 @@ class EventsListFooterCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     func resignHighlight() {
-        createEvent.isHighlighted = false
-        createEvent.backgroundColor = UIHelper.itemBackground
+        button.isHighlighted = false
+        button.backgroundColor = UIHelper.itemBackground
     }
 
     func highlight() {
-        createEvent.isHighlighted = true
-        createEvent.backgroundColor = UIHelper.brand
+        button.isHighlighted = true
+        button.backgroundColor = UIHelper.brand
     }
 }
 
@@ -56,16 +56,16 @@ extension EventsListFooterCell {
     private func setupLayout() {
         backgroundColor = .clear
 
-        contentView.addSubview(createEvent)
+        contentView.addSubview(button)
 
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(equalToConstant: EventCell.height),
-            createEvent.heightAnchor.constraint(equalToConstant: UIHelper.d2),
-            createEvent.widthAnchor.constraint(equalTo: contentView.widthAnchor,
+            button.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            button.widthAnchor.constraint(equalTo: contentView.widthAnchor,
                                                constant: -2 * UIHelper.spacingListHorizontal),
 
-            createEvent.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            createEvent.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
 }

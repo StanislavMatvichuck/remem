@@ -196,7 +196,7 @@ extension EventsListController {
     private func makeFooterCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
 
-        cell.createEvent.addTarget(
+        cell.button.addTarget(
             self,
             action: #selector(handleAddButton),
             for: .touchUpInside)
@@ -214,7 +214,7 @@ extension EventsListController {
         guard
             let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
             let viewModel = viewModel.eventViewModel(at: index.row)
-        else { return UITableViewCell() }
+        else { fatalError("unable to get EventCell") }
 
         eventCell.viewModel = viewModel
         eventCell.useCase = editUseCase

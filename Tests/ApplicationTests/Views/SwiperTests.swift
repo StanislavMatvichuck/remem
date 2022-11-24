@@ -99,7 +99,7 @@ class SwiperTests: XCTestCase {
 
         XCTAssertLessThan(sut.initialX, circlePosition, "circle is not returned immediately")
 
-        wait(for: [exp02], timeout: 0.001)
+        wait(for: [exp02], timeout: 0.01)
 
         XCTAssertEqual(sut.initialX, circlePosition)
     }

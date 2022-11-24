@@ -15,16 +15,9 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        recordMode = false
-
+        recordMode = true
         let coordinator = ApplicationFactory().makeCoordinator()
-
-        sut = EventsListController(
-            listUseCase: EventsListUseCasingFake(),
-            editUseCase: EventEditUseCasingFake(),
-            coordinator: coordinator
-        )
-
+        sut = EventsListController.make(coordinator: coordinator)
         putInViewHierarchy(sut)
     }
 
@@ -39,7 +32,33 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
     }
 
     func test_empty_dark() {
-        sut.view.window?.overrideUserInterfaceStyle = .dark
+        configureDarkMode()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_oneItem() {
+        sut.submitEvent()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_oneItem_dark() {
+        sut.submitEvent()
+        configureDarkMode()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_oneItem_swiped() {
+        sut.arrangeSingleEventSwiped()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_oneItem_swiped_dark() {
+        sut.arrangeSingleEventSwiped()
+        configureDarkMode()
 
         FBSnapshotVerifyViewController(sut)
     }
@@ -62,6 +81,10 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         wait(for: [exp], timeout: 0.1)
 
         FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
+    }
+
+    private func configureDarkMode() {
+        sut.view.window?.overrideUserInterfaceStyle = .dark
     }
 
     /// Duplicates with EventInput tests
