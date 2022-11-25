@@ -15,7 +15,8 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
+        folderName = "Events"
         let coordinator = ApplicationFactory().makeCoordinator()
         sut = EventsListController.make(coordinator: coordinator)
         putInViewHierarchy(sut)
@@ -31,7 +32,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_empty_dark() {
+    func test_emptyDark() {
         configureDarkMode()
 
         FBSnapshotVerifyViewController(sut)
@@ -43,7 +44,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_oneItem_dark() {
+    func test_oneItemDark() {
         sut.submitEvent()
         configureDarkMode()
 
@@ -56,7 +57,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_oneItem_swiped_dark() {
+    func test_oneItem_swipedDark() {
         sut.arrangeSingleEventSwiped()
         configureDarkMode()
 

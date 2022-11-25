@@ -10,7 +10,7 @@ import UIKit
 
 class EventCell: UITableViewCell {
     static let reuseIdentifier = "EventCell"
-    static let backgroundDefault = UIHelper.background
+    static let backgroundDefault = UIHelper.itemBackground
     static let backgroundGoalReached = UIHelper.goalReachedBackground
     static let backgroundGoalNotReached = UIHelper.goalNotReachedBackground
     static let pinColor = UIHelper.brandDimmed

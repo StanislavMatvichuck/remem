@@ -14,8 +14,8 @@ class DayDetailsSnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
-        
+        recordMode = false
+        folderName = "DayDetails"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
         let date = Date.now
@@ -42,7 +42,7 @@ class DayDetailsSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut.navigationController!)
     }
     
-    func test_empty_dark() {
+    func test_emptyDark() {
         configureDarkMode()
         FBSnapshotVerifyViewController(sut.navigationController!)
     }
@@ -51,16 +51,16 @@ class DayDetailsSnapshotsTest: FBSnapshotTestCase {
         sut.event.addHappening(date: .now)
         sut.update(event: sut.event)
         
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
     }
     
-    func test_singleHappening_dark() {
+    func test_singleHappeningDark() {
         configureDarkMode()
         
         sut.event.addHappening(date: .now)
         sut.update(event: sut.event)
         
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
     }
     
     private func configureDarkMode() {

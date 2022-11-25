@@ -14,8 +14,8 @@ class ClockSnapshotsTest: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        recordMode = true
-
+        recordMode = false
+        folderName = "Clock"
         sut = ClockController.make(event: Event(name: "Event"))
 
         putInViewHierarchy(sut)
@@ -31,7 +31,7 @@ class ClockSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_empty_dark() {
+    func test_emptyDark() {
         sut.view.window?.overrideUserInterfaceStyle = .dark
 
         FBSnapshotVerifyViewController(sut)

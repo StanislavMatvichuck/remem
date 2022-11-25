@@ -82,7 +82,7 @@ class WeekCell: UICollectionViewCell {
 
             let background = UIView(al: true)
             background.addAndConstrain(stack, constant: Self.spacing)
-            background.backgroundColor = UIHelper.background
+            background.backgroundColor = UIHelper.itemBackground
             background.layer.cornerRadius = UIHelper.radius
 
             let view = UIView(al: true)

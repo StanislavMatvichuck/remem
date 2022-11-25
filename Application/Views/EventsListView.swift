@@ -32,7 +32,7 @@ class EventsListView: UIView {
     // MARK: - Init
     init() {
         super.init(frame: .zero)
-        backgroundColor = UIHelper.itemBackground
+        backgroundColor = UIHelper.background
         addAndConstrain(table)
         addAndConstrain(input)
     }

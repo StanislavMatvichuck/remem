@@ -15,13 +15,13 @@ class EventDetailsView: UIView {
     init() {
         self.scroll = ViewScroll(.vertical)
         super.init(frame: .zero)
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = UIHelper.background
         configureLayout()
     }
 
     private func configureLayout() {
         let spacing = UIView(al: true)
-        spacing.backgroundColor = .red
+        spacing.backgroundColor = .clear
 
         scroll.contain(views: spacing)
 

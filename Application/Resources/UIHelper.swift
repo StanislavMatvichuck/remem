@@ -9,8 +9,8 @@ import UIKit
 
 struct UIHelper {
     // colors
-    static let background = UIColor.systemBackground
-    static let itemBackground = UIColor.secondarySystemBackground
+    static let background = UIColor.secondarySystemBackground
+    static let itemBackground = UIColor.systemBackground
     static let clockSectionBackground = UIColor.systemGray4
     static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
     static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!

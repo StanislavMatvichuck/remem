@@ -17,8 +17,8 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
-        
+        recordMode = false
+        folderName = "EventDetails"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
         let coordinator = ApplicationFactory().makeCoordinator()
@@ -57,7 +57,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         FBSnapshotVerifyViewController(sut.navigationController!)
     }
     
-    func test_empty_dark() {
+    func test_emptyDark() {
         configureDarkMode()
         FBSnapshotVerifyViewController(sut.navigationController!)
     }
@@ -66,10 +66,10 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         sut.event.addHappening(date: .now)
         sut.update(event: sut.event)
         
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
     }
     
-    func test_singleHappening_dark() {
+    func test_singleHappeningDark() {
         configureDarkMode()
         
         useCase.addHappening(to: event, date: .now)
@@ -84,7 +84,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         let point = CGPoint(x: 0, y: heightToScrollUp)
         sut.viewRoot.scroll.setContentOffset(point, animated: false)
         
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
     }
     
     private func configureDarkMode() {

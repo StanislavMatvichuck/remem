@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1320"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -20,34 +20,6 @@
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08B3570128E06A7B00770B9A"
-               BuildableName = "WidgetsFrameworkTests.xctest"
-               BlueprintName = "WidgetsFrameworkTests"
-               ReferencedContainer = "container:Remem.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0850074829216E73007B272C"
-               BuildableName = "ApplicationSnapshotsTests.xctest"
-               BlueprintName = "ApplicationSnapshotsTests"
-               ReferencedContainer = "container:Remem.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -57,6 +29,24 @@
       shouldUseLaunchSchemeArgsEnv = "NO"
       language = "en"
       systemAttachmentLifetime = "keepNever">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;open /Users/stanislavmatvichuck/Work/remem/Remem/Tests/ApplicationSnapshotsTests/Images_64&#10;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "08D5121927870D2500C2037F"
+                     BuildableName = "Application.app"
+                     BlueprintName = "Application"
+                     ReferencedContainer = "container:Remem.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -66,9 +56,21 @@
             ReferencedContainer = "container:Remem.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "IMAGE_DIFF_DIR"
+            value = "$(SOURCE_ROOT)/Tests/ApplicationSnapshotsTests/FailureDiffs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "FB_REFERENCE_IMAGE_DIR"
+            value = "$(SOURCE_ROOT)/Tests/ApplicationSnapshotsTests/Images"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <Testables>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -85,6 +87,27 @@
                BlueprintIdentifier = "0867A2CF28D469F500E0842C"
                BuildableName = "DataLayerTests.xctest"
                BlueprintName = "DataLayerTests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "08B3570128E06A7B00770B9A"
+               BuildableName = "WidgetsFrameworkTests.xctest"
+               BlueprintName = "WidgetsFrameworkTests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0850074829216E73007B272C"
+               BuildableName = "ApplicationSnapshotsTests.xctest"
+               BlueprintName = "ApplicationSnapshotsTests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>

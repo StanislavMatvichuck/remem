@@ -14,7 +14,8 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
+        folderName = "Week"
         let coordinator = ApplicationFactory().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")

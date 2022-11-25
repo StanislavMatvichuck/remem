@@ -20,7 +20,7 @@ class ClockView: UIView {
     init(viewModel: ClockViewModel) {
         self.clockFace = ClockFace(viewModel: viewModel)
         super.init(frame: .zero)
-        backgroundColor = .clear
+        backgroundColor = UIHelper.background
         setupLayout()
     }
 
