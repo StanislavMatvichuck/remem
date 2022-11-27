@@ -74,16 +74,6 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         
         useCase.addHappening(to: event, date: .now)
         
-        sut.view.bounds = UIScreen.main.bounds
-        sut.view.layoutIfNeeded()
-        let spacing = sut.viewRoot.scroll.viewContent.arrangedSubviews[0]
-        let weekView = sut.viewRoot.scroll.viewContent.arrangedSubviews[1]
-        let heightToScrollUp =
-            spacing.bounds.height +
-            weekView.bounds.height
-        let point = CGPoint(x: 0, y: heightToScrollUp)
-        sut.viewRoot.scroll.setContentOffset(point, animated: false)
-        
         FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
     }
     
