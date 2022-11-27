@@ -21,12 +21,23 @@ class EventTests: XCTestCase {
         super.tearDown()
     }
 
-    func testInit() {
+    func test_initWithName_hasId() {
         XCTAssertEqual(sut.id.count, 36)
-        XCTAssertEqual(sut.name, "Event")
-        XCTAssertEqual(sut.happenings.count, 0)
-        XCTAssertNil(sut.dateVisited)
+    }
 
+    func test_initWithName_nameIsAssigned() {
+        XCTAssertEqual(sut.name, "Event")
+    }
+
+    func test_initWithName_hasNoHappenings() {
+        XCTAssertEqual(sut.happenings.count, 0)
+    }
+
+    func test_initWithName_isNotVisited() {
+        XCTAssertNil(sut.dateVisited)
+    }
+
+    func test_initWithName_hasNoGoals() {
         for date in Date.now.dayByDayWeekForward {
             XCTAssertNil(sut.goal(at: date))
         }
@@ -59,7 +70,7 @@ class EventTests: XCTestCase {
 
         sut.addHappening(date: firstHappeningDate)
         sut.addHappening(date: secondHappeningDate)
-        
+
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
