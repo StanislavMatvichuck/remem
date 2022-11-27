@@ -13,7 +13,7 @@ class WeekCell: UICollectionViewCell {
     static let sectionsAmount = 12 /// must define layout height
 
     // MARK: - Properties
-    var viewModel: WeekCellViewModel? { didSet { configureContent() }}
+    var viewModel: WeekCellViewModel!
 
     let day: UILabel
     let amount: UILabel
@@ -133,22 +133,12 @@ class WeekCell: UICollectionViewCell {
         day.textColor = viewModel.isToday ? UIHelper.brand : UIHelper.itemFont
         amount.text = viewModel.amount
 
-        showGoal(amount: viewModel.goalsAmount)
         show(timings: viewModel.happeningsTimings)
-
-        if viewModel.isAchieved { show(achievedGoalAmount: viewModel.goalsAmount) }
     }
 }
 
 // MARK: - Private
 extension WeekCell {
-    private func showGoal(amount: Int) {
-        for (index, label) in timingLabels.enumerated() {
-            guard index < amount else { break }
-            label.backgroundColor = UIHelper.itemBackground
-        }
-    }
-
     private func show(timings: [String]) {
         for (index, timing) in timings.enumerated() {
             guard index < timingLabels.count else { break }

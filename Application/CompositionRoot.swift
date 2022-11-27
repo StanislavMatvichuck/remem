@@ -73,6 +73,7 @@ class ApplicationFactory {
         coordinator: Coordinating
     ) -> WeekController {
         WeekController(
+            today: DayComponents(date: .now),
             event: event,
             useCase: eventEditUseCase,
             coordinator: coordinator

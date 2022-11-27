@@ -13,18 +13,27 @@ class WeekController: UIViewController {
     // MARK: - Properties
     var scrollHappened = false
 
-    let viewRoot = WeekView()
+    let today: DayComponents
+    var event: Event
     let useCase: EventEditUseCasing
     weak var coordinator: Coordinating?
     var viewModel: WeekViewModel
-    var event: Event
+    let viewRoot: WeekView
+
     // MARK: - Init
 
-    init(event: Event, useCase: EventEditUseCasing, coordinator: Coordinating) {
-        self.useCase = useCase
+    init(
+        today: DayComponents,
+        event: Event,
+        useCase: EventEditUseCasing,
+        coordinator: Coordinating)
+    {
+        self.today = today
         self.event = event
-        self.viewModel = WeekViewModel(event: event)
+        self.useCase = useCase
         self.coordinator = coordinator
+        self.viewModel = WeekViewModel(today: today, event: event)
+        self.viewRoot = WeekView()
 
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
@@ -65,7 +74,7 @@ class WeekController: UIViewController {
 extension WeekController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         self.event = event
-        viewModel = WeekViewModel(event: event)
+        viewModel = WeekViewModel(today: today, event: event)
         viewRoot.collection.reloadData()
     }
 }
@@ -80,7 +89,7 @@ extension WeekController:
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int
     {
-        viewModel.count
+        viewModel.weekCellViewModels.count
     }
 
     func collectionView(
@@ -92,16 +101,14 @@ extension WeekController:
                 withReuseIdentifier: WeekCell.reuseIdentifier,
                 for: indexPath) as? WeekCell
         else { fatalError("cell type") }
-        cell.viewModel = viewModel.cellViewModel(at: indexPath.row)
+        cell.viewModel = viewModel.weekCellViewModels[indexPath.row]
         return cell
     }
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let cellViewModel = viewModel.cellViewModel(at: indexPath.row)
-        else { return }
-        coordinator?.showDay(event: cellViewModel.event, date: cellViewModel.date)
+        let vm = viewModel.weekCellViewModels[indexPath.row]
+        coordinator?.showDay(event: event, date: vm.day.date)
     }
 
     // UICollectionViewDelegateFlowLayout
