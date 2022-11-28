@@ -99,17 +99,19 @@ class WeekControllerTests: XCTestCase {
         )
     }
 
-    private func dayOfWeek(at index: IndexPath) -> WeekDay? {
-        do {
-            let collection = sut.viewRoot.collection
-            let cell = collection.dataSource?.collectionView(collection, cellForItemAt: index)
-            let dayCell = try XCTUnwrap(cell as? WeekCell)
-            let dayOfWeekNumber = Calendar.current.dateComponents(
-                [.weekday],
-                from: dayCell.viewModel.day.date
-            ).weekday ?? 0
+    func test_firstDayShowsDayNumber() {
+        let day = sut.firstDay
+        
+        XCTAssertEqual(day.day.text, "1")
+    }
 
-            return WeekDay(rawValue: dayOfWeekNumber)
-        } catch { return nil }
+    private func dayOfWeek(at index: IndexPath) -> WeekDay? {
+        let day = sut.day(at: index)
+        let dayOfWeekNumber = Calendar.current.dateComponents(
+            [.weekday],
+            from: day.viewModel.day.date
+        ).weekday ?? 0
+
+        return WeekDay(rawValue: dayOfWeekNumber)
     }
 }

@@ -55,6 +55,7 @@
 		0857A01F292FFD5900924530 /* ClockControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockControllerHelpers.swift */; };
 		0857DC4028E4AB4700D3F4E5 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
+		086136502934D64300F1B780 /* WeekControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* WeekControllerHelpers.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -379,6 +380,7 @@
 		085888E328DC8040004A8184 /* WidgetPreview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WidgetPreview.plist; path = WidgetsFramework/WidgetPreview.plist; sourceTree = SOURCE_ROOT; };
 		085888E728DC8ED0004A8184 /* WidgetFileWritingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileWritingTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
+		0861364F2934D64300F1B780 /* WeekControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekControllerHelpers.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2D028D469F500E0842C /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
@@ -839,6 +841,7 @@
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
 				08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */,
+				0861364F2934D64300F1B780 /* WeekControllerHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1493,6 +1496,7 @@
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				08292EC5292E1F6100F46A32 /* ClockControllerTests.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsControllerTests.swift in Sources */,
+				086136502934D64300F1B780 /* WeekControllerHelpers.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				0816F4492933C17900F3937A /* EventViewModelTests.swift in Sources */,
 				087366022930E000000F28DE /* WeekCellViewModelTests.swift in Sources */,

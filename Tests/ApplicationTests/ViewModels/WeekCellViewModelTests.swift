@@ -37,4 +37,8 @@ class WeekCellViewModelTests: XCTestCase {
 
         XCTAssertFalse(sut.isToday)
     }
+    
+    func test_hasDayNumber() {
+        XCTAssertEqual(sut.dayNumber, "1")
+    }
 }
