@@ -51,8 +51,6 @@ struct EventEditUseCasingFake: EventEditUseCasing {
 
     func removeHappening(from: Domain.Event, happening: Domain.Happening) {}
 
-    func addGoal(to: Domain.Event, at: Date, amount: Int) {}
-
     func rename(_ event: Domain.Event, to: String) {
         event.name = to
         delegates.call { $0.update(event: event) }

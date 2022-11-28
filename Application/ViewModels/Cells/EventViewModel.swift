@@ -10,10 +10,12 @@ import Foundation
 
 struct EventViewModel {
     let event: Event
+    let today: DayComponents
 
     // MARK: - Init
-    init(event: Event) {
+    init(event: Event, today: DayComponents) {
         self.event = event
+        self.today = today
     }
 
     var name: String { event.name }
@@ -21,23 +23,6 @@ struct EventViewModel {
     var amount: String {
         let todayDate = Date.now
         let todayHappeningsCount = event.happenings(forDay: todayDate).count
-        if let todayGoal = event.goal(at: todayDate), todayGoal.amount > 0 {
-            return "\(todayHappeningsCount)/\(todayGoal.amount)"
-        } else {
-            return "\(todayHappeningsCount)"
-        }
-    }
-
-    var hasGoal: Bool {
-        let todayDate = Date.now
-        if let goal = event.goal(at: todayDate) {
-            return goal.amount > 0
-        }
-        return false
-    }
-
-    var goalReached: Bool {
-        let todayDate = Date.now
-        return event.isGoalReached(at: todayDate)
+        return String(todayHappeningsCount)
     }
 }

@@ -12,8 +12,6 @@ public enum EventManipulationError: Error {
 }
 
 public class Event {
-    public typealias Goals = [WeekDay: [Goal]]
-
     public let id: String
     public var name: String
     public var happenings: [Happening]
@@ -21,46 +19,24 @@ public class Event {
     public let dateCreated: Date
     public var dateVisited: Date?
 
-    private var goals1: Goals = [
-        WeekDay.monday: [],
-        WeekDay.tuesday: [],
-        WeekDay.wednesday: [],
-        WeekDay.thursday: [],
-        WeekDay.friday: [],
-        WeekDay.saturday: [],
-        WeekDay.sunday: [],
-    ]
-
     // MARK: - Init
-    public
-    convenience
-    init(name: String) {
-        let dateCreated: Date = {
-            let c = Calendar.current
-            let creationDate = Date.now
-            var components = c.dateComponents([.year, .month, .day, .hour, .minute, .second], from: creationDate)
-            components.hour = 0
-            components.minute = 0
-            components.second = 0
-
-            if let date = c.date(from: components) { return date }
-            else { return creationDate }
-        }()
-
-        self.init(id: UUID().uuidString,
-                  name: name,
-                  happenings: [Happening](),
-                  dateCreated: dateCreated,
-                  dateVisited: nil)
+    public convenience init(name: String) {
+        self.init(
+            id: UUID().uuidString,
+            name: name,
+            happenings: [Happening](),
+            dateCreated: .now,
+            dateVisited: nil
+        )
     }
 
-    public
-    init(id: String,
-         name: String,
-         happenings: [Happening],
-         dateCreated: Date,
-         dateVisited: Date?)
-    {
+    public init(
+        id: String,
+        name: String,
+        happenings: [Happening],
+        dateCreated: Date,
+        dateVisited: Date?
+    ) {
         self.id = id
         self.name = name
         self.happenings = happenings
@@ -71,11 +47,9 @@ public class Event {
 
 // MARK: - Public
 public extension Event {
-    @discardableResult
-
-    func addHappening(date: Date) -> Happening {
-        let insertIndex = happenings.firstIndex { happening in
-            happening.dateCreated < date
+    @discardableResult func addHappening(date: Date) -> Happening {
+        let insertIndex = happenings.firstIndex {
+            happening in happening.dateCreated < date
         } ?? 0
 
         let newHappening = Happening(dateCreated: date)
@@ -84,13 +58,9 @@ public extension Event {
         return newHappening
     }
 
-    func visit() {
-        dateVisited = Date.now
-    }
+    func visit(at date: Date = .now) { dateVisited = date }
 
-    @discardableResult
-
-    func remove(happening: Happening) throws -> Happening? {
+    @discardableResult func remove(happening: Happening) throws -> Happening? {
         var happeningDeleted: Happening?
 
         for (index, existingHappening) in happenings.enumerated() {
@@ -109,61 +79,6 @@ public extension Event {
         happenings
             .filter { $0.dateCreated.isInSameDay(as: forDay) }
             .sorted(by: { $0.dateCreated > $1.dateCreated })
-    }
-
-    // Goals
-
-    func goal(at date: Date) -> Goal? {
-        let accessorDay = WeekDay.make(date)
-        let goals = goals(at: accessorDay)
-
-        var resultingGoal: Goal?
-
-        if let endOfDayDate = date.endOfDay {
-            for goal in goals {
-                if endOfDayDate >= goal.dateCreated { resultingGoal = goal }
-            }
-        }
-
-        return resultingGoal
-    }
-
-    func goals(at accessDay: WeekDay) -> [Goal] {
-        return goals1[accessDay] ?? [Goal]()
-    }
-
-    @discardableResult
-    func addGoal(at dateCreated: Date, amount: Int) -> Goal {
-        let accessWeekday = WeekDay.make(dateCreated)
-
-        if let existingGoal = goals1[accessWeekday]?.last,
-           existingGoal.amount == amount
-        {
-            return existingGoal
-        }
-
-        let newGoal = Goal(amount: amount, dateCreated: dateCreated)
-
-        var mutableGoalsArray = goals1[accessWeekday]
-        mutableGoalsArray?.append(newGoal)
-        goals1[accessWeekday] = mutableGoalsArray
-
-        return newGoal
-    }
-
-    func isGoalReached(at date: Date) -> Bool {
-        guard
-            let goal = goal(at: date),
-            goal.amount != 0 // think about this condition
-        else { return false }
-
-        let happenings = happenings(forDay: date)
-
-        let happeningsTotalValue = happenings.reduce(0) { partialResult, h in
-            partialResult + h.value
-        }
-
-        return happeningsTotalValue >= goal.amount
     }
 }
 

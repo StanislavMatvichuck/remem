@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="5">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="6">
     <entity name="Event" representedClassName=".CDEvent" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateVisited" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="uuid" attributeType="String"/>
-        <relationship name="goals" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Goal" inverseName="event" inverseEntity="Goal"/>
         <relationship name="happenings" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Happening" inverseName="event" inverseEntity="Happening"/>
-    </entity>
-    <entity name="Goal" representedClassName=".CDGoal" syncable="YES" codeGenerationType="class">
-        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dateDisabled" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="value" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="goals" inverseEntity="Event"/>
     </entity>
     <entity name="Happening" representedClassName=".CDHappening" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>

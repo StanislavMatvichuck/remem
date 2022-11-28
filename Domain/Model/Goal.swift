@@ -20,8 +20,3 @@ public enum WeekDay: Int, CaseIterable {
         WeekDay(rawValue: Calendar.current.dateComponents([.weekday], from: date).weekday!)!
     }
 }
-
-public struct Goal: Equatable {
-    public let amount: Int
-    public let dateCreated: Date
-}

@@ -24,7 +24,7 @@ struct EventsListViewModel {
 
     func eventViewModel(at index: Int) -> EventViewModel? {
         if let event = event(at: index) {
-            return EventViewModel(event: event)
+            return EventViewModel(event: event, today: .init(date: .now))
         } else {
             return nil
         }

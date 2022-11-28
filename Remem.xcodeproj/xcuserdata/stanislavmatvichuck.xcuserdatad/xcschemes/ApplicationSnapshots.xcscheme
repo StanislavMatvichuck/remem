@@ -20,6 +20,48 @@
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0870EEF72809B81100336759"
+               BuildableName = "ApplicationTests.xctest"
+               BlueprintName = "ApplicationTests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0867A2CF28D469F500E0842C"
+               BuildableName = "DataLayerTests.xctest"
+               BlueprintName = "DataLayerTests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "08B3570128E06A7B00770B9A"
+               BuildableName = "WidgetsFrameworkTests.xctest"
+               BlueprintName = "WidgetsFrameworkTests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -69,37 +111,6 @@
          </EnvironmentVariable>
       </EnvironmentVariables>
       <Testables>
-         <TestableReference
-            skipped = "YES"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0870EEF72809B81100336759"
-               BuildableName = "ApplicationTests.xctest"
-               BlueprintName = "ApplicationTests"
-               ReferencedContainer = "container:Remem.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0867A2CF28D469F500E0842C"
-               BuildableName = "DataLayerTests.xctest"
-               BlueprintName = "DataLayerTests"
-               ReferencedContainer = "container:Remem.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08B3570128E06A7B00770B9A"
-               BuildableName = "WidgetsFrameworkTests.xctest"
-               BlueprintName = "WidgetsFrameworkTests"
-               ReferencedContainer = "container:Remem.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO"
             testExecutionOrdering = "random">

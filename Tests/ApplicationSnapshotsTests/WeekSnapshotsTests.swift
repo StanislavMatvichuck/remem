@@ -20,6 +20,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
         sut = WeekController(
+            today: DayComponents.referenceValue,
             event: event,
             useCase: useCase,
             coordinator: coordinator

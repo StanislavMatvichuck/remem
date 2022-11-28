@@ -23,6 +23,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         let event = Event(name: "Event")
         let coordinator = ApplicationFactory().makeCoordinator()
         let weekController = WeekController(
+            today: DayComponents.referenceValue,
             event: event,
             useCase: useCase,
             coordinator: coordinator

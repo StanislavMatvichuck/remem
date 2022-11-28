@@ -72,29 +72,14 @@ public extension WidgetRowViewModel {
         let todayDate = Date.now
 
         let name: String = event.name
-        let amount: String = {
-            let todayHappeningsCount = event.happenings(forDay: todayDate).count
-            if let todayGoal = event.goal(at: todayDate), todayGoal.amount > 0 {
-                return "\(todayHappeningsCount)/\(todayGoal.amount)"
-            } else {
-                return "\(todayHappeningsCount)"
-            }
-        }()
+        let amount = String(event.happenings(forDay: todayDate).count)
+        let hasGoal = false
+        let goalReached = false
 
-        let hasGoal: Bool = {
-            if let goal = event.goal(at: todayDate) {
-                return goal.amount > 0
-            }
-            return false
-        }()
-
-        let goalReached: Bool = {
-            event.isGoalReached(at: todayDate)
-        }()
-
-        self.init(name: name,
-                  amount: amount,
-                  hasGoal: hasGoal,
-                  goalReached: goalReached)
+        self.init(
+            name: name,
+            amount: amount,
+            hasGoal: hasGoal,
+            goalReached: goalReached)
     }
 }

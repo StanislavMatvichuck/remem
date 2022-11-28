@@ -12,7 +12,6 @@ public protocol EventEditUseCasing {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
-    func addGoal(to: Event, at: Date, amount: Int)
     func rename(_: Event, to: String)
 
     func add(delegate: EventEditUseCasingDelegate)
@@ -68,13 +67,6 @@ public class EventEditUseCase: EventEditUseCasing {
 
     public func rename(_ event: Event, to newName: String) {
         event.name = newName
-        repository.save(event)
-        delegates.call { $0.update(event: event) }
-        widgetUseCase.update()
-    }
-
-    public func addGoal(to event: Event, at date: Date, amount: Int) {
-        _ = event.addGoal(at: date, amount: amount)
         repository.save(event)
         delegates.call { $0.update(event: event) }
         widgetUseCase.update()

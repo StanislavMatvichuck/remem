@@ -37,34 +37,17 @@ class EventTests: XCTestCase {
         XCTAssertNil(sut.dateVisited)
     }
 
-    func test_initWithName_hasNoGoals() {
-        for date in Date.now.dayByDayWeekForward {
-            XCTAssertNil(sut.goal(at: date))
-        }
+    func test_initWithName_hasDateCreated() {
+        XCTAssertNotNil(sut.dateCreated)
     }
 
-    func testInit_dateCreatedIsStartOfDay() {
-        let todayComponents = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: .now)
-        let components = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: sut.dateCreated)
-
-        XCTAssertEqual(components.hour, 0)
-        XCTAssertEqual(components.minute, 0)
-        XCTAssertEqual(components.second, 0)
-
-        XCTAssertEqual(components.day, todayComponents.day)
-        XCTAssertEqual(components.month, todayComponents.month)
-        XCTAssertEqual(components.year, todayComponents.year)
-    }
-
-    func test_addHappening_addedOne() throws {
-        let happeningDate = Date.now
-
-        sut.addHappening(date: happeningDate)
+    func test_addHappening_addedOne() {
+        sut.addHappening(date: Date.now)
 
         XCTAssertEqual(sut.happenings.count, 1)
     }
 
-    func test_addHappening_addedTwo() throws {
+    func test_addHappening_addedTwo() {
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
 
@@ -74,7 +57,7 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings.count, 2)
     }
 
-    func test_addHappening_sorted() throws {
+    func test_addHappening_happeningsAreSortedByDate() {
         let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
         let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
         let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
@@ -88,7 +71,8 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings[2], Happening(dateCreated: thirdHappeningDate))
     }
 
-    func test_visit() {
+    func test_visit_hasDateVisited() {
+        XCTAssertNil(sut.dateVisited)
         sut.visit()
         XCTAssertNotNil(sut.dateVisited)
     }

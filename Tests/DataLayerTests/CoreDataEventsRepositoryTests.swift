@@ -67,27 +67,6 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
-    func test_save_eventWithGoal() {
-        let newEvent = givenSavedDefaultEvent()
-        let goal = newEvent.addGoal(at: .now, amount: 1)
-
-        sut.save(newEvent)
-
-        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now), goal)
-    }
-
-    func test_save_eventWithGoals() {
-        let newEvent = givenSavedDefaultEvent()
-        _ = newEvent.addGoal(at: .now, amount: 1)
-        let goal2 = newEvent.addGoal(at: .now.addingTimeInterval(5.0), amount: 2)
-        let goal3 = newEvent.addGoal(at: .now.addingTimeInterval(60 * 60 * 24), amount: 3)
-
-        sut.save(newEvent)
-
-        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now.addingTimeInterval(5.0)), goal2)
-        XCTAssertEqual(sut.event(byId: newEvent.id)?.goal(at: .now.addingTimeInterval(60 * 60 * 24)), goal3)
-    }
-
     func test_save_allPossibleModifications() throws {
         let newEvent = givenSavedDefaultEvent()
 
@@ -101,12 +80,7 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         if let removedHappening = newEvent.happenings.first {
             try newEvent.remove(happening: removedHappening)
         }
-        sut.save(newEvent)
-        // adding goal
-        newEvent.addGoal(at: .now, amount: 1)
-        sut.save(newEvent)
-        // updating goal
-        newEvent.addGoal(at: .now.addingTimeInterval(5.0), amount: 2)
+
         sut.save(newEvent)
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }

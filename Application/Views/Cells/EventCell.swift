@@ -99,16 +99,6 @@ class EventCell: UITableViewCell {
     private func handleViewStateUpdate() {
         nameLabel.text = viewModel?.name
         valueLabel.text = viewModel?.amount
-
-        if let vm = viewModel, vm.hasGoal {
-            if vm.goalReached {
-                viewRoot.backgroundColor = Self.backgroundGoalReached
-            } else {
-                viewRoot.backgroundColor = Self.backgroundGoalNotReached
-            }
-        } else {
-            viewRoot.backgroundColor = Self.backgroundDefault
-        }
     }
 
     // MARK: - View lifecycle
