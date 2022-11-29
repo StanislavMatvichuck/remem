@@ -10,7 +10,7 @@ import Foundation
 import IosUseCases
 
 struct WeekViewModel {
-    static let shownDaysForward = 14.0
+    private let upcomingWeeksCount = 3
     let today: DayComponents
     var event: Event
     var weekCellViewModels: [WeekCellViewModel]
@@ -19,20 +19,20 @@ struct WeekViewModel {
         self.today = today
         self.event = event
 
-        let dayInSeconds = 60 * 60 * 24.0
-        let from = event.dateCreated.startOfWeek!
-        let futureDays = dayInSeconds * Self.shownDaysForward
-        let to = today.date.endOfWeek!.addingTimeInterval(futureDays)
+        var startOfWeekAfterEventCreation = DayComponents(date: event.dateCreated).value
+        startOfWeekAfterEventCreation.weekday = 2 /// set Monday
+        let startOfWeekDate = Calendar.current.date(from: startOfWeekAfterEventCreation)
+        let startOfWeekDay = DayComponents(date: startOfWeekDate!)
 
         var viewModels = [WeekCellViewModel]()
 
-        for date in stride(from: from, to: to, by: dayInSeconds) {
-            let viewModel = WeekCellViewModel(
-                day: DayComponents(date: date),
+        for addedDay in 0 ..< upcomingWeeksCount * 7 {
+            let cellDay = startOfWeekDay.adding(components: DateComponents(day: addedDay))
+            viewModels.append(WeekCellViewModel(
+                day: cellDay,
                 today: today,
-                happenings: []
-            )
-            viewModels.append(viewModel)
+                happenings: event.happenings(forDayComponents: cellDay)
+            ))
         }
 
         self.weekCellViewModels = viewModels

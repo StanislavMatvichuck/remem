@@ -28,4 +28,14 @@ class WeekViewModelTests: XCTestCase {
     func testInit() {
         XCTAssertNotNil(sut)
     }
+
+    func test_eventWithHappeningOnFirstDay_addsHappeningToFirstCell() {
+        let dateCreated = DayComponents.referenceValue.date
+        let event = Event(name: "Event", dateCreated: dateCreated)
+        event.addHappening(date: dateCreated.addingTimeInterval(5))
+
+        sut = WeekViewModel(today: DayComponents.referenceValue, event: event)
+
+        XCTAssertEqual(sut.weekCellViewModels.first?.happenings.count, 1)
+    }
 }

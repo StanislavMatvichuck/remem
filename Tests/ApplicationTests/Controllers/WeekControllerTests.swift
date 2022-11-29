@@ -28,9 +28,6 @@ class WeekControllerTests: XCTestCase {
 
         let useCase = EventEditUseCasingFake()
 
-        let spy = PresentationVerifier()
-        self.spy = spy
-
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
@@ -52,7 +49,9 @@ class WeekControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_tap_presentsDayController() throws {
+    func test_tap_presentsDayController() {
+        addPresentationSpy()
+
         let collection = sut.viewRoot.collection
         let firstCellIndex = IndexPath(row: 0, section: 0)
 
@@ -64,13 +63,13 @@ class WeekControllerTests: XCTestCase {
         spy.verify(animated: true)
     }
 
-    func test_firstDayIsMonday() throws {
+    func test_firstDayIsMonday() {
         let firstCellIndex = IndexPath(row: 0, section: 0)
 
         XCTAssertEqual(dayOfWeek(at: firstCellIndex), WeekDay.monday)
     }
 
-    func test_lastDayIsSunday() throws {
+    func test_lastDayIsSunday() {
         let daysCount = sut.viewModel.weekCellViewModels.count
         let lastCellIndex = IndexPath(row: daysCount - 1, section: 0)
 
@@ -100,18 +99,49 @@ class WeekControllerTests: XCTestCase {
     }
 
     func test_firstDayShowsDayNumber() {
-        let day = sut.firstDay
-        
-        XCTAssertEqual(day.day.text, "1")
+        XCTAssertEqual(sut.firstDay.day.text, "1")
+    }
+
+    func test_firstDayHasHappening_firstDayShowsHappeningTime() {
+        let happeningOffset = TimeInterval(60 * 60)
+
+        let event = Event(
+            id: "",
+            name: "Event",
+            happenings: [],
+            dateCreated: DayComponents.referenceValue.date,
+            dateVisited: nil
+        )
+
+        event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(happeningOffset))
+
+        let useCase = EventEditUseCasingFake()
+
+        let coordinator = ApplicationFactory().makeCoordinator()
+        self.coordinator = coordinator
+
+        let sut = WeekController(
+            today: DayComponents.referenceValue,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+
+        XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "01:00")
     }
 
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
         let day = sut.day(at: index)
+
         let dayOfWeekNumber = Calendar.current.dateComponents(
             [.weekday],
             from: day.viewModel.day.date
         ).weekday ?? 0
 
         return WeekDay(rawValue: dayOfWeekNumber)
+    }
+
+    private func addPresentationSpy() {
+        spy = PresentationVerifier()
     }
 }

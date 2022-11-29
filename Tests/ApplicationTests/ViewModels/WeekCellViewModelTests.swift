@@ -41,4 +41,12 @@ class WeekCellViewModelTests: XCTestCase {
     func test_hasDayNumber() {
         XCTAssertEqual(sut.dayNumber, "1")
     }
+    
+    func test_oneHappening_showsHappeningTime() {
+        let day = DayComponents.referenceValue
+        let happening = Happening(dateCreated: DayComponents.referenceValue.date)
+        sut = WeekCellViewModel(day: day, today: day, happenings: [happening])
+        
+        XCTAssertEqual(sut.happeningsTimings.first, "00:00")
+    }
 }
