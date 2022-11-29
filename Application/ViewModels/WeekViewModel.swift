@@ -7,7 +7,6 @@
 
 import Domain
 import Foundation
-import IosUseCases
 
 struct WeekViewModel {
     private let upcomingWeeksCount = 3
@@ -19,14 +18,27 @@ struct WeekViewModel {
         self.today = today
         self.event = event
 
-        var startOfWeekAfterEventCreation = DayComponents(date: event.dateCreated).value
-        startOfWeekAfterEventCreation.weekday = 2 /// set Monday
-        let startOfWeekDate = Calendar.current.date(from: startOfWeekAfterEventCreation)
-        let startOfWeekDay = DayComponents(date: startOfWeekDate!)
+        let startOfWeekDay = {
+            var startOfWeekAfterEventCreation = DayComponents(date: event.dateCreated).value
+            startOfWeekAfterEventCreation.weekday = 2 /// set Monday
+            let startOfWeekDate = Calendar.current.date(from: startOfWeekAfterEventCreation)!
+            return DayComponents(date: startOfWeekDate)
+        }()
+
+        let weeksBetweenTodayAndEventCreationDay: Int = {
+            let amount = Calendar.current.dateComponents(
+                [.weekOfYear],
+                from: event.dateCreated,
+                to: today.date
+            ).weekOfYear ?? 0
+
+            return max(0, amount)
+        }()
+
+        let daysToShow = (weeksBetweenTodayAndEventCreationDay + upcomingWeeksCount) * 7
 
         var viewModels = [WeekCellViewModel]()
-
-        for addedDay in 0 ..< upcomingWeeksCount * 7 {
+        for addedDay in 0 ..< daysToShow {
             let cellDay = startOfWeekDay.adding(components: DateComponents(day: addedDay))
             viewModels.append(WeekCellViewModel(
                 day: cellDay,

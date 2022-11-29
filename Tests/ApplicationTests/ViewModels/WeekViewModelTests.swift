@@ -38,4 +38,15 @@ class WeekViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.weekCellViewModels.first?.happenings.count, 1)
     }
+
+    func test_numberOfDaysDependsOnEventCreationDateAndToday() {
+        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
+        let dateTodayMonthAfterCreation = DayComponents.referenceValue.adding(
+            components: DateComponents(month: 1)
+        )
+
+        let sut = WeekViewModel(today: dateTodayMonthAfterCreation, event: event)
+
+        XCTAssertLessThan(21, sut.weekCellViewModels.count)
+    }
 }

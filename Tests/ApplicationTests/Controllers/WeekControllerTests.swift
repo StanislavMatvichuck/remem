@@ -83,7 +83,6 @@ class WeekControllerTests: XCTestCase {
     }
 
     func test_todayDayIsVisibleWhenAppears() {}
-    func test_numberOfDaysDependsOnEventCreationDate() {}
 
     func test_numberOfDaysIsDividedBy7() {
         let daysCount = sut.viewRoot.collection.numberOfItems(inSection: 0)
