@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct WeekViewModel {
-    private let upcomingWeeksCount = 3
+    let upcomingWeeksCount = 3
     let today: DayComponents
     var event: Event
     var weekCellViewModels: [WeekCellViewModel]

@@ -82,26 +82,37 @@ class WeekControllerTests: XCTestCase {
         XCTAssertEqual(todays.count, 1)
     }
 
-    func test_todayDayIsVisibleWhenAppears() {}
+    func test_todayDay_visibleWhenAppears() throws {
+        let happeningOffset = TimeInterval(60 * 60)
 
-    func test_numberOfDaysIsDividedBy7() {
-        let daysCount = sut.viewRoot.collection.numberOfItems(inSection: 0)
+        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
+        event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(happeningOffset))
 
-        XCTAssertEqual(daysCount % 7, 0)
-    }
+        let useCase = EventEditUseCasingFake()
+        let coordinator = ApplicationFactory().makeCoordinator()
+        self.coordinator = coordinator
 
-    func test_numberOfDaysAtLeast21() {
-        XCTAssertLessThanOrEqual(
-            21,
-            sut.viewRoot.collection.numberOfItems(inSection: 0)
+        sut = WeekController(
+            today: DayComponents.referenceValue.adding(components: DateComponents(year: 1)),
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
         )
+
+        layoutInScreen()
+
+        let visibleCells = sut.viewRoot.collection.visibleCells
+        let visibleDays = try XCTUnwrap(visibleCells as? [WeekCell])
+        let todayCell = visibleDays.filter { $0.viewModel.isToday }
+
+        XCTAssertEqual(todayCell.count, 1)
     }
 
-    func test_firstDayShowsDayNumber() {
+    func test_firstDay_showsDayNumber() {
         XCTAssertEqual(sut.firstDay.day.text, "1")
     }
 
-    func test_firstDayHasHappening_firstDayShowsHappeningTime() {
+    func test_hasHappening_firstDayShowsHappeningTime() {
         let happeningOffset = TimeInterval(60 * 60)
 
         let event = Event(
@@ -142,5 +153,11 @@ class WeekControllerTests: XCTestCase {
 
     private func addPresentationSpy() {
         spy = PresentationVerifier()
+    }
+
+    private func layoutInScreen() {
+        putInViewHierarchy(sut)
+        sut.view.bounds = UIScreen.main.bounds
+        sut.view.layoutIfNeeded()
     }
 }

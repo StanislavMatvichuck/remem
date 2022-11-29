@@ -64,9 +64,9 @@ class WeekController: UIViewController {
     }
 
     private func setInitialScrollPosition() {
-//        let lastCellIndex = IndexPath(row: viewModel.count - 1, section: 0)
-//        let scrollToIndex = IndexPath(row: lastCellIndex.row - WeekViewModel.shownDaysForward, section: 0)
-//        viewRoot.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
+        let lastCellIndex = IndexPath(row: viewModel.weekCellViewModels.count - 1, section: 0)
+        let scrollToIndex = IndexPath(row: lastCellIndex.row - (viewModel.upcomingWeeksCount - 1) * 7, section: 0)
+        viewRoot.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
     }
 }
 
