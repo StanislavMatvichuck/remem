@@ -41,6 +41,14 @@ class EventTests: XCTestCase {
         XCTAssertNotNil(sut.dateCreated)
     }
 
+    func test_initWithNameAndDate() {
+        let dateCreated = DayComponents.referenceValue.date
+        let sut = Event(name: "Event", dateCreated: dateCreated)
+
+        XCTAssertEqual(sut.name, "Event")
+        XCTAssertEqual(sut.dateCreated, dateCreated)
+    }
+
     func test_addHappening_addedOne() {
         sut.addHappening(date: Date.now)
 
@@ -76,9 +84,29 @@ class EventTests: XCTestCase {
         sut.visit()
         XCTAssertNotNil(sut.dateVisited)
     }
-}
 
-// MARK: - Private
-extension EventTests {
-    var cal: Calendar { Calendar.current }
+    func test_hasHappeningAtDayOfCreation_getHappeningsForDay_returnsOne() {
+        let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
+
+        let happeningsForFirstDay = sut.happenings(forDayComponents: dayOfCreation)
+
+        XCTAssertEqual(happeningsForFirstDay.count, 1)
+    }
+
+    func test_hasHappeningAtDayOfCreation_getHappeningsForNextDay_returnsNone() {
+        let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
+
+        let nextDay = dayOfCreation.adding(components: DateComponents(day: 1))
+        let happeningsForFirstDay = sut.happenings(forDayComponents: nextDay)
+
+        XCTAssertEqual(happeningsForFirstDay.count, 0)
+    }
+
+    private func arrangeWithOneHappeningOneHourAfterCreation() -> (Event, DayComponents) {
+        let day = DayComponents.referenceValue
+        let date = day.date
+        let sut = Event(name: "Event", dateCreated: date)
+        sut.addHappening(date: date.addingTimeInterval(60 * 60))
+        return (sut, day)
+    }
 }

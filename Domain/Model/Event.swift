@@ -30,6 +30,17 @@ public class Event {
         )
     }
 
+    public convenience init(name: String, dateCreated: Date) {
+        self.init(
+            id: UUID().uuidString,
+            name: name,
+            happenings: [Happening](),
+            dateCreated: dateCreated,
+            dateVisited: nil
+        )
+    }
+
+    /// Used by DataLayer only
     public init(
         id: String,
         name: String,
@@ -79,6 +90,22 @@ public extension Event {
         happenings
             .filter { $0.dateCreated.isInSameDay(as: forDay) }
             .sorted(by: { $0.dateCreated > $1.dateCreated })
+    }
+
+    func happenings(forDayComponents day: DayComponents) -> [Happening] {
+        let startOfDay = Calendar.current.startOfDay(for: day.date)
+
+        var endOfDayComponents = day.value
+        endOfDayComponents.hour = 23
+        endOfDayComponents.minute = 59
+        endOfDayComponents.second = 59
+
+        guard let endOfDayDate = Calendar.current.date(from: endOfDayComponents) else { return [] }
+
+        return happenings.filter {
+            $0.dateCreated > startOfDay &&
+                $0.dateCreated < endOfDayDate
+        }
     }
 }
 
