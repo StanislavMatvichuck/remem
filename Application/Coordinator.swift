@@ -11,7 +11,7 @@ import UIKit
 
 public protocol Coordinating: AnyObject {
     func showDetails(event: Event)
-    func showDay(event: Event, date: Date)
+    func showDay(event: Event, day: DayComponents)
     func dismiss()
 }
 
@@ -40,8 +40,8 @@ extension Coordinator {
         )
     }
 
-    func showDay(event: Event, date: Date) {
-        presentModally(factory.makeDayController(date: date, event: event))
+    func showDay(event: Event, day: DayComponents) {
+        presentModally(factory.makeDayController(day: day, event: event))
     }
 
     func dismiss() {

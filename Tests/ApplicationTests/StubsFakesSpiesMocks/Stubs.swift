@@ -49,7 +49,12 @@ struct EventEditUseCasingFake: EventEditUseCasing {
         delegates.call { $0.update(event: to) }
     }
 
-    func removeHappening(from: Domain.Event, happening: Domain.Happening) {}
+    func removeHappening(from event: Domain.Event, happening: Domain.Happening) {
+        do {
+            try event.remove(happening: happening)
+            delegates.call { $0.update(event: event) }
+        } catch {}
+    }
 
     func rename(_ event: Domain.Event, to: String) {
         event.name = to

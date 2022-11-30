@@ -11,7 +11,7 @@ public enum EventManipulationError: Error {
     case invalidHappeningDeletion
 }
 
-public class Event {
+public class Event: CustomDebugStringConvertible {
     public let id: String
     public var name: String
     public var happenings: [Happening]
@@ -53,6 +53,14 @@ public class Event {
         self.happenings = happenings
         self.dateCreated = dateCreated
         self.dateVisited = dateVisited
+    }
+
+    public var debugDescription: String {
+        """
+        name: \(name)
+        dateCreated: \(dateCreated.debugDescription)
+        happeningsCount: \(happenings.count)
+        """
     }
 }
 
