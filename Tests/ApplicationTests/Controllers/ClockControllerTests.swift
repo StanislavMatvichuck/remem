@@ -30,26 +30,41 @@ class ClockControllerTests: XCTestCase {
         XCTAssertEqual(sections.count, 144)
     }
 
-    func test_empty_allSectionsAreEmpty() throws {
+    func test_empty_allSectionsAreEmpty() {
         XCTAssertEqual(nonEmptySections.count, 0)
     }
 
-    func test_singleHappening_oneSectionIsNotEmpty() throws {
-        let event = sut.event
-        event.addHappening(date: .now)
-        sut.update(event: event)
+    func test_singleHappening_oneSectionIsNotEmpty() {
+        addOneHappening()
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }
 
-    func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
+    func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
+        for _ in 0 ..< sut.viewModel.size {
+            addOneHappening()
+        }
+
+        XCTAssertEqual(nonEmptySections.count, 1)
+    }
+
+    func test_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {
+        let time = TimeComponents(h: 12, m: 30, s: 45)
+        let time02 = TimeComponents(h: 13, m: 35, s: 45)
+
+        addOneHappening(at: time)
+        addOneHappening(at: time02)
+
+        XCTAssertEqual(nonEmptySections.count, 2, "precondition")
+        // TODO: add size comparison
+    }
+
     func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
-    func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {}
-    func test_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {}
+    func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
     func test_manyHappenings_randomlyDistributed_oneSectionFull() {}
     func test_manyHappenings_randomlyDistributed_oneSectionEmpty() {}
 
-    func test_receivesUpdatesFromEditUseCasing() throws {
+    func test_receivesUpdatesFromEditUseCasing() {
         let event = Event(name: "Event")
         let useCase = EventEditUseCasingFake()
 
@@ -76,4 +91,25 @@ class ClockControllerTests: XCTestCase {
     private var nonEmptySections: [ClockSectionAnimatedLayer] {
         sections.filter { $0.section.variant != .empty }
     }
+
+    private func addOneHappening(
+        at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
+    ) {
+        var today = DayComponents(date: .now).value
+        today.hour = at.h
+        today.minute = at.m
+        today.second = at.s
+        let event = sut.event
+
+        guard let date = Calendar.current.date(from: today)
+        else { fatalError("error making time for insertion") }
+        event.addHappening(date: date)
+        sut.update(event: event)
+    }
+}
+
+private struct TimeComponents {
+    let h: Int
+    let m: Int
+    let s: Int
 }

@@ -9,13 +9,13 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
-    static let size = 144
-    static let endSeconds = 24 * 60 * 60
+    let size = 144
+    let endSeconds = 24 * 60 * 60
 
     var sections: [ClockSection]
 
     init(happenings: [Happening]) {
-        sections = Array(repeating: ClockSection(), count: Self.size)
+        sections = Array(repeating: ClockSection(), count: size)
         happenings.forEach { add(happening: $0) }
     }
 
@@ -41,12 +41,12 @@ struct ClockViewModel {
     private func index(for seconds: Int) -> Int? {
         guard
             seconds >= 0,
-            seconds <= Self.endSeconds
+            seconds <= endSeconds
         else { return nil }
 
-        let secondsPerSection = Self.endSeconds / Self.size
+        let secondsPerSection = endSeconds / size
 
-        for i in 1 ... Self.size {
+        for i in 1 ... size {
             if seconds <= i * secondsPerSection {
                 return i - 1
             }

@@ -34,7 +34,7 @@ class ClockController: UIViewController {
 
     /// bullshit method. too much details about view and viewModel
     private func update() {
-        for i in 0 ... ClockViewModel.size - 1 {
+        for i in 0 ..< viewModel.size {
             guard
                 let layers = viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],
                 let section = viewModel.section(at: i)

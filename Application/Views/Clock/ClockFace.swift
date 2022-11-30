@@ -29,7 +29,7 @@ class ClockFace: UIView {
 extension ClockFace {
     private func installAnimatedSublayers() {
         if layer.sublayers == nil {
-            for index in 0 ..< ClockViewModel.size {
+            for index in 0 ..< viewModel.size {
                 layer.addSublayer(makeAnimatedLayer(for: index))
             }
         }
@@ -38,7 +38,8 @@ extension ClockFace {
     private func makeAnimatedLayer(for index: Int) -> ClockSectionAnimatedLayer {
         let layer = ClockSectionAnimatedLayer(
             section: viewModel.section(at: index)!,
-            frame: bounds
+            frame: bounds,
+            size: viewModel.size
         )
         layer.rotate(for: index)
         return layer

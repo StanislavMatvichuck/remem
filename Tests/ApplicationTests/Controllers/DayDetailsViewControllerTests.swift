@@ -134,6 +134,7 @@ class DayDetailsViewControllerTests: XCTestCase {
         action.handler(action, UIView()) { _ in }
 
         XCTAssertEqual(sut.happeningsAmount, 0)
+        XCTFail("check for day of happening deletion")
     }
 
     func test_manyHappenings_showsManyHappenings() {
