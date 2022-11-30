@@ -12,7 +12,7 @@ import UIKit
 class ClockController: UIViewController {
     let viewRoot: ClockView
     var viewModel: ClockViewModel
-    private var event: Event
+    var event: Event
 
     init(event: Event, useCase: EventEditUseCasing) {
         self.event = event

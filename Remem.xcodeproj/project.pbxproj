@@ -791,8 +791,8 @@
 			children = (
 				0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */,
 				081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */,
-				08913779292BCDEF00EFD23D /* WeekControllerTests.swift */,
 				08292EC4292E1F6100F46A32 /* ClockControllerTests.swift */,
+				08913779292BCDEF00EFD23D /* WeekControllerTests.swift */,
 				0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */,
 			);
 			path = Controllers;

@@ -7,7 +7,6 @@
 
 import UIKit
 
-// bullshit class. what is its responsibility?
 class ClockFace: UIView {
     let viewModel: ClockViewModel
 
@@ -30,9 +29,8 @@ class ClockFace: UIView {
 extension ClockFace {
     private func installAnimatedSublayers() {
         if layer.sublayers == nil {
-            for index in 0 ... ClockViewModel.size - 1 {
-                let newSectionLayer = makeAnimatedLayer(for: index)
-                layer.addSublayer(newSectionLayer)
+            for index in 0 ..< ClockViewModel.size {
+                layer.addSublayer(makeAnimatedLayer(for: index))
             }
         }
     }
