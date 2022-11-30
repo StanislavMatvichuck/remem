@@ -12,7 +12,7 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
     static let width = 3.0
 
     // MARK: - Properties
-    var section: ClockSection
+    var section: ClockSection!
     var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
 
     // MARK: - Init
@@ -22,6 +22,8 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
         self.frame = frame
         configureAppearance()
     }
+
+    override init(layer: Any) { super.init(layer: layer) }
 
     private func configureAppearance() {
         lineWidth = Self.width
