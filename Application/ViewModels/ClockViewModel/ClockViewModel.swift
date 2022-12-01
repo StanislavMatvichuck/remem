@@ -44,10 +44,10 @@ struct DefaultClockSorter: ClockStrategy {
 
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
-        return happeningsPerSection.map { happeningsAmount in
-            ClockSectionViewModel(length: max == 0 ?
-                0.0 :
-                CGFloat(happeningsAmount) / max
+        return happeningsPerSection.enumerated().map { index, happeningsAmount in
+            ClockSectionViewModel(
+                index: index,
+                length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max
             )
         }
     }

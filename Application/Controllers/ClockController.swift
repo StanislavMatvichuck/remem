@@ -36,11 +36,11 @@ class ClockController: UIViewController {
 
     private func update() {
         guard
-            let layers = viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer]
+            let layers = viewRoot.clockFace.layer.sublayers as? [ClockLayer]
         else { return }
 
         viewModel.sections.enumerated().forEach { index, section in
-            layers[index].animate(at: index, to: section)
+            layers[index].viewModel = section
         }
     }
 }

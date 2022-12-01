@@ -35,13 +35,11 @@ extension ClockFace {
         }
     }
 
-    private func makeAnimatedLayer(for index: Int) -> ClockSectionAnimatedLayer {
-        let layer = ClockSectionAnimatedLayer(
+    private func makeAnimatedLayer(for index: Int) -> ClockLayer {
+        ClockLayer(
             section: viewModel.sections[index],
             frame: bounds,
             size: viewModel.size
         )
-        layer.rotate(for: index)
-        return layer
     }
 }

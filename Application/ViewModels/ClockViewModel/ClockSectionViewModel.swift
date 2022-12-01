@@ -8,6 +8,7 @@
 import Foundation
 
 struct ClockSectionViewModel {
+    let index: Int
     let length: CGFloat
     var isEmpty: Bool { length == 0 }
 }

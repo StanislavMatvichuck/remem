@@ -97,13 +97,13 @@ class ClockControllerTests: XCTestCase {
         sut.view.layoutIfNeeded()
     }
 
-    private var sections: [ClockSectionAnimatedLayer] {
+    private var sections: [ClockLayer] {
         do {
-            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer])
+            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockLayer])
         } catch { return [] }
     }
 
-    private var nonEmptySections: [ClockSectionAnimatedLayer] {
+    private var nonEmptySections: [ClockLayer] {
         sections.filter { $0.viewModel.length != 0.0 }
     }
 
