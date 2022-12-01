@@ -28,7 +28,12 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
             useCase: useCase,
             coordinator: coordinator
         )
-        let clockController = ClockController(event: event, useCase: useCase)
+        
+        let clockController = ClockController(
+            event: event,
+            useCase: useCase,
+            sorter: DefaultClockSorter(size: 144)
+        )
         
         self.useCase = useCase
         self.event = event

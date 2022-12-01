@@ -18,7 +18,7 @@ class ClockControllerTests: XCTestCase {
         let event = Event(name: "Event")
         sut = ClockController.make(event: event)
         sut.loadViewIfNeeded()
-        forceViewToLayoutInScreenSize()
+        sut.forceViewToLayoutInScreenSize()
     }
 
     override func tearDown() {
@@ -35,14 +35,14 @@ class ClockControllerTests: XCTestCase {
     }
 
     func test_singleHappening_oneSectionIsNotEmpty() {
-        addOneHappening()
+        sut.addOneHappening()
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }
 
     func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
         for _ in 0 ..< sut.viewModel.size {
-            addOneHappening()
+            sut.addOneHappening()
         }
 
         XCTAssertEqual(nonEmptySections.count, 1)
@@ -52,8 +52,8 @@ class ClockControllerTests: XCTestCase {
         let time = TimeComponents(h: 12, m: 30, s: 45)
         let time02 = TimeComponents(h: 13, m: 35, s: 45)
 
-        addOneHappening(at: time)
-        addOneHappening(at: time02)
+        sut.addOneHappening(at: time)
+        sut.addOneHappening(at: time02)
 
         XCTAssertEqual(nonEmptySections.count, 2, "precondition")
         // TODO: add size comparison
@@ -63,7 +63,7 @@ class ClockControllerTests: XCTestCase {
     func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
     func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
         for _ in 0 ..< Int.random(in: 1 ..< 100) {
-            addOneHappening(at: TimeComponents(
+            sut.addOneHappening(at: TimeComponents(
                 h: Int.random(in: 0 ..< 24),
                 m: Int.random(in: 0 ..< 60),
                 s: Int.random(in: 0 ..< 60)
@@ -85,16 +85,11 @@ class ClockControllerTests: XCTestCase {
             sorter: DefaultClockSorter(size: 144)
         )
 
-        forceViewToLayoutInScreenSize()
+        sut.forceViewToLayoutInScreenSize()
 
         useCase.addHappening(to: event, date: .now)
 
         XCTAssertEqual(nonEmptySections.count, 1)
-    }
-
-    private func forceViewToLayoutInScreenSize() {
-        sut.view.bounds = UIScreen.main.bounds
-        sut.view.layoutIfNeeded()
     }
 
     private var sections: [ClockLayer] {
@@ -106,25 +101,4 @@ class ClockControllerTests: XCTestCase {
     private var nonEmptySections: [ClockLayer] {
         sections.filter { $0.viewModel.length != 0.0 }
     }
-
-    private func addOneHappening(
-        at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
-    ) {
-        var today = DayComponents(date: .now).value
-        today.hour = at.h
-        today.minute = at.m
-        today.second = at.s
-        let event = sut.event
-
-        guard let date = Calendar.current.date(from: today)
-        else { fatalError("error making time for insertion") }
-        event.addHappening(date: date)
-        sut.update(event: event)
-    }
-}
-
-private struct TimeComponents {
-    let h: Int
-    let m: Int
-    let s: Int
 }

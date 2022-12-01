@@ -18,10 +18,9 @@ class DayDetailsSnapshotsTest: FBSnapshotTestCase {
         folderName = "DayDetails"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
-        let date = Date(timeIntervalSinceReferenceDate: 0)
         
         sut = DayDetailsViewController(
-            date: date,
+            day: DayComponents.referenceValue,
             event: event,
             useCase: useCase
         )

@@ -17,7 +17,6 @@ class ClockSnapshotsTest: FBSnapshotTestCase {
         recordMode = false
         folderName = "Clock"
         sut = ClockController.make(event: Event(name: "Event"))
-
         putInViewHierarchy(sut)
     }
 
@@ -32,8 +31,30 @@ class ClockSnapshotsTest: FBSnapshotTestCase {
     }
 
     func test_emptyDark() {
-        sut.view.window?.overrideUserInterfaceStyle = .dark
+        configureDarkMode()
 
         FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_singleHappening() {
+        sut.forceViewToLayoutInScreenSize()
+
+        sut.addOneHappening(at: TimeComponents(h: 12, m: 1, s: 1))
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_singleHappeningDark() {
+        sut.forceViewToLayoutInScreenSize()
+
+        sut.addOneHappening(at: TimeComponents(h: 12, m: 1, s: 1))
+
+        configureDarkMode()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    private func configureDarkMode() {
+        sut.view.window?.overrideUserInterfaceStyle = .dark
     }
 }

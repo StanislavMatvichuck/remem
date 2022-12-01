@@ -29,10 +29,6 @@ class ClockController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {}
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        update()
-    }
 
     private func update() {
         guard
