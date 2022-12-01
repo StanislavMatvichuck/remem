@@ -61,14 +61,29 @@ class ClockControllerTests: XCTestCase {
 
     func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
     func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
-    func test_manyHappenings_randomlyDistributed_oneSectionFull() {}
-    func test_manyHappenings_randomlyDistributed_oneSectionEmpty() {}
+    func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
+        for _ in 0 ..< Int.random(in: 1 ..< 100) {
+            addOneHappening(at: TimeComponents(
+                h: Int.random(in: 0 ..< 24),
+                m: Int.random(in: 0 ..< 60),
+                s: Int.random(in: 0 ..< 60)
+            ))
+        }
+
+        let fullSections = sections.filter { $0.viewModel.length == 1.0 }
+
+        XCTAssertLessThanOrEqual(1, fullSections.count)
+    }
 
     func test_receivesUpdatesFromEditUseCasing() {
         let event = Event(name: "Event")
         let useCase = EventEditUseCasingFake()
 
-        sut = ClockController(event: event, useCase: useCase)
+        sut = ClockController(
+            event: event,
+            useCase: useCase,
+            sorter: DefaultClockSorter(size: 144)
+        )
 
         forceViewToLayoutInScreenSize()
 
@@ -89,7 +104,7 @@ class ClockControllerTests: XCTestCase {
     }
 
     private var nonEmptySections: [ClockSectionAnimatedLayer] {
-        sections.filter { $0.section.variant != .empty }
+        sections.filter { $0.viewModel.length != 0.0 }
     }
 
     private func addOneHappening(

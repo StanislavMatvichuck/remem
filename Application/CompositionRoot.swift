@@ -81,7 +81,11 @@ class ApplicationFactory {
     }
 
     func makeClockController(event: Event) -> ClockController {
-        ClockController(event: event, useCase: eventEditUseCase)
+        ClockController(
+            event: event,
+            useCase: eventEditUseCase,
+            sorter: DefaultClockSorter(size: 144)
+        )
     }
 
     func makeDayController(day: DayComponents, event: Event) -> DayDetailsViewController {

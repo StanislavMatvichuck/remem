@@ -12,13 +12,13 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
     static let width = 3.0
 
     // MARK: - Properties
-    var section: ClockSection!
+    var viewModel: ClockSectionViewModel!
     var center: CGPoint { CGPoint(x: bounds.midX, y: bounds.midY) }
     var size: Int!
 
     // MARK: - Init
-    init(section: ClockSection, frame: CGRect, size: Int) {
-        self.section = section
+    init(section: ClockSectionViewModel, frame: CGRect, size: Int) {
+        self.viewModel = section
         self.size = size
         super.init()
         self.frame = frame
@@ -31,8 +31,8 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
         lineWidth = Self.width
         lineCap = .round
         path = path().cgPath
-        strokeColor = Self.color(for: section).cgColor
-        strokeEnd = Self.strokeEnd(for: section)
+        strokeColor = Self.color(for: viewModel).cgColor
+        strokeEnd = Self.strokeEnd(for: viewModel)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -40,11 +40,11 @@ class ClockSectionAnimatedLayer: CAShapeLayer {
 
 // MARK: - Public
 extension ClockSectionAnimatedLayer {
-    func animate(at index: Int, to section: ClockSection) {
-        updateColorIfNeeded(at: index, updatedSection: section)
-        updateStrokeEndIfNeeded(at: index, updatedSection: section)
+    func animate(at index: Int, to viewModel: ClockSectionViewModel) {
+        updateColorIfNeeded(at: index, updatedSection: viewModel)
+        updateStrokeEndIfNeeded(at: index, updatedSection: viewModel)
         rotate(for: index)
-        self.section = section
+        self.viewModel = viewModel
     }
 
     func rotate(for index: Int) {
@@ -71,8 +71,8 @@ extension ClockSectionAnimatedLayer {
         return start
     }
 
-    private func updateColorIfNeeded(at index: Int, updatedSection: ClockSection) {
-        let displayedColor = ClockSectionAnimatedLayer.color(for: section)
+    private func updateColorIfNeeded(at index: Int, updatedSection: ClockSectionViewModel) {
+        let displayedColor = ClockSectionAnimatedLayer.color(for: viewModel)
         let newColor = ClockSectionAnimatedLayer.color(for: updatedSection)
 
         if displayedColor != newColor {
@@ -80,8 +80,8 @@ extension ClockSectionAnimatedLayer {
         }
     }
 
-    private func updateStrokeEndIfNeeded(at index: Int, updatedSection: ClockSection) {
-        let displayedStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: section)
+    private func updateStrokeEndIfNeeded(at index: Int, updatedSection: ClockSectionViewModel) {
+        let displayedStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: viewModel)
         let newStrokeEnd = ClockSectionAnimatedLayer.strokeEnd(for: updatedSection)
 
         if displayedStrokeEnd != newStrokeEnd {
@@ -131,21 +131,13 @@ extension ClockSectionAnimatedLayer {
     }
 
     // Static methods
-    private static func strokeEnd(for section: ClockSection) -> CGFloat {
-        switch section.variant {
-        case .empty: return 0.2
-        case .little: return 0.33
-        case .mid: return 0.66
-        case .big: return 1.0
-        }
+    private static func strokeEnd(for section: ClockSectionViewModel) -> CGFloat {
+        section.length
     }
 
-    private static func color(for section: ClockSection) -> UIColor {
-        switch section.variant {
-        case .empty:
-            return UIHelper.clockSectionBackground
-        case .little, .mid, .big:
-            return UIHelper.brand
-        }
+    private static func color(for section: ClockSectionViewModel) -> UIColor {
+        section.length == 0 ?
+            UIHelper.clockSectionBackground :
+            UIHelper.brand
     }
 }

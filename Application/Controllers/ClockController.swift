@@ -11,12 +11,14 @@ import UIKit
 
 class ClockController: UIViewController {
     let viewRoot: ClockView
+    let sorter: ClockStrategy
     var viewModel: ClockViewModel
     var event: Event
 
-    init(event: Event, useCase: EventEditUseCasing) {
+    init(event: Event, useCase: EventEditUseCasing, sorter: ClockStrategy) {
         self.event = event
-        self.viewModel = ClockViewModel(happenings: event.happenings)
+        self.sorter = sorter
+        self.viewModel = ClockViewModel(happenings: event.happenings, sorter: sorter)
         self.viewRoot = ClockView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
@@ -32,15 +34,13 @@ class ClockController: UIViewController {
         update()
     }
 
-    /// bullshit method. too much details about view and viewModel
     private func update() {
-        for i in 0 ..< viewModel.size {
-            guard
-                let layers = viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer],
-                let section = viewModel.section(at: i)
-            else { continue }
+        guard
+            let layers = viewRoot.clockFace.layer.sublayers as? [ClockSectionAnimatedLayer]
+        else { return }
 
-            layers[i].animate(at: i, to: section)
+        viewModel.sections.enumerated().forEach { index, section in
+            layers[index].animate(at: index, to: section)
         }
     }
 }
@@ -49,7 +49,7 @@ extension ClockController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         guard self.event == event else { return }
 
-        viewModel = ClockViewModel(happenings: event.happenings)
+        viewModel = ClockViewModel(happenings: event.happenings, sorter: sorter)
         update()
     }
 }

@@ -11,6 +11,10 @@ import XCTest
 
 extension ClockController {
     static func make(event: Event = Event(name: "Event")) -> ClockController {
-        ClockController(event: event, useCase: EventEditUseCasingFake())
+        ClockController(
+            event: event,
+            useCase: EventEditUseCasingFake(),
+            sorter: DefaultClockSorter(size: 144)
+        )
     }
 }

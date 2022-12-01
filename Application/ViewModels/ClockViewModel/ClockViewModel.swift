@@ -9,60 +9,58 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
-    let size = 144
-    let endSeconds = 24 * 60 * 60
+    var size: Int { sections.count }
+    let sections: [ClockSectionViewModel]
 
-    var sections: [ClockSection]
-
-    init(happenings: [Happening]) {
-        sections = Array(repeating: ClockSection(), count: size)
-        happenings.forEach { add(happening: $0) }
+    init(happenings: [Happening], sorter: ClockStrategy) {
+        self.sections = sorter.sort(orderedByDateHappenings: happenings)
     }
+}
 
-    func section(at index: Int) -> ClockSection? {
-        guard
-            index < sections.count,
-            index >= 0
-        else { return nil }
+protocol ClockStrategy {
+    func sort(orderedByDateHappenings: [Happening]) -> [ClockSectionViewModel]
+}
 
-        return sections[index]
-    }
+struct DefaultClockSorter: ClockStrategy {
+    let size: Int
+    let secondsInDay = 60 * 60 * 24
+    var secondsInSection: Int { secondsInDay / size }
 
-    private mutating func add(happening: Happening) {
-        let date = happening.dateCreated
-        guard
-            let index = index(for: seconds(for: date)),
-            var section = section(at: index)
-        else { return }
-        section.addHappening()
-        sections[index] = section
-    }
+    func sort(orderedByDateHappenings: [Happening]) -> [ClockSectionViewModel] {
+        /// happenings size is bigger than clock size
+        var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
-    private func index(for seconds: Int) -> Int? {
-        guard
-            seconds >= 0,
-            seconds <= endSeconds
-        else { return nil }
+        for happening in orderedByDateHappenings {
+            var happeningSeconds = seconds(for: happening)
+            var i = 0
 
-        let secondsPerSection = endSeconds / size
-
-        for i in 1 ... size {
-            if seconds <= i * secondsPerSection {
-                return i - 1
+            while happeningSeconds >= 0 {
+                happeningSeconds -= secondsInSection
+                i += 1
             }
+
+            happeningsPerSection[i - 1] += 1
         }
 
-        return nil
+        let max = CGFloat(happeningsPerSection.max() ?? 0)
+
+        return happeningsPerSection.map { happeningsAmount in
+            ClockSectionViewModel(length: max == 0 ?
+                0.0 :
+                CGFloat(happeningsAmount) / max
+            )
+        }
     }
 
-    private func seconds(for date: Date) -> Int {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute, .second], from: date)
+    func seconds(forSection: Int) -> Int {
+        return secondsInSection * (forSection + 1)
+    }
 
-        let hoursAsSeconds = (components.hour ?? 0) * 60 * 60
-        let minutesAsSeconds = (components.minute ?? 0) * 60
-        let seconds = (components.second ?? 0)
-
-        return hoursAsSeconds + minutesAsSeconds + seconds
+    func seconds(for happening: Happening) -> Int {
+        Calendar.current.dateComponents(
+            [.second],
+            from: Calendar.current.startOfDay(for: happening.dateCreated),
+            to: happening.dateCreated
+        ).second ?? 0
     }
 }
