@@ -155,8 +155,8 @@ extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
                 style: .destructive,
                 title: String(localizationId: "button.delete")
             ) { _, _, completion in
-                let happening = self.event.happenings[index.row]
-                self.useCase.removeHappening(from: self.event, happening: happening)
+                let happenings = self.event.happenings(forDayComponents: self.day)
+                self.useCase.removeHappening(from: self.event, happening: happenings[index.row])
                 completion(true)
             },
         ])

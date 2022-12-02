@@ -120,7 +120,11 @@ class DayDetailsViewControllerTests: XCTestCase {
     /// Might be refactored with next method
     func test_singleHappening_swipedToDelete_removesHappeningFromList() {
         let event = Event(name: "EventWithOneHappening")
-        event.addHappening(date: .now)
+        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 0)))
+        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 1)))
+        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 2)))
+        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 3)))
+        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 4)))
 
         sut = DayDetailsViewController.make(event: event)
 
@@ -130,11 +134,11 @@ class DayDetailsViewControllerTests: XCTestCase {
             sut.table,
             trailingSwipeActionsConfigurationForRowAt: sut.firstIndex
         )
+
         let action = configuration!.actions.first!
         action.handler(action, UIView()) { _ in }
 
         XCTAssertEqual(sut.happeningsAmount, 0)
-        XCTFail("check for day of happening deletion")
     }
 
     func test_manyHappenings_showsManyHappenings() {
