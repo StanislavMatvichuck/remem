@@ -9,20 +9,34 @@ import Domain
 import Foundation
 
 struct WeekViewModel {
-    let upcomingWeeksCount = 3
+    private let upcomingWeeksCount = 3
     let today: DayComponents
     var event: Event
-    var weekCellViewModels: [WeekCellViewModel]
+    var items: [WeekCellViewModel]
+    var scrollToIndex: Int = 0
     // MARK: - Init
     init(today: DayComponents, event: Event) {
         self.today = today
         self.event = event
 
-        let startOfWeekDay = {
-            var startOfWeekAfterEventCreation = DayComponents(date: event.dateCreated).value
-            startOfWeekAfterEventCreation.weekday = 2 /// set Monday
-            let startOfWeekDate = Calendar.current.date(from: startOfWeekAfterEventCreation)!
-            return DayComponents(date: startOfWeekDate)
+        let startOfWeekDayCreated = {
+            let cal = Calendar.current
+            let startOfWeekDateComponents = cal.dateComponents(
+                [.yearForWeekOfYear, .weekOfYear],
+                from: event.dateCreated
+            )
+            let date = cal.date(from: startOfWeekDateComponents)!
+            return DayComponents(date: date)
+        }()
+
+        let startOfWeekDayToday = {
+            let cal = Calendar.current
+            let startOfWeekDateComponents = cal.dateComponents(
+                [.yearForWeekOfYear, .weekOfYear],
+                from: today.date
+            )
+            let date = cal.date(from: startOfWeekDateComponents)!
+            return DayComponents(date: date)
         }()
 
         let weeksBetweenTodayAndEventCreationDay: Int = {
@@ -31,7 +45,6 @@ struct WeekViewModel {
                 from: event.dateCreated,
                 to: today.date
             ).weekOfYear ?? 0
-
             return max(0, amount)
         }()
 
@@ -39,14 +52,21 @@ struct WeekViewModel {
 
         var viewModels = [WeekCellViewModel]()
         for addedDay in 0 ..< daysToShow {
-            let cellDay = startOfWeekDay.adding(components: DateComponents(day: addedDay))
-            viewModels.append(WeekCellViewModel(
+            let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
+            let vm = WeekCellViewModel(
                 day: cellDay,
                 today: today,
                 happenings: event.happenings(forDayComponents: cellDay)
-            ))
+            )
+
+            viewModels.append(vm)
+
+            if vm.isToday {
+                let index = viewModels.firstIndex(where: { $0.day == startOfWeekDayToday })
+                scrollToIndex = index ?? 0
+            }
         }
 
-        self.weekCellViewModels = viewModels
+        items = viewModels
     }
 }

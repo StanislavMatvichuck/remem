@@ -64,9 +64,10 @@ class WeekController: UIViewController {
     }
 
     private func setInitialScrollPosition() {
-        let lastCellIndex = IndexPath(row: viewModel.weekCellViewModels.count - 1, section: 0)
-        let scrollToIndex = IndexPath(row: lastCellIndex.row - (viewModel.upcomingWeeksCount - 1) * 7, section: 0)
-        viewRoot.collection.scrollToItem(at: scrollToIndex, at: .right, animated: false)
+        viewRoot.collection.scrollToItem(
+            at: IndexPath(row: viewModel.scrollToIndex, section: 0),
+            at: .left,
+            animated: false)
     }
 }
 
@@ -89,7 +90,7 @@ extension WeekController:
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int
     {
-        viewModel.weekCellViewModels.count
+        viewModel.items.count
     }
 
     func collectionView(
@@ -101,22 +102,24 @@ extension WeekController:
                 withReuseIdentifier: WeekCell.reuseIdentifier,
                 for: indexPath) as? WeekCell
         else { fatalError("cell type") }
-        cell.viewModel = viewModel.weekCellViewModels[indexPath.row]
+        cell.viewModel = viewModel.items[indexPath.row]
         return cell
     }
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vm = viewModel.weekCellViewModels[indexPath.row]
+        let vm = viewModel.items[indexPath.row]
         coordinator?.showDay(event: event, day: vm.day)
     }
 
     // UICollectionViewDelegateFlowLayout
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: collectionView.bounds.width / 7,
-                      height: collectionView.bounds.height)
+        CGSize(
+            width: collectionView.bounds.width / 7,
+            height: collectionView.bounds.height)
     }
 }

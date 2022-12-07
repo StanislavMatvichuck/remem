@@ -18,13 +18,8 @@ class WeekControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        let event = Event(
-            id: "",
-            name: "Event",
-            happenings: [],
-            dateCreated: DayComponents.referenceValue.date,
-            dateVisited: nil
-        )
+        let created = DayComponents.referenceValue
+        let event = Event(name: "Event", dateCreated: created.date)
 
         let useCase = EventEditUseCasingFake()
 
@@ -32,7 +27,7 @@ class WeekControllerTests: XCTestCase {
         self.coordinator = coordinator
 
         let sut = WeekController(
-            today: DayComponents.referenceValue,
+            today: created,
             event: event,
             useCase: useCase,
             coordinator: coordinator
@@ -70,30 +65,32 @@ class WeekControllerTests: XCTestCase {
     }
 
     func test_lastDayIsSunday() {
-        let daysCount = sut.viewModel.weekCellViewModels.count
+        let daysCount = sut.viewModel.items.count
         let lastCellIndex = IndexPath(row: daysCount - 1, section: 0)
 
         XCTAssertEqual(dayOfWeek(at: lastCellIndex), WeekDay.sunday)
     }
 
     func test_hasTodayDay() {
-        let todays = sut.viewModel.weekCellViewModels.filter { $0.isToday }
+        let todays = sut.viewModel.items.filter { $0.isToday }
 
         XCTAssertEqual(todays.count, 1)
     }
 
     func test_todayDay_visibleWhenAppears() throws {
-        let happeningOffset = TimeInterval(60 * 60)
+        /// Random numbers may be replaced with cycle but then it takes significant time to execute
+        let createdRandomOffset = Int.random(in: 0 ..< 1000)
+        let todayRandomOffset = Int.random(in: 0 ..< 1000)
 
-        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
-        event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(happeningOffset))
+        let created = DayComponents.referenceValue.adding(components: DateComponents(day: createdRandomOffset))
+        let event = Event(name: "Event", dateCreated: created.date)
 
         let useCase = EventEditUseCasingFake()
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
         sut = WeekController(
-            today: DayComponents.referenceValue.adding(components: DateComponents(year: 1)),
+            today: created.adding(components: DateComponents(day: todayRandomOffset)),
             event: event,
             useCase: useCase,
             coordinator: coordinator
@@ -101,9 +98,22 @@ class WeekControllerTests: XCTestCase {
 
         layoutInScreen()
 
-        let visibleCells = sut.viewRoot.collection.visibleCells
-        let visibleDays = try XCTUnwrap(visibleCells as? [WeekCell])
-        let todayCell = visibleDays.filter { $0.viewModel.isToday }
+        let collection = sut.viewRoot.collection
+        let renderedIndexPaths = collection.indexPathsForVisibleItems
+        let fullyVisibleIndexPaths = renderedIndexPaths.filter { indexPath in
+            let layoutAttribute = collection.layoutAttributesForItem(at: indexPath)!
+            let cellFrame = layoutAttribute.frame
+            let isCellFullyVisible =
+                cellFrame.minX >= collection.bounds.minX &&
+                cellFrame.maxX.rounded(.down) <= collection.bounds.maxX
+            return isCellFullyVisible
+        }
+
+        let todayCell = try fullyVisibleIndexPaths.filter { index in
+            let cell = collection.cellForItem(at: index)
+            let weekCell = try XCTUnwrap(cell as? WeekCell)
+            return weekCell.viewModel.isToday
+        }
 
         XCTAssertEqual(todayCell.count, 1)
     }

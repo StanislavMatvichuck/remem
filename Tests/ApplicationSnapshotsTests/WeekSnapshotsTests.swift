@@ -14,13 +14,14 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = false
+        recordMode = true
         folderName = "Week"
         let coordinator = ApplicationFactory().makeCoordinator()
         let useCase = EventEditUseCasingFake()
-        let event = Event(name: "Event")
+        let today = DayComponents.referenceValue
+        let event = Event(name: "Event", dateCreated: today.date)
         sut = WeekController(
-            today: DayComponents.referenceValue,
+            today: today,
             event: event,
             useCase: useCase,
             coordinator: coordinator
@@ -36,6 +37,118 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty() {
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_todayOffsetByOneDay() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue
+        let today = dateCreated.adding(components: DateComponents(day: 1))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_dateCreatedOffsetByOneDay() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
+        let today = dateCreated.adding(components: DateComponents(day: 0))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_todayOffsetByTwoDaysAndDateCreatedOffsetByOneDay() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
+        let today = dateCreated.adding(components: DateComponents(day: 1))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_todayOffsetIsWeekAndDateCreatedOffsetIs3() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 3))
+        let today = dateCreated.adding(components: DateComponents(day: 4))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        event.addHappening(date: dateCreated.date.addingTimeInterval(61))
+        
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_createdOffset0_todayOffset11() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 0))
+        let today = dateCreated.adding(components: DateComponents(day: 11))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_empty_createdOffset0_todayOffset1year() {
+        let coordinator = ApplicationFactory().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 0))
+        let today = dateCreated.adding(components: DateComponents(year: 1))
+        let event = Event(name: "Event", dateCreated: dateCreated.date)
+        
+        sut = WeekController(
+            today: today,
+            event: event,
+            useCase: useCase,
+            coordinator: coordinator
+        )
+        
+        putInViewHierarchy(sut)
+        
         FBSnapshotVerifyViewController(sut)
     }
 }

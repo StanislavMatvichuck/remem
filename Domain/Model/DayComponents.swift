@@ -16,6 +16,8 @@ public struct DayComponents: Equatable, CustomDebugStringConvertible {
         value = Calendar.current.dateComponents([.year, .month, .day], from: date)
     }
 
+    public var europeanWeekDay: WeekDay { WeekDay.make(date) }
+
     public var debugDescription: String { "\(date.debugDescription) \(value.debugDescription)" }
 
     public static func == (lhs: DayComponents, rhs: DayComponents) -> Bool {

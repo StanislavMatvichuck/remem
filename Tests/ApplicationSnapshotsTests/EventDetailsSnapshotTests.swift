@@ -20,7 +20,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         recordMode = false
         folderName = "EventDetails"
         let useCase = EventEditUseCasingFake()
-        let event = Event(name: "Event")
+        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
         let coordinator = ApplicationFactory().makeCoordinator()
         let weekController = WeekController(
             today: DayComponents.referenceValue,
