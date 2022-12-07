@@ -12,7 +12,7 @@ import XCTest
 
 class WeekControllerTests: XCTestCase {
     var spy: PresentationVerifier!
-    var sut: WeekController!
+    var sut: WeekViewController!
     var coordinator: Coordinating!
 
     override func setUp() {
@@ -26,7 +26,7 @@ class WeekControllerTests: XCTestCase {
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
-        let sut = WeekController(
+        let sut = WeekViewController(
             today: created,
             event: event,
             useCase: useCase,
@@ -89,7 +89,7 @@ class WeekControllerTests: XCTestCase {
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
-        sut = WeekController(
+        sut = WeekViewController(
             today: created.adding(components: DateComponents(day: todayRandomOffset)),
             event: event,
             useCase: useCase,
@@ -140,7 +140,7 @@ class WeekControllerTests: XCTestCase {
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
-        let sut = WeekController(
+        let sut = WeekViewController(
             today: DayComponents.referenceValue,
             event: event,
             useCase: useCase,

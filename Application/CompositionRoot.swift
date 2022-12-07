@@ -43,7 +43,7 @@ class ApplicationFactory {
     }
 
     func makeRootViewController(coordinator: Coordinator) -> UIViewController {
-        let eventsListController = EventsListController(
+        let eventsListController = EventsListViewController(
             listUseCase: eventsListUseCase,
             editUseCase: eventEditUseCase,
             coordinator: coordinator
@@ -55,15 +55,15 @@ class ApplicationFactory {
     func makeEventDetailsController(
         event: Event,
         coordinator: Coordinating
-    ) -> EventDetailsController {
-        EventDetailsController(
+    ) -> EventViewController {
+        EventViewController(
             event: event,
             useCase: eventEditUseCase,
             controllers: [
                 makeWeekController(
                     event: event, coordinator: coordinator
                 ),
-                makeClockController(event: event),
+                makeClockViewController(event: event),
             ]
         )
     }
@@ -71,8 +71,8 @@ class ApplicationFactory {
     func makeWeekController(
         event: Event,
         coordinator: Coordinating
-    ) -> WeekController {
-        WeekController(
+    ) -> WeekViewController {
+        WeekViewController(
             today: DayComponents(date: .now),
             event: event,
             useCase: eventEditUseCase,
@@ -80,16 +80,16 @@ class ApplicationFactory {
         )
     }
 
-    func makeClockController(event: Event) -> ClockController {
-        ClockController(
+    func makeClockViewController(event: Event) -> ClockViewController {
+        ClockViewController(
             event: event,
             useCase: eventEditUseCase,
             sorter: DefaultClockSorter(size: 144)
         )
     }
 
-    func makeDayController(day: DayComponents, event: Event) -> DayDetailsViewController {
-        let controller = DayDetailsViewController(
+    func makeDayController(day: DayComponents, event: Event) -> DayViewController {
+        let controller = DayViewController(
             day: day,
             event: event,
             useCase: eventEditUseCase

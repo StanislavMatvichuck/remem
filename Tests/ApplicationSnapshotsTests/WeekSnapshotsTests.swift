@@ -10,7 +10,7 @@ import Domain
 import iOSSnapshotTestCase
 
 class WeekSnapshotsTest: FBSnapshotTestCase {
-    var sut: WeekController!
+    var sut: WeekViewController!
     
     override func setUp() {
         super.setUp()
@@ -20,7 +20,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let useCase = EventEditUseCasingFake()
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -46,7 +46,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let dateCreated = DayComponents.referenceValue
         let today = dateCreated.adding(components: DateComponents(day: 1))
         let event = Event(name: "Event", dateCreated: dateCreated.date)
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -64,7 +64,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
         let today = dateCreated.adding(components: DateComponents(day: 0))
         let event = Event(name: "Event", dateCreated: dateCreated.date)
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -82,7 +82,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
         let today = dateCreated.adding(components: DateComponents(day: 1))
         let event = Event(name: "Event", dateCreated: dateCreated.date)
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -102,7 +102,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let event = Event(name: "Event", dateCreated: dateCreated.date)
         event.addHappening(date: dateCreated.date.addingTimeInterval(61))
         
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -121,7 +121,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let today = dateCreated.adding(components: DateComponents(day: 11))
         let event = Event(name: "Event", dateCreated: dateCreated.date)
         
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,
@@ -140,7 +140,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         let today = dateCreated.adding(components: DateComponents(year: 1))
         let event = Event(name: "Event", dateCreated: dateCreated.date)
         
-        sut = WeekController(
+        sut = WeekViewController(
             today: today,
             event: event,
             useCase: useCase,

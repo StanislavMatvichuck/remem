@@ -1,5 +1,5 @@
 //
-//  ClockControllerTests.swift
+//  ClockViewControllerTests.swift
 //  ApplicationTests
 //
 //  Created by Stanislav Matvichuck on 23.11.2022.
@@ -10,13 +10,13 @@ import Domain
 import IosUseCases
 import XCTest
 
-class ClockControllerTests: XCTestCase {
-    private var sut: ClockController!
+class ClockViewControllerTests: XCTestCase {
+    private var sut: ClockViewController!
 
     override func setUp() {
         super.setUp()
         let event = Event(name: "Event")
-        sut = ClockController.make(event: event)
+        sut = ClockViewController.make(event: event)
         sut.loadViewIfNeeded()
         sut.forceViewToLayoutInScreenSize()
     }
@@ -79,7 +79,7 @@ class ClockControllerTests: XCTestCase {
         let event = Event(name: "Event")
         let useCase = EventEditUseCasingFake()
 
-        sut = ClockController(
+        sut = ClockViewController(
             event: event,
             useCase: useCase,
             sorter: DefaultClockSorter(size: 144)

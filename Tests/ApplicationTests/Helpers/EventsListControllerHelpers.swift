@@ -8,13 +8,13 @@
 @testable import Application
 import XCTest
 
-extension EventsListController {
-    static func make(coordinator: Coordinating?) -> EventsListController {
+extension EventsListViewController {
+    static func make(coordinator: Coordinating?) -> EventsListViewController {
         let coordinator = coordinator ?? ApplicationFactory().makeCoordinator()
         let listUCfake = EventsListUseCasingFake()
         let editUCfake = EventEditUseCasingFake()
 
-        let sut = EventsListController(
+        let sut = EventsListViewController(
             listUseCase: listUCfake,
             editUseCase: editUCfake,
             coordinator: coordinator
@@ -26,7 +26,7 @@ extension EventsListController {
     }
 
     var hint: EventsListHintCell {
-        let hintSection = EventsListController.Section.hint.rawValue
+        let hintSection = EventsListViewController.Section.hint.rawValue
         let hintIndexPath = IndexPath(row: 0, section: hintSection)
         let cell = cell(atIndexPath: hintIndexPath)
 
@@ -36,7 +36,7 @@ extension EventsListController {
     }
 
     var footer: EventsListFooterCell {
-        let footerSection = EventsListController.Section.footer.rawValue
+        let footerSection = EventsListViewController.Section.footer.rawValue
         let footerIndexPath = IndexPath(row: 0, section: footerSection)
         let cell = cell(atIndexPath: footerIndexPath)
 
@@ -50,7 +50,7 @@ extension EventsListController {
     var hintText: String? { hint.label.text }
     var eventsCount: Int {
         viewRoot.table.numberOfRows(
-            inSection: EventsListController.Section.events.rawValue
+            inSection: EventsListViewController.Section.events.rawValue
         )
     }
 
@@ -58,7 +58,7 @@ extension EventsListController {
         do {
             let indexPath = IndexPath(
                 row: index,
-                section: EventsListController.Section.events.rawValue
+                section: EventsListViewController.Section.events.rawValue
             )
             let cell = cell(atIndexPath: indexPath)
             return try XCTUnwrap(cell as? EventCell)

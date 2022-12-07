@@ -10,7 +10,7 @@ import Domain
 import iOSSnapshotTestCase
 
 class DayDetailsSnapshotsTest: FBSnapshotTestCase {
-    var sut: DayDetailsViewController!
+    var sut: DayViewController!
     
     override func setUp() {
         super.setUp()
@@ -19,7 +19,7 @@ class DayDetailsSnapshotsTest: FBSnapshotTestCase {
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
         
-        sut = DayDetailsViewController(
+        sut = DayViewController(
             day: DayComponents.referenceValue,
             event: event,
             useCase: useCase

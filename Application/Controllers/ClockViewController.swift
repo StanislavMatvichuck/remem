@@ -1,5 +1,5 @@
 //
-//  ClockController.swift
+//  ClockViewController.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 24.05.2022.
@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class ClockController: UIViewController {
+class ClockViewController: UIViewController {
     let viewRoot: ClockView
     let sorter: ClockStrategy
     var viewModel: ClockViewModel
@@ -41,7 +41,7 @@ class ClockController: UIViewController {
     }
 }
 
-extension ClockController: EventEditUseCasingDelegate {
+extension ClockViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         guard self.event == event else { return }
 

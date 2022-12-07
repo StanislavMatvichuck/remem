@@ -8,7 +8,7 @@
 @testable import Application
 import XCTest
 
-extension WeekController {
+extension WeekViewController {
     var firstDay: WeekCell { day(at: IndexPath(row: 0, section: 0)) }
 
     func day(at index: IndexPath) -> WeekCell {

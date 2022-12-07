@@ -10,14 +10,14 @@ import Domain
 import XCTest
 
 class EventDetailsControllerTests: XCTestCase {
-    var sut: EventDetailsController!
+    var sut: EventViewController!
 
     override func setUp() {
         super.setUp()
         let event = Event(name: "EventName")
         let ucFake = EventEditUseCasingFake()
 
-        let sut = EventDetailsController(
+        let sut = EventViewController(
             event: event,
             useCase: ucFake,
             controllers: [UIViewController(), UIViewController()]

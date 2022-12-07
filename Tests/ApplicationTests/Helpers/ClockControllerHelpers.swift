@@ -1,5 +1,5 @@
 //
-//  ClockControllerHelpers.swift
+//  ClockViewControllerHelpers.swift
 //  Remem
 //
 //  Created by Stanislav Matvichuck on 24.11.2022.
@@ -15,9 +15,9 @@ struct TimeComponents {
     let s: Int
 }
 
-extension ClockController {
-    static func make(event: Event = Event(name: "Event")) -> ClockController {
-        ClockController(
+extension ClockViewController {
+    static func make(event: Event = Event(name: "Event")) -> ClockViewController {
+        ClockViewController(
             event: event,
             useCase: EventEditUseCasingFake(),
             sorter: DefaultClockSorter(size: 144)

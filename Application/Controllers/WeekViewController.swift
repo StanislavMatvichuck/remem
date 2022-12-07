@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class WeekController: UIViewController {
+class WeekViewController: UIViewController {
     // MARK: - Properties
     var scrollHappened = false
 
@@ -72,7 +72,7 @@ class WeekController: UIViewController {
 }
 
 // MARK: - EditUseCaseDelegating
-extension WeekController: EventEditUseCasingDelegate {
+extension WeekViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         self.event = event
         viewModel = WeekViewModel(today: today, event: event)
@@ -81,7 +81,7 @@ extension WeekController: EventEditUseCasingDelegate {
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension WeekController:
+extension WeekViewController:
     UICollectionViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout

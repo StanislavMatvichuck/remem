@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-extension DayDetailsViewController {
+extension DayViewController {
     var table: UITableView { viewRoot.happenings }
     var firstIndex: IndexPath { IndexPath(row: 0, section: 0) }
     var happeningsAmount: Int { table.numberOfRows(inSection: 0) }
@@ -24,9 +24,9 @@ extension DayDetailsViewController {
     static func make(
         event: Event = Event(name: "Event"),
         day: DayComponents = DayComponents(date: .now)
-    ) -> DayDetailsViewController {
+    ) -> DayViewController {
         let useCase = EventEditUseCasingFake()
-        let sut = DayDetailsViewController(
+        let sut = DayViewController(
             day: day,
             event: event,
             useCase: useCase

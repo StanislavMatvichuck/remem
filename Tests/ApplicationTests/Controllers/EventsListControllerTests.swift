@@ -13,7 +13,7 @@ import XCTest
 
 class EventsListControllerTests: XCTestCase {
     // MARK: - Test fixture
-    var sut: EventsListController!
+    var sut: EventsListViewController!
     var coordinator: Coordinating!
 
     var table: UITableView { sut.viewRoot.table }
@@ -25,7 +25,7 @@ class EventsListControllerTests: XCTestCase {
         let coordinator = ApplicationFactory().makeCoordinator()
         self.coordinator = coordinator
 
-        let sut = EventsListController.make(coordinator: coordinator)
+        let sut = EventsListViewController.make(coordinator: coordinator)
         self.sut = sut
 
         coordinator.navController.pushViewController(sut, animated: false)
@@ -50,25 +50,25 @@ class EventsListControllerTests: XCTestCase {
     func test_empty_tableHasThreeSections() throws {
         XCTAssertEqual(
             table.numberOfSections,
-            EventsListController.Section.allCases.count
+            EventsListViewController.Section.allCases.count
         )
     }
 
     func test_empty_hasHintSection() {
         XCTAssertEqual(table.numberOfRows(
-            inSection: EventsListController.Section.hint.rawValue
+            inSection: EventsListViewController.Section.hint.rawValue
         ), 1)
     }
 
     func test_empty_hasFooterSection() {
         XCTAssertEqual(table.numberOfRows(
-            inSection: EventsListController.Section.footer.rawValue
+            inSection: EventsListViewController.Section.footer.rawValue
         ), 1)
     }
 
     func test_empty_hasNoEventsInList() {
         XCTAssertEqual(table.numberOfRows(
-            inSection: EventsListController.Section.events.rawValue
+            inSection: EventsListViewController.Section.events.rawValue
         ), 0)
     }
 
@@ -233,7 +233,7 @@ class EventsListControllerTests: XCTestCase {
 
         let indexPath = IndexPath(
             row: 0,
-            section: EventsListController.Section.events.rawValue
+            section: EventsListViewController.Section.events.rawValue
         )
         table.delegate?.tableView?(table, didSelectRowAt: indexPath)
 
@@ -247,7 +247,7 @@ class EventsListControllerTests: XCTestCase {
 
         let indexPath = IndexPath(
             row: 0,
-            section: EventsListController.Section.events.rawValue
+            section: EventsListViewController.Section.events.rawValue
         )
 
         let configuration = table.delegate?.tableView?(

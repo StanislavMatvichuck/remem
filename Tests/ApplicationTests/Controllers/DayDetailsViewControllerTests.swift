@@ -11,11 +11,11 @@ import ViewControllerPresentationSpy
 import XCTest
 
 class DayDetailsViewControllerTests: XCTestCase {
-    var sut: DayDetailsViewController!
+    var sut: DayViewController!
 
     override func setUp() {
         super.setUp()
-        sut = DayDetailsViewController.make()
+        sut = DayViewController.make()
     }
 
     override func tearDown() {
@@ -95,7 +95,7 @@ class DayDetailsViewControllerTests: XCTestCase {
         let event = Event(name: "EventWithOneHappening")
         event.addHappening(date: .now)
 
-        sut = DayDetailsViewController.make(event: event)
+        sut = DayViewController.make(event: event)
 
         assertCellHasTimeText(at: sut.firstIndex)
     }
@@ -104,7 +104,7 @@ class DayDetailsViewControllerTests: XCTestCase {
         let event = Event(name: "EventWithOneHappening")
         event.addHappening(date: .now)
 
-        sut = DayDetailsViewController.make(event: event)
+        sut = DayViewController.make(event: event)
 
         let configuration = sut.table.delegate?.tableView?(
             sut.table,
@@ -126,7 +126,7 @@ class DayDetailsViewControllerTests: XCTestCase {
         event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 3)))
         event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 4)))
 
-        sut = DayDetailsViewController.make(event: event)
+        sut = DayViewController.make(event: event)
 
         XCTAssertEqual(sut.happeningsAmount, 1, "precondition")
 
@@ -147,7 +147,7 @@ class DayDetailsViewControllerTests: XCTestCase {
         event.addHappening(date: .now.addingTimeInterval(-2))
         event.addHappening(date: .now.addingTimeInterval(-3))
 
-        sut = DayDetailsViewController.make(event: event)
+        sut = DayViewController.make(event: event)
 
         let secondCellIndex = IndexPath(row: 1, section: 0)
         let thirdCellIndex = IndexPath(row: 2, section: 0)

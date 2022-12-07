@@ -11,7 +11,7 @@ import iOSSnapshotTestCase
 import IosUseCases
 
 class EventDetailsSnapshotsTest: FBSnapshotTestCase {
-    var sut: EventDetailsController!
+    var sut: EventViewController!
     var useCase: EventEditUseCasing!
     var event: Event!
     
@@ -22,14 +22,14 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
         let coordinator = ApplicationFactory().makeCoordinator()
-        let weekController = WeekController(
+        let weekController = WeekViewController(
             today: DayComponents.referenceValue,
             event: event,
             useCase: useCase,
             coordinator: coordinator
         )
         
-        let clockController = ClockController(
+        let clockController = ClockViewController(
             event: event,
             useCase: useCase,
             sorter: DefaultClockSorter(size: 144)
@@ -37,7 +37,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
         
         self.useCase = useCase
         self.event = event
-        sut = EventDetailsController(
+        sut = EventViewController(
             event: event,
             useCase: useCase,
             controllers: [

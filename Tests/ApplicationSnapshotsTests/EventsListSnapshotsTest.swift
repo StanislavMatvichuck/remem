@@ -11,14 +11,14 @@ import iOSSnapshotTestCase
 import IosUseCases
 
 class EventsListSnapshotsTest: FBSnapshotTestCase {
-    var sut: EventsListController!
+    var sut: EventsListViewController!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "Events"
         let coordinator = ApplicationFactory().makeCoordinator()
-        sut = EventsListController.make(coordinator: coordinator)
+        sut = EventsListViewController.make(coordinator: coordinator)
         putInViewHierarchy(sut)
     }
 

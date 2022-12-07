@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class EventDetailsController: UIViewController {
+class EventViewController: UIViewController {
     // MARK: - Properties
     let viewRoot = EventDetailsView()
     let useCase: EventEditUseCasing
@@ -52,7 +52,7 @@ class EventDetailsController: UIViewController {
     }
 }
 
-extension EventDetailsController: EventEditUseCasingDelegate {
+extension EventViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         if self.event == event {
             viewModel = EventDetailsViewModel(event: event)

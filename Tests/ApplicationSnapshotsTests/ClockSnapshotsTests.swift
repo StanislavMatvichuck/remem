@@ -10,13 +10,13 @@ import Domain
 import iOSSnapshotTestCase
 
 class ClockSnapshotsTest: FBSnapshotTestCase {
-    var sut: ClockController!
+    var sut: ClockViewController!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "Clock"
-        sut = ClockController.make(event: Event(name: "Event"))
+        sut = ClockViewController.make(event: Event(name: "Event"))
         putInViewHierarchy(sut)
     }
 

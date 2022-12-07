@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class DayDetailsViewController: UIViewController {
+class DayViewController: UIViewController {
     // MARK: - Properties
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -135,7 +135,7 @@ class DayDetailsViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
+extension DayViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.items.count
     }
@@ -163,7 +163,7 @@ extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension DayDetailsViewController: EventEditUseCasingDelegate {
+extension DayViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         guard self.event == event else { return }
         self.event = event

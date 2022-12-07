@@ -9,7 +9,7 @@ import Domain
 import IosUseCases
 import UIKit
 
-class EventsListController: UIViewController {
+class EventsListViewController: UIViewController {
     enum Section: Int, CaseIterable {
         case hint
         case events
@@ -62,7 +62,7 @@ class EventsListController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension EventsListController: UITableViewDataSource {
+extension EventsListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int { 3 }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -87,7 +87,7 @@ extension EventsListController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension EventsListController: UITableViewDelegate {
+extension EventsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard let event = viewModel.event(at: indexPath.row) else { return nil }
 
@@ -126,7 +126,7 @@ extension EventsListController: UITableViewDelegate {
 }
 
 // MARK: - Events handling
-extension EventsListController {
+extension EventsListViewController {
     private func setupEventHandlers() {
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
         viewRoot.input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
@@ -145,7 +145,7 @@ extension EventsListController {
 }
 
 // MARK: - EventsListUseCasingDelegate, EventEditUseCasingDelegate
-extension EventsListController:
+extension EventsListViewController:
     EventsListUseCasingDelegate,
     EventEditUseCasingDelegate
 {
@@ -177,7 +177,7 @@ extension EventsListController:
 }
 
 // MARK: - Private
-extension EventsListController {
+extension EventsListViewController {
     private func makeHintCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListHintCell.reuseIdentifier) as! EventsListHintCell
         cell.label.text = viewModel.hint.text
