@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-class EventDetailsControllerTests: XCTestCase {
+class EventViewControllerTests: XCTestCase {
     var sut: EventViewController!
 
     override func setUp() {

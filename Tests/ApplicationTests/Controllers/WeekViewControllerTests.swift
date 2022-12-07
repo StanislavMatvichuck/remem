@@ -10,7 +10,7 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-class WeekControllerTests: XCTestCase {
+class WeekViewControllerTests: XCTestCase {
     var spy: PresentationVerifier!
     var sut: WeekViewController!
     var coordinator: Coordinating!

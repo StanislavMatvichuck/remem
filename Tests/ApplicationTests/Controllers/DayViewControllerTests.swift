@@ -10,7 +10,7 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-class DayDetailsViewControllerTests: XCTestCase {
+class DayViewControllerTests: XCTestCase {
     var sut: DayViewController!
 
     override func setUp() {

@@ -16,6 +16,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = true
         folderName = "Week"
+        
         let coordinator = ApplicationFactory().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let today = DayComponents.referenceValue

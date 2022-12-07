@@ -9,13 +9,13 @@
 import Domain
 import iOSSnapshotTestCase
 
-class DayDetailsSnapshotsTest: FBSnapshotTestCase {
+class DaySnapshotsTest: FBSnapshotTestCase {
     var sut: DayViewController!
     
     override func setUp() {
         super.setUp()
         recordMode = false
-        folderName = "DayDetails"
+        folderName = "Day"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event")
         

@@ -11,7 +11,7 @@ import IosUseCases
 import ViewControllerPresentationSpy
 import XCTest
 
-class EventsListControllerTests: XCTestCase {
+class EventsListViewControllerTests: XCTestCase {
     // MARK: - Test fixture
     var sut: EventsListViewController!
     var coordinator: Coordinating!

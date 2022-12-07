@@ -10,7 +10,7 @@ import Domain
 import iOSSnapshotTestCase
 import IosUseCases
 
-class EventDetailsSnapshotsTest: FBSnapshotTestCase {
+class EventSnapshotsTest: FBSnapshotTestCase {
     var sut: EventViewController!
     var useCase: EventEditUseCasing!
     var event: Event!
@@ -18,7 +18,7 @@ class EventDetailsSnapshotsTest: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
         recordMode = false
-        folderName = "EventDetails"
+        folderName = "Event"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
         let coordinator = ApplicationFactory().makeCoordinator()

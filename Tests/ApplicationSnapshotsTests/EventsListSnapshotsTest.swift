@@ -16,7 +16,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
         recordMode = false
-        folderName = "Events"
+        folderName = "EventsList"
         let coordinator = ApplicationFactory().makeCoordinator()
         sut = EventsListViewController.make(coordinator: coordinator)
         putInViewHierarchy(sut)
