@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayHappeningCell: UITableViewCell {
+class DayItem: UITableViewCell {
     static let reuseIdentifier = "DayHappeningCell"
 
     // MARK: - Properties

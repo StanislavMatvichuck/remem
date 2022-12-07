@@ -9,16 +9,16 @@
 import XCTest
 
 extension WeekViewController {
-    var firstDay: WeekCell { day(at: IndexPath(row: 0, section: 0)) }
+    var firstDay: WeekItem { day(at: IndexPath(row: 0, section: 0)) }
 
-    func day(at index: IndexPath) -> WeekCell {
+    func day(at index: IndexPath) -> WeekItem {
         do {
             let cell = viewRoot.collection.dataSource?.collectionView(
                 viewRoot.collection,
                 cellForItemAt: index
             )
 
-            return try XCTUnwrap(cell as? WeekCell)
+            return try XCTUnwrap(cell as? WeekItem)
         } catch { fatalError("error getting day") }
     }
 }

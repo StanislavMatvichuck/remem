@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventsListHintCell: UITableViewCell {
+class EventsListHintItem: UITableViewCell {
     static let reuseIdentifier = "EventsListHintCell"
 
     // MARK: - Properties
@@ -31,7 +31,7 @@ class EventsListHintCell: UITableViewCell {
 }
 
 // MARK: - Private
-extension EventsListHintCell {
+extension EventsListHintItem {
     private func setup() {
         backgroundColor = .clear
 

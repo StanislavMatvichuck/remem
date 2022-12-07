@@ -7,8 +7,8 @@
 
 import UIKit
 
-class WeekCell: UICollectionViewCell {
-    static let reuseIdentifier = "CellDay"
+class WeekItem: UICollectionViewCell {
+    static let reuseIdentifier = "WeekItem"
     static let spacing = UIHelper.spacing / 8
     static let sectionsAmount = 12 /// must define layout height
 
@@ -138,7 +138,7 @@ class WeekCell: UICollectionViewCell {
 }
 
 // MARK: - Private
-extension WeekCell {
+extension WeekItem {
     private func show(timings: [String]) {
         for (index, timing) in timings.enumerated() {
             guard index < timingLabels.count else { break }

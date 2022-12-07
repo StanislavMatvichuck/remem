@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventDetailsView: UIView {
+class EventView: UIView {
     // MARK: - Properties
     let scroll: ViewScroll
 

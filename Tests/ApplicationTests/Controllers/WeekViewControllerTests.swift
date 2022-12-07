@@ -111,7 +111,7 @@ class WeekViewControllerTests: XCTestCase {
 
         let todayCell = try fullyVisibleIndexPaths.filter { index in
             let cell = collection.cellForItem(at: index)
-            let weekCell = try XCTUnwrap(cell as? WeekCell)
+            let weekCell = try XCTUnwrap(cell as? WeekItem)
             return weekCell.viewModel.isToday
         }
 

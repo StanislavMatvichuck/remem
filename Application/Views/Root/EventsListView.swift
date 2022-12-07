@@ -13,12 +13,12 @@ class EventsListView: UIView {
 
     let table: UITableView = {
         let table = UITableView(al: true)
-        table.register(EventCell.self,
-                       forCellReuseIdentifier: EventCell.reuseIdentifier)
-        table.register(EventsListHintCell.self,
-                       forCellReuseIdentifier: EventsListHintCell.reuseIdentifier)
-        table.register(EventsListFooterCell.self,
-                       forCellReuseIdentifier: EventsListFooterCell.reuseIdentifier)
+        table.register(EventsListItem.self,
+                       forCellReuseIdentifier: EventsListItem.reuseIdentifier)
+        table.register(EventsListHintItem.self,
+                       forCellReuseIdentifier: EventsListHintItem.reuseIdentifier)
+        table.register(EventsListFooterItem.self,
+                       forCellReuseIdentifier: EventsListFooterItem.reuseIdentifier)
         table.backgroundColor = .clear
         table.separatorStyle = .none
         return table

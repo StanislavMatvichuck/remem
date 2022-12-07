@@ -48,7 +48,7 @@ class ClockView: UIView {
         addSubview(bottomDigits)
         addSubview(leftDigits)
 
-        let digitsDistanceFromCenter = -ClockLayer.length - 6.0
+        let digitsDistanceFromCenter = -ClockItem.length - 6.0
 
         NSLayoutConstraint.activate([
             topDigits.centerXAnchor.constraint(equalTo: centerXAnchor),

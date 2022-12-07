@@ -11,7 +11,7 @@ import UIKit
 
 class EventViewController: UIViewController {
     // MARK: - Properties
-    let viewRoot = EventDetailsView()
+    let viewRoot = EventView()
     let useCase: EventEditUseCasing
     var event: Event
     var viewModel: EventViewModel

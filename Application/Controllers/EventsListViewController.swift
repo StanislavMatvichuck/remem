@@ -179,7 +179,7 @@ extension EventsListViewController:
 // MARK: - Private
 extension EventsListViewController {
     private func makeHintCell() -> UITableViewCell {
-        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListHintCell.reuseIdentifier) as! EventsListHintCell
+        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListHintItem.reuseIdentifier) as! EventsListHintItem
         cell.label.text = viewModel.hint.text
 
         if viewModel.hint == .swipeLeft {
@@ -194,7 +194,7 @@ extension EventsListViewController {
     }
 
     private func makeFooterCell() -> UITableViewCell {
-        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterCell.reuseIdentifier) as! EventsListFooterCell
+        let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterItem.reuseIdentifier) as! EventsListFooterItem
 
         cell.button.addTarget(
             self,
@@ -212,7 +212,7 @@ extension EventsListViewController {
 
     private func makeEventCell(for index: IndexPath) -> UITableViewCell {
         guard
-            let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier) as? EventCell,
+            let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListItem.reuseIdentifier) as? EventsListItem,
             let viewModel = viewModel.eventViewModel(at: index.row)
         else { fatalError("unable to get EventCell") }
 
@@ -223,7 +223,7 @@ extension EventsListViewController {
         return eventCell
     }
 
-    private func configureSwipeHintIfNeeded(at indexPath: IndexPath, cell: EventCell) {
+    private func configureSwipeHintIfNeeded(at indexPath: IndexPath, cell: EventsListItem) {
         guard
             indexPath.row == 0,
             indexPath.section == Section.events.rawValue,

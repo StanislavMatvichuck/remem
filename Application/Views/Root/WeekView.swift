@@ -20,7 +20,7 @@ class WeekView: UIView {
         view.clipsToBounds = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
-        view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
+        view.register(WeekItem.self, forCellWithReuseIdentifier: WeekItem.reuseIdentifier)
 
         return view
     }()

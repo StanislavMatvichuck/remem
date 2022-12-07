@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventsListFooterCell: UITableViewCell {
+class EventsListFooterItem: UITableViewCell {
     static let reuseIdentifier = "EventsListFooterCell"
 
     // MARK: - Properties
@@ -52,14 +52,14 @@ class EventsListFooterCell: UITableViewCell {
 }
 
 // MARK: - Private
-extension EventsListFooterCell {
+extension EventsListFooterItem {
     private func setupLayout() {
         backgroundColor = .clear
 
         contentView.addSubview(button)
 
         NSLayoutConstraint.activate([
-            contentView.heightAnchor.constraint(equalToConstant: EventCell.height),
+            contentView.heightAnchor.constraint(equalToConstant: EventsListItem.height),
             button.heightAnchor.constraint(equalToConstant: UIHelper.d2),
             button.widthAnchor.constraint(equalTo: contentView.widthAnchor,
                                                constant: -2 * UIHelper.spacingListHorizontal),

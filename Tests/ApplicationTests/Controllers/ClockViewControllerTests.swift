@@ -92,13 +92,13 @@ class ClockViewControllerTests: XCTestCase {
         XCTAssertEqual(nonEmptySections.count, 1)
     }
 
-    private var sections: [ClockLayer] {
+    private var sections: [ClockItem] {
         do {
-            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockLayer])
+            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockItem])
         } catch { return [] }
     }
 
-    private var nonEmptySections: [ClockLayer] {
+    private var nonEmptySections: [ClockItem] {
         sections.filter { $0.viewModel.length != 0.0 }
     }
 }

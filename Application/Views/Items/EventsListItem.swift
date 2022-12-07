@@ -8,7 +8,7 @@
 import IosUseCases
 import UIKit
 
-class EventCell: UITableViewCell {
+class EventsListItem: UITableViewCell {
     static let reuseIdentifier = "EventCell"
     static let backgroundDefault = UIHelper.itemBackground
     static let backgroundGoalReached = UIHelper.goalReachedBackground
@@ -25,7 +25,7 @@ class EventCell: UITableViewCell {
     let viewRoot: UIView = {
         let view = UIView(al: true)
         view.layer.cornerRadius = UIHelper.r2
-        view.backgroundColor = EventCell.backgroundDefault
+        view.backgroundColor = EventsListItem.backgroundDefault
         return view
     }()
 
@@ -110,7 +110,7 @@ class EventCell: UITableViewCell {
 }
 
 // MARK: - User input
-extension EventCell {
+extension EventsListItem {
     @objc private func handleSwipe(_ swiper: Swiper) {
         guard let useCase, let viewModel else { return }
         useCase.addHappening(to: viewModel.event, date: .now)
@@ -123,7 +123,7 @@ extension EventCell {
 }
 
 // MARK: - Dark mode
-extension EventCell {
+extension EventsListItem {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         handleViewStateUpdate()

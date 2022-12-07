@@ -28,7 +28,7 @@ class DayViewController: UIViewController {
     }
 
     let useCase: EventEditUseCasing
-    let viewRoot: DayDetailsView
+    let viewRoot: DayView
     let day: DayComponents
     var event: Event
     var viewModel: DayViewModel
@@ -42,7 +42,7 @@ class DayViewController: UIViewController {
         self.useCase = useCase
         self.event = event
         self.day = day
-        self.viewRoot = DayDetailsView()
+        self.viewRoot = DayView()
         self.viewModel = DayViewModel(day: day, event: event)
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
@@ -142,9 +142,9 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DayHappeningCell.reuseIdentifier,
+            withIdentifier: DayItem.reuseIdentifier,
             for: indexPath
-        ) as? DayHappeningCell else { fatalError("unable to dequeue cell") }
+        ) as? DayItem else { fatalError("unable to dequeue cell") }
         cell.label.text = viewModel.items[indexPath.row]
         return cell
     }

@@ -7,12 +7,12 @@
 
 import UIKit
 
-class DayDetailsView: UIView {
+class DayView: UIView {
     // MARK: - Properties
     var happenings: UITableView = {
         let table = UITableView(al: true)
 
-        table.register(DayHappeningCell.self, forCellReuseIdentifier: DayHappeningCell.reuseIdentifier)
+        table.register(DayItem.self, forCellReuseIdentifier: DayItem.reuseIdentifier)
         table.separatorStyle = .none
         table.tableFooterView = UIView(al: true)
         table.allowsSelection = false

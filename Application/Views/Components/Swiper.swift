@@ -52,7 +52,7 @@ class Swiper: UIControl {
     }
 
     private func configureAppearance() {
-        layer.backgroundColor = EventCell.pinColor.cgColor
+        layer.backgroundColor = EventsListItem.pinColor.cgColor
         layer.cornerRadius = UIHelper.r1
     }
 }
@@ -125,6 +125,6 @@ extension Swiper {
 extension Swiper {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        layer.backgroundColor = EventCell.pinColor.cgColor
+        layer.backgroundColor = EventsListItem.pinColor.cgColor
     }
 }

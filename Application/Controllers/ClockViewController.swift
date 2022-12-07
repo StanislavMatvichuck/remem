@@ -32,7 +32,7 @@ class ClockViewController: UIViewController {
 
     private func update() {
         guard
-            let layers = viewRoot.clockFace.layer.sublayers as? [ClockLayer]
+            let layers = viewRoot.clockFace.layer.sublayers as? [ClockItem]
         else { return }
 
         viewModel.sections.enumerated().forEach { index, section in

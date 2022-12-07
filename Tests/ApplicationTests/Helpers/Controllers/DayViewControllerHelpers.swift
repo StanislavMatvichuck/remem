@@ -14,10 +14,10 @@ extension DayViewController {
     var firstIndex: IndexPath { IndexPath(row: 0, section: 0) }
     var happeningsAmount: Int { table.numberOfRows(inSection: 0) }
 
-    func happening(at index: IndexPath) -> DayHappeningCell {
+    func happening(at index: IndexPath) -> DayItem {
         do {
             let cell = table.dataSource?.tableView(table, cellForRowAt: index)
-            return try XCTUnwrap(cell as? DayHappeningCell)
+            return try XCTUnwrap(cell as? DayItem)
         } catch { fatalError("happening getting error") }
     }
 

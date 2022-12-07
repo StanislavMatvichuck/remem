@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ClockLayer: CAShapeLayer {
+class ClockItem: CAShapeLayer {
     static let length = 48.0
     static let width = 3.0
 
@@ -15,21 +15,21 @@ class ClockLayer: CAShapeLayer {
     var viewModel: ClockItemViewModel! {
         didSet {
             if let oldValue, let viewModel {
-                if ClockLayer.color(for: oldValue) !=
-                    ClockLayer.color(for: viewModel)
+                if ClockItem.color(for: oldValue) !=
+                    ClockItem.color(for: viewModel)
                 {
                     addColorAnimation(
-                        from: ClockLayer.color(for: oldValue),
-                        to: ClockLayer.color(for: viewModel)
+                        from: ClockItem.color(for: oldValue),
+                        to: ClockItem.color(for: viewModel)
                     )
                 }
 
-                if ClockLayer.strokeEnd(for: oldValue) !=
-                    ClockLayer.strokeEnd(for: viewModel)
+                if ClockItem.strokeEnd(for: oldValue) !=
+                    ClockItem.strokeEnd(for: viewModel)
                 {
                     addStrokeEndAnimation(
-                        from: ClockLayer.strokeEnd(for: oldValue),
-                        to: ClockLayer.strokeEnd(for: viewModel)
+                        from: ClockItem.strokeEnd(for: oldValue),
+                        to: ClockItem.strokeEnd(for: viewModel)
                     )
                 }
             }
@@ -67,7 +67,7 @@ class ClockLayer: CAShapeLayer {
 }
 
 // MARK: - Private
-extension ClockLayer {
+extension ClockItem {
     private func path() -> UIBezierPath {
         // TODO: clock layout for different screen sizes
         let sectionWidth = Self.width

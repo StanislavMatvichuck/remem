@@ -99,8 +99,8 @@ extension WeekViewController:
     {
         guard
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: WeekCell.reuseIdentifier,
-                for: indexPath) as? WeekCell
+                withReuseIdentifier: WeekItem.reuseIdentifier,
+                for: indexPath) as? WeekItem
         else { fatalError("cell type") }
         cell.viewModel = viewModel.items[indexPath.row]
         return cell

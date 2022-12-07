@@ -25,28 +25,28 @@ extension EventsListViewController {
         return sut
     }
 
-    var hint: EventsListHintCell {
+    var hint: EventsListHintItem {
         let hintSection = EventsListViewController.Section.hint.rawValue
         let hintIndexPath = IndexPath(row: 0, section: hintSection)
         let cell = cell(atIndexPath: hintIndexPath)
 
         do {
-            return try XCTUnwrap(cell as? EventsListHintCell)
+            return try XCTUnwrap(cell as? EventsListHintItem)
         } catch { fatalError("unable to get hint") }
     }
 
-    var footer: EventsListFooterCell {
+    var footer: EventsListFooterItem {
         let footerSection = EventsListViewController.Section.footer.rawValue
         let footerIndexPath = IndexPath(row: 0, section: footerSection)
         let cell = cell(atIndexPath: footerIndexPath)
 
         do {
-            return try XCTUnwrap(cell as? EventsListFooterCell)
+            return try XCTUnwrap(cell as? EventsListFooterItem)
         } catch { fatalError("unable to get footer") }
     }
 
     var addButton: UIButton { footer.button }
-    var firstEvent: EventCell { event(at: 0) }
+    var firstEvent: EventsListItem { event(at: 0) }
     var hintText: String? { hint.label.text }
     var eventsCount: Int {
         viewRoot.table.numberOfRows(
@@ -54,19 +54,19 @@ extension EventsListViewController {
         )
     }
 
-    func event(at index: Int) -> EventCell {
+    func event(at index: Int) -> EventsListItem {
         do {
             let indexPath = IndexPath(
                 row: index,
                 section: EventsListViewController.Section.events.rawValue
             )
             let cell = cell(atIndexPath: indexPath)
-            return try XCTUnwrap(cell as? EventCell)
+            return try XCTUnwrap(cell as? EventsListItem)
         } catch { fatalError("unable to get EventCell at \(index)") }
     }
 
     @discardableResult
-    func arrangeSingleEventSwiped() -> EventCell {
+    func arrangeSingleEventSwiped() -> EventsListItem {
         submitEvent()
 
         /// this part works badly
