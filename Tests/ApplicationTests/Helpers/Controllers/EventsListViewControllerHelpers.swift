@@ -10,7 +10,7 @@ import XCTest
 
 extension EventsListViewController {
     static func make(coordinator: Coordinating?) -> EventsListViewController {
-        let coordinator = coordinator ?? ApplicationFactory().makeCoordinator()
+        let coordinator = coordinator ?? CompositionRoot().makeCoordinator()
         let listUCfake = EventsListUseCasingFake()
         let editUCfake = EventEditUseCasingFake()
 

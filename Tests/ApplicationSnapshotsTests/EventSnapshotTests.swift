@@ -21,7 +21,7 @@ class EventSnapshotsTest: FBSnapshotTestCase {
         folderName = "Event"
         let useCase = EventEditUseCasingFake()
         let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let weekController = WeekViewController(
             today: DayComponents.referenceValue,
             event: event,
@@ -46,7 +46,7 @@ class EventSnapshotsTest: FBSnapshotTestCase {
             ]
         )
         
-        let navigation = ApplicationFactory.makeStyledNavigationController()
+        let navigation = CompositionRoot.makeStyledNavigationController()
         navigation.pushViewController(sut, animated: false)
         navigation.navigationBar.prefersLargeTitles = true
         

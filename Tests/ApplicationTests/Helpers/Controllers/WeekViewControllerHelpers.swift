@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import XCTest
 
 extension WeekViewController {
@@ -20,5 +21,21 @@ extension WeekViewController {
 
             return try XCTUnwrap(cell as? WeekItem)
         } catch { fatalError("error getting day") }
+    }
+
+    static func make() -> (sut: WeekViewController, coordinator: Coordinating) {
+        let coordinator = CompositionRoot().makeCoordinator()
+        let useCase = EventEditUseCasingFake()
+        let today = DayComponents.referenceValue
+        let event = Event(name: "Event", dateCreated: today.date)
+        return (
+            sut: WeekViewController(
+                today: today,
+                event: event,
+                useCase: useCase,
+                coordinator: coordinator
+            ),
+            coordinator: coordinator
+        )
     }
 }

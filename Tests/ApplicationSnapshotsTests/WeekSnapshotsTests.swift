@@ -17,23 +17,13 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
         recordMode = true
         folderName = "Week"
         
-        let coordinator = ApplicationFactory().makeCoordinator()
-        let useCase = EventEditUseCasingFake()
-        let today = DayComponents.referenceValue
-        let event = Event(name: "Event", dateCreated: today.date)
-        sut = WeekViewController(
-            today: today,
-            event: event,
-            useCase: useCase,
-            coordinator: coordinator
-        )
-        
+        sut = WeekViewController.make().sut
         putInViewHierarchy(sut)
     }
     
     override func tearDown() {
-        executeRunLoop()
         sut = nil
+        executeRunLoop()
         super.tearDown()
     }
     
@@ -42,7 +32,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_todayOffsetByOneDay() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue
         let today = dateCreated.adding(components: DateComponents(day: 1))
@@ -60,7 +50,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_dateCreatedOffsetByOneDay() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
         let today = dateCreated.adding(components: DateComponents(day: 0))
@@ -78,7 +68,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_todayOffsetByTwoDaysAndDateCreatedOffsetByOneDay() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 1))
         let today = dateCreated.adding(components: DateComponents(day: 1))
@@ -96,7 +86,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_todayOffsetIsWeekAndDateCreatedOffsetIs3() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 3))
         let today = dateCreated.adding(components: DateComponents(day: 4))
@@ -116,7 +106,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_createdOffset0_todayOffset11() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 0))
         let today = dateCreated.adding(components: DateComponents(day: 11))
@@ -135,7 +125,7 @@ class WeekSnapshotsTest: FBSnapshotTestCase {
     }
     
     func test_empty_createdOffset0_todayOffset1year() {
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         let useCase = EventEditUseCasingFake()
         let dateCreated = DayComponents.referenceValue.adding(components: DateComponents(day: 0))
         let today = dateCreated.adding(components: DateComponents(year: 1))

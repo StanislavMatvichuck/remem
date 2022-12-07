@@ -17,23 +17,7 @@ class WeekViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-
-        let created = DayComponents.referenceValue
-        let event = Event(name: "Event", dateCreated: created.date)
-
-        let useCase = EventEditUseCasingFake()
-
-        let coordinator = ApplicationFactory().makeCoordinator()
-        self.coordinator = coordinator
-
-        let sut = WeekViewController(
-            today: created,
-            event: event,
-            useCase: useCase,
-            coordinator: coordinator
-        )
-
-        self.sut = sut
+        (sut, coordinator) = WeekViewController.make()
     }
 
     override func tearDown() {
@@ -86,7 +70,7 @@ class WeekViewControllerTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
 
         let useCase = EventEditUseCasingFake()
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         self.coordinator = coordinator
 
         sut = WeekViewController(
@@ -137,7 +121,7 @@ class WeekViewControllerTests: XCTestCase {
 
         let useCase = EventEditUseCasingFake()
 
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         self.coordinator = coordinator
 
         let sut = WeekViewController(

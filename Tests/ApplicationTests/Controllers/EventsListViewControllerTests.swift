@@ -22,7 +22,7 @@ class EventsListViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         self.coordinator = coordinator
 
         let sut = EventsListViewController.make(coordinator: coordinator)

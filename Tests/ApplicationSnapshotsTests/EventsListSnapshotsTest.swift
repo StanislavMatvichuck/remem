@@ -17,7 +17,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = false
         folderName = "EventsList"
-        let coordinator = ApplicationFactory().makeCoordinator()
+        let coordinator = CompositionRoot().makeCoordinator()
         sut = EventsListViewController.make(coordinator: coordinator)
         putInViewHierarchy(sut)
     }

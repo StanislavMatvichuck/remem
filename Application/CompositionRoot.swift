@@ -10,24 +10,27 @@ import Domain
 import IosUseCases
 import UIKit
 
-class ApplicationFactory {
-    // MARK: - Long-lived dependencies
+class CompositionRoot: CoordinatingFactory {
     let eventsListUseCase: EventsListUseCasing
     let eventEditUseCase: EventEditUseCasing
-    // MARK: - Init
-    init() {
-        func makeEventsRepository() -> EventsRepositoryInterface {
-            let container = CoreDataStack.createContainer(inMemory: false)
-            let mapper = EventEntityMapper()
-            return CoreDataEventsRepository(container: container, mapper: mapper)
-        }
 
-        let repository = makeEventsRepository()
+    init(
+        listUseCasing: EventsListUseCasing? = nil,
+        eventEditUseCasing: EventEditUseCasing? = nil
+    ) {
+        let repository = Self.makeEventsRepository()
         let widgetsUseCase = WidgetsUseCase(repository: repository)
-        self.eventsListUseCase = EventsListUseCase(repository: repository,
-                                                   widgetUseCase: widgetsUseCase)
-        self.eventEditUseCase = EventEditUseCase(repository: repository,
-                                                 widgetUseCase: widgetsUseCase)
+        let coreDataEventsListUseCase = EventsListUseCase(repository: repository, widgetUseCase: widgetsUseCase)
+        let coreDataEventEditUseCase = EventEditUseCase(repository: repository, widgetUseCase: widgetsUseCase)
+
+        self.eventsListUseCase = coreDataEventsListUseCase
+        self.eventEditUseCase = coreDataEventEditUseCase
+    }
+
+    static func makeEventsRepository() -> EventsRepositoryInterface {
+        let container = CoreDataStack.createContainer(inMemory: false)
+        let mapper = EventEntityMapper()
+        return CoreDataEventsRepository(container: container, mapper: mapper)
     }
 
     // MARK: - Controllers creation
@@ -95,7 +98,7 @@ class ApplicationFactory {
             useCase: eventEditUseCase
         )
 
-        let nav = ApplicationFactory.makeStyledNavigationController()
+        let nav = Self.makeStyledNavigationController()
         nav.pushViewController(controller, animated: false)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {

@@ -25,7 +25,7 @@ class DaySnapshotsTest: FBSnapshotTestCase {
             useCase: useCase
         )
         
-        let navigation = ApplicationFactory.makeStyledNavigationController()
+        let navigation = CompositionRoot.makeStyledNavigationController()
         navigation.pushViewController(sut, animated: false)
         
         putInViewHierarchy(navigation)

@@ -9,30 +9,30 @@ import Domain
 import IosUseCases
 import UIKit
 
-public protocol Coordinating: AnyObject {
+protocol Coordinating: AnyObject {
     func showDetails(event: Event)
     func showDay(event: Event, day: DayComponents)
-    func dismiss()
+}
+
+protocol CoordinatingFactory {
+    func makeEventDetailsController(event: Event, coordinator: Coordinating) -> EventViewController
+    func makeDayController(day: DayComponents, event: Event) -> DayViewController
 }
 
 class Coordinator: NSObject, Coordinating {
-    // MARK: - Properties
-    let factory: ApplicationFactory
+    let factory: CoordinatingFactory
     let navController: UINavigationController
 
-    // MARK: - Init
     init(
         navController: UINavigationController,
-        applicationFactory: ApplicationFactory
+        applicationFactory: CoordinatingFactory
     ) {
         self.navController = navController
         self.factory = applicationFactory
         super.init()
     }
-}
 
-// MARK: - Public
-extension Coordinator {
+    // MARK: - Coordinating
     func showDetails(event: Event) {
         navController.pushViewController(
             factory.makeEventDetailsController(event: event, coordinator: self),
@@ -44,13 +44,6 @@ extension Coordinator {
         presentModally(factory.makeDayController(day: day, event: event))
     }
 
-    func dismiss() {
-        navController.dismiss(animated: true)
-    }
-}
-
-// MARK: - Private
-extension Coordinator {
     private func presentModally(_ controller: UIViewController) {
         if let nav = controller.navigationController { navController.present(nav, animated: true) }
     }
