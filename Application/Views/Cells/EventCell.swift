@@ -17,7 +17,7 @@ class EventCell: UITableViewCell {
     static let height = UIHelper.d2 + UIHelper.spacing
 
     // MARK: - Properties
-    var viewModel: EventViewModel? { didSet { handleViewStateUpdate() } }
+    var viewModel: EventItemViewModel? { didSet { handleViewStateUpdate() } }
     var useCase: EventEditUseCasing?
     weak var coordinator: Coordinating?
     let swiper = Swiper()

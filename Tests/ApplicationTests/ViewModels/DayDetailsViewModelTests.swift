@@ -13,7 +13,7 @@ class DayDetailsViewModelTests: XCTestCase {
     func test_eventWithNoHappenings_showsNothing() {
         let day = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
-        let sut = DayDetailsViewModel(day: day, event: event)
+        let sut = DayViewModel(day: day, event: event)
 
         XCTAssertEqual(sut.items.count, 0)
     }
@@ -22,7 +22,7 @@ class DayDetailsViewModelTests: XCTestCase {
         let day = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
         event.addHappening(date: day.date.addingTimeInterval(60 * 60))
-        let sut = DayDetailsViewModel(day: day, event: event)
+        let sut = DayViewModel(day: day, event: event)
 
         XCTAssertEqual(sut.items.count, 1)
     }
@@ -31,7 +31,7 @@ class DayDetailsViewModelTests: XCTestCase {
         let day = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
         event.addHappening(date: day.date.addingTimeInterval(60 * 60 * 24))
-        let sut = DayDetailsViewModel(day: day, event: event)
+        let sut = DayViewModel(day: day, event: event)
 
         XCTAssertEqual(sut.items.count, 0)
     }

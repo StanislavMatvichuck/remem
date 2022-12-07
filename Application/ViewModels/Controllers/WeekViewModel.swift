@@ -12,7 +12,7 @@ struct WeekViewModel {
     private let upcomingWeeksCount = 3
     let today: DayComponents
     var event: Event
-    var items: [WeekCellViewModel]
+    var items: [WeekItemViewModel]
     var scrollToIndex: Int = 0
     // MARK: - Init
     init(today: DayComponents, event: Event) {
@@ -50,10 +50,10 @@ struct WeekViewModel {
 
         let daysToShow = (weeksBetweenTodayAndEventCreationDay + upcomingWeeksCount) * 7
 
-        var viewModels = [WeekCellViewModel]()
+        var viewModels = [WeekItemViewModel]()
         for addedDay in 0 ..< daysToShow {
             let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
-            let vm = WeekCellViewModel(
+            let vm = WeekItemViewModel(
                 day: cellDay,
                 today: today,
                 happenings: event.happenings(forDayComponents: cellDay)

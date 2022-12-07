@@ -31,7 +31,7 @@ class DayViewController: UIViewController {
     let viewRoot: DayDetailsView
     let day: DayComponents
     var event: Event
-    var viewModel: DayDetailsViewModel
+    var viewModel: DayViewModel
 
     // MARK: - Init
     init(
@@ -43,7 +43,7 @@ class DayViewController: UIViewController {
         self.event = event
         self.day = day
         self.viewRoot = DayDetailsView()
-        self.viewModel = DayDetailsViewModel(day: day, event: event)
+        self.viewModel = DayViewModel(day: day, event: event)
         super.init(nibName: nil, bundle: nil)
         useCase.add(delegate: self)
     }
@@ -167,7 +167,7 @@ extension DayViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         guard self.event == event else { return }
         self.event = event
-        viewModel = DayDetailsViewModel(day: day, event: event)
+        viewModel = DayViewModel(day: day, event: event)
         viewRoot.happenings.reloadData()
     }
 }

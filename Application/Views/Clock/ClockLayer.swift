@@ -12,7 +12,7 @@ class ClockLayer: CAShapeLayer {
     static let width = 3.0
 
     // MARK: - Properties
-    var viewModel: ClockSectionViewModel! {
+    var viewModel: ClockItemViewModel! {
         didSet {
             if let oldValue, let viewModel {
                 if ClockLayer.color(for: oldValue) !=
@@ -44,7 +44,7 @@ class ClockLayer: CAShapeLayer {
     var size: Int!
 
     // MARK: - Init
-    init(section: ClockSectionViewModel, frame: CGRect, size: Int) {
+    init(section: ClockItemViewModel, frame: CGRect, size: Int) {
         self.viewModel = section
         self.size = size
         super.init()
@@ -115,11 +115,11 @@ extension ClockLayer {
     }
 
     // Static methods
-    private static func strokeEnd(for section: ClockSectionViewModel) -> CGFloat {
+    private static func strokeEnd(for section: ClockItemViewModel) -> CGFloat {
         0.2 + 0.8 * section.length
     }
 
-    private static func color(for section: ClockSectionViewModel) -> UIColor {
+    private static func color(for section: ClockItemViewModel) -> UIColor {
         section.length == 0 ?
             UIHelper.clockSectionBackground :
             UIHelper.brand

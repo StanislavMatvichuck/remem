@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct EventViewModel {
+struct EventItemViewModel {
     let event: Event
     let today: DayComponents
 

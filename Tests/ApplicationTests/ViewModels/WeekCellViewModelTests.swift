@@ -10,12 +10,12 @@ import Domain
 import XCTest
 
 class WeekCellViewModelTests: XCTestCase {
-    private var sut: WeekCellViewModel!
+    private var sut: WeekItemViewModel!
 
     override func setUp() {
         super.setUp()
         let day = DayComponents.referenceValue
-        sut = WeekCellViewModel(day: day, today: day, happenings: [])
+        sut = WeekItemViewModel(day: day, today: day, happenings: [])
     }
 
     override func tearDown() {
@@ -33,7 +33,7 @@ class WeekCellViewModelTests: XCTestCase {
     func test_dayAndTodayAreDifferent_isTodayFalse() {
         let day = DayComponents.referenceValue
         let dayLater = day.adding(components: DateComponents(hour: 24))
-        let sut = WeekCellViewModel(day: day, today: dayLater, happenings: [])
+        let sut = WeekItemViewModel(day: day, today: dayLater, happenings: [])
 
         XCTAssertFalse(sut.isToday)
     }
@@ -45,7 +45,7 @@ class WeekCellViewModelTests: XCTestCase {
     func test_oneHappening_showsHappeningTime() {
         let day = DayComponents.referenceValue
         let happening = Happening(dateCreated: DayComponents.referenceValue.date)
-        sut = WeekCellViewModel(day: day, today: day, happenings: [happening])
+        sut = WeekItemViewModel(day: day, today: day, happenings: [happening])
         
         XCTAssertEqual(sut.happeningsTimings.first, "00:00")
     }

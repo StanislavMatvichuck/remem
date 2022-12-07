@@ -22,9 +22,9 @@ struct EventsListViewModel {
         return .swipeLeft
     }
 
-    func eventViewModel(at index: Int) -> EventViewModel? {
+    func eventViewModel(at index: Int) -> EventItemViewModel? {
         if let event = event(at: index) {
-            return EventViewModel(event: event, today: .init(date: .now))
+            return EventItemViewModel(event: event, today: .init(date: .now))
         } else {
             return nil
         }

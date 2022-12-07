@@ -14,7 +14,7 @@ class EventViewController: UIViewController {
     let viewRoot = EventDetailsView()
     let useCase: EventEditUseCasing
     var event: Event
-    var viewModel: EventDetailsViewModel
+    var viewModel: EventViewModel
 
     // MARK: - Init
     init(
@@ -23,7 +23,7 @@ class EventViewController: UIViewController {
         controllers: [UIViewController]
     ) {
         self.event = event
-        self.viewModel = EventDetailsViewModel(event: event)
+        self.viewModel = EventViewModel(event: event)
         self.useCase = useCase
 
         super.init(nibName: nil, bundle: nil)
@@ -55,7 +55,7 @@ class EventViewController: UIViewController {
 extension EventViewController: EventEditUseCasingDelegate {
     func update(event: Domain.Event) {
         if self.event == event {
-            viewModel = EventDetailsViewModel(event: event)
+            viewModel = EventViewModel(event: event)
         }
     }
 }

@@ -9,7 +9,7 @@ import Domain
 import Foundation
 import IosUseCases
 
-struct WeekCellViewModel {
+struct WeekItemViewModel {
     let day: DayComponents
     let today: DayComponents
     let happenings: [Happening]

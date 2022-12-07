@@ -13,7 +13,7 @@ class WeekCell: UICollectionViewCell {
     static let sectionsAmount = 12 /// must define layout height
 
     // MARK: - Properties
-    var viewModel: WeekCellViewModel! { didSet { configureContent() } }
+    var viewModel: WeekItemViewModel! { didSet { configureContent() } }
 
     let day: UILabel
     let amount: UILabel

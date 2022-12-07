@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ClockSectionViewModel {
+struct ClockItemViewModel {
     let index: Int
     let length: CGFloat
     var isEmpty: Bool { length == 0 }

@@ -10,7 +10,7 @@ import Foundation
 
 struct ClockViewModel {
     var size: Int { sections.count }
-    let sections: [ClockSectionViewModel]
+    let sections: [ClockItemViewModel]
 
     init(happenings: [Happening], sorter: ClockStrategy) {
         self.sections = sorter.sort(orderedByDateHappenings: happenings)
@@ -18,7 +18,7 @@ struct ClockViewModel {
 }
 
 protocol ClockStrategy {
-    func sort(orderedByDateHappenings: [Happening]) -> [ClockSectionViewModel]
+    func sort(orderedByDateHappenings: [Happening]) -> [ClockItemViewModel]
 }
 
 struct DefaultClockSorter: ClockStrategy {
@@ -26,7 +26,7 @@ struct DefaultClockSorter: ClockStrategy {
     let secondsInDay = 60 * 60 * 24
     var secondsInSection: Int { secondsInDay / size }
 
-    func sort(orderedByDateHappenings: [Happening]) -> [ClockSectionViewModel] {
+    func sort(orderedByDateHappenings: [Happening]) -> [ClockItemViewModel] {
         /// happenings size is bigger than clock size
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
@@ -45,7 +45,7 @@ struct DefaultClockSorter: ClockStrategy {
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
         return happeningsPerSection.enumerated().map { index, happeningsAmount in
-            ClockSectionViewModel(
+            ClockItemViewModel(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max
             )

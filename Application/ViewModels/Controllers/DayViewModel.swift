@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct DayDetailsViewModel {
+struct DayViewModel {
     let day: DayComponents
     let items: [String]
 
