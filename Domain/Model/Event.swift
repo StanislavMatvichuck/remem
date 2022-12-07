@@ -96,7 +96,7 @@ public extension Event {
 
     func happenings(forDay: Date) -> [Happening] {
         happenings
-            .filter { $0.dateCreated.isInSameDay(as: forDay) }
+            .filter { Calendar.current.isDate($0.dateCreated, inSameDayAs: forDay) }
             .sorted(by: { $0.dateCreated > $1.dateCreated })
     }
 

@@ -73,7 +73,6 @@
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41028D0A4060085A37D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* Goal.swift */; };
-		087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41128D0A4510085A37D /* ExtenstionsDate.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -403,7 +402,6 @@
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED40F28D0A4060085A37D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
-		087ED41128D0A4510085A37D /* ExtenstionsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionsDate.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -676,7 +674,6 @@
 			children = (
 				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
 				080A679028D1E2DA00889A97 /* Model */,
-				087ED41128D0A4510085A37D /* ExtenstionsDate.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1450,7 +1447,6 @@
 				08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
 				087ED41028D0A4060085A37D /* Goal.swift in Sources */,
-				087ED41228D0A4510085A37D /* ExtenstionsDate.swift in Sources */,
 				0816F4462933B8D700F3937A /* DayComponents.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
 			);
