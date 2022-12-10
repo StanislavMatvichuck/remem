@@ -10,49 +10,43 @@ import Domain
 import IosUseCases
 import UIKit
 
-class CompositionRoot: CoordinatingFactory {
+/// Plays role of `Composer`
+/// # Objects composition
+/// # Dependencies lifecycle management
+class CompositionRoot {
+    /// Singleton dependency lifecycle
     let eventsListUseCase: EventsListUseCasing
     let eventEditUseCase: EventEditUseCasing
+    let coordinator: Coordinating
 
-    init(
-        listUseCasing: EventsListUseCasing? = nil,
-        eventEditUseCasing: EventEditUseCasing? = nil
-    ) {
-        let repository = Self.makeEventsRepository()
+    init() {
+        /// Scoped dependency lifecycle?
+        let repository = CoreDataEventsRepository(
+            container: CoreDataStack.createContainer(
+                inMemory: false
+            ),
+            mapper: EventEntityMapper()
+        )
+
         let widgetsUseCase = WidgetsUseCase(repository: repository)
         let coreDataEventsListUseCase = EventsListUseCase(repository: repository, widgetUseCase: widgetsUseCase)
         let coreDataEventEditUseCase = EventEditUseCase(repository: repository, widgetUseCase: widgetsUseCase)
 
         self.eventsListUseCase = coreDataEventsListUseCase
         self.eventEditUseCase = coreDataEventEditUseCase
-    }
-
-    static func makeEventsRepository() -> EventsRepositoryInterface {
-        let container = CoreDataStack.createContainer(inMemory: false)
-        let mapper = EventEntityMapper()
-        return CoreDataEventsRepository(container: container, mapper: mapper)
+        self.coordinator = DefaultCoordinator()
     }
 
     // MARK: - Controllers creation
 
-    func makeCoordinator() -> Coordinator {
-        let navController = Self.makeStyledNavigationController()
-        navController.navigationBar.prefersLargeTitles = true
-        let coordinator = Coordinator(
-            navController: navController,
-            applicationFactory: self
-        )
-        return coordinator
-    }
-
-    func makeRootViewController(coordinator: Coordinator) -> UIViewController {
+    func makeRootViewController() -> UIViewController {
         let eventsListController = EventsListViewController(
             listUseCase: eventsListUseCase,
             editUseCase: eventEditUseCase,
             coordinator: coordinator
         )
-        coordinator.navController.pushViewController(eventsListController, animated: false)
-        return coordinator.navController
+        coordinator.show(eventsListController)
+        return eventsListController.navigationController!
     }
 
     func makeEventDetailsController(
@@ -64,7 +58,8 @@ class CompositionRoot: CoordinatingFactory {
             useCase: eventEditUseCase,
             controllers: [
                 makeWeekController(
-                    event: event, coordinator: coordinator
+                    event: event,
+                    coordinator: coordinator
                 ),
                 makeClockViewController(event: event),
             ]
@@ -92,52 +87,10 @@ class CompositionRoot: CoordinatingFactory {
     }
 
     func makeDayController(day: DayComponents, event: Event) -> DayViewController {
-        let controller = DayViewController(
+        DayViewController(
             day: day,
             event: event,
             useCase: eventEditUseCase
         )
-
-        let nav = Self.makeStyledNavigationController()
-        nav.pushViewController(controller, animated: false)
-        nav.modalPresentationStyle = .pageSheet
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
-
-        return controller
-    }
-
-    // MARK: - UINavigationController styling
-
-    static func makeStyledNavigationController() -> UINavigationController {
-        let appearance = makeNavigationBarAppearance()
-        let nav = UINavigationController()
-        nav.navigationBar.standardAppearance = appearance
-        nav.navigationBar.compactAppearance = appearance
-        nav.navigationBar.scrollEdgeAppearance = appearance
-        nav.navigationBar.compactScrollEdgeAppearance = appearance
-        return nav
-    }
-
-    static func makeNavigationBarAppearance() -> UINavigationBarAppearance {
-        let cancelAppearance = UIBarButtonItemAppearance(style: .plain)
-        cancelAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.font]
-
-        let doneAppearance = UIBarButtonItemAppearance(style: .done)
-        doneAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold]
-
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-
-        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIHelper.fontSmallBold,
-                                          NSAttributedString.Key.foregroundColor: UIHelper.itemFont]
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIHelper.itemFont,
-                                               NSAttributedString.Key.font: UIHelper.fontBold]
-
-        appearance.backButtonAppearance = cancelAppearance
-        appearance.doneButtonAppearance = doneAppearance
-        appearance.buttonAppearance = cancelAppearance
-        return appearance
     }
 }

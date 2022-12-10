@@ -16,7 +16,7 @@ class WeekViewController: UIViewController {
     let today: DayComponents
     var event: Event
     let useCase: EventEditUseCasing
-    weak var coordinator: Coordinating?
+    let coordinator: Coordinating
     var viewModel: WeekViewModel
     let viewRoot: WeekView
 
@@ -109,7 +109,12 @@ extension WeekViewController:
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vm = viewModel.items[indexPath.row]
-        coordinator?.showDay(event: event, day: vm.day)
+
+        coordinator.show(DayViewController(
+            day: vm.day,
+            event: event,
+            useCase: useCase)
+        )
     }
 
     // UICollectionViewDelegateFlowLayout

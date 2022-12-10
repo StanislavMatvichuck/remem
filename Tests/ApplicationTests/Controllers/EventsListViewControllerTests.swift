@@ -21,14 +21,7 @@ class EventsListViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-
-        let coordinator = CompositionRoot().makeCoordinator()
-        self.coordinator = coordinator
-
-        let sut = EventsListViewController.make(coordinator: coordinator)
-        self.sut = sut
-
-        coordinator.navController.pushViewController(sut, animated: false)
+        (sut, coordinator) = EventsListViewController.make()
     }
 
     override func tearDown() {
@@ -224,7 +217,7 @@ class EventsListViewControllerTests: XCTestCase {
         XCTAssertNil(sut.viewRoot.swipeHint.superview)
     }
 
-    func test_singleEvent_eventTapped_opensEventDetails() throws {
+    func test_singleEvent_eventTapped_opensEventDetails() {
         let navigationController = sut.navigationController
 
         XCTAssertEqual(navigationController?.viewControllers.count, 1, "precondition")

@@ -59,6 +59,7 @@ class ClockViewControllerTests: XCTestCase {
         // TODO: add size comparison
     }
 
+    /// also make snapshots for these cases
     func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
     func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
     func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {

@@ -127,6 +127,7 @@
 		08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */; };
 		08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
 		08E63E5829409A0C00F87F25 /* EventsListViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */; };
+		08E63E5C2940B2D100F87F25 /* CompositionRootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E63E5B2940B2D100F87F25 /* CompositionRootTests.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F82FE5291E5DB10033AB0D /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE4291E5DB10033AB0D /* Fakes.swift */; };
@@ -461,6 +462,7 @@
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
+		08E63E5B2940B2D100F87F25 /* CompositionRootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRootTests.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 				0891377B292BE55600EFD23D /* Controllers */,
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
+				08E63E5B2940B2D100F87F25 /* CompositionRootTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -1530,6 +1533,7 @@
 				087366022930E000000F28DE /* WeekCellViewModelTests.swift in Sources */,
 				0857A01E292FFD5900924530 /* ClockViewControllerHelpers.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
+				08E63E5C2940B2D100F87F25 /* CompositionRootTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */,
 				0898F52A28E212DC006745B6 /* IosUseCasesTests.swift in Sources */,

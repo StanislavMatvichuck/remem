@@ -19,7 +19,6 @@ class EventsListItem: UITableViewCell {
     // MARK: - Properties
     var viewModel: EventItemViewModel? { didSet { handleViewStateUpdate() } }
     var useCase: EventEditUseCasing?
-    weak var coordinator: Coordinating?
     let swiper = Swiper()
 
     let viewRoot: UIView = {
@@ -114,11 +113,6 @@ extension EventsListItem {
     @objc private func handleSwipe(_ swiper: Swiper) {
         guard let useCase, let viewModel else { return }
         useCase.addHappening(to: viewModel.event, date: .now)
-    }
-
-    @objc private func handlePress(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard let viewModel else { return }
-        coordinator?.showDetails(event: viewModel.event)
     }
 }
 

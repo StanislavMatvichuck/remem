@@ -9,22 +9,6 @@
 import XCTest
 
 extension EventsListViewController {
-    static func make(coordinator: Coordinating?) -> EventsListViewController {
-        let coordinator = coordinator ?? CompositionRoot().makeCoordinator()
-        let listUCfake = EventsListUseCasingFake()
-        let editUCfake = EventEditUseCasingFake()
-
-        let sut = EventsListViewController(
-            listUseCase: listUCfake,
-            editUseCase: editUCfake,
-            coordinator: coordinator
-        )
-
-        sut.loadViewIfNeeded()
-
-        return sut
-    }
-
     var hint: EventsListHintItem {
         let hintSection = EventsListViewController.Section.hint.rawValue
         let hintIndexPath = IndexPath(row: 0, section: hintSection)
@@ -95,5 +79,22 @@ extension EventsListViewController {
         if let cell = dataSource?.tableView(table, cellForRowAt: atIndexPath) {
             return cell
         } else { fatalError("unable to get cell at \(atIndexPath)") }
+    }
+
+    static func make() -> (sut: EventsListViewController, coordinator: Coordinating) {
+        let coordinator = CompositionRoot().coordinator
+        let listUCfake = EventsListUseCasingFake()
+        let editUCfake = EventEditUseCasingFake()
+
+        let sut = EventsListViewController(
+            listUseCase: listUCfake,
+            editUseCase: editUCfake,
+            coordinator: coordinator
+        )
+
+        sut.loadViewIfNeeded()
+        coordinator.show(sut)
+
+        return (sut: sut, coordinator: coordinator)
     }
 }

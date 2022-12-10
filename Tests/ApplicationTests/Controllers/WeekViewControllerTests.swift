@@ -70,7 +70,7 @@ class WeekViewControllerTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
 
         let useCase = EventEditUseCasingFake()
-        let coordinator = CompositionRoot().makeCoordinator()
+        let coordinator = DefaultCoordinator()
         self.coordinator = coordinator
 
         sut = WeekViewController(
@@ -121,7 +121,7 @@ class WeekViewControllerTests: XCTestCase {
 
         let useCase = EventEditUseCasingFake()
 
-        let coordinator = CompositionRoot().makeCoordinator()
+        let coordinator = CompositionRoot().coordinator
         self.coordinator = coordinator
 
         let sut = WeekViewController(

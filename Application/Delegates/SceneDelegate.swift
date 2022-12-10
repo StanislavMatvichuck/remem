@@ -9,7 +9,6 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    var coordinator: Coordinator?
 
     func scene(
         _ scene: UIScene,
@@ -19,13 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let root = CompositionRoot()
-        let coordinator = root.makeCoordinator()
-        let rootViewController = root.makeRootViewController(coordinator: coordinator)
         self.window = window
-        self.coordinator = coordinator
 
-        window.rootViewController = rootViewController
+        window.rootViewController = CompositionRoot().makeRootViewController()
         window.makeKeyAndVisible()
     }
 }

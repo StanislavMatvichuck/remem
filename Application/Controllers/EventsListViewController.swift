@@ -21,7 +21,7 @@ class EventsListViewController: UIViewController {
     let editUseCase: EventEditUseCasing
     let viewRoot: EventsListView
 
-    weak var coordinator: Coordinating?
+    let coordinator: Coordinating
     var viewModel: EventsListViewModel
 
     // MARK: - Init
@@ -121,7 +121,25 @@ extension EventsListViewController: UITableViewDelegate {
             let event = viewModel.event(at: indexPath.row)
         else { return }
 
-        coordinator?.showDetails(event: event)
+        let weekController = WeekViewController(
+            today: DayComponents(date: .now),
+            event: event,
+            useCase: editUseCase,
+            coordinator: coordinator)
+
+        let clockController = ClockViewController(
+            event: event,
+            useCase: editUseCase,
+            sorter: DefaultClockSorter(size: 144))
+
+        coordinator.show(EventViewController(
+            event: event,
+            useCase: editUseCase,
+            controllers: [
+                weekController,
+                clockController
+            ])
+        )
     }
 }
 
