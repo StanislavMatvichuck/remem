@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios-snapshot-test-case",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uber/ios-snapshot-test-case",
+      "state" : {
+        "branch" : "main",
+        "revision" : "71f19547d9f9d0959a10881814de41b2114a8e1c"
+      }
+    }
+  ],
+  "version" : 2
+}
