@@ -7,7 +7,7 @@
 
 import Domain
 import Foundation
-import IosUseCases
+
 
 struct WeekItemViewModel {
     let day: DayComponents

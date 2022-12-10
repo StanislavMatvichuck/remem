@@ -7,14 +7,13 @@
 
 import SwiftUI
 import WidgetKit
-import WidgetsFramework
 
 struct MediumWidgetView: View {
     var viewModel: WidgetViewModel
 
     @ViewBuilder
     var body: some View {
-        if viewModel.count == 0 {
+        if viewModel.items.count == 0 {
             EmptyView()
         } else {
             EventsListView(viewModel)

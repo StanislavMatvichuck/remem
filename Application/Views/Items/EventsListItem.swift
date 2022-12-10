@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
-import IosUseCases
+
 import UIKit
 
 class EventsListItem: UITableViewCell {

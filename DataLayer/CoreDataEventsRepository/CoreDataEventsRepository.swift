@@ -7,7 +7,7 @@
 
 import CoreData
 import Domain
-import IosUseCases
+
 
 public class CoreDataEventsRepository {
     private let container: NSPersistentContainer

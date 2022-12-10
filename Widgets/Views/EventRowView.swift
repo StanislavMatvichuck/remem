@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
-import WidgetsFramework
 
 struct EventRowView: View {
-    let viewModel: WidgetRowViewModeling?
+    let viewModel: WidgetRowViewModel?
 
     @ViewBuilder
     var body: some View {

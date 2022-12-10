@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WidgetKit
-import WidgetsFramework
 
 @main
 struct RememWidgets: Widget, PreviewProvider {

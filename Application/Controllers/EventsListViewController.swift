@@ -6,7 +6,7 @@
 //
 
 import Domain
-import IosUseCases
+
 import UIKit
 
 class EventsListViewController: UIViewController {

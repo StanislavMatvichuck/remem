@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum WidgetDescription: String {
+enum WidgetDescription: String {
     case test = "WidgetData"
     case medium = "RememWidgets"
 }

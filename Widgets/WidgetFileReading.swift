@@ -7,22 +7,23 @@
 
 import Foundation
 
-public protocol WidgetFileReading {
+protocol WidgetFileReading {
     func read(for: WidgetDescription) -> WidgetViewModel?
     func readStaticPreview() -> WidgetViewModel
 }
 
-public class WidgetFileReader: WidgetFileReading {
-    public init() {}
-    
-    public func readStaticPreview() -> WidgetViewModel {
-        let localURL = Bundle(for: Self.self).url(forResource: "WidgetPreview", withExtension: "plist")!
+class WidgetFileReader: WidgetFileReading {
+    func readStaticPreview() -> WidgetViewModel {
+        let localURL = Bundle(for: Self.self).url(
+            forResource: "WidgetPreview",
+            withExtension: "plist"
+        )!
         let fileContent = try! Data(contentsOf: localURL)
         let viewModel = try! PropertyListDecoder().decode(WidgetViewModel.self, from: fileContent)
         return viewModel
     }
     
-    public func read(for description: WidgetDescription) -> WidgetViewModel? {
+    func read(for description: WidgetDescription) -> WidgetViewModel? {
         guard
             let directoryURL = FileManager.default.containerURL(
                 forSecurityApplicationGroupIdentifier: "group.remem.io")

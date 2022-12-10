@@ -8,14 +8,12 @@
 import Domain
 import Foundation
 
-public protocol WidgetFileWriting {
-    func update(eventsList: [Event], for: WidgetDescription)
+protocol WidgetFileWriting {
+    func update(today: DayComponents, eventsList: [Event], for: WidgetDescription)
 }
 
-public class WidgetFileWriter: WidgetFileWriting {
-    public init() {}
-
-    public func update(eventsList: [Event], for description: WidgetDescription) {
+class WidgetFileWriter: WidgetFileWriting {
+    func update(today: DayComponents, eventsList: [Event], for description: WidgetDescription) {
         guard
             let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")
         else { return }
@@ -29,13 +27,13 @@ public class WidgetFileWriter: WidgetFileWriting {
         let widgetEventRows: [WidgetRowViewModel] = {
             var result = [WidgetRowViewModel]()
             for event in eventsList {
-                let row = WidgetRowViewModel(event: event)
+                let row = WidgetRowViewModel(event: event, today: today)
                 result.append(row)
             }
             return result
         }()
 
-        let widgetViewModel = WidgetViewModel(viewModel: widgetEventRows)
+        let widgetViewModel = WidgetViewModel(items: widgetEventRows)
 
         do {
             let dataToWrite = try encoder.encode(widgetViewModel)

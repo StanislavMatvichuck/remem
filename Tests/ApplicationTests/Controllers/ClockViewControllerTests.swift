@@ -7,7 +7,7 @@
 
 @testable import Application
 import Domain
-import IosUseCases
+
 import XCTest
 
 class ClockViewControllerTests: XCTestCase {

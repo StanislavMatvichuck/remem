@@ -5,7 +5,7 @@
 //  Created by Stanislav Matvichuck on 23.09.2022.
 //
 
-import WidgetsFramework
+
 import XCTest
 
 class WidgetFileReadingTests: XCTestCase {

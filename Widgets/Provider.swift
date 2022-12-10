@@ -6,7 +6,7 @@
 //
 
 import WidgetKit
-import WidgetsFramework
+
 
 struct MediumWidgetTimelineEntry: TimelineEntry {
     var date: Date

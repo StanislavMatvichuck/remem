@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import WidgetsFramework
 
 struct EventRow: Identifiable {
     let id = UUID()
-    let viewModel: WidgetRowViewModeling?
+    let viewModel: WidgetRowViewModel
 }
 
 struct EventsListView: View {
@@ -35,17 +34,6 @@ struct EventsListView: View {
     }
 
     private func eventsRows() -> [EventRow] {
-        var eventsRows = [EventRow]()
-
-        for i in 0 ... 2 {
-            guard let eventViewModel = viewModel.rowViewModel(at: i) else {
-                eventsRows.append(EventRow(viewModel: nil))
-                continue
-            }
-
-            eventsRows.append(EventRow(viewModel: eventViewModel))
-        }
-
-        return eventsRows
+        viewModel.items.map { EventRow(viewModel: $0) }
     }
 }

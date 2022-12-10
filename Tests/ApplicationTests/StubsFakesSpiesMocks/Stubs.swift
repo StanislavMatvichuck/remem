@@ -8,7 +8,6 @@
 @testable import Application
 import Domain
 import Foundation
-import IosUseCases
 
 class WidgetUseCaseStub: WidgetsUseCasing {
     func update() {}

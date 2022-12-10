@@ -6,7 +6,7 @@
 //
 
 import Domain
-import WidgetsFramework
+
 import XCTest
 
 class WidgetFileWritingTests: XCTestCase {

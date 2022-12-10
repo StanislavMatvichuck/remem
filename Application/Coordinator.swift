@@ -6,7 +6,7 @@
 //
 
 import Domain
-import IosUseCases
+
 import UIKit
 
 /// `Abstraction` in view presentation layer

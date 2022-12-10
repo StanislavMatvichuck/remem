@@ -8,7 +8,7 @@
 @testable import Application
 import Domain
 import iOSSnapshotTestCase
-import IosUseCases
+
 
 class EventsListSnapshotsTest: FBSnapshotTestCase {
     var sut: EventsListViewController!

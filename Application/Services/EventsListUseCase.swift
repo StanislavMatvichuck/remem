@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-public protocol EventsListUseCasing {
+protocol EventsListUseCasing {
     func makeAllEvents() -> [Event]
     func add(name: String)
     func remove(_: Event)
@@ -17,40 +17,35 @@ public protocol EventsListUseCasing {
     func remove(delegate: EventsListUseCasingDelegate)
 }
 
-public class EventsListUseCase: EventsListUseCasing {
+class EventsListUseCase: EventsListUseCasing {
     // MARK: - Properties
     private var repository: EventsRepositoryInterface
     private var delegates: MulticastDelegate<EventsListUseCasingDelegate>
-    private let widgetUseCase: WidgetsUseCasing
+
     // MARK: - Init
-    public init(repository: EventsRepositoryInterface,
-                widgetUseCase: WidgetsUseCasing)
-    {
+    init(repository: EventsRepositoryInterface) {
         self.repository = repository
-        self.widgetUseCase = widgetUseCase
         self.delegates = MulticastDelegate<EventsListUseCasingDelegate>()
     }
 
     // EventsListUseCasing
-    public func makeAllEvents() -> [Event] { repository.makeAllEvents() }
-    public func add(name: String) {
+    func makeAllEvents() -> [Event] { repository.makeAllEvents() }
+    func add(name: String) {
         let createdEvent = Event(name: name)
 
         repository.save(createdEvent)
         delegates.call { $0.update(events: repository.makeAllEvents()) }
-        widgetUseCase.update()
     }
 
-    public func remove(_ event: Event) {
+    func remove(_ event: Event) {
         repository.delete(event)
         delegates.call { $0.update(events: repository.makeAllEvents()) }
-        widgetUseCase.update()
     }
 
-    public func add(delegate: EventsListUseCasingDelegate) { delegates.addDelegate(delegate) }
-    public func remove(delegate: EventsListUseCasingDelegate) { delegates.removeDelegate(delegate) }
+    func add(delegate: EventsListUseCasingDelegate) { delegates.addDelegate(delegate) }
+    func remove(delegate: EventsListUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }
 
-public protocol EventsListUseCasingDelegate: AnyObject {
+protocol EventsListUseCasingDelegate: AnyObject {
     func update(events: [Event])
 }

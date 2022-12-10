@@ -7,7 +7,7 @@
 
 import DataLayer
 import Domain
-import IosUseCases
+
 import UIKit
 
 /// Plays role of `Composer`
@@ -28,9 +28,8 @@ class CompositionRoot {
             mapper: EventEntityMapper()
         )
 
-        let widgetsUseCase = WidgetsUseCase(repository: repository)
-        let coreDataEventsListUseCase = EventsListUseCase(repository: repository, widgetUseCase: widgetsUseCase)
-        let coreDataEventEditUseCase = EventEditUseCase(repository: repository, widgetUseCase: widgetsUseCase)
+        let coreDataEventsListUseCase = EventsListUseCase(repository: repository)
+        let coreDataEventEditUseCase = EventEditUseCase(repository: repository)
 
         self.eventsListUseCase = coreDataEventsListUseCase
         self.eventEditUseCase = coreDataEventEditUseCase

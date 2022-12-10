@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-public protocol EventEditUseCasing {
+protocol EventEditUseCasing {
     func visit(_: Event)
     func addHappening(to: Event, date: Date)
     func removeHappening(from: Event, happening: Happening)
@@ -18,22 +18,17 @@ public protocol EventEditUseCasing {
     func remove(delegate: EventEditUseCasingDelegate)
 }
 
-public class EventEditUseCase: EventEditUseCasing {
-    // MARK: - Properties
+class EventEditUseCase: EventEditUseCasing {
     private let repository: EventsRepositoryInterface
     private let delegates: MulticastDelegate<EventEditUseCasingDelegate>
-    private let widgetUseCase: WidgetsUseCasing
-    // MARK: - Init
-    public init(repository: EventsRepositoryInterface,
-                widgetUseCase: WidgetsUseCasing)
-    {
+
+    init(repository: EventsRepositoryInterface) {
         self.repository = repository
-        self.widgetUseCase = widgetUseCase
         self.delegates = MulticastDelegate<EventEditUseCasingDelegate>()
     }
 
     // EventEditUseCasing
-    public func visit(_ event: Event) {
+    func visit(_ event: Event) {
         guard event.dateVisited == nil else { return }
 
         event.dateVisited = .now
@@ -41,19 +36,17 @@ public class EventEditUseCase: EventEditUseCasing {
         delegates.call { $0.update(event: event) }
     }
 
-    public func addHappening(to event: Event, date: Date) {
+    func addHappening(to event: Event, date: Date) {
         _ = event.addHappening(date: date)
         repository.save(event)
         delegates.call { $0.update(event: event) }
-        widgetUseCase.update()
     }
 
-    public func removeHappening(from event: Event, happening: Happening) {
+    func removeHappening(from event: Event, happening: Happening) {
         do {
             if let _ = try event.remove(happening: happening) {
                 repository.save(event)
                 delegates.call { $0.update(event: event) }
-                widgetUseCase.update()
             }
         } catch {
             switch error {
@@ -65,17 +58,16 @@ public class EventEditUseCase: EventEditUseCasing {
         }
     }
 
-    public func rename(_ event: Event, to newName: String) {
+    func rename(_ event: Event, to newName: String) {
         event.name = newName
         repository.save(event)
         delegates.call { $0.update(event: event) }
-        widgetUseCase.update()
     }
 
-    public func add(delegate: EventEditUseCasingDelegate) { delegates.addDelegate(delegate) }
-    public func remove(delegate: EventEditUseCasingDelegate) { delegates.removeDelegate(delegate) }
+    func add(delegate: EventEditUseCasingDelegate) { delegates.addDelegate(delegate) }
+    func remove(delegate: EventEditUseCasingDelegate) { delegates.removeDelegate(delegate) }
 }
 
-public protocol EventEditUseCasingDelegate: AnyObject {
+protocol EventEditUseCasingDelegate: AnyObject {
     func update(event: Event)
 }
