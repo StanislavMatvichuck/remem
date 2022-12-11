@@ -9,10 +9,6 @@
 import Domain
 import Foundation
 
-class WidgetUseCaseStub: WidgetsUseCasing {
-    func update() {}
-}
-
 class EventsListUseCasingFake: EventsListUseCasing {
     var events: [Event]
 

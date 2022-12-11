@@ -70,7 +70,7 @@
 		087366022930E000000F28DE /* WeekCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087366012930E000000F28DE /* WeekCellViewModelTests.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
-		087ED41028D0A4060085A37D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* Goal.swift */; };
+		087ED41028D0A4060085A37D /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* WeekDay.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -92,7 +92,6 @@
 		08B81784294500A70095D891 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		08B81785294500A70095D891 /* EventEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4C289598A0005453DD /* EventEditUseCase.swift */; };
 		08B81786294500A70095D891 /* EventsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D10F4A289587CC005453DD /* EventsListUseCase.swift */; };
-		08B81787294500A70095D891 /* WidgetsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB6128E24623006716F4 /* WidgetsUseCase.swift */; };
 		08B8178A294506E30095D891 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
 		08B89A2828E3191A00F4B63B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2728E3191A00F4B63B /* EmptyView.swift */; };
@@ -325,7 +324,7 @@
 		087366012930E000000F28DE /* WeekCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellViewModelTests.swift; sourceTree = "<group>"; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
-		087ED40F28D0A4060085A37D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		087ED40F28D0A4060085A37D /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -339,7 +338,6 @@
 		08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerTests.swift; sourceTree = "<group>"; };
 		0891377C292BE57400EFD23D /* DayViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewControllerTests.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
-		0895FB6128E24623006716F4 /* WidgetsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsUseCase.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* EventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInput.swift; sourceTree = "<group>"; };
@@ -468,7 +466,7 @@
 			children = (
 				083BECF328D0A31A009157FD /* Event.swift */,
 				087ED40D28D0A3F60085A37D /* Happening.swift */,
-				087ED40F28D0A4060085A37D /* Goal.swift */,
+				087ED40F28D0A4060085A37D /* WeekDay.swift */,
 				0816F4452933B8D700F3937A /* DayComponents.swift */,
 			);
 			path = Model;
@@ -680,7 +678,6 @@
 				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
 				08D10F4C289598A0005453DD /* EventEditUseCase.swift */,
 				08D10F4A289587CC005453DD /* EventsListUseCase.swift */,
-				0895FB6128E24623006716F4 /* WidgetsUseCase.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1193,7 +1190,7 @@
 			files = (
 				08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
-				087ED41028D0A4060085A37D /* Goal.swift in Sources */,
+				087ED41028D0A4060085A37D /* WeekDay.swift in Sources */,
 				0816F4462933B8D700F3937A /* DayComponents.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
 			);
@@ -1292,7 +1289,6 @@
 				08D512382787153900C2037F /* EventsListItem.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
-				08B81787294500A70095D891 /* WidgetsUseCase.swift in Sources */,
 				08B81786294500A70095D891 /* EventsListUseCase.swift in Sources */,
 				08B81785294500A70095D891 /* EventEditUseCase.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,

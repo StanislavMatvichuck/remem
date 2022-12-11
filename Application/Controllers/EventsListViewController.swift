@@ -6,7 +6,6 @@
 //
 
 import Domain
-
 import UIKit
 
 class EventsListViewController: UIViewController {
@@ -19,8 +18,8 @@ class EventsListViewController: UIViewController {
     // MARK: - Properties
     let listUseCase: EventsListUseCasing
     let editUseCase: EventEditUseCasing
-    let viewRoot: EventsListView
 
+    let viewRoot: EventsListView
     let coordinator: Coordinating
     var viewModel: EventsListViewModel
 

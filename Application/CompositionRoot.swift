@@ -7,7 +7,6 @@
 
 import DataLayer
 import Domain
-
 import UIKit
 
 /// Plays role of `Composer`

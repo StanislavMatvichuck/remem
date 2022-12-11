@@ -5,8 +5,6 @@
 //  Created by Stanislav Matvichuck on 28.07.2022.
 //
 
-import Domain
-
 import UIKit
 
 /// `Abstraction` in view presentation layer

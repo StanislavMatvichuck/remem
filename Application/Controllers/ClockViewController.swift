@@ -6,7 +6,6 @@
 //
 
 import Domain
-
 import UIKit
 
 class ClockViewController: UIViewController {
