@@ -77,18 +77,18 @@ class ClockViewControllerTests: XCTestCase {
     }
 
     func test_receivesUpdatesFromEditUseCasing() {
-        let event = Event(name: "Event")
-        let useCase = EventEditUseCasingFake()
+        let refDay = DayComponents.referenceValue
+        let event = Event(name: "Event", dateCreated: refDay.date)
+        let commander = EventsRepositoryFake(events: [event])
 
         sut = ClockViewController(
             event: event,
-            useCase: useCase,
             sorter: DefaultClockSorter(size: 144)
         )
 
         sut.forceViewToLayoutInScreenSize()
 
-        useCase.addHappening(to: event, date: .now)
+        event.addHappening(date: refDay.date)
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }

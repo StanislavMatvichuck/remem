@@ -14,16 +14,12 @@ class EventViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let event = Event(name: "EventName")
-        let ucFake = EventEditUseCasingFake()
 
-        let sut = EventViewController(
-            event: event,
-            useCase: ucFake,
+        sut = EventViewController(
+            event: Event(name: "EventName"),
+            commander: EventsRepositoryFake(),
             controllers: [UIViewController(), UIViewController()]
         )
-
-        self.sut = sut
     }
 
     override func tearDown() {

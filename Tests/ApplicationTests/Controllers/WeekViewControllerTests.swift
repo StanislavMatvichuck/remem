@@ -69,14 +69,14 @@ class WeekViewControllerTests: XCTestCase {
         let created = DayComponents.referenceValue.adding(components: DateComponents(day: createdRandomOffset))
         let event = Event(name: "Event", dateCreated: created.date)
 
-        let useCase = EventEditUseCasingFake()
+        let commander = EventsRepositoryFake(events: [event])
         let coordinator = DefaultCoordinator()
         self.coordinator = coordinator
 
         sut = WeekViewController(
             today: created.adding(components: DateComponents(day: todayRandomOffset)),
             event: event,
-            useCase: useCase,
+            commander: commander,
             coordinator: coordinator
         )
 
@@ -119,15 +119,14 @@ class WeekViewControllerTests: XCTestCase {
 
         event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(happeningOffset))
 
-        let useCase = EventEditUseCasingFake()
-
+        let commander = EventsRepositoryFake(events: [event])
         let coordinator = CompositionRoot().coordinator
         self.coordinator = coordinator
 
         let sut = WeekViewController(
             today: DayComponents.referenceValue,
             event: event,
-            useCase: useCase,
+            commander: commander,
             coordinator: coordinator
         )
 

@@ -8,8 +8,7 @@
 import CoreData
 import Domain
 
-
-public class CoreDataEventsRepository {
+public class CoreDataEventsRepository: EventsQuerying {
     private let container: NSPersistentContainer
     private let entityMapper: EventEntityMapper
     private var moc: NSManagedObjectContext { container.viewContext }
@@ -21,6 +20,8 @@ public class CoreDataEventsRepository {
         self.container = container
         self.entityMapper = mapper
     }
+
+    public func get() -> [Event] { makeAllEvents() }
 }
 
 extension CoreDataEventsRepository: EventsRepositoryInterface {

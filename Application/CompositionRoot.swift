@@ -9,51 +9,82 @@ import DataLayer
 import Domain
 import UIKit
 
-/// Plays role of `Composer`
-/// # Objects composition
-/// # Dependencies lifecycle management
 class CompositionRoot {
-    /// Singleton dependency lifecycle
-    let eventsListUseCase: EventsListUseCasing
-    let eventEditUseCase: EventEditUseCasing
+    let provider: EventsQuerying
+    let commander: EventsCommanding
     let coordinator: Coordinating
+    let eventsListUpdater: EventsListsUpdater
 
     init() {
-        /// Scoped dependency lifecycle?
-        let repository = CoreDataEventsRepository(
-            container: CoreDataStack.createContainer(
-                inMemory: false
+        let updater = EventsListsUpdater()
+        let coordinator = DefaultCoordinator()
+        let decoratedEventsProviderCommander = EventsRepositoryDecorator(
+            repository: CoreDataEventsRepository(
+                container: CoreDataStack.createContainer(
+                    inMemory: false
+                ),
+                mapper: EventEntityMapper()
             ),
-            mapper: EventEntityMapper()
+            updater: updater
         )
 
-        let coreDataEventsListUseCase = EventsListUseCase(repository: repository)
-        let coreDataEventEditUseCase = EventEditUseCase(repository: repository)
+        self.coordinator = coordinator
+        self.eventsListUpdater = updater
+        self.provider = decoratedEventsProviderCommander
+        self.commander = decoratedEventsProviderCommander
 
-        self.eventsListUseCase = coreDataEventsListUseCase
-        self.eventEditUseCase = coreDataEventEditUseCase
-        self.coordinator = DefaultCoordinator()
+        decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
     }
 
     // MARK: - Controllers creation
 
     func makeRootViewController() -> UIViewController {
-        let eventsListController = EventsListViewController(
-            listUseCase: eventsListUseCase,
-            editUseCase: eventEditUseCase,
-            coordinator: coordinator
-        )
+        let viewModel = makeEventsListViewModel()
+        let eventsListController = EventsListViewController(viewModel: viewModel)
         coordinator.show(eventsListController)
+        eventsListUpdater.addDelegate(eventsListController)
         return eventsListController.navigationController!
     }
 
-    func makeEventDetailsController(
+    func makeEventsListViewModel() -> EventsListViewModel {
+        EventsListViewModel(
+            events: provider.get(),
+            today: DayComponents(date: .now),
+            onAdd: { name in
+                self.commander.save(Event(name: name))
+            },
+            itemViewModelFactory: makeEventItemViewModel
+        )
+    }
+
+    func makeEventItemViewModel(
         event: Event,
-        coordinator: Coordinating
-    ) -> EventViewController {
+        today: DayComponents
+    ) -> EventItemViewModel {
+        EventItemViewModel(
+            event: event,
+            today: today,
+            onSelect: { event in
+                self.coordinator.show(self.makeEventController(event: event))
+            },
+            onSwipe: { event in
+                event.addHappening(date: .now)
+                self.commander.save(event)
+            },
+            onRemove: { event in
+                self.commander.delete(event)
+            },
+            onRename: { event, newName in
+                event.name = newName
+                self.commander.save(event)
+            }
+        )
+    }
+
+    func makeEventController(event: Event) -> EventViewController {
         EventViewController(
             event: event,
-            useCase: eventEditUseCase,
+            commander: commander,
             controllers: [
                 makeWeekController(
                     event: event,
@@ -71,7 +102,7 @@ class CompositionRoot {
         WeekViewController(
             today: DayComponents(date: .now),
             event: event,
-            useCase: eventEditUseCase,
+            commander: commander,
             coordinator: coordinator
         )
     }
@@ -79,7 +110,6 @@ class CompositionRoot {
     func makeClockViewController(event: Event) -> ClockViewController {
         ClockViewController(
             event: event,
-            useCase: eventEditUseCase,
             sorter: DefaultClockSorter(size: 144)
         )
     }
@@ -88,7 +118,57 @@ class CompositionRoot {
         DayViewController(
             day: day,
             event: event,
-            useCase: eventEditUseCase
+            commander: commander
         )
+    }
+}
+
+class EventsRepositoryDecorator:
+    EventsRepositoryInterface,
+    EventsQuerying,
+    EventsCommanding
+{
+    let decoratee: EventsRepositoryInterface
+    let updater: EventsListViewModelUpdating
+    var viewModelFactory: (() -> EventsListViewModel)?
+
+    init(
+        repository: EventsRepositoryInterface,
+        updater: EventsListViewModelUpdating
+    ) {
+        self.decoratee = repository
+        self.updater = updater
+    }
+
+    func get() -> [Event] { makeAllEvents() }
+
+    func makeAllEvents() -> [Domain.Event] {
+        decoratee.makeAllEvents()
+    }
+
+    func save(_ event: Domain.Event) {
+        decoratee.save(event)
+        sendUpdates()
+    }
+
+    func delete(_ event: Domain.Event) {
+        decoratee.delete(event)
+        sendUpdates()
+    }
+
+    private func sendUpdates() {
+        guard let viewModelFactory else { return }
+        updater.update(viewModel: viewModelFactory())
+    }
+}
+
+protocol EventsListViewModelUpdating { func update(viewModel: EventsListViewModel) }
+
+class EventsListsUpdater:
+    MulticastDelegate<EventsListViewModelUpdating>,
+    EventsListViewModelUpdating
+{
+    func update(viewModel: EventsListViewModel) {
+        call { $0.update(viewModel: viewModel) }
     }
 }

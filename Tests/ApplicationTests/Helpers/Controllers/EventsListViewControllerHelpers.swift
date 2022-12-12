@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import XCTest
 
 extension EventsListViewController {
@@ -81,20 +82,72 @@ extension EventsListViewController {
         } else { fatalError("unable to get cell at \(atIndexPath)") }
     }
 
-    static func make() -> (sut: EventsListViewController, coordinator: Coordinating) {
-        let coordinator = CompositionRoot().coordinator
-        let listUCfake = EventsListUseCasingFake()
-        let editUCfake = EventEditUseCasingFake()
+    static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
+        let updater = EventsListsUpdater()
+        let provider = EventsRepositoryDecorator(
+            repository: EventsRepositoryFake(),
+            updater: updater
+        )
+
+        let commander = provider
+        let listViewModelFactory = {
+            EventsListViewModel(
+                events: provider.get(),
+                today: DayComponents(date: .now),
+                onAdd: { name in
+                    commander.save(Event(name: name))
+                },
+                itemViewModelFactory: { event, today in
+                    EventItemViewModel(
+                        event: event,
+                        today: today,
+                        onSelect: { _ in
+                            coordinator.show(UIViewController())
+                        },
+                        onSwipe: { event in
+                            event.addHappening(date: .now)
+                            commander.save(event)
+                        },
+                        onRemove: { event in
+                            commander.delete(event)
+                        },
+                        onRename: { event, newName in
+                            event.name = newName
+                            commander.save(event)
+                        }
+                    )
+                }
+            )
+        }
+
+        commander.viewModelFactory = listViewModelFactory
 
         let sut = EventsListViewController(
-            listUseCase: listUCfake,
-            editUseCase: editUCfake,
-            coordinator: coordinator
+            viewModel: listViewModelFactory()
         )
 
         sut.loadViewIfNeeded()
         coordinator.show(sut)
+        updater.addDelegate(sut)
 
-        return (sut: sut, coordinator: coordinator)
+        return (sut, coordinator)
+    }
+}
+
+class DecoratedDefaultCoordinator: Coordinating {
+    let decoratee: Coordinating
+    let callback: () -> Void
+
+    init(_ coordinator: Coordinating, callBack: @escaping () -> Void) {
+        self.decoratee = coordinator
+        self.callback = callBack
+    }
+
+    func show(_ controller: UIViewController) {
+        decoratee.show(controller)
+
+        if controller as? EventsListViewController == nil {
+            callback()
+        }
     }
 }

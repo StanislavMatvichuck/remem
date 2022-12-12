@@ -5,7 +5,6 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
-
 import UIKit
 
 class EventsListItem: UITableViewCell {
@@ -18,7 +17,6 @@ class EventsListItem: UITableViewCell {
 
     // MARK: - Properties
     var viewModel: EventItemViewModel? { didSet { handleViewStateUpdate() } }
-    var useCase: EventEditUseCasing?
     let swiper = Swiper()
 
     let viewRoot: UIView = {
@@ -93,6 +91,9 @@ class EventsListItem: UITableViewCell {
 
     private func configureEventsHandlers() {
         swiper.addTarget(self, action: #selector(handleSwipe), for: .primaryActionTriggered)
+        viewRoot.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        )
     }
 
     private func handleViewStateUpdate() {
@@ -103,7 +104,6 @@ class EventsListItem: UITableViewCell {
     // MARK: - View lifecycle
     override func prepareForReuse() {
         viewModel = nil
-        useCase = nil
         super.prepareForReuse()
     }
 }
@@ -111,8 +111,13 @@ class EventsListItem: UITableViewCell {
 // MARK: - User input
 extension EventsListItem {
     @objc private func handleSwipe(_ swiper: Swiper) {
-        guard let useCase, let viewModel else { return }
-        useCase.addHappening(to: viewModel.event, date: .now)
+        guard let viewModel else { return }
+        viewModel.onSwipe(viewModel.event)
+    }
+
+    @objc private func handleTap(_ gr: UITapGestureRecognizer) {
+        guard let viewModel else { return }
+        viewModel.onSelect(viewModel.event)
     }
 }
 

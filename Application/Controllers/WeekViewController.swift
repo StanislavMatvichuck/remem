@@ -15,7 +15,7 @@ class WeekViewController: UIViewController {
 
     let today: DayComponents
     var event: Event
-    let useCase: EventEditUseCasing
+    let commander: EventsCommanding
     let coordinator: Coordinating
     var viewModel: WeekViewModel
     let viewRoot: WeekView
@@ -25,18 +25,17 @@ class WeekViewController: UIViewController {
     init(
         today: DayComponents,
         event: Event,
-        useCase: EventEditUseCasing,
+        commander: EventsCommanding,
         coordinator: Coordinating)
     {
         self.today = today
         self.event = event
-        self.useCase = useCase
+        self.commander = commander
         self.coordinator = coordinator
         self.viewModel = WeekViewModel(today: today, event: event)
         self.viewRoot = WeekView()
 
         super.init(nibName: nil, bundle: nil)
-        useCase.add(delegate: self)
 
         configureCollection()
     }
@@ -71,15 +70,6 @@ class WeekViewController: UIViewController {
     }
 }
 
-// MARK: - EditUseCaseDelegating
-extension WeekViewController: EventEditUseCasingDelegate {
-    func update(event: Domain.Event) {
-        self.event = event
-        viewModel = WeekViewModel(today: today, event: event)
-        viewRoot.collection.reloadData()
-    }
-}
-
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension WeekViewController:
     UICollectionViewDataSource,
@@ -108,12 +98,10 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vm = viewModel.items[indexPath.row]
-
         coordinator.show(DayViewController(
-            day: vm.day,
+            day: viewModel.items[indexPath.row].day,
             event: event,
-            useCase: useCase)
+            commander: commander)
         )
     }
 

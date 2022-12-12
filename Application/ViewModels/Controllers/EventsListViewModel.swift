@@ -8,31 +8,39 @@
 import Domain
 
 struct EventsListViewModel {
-    var renamedEvent: Event?
+    typealias ItemViewModelFactory = (_: Event, _: DayComponents) -> EventItemViewModel
+    typealias onAdd = (_: String) -> Void
+
     let events: [Event]
+    let today: DayComponents
+    let items: [EventItemViewModel]
+    let factory: ItemViewModelFactory
+    let hint: String
+    var renamedItem: EventItemViewModel?
 
-    init(events: [Event]) { self.events = events }
+    let onAdd: onAdd
 
-    var count: Int { events.count }
-    var isAddButtonHighlighted: Bool { events.count == 0 }
-    var hint: HintState {
-        if events.count == 0 { return .empty }
-        if events.filter({ $0.happenings.count > 0 }).count == 0 { return .placeFirstMark }
-        if events.filter({ $0.dateVisited != nil }).count == 0 { return .pressMe }
-        return .swipeLeft
-    }
+    init(
+        events: [Event],
+        today: DayComponents,
+        onAdd: @escaping onAdd,
+        itemViewModelFactory: @escaping ItemViewModelFactory
+    ) {
+        self.events = events
+        self.today = today
+        self.onAdd = onAdd
+        factory = itemViewModelFactory
 
-    func eventViewModel(at index: Int) -> EventItemViewModel? {
-        if let event = event(at: index) {
-            return EventItemViewModel(event: event, today: .init(date: .now))
-        } else {
-            return nil
+        hint = {
+            if events.count == 0 { return HintState.empty.text }
+            if events.filter({ $0.happenings.count > 0 }).count == 0 { return HintState.placeFirstMark.text }
+            if events.filter({ $0.dateVisited != nil }).count == 0 { return HintState.pressMe.text }
+            return HintState.swipeLeft.text
+        }()
+
+        items = events.map { event in
+            itemViewModelFactory(event, today)
         }
-    }
-
-    func event(at index: Int) -> Event? {
-        guard index < events.count, index >= 0 else { return nil }
-        return events[index]
     }
 }
 
@@ -42,7 +50,7 @@ enum HintState: String {
     case pressMe
     case swipeLeft
 
-    var text: String? {
+    var text: String {
         switch self {
         case .empty:
             return String(localizationId: "eventsList.hint.empty")

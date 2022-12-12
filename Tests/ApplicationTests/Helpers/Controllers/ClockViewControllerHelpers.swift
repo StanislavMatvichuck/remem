@@ -16,14 +16,6 @@ struct TimeComponents {
 }
 
 extension ClockViewController {
-    static func make(event: Event = Event(name: "Event")) -> ClockViewController {
-        ClockViewController(
-            event: event,
-            useCase: EventEditUseCasingFake(),
-            sorter: DefaultClockSorter(size: 144)
-        )
-    }
-
     func addOneHappening(
         at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
     ) {
@@ -35,11 +27,17 @@ extension ClockViewController {
         guard let date = Calendar.current.date(from: today)
         else { fatalError("error making time for insertion") }
         event.addHappening(date: date)
-        update(event: event)
     }
 
     func forceViewToLayoutInScreenSize() {
         view.bounds = UIScreen.main.bounds
         view.layoutIfNeeded()
+    }
+
+    static func make(event: Event = Event(name: "Event")) -> ClockViewController {
+        ClockViewController(
+            event: event,
+            sorter: DefaultClockSorter(size: 144)
+        )
     }
 }

@@ -24,15 +24,15 @@ extension WeekViewController {
     }
 
     static func make() -> (sut: WeekViewController, coordinator: Coordinating) {
-        let coordinator = CompositionRoot().coordinator
-        let useCase = EventEditUseCasingFake()
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
+        let coordinator = CompositionRoot().coordinator
+        let commander = EventsRepositoryFake(events: [event])
         return (
             sut: WeekViewController(
                 today: today,
                 event: event,
-                useCase: useCase,
+                commander: commander,
                 coordinator: coordinator
             ),
             coordinator: coordinator

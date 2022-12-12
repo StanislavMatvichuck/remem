@@ -12,22 +12,21 @@ import UIKit
 class EventViewController: UIViewController {
     // MARK: - Properties
     let viewRoot = EventView()
-    let useCase: EventEditUseCasing
+    let commander: EventsCommanding
     var event: Event
     var viewModel: EventViewModel
 
     // MARK: - Init
     init(
         event: Event,
-        useCase: EventEditUseCasing,
+        commander: EventsCommanding,
         controllers: [UIViewController]
     ) {
         self.event = event
         self.viewModel = EventViewModel(event: event)
-        self.useCase = useCase
+        self.commander = commander
 
         super.init(nibName: nil, bundle: nil)
-        useCase.add(delegate: self)
 
         title = viewModel.title
 
@@ -42,20 +41,13 @@ class EventViewController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        useCase.visit(event)
+        event.visit()
+        commander.save(event)
     }
 
     private func contain(controller: UIViewController) {
         addChild(controller)
         viewRoot.scroll.viewContent.addArrangedSubview(controller.view)
         controller.didMove(toParent: self)
-    }
-}
-
-extension EventViewController: EventEditUseCasingDelegate {
-    func update(event: Domain.Event) {
-        if self.event == event {
-            viewModel = EventViewModel(event: event)
-        }
     }
 }

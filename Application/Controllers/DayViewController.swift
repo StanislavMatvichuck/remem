@@ -26,7 +26,7 @@ class DayViewController: UIViewController {
         }
     }
 
-    let useCase: EventEditUseCasing
+    let commander: EventsCommanding
     let viewRoot: DayView
     let day: DayComponents
     var event: Event
@@ -36,15 +36,14 @@ class DayViewController: UIViewController {
     init(
         day: DayComponents,
         event: Event,
-        useCase: EventEditUseCasing
+        commander: EventsCommanding
     ) {
-        self.useCase = useCase
+        self.commander = commander
         self.event = event
         self.day = day
         self.viewRoot = DayView()
         self.viewModel = DayViewModel(day: day, event: event)
         super.init(nibName: nil, bundle: nil)
-        useCase.add(delegate: self)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -119,7 +118,8 @@ class DayViewController: UIViewController {
 
     @objc private func handleTimeChange() { updateDisplayedTime() }
     @objc private func handleTimeSelectionSubmit(_: UIAlertAction) {
-        useCase.addHappening(to: event, date: picker.date)
+        event.addHappening(date: picker.date)
+        commander.save(event)
     }
 
     @objc private func handleEdit() {
@@ -154,19 +154,16 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
                 style: .destructive,
                 title: String(localizationId: "button.delete")
             ) { _, _, completion in
-                let happenings = self.event.happenings(forDayComponents: self.day)
-                self.useCase.removeHappening(from: self.event, happening: happenings[index.row])
+                let event = self.event
+                let happenings = event.happenings(forDayComponents: self.day)
+                do {
+                    try event.remove(happening: happenings[index.row])
+                } catch {
+                    print("")
+                }
+                self.commander.save(event)
                 completion(true)
             },
         ])
-    }
-}
-
-extension DayViewController: EventEditUseCasingDelegate {
-    func update(event: Domain.Event) {
-        guard self.event == event else { return }
-        self.event = event
-        viewModel = DayViewModel(day: day, event: event)
-        viewRoot.happenings.reloadData()
     }
 }

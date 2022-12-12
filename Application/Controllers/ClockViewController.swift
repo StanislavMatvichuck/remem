@@ -14,13 +14,12 @@ class ClockViewController: UIViewController {
     var viewModel: ClockViewModel
     var event: Event
 
-    init(event: Event, useCase: EventEditUseCasing, sorter: ClockStrategy) {
+    init(event: Event, sorter: ClockStrategy) {
         self.event = event
         self.sorter = sorter
         self.viewModel = ClockViewModel(happenings: event.happenings, sorter: sorter)
         self.viewRoot = ClockView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
-        useCase.add(delegate: self)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -37,14 +36,5 @@ class ClockViewController: UIViewController {
         viewModel.sections.enumerated().forEach { index, section in
             layers[index].viewModel = section
         }
-    }
-}
-
-extension ClockViewController: EventEditUseCasingDelegate {
-    func update(event: Domain.Event) {
-        guard self.event == event else { return }
-
-        viewModel = ClockViewModel(happenings: event.happenings, sorter: sorter)
-        update()
     }
 }

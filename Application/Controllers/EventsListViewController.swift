@@ -15,36 +15,18 @@ class EventsListViewController: UIViewController {
         case footer
     }
 
-    // MARK: - Properties
-    let listUseCase: EventsListUseCasing
-    let editUseCase: EventEditUseCasing
-
     let viewRoot: EventsListView
-    let coordinator: Coordinating
     var viewModel: EventsListViewModel
 
     // MARK: - Init
-    init(
-        listUseCase: EventsListUseCasing,
-        editUseCase: EventEditUseCasing,
-        coordinator: Coordinating)
-    {
+    init(viewModel: EventsListViewModel) {
         self.viewRoot = EventsListView()
-        self.listUseCase = listUseCase
-        self.editUseCase = editUseCase
-        self.coordinator = coordinator
-
-        self.viewModel = EventsListViewModel(events: listUseCase.makeAllEvents())
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
-
-        listUseCase.add(delegate: self)
-        editUseCase.add(delegate: self)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
-    deinit { print(#function) }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -58,6 +40,32 @@ class EventsListViewController: UIViewController {
         viewRoot.table.dataSource = self
         viewRoot.table.delegate = self
     }
+
+    private func setupEventHandlers() {
+        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
+    }
+
+    @objc private func handleAdd() {
+        if let renamedEventItem = viewModel.renamedItem {
+            renamedEventItem.onRename(
+                renamedEventItem.event,
+                viewRoot.input.value
+            )
+        } else {
+            viewModel.onAdd(viewRoot.input.value)
+        }
+    }
+}
+
+extension EventsListViewController: EventsListViewModelUpdating {
+    func update(viewModel: EventsListViewModel) {
+        self.viewModel = viewModel
+        viewRoot.table.reloadData()
+
+        if viewModel.hint != HintState.placeFirstMark.text {
+            viewRoot.swipeHint.removeFromSuperview()
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -69,7 +77,7 @@ extension EventsListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Section(rawValue: section) == .events ? viewModel.count : 1
+        Section(rawValue: section) == .events ? viewModel.items.count : 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,21 +96,23 @@ extension EventsListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension EventsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let event = viewModel.event(at: indexPath.row) else { return nil }
+        let event = viewModel.events[indexPath.row]
 
-        let renameAction = UIContextualAction(style: .normal,
-                                              title: String(localizationId: "button.rename")) {
-                _, _, completion in
-                self.viewModel.renamedEvent = event
-                self.viewRoot.input.rename(oldName: event.name)
-                completion(true)
+        let renameAction = UIContextualAction(
+            style: .normal,
+            title: String(localizationId: "button.rename")
+        ) { _, _, completion in
+            self.viewModel.renamedItem = self.viewModel.items[indexPath.row]
+            self.viewRoot.input.rename(oldName: event.name)
+            completion(true)
         }
 
-        let deleteAction = UIContextualAction(style: .destructive,
-                                              title: String(localizationId: "button.delete")) {
-                _, _, completion in
-                self.listUseCase.remove(event)
-                completion(true)
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: String(localizationId: "button.delete")
+        ) { _, _, completion in
+            self.viewModel.items[indexPath.row].onRemove(event)
+            completion(true)
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
@@ -113,93 +123,15 @@ extension EventsListViewController: UITableViewDelegate {
         sender.animate()
         viewRoot.input.show(value: "")
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            indexPath.section == Section.events.rawValue,
-            let event = viewModel.event(at: indexPath.row)
-        else { return }
-
-        let weekController = WeekViewController(
-            today: DayComponents(date: .now),
-            event: event,
-            useCase: editUseCase,
-            coordinator: coordinator)
-
-        let clockController = ClockViewController(
-            event: event,
-            useCase: editUseCase,
-            sorter: DefaultClockSorter(size: 144))
-
-        coordinator.show(EventViewController(
-            event: event,
-            useCase: editUseCase,
-            controllers: [
-                weekController,
-                clockController
-            ])
-        )
-    }
-}
-
-// MARK: - Events handling
-extension EventsListViewController {
-    private func setupEventHandlers() {
-        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
-        viewRoot.input.addTarget(self, action: #selector(handleCancel), for: .editingDidEndOnExit)
-    }
-
-    @objc private func handleAdd() {
-        if let renaming = viewModel.renamedEvent {
-            editUseCase.rename(renaming, to: viewRoot.input.value)
-            viewModel.renamedEvent = nil
-        } else {
-            listUseCase.add(name: viewRoot.input.value)
-        }
-    }
-
-    @objc private func handleCancel() {}
-}
-
-// MARK: - EventsListUseCasingDelegate, EventEditUseCasingDelegate
-extension EventsListViewController:
-    EventsListUseCasingDelegate,
-    EventEditUseCasingDelegate
-{
-    func update(event: Domain.Event) {
-        if let index = viewModel.events.firstIndex(of: event) {
-            var newEvents = viewModel.events
-            newEvents[index] = event
-            viewModel = EventsListViewModel(events: newEvents)
-            viewRoot.table.reloadRows(
-                at: [IndexPath(
-                    row: index,
-                    section: Section.events.rawValue)],
-                with: .none)
-            hideSwipeHintIfNeeded()
-        }
-    }
-
-    func update(events: [Event]) {
-        viewModel = EventsListViewModel(events: events)
-        hideSwipeHintIfNeeded()
-        viewRoot.table.reloadData()
-    }
-
-    private func hideSwipeHintIfNeeded() {
-        if viewModel.hint != .placeFirstMark {
-            viewRoot.swipeHint.removeFromSuperview()
-        }
-    }
 }
 
 // MARK: - Private
 extension EventsListViewController {
     private func makeHintCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListHintItem.reuseIdentifier) as! EventsListHintItem
-        cell.label.text = viewModel.hint.text
+        cell.label.text = viewModel.hint
 
-        if viewModel.hint == .swipeLeft {
+        if viewModel.hint == HintState.swipeLeft.text {
             cell.label.font = UIHelper.fontSmall
             cell.label.textColor = UIHelper.hint
         } else {
@@ -213,29 +145,19 @@ extension EventsListViewController {
     private func makeFooterCell() -> UITableViewCell {
         let cell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListFooterItem.reuseIdentifier) as! EventsListFooterItem
 
-        cell.button.addTarget(
-            self,
-            action: #selector(handleAddButton),
-            for: .touchUpInside)
+        cell.button.addTarget(self, action: #selector(handleAddButton), for: .touchUpInside)
 
-        if viewModel.isAddButtonHighlighted {
-            cell.highlight()
-        } else {
-            cell.resignHighlight()
-        }
+        viewModel.items.isEmpty ? cell.highlight() : cell.resignHighlight()
 
         return cell
     }
 
     private func makeEventCell(for index: IndexPath) -> UITableViewCell {
-        guard
-            let eventCell = viewRoot.table.dequeueReusableCell(withIdentifier: EventsListItem.reuseIdentifier) as? EventsListItem,
-            let viewModel = viewModel.eventViewModel(at: index.row)
-        else { fatalError("unable to get EventCell") }
+        guard let eventCell = viewRoot.table.dequeueReusableCell(
+            withIdentifier: EventsListItem.reuseIdentifier
+        ) as? EventsListItem else { fatalError("unable to get EventCell") }
 
-        eventCell.viewModel = viewModel
-        eventCell.useCase = editUseCase
-
+        eventCell.viewModel = viewModel.items[index.row]
         configureSwipeHintIfNeeded(at: index, cell: eventCell)
         return eventCell
     }
@@ -244,7 +166,7 @@ extension EventsListViewController {
         guard
             indexPath.row == 0,
             indexPath.section == Section.events.rawValue,
-            viewModel.hint == .placeFirstMark
+            viewModel.hint == HintState.placeFirstMark.text
         else { return }
         cell.contentView.addAndConstrain(viewRoot.swipeHint)
         viewRoot.swipeHint.start()

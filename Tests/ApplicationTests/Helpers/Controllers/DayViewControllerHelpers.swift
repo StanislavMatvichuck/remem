@@ -25,12 +25,12 @@ extension DayViewController {
         event: Event = Event(name: "Event"),
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
-        let useCase = EventEditUseCasingFake()
         let sut = DayViewController(
             day: day,
             event: event,
-            useCase: useCase
+            commander: EventsRepositoryFake(events: [event])
         )
+
         sut.loadViewIfNeeded()
 
         _ = UINavigationController(rootViewController: sut)

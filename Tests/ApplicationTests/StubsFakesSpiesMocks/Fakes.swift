@@ -8,22 +8,30 @@
 @testable import Application
 import Domain
 
-class EventsRepositoryFake: EventsRepositoryInterface {
-    private var events: [Event]
+class EventsRepositoryFake:
+    EventsRepositoryInterface,
+    EventsQuerying,
+    EventsCommanding
+{
+    var events: [Event]
 
-    init(events: [Event]) {
-        self.events = events
-    }
+    init(events: [Event] = []) { self.events = events }
 
-    func makeAllEvents() -> [Domain.Event] { events }
+    func get() -> [Domain.Event] { events }
 
     func save(_ event: Domain.Event) {
-        events.append(event)
+        if let existingEventIndex = events.firstIndex(of: event) {
+            events[existingEventIndex] = event
+        } else {
+            events.append(event)
+        }
     }
 
     func delete(_ event: Domain.Event) {
-        if let index = events.firstIndex(of: event) {
-            events.remove(at: index)
-        }
+        guard let existingEventIndex = events.firstIndex(of: event) else { return }
+        events.remove(at: existingEventIndex)
     }
+
+    /// this might be removed with `EventsRepositoryInterface`
+    func makeAllEvents() -> [Domain.Event] { get() }
 }

@@ -10,3 +10,12 @@ public protocol EventsRepositoryInterface {
     func save(_: Event)
     func delete(_: Event)
 }
+
+public protocol EventsQuerying {
+    func get() -> [Event]
+}
+
+public protocol EventsCommanding {
+    func save(_: Event)
+    func delete(_: Event)
+}
