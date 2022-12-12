@@ -40,8 +40,7 @@ struct EventItemViewModel {
     var name: String { event.name }
 
     var amount: String {
-        let todayDate = Date.now
-        let todayHappeningsCount = event.happenings(forDay: todayDate).count
+        let todayHappeningsCount = event.happenings(forDayComponents: today).count
         return String(todayHappeningsCount)
     }
 }

@@ -94,12 +94,6 @@ public extension Event {
         return happeningDeleted
     }
 
-    func happenings(forDay: Date) -> [Happening] {
-        happenings
-            .filter { Calendar.current.isDate($0.dateCreated, inSameDayAs: forDay) }
-            .sorted(by: { $0.dateCreated > $1.dateCreated })
-    }
-
     func happenings(forDayComponents day: DayComponents) -> [Happening] {
         let startOfDay = Calendar.current.startOfDay(for: day.date)
 
