@@ -10,7 +10,7 @@ import Domain
 import XCTest
 
 class EventItemViewModelTests: XCTestCase {
-    private var sut: EventItemViewModel!
+//    private var sut: EventItemViewModel!
 
 //    override func setUp() {
 //        super.setUp()
@@ -20,7 +20,7 @@ class EventItemViewModelTests: XCTestCase {
 //        super.tearDown()
 //    }
 
-    func testInit() {
+    func test_init() {
         let coordinator = DefaultCoordinator()
         let commander = EventsRepositoryFake()
         let today = DayComponents.referenceValue
@@ -28,20 +28,11 @@ class EventItemViewModelTests: XCTestCase {
         let sut = EventItemViewModel(
             event: event,
             today: today,
-            onSelect: { _ in
-                coordinator.show(UIViewController())
-            },
-            onSwipe: { event in
-                event.addHappening(date: .now)
-                commander.save(event)
-            },
-            onRemove: { event in
-                commander.delete(event)
-            },
-            onRename: { event, newName in
-                event.name = newName
-                commander.save(event)
-            }
+            onSelect: { _ in },
+            coordinator: coordinator,
+            commander: commander
         )
+
+        XCTAssertNotNil(sut)
     }
 }

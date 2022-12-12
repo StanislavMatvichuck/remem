@@ -10,31 +10,25 @@ import Foundation
 
 struct EventItemViewModel {
     typealias onSelect = (_: Event) -> Void
-    typealias onSwipe = (_: Event) -> Void
-    typealias onRemove = (_: Event) -> Void
-    typealias onRename = (_: Event, _: String) -> Void
 
     let event: Event
     let today: DayComponents
     let onSelect: onSelect
-    let onSwipe: onSwipe
-    let onRemove: onRemove
-    let onRename: onRename
+    let coordinator: Coordinating
+    let commander: EventsCommanding
 
     init(
         event: Event,
         today: DayComponents,
         onSelect: @escaping onSelect,
-        onSwipe: @escaping onSwipe,
-        onRemove: @escaping onRemove,
-        onRename: @escaping onRename
+        coordinator: Coordinating,
+        commander: EventsCommanding
     ) {
         self.event = event
         self.today = today
         self.onSelect = onSelect
-        self.onSwipe = onSwipe
-        self.onRename = onRename
-        self.onRemove = onRemove
+        self.coordinator = coordinator
+        self.commander = commander
     }
 
     var name: String { event.name }
@@ -42,5 +36,19 @@ struct EventItemViewModel {
     var amount: String {
         let todayHappeningsCount = event.happenings(forDayComponents: today).count
         return String(todayHappeningsCount)
+    }
+
+    func swipe() {
+        event.addHappening(date: .now)
+        commander.save(event)
+    }
+
+    func remove() {
+        commander.delete(event)
+    }
+
+    func rename(to newName: String) {
+        event.name = newName
+        commander.save(event)
     }
 }

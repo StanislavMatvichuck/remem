@@ -69,17 +69,8 @@ class CompositionRoot {
             onSelect: { event in
                 self.coordinator.show(self.makeEventController(event: event))
             },
-            onSwipe: { event in
-                event.addHappening(date: .now)
-                self.commander.save(event)
-            },
-            onRemove: { event in
-                self.commander.delete(event)
-            },
-            onRename: { event, newName in
-                event.name = newName
-                self.commander.save(event)
-            }
+            coordinator: coordinator,
+            commander: commander
         )
     }
 

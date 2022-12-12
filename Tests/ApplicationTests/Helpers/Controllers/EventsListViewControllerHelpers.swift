@@ -104,17 +104,8 @@ extension EventsListViewController {
                         onSelect: { _ in
                             coordinator.show(UIViewController())
                         },
-                        onSwipe: { event in
-                            event.addHappening(date: .now)
-                            commander.save(event)
-                        },
-                        onRemove: { event in
-                            commander.delete(event)
-                        },
-                        onRename: { event, newName in
-                            event.name = newName
-                            commander.save(event)
-                        }
+                        coordinator: coordinator,
+                        commander: commander
                     )
                 }
             )

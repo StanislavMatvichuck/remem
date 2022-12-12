@@ -47,10 +47,7 @@ class EventsListViewController: UIViewController {
 
     @objc private func handleAdd() {
         if let renamedEventItem = viewModel.renamedItem {
-            renamedEventItem.onRename(
-                renamedEventItem.event,
-                viewRoot.input.value
-            )
+            renamedEventItem.rename(to: viewRoot.input.value)
         } else {
             viewModel.onAdd(viewRoot.input.value)
         }
@@ -111,7 +108,7 @@ extension EventsListViewController: UITableViewDelegate {
             style: .destructive,
             title: String(localizationId: "button.delete")
         ) { _, _, completion in
-            self.viewModel.items[indexPath.row].onRemove(event)
+            self.viewModel.items[indexPath.row].remove()
             completion(true)
         }
 

@@ -111,8 +111,7 @@ class EventsListItem: UITableViewCell {
 // MARK: - User input
 extension EventsListItem {
     @objc private func handleSwipe(_ swiper: Swiper) {
-        guard let viewModel else { return }
-        viewModel.onSwipe(viewModel.event)
+        viewModel?.swipe()
     }
 
     @objc private func handleTap(_ gr: UITapGestureRecognizer) {
