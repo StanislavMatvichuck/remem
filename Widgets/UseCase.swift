@@ -9,16 +9,16 @@ import Domain
 import WidgetKit
 
 class WidgetsUseCase {
-    private let repository: EventsRepositoryInterface
+    private let provider: EventsQuerying
 
-    init(repository: EventsRepositoryInterface) {
-        self.repository = repository
+    init(provider: EventsQuerying) {
+        self.provider = provider
     }
 
     func update() {
         WidgetFileWriter().update(
             today: DayComponents(date: .now),
-            eventsList: repository.makeAllEvents(),
+            eventsList: provider.get(),
             for: .medium
         )
 

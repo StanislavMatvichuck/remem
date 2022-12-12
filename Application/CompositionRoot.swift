@@ -18,19 +18,21 @@ class CompositionRoot {
     init() {
         let updater = EventsListsUpdater()
         let coordinator = DefaultCoordinator()
-        let decoratedEventsProviderCommander = EventsRepositoryDecorator(
-            repository: CoreDataEventsRepository(
-                container: CoreDataStack.createContainer(
-                    inMemory: false
-                ),
-                mapper: EventEntityMapper()
+        let repository = CoreDataEventsRepository(
+            container: CoreDataStack.createContainer(
+                inMemory: false
             ),
+            mapper: EventEntityMapper()
+        )
+
+        let decoratedEventsProviderCommander = EventsRepositoryDecorator(
+            decoratee: repository,
             updater: updater
         )
 
         self.coordinator = coordinator
         self.eventsListUpdater = updater
-        self.provider = decoratedEventsProviderCommander
+        self.provider = repository
         self.commander = decoratedEventsProviderCommander
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
@@ -123,27 +125,17 @@ class CompositionRoot {
     }
 }
 
-class EventsRepositoryDecorator:
-    EventsRepositoryInterface,
-    EventsQuerying,
-    EventsCommanding
-{
-    let decoratee: EventsRepositoryInterface
+class EventsRepositoryDecorator: EventsCommanding {
+    let decoratee: EventsCommanding
     let updater: EventsListViewModelUpdating
     var viewModelFactory: (() -> EventsListViewModel)?
 
     init(
-        repository: EventsRepositoryInterface,
+        decoratee: EventsCommanding,
         updater: EventsListViewModelUpdating
     ) {
-        self.decoratee = repository
+        self.decoratee = decoratee
         self.updater = updater
-    }
-
-    func get() -> [Event] { makeAllEvents() }
-
-    func makeAllEvents() -> [Domain.Event] {
-        decoratee.makeAllEvents()
     }
 
     func save(_ event: Domain.Event) {

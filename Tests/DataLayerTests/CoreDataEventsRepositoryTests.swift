@@ -27,14 +27,14 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func testInit() {
-        XCTAssertEqual(sut.makeAllEvents().count, 0)
+        XCTAssertEqual(sut.get().count, 0)
     }
 
     func test_save_newEvent() {
         let newEvent = givenSavedDefaultEvent()
 
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
-        XCTAssertEqual(sut.makeAllEvents().count, 1)
+        XCTAssertEqual(sut.get().count, 1)
     }
 
     func test_save_eventWithHappening() {
@@ -88,15 +88,23 @@ class CoreDataEventsRepositoryTests: XCTestCase {
     func test_delete_success() {
         let event = givenSavedDefaultEvent()
         sut.delete(event)
-        XCTAssertEqual(sut.makeAllEvents().count, 0)
+        XCTAssertEqual(sut.get().count, 0)
     }
-}
 
-// MARK: - Private
-extension CoreDataEventsRepositoryTests {
     private func givenSavedDefaultEvent() -> Event {
         let newEvent = Event(name: "Event")
         sut.save(newEvent)
         return newEvent
+    }
+}
+
+private extension CoreDataEventsRepository {
+    func event(byId: String) -> Event {
+        let all = get()
+
+        guard let index = all.firstIndex(where: { $0.id == byId })
+        else { fatalError("unable to find event by id \(byId)") }
+
+        return all[index]
     }
 }

@@ -9,7 +9,6 @@
 import Domain
 
 class EventsRepositoryFake:
-    EventsRepositoryInterface,
     EventsQuerying,
     EventsCommanding
 {
@@ -31,7 +30,4 @@ class EventsRepositoryFake:
         guard let existingEventIndex = events.firstIndex(of: event) else { return }
         events.remove(at: existingEventIndex)
     }
-
-    /// this might be removed with `EventsRepositoryInterface`
-    func makeAllEvents() -> [Domain.Event] { get() }
 }

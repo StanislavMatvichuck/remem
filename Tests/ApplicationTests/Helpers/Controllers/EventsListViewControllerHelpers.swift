@@ -84,12 +84,12 @@ extension EventsListViewController {
 
     static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
         let updater = EventsListsUpdater()
-        let provider = EventsRepositoryDecorator(
-            repository: EventsRepositoryFake(),
+        let provider = EventsRepositoryFake()
+        let commander = EventsRepositoryDecorator(
+            decoratee: provider,
             updater: updater
         )
 
-        let commander = provider
         let listViewModelFactory = {
             EventsListViewModel(
                 events: provider.get(),

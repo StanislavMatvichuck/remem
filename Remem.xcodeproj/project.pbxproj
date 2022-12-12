@@ -74,7 +74,7 @@
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
-		08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsRepository.swift */; };
+		08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */; };
 		0890627827A0A2520032847C /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventViewController.swift */; };
 		0890627A27A0A25E0032847C /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventView.swift */; };
 		0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */; };
@@ -258,7 +258,7 @@
 
 /* Begin PBXFileReference section */
 		080656E9283B946000C09409 /* ClockItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockItemViewModel.swift; sourceTree = "<group>"; };
-		080A678E28D1E2AA00889A97 /* EventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsRepository.swift; sourceTree = "<group>"; };
+		080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQueryingCommanding.swift; sourceTree = "<group>"; };
 		080AA96C28D768350038C21A /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
@@ -534,7 +534,7 @@
 		083BECF228D0A31A009157FD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				080A678E28D1E2AA00889A97 /* EventsRepository.swift */,
+				080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */,
 				080A679028D1E2DA00889A97 /* Model */,
 			);
 			path = Domain;
@@ -1181,7 +1181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08855C6929278F7B0067D196 /* EventsRepository.swift in Sources */,
+				08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
 				087ED41028D0A4060085A37D /* WeekDay.swift in Sources */,
 				0816F4462933B8D700F3937A /* DayComponents.swift in Sources */,
