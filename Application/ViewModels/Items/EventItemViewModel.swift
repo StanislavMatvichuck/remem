@@ -9,24 +9,19 @@ import Domain
 import Foundation
 
 struct EventItemViewModel {
-    typealias onSelect = (_: Event) -> Void
-
     let event: Event
     let today: DayComponents
-    let onSelect: onSelect
     let coordinator: Coordinating
     let commander: EventsCommanding
 
     init(
         event: Event,
         today: DayComponents,
-        onSelect: @escaping onSelect,
         coordinator: Coordinating,
         commander: EventsCommanding
     ) {
         self.event = event
         self.today = today
-        self.onSelect = onSelect
         self.coordinator = coordinator
         self.commander = commander
     }
@@ -36,6 +31,10 @@ struct EventItemViewModel {
     var amount: String {
         let todayHappeningsCount = event.happenings(forDayComponents: today).count
         return String(todayHappeningsCount)
+    }
+
+    func select() {
+        coordinator.show(.eventItem(event: event))
     }
 
     func swipe() {

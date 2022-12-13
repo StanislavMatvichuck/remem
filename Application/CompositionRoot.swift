@@ -82,9 +82,6 @@ class CompositionRoot: CoordinatingFactory {
         EventItemViewModel(
             event: event,
             today: today,
-            onSelect: { event in
-                self.coordinator.show(.eventItem(event: event))
-            },
             coordinator: coordinator,
             commander: commander
         )

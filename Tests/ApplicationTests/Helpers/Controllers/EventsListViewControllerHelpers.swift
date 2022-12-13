@@ -101,9 +101,6 @@ extension EventsListViewController {
                     EventItemViewModel(
                         event: event,
                         today: today,
-                        onSelect: { _ in
-                            coordinator.show(.list)
-                        },
                         coordinator: coordinator,
                         commander: commander
                     )

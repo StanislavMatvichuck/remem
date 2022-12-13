@@ -115,8 +115,7 @@ extension EventsListItem {
     }
 
     @objc private func handleTap(_ gr: UITapGestureRecognizer) {
-        guard let viewModel else { return }
-        viewModel.onSelect(viewModel.event)
+        viewModel?.select()
     }
 }
 

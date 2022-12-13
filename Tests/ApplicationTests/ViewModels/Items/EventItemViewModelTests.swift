@@ -28,7 +28,6 @@ class EventItemViewModelTests: XCTestCase {
         let sut = EventItemViewModel(
             event: event,
             today: today,
-            onSelect: { _ in },
             coordinator: coordinator,
             commander: commander
         )
