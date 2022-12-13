@@ -218,15 +218,7 @@ class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_singleEvent_eventTapped_opensEventDetails() {
-        let expectation = XCTestExpectation(description: "presentation")
-        let decoratedCoordinator = DecoratedDefaultCoordinator(
-            DefaultCoordinator(),
-            callBack: {
-                expectation.fulfill()
-            }
-        )
-
-        let sut = EventsListViewController.make(coordinator: decoratedCoordinator)
+        let sut = EventsListViewController.make()
         let navigationController = sut.sut.navigationController
 
         putInViewHierarchy(sut.sut)
@@ -234,11 +226,6 @@ class EventsListViewControllerTests: XCTestCase {
         XCTAssertEqual(navigationController?.viewControllers.count, 1, "precondition")
 
         sut.sut.submitEvent()
-
-        let tapGR = sut.sut.firstEvent.viewRoot.gestureRecognizers?.first as? UITapGestureRecognizer
-        tapGR?.state = .ended
-
-        wait(for: [expectation], timeout: 0.1)
 
         XCTAssertEqual(navigationController?.viewControllers.count, 2)
     }

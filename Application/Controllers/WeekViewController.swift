@@ -98,11 +98,7 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator.show(DayViewController(
-            day: viewModel.items[indexPath.row].day,
-            event: event,
-            commander: commander)
-        )
+        coordinator.show(.weekItem(day: today, event: event))
     }
 
     // UICollectionViewDelegateFlowLayout

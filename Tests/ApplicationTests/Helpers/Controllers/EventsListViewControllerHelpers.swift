@@ -102,7 +102,7 @@ extension EventsListViewController {
                         event: event,
                         today: today,
                         onSelect: { _ in
-                            coordinator.show(UIViewController())
+                            coordinator.show(.list)
                         },
                         coordinator: coordinator,
                         commander: commander
@@ -118,27 +118,8 @@ extension EventsListViewController {
         )
 
         sut.loadViewIfNeeded()
-        coordinator.show(sut)
         updater.addDelegate(sut)
 
         return (sut, coordinator)
-    }
-}
-
-class DecoratedDefaultCoordinator: Coordinating {
-    let decoratee: Coordinating
-    let callback: () -> Void
-
-    init(_ coordinator: Coordinating, callBack: @escaping () -> Void) {
-        self.decoratee = coordinator
-        self.callback = callBack
-    }
-
-    func show(_ controller: UIViewController) {
-        decoratee.show(controller)
-
-        if controller as? EventsListViewController == nil {
-            callback()
-        }
     }
 }

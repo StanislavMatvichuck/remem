@@ -9,7 +9,7 @@ import DataLayer
 import Domain
 import UIKit
 
-class CompositionRoot {
+class CompositionRoot: CoordinatingFactory {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinating
@@ -36,16 +36,32 @@ class CompositionRoot {
         self.commander = decoratedEventsProviderCommander
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
+        coordinator.factory = self
     }
 
     // MARK: - Controllers creation
 
+    func makeController(for navCase: CoordinatingCase) -> UIViewController {
+        switch navCase {
+        case .list:
+            return makeEventsListViewController()
+        case .eventItem(let event):
+            return makeEventViewController(event)
+        case .weekItem(let day, let event):
+            return makeDayViewController(event, day)
+        }
+    }
+
     func makeRootViewController() -> UIViewController {
+        coordinator.show(.list)
+        return coordinator.root
+    }
+
+    func makeEventsListViewController() -> EventsListViewController {
         let viewModel = makeEventsListViewModel()
         let eventsListController = EventsListViewController(viewModel: viewModel)
-        coordinator.show(eventsListController)
         eventsListUpdater.addDelegate(eventsListController)
-        return eventsListController.navigationController!
+        return eventsListController
     }
 
     func makeEventsListViewModel() -> EventsListViewModel {
@@ -67,14 +83,14 @@ class CompositionRoot {
             event: event,
             today: today,
             onSelect: { event in
-                self.coordinator.show(self.makeEventController(event: event))
+                self.coordinator.show(.eventItem(event: event))
             },
             coordinator: coordinator,
             commander: commander
         )
     }
 
-    func makeEventController(event: Event) -> EventViewController {
+    func makeEventViewController(_ event: Domain.Event) -> EventViewController {
         EventViewController(
             event: event,
             commander: commander,
@@ -107,7 +123,7 @@ class CompositionRoot {
         )
     }
 
-    func makeDayController(day: DayComponents, event: Event) -> DayViewController {
+    func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {
         DayViewController(
             day: day,
             event: event,

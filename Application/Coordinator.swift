@@ -5,16 +5,30 @@
 //  Created by Stanislav Matvichuck on 28.07.2022.
 //
 
+import Domain
 import UIKit
 
 /// `Abstraction` in view presentation layer
 /// who uses this abstraction? viewControllers for now
 protocol Coordinating {
-    func show(_: UIViewController)
+    var root: UIViewController { get }
+    func show(_: CoordinatingCase)
+}
+
+enum CoordinatingCase {
+    case list
+    case eventItem(event: Event)
+    case weekItem(day: DayComponents, event: Event)
+}
+
+protocol CoordinatingFactory {
+    func makeController(for: CoordinatingCase) -> UIViewController
 }
 
 class DefaultCoordinator: Coordinating {
     let navController: UINavigationController
+    var root: UIViewController { navController }
+    var factory: CoordinatingFactory?
 
     init(
         navController: UINavigationController = DefaultCoordinator.makeStyledNavigationController()
@@ -22,12 +36,16 @@ class DefaultCoordinator: Coordinating {
         self.navController = navController
     }
 
-    func show(_ controller: UIViewController) {
-        if let controller = controller as? EventsListViewController {
-            navController.pushViewController(controller, animated: false)
-        } else if let controller = controller as? EventViewController {
-            navController.pushViewController(controller, animated: true)
-        } else if let controller = controller as? DayViewController {
+    func show(_ fromCase: CoordinatingCase) {
+        guard let factory else { fatalError("coordinator factory is nil") }
+        switch fromCase {
+        case .list:
+            navController.pushViewController(factory.makeController(for: .list), animated: false)
+        case .eventItem(let event):
+            navController.pushViewController(factory.makeController(for: .eventItem(event: event)), animated: true)
+        case .weekItem(let day, let event):
+            let controller = factory.makeController(for: .weekItem(day: day, event: event))
+
             let nav = Self.makeStyledNavigationController()
             nav.pushViewController(controller, animated: false)
             nav.modalPresentationStyle = .pageSheet
