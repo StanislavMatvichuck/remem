@@ -85,7 +85,7 @@ extension EventsListViewController {
     static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
         let updater = EventsListsUpdater()
         let provider = EventsRepositoryFake()
-        let commander = EventsRepositoryDecorator(
+        let commander = EventsCommandingUIUpdatingDecorator(
             decoratee: provider,
             updater: updater
         )
@@ -94,9 +94,6 @@ extension EventsListViewController {
             EventsListViewModel(
                 events: provider.get(),
                 today: DayComponents(date: .now),
-                onAdd: { name in
-                    commander.save(Event(name: name))
-                },
                 itemViewModelFactory: { event, today in
                     EventItemViewModel(
                         event: event,
@@ -104,7 +101,8 @@ extension EventsListViewController {
                         coordinator: coordinator,
                         commander: commander
                     )
-                }
+                },
+                commander: commander
             )
         }
 

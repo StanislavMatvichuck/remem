@@ -25,7 +25,7 @@ class CompositionRoot: CoordinatingFactory {
             mapper: EventEntityMapper()
         )
 
-        let decoratedEventsProviderCommander = EventsRepositoryDecorator(
+        let decoratedEventsProviderCommander = EventsCommandingUIUpdatingDecorator(
             decoratee: repository,
             updater: updater
         )
@@ -58,8 +58,7 @@ class CompositionRoot: CoordinatingFactory {
     }
 
     func makeEventsListViewController() -> EventsListViewController {
-        let viewModel = makeEventsListViewModel()
-        let eventsListController = EventsListViewController(viewModel: viewModel)
+        let eventsListController = EventsListViewController(viewModel: makeEventsListViewModel())
         eventsListUpdater.addDelegate(eventsListController)
         return eventsListController
     }
@@ -90,7 +89,7 @@ class CompositionRoot: CoordinatingFactory {
             event: event,
             commander: commander,
             controllers: [
-                makeWeekController(
+                makeWeekViewController(
                     event: event,
                     coordinator: coordinator
                 ),
@@ -99,7 +98,7 @@ class CompositionRoot: CoordinatingFactory {
         )
     }
 
-    func makeWeekController(
+    func makeWeekViewController(
         event: Event,
         coordinator: Coordinating
     ) -> WeekViewController {
@@ -124,45 +123,5 @@ class CompositionRoot: CoordinatingFactory {
             event: event,
             commander: commander
         )
-    }
-}
-
-class EventsRepositoryDecorator: EventsCommanding {
-    let decoratee: EventsCommanding
-    let updater: EventsListViewModelUpdating
-    var viewModelFactory: (() -> EventsListViewModel)?
-
-    init(
-        decoratee: EventsCommanding,
-        updater: EventsListViewModelUpdating
-    ) {
-        self.decoratee = decoratee
-        self.updater = updater
-    }
-
-    func save(_ event: Domain.Event) {
-        decoratee.save(event)
-        sendUpdates()
-    }
-
-    func delete(_ event: Domain.Event) {
-        decoratee.delete(event)
-        sendUpdates()
-    }
-
-    private func sendUpdates() {
-        guard let viewModelFactory else { return }
-        updater.update(viewModel: viewModelFactory())
-    }
-}
-
-protocol EventsListViewModelUpdating { func update(viewModel: EventsListViewModel) }
-
-class EventsListsUpdater:
-    MulticastDelegate<EventsListViewModelUpdating>,
-    EventsListViewModelUpdating
-{
-    func update(viewModel: EventsListViewModel) {
-        call { $0.update(viewModel: viewModel) }
     }
 }
