@@ -49,7 +49,7 @@ class EventsListViewController: UIViewController {
         if let renamedEventItem = viewModel.renamedItem {
             renamedEventItem.rename(to: viewRoot.input.value)
         } else {
-            viewModel.onAdd(viewRoot.input.value)
+            viewModel.add(name: viewRoot.input.value)
         }
     }
 }

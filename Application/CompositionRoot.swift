@@ -68,10 +68,8 @@ class CompositionRoot: CoordinatingFactory {
         EventsListViewModel(
             events: provider.get(),
             today: DayComponents(date: .now),
-            onAdd: { name in
-                self.commander.save(Event(name: name))
-            },
-            itemViewModelFactory: makeEventItemViewModel
+            itemViewModelFactory: makeEventItemViewModel,
+            commander: commander
         )
     }
 

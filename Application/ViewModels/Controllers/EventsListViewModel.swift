@@ -9,26 +9,25 @@ import Domain
 
 struct EventsListViewModel {
     typealias ItemViewModelFactory = (_: Event, _: DayComponents) -> EventItemViewModel
-    typealias onAdd = (_: String) -> Void
 
     let events: [Event]
     let today: DayComponents
     let items: [EventItemViewModel]
     let factory: ItemViewModelFactory
+    let commander: EventsCommanding
     let hint: String
     var renamedItem: EventItemViewModel?
-
-    let onAdd: onAdd
 
     init(
         events: [Event],
         today: DayComponents,
-        onAdd: @escaping onAdd,
-        itemViewModelFactory: @escaping ItemViewModelFactory
+        itemViewModelFactory: @escaping ItemViewModelFactory,
+        commander: EventsCommanding
     ) {
         self.events = events
         self.today = today
-        self.onAdd = onAdd
+
+        self.commander = commander
         factory = itemViewModelFactory
 
         hint = {
@@ -41,6 +40,10 @@ struct EventsListViewModel {
         items = events.map { event in
             itemViewModelFactory(event, today)
         }
+    }
+
+    func add(name: String) {
+        commander.save(Event(name: name))
     }
 }
 
