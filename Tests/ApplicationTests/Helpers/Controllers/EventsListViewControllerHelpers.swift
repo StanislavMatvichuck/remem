@@ -85,7 +85,7 @@ extension EventsListViewController {
     static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
         let updater = EventsListsUpdater()
         let provider = EventsRepositoryFake()
-        let commander = EventsCommandingUIUpdatingDecorator(
+        let commander = EventsCommandingEventsListViewModelUpdatingDecorator(
             decoratee: provider,
             updater: updater
         )

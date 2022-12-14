@@ -13,10 +13,9 @@ class CompositionRoot: CoordinatingFactory {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinating
-    let eventsListUpdater: EventsListsUpdater
+    let eventsListViewModelUpdater: EventsListViewModelUpdateDispatcher
 
     init() {
-        let updater = EventsListsUpdater()
         let coordinator = DefaultCoordinator()
         let repository = CoreDataEventsRepository(
             container: CoreDataStack.createContainer(
@@ -25,15 +24,14 @@ class CompositionRoot: CoordinatingFactory {
             mapper: EventEntityMapper()
         )
 
-        let decoratedEventsProviderCommander = EventsCommandingUIUpdatingDecorator(
-            decoratee: repository,
-            updater: updater
+        let decoratedEventsProviderCommander = EventsCommandingEventsListViewModelUpdatingDecorator(
+            decoratedInterface: repository
         )
 
         self.coordinator = coordinator
-        self.eventsListUpdater = updater
         self.provider = repository
         self.commander = decoratedEventsProviderCommander
+        self.eventsListViewModelUpdater = decoratedEventsProviderCommander
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
         coordinator.factory = self
@@ -59,7 +57,7 @@ class CompositionRoot: CoordinatingFactory {
 
     func makeEventsListViewController() -> EventsListViewController {
         let eventsListController = EventsListViewController(viewModel: makeEventsListViewModel())
-        eventsListUpdater.addDelegate(eventsListController)
+        eventsListViewModelUpdater.addUpdateReceiver(eventsListController)
         return eventsListController
     }
 
