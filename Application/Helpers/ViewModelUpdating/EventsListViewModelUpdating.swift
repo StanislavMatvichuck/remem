@@ -18,7 +18,6 @@ protocol EventsListViewModelUpdateDispatcher {
 class EventsCommandingEventsListViewModelUpdatingDecorator:
     MulticastDelegate<EventsListViewModelUpdating>,
     EventsListViewModelUpdateDispatcher,
-    EventsListViewModelUpdating,
     EventsCommanding
 {
     let decoratedInterface: EventsCommanding
@@ -40,12 +39,8 @@ class EventsCommandingEventsListViewModelUpdatingDecorator:
         addDelegate(receiver)
     }
 
-    func update(viewModel: EventsListViewModel) {
-        call { $0.update(viewModel: viewModel) }
-    }
-
     private func sendUpdates() {
-        guard let viewModelFactory else { return }
-        update(viewModel: viewModelFactory())
+        guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
+        call { $0.update(viewModel: viewModelFactory()) }
     }
 }
