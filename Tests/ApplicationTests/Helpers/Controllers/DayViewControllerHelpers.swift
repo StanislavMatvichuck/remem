@@ -25,13 +25,15 @@ extension DayViewController {
         event: Event = Event(name: "Event"),
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
-        let sut = DayViewController(
-            day: day,
-            event: event,
-            commander: EventsRepositoryFake(events: [event])
-        )
+        let decoratedCommander = EventsCommandingDayViewModelUpdatingDecorator(decoratedInterface: EventsRepositoryFake(events: [event]))
+        let viewModel = DayViewModel(day: day, event: event, commander: decoratedCommander)
+        let sut = DayViewController(viewModel: viewModel)
 
         sut.loadViewIfNeeded()
+        decoratedCommander.addUpdateReceiver(sut)
+        decoratedCommander.viewModelFactory = { event, day in
+            DayViewModel(day: day, event: event, commander: decoratedCommander)
+        }
 
         _ = UINavigationController(rootViewController: sut)
 

@@ -83,11 +83,9 @@ extension EventsListViewController {
     }
 
     static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
-        let updater = EventsListsUpdater()
         let provider = EventsRepositoryFake()
         let commander = EventsCommandingEventsListViewModelUpdatingDecorator(
-            decoratee: provider,
-            updater: updater
+            decoratedInterface: provider
         )
 
         let listViewModelFactory = {
@@ -106,14 +104,12 @@ extension EventsListViewController {
             )
         }
 
-        commander.viewModelFactory = listViewModelFactory
-
-        let sut = EventsListViewController(
-            viewModel: listViewModelFactory()
-        )
+        let sut = EventsListViewController(viewModel: listViewModelFactory())
 
         sut.loadViewIfNeeded()
-        updater.addDelegate(sut)
+
+        commander.viewModelFactory = listViewModelFactory
+        commander.addUpdateReceiver(sut)
 
         return (sut, coordinator)
     }

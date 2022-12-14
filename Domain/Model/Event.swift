@@ -105,7 +105,7 @@ public extension Event {
         guard let endOfDayDate = Calendar.current.date(from: endOfDayComponents) else { return [] }
 
         return happenings.filter {
-            $0.dateCreated > startOfDay &&
+            $0.dateCreated >= startOfDay &&
                 $0.dateCreated < endOfDayDate
         }
     }

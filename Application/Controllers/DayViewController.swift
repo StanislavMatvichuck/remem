@@ -26,23 +26,13 @@ class DayViewController: UIViewController {
         }
     }
 
-    let commander: EventsCommanding
     let viewRoot: DayView
-    let day: DayComponents
-    var event: Event
     var viewModel: DayViewModel
 
     // MARK: - Init
-    init(
-        day: DayComponents,
-        event: Event,
-        commander: EventsCommanding
-    ) {
-        self.commander = commander
-        self.event = event
-        self.day = day
+    init(viewModel: DayViewModel) {
         self.viewRoot = DayView()
-        self.viewModel = DayViewModel(day: day, event: event)
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -57,7 +47,7 @@ class DayViewController: UIViewController {
     }
 
     private func configurePicker() {
-        picker.date = day.date
+        picker.date = viewModel.day.date
         picker.addTarget(self, action: #selector(handleTimeChange), for: .valueChanged)
     }
 
@@ -106,6 +96,7 @@ class DayViewController: UIViewController {
         return alert
     }
 
+    // TODO: Move this logic to viewModel
     private func updateDisplayedTime() {
         guard let field = textField else { return }
 
@@ -118,8 +109,7 @@ class DayViewController: UIViewController {
 
     @objc private func handleTimeChange() { updateDisplayedTime() }
     @objc private func handleTimeSelectionSubmit(_: UIAlertAction) {
-        event.addHappening(date: picker.date)
-        commander.save(event)
+        viewModel.addHappening()
     }
 
     @objc private func handleEdit() {
@@ -129,8 +119,6 @@ class DayViewController: UIViewController {
     @objc private func handleAdd() {
         present(makeTimeSelectionAlert(), animated: true)
     }
-
-    deinit { print("day details controller deinit") }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -154,16 +142,18 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
                 style: .destructive,
                 title: String(localizationId: "button.delete")
             ) { _, _, completion in
-                let event = self.event
-                let happenings = event.happenings(forDayComponents: self.day)
-                do {
-                    try event.remove(happening: happenings[index.row])
-                } catch {
-                    print("")
-                }
-                self.commander.save(event)
+                self.viewModel.removeHappening(at: index.row)
                 completion(true)
             },
         ])
+    }
+}
+
+extension DayViewController: DayViewModelUpdating {
+    var currentViewModel: DayViewModel { viewModel }
+
+    func update(viewModel: DayViewModel) {
+        self.viewModel = viewModel
+        viewRoot.happenings.reloadData()
     }
 }

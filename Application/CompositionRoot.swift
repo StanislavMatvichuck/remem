@@ -14,6 +14,7 @@ class CompositionRoot: CoordinatingFactory {
     let commander: EventsCommanding
     let coordinator: Coordinating
     let eventsListViewModelUpdater: EventsListViewModelUpdateDispatcher
+    let dayViewModelUpdater: DayViewModelUpdateDispatcher
 
     init() {
         let coordinator = DefaultCoordinator()
@@ -28,25 +29,27 @@ class CompositionRoot: CoordinatingFactory {
             decoratedInterface: repository
         )
 
+        let decoratedEventsListViewModelUpdatingDecorator = EventsCommandingDayViewModelUpdatingDecorator(
+            decoratedInterface: decoratedEventsProviderCommander
+        )
+
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = decoratedEventsProviderCommander
+        self.commander = decoratedEventsListViewModelUpdatingDecorator
         self.eventsListViewModelUpdater = decoratedEventsProviderCommander
+        self.dayViewModelUpdater = decoratedEventsListViewModelUpdatingDecorator
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
+        decoratedEventsListViewModelUpdatingDecorator.viewModelFactory = makeDayViewModel
         coordinator.factory = self
     }
 
     // MARK: - Controllers creation
-
     func makeController(for navCase: CoordinatingCase) -> UIViewController {
         switch navCase {
-        case .list:
-            return makeEventsListViewController()
-        case .eventItem(let event):
-            return makeEventViewController(event)
-        case .weekItem(let day, let event):
-            return makeDayViewController(event, day)
+        case .list: return makeEventsListViewController()
+        case .eventItem(let event): return makeEventViewController(event)
+        case .weekItem(let day, let event): return makeDayViewController(event, day)
         }
     }
 
@@ -116,10 +119,13 @@ class CompositionRoot: CoordinatingFactory {
     }
 
     func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {
-        DayViewController(
-            day: day,
-            event: event,
-            commander: commander
-        )
+        let viewModel = makeDayViewModel(event: event, day: day)
+        let controller = DayViewController(viewModel: viewModel)
+        dayViewModelUpdater.addUpdateReceiver(controller)
+        return controller
+    }
+
+    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
+        DayViewModel(day: day, event: event, commander: commander)
     }
 }
