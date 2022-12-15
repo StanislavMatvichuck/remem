@@ -13,17 +13,15 @@ import XCTest
 class WeekViewControllerTests: XCTestCase {
     var spy: PresentationVerifier!
     var sut: WeekViewController!
-    var coordinator: Coordinating!
 
     override func setUp() {
         super.setUp()
-        (sut, coordinator) = WeekViewController.make()
+        sut = WeekViewController.make()
     }
 
     override func tearDown() {
         spy = nil
         sut = nil
-        coordinator = nil
         executeRunLoop()
         super.tearDown()
     }
@@ -70,15 +68,15 @@ class WeekViewControllerTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
 
         let commander = EventsRepositoryFake(events: [event])
-        let coordinator = DefaultCoordinator()
-        self.coordinator = coordinator
 
-        sut = WeekViewController(
+        let viewModel = WeekViewModel(
             today: created.adding(components: DateComponents(day: todayRandomOffset)),
             event: event,
-            commander: commander,
-            coordinator: coordinator
+            coordinator: CompositionRoot().coordinator,
+            commander: commander
         )
+
+        sut = WeekViewController(viewModel: viewModel)
 
         layoutInScreen()
 
@@ -121,14 +119,15 @@ class WeekViewControllerTests: XCTestCase {
 
         let commander = EventsRepositoryFake(events: [event])
         let coordinator = CompositionRoot().coordinator
-        self.coordinator = coordinator
 
-        let sut = WeekViewController(
+        let viewModel = WeekViewModel(
             today: DayComponents.referenceValue,
             event: event,
-            commander: commander,
-            coordinator: coordinator
+            coordinator: coordinator,
+            commander: commander
         )
+
+        sut = WeekViewController(viewModel: viewModel)
 
         XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "01:00")
     }

@@ -34,7 +34,7 @@ struct EventItemViewModel {
     }
 
     func select() {
-        coordinator.show(.eventItem(event: event))
+        coordinator.show(.eventItem(today: today, event: event))
     }
 
     func swipe() {

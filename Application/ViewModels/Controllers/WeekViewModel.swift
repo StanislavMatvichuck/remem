@@ -13,11 +13,19 @@ struct WeekViewModel {
     let today: DayComponents
     var event: Event
     var items: [WeekItemViewModel]
+    let commander: EventsCommanding
+    let coordinator: Coordinating
     var scrollToIndex: Int = 0
     // MARK: - Init
-    init(today: DayComponents, event: Event) {
+    init(today: DayComponents,
+         event: Event,
+         coordinator: Coordinating,
+         commander: EventsCommanding)
+    {
         self.today = today
         self.event = event
+        self.coordinator = coordinator
+        self.commander = commander
 
         let startOfWeekDayCreated = {
             let cal = Calendar.current
@@ -68,5 +76,9 @@ struct WeekViewModel {
         }
 
         items = viewModels
+    }
+
+    func select() {
+        coordinator.show(.weekItem(day: today, event: event))
     }
 }

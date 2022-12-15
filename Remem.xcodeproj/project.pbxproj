@@ -124,6 +124,7 @@
 		08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* ClockView.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		08FE5CCF294B1FB700087D21 /* ClockViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */; };
+		08FE5CD1294B265200087D21 /* WeekViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventItemViewModel.swift */; };
 		08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekItemViewModel.swift */; };
@@ -389,6 +390,7 @@
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelUpdating.swift; sourceTree = "<group>"; };
+		08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelUpdating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -679,6 +681,7 @@
 				08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */,
 				083479A62948BEFD00E21FCD /* DayViewModelUpdating.swift */,
 				08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */,
+				08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */,
 			);
 			path = ViewModelUpdating;
 			sourceTree = "<group>";
@@ -1298,6 +1301,7 @@
 				08D512382787153900C2037F /* EventsListItem.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
+				08FE5CD1294B265200087D21 /* WeekViewModelUpdating.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,

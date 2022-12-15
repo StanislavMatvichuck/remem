@@ -6,33 +6,16 @@
 //
 
 import Domain
-
 import UIKit
 
 class WeekViewController: UIViewController {
-    // MARK: - Properties
     var scrollHappened = false
 
-    let today: DayComponents
-    var event: Event
-    let commander: EventsCommanding
-    let coordinator: Coordinating
     var viewModel: WeekViewModel
     let viewRoot: WeekView
 
-    // MARK: - Init
-
-    init(
-        today: DayComponents,
-        event: Event,
-        commander: EventsCommanding,
-        coordinator: Coordinating)
-    {
-        self.today = today
-        self.event = event
-        self.commander = commander
-        self.coordinator = coordinator
-        self.viewModel = WeekViewModel(today: today, event: event)
+    init(viewModel: WeekViewModel) {
+        self.viewModel = viewModel
         self.viewRoot = WeekView()
 
         super.init(nibName: nil, bundle: nil)
@@ -98,7 +81,7 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator.show(.weekItem(day: today, event: event))
+        viewModel.select()
     }
 
     // UICollectionViewDelegateFlowLayout
@@ -110,5 +93,13 @@ extension WeekViewController:
         CGSize(
             width: collectionView.bounds.width / 7,
             height: collectionView.bounds.height)
+    }
+}
+
+extension WeekViewController: WeekViewModelUpdating {
+    var currentViewModel: WeekViewModel { viewModel }
+    func update(viewModel: WeekViewModel) {
+        self.viewModel = viewModel
+        viewRoot.collection.reloadData()
     }
 }

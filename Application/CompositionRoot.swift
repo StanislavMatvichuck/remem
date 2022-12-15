@@ -16,6 +16,7 @@ class CompositionRoot: CoordinatingFactory {
     let eventsListViewModelUpdater: EventsListViewModelUpdateDispatcher
     let dayViewModelUpdater: DayViewModelUpdateDispatcher
     let clockViewModelUpdater: ClockViewModelUpdateDispatcher
+    let weekViewModelUpdater: WeekViewModelUpdateDispatcher
 
     init() {
         let coordinator = DefaultCoordinator()
@@ -38,16 +39,22 @@ class CompositionRoot: CoordinatingFactory {
             decoratedInterface: decoratedEventsListViewModelUpdatingDecorator
         )
 
+        let decoratedWeekViewModelUpdatingDecorator = EventsCommandingWeekViewModelUpdatingDecorator(
+            decoratedInterface: decoratedClockViewModelUpdatingDecorator
+        )
+
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = decoratedClockViewModelUpdatingDecorator
+        self.commander = decoratedWeekViewModelUpdatingDecorator
         self.eventsListViewModelUpdater = decoratedEventsProviderCommander
         self.dayViewModelUpdater = decoratedEventsListViewModelUpdatingDecorator
         self.clockViewModelUpdater = decoratedClockViewModelUpdatingDecorator
+        self.weekViewModelUpdater = decoratedWeekViewModelUpdatingDecorator
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
         decoratedEventsListViewModelUpdatingDecorator.viewModelFactory = makeDayViewModel
         decoratedClockViewModelUpdatingDecorator.viewModelFactory = makeClockViewModel
+        decoratedWeekViewModelUpdatingDecorator.viewModelFactory = makeWeekViewModel
         coordinator.factory = self
     }
 
@@ -55,7 +62,7 @@ class CompositionRoot: CoordinatingFactory {
     func makeController(for navCase: CoordinatingCase) -> UIViewController {
         switch navCase {
         case .list: return makeEventsListViewController()
-        case .eventItem(let event): return makeEventViewController(event)
+        case .eventItem(let today, let event): return makeEventViewController(event, today)
         case .weekItem(let day, let event): return makeDayViewController(event, day)
         }
     }
@@ -92,30 +99,24 @@ class CompositionRoot: CoordinatingFactory {
         )
     }
 
-    func makeEventViewController(_ event: Domain.Event) -> EventViewController {
+    func makeEventViewController(_ event: Domain.Event, _ today: DayComponents) -> EventViewController {
         EventViewController(
             event: event,
             commander: commander,
             controllers: [
                 makeWeekViewController(
                     event: event,
-                    coordinator: coordinator
+                    today: today
                 ),
                 makeClockViewController(event: event),
             ]
         )
     }
 
-    func makeWeekViewController(
-        event: Event,
-        coordinator: Coordinating
-    ) -> WeekViewController {
-        WeekViewController(
-            today: DayComponents(date: .now),
-            event: event,
-            commander: commander,
-            coordinator: coordinator
-        )
+    func makeWeekViewController(event: Event, today: DayComponents) -> WeekViewController {
+        let controller = WeekViewController(viewModel: makeWeekViewModel(event: event, today: today))
+        weekViewModelUpdater.addUpdateReceiver(controller)
+        return controller
     }
 
     func makeClockViewController(event: Event) -> ClockViewController {
@@ -140,5 +141,14 @@ class CompositionRoot: CoordinatingFactory {
 
     func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
         DayViewModel(day: day, event: event, commander: commander)
+    }
+
+    func makeWeekViewModel(event: Event, today: DayComponents) -> WeekViewModel {
+        WeekViewModel(
+            today: today,
+            event: event,
+            coordinator: coordinator,
+            commander: commander
+        )
     }
 }

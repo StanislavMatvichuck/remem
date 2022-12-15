@@ -23,19 +23,17 @@ extension WeekViewController {
         } catch { fatalError("error getting day") }
     }
 
-    static func make() -> (sut: WeekViewController, coordinator: Coordinating) {
+    static func make() -> WeekViewController {
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
         let coordinator = CompositionRoot().coordinator
         let commander = EventsRepositoryFake(events: [event])
-        return (
-            sut: WeekViewController(
-                today: today,
-                event: event,
-                commander: commander,
-                coordinator: coordinator
-            ),
-            coordinator: coordinator
+        let viewModel = WeekViewModel(
+            today: today,
+            event: event,
+            coordinator: coordinator,
+            commander: commander
         )
+        return WeekViewController(viewModel: viewModel)
     }
 }

@@ -17,7 +17,7 @@ protocol Coordinating {
 
 enum CoordinatingCase {
     case list
-    case eventItem(event: Event)
+    case eventItem(today: DayComponents, event: Event)
     case weekItem(day: DayComponents, event: Event)
 }
 
@@ -41,8 +41,8 @@ class DefaultCoordinator: Coordinating {
         switch fromCase {
         case .list:
             navController.pushViewController(factory.makeController(for: .list), animated: false)
-        case .eventItem(let event):
-            navController.pushViewController(factory.makeController(for: .eventItem(event: event)), animated: true)
+        case .eventItem(let today, let event):
+            navController.pushViewController(factory.makeController(for: .eventItem(today: today, event: event)), animated: true)
         case .weekItem(let day, let event):
             let controller = factory.makeController(for: .weekItem(day: day, event: event))
 
