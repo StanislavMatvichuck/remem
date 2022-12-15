@@ -82,7 +82,7 @@ extension EventsListViewController {
         } else { fatalError("unable to get cell at \(atIndexPath)") }
     }
 
-    static func make(coordinator: Coordinating = DefaultCoordinator()) -> (sut: EventsListViewController, coordinator: Coordinating) {
+    static func make(coordinator: Coordinating = DefaultCoordinator()) -> EventsListViewController {
         let provider = EventsRepositoryFake()
         let commander = EventsCommandingEventsListViewModelUpdatingDecorator(
             decoratedInterface: provider
@@ -111,6 +111,6 @@ extension EventsListViewController {
         commander.viewModelFactory = listViewModelFactory
         commander.addUpdateReceiver(sut)
 
-        return (sut, coordinator)
+        return sut
     }
 }

@@ -26,7 +26,14 @@ extension ClockViewController {
 
         guard let date = Calendar.current.date(from: today)
         else { fatalError("error making time for insertion") }
-        event.addHappening(date: date)
+        let existingEvent = viewModel.event
+        existingEvent.addHappening(date: date)
+        let newViewModel = ClockViewModel(
+            event: existingEvent,
+            sorter: DefaultClockSorter(size: 144)
+        )
+
+        update(viewModel: newViewModel)
     }
 
     func forceViewToLayoutInScreenSize() {
@@ -36,8 +43,9 @@ extension ClockViewController {
 
     static func make(event: Event = Event(name: "Event")) -> ClockViewController {
         ClockViewController(
-            event: event,
-            sorter: DefaultClockSorter(size: 144)
-        )
+            viewModel: ClockViewModel(
+                event: event,
+                sorter: DefaultClockSorter(size: 144)
+            ))
     }
 }

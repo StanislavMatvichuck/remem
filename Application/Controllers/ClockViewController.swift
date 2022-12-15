@@ -10,14 +10,10 @@ import UIKit
 
 class ClockViewController: UIViewController {
     let viewRoot: ClockView
-    let sorter: ClockStrategy
     var viewModel: ClockViewModel
-    var event: Event
 
-    init(event: Event, sorter: ClockStrategy) {
-        self.event = event
-        self.sorter = sorter
-        self.viewModel = ClockViewModel(happenings: event.happenings, sorter: sorter)
+    init(viewModel: ClockViewModel) {
+        self.viewModel = viewModel
         self.viewRoot = ClockView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,13 +23,18 @@ class ClockViewController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {}
+}
 
-    private func update() {
+extension ClockViewController: ClockViewModelUpdating {
+    var currentViewModel: ClockViewModel { viewModel }
+    func update(viewModel: ClockViewModel) {
+        self.viewModel = viewModel
+
         guard
             let layers = viewRoot.clockFace.layer.sublayers as? [ClockItem]
         else { return }
 
-        viewModel.sections.enumerated().forEach { index, section in
+        viewModel.items.enumerated().forEach { index, section in
             layers[index].viewModel = section
         }
     }

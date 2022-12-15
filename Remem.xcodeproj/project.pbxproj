@@ -123,6 +123,7 @@
 		08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FEA291E71E10033AB0D /* Mocks.swift */; };
 		08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* ClockView.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
+		08FE5CCF294B1FB700087D21 /* ClockViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventItemViewModel.swift */; };
 		08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekItemViewModel.swift */; };
@@ -387,6 +388,7 @@
 		08F82FEA291E71E10033AB0D /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
+		08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelUpdating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -674,8 +676,9 @@
 		08B171C329486837006FB46C /* ViewModelUpdating */ = {
 			isa = PBXGroup;
 			children = (
-				08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */,
+				08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */,
 				083479A62948BEFD00E21FCD /* DayViewModelUpdating.swift */,
+				08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */,
 			);
 			path = ViewModelUpdating;
 			sourceTree = "<group>";
@@ -1314,6 +1317,7 @@
 				0890627827A0A2520032847C /* EventViewController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
+				08FE5CCF294B1FB700087D21 /* ClockViewModelUpdating.swift in Sources */,
 				08B81784294500A70095D891 /* MulticastDelegate.swift in Sources */,
 				08D5122227870D2500C2037F /* EventsListViewController.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,

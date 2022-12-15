@@ -113,9 +113,15 @@ class CompositionRoot: CoordinatingFactory {
 
     func makeClockViewController(event: Event) -> ClockViewController {
         ClockViewController(
-            event: event,
-            sorter: DefaultClockSorter(size: 144)
+            viewModel: makeClockViewModel(
+                event: event,
+                sorter: DefaultClockSorter(size: 144)
+            )
         )
+    }
+
+    func makeClockViewModel(event: Event, sorter: ClockStrategy) -> ClockViewModel {
+        ClockViewModel(event: event, sorter: sorter)
     }
 
     func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {

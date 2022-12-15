@@ -9,11 +9,12 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
-    var size: Int { sections.count }
-    let sections: [ClockItemViewModel]
+    let event: Event
+    let items: [ClockItemViewModel]
 
-    init(happenings: [Happening], sorter: ClockStrategy) {
-        self.sections = sorter.sort(orderedByDateHappenings: happenings)
+    init(event: Event, sorter: ClockStrategy) {
+        self.items = sorter.sort(orderedByDateHappenings: event.happenings)
+        self.event = event
     }
 }
 

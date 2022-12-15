@@ -41,7 +41,7 @@ class ClockViewControllerTests: XCTestCase {
     }
 
     func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
-        for _ in 0 ..< sut.viewModel.size {
+        for _ in 0 ..< sut.viewModel.items.count {
             sut.addOneHappening()
         }
 
@@ -74,23 +74,6 @@ class ClockViewControllerTests: XCTestCase {
         let fullSections = sections.filter { $0.viewModel.length == 1.0 }
 
         XCTAssertLessThanOrEqual(1, fullSections.count)
-    }
-
-    func test_receivesUpdatesFromEditUseCasing() {
-        let refDay = DayComponents.referenceValue
-        let event = Event(name: "Event", dateCreated: refDay.date)
-        let commander = EventsRepositoryFake(events: [event])
-
-        sut = ClockViewController(
-            event: event,
-            sorter: DefaultClockSorter(size: 144)
-        )
-
-        sut.forceViewToLayoutInScreenSize()
-
-        event.addHappening(date: refDay.date)
-
-        XCTAssertEqual(nonEmptySections.count, 1)
     }
 
     private var sections: [ClockItem] {

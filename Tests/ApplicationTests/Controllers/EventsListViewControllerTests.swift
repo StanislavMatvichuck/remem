@@ -14,20 +14,17 @@ import XCTest
 class EventsListViewControllerTests: XCTestCase {
     // MARK: - Test fixture
     var sut: EventsListViewController!
-    var coordinator: Coordinating!
-
     var table: UITableView { sut.viewRoot.table }
     var view: EventsListView { sut.viewRoot }
 
     override func setUp() {
         super.setUp()
-        (sut, coordinator) = EventsListViewController.make()
+        sut = EventsListViewController.make()
     }
 
     override func tearDown() {
-        executeRunLoop()
         sut = nil
-        coordinator = nil
+        executeRunLoop()
         super.tearDown()
     }
 
@@ -215,19 +212,6 @@ class EventsListViewControllerTests: XCTestCase {
         sut.arrangeSingleEventSwiped()
 
         XCTAssertNil(sut.viewRoot.swipeHint.superview)
-    }
-
-    func test_singleEvent_eventTapped_opensEventDetails() {
-        let sut = EventsListViewController.make()
-        let navigationController = sut.sut.navigationController
-
-        putInViewHierarchy(sut.sut)
-
-        XCTAssertEqual(navigationController?.viewControllers.count, 1, "precondition")
-
-        sut.sut.submitEvent()
-
-        XCTAssertEqual(navigationController?.viewControllers.count, 2)
     }
 
     private func arrangeFirstEventSwipeAction(number: Int) -> UIContextualAction {
