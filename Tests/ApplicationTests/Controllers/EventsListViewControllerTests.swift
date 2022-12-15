@@ -155,7 +155,7 @@ class EventsListViewControllerTests: XCTestCase {
 
         view.input.value = "ChangedName"
 
-        view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
+        _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
 
         XCTAssertEqual(sut.firstEvent.nameLabel.text, "ChangedName")
     }
