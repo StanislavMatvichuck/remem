@@ -93,14 +93,12 @@ extension EventsListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension EventsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let event = viewModel.events[indexPath.row]
-
         let renameAction = UIContextualAction(
             style: .normal,
             title: String(localizationId: "button.rename")
         ) { _, _, completion in
             self.viewModel.renamedItem = self.viewModel.items[indexPath.row]
-            self.viewRoot.input.rename(oldName: event.name)
+            self.viewRoot.input.rename(oldName: self.viewModel.items[indexPath.row].event.name)
             completion(true)
         }
 

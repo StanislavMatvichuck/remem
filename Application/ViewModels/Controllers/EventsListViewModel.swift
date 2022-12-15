@@ -10,7 +10,7 @@ import Domain
 struct EventsListViewModel {
     typealias ItemViewModelFactory = (_: Event, _: DayComponents) -> EventItemViewModel
 
-    let events: [Event]
+    private let events: [Event]
     let today: DayComponents
     let items: [EventItemViewModel]
     let factory: ItemViewModelFactory
