@@ -15,11 +15,17 @@ class EventViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        sut = EventViewController(
+        let viewModel = EventViewModel(
             event: Event(name: "EventName"),
-            commander: EventsRepositoryFake(),
+            commander: EventsRepositoryFake()
+        )
+
+        sut = EventViewController(
+            viewModel: viewModel,
             controllers: [UIViewController(), UIViewController()]
         )
+
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
@@ -35,12 +41,12 @@ class EventViewControllerTests: XCTestCase {
     func test_viewDidAppear_visitEvent() {
         putInViewHierarchy(sut)
 
-        XCTAssertNil(sut.event.dateVisited, "precondition")
+        XCTAssertNil(sut.viewModel.event.dateVisited, "precondition")
 
         sut.loadViewIfNeeded()
         executeRunLoop()
 
-        XCTAssertNotNil(sut.event.dateVisited)
+        XCTAssertNotNil(sut.viewModel.event.dateVisited)
     }
 
     func test_showsControllersInScroll() {
