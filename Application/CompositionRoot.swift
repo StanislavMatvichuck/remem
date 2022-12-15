@@ -58,6 +58,11 @@ class CompositionRoot: CoordinatingFactory {
         coordinator.factory = self
     }
 
+    func makeRootViewController() -> UIViewController {
+        coordinator.show(.list)
+        return coordinator.root
+    }
+
     // MARK: - Controllers creation
     func makeController(for navCase: CoordinatingCase) -> UIViewController {
         switch navCase {
@@ -67,36 +72,10 @@ class CompositionRoot: CoordinatingFactory {
         }
     }
 
-    func makeRootViewController() -> UIViewController {
-        coordinator.show(.list)
-        return coordinator.root
-    }
-
     func makeEventsListViewController() -> EventsListViewController {
         let eventsListController = EventsListViewController(viewModel: makeEventsListViewModel())
         eventsListViewModelUpdater.addUpdateReceiver(eventsListController)
         return eventsListController
-    }
-
-    func makeEventsListViewModel() -> EventsListViewModel {
-        EventsListViewModel(
-            events: provider.get(),
-            today: DayComponents(date: .now),
-            itemViewModelFactory: makeEventItemViewModel,
-            commander: commander
-        )
-    }
-
-    func makeEventItemViewModel(
-        event: Event,
-        today: DayComponents
-    ) -> EventItemViewModel {
-        EventItemViewModel(
-            event: event,
-            today: today,
-            coordinator: coordinator,
-            commander: commander
-        )
     }
 
     func makeEventViewController(_ event: Domain.Event, _ today: DayComponents) -> EventViewController {
@@ -125,18 +104,40 @@ class CompositionRoot: CoordinatingFactory {
         return controller
     }
 
-    func makeClockViewModel(event: Event) -> ClockViewModel {
-        ClockViewModel(
-            event: event,
-            sorter: DefaultClockSorter(size: 144)
-        )
-    }
-
     func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {
         let viewModel = makeDayViewModel(event: event, day: day)
         let controller = DayViewController(viewModel: viewModel)
         dayViewModelUpdater.addUpdateReceiver(controller)
         return controller
+    }
+
+    // MARK: - ViewModels creation
+    func makeEventsListViewModel() -> EventsListViewModel {
+        EventsListViewModel(
+            events: provider.get(),
+            today: DayComponents(date: .now),
+            itemViewModelFactory: makeEventItemViewModel,
+            commander: commander
+        )
+    }
+
+    func makeEventItemViewModel(
+        event: Event,
+        today: DayComponents
+    ) -> EventItemViewModel {
+        EventItemViewModel(
+            event: event,
+            today: today,
+            coordinator: coordinator,
+            commander: commander
+        )
+    }
+
+    func makeClockViewModel(event: Event) -> ClockViewModel {
+        ClockViewModel(
+            event: event,
+            sorter: DefaultClockSorter(size: 144)
+        )
     }
 
     func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
