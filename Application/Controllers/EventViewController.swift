@@ -11,38 +11,31 @@ import UIKit
 
 class EventViewController: UIViewController {
     // MARK: - Properties
-    let viewRoot = EventView()
-    let commander: EventsCommanding
-    var event: Event
+    let viewRoot: EventView
     var viewModel: EventViewModel
 
     // MARK: - Init
-    init(
-        event: Event,
-        commander: EventsCommanding,
-        controllers: [UIViewController]
-    ) {
-        self.event = event
-        self.viewModel = EventViewModel(event: event)
-        self.commander = commander
+    init(viewModel: EventViewModel, controllers: [UIViewController]) {
+        self.viewModel = viewModel
+        self.viewRoot = EventView()
 
         super.init(nibName: nil, bundle: nil)
 
-        title = viewModel.title
-
-        for controller in controllers {
-            contain(controller: controller)
-        }
+        for controller in controllers { contain(controller: controller) }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = viewModel.title
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        event.visit()
-        commander.save(event)
+        viewModel.visit()
     }
 
     private func contain(controller: UIViewController) {

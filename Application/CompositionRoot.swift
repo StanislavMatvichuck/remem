@@ -80,8 +80,7 @@ class CompositionRoot: CoordinatingFactory {
 
     func makeEventViewController(_ event: Domain.Event, _ today: DayComponents) -> EventViewController {
         EventViewController(
-            event: event,
-            commander: commander,
+            viewModel: makeEventViewModel(event: event),
             controllers: [
                 makeWeekViewController(
                     event: event,
@@ -138,6 +137,10 @@ class CompositionRoot: CoordinatingFactory {
             event: event,
             sorter: DefaultClockSorter(size: 144)
         )
+    }
+
+    func makeEventViewModel(event: Event) -> EventViewModel {
+        EventViewModel(event: event, commander: commander)
     }
 
     func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {

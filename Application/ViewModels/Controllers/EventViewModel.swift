@@ -16,11 +16,20 @@ struct EventViewModel {
         return formatter
     }()
 
-    private let event: Event
+    let event: Event
+    let commander: EventsCommanding
 
-    init(event: Event) { self.event = event }
+    init(event: Event, commander: EventsCommanding) {
+        self.event = event
+        self.commander = commander
+    }
 
     var title: String { event.name }
+
+    func visit() {
+        event.visit()
+        commander.save(event)
+    }
 
     /// deprecated. move to `StatsViewModel`
     var totalAmount: String {
