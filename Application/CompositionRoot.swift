@@ -15,6 +15,7 @@ class CompositionRoot: CoordinatingFactory {
     let coordinator: Coordinating
     let eventsListViewModelUpdater: EventsListViewModelUpdateDispatcher
     let dayViewModelUpdater: DayViewModelUpdateDispatcher
+    let clockViewModelUpdater: ClockViewModelUpdateDispatcher
 
     init() {
         let coordinator = DefaultCoordinator()
@@ -33,14 +34,20 @@ class CompositionRoot: CoordinatingFactory {
             decoratedInterface: decoratedEventsProviderCommander
         )
 
+        let decoratedClockViewModelUpdatingDecorator = EventsCommandingClockViewModelUpdatingDecorator(
+            decoratedInterface: decoratedEventsListViewModelUpdatingDecorator
+        )
+
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = decoratedEventsListViewModelUpdatingDecorator
+        self.commander = decoratedClockViewModelUpdatingDecorator
         self.eventsListViewModelUpdater = decoratedEventsProviderCommander
         self.dayViewModelUpdater = decoratedEventsListViewModelUpdatingDecorator
+        self.clockViewModelUpdater = decoratedClockViewModelUpdatingDecorator
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
         decoratedEventsListViewModelUpdatingDecorator.viewModelFactory = makeDayViewModel
+        decoratedClockViewModelUpdatingDecorator.viewModelFactory = makeClockViewModel
         coordinator.factory = self
     }
 
@@ -112,16 +119,16 @@ class CompositionRoot: CoordinatingFactory {
     }
 
     func makeClockViewController(event: Event) -> ClockViewController {
-        ClockViewController(
-            viewModel: makeClockViewModel(
-                event: event,
-                sorter: DefaultClockSorter(size: 144)
-            )
-        )
+        let controller = ClockViewController(viewModel: makeClockViewModel(event: event))
+        clockViewModelUpdater.addUpdateReceiver(controller)
+        return controller
     }
 
-    func makeClockViewModel(event: Event, sorter: ClockStrategy) -> ClockViewModel {
-        ClockViewModel(event: event, sorter: sorter)
+    func makeClockViewModel(event: Event) -> ClockViewModel {
+        ClockViewModel(
+            event: event,
+            sorter: DefaultClockSorter(size: 144)
+        )
     }
 
     func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {
