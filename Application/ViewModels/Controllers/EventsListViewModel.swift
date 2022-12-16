@@ -17,6 +17,10 @@ struct EventsListViewModel {
     private let factory: EventItemViewModelFactory
     private let commander: EventsCommanding
 
+    let title = String(localizationId: "eventsList.title")
+    let rename = String(localizationId: "button.rename")
+    let delete = String(localizationId: "button.delete")
+
     let hint: String
     let items: [EventItemViewModel]
     var renamedItem: EventItemViewModel?
