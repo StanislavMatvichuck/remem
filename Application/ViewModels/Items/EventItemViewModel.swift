@@ -9,10 +9,10 @@ import Domain
 import Foundation
 
 struct EventItemViewModel {
-    let event: Event
-    let today: DayComponents
-    let coordinator: Coordinating
-    let commander: EventsCommanding
+    private let event: Event
+    private let today: DayComponents
+    private let coordinator: Coordinating
+    private let commander: EventsCommanding
 
     init(
         event: Event,

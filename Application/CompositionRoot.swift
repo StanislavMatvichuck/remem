@@ -9,7 +9,10 @@ import DataLayer
 import Domain
 import UIKit
 
-class CompositionRoot: CoordinatingFactory {
+class CompositionRoot:
+    CoordinatingFactory,
+    EventItemViewModelFactory
+{
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinating
@@ -115,7 +118,7 @@ class CompositionRoot: CoordinatingFactory {
         EventsListViewModel(
             events: provider.get(),
             today: DayComponents(date: .now),
-            itemViewModelFactory: makeEventItemViewModel,
+            factory: self,
             commander: commander
         )
     }

@@ -88,18 +88,13 @@ extension EventsListViewController {
             decoratedInterface: provider
         )
 
+        let eventItemsFactory = EventItemsFactory(commander: commander)
+
         let listViewModelFactory = {
             EventsListViewModel(
                 events: provider.get(),
                 today: DayComponents(date: .now),
-                itemViewModelFactory: { event, today in
-                    EventItemViewModel(
-                        event: event,
-                        today: today,
-                        coordinator: coordinator,
-                        commander: commander
-                    )
-                },
+                factory: eventItemsFactory,
                 commander: commander
             )
         }
@@ -112,5 +107,23 @@ extension EventsListViewController {
         commander.addUpdateReceiver(sut)
 
         return sut
+    }
+}
+
+/// This class duplicates CompositionRoot. Must be removed later
+struct EventItemsFactory: EventItemViewModelFactory {
+    let commander: EventsCommanding
+
+    init(commander: EventsCommanding) {
+        self.commander = commander
+    }
+
+    func makeEventItemViewModel(event: Event, today: DayComponents) -> EventItemViewModel {
+        EventItemViewModel(
+            event: event,
+            today: today,
+            coordinator: CompositionRoot().coordinator,
+            commander: commander
+        )
     }
 }

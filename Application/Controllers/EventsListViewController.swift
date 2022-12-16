@@ -16,7 +16,9 @@ class EventsListViewController: UIViewController {
     }
 
     let viewRoot: EventsListView
-    var viewModel: EventsListViewModel
+    var viewModel: EventsListViewModel {
+        didSet { update() }
+    }
 
     // MARK: - Init
     init(viewModel: EventsListViewModel) {
@@ -57,10 +59,17 @@ class EventsListViewController: UIViewController {
 extension EventsListViewController: EventsListViewModelUpdating {
     func update(viewModel: EventsListViewModel) {
         self.viewModel = viewModel
+    }
+
+    func update() {
         viewRoot.table.reloadData()
 
         if viewModel.hint != HintState.placeFirstMark.text {
             viewRoot.swipeHint.removeFromSuperview()
+        }
+
+        if let renamedItem = viewModel.renamedItem {
+            viewRoot.input.rename(oldName: renamedItem.name)
         }
     }
 }
@@ -98,7 +107,6 @@ extension EventsListViewController: UITableViewDelegate {
             title: String(localizationId: "button.rename")
         ) { _, _, completion in
             self.viewModel.renamedItem = self.viewModel.items[indexPath.row]
-            self.viewRoot.input.rename(oldName: self.viewModel.items[indexPath.row].event.name)
             completion(true)
         }
 
