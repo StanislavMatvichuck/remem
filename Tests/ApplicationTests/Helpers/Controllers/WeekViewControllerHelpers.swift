@@ -32,8 +32,20 @@ extension WeekViewController {
             today: today,
             event: event,
             coordinator: coordinator,
-            commander: commander
+            commander: commander,
+            factory: WeekItemViewModelFactory()
         )
         return WeekViewController(viewModel: viewModel)
+    }
+}
+
+/// This type duplicates `CompositionRoot`. Must be removed later
+struct WeekItemViewModelFactory: WeekItemViewModelFactoring {
+    func makeWeekItemViewModel(day: Domain.DayComponents, today: Domain.DayComponents, happenings: [Domain.Happening]) -> Application.WeekItemViewModel {
+        WeekItemViewModel(
+            day: day,
+            today: today,
+            happenings: happenings
+        )
     }
 }

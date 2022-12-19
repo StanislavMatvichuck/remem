@@ -110,7 +110,8 @@ class WeekViewModelTests: XCTestCase {
             today: today,
             event: event,
             coordinator: CompositionRoot().coordinator,
-            commander: EventsRepositoryFake()
+            commander: EventsRepositoryFake(),
+            factory: WeekItemViewModelFactory()
         )
     }
 }

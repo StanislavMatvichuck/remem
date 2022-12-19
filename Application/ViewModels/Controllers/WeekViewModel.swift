@@ -8,6 +8,14 @@
 import Domain
 import Foundation
 
+protocol WeekItemViewModelFactoring {
+    func makeWeekItemViewModel(
+        day: DayComponents,
+        today: DayComponents,
+        happenings: [Happening]
+    ) -> WeekItemViewModel
+}
+
 struct WeekViewModel {
     private let upcomingWeeksCount = 3
     let today: DayComponents
@@ -17,11 +25,13 @@ struct WeekViewModel {
     let coordinator: Coordinating
     var scrollToIndex: Int = 0
     // MARK: - Init
-    init(today: DayComponents,
-         event: Event,
-         coordinator: Coordinating,
-         commander: EventsCommanding)
-    {
+    init(
+        today: DayComponents,
+        event: Event,
+        coordinator: Coordinating,
+        commander: EventsCommanding,
+        factory: WeekItemViewModelFactoring
+    ) {
         self.today = today
         self.event = event
         self.coordinator = coordinator
@@ -61,7 +71,7 @@ struct WeekViewModel {
         var viewModels = [WeekItemViewModel]()
         for addedDay in 0 ..< daysToShow {
             let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
-            let vm = WeekItemViewModel(
+            let vm = factory.makeWeekItemViewModel(
                 day: cellDay,
                 today: today,
                 happenings: event.happenings(forDayComponents: cellDay)

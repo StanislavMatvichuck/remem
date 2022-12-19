@@ -73,7 +73,8 @@ class WeekViewControllerTests: XCTestCase {
             today: created.adding(components: DateComponents(day: todayRandomOffset)),
             event: event,
             coordinator: CompositionRoot().coordinator,
-            commander: commander
+            commander: commander,
+            factory: WeekItemViewModelFactory()
         )
 
         sut = WeekViewController(viewModel: viewModel)
@@ -124,7 +125,8 @@ class WeekViewControllerTests: XCTestCase {
             today: DayComponents.referenceValue,
             event: event,
             coordinator: coordinator,
-            commander: commander
+            commander: commander,
+            factory: WeekItemViewModelFactory()
         )
 
         sut = WeekViewController(viewModel: viewModel)
