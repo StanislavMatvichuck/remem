@@ -47,7 +47,7 @@ class DayViewController: UIViewController {
     }
 
     private func configurePicker() {
-        picker.date = viewModel.day.date
+        picker.date = viewModel.pickerDate
         picker.addTarget(self, action: #selector(handleTimeChange), for: .valueChanged)
     }
 
@@ -59,13 +59,13 @@ class DayViewController: UIViewController {
     private func configureNavBar() {
         title = viewModel.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: String(localizationId: "button.create"),
+            title: viewModel.create,
             style: .plain,
             target: self,
             action: #selector(handleAdd)
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: String(localizationId: "button.edit"),
+            title: viewModel.edit,
             style: .plain,
             target: self,
             action: #selector(handleEdit)
@@ -74,17 +74,17 @@ class DayViewController: UIViewController {
 
     private func makeTimeSelectionAlert() -> UIAlertController {
         let alert = UIAlertController(
-            title: String(localizationId: "button.create"),
+            title: viewModel.create,
             message: nil,
             preferredStyle: .alert
         )
         let cancel = UIAlertAction(
-            title: String(localizationId: "button.cancel"),
+            title: viewModel.cancel,
             style: .cancel,
             handler: nil
         )
         let submit = UIAlertAction(
-            title: String(localizationId: "button.create"),
+            title: viewModel.create,
             style: .default,
             handler: handleTimeSelectionSubmit
         )
@@ -140,7 +140,7 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
         UISwipeActionsConfiguration(actions: [
             UIContextualAction(
                 style: .destructive,
-                title: String(localizationId: "button.delete")
+                title: viewModel.delete
             ) { _, _, completion in
                 self.viewModel.removeHappening(at: index.row)
                 completion(true)

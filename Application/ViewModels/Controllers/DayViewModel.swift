@@ -9,10 +9,16 @@ import Domain
 import Foundation
 
 struct DayViewModel {
+    let create = String(localizationId: "button.create")
+    let delete = String(localizationId: "button.delete")
+    let cancel = String(localizationId: "button.cancel")
+    let edit = String(localizationId: "button.edit")
+
     let day: DayComponents
-    let items: [String]
-    let commander: EventsCommanding
+    private let commander: EventsCommanding
     let event: Event
+
+    let items: [String]
     var pickerDate: Date
 
     init(day: DayComponents, event: Event, commander: EventsCommanding) {
