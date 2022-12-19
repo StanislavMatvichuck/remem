@@ -110,8 +110,8 @@ extension EventsListViewController {
     }
 }
 
-/// This class duplicates CompositionRoot. Must be removed later
-struct EventItemsFactory: EventItemViewModelFactory {
+/// This type duplicates CompositionRoot. Must be removed later
+struct EventItemsFactory: EventItemViewModelFactoring {
     let commander: EventsCommanding
 
     init(commander: EventsCommanding) {

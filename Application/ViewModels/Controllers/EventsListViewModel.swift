@@ -7,14 +7,14 @@
 
 import Domain
 
-protocol EventItemViewModelFactory {
+protocol EventItemViewModelFactoring {
     func makeEventItemViewModel(event: Event, today: DayComponents) -> EventItemViewModel
 }
 
 struct EventsListViewModel {
     private let events: [Event]
     private let today: DayComponents
-    private let factory: EventItemViewModelFactory
+    private let factory: EventItemViewModelFactoring
     private let commander: EventsCommanding
 
     let title = String(localizationId: "eventsList.title")
@@ -28,7 +28,7 @@ struct EventsListViewModel {
     init(
         events: [Event],
         today: DayComponents,
-        factory: EventItemViewModelFactory,
+        factory: EventItemViewModelFactoring,
         commander: EventsCommanding
     ) {
         self.events = events

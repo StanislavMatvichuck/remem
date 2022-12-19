@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-class WeekCellViewModelTests: XCTestCase {
+class WeekItemViewModelTests: XCTestCase {
     private var sut: WeekItemViewModel!
 
     override func setUp() {

@@ -38,7 +38,12 @@ class DayViewModelTests: XCTestCase {
             event.addHappening(date: happening.dateCreated)
         }
         let commander = EventsRepositoryFake(events: [event])
-        let sut = DayViewModel(day: day, event: event, commander: commander)
+        let sut = DayViewModel(
+            day: day,
+            event: event,
+            commander: commander,
+            factory: DayItemViewModelFactory(commander: commander)
+        )
         return sut
     }
 }

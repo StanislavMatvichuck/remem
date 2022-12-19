@@ -8,6 +8,10 @@
 import Domain
 import Foundation
 
+protocol DayItemViewModelFactoring {
+    func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel
+}
+
 struct DayViewModel {
     let create = String(localizationId: "button.create")
     let delete = String(localizationId: "button.delete")
@@ -18,13 +22,20 @@ struct DayViewModel {
     private let commander: EventsCommanding
     let event: Event
 
-    let items: [String]
+    let items: [DayItemViewModel]
+    let itemsFactory: DayItemViewModelFactoring
     var pickerDate: Date
 
-    init(day: DayComponents, event: Event, commander: EventsCommanding) {
+    init(
+        day: DayComponents,
+        event: Event,
+        commander: EventsCommanding,
+        factory: DayItemViewModelFactoring
+    ) {
         self.event = event
         self.day = day
         self.commander = commander
+        self.itemsFactory = factory
         self.pickerDate = day.date
 
         let dateFormatter = DateFormatter()
@@ -32,7 +43,9 @@ struct DayViewModel {
         dateFormatter.dateStyle = .none
 
         let happenings = event.happenings(forDayComponents: day)
-        self.items = happenings.map { dateFormatter.string(from: $0.dateCreated) }
+        self.items = happenings.map {
+            factory.makeDayItemViewModel(event: event, happening: $0)
+        }
     }
 
     var title: String? {
@@ -43,14 +56,6 @@ struct DayViewModel {
 
     func addHappening() {
         event.addHappening(date: pickerDate)
-        commander.save(event)
-    }
-
-    func removeHappening(at: Int) {
-        let happenings = event.happenings(forDayComponents: day)
-        let removedHappening = happenings[at]
-        do { try event.remove(happening: removedHappening) }
-        catch { fatalError("unable to remove happening") }
         commander.save(event)
     }
 }

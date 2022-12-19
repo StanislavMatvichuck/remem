@@ -132,7 +132,7 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: DayItem.reuseIdentifier,
             for: indexPath
         ) as? DayItem else { fatalError("unable to dequeue cell") }
-        cell.label.text = viewModel.items[indexPath.row]
+        cell.label.text = viewModel.items[indexPath.row].text
         return cell
     }
 
@@ -142,7 +142,7 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
                 style: .destructive,
                 title: viewModel.delete
             ) { _, _, completion in
-                self.viewModel.removeHappening(at: index.row)
+                self.viewModel.items[index.row].remove()
                 completion(true)
             },
         ])

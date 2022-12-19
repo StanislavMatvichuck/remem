@@ -26,13 +26,23 @@ extension DayViewController {
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
         let decoratedCommander = EventsCommandingDayViewModelUpdatingDecorator(decoratedInterface: EventsRepositoryFake(events: [event]))
-        let viewModel = DayViewModel(day: day, event: event, commander: decoratedCommander)
+        let viewModel = DayViewModel(
+            day: day,
+            event: event,
+            commander: decoratedCommander,
+            factory: DayItemViewModelFactory(commander: decoratedCommander)
+        )
         let sut = DayViewController(viewModel: viewModel)
 
         sut.loadViewIfNeeded()
         decoratedCommander.addUpdateReceiver(sut)
         decoratedCommander.viewModelFactory = { event, day in
-            DayViewModel(day: day, event: event, commander: decoratedCommander)
+            DayViewModel(
+                day: day,
+                event: event,
+                commander: decoratedCommander,
+                factory: DayItemViewModelFactory(commander: decoratedCommander)
+            )
         }
 
         _ = UINavigationController(rootViewController: sut)
@@ -40,5 +50,22 @@ extension DayViewController {
         putInViewHierarchy(sut)
 
         return sut
+    }
+}
+
+/// This type duplicates `CompositionRoot`. Must be removed later
+struct DayItemViewModelFactory: DayItemViewModelFactoring {
+    let commander: EventsCommanding
+
+    init(commander: EventsCommanding) {
+        self.commander = commander
+    }
+
+    func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel {
+        DayItemViewModel(
+            event: event,
+            happening: happening,
+            commander: commander
+        )
     }
 }
