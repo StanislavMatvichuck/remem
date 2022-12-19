@@ -7,22 +7,21 @@
 
 import Domain
 
-protocol DayViewModelUpdating {
-    var currentViewModel: DayViewModel { get }
+protocol UsingDayViewModel {
+    var viewModel: DayViewModel { get }
     func update(viewModel: DayViewModel)
 }
 
 protocol DayViewModelUpdateDispatcher {
-    func addUpdateReceiver(_: DayViewModelUpdating)
+    func addUpdateReceiver(_: UsingDayViewModel)
 }
 
 class EventsCommandingDayViewModelUpdatingDecorator:
-    MulticastDelegate<DayViewModelUpdating>,
+    MulticastDelegate<UsingDayViewModel>,
     DayViewModelUpdateDispatcher,
     EventsCommanding
 {
     let decoratedInterface: EventsCommanding
-    var viewModelFactory: ((_: Event, _: DayComponents) -> DayViewModel)?
 
     init(decoratedInterface: EventsCommanding) { self.decoratedInterface = decoratedInterface }
 
@@ -36,18 +35,16 @@ class EventsCommandingDayViewModelUpdatingDecorator:
         sendUpdates(for: event)
     }
 
-    func addUpdateReceiver(_ receiver: DayViewModelUpdating) {
+    func addUpdateReceiver(_ receiver: UsingDayViewModel) {
         addDelegate(receiver)
     }
 
     private func sendUpdates(for updatedEvent: Event) {
-        guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
-
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.currentViewModel
+            let currentViewModel = viewModelUpdateReceiver.viewModel
 
-            if currentViewModel.event == updatedEvent {
-                let newViewModel = viewModelFactory(updatedEvent, currentViewModel.day)
+            if currentViewModel.eventId == updatedEvent.id {
+                let newViewModel = currentViewModel.copy(forNewEvent: updatedEvent)
                 viewModelUpdateReceiver.update(viewModel: newViewModel)
             }
         }

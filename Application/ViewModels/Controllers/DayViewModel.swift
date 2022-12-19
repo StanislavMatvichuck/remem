@@ -12,30 +12,42 @@ protocol DayItemViewModelFactoring {
     func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel
 }
 
+protocol DayViewModelFactoring {
+    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel
+}
+
 struct DayViewModel {
     let create = String(localizationId: "button.create")
     let delete = String(localizationId: "button.delete")
     let cancel = String(localizationId: "button.cancel")
     let edit = String(localizationId: "button.edit")
 
-    let day: DayComponents
+    private let day: DayComponents
     private let commander: EventsCommanding
-    let event: Event
+    private let event: Event
+    private let itemsFactory: DayItemViewModelFactoring
+    private let selfFactory: DayViewModelFactoring
 
+    /// Used by `DayViewModelUpdating`
+    let eventId: String
     let items: [DayItemViewModel]
-    let itemsFactory: DayItemViewModelFactoring
+    let title: String?
     var pickerDate: Date
+    var readableTime: String?
 
     init(
         day: DayComponents,
         event: Event,
         commander: EventsCommanding,
-        factory: DayItemViewModelFactoring
+        itemsFactory: DayItemViewModelFactoring,
+        selfFactory: DayViewModelFactoring
     ) {
+        self.eventId = event.id
         self.event = event
         self.day = day
         self.commander = commander
-        self.itemsFactory = factory
+        self.itemsFactory = itemsFactory
+        self.selfFactory = selfFactory
         self.pickerDate = day.date
 
         let dateFormatter = DateFormatter()
@@ -44,18 +56,35 @@ struct DayViewModel {
 
         let happenings = event.happenings(forDayComponents: day)
         self.items = happenings.map {
-            factory.makeDayItemViewModel(event: event, happening: $0)
+            itemsFactory.makeDayItemViewModel(event: event, happening: $0)
         }
-    }
 
-    var title: String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d MMMM"
-        return dateFormatter.string(for: day.date)
+        let titleFormatter = DateFormatter()
+        titleFormatter.dateFormat = "d MMMM"
+
+        self.title = titleFormatter.string(for: day.date)
+
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+
+        self.readableTime = timeFormatter.string(for: day.date)
     }
 
     func addHappening() {
         event.addHappening(date: pickerDate)
         commander.save(event)
+    }
+
+    mutating func update(pickerDate: Date) {
+        self.pickerDate = pickerDate
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        readableTime = timeFormatter.string(for: pickerDate)
+    }
+
+    func copy(forNewEvent event: Event) -> DayViewModel {
+        selfFactory.makeDayViewModel(event: event, day: day)
     }
 }

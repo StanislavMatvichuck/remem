@@ -42,7 +42,8 @@ class DayViewModelTests: XCTestCase {
             day: day,
             event: event,
             commander: commander,
-            factory: DayItemViewModelFactory(commander: commander)
+            itemsFactory: DayItemViewModelFactory(commander: commander),
+            selfFactory: DayViewModelFactory(commander: commander)
         )
         return sut
     }

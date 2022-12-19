@@ -87,8 +87,10 @@ struct WeekViewModel {
 
         items = viewModels
     }
-
-    func select() {
-        coordinator.show(.weekItem(day: today, event: event))
+    
+    /// TODO: test this method
+    func select(at index: Int) {
+        let selectedDay = items[index].day
+        coordinator.show(.weekItem(day: selectedDay, event: event))
     }
 }

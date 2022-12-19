@@ -26,24 +26,11 @@ extension DayViewController {
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
         let decoratedCommander = EventsCommandingDayViewModelUpdatingDecorator(decoratedInterface: EventsRepositoryFake(events: [event]))
-        let viewModel = DayViewModel(
-            day: day,
-            event: event,
-            commander: decoratedCommander,
-            factory: DayItemViewModelFactory(commander: decoratedCommander)
-        )
+        let viewModel = DayViewModelFactory(commander: decoratedCommander).makeDayViewModel(event: event, day: day)
         let sut = DayViewController(viewModel: viewModel)
 
         sut.loadViewIfNeeded()
         decoratedCommander.addUpdateReceiver(sut)
-        decoratedCommander.viewModelFactory = { event, day in
-            DayViewModel(
-                day: day,
-                event: event,
-                commander: decoratedCommander,
-                factory: DayItemViewModelFactory(commander: decoratedCommander)
-            )
-        }
 
         _ = UINavigationController(rootViewController: sut)
 
@@ -66,6 +53,24 @@ struct DayItemViewModelFactory: DayItemViewModelFactoring {
             event: event,
             happening: happening,
             commander: commander
+        )
+    }
+}
+
+struct DayViewModelFactory: DayViewModelFactoring {
+    let commander: EventsCommanding
+
+    init(commander: EventsCommanding) {
+        self.commander = commander
+    }
+
+    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
+        DayViewModel(
+            day: day,
+            event: event,
+            commander: commander,
+            itemsFactory: DayItemViewModelFactory(commander: commander),
+            selfFactory: self
         )
     }
 }

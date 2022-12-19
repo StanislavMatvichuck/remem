@@ -12,6 +12,7 @@ import UIKit
 class CompositionRoot:
     CoordinatingFactory,
     EventItemViewModelFactoring,
+    DayViewModelFactoring,
     DayItemViewModelFactoring,
     WeekItemViewModelFactoring
 {
@@ -57,7 +58,6 @@ class CompositionRoot:
         self.weekViewModelUpdater = decoratedWeekViewModelUpdatingDecorator
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
-        decoratedEventsListViewModelUpdatingDecorator.viewModelFactory = makeDayViewModel
         decoratedClockViewModelUpdatingDecorator.viewModelFactory = makeClockViewModel
         decoratedWeekViewModelUpdatingDecorator.viewModelFactory = makeWeekViewModel
         coordinator.factory = self
@@ -144,17 +144,18 @@ class CompositionRoot:
         )
     }
 
-    func makeEventViewModel(event: Event) -> EventViewModel {
-        EventViewModel(event: event, commander: commander)
-    }
-
     func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
         DayViewModel(
             day: day,
             event: event,
             commander: commander,
-            factory: self
+            itemsFactory: self,
+            selfFactory: self
         )
+    }
+
+    func makeEventViewModel(event: Event) -> EventViewModel {
+        EventViewModel(event: event, commander: commander)
     }
 
     func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel {

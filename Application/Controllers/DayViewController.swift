@@ -8,7 +8,10 @@
 import Domain
 import UIKit
 
-class DayViewController: UIViewController {
+class DayViewController:
+    UIViewController,
+    UsingDayViewModel
+{
     // MARK: - Properties
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -17,23 +20,49 @@ class DayViewController: UIViewController {
         return picker
     }()
 
-    lazy var textField: UITextField? = nil {
+    private let alert: UIAlertController
+    var timeInput: UITextField { alert.textFields!.first! }
+    let viewRoot: DayView
+    var viewModel: DayViewModel {
         didSet {
-            textField?.inputView = picker
-            textField?.font = UIHelper.fontBold
-            textField?.textColor = UIHelper.itemFont
-            textField?.textAlignment = .center
+            viewRoot.happenings.reloadData()
+            timeInput.text = viewModel.readableTime
         }
     }
-
-    let viewRoot: DayView
-    var viewModel: DayViewModel
 
     // MARK: - Init
     init(viewModel: DayViewModel) {
         self.viewRoot = DayView()
         self.viewModel = viewModel
+        self.alert = UIAlertController(
+            title: viewModel.create,
+            message: nil,
+            preferredStyle: .alert
+        )
+
         super.init(nibName: nil, bundle: nil)
+
+        let cancel = UIAlertAction(
+            title: viewModel.cancel,
+            style: .cancel,
+            handler: nil
+        )
+
+        let submit = UIAlertAction(
+            title: viewModel.create,
+            style: .default,
+            handler: handleTimeSelectionSubmit
+        )
+
+        alert.addAction(cancel)
+        alert.addAction(submit)
+        alert.addTextField { field in
+            field.inputView = self.picker
+            field.font = UIHelper.fontBold
+            field.textColor = UIHelper.itemFont
+            field.textAlignment = .center
+            field.text = viewModel.readableTime
+        }
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -72,42 +101,10 @@ class DayViewController: UIViewController {
         )
     }
 
-    private func makeTimeSelectionAlert() -> UIAlertController {
-        let alert = UIAlertController(
-            title: viewModel.create,
-            message: nil,
-            preferredStyle: .alert
-        )
-        let cancel = UIAlertAction(
-            title: viewModel.cancel,
-            style: .cancel,
-            handler: nil
-        )
-        let submit = UIAlertAction(
-            title: viewModel.create,
-            style: .default,
-            handler: handleTimeSelectionSubmit
-        )
-
-        alert.addTextField { field in self.textField = field }
-        alert.addAction(cancel)
-        alert.addAction(submit)
-
-        return alert
+    @objc private func handleTimeChange() {
+        viewModel.update(pickerDate: picker.date)
     }
 
-    // TODO: Move this logic to viewModel
-    private func updateDisplayedTime() {
-        guard let field = textField else { return }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-
-        field.text = dateFormatter.string(for: picker.date)
-    }
-
-    @objc private func handleTimeChange() { updateDisplayedTime() }
     @objc private func handleTimeSelectionSubmit(_: UIAlertAction) {
         viewModel.addHappening()
     }
@@ -117,7 +114,11 @@ class DayViewController: UIViewController {
     }
 
     @objc private func handleAdd() {
-        present(makeTimeSelectionAlert(), animated: true)
+        present(alert, animated: true)
+    }
+
+    func update(viewModel: DayViewModel) {
+        self.viewModel = viewModel
     }
 }
 
@@ -146,14 +147,5 @@ extension DayViewController: UITableViewDataSource, UITableViewDelegate {
                 completion(true)
             },
         ])
-    }
-}
-
-extension DayViewController: DayViewModelUpdating {
-    var currentViewModel: DayViewModel { viewModel }
-
-    func update(viewModel: DayViewModel) {
-        self.viewModel = viewModel
-        viewRoot.happenings.reloadData()
     }
 }

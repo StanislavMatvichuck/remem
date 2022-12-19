@@ -157,6 +157,22 @@ class DayViewControllerTests: XCTestCase {
         assertCellHasTimeText(at: thirdCellIndex)
     }
 
+    /// Bad test because of viewModel implementation detail
+    // TODO: make integration test for picker
+    func test_createHappeningAlertShown_swipingPicker_updatesTimeText() {
+        tap(sut.navigationItem.leftBarButtonItem!)
+
+        sut.viewModel.update(pickerDate: DayComponents.referenceValue.date)
+
+        XCTAssertEqual(sut.timeInput.text, "00:00")
+    }
+
+    func test_createHappeningAlertShown_initialTimeIsStartOfDay() {
+        tap(sut.navigationItem.leftBarButtonItem!)
+
+        XCTAssertEqual(sut.timeInput.text!.count, 5)
+    }
+
     private func assertCellHasTimeText(
         at index: IndexPath,
         file: StaticString = #file,

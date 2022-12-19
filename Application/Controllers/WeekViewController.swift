@@ -81,7 +81,7 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.select()
+        viewModel.select(at: indexPath.row)
     }
 
     // UICollectionViewDelegateFlowLayout
