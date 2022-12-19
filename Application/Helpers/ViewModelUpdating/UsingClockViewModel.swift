@@ -7,17 +7,17 @@
 
 import Domain
 
-protocol ClockViewModelUpdating {
-    var currentViewModel: ClockViewModel { get }
+protocol UsingClockViewModel {
+    var viewModel: ClockViewModel { get }
     func update(viewModel: ClockViewModel)
 }
 
 protocol ClockViewModelUpdateDispatcher {
-    func addUpdateReceiver(_: ClockViewModelUpdating)
+    func addUpdateReceiver(_: UsingClockViewModel)
 }
 
 class EventsCommandingClockViewModelUpdatingDecorator:
-    MulticastDelegate<ClockViewModelUpdating>,
+    MulticastDelegate<UsingClockViewModel>,
     ClockViewModelUpdateDispatcher,
     EventsCommanding
 {
@@ -38,7 +38,7 @@ class EventsCommandingClockViewModelUpdatingDecorator:
         sendUpdates(for: event)
     }
 
-    func addUpdateReceiver(_ receiver: ClockViewModelUpdating) {
+    func addUpdateReceiver(_ receiver: UsingClockViewModel) {
         addDelegate(receiver)
     }
 
@@ -46,9 +46,9 @@ class EventsCommandingClockViewModelUpdatingDecorator:
         guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
 
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.currentViewModel
+            let currentViewModel = viewModelUpdateReceiver.viewModel
 
-            if currentViewModel.event == updatedEvent {
+            if currentViewModel.eventId == updatedEvent.id {
                 let newViewModel = viewModelFactory(updatedEvent)
                 viewModelUpdateReceiver.update(viewModel: newViewModel)
             }

@@ -12,17 +12,24 @@ import XCTest
 
 class ClockViewControllerTests: XCTestCase {
     private var sut: ClockViewController!
+    private var event: Event!
 
     override func setUp() {
         super.setUp()
-        let event = Event(name: "Event")
-        sut = ClockViewController.make(event: event)
+        event = Event(name: "Event")
+        sut = ClockViewController(viewModel:
+            ClockViewModel(
+                event: event,
+                sorter: DefaultClockSorter(size: 144)
+            )
+        )
         sut.loadViewIfNeeded()
         sut.forceViewToLayoutInScreenSize()
     }
 
     override func tearDown() {
         sut = nil
+        event = nil
         super.tearDown()
     }
 
@@ -35,14 +42,14 @@ class ClockViewControllerTests: XCTestCase {
     }
 
     func test_singleHappening_oneSectionIsNotEmpty() {
-        sut.addOneHappening()
+        addOneHappening()
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }
 
     func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
         for _ in 0 ..< sut.viewModel.items.count {
-            sut.addOneHappening()
+            addOneHappening()
         }
 
         XCTAssertEqual(nonEmptySections.count, 1)
@@ -52,8 +59,8 @@ class ClockViewControllerTests: XCTestCase {
         let time = TimeComponents(h: 12, m: 30, s: 45)
         let time02 = TimeComponents(h: 13, m: 35, s: 45)
 
-        sut.addOneHappening(at: time)
-        sut.addOneHappening(at: time02)
+        addOneHappening(at: time)
+        addOneHappening(at: time02)
 
         XCTAssertEqual(nonEmptySections.count, 2, "precondition")
         // TODO: add size comparison
@@ -64,7 +71,7 @@ class ClockViewControllerTests: XCTestCase {
     func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
     func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
         for _ in 0 ..< Int.random(in: 1 ..< 100) {
-            sut.addOneHappening(at: TimeComponents(
+            addOneHappening(at: TimeComponents(
                 h: Int.random(in: 0 ..< 24),
                 m: Int.random(in: 0 ..< 60),
                 s: Int.random(in: 0 ..< 60)
@@ -85,4 +92,30 @@ class ClockViewControllerTests: XCTestCase {
     private var nonEmptySections: [ClockItem] {
         sections.filter { $0.viewModel.length != 0.0 }
     }
+
+    private func addOneHappening(
+        at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
+    ) {
+        var today = DayComponents(date: .now).value
+        today.hour = at.h
+        today.minute = at.m
+        today.second = at.s
+
+        guard let date = Calendar.current.date(from: today)
+        else { fatalError("error making time for insertion") }
+
+        event.addHappening(date: date)
+
+        sut.update(viewModel:
+            ClockViewModel(
+                event: event,
+                sorter: DefaultClockSorter(size: 144)
+            ))
+    }
+}
+
+struct TimeComponents {
+    let h: Int
+    let m: Int
+    let s: Int
 }

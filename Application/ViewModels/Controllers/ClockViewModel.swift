@@ -9,12 +9,14 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
-    let event: Event
+    private let event: Event
+    let eventId: String
     let items: [ClockItemViewModel]
 
     init(event: Event, sorter: ClockStrategy) {
         self.items = sorter.sort(orderedByDateHappenings: event.happenings)
         self.event = event
+        self.eventId = event.id
     }
 }
 

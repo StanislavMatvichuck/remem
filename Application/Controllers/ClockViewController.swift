@@ -8,9 +8,22 @@
 import Domain
 import UIKit
 
-class ClockViewController: UIViewController {
+class ClockViewController:
+    UIViewController,
+    UsingClockViewModel
+{
     let viewRoot: ClockView
-    var viewModel: ClockViewModel
+    var viewModel: ClockViewModel {
+        didSet {
+            guard
+                let layers = viewRoot.clockFace.layer.sublayers as? [ClockItem]
+            else { return }
+
+            viewModel.items.enumerated().forEach { index, section in
+                layers[index].viewModel = section
+            }
+        }
+    }
 
     init(viewModel: ClockViewModel) {
         self.viewModel = viewModel
@@ -23,19 +36,8 @@ class ClockViewController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {}
-}
 
-extension ClockViewController: ClockViewModelUpdating {
-    var currentViewModel: ClockViewModel { viewModel }
     func update(viewModel: ClockViewModel) {
         self.viewModel = viewModel
-
-        guard
-            let layers = viewRoot.clockFace.layer.sublayers as? [ClockItem]
-        else { return }
-
-        viewModel.items.enumerated().forEach { index, section in
-            layers[index].viewModel = section
-        }
     }
 }

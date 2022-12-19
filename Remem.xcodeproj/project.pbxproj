@@ -37,7 +37,7 @@
 		083380422944F9100021281C /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		083380432944F9100021281C /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889669528D88A080075A51D /* WidgetViewModel.swift */; };
 		083380452944FD8D0021281C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083380442944FD8D0021281C /* UseCase.swift */; };
-		083479A72948BEFD00E21FCD /* DayViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083479A62948BEFD00E21FCD /* DayViewModelUpdating.swift */; };
+		083479A72948BEFD00E21FCD /* UsingDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083479A62948BEFD00E21FCD /* UsingDayViewModel.swift */; };
 		0835D0FE2934CDB50099AFF6 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
@@ -125,7 +125,7 @@
 		08F97A40295076DC00AB7051 /* DayItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F97A3F295076DC00AB7051 /* DayItemViewModelTests.swift */; };
 		08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* ClockView.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
-		08FE5CCF294B1FB700087D21 /* ClockViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */; };
+		08FE5CCF294B1FB700087D21 /* UsingClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */; };
 		08FE5CD1294B265200087D21 /* WeekViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventItemViewModel.swift */; };
@@ -292,7 +292,7 @@
 		082A19DF2945DEF900D32B0A /* EventsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModelTests.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		083380442944FD8D0021281C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
-		083479A62948BEFD00E21FCD /* DayViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModelUpdating.swift; sourceTree = "<group>"; };
+		083479A62948BEFD00E21FCD /* UsingDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingDayViewModel.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 		08F97A3F295076DC00AB7051 /* DayItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemViewModelTests.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
-		08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelUpdating.swift; sourceTree = "<group>"; };
+		08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingClockViewModel.swift; sourceTree = "<group>"; };
 		08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelUpdating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -683,8 +683,8 @@
 		08B171C329486837006FB46C /* ViewModelUpdating */ = {
 			isa = PBXGroup;
 			children = (
-				08FE5CCE294B1FB700087D21 /* ClockViewModelUpdating.swift */,
-				083479A62948BEFD00E21FCD /* DayViewModelUpdating.swift */,
+				08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */,
+				083479A62948BEFD00E21FCD /* UsingDayViewModel.swift */,
 				08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */,
 				08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */,
 			);
@@ -1314,7 +1314,7 @@
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockItemViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventView.swift in Sources */,
-				083479A72948BEFD00E21FCD /* DayViewModelUpdating.swift in Sources */,
+				083479A72948BEFD00E21FCD /* UsingDayViewModel.swift in Sources */,
 				08DC51F9284BD2BD00DEDFBD /* ClockItem.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
@@ -1328,7 +1328,7 @@
 				0890627827A0A2520032847C /* EventViewController.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
-				08FE5CCF294B1FB700087D21 /* ClockViewModelUpdating.swift in Sources */,
+				08FE5CCF294B1FB700087D21 /* UsingClockViewModel.swift in Sources */,
 				08B81784294500A70095D891 /* MulticastDelegate.swift in Sources */,
 				08D5122227870D2500C2037F /* EventsListViewController.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */,
