@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -25,52 +26,14 @@ extension DayViewController {
         event: Event = Event(name: "Event"),
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
-        let decoratedCommander = EventsCommandingDayViewModelUpdatingDecorator(decoratedInterface: EventsRepositoryFake(events: [event]))
-        let viewModel = DayViewModelFactory(commander: decoratedCommander).makeDayViewModel(event: event, day: day)
-        let sut = DayViewController(viewModel: viewModel)
+        let sut = CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeDayViewController(event, day)
 
         sut.loadViewIfNeeded()
-        decoratedCommander.addUpdateReceiver(sut)
-
-        _ = UINavigationController(rootViewController: sut)
 
         putInViewHierarchy(sut)
 
         return sut
-    }
-}
-
-/// This type duplicates `CompositionRoot`. Must be removed later
-struct DayItemViewModelFactory: DayItemViewModelFactoring {
-    let commander: EventsCommanding
-
-    init(commander: EventsCommanding) {
-        self.commander = commander
-    }
-
-    func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel {
-        DayItemViewModel(
-            event: event,
-            happening: happening,
-            commander: commander
-        )
-    }
-}
-
-struct DayViewModelFactory: DayViewModelFactoring {
-    let commander: EventsCommanding
-
-    init(commander: EventsCommanding) {
-        self.commander = commander
-    }
-
-    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
-        DayViewModel(
-            day: day,
-            event: event,
-            commander: commander,
-            itemsFactory: DayItemViewModelFactory(commander: commander),
-            selfFactory: self
-        )
     }
 }

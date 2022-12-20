@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -21,16 +22,11 @@ class EventItemViewModelTests: XCTestCase {
 //    }
 
     func test_init() {
-        let coordinator = DefaultCoordinator()
-        let commander = EventsRepositoryFake()
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        let sut = EventItemViewModel(
-            event: event,
-            today: today,
-            coordinator: coordinator,
-            commander: commander
-        )
+        let sut = CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeEventItemViewModel(event: event, today: today)
 
         XCTAssertNotNil(sut)
     }

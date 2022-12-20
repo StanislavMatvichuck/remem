@@ -8,10 +8,17 @@
 import Domain
 import UIKit
 
-class WeekViewController: UIViewController {
+class WeekViewController:
+    UIViewController,
+    WeekViewModelUpdating
+{
     var scrollHappened = false
+    var viewModel: WeekViewModel {
+        didSet {
+            viewRoot.collection.reloadData()
+        }
+    }
 
-    var viewModel: WeekViewModel
     let viewRoot: WeekView
 
     init(viewModel: WeekViewModel) {
@@ -81,7 +88,7 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.select(at: indexPath.row)
+        viewModel.items[indexPath.row].select()
     }
 
     // UICollectionViewDelegateFlowLayout
@@ -90,16 +97,11 @@ extension WeekViewController:
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        CGSize(
-            width: collectionView.bounds.width / 7,
-            height: collectionView.bounds.height)
+        CGSize(width: collectionView.bounds.width / 7,
+               height: collectionView.bounds.height)
     }
-}
 
-extension WeekViewController: WeekViewModelUpdating {
-    var currentViewModel: WeekViewModel { viewModel }
     func update(viewModel: WeekViewModel) {
         self.viewModel = viewModel
-        viewRoot.collection.reloadData()
     }
 }

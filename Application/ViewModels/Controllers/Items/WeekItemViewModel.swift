@@ -8,29 +8,45 @@
 import Domain
 import Foundation
 
-
 struct WeekItemViewModel {
-    let day: DayComponents
-    let today: DayComponents
-    let happenings: [Happening]
+    private let event: Event
+    private let day: DayComponents
+    private let today: DayComponents
+    private let coordinator: Coordinating
 
-    init(day: DayComponents, today: DayComponents, happenings: [Happening]) {
+    let isToday: Bool
+    let amount: String
+    let items: [String]
+    let dayNumber: String
+    let date: Date /// used only by `WeekViewControllerTests`
+
+    init(
+        event: Event,
+        day: DayComponents,
+        today: DayComponents,
+        coordinator: Coordinating
+    ) {
         self.day = day
         self.today = today
-        self.happenings = happenings
-    }
+        self.event = event
+        self.coordinator = coordinator
 
-    var dayNumber: String { String(day.value.day ?? 0) }
-    var amount: String { String(happenings.count) }
-    var isToday: Bool { day == today }
-
-    var happeningsTimings: [String] {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .short
 
-        return happenings.map { happening in
+        self.items = event.happenings(forDayComponents: day).map { happening in
             formatter.string(from: happening.dateCreated)
         }
+
+        self.dayNumber = String(day.value.day ?? 0)
+        self.amount = String(items.count)
+        self.isToday = day == today
+        self.date = day.date
+    }
+
+    // TODO: test this method
+    func select() {
+        coordinator.show(.weekItem(day: day, event: event))
     }
 }

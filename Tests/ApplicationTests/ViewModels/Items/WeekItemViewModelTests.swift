@@ -15,7 +15,13 @@ class WeekItemViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let day = DayComponents.referenceValue
-        sut = WeekItemViewModel(day: day, today: day, happenings: [])
+        let event = Event(name: "Event", dateCreated: day.date)
+        sut = WeekItemViewModel(
+            event: event,
+            day: day,
+            today: day,
+            coordinator: CompositionRoot().coordinator
+        )
     }
 
     override func tearDown() {
@@ -33,20 +39,33 @@ class WeekItemViewModelTests: XCTestCase {
     func test_dayAndTodayAreDifferent_isTodayFalse() {
         let day = DayComponents.referenceValue
         let dayLater = day.adding(components: DateComponents(hour: 24))
-        let sut = WeekItemViewModel(day: day, today: dayLater, happenings: [])
+        let event = Event(name: "Event", dateCreated: day.date)
+        let sut = WeekItemViewModel(
+            event: event,
+            day: day,
+            today: dayLater,
+            coordinator: CompositionRoot().coordinator
+        )
 
         XCTAssertFalse(sut.isToday)
     }
-    
+
     func test_hasDayNumber() {
         XCTAssertEqual(sut.dayNumber, "1")
     }
-    
+
     func test_oneHappening_showsHappeningTime() {
         let day = DayComponents.referenceValue
-        let happening = Happening(dateCreated: DayComponents.referenceValue.date)
-        sut = WeekItemViewModel(day: day, today: day, happenings: [happening])
-        
-        XCTAssertEqual(sut.happeningsTimings.first, "00:00")
+        let event = Event(name: "Event", dateCreated: day.date)
+        event.addHappening(date: day.date)
+
+        sut = WeekItemViewModel(
+            event: event,
+            day: day,
+            today: day,
+            coordinator: CompositionRoot().coordinator
+        )
+
+        XCTAssertEqual(sut.items.first, "00:00")
     }
 }

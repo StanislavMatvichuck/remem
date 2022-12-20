@@ -70,22 +70,22 @@ class DayViewControllerTests: XCTestCase {
         XCTAssertEqual(createButton?.title, String(localizationId: "button.create"))
     }
 
-    func test_createButtonTap_presentsAlert() {
-        let verifier = AlertVerifier()
-        let createButton = sut.navigationItem.leftBarButtonItem
-
-        tap(createButton!)
-
-        verifier.verify(
-            title: String(localizationId: "button.create"),
-            message: "",
-            animated: true,
-            actions: [
-                .cancel(String(localizationId: "button.cancel")),
-                .default(String(localizationId: "button.create"))
-            ]
-        )
-    }
+//    func test_createButtonTap_presentsAlert() {
+//        let verifier = AlertVerifier()
+//        let createButton = sut.navigationItem.leftBarButtonItem
+//
+//        tap(createButton!)
+//
+//        verifier.verify(
+//            title: String(localizationId: "button.create"),
+//            message: "",
+//            animated: true,
+//            actions: [
+//                .cancel(String(localizationId: "button.cancel")),
+//                .default(String(localizationId: "button.create"))
+//            ]
+//        )
+//    }
 
     func test_empty_showsNothing() {
         XCTAssertEqual(sut.happeningsAmount, 0)

@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 23.08.2022.
 //
 
+import CoreData
 import DataLayer
 import Domain
 import UIKit
@@ -14,6 +15,7 @@ class CompositionRoot:
     EventItemViewModelFactoring,
     DayViewModelFactoring,
     DayItemViewModelFactoring,
+    WeekViewModelFactoring,
     WeekItemViewModelFactoring
 {
     let provider: EventsQuerying
@@ -24,12 +26,13 @@ class CompositionRoot:
     let clockViewModelUpdater: ClockViewModelUpdateDispatcher
     let weekViewModelUpdater: WeekViewModelUpdateDispatcher
 
-    init() {
+    init(
+        coreDataContainer: NSPersistentContainer = CoreDataStack
+            .createContainer(inMemory: false)
+    ) {
         let coordinator = DefaultCoordinator()
         let repository = CoreDataEventsRepository(
-            container: CoreDataStack.createContainer(
-                inMemory: false
-            ),
+            container: coreDataContainer,
             mapper: EventEntityMapper()
         )
 
@@ -59,7 +62,6 @@ class CompositionRoot:
 
         decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
         decoratedClockViewModelUpdatingDecorator.viewModelFactory = makeClockViewModel
-        decoratedWeekViewModelUpdatingDecorator.viewModelFactory = makeWeekViewModel
         coordinator.factory = self
     }
 
@@ -172,15 +174,17 @@ class CompositionRoot:
             event: event,
             coordinator: coordinator,
             commander: commander,
-            factory: self
+            itemsFactory: self,
+            selfFactory: self
         )
     }
 
-    func makeWeekItemViewModel(day: Domain.DayComponents, today: Domain.DayComponents, happenings: [Domain.Happening]) -> WeekItemViewModel {
+    func makeWeekItemViewModel(event: Event, today: DayComponents, day: DayComponents) -> WeekItemViewModel {
         WeekItemViewModel(
+            event: event,
             day: day,
             today: today,
-            happenings: happenings
+            coordinator: coordinator
         )
     }
 }

@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -15,13 +16,12 @@ class EventViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        let viewModel = EventViewModel(
-            event: Event(name: "EventName"),
-            commander: EventsRepositoryFake()
-        )
-
         sut = EventViewController(
-            viewModel: viewModel,
+            viewModel: CompositionRoot(
+                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+            ).makeEventViewModel(
+                event: Event(name: "EventName")
+            ),
             controllers: [UIViewController(), UIViewController()]
         )
 

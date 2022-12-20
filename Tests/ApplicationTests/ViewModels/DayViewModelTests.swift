@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -37,13 +38,11 @@ class DayViewModelTests: XCTestCase {
         for happening in happenings {
             event.addHappening(date: happening.dateCreated)
         }
-        let commander = EventsRepositoryFake(events: [event])
-        let sut = DayViewModel(
-            day: day,
+        let sut = CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeDayViewModel(
             event: event,
-            commander: commander,
-            itemsFactory: DayItemViewModelFactory(commander: commander),
-            selfFactory: DayViewModelFactory(commander: commander)
+            day: day
         )
         return sut
     }

@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -83,47 +84,12 @@ extension EventsListViewController {
     }
 
     static func make(coordinator: Coordinating = DefaultCoordinator()) -> EventsListViewController {
-        let provider = EventsRepositoryFake()
-        let commander = EventsCommandingEventsListViewModelUpdatingDecorator(
-            decoratedInterface: provider
-        )
-
-        let eventItemsFactory = EventItemsFactory(commander: commander)
-
-        let listViewModelFactory = {
-            EventsListViewModel(
-                events: provider.get(),
-                today: DayComponents(date: .now),
-                factory: eventItemsFactory,
-                commander: commander
-            )
-        }
-
-        let sut = EventsListViewController(viewModel: listViewModelFactory())
+        let sut = CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeEventsListViewController()
 
         sut.loadViewIfNeeded()
 
-        commander.viewModelFactory = listViewModelFactory
-        commander.addUpdateReceiver(sut)
-
         return sut
-    }
-}
-
-/// This type duplicates CompositionRoot. Must be removed later
-struct EventItemsFactory: EventItemViewModelFactoring {
-    let commander: EventsCommanding
-
-    init(commander: EventsCommanding) {
-        self.commander = commander
-    }
-
-    func makeEventItemViewModel(event: Event, today: DayComponents) -> EventItemViewModel {
-        EventItemViewModel(
-            event: event,
-            today: today,
-            coordinator: CompositionRoot().coordinator,
-            commander: commander
-        )
     }
 }

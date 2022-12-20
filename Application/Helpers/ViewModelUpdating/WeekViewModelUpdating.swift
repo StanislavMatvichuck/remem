@@ -8,7 +8,7 @@
 import Domain
 
 protocol WeekViewModelUpdating {
-    var currentViewModel: WeekViewModel { get }
+    var viewModel: WeekViewModel { get }
     func update(viewModel: WeekViewModel)
 }
 
@@ -22,7 +22,6 @@ class EventsCommandingWeekViewModelUpdatingDecorator:
     EventsCommanding
 {
     let decoratedInterface: EventsCommanding
-    var viewModelFactory: ((_: Event, _: DayComponents) -> WeekViewModel)?
 
     init(decoratedInterface: EventsCommanding) {
         self.decoratedInterface = decoratedInterface
@@ -43,14 +42,13 @@ class EventsCommandingWeekViewModelUpdatingDecorator:
     }
 
     private func sendUpdates(for updatedEvent: Event) {
-        guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
-
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.currentViewModel
+            let currentViewModel = viewModelUpdateReceiver.viewModel
 
-            if currentViewModel.event == updatedEvent {
-                let newViewModel = viewModelFactory(updatedEvent, currentViewModel.today)
-                viewModelUpdateReceiver.update(viewModel: newViewModel)
+            if currentViewModel.eventId == updatedEvent.id {
+                viewModelUpdateReceiver.update(
+                    viewModel: currentViewModel.copy(forNewEvent: updatedEvent)
+                )
             }
         }
     }

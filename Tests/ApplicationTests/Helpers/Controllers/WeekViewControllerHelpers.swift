@@ -6,13 +6,14 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
 extension WeekViewController {
-    var firstDay: WeekItem { day(at: IndexPath(row: 0, section: 0)) }
+    var firstDay: WeekItem { cell(at: IndexPath(row: 0, section: 0)) }
 
-    func day(at index: IndexPath) -> WeekItem {
+    func cell(at index: IndexPath) -> WeekItem {
         do {
             let cell = viewRoot.collection.dataSource?.collectionView(
                 viewRoot.collection,
@@ -26,26 +27,48 @@ extension WeekViewController {
     static func make() -> WeekViewController {
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        let coordinator = CompositionRoot().coordinator
-        let commander = EventsRepositoryFake(events: [event])
-        let viewModel = WeekViewModel(
-            today: today,
+        return CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeWeekViewController(
             event: event,
-            coordinator: coordinator,
-            commander: commander,
-            factory: WeekItemViewModelFactory()
+            today: today
         )
-        return WeekViewController(viewModel: viewModel)
     }
 }
 
 /// This type duplicates `CompositionRoot`. Must be removed later
 struct WeekItemViewModelFactory: WeekItemViewModelFactoring {
-    func makeWeekItemViewModel(day: Domain.DayComponents, today: Domain.DayComponents, happenings: [Domain.Happening]) -> Application.WeekItemViewModel {
+    func makeWeekItemViewModel(
+        event: Event,
+        today: DayComponents,
+        day: DayComponents
+    ) -> WeekItemViewModel {
         WeekItemViewModel(
+            event: event,
             day: day,
             today: today,
-            happenings: happenings
+            coordinator: CompositionRoot().coordinator
+        )
+    }
+}
+
+struct WeekViewModelFactory: WeekViewModelFactoring {
+    let coordinator: Coordinating
+    let commander: EventsCommanding
+
+    init(coordinator: Coordinating, commander: EventsCommanding) {
+        self.coordinator = coordinator
+        self.commander = commander
+    }
+
+    func makeWeekViewModel(event: Event, today: DayComponents) -> WeekViewModel {
+        WeekViewModel(
+            today: today,
+            event: event,
+            coordinator: coordinator,
+            commander: commander,
+            itemsFactory: WeekItemViewModelFactory(),
+            selfFactory: self
         )
     }
 }

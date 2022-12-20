@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import XCTest
 
@@ -16,12 +17,14 @@ class DayItemViewModelTests: XCTestCase {
         let created = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: created.date)
         let happening = event.addHappening(date: created.date)
-        let commander = EventsRepositoryFake(events: [event])
-        sut = DayItemViewModel(
+
+        sut = CompositionRoot(
+            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+        ).makeDayItemViewModel(
             event: event,
-            happening: happening,
-            commander: commander
+            happening: happening
         )
+
         super.setUp()
     }
 

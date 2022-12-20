@@ -17,8 +17,8 @@ class ClockViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         event = Event(name: "Event")
-        sut = ClockViewController(viewModel:
-            ClockViewModel(
+        sut = ClockViewController(
+            viewModel: ClockViewModel(
                 event: event,
                 sorter: DefaultClockSorter(size: 144)
             )
@@ -106,11 +106,12 @@ class ClockViewControllerTests: XCTestCase {
 
         event.addHappening(date: date)
 
-        sut.update(viewModel:
-            ClockViewModel(
+        sut.update(
+            viewModel: ClockViewModel(
                 event: event,
                 sorter: DefaultClockSorter(size: 144)
-            ))
+            )
+        )
     }
 }
 

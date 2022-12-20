@@ -133,7 +133,7 @@ class WeekItem: UICollectionViewCell {
         day.textColor = viewModel.isToday ? UIHelper.brand : UIHelper.itemFont
         amount.text = viewModel.amount
 
-        show(timings: viewModel.happeningsTimings)
+        show(timings: viewModel.items)
     }
 }
 

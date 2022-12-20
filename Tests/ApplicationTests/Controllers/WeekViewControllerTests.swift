@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import Domain
 import ViewControllerPresentationSpy
 import XCTest
@@ -67,17 +68,14 @@ class WeekViewControllerTests: XCTestCase {
         let created = DayComponents.referenceValue.adding(components: DateComponents(day: createdRandomOffset))
         let event = Event(name: "Event", dateCreated: created.date)
 
-        let commander = EventsRepositoryFake(events: [event])
-
-        let viewModel = WeekViewModel(
-            today: created.adding(components: DateComponents(day: todayRandomOffset)),
-            event: event,
-            coordinator: CompositionRoot().coordinator,
-            commander: commander,
-            factory: WeekItemViewModelFactory()
+        sut = WeekViewController(
+            viewModel: CompositionRoot(
+                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+            ).makeWeekViewModel(
+                event: event,
+                today: created.adding(components: DateComponents(day: todayRandomOffset))
+            )
         )
-
-        sut = WeekViewController(viewModel: viewModel)
 
         layoutInScreen()
 
@@ -106,40 +104,27 @@ class WeekViewControllerTests: XCTestCase {
     }
 
     func test_hasHappening_firstDayShowsHappeningTime() {
-        let happeningOffset = TimeInterval(60 * 60)
+        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
+        event.addHappening(date: DayComponents.referenceValue.date)
 
-        let event = Event(
-            id: "",
-            name: "Event",
-            happenings: [],
-            dateCreated: DayComponents.referenceValue.date,
-            dateVisited: nil
+        sut = WeekViewController(
+            viewModel: CompositionRoot(
+                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+            ).makeWeekViewModel(
+                event: event,
+                today: DayComponents.referenceValue
+            )
         )
 
-        event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(happeningOffset))
-
-        let commander = EventsRepositoryFake(events: [event])
-        let coordinator = CompositionRoot().coordinator
-
-        let viewModel = WeekViewModel(
-            today: DayComponents.referenceValue,
-            event: event,
-            coordinator: coordinator,
-            commander: commander,
-            factory: WeekItemViewModelFactory()
-        )
-
-        sut = WeekViewController(viewModel: viewModel)
-
-        XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "01:00")
+        XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "00:00")
     }
 
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
-        let day = sut.day(at: index)
+        let vm = sut.viewModel.items[index.row]
 
         let dayOfWeekNumber = Calendar.current.dateComponents(
             [.weekday],
-            from: day.viewModel.day.date
+            from: vm.date
         ).weekday ?? 0
 
         return WeekDay(rawValue: dayOfWeekNumber)

@@ -35,7 +35,7 @@ class WeekViewModelTests: XCTestCase {
 
         sut = make(today: dateCreated, event: event)
 
-        XCTAssertEqual(sut.items.first?.happenings.count, 1)
+        XCTAssertEqual(sut.items.first?.items.count, 1)
     }
 
     func test_numberOfDays_dependsOnEventCreationDateAndToday() {
@@ -73,10 +73,10 @@ class WeekViewModelTests: XCTestCase {
             let event = Event(name: "Event", dateCreated: created.date)
             let sut = make(today: created, event: event)
 
-            let firstVm = sut.items.first
+            let firstItemDayNumber = Int(sut.items.first!.dayNumber) ?? 0
 
-            XCTAssertEqual(firstVm?.day.europeanWeekDay, WeekDay.monday)
-            XCTAssertLessThan(firstVm!.day.date, created.date)
+            XCTAssertEqual(firstItemDayNumber, 1)
+            XCTAssertLessThan(firstItemDayNumber, created.europeanWeekDay.rawValue)
         }
     }
 
@@ -97,21 +97,15 @@ class WeekViewModelTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
 
         let sut = make(today: created.adding(components: DateComponents(day: todayRandomOffset)), event: event)
-        let scrollToVm = sut.items[sut.scrollToIndex]
+        let scrollToItem = sut.items[sut.scrollToIndex]
 
-        XCTAssertEqual(scrollToVm.day.europeanWeekDay, WeekDay.monday)
+//        XCTAssertEqual(scrollToItem.day.europeanWeekDay, WeekDay.monday)
     }
 
     private func make(
         today: DayComponents,
         event: Event
     ) -> WeekViewModel {
-        WeekViewModel(
-            today: today,
-            event: event,
-            coordinator: CompositionRoot().coordinator,
-            commander: EventsRepositoryFake(),
-            factory: WeekItemViewModelFactory()
-        )
+        CompositionRoot().makeWeekViewModel(event: event, today: today)
     }
 }

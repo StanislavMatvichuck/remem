@@ -8,34 +8,49 @@
 import Domain
 import Foundation
 
+protocol WeekViewModelFactoring {
+    func makeWeekViewModel(
+        event: Event,
+        today: DayComponents
+    ) -> WeekViewModel
+}
+
 protocol WeekItemViewModelFactoring {
     func makeWeekItemViewModel(
-        day: DayComponents,
+        event: Event,
         today: DayComponents,
-        happenings: [Happening]
+        day: DayComponents
     ) -> WeekItemViewModel
 }
 
 struct WeekViewModel {
     private let upcomingWeeksCount = 3
-    let today: DayComponents
-    var event: Event
+    private let today: DayComponents
+    private let commander: EventsCommanding
+    private let coordinator: Coordinating
+    private var event: Event
+    private let itemsFactory: WeekItemViewModelFactoring
+    private let selfFactory: WeekViewModelFactoring
+
     var items: [WeekItemViewModel]
-    let commander: EventsCommanding
-    let coordinator: Coordinating
     var scrollToIndex: Int = 0
-    // MARK: - Init
+    var eventId: String /// used by `WeekViewModelUpdating`
+
     init(
         today: DayComponents,
         event: Event,
         coordinator: Coordinating,
         commander: EventsCommanding,
-        factory: WeekItemViewModelFactoring
+        itemsFactory: WeekItemViewModelFactoring,
+        selfFactory: WeekViewModelFactoring
     ) {
         self.today = today
         self.event = event
         self.coordinator = coordinator
         self.commander = commander
+        self.itemsFactory = itemsFactory
+        self.selfFactory = selfFactory
+        eventId = event.id
 
         let startOfWeekDayCreated = {
             let cal = Calendar.current
@@ -69,28 +84,33 @@ struct WeekViewModel {
         let daysToShow = (weeksBetweenTodayAndEventCreationDay + upcomingWeeksCount) * 7
 
         var viewModels = [WeekItemViewModel]()
+
         for addedDay in 0 ..< daysToShow {
             let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
-            let vm = factory.makeWeekItemViewModel(
-                day: cellDay,
+            let vm = itemsFactory.makeWeekItemViewModel(
+                event: event,
                 today: today,
-                happenings: event.happenings(forDayComponents: cellDay)
+                day: cellDay
             )
 
             viewModels.append(vm)
 
-            if vm.isToday {
-                let index = viewModels.firstIndex(where: { $0.day == startOfWeekDayToday })
-                scrollToIndex = index ?? 0
+            if cellDay == startOfWeekDayToday {
+                scrollToIndex = addedDay
             }
         }
 
         items = viewModels
     }
-    
-    /// TODO: test this method
-    func select(at index: Int) {
-        let selectedDay = items[index].day
-        coordinator.show(.weekItem(day: selectedDay, event: event))
+
+    func copy(forNewEvent event: Event) -> WeekViewModel {
+        WeekViewModel(
+            today: today,
+            event: event,
+            coordinator: coordinator,
+            commander: commander,
+            itemsFactory: itemsFactory,
+            selfFactory: selfFactory
+        )
     }
 }
