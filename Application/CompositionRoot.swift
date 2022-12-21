@@ -26,13 +26,10 @@ class CompositionRoot:
     let clockViewModelUpdater: ClockViewModelUpdateDispatcher
     let weekViewModelUpdater: WeekViewModelUpdateDispatcher
 
-    init(
-        coreDataContainer: NSPersistentContainer = CoreDataStack
-            .createContainer(inMemory: false)
-    ) {
+    init(testingInMemoryMode: Bool = false) {
         let coordinator = DefaultCoordinator()
         let repository = CoreDataEventsRepository(
-            container: coreDataContainer,
+            container: CoreDataStack.createContainer(inMemory: testingInMemoryMode),
             mapper: EventEntityMapper()
         )
 

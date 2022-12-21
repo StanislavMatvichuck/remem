@@ -6,7 +6,6 @@
 //
 
 @testable import Application
-import DataLayer
 import Domain
 import ViewControllerPresentationSpy
 import XCTest
@@ -70,7 +69,7 @@ class WeekViewControllerTests: XCTestCase {
 
         sut = WeekViewController(
             viewModel: CompositionRoot(
-                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
+                testingInMemoryMode: true
             ).makeWeekViewModel(
                 event: event,
                 today: created.adding(components: DateComponents(day: todayRandomOffset))
@@ -108,9 +107,7 @@ class WeekViewControllerTests: XCTestCase {
         event.addHappening(date: DayComponents.referenceValue.date)
 
         sut = WeekViewController(
-            viewModel: CompositionRoot(
-                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
-            ).makeWeekViewModel(
+            viewModel: CompositionRoot(testingInMemoryMode: true).makeWeekViewModel(
                 event: event,
                 today: DayComponents.referenceValue
             )

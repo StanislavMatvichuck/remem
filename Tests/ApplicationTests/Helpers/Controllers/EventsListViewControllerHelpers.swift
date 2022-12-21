@@ -6,7 +6,6 @@
 //
 
 @testable import Application
-import DataLayer
 import Domain
 import XCTest
 
@@ -83,10 +82,8 @@ extension EventsListViewController {
         } else { fatalError("unable to get cell at \(atIndexPath)") }
     }
 
-    static func make(coordinator: Coordinating = DefaultCoordinator()) -> EventsListViewController {
-        let sut = CompositionRoot(
-            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
-        ).makeEventsListViewController()
+    static func make() -> EventsListViewController {
+        let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewController()
 
         sut.loadViewIfNeeded()
 

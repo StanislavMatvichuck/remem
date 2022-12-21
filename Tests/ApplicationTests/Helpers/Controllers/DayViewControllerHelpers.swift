@@ -6,7 +6,6 @@
 //
 
 @testable import Application
-import DataLayer
 import Domain
 import XCTest
 
@@ -26,9 +25,7 @@ extension DayViewController {
         event: Event = Event(name: "Event"),
         day: DayComponents = DayComponents(date: .now)
     ) -> DayViewController {
-        let sut = CompositionRoot(
-            coreDataContainer: CoreDataStack.createContainer(inMemory: true)
-        ).makeDayViewController(event, day)
+        let sut = CompositionRoot(testingInMemoryMode: true).makeDayViewController(event, day)
 
         sut.loadViewIfNeeded()
 

@@ -6,7 +6,6 @@
 //
 
 @testable import Application
-import DataLayer
 import Domain
 import XCTest
 
@@ -17,9 +16,7 @@ class EventViewControllerTests: XCTestCase {
         super.setUp()
 
         sut = EventViewController(
-            viewModel: CompositionRoot(
-                coreDataContainer: CoreDataStack.createContainer(inMemory: true)
-            ).makeEventViewModel(
+            viewModel: CompositionRoot(testingInMemoryMode: true).makeEventViewModel(
                 event: Event(name: "EventName")
             ),
             controllers: [UIViewController(), UIViewController()]
