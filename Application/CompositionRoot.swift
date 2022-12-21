@@ -11,9 +11,11 @@ import UIKit
 
 class CompositionRoot:
     CoordinatingFactoring,
-    EventItemViewModelFactoring,
+    ClockViewModelFactoring,
     DayViewModelFactoring,
     DayItemViewModelFactoring,
+    EventsListViewModelFactoring,
+    EventItemViewModelFactoring,
     WeekViewModelFactoring,
     WeekItemViewModelFactoring
 {
@@ -56,8 +58,6 @@ class CompositionRoot:
         self.clockViewModelUpdater = decoratedClockViewModelUpdatingDecorator
         self.weekViewModelUpdater = decoratedWeekViewModelUpdatingDecorator
 
-        decoratedEventsProviderCommander.viewModelFactory = makeEventsListViewModel
-        decoratedClockViewModelUpdatingDecorator.viewModelFactory = makeClockViewModel
         coordinator.factory = self
     }
 
@@ -118,8 +118,9 @@ class CompositionRoot:
         EventsListViewModel(
             events: provider.get(),
             today: DayComponents(date: .now),
-            factory: self,
-            commander: commander
+            commander: commander,
+            itemsFactory: self,
+            selfFactory: self
         )
     }
 
@@ -138,7 +139,8 @@ class CompositionRoot:
     func makeClockViewModel(event: Event) -> ClockViewModel {
         ClockViewModel(
             event: event,
-            sorter: DefaultClockSorter(size: 144)
+            sorter: DefaultClockSorter(size: 144),
+            selfFactory: self
         )
     }
 

@@ -23,7 +23,9 @@ class EventsCommandingDayViewModelUpdatingDecorator:
 {
     let decoratedInterface: EventsCommanding
 
-    init(decoratedInterface: EventsCommanding) { self.decoratedInterface = decoratedInterface }
+    init(decoratedInterface: EventsCommanding) {
+        self.decoratedInterface = decoratedInterface
+    }
 
     func save(_ event: Domain.Event) {
         decoratedInterface.save(event)
@@ -41,11 +43,10 @@ class EventsCommandingDayViewModelUpdatingDecorator:
 
     private func sendUpdates(for updatedEvent: Event) {
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.viewModel
-
-            if currentViewModel.eventId == updatedEvent.id {
-                let newViewModel = currentViewModel.copy(forNewEvent: updatedEvent)
-                viewModelUpdateReceiver.update(viewModel: newViewModel)
+            if viewModelUpdateReceiver.viewModel.eventId == updatedEvent.id {
+                viewModelUpdateReceiver.update(
+                    viewModel: viewModelUpdateReceiver.viewModel.copy(forNewEvent: updatedEvent)
+                )
             }
         }
     }

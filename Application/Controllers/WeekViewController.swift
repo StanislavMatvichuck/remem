@@ -10,7 +10,7 @@ import UIKit
 
 class WeekViewController:
     UIViewController,
-    WeekViewModelUpdating
+    UsingWeekViewModel
 {
     var scrollHappened = false
     var viewModel: WeekViewModel {

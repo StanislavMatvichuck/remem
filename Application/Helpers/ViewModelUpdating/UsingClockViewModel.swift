@@ -22,7 +22,6 @@ class EventsCommandingClockViewModelUpdatingDecorator:
     EventsCommanding
 {
     let decoratedInterface: EventsCommanding
-    var viewModelFactory: ((_: Event) -> ClockViewModel)?
 
     init(decoratedInterface: EventsCommanding) {
         self.decoratedInterface = decoratedInterface
@@ -43,14 +42,11 @@ class EventsCommandingClockViewModelUpdatingDecorator:
     }
 
     private func sendUpdates(for updatedEvent: Event) {
-        guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
-
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.viewModel
-
-            if currentViewModel.eventId == updatedEvent.id {
-                let newViewModel = viewModelFactory(updatedEvent)
-                viewModelUpdateReceiver.update(viewModel: newViewModel)
+            if viewModelUpdateReceiver.viewModel.eventId == updatedEvent.id {
+                viewModelUpdateReceiver.update(
+                    viewModel: viewModelUpdateReceiver.viewModel.copy(forNewEvent: updatedEvent)
+                )
             }
         }
     }

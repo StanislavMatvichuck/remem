@@ -86,7 +86,7 @@
 		08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
 		08AF544A293740E800032487 /* DayViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayViewModelTests.swift */; };
 		08AF544B293740E800032487 /* DayViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayViewModelTests.swift */; };
-		08B171C529486851006FB46C /* EventsListViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */; };
+		08B171C529486851006FB46C /* UsingEventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B171C429486851006FB46C /* UsingEventsListViewModel.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayItem.swift */; };
@@ -124,7 +124,7 @@
 		08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* ClockView.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		08FE5CCF294B1FB700087D21 /* UsingClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */; };
-		08FE5CD1294B265200087D21 /* WeekViewModelUpdating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */; };
+		08FE5CD1294B265200087D21 /* UsingWeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE5CD0294B265200087D21 /* UsingWeekViewModel.swift */; };
 		08FEA38B28DC94F600BAA196 /* Widgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0826AC8F28C86ECE0021D607 /* Widgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EC438128BA365400755B54 /* EventItemViewModel.swift */; };
 		08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E88C228AF916000400180 /* WeekItemViewModel.swift */; };
@@ -348,7 +348,7 @@
 		08A19D2A28901AEC0085DC6F /* EventsListHintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListHintItem.swift; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* DayViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewControllerHelpers.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModelTests.swift; sourceTree = "<group>"; };
-		08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModelUpdating.swift; sourceTree = "<group>"; };
+		08B171C429486851006FB46C /* UsingEventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingEventsListViewModel.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		08B26A11289E91D400DFBAC8 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		08B26A13289E975900DFBAC8 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingClockViewModel.swift; sourceTree = "<group>"; };
-		08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelUpdating.swift; sourceTree = "<group>"; };
+		08FE5CD0294B265200087D21 /* UsingWeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsingWeekViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -682,8 +682,8 @@
 			children = (
 				08FE5CCE294B1FB700087D21 /* UsingClockViewModel.swift */,
 				083479A62948BEFD00E21FCD /* UsingDayViewModel.swift */,
-				08B171C429486851006FB46C /* EventsListViewModelUpdating.swift */,
-				08FE5CD0294B265200087D21 /* WeekViewModelUpdating.swift */,
+				08B171C429486851006FB46C /* UsingEventsListViewModel.swift */,
+				08FE5CD0294B265200087D21 /* UsingWeekViewModel.swift */,
 			);
 			path = ViewModelUpdating;
 			sourceTree = "<group>";
@@ -1302,7 +1302,7 @@
 				08D512382787153900C2037F /* EventsListItem.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
-				08FE5CD1294B265200087D21 /* WeekViewModelUpdating.swift in Sources */,
+				08FE5CD1294B265200087D21 /* UsingWeekViewModel.swift in Sources */,
 				0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
@@ -1313,7 +1313,7 @@
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */,
-				08B171C529486851006FB46C /* EventsListViewModelUpdating.swift in Sources */,
+				08B171C529486851006FB46C /* UsingEventsListViewModel.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08A19D292890125B0085DC6F /* EventsListFooterItem.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,

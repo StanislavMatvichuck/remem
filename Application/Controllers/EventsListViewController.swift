@@ -56,7 +56,7 @@ class EventsListViewController: UIViewController {
     }
 }
 
-extension EventsListViewController: EventsListViewModelUpdating {
+extension EventsListViewController: UsingEventsListViewModel {
     func update(viewModel: EventsListViewModel) {
         self.viewModel = viewModel
     }

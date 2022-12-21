@@ -7,23 +7,25 @@
 
 import Domain
 
-protocol EventsListViewModelUpdating {
+protocol UsingEventsListViewModel {
+    var viewModel: EventsListViewModel { get }
     func update(viewModel: EventsListViewModel)
 }
 
 protocol EventsListViewModelUpdateDispatcher {
-    func addUpdateReceiver(_: EventsListViewModelUpdating)
+    func addUpdateReceiver(_: UsingEventsListViewModel)
 }
 
 class EventsCommandingEventsListViewModelUpdatingDecorator:
-    MulticastDelegate<EventsListViewModelUpdating>,
+    MulticastDelegate<UsingEventsListViewModel>,
     EventsListViewModelUpdateDispatcher,
     EventsCommanding
 {
     let decoratedInterface: EventsCommanding
-    var viewModelFactory: (() -> EventsListViewModel)?
 
-    init(decoratedInterface: EventsCommanding) { self.decoratedInterface = decoratedInterface }
+    init(decoratedInterface: EventsCommanding) {
+        self.decoratedInterface = decoratedInterface
+    }
 
     func save(_ event: Domain.Event) {
         decoratedInterface.save(event)
@@ -35,12 +37,17 @@ class EventsCommandingEventsListViewModelUpdatingDecorator:
         sendUpdates()
     }
 
-    func addUpdateReceiver(_ receiver: EventsListViewModelUpdating) {
+    func addUpdateReceiver(_ receiver: UsingEventsListViewModel) {
         addDelegate(receiver)
     }
 
     private func sendUpdates() {
-        guard let viewModelFactory else { fatalError("viewModelFactory is not provided") }
-        call { $0.update(viewModel: viewModelFactory()) }
+        call { viewModelUpdateReceiver in
+            
+            viewModelUpdateReceiver.update(
+                viewModel: viewModelUpdateReceiver.viewModel.copy()
+            )
+            
+        }
     }
 }

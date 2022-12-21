@@ -7,17 +7,17 @@
 
 import Domain
 
-protocol WeekViewModelUpdating {
+protocol UsingWeekViewModel {
     var viewModel: WeekViewModel { get }
     func update(viewModel: WeekViewModel)
 }
 
 protocol WeekViewModelUpdateDispatcher {
-    func addUpdateReceiver(_: WeekViewModelUpdating)
+    func addUpdateReceiver(_: UsingWeekViewModel)
 }
 
 class EventsCommandingWeekViewModelUpdatingDecorator:
-    MulticastDelegate<WeekViewModelUpdating>,
+    MulticastDelegate<UsingWeekViewModel>,
     WeekViewModelUpdateDispatcher,
     EventsCommanding
 {
@@ -37,17 +37,15 @@ class EventsCommandingWeekViewModelUpdatingDecorator:
         sendUpdates(for: event)
     }
 
-    func addUpdateReceiver(_ receiver: WeekViewModelUpdating) {
+    func addUpdateReceiver(_ receiver: UsingWeekViewModel) {
         addDelegate(receiver)
     }
 
     private func sendUpdates(for updatedEvent: Event) {
         call { viewModelUpdateReceiver in
-            let currentViewModel = viewModelUpdateReceiver.viewModel
-
-            if currentViewModel.eventId == updatedEvent.id {
+            if viewModelUpdateReceiver.viewModel.eventId == updatedEvent.id {
                 viewModelUpdateReceiver.update(
-                    viewModel: currentViewModel.copy(forNewEvent: updatedEvent)
+                    viewModel: viewModelUpdateReceiver.viewModel.copy(forNewEvent: updatedEvent)
                 )
             }
         }

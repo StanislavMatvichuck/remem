@@ -18,9 +18,8 @@ class ClockViewControllerTests: XCTestCase {
         super.setUp()
         event = Event(name: "Event")
         sut = ClockViewController(
-            viewModel: ClockViewModel(
-                event: event,
-                sorter: DefaultClockSorter(size: 144)
+            viewModel: CompositionRoot(testingInMemoryMode: true).makeClockViewModel(
+                event: event
             )
         )
         sut.loadViewIfNeeded()
@@ -107,9 +106,8 @@ class ClockViewControllerTests: XCTestCase {
         event.addHappening(date: date)
 
         sut.update(
-            viewModel: ClockViewModel(
-                event: event,
-                sorter: DefaultClockSorter(size: 144)
+            viewModel: CompositionRoot(testingInMemoryMode: true).makeClockViewModel(
+                event: event
             )
         )
     }

@@ -11,10 +11,15 @@ protocol EventItemViewModelFactoring {
     func makeEventItemViewModel(event: Event, today: DayComponents) -> EventItemViewModel
 }
 
+protocol EventsListViewModelFactoring {
+    func makeEventsListViewModel() -> EventsListViewModel
+}
+
 struct EventsListViewModel {
     private let events: [Event]
     private let today: DayComponents
-    private let factory: EventItemViewModelFactoring
+    private let itemsFactory: EventItemViewModelFactoring
+    private let selfFactory: EventsListViewModelFactoring
     private let commander: EventsCommanding
 
     let title = String(localizationId: "eventsList.title")
@@ -28,13 +33,15 @@ struct EventsListViewModel {
     init(
         events: [Event],
         today: DayComponents,
-        factory: EventItemViewModelFactoring,
-        commander: EventsCommanding
+        commander: EventsCommanding,
+        itemsFactory: EventItemViewModelFactoring,
+        selfFactory: EventsListViewModelFactoring
     ) {
         self.events = events
         self.today = today
-        self.factory = factory
         self.commander = commander
+        self.itemsFactory = itemsFactory
+        self.selfFactory = selfFactory
 
         hint = {
             if events.count == 0 { return HintState.empty.text }
@@ -44,12 +51,16 @@ struct EventsListViewModel {
         }()
 
         items = events.map { event in
-            factory.makeEventItemViewModel(event: event, today: today)
+            itemsFactory.makeEventItemViewModel(event: event, today: today)
         }
     }
 
     func add(name: String) {
         commander.save(Event(name: name))
+    }
+
+    func copy() -> EventsListViewModel {
+        selfFactory.makeEventsListViewModel()
     }
 }
 
