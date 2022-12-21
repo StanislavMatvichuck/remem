@@ -21,14 +21,14 @@ enum CoordinatingCase {
     case weekItem(day: DayComponents, event: Event)
 }
 
-protocol CoordinatingFactory {
+protocol CoordinatingFactoring {
     func makeController(for: CoordinatingCase) -> UIViewController
 }
 
 class DefaultCoordinator: Coordinating {
     let navController: UINavigationController
     var root: UIViewController { navController }
-    var factory: CoordinatingFactory?
+    var factory: CoordinatingFactoring?
 
     init(
         navController: UINavigationController = DefaultCoordinator.makeStyledNavigationController()

@@ -5,13 +5,12 @@
 //  Created by Stanislav Matvichuck on 23.08.2022.
 //
 
-import CoreData
 import DataLayer
 import Domain
 import UIKit
 
 class CompositionRoot:
-    CoordinatingFactory,
+    CoordinatingFactoring,
     EventItemViewModelFactoring,
     DayViewModelFactoring,
     DayItemViewModelFactoring,
