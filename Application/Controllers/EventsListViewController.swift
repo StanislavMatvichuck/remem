@@ -8,7 +8,10 @@
 import Domain
 import UIKit
 
-class EventsListViewController: UIViewController {
+class EventsListViewController:
+    UIViewController,
+    UsingEventDependantViewModel
+{
     enum Section: Int, CaseIterable {
         case hint
         case events
@@ -54,14 +57,8 @@ class EventsListViewController: UIViewController {
             viewModel.add(name: viewRoot.input.value)
         }
     }
-}
 
-extension EventsListViewController: UsingEventsListViewModel {
-    func update(viewModel: EventsListViewModel) {
-        self.viewModel = viewModel
-    }
-
-    func update() {
+    private func update() {
         viewRoot.table.reloadData()
 
         if viewModel.hint != HintState.placeFirstMark.text {

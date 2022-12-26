@@ -12,7 +12,7 @@ protocol ClockViewModelFactoring {
     func makeClockViewModel(event: Event) -> ClockViewModel
 }
 
-struct ClockViewModel {
+struct ClockViewModel: EventDependantViewModel {
     private let event: Event
     private let selfFactory: ClockViewModelFactoring
     let eventId: String
@@ -29,8 +29,8 @@ struct ClockViewModel {
         self.selfFactory = selfFactory
     }
 
-    func copy(forNewEvent event: Event) -> ClockViewModel {
-        selfFactory.makeClockViewModel(event: event)
+    func copy(_ po: EventDependantViewModelParameterObject) -> ClockViewModel {
+        selfFactory.makeClockViewModel(event: po.event)
     }
 }
 

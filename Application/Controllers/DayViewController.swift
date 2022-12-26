@@ -10,7 +10,7 @@ import UIKit
 
 class DayViewController:
     UIViewController,
-    UsingDayViewModel
+    UsingEventDependantViewModel
 {
     // MARK: - Properties
     let picker: UIDatePicker = {
@@ -115,10 +115,6 @@ class DayViewController:
 
     @objc private func handleAdd() {
         present(alert, animated: true)
-    }
-
-    func update(viewModel: DayViewModel) {
-        self.viewModel = viewModel
     }
 }
 

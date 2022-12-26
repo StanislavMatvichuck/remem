@@ -32,7 +32,7 @@ class WeekViewModelTests: XCTestCase {
 
     func test_eventWithHappeningOnFirstDay_addsHappeningToFirstCell() {
         event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(5))
-        sut = sut.copy(forNewEvent: event)
+        sut = sut.copy(EventDependantViewModelParameterObject(event: event))
 
         XCTAssertEqual(sut.items.first?.items.count, 1)
     }

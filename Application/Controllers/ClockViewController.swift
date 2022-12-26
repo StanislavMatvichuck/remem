@@ -10,7 +10,7 @@ import UIKit
 
 class ClockViewController:
     UIViewController,
-    UsingClockViewModel
+    UsingEventDependantViewModel
 {
     let viewRoot: ClockView
     var viewModel: ClockViewModel {
@@ -36,8 +36,4 @@ class ClockViewController:
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {}
-
-    func update(viewModel: ClockViewModel) {
-        self.viewModel = viewModel
-    }
 }

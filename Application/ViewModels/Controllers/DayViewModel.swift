@@ -16,7 +16,7 @@ protocol DayViewModelFactoring {
     func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel
 }
 
-struct DayViewModel {
+struct DayViewModel: EventDependantViewModel {
     let create = String(localizationId: "button.create")
     let delete = String(localizationId: "button.delete")
     let cancel = String(localizationId: "button.cancel")
@@ -84,7 +84,7 @@ struct DayViewModel {
         readableTime = timeFormatter.string(for: pickerDate)
     }
 
-    func copy(forNewEvent event: Event) -> DayViewModel {
-        selfFactory.makeDayViewModel(event: event, day: day)
+    func copy(_ po: EventDependantViewModelParameterObject) -> DayViewModel {
+        selfFactory.makeDayViewModel(event: po.event, day: day)
     }
 }

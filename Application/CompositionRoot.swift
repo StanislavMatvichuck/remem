@@ -22,10 +22,11 @@ class CompositionRoot:
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinating
-    let eventsListViewModelUpdater: EventsListViewModelUpdateDispatcher
-    let dayViewModelUpdater: DayViewModelUpdateDispatcher
-    let clockViewModelUpdater: ClockViewModelUpdateDispatcher
-    let weekViewModelUpdater: WeekViewModelUpdateDispatcher
+
+    let eventsListViewModelUpdater: EventsListUpdater
+    let dayViewModelUpdater: DayUpdater
+    let clockViewModelUpdater: ClockUpdater
+    let weekViewModelUpdater: WeekUpdater
 
     init(testingInMemoryMode: Bool = false) {
         let coordinator = DefaultCoordinator()
@@ -34,29 +35,19 @@ class CompositionRoot:
             mapper: EventEntityMapper()
         )
 
-        let decoratedEventsProviderCommander = EventsCommandingEventsListViewModelUpdatingDecorator(
-            decoratedInterface: repository
-        )
+        let eventsListUpdater = EventsListUpdater(repository)
+        let dayUpdater = DayUpdater(eventsListUpdater)
+        let clockUpdater = ClockUpdater(dayUpdater)
+        let weekUpdater = WeekUpdater(clockUpdater)
 
-        let decoratedEventsListViewModelUpdatingDecorator = EventsCommandingDayViewModelUpdatingDecorator(
-            decoratedInterface: decoratedEventsProviderCommander
-        )
-
-        let decoratedClockViewModelUpdatingDecorator = EventsCommandingClockViewModelUpdatingDecorator(
-            decoratedInterface: decoratedEventsListViewModelUpdatingDecorator
-        )
-
-        let decoratedWeekViewModelUpdatingDecorator = EventsCommandingWeekViewModelUpdatingDecorator(
-            decoratedInterface: decoratedClockViewModelUpdatingDecorator
-        )
+        self.eventsListViewModelUpdater = eventsListUpdater
+        self.dayViewModelUpdater = dayUpdater
+        self.clockViewModelUpdater = clockUpdater
+        self.weekViewModelUpdater = weekUpdater
 
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = decoratedWeekViewModelUpdatingDecorator
-        self.eventsListViewModelUpdater = decoratedEventsProviderCommander
-        self.dayViewModelUpdater = decoratedEventsListViewModelUpdatingDecorator
-        self.clockViewModelUpdater = decoratedClockViewModelUpdatingDecorator
-        self.weekViewModelUpdater = decoratedWeekViewModelUpdatingDecorator
+        self.commander = weekUpdater
 
         coordinator.factory = self
     }
@@ -77,7 +68,7 @@ class CompositionRoot:
 
     func makeEventsListViewController() -> EventsListViewController {
         let eventsListController = EventsListViewController(viewModel: makeEventsListViewModel())
-        eventsListViewModelUpdater.addUpdateReceiver(eventsListController)
+        eventsListViewModelUpdater.addReceiver(receiver: eventsListController)
         return eventsListController
     }
 
@@ -96,20 +87,20 @@ class CompositionRoot:
 
     func makeWeekViewController(event: Event, today: DayComponents) -> WeekViewController {
         let controller = WeekViewController(viewModel: makeWeekViewModel(event: event, today: today))
-        weekViewModelUpdater.addUpdateReceiver(controller)
+        weekViewModelUpdater.addReceiver(receiver: controller)
         return controller
     }
 
     func makeClockViewController(event: Event) -> ClockViewController {
         let controller = ClockViewController(viewModel: makeClockViewModel(event: event))
-        clockViewModelUpdater.addUpdateReceiver(controller)
+        clockViewModelUpdater.addReceiver(receiver: controller)
         return controller
     }
 
     func makeDayViewController(_ event: Event, _ day: DayComponents) -> DayViewController {
         let viewModel = makeDayViewModel(event: event, day: day)
         let controller = DayViewController(viewModel: viewModel)
-        dayViewModelUpdater.addUpdateReceiver(controller)
+        dayViewModelUpdater.addReceiver(receiver: controller)
         return controller
     }
 

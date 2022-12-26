@@ -10,7 +10,7 @@ import UIKit
 
 class WeekViewController:
     UIViewController,
-    UsingWeekViewModel
+    UsingEventDependantViewModel
 {
     var scrollHappened = false
     var viewModel: WeekViewModel {
@@ -99,9 +99,5 @@ extension WeekViewController:
     {
         CGSize(width: collectionView.bounds.width / 7,
                height: collectionView.bounds.height)
-    }
-
-    func update(viewModel: WeekViewModel) {
-        self.viewModel = viewModel
     }
 }

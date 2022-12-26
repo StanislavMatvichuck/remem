@@ -15,7 +15,7 @@ protocol EventsListViewModelFactoring {
     func makeEventsListViewModel() -> EventsListViewModel
 }
 
-struct EventsListViewModel {
+struct EventsListViewModel: EventDependantViewModel {
     private let events: [Event]
     private let today: DayComponents
     private let itemsFactory: EventItemViewModelFactoring
@@ -59,7 +59,8 @@ struct EventsListViewModel {
         commander.save(Event(name: name))
     }
 
-    func copy() -> EventsListViewModel {
+    var eventId: String { "eventsList" }
+    func copy(_: EventDependantViewModelParameterObject) -> EventsListViewModel {
         selfFactory.makeEventsListViewModel()
     }
 }

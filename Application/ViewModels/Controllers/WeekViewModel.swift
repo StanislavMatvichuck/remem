@@ -23,7 +23,7 @@ protocol WeekItemViewModelFactoring {
     ) -> WeekItemViewModel
 }
 
-struct WeekViewModel {
+struct WeekViewModel: EventDependantViewModel {
     private let upcomingWeeksCount = 3
     private let today: DayComponents
     private let commander: EventsCommanding
@@ -103,14 +103,7 @@ struct WeekViewModel {
         items = viewModels
     }
 
-    func copy(forNewEvent event: Event) -> WeekViewModel {
-        WeekViewModel(
-            today: today,
-            event: event,
-            coordinator: coordinator,
-            commander: commander,
-            itemsFactory: itemsFactory,
-            selfFactory: selfFactory
-        )
+    func copy(_ po: EventDependantViewModelParameterObject) -> WeekViewModel {
+        selfFactory.makeWeekViewModel(event: po.event, today: today)
     }
 }
