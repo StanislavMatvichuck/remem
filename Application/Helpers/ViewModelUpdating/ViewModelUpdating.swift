@@ -56,7 +56,6 @@ class Updater<T: UsingEventDependantViewModel>:
     private func sendUpdates(newEvent: Event) {
         call { receiver in
             let newVM = receiver.viewModel.copy(newEvent: newEvent)
-
             if receiver.viewModel.isUpdateRequired(viewModel: newVM) {
                 receiver.viewModel = newVM
             }

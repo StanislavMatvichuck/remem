@@ -67,9 +67,9 @@ class CompositionRoot:
     }
 
     func makeEventsListViewController() -> EventsListViewController {
-        let eventsListController = EventsListViewController(viewModel: makeEventsListViewModel())
-        eventsListViewModelUpdater.addReceiver(receiver: eventsListController)
-        return eventsListController
+        let controller = EventsListViewController(viewModel: makeEventsListViewModel())
+        eventsListViewModelUpdater.addReceiver(receiver: controller)
+        return controller
     }
 
     func makeEventViewController(_ event: Domain.Event, _ today: DayComponents) -> EventViewController {
