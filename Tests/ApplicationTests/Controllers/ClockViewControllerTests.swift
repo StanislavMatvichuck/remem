@@ -13,14 +13,15 @@ import XCTest
 class ClockViewControllerTests: XCTestCase {
     private var sut: ClockViewController!
     private var event: Event!
+    private var viewModelFactory: ClockViewModelFactoring!
 
     override func setUp() {
         super.setUp()
+        let root = CompositionRoot(testingInMemoryMode: true)
+        viewModelFactory = root
         event = Event(name: "Event")
         sut = ClockViewController(
-            viewModel: CompositionRoot(testingInMemoryMode: true).makeClockViewModel(
-                event: event
-            )
+            viewModel: viewModelFactory.makeClockViewModel(event: event)
         )
         sut.loadViewIfNeeded()
         sut.forceViewToLayoutInScreenSize()
@@ -42,6 +43,7 @@ class ClockViewControllerTests: XCTestCase {
 
     func test_singleHappening_oneSectionIsNotEmpty() {
         addOneHappening()
+        sendEventUpdatesToController()
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }
@@ -50,6 +52,8 @@ class ClockViewControllerTests: XCTestCase {
         for _ in 0 ..< sut.viewModel.items.count {
             addOneHappening()
         }
+
+        sendEventUpdatesToController()
 
         XCTAssertEqual(nonEmptySections.count, 1)
     }
@@ -60,14 +64,35 @@ class ClockViewControllerTests: XCTestCase {
 
         addOneHappening(at: time)
         addOneHappening(at: time02)
+        sendEventUpdatesToController()
 
         XCTAssertEqual(nonEmptySections.count, 2, "precondition")
-        // TODO: add size comparison
+        XCTAssertEqual(
+            nonEmptySections[0].viewModel.length,
+            nonEmptySections[1].viewModel.length
+        )
     }
 
     /// also make snapshots for these cases
     func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
-    func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {}
+    func test_manyHappenings_evenlyDistributed_allSectionsEqualSize() {
+        for h in 0 ..< 24 {
+            for m in 0 ..< 60 {
+                addOneHappening(at: TimeComponents(h: h, m: m, s: 0))
+            }
+        }
+
+        sendEventUpdatesToController()
+
+        let size = sections.first!.viewModel.length
+
+        XCTAssertNotEqual(size, 0.0, accuracy: 0.001, "precondition")
+
+        for section in sections {
+            XCTAssertEqual(size, section.viewModel.length)
+        }
+    }
+
     func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
         for _ in 0 ..< Int.random(in: 1 ..< 100) {
             addOneHappening(at: TimeComponents(
@@ -77,6 +102,8 @@ class ClockViewControllerTests: XCTestCase {
             ))
         }
 
+        sendEventUpdatesToController()
+
         let fullSections = sections.filter { $0.viewModel.length == 1.0 }
 
         XCTAssertLessThanOrEqual(1, fullSections.count)
@@ -85,7 +112,7 @@ class ClockViewControllerTests: XCTestCase {
     private var sections: [ClockItem] {
         do {
             return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockItem])
-        } catch { return [] }
+        } catch { fatalError(error.localizedDescription) }
     }
 
     private var nonEmptySections: [ClockItem] {
@@ -104,9 +131,10 @@ class ClockViewControllerTests: XCTestCase {
         else { fatalError("error making time for insertion") }
 
         event.addHappening(date: date)
+    }
 
-        sut.viewModel = CompositionRoot(testingInMemoryMode: true)
-            .makeClockViewModel(event: event)
+    private func sendEventUpdatesToController() {
+        sut.viewModel = viewModelFactory.makeClockViewModel(event: event)
     }
 }
 

@@ -40,8 +40,13 @@ protocol ClockStrategy {
 
 struct DefaultClockSorter: ClockStrategy {
     let size: Int
-    let secondsInDay = 60 * 60 * 24
+    let secondsInDay: Int
     var secondsInSection: Int { secondsInDay / size }
+
+    init(size: Int) {
+        self.size = size
+        self.secondsInDay = 60 * 60 * 24
+    }
 
     func sort(orderedByDateHappenings: [Happening]) -> [ClockItemViewModel] {
         /// happenings size is bigger than clock size
