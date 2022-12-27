@@ -60,7 +60,7 @@ struct EventsListViewModel: EventDependantViewModel {
     }
 
     var eventId: String { "eventsList" }
-    func copy(_: EventDependantViewModelParameterObject) -> EventsListViewModel {
+    func copy(newEvent: Event) -> EventsListViewModel {
         selfFactory.makeEventsListViewModel()
     }
 }

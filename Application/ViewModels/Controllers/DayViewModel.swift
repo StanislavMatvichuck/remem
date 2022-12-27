@@ -84,7 +84,7 @@ struct DayViewModel: EventDependantViewModel {
         readableTime = timeFormatter.string(for: pickerDate)
     }
 
-    func copy(_ po: EventDependantViewModelParameterObject) -> DayViewModel {
-        selfFactory.makeDayViewModel(event: po.event, day: day)
+    func copy(newEvent: Event) -> DayViewModel {
+        selfFactory.makeDayViewModel(event: newEvent, day: day)
     }
 }

@@ -29,8 +29,8 @@ struct ClockViewModel: EventDependantViewModel {
         self.selfFactory = selfFactory
     }
 
-    func copy(_ po: EventDependantViewModelParameterObject) -> ClockViewModel {
-        selfFactory.makeClockViewModel(event: po.event)
+    func copy(newEvent: Event) -> ClockViewModel {
+        selfFactory.makeClockViewModel(event: newEvent)
     }
 }
 

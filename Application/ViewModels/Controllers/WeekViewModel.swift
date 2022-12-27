@@ -103,7 +103,7 @@ struct WeekViewModel: EventDependantViewModel {
         items = viewModels
     }
 
-    func copy(_ po: EventDependantViewModelParameterObject) -> WeekViewModel {
-        selfFactory.makeWeekViewModel(event: po.event, today: today)
+    func copy(newEvent: Event) -> WeekViewModel {
+        selfFactory.makeWeekViewModel(event: newEvent, today: today)
     }
 }

@@ -7,11 +7,9 @@
 
 import Domain
 
-struct EventDependantViewModelParameterObject { let event: Event }
-
 protocol EventDependantViewModel {
     var eventId: String { get }
-    func copy(_: EventDependantViewModelParameterObject) -> Self
+    func copy(newEvent: Event) -> Self
 }
 
 extension EventDependantViewModel {
@@ -47,21 +45,21 @@ class Updater<T: UsingEventDependantViewModel>:
 
     func save(_ event: Event) {
         decoratedInterface.save(event)
-        sendUpdates(forNewEvent: event)
+        sendUpdates(newEvent: event)
     }
 
     func delete(_ event: Event) {
         decoratedInterface.delete(event)
-        sendUpdates(forNewEvent: event)
+        sendUpdates(newEvent: event)
     }
 
     func addReceiver(receiver: T) {
         addDelegate(receiver)
     }
 
-    func sendUpdates(forNewEvent: Event) {
+    private func sendUpdates(newEvent: Event) {
         call { receiver in
-            let newVM = receiver.viewModel.copy(EventDependantViewModelParameterObject(event: forNewEvent))
+            let newVM = receiver.viewModel.copy(newEvent: newEvent)
 
             if receiver.viewModel.isUpdateRequired(viewModel: newVM) {
                 receiver.update(viewModel: newVM)
