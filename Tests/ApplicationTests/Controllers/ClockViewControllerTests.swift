@@ -105,11 +105,8 @@ class ClockViewControllerTests: XCTestCase {
 
         event.addHappening(date: date)
 
-        sut.update(
-            viewModel: CompositionRoot(testingInMemoryMode: true).makeClockViewModel(
-                event: event
-            )
-        )
+        sut.viewModel = CompositionRoot(testingInMemoryMode: true)
+            .makeClockViewModel(event: event)
     }
 }
 

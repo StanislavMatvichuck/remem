@@ -23,10 +23,6 @@ protocol UsingEventDependantViewModel: AnyObject {
     var viewModel: T { get set }
 }
 
-extension UsingEventDependantViewModel {
-    func update(viewModel: T) { self.viewModel = viewModel }
-}
-
 protocol EventUpdater {
     associatedtype T: UsingEventDependantViewModel
     func addReceiver(receiver: T)
@@ -62,7 +58,7 @@ class Updater<T: UsingEventDependantViewModel>:
             let newVM = receiver.viewModel.copy(newEvent: newEvent)
 
             if receiver.viewModel.isUpdateRequired(viewModel: newVM) {
-                receiver.update(viewModel: newVM)
+                receiver.viewModel = newVM
             }
         }
     }
