@@ -16,7 +16,7 @@ class ClockSnapshotsTest: FBSnapshotTestCase, ClockViewControllerTesting {
 
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
         folderName = "Clock"
         let root = CompositionRoot(testingInMemoryMode: true)
 

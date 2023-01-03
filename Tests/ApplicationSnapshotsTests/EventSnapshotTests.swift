@@ -15,7 +15,7 @@ class EventSnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
         folderName = "Event"
         
         let day = DayComponents.referenceValue
