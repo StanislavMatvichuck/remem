@@ -8,8 +8,6 @@
 import Domain
 import UIKit
 
-/// `Abstraction` in view presentation layer
-/// who uses this abstraction? viewControllers for now
 protocol Coordinating {
     var root: UIViewController { get }
     func show(_: CoordinatingCase)

@@ -38,12 +38,12 @@ class EventViewControllerTests: XCTestCase {
     func test_viewDidAppear_visitEvent() {
         putInViewHierarchy(sut)
 
-        XCTAssertNil(sut.viewModel.event.dateVisited, "precondition")
+        XCTAssertFalse(sut.viewModel.isVisited, "precondition")
 
         sut.loadViewIfNeeded()
         executeRunLoop()
 
-        XCTAssertNotNil(sut.viewModel.event.dateVisited)
+        XCTAssertTrue(sut.viewModel.isVisited)
     }
 
     func test_showsControllersInScroll() {

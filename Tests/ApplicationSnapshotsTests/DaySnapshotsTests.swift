@@ -9,26 +9,21 @@
 import Domain
 import iOSSnapshotTestCase
 
-class DaySnapshotsTest: FBSnapshotTestCase {
+class DaySnapshotsTest: FBSnapshotTestCase, DayViewControllerTesting {
+    var event: Event!
     var sut: DayViewController!
     
     override func setUp() {
         super.setUp()
-        recordMode = false
+        recordMode = true
         folderName = "Day"
-        let useCase = EventEditUseCasingFake()
-        let event = Event(name: "Event")
+        event = Event(name: "Event")
+        let day = DayComponents.referenceValue
+        let root = CompositionRoot(testingInMemoryMode: true)
         
-        sut = DayViewController(
-            day: DayComponents.referenceValue,
-            event: event,
-            useCase: useCase
-        )
+        sut = root.makeDayViewController(event, day)
         
-        let navigation = CompositionRoot.makeStyledNavigationController()
-        navigation.pushViewController(sut, animated: false)
-        
-        putInViewHierarchy(navigation)
+        putInViewHierarchy(sut)
     }
     
     override func tearDown() {
@@ -38,31 +33,33 @@ class DaySnapshotsTest: FBSnapshotTestCase {
     }
  
     func test_empty() {
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut)
     }
     
     func test_emptyDark() {
         configureDarkMode()
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut)
     }
     
     func test_singleHappening() {
-        sut.event.addHappening(date: Date(timeIntervalSinceReferenceDate: 5 * 60))
-        sut.update(event: sut.event)
+        arrangeSingleHappening()
         
-        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
+        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
     }
     
     func test_singleHappeningDark() {
         configureDarkMode()
+        arrangeSingleHappening()
         
-        sut.event.addHappening(date: Date(timeIntervalSinceReferenceDate: 5 * 60))
-        sut.update(event: sut.event)
-        
-        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
+        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
+    }
+    
+    private func arrangeSingleHappening() {
+        addHappening(at: DayComponents.referenceValue.date)
+        sendEventUpdatesToController()
     }
     
     private func configureDarkMode() {
-        sut.navigationController!.view.window?.overrideUserInterfaceStyle = .dark
+        sut.view.window?.overrideUserInterfaceStyle = .dark
     }
 }

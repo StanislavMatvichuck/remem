@@ -10,12 +10,17 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-class DayViewControllerTests: XCTestCase {
+class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
+    var event: Domain.Event!
     var sut: DayViewController!
 
     override func setUp() {
         super.setUp()
-        sut = DayViewController.make()
+        let day = DayComponents.referenceValue
+        let root = CompositionRoot(testingInMemoryMode: true)
+        event = Event(name: "Event", dateCreated: day.date)
+        sut = root.makeDayViewController(event, day)
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
@@ -70,41 +75,37 @@ class DayViewControllerTests: XCTestCase {
         XCTAssertEqual(createButton?.title, String(localizationId: "button.create"))
     }
 
-//    func test_createButtonTap_presentsAlert() {
-//        let verifier = AlertVerifier()
-//        let createButton = sut.navigationItem.leftBarButtonItem
-//
-//        tap(createButton!)
-//
-//        verifier.verify(
-//            title: String(localizationId: "button.create"),
-//            message: "",
-//            animated: true,
-//            actions: [
-//                .cancel(String(localizationId: "button.cancel")),
-//                .default(String(localizationId: "button.create"))
-//            ]
-//        )
-//    }
+    func test_createButtonTap_presentsAlert() {
+        let verifier = AlertVerifier()
+        let createButton = sut.navigationItem.leftBarButtonItem
+
+        tap(createButton!)
+
+        verifier.verify(
+            title: String(localizationId: "button.create"),
+            message: "",
+            animated: true,
+            actions: [
+                .cancel(String(localizationId: "button.cancel")),
+                .default(String(localizationId: "button.create"))
+            ]
+        )
+    }
 
     func test_empty_showsNothing() {
         XCTAssertEqual(sut.happeningsAmount, 0)
     }
 
     func test_singleHappening_showsTime() {
-        let event = Event(name: "EventWithOneHappening")
-        event.addHappening(date: .now)
-
-        sut = DayViewController.make(event: event)
+        addHappening(at: DayComponents.referenceValue.date)
+        sendEventUpdatesToController()
 
         assertCellHasTimeText(at: sut.firstIndex)
     }
 
     func test_singleHappening_hasSwipeToDelete() {
-        let event = Event(name: "EventWithOneHappening")
-        event.addHappening(date: .now)
-
-        sut = DayViewController.make(event: event)
+        addHappening(at: DayComponents.referenceValue.date)
+        sendEventUpdatesToController()
 
         let configuration = sut.table.delegate?.tableView?(
             sut.table,
@@ -119,14 +120,13 @@ class DayViewControllerTests: XCTestCase {
 
     /// Might be refactored with next method
     func test_singleHappening_swipedToDelete_removesHappeningFromList() {
-        let event = Event(name: "EventWithOneHappening")
-        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 0)))
-        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 1)))
-        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 2)))
-        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 3)))
-        event.addHappening(date: .now.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 4)))
-
-        sut = DayViewController.make(event: event)
+        let date = DayComponents.referenceValue.date
+        addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 0)))
+        addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 1)))
+        addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 2)))
+        addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 3)))
+        addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 4)))
+        sendEventUpdatesToController()
 
         XCTAssertEqual(sut.happeningsAmount, 1, "precondition")
 
@@ -142,12 +142,11 @@ class DayViewControllerTests: XCTestCase {
     }
 
     func test_manyHappenings_showsManyHappenings() {
-        let event = Event(name: "EventWithThreeHappenings")
-        event.addHappening(date: .now.addingTimeInterval(-1))
-        event.addHappening(date: .now.addingTimeInterval(-2))
-        event.addHappening(date: .now.addingTimeInterval(-3))
-
-        sut = DayViewController.make(event: event)
+        let date = DayComponents.referenceValue.date
+        addHappening(at: date.addingTimeInterval(1))
+        addHappening(at: date.addingTimeInterval(2))
+        addHappening(at: date.addingTimeInterval(3))
+        sendEventUpdatesToController()
 
         let secondCellIndex = IndexPath(row: 1, section: 0)
         let thirdCellIndex = IndexPath(row: 2, section: 0)

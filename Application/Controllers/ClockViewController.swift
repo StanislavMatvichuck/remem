@@ -15,13 +15,7 @@ class ClockViewController:
     let viewRoot: ClockView
     var viewModel: ClockViewModel {
         didSet {
-            guard
-                let layers = viewRoot.clockFace.layer.sublayers as? [ClockItem]
-            else { return }
-
-            viewModel.items.enumerated().forEach { index, section in
-                layers[index].viewModel = section
-            }
+            viewRoot.clockFace.viewModel = viewModel
         }
     }
 

@@ -7,13 +7,12 @@
 
 @testable import Application
 import Domain
-
 import XCTest
 
-class ClockViewControllerTests: XCTestCase {
-    private var sut: ClockViewController!
-    private var event: Event!
-    private var viewModelFactory: ClockViewModelFactoring!
+class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
+    var sut: ClockViewController!
+    var event: Event!
+    var viewModelFactory: ClockViewModelFactoring!
 
     override func setUp() {
         super.setUp()
@@ -68,8 +67,8 @@ class ClockViewControllerTests: XCTestCase {
 
         XCTAssertEqual(nonEmptySections.count, 2, "precondition")
         XCTAssertEqual(
-            nonEmptySections[0].viewModel.length,
-            nonEmptySections[1].viewModel.length
+            nonEmptySections[0].strokeEnd,
+            nonEmptySections[1].strokeEnd
         )
     }
 
@@ -84,12 +83,12 @@ class ClockViewControllerTests: XCTestCase {
 
         sendEventUpdatesToController()
 
-        let size = sections.first!.viewModel.length
+        let size = sections.first!.strokeEnd
 
         XCTAssertNotEqual(size, 0.0, accuracy: 0.001, "precondition")
 
         for section in sections {
-            XCTAssertEqual(size, section.viewModel.length)
+            XCTAssertEqual(size, section.strokeEnd)
         }
     }
 
@@ -104,42 +103,18 @@ class ClockViewControllerTests: XCTestCase {
 
         sendEventUpdatesToController()
 
-        let fullSections = sections.filter { $0.viewModel.length == 1.0 }
+        let fullSections = sections.filter { $0.strokeEnd == 0.96 }
 
         XCTAssertLessThanOrEqual(1, fullSections.count)
     }
 
-    private var sections: [ClockItem] {
+    private var sections: [CAShapeLayer] {
         do {
-            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [ClockItem])
+            return try XCTUnwrap(sut.viewRoot.clockFace.layer.sublayers as? [CAShapeLayer])
         } catch { fatalError(error.localizedDescription) }
     }
 
-    private var nonEmptySections: [ClockItem] {
-        sections.filter { $0.viewModel.length != 0.0 }
+    private var nonEmptySections: [CAShapeLayer] {
+        sections.filter { $0.strokeEnd > 0.01 }
     }
-
-    private func addOneHappening(
-        at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
-    ) {
-        var today = DayComponents(date: .now).value
-        today.hour = at.h
-        today.minute = at.m
-        today.second = at.s
-
-        guard let date = Calendar.current.date(from: today)
-        else { fatalError("error making time for insertion") }
-
-        event.addHappening(date: date)
-    }
-
-    private func sendEventUpdatesToController() {
-        sut.viewModel = viewModelFactory.makeClockViewModel(event: event)
-    }
-}
-
-struct TimeComponents {
-    let h: Int
-    let m: Int
-    let s: Int
 }

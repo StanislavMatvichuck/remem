@@ -20,13 +20,17 @@ class DayViewController:
         return picker
     }()
 
-    private let alert: UIAlertController
-    var timeInput: UITextField { alert.textFields!.first! }
+    private var alert: UIAlertController?
+    var timeInput: UITextField {
+        if let textField = alert?.textFields?.first {
+            return textField
+        } else { fatalError("alert is not created") }
+    }
+
     let viewRoot: DayView
     var viewModel: DayViewModel {
         didSet {
             viewRoot.happenings.reloadData()
-            timeInput.text = viewModel.readableTime
         }
     }
 
@@ -34,35 +38,8 @@ class DayViewController:
     init(viewModel: DayViewModel) {
         self.viewRoot = DayView()
         self.viewModel = viewModel
-        self.alert = UIAlertController(
-            title: viewModel.create,
-            message: nil,
-            preferredStyle: .alert
-        )
 
         super.init(nibName: nil, bundle: nil)
-
-        let cancel = UIAlertAction(
-            title: viewModel.cancel,
-            style: .cancel,
-            handler: nil
-        )
-
-        let submit = UIAlertAction(
-            title: viewModel.create,
-            style: .default,
-            handler: handleTimeSelectionSubmit
-        )
-
-        alert.addAction(cancel)
-        alert.addAction(submit)
-        alert.addTextField { field in
-            field.inputView = self.picker
-            field.font = UIHelper.fontBold
-            field.textColor = UIHelper.itemFont
-            field.textAlignment = .center
-            field.text = viewModel.readableTime
-        }
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -114,7 +91,39 @@ class DayViewController:
     }
 
     @objc private func handleAdd() {
-        present(alert, animated: true)
+        alert = make()
+        present(alert!, animated: true)
+    }
+
+    private func make() -> UIAlertController {
+        let alert = UIAlertController(
+            title: viewModel.create,
+            message: "",
+            preferredStyle: .alert
+        )
+
+        let cancel = UIAlertAction(
+            title: viewModel.cancel,
+            style: .cancel,
+            handler: nil
+        )
+
+        let submit = UIAlertAction(
+            title: viewModel.create,
+            style: .default,
+            handler: handleTimeSelectionSubmit
+        )
+
+        alert.addAction(cancel)
+        alert.addAction(submit)
+        alert.addTextField { field in
+            field.inputView = self.picker
+            field.font = UIHelper.fontBold
+            field.textColor = UIHelper.itemFont
+            field.textAlignment = .center
+            field.text = self.viewModel.readableTime
+        }
+        return alert
     }
 }
 

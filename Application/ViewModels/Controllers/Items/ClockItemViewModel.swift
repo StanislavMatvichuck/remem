@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ClockItemViewModel {
+struct ClockItemViewModel: Equatable {
     let index: Int
     let length: CGFloat
+    let clockSize: Int
     var isEmpty: Bool { length == 0 }
 }

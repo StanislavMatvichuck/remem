@@ -20,17 +20,19 @@ extension DayViewController {
             return try XCTUnwrap(cell as? DayItem)
         } catch { fatalError("happening getting error") }
     }
+}
 
-    static func make(
-        event: Event = Event(name: "Event"),
-        day: DayComponents = DayComponents(date: .now)
-    ) -> DayViewController {
-        let sut = CompositionRoot(testingInMemoryMode: true).makeDayViewController(event, day)
+protocol DayViewControllerTesting {
+    var sut: DayViewController! { get set }
+    var event: Event! { get set }
+}
 
-        sut.loadViewIfNeeded()
+extension DayViewControllerTesting {
+    func addHappening(at date: Date) {
+        event.addHappening(date: date)
+    }
 
-        putInViewHierarchy(sut)
-
-        return sut
+    func sendEventUpdatesToController() {
+        sut.viewModel = sut.viewModel.copy(newEvent: event)
     }
 }

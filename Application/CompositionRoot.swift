@@ -14,6 +14,7 @@ class CompositionRoot:
     ClockViewModelFactoring,
     DayViewModelFactoring,
     DayItemViewModelFactoring,
+    EventViewModelFactoring,
     EventsListViewModelFactoring,
     EventItemViewModelFactoring,
     WeekViewModelFactoring,
@@ -146,7 +147,11 @@ class CompositionRoot:
     }
 
     func makeEventViewModel(event: Event) -> EventViewModel {
-        EventViewModel(event: event, commander: commander)
+        EventViewModel(
+            event: event,
+            commander: commander,
+            selfFactory: self
+        )
     }
 
     func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel {

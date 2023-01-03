@@ -7,6 +7,9 @@
 
 import UIKit
 
+let ClockSectionMultiplier: CGFloat = 0.15
+let ClockDigitsOffset: CGFloat = 8.0
+
 class ClockView: UIView {
     // MARK: - Properties
     let clockFace: ClockFace
@@ -15,6 +18,7 @@ class ClockView: UIView {
     let rightDigits = makeLabel("18")
     let bottomDigits = makeLabel("00")
     let leftDigits = makeLabel("06")
+    private var updatedConstraints: [NSLayoutConstraint] = []
 
     // MARK: - Init
     init(viewModel: ClockViewModel) {
@@ -27,18 +31,16 @@ class ClockView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func setupLayout() {
-        addLabels()
-        addIcons()
         addSubview(clockFace)
 
+        addLabels()
+        addIcons()
+
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalTo: heightAnchor),
-
-            clockFace.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
-            clockFace.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor),
-
-            clockFace.topAnchor.constraint(equalTo: topAnchor),
-            clockFace.bottomAnchor.constraint(equalTo: bottomAnchor),
+            clockFace.widthAnchor.constraint(equalTo: widthAnchor),
+            clockFace.heightAnchor.constraint(equalTo: heightAnchor),
+            clockFace.centerXAnchor.constraint(equalTo: centerXAnchor),
+            clockFace.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
 
@@ -48,19 +50,27 @@ class ClockView: UIView {
         addSubview(bottomDigits)
         addSubview(leftDigits)
 
-        let digitsDistanceFromCenter = -ClockItem.length - 6.0
+        let topConstraint = topDigits.topAnchor.constraint(equalTo: clockFace.topAnchor)
+        let rightConstraint = rightDigits.trailingAnchor.constraint(equalTo: clockFace.trailingAnchor)
+        let bottomConstraint = bottomDigits.bottomAnchor.constraint(equalTo: clockFace.bottomAnchor)
+        let leftConstraint = leftDigits.leadingAnchor.constraint(equalTo: clockFace.leadingAnchor)
 
         NSLayoutConstraint.activate([
-            topDigits.centerXAnchor.constraint(equalTo: centerXAnchor),
-            rightDigits.centerYAnchor.constraint(equalTo: centerYAnchor),
-            bottomDigits.centerXAnchor.constraint(equalTo: centerXAnchor),
-            leftDigits.centerYAnchor.constraint(equalTo: centerYAnchor),
+            topDigits.centerXAnchor.constraint(equalTo: clockFace.centerXAnchor),
+            rightDigits.centerYAnchor.constraint(equalTo: clockFace.centerYAnchor),
+            bottomDigits.centerXAnchor.constraint(equalTo: clockFace.centerXAnchor),
+            leftDigits.centerYAnchor.constraint(equalTo: clockFace.centerYAnchor),
 
-            topDigits.topAnchor.constraint(equalTo: topAnchor, constant: -digitsDistanceFromCenter),
-            rightDigits.trailingAnchor.constraint(equalTo: trailingAnchor, constant: digitsDistanceFromCenter),
-            bottomDigits.bottomAnchor.constraint(equalTo: bottomAnchor, constant: digitsDistanceFromCenter),
-            leftDigits.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -digitsDistanceFromCenter),
+            topConstraint,
+            rightConstraint,
+            bottomConstraint,
+            leftConstraint,
         ])
+
+        updatedConstraints.append(topConstraint)
+        updatedConstraints.append(rightConstraint)
+        updatedConstraints.append(bottomConstraint)
+        updatedConstraints.append(leftConstraint)
     }
 
     private func addIcons() {
@@ -96,5 +106,21 @@ class ClockView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         return imageView
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        updatedConstraints.forEach {
+            guard $0.constant == 0 else { return }
+
+            $0.constant = bounds.width * ClockSectionMultiplier + ClockDigitsOffset
+
+            if $0.firstAnchor.isEqual(rightDigits.trailingAnchor) ||
+                $0.firstAnchor.isEqual(bottomDigits.bottomAnchor)
+            {
+                $0.constant *= -1
+            }
+        }
     }
 }

@@ -69,7 +69,8 @@ struct DefaultClockSorter: ClockStrategy {
         return happeningsPerSection.enumerated().map { index, happeningsAmount in
             ClockItemViewModel(
                 index: index,
-                length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max
+                length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,
+                clockSize: size
             )
         }
     }

@@ -9,48 +9,22 @@
 import Domain
 import iOSSnapshotTestCase
 
-
 class EventSnapshotsTest: FBSnapshotTestCase {
     var sut: EventViewController!
-    var useCase: EventEditUseCasing!
     var event: Event!
     
     override func setUp() {
         super.setUp()
-        recordMode = false
+        recordMode = true
         folderName = "Event"
-        let useCase = EventEditUseCasingFake()
-        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
-        let coordinator = CompositionRoot().makeCoordinator()
-        let weekController = WeekViewController(
-            today: DayComponents.referenceValue,
-            event: event,
-            useCase: useCase,
-            coordinator: coordinator
-        )
         
-        let clockController = ClockViewController(
-            event: event,
-            useCase: useCase,
-            sorter: DefaultClockSorter(size: 144)
-        )
+        let day = DayComponents.referenceValue
+        let root = CompositionRoot(testingInMemoryMode: true)
         
-        self.useCase = useCase
-        self.event = event
-        sut = EventViewController(
-            event: event,
-            useCase: useCase,
-            controllers: [
-                weekController,
-                clockController,
-            ]
-        )
-        
-        let navigation = CompositionRoot.makeStyledNavigationController()
-        navigation.pushViewController(sut, animated: false)
-        navigation.navigationBar.prefersLargeTitles = true
-        
-        putInViewHierarchy(navigation)
+        event = Event(name: "Event", dateCreated: day.date)
+        sut = root.makeEventViewController(event, day)
+
+        putInViewHierarchy(sut)
     }
     
     override func tearDown() {
@@ -60,30 +34,41 @@ class EventSnapshotsTest: FBSnapshotTestCase {
     }
  
     func test_empty() {
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut)
     }
     
     func test_emptyDark() {
         configureDarkMode()
-        FBSnapshotVerifyViewController(sut.navigationController!)
+        FBSnapshotVerifyViewController(sut)
     }
     
     func test_singleHappening() {
-        sut.event.addHappening(date: .now)
-        sut.update(event: sut.event)
+        arrangeOneHappening()
         
-        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
+        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
     }
     
     func test_singleHappeningDark() {
         configureDarkMode()
+        arrangeOneHappening()
         
-        useCase.addHappening(to: event, date: .now)
-        
-        FBSnapshotVerifyViewController(sut.navigationController!, perPixelTolerance: 0.05)
+        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
+    }
+    
+    private func arrangeOneHappening() {
+        addHappening()
+        sendEventUpdatesToController()
+    }
+    
+    private func addHappening() {
+        event.addHappening(date: DayComponents.referenceValue.date)
+    }
+    
+    private func sendEventUpdatesToController() {
+        sut.viewModel = sut.viewModel.copy(newEvent: event)
     }
     
     private func configureDarkMode() {
-        sut.navigationController!.view.window?.overrideUserInterfaceStyle = .dark
+        sut.view.window?.overrideUserInterfaceStyle = .dark
     }
 }
