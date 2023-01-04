@@ -9,7 +9,9 @@
 import Domain
 import iOSSnapshotTestCase
 
-class WeekSnapshotsTest: FBSnapshotTestCase {
+class WeekSnapshotsTest:
+    FBSnapshotTestCase
+{
     var sut: WeekViewController!
     var event: Event!
     

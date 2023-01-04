@@ -9,15 +9,20 @@
 import Domain
 import iOSSnapshotTestCase
 
-class ClockSnapshotsTest: FBSnapshotTestCase, ClockViewControllerTesting {
-    var event: Domain.Event!
+class ClockSnapshotsTest:
+    FBSnapshotTestCase,
+    ClockViewControllerTesting
+{
+    var sut: ClockViewController!
+    var event: Event!
+
     var viewModelFactory: Application.ClockViewModelFactoring!
-    var sut: Application.ClockViewController!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "Clock"
+
         let root = CompositionRoot(testingInMemoryMode: true)
 
         event = Event(name: "Event")

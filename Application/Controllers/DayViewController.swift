@@ -30,6 +30,11 @@ class DayViewController:
     let viewRoot: DayView
     var viewModel: DayViewModel {
         didSet {
+            // TODO: add test for this, time picking
+            if viewModel.readableTime != oldValue.readableTime {
+                timeInput.text = viewModel.readableTime
+            }
+
             viewRoot.happenings.reloadData()
         }
     }

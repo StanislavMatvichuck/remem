@@ -9,18 +9,22 @@
 import Domain
 import iOSSnapshotTestCase
 
-class DaySnapshotsTest: FBSnapshotTestCase, DayViewControllerTesting {
-    var event: Event!
+class DaySnapshotsTest:
+    FBSnapshotTestCase,
+    DayViewControllerTesting
+{
     var sut: DayViewController!
+    var event: Event!
     
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "Day"
-        event = Event(name: "Event")
+        
         let day = DayComponents.referenceValue
         let root = CompositionRoot(testingInMemoryMode: true)
         
+        event = Event(name: "Event")
         sut = root.makeDayViewController(event, day)
         
         putInViewHierarchy(sut)
