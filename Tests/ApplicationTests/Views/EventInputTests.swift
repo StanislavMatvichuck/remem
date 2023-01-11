@@ -97,13 +97,13 @@ class EventInputTests: XCTestCase {
     }
 
     func test_show_backgroundCoversScreen() {
-        sut.show()
+        sut.show(value: "")
 
         XCTAssertFalse(sut.background.isHidden)
     }
 
     func test_show_shouldReceiveTouches() {
-        sut.show()
+        sut.show(value: "")
 
         XCTAssertTrue(sut.isUserInteractionEnabled)
     }
@@ -111,7 +111,7 @@ class EventInputTests: XCTestCase {
     func test_show_keyboardShouldAppear() {
         XCTAssertFalse(sut.textField.isFirstResponder, "precondition")
 
-        sut.show()
+        sut.show(value: "")
 
         XCTAssertTrue(sut.textField.isFirstResponder)
     }
@@ -119,13 +119,13 @@ class EventInputTests: XCTestCase {
     func test_show_backgroundIsNotHidden() {
         XCTAssertTrue(sut.background.isHidden, "precondition")
 
-        sut.show()
+        sut.show(value: "")
 
         XCTAssertFalse(sut.background.isHidden)
     }
 
     func test_show_backgroundIsTransparent() {
-        sut.show()
+        sut.show(value: "")
 
         XCTAssertEqual(sut.background.alpha, 0)
     }
@@ -159,7 +159,7 @@ class EventInputTests: XCTestCase {
     }
 
     func test_whenShown_tappingEmoji_addsEmojiToTextfield() {
-        sut.show()
+        sut.show(value: "")
 
         guard let emoji = emojis().first else {
             XCTFail("must be at least one tappable emoji")
@@ -335,7 +335,7 @@ private extension EventInputTests {
         let exp = XCTestExpectation(description: "background updated asynchronously")
         sut.animationCompletionHandler = { exp.fulfill() }
 
-        sut.show()
+        sut.show(value: "")
 
         // simulating UIResponder notification dispatch
         DispatchQueue.main.async {

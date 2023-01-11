@@ -10,60 +10,14 @@ import Domain
 import XCTest
 
 extension EventsListViewController {
-    var hint: EventsListHintItem {
-        let hintSection = EventsListViewController.Section.hint.rawValue
-        let hintIndexPath = IndexPath(row: 0, section: hintSection)
-        let cell = cell(atIndexPath: hintIndexPath)
-
-        do {
-            return try XCTUnwrap(cell as? EventsListHintItem)
-        } catch { fatalError("unable to get hint") }
-    }
-
-    var footer: EventsListFooterItem {
-        let footerSection = EventsListViewController.Section.footer.rawValue
-        let footerIndexPath = IndexPath(row: 0, section: footerSection)
-        let cell = cell(atIndexPath: footerIndexPath)
-
-        do {
-            return try XCTUnwrap(cell as? EventsListFooterItem)
-        } catch { fatalError("unable to get footer") }
-    }
-
-    var addButton: UIButton { footer.button }
-    var firstEvent: EventsListItem { event(at: 0) }
-    var hintText: String? { hint.label.text }
-    var eventsCount: Int {
-        viewRoot.table.numberOfRows(
-            inSection: EventsListViewController.Section.events.rawValue
-        )
-    }
-
-    func event(at index: Int) -> EventsListItem {
-        do {
-            let indexPath = IndexPath(
-                row: index,
-                section: EventsListViewController.Section.events.rawValue
-            )
-            let cell = cell(atIndexPath: indexPath)
-            return try XCTUnwrap(cell as? EventsListItem)
-        } catch { fatalError("unable to get EventCell at \(index)") }
-    }
-
-    @discardableResult
-    func arrangeSingleEventSwiped() -> EventsListItem {
+    func arrangeSingleEventSwiped() {
         submitEvent()
+        swipeFirstEvent()
+    }
 
-        /// this part works badly
-//        XCTAssertEqual(firstEvent.valueLabel.text, "0", "precondition")
-//        firstEvent.swiper.sendActions(for: .primaryActionTriggered)
-//        return firstEvent
-
-        /// this works
-        let cell = firstEvent
-        XCTAssertEqual(cell.valueLabel.text, "0", "precondition")
+    func swipeFirstEvent() {
+        let cell = tableView(viewRoot.table, cellForRowAt: IndexPath(row: 0, section: 1)) as! EventItem
         cell.swiper.sendActions(for: .primaryActionTriggered)
-        return cell
     }
 
     func submitEvent() {
@@ -74,19 +28,25 @@ extension EventsListViewController {
         )
     }
 
-    private func cell(atIndexPath: IndexPath) -> UITableViewCell {
-        let table = viewRoot.table
-        let dataSource = table.dataSource
-        if let cell = dataSource?.tableView(table, cellForRowAt: atIndexPath) {
-            return cell
-        } else { fatalError("unable to get cell at \(atIndexPath)") }
+    var hintText: String? {
+        let hintCell = viewRoot.table.cellForRow(at: IndexPath(row: 0, section: 0)) as! HintItem
+        return hintCell.label.text
+    }
+
+    var eventsCount: Int { viewRoot.table.numberOfRows(inSection: 1) }
+
+    var firstEvent: EventItem {
+        guard let cell = viewRoot.table.dataSource?.tableView(
+            viewRoot.table,
+            cellForRowAt: IndexPath(row: 0, section: 1)
+        ) as? EventItem else { fatalError("unable to get EventItem") }
+        return cell
     }
 
     static func make() -> EventsListViewController {
         let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewController()
-
         sut.loadViewIfNeeded()
-
+        putInViewHierarchy(sut)
         return sut
     }
 }

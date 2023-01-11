@@ -13,20 +13,16 @@ class EventsListView: UIView {
 
     let table: UITableView = {
         let table = UITableView(al: true)
-        table.register(EventsListItem.self,
-                       forCellReuseIdentifier: EventsListItem.reuseIdentifier)
-        table.register(EventsListHintItem.self,
-                       forCellReuseIdentifier: EventsListHintItem.reuseIdentifier)
-        table.register(EventsListFooterItem.self,
-                       forCellReuseIdentifier: EventsListFooterItem.reuseIdentifier)
         table.backgroundColor = .clear
         table.separatorStyle = .none
         return table
     }()
 
     let swipeHint: SwipeGestureView = {
-        SwipeGestureView(mode: .horizontal,
-                         edgeInset: UIHelper.r2 + UIHelper.spacingListHorizontal)
+        SwipeGestureView(
+            mode: .horizontal,
+            edgeInset: UIHelper.r2 + UIHelper.spacingListHorizontal
+        )
     }()
 
     // MARK: - Init

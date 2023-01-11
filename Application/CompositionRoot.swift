@@ -16,7 +16,9 @@ class CompositionRoot:
     DayItemViewModelFactoring,
     EventViewModelFactoring,
     EventsListViewModelFactoring,
+    HintItemViewModelFactoring,
     EventItemViewModelFactoring,
+    FooterItemViewModeFactoring,
     WeekViewModelFactoring,
     WeekItemViewModelFactoring
 {
@@ -68,8 +70,19 @@ class CompositionRoot:
     }
 
     func makeEventsListViewController() -> EventsListViewController {
-        let controller = EventsListViewController(viewModel: makeEventsListViewModel())
+        var viewModel = makeEventsListViewModel()
+        let providers: [EventsListItemProviding] = [
+            HintItemProvider(),
+            EventItemProvider(),
+            FooterItemProvider(),
+        ]
+        let controller = EventsListViewController(
+            viewModel: viewModel,
+            providers: providers
+        )
         eventsListViewModelUpdater.addReceiver(receiver: controller)
+        viewModel.setResponderForFooterItemViewModel(controller)
+        controller.viewModel = viewModel /// fires didSet for viewModel before viewDidLoad
         return controller
     }
 
@@ -107,12 +120,30 @@ class CompositionRoot:
 
     // MARK: - ViewModels creation
     func makeEventsListViewModel() -> EventsListViewModel {
-        EventsListViewModel(
-            events: provider.get(),
-            today: DayComponents(date: .now),
+        let today = DayComponents(date: .now)
+        let events = provider.get()
+        let footerVm = makeFooterItemViewModel(eventsCount: events.count) // class, uses reference semantics
+        let vm = EventsListViewModel(
+            events: events,
+            today: today,
             commander: commander,
-            itemsFactory: self,
+            sections: [
+                [makeHintItemViewModel(events: events)],
+                events.map { makeEventItemViewModel(event: $0, today: today) },
+                [footerVm],
+            ],
             selfFactory: self
+        )
+        return vm
+    }
+
+    func makeHintItemViewModel(events: [Event]) -> HintItemViewModel {
+        HintItemViewModel(events: events)
+    }
+
+    func makeFooterItemViewModel(eventsCount: Int) -> FooterItemViewModel {
+        FooterItemViewModel(
+            eventsCount: eventsCount
         )
     }
 

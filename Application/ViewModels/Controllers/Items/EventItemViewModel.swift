@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct EventItemViewModel {
+struct EventItemViewModel: EventsListItemViewModel {
     private let event: Event
     private let today: DayComponents
     private let coordinator: Coordinating

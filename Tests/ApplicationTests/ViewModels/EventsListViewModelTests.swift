@@ -10,15 +10,9 @@ import Domain
 import XCTest
 
 class EventsListViewModelTests: XCTestCase {
-    private var sut: EventsListViewModel!
+    func test_hasNumberOfSections() {
+        let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewModel()
 
-//    override func setUp() {
-//        super.setUp()
-//    }
-//
-//    override func tearDown() {
-//        super.tearDown()
-//    }
-
-    func testInit() {}
+        XCTAssertEqual(sut.numberOfSections, 3)
+    }
 }

@@ -120,7 +120,7 @@ class EventInput: UIControl {
 
 // MARK: - Public
 extension EventInput: EventInputing {
-    func show(value: String = "") {
+    func show(value: String) {
         self.value = value
         background.isHidden = false
         background.alpha = 0.0

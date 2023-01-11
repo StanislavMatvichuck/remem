@@ -19,6 +19,7 @@ struct UIHelper {
     static let secondary = UIColor.systemOrange
     static let itemFont = UIColor.gray
     static let hint = UIColor.systemGray3
+    static let pinColor = Self.brandDimmed
     // metrics
     static let spacing = 16.0
     static let spacingListHorizontal = 32.0
@@ -28,6 +29,8 @@ struct UIHelper {
     static var delta1: CGFloat { 5 }
     static var d1: CGFloat { 2 * r1 }
     static var d2: CGFloat { 2 * r2 }
+    static var height: CGFloat { Self.d2 + Self.spacing }
+
     // fonts
     static let font: UIFont = makeFont()
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)
