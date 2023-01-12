@@ -16,7 +16,12 @@ class EventItemViewModelTests: XCTestCase {
         super.setUp()
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        sut = CompositionRoot(testingInMemoryMode: true).makeEventItemViewModel(event: event, today: today)
+        sut = CompositionRoot(testingInMemoryMode: true)
+            .makeEventItemViewModel(
+                event: event,
+                today: today,
+                hintEnabled: false
+            )
     }
 
     override func tearDown() {

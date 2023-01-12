@@ -9,19 +9,8 @@ import UIKit
 
 class FooterItem: UITableViewCell {
     let button: UIButton = {
-        let title = NSAttributedString(
-            string: "",
-            attributes: [
-                NSAttributedString.Key.font: UIHelper.fontSmallBold,
-            ]
-        )
-
         let button = UIButton(al: true)
-        button.setAttributedTitle(title, for: .normal)
-        button.backgroundColor = UIHelper.brand
         button.layer.cornerRadius = UIHelper.r2
-        button.layer.borderWidth = 3
-        button.isHighlighted = true
         return button
     }()
 
@@ -29,11 +18,22 @@ class FooterItem: UITableViewCell {
         didSet {
             guard let viewModel else { return }
 
-            let attributes: [NSAttributedString.Key: Any] = {
+            let background: UIColor = {
                 viewModel.isHighlighted ?
-                    [NSAttributedString.Key.font: UIHelper.fontSmallBold] :
-                    [NSAttributedString.Key.font: UIHelper.fontSmall]
+                    UIHelper.brand :
+                    UIHelper.itemBackground
             }()
+
+            let foreground: UIColor = {
+                viewModel.isHighlighted ?
+                    UIHelper.colorButtonTextHighLighted :
+                    UIHelper.colorButtonText
+            }()
+
+            let attributes: [NSAttributedString.Key: Any] = [
+                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                NSAttributedString.Key.foregroundColor: foreground,
+            ]
 
             button.setAttributedTitle(
                 NSAttributedString(
@@ -42,6 +42,8 @@ class FooterItem: UITableViewCell {
                 ),
                 for: .normal
             )
+
+            button.backgroundColor = background
         }
     }
 
@@ -60,8 +62,17 @@ class FooterItem: UITableViewCell {
     }
 
     private func configureLayout() {
-        contentView.addAndConstrain(button)
-        button.heightAnchor.constraint(equalToConstant: UIHelper.d2).isActive = true
+        contentView.addSubview(button)
+        let height = contentView.heightAnchor.constraint(equalToConstant: UIHelper.height)
+        height.priority = .defaultLow /// tableView constraints fix
+
+        NSLayoutConstraint.activate([
+            height,
+            button.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            button.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+        ])
     }
 
     private func configureAppearance() {

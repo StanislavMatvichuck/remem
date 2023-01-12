@@ -7,10 +7,6 @@
 
 import Domain
 
-protocol EventItemViewModelFactoring {
-    func makeEventItemViewModel(event: Event, today: DayComponents) -> EventItemViewModel
-}
-
 protocol EventsListViewModelFactoring {
     func makeEventsListViewModel() -> EventsListViewModel
 }

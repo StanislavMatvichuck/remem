@@ -32,7 +32,9 @@ class Swiper: UIControl {
         addGestureRecognizer(
             UIPanGestureRecognizer(
                 target: self,
-                action: #selector(handlePan)))
+                action: #selector(handlePan)
+            )
+        )
     }
 
     private func configureLayout() {
@@ -40,7 +42,8 @@ class Swiper: UIControl {
 
         horizontalConstraint = centerXAnchor.constraint(
             equalTo: superview.leadingAnchor,
-            constant: initialX)
+            constant: initialX
+        )
 
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: size),
@@ -92,7 +95,8 @@ extension Swiper {
                 self.horizontalConstraint.constant = self.initialX
                 self.superview?.layoutIfNeeded()
             },
-            completion: animationCompletionHandler)
+            completion: animationCompletionHandler
+        )
     }
 
     private func animateSuccess() {

@@ -61,16 +61,11 @@ class EventsListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.empty"))
     }
 
-    func test_empty_gestureHintIsNotVisible() {
-        let gestureHint = view.swipeHint
-
-        XCTAssertNil(gestureHint.superview)
-    }
-
     func test_empty_showsHighlightedAddButton() throws {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
+                NSAttributedString.Key.foregroundColor: UIHelper.colorButtonTextHighLighted,
                 NSAttributedString.Key.font: UIHelper.fontSmallBold,
             ]
         )
@@ -83,8 +78,8 @@ class EventsListViewControllerTests: XCTestCase {
             )
         ) as! FooterItem
 
-        XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-//        XCTAssertEqual(sut.addButton.backgroundColor, UIHelper.secondary, "Button must be highlighted when list is empty")
+        XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "button text is white with proper font")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.brand.cgColor, "highlighted button has brand background")
     }
 
     func test_empty_addButtonTapped_showsKeyboard() {
@@ -110,13 +105,14 @@ class EventsListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.firstEvent.nameLabel.text, "SubmittedEventName")
     }
 
-    func test_singleEvent_showsNormalAddButton() throws {
+    func test_singleEvent_showsNormalAddButton() {
         sut.submitEvent()
 
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
-                NSAttributedString.Key.font: UIHelper.fontSmall,
+                NSAttributedString.Key.foregroundColor: UIHelper.colorButtonText,
+                NSAttributedString.Key.font: UIHelper.fontSmallBold,
             ]
         )
 
@@ -129,7 +125,7 @@ class EventsListViewControllerTests: XCTestCase {
         ) as! FooterItem
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-//        XCTAssertEqual(sut.addButton.backgroundColor, UIHelper.secondary, "Button must be highlighted when list is empty")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.itemBackground.cgColor, "button has regular background")
     }
 
     func test_singleEvent_showsHint_firstHappening() {
@@ -147,9 +143,9 @@ class EventsListViewControllerTests: XCTestCase {
     func test_singleEvent_showsGestureHint() {
         sut.submitEvent()
 
-        _ = sut.firstEvent
+        let event = sut.firstEvent
 
-        XCTAssertNotNil(sut.viewRoot.swipeHint.superview)
+        XCTAssertNotNil(event.viewRoot.swipingHint)
     }
 
 //    func test_singleEvent_hasRenameSwipeAction() {
@@ -229,6 +225,8 @@ class EventsListViewControllerTests: XCTestCase {
     func test_singleEvent_swipe_gestureHintIsNotVisible() {
         sut.arrangeSingleEventSwiped()
 
-        XCTAssertNil(sut.viewRoot.swipeHint.superview)
+        let event = sut.firstEvent
+
+        XCTAssertNil(event.viewRoot.swipingHint)
     }
 }

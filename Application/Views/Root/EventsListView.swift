@@ -18,18 +18,17 @@ class EventsListView: UIView {
         return table
     }()
 
-    let swipeHint: SwipeGestureView = {
-        SwipeGestureView(
-            mode: .horizontal,
-            edgeInset: UIHelper.r2 + UIHelper.spacingListHorizontal
-        )
-    }()
-
     // MARK: - Init
     init() {
         super.init(frame: .zero)
         backgroundColor = UIHelper.background
-        addAndConstrain(table)
+        addSubview(table)
+        NSLayoutConstraint.activate([
+            table.centerXAnchor.constraint(equalTo: centerXAnchor),
+            table.centerYAnchor.constraint(equalTo: centerYAnchor),
+            table.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
+            table.heightAnchor.constraint(equalTo: heightAnchor)
+        ])
         addAndConstrain(input)
     }
 

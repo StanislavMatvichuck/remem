@@ -122,14 +122,23 @@ class CompositionRoot:
     func makeEventsListViewModel() -> EventsListViewModel {
         let today = DayComponents(date: .now)
         let events = provider.get()
-        let footerVm = makeFooterItemViewModel(eventsCount: events.count) // class, uses reference semantics
+        let footerVm = makeFooterItemViewModel(eventsCount: events.count)
+        let hintVm = makeHintItemViewModel(events: events)
+        let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text
+
         let vm = EventsListViewModel(
             events: events,
             today: today,
             commander: commander,
             sections: [
-                [makeHintItemViewModel(events: events)],
-                events.map { makeEventItemViewModel(event: $0, today: today) },
+                [hintVm],
+                events.map {
+                    makeEventItemViewModel(
+                        event: $0,
+                        today: today,
+                        hintEnabled: gestureHintEnabled
+                    )
+                },
                 [footerVm],
             ],
             selfFactory: self
@@ -149,11 +158,13 @@ class CompositionRoot:
 
     func makeEventItemViewModel(
         event: Event,
-        today: DayComponents
+        today: DayComponents,
+        hintEnabled: Bool
     ) -> EventItemViewModel {
         EventItemViewModel(
             event: event,
             today: today,
+            hintEnabled: hintEnabled,
             coordinator: coordinator,
             commander: commander
         )

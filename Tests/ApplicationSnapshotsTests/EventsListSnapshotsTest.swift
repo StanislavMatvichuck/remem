@@ -14,7 +14,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        recordMode = false
+        recordMode = true
         folderName = "EventsList"
         let root = CompositionRoot(testingInMemoryMode: true)
         sut = root.makeEventsListViewController()

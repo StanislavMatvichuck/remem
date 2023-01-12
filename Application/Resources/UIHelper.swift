@@ -20,6 +20,8 @@ struct UIHelper {
     static let itemFont = UIColor.gray
     static let hint = UIColor.systemGray3
     static let pinColor = Self.brandDimmed
+    static let colorButtonText = brand
+    static let colorButtonTextHighLighted = itemBackground
     // metrics
     static let spacing = 16.0
     static let spacingListHorizontal = 32.0

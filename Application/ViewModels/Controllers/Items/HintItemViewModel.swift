@@ -13,7 +13,7 @@ protocol HintItemViewModelFactoring {
 
 struct HintItemViewModel: EventsListItemViewModel {
     let title: String
-    let titleHighlighted: Bool
+    let highlighted: Bool
 
     init(events: [Event]) {
         let hint = {
@@ -24,21 +24,7 @@ struct HintItemViewModel: EventsListItemViewModel {
         }()
 
         title = hint.text
-        titleHighlighted = hint != .swipeLeft
-    }
-}
-
-extension EventsListViewModel {
-    var gestureHintEnabled: Bool {
-        for section in sections {
-            for item in section {
-                if let hintItem = item as? HintItemViewModel {
-                    return hintItem.title == HintState.placeFirstMark.text
-                }
-            }
-        }
-
-        return false
+        highlighted = hint != .swipeLeft
     }
 }
 

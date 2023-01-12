@@ -8,15 +8,28 @@
 import Domain
 import Foundation
 
+protocol EventItemViewModelFactoring {
+    func makeEventItemViewModel(
+        event: Event,
+        today: DayComponents,
+        hintEnabled: Bool
+    ) -> EventItemViewModel
+}
+
 struct EventItemViewModel: EventsListItemViewModel {
     private let event: Event
     private let today: DayComponents
     private let coordinator: Coordinating
     private let commander: EventsCommanding
 
+    var name: String
+    var hintEnabled: Bool
+    var amount: String
+
     init(
         event: Event,
         today: DayComponents,
+        hintEnabled: Bool,
         coordinator: Coordinating,
         commander: EventsCommanding
     ) {
@@ -24,13 +37,13 @@ struct EventItemViewModel: EventsListItemViewModel {
         self.today = today
         self.coordinator = coordinator
         self.commander = commander
-    }
 
-    var name: String { event.name }
-
-    var amount: String {
-        let todayHappeningsCount = event.happenings(forDayComponents: today).count
-        return String(todayHappeningsCount)
+        self.name = event.name
+        self.hintEnabled = hintEnabled
+        self.amount = {
+            let todayHappeningsCount = event.happenings(forDayComponents: today).count
+            return String(todayHappeningsCount)
+        }()
     }
 
     func select() {

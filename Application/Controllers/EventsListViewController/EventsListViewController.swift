@@ -5,24 +5,7 @@
 //  Created by Stanislav Matvichuck on 06.01.2022.
 //
 
-import Domain
 import UIKit
-
-// TODO: make viewModel property + didSet configuration be same everywhere
-// TODO: procedural if's to polymorphism?
-/// common cell interface?
-/// func configure(some)?
-/// where cell type must live?
-/// what handles events? (itemViewModel + this controller currently)
-/// make cell based on `type` of view model?
-/// direct mapping of `vm type (props + methods)` with `cell type (view, vm)`
-/// who is responsible for that mapping? controller
-/// THIS STUFF IMPROVES EXTENSIBILITY BY ENABLING ARBITRARY AMOUNT OF CELL TYPES
-/// ALSO A PLUS that separate functionality like hints and add button obtain their clear view models. From that perspective hint = event = footer. Also = week = day = clock.
-///   ALL ITEMS ARE SOMEHOW EQUAL IN VM. But different in table/collection/clock usage
-// TODO: is it possible to describe items with capability protocols? what are consequences?
-// for example: swipeable, selectable, swipeActionsContaining, update receiving
-// TODO: how will it exchange with existing tests? is it a refactoring? no code should be broken during codebase update
 
 class EventsListViewController:
     UIViewController,
@@ -31,7 +14,8 @@ class EventsListViewController:
     let viewRoot: EventsListView
     var viewModel: EventsListViewModel {
         didSet {
-            if isViewLoaded { update() }
+            guard isViewLoaded else { return }
+            update()
         }
     }
 
@@ -88,10 +72,6 @@ class EventsListViewController:
         } else if viewModel.inputVisible {
             viewRoot.input.show(value: viewModel.inputContent)
         }
-
-        if !viewModel.gestureHintEnabled {
-            viewRoot.swipeHint.removeFromSuperview()
-        }
     }
 }
 
@@ -104,7 +84,7 @@ extension EventsListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = providers[indexPath.section].dequeue(
+        providers[indexPath.section].dequeue(
             tableView,
             indexPath: indexPath,
             viewModel: viewModel.itemViewModel(
@@ -112,17 +92,6 @@ extension EventsListViewController: UITableViewDataSource {
                 section: indexPath.section
             )
         )
-
-        if
-            viewModel.gestureHintEnabled,
-            indexPath == IndexPath(row: 0, section: 1)
-        {
-            let hint = viewRoot.swipeHint
-            cell.contentView.addAndConstrain(hint)
-            hint.start()
-        }
-
-        return cell
     }
 }
 
