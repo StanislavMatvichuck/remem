@@ -96,26 +96,19 @@ extension EventsListViewController: UITableViewDataSource {
 }
 
 extension EventsListViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let renameAction = UIContextualAction(
-//            style: .normal,
-//            title: viewModel.rename
-//        ) { _, _, completion in
-//            self.viewModel.renamedItem = self.viewModel.itemViewModel(
-//                row: indexPath.row,
-//                section: indexPath.section
-//            )
-//            completion(true)
-//        }
-//
-//        let deleteAction = UIContextualAction(
-//            style: .destructive,
-//            title: viewModel.delete
-//        ) { _, _, completion in
-//            self.viewModel.items[indexPath.row].remove()
-//            completion(true)
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
-//    }
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        guard let cell = providers[indexPath.section].dequeue(
+            tableView,
+            indexPath: indexPath,
+            viewModel: viewModel.itemViewModel(
+                row: indexPath.row,
+                section: indexPath.section
+            )
+        ) as? TrailingSwipeActionsConfigurationProviding
+        else { return nil }
+        return cell.trailingActionsConfiguration()
+    }
 }

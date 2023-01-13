@@ -43,6 +43,25 @@ extension EventsListViewController {
         return cell
     }
 
+    func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
+        submitEvent()
+
+        let table = viewRoot.table
+        let index = IndexPath(
+            row: 0,
+            section: 1
+        )
+
+        guard let config = table.delegate?.tableView?(
+            table,
+            trailingSwipeActionsConfigurationForRowAt: index
+        ) else {
+            fatalError("unable to get trailing swiping action for first event")
+        }
+
+        return config.actions[number]
+    }
+
     static func make() -> EventsListViewController {
         let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewController()
         sut.loadViewIfNeeded()

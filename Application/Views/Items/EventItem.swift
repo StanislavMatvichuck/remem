@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrailingSwipeActionsConfigurationProviding {
+    func trailingActionsConfiguration() -> UISwipeActionsConfiguration
+}
+
 class EventItem: UITableViewCell {
     let swiper = Swiper()
 
@@ -124,5 +128,33 @@ class EventItem: UITableViewCell {
 
     @objc private func handleTap(_ gr: UITapGestureRecognizer) {
         viewModel?.select()
+    }
+}
+
+extension EventItem: TrailingSwipeActionsConfigurationProviding {
+    func trailingActionsConfiguration() -> UISwipeActionsConfiguration {
+        guard let viewModel else { fatalError("can't create configuration without viewModel") }
+
+        let renameAction = UIContextualAction(
+            style: .normal,
+            title: viewModel.rename,
+            handler: { _, _, completion in
+                self.viewModel?.initiateRenaming()
+                completion(true)
+            }
+        )
+
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: viewModel.delete,
+            handler: { _, _, completion in
+                self.viewModel?.remove()
+                completion(true)
+            }
+        )
+
+        return UISwipeActionsConfiguration(
+            actions: [renameAction, deleteAction]
+        )
     }
 }

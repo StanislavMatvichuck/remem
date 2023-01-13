@@ -13,8 +13,6 @@ protocol EventsListViewModelFactoring {
 
 struct EventsListViewModel: EventDependantViewModel {
     let title = String(localizationId: "eventsList.title")
-    let rename = String(localizationId: "button.rename")
-    let delete = String(localizationId: "button.delete")
 
     private let events: [Event]
     private let today: DayComponents

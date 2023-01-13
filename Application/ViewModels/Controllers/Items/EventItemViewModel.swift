@@ -17,6 +17,9 @@ protocol EventItemViewModelFactoring {
 }
 
 struct EventItemViewModel: EventsListItemViewModel {
+    let rename = String(localizationId: "button.rename")
+    let delete = String(localizationId: "button.delete")
+
     private let event: Event
     private let today: DayComponents
     private let coordinator: Coordinating
@@ -58,6 +61,8 @@ struct EventItemViewModel: EventsListItemViewModel {
     func remove() {
         commander.delete(event)
     }
+
+    func initiateRenaming() {}
 
     func rename(to newName: String) {
         event.name = newName

@@ -148,16 +148,23 @@ class EventsListViewControllerTests: XCTestCase {
         XCTAssertNotNil(event.viewRoot.swipingHint)
     }
 
-//    func test_singleEvent_hasRenameSwipeAction() {
-//        let index = IndexPath(row: 0, section: 1)
-//        let config = table.delegate?.tableView?(table, trailingSwipeActionsConfigurationForRowAt: index)
-//        let button = config?.actions.first
-//
-//        XCTAssertEqual(
-//            button?.title,
-//            String(localizationId: "button.rename")
-//        )
-//    }
+    func test_singleEvent_hasRenameSwipeAction() {
+        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
+
+        XCTAssertEqual(
+            button.title,
+            String(localizationId: "button.rename")
+        )
+    }
+
+    func test_singleEvent_hasDeleteSwipeAction() {
+        let button = sut.submittedEventTrailingSwipeActionButton(number: 1)
+
+        XCTAssertEqual(
+            button.title,
+            String(localizationId: "button.delete")
+        )
+    }
 
 //    func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
 //        XCTAssertFalse(view.input.textField.isFirstResponder)
@@ -182,15 +189,6 @@ class EventsListViewControllerTests: XCTestCase {
 //        putInViewHierarchy(sut)
 //        let renameButton = arrangeFirstEventSwipeAction(number: 1)
 //        renameButton.handler(renameButton, UIView()) { _ in }
-//    }
-
-//    func test_singleEvent_hasDeleteSwipeAction() {
-//        let deleteButton = arrangeFirstEventSwipeAction(number: 0)
-//
-//        XCTAssertEqual(
-//            deleteButton.title,
-//            String(localizationId: "button.delete")
-//        )
 //    }
 
 //    func test_singleEvent_deletePressed_removesEventFromList() throws {
