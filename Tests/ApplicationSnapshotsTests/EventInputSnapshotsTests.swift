@@ -31,6 +31,7 @@ final class EventInputSnapshotsTests: FBSnapshotTestCase {
     override func tearDown() {
         executeRunLoop()
         sut = nil
+        parent = nil
         super.tearDown()
     }
  
