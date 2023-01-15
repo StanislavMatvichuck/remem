@@ -74,19 +74,21 @@ class EventInput: UIControl {
     }()
 
     let emojiContainer: UIScrollView = {
-        let scroll = ViewScroll(.horizontal, spacing: UIHelper.delta1)
+        let scroll = ViewScroll(.horizontal, spacing: UIHelper.spacing)
         scroll.viewContent.layoutMargins = UIEdgeInsets(
             top: 0,
-            left: UIHelper.delta1,
+            left: UIHelper.spacing,
             bottom: 0,
-            right: UIHelper.delta1
+            right: UIHelper.spacing
         )
         scroll.viewContent.isLayoutMarginsRelativeArrangement = true
         scroll.showsHorizontalScrollIndicator = false
 
         for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
             let button = UIButton(al: true)
-            button.setTitle(emoji, for: .normal)
+            let attributes = [NSAttributedString.Key.font: UIHelper.fontBold]
+            let title = NSAttributedString(string: emoji, attributes: attributes)
+            button.setAttributedTitle(title, for: .normal)
             scroll.contain(views: button)
         }
 
@@ -158,7 +160,7 @@ extension EventInput {
 
         addSubview(viewInput)
         NSLayoutConstraint.activate([
-            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.delta1),
+            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
             viewInput.heightAnchor.constraint(equalToConstant: UIHelper.d2),
             viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
@@ -167,7 +169,7 @@ extension EventInput {
         NSLayoutConstraint.activate([
             emojiContainer.widthAnchor.constraint(equalTo: widthAnchor),
             emojiContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -UIHelper.delta1),
+            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -UIHelper.spacing),
         ])
 
         NSLayoutConstraint.activate([constraint])
@@ -295,7 +297,7 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        let heightAboveKeyboard = viewInput.bounds.height + emojiContainer.bounds.height
+        let heightAboveKeyboard = viewInput.bounds.height + emojiContainer.bounds.height + 2 * UIHelper.spacing
         let keyboardHeight = keyboardSize.cgRectValue.size.height
         let newConstant = -keyboardHeight - heightAboveKeyboard
 
