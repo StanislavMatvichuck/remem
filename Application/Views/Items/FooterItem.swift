@@ -68,7 +68,7 @@ class FooterItem: UITableViewCell {
 
         NSLayoutConstraint.activate([
             height,
-            button.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            button.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
             button.heightAnchor.constraint(equalToConstant: UIHelper.d2),
             button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

@@ -13,7 +13,7 @@ class SwipingHintDisplaySnapshotsTest: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
         folderName = "SwipingHintDisplay"
         
         final class ParentView: UIView, UsingSwipingHintDisplaying {}

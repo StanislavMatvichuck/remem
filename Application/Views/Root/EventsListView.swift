@@ -22,13 +22,7 @@ class EventsListView: UIView {
     init() {
         super.init(frame: .zero)
         backgroundColor = UIHelper.background
-        addSubview(table)
-        NSLayoutConstraint.activate([
-            table.centerXAnchor.constraint(equalTo: centerXAnchor),
-            table.centerYAnchor.constraint(equalTo: centerYAnchor),
-            table.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
-            table.heightAnchor.constraint(equalTo: heightAnchor)
-        ])
+        addAndConstrain(table)
         addAndConstrain(input)
     }
 

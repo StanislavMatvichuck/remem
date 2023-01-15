@@ -46,8 +46,8 @@ class HintItem: UITableViewCell {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIHelper.spacing),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIHelper.spacing),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            label.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }
 

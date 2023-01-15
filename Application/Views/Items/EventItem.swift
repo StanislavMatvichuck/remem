@@ -93,7 +93,7 @@ class EventItem: UITableViewCell {
         NSLayoutConstraint.activate([
             height,
             viewRoot.heightAnchor.constraint(equalToConstant: UIHelper.d2),
-            viewRoot.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            viewRoot.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
             viewRoot.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             viewRoot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
