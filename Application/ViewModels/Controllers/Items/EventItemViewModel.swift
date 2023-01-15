@@ -16,7 +16,15 @@ protocol EventItemViewModelFactoring {
     ) -> EventItemViewModel
 }
 
-struct EventItemViewModel: EventsListItemViewModel {
+protocol EventItemViewModelRenameResponding {
+    func renameRequested(_ viewModel: EventItemViewModel)
+}
+
+protocol UsingEventItemViewModelRenameResponding {
+    func withRenameRequestHandler(_: EventItemViewModelRenameResponding) -> EventItemViewModel
+}
+
+struct EventItemViewModel: EventsListItemViewModel, UsingEventItemViewModelRenameResponding {
     let rename = String(localizationId: "button.rename")
     let delete = String(localizationId: "button.delete")
 
@@ -28,6 +36,7 @@ struct EventItemViewModel: EventsListItemViewModel {
     var name: String
     var hintEnabled: Bool
     var amount: String
+    var renameHandler: EventItemViewModelRenameResponding?
 
     init(
         event: Event,
@@ -62,10 +71,29 @@ struct EventItemViewModel: EventsListItemViewModel {
         commander.delete(event)
     }
 
-    func initiateRenaming() {}
+    func initiateRenaming() {
+        guard let renameHandler else {
+            print("⚠️ EventItemViewModel trying to use renameHandler which is nil")
+            return
+        }
+
+        renameHandler.renameRequested(self)
+    }
 
     func rename(to newName: String) {
         event.name = newName
         commander.save(event)
+    }
+
+    func withRenameRequestHandler(_ handler: EventItemViewModelRenameResponding) -> EventItemViewModel {
+        var newSelf = self
+        newSelf.renameHandler = handler
+        return newSelf
+    }
+}
+
+extension EventsListViewController: EventItemViewModelRenameResponding {
+    func renameRequested(_ itemViewModel: EventItemViewModel) {
+        viewModel.renamedItem = itemViewModel
     }
 }

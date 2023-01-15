@@ -12,40 +12,40 @@ protocol FooterItemViewModeFactoring {
 }
 
 protocol FooterItemViewModelResponding {
-    func selected()
+    func selected(_ viewModel: FooterItemViewModel)
 }
 
-struct FooterItemViewModel: EventsListItemViewModel {
+protocol UsingFooterItemViewModelResponding {
+    func withSelectedHandler(_: FooterItemViewModelResponding) -> FooterItemViewModel
+}
+
+struct FooterItemViewModel: EventsListItemViewModel, UsingFooterItemViewModelResponding {
     let title = String(localizationId: "button.create")
     let isHighlighted: Bool
-    var responder: FooterItemViewModelResponding?
+    var selectionHandler: FooterItemViewModelResponding?
 
     init(eventsCount: Int) {
         isHighlighted = eventsCount == 0
     }
 
-    mutating func select() {
-        responder?.selected()
-    }
-}
-
-extension EventsListViewModel {
-    mutating func setResponderForFooterItemViewModel(
-        _ footerHandler: FooterItemViewModelResponding
-    ) {
-        for (sectionIndex, section) in sections.enumerated() {
-            for (itemIndex, item) in section.enumerated() {
-                if var updatedFooterItem = item as? FooterItemViewModel {
-                    updatedFooterItem.responder = footerHandler
-                    sections[sectionIndex][itemIndex] = updatedFooterItem
-                }
-            }
+    func select() {
+        guard let selectionHandler else {
+            print("⚠️ FooterItemViewModel trying to use responder which is nil")
+            return
         }
+
+        selectionHandler.selected(self)
+    }
+
+    func withSelectedHandler(_ responder: FooterItemViewModelResponding) -> FooterItemViewModel {
+        var newSelf = self
+        newSelf.selectionHandler = responder
+        return newSelf
     }
 }
 
 extension EventsListViewController: FooterItemViewModelResponding {
-    func selected() {
+    func selected(_: FooterItemViewModel) {
         viewModel.showInput()
     }
 }

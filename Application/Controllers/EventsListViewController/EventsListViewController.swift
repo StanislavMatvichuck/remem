@@ -16,6 +16,8 @@ class EventsListViewController:
         didSet {
             guard isViewLoaded else { return }
             update()
+            /// does not trigger didSet
+            viewModel = connectToViewModelHandlers(viewModel: viewModel)
         }
     }
 
@@ -28,6 +30,9 @@ class EventsListViewController:
         self.providers = providers
 
         super.init(nibName: nil, bundle: nil)
+
+        /// does not trigger didSet
+        self.viewModel = connectToViewModelHandlers(viewModel: viewModel)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -72,6 +77,27 @@ class EventsListViewController:
         } else if viewModel.inputVisible {
             viewRoot.input.show(value: viewModel.inputContent)
         }
+    }
+
+    /// - Parameter viewModel: all handlers of this vm will be updated to
+    /// - Parameter controller: self that plays multiple roles by extensions in viewModels files
+    /// - Returns: new version of list view model with all handlers configured to call controller
+    private func connectToViewModelHandlers(viewModel: EventsListViewModel) -> EventsListViewModel {
+        var newViewModel = viewModel
+        for (indexSection, section) in newViewModel.sections.enumerated() {
+            for (indexItem, item) in section.enumerated() {
+                if let item = item as? UsingEventItemViewModelRenameResponding {
+                    let newItem: EventItemViewModel = item.withRenameRequestHandler(self)
+                    newViewModel.sections[indexSection][indexItem] = newItem
+                }
+
+                if let item = item as? UsingFooterItemViewModelResponding {
+                    let newItem: FooterItemViewModel = item.withSelectedHandler(self)
+                    newViewModel.sections[indexSection][indexItem] = newItem
+                }
+            }
+        }
+        return newViewModel
     }
 }
 

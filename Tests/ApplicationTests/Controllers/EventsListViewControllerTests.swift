@@ -166,40 +166,36 @@ class EventsListViewControllerTests: XCTestCase {
         )
     }
 
-//    func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
-//        XCTAssertFalse(view.input.textField.isFirstResponder)
-//
-//        arrangeFirstEventRenameButtonPressed()
-//
-//        XCTAssertTrue(view.input.textField.isFirstResponder)
-//        XCTAssertEqual(view.input.value, "SubmittedEventName")
-//    }
+    func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
+        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
-//    func test_singleEvent_submittingRename_changesEventName() throws {
-//        arrangeFirstEventRenameButtonPressed()
-//
-//        view.input.value = "ChangedName"
-//
-//        _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
-//
-//        XCTAssertEqual(sut.firstEvent.nameLabel.text, "ChangedName")
-//    }
+        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
 
-//    private func arrangeFirstEventRenameButtonPressed() {
-//        putInViewHierarchy(sut)
-//        let renameButton = arrangeFirstEventSwipeAction(number: 1)
-//        renameButton.handler(renameButton, UIView()) { _ in }
-//    }
+        button.handler(button, UIView()) { _ in }
 
-//    func test_singleEvent_deletePressed_removesEventFromList() throws {
-//        let deleteButton = arrangeFirstEventSwipeAction(number: 0)
-//
-//        XCTAssertEqual(sut.eventsCount, 1, "precondition")
-//
-//        deleteButton.handler(deleteButton, UIView()) { _ in }
-//
-//        XCTAssertEqual(sut.eventsCount, 0, "precondition")
-//    }
+        XCTAssertTrue(view.input.textField.isFirstResponder)
+        XCTAssertEqual(view.input.value, "SubmittedEventName")
+    }
+
+    func test_singleEvent_submittingRename_changesEventName() {
+        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
+
+        button.handler(button, UIView()) { _ in }
+        view.input.value = "ChangedName"
+        _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
+
+        XCTAssertEqual(sut.firstEvent.nameLabel.text, "ChangedName")
+    }
+
+    func test_singleEvent_deletePressed_removesEventFromList() {
+        let button = sut.submittedEventTrailingSwipeActionButton(number: 1)
+
+        XCTAssertEqual(sut.eventsCount, 1, "precondition")
+
+        button.handler(button, UIView()) { _ in }
+
+        XCTAssertEqual(sut.eventsCount, 0)
+    }
 
     func test_singleEvent_swipe_increasesLabelAmountByOne() {
         sut.arrangeSingleEventSwiped()

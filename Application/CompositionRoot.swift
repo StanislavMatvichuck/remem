@@ -70,19 +70,16 @@ class CompositionRoot:
     }
 
     func makeEventsListViewController() -> EventsListViewController {
-        var viewModel = makeEventsListViewModel()
         let providers: [EventsListItemProviding] = [
             HintItemProvider(),
             EventItemProvider(),
             FooterItemProvider(),
         ]
         let controller = EventsListViewController(
-            viewModel: viewModel,
+            viewModel: makeEventsListViewModel(),
             providers: providers
         )
         eventsListViewModelUpdater.addReceiver(receiver: controller)
-        viewModel.setResponderForFooterItemViewModel(controller)
-        controller.viewModel = viewModel /// fires didSet for viewModel before viewDidLoad
         return controller
     }
 
