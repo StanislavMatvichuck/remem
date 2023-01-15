@@ -10,7 +10,8 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
+@MainActor
+final class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
     var event: Domain.Event!
     var sut: DayViewController!
 

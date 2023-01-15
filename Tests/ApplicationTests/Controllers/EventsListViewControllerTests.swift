@@ -7,8 +7,6 @@
 
 @testable import Application
 import Domain
-
-import ViewControllerPresentationSpy
 import XCTest
 
 class EventsListViewControllerTests: XCTestCase {

@@ -8,6 +8,15 @@
         "branch" : "main",
         "revision" : "71f19547d9f9d0959a10881814de41b2114a8e1c"
       }
+    },
+    {
+      "identity" : "viewcontrollerpresentationspy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jonreid/ViewControllerPresentationSpy",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1d7422b88f03065e3f25eeef6cae085cecd94911"
+      }
     }
   ],
   "version" : 2
