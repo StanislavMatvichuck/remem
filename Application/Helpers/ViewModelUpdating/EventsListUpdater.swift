@@ -37,5 +37,3 @@ final class EventsListUpdater: MulticastDelegate<UsingEventsListViewModel>, Even
         call { $0.update(viewModel: newViewModel) }
     }
 }
-
-

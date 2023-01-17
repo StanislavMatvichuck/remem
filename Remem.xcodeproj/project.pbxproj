@@ -97,6 +97,8 @@
 		08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
 		08C85FF228B4FB7800FF37D9 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* CompositionRoot.swift */; };
+		08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
+		08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */; };
 		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
 		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
 		08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */; };
@@ -108,6 +110,7 @@
 		08D5122A27870D2600C2037F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122827870D2600C2037F /* LaunchScreen.storyboard */; };
 		08D512362787144800C2037F /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EventsListView.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
+		08D763CA2977043C00B6EFD2 /* EventsListUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D763C92977043C00B6EFD2 /* EventsListUpdater.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08E63E5529409A0C00F87F25 /* WeekViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */; };
 		08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */; };
@@ -368,6 +371,7 @@
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming01.xcdatamodel; sourceTree = "<group>"; };
 		08D6E1D3288806FA003BF595 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
+		08D763C92977043C00B6EFD2 /* EventsListUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUpdater.swift; sourceTree = "<group>"; };
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
@@ -700,6 +704,7 @@
 			isa = PBXGroup;
 			children = (
 				08326B2129532F2600A0BAEB /* ViewModelUpdating.swift */,
+				08D763C92977043C00B6EFD2 /* EventsListUpdater.swift */,
 			);
 			path = ViewModelUpdating;
 			sourceTree = "<group>";
@@ -1239,10 +1244,12 @@
 				08292EC7292E24F700F46A32 /* ClockSnapshotsTests.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventSnapshotTests.swift in Sources */,
 				08AF544B293740E800032487 /* DayViewModelTests.swift in Sources */,
+				08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshotsTest.swift in Sources */,
 				087791992974858300780F60 /* SnapshotsAtlas.swift in Sources */,
 				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
+				08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshotsTests.swift in Sources */,
 				0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */,
 				0850075829216F74007B272C /* Mocks.swift in Sources */,
@@ -1356,6 +1363,7 @@
 				08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
+				08D763CA2977043C00B6EFD2 /* EventsListUpdater.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,

@@ -16,15 +16,7 @@ protocol EventItemViewModelFactoring {
     ) -> EventItemViewModel
 }
 
-protocol EventItemViewModelRenameResponding {
-    func renameRequested(_ viewModel: EventItemViewModel)
-}
-
-protocol UsingEventItemViewModelRenameResponding {
-    func withRenameRequestHandler(_: EventItemViewModelRenameResponding) -> EventItemViewModel
-}
-
-struct EventItemViewModel: EventsListItemViewModel, UsingEventItemViewModelRenameResponding {
+struct EventItemViewModel {
     let rename = String(localizationId: "button.rename")
     let delete = String(localizationId: "button.delete")
 
@@ -84,12 +76,10 @@ struct EventItemViewModel: EventsListItemViewModel, UsingEventItemViewModelRenam
         event.name = newName
         commander.save(event)
     }
+}
 
-    func withRenameRequestHandler(_ handler: EventItemViewModelRenameResponding) -> EventItemViewModel {
-        var newSelf = self
-        newSelf.renameHandler = handler
-        return newSelf
-    }
+protocol EventItemViewModelRenameResponding {
+    func renameRequested(_ viewModel: EventItemViewModel)
 }
 
 extension EventsListViewController: EventItemViewModelRenameResponding {

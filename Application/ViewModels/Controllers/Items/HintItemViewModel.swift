@@ -11,7 +11,7 @@ protocol HintItemViewModelFactoring {
     func makeHintItemViewModel(events: [Event]) -> HintItemViewModel
 }
 
-struct HintItemViewModel: EventsListItemViewModel {
+struct HintItemViewModel {
     let title: String
     let highlighted: Bool
 

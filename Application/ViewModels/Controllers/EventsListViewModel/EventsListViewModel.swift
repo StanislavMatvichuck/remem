@@ -24,7 +24,6 @@ extension EventsListViewController: UsingEventsListViewModel {
 struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
-    private let events: [Event]
     private let today: DayComponents
     private let selfFactory: EventsListViewModelFactoring
     private let commander: EventsCommanding
@@ -36,13 +35,11 @@ struct EventsListViewModel {
     var inputContent: String = ""
 
     init(
-        events: [Event],
         today: DayComponents,
         commander: EventsCommanding,
         sections: [[EventsListItemViewModel]],
         selfFactory: EventsListViewModelFactoring
     ) {
-        self.events = events
         self.today = today
         self.commander = commander
         self.sections = sections

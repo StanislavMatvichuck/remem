@@ -11,15 +11,7 @@ protocol FooterItemViewModeFactoring {
     func makeFooterItemViewModel(eventsCount: Int) -> FooterItemViewModel
 }
 
-protocol FooterItemViewModelResponding {
-    func selected(_ viewModel: FooterItemViewModel)
-}
-
-protocol UsingFooterItemViewModelResponding {
-    func withSelectedHandler(_: FooterItemViewModelResponding) -> FooterItemViewModel
-}
-
-struct FooterItemViewModel: EventsListItemViewModel, UsingFooterItemViewModelResponding {
+struct FooterItemViewModel {
     let title = String(localizationId: "button.create")
     let isHighlighted: Bool
     var selectionHandler: FooterItemViewModelResponding?
@@ -36,12 +28,10 @@ struct FooterItemViewModel: EventsListItemViewModel, UsingFooterItemViewModelRes
 
         selectionHandler.selected(self)
     }
+}
 
-    func withSelectedHandler(_ responder: FooterItemViewModelResponding) -> FooterItemViewModel {
-        var newSelf = self
-        newSelf.selectionHandler = responder
-        return newSelf
-    }
+protocol FooterItemViewModelResponding {
+    func selected(_ viewModel: FooterItemViewModel)
 }
 
 extension EventsListViewController: FooterItemViewModelResponding {

@@ -128,7 +128,6 @@ class CompositionRoot:
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text
 
         let vm = EventsListViewModel(
-            events: events,
             today: today,
             commander: commander,
             sections: [

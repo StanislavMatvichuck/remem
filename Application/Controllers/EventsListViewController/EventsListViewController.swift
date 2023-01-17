@@ -81,19 +81,13 @@ class EventsListViewController: UIViewController {
     /// - Returns: new version of list view model with all handlers configured to call controller
     private func connectToViewModelHandlers(viewModel: EventsListViewModel) -> EventsListViewModel {
         var newViewModel = viewModel
-        for (indexSection, section) in newViewModel.sections.enumerated() {
-            for (indexItem, item) in section.enumerated() {
-                if let item = item as? UsingEventItemViewModelRenameResponding {
-                    let newItem: EventItemViewModel = item.withRenameRequestHandler(self)
-                    newViewModel.sections[indexSection][indexItem] = newItem
-                }
 
-                if let item = item as? UsingFooterItemViewModelResponding {
-                    let newItem: FooterItemViewModel = item.withSelectedHandler(self)
-                    newViewModel.sections[indexSection][indexItem] = newItem
-                }
+        for (i, section) in newViewModel.sections.enumerated() {
+            for (j, item) in section.enumerated() {
+                newViewModel.sections[i][j] = item.add(self)
             }
         }
+
         return newViewModel
     }
 }
