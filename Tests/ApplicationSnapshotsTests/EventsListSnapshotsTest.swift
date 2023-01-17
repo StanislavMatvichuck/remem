@@ -11,13 +11,14 @@ import iOSSnapshotTestCase
 
 class EventsListSnapshotsTest: FBSnapshotTestCase {
     var sut: EventsListViewController!
+    var root: CompositionRoot!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "EventsList"
-        let root = CompositionRoot(testingInMemoryMode: true)
-        sut = root.makeEventsListViewController()
+        root = CompositionRoot(testingInMemoryMode: true)
+        sut = root.makeEventsListViewController(events: root.provider.get())
         putInViewHierarchy(sut)
     }
 
@@ -59,6 +60,16 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
     func test_oneItem_swipedDark() {
         sut.arrangeSingleEventSwiped()
         configureDarkMode()
+
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_oneItem_visited() {
+        let event = Event(name: "VisitedEvent")
+        event.visit()
+        event.addHappening(date: .now)
+
+        sut.viewModel = root.makeEventsListViewModel(events: [event])
 
         FBSnapshotVerifyViewController(sut)
     }

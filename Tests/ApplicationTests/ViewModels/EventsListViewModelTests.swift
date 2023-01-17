@@ -11,7 +11,7 @@ import XCTest
 
 class EventsListViewModelTests: XCTestCase {
     func test_hasNumberOfSections() {
-        let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewModel()
+        let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewModel(events: [])
 
         XCTAssertEqual(sut.numberOfSections, 3)
     }

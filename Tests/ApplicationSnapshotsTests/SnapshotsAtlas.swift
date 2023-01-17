@@ -16,7 +16,7 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
         recordMode = true
         folderName = "Atlas"
         
-        parent = UIView(frame: CGRect(x: 0, y: 0, width: 1920, height: 1080))
+        parent = UIView(frame: CGRect(x: 0, y: 0, width: 2 * 1920, height: 2 * 1080))
         parent.backgroundColor = UIColor.purple
     }
     
@@ -26,11 +26,11 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
         super.tearDown()
     }
  
-    func test_rendersFullHDPurpleBackground() {
+    func test01_rendersFullHDPurpleBackground() {
         FBSnapshotVerifyView(parent)
     }
     
-    func test_snapshotImageCanBeAdded() {
+    func test02_snapshotImageCanBeAdded() {
         let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
         let testName = "EventsList/test_empty"
         guard let image = UIImage(contentsOfFile: "\(directory)/\(testName)@2x.png") else { return }
@@ -48,34 +48,97 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
         FBSnapshotVerifyView(parent)
     }
     
-    func test_someSnapshotsCanBeAddedHorizontally() {
-        let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        let testNames = [
+    func test03_someSnapshotsCanBeAddedHorizontally() {
+        let row = makeRow(testNames: [
             "EventsList/test_empty",
             "EventsList/test_addButton_inputShown",
             "EventsList/test_oneItem",
             "EventsList/test_oneItem_swiped",
-        ]
+        ])
         
-        let horizontalStack = UIStackView()
-        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStack.axis = .horizontal
-        
-        for name in testNames {
-            horizontalStack.addArrangedSubview(makeImageViewFor(testName: name))
-        }
-        
-        parent.addSubview(horizontalStack)
+        parent.addSubview(row)
         
         NSLayoutConstraint.activate([
-            horizontalStack.centerXAnchor.constraint(equalTo: parent.centerXAnchor),
-            horizontalStack.topAnchor.constraint(equalTo: parent.topAnchor),
+            row.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row.topAnchor.constraint(equalTo: parent.topAnchor),
         ])
         
         FBSnapshotVerifyView(parent)
     }
     
-    private func makeImageViewFor(testName: String) -> UIImageView {
+    func test04_emptyRowItemCanBeAdded() {
+        let row = makeRow(testNames: [
+            nil,
+            "EventsList/test_empty",
+        ])
+        
+        parent.addSubview(row)
+        
+        NSLayoutConstraint.activate([
+            row.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row.topAnchor.constraint(equalTo: parent.topAnchor),
+        ])
+        
+        FBSnapshotVerifyView(parent)
+    }
+    
+    func test05_twoRowsCanBeAdded() {
+        let row01 = makeRow(testNames: [
+            "EventsList/test_empty",
+            "EventsList/test_addButton_inputShown",
+            "EventsList/test_oneItem",
+            "EventsList/test_oneItem_swiped",
+            nil,
+            "EventsList/test_oneItem_visited",
+        ])
+        
+        let row02 = makeRow(testNames: [
+            nil,
+            nil,
+            nil,
+            nil,
+            "Event/test_singleHappening",
+        ])
+        
+        parent.addSubview(row01)
+        parent.addSubview(row02)
+        
+        NSLayoutConstraint.activate([
+            row01.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row01.topAnchor.constraint(equalTo: parent.topAnchor),
+            row02.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row02.topAnchor.constraint(equalTo: row01.bottomAnchor),
+        ])
+        
+        FBSnapshotVerifyView(parent)
+    }
+    
+    private func makeRow(testNames: [String?]) -> UIStackView {
+        let horizontalStack = UIStackView()
+        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStack.axis = .horizontal
+        horizontalStack.spacing = 16
+        
+        for name in testNames {
+            horizontalStack.addArrangedSubview(makeImageViewFor(testName: name))
+        }
+        
+        return horizontalStack
+    }
+    
+    private func makeImageViewFor(testName: String?) -> UIImageView {
+        guard let testName else {
+            let view = UIImageView(image: nil)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height
+            NSLayoutConstraint.activate([
+                view.widthAnchor.constraint(equalToConstant: width),
+                view.heightAnchor.constraint(equalToConstant: height),
+            ])
+            return view
+        }
+        
         let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
         guard let image = UIImage(contentsOfFile: "\(directory)/\(testName)@2x.png") else { fatalError("unable to find image") }
         

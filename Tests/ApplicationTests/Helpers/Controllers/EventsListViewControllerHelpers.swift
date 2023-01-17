@@ -43,6 +43,14 @@ extension EventsListViewController {
         return cell
     }
 
+    var footer: FooterItem {
+        guard let cell = viewRoot.table.dataSource?.tableView(
+            viewRoot.table,
+            cellForRowAt: IndexPath(row: 0, section: 2)
+        ) as? FooterItem else { fatalError("unable to get footer") }
+        return cell
+    }
+
     func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
         submitEvent()
 
@@ -63,7 +71,8 @@ extension EventsListViewController {
     }
 
     static func make() -> EventsListViewController {
-        let sut = CompositionRoot(testingInMemoryMode: true).makeEventsListViewController()
+        let root = CompositionRoot(testingInMemoryMode: true)
+        let sut = root.makeEventsListViewController(events: root.provider.get())
         sut.loadViewIfNeeded()
         putInViewHierarchy(sut)
         return sut
