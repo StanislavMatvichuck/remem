@@ -8,10 +8,20 @@
 import Domain
 
 protocol EventsListViewModelFactoring {
-    func makeEventsListViewModel() -> EventsListViewModel
+    func makeEventsListViewModel(events: [Event]) -> EventsListViewModel
 }
 
-struct EventsListViewModel: EventDependantViewModel {
+protocol UsingEventsListViewModel {
+    func update(viewModel: EventsListViewModel)
+}
+
+extension EventsListViewController: UsingEventsListViewModel {
+    func update(viewModel: EventsListViewModel) {
+        self.viewModel = viewModel
+    }
+}
+
+struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
     private let events: [Event]
@@ -45,12 +55,6 @@ struct EventsListViewModel: EventDependantViewModel {
 
     mutating func showInput() {
         inputVisible = true
-    }
-
-    var eventId: String { "eventsList" }
-
-    func copy(newEvent: Event) -> EventsListViewModel {
-        selfFactory.makeEventsListViewModel()
     }
 
     func rows(inSection: Int) -> Int { sections[inSection].count }

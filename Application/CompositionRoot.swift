@@ -38,7 +38,11 @@ class CompositionRoot:
             mapper: EventEntityMapper()
         )
 
-        let eventsListUpdater = EventsListUpdater(repository)
+        let eventsListUpdater = EventsListUpdater(
+            decorated: repository,
+            eventsProvider: repository
+        )
+
         let dayUpdater = DayUpdater(eventsListUpdater)
         let clockUpdater = ClockUpdater(dayUpdater)
         let weekUpdater = WeekUpdater(clockUpdater)
@@ -53,6 +57,7 @@ class CompositionRoot:
         self.commander = weekUpdater
 
         coordinator.factory = self
+        eventsListUpdater.factory = self
     }
 
     func makeRootViewController() -> UIViewController {
@@ -63,23 +68,23 @@ class CompositionRoot:
     // MARK: - Controllers creation
     func makeController(for navCase: CoordinatingCase) -> UIViewController {
         switch navCase {
-        case .list: return makeEventsListViewController()
+        case .list: return makeEventsListViewController(events: provider.get())
         case .eventItem(let today, let event): return makeEventViewController(event, today)
         case .weekItem(let day, let event): return makeDayViewController(event, day)
         }
     }
 
-    func makeEventsListViewController() -> EventsListViewController {
+    func makeEventsListViewController(events: [Event]) -> EventsListViewController {
         let providers: [EventsListItemProviding] = [
             HintItemProvider(),
             EventItemProvider(),
             FooterItemProvider(),
         ]
         let controller = EventsListViewController(
-            viewModel: makeEventsListViewModel(),
+            viewModel: makeEventsListViewModel(events: events),
             providers: providers
         )
-        eventsListViewModelUpdater.addReceiver(receiver: controller)
+        eventsListViewModelUpdater.add(receiver: controller)
         return controller
     }
 
@@ -116,9 +121,8 @@ class CompositionRoot:
     }
 
     // MARK: - ViewModels creation
-    func makeEventsListViewModel() -> EventsListViewModel {
+    func makeEventsListViewModel(events: [Event]) -> EventsListViewModel {
         let today = DayComponents(date: .now)
-        let events = provider.get()
         let footerVm = makeFooterItemViewModel(eventsCount: events.count)
         let hintVm = makeHintItemViewModel(events: events)
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text

@@ -7,10 +7,7 @@
 
 import UIKit
 
-class EventsListViewController:
-    UIViewController,
-    UsingEventDependantViewModel
-{
+class EventsListViewController: UIViewController {
     let viewRoot: EventsListView
     var viewModel: EventsListViewModel {
         didSet {

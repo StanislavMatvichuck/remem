@@ -63,12 +63,6 @@ class Updater<T: UsingEventDependantViewModel>:
     }
 }
 
-class EventsListUpdater: Updater<EventsListViewController> {
-    init(_ decoratedInterface: EventsCommanding) {
-        super.init(decoratedInterface: decoratedInterface)
-    }
-}
-
 class DayUpdater: Updater<DayViewController> {
     init(_ decoratedInterface: EventsCommanding) {
         super.init(decoratedInterface: decoratedInterface)
