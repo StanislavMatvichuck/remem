@@ -7,7 +7,11 @@
 
 import UIKit
 
-class EventsListViewController: UIViewController {
+class EventsListViewController:
+    UIViewController,
+    UITableViewDataSource,
+    UITableViewDelegate
+{
     let viewRoot: EventsListView
     var viewModel: EventsListViewModel {
         didSet {
@@ -40,6 +44,32 @@ class EventsListViewController: UIViewController {
         setupTableView()
         setupEventHandlers()
         update()
+    }
+
+    // MARK: - UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int { viewModel.numberOfSections }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { viewModel.rows(inSection: section) }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        providers[indexPath.section].dequeue(
+            tableView,
+            indexPath: indexPath,
+            viewModel: viewModel.itemViewModel(
+                row: indexPath.row,
+                section: indexPath.section
+            )
+        )
+    }
+
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        (providers[indexPath.section].dequeue(
+            tableView,
+            indexPath: indexPath,
+            viewModel: viewModel.itemViewModel(
+                row: indexPath.row,
+                section: indexPath.section
+            )
+        ) as? TrailingSwipeActionsConfigurationProviding)?.trailingActionsConfiguration()
     }
 
     private func setupTableView() {
@@ -89,43 +119,5 @@ class EventsListViewController: UIViewController {
         }
 
         return newViewModel
-    }
-}
-
-// MARK: - UITableViewDataSource
-extension EventsListViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { viewModel.numberOfSections }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.rows(inSection: section)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        providers[indexPath.section].dequeue(
-            tableView,
-            indexPath: indexPath,
-            viewModel: viewModel.itemViewModel(
-                row: indexPath.row,
-                section: indexPath.section
-            )
-        )
-    }
-}
-
-extension EventsListViewController: UITableViewDelegate {
-    func tableView(
-        _ tableView: UITableView,
-        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-    ) -> UISwipeActionsConfiguration? {
-        guard let cell = providers[indexPath.section].dequeue(
-            tableView,
-            indexPath: indexPath,
-            viewModel: viewModel.itemViewModel(
-                row: indexPath.row,
-                section: indexPath.section
-            )
-        ) as? TrailingSwipeActionsConfigurationProviding
-        else { return nil }
-        return cell.trailingActionsConfiguration()
     }
 }
