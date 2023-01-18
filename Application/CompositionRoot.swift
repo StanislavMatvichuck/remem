@@ -140,8 +140,7 @@ class CompositionRoot:
                     )
                 },
                 [footerVm],
-            ],
-            selfFactory: self
+            ]
         )
         return vm
     }

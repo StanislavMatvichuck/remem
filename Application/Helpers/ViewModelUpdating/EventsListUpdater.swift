@@ -7,7 +7,7 @@
 
 import Domain
 
-final class EventsListUpdater: MulticastDelegate<UsingEventsListViewModel>, EventsCommanding {
+final class EventsListUpdater: MulticastDelegate<ReceivingEventsListViewModelUpdates>, EventsCommanding {
     /// `CompositionRoot` is a factory. Is it possible to avoid this cycle and use initializer injection?
     var factory: EventsListViewModelFactoring?
     private let decorated: EventsCommanding
@@ -27,7 +27,7 @@ final class EventsListUpdater: MulticastDelegate<UsingEventsListViewModel>, Even
         update()
     }
 
-    func add(receiver: UsingEventsListViewModel) {
+    func add(receiver: ReceivingEventsListViewModelUpdates) {
         addDelegate(receiver)
     }
 

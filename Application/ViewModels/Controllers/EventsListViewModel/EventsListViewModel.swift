@@ -11,11 +11,11 @@ protocol EventsListViewModelFactoring {
     func makeEventsListViewModel(events: [Event]) -> EventsListViewModel
 }
 
-protocol UsingEventsListViewModel {
+protocol ReceivingEventsListViewModelUpdates {
     func update(viewModel: EventsListViewModel)
 }
 
-extension EventsListViewController: UsingEventsListViewModel {
+extension EventsListViewController: ReceivingEventsListViewModelUpdates {
     func update(viewModel: EventsListViewModel) {
         self.viewModel = viewModel
     }
@@ -25,7 +25,6 @@ struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
     private let today: DayComponents
-    private let selfFactory: EventsListViewModelFactoring
     private let commander: EventsCommanding
 
     var sections: [[EventsListItemViewModel]]
@@ -37,13 +36,11 @@ struct EventsListViewModel {
     init(
         today: DayComponents,
         commander: EventsCommanding,
-        sections: [[EventsListItemViewModel]],
-        selfFactory: EventsListViewModelFactoring
+        sections: [[EventsListItemViewModel]]
     ) {
         self.today = today
         self.commander = commander
         self.sections = sections
-        self.selfFactory = selfFactory
     }
 
     func add(name: String) {
