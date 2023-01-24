@@ -22,7 +22,7 @@ struct EventItemViewModel {
 
     private let event: Event
     private let today: DayComponents
-    private let coordinator: Coordinating
+    private let coordinator: DefaultCoordinator
     private let commander: EventsCommanding
 
     var name: String
@@ -34,7 +34,7 @@ struct EventItemViewModel {
         event: Event,
         today: DayComponents,
         hintEnabled: Bool,
-        coordinator: Coordinating,
+        coordinator: DefaultCoordinator,
         commander: EventsCommanding
     ) {
         self.event = event
@@ -51,7 +51,7 @@ struct EventItemViewModel {
     }
 
     func select() {
-        coordinator.show(.eventItem(today: today, event: event))
+        coordinator.show(.eventDetails(today: today, event: event))
     }
 
     func swipe() {

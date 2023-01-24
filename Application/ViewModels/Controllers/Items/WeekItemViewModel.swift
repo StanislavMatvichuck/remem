@@ -12,7 +12,7 @@ struct WeekItemViewModel {
     private let event: Event
     private let day: DayComponents
     private let today: DayComponents
-    private let coordinator: Coordinating
+    private let coordinator: DefaultCoordinator
 
     let isToday: Bool
     let amount: String
@@ -24,7 +24,7 @@ struct WeekItemViewModel {
         event: Event,
         day: DayComponents,
         today: DayComponents,
-        coordinator: Coordinating
+        coordinator: DefaultCoordinator
     ) {
         self.day = day
         self.today = today
@@ -47,6 +47,6 @@ struct WeekItemViewModel {
 
     // TODO: test this method
     func select() {
-        coordinator.show(.weekItem(day: day, event: event))
+        coordinator.show(.dayDetails(day: day, event: event))
     }
 }

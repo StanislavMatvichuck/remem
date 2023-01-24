@@ -8,25 +8,19 @@
 import Domain
 import UIKit
 
-protocol Coordinating {
-    var root: UIViewController { get }
-    func show(_: CoordinatingCase)
+protocol CoordinatorFactoring {
+    func makeController(for: DefaultCoordinator.NavigationState) -> UIViewController
 }
 
-enum CoordinatingCase {
-    case list
-    case eventItem(today: DayComponents, event: Event)
-    case weekItem(day: DayComponents, event: Event)
-}
+class DefaultCoordinator {
+    enum NavigationState {
+        case eventsList
+        case eventDetails(today: DayComponents, event: Event)
+        case dayDetails(day: DayComponents, event: Event)
+    }
 
-protocol CoordinatingFactoring {
-    func makeController(for: CoordinatingCase) -> UIViewController
-}
-
-class DefaultCoordinator: Coordinating {
     let navController: UINavigationController
-    var root: UIViewController { navController }
-    var factory: CoordinatingFactoring?
+    var factory: CoordinatorFactoring?
 
     init(
         navController: UINavigationController = DefaultCoordinator.makeStyledNavigationController()
@@ -34,15 +28,15 @@ class DefaultCoordinator: Coordinating {
         self.navController = navController
     }
 
-    func show(_ fromCase: CoordinatingCase) {
+    func show(_ fromCase: NavigationState) {
         guard let factory else { fatalError("coordinator factory is nil") }
         switch fromCase {
-        case .list:
-            navController.pushViewController(factory.makeController(for: .list), animated: false)
-        case .eventItem(let today, let event):
-            navController.pushViewController(factory.makeController(for: .eventItem(today: today, event: event)), animated: true)
-        case .weekItem(let day, let event):
-            let controller = factory.makeController(for: .weekItem(day: day, event: event))
+        case .eventsList:
+            navController.pushViewController(factory.makeController(for: .eventsList), animated: false)
+        case .eventDetails(let today, let event):
+            navController.pushViewController(factory.makeController(for: .eventDetails(today: today, event: event)), animated: true)
+        case .dayDetails(let day, let event):
+            let controller = factory.makeController(for: .dayDetails(day: day, event: event))
 
             let nav = Self.makeStyledNavigationController()
             nav.pushViewController(controller, animated: false)

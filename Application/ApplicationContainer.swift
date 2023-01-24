@@ -10,7 +10,7 @@ import Domain
 import UIKit
 
 class ApplicationContainer:
-    CoordinatingFactoring,
+    CoordinatorFactoring,
     ClockViewModelFactoring,
     DayViewModelFactoring,
     DayItemViewModelFactoring,
@@ -20,7 +20,7 @@ class ApplicationContainer:
 {
     let provider: EventsQuerying
     let commander: EventsCommanding
-    let coordinator: Coordinating
+    let coordinator: DefaultCoordinator
 
     let dayViewModelUpdater: DayUpdater
     let clockViewModelUpdater: ClockUpdater
@@ -49,18 +49,17 @@ class ApplicationContainer:
     }
 
     func makeRootViewController() -> UIViewController {
-        coordinator.show(.list)
-        return coordinator.root
+        coordinator.navController
     }
 
     // MARK: - Controllers creation
-    func makeController(for navCase: CoordinatingCase) -> UIViewController {
+    func makeController(for navCase: DefaultCoordinator.NavigationState) -> UIViewController {
         switch navCase {
-        case .list:
+        case .eventsList:
             let container = EventsListContainer(applicationContainer: self)
             return container.makeEventsListViewController(events: provider.get())
-        case .eventItem(let today, let event): return makeEventViewController(event, today)
-        case .weekItem(let day, let event): return makeDayViewController(event, day)
+        case .eventDetails(let today, let event): return makeEventViewController(event, today)
+        case .dayDetails(let day, let event): return makeDayViewController(event, day)
         }
     }
 
