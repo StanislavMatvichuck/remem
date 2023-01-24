@@ -16,7 +16,7 @@ class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
 
     override func setUp() {
         super.setUp()
-        let root = CompositionRoot(testingInMemoryMode: true)
+        let root = ApplicationContainer(testingInMemoryMode: true)
         viewModelFactory = root
         event = Event(name: "Event")
         sut = ClockViewController(

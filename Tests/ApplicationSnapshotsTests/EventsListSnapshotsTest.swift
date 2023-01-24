@@ -11,13 +11,13 @@ import iOSSnapshotTestCase
 
 class EventsListSnapshotsTest: FBSnapshotTestCase {
     var sut: EventsListViewController!
-    var root: CompositionRoot!
+    var root: ApplicationContainer!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "EventsList"
-        root = CompositionRoot(testingInMemoryMode: true)
+        root = ApplicationContainer(testingInMemoryMode: true)
         sut = root.makeEventsListViewController(events: root.provider.get())
         putInViewHierarchy(sut)
     }

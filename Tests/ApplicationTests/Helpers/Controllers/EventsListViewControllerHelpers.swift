@@ -71,8 +71,9 @@ extension EventsListViewController {
     }
 
     static func make() -> EventsListViewController {
-        let root = CompositionRoot(testingInMemoryMode: true)
-        let sut = root.makeEventsListViewController(events: root.provider.get())
+        let root = ApplicationContainer(testingInMemoryMode: true)
+        let container = EventsListContainer(applicationContainer: root)
+        let sut = container.makeEventsListViewController(events: root.provider.get())
         sut.loadViewIfNeeded()
         putInViewHierarchy(sut)
         return sut

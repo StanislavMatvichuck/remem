@@ -80,7 +80,7 @@ class WeekSnapshotsTest:
         withDayCreated: DayComponents = DayComponents.referenceValue,
         andToday: DayComponents = DayComponents.referenceValue
     ) {
-        let root = CompositionRoot(testingInMemoryMode: true)
+        let root = ApplicationContainer(testingInMemoryMode: true)
         event = Event(name: "Event", dateCreated: withDayCreated.date)
         sut = root.makeWeekViewController(event: event, today: andToday)
         putInViewHierarchy(sut)

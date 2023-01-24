@@ -69,7 +69,7 @@ class WeekViewControllerTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
 
         sut = WeekViewController(
-            viewModel: CompositionRoot(
+            viewModel: ApplicationContainer(
                 testingInMemoryMode: true
             ).makeWeekViewModel(
                 event: event,
@@ -108,7 +108,7 @@ class WeekViewControllerTests: XCTestCase {
         event.addHappening(date: DayComponents.referenceValue.date)
 
         sut = WeekViewController(
-            viewModel: CompositionRoot(testingInMemoryMode: true).makeWeekViewModel(
+            viewModel: ApplicationContainer(testingInMemoryMode: true).makeWeekViewModel(
                 event: event,
                 today: DayComponents.referenceValue
             )

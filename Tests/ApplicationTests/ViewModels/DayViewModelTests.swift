@@ -37,7 +37,7 @@ class DayViewModelTests: XCTestCase {
         for happening in happenings {
             event.addHappening(date: happening.dateCreated)
         }
-        let sut = CompositionRoot(testingInMemoryMode: true).makeDayViewModel(
+        let sut = ApplicationContainer(testingInMemoryMode: true).makeDayViewModel(
             event: event,
             day: day
         )

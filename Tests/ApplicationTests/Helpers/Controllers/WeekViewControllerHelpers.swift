@@ -26,7 +26,7 @@ extension WeekViewController {
     static func make() -> WeekViewController {
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        return CompositionRoot(testingInMemoryMode: true).makeWeekViewController(
+        return ApplicationContainer(testingInMemoryMode: true).makeWeekViewController(
             event: event,
             today: today
         )

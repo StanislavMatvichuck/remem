@@ -17,7 +17,7 @@ class DayItemViewModelTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
         let happening = event.addHappening(date: created.date)
 
-        sut = CompositionRoot(testingInMemoryMode: true).makeDayItemViewModel(
+        sut = ApplicationContainer(testingInMemoryMode: true).makeDayItemViewModel(
             event: event,
             happening: happening
         )

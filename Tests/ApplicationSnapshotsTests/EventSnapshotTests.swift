@@ -19,7 +19,7 @@ class EventSnapshotsTest: FBSnapshotTestCase {
         folderName = "Event"
         
         let day = DayComponents.referenceValue
-        let root = CompositionRoot(testingInMemoryMode: true)
+        let root = ApplicationContainer(testingInMemoryMode: true)
         
         event = Event(name: "Event", dateCreated: day.date)
         sut = root.makeEventViewController(event, day)

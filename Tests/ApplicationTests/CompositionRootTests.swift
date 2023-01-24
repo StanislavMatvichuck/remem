@@ -10,6 +10,6 @@ import XCTest
 
 class CompositionRootTests: XCTestCase {
     func test_canMakeRootViewController() {
-        XCTAssertNotNil(CompositionRoot().makeRootViewController())
+        XCTAssertNotNil(ApplicationContainer().makeRootViewController())
     }
 }

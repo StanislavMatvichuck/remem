@@ -22,7 +22,7 @@ class DaySnapshotsTest:
         folderName = "Day"
         
         let day = DayComponents.referenceValue
-        let root = CompositionRoot(testingInMemoryMode: true)
+        let root = ApplicationContainer(testingInMemoryMode: true)
         
         event = Event(name: "Event")
         sut = root.makeDayViewController(event, day)

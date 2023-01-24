@@ -85,7 +85,7 @@ class WeekViewModelTests: XCTestCase {
         created: DayComponents
     ) -> WeekViewModel {
         event = Event(name: "Event", dateCreated: created.date)
-        return CompositionRoot().makeWeekViewModel(
+        return ApplicationContainer().makeWeekViewModel(
             event: event,
             today: today
         )

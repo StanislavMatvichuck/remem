@@ -18,7 +18,7 @@ final class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
     override func setUp() {
         super.setUp()
         let day = DayComponents.referenceValue
-        let root = CompositionRoot(testingInMemoryMode: true)
+        let root = ApplicationContainer(testingInMemoryMode: true)
         event = Event(name: "Event", dateCreated: day.date)
         sut = root.makeDayViewController(event, day)
         sut.loadViewIfNeeded()

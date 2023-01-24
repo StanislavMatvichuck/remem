@@ -20,7 +20,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            coordinator: CompositionRoot().coordinator
+            coordinator: ApplicationContainer().coordinator
         )
     }
 
@@ -44,7 +44,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: dayLater,
-            coordinator: CompositionRoot().coordinator
+            coordinator: ApplicationContainer().coordinator
         )
 
         XCTAssertFalse(sut.isToday)
@@ -63,7 +63,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            coordinator: CompositionRoot().coordinator
+            coordinator: ApplicationContainer().coordinator
         )
 
         XCTAssertEqual(sut.items.first, "00:00")

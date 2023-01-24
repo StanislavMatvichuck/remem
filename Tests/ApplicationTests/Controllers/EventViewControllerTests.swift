@@ -16,7 +16,7 @@ class EventViewControllerTests: XCTestCase {
         super.setUp()
 
         sut = EventViewController(
-            viewModel: CompositionRoot(testingInMemoryMode: true).makeEventViewModel(
+            viewModel: ApplicationContainer(testingInMemoryMode: true).makeEventViewModel(
                 event: Event(name: "EventName")
             ),
             controllers: [UIViewController(), UIViewController()]
