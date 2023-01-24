@@ -11,16 +11,6 @@ protocol EventsListViewModelFactoring {
     func makeEventsListViewModel(events: [Event]) -> EventsListViewModel
 }
 
-protocol ReceivingEventsListViewModelUpdates {
-    func update(viewModel: EventsListViewModel)
-}
-
-extension EventsListViewController: ReceivingEventsListViewModelUpdates {
-    func update(viewModel: EventsListViewModel) {
-        self.viewModel = viewModel
-    }
-}
-
 struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
