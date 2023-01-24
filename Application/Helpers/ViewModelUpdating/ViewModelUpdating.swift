@@ -63,20 +63,6 @@ class Updater<T: UsingEventDependantViewModel>:
     }
 }
 
-class DayUpdater: Updater<DayViewController> {
-    init(_ decoratedInterface: EventsCommanding) {
-        super.init(decoratedInterface: decoratedInterface)
-    }
-}
-
-class ClockUpdater: Updater<ClockViewController> {
-    init(_ decoratedInterface: EventsCommanding) {
-        super.init(decoratedInterface: decoratedInterface)
-    }
-}
-
-class WeekUpdater: Updater<WeekViewController> {
-    init(_ decoratedInterface: EventsCommanding) {
-        super.init(decoratedInterface: decoratedInterface)
-    }
-}
+class DayUpdater: Updater<DayViewController> {}
+class ClockUpdater: Updater<ClockViewController> {}
+class WeekUpdater: Updater<WeekViewController> {}

@@ -43,9 +43,9 @@ class CompositionRoot:
             eventsProvider: repository
         )
 
-        let dayUpdater = DayUpdater(eventsListUpdater)
-        let clockUpdater = ClockUpdater(dayUpdater)
-        let weekUpdater = WeekUpdater(clockUpdater)
+        let dayUpdater = DayUpdater(decoratedInterface: eventsListUpdater)
+        let clockUpdater = ClockUpdater(decoratedInterface: dayUpdater)
+        let weekUpdater = WeekUpdater(decoratedInterface: clockUpdater)
 
         self.eventsListViewModelUpdater = eventsListUpdater
         self.dayViewModelUpdater = dayUpdater
