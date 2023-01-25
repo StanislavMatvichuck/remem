@@ -12,7 +12,7 @@ class DefaultCoordinator {
     enum NavigationState {
         case eventsList
         case eventDetails(today: DayComponents, event: Event)
-        case dayDetails(day: DayComponents, event: Event)
+        case dayDetails(day: DayComponents)
     }
 
     let navController: UINavigationController
@@ -44,9 +44,9 @@ class DefaultCoordinator {
             let controller = container.makeController()
 
             navController.pushViewController(controller, animated: true)
-        case .dayDetails(let day, let event):
+        case .dayDetails(let day):
             guard let dayDetailsFactory else { fatalError("coordinator factory is nil") }
-            let container = dayDetailsFactory.makeContainer(event: event, day: day)
+            let container = dayDetailsFactory.makeContainer(day: day)
             let controller = container.makeController()
 
             let nav = Self.makeStyledNavigationController()

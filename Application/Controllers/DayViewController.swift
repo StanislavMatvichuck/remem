@@ -8,11 +8,7 @@
 import Domain
 import UIKit
 
-class DayViewController:
-    UIViewController,
-    UsingEventDependantViewModel
-{
-    // MARK: - Properties
+class DayViewController: UIViewController {
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time

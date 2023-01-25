@@ -38,7 +38,7 @@ extension ClockViewControllerTesting {
     }
 
     func sendEventUpdatesToController() {
-        sut.viewModel = viewModelFactory.makeClockViewModel(event: event)
+        sut.viewModel = viewModelFactory.makeViewModel()
     }
 }
 

@@ -16,12 +16,15 @@ class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
 
     override func setUp() {
         super.setUp()
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        viewModelFactory = root
         event = Event(name: "Event")
-        sut = ClockViewController(
-            viewModel: viewModelFactory.makeClockViewModel(event: event)
-        )
+        let today = DayComponents.referenceValue
+
+        let root = ApplicationContainer(testingInMemoryMode: true)
+        let listContainer = root.makeContainer()
+        let eventDetailsContainer = listContainer.makeContainer(event: event, today: today)
+
+        viewModelFactory = eventDetailsContainer
+        sut = eventDetailsContainer.makeClockViewController()
         sut.loadViewIfNeeded()
         sut.forceViewToLayoutInScreenSize()
     }

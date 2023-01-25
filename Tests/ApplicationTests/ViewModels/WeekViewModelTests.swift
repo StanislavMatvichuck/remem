@@ -17,7 +17,8 @@ class WeekViewModelTests: XCTestCase {
         super.setUp()
         let today = DayComponents.referenceValue
         let created = DayComponents.referenceValue
-        sut = make(today: today, created: created)
+        event = Event(name: "Event", dateCreated: created.date)
+        sut = make(today: today, created: created, event: event)
     }
 
     override func tearDown() {
@@ -32,7 +33,11 @@ class WeekViewModelTests: XCTestCase {
 
     func test_eventWithHappeningOnFirstDay_addsHappeningToFirstCell() {
         event.addHappening(date: DayComponents.referenceValue.date.addingTimeInterval(5))
-        sut = sut.copy(newEvent: event)
+        sut = make(
+            today: DayComponents.referenceValue,
+            created: DayComponents.referenceValue,
+            event: event
+        )
 
         XCTAssertEqual(sut.items.first?.items.count, 1)
     }
@@ -42,7 +47,11 @@ class WeekViewModelTests: XCTestCase {
             components: DateComponents(month: 1)
         )
 
-        sut = make(today: dateTodayMonthAfterCreation, created: DayComponents.referenceValue)
+        sut = make(
+            today: dateTodayMonthAfterCreation,
+            created: DayComponents.referenceValue,
+            event: event
+        )
 
         XCTAssertLessThan(21, sut.items.count)
     }
@@ -58,7 +67,11 @@ class WeekViewModelTests: XCTestCase {
     func test_dateCreatedHasWeekdayOffset_firstCellIsMondayBeforeDateCreated() {
         for i in 1 ..< 6 {
             let created = DayComponents.referenceValue.adding(components: DateComponents(day: i))
-            let sut = make(today: created, created: created)
+            let sut = make(
+                today: created,
+                created: created,
+                event: event
+            )
 
             let firstItemDayNumber = Int(sut.items.first!.dayNumber) ?? 0
 
@@ -82,13 +95,13 @@ class WeekViewModelTests: XCTestCase {
 
     private func make(
         today: DayComponents,
-        created: DayComponents
+        created: DayComponents,
+        event: Event
     ) -> WeekViewModel {
-        event = Event(name: "Event", dateCreated: created.date)
-        return ApplicationContainer().makeWeekViewModel(
-            event: event,
-            today: today
-        )
+        return ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+            .makeViewModel()
     }
 
     private func arrangeRandomDates() {
@@ -99,6 +112,6 @@ class WeekViewModelTests: XCTestCase {
             components: DateComponents(day: Int.random(in: -1000 ..< 1000))
         )
 
-        sut = make(today: randomDateToday, created: randomDateOfCreation)
+        sut = make(today: randomDateToday, created: randomDateOfCreation, event: event)
     }
 }

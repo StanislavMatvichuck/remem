@@ -8,10 +8,7 @@
 import Domain
 import UIKit
 
-class WeekViewController:
-    UIViewController,
-    UsingEventDependantViewModel
-{
+class WeekViewController: UIViewController {
     var scrollHappened = false
     var viewModel: WeekViewModel {
         didSet {

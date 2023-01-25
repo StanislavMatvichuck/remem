@@ -37,10 +37,11 @@ class DayViewModelTests: XCTestCase {
         for happening in happenings {
             event.addHappening(date: happening.dateCreated)
         }
-        let sut = ApplicationContainer(testingInMemoryMode: true).makeDayViewModel(
-            event: event,
-            day: day
-        )
-        return sut
+
+        let container = ApplicationContainer(testingInMemoryMode: true)
+        let listContainer = container.makeContainer()
+        let eventDetailsContainer = listContainer.makeContainer(event: event, today: day)
+        let dayContainer = eventDetailsContainer.makeContainer(day: day)
+        return dayContainer.makeViewModel()
     }
 }

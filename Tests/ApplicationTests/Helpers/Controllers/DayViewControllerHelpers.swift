@@ -23,8 +23,9 @@ extension DayViewController {
 }
 
 protocol DayViewControllerTesting {
-    var sut: DayViewController! { get set }
-    var event: Event! { get set }
+    var sut: DayViewController! { get }
+    var viewModelFactory: DayViewModelFactoring! { get }
+    var event: Event! { get }
 }
 
 extension DayViewControllerTesting {
@@ -33,6 +34,6 @@ extension DayViewControllerTesting {
     }
 
     func sendEventUpdatesToController() {
-        sut.viewModel = sut.viewModel.copy(newEvent: event)
+        sut.viewModel = viewModelFactory.makeViewModel()
     }
 }

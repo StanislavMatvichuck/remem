@@ -7,10 +7,6 @@
 
 import Domain
 
-protocol DayDetailsContainerFactoring {
-    func makeContainer(event: Event, day: DayComponents) -> DayDetailsContainer
-}
-
 final class DayDetailsContainer {
     let parent: EventDetailsContainer
     let event: Event
@@ -22,28 +18,34 @@ final class DayDetailsContainer {
         self.event = event
         self.day = day
         self.updater = DayUpdater(decoratedInterface: parent.weekViewModelUpdater)
+        updater.factory = self
     }
 
     func makeController() -> DayViewController {
-        let controller = DayViewController(viewModel: makeDayViewModel(event: event, day: day))
-        updater.addReceiver(receiver: controller)
+        let controller = DayViewController(viewModel: makeViewModel())
+        updater.add(receiver: controller)
         return controller
     }
 }
 
+protocol DayViewModelFactoring { func makeViewModel() -> DayViewModel }
+protocol DayItemViewModelFactoring { func makeViewModel(happening: Happening) -> DayItemViewModel }
+
 // MARK: - ViewModelFactoring
-extension DayDetailsContainer: DayViewModelFactoring, DayItemViewModelFactoring {
-    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel {
+extension DayDetailsContainer:
+    DayViewModelFactoring,
+    DayItemViewModelFactoring
+{
+    func makeViewModel() -> DayViewModel {
         DayViewModel(
             day: day,
             event: event,
             commander: updater,
-            itemsFactory: self,
-            selfFactory: self
+            itemFactory: self
         )
     }
 
-    func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel {
+    func makeViewModel(happening: Happening) -> DayItemViewModel {
         DayItemViewModel(
             event: event,
             happening: happening,

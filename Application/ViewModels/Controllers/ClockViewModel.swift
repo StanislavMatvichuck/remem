@@ -8,29 +8,14 @@
 import Domain
 import Foundation
 
-protocol ClockViewModelFactoring {
-    func makeClockViewModel(event: Event) -> ClockViewModel
-}
-
-struct ClockViewModel: EventDependantViewModel {
+struct ClockViewModel {
     private let event: Event
-    private let selfFactory: ClockViewModelFactoring
-    let eventId: String
+
     let items: [ClockItemViewModel]
 
-    init(
-        event: Event,
-        sorter: ClockStrategy,
-        selfFactory: ClockViewModelFactoring
-    ) {
+    init(event: Event, sorter: ClockStrategy) {
         self.items = sorter.sort(orderedByDateHappenings: event.happenings)
         self.event = event
-        self.eventId = event.id
-        self.selfFactory = selfFactory
-    }
-
-    func copy(newEvent: Event) -> ClockViewModel {
-        selfFactory.makeClockViewModel(event: newEvent)
     }
 }
 

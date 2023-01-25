@@ -26,31 +26,37 @@ final class EventDetailsContainer {
         self.clockViewModelUpdater = updater
         self.weekViewModelUpdater = WeekUpdater(decoratedInterface: updater)
         parent.parent.coordinator.dayDetailsFactory = self
+        clockViewModelUpdater.factory = self
+        weekViewModelUpdater.factory = self
     }
 
     func makeController() -> EventViewController {
-        let controller = EventViewController(
-            viewModel: makeEventViewModel(event: event),
+        EventViewController(
+            viewModel: makeViewModel(),
             controllers: [
-                WeekViewController(viewModel: makeWeekViewModel(event: event, today: today)),
-                ClockViewController(viewModel: makeClockViewModel(event: event))
+                makeWeekViewController(),
+                makeClockViewController()
             ]
         )
+    }
+
+    func makeWeekViewController() -> WeekViewController {
+        let controller = WeekViewController(viewModel: makeViewModel())
+        weekViewModelUpdater.add(receiver: controller)
         return controller
     }
 
-    func makeWeekViewController(event: Event, today: DayComponents) -> WeekViewController {
-        let controller = WeekViewController(viewModel: makeWeekViewModel(event: event, today: today))
-        weekViewModelUpdater.addReceiver(receiver: controller)
-        return controller
-    }
-
-    func makeClockViewController(event: Event) -> ClockViewController {
-        let controller = ClockViewController(viewModel: makeClockViewModel(event: event))
-        clockViewModelUpdater.addReceiver(receiver: controller)
+    func makeClockViewController() -> ClockViewController {
+        let controller = ClockViewController(viewModel: makeViewModel())
+        clockViewModelUpdater.add(receiver: controller)
         return controller
     }
 }
+
+protocol EventViewModelFactoring { func makeViewModel() -> EventViewModel }
+protocol WeekViewModelFactoring { func makeViewModel() -> WeekViewModel }
+protocol WeekItemViewModelFactoring { func makeViewModel(day: DayComponents) -> WeekItemViewModel }
+protocol ClockViewModelFactoring { func makeViewModel() -> ClockViewModel }
 
 // MARK: - ViewModelFactoring
 extension EventDetailsContainer:
@@ -59,37 +65,30 @@ extension EventDetailsContainer:
     WeekViewModelFactoring,
     WeekItemViewModelFactoring
 {
-    func makeClockViewModel(event: Event) -> ClockViewModel {
+    func makeViewModel() -> ClockViewModel {
         ClockViewModel(
             event: event,
-            sorter: DefaultClockSorter(size: 144),
-            selfFactory: self
+            sorter: DefaultClockSorter(size: 144)
         )
     }
 
-    func makeEventViewModel(event: Event) -> EventViewModel {
+    func makeViewModel() -> EventViewModel {
         EventViewModel(
             event: event,
-            commander: weekViewModelUpdater,
-            selfFactory: self
+            commander: weekViewModelUpdater
         )
     }
 
-    func makeWeekViewModel(event: Event, today: DayComponents) -> WeekViewModel {
+    func makeViewModel() -> WeekViewModel {
         WeekViewModel(
             today: today,
             event: event,
             coordinator: parent.parent.coordinator,
-            itemsFactory: self,
-            selfFactory: self
+            itemFactory: self
         )
     }
 
-    func makeWeekItemViewModel(
-        event: Event,
-        today: DayComponents,
-        day: DayComponents
-    ) -> WeekItemViewModel {
+    func makeViewModel(day: DayComponents) -> WeekItemViewModel {
         WeekItemViewModel(
             event: event,
             day: day,
@@ -99,8 +98,12 @@ extension EventDetailsContainer:
     }
 }
 
+protocol DayDetailsContainerFactoring {
+    func makeContainer(day: DayComponents) -> DayDetailsContainer
+}
+
 extension EventDetailsContainer: DayDetailsContainerFactoring {
-    func makeContainer(event: Event, day: DayComponents) -> DayDetailsContainer {
+    func makeContainer(day: DayComponents) -> DayDetailsContainer {
         DayDetailsContainer(parent: self, event: event, day: day)
     }
 }

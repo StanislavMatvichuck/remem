@@ -8,11 +8,7 @@
 import Domain
 import Foundation
 
-protocol EventViewModelFactoring {
-    func makeEventViewModel(event: Event) -> EventViewModel
-}
-
-struct EventViewModel: EventDependantViewModel {
+struct EventViewModel {
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -22,16 +18,13 @@ struct EventViewModel: EventDependantViewModel {
 
     private let event: Event
     private let commander: EventsCommanding
-    private let selfFactory: EventViewModelFactoring
 
     init(
         event: Event,
-        commander: EventsCommanding,
-        selfFactory: EventViewModelFactoring
+        commander: EventsCommanding
     ) {
         self.event = event
         self.commander = commander
-        self.selfFactory = selfFactory
     }
 
     var title: String { event.name }
@@ -40,11 +33,6 @@ struct EventViewModel: EventDependantViewModel {
     func visit() {
         event.visit()
         commander.save(event)
-    }
-
-    var eventId: String { event.id }
-    func copy(newEvent: Domain.Event) -> EventViewModel {
-        selfFactory.makeEventViewModel(event: newEvent)
     }
 
     /// deprecated. move to `StatsViewModel`

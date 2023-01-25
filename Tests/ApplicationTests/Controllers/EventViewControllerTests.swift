@@ -15,10 +15,15 @@ class EventViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        let event = Event(name: "Event")
+
+        struct Stub: EventsCommanding {
+            func save(_: Event) {}
+            func delete(_: Event) {}
+        }
+
         sut = EventViewController(
-            viewModel: ApplicationContainer(testingInMemoryMode: true).makeEventViewModel(
-                event: Event(name: "EventName")
-            ),
+            viewModel: EventViewModel(event: event, commander: Stub()),
             controllers: [UIViewController(), UIViewController()]
         )
 
@@ -32,7 +37,7 @@ class EventViewControllerTests: XCTestCase {
     }
 
     func test_showsTitle_nameOfEvent() {
-        XCTAssertEqual(sut.title, "EventName")
+        XCTAssertEqual(sut.title, "Event")
     }
 
     func test_viewDidAppear_visitEvent() {

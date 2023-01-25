@@ -8,15 +8,7 @@
 import Domain
 import Foundation
 
-protocol DayItemViewModelFactoring {
-    func makeDayItemViewModel(event: Event, happening: Happening) -> DayItemViewModel
-}
-
-protocol DayViewModelFactoring {
-    func makeDayViewModel(event: Event, day: DayComponents) -> DayViewModel
-}
-
-struct DayViewModel: EventDependantViewModel {
+struct DayViewModel {
     let create = String(localizationId: "button.create")
     let delete = String(localizationId: "button.delete")
     let cancel = String(localizationId: "button.cancel")
@@ -25,8 +17,6 @@ struct DayViewModel: EventDependantViewModel {
     private let day: DayComponents
     private let commander: EventsCommanding
     private let event: Event
-    private let itemsFactory: DayItemViewModelFactoring
-    private let selfFactory: DayViewModelFactoring
 
     /// Used by `DayViewModelUpdating`
     let eventId: String
@@ -39,15 +29,12 @@ struct DayViewModel: EventDependantViewModel {
         day: DayComponents,
         event: Event,
         commander: EventsCommanding,
-        itemsFactory: DayItemViewModelFactoring,
-        selfFactory: DayViewModelFactoring
+        itemFactory: DayItemViewModelFactoring
     ) {
         self.eventId = event.id
         self.event = event
         self.day = day
         self.commander = commander
-        self.itemsFactory = itemsFactory
-        self.selfFactory = selfFactory
         self.pickerDate = day.date
 
         let dateFormatter = DateFormatter()
@@ -55,8 +42,9 @@ struct DayViewModel: EventDependantViewModel {
         dateFormatter.dateStyle = .none
 
         let happenings = event.happenings(forDayComponents: day)
+
         self.items = happenings.map {
-            itemsFactory.makeDayItemViewModel(event: event, happening: $0)
+            itemFactory.makeViewModel(happening: $0)
         }
 
         let titleFormatter = DateFormatter()
@@ -82,9 +70,5 @@ struct DayViewModel: EventDependantViewModel {
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
         readableTime = timeFormatter.string(for: pickerDate)
-    }
-
-    func copy(newEvent: Event) -> DayViewModel {
-        selfFactory.makeDayViewModel(event: newEvent, day: day)
     }
 }

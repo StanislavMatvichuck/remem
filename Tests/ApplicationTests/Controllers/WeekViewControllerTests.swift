@@ -67,15 +67,12 @@ class WeekViewControllerTests: XCTestCase {
 
         let created = DayComponents.referenceValue.adding(components: DateComponents(day: createdRandomOffset))
         let event = Event(name: "Event", dateCreated: created.date)
+        let today = created.adding(components: DateComponents(day: todayRandomOffset))
 
-        sut = WeekViewController(
-            viewModel: ApplicationContainer(
-                testingInMemoryMode: true
-            ).makeWeekViewModel(
-                event: event,
-                today: created.adding(components: DateComponents(day: todayRandomOffset))
-            )
-        )
+        sut = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+            .makeWeekViewController()
 
         layoutInScreen()
 
@@ -104,15 +101,14 @@ class WeekViewControllerTests: XCTestCase {
     }
 
     func test_hasHappening_firstDayShowsHappeningTime() {
+        let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
         event.addHappening(date: DayComponents.referenceValue.date)
 
-        sut = WeekViewController(
-            viewModel: ApplicationContainer(testingInMemoryMode: true).makeWeekViewModel(
-                event: event,
-                today: DayComponents.referenceValue
-            )
-        )
+        sut = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+            .makeWeekViewController()
 
         XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "00:00")
     }

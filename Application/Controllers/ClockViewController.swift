@@ -8,10 +8,7 @@
 import Domain
 import UIKit
 
-class ClockViewController:
-    UIViewController,
-    UsingEventDependantViewModel
-{
+class ClockViewController: UIViewController {
     let viewRoot: ClockView
     var viewModel: ClockViewModel {
         didSet {

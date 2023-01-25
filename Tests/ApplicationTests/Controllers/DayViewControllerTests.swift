@@ -14,13 +14,21 @@ import XCTest
 final class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
     var event: Domain.Event!
     var sut: DayViewController!
+    var viewModelFactory: DayViewModelFactoring!
 
     override func setUp() {
         super.setUp()
+
         let day = DayComponents.referenceValue
-        let root = ApplicationContainer(testingInMemoryMode: true)
         event = Event(name: "Event", dateCreated: day.date)
-        sut = root.makeDayViewController(event, day)
+
+        let dayContainer = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: day)
+            .makeContainer(day: day)
+        viewModelFactory = dayContainer
+
+        sut = dayContainer.makeController()
         sut.loadViewIfNeeded()
     }
 

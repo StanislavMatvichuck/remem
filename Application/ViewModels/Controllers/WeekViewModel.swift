@@ -8,46 +8,28 @@
 import Domain
 import Foundation
 
-protocol WeekViewModelFactoring {
-    func makeWeekViewModel(
-        event: Event,
-        today: DayComponents
-    ) -> WeekViewModel
-}
-
-protocol WeekItemViewModelFactoring {
-    func makeWeekItemViewModel(
-        event: Event,
-        today: DayComponents,
-        day: DayComponents
-    ) -> WeekItemViewModel
-}
-
-struct WeekViewModel: EventDependantViewModel {
+struct WeekViewModel {
     private let upcomingWeeksCount = 3
     private let today: DayComponents
     private let coordinator: DefaultCoordinator
-    private var event: Event
-    private let itemsFactory: WeekItemViewModelFactoring
-    private let selfFactory: WeekViewModelFactoring
+    private let event: Event
 
-    var items: [WeekItemViewModel]
+    let items: [WeekItemViewModel]
+    let itemFactory: WeekItemViewModelFactoring
     var scrollToIndex: Int = 0
-    var eventId: String /// used by `WeekViewModelUpdating`
 
     init(
         today: DayComponents,
         event: Event,
         coordinator: DefaultCoordinator,
-        itemsFactory: WeekItemViewModelFactoring,
-        selfFactory: WeekViewModelFactoring
+        itemFactory: WeekItemViewModelFactoring
     ) {
         self.today = today
         self.event = event
         self.coordinator = coordinator
-        self.itemsFactory = itemsFactory
-        self.selfFactory = selfFactory
-        eventId = event.id
+        self.itemFactory = itemFactory
+
+        /// Items creation logic
 
         let startOfWeekDayCreated = {
             let cal = Calendar.current
@@ -84,11 +66,7 @@ struct WeekViewModel: EventDependantViewModel {
 
         for addedDay in 0 ..< daysToShow {
             let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
-            let vm = itemsFactory.makeWeekItemViewModel(
-                event: event,
-                today: today,
-                day: cellDay
-            )
+            let vm = itemFactory.makeViewModel(day: cellDay)
 
             viewModels.append(vm)
 
@@ -98,9 +76,5 @@ struct WeekViewModel: EventDependantViewModel {
         }
 
         items = viewModels
-    }
-
-    func copy(newEvent: Event) -> WeekViewModel {
-        selfFactory.makeWeekViewModel(event: newEvent, today: today)
     }
 }
