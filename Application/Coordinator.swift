@@ -8,10 +8,6 @@
 import Domain
 import UIKit
 
-protocol CoordinatorFactoring {
-    func makeController(for: DefaultCoordinator.NavigationState) -> UIViewController
-}
-
 class DefaultCoordinator {
     enum NavigationState {
         case eventsList
@@ -20,7 +16,13 @@ class DefaultCoordinator {
     }
 
     let navController: UINavigationController
-    var factory: CoordinatorFactoring?
+    var state: NavigationState = .eventsList {
+        didSet { show(state) }
+    }
+
+    var listFactory: EventsListContainerFactoring?
+    var eventDetailsFactory: EventDetailsContainerFactoring?
+    var dayDetailsFactory: DayDetailsContainerFactoring?
 
     init(
         navController: UINavigationController = DefaultCoordinator.makeStyledNavigationController()
@@ -29,14 +31,23 @@ class DefaultCoordinator {
     }
 
     func show(_ fromCase: NavigationState) {
-        guard let factory else { fatalError("coordinator factory is nil") }
         switch fromCase {
         case .eventsList:
-            navController.pushViewController(factory.makeController(for: .eventsList), animated: false)
+            guard let listFactory else { fatalError("coordinator factory is nil") }
+            let container = listFactory.makeContainer()
+            let controller = container.makeController()
+
+            navController.pushViewController(controller, animated: false)
         case .eventDetails(let today, let event):
-            navController.pushViewController(factory.makeController(for: .eventDetails(today: today, event: event)), animated: true)
+            guard let eventDetailsFactory else { fatalError("coordinator factory is nil") }
+            let container = eventDetailsFactory.makeContainer(event: event, today: today)
+            let controller = container.makeController()
+
+            navController.pushViewController(controller, animated: true)
         case .dayDetails(let day, let event):
-            let controller = factory.makeController(for: .dayDetails(day: day, event: event))
+            guard let dayDetailsFactory else { fatalError("coordinator factory is nil") }
+            let container = dayDetailsFactory.makeContainer(event: event, day: day)
+            let controller = container.makeController()
 
             let nav = Self.makeStyledNavigationController()
             nav.pushViewController(controller, animated: false)

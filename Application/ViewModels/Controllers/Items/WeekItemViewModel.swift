@@ -47,6 +47,6 @@ struct WeekItemViewModel {
 
     // TODO: test this method
     func select() {
-        coordinator.show(.dayDetails(day: day, event: event))
+        coordinator.state = .dayDetails(day: day, event: event)
     }
 }

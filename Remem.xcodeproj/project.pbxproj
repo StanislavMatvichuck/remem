@@ -65,6 +65,8 @@
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
+		086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E397129809C5800CCE80E /* EventDetailsContainer.swift */; };
+		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087365FF2930DD29000F28DE /* WeekViewModelTests.swift */; };
 		087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087366012930E000000F28DE /* WeekItemViewModelTests.swift */; };
@@ -315,6 +317,8 @@
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
+		086E397129809C5800CCE80E /* EventDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContainer.swift; sourceTree = "<group>"; };
+		086E39732981431C00CCE80E /* DayDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsContainer.swift; sourceTree = "<group>"; };
 		086FFE652816971A0054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE69281699DF0054266E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -775,8 +779,10 @@
 			isa = PBXGroup;
 			children = (
 				08CC506B2906DEEC00840385 /* main.swift */,
-				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
+				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
+				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
+				086E39732981431C00CCE80E /* DayDetailsContainer.swift */,
 				0823D233289283A8005B4BE3 /* Coordinator.swift */,
 				08D512332787140D00C2037F /* Controllers */,
 				08235E7128C5CC3F0026DED2 /* ViewModels */,
@@ -1341,12 +1347,14 @@
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08EB982929683E3C008C263A /* EventsListItemProviding.swift in Sources */,
+				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* FooterItemViewModel.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayViewModel.swift in Sources */,
 				0812D8C2296775E80010C66D /* EventsListItemViewModel.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
+				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventViewModel.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventViewController.swift in Sources */,

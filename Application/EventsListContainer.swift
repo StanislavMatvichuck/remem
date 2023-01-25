@@ -8,34 +8,32 @@
 import Domain
 import Foundation
 
+protocol EventsListContainerFactoring {
+    func makeContainer() -> EventsListContainer
+}
+
 final class EventsListContainer {
-    var applicationContainer: ApplicationContainer
-    var updater: EventsListUpdater
+    let parent: ApplicationContainer
+    let updater: EventsListUpdater
 
     init(applicationContainer: ApplicationContainer) {
-        self.applicationContainer = applicationContainer
+        self.parent = applicationContainer
         self.updater = EventsListUpdater(
             decorated: applicationContainer.commander,
             eventsProvider: applicationContainer.provider
         )
         updater.factory = self
+        applicationContainer.coordinator.eventDetailsFactory = self
     }
-}
 
-// MARK: - ViewController factoring
-protocol EventsListViewControllerFactoring {
-    func makeEventsListViewController(events: [Event]) -> EventsListViewController
-}
-
-extension EventsListContainer: EventsListViewControllerFactoring {
-    func makeEventsListViewController(events: [Event]) -> EventsListViewController {
+    func makeController() -> EventsListViewController {
         let providers: [EventsListItemProviding] = [
             HintItemProvider(),
             EventItemProvider(),
             FooterItemProvider(),
         ]
         let controller = EventsListViewController(
-            viewModel: makeEventsListViewModel(events: events),
+            viewModel: makeEventsListViewModel(events: parent.provider.get()),
             providers: providers
         )
         updater.add(receiver: controller)
@@ -93,8 +91,14 @@ extension EventsListContainer:
             event: event,
             today: today,
             hintEnabled: hintEnabled,
-            coordinator: applicationContainer.coordinator,
+            coordinator: parent.coordinator,
             commander: updater
         )
+    }
+}
+
+extension EventsListContainer: EventDetailsContainerFactoring {
+    func makeContainer(event: Event, today: DayComponents) -> EventDetailsContainer {
+        EventDetailsContainer(parent: self, event: event, today: today)
     }
 }

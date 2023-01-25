@@ -26,7 +26,6 @@ protocol WeekItemViewModelFactoring {
 struct WeekViewModel: EventDependantViewModel {
     private let upcomingWeeksCount = 3
     private let today: DayComponents
-    private let commander: EventsCommanding
     private let coordinator: DefaultCoordinator
     private var event: Event
     private let itemsFactory: WeekItemViewModelFactoring
@@ -40,14 +39,12 @@ struct WeekViewModel: EventDependantViewModel {
         today: DayComponents,
         event: Event,
         coordinator: DefaultCoordinator,
-        commander: EventsCommanding,
         itemsFactory: WeekItemViewModelFactoring,
         selfFactory: WeekViewModelFactoring
     ) {
         self.today = today
         self.event = event
         self.coordinator = coordinator
-        self.commander = commander
         self.itemsFactory = itemsFactory
         self.selfFactory = selfFactory
         eventId = event.id
