@@ -13,7 +13,7 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
         folderName = "Atlas"
         
         parent = UIView(frame: CGRect(x: 0, y: 0, width: 2 * 1920, height: 2 * 1080))

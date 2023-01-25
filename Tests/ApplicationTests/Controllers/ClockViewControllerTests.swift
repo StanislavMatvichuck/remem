@@ -9,22 +9,14 @@
 import Domain
 import XCTest
 
-class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
+final class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
     var sut: ClockViewController!
     var event: Event!
     var viewModelFactory: ClockViewModelFactoring!
 
     override func setUp() {
         super.setUp()
-        event = Event(name: "Event")
-        let today = DayComponents.referenceValue
-
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        let listContainer = root.makeContainer()
-        let eventDetailsContainer = listContainer.makeContainer(event: event, today: today)
-
-        viewModelFactory = eventDetailsContainer
-        sut = eventDetailsContainer.makeClockViewController()
+        makeSutWithViewModelFactory()
         sut.loadViewIfNeeded()
         sut.forceViewToLayoutInScreenSize()
     }

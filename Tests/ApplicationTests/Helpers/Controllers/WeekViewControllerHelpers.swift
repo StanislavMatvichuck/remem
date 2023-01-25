@@ -22,14 +22,30 @@ extension WeekViewController {
             return try XCTUnwrap(cell as? WeekItem)
         } catch { fatalError("error getting day") }
     }
+}
 
-    static func make() -> WeekViewController {
-        let today = DayComponents.referenceValue
-        let event = Event(name: "Event", dateCreated: today.date)
+protocol WeekViewControllerTesting: AnyObject {
+    var event: Event! { get set }
+    var sut: WeekViewController! { get set }
+    var viewModelFactory: WeekViewModelFactoring! { get set }
+}
 
+extension WeekViewControllerTesting {
+    func makeSutWithViewModelFactory(
+        eventDateCreated: DayComponents = .referenceValue,
+        today: DayComponents = .referenceValue
+    ) {
+        event = Event(name: "Event", dateCreated: eventDateCreated.date)
         let container = ApplicationContainer(testingInMemoryMode: true)
-        let listContainer = container.makeContainer()
-        let eventDetailsContainer = listContainer.makeContainer(event: event, today: today)
-        return eventDetailsContainer.makeWeekViewController()
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+        sut = container.makeWeekViewController()
+        viewModelFactory = container
+    }
+
+    func clearSutAndViewModelFactory() {
+        event = nil
+        sut = nil
+        viewModelFactory = nil
     }
 }

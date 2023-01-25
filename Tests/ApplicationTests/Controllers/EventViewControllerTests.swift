@@ -9,29 +9,19 @@
 import Domain
 import XCTest
 
-class EventViewControllerTests: XCTestCase {
+class EventViewControllerTests: XCTestCase, EventDetailsViewControllerTesting {
     var sut: EventViewController!
+    var event: Event!
+    var viewModelFactory: EventViewModelFactoring!
 
     override func setUp() {
         super.setUp()
-
-        let event = Event(name: "Event")
-
-        struct Stub: EventsCommanding {
-            func save(_: Event) {}
-            func delete(_: Event) {}
-        }
-
-        sut = EventViewController(
-            viewModel: EventViewModel(event: event, commander: Stub()),
-            controllers: [UIViewController(), UIViewController()]
-        )
-
+        makeSutWithViewModelFactory()
         sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
-        sut = nil
+        clearSutAndViewModelFactory()
         executeRunLoop()
         super.tearDown()
     }
@@ -45,7 +35,6 @@ class EventViewControllerTests: XCTestCase {
 
         XCTAssertFalse(sut.viewModel.isVisited, "precondition")
 
-        sut.loadViewIfNeeded()
         executeRunLoop()
 
         XCTAssertTrue(sut.viewModel.isVisited)

@@ -17,13 +17,10 @@ class DayItemViewModelTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: created.date)
         let happening = event.addHappening(date: created.date)
 
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        let listContainer = root.makeContainer()
-        let eventDetailsContainer = listContainer.makeContainer(event: event, today: created)
-        let dayDetailsContainer = eventDetailsContainer.makeContainer(day: created)
-
-        sut = dayDetailsContainer.makeViewModel(
-            happening: happening
+        sut = DayItemViewModel(
+            event: event,
+            happening: happening,
+            commander: EventsCommandingStub()
         )
 
         super.setUp()

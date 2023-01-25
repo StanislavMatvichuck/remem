@@ -16,12 +16,13 @@ class EventItemViewModelTests: XCTestCase {
         super.setUp()
         let today = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        let listContainer = EventsListContainer(applicationContainer: root)
-        sut = listContainer.makeEventItemViewModel(
+
+        sut = EventItemViewModel(
             event: event,
             today: today,
-            hintEnabled: false
+            hintEnabled: false,
+            coordinator: DefaultCoordinatorStub(),
+            commander: EventsCommandingStub()
         )
     }
 

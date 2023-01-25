@@ -10,10 +10,12 @@ import Domain
 import iOSSnapshotTestCase
 
 class WeekSnapshotsTest:
-    FBSnapshotTestCase
+    FBSnapshotTestCase,
+    WeekViewControllerTesting
 {
     var sut: WeekViewController!
     var event: Event!
+    var viewModelFactory: WeekViewModelFactoring!
     
     override func setUp() {
         super.setUp()
@@ -80,9 +82,7 @@ class WeekSnapshotsTest:
         withDayCreated: DayComponents = DayComponents.referenceValue,
         andToday: DayComponents = DayComponents.referenceValue
     ) {
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        event = Event(name: "Event", dateCreated: withDayCreated.date)
-        sut = root.makeWeekViewController(event: event, today: andToday)
+        makeSutWithViewModelFactory(eventDateCreated: withDayCreated, today: andToday)
         putInViewHierarchy(sut)
     }
 }

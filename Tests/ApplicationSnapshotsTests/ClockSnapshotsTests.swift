@@ -15,7 +15,6 @@ class ClockSnapshotsTest:
 {
     var sut: ClockViewController!
     var event: Event!
-
     var viewModelFactory: Application.ClockViewModelFactoring!
 
     override func setUp() {
@@ -23,11 +22,7 @@ class ClockSnapshotsTest:
         recordMode = false
         folderName = "Clock"
 
-        let root = ApplicationContainer(testingInMemoryMode: true)
-
-        event = Event(name: "Event")
-        sut = root.makeClockViewController(event: event)
-        viewModelFactory = root
+        makeSutWithViewModelFactory()
 
         putInViewHierarchy(sut)
     }

@@ -11,18 +11,20 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-class WeekViewControllerTests: XCTestCase {
+class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     var spy: PresentationVerifier!
     var sut: WeekViewController!
+    var event: Event!
+    var viewModelFactory: WeekViewModelFactoring!
 
     override func setUp() {
         super.setUp()
-        sut = WeekViewController.make()
+        makeSutWithViewModelFactory()
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
-        spy = nil
-        sut = nil
+        clearSutAndViewModelFactory()
         executeRunLoop()
         super.tearDown()
     }

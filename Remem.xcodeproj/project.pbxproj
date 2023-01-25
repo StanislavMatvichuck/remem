@@ -94,6 +94,10 @@
 		08B26A10289E919F00DFBAC8 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayItem.swift */; };
+		08B628B12981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
+		08B628B22981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
+		08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */; };
+		08B628B52981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */; };
 		08B81784294500A70095D891 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */; };
 		08B8178A294506E30095D891 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
@@ -359,6 +363,8 @@
 		08B26A13289E975900DFBAC8 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		08B26A15289E98B700DFBAC8 /* DayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		08B356F028DDEC0900770B9A /* WidgetFileReadingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFileReadingTests.swift; sourceTree = "<group>"; };
+		08B628B02981A46600CA57F1 /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
+		08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerHelpers.swift; sourceTree = "<group>"; };
 		08B89A2528E3190600F4B63B /* StyledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledText.swift; sourceTree = "<group>"; };
 		08B89A2728E3191A00F4B63B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
@@ -866,6 +872,7 @@
 				08AF544629373D9200032487 /* DayViewControllerHelpers.swift */,
 				08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */,
 				0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */,
+				08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -899,6 +906,7 @@
 			isa = PBXGroup;
 			children = (
 				08F82FEA291E71E10033AB0D /* Mocks.swift */,
+				08B628B02981A46600CA57F1 /* Stubs.swift */,
 			);
 			path = StubsFakesSpiesMocks;
 			sourceTree = "<group>";
@@ -1262,10 +1270,12 @@
 				08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshotsTest.swift in Sources */,
+				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
 				087791992974858300780F60 /* SnapshotsAtlas.swift in Sources */,
 				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
 				08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshotsTests.swift in Sources */,
+				08B628B52981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
 				0857A018292FD73000924530 /* WeekSnapshotsTests.swift in Sources */,
 				0850075829216F74007B272C /* Mocks.swift in Sources */,
 				08E63E5529409A0C00F87F25 /* WeekViewControllerHelpers.swift in Sources */,
@@ -1306,6 +1316,7 @@
 				08AF544A293740E800032487 /* DayViewModelTests.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				08292EC5292E1F6100F46A32 /* ClockViewControllerTests.swift in Sources */,
+				08B628B12981A46600CA57F1 /* Stubs.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventViewControllerTests.swift in Sources */,
 				08F97A40295076DC00AB7051 /* DayItemViewModelTests.swift in Sources */,
 				086136502934D64300F1B780 /* WeekViewControllerHelpers.swift in Sources */,
@@ -1316,6 +1327,7 @@
 				082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */,
 				08E63E5C2940B2D100F87F25 /* CompositionRootTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
+				08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
 				08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayViewControllerTests.swift in Sources */,

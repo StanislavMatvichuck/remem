@@ -38,10 +38,20 @@ class DayViewModelTests: XCTestCase {
             event.addHappening(date: happening.dateCreated)
         }
 
-        let container = ApplicationContainer(testingInMemoryMode: true)
-        let listContainer = container.makeContainer()
-        let eventDetailsContainer = listContainer.makeContainer(event: event, today: day)
-        let dayContainer = eventDetailsContainer.makeContainer(day: day)
-        return dayContainer.makeViewModel()
+        struct DayItemViewModelFactoringStub: DayItemViewModelFactoring {
+            let event: Event
+            let commander = EventsCommandingStub()
+
+            func makeViewModel(happening: Happening) -> DayItemViewModel {
+                DayItemViewModel(event: event, happening: happening, commander: commander)
+            }
+        }
+
+        return DayViewModel(
+            day: day,
+            event: event,
+            commander: EventsCommandingStub(),
+            itemFactory: DayItemViewModelFactoringStub(event: event)
+        )
     }
 }

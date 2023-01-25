@@ -9,19 +9,21 @@
 import Domain
 import XCTest
 
-class EventsListViewControllerTests: XCTestCase {
+class EventsListViewControllerTests: XCTestCase, EventsListViewControllerTesting {
     // MARK: - Test fixture
     var sut: EventsListViewController!
+    var viewModelFactory: EventsListViewModelFactoring!
     var table: UITableView { sut.viewRoot.table }
     var view: EventsListView { sut.viewRoot }
 
     override func setUp() {
         super.setUp()
-        sut = EventsListViewController.make()
+        makeSutWithViewModelFactory()
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
-        sut = nil
+        clearSutAndViewModelFactory()
         executeRunLoop()
         super.tearDown()
     }
@@ -81,6 +83,7 @@ class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_empty_addButtonTapped_showsKeyboard() {
+        putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
         let footerCell = table.dataSource?.tableView(
@@ -165,6 +168,7 @@ class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
+        putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
         let button = sut.submittedEventTrailingSwipeActionButton(number: 0)

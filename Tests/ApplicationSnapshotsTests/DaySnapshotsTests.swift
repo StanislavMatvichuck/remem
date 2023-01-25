@@ -15,17 +15,14 @@ class DaySnapshotsTest:
 {
     var sut: DayViewController!
     var event: Event!
+    var viewModelFactory: DayViewModelFactoring!
     
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "Day"
         
-        let day = DayComponents.referenceValue
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        
-        event = Event(name: "Event")
-        sut = root.makeDayViewController(event, day)
+        makeSutWithViewModelFactory()
         
         putInViewHierarchy(sut)
     }

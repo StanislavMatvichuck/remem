@@ -69,13 +69,22 @@ extension EventsListViewController {
 
         return config.actions[number]
     }
+}
 
-    static func make() -> EventsListViewController {
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        let container = EventsListContainer(applicationContainer: root)
-        let sut = container.makeController()
-        sut.loadViewIfNeeded()
-        putInViewHierarchy(sut)
-        return sut
+protocol EventsListViewControllerTesting: AnyObject {
+    var sut: EventsListViewController! { get set }
+    var viewModelFactory: EventsListViewModelFactoring! { get set }
+}
+
+extension EventsListViewControllerTesting {
+    func makeSutWithViewModelFactory() {
+        let container = ApplicationContainer(testingInMemoryMode: true).makeContainer()
+        sut = container.makeController()
+        viewModelFactory = container
+    }
+
+    func clearSutAndViewModelFactory() {
+        sut = nil
+        viewModelFactory = nil
     }
 }

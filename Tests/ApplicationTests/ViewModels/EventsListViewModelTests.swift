@@ -9,11 +9,13 @@
 import Domain
 import XCTest
 
-class EventsListViewModelTests: XCTestCase {
+final class EventsListViewModelTests: XCTestCase {
     func test_hasNumberOfSections() {
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        let container = EventsListContainer(applicationContainer: root)
-        let sut = container.makeEventsListViewModel(events: [])
+        let sut = EventsListViewModel(
+            today: DayComponents.referenceValue,
+            commander: EventsCommandingStub(),
+            sections: [[], [], []]
+        )
 
         XCTAssertEqual(sut.numberOfSections, 3)
     }

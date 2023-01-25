@@ -9,16 +9,18 @@
 import Domain
 import iOSSnapshotTestCase
 
-class EventsListSnapshotsTest: FBSnapshotTestCase {
+class EventsListSnapshotsTest:
+    FBSnapshotTestCase,
+    EventsListViewControllerTesting
+{
     var sut: EventsListViewController!
-    var root: ApplicationContainer!
+    var viewModelFactory: EventsListViewModelFactoring!
 
     override func setUp() {
         super.setUp()
         recordMode = false
         folderName = "EventsList"
-        root = ApplicationContainer(testingInMemoryMode: true)
-        sut = root.makeEventsListViewController(events: root.provider.get())
+        makeSutWithViewModelFactory()
         putInViewHierarchy(sut)
     }
 
@@ -69,7 +71,7 @@ class EventsListSnapshotsTest: FBSnapshotTestCase {
         event.visit()
         event.addHappening(date: .now)
 
-        sut.viewModel = root.makeEventsListViewModel(events: [event])
+        sut.viewModel = viewModelFactory.makeEventsListViewModel(events: [event])
 
         FBSnapshotVerifyViewController(sut)
     }

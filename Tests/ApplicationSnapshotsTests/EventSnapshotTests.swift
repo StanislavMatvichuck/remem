@@ -9,7 +9,8 @@
 import Domain
 import iOSSnapshotTestCase
 
-class EventSnapshotsTest: FBSnapshotTestCase {
+class EventSnapshotsTest: FBSnapshotTestCase, EventDetailsViewControllerTesting {
+    var viewModelFactory: Application.EventViewModelFactoring!
     var sut: EventViewController!
     var event: Event!
     
@@ -17,19 +18,13 @@ class EventSnapshotsTest: FBSnapshotTestCase {
         super.setUp()
         recordMode = false
         folderName = "Event"
-        
-        let day = DayComponents.referenceValue
-        let root = ApplicationContainer(testingInMemoryMode: true)
-        
-        event = Event(name: "Event", dateCreated: day.date)
-        sut = root.makeEventViewController(event, day)
-
+        makeSutWithViewModelFactory()
         putInViewHierarchy(sut)
     }
     
     override func tearDown() {
+        clearSutAndViewModelFactory()
         executeRunLoop()
-        sut = nil
         super.tearDown()
     }
  
@@ -65,7 +60,7 @@ class EventSnapshotsTest: FBSnapshotTestCase {
     }
     
     private func sendEventUpdatesToController() {
-        sut.viewModel = sut.viewModel.copy(newEvent: event)
+        sut.viewModel = viewModelFactory.makeViewModel()
     }
     
     private func configureDarkMode() {

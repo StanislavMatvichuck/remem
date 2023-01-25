@@ -16,11 +16,12 @@ class WeekItemViewModelTests: XCTestCase {
         super.setUp()
         let day = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
+
         sut = WeekItemViewModel(
             event: event,
             day: day,
             today: day,
-            coordinator: ApplicationContainer().coordinator
+            coordinator: DefaultCoordinatorStub()
         )
     }
 

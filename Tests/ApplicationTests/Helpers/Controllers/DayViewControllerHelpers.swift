@@ -22,10 +22,10 @@ extension DayViewController {
     }
 }
 
-protocol DayViewControllerTesting {
-    var sut: DayViewController! { get }
-    var viewModelFactory: DayViewModelFactoring! { get }
-    var event: Event! { get }
+protocol DayViewControllerTesting: AnyObject {
+    var sut: DayViewController! { get set }
+    var viewModelFactory: DayViewModelFactoring! { get set }
+    var event: Event! { get set }
 }
 
 extension DayViewControllerTesting {
@@ -35,5 +35,16 @@ extension DayViewControllerTesting {
 
     func sendEventUpdatesToController() {
         sut.viewModel = viewModelFactory.makeViewModel()
+    }
+
+    func makeSutWithViewModelFactory() {
+        let day = DayComponents.referenceValue
+        event = Event(name: "Event")
+        let container = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: day)
+            .makeContainer(day: day)
+        sut = container.makeController()
+        viewModelFactory = container
     }
 }
