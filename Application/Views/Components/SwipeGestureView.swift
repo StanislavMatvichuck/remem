@@ -103,6 +103,11 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        startAnimation()
+    }
+
     func startAnimation() {
         let animator = UIViewPropertyAnimator(
             duration: 1.5,
