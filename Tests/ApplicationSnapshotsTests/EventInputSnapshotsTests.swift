@@ -18,14 +18,21 @@ final class EventInputSnapshotsTests: FBSnapshotTestCase {
         folderName = "EventInput"
         
         sut = EventInput()
-        sut.backgroundColor = .orange
         
         parent = UIView(frame: UIScreen.main.bounds)
+        parent.backgroundColor = UIHelper.background
+        
+        /// adds sublayer to make blur effect visible
+        let layer = CALayer()
+        layer.frame = CGRect(x: 150, y: 150, width: 150, height: 150)
+        layer.backgroundColor = UIColor.purple.cgColor
+        parent.layer.addSublayer(layer)
+        
         parent.addAndConstrain(sut)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.addSubview(parent)
-        window.isHidden = false
+        window.makeKeyAndVisible()
     }
     
     override func tearDown() {
@@ -57,8 +64,14 @@ final class EventInputSnapshotsTests: FBSnapshotTestCase {
         FBSnapshotVerifyView(parent, perPixelTolerance: 0.05)
     }
     
-    private func configureDarkMode() {
-        sut.window?.overrideUserInterfaceStyle = .dark
+    func test_show_dark() {
+        executeWithDarkMode(test_show)
+    }
+    
+    private func executeWithDarkMode(_ testCase: () -> Void) {
+        parent.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        testCase()
     }
     
     /// Duplicates with EventInput tests

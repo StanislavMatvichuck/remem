@@ -82,7 +82,7 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
         FBSnapshotVerifyView(parent)
     }
     
-    func test05_twoRowsCanBeAdded() {
+    func test05_eventsListBasicFlow() {
         let row01 = makeRow(testNames: [
             "EventsList/test_empty",
             "EventsList/test_addButton_inputShown",
@@ -98,6 +98,37 @@ final class SnapshotsAtlas: FBSnapshotTestCase {
             nil,
             nil,
             "Event/test_singleHappening",
+        ])
+        
+        parent.addSubview(row01)
+        parent.addSubview(row02)
+        
+        NSLayoutConstraint.activate([
+            row01.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row01.topAnchor.constraint(equalTo: parent.topAnchor),
+            row02.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
+            row02.topAnchor.constraint(equalTo: row01.bottomAnchor),
+        ])
+        
+        FBSnapshotVerifyView(parent)
+    }
+    
+    func test06_eventsListBasicFlow_dark() {
+        let row01 = makeRow(testNames: [
+            "EventsList/test_empty_dark",
+            "EventsList/test_addButton_inputShown_dark",
+            "EventsList/test_oneItem_dark",
+            "EventsList/test_oneItem_swiped_dark",
+            nil,
+            "EventsList/test_oneItem_visited_dark",
+        ])
+        
+        let row02 = makeRow(testNames: [
+            nil,
+            nil,
+            nil,
+            nil,
+            "Event/test_singleHappening_dark",
         ])
         
         parent.addSubview(row01)

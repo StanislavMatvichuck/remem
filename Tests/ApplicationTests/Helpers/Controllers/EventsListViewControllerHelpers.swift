@@ -87,4 +87,9 @@ extension EventsListViewControllerTesting {
         sut = nil
         viewModelFactory = nil
     }
+
+    func forceViewToLayoutInScreenSize() {
+        sut.view.bounds = UIScreen.main.bounds
+        sut.view.layoutIfNeeded()
+    }
 }

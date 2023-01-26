@@ -32,23 +32,14 @@ class EventSnapshotsTest: FBSnapshotTestCase, EventDetailsViewControllerTesting 
         FBSnapshotVerifyViewController(sut)
     }
     
-    func test_emptyDark() {
-        configureDarkMode()
-        FBSnapshotVerifyViewController(sut)
-    }
-    
     func test_singleHappening() {
         arrangeOneHappening()
         
         FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
     }
     
-    func test_singleHappeningDark() {
-        configureDarkMode()
-        arrangeOneHappening()
-        
-        FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
-    }
+    func test_empty_dark() { executeWithDarkMode(test_empty) }
+    func test_singleHappening_dark() { executeWithDarkMode(test_singleHappening) }
     
     private func arrangeOneHappening() {
         addHappening()
@@ -61,9 +52,5 @@ class EventSnapshotsTest: FBSnapshotTestCase, EventDetailsViewControllerTesting 
     
     private func sendEventUpdatesToController() {
         sut.viewModel = viewModelFactory.makeViewModel()
-    }
-    
-    private func configureDarkMode() {
-        sut.view.window?.overrideUserInterfaceStyle = .dark
     }
 }

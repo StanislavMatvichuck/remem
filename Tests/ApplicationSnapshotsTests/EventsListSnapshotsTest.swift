@@ -25,8 +25,8 @@ class EventsListSnapshotsTest:
     }
 
     override func tearDown() {
+        clearSutAndViewModelFactory()
         executeRunLoop()
-        sut = nil
         super.tearDown()
     }
 
@@ -34,11 +34,7 @@ class EventsListSnapshotsTest:
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_emptyDark() {
-        configureDarkMode()
-
-        FBSnapshotVerifyViewController(sut)
-    }
+    func test_empty_dark() { executeWithDarkMode(test_empty) }
 
     func test_oneItem() {
         sut.submitEvent()
@@ -46,12 +42,7 @@ class EventsListSnapshotsTest:
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_oneItemDark() {
-        sut.submitEvent()
-        configureDarkMode()
-
-        FBSnapshotVerifyViewController(sut)
-    }
+    func test_oneItem_dark() { executeWithDarkMode(test_oneItem) }
 
     func test_oneItem_swiped() {
         sut.arrangeSingleEventSwiped()
@@ -59,12 +50,7 @@ class EventsListSnapshotsTest:
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_oneItem_swipedDark() {
-        sut.arrangeSingleEventSwiped()
-        configureDarkMode()
-
-        FBSnapshotVerifyViewController(sut)
-    }
+    func test_oneItem_swiped_dark() { executeWithDarkMode(test_oneItem_swiped) }
 
     func test_oneItem_visited() {
         let event = Event(name: "VisitedEvent")
@@ -75,6 +61,8 @@ class EventsListSnapshotsTest:
 
         FBSnapshotVerifyViewController(sut)
     }
+
+    func test_oneItem_visited_dark() { executeWithDarkMode(test_oneItem_visited) }
 
     /// Duplicates with EventInput tests
     func test_addButton_inputShown() {
@@ -96,8 +84,12 @@ class EventsListSnapshotsTest:
         FBSnapshotVerifyViewController(sut, perPixelTolerance: 0.05)
     }
 
-    private func configureDarkMode() {
-        sut.view.window?.overrideUserInterfaceStyle = .dark
+    func test_addButton_inputShown_dark() { executeWithDarkMode(test_addButton_inputShown) }
+
+    private func executeWithDarkMode(_ testCase: () -> Void) {
+        sut.view.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        testCase()
     }
 
     /// Duplicates with EventInput tests

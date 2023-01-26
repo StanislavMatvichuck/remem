@@ -12,6 +12,7 @@
 		0816F4462933B8D700F3937A /* DayComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816F4452933B8D700F3937A /* DayComponents.swift */; };
 		081BAFA1292B892F00112C76 /* EventViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventViewControllerTests.swift */; };
 		0823D234289283A8005B4BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* Coordinator.swift */; };
+		0824D0192981E38E00B6E701 /* SnapshotsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824D0182981E38E00B6E701 /* SnapshotsHelpers.swift */; };
 		0826AC9228C86ECE0021D607 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9128C86ECE0021D607 /* WidgetKit.framework */; };
 		0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9328C86ECE0021D607 /* SwiftUI.framework */; };
 		0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826AC9628C86ECE0021D607 /* RememWidgets.swift */; };
@@ -276,6 +277,7 @@
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewControllerTests.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0824D0182981E38E00B6E701 /* SnapshotsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotsHelpers.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
 		0826AC8F28C86ECE0021D607 /* Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0826AC9128C86ECE0021D607 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -598,6 +600,7 @@
 				08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */,
 				0877919629747A3000780F60 /* EventInputSnapshotsTests.swift */,
 				087791982974858300780F60 /* SnapshotsAtlas.swift */,
+				0824D0182981E38E00B6E701 /* SnapshotsHelpers.swift */,
 			);
 			path = ApplicationSnapshotsTests;
 			sourceTree = "<group>";
@@ -1280,6 +1283,7 @@
 				0850075829216F74007B272C /* Mocks.swift in Sources */,
 				08E63E5529409A0C00F87F25 /* WeekViewControllerHelpers.swift in Sources */,
 				08E63E5829409A0C00F87F25 /* EventsListViewControllerHelpers.swift in Sources */,
+				0824D0192981E38E00B6E701 /* SnapshotsHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
