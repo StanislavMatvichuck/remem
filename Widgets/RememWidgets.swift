@@ -14,13 +14,12 @@ struct RememWidgets: Widget, PreviewProvider {
     let provider: Provider
 
     init() {
-        let repository = WidgetFileReader()
-        self.provider = Provider(repository: repository)
+        self.provider = Provider(provider: WidgetEventsQuerying())
     }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: provider) { entry in
-            MediumWidgetView(viewModel: entry.vm)
+            EventsList(items: entry.items)
         }
         .configurationDisplayName("Today goals")
         .description("A list of events with defined goals")
@@ -29,8 +28,8 @@ struct RememWidgets: Widget, PreviewProvider {
 
     // PreviewProvider
     static var previews: some View {
-        let reader = WidgetFileReader()
-        MediumWidgetView(viewModel: reader.readStaticPreview())
+        let provider = Provider(provider: WidgetEventsQuerying())
+        EventsList(items: provider.provider.getPreview())
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

@@ -17,13 +17,20 @@ final class EventsListContainer {
     let updater: EventsListUpdater
 
     init(applicationContainer: ApplicationContainer) {
-        self.parent = applicationContainer
-        self.updater = EventsListUpdater(
-            decorated: applicationContainer.commander,
+        let widgetUpdater = WidgetUpdater(provider: applicationContainer.provider,
+                                          decorated: applicationContainer.commander)
+
+        let controllerUpdater = EventsListUpdater(
+            decorated: widgetUpdater,
             eventsProvider: applicationContainer.provider
         )
-        updater.factory = self
+
+        parent = applicationContainer
+        updater = controllerUpdater
+
         applicationContainer.coordinator.eventDetailsFactory = self
+        controllerUpdater.factory = self
+        widgetUpdater.factory = self
     }
 
     func makeController() -> EventsListViewController {

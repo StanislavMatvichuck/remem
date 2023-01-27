@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>items</key>
-	<array>
-		<dict>
-			<key>name</key>
-			<string>💊</string>
-			<key>amount</key>
-			<string>0</string>
-			<key>hasGoal</key>
-			<false/>
-			<key>goalReached</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Event name</string>
-			<key>amount</key>
-			<string>1/2</string>
-			<key>hasGoal</key>
-			<true/>
-			<key>goalReached</key>
-			<false/>
-		</dict>
-	</array>
-	<key>date</key>
-	<date>2022-09-22T11:39:05Z</date>
-</dict>
+<array>
+	<dict>
+		<key>id</key>
+		<string>742370E7-319A-4599-804C-F0F9A6314471</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>724BA0DF-9DA9-4BD0-8B54-A2A37337CB27</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>090AA720-E2EF-4C8E-AE3F-389EC64AF95C</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>2BAD065B-A649-49DD-9D07-8CAEBA53ABEB</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>B08CCC21-04CF-4B86-ABD1-64C208BCADC9</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>136E272D-5DF3-446E-B916-308DCA215ABC</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>name03</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>5A8181CC-296B-4B92-8F38-B3C4A82E23E2</string>
+		<key>amount</key>
+		<string>2</string>
+		<key>name</key>
+		<string>name02</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>036A707F-EC47-4758-A462-D0B359DB3420</string>
+		<key>amount</key>
+		<string>1</string>
+		<key>name</key>
+		<string>name01</string>
+	</dict>
+</array>
 </plist>

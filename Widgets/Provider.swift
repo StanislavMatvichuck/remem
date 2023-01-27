@@ -7,43 +7,37 @@
 
 import WidgetKit
 
-
 struct MediumWidgetTimelineEntry: TimelineEntry {
     var date: Date
-    var vm: WidgetViewModel
+    var items: [WidgetEventItemViewModel]
 
-    init(_ vm: WidgetViewModel) {
+    init(items: [WidgetEventItemViewModel]) {
         self.date = .now
-        self.vm = vm
+        self.items = items
     }
 }
 
 struct Provider: TimelineProvider {
-    private let fileReader: WidgetFileReading
-
-    init(repository: WidgetFileReading) { self.fileReader = repository }
-
-    // TimelineProvider
     typealias Entry = MediumWidgetTimelineEntry
 
-    func placeholder(in context: Context) -> MediumWidgetTimelineEntry {
-        MediumWidgetTimelineEntry(fileReader.readStaticPreview())
+    let provider: WidgetEventsQuerying
+    init(provider: WidgetEventsQuerying) {
+        self.provider = provider
     }
 
-    func getSnapshot(in context: Context,
-                     completion: @escaping (MediumWidgetTimelineEntry) -> ())
-    {
-        completion(MediumWidgetTimelineEntry(fileReader.readStaticPreview()))
+    func placeholder(in context: Context) -> MediumWidgetTimelineEntry {
+        MediumWidgetTimelineEntry(items: provider.getPreview())
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (MediumWidgetTimelineEntry) -> ()) {
+        completion(MediumWidgetTimelineEntry(items: provider.getPreview()))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [MediumWidgetTimelineEntry] = []
-
-        if let viewModel = fileReader.read(for: .medium) {
-            entries.append(MediumWidgetTimelineEntry(viewModel))
-        }
-
-        let timeline = Timeline(entries: entries, policy: .never)
+        let timeline = Timeline(
+            entries: [MediumWidgetTimelineEntry(items: provider.getFromFile())],
+            policy: .never
+        )
 
         completion(timeline)
     }

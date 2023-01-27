@@ -18,7 +18,6 @@ extension EventsListViewController: DisplayingEventsListViewModel {
 }
 
 final class EventsListUpdater: MulticastDelegate<DisplayingEventsListViewModel>, EventsCommanding {
-    /// `CompositionRoot` is a factory. Is it possible to avoid this cycle and use initializer injection?
     var factory: EventsListViewModelFactoring?
     private let decorated: EventsCommanding
     private let provider: EventsQuerying
