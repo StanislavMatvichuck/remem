@@ -62,4 +62,4 @@ WHEN `EventItem` is tapped `EventDetails` screen is shown
 
 ### Atlas for dark mode
 
-![Atlas for dark mode](/Tests/Snapshots/Images_64/Atlas/test05_eventsListBasicFlow_dark@2x.png)
+![Atlas for dark mode](/Tests/Snapshots/Images_64/Atlas/test06_eventsListBasicFlow_dark@2x.png)

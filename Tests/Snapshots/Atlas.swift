@@ -9,6 +9,10 @@ import iOSSnapshotTestCase
 import UIKit
 
 final class Atlas: FBSnapshotTestCase {
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+    let spacing = 16.0
+    
     var parent: UIView!
     
     override func setUp() {
@@ -83,6 +87,9 @@ final class Atlas: FBSnapshotTestCase {
     }
     
     func test05_eventsListBasicFlow() {
+        parent = UIView(frame: CGRect(x: 0, y: 0, width: 6 * (width + spacing), height: 2 * (height + spacing)))
+        parent.backgroundColor = UIColor.purple
+        
         let row01 = makeRow(testNames: [
             "EventsList/test_empty",
             "EventsList/test_addButton_inputShown",
@@ -114,6 +121,9 @@ final class Atlas: FBSnapshotTestCase {
     }
     
     func test06_eventsListBasicFlow_dark() {
+        parent = UIView(frame: CGRect(x: 0, y: 0, width: 6 * (width + spacing), height: 2 * (height + spacing)))
+        parent.backgroundColor = UIColor.purple
+        
         let row01 = makeRow(testNames: [
             "EventsList/test_empty_dark",
             "EventsList/test_addButton_inputShown_dark",
@@ -148,7 +158,7 @@ final class Atlas: FBSnapshotTestCase {
         let horizontalStack = UIStackView()
         horizontalStack.translatesAutoresizingMaskIntoConstraints = false
         horizontalStack.axis = .horizontal
-        horizontalStack.spacing = 16
+        horizontalStack.spacing = spacing
         
         for name in testNames {
             horizontalStack.addArrangedSubview(makeImageViewFor(testName: name))
