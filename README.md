@@ -1,6 +1,7 @@
 # Remem
 
-### Domain model description
+<details>
+  <summary>Domain model description</summary>
 
 An `Event` can be added by providing `name`
 
@@ -11,8 +12,11 @@ Existing `Happening` can be removed from `Event`
 Existing `Event` can be deleted
 
 Existing `Event` can be renamed
+  
+</details>
 
-### Application description
+<details>
+  <summary>Application description</summary>
 
 WHEN application is launched `EventsList` screen is shown
 
@@ -56,10 +60,18 @@ WHEN `EventItem` is tapped `EventDetails` screen is shown
 
 `EventDetails` shows `Week` AND `Clock` AND `Stats` and title is `Event`s name
 
-### Atlas for light mode
+</details>
+
+<details>
+  <summary>Atlas for light mode</summary>
 
 ![Atlas for light mode](/Tests/Snapshots/Images_64/Atlas/test05_eventsListBasicFlow@2x.png)
+  
+</details>
 
-### Atlas for dark mode
+<details>
+  <summary>Atlas for dark mode</summary>
 
 ![Atlas for dark mode](/Tests/Snapshots/Images_64/Atlas/test06_eventsListBasicFlow_dark@2x.png)
+  
+</details>
