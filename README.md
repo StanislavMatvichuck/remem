@@ -55,3 +55,11 @@ THEN existing `Event` is renamed
 WHEN `EventItem` is tapped `EventDetails` screen is shown
 
 `EventDetails` shows `Week` AND `Clock` AND `Stats` and title is `Event`s name
+
+### Atlas for light mode
+
+![Atlas for light mode](/Tests/Snapshots/Images_64/Atlas/test05_eventsListBasicFlow@2x.png)
+
+### Atlas for dark mode
+
+![Atlas for dark mode](/Tests/Snapshots/Images_64/Atlas/test05_eventsListBasicFlow_dark@2x.png)
