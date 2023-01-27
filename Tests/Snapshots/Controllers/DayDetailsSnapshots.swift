@@ -11,7 +11,7 @@ import iOSSnapshotTestCase
 
 final class DayDetailsSnapshots:
     FBSnapshotTestCase,
-    DayViewControllerTesting
+    DayDetailsViewControllerTesting
 {
     var sut: DayDetailsViewController!
     var event: Event!
