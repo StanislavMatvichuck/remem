@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-class DayViewController: UIViewController {
+class DayDetailsViewController: UIViewController {
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
@@ -23,8 +23,8 @@ class DayViewController: UIViewController {
         } else { fatalError("alert is not created") }
     }
 
-    let viewRoot: DayView
-    var viewModel: DayViewModel {
+    let viewRoot: DayDetailsView
+    var viewModel: DayDetailsViewModel {
         didSet {
             // TODO: add test for this, time picking
             if viewModel.readableTime != oldValue.readableTime {
@@ -36,8 +36,8 @@ class DayViewController: UIViewController {
     }
 
     // MARK: - Init
-    init(viewModel: DayViewModel) {
-        self.viewRoot = DayView()
+    init(viewModel: DayDetailsViewModel) {
+        self.viewRoot = DayDetailsView()
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
@@ -129,7 +129,7 @@ class DayViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-extension DayViewController: UITableViewDataSource, UITableViewDelegate {
+extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.items.count
     }

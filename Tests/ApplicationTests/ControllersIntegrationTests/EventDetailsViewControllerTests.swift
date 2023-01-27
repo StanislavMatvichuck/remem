@@ -9,8 +9,8 @@
 import Domain
 import XCTest
 
-class EventViewControllerTests: XCTestCase, EventDetailsViewControllerTesting {
-    var sut: EventViewController!
+final class EventDetailsViewControllerTests: XCTestCase, EventDetailsViewControllerTesting {
+    var sut: EventDetailsViewController!
     var event: Event!
     var viewModelFactory: EventViewModelFactoring!
 

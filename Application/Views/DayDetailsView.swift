@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayView: UIView {
+class DayDetailsView: UIView {
     // MARK: - Properties
     var happenings: UITableView = {
         let table = UITableView(al: true)

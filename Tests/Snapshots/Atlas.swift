@@ -8,7 +8,7 @@
 import iOSSnapshotTestCase
 import UIKit
 
-final class SnapshotsAtlas: FBSnapshotTestCase {
+final class Atlas: FBSnapshotTestCase {
     var parent: UIView!
     
     override func setUp() {

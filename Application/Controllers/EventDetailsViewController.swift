@@ -9,15 +9,15 @@ import Domain
 
 import UIKit
 
-class EventViewController: UIViewController {
+class EventDetailsViewController: UIViewController {
     // MARK: - Properties
-    let viewRoot: EventView
-    var viewModel: EventViewModel
+    let viewRoot: EventDetailsView
+    var viewModel: EventDetailsViewModel
 
     // MARK: - Init
-    init(viewModel: EventViewModel, controllers: [UIViewController]) {
+    init(viewModel: EventDetailsViewModel, controllers: [UIViewController]) {
         self.viewModel = viewModel
-        self.viewRoot = EventView()
+        self.viewRoot = EventDetailsView()
 
         super.init(nibName: nil, bundle: nil)
 

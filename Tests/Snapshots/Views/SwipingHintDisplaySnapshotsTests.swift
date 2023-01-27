@@ -8,7 +8,7 @@
 @testable import Application
 import iOSSnapshotTestCase
 
-class SwipingHintDisplaySnapshotsTest: FBSnapshotTestCase {
+final class SwipingHintDisplaySnapshots: FBSnapshotTestCase {
     var sut: UsingSwipingHintDisplaying!
     
     override func setUp() {

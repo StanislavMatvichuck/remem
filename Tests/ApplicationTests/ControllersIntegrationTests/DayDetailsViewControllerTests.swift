@@ -11,9 +11,9 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-final class DayViewControllerTests: XCTestCase, DayViewControllerTesting {
+final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting {
     var event: Domain.Event!
-    var sut: DayViewController!
+    var sut: DayDetailsViewController!
     var viewModelFactory: DayViewModelFactoring!
 
     override func setUp() {

@@ -8,7 +8,7 @@
 @testable import Application
 import iOSSnapshotTestCase
 
-final class EventInputSnapshotsTests: FBSnapshotTestCase {
+final class EventInputSnapshots: FBSnapshotTestCase {
     var sut: EventInput!
     var parent: UIView!
     

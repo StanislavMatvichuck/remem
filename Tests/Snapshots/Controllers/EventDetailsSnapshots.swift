@@ -9,9 +9,9 @@
 import Domain
 import iOSSnapshotTestCase
 
-class EventSnapshotsTest: FBSnapshotTestCase, EventDetailsViewControllerTesting {
+final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControllerTesting {
     var viewModelFactory: Application.EventViewModelFactoring!
-    var sut: EventViewController!
+    var sut: EventDetailsViewController!
     var event: Event!
     
     override func setUp() {

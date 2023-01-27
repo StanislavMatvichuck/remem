@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-class EventsListViewControllerTests: XCTestCase, EventsListViewControllerTesting {
+final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerTesting {
     // MARK: - Test fixture
     var sut: EventsListViewController!
     var viewModelFactory: EventsListViewModelFactoring!

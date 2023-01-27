@@ -9,11 +9,11 @@
 import Domain
 import iOSSnapshotTestCase
 
-class DaySnapshotsTest:
+final class DayDetailsSnapshots:
     FBSnapshotTestCase,
     DayViewControllerTesting
 {
-    var sut: DayViewController!
+    var sut: DayDetailsViewController!
     var event: Event!
     var viewModelFactory: DayViewModelFactoring!
     

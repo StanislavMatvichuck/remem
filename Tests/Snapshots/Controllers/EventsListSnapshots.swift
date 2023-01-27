@@ -9,7 +9,7 @@
 import Domain
 import iOSSnapshotTestCase
 
-class EventsListSnapshotsTest:
+final class EventsListSnapshots:
     FBSnapshotTestCase,
     EventsListViewControllerTesting
 {

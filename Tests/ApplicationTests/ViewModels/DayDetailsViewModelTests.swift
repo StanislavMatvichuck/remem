@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-class DayViewModelTests: XCTestCase {
+final class DayDetailsViewModelTests: XCTestCase {
     func test_eventWithNoHappenings_showsNothing() {
         let sut = make()
 
@@ -31,7 +31,7 @@ class DayViewModelTests: XCTestCase {
         XCTAssertEqual(sut.items.count, 0)
     }
 
-    private func make(happenings: [Happening] = []) -> DayViewModel {
+    private func make(happenings: [Happening] = []) -> DayDetailsViewModel {
         let day = DayComponents.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
         for happening in happenings {
@@ -47,7 +47,7 @@ class DayViewModelTests: XCTestCase {
             }
         }
 
-        return DayViewModel(
+        return DayDetailsViewModel(
             day: day,
             event: event,
             commander: EventsCommandingStub(),

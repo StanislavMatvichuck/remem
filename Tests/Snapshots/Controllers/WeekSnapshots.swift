@@ -9,7 +9,7 @@
 import Domain
 import iOSSnapshotTestCase
 
-class WeekSnapshotsTest:
+final class WeekSnapshots:
     FBSnapshotTestCase,
     WeekViewControllerTesting
 {

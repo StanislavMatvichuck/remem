@@ -9,7 +9,7 @@
 import Domain
 import iOSSnapshotTestCase
 
-class ClockSnapshotsTest:
+final class ClockSnapshots:
     FBSnapshotTestCase,
     ClockViewControllerTesting
 {

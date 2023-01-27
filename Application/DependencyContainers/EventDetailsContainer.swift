@@ -30,8 +30,8 @@ final class EventDetailsContainer {
         weekViewModelUpdater.factory = self
     }
 
-    func makeController() -> EventViewController {
-        EventViewController(
+    func makeController() -> EventDetailsViewController {
+        EventDetailsViewController(
             viewModel: makeViewModel(),
             controllers: [
                 makeWeekViewController(),
@@ -53,7 +53,7 @@ final class EventDetailsContainer {
     }
 }
 
-protocol EventViewModelFactoring { func makeViewModel() -> EventViewModel }
+protocol EventViewModelFactoring { func makeViewModel() -> EventDetailsViewModel }
 protocol WeekViewModelFactoring { func makeViewModel() -> WeekViewModel }
 protocol WeekItemViewModelFactoring { func makeViewModel(day: DayComponents) -> WeekItemViewModel }
 protocol ClockViewModelFactoring { func makeViewModel() -> ClockViewModel }
@@ -72,8 +72,8 @@ extension EventDetailsContainer:
         )
     }
 
-    func makeViewModel() -> EventViewModel {
-        EventViewModel(
+    func makeViewModel() -> EventDetailsViewModel {
+        EventDetailsViewModel(
             event: event,
             commander: weekViewModelUpdater
         )

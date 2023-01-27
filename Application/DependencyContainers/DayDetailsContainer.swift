@@ -11,24 +11,24 @@ final class DayDetailsContainer {
     let parent: EventDetailsContainer
     let event: Event
     let day: DayComponents
-    let updater: DayUpdater
+    let updater: DayDetailsUpdater
 
     init(parent: EventDetailsContainer, event: Event, day: DayComponents) {
         self.parent = parent
         self.event = event
         self.day = day
-        self.updater = DayUpdater(decoratedInterface: parent.weekViewModelUpdater)
+        self.updater = DayDetailsUpdater(decoratedInterface: parent.weekViewModelUpdater)
         updater.factory = self
     }
 
-    func makeController() -> DayViewController {
-        let controller = DayViewController(viewModel: makeViewModel())
+    func makeController() -> DayDetailsViewController {
+        let controller = DayDetailsViewController(viewModel: makeViewModel())
         updater.add(receiver: controller)
         return controller
     }
 }
 
-protocol DayViewModelFactoring { func makeViewModel() -> DayViewModel }
+protocol DayViewModelFactoring { func makeViewModel() -> DayDetailsViewModel }
 protocol DayItemViewModelFactoring { func makeViewModel(happening: Happening) -> DayItemViewModel }
 
 // MARK: - ViewModelFactoring
@@ -36,8 +36,8 @@ extension DayDetailsContainer:
     DayViewModelFactoring,
     DayItemViewModelFactoring
 {
-    func makeViewModel() -> DayViewModel {
-        DayViewModel(
+    func makeViewModel() -> DayDetailsViewModel {
+        DayDetailsViewModel(
             day: day,
             event: event,
             commander: updater,

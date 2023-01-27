@@ -7,17 +7,17 @@
 
 import Domain
 
-protocol DisplayingDayViewModel {
-    func update(_: DayViewModel)
+protocol DisplayingDayDetailsViewModel {
+    func update(_: DayDetailsViewModel)
 }
 
-extension DayViewController: DisplayingDayViewModel {
-    func update(_ vm: DayViewModel) {
+extension DayDetailsViewController: DisplayingDayDetailsViewModel {
+    func update(_ vm: DayDetailsViewModel) {
         viewModel = vm
     }
 }
 
-final class DayUpdater: MulticastDelegate<DisplayingDayViewModel> {
+final class DayDetailsUpdater: MulticastDelegate<DisplayingDayDetailsViewModel> {
     private let decorated: EventsCommanding
 
     var factory: DayViewModelFactoring?
@@ -26,7 +26,7 @@ final class DayUpdater: MulticastDelegate<DisplayingDayViewModel> {
         self.decorated = decoratedInterface
     }
 
-    func add(receiver: DisplayingDayViewModel) {
+    func add(receiver: DisplayingDayDetailsViewModel) {
         addDelegate(receiver)
     }
 
@@ -36,7 +36,7 @@ final class DayUpdater: MulticastDelegate<DisplayingDayViewModel> {
     }
 }
 
-extension DayUpdater: EventsCommanding {
+extension DayDetailsUpdater: EventsCommanding {
     func save(_ event: Domain.Event) {
         decorated.save(event)
         update()

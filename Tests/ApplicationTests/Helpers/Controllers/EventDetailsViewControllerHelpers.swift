@@ -10,7 +10,7 @@ import Domain
 
 protocol EventDetailsViewControllerTesting: AnyObject {
     var event: Event! { get set }
-    var sut: EventViewController! { get set }
+    var sut: EventDetailsViewController! { get set }
     var viewModelFactory: EventViewModelFactoring! { get set }
 }
 

@@ -19,7 +19,6 @@ final class SwipingHintDisplayingTests: XCTestCase {
         display = sut.addSwipingHint()
         let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 300, height: 150))
         window.addSubview(sut)
-//        window.isHidden = false
         sut.layoutIfNeeded()
     }
 
