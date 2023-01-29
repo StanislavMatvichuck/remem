@@ -38,12 +38,12 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         super.tearDown()
     }
 
-    func test_tableViewIsConfigured() {
+    func test_tableIsConfigured() {
         XCTAssertNotNil(sut.viewRoot.happenings.dataSource)
         XCTAssertNotNil(sut.viewRoot.happenings.delegate)
     }
 
-    func test_hasTitle() {
+    func test_showsTitle() {
         let numberString = sut.title!.split(separator: " ").first
         let wordString = sut.title!.split(separator: " ").last
 
@@ -51,13 +51,13 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         XCTAssertLessThanOrEqual(3, wordString!.count)
     }
 
-    func test_hasEditButton() {
+    func test_showsEditButton() {
         let editButton = sut.navigationItem.rightBarButtonItem
 
         XCTAssertEqual(editButton?.title, String(localizationId: "button.edit"))
     }
 
-    func test_editButtonTap_enablesEditMode() {
+    func test_editButtonTapped_editModeEnabled() {
         let editButton = sut.navigationItem.rightBarButtonItem
 
         XCTAssertFalse(sut.viewRoot.happenings.isEditing, "precondition")
@@ -67,7 +67,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         XCTAssertTrue(sut.viewRoot.happenings.isEditing)
     }
 
-    func test_editButtonTap_tapAgain_disablesEditMode() {
+    func test_editButtonTapedTwoTimes_editModeDisabled() {
         let editButton = sut.navigationItem.rightBarButtonItem
 
         XCTAssertFalse(sut.viewRoot.happenings.isEditing, "precondition")
@@ -78,13 +78,13 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         XCTAssertFalse(sut.viewRoot.happenings.isEditing)
     }
 
-    func test_hasCreateButton() {
+    func test_showsCreateHappeningButton() {
         let createButton = sut.navigationItem.leftBarButtonItem
 
         XCTAssertEqual(createButton?.title, String(localizationId: "button.create"))
     }
 
-    func test_createButtonTap_presentsAlert() {
+    func test_createButtonTaped_createHappeningAlertPresented() {
         let verifier = AlertVerifier()
         let createButton = sut.navigationItem.leftBarButtonItem
 
@@ -101,7 +101,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         )
     }
 
-    func test_empty_showsNothing() {
+    func test_empty_noHappeningsInList() {
         XCTAssertEqual(sut.happeningsAmount, 0)
     }
 
@@ -167,7 +167,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
 
     /// Bad test because of viewModel implementation detail
     // TODO: make integration test for picker
-    func test_createHappeningAlertShown_swipingPicker_updatesTimeText() {
+    func test_createHappeningAlertPresented_scrollingPicker_updatesTimeText() {
         tap(sut.navigationItem.leftBarButtonItem!)
 
         sut.viewModel.update(pickerDate: DayComponents.referenceValue.date)
@@ -175,7 +175,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         XCTAssertEqual(sut.timeInput.text, "00:00")
     }
 
-    func test_createHappeningAlertShown_initialTimeIsStartOfDay() {
+    func test_createHappeningAlertPresented_initialTimeIsStartOfDay() {
         tap(sut.navigationItem.leftBarButtonItem!)
 
         XCTAssertEqual(sut.timeInput.text!.count, 5)

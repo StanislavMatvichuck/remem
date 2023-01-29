@@ -53,7 +53,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertEqual(footerCell.button.titleLabel?.text, String(localizationId: "button.create"))
     }
 
-    func test_empty_hasNoEventsInList() {
+    func test_empty_hasNoEvents() {
         XCTAssertEqual(table.numberOfRows(inSection: 1), 0)
     }
 
@@ -61,7 +61,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.empty"))
     }
 
-    func test_empty_showsHighlightedAddButton() throws {
+    func test_empty_showsCreateEventButton_highlighted() {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
@@ -82,7 +82,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.brand.cgColor, "highlighted button has brand background")
     }
 
-    func test_empty_addButtonTapped_showsKeyboard() {
+    func test_createEventButtonTapped_showsKeyboard() {
         putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
@@ -99,14 +99,14 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
     }
 
-    func test_empty_submittingEvent_addsEventToList() {
+    func test_submittingEvent_addsEventToList() {
         sut.submitEvent()
 
         XCTAssertEqual(sut.eventsCount, 1)
         XCTAssertEqual(sut.firstEvent.nameLabel.text, "SubmittedEventName")
     }
 
-    func test_singleEvent_showsNormalAddButton() {
+    func test_singleEvent_showsCreateButton_default() {
         sut.submitEvent()
 
         let title = NSAttributedString(
@@ -142,6 +142,8 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_singleEvent_showsGestureHint() {
+        /// is it part of list controller or EventItemViewModel?
+        /// should some tests be moved to EventItemViewModel?
         sut.submitEvent()
 
         let event = sut.firstEvent
@@ -150,6 +152,8 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_singleEvent_hasRenameSwipeAction() {
+        /// is it part of list controller or EventItemViewModel?
+        /// should some tests be moved to EventItemViewModel?
         let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
 
         XCTAssertEqual(
@@ -179,7 +183,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertEqual(view.input.value, "SubmittedEventName")
     }
 
-    func test_singleEvent_submittingRename_changesEventName() {
+    func test_singleEvent_submittingRename_eventNameUpdated() {
         let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
 
         button.handler(button, UIView()) { _ in }
@@ -199,26 +203,26 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         XCTAssertEqual(sut.eventsCount, 0)
     }
 
-    func test_singleEvent_swipe_increasesLabelAmountByOne() {
+    func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
         sut.arrangeSingleEventSwiped()
 
         XCTAssertEqual(sut.firstEvent.valueLabel.text, "1")
     }
 
-    func test_singleEvent_swipe_swipe_increasesLabelAmountByTwo() {
+    func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
         sut.arrangeSingleEventSwiped()
         sut.swipeFirstEvent()
 
         XCTAssertEqual(sut.firstEvent.valueLabel.text, "2")
     }
 
-    func test_singleEvent_swipe_showsHint_pressToSeeDetails() {
+    func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
         sut.arrangeSingleEventSwiped()
 
         XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.firstVisit"))
     }
 
-    func test_singleEvent_swipe_gestureHintIsNotVisible() {
+    func test_singleEvent_swiped_gestureHintIsNotVisible() {
         sut.arrangeSingleEventSwiped()
 
         let event = sut.firstEvent
