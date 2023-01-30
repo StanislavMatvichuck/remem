@@ -50,6 +50,12 @@ extension ClockViewControllerTesting {
         sut = container.makeClockViewController()
         viewModelFactory = container
     }
+
+    func clearSutAndViewModelFactory() {
+        event = nil
+        sut = nil
+        viewModelFactory = nil
+    }
 }
 
 struct TimeComponents {

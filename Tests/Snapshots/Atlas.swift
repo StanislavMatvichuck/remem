@@ -8,7 +8,7 @@
 import iOSSnapshotTestCase
 import UIKit
 
-final class Atlas: FBSnapshotTestCase {
+final class ZAtlas: FBSnapshotTestCase {
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     let spacing = 16.0
@@ -17,8 +17,7 @@ final class Atlas: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "Atlas"
+        configureCommonOptions()
         
         parent = UIView(frame: CGRect(x: 0, y: 0, width: 2 * 1920, height: 2 * 1080))
         parent.backgroundColor = UIColor.purple
@@ -168,28 +167,23 @@ final class Atlas: FBSnapshotTestCase {
     }
     
     private func makeImageViewFor(testName: String?) -> UIImageView {
-        guard let testName else {
-            let view = UIImageView(image: nil)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            let width = UIScreen.main.bounds.width
-            let height = UIScreen.main.bounds.height
-            NSLayoutConstraint.activate([
-                view.widthAnchor.constraint(equalToConstant: width),
-                view.heightAnchor.constraint(equalToConstant: height),
-            ])
-            return view
-        }
+        let w = UIScreen.main.bounds.size.width
+        let h = UIScreen.main.bounds.size.height
+        
+        let view = UIImageView(image: nil)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: w),
+            view.heightAnchor.constraint(equalToConstant: h),
+        ])
         
         let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        guard let image = UIImage(contentsOfFile: "\(directory)/\(testName)@2x.png") else { fatalError("unable to find image") }
+        let screenSize = "_\(Int(w))x\(Int(h))"
+        let path = "\(directory)/\(testName ?? "nil")\(screenSize).png"
         
-        let view = UIImageView(image: image)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: image.size.width),
-            view.heightAnchor.constraint(equalToConstant: image.size.height),
-        ])
+        if let image = UIImage(contentsOfFile: path) {
+            view.image = image
+        }
         
         return view
     }

@@ -95,7 +95,6 @@
 		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
 		08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
-		08AF544B293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayItem.swift */; };
@@ -1279,7 +1278,6 @@
 				08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
-				08AF544B293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,

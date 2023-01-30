@@ -18,8 +18,7 @@ final class EventsListSnapshots:
 
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "EventsList"
+        configureCommonOptions()
         makeSutWithViewModelFactory()
         putInViewHierarchy(sut)
     }

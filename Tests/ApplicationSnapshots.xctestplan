@@ -57,13 +57,15 @@
       }
     ],
     "language" : "en",
+    "mainThreadCheckerEnabled" : false,
     "region" : "GB",
     "targetForVariableExpansion" : {
       "containerPath" : "container:Remem.xcodeproj",
       "identifier" : "08D5121927870D2500C2037F",
       "name" : "Application"
     },
-    "uiTestingScreenshotsLifetime" : "keepNever"
+    "uiTestingScreenshotsLifetime" : "keepNever",
+    "userAttachmentLifetime" : "keepNever"
   },
   "testTargets" : [
     {

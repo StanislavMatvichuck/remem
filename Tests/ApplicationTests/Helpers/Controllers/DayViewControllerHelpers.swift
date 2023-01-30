@@ -47,4 +47,10 @@ extension DayDetailsViewControllerTesting {
         sut = container.makeController()
         viewModelFactory = container
     }
+
+    func clearSutAndViewModelFactory() {
+        event = nil
+        sut = nil
+        viewModelFactory = nil
+    }
 }

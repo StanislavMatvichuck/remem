@@ -14,8 +14,7 @@ final class EventInputSnapshots: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "EventInput"
+        configureCommonOptions()
         
         sut = EventInput()
         

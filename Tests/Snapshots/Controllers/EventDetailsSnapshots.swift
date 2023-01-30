@@ -16,8 +16,7 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControlle
     
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "Event"
+        configureCommonOptions()
         makeSutWithViewModelFactory()
         putInViewHierarchy(sut)
     }

@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 26.01.2023.
 //
 
+import iOSSnapshotTestCase
 import UIKit
 
 extension EventDetailsViewControllerTesting {
@@ -23,5 +24,13 @@ extension UIUserInterfaceStyle: CustomStringConvertible {
         @unknown default:
             return "unspecified style"
         }
+    }
+}
+
+extension FBSnapshotTestCase {
+    func configureCommonOptions() {
+        recordMode = false
+        fileNameOptions = [.screenSize]
+        folderName = "\(String(String(describing: self)))".replacingOccurrences(of: "Snapshots", with: "")
     }
 }

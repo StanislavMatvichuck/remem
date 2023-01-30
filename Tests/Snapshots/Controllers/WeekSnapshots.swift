@@ -19,13 +19,12 @@ final class WeekSnapshots:
     
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "Week"
+        configureCommonOptions()
         arrange()
     }
     
     override func tearDown() {
-        sut = nil
+        clearSutAndViewModelFactory()
         executeRunLoop()
         super.tearDown()
     }

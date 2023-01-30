@@ -19,17 +19,14 @@ final class DayDetailsSnapshots:
     
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "Day"
-        
+        configureCommonOptions()
         makeSutWithViewModelFactory()
-        
         putInViewHierarchy(sut)
     }
     
     override func tearDown() {
+        clearSutAndViewModelFactory()
         executeRunLoop()
-        sut = nil
         super.tearDown()
     }
  

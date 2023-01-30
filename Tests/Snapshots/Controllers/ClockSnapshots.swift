@@ -19,17 +19,14 @@ final class ClockSnapshots:
 
     override func setUp() {
         super.setUp()
-        recordMode = false
-        folderName = "Clock"
-
+        configureCommonOptions()
         makeSutWithViewModelFactory()
-
         putInViewHierarchy(sut)
     }
 
     override func tearDown() {
+        clearSutAndViewModelFactory()
         executeRunLoop()
-        sut = nil
         super.tearDown()
     }
 
