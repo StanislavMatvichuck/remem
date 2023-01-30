@@ -31,6 +31,6 @@ extension FBSnapshotTestCase {
     func configureCommonOptions() {
         recordMode = false
         fileNameOptions = [.screenSize]
-        folderName = "\(String(String(describing: self)))".replacingOccurrences(of: "Snapshots", with: "")
+        folderName = "\(String(describing: type(of: self)))".replacingOccurrences(of: "Snapshots", with: "")
     }
 }

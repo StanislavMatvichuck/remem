@@ -103,7 +103,7 @@ final class ZAtlas: FBSnapshotTestCase {
             nil,
             nil,
             nil,
-            "Event/test_singleHappening",
+            "EventDetails/test_singleHappening",
         ])
         
         parent.addSubview(row01)
@@ -137,7 +137,7 @@ final class ZAtlas: FBSnapshotTestCase {
             nil,
             nil,
             nil,
-            "Event/test_singleHappening_dark",
+            "EventDetails/test_singleHappening_dark",
         ])
         
         parent.addSubview(row01)
