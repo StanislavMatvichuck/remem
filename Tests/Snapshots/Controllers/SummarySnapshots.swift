@@ -16,7 +16,7 @@ final class SummarySnapshots: FBSnapshotTestCase {
 
     override func setUp() {
         super.setUp()
-        recordMode = true
+        recordMode = false
         folderName = "Summary"
         let event = Event(name: "Event")
         let viewModel = SummaryViewModel(event: event)

@@ -43,4 +43,16 @@ final class EventDetailsViewControllerTests: XCTestCase, EventDetailsViewControl
     func test_showsControllersInScroll() {
         XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count)
     }
+
+    func test_showsWeek() {
+        XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1)
+    }
+
+    func test_showsClock() {
+        XCTAssertEqual(sut.children.filter { $0 is ClockViewController }.count, 1)
+    }
+
+    func test_showsSummary() {
+        XCTAssertEqual(sut.children.filter { $0 is SummaryViewController }.count, 1)
+    }
 }

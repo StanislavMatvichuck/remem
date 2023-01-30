@@ -35,7 +35,8 @@ final class EventDetailsContainer {
             viewModel: makeViewModel(),
             controllers: [
                 makeWeekViewController(),
-                makeClockViewController()
+                makeClockViewController(),
+                makeSummaryViewController()
             ]
         )
     }
@@ -51,19 +52,27 @@ final class EventDetailsContainer {
         clockViewModelUpdater.add(receiver: controller)
         return controller
     }
+
+    func makeSummaryViewController() -> SummaryViewController {
+        let controller = SummaryViewController(viewModel: makeViewModel())
+//        clockViewModelUpdater.add(receiver: controller)
+        return controller
+    }
 }
 
+// MARK: - ViewModelFactoring
 protocol EventViewModelFactoring { func makeViewModel() -> EventDetailsViewModel }
 protocol WeekViewModelFactoring { func makeViewModel() -> WeekViewModel }
 protocol WeekItemViewModelFactoring { func makeViewModel(day: DayComponents) -> WeekItemViewModel }
 protocol ClockViewModelFactoring { func makeViewModel() -> ClockViewModel }
+protocol SummaryViewModelFactoring { func makeViewModel() -> SummaryViewModel }
 
-// MARK: - ViewModelFactoring
 extension EventDetailsContainer:
     ClockViewModelFactoring,
     EventViewModelFactoring,
     WeekViewModelFactoring,
-    WeekItemViewModelFactoring
+    WeekItemViewModelFactoring,
+    SummaryViewModelFactoring
 {
     func makeViewModel() -> ClockViewModel {
         ClockViewModel(
@@ -95,6 +104,10 @@ extension EventDetailsContainer:
             today: today,
             coordinator: parent.parent.coordinator
         )
+    }
+
+    func makeViewModel() -> SummaryViewModel {
+        SummaryViewModel(event: event)
     }
 }
 
