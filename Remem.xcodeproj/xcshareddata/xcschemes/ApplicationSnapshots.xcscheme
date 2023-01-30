@@ -110,6 +110,12 @@
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:Tests/ApplicationSnapshots.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO">

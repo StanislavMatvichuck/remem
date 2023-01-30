@@ -1,0 +1,81 @@
+{
+  "configurations" : [
+    {
+      "id" : "902E2A9D-6392-4CC1-8AD7-6F03AC9D37C1",
+      "name" : "Ukrainian",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "IMAGE_DIFF_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/failureDiffs_ua"
+          },
+          {
+            "key" : "FB_REFERENCE_IMAGE_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/images_ua"
+          }
+        ],
+        "language" : "uk",
+        "region" : "UA"
+      }
+    },
+    {
+      "id" : "BF7CB92A-9532-418A-B509-EE43A892581C",
+      "name" : "Russian",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "IMAGE_DIFF_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/failureDiffs_ru"
+          },
+          {
+            "key" : "FB_REFERENCE_IMAGE_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/images_ru"
+          }
+        ],
+        "language" : "ru",
+        "region" : "EE"
+      }
+    },
+    {
+      "id" : "08C31EB4-2CBC-44F6-8509-6E7435C6EC14",
+      "name" : "English",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "environmentVariableEntries" : [
+      {
+        "key" : "IMAGE_DIFF_DIR",
+        "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/failureDiffs_en"
+      },
+      {
+        "key" : "FB_REFERENCE_IMAGE_DIR",
+        "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/images_en"
+      }
+    ],
+    "language" : "en",
+    "region" : "GB",
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Remem.xcodeproj",
+      "identifier" : "08D5121927870D2500C2037F",
+      "name" : "Application"
+    },
+    "uiTestingScreenshotsLifetime" : "keepNever"
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "Atlas"
+      ],
+      "target" : {
+        "containerPath" : "container:Remem.xcodeproj",
+        "identifier" : "0850074829216E73007B272C",
+        "name" : "ApplicationSnapshotsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

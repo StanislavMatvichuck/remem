@@ -363,6 +363,7 @@
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* EventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInput.swift; sourceTree = "<group>"; };
+		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* DayViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewControllerHelpers.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
@@ -929,6 +930,7 @@
 		08FEA39E28DC9A4000BAA196 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */,
 				0870EEF92809B81100336759 /* ApplicationTests */,
 				0850074A29216E73007B272C /* Snapshots */,
 				0867A2D628D469F500E0842C /* DataLayerTests */,
