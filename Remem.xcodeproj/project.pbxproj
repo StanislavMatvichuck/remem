@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		080AA96D28D768350038C21A /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA96C28D768350038C21A /* EventRow.swift */; };
+		080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */; };
+		080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417B2986AE3200C1F54F /* SummaryViewModel.swift */; };
+		080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417D2986AEC600C1F54F /* SummaryViewController.swift */; };
+		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
+		080C41822986B69700C1F54F /* StatsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* StatsSnapshots.swift */; };
 		0812D8C2296775E80010C66D /* EventsListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812D8C1296775E80010C66D /* EventsListItemViewModel.swift */; };
 		0816F4462933B8D700F3937A /* DayComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816F4452933B8D700F3937A /* DayComponents.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
@@ -268,6 +273,11 @@
 		080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQueryingCommanding.swift; sourceTree = "<group>"; };
 		080AA96C28D768350038C21A /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		080BF1442884A22C00DDF55F /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
+		080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewControllerTests.swift; sourceTree = "<group>"; };
+		080C417B2986AE3200C1F54F /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		080C417D2986AEC600C1F54F /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		080C417F2986AF4800C1F54F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		080C41812986B69700C1F54F /* StatsSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSnapshots.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
 		0812D8C1296775E80010C66D /* EventsListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListItemViewModel.swift; sourceTree = "<group>"; };
 		0816F4452933B8D700F3937A /* DayComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayComponents.swift; sourceTree = "<group>"; };
@@ -505,6 +515,7 @@
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
+				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -583,6 +594,7 @@
 				0857A019292FD8A900924530 /* DayDetailsSnapshots.swift */,
 				0857A01B292FE66F00924530 /* EventDetailsSnapshots.swift */,
 				0850075529216ECF007B272C /* EventsListSnapshots.swift */,
+				080C41812986B69700C1F54F /* StatsSnapshots.swift */,
 				0857A017292FD73000924530 /* WeekSnapshots.swift */,
 			);
 			path = Controllers;
@@ -660,11 +672,12 @@
 			isa = PBXGroup;
 			children = (
 				086DC6D3288058E70048F22F /* Items */,
-				0868209327BFAD6500551F6A /* Components */,
 				0879AC8F2879B12400D8DD8E /* ClockView */,
+				0868209327BFAD6500551F6A /* Components */,
 				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
+				080C417F2986AF4800C1F54F /* SummaryView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
 			);
 			path = Views;
@@ -729,6 +742,7 @@
 				0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */,
 				081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */,
+				080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */,
 				08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */,
 			);
 			path = ControllersIntegrationTests;
@@ -863,6 +877,7 @@
 				0890627727A0A2520032847C /* EventDetailsViewController.swift */,
 				0812D8BD2966F0910010C66D /* EventsListViewController */,
 				0852C6AC283D66170027EF3E /* WeekViewController.swift */,
+				080C417D2986AEC600C1F54F /* SummaryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1268,6 +1283,7 @@
 				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,
 				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
 				087791992974858300780F60 /* Atlas.swift in Sources */,
+				080C41822986B69700C1F54F /* StatsSnapshots.swift in Sources */,
 				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
 				08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,
@@ -1324,6 +1340,7 @@
 				082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */,
 				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
+				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
@@ -1356,6 +1373,7 @@
 				0823D234289283A8005B4BE3 /* DefaultCoordinator.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
+				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockItemViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -1367,6 +1385,7 @@
 				08FEA39828DC98A600BAA196 /* DayDetailsViewModel.swift in Sources */,
 				0812D8C2296775E80010C66D /* EventsListItemViewModel.swift in Sources */,
 				086E39762981663C00CCE80E /* WeekUpdater.swift in Sources */,
+				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
@@ -1384,6 +1403,7 @@
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* FooterItem.swift in Sources */,
+				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,

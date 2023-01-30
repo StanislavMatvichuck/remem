@@ -16,4 +16,10 @@
 "eventDetails.buttonGoalsInput" = "Configure daily goal";
 "eventDetails.total" = "Total";
 
+"summary.total" = "Total happenings";
+"summary.weekAverage" = "Week average";
+"summary.dayAverage" = "Day average";
+"summary.daysTracked" = "Days tracked";
+"summary.daysSinceLastHappening" = "Days since last happening";
+
 "goalsInput.title" = "Daily goal";
