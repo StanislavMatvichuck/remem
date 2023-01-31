@@ -107,7 +107,7 @@ extension EventDetailsContainer:
     }
 
     func makeViewModel() -> SummaryViewModel {
-        SummaryViewModel(event: event)
+        SummaryViewModel(event: event, today: today)
     }
 }
 

@@ -15,7 +15,7 @@ final class SummaryViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let event = Event(name: "Event")
-        let viewModel = SummaryViewModel(event: event)
+        let viewModel = SummaryViewModel(event: event, today: DayComponents.referenceValue)
         sut = SummaryViewController(viewModel: viewModel)
     }
 

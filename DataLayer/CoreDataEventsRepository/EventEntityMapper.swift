@@ -15,24 +15,20 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
     override public func entityAccessorKey(_ object: Event) -> String { object.id }
 
     override public func convert(_ entity: CDEvent) -> Event? {
-        //
-        // Happenings
-        //
-        var happenings = [Happening]()
-
-        for cdHappening in entity.happenings! {
-            guard let cdHappening = cdHappening as? CDHappening else { continue }
-            let happening = Happening(dateCreated: cdHappening.dateCreated!)
-            happenings.append(happening)
-        }
-
-        return Event(
+        let event = Event(
             id: entity.uuid!,
             name: entity.name!,
-            happenings: happenings,
+            happenings: [],
             dateCreated: entity.dateCreated!,
             dateVisited: entity.dateVisited
         )
+
+        for cdHappening in entity.happenings! {
+            guard let cdHappening = cdHappening as? CDHappening else { continue }
+            event.addHappening(date: cdHappening.dateCreated!)
+        }
+
+        return event
     }
 
     override public func update(_ entity: CDEvent, by model: Event) {
