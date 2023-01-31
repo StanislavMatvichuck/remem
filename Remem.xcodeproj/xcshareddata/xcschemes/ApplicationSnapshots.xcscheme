@@ -143,6 +143,17 @@
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0857B5A229892CBC002B400B"
+               BuildableName = "ApplicationUITests.xctest"
+               BlueprintName = "ApplicationUITests"
+               ReferencedContainer = "container:Remem.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
