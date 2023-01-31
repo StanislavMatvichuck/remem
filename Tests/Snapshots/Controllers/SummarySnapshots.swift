@@ -18,7 +18,7 @@ final class SummarySnapshots: FBSnapshotTestCase {
         super.setUp()
         configureCommonOptions()
         let event = Event(name: "Event")
-        let viewModel = SummaryViewModel(event: event)
+        let viewModel = SummaryViewModel(event: event, today: DayComponents(date: .now))
         sut = SummaryViewController(viewModel: viewModel)
         putInViewHierarchy(sut)
     }

@@ -20,6 +20,7 @@ final class WeekSnapshots:
     override func setUp() {
         super.setUp()
         configureCommonOptions()
+        recordMode = true
         arrange()
     }
     
@@ -75,6 +76,38 @@ final class WeekSnapshots:
         arrange(andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_eventWithHappenings_showsLabels() {
+        addHappeningsAtEachMinute(minutes: 1, dayOffset: 0)
+        addHappeningsAtEachMinute(minutes: 2, dayOffset: 1)
+        addHappeningsAtEachMinute(minutes: 3, dayOffset: 2)
+        addHappeningsAtEachMinute(minutes: 4, dayOffset: 3)
+        addHappeningsAtEachMinute(minutes: 5, dayOffset: 4)
+        addHappeningsAtEachMinute(minutes: 6, dayOffset: 5)
+        addHappeningsAtEachMinute(minutes: 7, dayOffset: 6)
+        
+        sut.viewModel = viewModelFactory.makeViewModel()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_eventWithHappenings_showsLabels_dark() { executeWithDarkMode(testCase: test_eventWithHappenings_showsLabels) }
+    
+    private func addHappeningsAtEachMinute(minutes: Int, dayOffset: Int) {
+        for i in 0 ..< minutes {
+            event.addHappening(date:
+                DayComponents.referenceValue.adding(
+                    components: DateComponents(day: dayOffset, minute: i)
+                ).date
+            )
+        }
+    }
+    
+    private func executeWithDarkMode(testCase: () -> Void) {
+        sut.view.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        testCase()
     }
     
     private func arrange(
