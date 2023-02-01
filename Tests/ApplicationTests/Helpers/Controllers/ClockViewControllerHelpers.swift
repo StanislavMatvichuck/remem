@@ -26,7 +26,7 @@ extension ClockViewControllerTesting {
     func addOneHappening(
         at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
     ) {
-        var today = DayComponents(date: .now).value
+        var today = DayComponents(date: .now).value // DateComponents.value usage02
         today.hour = at.h
         today.minute = at.m
         today.second = at.s

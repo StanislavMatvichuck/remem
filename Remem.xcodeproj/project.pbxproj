@@ -14,7 +14,6 @@
 		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
 		080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* SummarySnapshots.swift */; };
 		0812D8C2296775E80010C66D /* EventsListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812D8C1296775E80010C66D /* EventsListItemViewModel.swift */; };
-		0816F4462933B8D700F3937A /* DayComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816F4452933B8D700F3937A /* DayComponents.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		0823D234289283A8005B4BE3 /* DefaultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823D233289283A8005B4BE3 /* DefaultCoordinator.swift */; };
 		0824D0192981E38E00B6E701 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824D0182981E38E00B6E701 /* Helpers.swift */; };
@@ -82,11 +81,18 @@
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
-		087ED41028D0A4060085A37D /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40F28D0A4060085A37D /* WeekDay.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */; };
+		0887C807298AE5040048EC12 /* EventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C806298AE5040048EC12 /* EventExtensions.swift */; };
+		0887C808298AE5770048EC12 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
+		0887C809298AE5770048EC12 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
+		0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1855298AC8C100DBC78D /* DayTimeline.swift */; };
+		0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C800298AD3590048EC12 /* WeekTimeline.swift */; };
+		0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */; };
+		0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
+		0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */; };
 		088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */; };
 		0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsViewController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
@@ -288,7 +294,6 @@
 		080C41812986B69700C1F54F /* SummarySnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySnapshots.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
 		0812D8C1296775E80010C66D /* EventsListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListItemViewModel.swift; sourceTree = "<group>"; };
-		0816F4452933B8D700F3937A /* DayComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayComponents.swift; sourceTree = "<group>"; };
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		0823D233289283A8005B4BE3 /* DefaultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoordinator.swift; sourceTree = "<group>"; };
@@ -356,10 +361,15 @@
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
-		087ED40F28D0A4060085A37D /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTimelineTests.swift; sourceTree = "<group>"; };
+		0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTimelineTests.swift; sourceTree = "<group>"; };
+		0887C800298AD3590048EC12 /* WeekTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTimeline.swift; sourceTree = "<group>"; };
+		0887C802298AD39E0048EC12 /* WeekIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekIndex.swift; sourceTree = "<group>"; };
+		0887C804298AD9B60048EC12 /* TimelineTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTesting.swift; sourceTree = "<group>"; };
+		0887C806298AE5040048EC12 /* EventExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtensions.swift; sourceTree = "<group>"; };
 		0889669728D88A8E0075A51D /* WidgetUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdater.swift; sourceTree = "<group>"; };
 		088E88C228AF916000400180 /* WeekItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItemViewModel.swift; sourceTree = "<group>"; };
 		088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalRemovedDateDisabled04.xcdatamodel; sourceTree = "<group>"; };
@@ -423,6 +433,8 @@
 		08F97A3F295076DC00AB7051 /* DayItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemViewModelTests.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
+		08FE1855298AC8C100DBC78D /* DayTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTimeline.swift; sourceTree = "<group>"; };
+		08FE1857298AC90900DBC78D /* DayIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,8 +520,6 @@
 			children = (
 				083BECF328D0A31A009157FD /* Event.swift */,
 				087ED40D28D0A3F60085A37D /* Happening.swift */,
-				087ED40F28D0A4060085A37D /* WeekDay.swift */,
-				0816F4452933B8D700F3937A /* DayComponents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -723,6 +733,9 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */,
+				0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */,
+				0887C804298AD9B60048EC12 /* TimelineTesting.swift */,
 				087365FE2930DD0C000F28DE /* ViewModels */,
 				0891377E292BEA3800EFD23D /* Views */,
 				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
@@ -904,7 +917,12 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08FE1855298AC8C100DBC78D /* DayTimeline.swift */,
+				0887C800298AD3590048EC12 /* WeekTimeline.swift */,
+				08FE1857298AC90900DBC78D /* DayIndex.swift */,
+				0887C802298AD39E0048EC12 /* WeekIndex.swift */,
 				08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */,
+				0887C806298AE5040048EC12 /* EventExtensions.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
@@ -1311,8 +1329,6 @@
 			files = (
 				08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
-				087ED41028D0A4060085A37D /* WeekDay.swift in Sources */,
-				0816F4462933B8D700F3937A /* DayComponents.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1376,6 +1392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				082A19E02945DEF900D32B0A /* EventsListViewModelTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				08292EC9292E5B8500F46A32 /* EventsListViewControllerHelpers.swift in Sources */,
@@ -1391,6 +1408,7 @@
 				086136502934D64300F1B780 /* WeekViewControllerHelpers.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */,
+				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
 				0857A01E292FFD5900924530 /* ClockViewControllerHelpers.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */,
@@ -1401,6 +1419,7 @@
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
+				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,
 				08CEA4642938B91700967BB4 /* ClockStrategyTests.swift in Sources */,
 				087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */,
 			);
@@ -1420,6 +1439,7 @@
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */,
+				0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
@@ -1429,10 +1449,13 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				0823D234289283A8005B4BE3 /* DefaultCoordinator.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
+				0887C808298AE5770048EC12 /* DayIndex.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
+				0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockItemViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
+				0887C807298AE5040048EC12 /* EventExtensions.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				08EB982929683E3C008C263A /* EventsListItemProviding.swift in Sources */,
@@ -1465,6 +1488,7 @@
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
+				0887C809298AE5770048EC12 /* WeekIndex.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,

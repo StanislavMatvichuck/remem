@@ -93,22 +93,6 @@ public extension Event {
 
         return happeningDeleted
     }
-
-    func happenings(forDayComponents day: DayComponents) -> [Happening] {
-        let startOfDay = Calendar.current.startOfDay(for: day.date)
-
-        var endOfDayComponents = day.value
-        endOfDayComponents.hour = 23
-        endOfDayComponents.minute = 59
-        endOfDayComponents.second = 59
-
-        guard let endOfDayDate = Calendar.current.date(from: endOfDayComponents) else { return [] }
-
-        return happenings.filter {
-            $0.dateCreated >= startOfDay &&
-                $0.dateCreated < endOfDayDate
-        }
-    }
 }
 
 // MARK: - Equatable
