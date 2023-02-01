@@ -17,14 +17,14 @@ final class DayDetailsViewModelTests: XCTestCase {
     }
 
     func test_eventWithHappeningAtSameDay_showsHappening() {
-        let happening = Happening(dateCreated: DayComponents.referenceValue.date)
+        let happening = Happening(dateCreated: DayIndex.referenceValue.date)
         let sut = make(happenings: [happening])
 
         XCTAssertEqual(sut.items.count, 1)
     }
 
     func test_eventWithHappeningAtAnotherDay_showsNothing() {
-        let date = DayComponents.referenceValue.adding(components: DateComponents(day: 1)).date
+        let date = DayIndex.referenceValue.adding(dateComponents: DateComponents(day: 1)).date
         let happening = Happening(dateCreated: date)
         let sut = make(happenings: [happening])
 
@@ -32,7 +32,7 @@ final class DayDetailsViewModelTests: XCTestCase {
     }
 
     private func make(happenings: [Happening] = []) -> DayDetailsViewModel {
-        let day = DayComponents.referenceValue
+        let day = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
         for happening in happenings {
             event.addHappening(date: happening.dateCreated)

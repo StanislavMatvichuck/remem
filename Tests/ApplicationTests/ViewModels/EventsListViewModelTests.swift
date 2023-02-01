@@ -12,7 +12,7 @@ import XCTest
 final class EventsListViewModelTests: XCTestCase {
     func test_hasNumberOfSections() {
         let sut = EventsListViewModel(
-            today: DayComponents.referenceValue,
+            today: DayIndex.referenceValue,
             commander: EventsCommandingStub(),
             sections: [[], [], []]
         )

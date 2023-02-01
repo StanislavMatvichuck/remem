@@ -14,7 +14,7 @@ struct DayDetailsViewModel {
     let cancel = String(localizationId: "button.cancel")
     let edit = String(localizationId: "button.edit")
 
-    private let day: DayComponents
+    private let day: DayIndex
     private let commander: EventsCommanding
     private let event: Event
 
@@ -26,7 +26,7 @@ struct DayDetailsViewModel {
     var readableTime: String?
 
     init(
-        day: DayComponents,
+        day: DayIndex,
         event: Event,
         commander: EventsCommanding,
         itemFactory: DayItemViewModelFactoring
@@ -41,7 +41,7 @@ struct DayDetailsViewModel {
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
 
-        let happenings = event.happenings(forDayComponents: day)
+        let happenings = event.happenings(forDayIndex: day)
 
         self.items = happenings.map {
             itemFactory.makeViewModel(happening: $0)

@@ -26,15 +26,12 @@ extension ClockViewControllerTesting {
     func addOneHappening(
         at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
     ) {
-        var today = DayComponents(date: .now).value // DateComponents.value usage02
+        var today = calendar.dateComponents([.hour, .minute, .second], from: .now)
         today.hour = at.h
         today.minute = at.m
         today.second = at.s
 
-        guard let date = Calendar.current.date(from: today)
-        else { fatalError("error making time for insertion") }
-
-        event.addHappening(date: date)
+        event.addHappening(date: calendar.date(from: today)!)
     }
 
     func sendEventUpdatesToController() {
@@ -43,7 +40,7 @@ extension ClockViewControllerTesting {
 
     func makeSutWithViewModelFactory() {
         event = Event(name: "Event")
-        let today = DayComponents.referenceValue
+        let today = DayIndex.referenceValue
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: today)

@@ -14,7 +14,7 @@ class EventItemViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let today = DayComponents.referenceValue
+        let today = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: today.date)
 
         sut = EventItemViewModel(

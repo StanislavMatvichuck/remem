@@ -53,7 +53,7 @@ final class DayDetailsSnapshots:
     }
     
     private func arrangeSingleHappening() {
-        addHappening(at: DayComponents.referenceValue.date)
+        addHappening(at: DayIndex.referenceValue.date)
         sendEventUpdatesToController()
     }
     

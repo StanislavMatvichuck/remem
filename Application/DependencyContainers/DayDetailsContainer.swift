@@ -10,10 +10,10 @@ import Domain
 final class DayDetailsContainer {
     let parent: EventDetailsContainer
     let event: Event
-    let day: DayComponents
+    let day: DayIndex
     let updater: DayDetailsUpdater
 
-    init(parent: EventDetailsContainer, event: Event, day: DayComponents) {
+    init(parent: EventDetailsContainer, event: Event, day: DayIndex) {
         self.parent = parent
         self.event = event
         self.day = day

@@ -67,9 +67,9 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
         let createdRandomOffset = Int.random(in: 0 ..< 1000)
         let todayRandomOffset = Int.random(in: 0 ..< 1000)
 
-        let created = DayComponents.referenceValue.adding(components: DateComponents(day: createdRandomOffset))
+        let created = DayIndex.referenceValue.adding(dateComponents: DateComponents(day: createdRandomOffset))
         let event = Event(name: "Event", dateCreated: created.date)
-        let today = created.adding(components: DateComponents(day: todayRandomOffset))
+        let today = created.adding(dateComponents: DateComponents(day: todayRandomOffset))
 
         sut = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
@@ -103,9 +103,9 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     }
 
     func test_hasHappening_firstDayShowsHappeningTime() {
-        let today = DayComponents.referenceValue
-        let event = Event(name: "Event", dateCreated: DayComponents.referenceValue.date)
-        event.addHappening(date: DayComponents.referenceValue.date)
+        let today = DayIndex.referenceValue
+        let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
 
         sut = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()

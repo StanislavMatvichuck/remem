@@ -11,8 +11,8 @@ import UIKit
 class DefaultCoordinator {
     enum NavigationState {
         case eventsList
-        case eventDetails(today: DayComponents, event: Event)
-        case dayDetails(day: DayComponents)
+        case eventDetails(today: DayIndex, event: Event)
+        case dayDetails(day: DayIndex)
     }
 
     let navController: UINavigationController

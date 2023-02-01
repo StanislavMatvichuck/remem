@@ -14,7 +14,7 @@ protocol EventsListViewModelFactoring {
 struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
-    private let today: DayComponents
+    private let today: DayIndex
     private let commander: EventsCommanding
 
     var sections: [[EventsListItemViewModel]]
@@ -24,7 +24,7 @@ struct EventsListViewModel {
     var inputContent: String = ""
 
     init(
-        today: DayComponents,
+        today: DayIndex,
         commander: EventsCommanding,
         sections: [[EventsListItemViewModel]]
     ) {

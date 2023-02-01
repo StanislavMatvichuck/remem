@@ -46,7 +46,7 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControlle
     }
     
     private func addHappening() {
-        event.addHappening(date: DayComponents.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
     }
     
     private func sendEventUpdatesToController() {

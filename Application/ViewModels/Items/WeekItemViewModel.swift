@@ -8,10 +8,17 @@
 import Domain
 import Foundation
 
+extension DayIndex {
+    var dayInMonth: Int {
+        let components = calendar.dateComponents([.day], from: date)
+        return components.day ?? 1
+    }
+}
+
 struct WeekItemViewModel {
     private let event: Event
-    private let day: DayComponents
-    private let today: DayComponents
+    private let day: DayIndex
+    private let today: DayIndex
     private let coordinator: DefaultCoordinator
 
     let isToday: Bool
@@ -22,8 +29,8 @@ struct WeekItemViewModel {
 
     init(
         event: Event,
-        day: DayComponents,
-        today: DayComponents,
+        day: DayIndex,
+        today: DayIndex,
         coordinator: DefaultCoordinator
     ) {
         self.day = day
@@ -35,11 +42,11 @@ struct WeekItemViewModel {
         formatter.dateStyle = .none
         formatter.timeStyle = .short
 
-        self.items = event.happenings(forDayComponents: day).map { happening in
+        self.items = event.happenings(forDayIndex: day).map { happening in
             formatter.string(from: happening.dateCreated)
         }
 
-        self.dayNumber = String(day.value.day ?? 0)
+        self.dayNumber = String(day.dayInMonth)
         self.amount = String(items.count)
         self.isToday = day == today
         self.date = day.date

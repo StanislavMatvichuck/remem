@@ -19,7 +19,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     override func setUp() {
         super.setUp()
 
-        let day = DayComponents.referenceValue
+        let day = DayIndex.referenceValue
         event = Event(name: "Event", dateCreated: day.date)
 
         let dayContainer = ApplicationContainer(testingInMemoryMode: true)
@@ -106,14 +106,14 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     }
 
     func test_singleHappening_showsTime() {
-        addHappening(at: DayComponents.referenceValue.date)
+        addHappening(at: DayIndex.referenceValue.date)
         sendEventUpdatesToController()
 
         assertCellHasTimeText(at: sut.firstIndex)
     }
 
     func test_singleHappening_hasSwipeToDelete() {
-        addHappening(at: DayComponents.referenceValue.date)
+        addHappening(at: DayIndex.referenceValue.date)
         sendEventUpdatesToController()
 
         let configuration = sut.table.delegate?.tableView?(
@@ -129,7 +129,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
 
     /// Might be refactored with next method
     func test_singleHappening_swipedToDelete_removesHappeningFromList() {
-        let date = DayComponents.referenceValue.date
+        let date = DayIndex.referenceValue.date
         addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 0)))
         addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 1)))
         addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 2)))
@@ -151,7 +151,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     }
 
     func test_manyHappenings_showsManyHappenings() {
-        let date = DayComponents.referenceValue.date
+        let date = DayIndex.referenceValue.date
         addHappening(at: date.addingTimeInterval(1))
         addHappening(at: date.addingTimeInterval(2))
         addHappening(at: date.addingTimeInterval(3))
@@ -170,7 +170,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     func test_createHappeningAlertPresented_scrollingPicker_updatesTimeText() {
         tap(sut.navigationItem.leftBarButtonItem!)
 
-        sut.viewModel.update(pickerDate: DayComponents.referenceValue.date)
+        sut.viewModel.update(pickerDate: DayIndex.referenceValue.date)
 
         XCTAssertEqual(sut.timeInput.text, "00:00")
     }

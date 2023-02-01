@@ -32,8 +32,8 @@ protocol WeekViewControllerTesting: AnyObject {
 
 extension WeekViewControllerTesting {
     func makeSutWithViewModelFactory(
-        eventDateCreated: DayComponents = .referenceValue,
-        today: DayComponents = .referenceValue
+        eventDateCreated: DayIndex = .referenceValue,
+        today: DayIndex = .referenceValue
     ) {
         event = Event(name: "Event", dateCreated: eventDateCreated.date)
         let container = ApplicationContainer(testingInMemoryMode: true)

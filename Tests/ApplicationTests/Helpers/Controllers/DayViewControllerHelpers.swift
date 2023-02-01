@@ -38,7 +38,7 @@ extension DayDetailsViewControllerTesting {
     }
 
     func makeSutWithViewModelFactory() {
-        let day = DayComponents.referenceValue
+        let day = DayIndex.referenceValue
         event = Event(name: "Event")
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()

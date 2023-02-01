@@ -8,17 +8,17 @@
 import Domain
 
 protocol EventDetailsContainerFactoring {
-    func makeContainer(event: Event, today: DayComponents) -> EventDetailsContainer
+    func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer
 }
 
 final class EventDetailsContainer {
     let parent: EventsListContainer
     let event: Event
-    let today: DayComponents
+    let today: DayIndex
     let clockViewModelUpdater: ClockUpdater
     let weekViewModelUpdater: WeekUpdater
 
-    init(parent: EventsListContainer, event: Event, today: DayComponents) {
+    init(parent: EventsListContainer, event: Event, today: DayIndex) {
         self.parent = parent
         self.event = event
         self.today = today
@@ -63,7 +63,7 @@ final class EventDetailsContainer {
 // MARK: - ViewModelFactoring
 protocol EventViewModelFactoring { func makeViewModel() -> EventDetailsViewModel }
 protocol WeekViewModelFactoring { func makeViewModel() -> WeekViewModel }
-protocol WeekItemViewModelFactoring { func makeViewModel(day: DayComponents) -> WeekItemViewModel }
+protocol WeekItemViewModelFactoring { func makeViewModel(day: DayIndex) -> WeekItemViewModel }
 protocol ClockViewModelFactoring { func makeViewModel() -> ClockViewModel }
 protocol SummaryViewModelFactoring { func makeViewModel() -> SummaryViewModel }
 
@@ -97,7 +97,7 @@ extension EventDetailsContainer:
         )
     }
 
-    func makeViewModel(day: DayComponents) -> WeekItemViewModel {
+    func makeViewModel(day: DayIndex) -> WeekItemViewModel {
         WeekItemViewModel(
             event: event,
             day: day,
@@ -112,11 +112,11 @@ extension EventDetailsContainer:
 }
 
 protocol DayDetailsContainerFactoring {
-    func makeContainer(day: DayComponents) -> DayDetailsContainer
+    func makeContainer(day: DayIndex) -> DayDetailsContainer
 }
 
 extension EventDetailsContainer: DayDetailsContainerFactoring {
-    func makeContainer(day: DayComponents) -> DayDetailsContainer {
+    func makeContainer(day: DayIndex) -> DayDetailsContainer {
         DayDetailsContainer(parent: self, event: event, day: day)
     }
 }

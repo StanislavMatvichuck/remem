@@ -14,7 +14,7 @@ class WeekItemViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let day = DayComponents.referenceValue
+        let day = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
 
         sut = WeekItemViewModel(
@@ -38,8 +38,8 @@ class WeekItemViewModelTests: XCTestCase {
     }
 
     func test_dayAndTodayAreDifferent_isTodayFalse() {
-        let day = DayComponents.referenceValue
-        let dayLater = day.adding(components: DateComponents(hour: 24))
+        let day = DayIndex.referenceValue
+        let dayLater = day.adding(dateComponents: DateComponents(hour: 24))
         let event = Event(name: "Event", dateCreated: day.date)
         let sut = WeekItemViewModel(
             event: event,
@@ -56,7 +56,7 @@ class WeekItemViewModelTests: XCTestCase {
     }
 
     func test_oneHappening_showsHappeningTime() {
-        let day = DayComponents.referenceValue
+        let day = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
         event.addHappening(date: day.date)
 

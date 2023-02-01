@@ -22,58 +22,17 @@ public enum WeekDay: Int, CaseIterable {
     }
 }
 
-/// must be replaced buy `DateDayIndex` -> for what? why?
-/// but very carefully with attention to each code refactoring
-/// trying not to break existing tests
-struct DayComponents: Equatable, CustomDebugStringConvertible {
-    public let date: Date
-    public let value: DateComponents
-    /// is a computed property and used only for comparison
-    /// only 2 places in code that use `value`
-
-    /// can be deleted?
-    public init(date: Date) {
-        self.date = date
-        value = Calendar.current.dateComponents([.year, .month, .day], from: date)
-    }
-
-    /// can be deleted
-    public var europeanWeekDay: WeekDay { WeekDay.make(date) }
-
-    /// can be deleted
-    public var debugDescription: String { "\(date.debugDescription) \(value.debugDescription)" }
-
-    /// this is implemented already better
-    public static func == (lhs: DayComponents, rhs: DayComponents) -> Bool {
-        return lhs.value == rhs.value
-    }
-
-    /// heavily used by tests
-    public static let referenceValue: DayComponents = {
-        let referenceDay = DateComponents(year: 2001, month: 1, day: 1)
-        let referenceDate = Calendar.current.date(from: referenceDay)!
-        let day = DayComponents(date: referenceDate)
-        return day
-    }()
-
-    /// heavily used by tests
-    /// used in WeekViewModel
-    public func adding(components: DateComponents) -> DayComponents {
-        DayComponents(date: Calendar.current.date(byAdding: components, to: date)!)
-    }
-}
-
 extension Event {
-    func happenings(forDayComponents day: DayComponents) -> [Happening] {
+    func happenings(forDayIndex day: DayIndex) -> [Happening] {
         let startOfDay = Calendar.current.startOfDay(for: day.date)
-        let startOfDayComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfDay)
+        let startOfDayIndex = Calendar.current.dateComponents([.year, .month, .day], from: startOfDay)
 
-        var endOfDayComponents = startOfDayComponents
-        endOfDayComponents.hour = 23
-        endOfDayComponents.minute = 59
-        endOfDayComponents.second = 59
+        var endOfDayIndex = startOfDayIndex
+        endOfDayIndex.hour = 23
+        endOfDayIndex.minute = 59
+        endOfDayIndex.second = 59
 
-        guard let endOfDayDate = Calendar.current.date(from: endOfDayComponents) else { return [] }
+        guard let endOfDayDate = Calendar.current.date(from: endOfDayIndex) else { return [] }
 
         return happenings.filter {
             $0.dateCreated >= startOfDay &&

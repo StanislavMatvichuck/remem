@@ -139,7 +139,7 @@ final class SummaryViewModelTests: XCTestCase {
 
         for happening in happenings { event.addHappening(date: happening.dateCreated) }
 
-        sut = SummaryViewModel(event: event, today: DayComponents(date: .now))
+        sut = SummaryViewModel(event: event, today: DayIndex(.now))
     }
 
     private var yesterday: Date {

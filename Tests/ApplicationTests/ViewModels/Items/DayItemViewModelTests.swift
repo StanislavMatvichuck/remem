@@ -13,7 +13,7 @@ class DayItemViewModelTests: XCTestCase {
     private var sut: DayItemViewModel!
 
     override func setUp() {
-        let created = DayComponents.referenceValue
+        let created = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: created.date)
         let happening = event.addHappening(date: created.date)
 

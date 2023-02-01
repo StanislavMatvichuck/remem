@@ -10,7 +10,7 @@ import Foundation
 
 struct WeekViewModel {
     private let upcomingWeeksCount = 3
-    private let today: DayComponents
+    private let today: DayIndex
     private let coordinator: DefaultCoordinator
     private let event: Event
 
@@ -19,7 +19,7 @@ struct WeekViewModel {
     var scrollToIndex: Int = 0
 
     init(
-        today: DayComponents,
+        today: DayIndex,
         event: Event,
         coordinator: DefaultCoordinator,
         itemFactory: WeekItemViewModelFactoring
@@ -38,7 +38,7 @@ struct WeekViewModel {
                 from: event.dateCreated
             )
             let date = cal.date(from: startOfWeekDateComponents)!
-            return DayComponents(date: date)
+            return DayIndex(date)
         }()
 
         let startOfWeekDayToday = {
@@ -48,7 +48,7 @@ struct WeekViewModel {
                 from: today.date
             )
             let date = cal.date(from: startOfWeekDateComponents)!
-            return DayComponents(date: date)
+            return DayIndex(date)
         }()
 
         let weeksBetweenTodayAndEventCreationDay: Int = {
@@ -65,12 +65,13 @@ struct WeekViewModel {
         var viewModels = [WeekItemViewModel]()
 
         for addedDay in 0 ..< daysToShow {
-            let cellDay = startOfWeekDayCreated.adding(components: DateComponents(day: addedDay))
-            let vm = itemFactory.makeViewModel(day: cellDay)
+            let day = DateComponents(day: addedDay)
+            let cellDay = calendar.date(byAdding: day, to: startOfWeekDayCreated.date)!
+            let vm = itemFactory.makeViewModel(day: DayIndex(cellDay))
 
             viewModels.append(vm)
 
-            if cellDay == startOfWeekDayToday {
+            if cellDay == startOfWeekDayToday.date {
                 scrollToIndex = addedDay
             }
         }

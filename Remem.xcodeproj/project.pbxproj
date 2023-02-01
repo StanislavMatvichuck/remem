@@ -733,9 +733,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
-				0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */,
-				0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */,
-				0887C804298AD9B60048EC12 /* TimelineTesting.swift */,
+				0887C812298B0C460048EC12 /* Timelines */,
 				087365FE2930DD0C000F28DE /* ViewModels */,
 				0891377E292BEA3800EFD23D /* Views */,
 				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
@@ -772,6 +770,16 @@
 				087ED41428D0A4F20085A37D /* EventTests.swift */,
 			);
 			path = DomainTests;
+			sourceTree = "<group>";
+		};
+		0887C812298B0C460048EC12 /* Timelines */ = {
+			isa = PBXGroup;
+			children = (
+				0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */,
+				0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */,
+				0887C804298AD9B60048EC12 /* TimelineTesting.swift */,
+			);
+			path = Timelines;
 			sourceTree = "<group>";
 		};
 		0891377B292BE55600EFD23D /* ControllersIntegrationTests */ = {

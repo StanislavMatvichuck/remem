@@ -56,7 +56,7 @@ extension EventsListContainer:
     FooterItemViewModeFactoring
 {
     func makeEventsListViewModel(events: [Event]) -> EventsListViewModel {
-        let today = DayComponents(date: .now)
+        let today = DayIndex(.now)
         let footerVm = makeFooterItemViewModel(eventsCount: events.count)
         let hintVm = makeHintItemViewModel(events: events)
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text
@@ -91,7 +91,7 @@ extension EventsListContainer:
 
     func makeEventItemViewModel(
         event: Event,
-        today: DayComponents,
+        today: DayIndex,
         hintEnabled: Bool
     ) -> EventItemViewModel {
         EventItemViewModel(
@@ -105,7 +105,7 @@ extension EventsListContainer:
 }
 
 extension EventsListContainer: EventDetailsContainerFactoring {
-    func makeContainer(event: Event, today: DayComponents) -> EventDetailsContainer {
+    func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer {
         EventDetailsContainer(parent: self, event: event, today: today)
     }
 }

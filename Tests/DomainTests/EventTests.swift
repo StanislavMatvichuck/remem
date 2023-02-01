@@ -42,7 +42,7 @@ class EventTests: XCTestCase {
     }
 
     func test_initWithNameAndDate() {
-        let dateCreated = DayComponents.referenceValue.date
+        let dateCreated = DayIndex.referenceValue.date
         let sut = Event(name: "Event", dateCreated: dateCreated)
 
         XCTAssertEqual(sut.name, "Event")
@@ -88,7 +88,7 @@ class EventTests: XCTestCase {
     func test_hasHappeningAtDayOfCreation_getHappeningsForDay_returnsOne() {
         let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
 
-        let happeningsForFirstDay = sut.happenings(forDayComponents: dayOfCreation)
+        let happeningsForFirstDay = sut.happenings(forDayIndex: dayOfCreation)
 
         XCTAssertEqual(happeningsForFirstDay.count, 1)
     }
@@ -97,13 +97,13 @@ class EventTests: XCTestCase {
         let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
 
         let nextDay = dayOfCreation.adding(components: DateComponents(day: 1))
-        let happeningsForFirstDay = sut.happenings(forDayComponents: nextDay)
+        let happeningsForFirstDay = sut.happenings(forDayIndex: nextDay)
 
         XCTAssertEqual(happeningsForFirstDay.count, 0)
     }
 
-    private func arrangeWithOneHappeningOneHourAfterCreation() -> (Event, DayComponents) {
-        let day = DayComponents.referenceValue
+    private func arrangeWithOneHappeningOneHourAfterCreation() -> (Event, DayIndex) {
+        let day = DayIndex.referenceValue
         let date = day.date
         let sut = Event(name: "Event", dateCreated: date)
         sut.addHappening(date: date.addingTimeInterval(60 * 60))

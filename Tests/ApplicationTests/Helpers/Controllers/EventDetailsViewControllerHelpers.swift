@@ -16,7 +16,7 @@ protocol EventDetailsViewControllerTesting: AnyObject {
 
 extension EventDetailsViewControllerTesting {
     func makeSutWithViewModelFactory() {
-        let today = DayComponents.referenceValue
+        let today = DayIndex.referenceValue
         event = Event(name: "Event", dateCreated: today.date)
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()

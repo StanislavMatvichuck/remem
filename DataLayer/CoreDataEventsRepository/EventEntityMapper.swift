@@ -45,20 +45,17 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
 
         for existingCdHappening in entity.happenings! { context.delete(existingCdHappening as! NSManagedObject) }
 
-        var cdHappenings = [CDHappening]()
-
-        for happening in model.happenings {
-            let newCdHappening = CDHappening(
+        let mappedHappenings = model.happenings.map {
+            let new = CDHappening(
                 entity: CDHappening.entity(),
                 insertInto: context
             )
-            newCdHappening.dateCreated = happening.dateCreated
-            newCdHappening.value = happening.value
-            newCdHappening.event = entity
-
-            cdHappenings.append(newCdHappening)
+            new.dateCreated = $0.dateCreated
+            new.value = $0.value
+            new.event = entity
+            return new
         }
 
-        entity.happenings = NSOrderedSet(array: cdHappenings)
+        entity.happenings = NSOrderedSet(array: mappedHappenings)
     }
 }

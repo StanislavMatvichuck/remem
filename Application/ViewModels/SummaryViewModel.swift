@@ -52,7 +52,7 @@ struct SummaryViewModel {
     private let event: Event
     let items: [SummaryRow]
 
-    init(event: Event, today: DayComponents) {
+    init(event: Event, today: DayIndex) {
         self.event = event
 
         let totalAmount = String(

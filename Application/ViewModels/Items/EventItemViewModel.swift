@@ -11,7 +11,7 @@ import Foundation
 protocol EventItemViewModelFactoring {
     func makeEventItemViewModel(
         event: Event,
-        today: DayComponents,
+        today: DayIndex,
         hintEnabled: Bool
     ) -> EventItemViewModel
 }
@@ -21,7 +21,7 @@ struct EventItemViewModel {
     let delete = String(localizationId: "button.delete")
 
     private let event: Event
-    private let today: DayComponents
+    private let today: DayIndex
     private let coordinator: DefaultCoordinator
     private let commander: EventsCommanding
 
@@ -32,7 +32,7 @@ struct EventItemViewModel {
 
     init(
         event: Event,
-        today: DayComponents,
+        today: DayIndex,
         hintEnabled: Bool,
         coordinator: DefaultCoordinator,
         commander: EventsCommanding
@@ -45,7 +45,7 @@ struct EventItemViewModel {
         self.name = event.name
         self.hintEnabled = hintEnabled
         self.amount = {
-            let todayHappeningsCount = event.happenings(forDayComponents: today).count
+            let todayHappeningsCount = event.happenings(forDayIndex: today).count
             return String(todayHappeningsCount)
         }()
     }
