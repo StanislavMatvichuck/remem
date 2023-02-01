@@ -50,6 +50,7 @@ class WeekViewController: UIViewController {
     }
 
     private func setInitialScrollPosition() {
+        viewRoot.collection.layoutIfNeeded()
         viewRoot.collection.scrollToItem(
             at: IndexPath(row: viewModel.scrollToIndex, section: 0),
             at: .left,
@@ -86,15 +87,5 @@ extension WeekViewController:
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.items[indexPath.row].select()
-    }
-
-    // UICollectionViewDelegateFlowLayout
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        CGSize(width: collectionView.bounds.width / 7,
-               height: collectionView.bounds.height)
     }
 }

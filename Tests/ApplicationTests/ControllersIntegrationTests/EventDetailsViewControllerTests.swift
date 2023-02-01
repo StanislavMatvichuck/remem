@@ -35,7 +35,7 @@ final class EventDetailsViewControllerTests: XCTestCase, EventDetailsViewControl
 
         XCTAssertFalse(sut.viewModel.isVisited, "precondition")
 
-        executeRunLoop()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.1))
 
         XCTAssertTrue(sut.viewModel.isVisited)
     }

@@ -14,6 +14,7 @@ class WeekView: UIView {
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
+        layout.itemSize = WeekItem.layoutSize
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +22,12 @@ class WeekView: UIView {
         view.isPagingEnabled = true
         view.backgroundColor = .clear
         view.register(WeekItem.self, forCellWithReuseIdentifier: WeekItem.reuseIdentifier)
+        view.horizontalScrollIndicatorInsets = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: -UIHelper.delta1,
+            right: 0
+        )
 
         return view
     }()
@@ -64,27 +71,14 @@ class WeekView: UIView {
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-}
 
-// MARK: - Private
-extension WeekView {
     private func configureLayout() {
-        addSubview(collection)
-        addSubview(weekdaysLine)
+        let stack = UIStackView(al: true)
+        stack.axis = .vertical
+        stack.addArrangedSubview(collection)
+        stack.addArrangedSubview(weekdaysLine)
+        addAndConstrain(stack)
 
-        let height = UIScreen.main.bounds.height / 3
-
-        NSLayoutConstraint.activate([
-            collection.heightAnchor.constraint(equalToConstant: height),
-
-            collection.topAnchor.constraint(equalTo: topAnchor, constant: UIHelper.delta1),
-            collection.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collection.trailingAnchor.constraint(equalTo: trailingAnchor),
-
-            weekdaysLine.topAnchor.constraint(equalTo: collection.bottomAnchor),
-            weekdaysLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            weekdaysLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            weekdaysLine.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIHelper.spacing),
-        ])
+        collection.heightAnchor.constraint(equalToConstant: WeekItem.layoutSize.height).isActive = true
     }
 }

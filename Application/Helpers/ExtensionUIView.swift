@@ -19,6 +19,22 @@ extension UIView {
         ])
     }
 
+    func addAndConstrain(
+        _ subview: UIView,
+        top: CGFloat = 0,
+        left: CGFloat = 0,
+        right: CGFloat = 0,
+        bottom: CGFloat = 0
+    ) {
+        addSubview(subview)
+        NSLayoutConstraint.activate([
+            subview.leadingAnchor.constraint(equalTo: leadingAnchor, constant: left),
+            subview.topAnchor.constraint(equalTo: topAnchor, constant: top),
+            subview.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -right),
+            subview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottom),
+        ])
+    }
+
     /// Initializer made to shorten programmatic `UIView` creation
     /// - Parameter al: AutoLayout usage flag
     convenience init(al: Bool) {

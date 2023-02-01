@@ -44,17 +44,17 @@ final class SummaryView: UIView {
             )
         }
 
-        addSpacing()
+        verticalStack.addArrangedSubview(makeSpacing())
     }
 
     private func removeAllRows() {
         for view in verticalStack.arrangedSubviews { view.removeFromSuperview() }
     }
 
-    private func addSpacing() {
+    private func makeSpacing() -> UIView {
         let spacing = UIView(al: true)
         spacing.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-        verticalStack.addArrangedSubview(spacing)
+        return spacing
     }
 
     private func makeRow(left: UILabel, right: UILabel) -> UIStackView {
