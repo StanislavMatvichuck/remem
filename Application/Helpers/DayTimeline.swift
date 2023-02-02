@@ -40,6 +40,8 @@ struct DayTimeline<Element>: RandomAccessCollection {
         }
     }
     
+    subscript(i: Int) -> Element? { self[startIndex.adding(days: i)] }
+    
     func index(after i: DayIndex) -> DayIndex {
         let nextDay = calendar.date(byAdding: DateComponents(day: 1), to: i.date)!
         return DayIndex(nextDay)

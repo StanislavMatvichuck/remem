@@ -68,7 +68,7 @@ extension WeekViewController:
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int
     {
-        viewModel.items.count
+        viewModel.timeline.count
     }
 
     func collectionView(
@@ -80,12 +80,12 @@ extension WeekViewController:
                 withReuseIdentifier: WeekItem.reuseIdentifier,
                 for: indexPath) as? WeekItem
         else { fatalError("cell type") }
-        cell.viewModel = viewModel.items[indexPath.row]
+        cell.viewModel = viewModel.timeline[indexPath.row]
         return cell
     }
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.items[indexPath.row].select()
+        viewModel.timeline[indexPath.row]?.select()
     }
 }

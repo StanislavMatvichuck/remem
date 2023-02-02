@@ -50,14 +50,14 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     }
 
     func test_lastDayIsSunday() {
-        let daysCount = sut.viewModel.items.count
+        let daysCount = sut.viewModel.timeline.count
         let lastCellIndex = IndexPath(row: daysCount - 1, section: 0)
 
         XCTAssertEqual(dayOfWeek(at: lastCellIndex), WeekDay.sunday)
     }
 
     func test_hasTodayDay() {
-        let todays = sut.viewModel.items.filter { $0.isToday }
+        let todays = sut.viewModel.timeline.filter { ($0?.isToday)! }
 
         XCTAssertEqual(todays.count, 1)
     }
@@ -116,7 +116,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     }
 
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
-        let vm = sut.viewModel.items[index.row]
+        let vm = sut.viewModel.timeline[index.row]!
 
         let dayOfWeekNumber = Calendar.current.dateComponents(
             [.weekday],

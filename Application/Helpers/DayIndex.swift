@@ -9,7 +9,6 @@ import Foundation
 
 let calendar = Calendar.current
 
-/// passes some tests
 struct DayIndex {
     public let date: Date
 
@@ -36,6 +35,16 @@ extension DayIndex: CustomDebugStringConvertible {
             return f
         }()
 
-        return dateFormatter.string(from: self.date)
+        return dateFormatter.string(from: date)
     }
+}
+
+extension DayIndex {
+    func adding(days: Int) -> DayIndex {
+        DayIndex(calendar.date(byAdding: DateComponents(day: days), to: date)!)
+    }
+}
+
+extension WeekIndex {
+    var dayIndex: DayIndex { DayIndex(date) }
 }

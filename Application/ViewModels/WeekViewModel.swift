@@ -9,14 +9,13 @@ import Domain
 import Foundation
 
 struct WeekViewModel {
-    private let upcomingWeeksCount = 3
     private let today: DayIndex
     private let coordinator: DefaultCoordinator
     private let event: Event
 
-    let items: [WeekItemViewModel]
     let itemFactory: WeekItemViewModelFactoring
     var scrollToIndex: Int = 0
+    var timeline: DayTimeline<WeekItemViewModel>
 
     init(
         today: DayIndex,
@@ -29,53 +28,22 @@ struct WeekViewModel {
         self.coordinator = coordinator
         self.itemFactory = itemFactory
 
-        /// Items creation logic
+        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
+        let startOfWeekToday = WeekIndex(today.date).dayIndex
+        let endOfWeekToday = startOfWeekToday.adding(days: 14)
 
-        let startOfWeekDayCreated = {
-            let cal = Calendar.current
-            let startOfWeekDateComponents = cal.dateComponents(
-                [.yearForWeekOfYear, .weekOfYear],
-                from: event.dateCreated
-            )
-            let date = cal.date(from: startOfWeekDateComponents)!
-            return DayIndex(date)
-        }()
+        timeline = DayTimeline<WeekItemViewModel>(
+            storage: [:],
+            startIndex: startOfWeek,
+            endIndex: endOfWeekToday
+        )
 
-        let startOfWeekDayToday = {
-            let cal = Calendar.current
-            let startOfWeekDateComponents = cal.dateComponents(
-                [.yearForWeekOfYear, .weekOfYear],
-                from: today.date
-            )
-            let date = cal.date(from: startOfWeekDateComponents)!
-            return DayIndex(date)
-        }()
+        for i in 0 ..< timeline.count {
+            let nextDay = startOfWeek.adding(days: i)
 
-        let weeksBetweenTodayAndEventCreationDay: Int = {
-            let amount = Calendar.current.dateComponents(
-                [.weekOfYear],
-                from: event.dateCreated,
-                to: today.date
-            ).weekOfYear ?? 0
-            return max(0, amount)
-        }()
+            if nextDay == startOfWeekToday { scrollToIndex = i }
 
-        let daysToShow = (weeksBetweenTodayAndEventCreationDay + upcomingWeeksCount) * 7
-
-        var viewModels = [WeekItemViewModel]()
-
-        for addedDay in 0 ..< daysToShow {
-            let day = DateComponents(day: addedDay)
-            let cellDay = calendar.date(byAdding: day, to: startOfWeekDayCreated.date)!
-            let vm = itemFactory.makeViewModel(day: DayIndex(cellDay))
-
-            viewModels.append(vm)
-
-            if cellDay == startOfWeekDayToday.date {
-                scrollToIndex = addedDay
-            }
+            timeline[nextDay] = itemFactory.makeViewModel(day: nextDay)
         }
-
-        items = viewModels
     }
 }

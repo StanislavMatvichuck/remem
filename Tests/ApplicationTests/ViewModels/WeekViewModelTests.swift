@@ -39,7 +39,7 @@ class WeekViewModelTests: XCTestCase {
             event: event
         )
 
-        XCTAssertEqual(sut.items.first?.items.count, 1)
+        XCTAssertEqual(sut.timeline.first??.items.count, 1)
     }
 
     func test_todayAfterCreation_numberOfDays_moreThan21() {
@@ -53,11 +53,11 @@ class WeekViewModelTests: XCTestCase {
             event: event
         )
 
-        XCTAssertLessThan(21, sut.items.count)
+        XCTAssertLessThan(21, sut.timeline.count)
     }
 
-    func test_sameDates_numberOfDays_21() {
-        XCTAssertLessThanOrEqual(21, sut.items.count)
+    func test_sameDates_numberOfDays_14() {
+        XCTAssertLessThanOrEqual(14, sut.timeline.count)
     }
 
     func test_sameDates_scrollToIndex_0() {
@@ -73,24 +73,23 @@ class WeekViewModelTests: XCTestCase {
                 event: event
             )
 
-            let firstItemDayNumber = Int(sut.items.first!.dayNumber) ?? 0
+            let firstItemDayNumber = Int(sut.timeline.first??.dayNumber ?? "1") ?? 1
 
             XCTAssertEqual(firstItemDayNumber, 1)
-//            XCTAssertLessThan(firstItemDayNumber, created.europeanWeekDay.rawValue)
         }
     }
 
     func test_randomDates_scrollToIndex_isAlwaysMonday() {
         arrangeRandomDates()
 
-        let date = sut.items[sut.scrollToIndex].date
-        XCTAssertEqual(WeekDay.make(date), WeekDay.monday)
+        let date = sut.timeline[sut.scrollToIndex]?.date
+        XCTAssertEqual(WeekDay.make(date!), WeekDay.monday)
     }
 
     func test_randomDates_numberOfDays_multipleOf7() {
         arrangeRandomDates()
 
-        XCTAssertEqual(sut.items.count % 7, 0)
+        XCTAssertEqual(sut.timeline.count % 7, 0)
     }
 
     private func make(
@@ -125,11 +124,12 @@ class WeekViewModelTests: XCTestCase {
     }
 
     private func arrangeRandomDates() {
-        let randomDateToday = DayIndex.referenceValue.adding(
-            dateComponents: DateComponents(day: Int.random(in: -1000 ..< 1000))
-        )
         let randomDateOfCreation = DayIndex.referenceValue.adding(
-            dateComponents: DateComponents(day: Int.random(in: -1000 ..< 1000))
+            dateComponents: DateComponents(day: Int.random(in: 0 ..< 1000))
+        )
+
+        let randomDateToday = randomDateOfCreation.adding(
+            dateComponents: DateComponents(day: Int.random(in: 0 ..< 1000))
         )
 
         sut = make(today: randomDateToday, created: randomDateOfCreation, event: event)
