@@ -41,6 +41,8 @@ struct WeekTimeline<Element>: RandomAccessCollection {
         }
     }
     
+    subscript(i: Int) -> Element? { self[WeekIndex(calendar.date(byAdding: DateComponents(day: i * 7), to: startIndex.date)!)] }
+    
     func index(after i: WeekIndex) -> WeekIndex {
         let nextDay = calendar.date(byAdding: DateComponents(day: 7), to: i.date)!
         return WeekIndex(nextDay)

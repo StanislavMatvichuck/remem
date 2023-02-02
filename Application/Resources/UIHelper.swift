@@ -36,6 +36,7 @@ struct UIHelper {
     // fonts
     static let font: UIFont = makeFont()
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)
+    static let fontBoldBig: UIFont = makeFont(size: 48.0, weight: .bold)
     static let fontSmallBold: UIFont = makeFont(size: 17.0, weight: .bold)
     static let fontSmall: UIFont = makeFont(size: 12.0, weight: .regular)
 

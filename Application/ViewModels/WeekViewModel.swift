@@ -16,6 +16,7 @@ struct WeekViewModel {
     let itemFactory: WeekItemViewModelFactoring
     var scrollToIndex: Int = 0
     var timeline: DayTimeline<WeekItemViewModel>
+    var summaryTimeline: WeekTimeline<Int>
 
     init(
         today: DayIndex,
@@ -44,6 +45,22 @@ struct WeekViewModel {
             if nextDay == startOfWeekToday { scrollToIndex = i }
 
             timeline[nextDay] = itemFactory.makeViewModel(day: nextDay)
+        }
+
+        summaryTimeline = WeekTimeline(
+            storage: [:],
+            startIndex: WeekIndex(startOfWeek.date),
+            endIndex: WeekIndex(endOfWeekToday.date)
+        )
+
+        for happening in event.happenings {
+            let index = WeekIndex(happening.dateCreated)
+
+            if let summaryValue = summaryTimeline[index] {
+                summaryTimeline[index] = summaryValue + Int(happening.value)
+            } else {
+                summaryTimeline[index] = 1
+            }
         }
     }
 }

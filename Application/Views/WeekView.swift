@@ -8,7 +8,15 @@
 import UIKit
 
 class WeekView: UIView {
-    // MARK: - Properties
+    let summary: UILabel = {
+        let label = UILabel(al: true)
+        label.font = UIHelper.fontBoldBig
+        label.textColor = UIHelper.itemFont
+        label.text = "0"
+        label.textAlignment = .center
+        return label
+    }()
+
     let collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -75,8 +83,17 @@ class WeekView: UIView {
     private func configureLayout() {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
+        stack.addArrangedSubview(summary)
         stack.addArrangedSubview(collection)
         stack.addArrangedSubview(weekdaysLine)
+        stack.spacing = UIHelper.spacing
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(
+            top: UIHelper.spacing,
+            left: 0,
+            bottom: 0,
+            right: 0
+        )
         addAndConstrain(stack)
 
         collection.heightAnchor.constraint(equalToConstant: WeekItem.layoutSize.height).isActive = true

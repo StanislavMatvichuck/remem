@@ -115,6 +115,32 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
         XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "00:00")
     }
 
+    func test_showsWeekSummary() {
+        XCTAssertEqual(sut.viewRoot.summary.text, "0")
+    }
+
+    func test_eventWithOneHappening_weekSummary_1() {
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
+
+        sut.viewModel = viewModelFactory.makeViewModel()
+
+        XCTAssertEqual(sut.viewRoot.summary.text, "1")
+    }
+
+    func test_eventWithHappeningEachDayOfWeek_weekSummary_7() {
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 1).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 2).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 3).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 4).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 5).date)
+        event.addHappening(date: DayIndex.referenceValue.adding(days: 6).date)
+
+        sut.viewModel = viewModelFactory.makeViewModel()
+
+        XCTAssertEqual(sut.viewRoot.summary.text, "7")
+    }
+
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
         let vm = sut.viewModel.timeline[index.row]!
 

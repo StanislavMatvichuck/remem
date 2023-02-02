@@ -13,6 +13,7 @@ class WeekViewController: UIViewController {
     var viewModel: WeekViewModel {
         didSet {
             viewRoot.collection.reloadData()
+            updateSummary()
         }
     }
 
@@ -55,6 +56,9 @@ class WeekViewController: UIViewController {
             at: IndexPath(row: viewModel.scrollToIndex, section: 0),
             at: .left,
             animated: false)
+        // viewRoot.summary may also be updated here but contentOffset is required
+        print("setInitialScrollPosition offset \(viewRoot.collection.contentOffset.x)")
+        updateSummary()
     }
 }
 
@@ -87,5 +91,37 @@ extension WeekViewController:
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.timeline[indexPath.row]?.select()
+    }
+
+    /// somewhere
+    func handleScroll() {
+//        viewModel.updateToNewScrollPosition()
+        /// triggers didSet
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        print("offset \(scrollView.contentOffset.x)")
+        // 0
+        // 375 = collectionView.width
+        // make WeekIndex based on offset
+        // update viewRoot.summary by reading value from summaryTimeline
+        // also must be done at viewDidLoad to show summary for today's week
+        // mapping between contentOffset and int
+        // int can be used to get summary value
+        updateSummary()
+    }
+
+    private func makeWeekIndexForCurrentPosition() -> Int {
+        let offset = viewRoot.collection.contentOffset.x
+
+        guard offset != 0 else { return 0 }
+
+        let collectionWidth = viewRoot.collection.bounds.width
+        return Int(offset / collectionWidth)
+    }
+
+    private func updateSummary() {
+        let summaryValue = String(viewModel.summaryTimeline[makeWeekIndexForCurrentPosition()] ?? 0)
+        viewRoot.summary.text = summaryValue
     }
 }
