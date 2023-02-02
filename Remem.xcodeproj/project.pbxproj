@@ -101,6 +101,7 @@
 		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
 		0897E177297459FA00BD2A56 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = 0897E176297459FA00BD2A56 /* ViewControllerPresentationSpy */; };
 		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
+		089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
@@ -1356,6 +1357,7 @@
 				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
 				087791992974858300780F60 /* Atlas.swift in Sources */,
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
+				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
 				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
 				08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,

@@ -34,44 +34,44 @@ final class WeekSnapshots:
     }
     
     func test_empty_todayOffsetByOneDay() {
-        let offsetToday = DayIndex.referenceValue.adding(components: DateComponents(day: 1))
+        let offsetToday = DayIndex.referenceValue.adding(days: 1)
         arrange(andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetByOneDay() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(components: DateComponents(day: 1))
+        let offsetDayCreated = DayIndex.referenceValue.adding(days: 1)
         arrange(withDayCreated: offsetDayCreated, andToday: offsetDayCreated)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_todayOffsetByTwoDaysAndDateCreatedOffsetByOneDay() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(components: DateComponents(day: 1))
-        let offsetToday = offsetDayCreated.adding(components: DateComponents(day: 1))
+        let offsetDayCreated = DayIndex.referenceValue.adding(days: 1)
+        let offsetToday = offsetDayCreated.adding(days: 1)
         arrange(withDayCreated: offsetDayCreated, andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetIs3_todayOffsetIs7() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(components: DateComponents(day: 3))
-        let offsetToday = offsetDayCreated.adding(components: DateComponents(day: 4))
+        let offsetDayCreated = DayIndex.referenceValue.adding(days: 3)
+        let offsetToday = offsetDayCreated.adding(days: 4)
         arrange(withDayCreated: offsetDayCreated, andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset11() {
-        let offsetToday = DayIndex.referenceValue.adding(components: DateComponents(day: 11))
+        let offsetToday = DayIndex.referenceValue.adding(days: 11)
         arrange(andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset1year() {
-        let offsetToday = DayIndex.referenceValue.adding(components: DateComponents(year: 1))
+        let offsetToday = DayIndex.referenceValue.adding(days: 365)
         arrange(andToday: offsetToday)
         
         FBSnapshotVerifyViewController(sut)
@@ -97,7 +97,7 @@ final class WeekSnapshots:
         for i in 0 ..< minutes {
             event.addHappening(date:
                 DayIndex.referenceValue.adding(
-                    components: DateComponents(day: dayOffset, minute: i)
+                    dateComponents: DateComponents(day: dayOffset, minute: i)
                 ).date
             )
         }
