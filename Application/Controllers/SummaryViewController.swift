@@ -8,7 +8,11 @@
 import UIKit
 
 final class SummaryViewController: UIViewController {
-    var viewModel: SummaryViewModel
+    var viewModel: SummaryViewModel { didSet {
+        guard isViewLoaded else { return }
+        viewRoot.configureContent(viewModel: viewModel)
+    }}
+
     var viewRoot: SummaryView
 
     init(viewModel: SummaryViewModel) {

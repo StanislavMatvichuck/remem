@@ -32,7 +32,7 @@ final class SummaryView: UIView {
         backgroundColor = UIHelper.background
     }
 
-    private func configureContent(viewModel: SummaryViewModel) {
+    func configureContent(viewModel: SummaryViewModel) {
         removeAllRows()
 
         for item in viewModel.items {

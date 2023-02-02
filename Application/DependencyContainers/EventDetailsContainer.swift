@@ -17,6 +17,7 @@ final class EventDetailsContainer {
     let today: DayIndex
     let clockViewModelUpdater: ClockUpdater
     let weekViewModelUpdater: WeekUpdater
+    let summaryViewModelUpdater: SummaryUpdater
 
     init(parent: EventsListContainer, event: Event, today: DayIndex) {
         self.parent = parent
@@ -24,9 +25,11 @@ final class EventDetailsContainer {
         self.today = today
         let updater = ClockUpdater(decoratedInterface: parent.updater)
         self.clockViewModelUpdater = updater
-        self.weekViewModelUpdater = WeekUpdater(decoratedInterface: updater)
+        self.summaryViewModelUpdater = SummaryUpdater(decoratedInterface: clockViewModelUpdater)
+        self.weekViewModelUpdater = WeekUpdater(decoratedInterface: summaryViewModelUpdater)
         parent.parent.coordinator.dayDetailsFactory = self
         clockViewModelUpdater.factory = self
+        summaryViewModelUpdater.factory = self
         weekViewModelUpdater.factory = self
     }
 
@@ -55,7 +58,7 @@ final class EventDetailsContainer {
 
     func makeSummaryViewController() -> SummaryViewController {
         let controller = SummaryViewController(viewModel: makeViewModel())
-//        clockViewModelUpdater.add(receiver: controller)
+        summaryViewModelUpdater.add(receiver: controller)
         return controller
     }
 }
