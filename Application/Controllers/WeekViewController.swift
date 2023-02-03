@@ -90,24 +90,13 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.timeline[indexPath.row]?.select()
-    }
-
-    /// somewhere
-    func handleScroll() {
-//        viewModel.updateToNewScrollPosition()
-        /// triggers didSet
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.animateTapReceiving {
+            self.viewModel.timeline[indexPath.row]?.select()
+        }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        print("offset \(scrollView.contentOffset.x)")
-        // 0
-        // 375 = collectionView.width
-        // make WeekIndex based on offset
-        // update viewRoot.summary by reading value from summaryTimeline
-        // also must be done at viewDidLoad to show summary for today's week
-        // mapping between contentOffset and int
-        // int can be used to get summary value
         updateSummary()
     }
 

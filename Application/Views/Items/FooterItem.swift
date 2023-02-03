@@ -85,6 +85,8 @@ class FooterItem: UITableViewCell {
     }
 
     @objc private func handleButton(sender _: UIButton) {
-        viewModel?.select()
+        animateTapReceiving {
+            self.viewModel?.select()
+        }
     }
 }

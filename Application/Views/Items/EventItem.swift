@@ -127,7 +127,9 @@ class EventItem: UITableViewCell {
     }
 
     @objc private func handleTap(_ gr: UITapGestureRecognizer) {
-        viewModel?.select()
+        animateTapReceiving {
+            self.viewModel?.select()
+        }
     }
 }
 

@@ -43,7 +43,18 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = !al
     }
 
-    func animate() {
+    func animateTapReceiving(completionHandler: (() -> Void)? = nil) {
+        class AnimationDelegate: NSObject, CAAnimationDelegate {
+            let completionHandler: (() -> Void)?
+            init(completionHandler: (() -> Void)? = nil) {
+                self.completionHandler = completionHandler
+            }
+
+            func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+                if flag { completionHandler?() }
+            }
+        }
+
         let animation = CABasicAnimation(keyPath: "transform.scale")
         animation.fromValue = 1.0
         animation.toValue = 0.9
@@ -51,17 +62,9 @@ extension UIView {
         animation.duration = 0.07
         animation.autoreverses = true
         animation.repeatCount = 1
-        layer.add(animation, forKey: nil)
-    }
+        animation.delegate = AnimationDelegate(completionHandler: completionHandler)
 
-    func catchAttentionWithAnimation() {
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fromValue = 1.0
-        animation.toValue = 1.2
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        animation.duration = 0.15
-        animation.autoreverses = true
-        animation.repeatCount = 1
+        UIDevice.vibrate(.medium)
         layer.add(animation, forKey: nil)
     }
 }
