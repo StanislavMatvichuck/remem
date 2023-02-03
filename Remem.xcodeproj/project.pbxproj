@@ -373,6 +373,8 @@
 		0887C804298AD9B60048EC12 /* TimelineTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTesting.swift; sourceTree = "<group>"; };
 		0887C806298AE5040048EC12 /* EventExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtensions.swift; sourceTree = "<group>"; };
 		0889669728D88A8E0075A51D /* WidgetUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdater.swift; sourceTree = "<group>"; };
+		088B8455298D3CBA00F72EAA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		088B8456298D3CBA00F72EAA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		088E88C228AF916000400180 /* WeekItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItemViewModel.swift; sourceTree = "<group>"; };
 		088E88C428AFA83300400180 /* GoalRemovedDateDisabled04.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalRemovedDateDisabled04.xcdatamodel; sourceTree = "<group>"; };
 		088EAD0A28DDDD55001EE985 /* WidgetEventsQuerying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEventsQuerying.swift; sourceTree = "<group>"; };
@@ -1228,6 +1230,7 @@
 				Base,
 				uk,
 				ru,
+				de,
 			);
 			mainGroup = 08D5121127870D2500C2037F;
 			packageReferences = (
@@ -1587,6 +1590,7 @@
 				086FFE69281699DF0054266E /* en */,
 				086FFE6B281699E40054266E /* uk */,
 				086FFE6D28169DA70054266E /* ru */,
+				088B8456298D3CBA00F72EAA /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1597,6 +1601,7 @@
 				08D5122927870D2600C2037F /* Base */,
 				086FFE652816971A0054266E /* uk */,
 				086FFE6C28169DA70054266E /* ru */,
+				088B8455298D3CBA00F72EAA /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

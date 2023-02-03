@@ -12,8 +12,8 @@
 "eventsList.title" = "События";
 "eventsList.new" = "Короткое имя или эмодзи";
 
-"eventDetails.dayAverage" = "Среднее за день";
-"eventDetails.buttonGoalsInput" = "Настроить цель на день";
-"eventDetails.total" = "Всего";
-
-"goalsInput.title" = "Цель на день";
+"summary.total" = "Всего происшествий";
+"summary.weekAverage" = "Среднее за неделю";
+"summary.dayAverage" = "Среднее за день";
+"summary.daysTracked" = "Дней отслежено";
+"summary.daysSinceLastHappening" = "Дней после последнего происшествия";

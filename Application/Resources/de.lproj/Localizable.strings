@@ -1,0 +1,19 @@
+"button.create" = "Ereignis erstellen";
+"button.cancel" = "Stornieren";
+"button.delete" = "Löschen";
+"button.rename" = "Umbenennen";
+"button.save" = "Speichern";
+"button.edit" = "Bearbeiten";
+
+"eventsList.hint.empty" = "Ereignis zur Verfolgung hinzufügen";
+"eventsList.hint.firstHappening" = "Wischen Sie, wenn das Ereignis passiert ist";
+"eventsList.hint.firstVisit" = "Klicken, um Details anzuzeigen";
+"eventsList.hint.swipeLeft" = "nach links wischen";
+"eventsList.title" = "Ereignisse";
+"eventsList.new" = "Kurzname oder emoji";
+
+"summary.total" = "Totale Happenings";
+"summary.weekAverage" = "Wochendurchschnitt";
+"summary.dayAverage" = "Tagesdurchschnitt";
+"summary.daysTracked" = "Tage verfolgt";
+"summary.daysSinceLastHappening" = "Tage seit dem letzten Ereignis";

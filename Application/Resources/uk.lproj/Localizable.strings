@@ -5,15 +5,15 @@
 "button.save" = "Зберегти";
 "button.edit" = "Редагувати";
 
-"eventsList.hint.empty" = "Додай подію яку будемо відслідковувати";
-"eventsList.hint.firstHappening" = "Свайп коли подія сталася";
+"eventsList.hint.empty" = "Додай подію яку треба відслідковувати";
+"eventsList.hint.firstHappening" = "Свайп коли подія відбулася";
 "eventsList.hint.firstVisit" = "Тиць щоб подивитись подробиці";
 "eventsList.hint.swipeLeft" = "свайп ліворуч";
 "eventsList.title" = "Події";
 "eventsList.new" = "Коротке ім'я або емодзі";
 
-"eventDetails.dayAverage" = "Середнє за день";
-"eventDetails.buttonGoalsInput" = "Налаштувати завдання на день";
-"eventDetails.total" = "Всього";
-
-"goalsInput.title" = "Завдання на день";
+"summary.total" = "Загалом випадків";
+"summary.weekAverage" = "Середнє за тиждень";
+"summary.dayAverage" = "Середнє за день";
+"summary.daysTracked" = "Днів відслідковано";
+"summary.daysSinceLastHappening" = "Днів після останнього випадку";

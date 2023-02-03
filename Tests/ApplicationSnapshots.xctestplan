@@ -42,6 +42,24 @@
       "options" : {
 
       }
+    },
+    {
+      "id" : "D409FC85-5691-4756-82D3-CA30CCE01E62",
+      "name" : "German",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "IMAGE_DIFF_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/failureDiffs_de"
+          },
+          {
+            "key" : "FB_REFERENCE_IMAGE_DIR",
+            "value" : "$(SOURCE_ROOT)\/Tests\/Snapshots\/images_de"
+          }
+        ],
+        "language" : "de",
+        "region" : "DE"
+      }
     }
   ],
   "defaultOptions" : {

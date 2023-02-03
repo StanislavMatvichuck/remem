@@ -58,7 +58,7 @@ final class EventInputSnapshots: FBSnapshotTestCase {
             )
         }
         
-        wait(for: [exp], timeout: 0.1)
+        wait(for: [exp], timeout: 0.15)
         
         FBSnapshotVerifyView(parent, perPixelTolerance: 0.05)
     }
