@@ -67,13 +67,9 @@ public class Event: CustomDebugStringConvertible {
 // MARK: - Public
 public extension Event {
     @discardableResult func addHappening(date: Date) -> Happening {
-        let insertIndex = happenings.firstIndex {
-            happening in happening.dateCreated < date
-        } ?? 0
-
+        let insertIndex = happenings.firstIndex { $0.dateCreated <= date } ?? 0
         let newHappening = Happening(dateCreated: date)
         happenings.insert(newHappening, at: insertIndex)
-
         return newHappening
     }
 

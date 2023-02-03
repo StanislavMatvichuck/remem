@@ -125,6 +125,19 @@ final class SummaryViewModelTests: XCTestCase {
         XCTAssertEqual(daysSinceLastHappening, "1")
     }
 
+    func test_eventCreatedTwoWeeksAgoWithHappeningEachDay_weekAverage_7() {
+        let today = DayIndex.referenceValue.adding(days: 13)
+        let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
+
+        for i in 0 ..< 14 {
+            event.addHappening(date: DayIndex.referenceValue.adding(days: i).date)
+        }
+
+        sut = SummaryViewModel(event: event, today: today)
+
+        XCTAssertEqual(weekAverage, "7")
+    }
+
     private var totalAmount: String { sut.items[0].value }
     private var weekAverage: String { sut.items[1].value }
     private var dayAverage: String { sut.items[2].value }

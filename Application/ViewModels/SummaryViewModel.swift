@@ -55,22 +55,23 @@ struct SummaryViewModel {
     init(event: Event, today: DayIndex) {
         self.event = event
 
-        let totalAmount = String(
-            event.happenings.reduce(0) { partialResult, happening in
-                partialResult + Int(happening.value)
-            }
-        )
+        let totalAmount = event.happenings.reduce(0) { partialResult, happening in
+            partialResult + Int(happening.value)
+        }
 
         let weekAverageAmount: String = {
-            "0"
+            var timeline = WeekTimeline<Bool>()
+            timeline[WeekIndex(event.dateCreated)] = true
+            timeline[WeekIndex(today.date)] = true
+            let weeksAmount = timeline.count
+            return String(totalAmount / weeksAmount)
         }()
 
         let daysTrackedAmount: Int = {
-            let cal = Calendar.current
-            let fromDate = cal.startOfDay(for: event.dateCreated)
-            let toDate = cal.startOfDay(for: Date())
-            let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate).day!
-            return numberOfDays + 1
+            var timeline = DayTimeline<Bool>()
+            timeline[DayIndex(event.dateCreated)] = true
+            timeline[today] = true
+            return timeline.count
         }()
 
         let dayAverageAmount = {
@@ -81,22 +82,23 @@ struct SummaryViewModel {
                 return formatter
             }()
 
-            let total = Double(totalAmount)!
+            let total = Double(totalAmount)
             let daysAmount = Double(daysTrackedAmount)
             let number = NSNumber(value: total / daysAmount)
             return formatter.string(from: number)!
         }()
 
         let daysSinceLastHappeningAmount: String = {
-            let cal = Calendar.current
-            let fromDate = cal.startOfDay(for: event.happenings.last?.dateCreated ?? today.date)
-            let toDate = cal.startOfDay(for: today.date)
-            let numberOfDays = cal.dateComponents([.day], from: fromDate, to: toDate).day!
-            return String(numberOfDays)
+            var timeline = DayTimeline<Bool>()
+            guard let lastHappeningDate = event.happenings.first?.dateCreated
+            else { return "0" }
+            timeline[DayIndex(lastHappeningDate)] = true
+            timeline[today] = true
+            return String(timeline.count - 1)
         }()
 
         self.items = [
-            SummaryRow.total(value: totalAmount),
+            SummaryRow.total(value: String(totalAmount)),
             SummaryRow.weekAverage(value: weekAverageAmount),
             SummaryRow.dayAverage(value: dayAverageAmount),
             SummaryRow.daysTracked(value: String(daysTrackedAmount)),
