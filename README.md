@@ -15,6 +15,22 @@ Existing `Event` can be renamed
   
 </details>
 
+
+<details>
+  <summary>Описание предметной модели</summary>
+
+`Событие` может быть создано, используя `название`
+
+`Происшествие` может быть добавлено к `Событие` в определенное `датаВремя`
+
+Существующее `Происшетвие` может быть удалено из `События`
+
+Существующее `Событие` может быть удалено
+
+Существующее `Событие` может быть переименовано
+  
+</details>
+
 <details>
   <summary>Application description</summary>
 
@@ -62,16 +78,12 @@ WHEN `EventItem` is tapped `EventDetails` screen is shown
 
 </details>
 
-<details>
-  <summary>Atlas for light mode</summary>
+[Atlas for light mode](/Tests/Snapshots/images_en_64/ZAtlas/test05_eventsListBasicFlow_375x667.png)
 
-![Atlas for light mode](/Tests/Snapshots/Images_64/Atlas/test05_eventsListBasicFlow@2x.png)
-  
-</details>
+[Atlas for dark mode](/Tests/Snapshots/images_en_64/ZAtlas/test06_eventsListBasicFlow_dark_375x667.png)
 
-<details>
-  <summary>Atlas for dark mode</summary>
+[Atlas for Ukrainian localization](/Tests/Snapshots/images_ua_64/ZAtlas/test05_eventsListBasicFlow_375x667.png)
 
-![Atlas for dark mode](/Tests/Snapshots/Images_64/Atlas/test06_eventsListBasicFlow_dark@2x.png)
-  
-</details>
+[Atlas for German localization](/Tests/Snapshots/images_de_64/ZAtlas/test05_eventsListBasicFlow_375x667.png)
+
+[Atlas for Russian localization](/Tests/Snapshots/images_ru_64/ZAtlas/test05_eventsListBasicFlow_375x667.png)
