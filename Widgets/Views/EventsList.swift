@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct EventsList: View {
-    let items: [WidgetEventItemViewModel]
+    let items: [WidgetEventItemViewModel?]
     init(items: [WidgetEventItemViewModel]) {
-        self.items = items
+        var threeItems: [WidgetEventItemViewModel?] = [nil, nil, nil]
+        threeItems.replaceSubrange(0 ..< items.count, with: items)
+        self.items = threeItems
     }
 
     var body: some View {
@@ -21,7 +23,7 @@ struct EventsList: View {
             content: {
                 Color(UIHelper.itemBackground).ignoresSafeArea()
                 VStack(spacing: spacing) {
-                    ForEach(items.indices.prefix(3)) {
+                    ForEach(items.indices) {
                         EventRow(isLast: $0 == 0, item: items[$0])
                     }
                 }.padding(EdgeInsets(
