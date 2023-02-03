@@ -89,11 +89,12 @@ struct SummaryViewModel {
         }()
 
         let daysSinceLastHappeningAmount: String = {
+            guard let lastHappeningDate = event.happenings.last?.dateCreated else { return "0" }
+
             var timeline = DayTimeline<Bool>()
-            guard let lastHappeningDate = event.happenings.first?.dateCreated
-            else { return "0" }
             timeline[DayIndex(lastHappeningDate)] = true
             timeline[today] = true
+
             return String(timeline.count - 1)
         }()
 

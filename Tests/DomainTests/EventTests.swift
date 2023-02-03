@@ -80,14 +80,15 @@ class EventTests: XCTestCase {
     }
 
     func test_addHappening_manyHappenings_sortedByDate() {
-        let firstHappeningDate = Date.now.addingTimeInterval(TimeInterval(3.0))
-        let secondHappeningDate = Date.now.addingTimeInterval(TimeInterval(5.0))
-        let thirdHappeningDate = Date.now.addingTimeInterval(TimeInterval(7.0))
+        let date = Date(timeIntervalSinceReferenceDate: 0)
+        let firstHappeningDate = date.addingTimeInterval(TimeInterval(3.0))
+        let secondHappeningDate = date.addingTimeInterval(TimeInterval(5.0))
+        let thirdHappeningDate = date.addingTimeInterval(TimeInterval(7.0))
 
+        sut.addHappening(date: firstHappeningDate)
         sut.addHappening(date: thirdHappeningDate)
         sut.addHappening(date: secondHappeningDate)
         sut.addHappening(date: thirdHappeningDate)
-        sut.addHappening(date: firstHappeningDate)
         sut.addHappening(date: thirdHappeningDate)
         sut.addHappening(date: firstHappeningDate)
         sut.addHappening(date: thirdHappeningDate)
@@ -117,6 +118,16 @@ class EventTests: XCTestCase {
         XCTAssertEqual(sut.happenings[14], Happening(dateCreated: thirdHappeningDate))
 
         XCTAssertTrue(sut.happenings[0].dateCreated < sut.happenings[14].dateCreated)
+    }
+
+    func test_addHappening_oneHappeningExists_addingHappeningLater_addsToEnd() {
+        let date = Date(timeIntervalSinceReferenceDate: 0)
+        let dateLater = date.addingTimeInterval(60 * 60 * 24 + 15)
+
+        sut.addHappening(date: date)
+        sut.addHappening(date: dateLater)
+
+        XCTAssertTrue(sut.happenings[0].dateCreated < sut.happenings[1].dateCreated)
     }
 
     func test_visit_hasDateVisited() {
