@@ -55,6 +55,13 @@ struct SummaryViewModel {
     init(event: Event, today: DayIndex) {
         self.event = event
 
+        let averageNumberFormatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 2
+            return formatter
+        }()
+
         let totalAmount = event.happenings.reduce(0) { partialResult, happening in
             partialResult + Int(happening.value)
         }
@@ -64,7 +71,8 @@ struct SummaryViewModel {
             timeline[WeekIndex(event.dateCreated)] = true
             timeline[WeekIndex(today.date)] = true
             let weeksAmount = timeline.count
-            return String(totalAmount / weeksAmount)
+            let number = NSNumber(value: Double(totalAmount) / Double(weeksAmount))
+            return averageNumberFormatter.string(from: number)!
         }()
 
         let daysTrackedAmount: Int = {
@@ -75,17 +83,10 @@ struct SummaryViewModel {
         }()
 
         let dayAverageAmount = {
-            let formatter: NumberFormatter = {
-                let formatter = NumberFormatter()
-                formatter.numberStyle = .decimal
-                formatter.maximumFractionDigits = 2
-                return formatter
-            }()
-
             let total = Double(totalAmount)
             let daysAmount = Double(daysTrackedAmount)
             let number = NSNumber(value: total / daysAmount)
-            return formatter.string(from: number)!
+            return averageNumberFormatter.string(from: number)!
         }()
 
         let daysSinceLastHappeningAmount: String = {
