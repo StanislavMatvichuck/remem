@@ -69,11 +69,6 @@ public extension Event {
     @discardableResult func addHappening(date: Date) -> Happening {
         let newHappening = Happening(dateCreated: date)
 
-        guard happenings.count != 0 else {
-            happenings.append(newHappening)
-            return newHappening
-        }
-
         if let insertIndex = happenings.lastIndex(where: { $0.dateCreated <= date }) {
             happenings.insert(newHappening, at: insertIndex + 1)
             return newHappening
