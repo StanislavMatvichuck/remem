@@ -6,12 +6,15 @@
 //
 
 import Domain
+import Foundation
 
 protocol HintItemViewModelFactoring {
     func makeHintItemViewModel(events: [Event]) -> HintItemViewModel
 }
 
-struct HintItemViewModel {
+struct HintItemViewModel: EventsListItemViewModeling {
+    var identifier: String { "Hint" }
+
     let title: String
     let highlighted: Bool
 
@@ -25,6 +28,10 @@ struct HintItemViewModel {
 
         title = hint.text
         highlighted = hint != .swipeLeft
+    }
+
+    static func == (lhs: HintItemViewModel, rhs: HintItemViewModel) -> Bool {
+        lhs.title == rhs.title && lhs.highlighted == rhs.highlighted
     }
 }
 

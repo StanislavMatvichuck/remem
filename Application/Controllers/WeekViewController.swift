@@ -91,9 +91,8 @@ extension WeekViewController:
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.animateTapReceiving {
-            self.viewModel.timeline[indexPath.row]?.select()
-        }
+        cell?.animateTapReceiving()
+        viewModel.timeline[indexPath.row]?.select()
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

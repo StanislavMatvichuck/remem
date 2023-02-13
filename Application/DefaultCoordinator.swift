@@ -35,7 +35,7 @@ class DefaultCoordinator {
         case .eventsList:
             guard let listFactory else { fatalError("coordinator factory is nil") }
             let container = listFactory.makeContainer()
-            let controller = container.makeController()
+            let controller: EventsListViewController = container.makeController()
 
             navController.pushViewController(controller, animated: false)
         case .eventDetails(let today, let event):

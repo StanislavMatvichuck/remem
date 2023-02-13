@@ -7,6 +7,7 @@
 
 import Domain
 import Foundation
+import UIKit
 
 protocol EventsListContainerFactoring {
     func makeContainer() -> EventsListContainer
@@ -34,14 +35,8 @@ final class EventsListContainer {
     }
 
     func makeController() -> EventsListViewController {
-        let providers: [EventsListItemProviding] = [
-            HintItemProvider(),
-            EventItemProvider(),
-            FooterItemProvider(),
-        ]
         let controller = EventsListViewController(
-            viewModel: makeEventsListViewModel(events: parent.provider.get()),
-            providers: providers
+            viewModel: makeEventsListViewModel(events: parent.provider.get())
         )
         updater.add(receiver: controller)
         return controller
@@ -57,25 +52,28 @@ extension EventsListContainer:
 {
     func makeEventsListViewModel(events: [Event]) -> EventsListViewModel {
         let today = DayIndex(.now)
+
         let footerVm = makeFooterItemViewModel(eventsCount: events.count)
         let hintVm = makeHintItemViewModel(events: events)
+
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text
+        let eventsVm = events.map { makeEventItemViewModel(
+            event: $0,
+            today: today,
+            hintEnabled: gestureHintEnabled
+        ) }
+
+        var items = [any EventsListItemViewModeling]()
+        items.append(hintVm)
+        items.append(contentsOf: eventsVm)
+        items.append(footerVm)
 
         let vm = EventsListViewModel(
             today: today,
             commander: updater,
-            sections: [
-                [hintVm],
-                events.map {
-                    makeEventItemViewModel(
-                        event: $0,
-                        today: today,
-                        hintEnabled: gestureHintEnabled
-                    )
-                },
-                [footerVm],
-            ]
+            items: items
         )
+
         return vm
     }
 

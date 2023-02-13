@@ -16,8 +16,8 @@ func putInViewHierarchy(_ vc: UIViewController) {
     window.addSubview(vc.view)
 }
 
-func executeRunLoop() {
-    RunLoop.current.run(until: Date())
+func executeRunLoop(until: Date = Date()) {
+    RunLoop.current.run(until: until)
 }
 
 func tap(_ button: UIButton) {

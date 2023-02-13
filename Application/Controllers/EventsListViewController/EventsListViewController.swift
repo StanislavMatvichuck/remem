@@ -1,89 +1,108 @@
 //
-//  ViewController.swift
-//  Remem
+//  EventsListViewControllerWithDiffableDataSource.swift
+//  Application
 //
-//  Created by Stanislav Matvichuck on 06.01.2022.
+//  Created by Stanislav Matvichuck on 04.02.2023.
 //
 
 import UIKit
 
-class EventsListViewController:
-    UIViewController,
-    UITableViewDataSource,
-    UITableViewDelegate
-{
+final class EventsListViewController: UIViewController, UITableViewDelegate {
     let viewRoot: EventsListView
     var viewModel: EventsListViewModel {
         didSet {
             guard isViewLoaded else { return }
-            update()
-            /// does not trigger didSet
-            viewModel = connectToViewModelHandlers(viewModel: viewModel)
+            viewModel = connectToViewModelHandlers(viewModel: viewModel) /// does not trigger didSet
+            updateUI(oldValue)
         }
     }
 
-    let providers: [EventsListItemProviding]
+    lazy var dataSource: EventsListDataSource = {
+        EventsListDataSource(
+            tableView: viewRoot.table,
+            cellProvider: { table, indexPath, identifier in
+                let index = self.viewModel[identifier]!
+                let viewModel = self.viewModel.items[index]
+                return EventsListCellProvider.cell(
+                    table: table,
+                    forIndex: indexPath,
+                    viewModel: viewModel
+                )
+            }
+        )
+    }()
 
     // MARK: - Init
-    init(viewModel: EventsListViewModel, providers: [EventsListItemProviding]) {
-        self.viewRoot = EventsListView()
+    init(viewModel: EventsListViewModel) {
+        viewRoot = EventsListView()
         self.viewModel = viewModel
-        self.providers = providers
 
         super.init(nibName: nil, bundle: nil)
 
-        /// does not trigger didSet
-        self.viewModel = connectToViewModelHandlers(viewModel: viewModel)
+        self.viewModel = connectToViewModelHandlers(viewModel: viewModel) /// does not trigger didSet
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         setupTableView()
         setupEventHandlers()
-        update()
-    }
-
-    // MARK: - UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int { viewModel.numberOfSections }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { viewModel.rows(inSection: section) }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        providers[indexPath.section].dequeue(
-            tableView,
-            indexPath: indexPath,
-            viewModel: viewModel.itemViewModel(
-                row: indexPath.row,
-                section: indexPath.section
-            )
-        )
-    }
-
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        (providers[indexPath.section].dequeue(
-            tableView,
-            indexPath: indexPath,
-            viewModel: viewModel.itemViewModel(
-                row: indexPath.row,
-                section: indexPath.section
-            )
-        ) as? TrailingSwipeActionsConfigurationProviding)?.trailingActionsConfiguration()
+        updateUI(nil)
     }
 
     private func setupTableView() {
         let table = viewRoot.table
-        table.dataSource = self
         table.delegate = self
-
-        for provider in providers {
-            provider.register(table)
-        }
+        EventsListCellProvider.register(table)
     }
 
     private func setupEventHandlers() {
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
+    }
+
+    private func updateUI(_ oldValue: EventsListViewModel?) {
+        title = viewModel.title
+
+        var newSnapshot = makeSnapshot()
+
+        if let oldValue {
+            for newItem in newSnapshot.itemIdentifiers {
+                if let oldItem = oldValue.items.first(where: { $0.identifier == newItem }),
+                   let newItem = viewModel.items.first(where: { $0.identifier == newItem }),
+                   reconfigurationNeeded(oldItem, newItem)
+                {
+                    newSnapshot.reconfigureItems([newItem.identifier])
+                }
+            }
+        }
+
+        dataSource.apply(newSnapshot, animatingDifferences: oldValue != nil)
+
+        if let renamedItem = viewModel.renamedItem {
+            viewRoot.input.rename(oldName: renamedItem.name)
+        } else if viewModel.inputVisible {
+            viewRoot.input.show(value: viewModel.inputContent)
+        }
+    }
+
+    private func reconfigurationNeeded<
+        T: EventsListItemViewModeling,
+        U: EventsListItemViewModeling
+    >(_ lhs: T, _ rhs: U) -> Bool {
+        type(of: lhs) == type(of: rhs) &&
+            lhs.identifier == rhs.identifier &&
+            lhs.self != rhs.self as? T
+    }
+
+    private func makeSnapshot() -> NSDiffableDataSourceSnapshot<Int, String> {
+        let itemsIDs = viewModel.items.map { $0.identifier }
+
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(itemsIDs)
+        return snapshot
     }
 
     @objc private func handleAdd() {
@@ -94,30 +113,45 @@ class EventsListViewController:
         }
     }
 
-    private func update() {
-        title = viewModel.title
-
-        viewRoot.table.reloadData()
-
-        if let renamedItem = viewModel.renamedItem {
-            viewRoot.input.rename(oldName: renamedItem.name)
-        } else if viewModel.inputVisible {
-            viewRoot.input.show(value: viewModel.inputContent)
-        }
-    }
-
     /// - Parameter viewModel: all handlers of this vm will be updated to
     /// - Parameter controller: self that plays multiple roles by extensions in viewModels files
     /// - Returns: new version of list view model with all handlers configured to call controller
     private func connectToViewModelHandlers(viewModel: EventsListViewModel) -> EventsListViewModel {
         var newViewModel = viewModel
 
-        for (i, section) in newViewModel.sections.enumerated() {
-            for (j, item) in section.enumerated() {
-                newViewModel.sections[i][j] = item.add(self)
+        for (i, item) in newViewModel.items.enumerated() {
+            if let vm = item as? FooterItemViewModel {
+                newViewModel.items[i] = vm.withSelectionHandler(self)
+            }
+
+            if let vm = item as? EventItemViewModel {
+                newViewModel.items[i] = vm.withRenameHandler(self)
             }
         }
 
         return newViewModel
+    }
+
+    func tableView(_ table: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let viewModel = viewModel.items[indexPath.row]
+        let cell = EventsListCellProvider.cell(
+            table: table,
+            forIndex: indexPath,
+            viewModel: viewModel
+        )
+        guard let cellWithConfiguration = cell as? TrailingSwipeActionsConfigurationProviding else { return nil }
+        return cellWithConfiguration.trailingActionsConfiguration()
+    }
+}
+
+extension EventsListViewController: FooterItemViewModelResponding {
+    func selected(_: FooterItemViewModel) {
+        viewModel.showInput()
+    }
+}
+
+extension EventsListViewController: EventItemViewModelRenameResponding {
+    func renameRequested(_ itemViewModel: EventItemViewModel) {
+        viewModel.renamedItem = itemViewModel
     }
 }

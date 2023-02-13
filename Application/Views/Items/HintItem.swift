@@ -6,9 +6,10 @@
 //
 
 import UIKit
-// TODO: explore why importing UIKit replaces importing Foundation. How to apply it to Domain lib?
 
-class HintItem: UITableViewCell {
+class HintItem: UITableViewCell, EventsListCell {
+    static var reuseIdentifier = "HintItem"
+
     var viewModel: HintItemViewModel? {
         didSet {
             guard let viewModel else { return }

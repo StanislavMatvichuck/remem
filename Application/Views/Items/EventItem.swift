@@ -7,11 +7,9 @@
 
 import UIKit
 
-protocol TrailingSwipeActionsConfigurationProviding {
-    func trailingActionsConfiguration() -> UISwipeActionsConfiguration
-}
+final class EventItem: UITableViewCell, EventsListCell {
+    static var reuseIdentifier = "EventItem"
 
-class EventItem: UITableViewCell {
     let swiper = Swiper()
 
     final class RootView: UIView, UsingSwipingHintDisplaying {}
@@ -44,9 +42,22 @@ class EventItem: UITableViewCell {
 
     var viewModel: EventItemViewModel? {
         didSet {
-            handleViewStateUpdate()
+            handleViewStateUpdate(oldValue)
         }
     }
+
+    var valueBackgroundCircle: UIView = {
+        let view = UIView(al: true)
+        view.backgroundColor = UIHelper.background
+        view.layer.cornerRadius = UIHelper.r0
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: 2 * UIHelper.r0),
+            view.heightAnchor.constraint(equalToConstant: 2 * UIHelper.r0),
+        ])
+
+        return view
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,6 +71,7 @@ class EventItem: UITableViewCell {
     override func prepareForReuse() {
         viewModel = nil
         viewRoot.swipingHint?.removeFromSuperview()
+        swiper.resetToInitialStateWithoutAnimation()
         super.prepareForReuse()
     }
 
@@ -69,8 +81,6 @@ class EventItem: UITableViewCell {
     }
 
     private func configureLayout() {
-        viewRoot.addSubview(swiper)
-
         viewRoot.addSubview(nameLabel)
         NSLayoutConstraint.activate([
             nameLabel.centerXAnchor.constraint(equalTo: viewRoot.centerXAnchor),
@@ -79,12 +89,19 @@ class EventItem: UITableViewCell {
             nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * UIHelper.d2),
         ])
 
+        viewRoot.addSubview(valueBackgroundCircle)
+        NSLayoutConstraint.activate([
+            valueBackgroundCircle.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.r2),
+            valueBackgroundCircle.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
+        ])
+
         viewRoot.addSubview(valueLabel)
         NSLayoutConstraint.activate([
             valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.r2),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
         ])
 
+        viewRoot.addSubview(swiper)
         contentView.addSubview(viewRoot)
 
         let height = contentView.heightAnchor.constraint(equalToConstant: UIHelper.height)
@@ -111,7 +128,7 @@ class EventItem: UITableViewCell {
         )
     }
 
-    private func handleViewStateUpdate() {
+    private func handleViewStateUpdate(_ oldValue: EventItemViewModel? = nil) {
         nameLabel.text = viewModel?.name
         valueLabel.text = viewModel?.amount
 
@@ -119,6 +136,19 @@ class EventItem: UITableViewCell {
             viewRoot.addSwipingHint()
         } else {
             viewRoot.swipingHint?.removeFromSuperview()
+        }
+
+        animateFromSuccessIfNeeded(oldValue)
+    }
+
+    private func animateFromSuccessIfNeeded(_ oldValue: EventItemViewModel?) {
+        if
+            let viewModel, let oldValue,
+            let oldAmount = Int(oldValue.amount),
+            let newAmount = Int(viewModel.amount),
+            oldAmount < newAmount
+        {
+            swiper.animateFromSuccess()
         }
     }
 

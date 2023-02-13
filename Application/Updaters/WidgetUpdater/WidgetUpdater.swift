@@ -38,7 +38,7 @@ extension WidgetUpdater: EventsCommanding {
     func update() {
         guard let factory else { fatalError("updater requires factory") }
         let newViewModel = factory.makeEventsListViewModel(events: provider.get())
-        let items = newViewModel.sections[1] as! [EventItemViewModel]
+        let items = newViewModel.items.filter { type(of: $0) is EventItemViewModel.Type } as! [EventItemViewModel]
         update(items: items)
     }
 }

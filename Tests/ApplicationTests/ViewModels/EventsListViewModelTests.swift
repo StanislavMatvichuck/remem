@@ -9,14 +9,4 @@
 import Domain
 import XCTest
 
-final class EventsListViewModelTests: XCTestCase {
-    func test_hasNumberOfSections() {
-        let sut = EventsListViewModel(
-            today: DayIndex.referenceValue,
-            commander: EventsCommandingStub(),
-            sections: [[], [], []]
-        )
-
-        XCTAssertEqual(sut.numberOfSections, 3)
-    }
-}
+final class EventsListViewModelTests: XCTestCase {}

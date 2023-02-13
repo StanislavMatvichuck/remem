@@ -11,26 +11,36 @@ protocol EventsListViewModelFactoring {
     func makeEventsListViewModel(events: [Event]) -> EventsListViewModel
 }
 
+protocol EventsListItemViewModeling: Equatable {
+    var identifier: String { get }
+}
+
+extension EventsListItemViewModeling {
+    func hasSame(identifier: String) -> Bool {
+        self.identifier == identifier
+    }
+}
+
 struct EventsListViewModel {
     let title = String(localizationId: "eventsList.title")
 
     private let today: DayIndex
     private let commander: EventsCommanding
 
-    var sections: [[EventsListItemViewModel]]
-    var numberOfSections: Int { sections.count }
     var renamedItem: EventItemViewModel?
     var inputVisible: Bool = false
     var inputContent: String = ""
 
+    var items: [any EventsListItemViewModeling]
+
     init(
         today: DayIndex,
         commander: EventsCommanding,
-        sections: [[EventsListItemViewModel]]
+        items: [any EventsListItemViewModeling]
     ) {
         self.today = today
         self.commander = commander
-        self.sections = sections
+        self.items = items
     }
 
     func add(name: String) {
@@ -41,8 +51,17 @@ struct EventsListViewModel {
         inputVisible = true
     }
 
-    func rows(inSection: Int) -> Int { sections[inSection].count }
-    func itemViewModel(row: Int, section: Int) -> EventsListItemViewModel {
-        sections[section][row]
+    subscript(identifier: String) -> Int? {
+        for (index, item) in items.enumerated() {
+            if item.hasSame(identifier: identifier) {
+                return index
+            }
+        }
+        return nil
+//        let item = items.filter { $0.identifier == identifier }.first!
+//        return item
+//        let item = items[0]
+//        return item
+//        return FooterItemViewModel(eventsCount: 0)
     }
 }

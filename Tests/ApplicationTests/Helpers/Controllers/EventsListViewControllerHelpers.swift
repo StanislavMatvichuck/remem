@@ -16,7 +16,7 @@ extension EventsListViewController {
     }
 
     func swipeFirstEvent() {
-        let cell = tableView(viewRoot.table, cellForRowAt: IndexPath(row: 0, section: 1)) as! EventItem
+        guard let cell = viewRoot.table.dataSource?.tableView(viewRoot.table, cellForRowAt: IndexPath(row: 0, section: 1)) as? EventItem else { return }
         cell.swiper.sendActions(for: .primaryActionTriggered)
     }
 
@@ -33,12 +33,14 @@ extension EventsListViewController {
         return hintCell.label.text
     }
 
-    var eventsCount: Int { viewRoot.table.numberOfRows(inSection: 1) }
+    var eventsCount: Int {
+        viewRoot.table.numberOfRows(inSection: 0) - 2
+    }
 
     var firstEvent: EventItem {
         guard let cell = viewRoot.table.dataSource?.tableView(
             viewRoot.table,
-            cellForRowAt: IndexPath(row: 0, section: 1)
+            cellForRowAt: IndexPath(row: 1, section: 0)
         ) as? EventItem else { fatalError("unable to get EventItem") }
         return cell
     }
@@ -56,8 +58,8 @@ extension EventsListViewController {
 
         let table = viewRoot.table
         let index = IndexPath(
-            row: 0,
-            section: 1
+            row: 1,
+            section: 0
         )
 
         guard let config = table.delegate?.tableView?(

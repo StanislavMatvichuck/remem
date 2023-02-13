@@ -15,7 +15,7 @@ struct UIHelper {
     static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
     static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!
     static let brand = UIColor.systemBlue
-    static let brandDimmed = brand.withAlphaComponent(0.3)
+    static let brandDimmed = UIColor(named: "brandDimmed")!
     static let secondary = UIColor.systemOrange
     static let itemFont = UIColor.gray
     static let hint = UIColor.systemGray3
@@ -23,12 +23,13 @@ struct UIHelper {
     static let colorButtonText = brand
     static let colorButtonTextHighLighted = itemBackground
     // metrics
-    static let spacing = 16.0
-    static let spacingListHorizontal = 32.0
+    static let spacing = 8.0
+    static let spacingListHorizontal = 12.0
     static let radius = 4.0
-    static var r1: CGFloat { 2.2 * 14.0 }
+    static var r1: CGFloat { 32.0 }
     static var r2: CGFloat { r1 + delta1 }
-    static var delta1: CGFloat { 5 }
+    static var r0: CGFloat { r1 - delta1 }
+    static var delta1: CGFloat { 8 }
     static var d1: CGFloat { 2 * r1 }
     static var d2: CGFloat { 2 * r2 }
     static var height: CGFloat { Self.d2 + Self.spacing }

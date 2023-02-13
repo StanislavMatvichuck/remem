@@ -16,7 +16,9 @@ protocol EventItemViewModelFactoring {
     ) -> EventItemViewModel
 }
 
-struct EventItemViewModel {
+struct EventItemViewModel: EventsListItemViewModeling {    
+    var identifier: String { event.id }
+
     let rename = String(localizationId: "button.rename")
     let delete = String(localizationId: "button.delete")
 
@@ -25,9 +27,9 @@ struct EventItemViewModel {
     private let coordinator: DefaultCoordinator
     private let commander: EventsCommanding
 
-    var name: String
-    var hintEnabled: Bool
-    var amount: String
+    let name: String
+    let hintEnabled: Bool
+    let amount: String
     var renameHandler: EventItemViewModelRenameResponding?
 
     init(
@@ -76,14 +78,20 @@ struct EventItemViewModel {
         event.name = newName
         commander.save(event)
     }
+
+    func withRenameHandler(_ handler: EventItemViewModelRenameResponding) -> Self {
+        var new = self
+        new.renameHandler = handler
+        return new
+    }
+
+    static func == (lhs: EventItemViewModel, rhs: EventItemViewModel) -> Bool {
+        lhs.name == rhs.name &&
+            lhs.hintEnabled == rhs.hintEnabled &&
+            lhs.amount == rhs.amount
+    }
 }
 
 protocol EventItemViewModelRenameResponding {
     func renameRequested(_ viewModel: EventItemViewModel)
-}
-
-extension EventsListViewController: EventItemViewModelRenameResponding {
-    func renameRequested(_ itemViewModel: EventItemViewModel) {
-        viewModel.renamedItem = itemViewModel
-    }
 }

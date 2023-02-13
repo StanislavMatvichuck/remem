@@ -7,7 +7,9 @@
 
 import UIKit
 
-class FooterItem: UITableViewCell {
+class FooterItem: UITableViewCell, EventsListCell {
+    static var reuseIdentifier = "FooterItem"
+    
     let button: UIButton = {
         let button = UIButton(al: true)
         button.layer.cornerRadius = UIHelper.r2
@@ -85,8 +87,7 @@ class FooterItem: UITableViewCell {
     }
 
     @objc private func handleButton(sender _: UIButton) {
-        animateTapReceiving {
-            self.viewModel?.select()
-        }
+        animateTapReceiving()
+        viewModel?.select()
     }
 }
