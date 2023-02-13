@@ -2,6 +2,10 @@
 
 ⚠️ Repository description is under active construction :)
 
+
+https://user-images.githubusercontent.com/4983331/218447258-a562191c-6480-493c-89b4-85c1cdde9719.mp4
+
+
 <details>
   <summary>Domain model description</summary>
 
