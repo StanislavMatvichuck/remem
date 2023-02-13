@@ -18,3 +18,7 @@
 "summary.dayAverage" = "Среднее за день";
 "summary.daysTracked" = "Дней отслежено";
 "summary.daysSinceLastHappening" = "Дней после последнего происшествия";
+
+"widget.title" = "Список событий";
+"widget.subtitle" = "Первые три события с количеством случаев на сегодня";
+"widget.emptyRow" = "Добавь первое событие чтобы отслеживать";

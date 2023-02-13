@@ -18,3 +18,7 @@
 "summary.dayAverage" = "Day average";
 "summary.daysTracked" = "Days tracked";
 "summary.daysSinceLastHappening" = "Days since last happening";
+
+"widget.title" = "Events list";
+"widget.subtitle" = "First three events with amount for today";
+"widget.emptyRow" = "Add your first event to track";

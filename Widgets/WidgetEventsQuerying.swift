@@ -9,12 +9,24 @@ import Foundation
 
 class WidgetEventsQuerying {
     func getPreview() -> [WidgetEventItemViewModel] {
-        let localURL = Bundle(for: Self.self).url(
+        guard let localURL = Bundle(for: Self.self).url(
             forResource: "WidgetPreview",
             withExtension: "plist"
-        )!
-        let fileContent = try! Data(contentsOf: localURL)
-        let viewModel = try! PropertyListDecoder().decode([WidgetEventItemViewModel].self, from: fileContent)
+        ) else {
+            logger.error("WidgetEventsQuerying.getPreview localURL error")
+            return []
+        }
+
+        guard let fileContent = try? Data(contentsOf: localURL) else {
+            logger.error("WidgetEventsQuerying.getPreview fileContent error")
+            return []
+        }
+
+        guard let viewModel = try? PropertyListDecoder().decode([WidgetEventItemViewModel].self, from: fileContent) else {
+            logger.error("WidgetEventsQuerying.getPreview fileContent error")
+            return []
+        }
+
         return viewModel
     }
 

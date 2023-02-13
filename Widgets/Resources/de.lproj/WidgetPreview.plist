@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>id</key>
+		<string>090AA720-E2EF-4C8E-AE3F-389EC64AF95C</string>
+		<key>amount</key>
+		<string>3</string>
+		<key>name</key>
+		<string>Glas Wasser 🥛</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>2BAD065B-A649-49DD-9D07-8CAEBA53ABEB</string>
+		<key>amount</key>
+		<string>1</string>
+		<key>name</key>
+		<string>Pflanzen gießen 🪴</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>B08CCC21-04CF-4B86-ABD1-64C208BCADC9</string>
+		<key>amount</key>
+		<string>0</string>
+		<key>name</key>
+		<string>Meditation 🧘🏻‍♀️</string>
+	</dict>
+</array>
+</plist>

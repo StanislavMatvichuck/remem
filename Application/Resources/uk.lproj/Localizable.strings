@@ -18,3 +18,7 @@
 "summary.dayAverage" = "Середнє за день";
 "summary.daysTracked" = "Днів відслідковано";
 "summary.daysSinceLastHappening" = "Днів після останнього випадку";
+
+"widget.title" = "Список подій";
+"widget.subtitle" = "Перші три події з кількістю випадків на сьогодні";
+"widget.emptyRow" = "Додай першу подію щоб відслідковувати";

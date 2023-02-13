@@ -9,10 +9,20 @@ import SwiftUI
 
 struct EventsList: View {
     let items: [WidgetEventItemViewModel?]
+
     init(items: [WidgetEventItemViewModel]) {
-        var threeItems: [WidgetEventItemViewModel?] = [nil, nil, nil]
-        threeItems.replaceSubrange(0 ..< items.count, with: items)
-        self.items = threeItems
+        if items.isEmpty {
+            self.items = [WidgetEventItemViewModel(name: String(localizationId: "widget.emptyRow"), amount: "!"), nil]
+            return
+        }
+
+        var result = [WidgetEventItemViewModel?]()
+
+        items.prefix(3).forEach { result.append($0) }
+
+        while result.count < 3 { result.append(nil) }
+
+        self.items = result
     }
 
     var body: some View {
