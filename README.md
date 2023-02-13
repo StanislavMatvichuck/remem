@@ -2,9 +2,7 @@
 
 ⚠️ Repository description is under active construction :)
 
-
-https://user-images.githubusercontent.com/4983331/218447258-a562191c-6480-493c-89b4-85c1cdde9719.mp4
-
+https://user-images.githubusercontent.com/4983331/218532749-147d6536-195b-479b-aa86-b9bcbcc3464c.mp4
 
 <details>
   <summary>Domain model description</summary>
