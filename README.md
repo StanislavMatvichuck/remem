@@ -1,5 +1,7 @@
 # Remem
 
+⚠️ Repository description is under active construction :)
+
 <details>
   <summary>Domain model description</summary>
 
