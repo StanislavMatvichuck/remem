@@ -16,7 +16,7 @@ extension EventsListViewController {
     }
 
     func swipeFirstEvent() {
-        guard let cell = viewRoot.table.dataSource?.tableView(viewRoot.table, cellForRowAt: IndexPath(row: 0, section: 1)) as? EventItem else { return }
+        guard let cell = viewRoot.table.dataSource?.tableView(viewRoot.table, cellForRowAt: IndexPath(row: 1, section: 0)) as? EventItem else { return }
         cell.swiper.sendActions(for: .primaryActionTriggered)
     }
 
