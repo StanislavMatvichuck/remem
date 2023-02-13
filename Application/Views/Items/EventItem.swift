@@ -135,7 +135,7 @@ final class EventItem: UITableViewCell, EventsListCell {
         if let viewModel, viewModel.hintEnabled {
             viewRoot.addSwipingHint()
         } else {
-            viewRoot.swipingHint?.removeFromSuperview()
+            viewRoot.removeSwipingHint()
         }
 
         animateFromSuccessIfNeeded(oldValue)

@@ -9,7 +9,7 @@ import UIKit
 
 protocol UsingSwipingHintDisplaying: UIView {
     var swipingHint: SwipingHintDisplaying? { get }
-    @discardableResult func addSwipingHint() -> SwipingHintDisplaying
+    func addSwipingHint()
     func removeSwipingHint()
 }
 
@@ -26,17 +26,11 @@ extension UsingSwipingHintDisplaying {
         }.first as? SwipingHintDisplaying
     }
 
-    @discardableResult
-    func addSwipingHint() -> SwipingHintDisplaying {
-        let view = SwipingHintDisplay()
-        addSubview(view)
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: widthAnchor),
-            view.heightAnchor.constraint(equalTo: heightAnchor),
-            view.centerXAnchor.constraint(equalTo: centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: centerYAnchor),
-        ])
-        return view
+    func addSwipingHint() {
+        let display = SwipingHintDisplay()
+        addAndConstrain(display)
+        layoutIfNeeded()
+        display.startAnimation()
     }
 
     func removeSwipingHint() {
@@ -50,7 +44,13 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
     var animationCompletionHandler: (() -> Void)?
 
     var animatedPosition: CGFloat {
-        horizontalConstraint?.constant ?? 0
+        horizontalConstraint?.constant ?? initialConstant
+    }
+
+    private var duration: Double { 1.6 }
+    private var initialConstant: CGFloat { UIHelper.r2 }
+    private var finalConstant: CGFloat {
+        UIScreen.main.bounds.width - 2 * UIHelper.spacingListHorizontal - UIHelper.r2
     }
 
     private var horizontalConstraint: NSLayoutConstraint?
@@ -60,7 +60,7 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
 
         let littleSize = UIHelper.delta1 * 1.5
         let littleCenter = UIView(al: true)
-        littleCenter.layer.backgroundColor = UIColor.systemBlue.cgColor
+        littleCenter.layer.backgroundColor = UIColor.clear.cgColor
         littleCenter.layer.cornerRadius = littleSize / 2
 
         view.addSubview(littleCenter)
@@ -79,7 +79,7 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
             .withTintColor(.systemBlue.withAlphaComponent(1.0))
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font:
-                .systemFont(ofSize: 64, weight: .regular)))
+                .systemFont(ofSize: 40, weight: .regular)))
 
         let view = UIImageView(image: image)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -94,9 +94,6 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
-        addSubview(circle)
-        addSubview(finger)
-        setupConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -105,16 +102,16 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
 
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        startAnimation()
+        setupConstraints()
     }
 
     func startAnimation() {
         let animator = UIViewPropertyAnimator(
-            duration: 1.5,
+            duration: duration,
             timingParameters: UICubicTimingParameters()
         )
         animator.addAnimations {
-            self.horizontalConstraint?.constant = self.bounds.width - self.circle.bounds.height
+            self.horizontalConstraint?.constant = self.finalConstant
             self.layoutIfNeeded()
         }
         animator.addCompletion { _ in
@@ -126,11 +123,11 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
 
     private func startReverseAnimation() {
         let animator = UIViewPropertyAnimator(
-            duration: 1.5,
+            duration: duration,
             timingParameters: UICubicTimingParameters()
         )
         animator.addAnimations {
-            self.horizontalConstraint?.constant = 0
+            self.horizontalConstraint?.constant = self.initialConstant
             self.layoutIfNeeded()
         }
         animator.addCompletion { _ in
@@ -141,7 +138,10 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
     }
 
     private func setupConstraints() {
-        let horizontalConstraint = circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0)
+        addSubview(circle)
+        addSubview(finger)
+
+        let horizontalConstraint = circle.centerXAnchor.constraint(equalTo: leadingAnchor, constant: initialConstant)
         self.horizontalConstraint = horizontalConstraint
 
         let labelSize = finger.sizeThatFits(UIScreen.main.bounds.size)
@@ -149,8 +149,8 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
             finger.centerXAnchor.constraint(equalTo: circle.centerXAnchor, constant: 0.75 * labelSize.width),
             finger.centerYAnchor.constraint(equalTo: circle.centerYAnchor, constant: 0.56 * labelSize.height),
 
-            circle.topAnchor.constraint(equalTo: topAnchor),
-            circle.heightAnchor.constraint(equalTo: heightAnchor),
+            circle.centerYAnchor.constraint(equalTo: centerYAnchor),
+            circle.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1 / 3),
             circle.widthAnchor.constraint(equalTo: circle.heightAnchor),
             horizontalConstraint,
         ])
@@ -160,5 +160,9 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
         super.layoutSubviews()
         circle.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
         circle.layer.cornerRadius = circle.bounds.width / 2
+    }
+
+    override func updateConstraints() {
+        super.updateConstraints()
     }
 }
