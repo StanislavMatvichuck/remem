@@ -9,9 +9,12 @@ import iOSSnapshotTestCase
 import UIKit
 
 final class ZAtlas: FBSnapshotTestCase {
+    var scale: CGFloat { 0.5 }
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
-    let spacing = 16.0
+    var spacing: CGFloat { 16.0 * scale }
+    var atlasSize: CGSize { CGSize(width: 6 * (width + spacing) * scale, height: 1 * (height + spacing) * scale) }
+    var atlasFrame: CGRect { CGRect(origin: .zero, size: atlasSize) }
     
     var parent: UIView!
     
@@ -19,7 +22,8 @@ final class ZAtlas: FBSnapshotTestCase {
         super.setUp()
         configureCommonOptions()
         
-        parent = UIView(frame: CGRect(x: 0, y: 0, width: 2 * 1920, height: 2 * 1080))
+        parent = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacing, height: spacing)))
+        parent.translatesAutoresizingMaskIntoConstraints = false
         parent.backgroundColor = UIColor.purple
     }
     
@@ -29,64 +33,44 @@ final class ZAtlas: FBSnapshotTestCase {
         super.tearDown()
     }
  
-    func test01_rendersFullHDPurpleBackground() {
+    func test01_rendersPurpleBackground() {
         FBSnapshotVerifyView(parent)
     }
     
     func test02_snapshotImageCanBeAdded() {
-        let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        let testName = "EventsList/test_empty"
-        guard let image = UIImage(contentsOfFile: "\(directory)/\(testName)@2x.png") else { return }
-        let view = UIImageView(image: image)
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        parent.addSubview(view)
-        NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            view.topAnchor.constraint(equalTo: parent.topAnchor),
-            view.widthAnchor.constraint(equalToConstant: image.size.width),
-            view.heightAnchor.constraint(equalToConstant: image.size.height),
-        ])
+        let view = makeImageViewFor(testName: "EventsList/test_empty")
+        
+        parent.addAndConstrain(view, constant: spacing)
         
         FBSnapshotVerifyView(parent)
     }
     
     func test03_someSnapshotsCanBeAddedHorizontally() {
-        let row = makeRow(testNames: [
-            "EventsList/test_empty",
-            "EventsList/test_addButton_inputShown",
-            "EventsList/test_oneItem",
-            "EventsList/test_oneItem_swiped",
-        ])
-        
-        parent.addSubview(row)
-        
-        NSLayoutConstraint.activate([
-            row.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row.topAnchor.constraint(equalTo: parent.topAnchor),
-        ])
+        parent.addAndConstrain(
+            makeRow(testNames: [
+                "EventsList/test_empty",
+                "EventsList/test_addButton_inputShown",
+                "EventsList/test_oneItem",
+                "EventsList/test_oneItem_swiped",
+            ]),
+            constant: spacing)
         
         FBSnapshotVerifyView(parent)
     }
     
     func test04_emptyRowItemCanBeAdded() {
-        let row = makeRow(testNames: [
-            nil,
-            "EventsList/test_empty",
-        ])
-        
-        parent.addSubview(row)
-        
-        NSLayoutConstraint.activate([
-            row.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row.topAnchor.constraint(equalTo: parent.topAnchor),
-        ])
+        parent.addAndConstrain(
+            makeRow(testNames: [
+                nil,
+                "EventsList/test_empty",
+            ]),
+            constant: spacing)
         
         FBSnapshotVerifyView(parent)
     }
     
     func test05_eventsListBasicFlow() {
-        parent = UIView(frame: CGRect(x: 0, y: 0, width: 6 * (width + spacing), height: 2 * (height + spacing)))
+        parent = UIView(frame: atlasFrame)
         parent.backgroundColor = UIColor.purple
         
         let row01 = makeRow(testNames: [
@@ -94,33 +78,17 @@ final class ZAtlas: FBSnapshotTestCase {
             "EventsList/test_addButton_inputShown",
             "EventsList/test_oneItem",
             "EventsList/test_oneItem_swiped",
-            nil,
+            "EventDetails/test_singleHappening",
             "EventsList/test_oneItem_visited",
         ])
         
-        let row02 = makeRow(testNames: [
-            nil,
-            nil,
-            nil,
-            nil,
-            "EventDetails/test_singleHappening",
-        ])
-        
-        parent.addSubview(row01)
-        parent.addSubview(row02)
-        
-        NSLayoutConstraint.activate([
-            row01.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row01.topAnchor.constraint(equalTo: parent.topAnchor),
-            row02.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row02.topAnchor.constraint(equalTo: row01.bottomAnchor),
-        ])
+        parent.addAndConstrain(row01, constant: spacing)
         
         FBSnapshotVerifyView(parent)
     }
     
     func test06_eventsListBasicFlow_dark() {
-        parent = UIView(frame: CGRect(x: 0, y: 0, width: 6 * (width + spacing), height: 2 * (height + spacing)))
+        parent = UIView(frame: atlasFrame)
         parent.backgroundColor = UIColor.purple
         
         let row01 = makeRow(testNames: [
@@ -128,27 +96,11 @@ final class ZAtlas: FBSnapshotTestCase {
             "EventsList/test_addButton_inputShown_dark",
             "EventsList/test_oneItem_dark",
             "EventsList/test_oneItem_swiped_dark",
-            nil,
+            "EventDetails/test_singleHappening_dark",
             "EventsList/test_oneItem_visited_dark",
         ])
         
-        let row02 = makeRow(testNames: [
-            nil,
-            nil,
-            nil,
-            nil,
-            "EventDetails/test_singleHappening_dark",
-        ])
-        
-        parent.addSubview(row01)
-        parent.addSubview(row02)
-        
-        NSLayoutConstraint.activate([
-            row01.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row01.topAnchor.constraint(equalTo: parent.topAnchor),
-            row02.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
-            row02.topAnchor.constraint(equalTo: row01.bottomAnchor),
-        ])
+        parent.addAndConstrain(row01, constant: spacing)
         
         FBSnapshotVerifyView(parent)
     }
@@ -157,7 +109,7 @@ final class ZAtlas: FBSnapshotTestCase {
         let horizontalStack = UIStackView()
         horizontalStack.translatesAutoresizingMaskIntoConstraints = false
         horizontalStack.axis = .horizontal
-        horizontalStack.spacing = spacing
+        horizontalStack.spacing = spacing * scale
         
         for name in testNames {
             horizontalStack.addArrangedSubview(makeImageViewFor(testName: name))
@@ -167,23 +119,20 @@ final class ZAtlas: FBSnapshotTestCase {
     }
     
     private func makeImageViewFor(testName: String?) -> UIImageView {
-        let w = UIScreen.main.bounds.size.width
-        let h = UIScreen.main.bounds.size.height
-        
         let view = UIImageView(image: nil)
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: w),
-            view.heightAnchor.constraint(equalToConstant: h),
+            view.widthAnchor.constraint(equalToConstant: width * scale),
+            view.heightAnchor.constraint(equalToConstant: height * scale),
         ])
         
         let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        let screenSize = "_\(Int(w))x\(Int(h))"
+        let screenSize = "_\(Int(width))x\(Int(height))"
         let path = "\(directory)/\(testName ?? "nil")\(screenSize).png"
         
         if let image = UIImage(contentsOfFile: path) {
             view.image = image
-        }
+        } else { print("image not found for \(path)") }
         
         return view
     }

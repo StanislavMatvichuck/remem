@@ -34,3 +34,16 @@ extension FBSnapshotTestCase {
         folderName = "\(String(describing: type(of: self)))".replacingOccurrences(of: "Snapshots", with: "")
     }
 }
+
+extension UIView {
+    func addAndConstrain(_ view: UIView, constant: CGFloat = 0) {
+        addSubview(view)
+
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constant),
+            view.topAnchor.constraint(equalTo: topAnchor, constant: constant),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1 * constant),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1 * constant),
+        ])
+    }
+}
