@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
-    let create = String(localizationId: "button.create")
+    let create = String(localizationId: "button.addHappening")
     let delete = String(localizationId: "button.delete")
     let cancel = String(localizationId: "button.cancel")
     let edit = String(localizationId: "button.edit")

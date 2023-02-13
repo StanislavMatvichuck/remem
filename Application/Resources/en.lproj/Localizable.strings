@@ -4,6 +4,7 @@
 "button.rename" = "Rename";
 "button.save" = "Save";
 "button.edit" = "Edit";
+"button.addHappening" = "Add happening";
 
 "eventsList.hint.empty" = "Add an event you want to track";
 "eventsList.hint.firstHappening" = "Swipe when event happened";

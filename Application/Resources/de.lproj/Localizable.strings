@@ -4,6 +4,7 @@
 "button.rename" = "Umbenennen";
 "button.save" = "Speichern";
 "button.edit" = "Bearbeiten";
+"button.addHappening" = "Passiert hinzufügen";
 
 "eventsList.hint.empty" = "Ereignis zur Verfolgung hinzufügen";
 "eventsList.hint.firstHappening" = "Wischen Sie, wenn das Ereignis passiert ist";

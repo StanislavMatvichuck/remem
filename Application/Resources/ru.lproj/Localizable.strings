@@ -4,6 +4,7 @@
 "button.rename" = "Переименовать";
 "button.save" = "Сохранить";
 "button.edit" = "Редактировать";
+"button.addHappening" = "Добавить происшествие";
 
 "eventsList.hint.empty" = "Добавь событие чтобы отслеживать";
 "eventsList.hint.firstHappening" = "Свайп когда событие произошло";
