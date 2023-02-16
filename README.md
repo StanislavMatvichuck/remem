@@ -2,6 +2,13 @@
 
 ⚠️ Repository description is under active construction :)
 
+Planned features list
+
+- [ ] **Volume tests.** Would be cool to be sure that application will behave seamlessly even after 5-10 years of usage.
+- [ ] **Weekly goal.** Having a setup goal allows to track and display the amount of progress towards it.
+- [ ] **PDF reports.** This will allow to share your achievements with others with ease.
+- [ ] **Events list sorting variants.** List is static which blocks user from any customisations.
+
 https://user-images.githubusercontent.com/4983331/218532749-147d6536-195b-479b-aa86-b9bcbcc3464c.mp4
 
 <details>
