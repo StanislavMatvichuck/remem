@@ -15,7 +15,7 @@ struct UIHelper {
     static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
     static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!
     static let brand = UIColor.systemBlue
-    static let brandDimmed = UIColor(named: "brandDimmed")!
+    static let brandDimmed = UIColor(named: "primary_dimmed")!
     static let secondary = UIColor.systemOrange
     static let itemFont = UIColor.gray
     static let hint = UIColor.systemGray3
