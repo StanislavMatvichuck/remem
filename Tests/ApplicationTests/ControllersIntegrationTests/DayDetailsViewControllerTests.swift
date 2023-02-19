@@ -67,7 +67,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         XCTAssertTrue(sut.viewRoot.happenings.isEditing)
     }
 
-    func test_editButtonTapedTwoTimes_editModeDisabled() {
+    func test_editButtonTappedTwoTimes_editModeDisabled() {
         let editButton = sut.navigationItem.rightBarButtonItem
 
         XCTAssertFalse(sut.viewRoot.happenings.isEditing, "precondition")
@@ -81,7 +81,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     func test_showsCreateHappeningButton() {
         let createButton = sut.navigationItem.leftBarButtonItem
 
-        XCTAssertEqual(createButton?.title, String(localizationId: "button.create"))
+        XCTAssertEqual(createButton?.title, String(localizationId: "button.addHappening"))
     }
 
     func test_createButtonTaped_createHappeningAlertPresented() {
@@ -91,12 +91,12 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         tap(createButton!)
 
         verifier.verify(
-            title: String(localizationId: "button.create"),
+            title: String(localizationId: "button.addHappening"),
             message: "",
             animated: true,
             actions: [
                 .cancel(String(localizationId: "button.cancel")),
-                .default(String(localizationId: "button.create"))
+                .default(String(localizationId: "button.addHappening"))
             ]
         )
     }
