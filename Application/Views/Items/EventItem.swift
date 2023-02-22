@@ -61,6 +61,7 @@ final class EventItem: UITableViewCell, EventsListCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessibilityIdentifier = "EventItem"
         configureLayout()
         configureAppearance()
         configureEventHandlers()

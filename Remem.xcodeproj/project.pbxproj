@@ -79,6 +79,7 @@
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087365FF2930DD29000F28DE /* WeekViewModelTests.swift */; };
 		087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087366012930E000000F28DE /* WeekItemViewModelTests.swift */; };
+		08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
@@ -122,11 +123,8 @@
 		08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */; };
-		08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
-		08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */; };
 		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
 		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
-		08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */; };
 		08CEA4642938B91700967BB4 /* ClockStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA4632938B91700967BB4 /* ClockStrategyTests.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
@@ -364,6 +362,7 @@
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		087365FF2930DD29000F28DE /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
 		087366012930E000000F28DE /* WeekItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItemViewModelTests.swift; sourceTree = "<group>"; };
+		08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTesting.swift; sourceTree = "<group>"; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
@@ -410,7 +409,6 @@
 		08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		08CC50692906DE8200840385 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		08CC506B2906DEEC00840385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSceneDelegate.swift; sourceTree = "<group>"; };
 		08CCF4F0289FDBF1003576B8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		08CEA4632938B91700967BB4 /* ClockStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockStrategyTests.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -842,7 +840,6 @@
 			children = (
 				08E63E53294099F900F87F25 /* Controllers */,
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
-				08CC506D2906DF5D00840385 /* TestingSceneDelegate.swift */,
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
 			);
 			path = Helpers;
@@ -934,6 +931,7 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
 				08FE1855298AC8C100DBC78D /* DayTimeline.swift */,
 				0887C800298AD3590048EC12 /* WeekTimeline.swift */,
 				08FE1857298AC90900DBC78D /* DayIndex.swift */,
@@ -1362,7 +1360,6 @@
 				08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
-				08CA105B29758BEB00D4C402 /* TestingSceneDelegate.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,
 				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
@@ -1370,7 +1367,6 @@
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
 				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
 				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
-				08CA105A29758BE900D4C402 /* TestingAppDelegate.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,
 				08B628B52981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
 				0857A018292FD73000924530 /* WeekSnapshots.swift in Sources */,
@@ -1433,7 +1429,6 @@
 				0857A01E292FFD5900924530 /* ClockViewControllerHelpers.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */,
-				08CC506E2906DF5D00840385 /* TestingSceneDelegate.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */,
@@ -1462,6 +1457,7 @@
 				08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */,
 				0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */,
+				08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
@@ -1771,7 +1767,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.ApplicationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1790,7 +1786,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.ApplicationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1872,7 +1868,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6H38BVYL;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
@@ -1892,7 +1888,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6H38BVYL;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;

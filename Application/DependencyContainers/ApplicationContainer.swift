@@ -25,6 +25,8 @@ class ApplicationContainer {
         self.provider = repository
         self.commander = repository
 
+        scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
+
         coordinator.listFactory = self
     }
 

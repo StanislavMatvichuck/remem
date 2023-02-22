@@ -8,21 +8,25 @@
 import XCTest
 
 final class ApplicationUITests: XCTestCase {
-//    func testLaunchPerformance() throws {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTApplicationLaunchMetric()]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
+    func testVolume() {
+        let app = XCUIApplication()
+        app.launchArguments = ["eventsAmount 100"]
+        app.launch()
 
-    func test_addEvent() {
-        measure {
-            let app = XCUIApplication()
-            app.launch()
-            app.buttons["Create event"].tap()
-            app.buttons["Cancel"].tap()
-        }
+        app.tables.firstMatch.cells["EventItem"].firstMatch.tap()
+        app.navigationBars.buttons.firstMatch.waitForExistence(timeout: 5)
+        app.navigationBars.buttons.firstMatch.tap()
+    }
+
+    func test_swipe() {
+        let app = XCUIApplication()
+        app.launchArguments = ["eventsAmount 1"]
+        app.launch()
+
+        let firstEvent = app.tables.firstMatch.cells["EventItem"].firstMatch
+        let swiper = firstEvent.descendants(matching: .any)["Swiper"]
+        let valueLabel = firstEvent.staticTexts.element(boundBy: 1)
+
+        swiper.press(forDuration: 0, thenDragTo: valueLabel)
     }
 }
