@@ -9,22 +9,21 @@
 import Domain
 import XCTest
 
-final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerTesting {
-    // MARK: - Test fixture
+final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     var sut: EventsListViewController!
     var commander: EventsCommanding!
+    var event: Event!
+
     var table: UITableView { sut.viewRoot.table }
     var view: EventsListView { sut.viewRoot }
 
     override func setUp() {
         super.setUp()
-        makeSutWithViewModelFactory()
-        sut.loadViewIfNeeded()
+        make()
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 
@@ -54,7 +53,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_empty_showsHint_empty() {
-        XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.empty"))
+        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.empty"))
     }
 
     func test_empty_showsCreateEventButton_highlighted() {
@@ -96,14 +95,14 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_submittingEvent_addsEventToList() {
-        sut.submitEvent()
+        submitEvent()
 
-        XCTAssertEqual(sut.eventsCount, 1)
-        XCTAssertEqual(sut.firstEvent.nameLabel.text, "SubmittedEventName")
+        XCTAssertEqual(eventsCount, 1)
+        XCTAssertEqual(firstEvent.nameLabel.text, "SubmittedEventName")
     }
 
     func test_singleEvent_showsCreateButton_default() {
-        sut.submitEvent()
+        submitEvent()
 
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
@@ -126,31 +125,29 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_singleEvent_showsHint_firstHappening() {
-        sut.submitEvent()
+        submitEvent()
 
-        XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.firstHappening"))
+        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.firstHappening"))
     }
 
     func test_singleEvent_showsOneEvent() {
-        sut.submitEvent()
+        submitEvent()
 
-        XCTAssertNotNil(sut.firstEvent)
+        XCTAssertNotNil(firstEvent)
     }
 
     func test_singleEvent_showsGestureHint() {
         /// is it part of list controller or EventItemViewModel?
         /// should some tests be moved to EventItemViewModel?
-        sut.submitEvent()
+        submitEvent()
 
-        let event = sut.firstEvent
-
-        XCTAssertNotNil(event.viewRoot.swipingHint)
+        XCTAssertNotNil(firstEvent.viewRoot.swipingHint)
     }
 
     func test_singleEvent_hasRenameSwipeAction() {
         /// is it part of list controller or EventItemViewModel?
         /// should some tests be moved to EventItemViewModel?
-        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
+        let button = submittedEventTrailingSwipeActionButton(number: 0)
 
         XCTAssertEqual(
             button.title,
@@ -159,7 +156,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_singleEvent_hasDeleteSwipeAction() {
-        let button = sut.submittedEventTrailingSwipeActionButton(number: 1)
+        let button = submittedEventTrailingSwipeActionButton(number: 1)
 
         XCTAssertEqual(
             button.title,
@@ -171,7 +168,7 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
         putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
-        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
+        let button = submittedEventTrailingSwipeActionButton(number: 0)
 
         button.handler(button, UIView()) { _ in }
 
@@ -180,23 +177,23 @@ final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerT
     }
 
     func test_singleEvent_submittingRename_eventNameUpdated() {
-        let button = sut.submittedEventTrailingSwipeActionButton(number: 0)
+        let button = submittedEventTrailingSwipeActionButton(number: 0)
 
         button.handler(button, UIView()) { _ in }
         view.input.value = "ChangedName"
         _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
 
-        XCTAssertEqual(sut.firstEvent.nameLabel.text, "ChangedName")
+        XCTAssertEqual(firstEvent.nameLabel.text, "ChangedName")
     }
 
     func test_singleEvent_deletePressed_removesEventFromList() {
-        let button = sut.submittedEventTrailingSwipeActionButton(number: 1)
+        let button = submittedEventTrailingSwipeActionButton(number: 1)
 
-        XCTAssertEqual(sut.eventsCount, 1, "precondition")
+        XCTAssertEqual(eventsCount, 1, "precondition")
 
         button.handler(button, UIView()) { _ in }
 
-        XCTAssertEqual(sut.eventsCount, 0)
+        XCTAssertEqual(eventsCount, 0)
     }
 
     // TODO: refactor tests to use string identifiers instead of indexPath

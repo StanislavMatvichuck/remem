@@ -11,7 +11,7 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
+final class WeekViewControllerTests: XCTestCase, TestingViewController {
     var spy: PresentationVerifier!
     var sut: WeekViewController!
     var event: Event!
@@ -19,13 +19,11 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
 
     override func setUp() {
         super.setUp()
-        makeSutWithViewModelFactory()
-        sut.loadViewIfNeeded()
+        make()
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 
@@ -99,7 +97,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     }
 
     func test_firstDay_showsDayNumber() {
-        XCTAssertEqual(sut.firstDay.day.text, "1")
+        XCTAssertEqual(firstDay.day.text, "1")
     }
 
     func test_hasHappening_firstDayShowsHappeningTime() {
@@ -112,7 +110,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
             .makeContainer(event: event, today: today)
             .makeWeekViewController()
 
-        XCTAssertEqual(sut.firstDay.timingLabels.first?.text, "00:00")
+        XCTAssertEqual(firstDay.timingLabels.first?.text, "00:00")
     }
 
     func test_showsWeekSummary() {

@@ -9,20 +9,18 @@
 import Domain
 import XCTest
 
-final class EventDetailsViewControllerTests: XCTestCase, EventDetailsViewControllerTesting {
+final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
     var sut: EventDetailsViewController!
     var event: Event!
-    var viewModelFactory: EventViewModelFactoring!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
-        makeSutWithViewModelFactory()
-        sut.loadViewIfNeeded()
+        make()
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 

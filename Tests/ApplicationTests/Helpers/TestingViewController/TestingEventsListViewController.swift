@@ -9,50 +9,52 @@
 import Domain
 import XCTest
 
-protocol EventsListViewControllerTesting: AnyObject {
-    var sut: EventsListViewController! { get set }
-    var commander: EventsCommanding! { get set }
-}
+extension TestingViewController where Controller == EventsListViewController {
+    func make() {
+        let container = ApplicationContainer(testingInMemoryMode: true).makeContainer()
+        sut = container.makeController()
+        commander = container.updater
+        sut.loadViewIfNeeded()
+    }
 
-extension EventsListViewController {
     func arrangeSingleEventSwiped() {
         submitEvent()
         swipeFirstEvent()
     }
 
     func swipeFirstEvent() {
-        guard let cell = viewRoot.table.dataSource?.tableView(viewRoot.table, cellForRowAt: IndexPath(row: 1, section: 0)) as? EventItem else { return }
+        guard let cell = sut.viewRoot.table.dataSource?.tableView(sut.viewRoot.table, cellForRowAt: IndexPath(row: 1, section: 0)) as? EventItem else { return }
         cell.swiper.sendActions(for: .primaryActionTriggered)
     }
 
     func submitEvent() {
-        viewRoot.input.value = "SubmittedEventName"
+        sut.viewRoot.input.value = "SubmittedEventName"
 
-        _ = viewRoot.input.textField.delegate?.textFieldShouldReturn?(
-            viewRoot.input.textField
+        _ = sut.viewRoot.input.textField.delegate?.textFieldShouldReturn?(
+            sut.viewRoot.input.textField
         )
     }
 
     var hintText: String? {
-        let hintCell = viewRoot.table.cellForRow(at: IndexPath(row: 0, section: 0)) as! HintItem
+        let hintCell = sut.viewRoot.table.cellForRow(at: IndexPath(row: 0, section: 0)) as! HintItem
         return hintCell.label.text
     }
 
     var eventsCount: Int {
-        viewRoot.table.numberOfRows(inSection: 0) - 2
+        sut.viewRoot.table.numberOfRows(inSection: 0) - 2
     }
 
     var firstEvent: EventItem {
-        guard let cell = viewRoot.table.dataSource?.tableView(
-            viewRoot.table,
+        guard let cell = sut.viewRoot.table.dataSource?.tableView(
+            sut.viewRoot.table,
             cellForRowAt: IndexPath(row: 1, section: 0)
         ) as? EventItem else { fatalError("unable to get EventItem") }
         return cell
     }
 
     var footer: FooterItem {
-        guard let cell = viewRoot.table.dataSource?.tableView(
-            viewRoot.table,
+        guard let cell = sut.viewRoot.table.dataSource?.tableView(
+            sut.viewRoot.table,
             cellForRowAt: IndexPath(row: 0, section: 2)
         ) as? FooterItem else { fatalError("unable to get footer") }
         return cell
@@ -61,7 +63,7 @@ extension EventsListViewController {
     func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
         submitEvent()
 
-        let table = viewRoot.table
+        let table = sut.viewRoot.table
         let index = IndexPath(
             row: 1,
             section: 0
@@ -75,19 +77,6 @@ extension EventsListViewController {
         }
 
         return config.actions[number]
-    }
-}
-
-extension EventsListViewControllerTesting {
-    func makeSutWithViewModelFactory() {
-        let container = ApplicationContainer(testingInMemoryMode: true).makeContainer()
-        sut = container.makeController()
-        commander = container.updater
-    }
-
-    func clearSutAndViewModelFactory() {
-        sut = nil
-        commander = nil
     }
 
     func forceViewToLayoutInScreenSize() {

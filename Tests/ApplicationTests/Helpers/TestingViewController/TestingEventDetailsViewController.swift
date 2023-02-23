@@ -8,26 +8,14 @@
 @testable import Application
 import Domain
 
-protocol EventDetailsViewControllerTesting: AnyObject {
-    var event: Event! { get set }
-    var sut: EventDetailsViewController! { get set }
-    var viewModelFactory: EventViewModelFactoring! { get set }
-}
-
-extension EventDetailsViewControllerTesting {
-    func makeSutWithViewModelFactory() {
+extension TestingViewController where Controller == EventDetailsViewController {
+    func make() {
         let today = DayIndex.referenceValue
         event = Event(name: "Event", dateCreated: today.date)
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = container.makeController()
-        viewModelFactory = container
-    }
-
-    func clearSutAndViewModelFactory() {
-        event = nil
-        sut = nil
-        viewModelFactory = nil
+        sut.loadViewIfNeeded()
     }
 }

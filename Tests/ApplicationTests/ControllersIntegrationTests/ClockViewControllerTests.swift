@@ -9,21 +9,19 @@
 import Domain
 import XCTest
 
-final class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
+final class ClockViewControllerTests: XCTestCase, TestingViewController {
     var sut: ClockViewController!
     var event: Event!
     var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
-        makeSutWithViewModelFactory()
-        sut.loadViewIfNeeded()
-        sut.forceViewToLayoutInScreenSize()
+        make()
+        forceViewToLayoutInScreenSize()
     }
 
     override func tearDown() {
-        sut = nil
-        event = nil
+        clear()
         super.tearDown()
     }
 

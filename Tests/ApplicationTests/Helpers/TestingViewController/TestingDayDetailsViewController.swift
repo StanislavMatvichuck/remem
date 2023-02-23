@@ -1,0 +1,43 @@
+//
+//  DayDetailsControllerHelpers.swift
+//  Remem
+//
+//  Created by Stanislav Matvichuck on 30.11.2022.
+//
+
+@testable import Application
+import Domain
+import XCTest
+
+extension TestingViewController where Controller == DayDetailsViewController {
+    func make() {
+        let day = DayIndex.referenceValue
+        event = Event(name: "Event")
+        let container = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: day)
+            .makeContainer(day: day)
+        sut = container.makeController()
+        sut.loadViewIfNeeded()
+        commander = container.updater
+    }
+
+    var table: UITableView { sut.viewRoot.happenings }
+    var firstIndex: IndexPath { IndexPath(row: 0, section: 0) }
+    var happeningsAmount: Int { table.numberOfRows(inSection: 0) }
+
+    func happening(at index: IndexPath) -> DayItem {
+        do {
+            let cell = table.dataSource?.tableView(table, cellForRowAt: index)
+            return try XCTUnwrap(cell as? DayItem)
+        } catch { fatalError("happening getting error") }
+    }
+
+    func addHappening(at date: Date) {
+        event.addHappening(date: date)
+    }
+
+    func sendEventUpdatesToController() {
+        commander.save(event)
+    }
+}

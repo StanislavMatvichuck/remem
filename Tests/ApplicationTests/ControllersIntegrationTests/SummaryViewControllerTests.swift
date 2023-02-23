@@ -9,18 +9,18 @@
 import Domain
 import XCTest
 
-final class SummaryViewControllerTests: XCTestCase {
+final class SummaryViewControllerTests: XCTestCase, TestingViewController {
     var sut: SummaryViewController!
+    var event: Event!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
-        let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
-        let viewModel = SummaryViewModel(event: event, today: DayIndex.referenceValue)
-        sut = SummaryViewController(viewModel: viewModel)
+        make()
     }
 
     override func tearDown() {
-        sut = nil
+        clear()
         super.tearDown()
     }
 
@@ -62,23 +62,5 @@ final class SummaryViewControllerTests: XCTestCase {
 
     func test_newEvent_showsDaysSinceLastHappening_zero() {
         assertValueFor(summaryRow: SummaryViewModel.SummaryRow.daysSinceLastHappening(value: "0"))
-    }
-
-    private func assertLabelFor(
-        summaryRow: SummaryViewModel.SummaryRow,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) {
-        let label = sut.viewRoot.viewWithTag(summaryRow.labelTag) as? UILabel
-        XCTAssertEqual(label?.text, summaryRow.label, file: file, line: line)
-    }
-
-    private func assertValueFor(
-        summaryRow: SummaryViewModel.SummaryRow,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) {
-        let label = sut.viewRoot.viewWithTag(summaryRow.valueTag) as? UILabel
-        XCTAssertEqual(label?.text, summaryRow.value, file: file, line: line)
     }
 }

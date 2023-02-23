@@ -11,19 +11,19 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting {
-    var event: Domain.Event!
+final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
     var sut: DayDetailsViewController!
+    var event: Event!
     var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
-        makeSutWithViewModelFactory()
+        make()
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
         super.tearDown()
+        clear()
     }
 
     func test_tableIsConfigured() {
@@ -90,23 +90,23 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
     }
 
     func test_empty_noHappeningsInList() {
-        XCTAssertEqual(sut.happeningsAmount, 0)
+        XCTAssertEqual(happeningsAmount, 0)
     }
 
     func test_singleHappening_showsTime() {
         addHappening(at: DayIndex.referenceValue.date)
         sendEventUpdatesToController()
 
-        assertCellHasTimeText(at: sut.firstIndex)
+        assertCellHasTimeText(at: firstIndex)
     }
 
     func test_singleHappening_hasSwipeToDelete() {
         addHappening(at: DayIndex.referenceValue.date)
         sendEventUpdatesToController()
 
-        let configuration = sut.table.delegate?.tableView?(
-            sut.table,
-            trailingSwipeActionsConfigurationForRowAt: sut.firstIndex
+        let configuration = table.delegate?.tableView?(
+            table,
+            trailingSwipeActionsConfigurationForRowAt: firstIndex
         )
 
         XCTAssertEqual(
@@ -125,17 +125,17 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         addHappening(at: date.addingTimeInterval(-TimeInterval(60 * 60 * 24 * 4)))
         sendEventUpdatesToController()
 
-        XCTAssertEqual(sut.happeningsAmount, 1, "precondition")
+        XCTAssertEqual(happeningsAmount, 1, "precondition")
 
-        let configuration = sut.table.delegate?.tableView?(
-            sut.table,
-            trailingSwipeActionsConfigurationForRowAt: sut.firstIndex
+        let configuration = table.delegate?.tableView?(
+            table,
+            trailingSwipeActionsConfigurationForRowAt: firstIndex
         )
 
         let action = configuration!.actions.first!
         action.handler(action, UIView()) { _ in }
 
-        XCTAssertEqual(sut.happeningsAmount, 0)
+        XCTAssertEqual(happeningsAmount, 0)
     }
 
     func test_manyHappenings_showsManyHappenings() {
@@ -148,7 +148,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         let secondCellIndex = IndexPath(row: 1, section: 0)
         let thirdCellIndex = IndexPath(row: 2, section: 0)
 
-        assertCellHasTimeText(at: sut.firstIndex)
+        assertCellHasTimeText(at: firstIndex)
         assertCellHasTimeText(at: secondCellIndex)
         assertCellHasTimeText(at: thirdCellIndex)
     }
@@ -174,7 +174,7 @@ final class DayViewControllerTests: XCTestCase, DayDetailsViewControllerTesting 
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let cell = sut.happening(at: index)
+        let cell = happening(at: index)
         XCTAssertNotNil(cell.label.text?.firstIndex(of: ":"), file: file, line: line)
         XCTAssertLessThanOrEqual(5, cell.label.text?.count ?? 0, file: file, line: line)
     }

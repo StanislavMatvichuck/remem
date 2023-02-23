@@ -28,7 +28,7 @@
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		08292EC5292E1F6100F46A32 /* ClockViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC4292E1F6100F46A32 /* ClockViewControllerTests.swift */; };
 		08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC6292E24F700F46A32 /* ClockSnapshots.swift */; };
-		08292EC9292E5B8500F46A32 /* EventsListViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */; };
+		08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08293CC127B670FC0039E432 /* WeekItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08293CC027B670FC0039E432 /* WeekItem.swift */; };
 		082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A19DC2945DB1E00D32B0A /* EventItemViewModelTests.swift */; };
 		082A19E02945DEF900D32B0A /* EventsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082A19DF2945DEF900D32B0A /* EventsListViewModelTests.swift */; };
@@ -57,10 +57,10 @@
 		0857A018292FD73000924530 /* WeekSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A017292FD73000924530 /* WeekSnapshots.swift */; };
 		0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A019292FD8A900924530 /* DayDetailsSnapshots.swift */; };
 		0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01B292FE66F00924530 /* EventDetailsSnapshots.swift */; };
-		0857A01E292FFD5900924530 /* ClockViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */; };
+		0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
 		0857B5A629892CBC002B400B /* ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857B5A529892CBC002B400B /* ApplicationUITests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
-		086136502934D64300F1B780 /* WeekViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */; };
+		086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
 		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,15 +105,18 @@
 		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
 		089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		089C5B9529A7D51A00B1B977 /* WidgetEventItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventItemViewModel.swift */; };
-		08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
+		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
+		089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
+		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
+		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayItem.swift */; };
 		08B628B12981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
 		08B628B22981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
-		08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */; };
-		08B628B52981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */; };
+		08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
+		08B628B52981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
 		08B8178A294506E30095D891 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
@@ -130,10 +133,10 @@
 		08D512362787144800C2037F /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D512352787144800C2037F /* EventsListView.swift */; };
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
-		08E63E5529409A0C00F87F25 /* WeekViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */; };
-		08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */; };
-		08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* DayViewControllerHelpers.swift */; };
-		08E63E5829409A0C00F87F25 /* EventsListViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */; };
+		08E63E5529409A0C00F87F25 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
+		08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
+		08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
+		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */; };
@@ -306,7 +309,7 @@
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
 		08292EC4292E1F6100F46A32 /* ClockViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewControllerTests.swift; sourceTree = "<group>"; };
 		08292EC6292E24F700F46A32 /* ClockSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSnapshots.swift; sourceTree = "<group>"; };
-		08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewControllerHelpers.swift; sourceTree = "<group>"; };
+		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItem.swift; sourceTree = "<group>"; };
 		082A19DC2945DB1E00D32B0A /* EventItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModelTests.swift; sourceTree = "<group>"; };
 		082A19DF2945DEF900D32B0A /* EventsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModelTests.swift; sourceTree = "<group>"; };
@@ -336,11 +339,11 @@
 		0857A017292FD73000924530 /* WeekSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSnapshots.swift; sourceTree = "<group>"; };
 		0857A019292FD8A900924530 /* DayDetailsSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsSnapshots.swift; sourceTree = "<group>"; };
 		0857A01B292FE66F00924530 /* EventDetailsSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsSnapshots.swift; sourceTree = "<group>"; };
-		0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewControllerHelpers.swift; sourceTree = "<group>"; };
+		0857A01D292FFD5900924530 /* TestingClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingClockViewController.swift; sourceTree = "<group>"; };
 		0857B5A329892CBC002B400B /* ApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0857B5A529892CBC002B400B /* ApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUITests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
-		0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerHelpers.swift; sourceTree = "<group>"; };
+		0861364F2934D64300F1B780 /* TestingWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingWeekViewController.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2D028D469F500E0842C /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
@@ -388,14 +391,16 @@
 		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
 		0898017827FAF17C0014E110 /* EventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInput.swift; sourceTree = "<group>"; };
 		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
-		08AF544629373D9200032487 /* DayViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewControllerHelpers.swift; sourceTree = "<group>"; };
+		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
+		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
+		08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingDayDetailsViewController.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
 		08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsView.swift; sourceTree = "<group>"; };
 		08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModel.swift; sourceTree = "<group>"; };
 		08B26A15289E98B700DFBAC8 /* DayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		08B628B02981A46600CA57F1 /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
-		08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerHelpers.swift; sourceTree = "<group>"; };
+		08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventDetailsViewController.swift; sourceTree = "<group>"; };
 		08B89A2528E3190600F4B63B /* StyledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledText.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplayingTests.swift; sourceTree = "<group>"; };
@@ -723,13 +728,13 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				0892D64429A6BFB400884420 /* UpdaterTests.swift */,
 				0887C812298B0C460048EC12 /* Timelines */,
 				087365FE2930DD0C000F28DE /* ViewModels */,
 				0891377E292BEA3800EFD23D /* Views */,
 				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
-				0892D64429A6BFB400884420 /* UpdaterTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -821,8 +826,9 @@
 		08CC50682906DE6300840385 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				08E63E53294099F900F87F25 /* Controllers */,
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
+				08E63E53294099F900F87F25 /* TestingViewController */,
+				089C5B9629A7E27800B1B977 /* TestingViewController.swift */,
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
 			);
 			path = Helpers;
@@ -937,16 +943,17 @@
 			path = CoreDataEventsRepository;
 			sourceTree = "<group>";
 		};
-		08E63E53294099F900F87F25 /* Controllers */ = {
+		08E63E53294099F900F87F25 /* TestingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0857A01D292FFD5900924530 /* ClockViewControllerHelpers.swift */,
-				08AF544629373D9200032487 /* DayViewControllerHelpers.swift */,
-				08292EC8292E5B8500F46A32 /* EventsListViewControllerHelpers.swift */,
-				0861364F2934D64300F1B780 /* WeekViewControllerHelpers.swift */,
-				08B628B32981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift */,
+				0857A01D292FFD5900924530 /* TestingClockViewController.swift */,
+				08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */,
+				08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */,
+				08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */,
+				089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */,
+				0861364F2934D64300F1B780 /* TestingWeekViewController.swift */,
 			);
-			path = Controllers;
+			path = TestingViewController;
 			sourceTree = "<group>";
 		};
 		08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */ = {
@@ -1337,7 +1344,7 @@
 			files = (
 				0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */,
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
-				08E63E5629409A0C00F87F25 /* ClockViewControllerHelpers.swift in Sources */,
+				08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
@@ -1346,14 +1353,15 @@
 				087791992974858300780F60 /* Atlas.swift in Sources */,
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
 				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
-				08E63E5729409A0C00F87F25 /* DayViewControllerHelpers.swift in Sources */,
+				08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,
-				08B628B52981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
+				08B628B52981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				0857A018292FD73000924530 /* WeekSnapshots.swift in Sources */,
 				0850075829216F74007B272C /* Mocks.swift in Sources */,
-				08E63E5529409A0C00F87F25 /* WeekViewControllerHelpers.swift in Sources */,
-				08E63E5829409A0C00F87F25 /* EventsListViewControllerHelpers.swift in Sources */,
+				08E63E5529409A0C00F87F25 /* TestingWeekViewController.swift in Sources */,
+				08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */,
 				0824D0192981E38E00B6E701 /* Helpers.swift in Sources */,
+				089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,30 +1400,32 @@
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				082A19E02945DEF900D32B0A /* EventsListViewModelTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
-				08292EC9292E5B8500F46A32 /* EventsListViewControllerHelpers.swift in Sources */,
+				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
 				0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
+				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				08292EC5292E1F6100F46A32 /* ClockViewControllerTests.swift in Sources */,
 				08B628B12981A46600CA57F1 /* Stubs.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */,
 				08F97A40295076DC00AB7051 /* DayItemViewModelTests.swift in Sources */,
-				086136502934D64300F1B780 /* WeekViewControllerHelpers.swift in Sources */,
+				086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */,
 				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
-				0857A01E292FFD5900924530 /* ClockViewControllerHelpers.swift in Sources */,
+				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				082A19DD2945DB1E00D32B0A /* EventItemViewModelTests.swift in Sources */,
-				08B628B42981BD2F00CA57F1 /* EventDetailsViewControllerHelpers.swift in Sources */,
+				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				0892D64529A6BFB400884420 /* UpdaterTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
-				08AF544729373D9200032487 /* DayViewControllerHelpers.swift in Sources */,
+				08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
+				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
 				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,
 				08CEA4642938B91700967BB4 /* ClockStrategyTests.swift in Sources */,
 				087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */,
