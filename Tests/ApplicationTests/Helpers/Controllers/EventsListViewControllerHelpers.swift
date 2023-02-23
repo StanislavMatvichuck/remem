@@ -9,6 +9,11 @@
 import Domain
 import XCTest
 
+protocol EventsListViewControllerTesting: AnyObject {
+    var sut: EventsListViewController! { get set }
+    var commander: EventsCommanding! { get set }
+}
+
 extension EventsListViewController {
     func arrangeSingleEventSwiped() {
         submitEvent()
@@ -71,11 +76,6 @@ extension EventsListViewController {
 
         return config.actions[number]
     }
-}
-
-protocol EventsListViewControllerTesting: AnyObject {
-    var sut: EventsListViewController! { get set }
-    var commander: EventsCommanding! { get set }
 }
 
 extension EventsListViewControllerTesting {

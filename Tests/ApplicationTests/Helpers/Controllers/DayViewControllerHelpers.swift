@@ -9,6 +9,12 @@
 import Domain
 import XCTest
 
+protocol DayDetailsViewControllerTesting: AnyObject {
+    var sut: DayDetailsViewController! { get set }
+    var commander: EventsCommanding! { get set }
+    var event: Event! { get set }
+}
+
 extension DayDetailsViewController {
     var table: UITableView { viewRoot.happenings }
     var firstIndex: IndexPath { IndexPath(row: 0, section: 0) }
@@ -20,12 +26,6 @@ extension DayDetailsViewController {
             return try XCTUnwrap(cell as? DayItem)
         } catch { fatalError("happening getting error") }
     }
-}
-
-protocol DayDetailsViewControllerTesting: AnyObject {
-    var sut: DayDetailsViewController! { get set }
-    var commander: EventsCommanding! { get set }
-    var event: Event! { get set }
 }
 
 extension DayDetailsViewControllerTesting {

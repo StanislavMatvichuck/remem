@@ -9,6 +9,12 @@
 import Domain
 import XCTest
 
+protocol WeekViewControllerTesting: AnyObject {
+    var event: Event! { get set }
+    var sut: WeekViewController! { get set }
+    var commander: EventsCommanding! { get set }
+}
+
 extension WeekViewController {
     var firstDay: WeekItem { cell(at: IndexPath(row: 0, section: 0)) }
 
@@ -22,12 +28,6 @@ extension WeekViewController {
             return try XCTUnwrap(cell as? WeekItem)
         } catch { fatalError("error getting day") }
     }
-}
-
-protocol WeekViewControllerTesting: AnyObject {
-    var event: Event! { get set }
-    var sut: WeekViewController! { get set }
-    var commander: EventsCommanding! { get set }
 }
 
 extension WeekViewControllerTesting {

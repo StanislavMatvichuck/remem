@@ -9,17 +9,17 @@
 import Domain
 import XCTest
 
+protocol ClockViewControllerTesting: AnyObject {
+    var sut: ClockViewController! { get set }
+    var event: Event! { get set }
+    var commander: EventsCommanding! { get set }
+}
+
 extension ClockViewController {
     func forceViewToLayoutInScreenSize() {
         view.bounds = UIScreen.main.bounds
         view.layoutIfNeeded()
     }
-}
-
-protocol ClockViewControllerTesting: AnyObject {
-    var sut: ClockViewController! { get set }
-    var event: Event! { get set }
-    var commander: EventsCommanding! { get set }
 }
 
 extension ClockViewControllerTesting {

@@ -6,7 +6,7 @@
 //
 
 import AVFoundation
-import UIKit
+import UIKit.UIDevice
 
 extension UIDevice {
     static func vibrate(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
