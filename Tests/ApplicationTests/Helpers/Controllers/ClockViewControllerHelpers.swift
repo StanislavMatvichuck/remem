@@ -19,7 +19,7 @@ extension ClockViewController {
 protocol ClockViewControllerTesting: AnyObject {
     var sut: ClockViewController! { get set }
     var event: Event! { get set }
-    var viewModelFactory: ClockViewModelFactoring! { get set }
+    var commander: EventsCommanding! { get set }
 }
 
 extension ClockViewControllerTesting {
@@ -35,7 +35,7 @@ extension ClockViewControllerTesting {
     }
 
     func sendEventUpdatesToController() {
-        sut.viewModel = viewModelFactory.makeViewModel()
+        commander.save(event)
     }
 
     func makeSutWithViewModelFactory() {
@@ -45,13 +45,13 @@ extension ClockViewControllerTesting {
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = container.makeClockViewController()
-        viewModelFactory = container
+        commander = container.weekViewModelUpdater
     }
 
     func clearSutAndViewModelFactory() {
         event = nil
         sut = nil
-        viewModelFactory = nil
+        commander = nil
     }
 }
 

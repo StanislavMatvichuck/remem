@@ -27,7 +27,7 @@ extension WeekViewController {
 protocol WeekViewControllerTesting: AnyObject {
     var event: Event! { get set }
     var sut: WeekViewController! { get set }
-    var viewModelFactory: WeekViewModelFactoring! { get set }
+    var commander: EventsCommanding! { get set }
 }
 
 extension WeekViewControllerTesting {
@@ -40,12 +40,16 @@ extension WeekViewControllerTesting {
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = container.makeWeekViewController()
-        viewModelFactory = container
+        commander = container.weekViewModelUpdater
     }
 
     func clearSutAndViewModelFactory() {
         event = nil
         sut = nil
-        viewModelFactory = nil
+        commander = nil
+    }
+
+    func sendEventUpdatesToController() {
+        commander.save(event)
     }
 }

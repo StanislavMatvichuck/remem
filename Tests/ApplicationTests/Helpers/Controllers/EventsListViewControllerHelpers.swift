@@ -75,19 +75,19 @@ extension EventsListViewController {
 
 protocol EventsListViewControllerTesting: AnyObject {
     var sut: EventsListViewController! { get set }
-    var viewModelFactory: EventsListViewModelFactoring! { get set }
+    var commander: EventsCommanding! { get set }
 }
 
 extension EventsListViewControllerTesting {
     func makeSutWithViewModelFactory() {
         let container = ApplicationContainer(testingInMemoryMode: true).makeContainer()
         sut = container.makeController()
-        viewModelFactory = container
+        commander = container.updater
     }
 
     func clearSutAndViewModelFactory() {
         sut = nil
-        viewModelFactory = nil
+        commander = nil
     }
 
     func forceViewToLayoutInScreenSize() {

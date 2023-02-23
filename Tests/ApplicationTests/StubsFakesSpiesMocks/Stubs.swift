@@ -7,10 +7,19 @@
 
 @testable import Application
 import Domain
+import XCTest
 
 struct EventsCommandingStub: EventsCommanding {
     func save(_: Event) {}
     func delete(_: Event) {}
+}
+
+struct ReceiverStub: ViewModelDisplaying {
+    func update(_: String) {}
+}
+
+struct FactoryStub: ViewModelFactoring {
+    func makeViewModel() -> String { "ViewModel" }
 }
 
 final class DefaultCoordinatorStub: DefaultCoordinator {}

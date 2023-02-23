@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol FooterItemViewModeFactoring {
-    func makeFooterItemViewModel(eventsCount: Int) -> FooterItemViewModel
-}
-
 struct FooterItemViewModel: EventsListItemViewModeling {
     var identifier: String { "Footer" }
 

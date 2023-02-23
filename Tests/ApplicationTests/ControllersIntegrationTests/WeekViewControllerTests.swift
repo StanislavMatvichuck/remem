@@ -15,7 +15,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     var spy: PresentationVerifier!
     var sut: WeekViewController!
     var event: Event!
-    var viewModelFactory: WeekViewModelFactoring!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
@@ -122,7 +122,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
     func test_eventWithOneHappening_weekSummary_1() {
         event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
 
-        sut.viewModel = viewModelFactory.makeViewModel()
+        sendEventUpdatesToController()
 
         XCTAssertEqual(sut.viewRoot.summary.text, "1")
     }
@@ -136,7 +136,7 @@ class WeekViewControllerTests: XCTestCase, WeekViewControllerTesting {
         event.addHappening(date: DayIndex.referenceValue.adding(days: 5).date)
         event.addHappening(date: DayIndex.referenceValue.adding(days: 6).date)
 
-        sut.viewModel = viewModelFactory.makeViewModel()
+        sendEventUpdatesToController()
 
         XCTAssertEqual(sut.viewRoot.summary.text, "7")
     }

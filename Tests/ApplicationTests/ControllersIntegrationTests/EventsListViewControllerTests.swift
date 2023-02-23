@@ -12,7 +12,7 @@ import XCTest
 final class EventsListViewControllerTests: XCTestCase, EventsListViewControllerTesting {
     // MARK: - Test fixture
     var sut: EventsListViewController!
-    var viewModelFactory: EventsListViewModelFactoring!
+    var commander: EventsCommanding!
     var table: UITableView { sut.viewRoot.table }
     var view: EventsListView { sut.viewRoot }
 

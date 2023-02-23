@@ -9,7 +9,7 @@ import DataLayer
 import Domain
 import UIKit
 
-class ApplicationContainer {
+final class ApplicationContainer: EventsListContainerFactoring {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: DefaultCoordinator
@@ -34,10 +34,12 @@ class ApplicationContainer {
         coordinator.state = .eventsList
         return coordinator.navController
     }
-}
 
-extension ApplicationContainer: EventsListContainerFactoring {
     func makeContainer() -> EventsListContainer {
-        EventsListContainer(applicationContainer: self)
+        EventsListContainer(
+            provider: provider,
+            commander: commander,
+            coordinator: coordinator
+        )
     }
 }

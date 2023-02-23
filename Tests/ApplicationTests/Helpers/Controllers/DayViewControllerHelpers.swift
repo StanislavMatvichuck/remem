@@ -24,7 +24,7 @@ extension DayDetailsViewController {
 
 protocol DayDetailsViewControllerTesting: AnyObject {
     var sut: DayDetailsViewController! { get set }
-    var viewModelFactory: DayViewModelFactoring! { get set }
+    var commander: EventsCommanding! { get set }
     var event: Event! { get set }
 }
 
@@ -34,7 +34,7 @@ extension DayDetailsViewControllerTesting {
     }
 
     func sendEventUpdatesToController() {
-        sut.viewModel = viewModelFactory.makeViewModel()
+        commander.save(event)
     }
 
     func makeSutWithViewModelFactory() {
@@ -45,12 +45,14 @@ extension DayDetailsViewControllerTesting {
             .makeContainer(event: event, today: day)
             .makeContainer(day: day)
         sut = container.makeController()
-        viewModelFactory = container
+        sut.loadViewIfNeeded()
+        commander = container.updater
     }
 
     func clearSutAndViewModelFactory() {
         event = nil
+        commander = nil
         sut = nil
-        viewModelFactory = nil
+        executeRunLoop()
     }
 }

@@ -7,10 +7,6 @@
 
 import Domain
 
-protocol EventsListViewModelFactoring {
-    func makeEventsListViewModel(events: [Event]) -> EventsListViewModel
-}
-
 protocol EventsListItemViewModeling: Equatable {
     var identifier: String { get }
 }
@@ -58,10 +54,5 @@ struct EventsListViewModel {
             }
         }
         return nil
-//        let item = items.filter { $0.identifier == identifier }.first!
-//        return item
-//        let item = items[0]
-//        return item
-//        return FooterItemViewModel(eventsCount: 0)
     }
 }

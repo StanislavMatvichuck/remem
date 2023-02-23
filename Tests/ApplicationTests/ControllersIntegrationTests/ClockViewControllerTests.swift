@@ -12,7 +12,7 @@ import XCTest
 final class ClockViewControllerTests: XCTestCase, ClockViewControllerTesting {
     var sut: ClockViewController!
     var event: Event!
-    var viewModelFactory: ClockViewModelFactoring!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()

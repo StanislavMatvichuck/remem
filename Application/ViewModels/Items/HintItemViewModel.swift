@@ -8,10 +8,6 @@
 import Domain
 import Foundation
 
-protocol HintItemViewModelFactoring {
-    func makeHintItemViewModel(events: [Event]) -> HintItemViewModel
-}
-
 struct HintItemViewModel: EventsListItemViewModeling {
     var identifier: String { "Hint" }
 

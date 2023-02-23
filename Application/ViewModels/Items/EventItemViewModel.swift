@@ -8,15 +8,7 @@
 import Domain
 import Foundation
 
-protocol EventItemViewModelFactoring {
-    func makeEventItemViewModel(
-        event: Event,
-        today: DayIndex,
-        hintEnabled: Bool
-    ) -> EventItemViewModel
-}
-
-struct EventItemViewModel: EventsListItemViewModeling {    
+struct EventItemViewModel: EventsListItemViewModeling {
     var identifier: String { event.id }
 
     let rename = String(localizationId: "button.rename")

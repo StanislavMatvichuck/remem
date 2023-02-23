@@ -14,7 +14,7 @@ final class EventsListSnapshots:
     EventsListViewControllerTesting
 {
     var sut: EventsListViewController!
-    var viewModelFactory: EventsListViewModelFactoring!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
@@ -56,7 +56,7 @@ final class EventsListSnapshots:
         event.visit()
         event.addHappening(date: .now)
 
-        sut.viewModel = viewModelFactory.makeEventsListViewModel(events: [event])
+        commander.save(event)
 
         FBSnapshotVerifyViewController(sut)
     }
