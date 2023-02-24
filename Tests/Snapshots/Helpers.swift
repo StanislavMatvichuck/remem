@@ -8,13 +8,6 @@
 import iOSSnapshotTestCase
 import UIKit
 
-extension EventDetailsViewControllerTesting {
-    func executeWithDarkMode(_ testCase: () -> Void) {
-        sut.view.window?.overrideUserInterfaceStyle = .dark
-        testCase()
-    }
-}
-
 extension UIUserInterfaceStyle: CustomStringConvertible {
     public var description: String {
         switch self {

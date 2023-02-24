@@ -11,73 +11,74 @@ import iOSSnapshotTestCase
 
 final class WeekSnapshots:
     FBSnapshotTestCase,
-    WeekViewControllerTesting
+    TestingViewController
 {
     var sut: WeekViewController!
+    var commander: EventsCommanding!
     var event: Event!
-    var viewModelFactory: WeekViewModelFactoring!
     
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        arrange()
     }
     
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
     
     func test_empty() {
+        make()
+        
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_todayOffsetByOneDay() {
-        let offsetToday = DayIndex.referenceValue.adding(days: 1)
-        arrange(andToday: offsetToday)
+        make(today: DayIndex.referenceValue.adding(days: 1))
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetByOneDay() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(days: 1)
-        arrange(withDayCreated: offsetDayCreated, andToday: offsetDayCreated)
+        let day = DayIndex.referenceValue.adding(days: 1)
+        make(created: day, today: day)
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_todayOffsetByTwoDaysAndDateCreatedOffsetByOneDay() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(days: 1)
-        let offsetToday = offsetDayCreated.adding(days: 1)
-        arrange(withDayCreated: offsetDayCreated, andToday: offsetToday)
+        make(
+            created: DayIndex.referenceValue.adding(days: 1),
+            today: DayIndex.referenceValue.adding(days: 1).adding(days: 1)
+        )
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetIs3_todayOffsetIs7() {
-        let offsetDayCreated = DayIndex.referenceValue.adding(days: 3)
-        let offsetToday = offsetDayCreated.adding(days: 4)
-        arrange(withDayCreated: offsetDayCreated, andToday: offsetToday)
+        make(
+            created: DayIndex.referenceValue.adding(days: 3),
+            today: DayIndex.referenceValue.adding(days: 3).adding(days: 4)
+        )
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset11() {
-        let offsetToday = DayIndex.referenceValue.adding(days: 11)
-        arrange(andToday: offsetToday)
+        make(today: DayIndex.referenceValue.adding(days: 11))
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset1year() {
-        let offsetToday = DayIndex.referenceValue.adding(days: 365)
-        arrange(andToday: offsetToday)
+        make(today: DayIndex.referenceValue.adding(days: 365))
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_eventWithHappenings_showsLabels() {
+        make() // executed after dark mode handling
+        
         addHappeningsAtEachMinute(minutes: 1, dayOffset: 0)
         addHappeningsAtEachMinute(minutes: 2, dayOffset: 1)
         addHappeningsAtEachMinute(minutes: 3, dayOffset: 2)
@@ -86,12 +87,29 @@ final class WeekSnapshots:
         addHappeningsAtEachMinute(minutes: 6, dayOffset: 5)
         addHappeningsAtEachMinute(minutes: 7, dayOffset: 6)
         
-        sut.viewModel = viewModelFactory.makeViewModel()
+        sendEventUpdatesToController()
         
         FBSnapshotVerifyViewController(sut)
     }
     
-    func test_eventWithHappenings_showsLabels_dark() { executeWithDarkMode(testCase: test_eventWithHappenings_showsLabels) }
+    func test_eventWithHappenings_showsLabels_dark() {
+        make() // executed after dark mode handling
+        
+        addHappeningsAtEachMinute(minutes: 1, dayOffset: 0)
+        addHappeningsAtEachMinute(minutes: 2, dayOffset: 1)
+        addHappeningsAtEachMinute(minutes: 3, dayOffset: 2)
+        addHappeningsAtEachMinute(minutes: 4, dayOffset: 3)
+        addHappeningsAtEachMinute(minutes: 5, dayOffset: 4)
+        addHappeningsAtEachMinute(minutes: 6, dayOffset: 5)
+        addHappeningsAtEachMinute(minutes: 7, dayOffset: 6)
+        
+        sendEventUpdatesToController()
+        
+        sut.view.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
     
     private func addHappeningsAtEachMinute(minutes: Int, dayOffset: Int) {
         for i in 0 ..< minutes {
@@ -103,17 +121,17 @@ final class WeekSnapshots:
         }
     }
     
-    private func executeWithDarkMode(testCase: () -> Void) {
-        sut.view.overrideUserInterfaceStyle = .dark
-        executeRunLoop()
-        testCase()
-    }
-    
-    private func arrange(
-        withDayCreated: DayIndex = DayIndex.referenceValue,
-        andToday: DayIndex = DayIndex.referenceValue
+    private func make(
+        created: DayIndex = DayIndex.referenceValue,
+        today: DayIndex = DayIndex.referenceValue
     ) {
-        makeSutWithViewModelFactory(eventDateCreated: withDayCreated, today: andToday)
+        // make as regular and perform updates here?
+        event = Event(name: "Event", dateCreated: created.date)
+        let container = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+        sut = container.makeWeekViewController()
+        commander = container.weekViewModelUpdater
         putInViewHierarchy(sut)
     }
 }

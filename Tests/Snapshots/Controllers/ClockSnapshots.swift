@@ -11,22 +11,21 @@ import iOSSnapshotTestCase
 
 final class ClockSnapshots:
     FBSnapshotTestCase,
-    ClockViewControllerTesting
+    TestingViewController
 {
     var sut: ClockViewController!
     var event: Event!
-    var viewModelFactory: Application.ClockViewModelFactoring!
+    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        makeSutWithViewModelFactory()
+        make()
         putInViewHierarchy(sut)
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 

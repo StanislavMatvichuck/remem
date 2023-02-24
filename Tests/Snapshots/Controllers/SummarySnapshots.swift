@@ -9,23 +9,20 @@
 import Domain
 import iOSSnapshotTestCase
 
-final class SummarySnapshots: FBSnapshotTestCase {
+final class SummarySnapshots: FBSnapshotTestCase, TestingViewController {    
     var sut: SummaryViewController!
-//    var event: Event!
-//    var viewModelFactory: WeekViewModelFactoring!
+    var commander: EventsCommanding!
+    var event: Event!
 
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        let event = Event(name: "Event")
-        let viewModel = SummaryViewModel(event: event, today: DayIndex.referenceValue)
-        sut = SummaryViewController(viewModel: viewModel)
+        make()
         putInViewHierarchy(sut)
     }
 
     override func tearDown() {
-        sut = nil
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 
@@ -36,7 +33,7 @@ final class SummarySnapshots: FBSnapshotTestCase {
     func test_empty_dark() { executeWithDarkMode(testCase: test_empty) }
 
     private func executeWithDarkMode(testCase: () -> Void) {
-        sut.view.overrideUserInterfaceStyle = .dark
+        sut.view.window?.overrideUserInterfaceStyle = .dark
         executeRunLoop()
         testCase()
     }

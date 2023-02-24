@@ -17,5 +17,10 @@ extension TestingViewController where Controller == EventDetailsViewController {
             .makeContainer(event: event, today: today)
         sut = container.makeController()
         sut.loadViewIfNeeded()
+        commander = container.weekViewModelUpdater
+    }
+
+    func sendEventUpdatesToController() {
+        commander.save(event)
     }
 }

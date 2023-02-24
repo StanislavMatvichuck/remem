@@ -108,6 +108,7 @@
 		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
+		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
@@ -1345,6 +1346,7 @@
 				0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */,
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
 				08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */,
+				08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,

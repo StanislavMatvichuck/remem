@@ -11,22 +11,21 @@ import iOSSnapshotTestCase
 
 final class DayDetailsSnapshots:
     FBSnapshotTestCase,
-    DayDetailsViewControllerTesting
+    TestingViewController
 {
     var sut: DayDetailsViewController!
     var event: Event!
-    var viewModelFactory: DayViewModelFactoring!
+    var commander: EventsCommanding!
     
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        makeSutWithViewModelFactory()
+        make()
         putInViewHierarchy(sut)
     }
     
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
  

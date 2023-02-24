@@ -9,21 +9,20 @@
 import Domain
 import iOSSnapshotTestCase
 
-final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControllerTesting {
-    var viewModelFactory: Application.EventViewModelFactoring!
+final class EventDetailsSnapshots: FBSnapshotTestCase, TestingViewController {
     var sut: EventDetailsViewController!
     var event: Event!
+    var commander: EventsCommanding!
     
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        makeSutWithViewModelFactory()
+        make()
         putInViewHierarchy(sut)
     }
     
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
  
@@ -40,6 +39,12 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControlle
     func test_empty_dark() { executeWithDarkMode(test_empty) }
     func test_singleHappening_dark() { executeWithDarkMode(test_singleHappening) }
     
+    private func executeWithDarkMode(_ testCase: () -> Void) {
+        sut.view.window?.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        testCase()
+    }
+    
     private func arrangeOneHappening() {
         addHappening()
         sendEventUpdatesToController()
@@ -47,9 +52,5 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, EventDetailsViewControlle
     
     private func addHappening() {
         event.addHappening(date: DayIndex.referenceValue.date)
-    }
-    
-    private func sendEventUpdatesToController() {
-        sut.viewModel = viewModelFactory.makeViewModel()
     }
 }

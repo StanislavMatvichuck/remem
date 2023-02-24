@@ -11,21 +11,21 @@ import iOSSnapshotTestCase
 
 final class EventsListSnapshots:
     FBSnapshotTestCase,
-    EventsListViewControllerTesting
+    TestingViewController
 {
     var sut: EventsListViewController!
+    var event: Event! // is not needed here but required by a protocol
     var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        makeSutWithViewModelFactory()
+        make()
         putInViewHierarchy(sut)
     }
 
     override func tearDown() {
-        clearSutAndViewModelFactory()
-        executeRunLoop()
+        clear()
         super.tearDown()
     }
 
@@ -36,7 +36,7 @@ final class EventsListSnapshots:
     func test_empty_dark() { executeWithDarkMode(test_empty) }
 
     func test_oneItem() {
-        sut.submitEvent()
+        submitEvent()
 
         FBSnapshotVerifyViewController(sut)
     }
@@ -44,7 +44,7 @@ final class EventsListSnapshots:
     func test_oneItem_dark() { executeWithDarkMode(test_oneItem) }
 
     func test_oneItem_swiped() {
-        sut.arrangeSingleEventSwiped()
+        arrangeSingleEventSwiped()
 
         FBSnapshotVerifyViewController(sut)
     }
