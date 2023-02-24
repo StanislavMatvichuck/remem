@@ -11,7 +11,7 @@
 "eventsList.hint.firstVisit" = "Press to see details";
 "eventsList.hint.swipeLeft" = "swipe left";
 "eventsList.title" = "Events";
-"eventsList.new" = "Short name or emoji";
+"eventsList.new" = "Short title or emoji";
 
 "summary.total" = "Total happenings";
 "summary.weekAverage" = "Week average";

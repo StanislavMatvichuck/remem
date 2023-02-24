@@ -6,18 +6,18 @@
 "button.edit" = "Редагувати";
 "button.addHappening" = "Додати випадок";
 
-"eventsList.hint.empty" = "Додай подію яку треба відслідковувати";
+"eventsList.hint.empty" = "Додай подію яку бажаєш відслідковувати";
 "eventsList.hint.firstHappening" = "Свайп коли подія відбулася";
 "eventsList.hint.firstVisit" = "Тиць щоб подивитись подробиці";
 "eventsList.hint.swipeLeft" = "свайп ліворуч";
 "eventsList.title" = "Події";
-"eventsList.new" = "Коротке ім'я або емодзі";
+"eventsList.new" = "Коротка назва або емодзі";
 
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";
-"summary.dayAverage" = "Середнє за день";
-"summary.daysTracked" = "Днів відслідковано";
-"summary.daysSinceLastHappening" = "Днів після останнього випадку";
+"summary.dayAverage" = "Середнє за добу";
+"summary.daysTracked" = "Діб відслідковано";
+"summary.daysSinceLastHappening" = "Діб після останнього випадку";
 
 "widget.title" = "Список подій";
 "widget.subtitle" = "Перші три події з кількістю випадків на сьогодні";
