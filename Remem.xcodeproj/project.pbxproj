@@ -111,6 +111,7 @@
 		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E829A8EAFE000B68A1 /* DayChangeWatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */; };
 		08A331EA29A8EBC3000B68A1 /* DayChangeWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */; };
+		08A331EC29A92C18000B68A1 /* DayDetailsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331EB29A92C18000B68A1 /* DayDetailsContainerTests.swift */; };
 		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
@@ -398,6 +399,7 @@
 		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
 		08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChangeWatcherTests.swift; sourceTree = "<group>"; };
 		08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChangeWatcher.swift; sourceTree = "<group>"; };
+		08A331EB29A92C18000B68A1 /* DayDetailsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsContainerTests.swift; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingDayDetailsViewController.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				08A331EB29A92C18000B68A1 /* DayDetailsContainerTests.swift */,
 				08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */,
 				0892D64429A6BFB400884420 /* UpdaterTests.swift */,
 				0887C812298B0C460048EC12 /* Timelines */,
@@ -927,6 +930,7 @@
 			children = (
 				089C5B9429A7D4A000B1B977 /* Timelines */,
 				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
+				08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
@@ -934,7 +938,6 @@
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				08396EEB29A6523700281E51 /* Updater.swift */,
-				08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1422,6 +1425,7 @@
 				086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */,
 				08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */,
 				087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */,
+				08A331EC29A92C18000B68A1 /* DayDetailsContainerTests.swift in Sources */,
 				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
 				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
