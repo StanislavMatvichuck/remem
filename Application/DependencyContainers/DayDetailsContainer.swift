@@ -19,28 +19,31 @@ final class DayDetailsContainer {
         DayDetailsFactory(
             day: day,
             event: event,
-            commander: updater,
+            commander: commander,
             factory: self
         )
     }()
 
     init(event: Event, day: DayIndex, commander: EventsCommanding) {
+        print("DayDetailsContainer.init")
         self.event = event
         self.day = day
         self.commander = commander
-        self.updater = Updater(commander)
+        let updater = Updater<DayDetailsViewController, DayDetailsFactory>(commander)
+        self.updater = updater
         updater.factory = factory
     }
 
+    deinit { print("DayDetailsContainer.deinit") }
+
     func makeController() -> DayDetailsViewController {
         let controller = DayDetailsViewController(viewModel: factory.makeViewModel())
-        updater.receiver = controller
+        updater.delegate = controller
         return controller
     }
 }
 
 // MARK: - ViewModelFactoring
-protocol DayViewModelFactoring { func makeViewModel() -> DayDetailsViewModel }
 protocol DayItemViewModelFactoring { func makeViewModel(happening: Happening) -> DayItemViewModel }
 
 extension DayDetailsContainer: DayItemViewModelFactoring {

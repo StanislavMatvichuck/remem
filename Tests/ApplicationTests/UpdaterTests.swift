@@ -38,7 +38,7 @@ final class UpdaterTests: XCTestCase {
         let sut = Updater<ReceiverMock, FactoryStub>(commander)
         let receiver = ReceiverMock()
         let event = Event(name: "Event")
-        sut.receiver = receiver
+        sut.delegate = receiver
         sut.factory = FactoryStub()
 
         return (sut, receiver, event)

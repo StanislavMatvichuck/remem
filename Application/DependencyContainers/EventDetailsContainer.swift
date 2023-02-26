@@ -73,19 +73,19 @@ final class EventDetailsContainer {
 
     func makeWeekViewController() -> WeekViewController {
         let controller = WeekViewController(viewModel: weekFactory.makeViewModel())
-        weekViewModelUpdater.receiver = controller
+        weekViewModelUpdater.delegate = controller
         return controller
     }
 
     func makeClockViewController() -> ClockViewController {
         let controller = ClockViewController(viewModel: clockFactory.makeViewModel())
-        clockViewModelUpdater.receiver = controller
+        clockViewModelUpdater.delegate = controller
         return controller
     }
 
     func makeSummaryViewController() -> SummaryViewController {
         let controller = SummaryViewController(viewModel: summaryFactory.makeViewModel())
-        summaryViewModelUpdater.receiver = controller
+        summaryViewModelUpdater.delegate = controller
         return controller
     }
 }

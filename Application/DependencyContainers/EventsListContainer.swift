@@ -36,7 +36,7 @@ final class EventsListContainer {
         self.provider = provider
         self.coordinator = coordinator
         let widgetUpdater = Updater<WidgetViewController, WidgetFactory>(commander)
-        widgetUpdater.receiver = WidgetViewController()
+        widgetUpdater.delegate = WidgetViewController()
 
         let controllerUpdater = Updater<EventsListViewController, EventsListFactory>(widgetUpdater)
 
@@ -50,7 +50,7 @@ final class EventsListContainer {
 
     func makeController() -> EventsListViewController {
         let controller = EventsListViewController(viewModel: factory.makeViewModel())
-        updater.receiver = controller
+        updater.delegate = controller
         return controller
     }
 }

@@ -14,7 +14,7 @@ struct EventsCommandingStub: EventsCommanding {
     func delete(_: Event) {}
 }
 
-struct ReceiverStub: ViewModelDisplaying {
+class ReceiverStub: ViewModelDisplaying {
     func update(_: String) {}
 }
 

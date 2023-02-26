@@ -25,7 +25,7 @@ final class Updater<
     EventsCommanding where Receiver.ViewModel == Factory.ViewModel
 {
     var factory: Factory?
-    var receiver: Receiver?
+    var delegate: Receiver?
     private let commander: EventsCommanding
 
     init(_ commander: EventsCommanding) {
@@ -44,7 +44,7 @@ final class Updater<
 
     func update() {
         guard let factory else { fatalError("updater factory is required") }
-        receiver?.update(factory.makeViewModel())
+        delegate?.update(factory.makeViewModel())
     }
 }
 
