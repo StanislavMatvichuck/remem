@@ -112,12 +112,15 @@ class DayDetailsViewController: UIViewController {
         let submit = UIAlertAction(
             title: viewModel.create,
             style: .default,
-            handler: handleTimeSelectionSubmit
+            handler: { [weak self] action in
+                self?.handleTimeSelectionSubmit(action)
+            }
         )
 
         alert.addAction(cancel)
         alert.addAction(submit)
-        alert.addTextField { field in
+        alert.addTextField { [weak self] field in
+            guard let self else { return }
             field.inputView = self.picker
             field.font = UIHelper.fontBold
             field.textColor = UIHelper.itemFont

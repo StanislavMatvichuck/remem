@@ -8,7 +8,7 @@
 import Foundation
 import WidgetKit
 
-struct WidgetViewController: ViewModelDisplaying {
+final class WidgetViewController: ViewModelDisplaying {
     func update(_ items: [EventItemViewModel]) {
         guard let directory = FileManager.default.containerURL(
             forSecurityApplicationGroupIdentifier: "group.remem.io"

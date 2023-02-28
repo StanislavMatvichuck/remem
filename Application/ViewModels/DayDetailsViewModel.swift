@@ -17,6 +17,7 @@ struct DayDetailsViewModel {
     private let day: DayIndex
     private let commander: EventsCommanding
     private let event: Event
+    private let itemFactory: DayItemViewModelFactoring
 
     /// Used by `DayViewModelUpdating`
     let eventId: String
@@ -35,6 +36,7 @@ struct DayDetailsViewModel {
         self.event = event
         self.day = day
         self.commander = commander
+        self.itemFactory = itemFactory
         self.pickerDate = day.date
 
         let dateFormatter = DateFormatter()

@@ -21,8 +21,9 @@ class EventItemViewModelTests: XCTestCase {
             event: event,
             today: today,
             hintEnabled: false,
-            coordinator: DefaultCoordinatorStub(),
-            commander: EventsCommandingStub()
+            coordinator: CoordinatorStub(),
+            commander: EventsCommandingStub(),
+            tapHandler: {}
         )
     }
 

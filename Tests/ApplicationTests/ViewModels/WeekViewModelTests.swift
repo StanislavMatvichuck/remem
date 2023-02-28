@@ -100,7 +100,7 @@ class WeekViewModelTests: XCTestCase {
         struct WeekItemViewModelFactoringStub: WeekItemViewModelFactoring {
             let event: Event
             let today: DayIndex
-            let coordinator = DefaultCoordinatorStub()
+            let coordinator = CoordinatorStub()
 
             func makeViewModel(day: DayIndex) -> WeekItemViewModel {
                 WeekItemViewModel(
@@ -115,7 +115,7 @@ class WeekViewModelTests: XCTestCase {
         return WeekViewModel(
             today: today,
             event: event,
-            coordinator: DefaultCoordinatorStub(),
+            coordinator: CoordinatorStub(),
             itemFactory: WeekItemViewModelFactoringStub(
                 event: event,
                 today: today

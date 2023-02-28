@@ -9,73 +9,56 @@ import Domain
 import Foundation
 import UIKit
 
-protocol EventsListContainerFactoring {
-    func makeContainer() -> EventsListContainer
-}
-
-final class EventsListContainer {
-    let provider: EventsQuerying
-    let coordinator: DefaultCoordinator
-    let updater: Updater<EventsListViewController, EventsListFactory>
-
-    lazy var factory: EventsListFactory = {
-        EventsListFactory(
-            provider: provider,
-            commander: updater,
-            footerItemFactory: self,
-            hintItemFactory: self,
-            eventItemFactory: self
-        )
-    }()
-
-    init(
-        provider: EventsQuerying,
-        commander: EventsCommanding,
-        coordinator: DefaultCoordinator
-    ) {
-        self.provider = provider
-        self.coordinator = coordinator
-        let widgetUpdater = Updater<WidgetViewController, WidgetFactory>(commander)
-        widgetUpdater.delegate = WidgetViewController()
-
-        let controllerUpdater = Updater<EventsListViewController, EventsListFactory>(widgetUpdater)
-
-        updater = controllerUpdater
-
-        coordinator.eventDetailsFactory = self
-
-        controllerUpdater.factory = factory
-        widgetUpdater.factory = WidgetFactory(factory: factory)
-    }
-
-    func makeController() -> EventsListViewController {
-        let controller = EventsListViewController(viewModel: factory.makeViewModel())
-        updater.delegate = controller
-        return controller
-    }
-}
-
-extension EventsListContainer: EventDetailsContainerFactoring {
-    func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer {
-        EventDetailsContainer(
-            event: event,
-            today: today,
-            commander: updater,
-            coordinator: coordinator
-        )
-    }
-}
-
-// MARK: - ViewModels factoring
 protocol HintItemViewModelFactoring { func makeHintItemViewModel(events: [Event]) -> HintItemViewModel }
 protocol EventItemViewModelFactoring { func makeEventItemViewModel(event: Event, today: DayIndex, hintEnabled: Bool) -> EventItemViewModel }
 protocol FooterItemViewModeFactoring { func makeFooterItemViewModel(eventsCount: Int) -> FooterItemViewModel }
 
-extension EventsListContainer:
+final class EventsListContainer:
+    ControllerFactoring,
     HintItemViewModelFactoring,
     EventItemViewModelFactoring,
     FooterItemViewModeFactoring
 {
+    let parent: ApplicationContainer
+    let widgetViewController: WidgetViewController /// more like application-level dependency
+
+    var provider: EventsQuerying { parent.provider }
+    var coordinator: Coordinator { parent.coordinator }
+
+    lazy var updater: Updater<EventsListViewController, EventsListViewModelFactory> = {
+        let widgetUpdater = Updater<WidgetViewController, WidgetViewModelFactory>(parent.commander)
+        widgetUpdater.delegate = widgetViewController
+        widgetUpdater.factory = widgetViewModelFactory
+
+        let listUpdater = Updater<EventsListViewController, EventsListViewModelFactory>(widgetUpdater)
+        listUpdater.factory = listViewModelFactory
+
+        return listUpdater
+    }()
+
+    lazy var listViewModelFactory: EventsListViewModelFactory = {
+        EventsListViewModelFactory(parent: self)
+    }()
+
+    lazy var widgetViewModelFactory: WidgetViewModelFactory = {
+        WidgetViewModelFactory(parent: self)
+    }()
+
+    init(parent: ApplicationContainer) {
+        print("EventsListContainer.init")
+
+        self.parent = parent
+        self.widgetViewController = WidgetViewController()
+    }
+
+    deinit { print("EventsListContainer.deinit") }
+
+    func make() -> UIViewController {
+        let controller = EventsListViewController(viewModel: listViewModelFactory.makeViewModel())
+        updater.delegate = controller
+        return controller
+    }
+
     func makeHintItemViewModel(events: [Event]) -> HintItemViewModel {
         HintItemViewModel(events: events)
     }
@@ -96,27 +79,41 @@ extension EventsListContainer:
             today: today,
             hintEnabled: hintEnabled,
             coordinator: coordinator,
-            commander: updater
+            commander: updater,
+            tapHandler: {
+                self.coordinator.show(Navigation.eventDetails(
+                    factory: self.makeContainer(
+                        event: event,
+                        today: today
+                    ))
+                )
+            }
+        )
+    }
+
+    func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer {
+        EventDetailsContainer(
+            parent: self,
+            event: event,
+            today: today
         )
     }
 }
 
-struct EventsListFactory: ViewModelFactoring {
-    let provider: EventsQuerying
-    let commander: EventsCommanding
-    let footerItemFactory: FooterItemViewModeFactoring
-    let hintItemFactory: HintItemViewModelFactoring
-    let eventItemFactory: EventItemViewModelFactoring
+final class EventsListViewModelFactory: ViewModelFactoring {
+    unowned let parent: EventsListContainer
+
+    init(parent: EventsListContainer) { self.parent = parent }
 
     func makeViewModel() -> EventsListViewModel {
         let today = DayIndex(.now)
-        let events = provider.get()
+        let events = parent.provider.get()
 
-        let footerVm = footerItemFactory.makeFooterItemViewModel(eventsCount: events.count)
-        let hintVm = hintItemFactory.makeHintItemViewModel(events: events)
+        let footerVm = parent.makeFooterItemViewModel(eventsCount: events.count)
+        let hintVm = parent.makeHintItemViewModel(events: events)
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text
-        let eventsVm = events.map { eventItemFactory.makeEventItemViewModel(
+        let eventsVm = events.map { parent.makeEventItemViewModel(
             event: $0,
             today: today,
             hintEnabled: gestureHintEnabled
@@ -129,7 +126,7 @@ struct EventsListFactory: ViewModelFactoring {
 
         let vm = EventsListViewModel(
             today: today,
-            commander: commander,
+            commander: parent.updater,
             items: items
         )
 
@@ -137,11 +134,13 @@ struct EventsListFactory: ViewModelFactoring {
     }
 }
 
-struct WidgetFactory: ViewModelFactoring {
-    let factory: EventsListFactory
+final class WidgetViewModelFactory: ViewModelFactoring {
+    unowned let parent: EventsListContainer
+
+    init(parent: EventsListContainer) { self.parent = parent }
 
     func makeViewModel() -> [EventItemViewModel] {
-        let listVm: EventsListViewModel = factory.makeViewModel()
+        let listVm: EventsListViewModel = parent.listViewModelFactory.makeViewModel()
         let items = listVm.items.filter { type(of: $0) is EventItemViewModel.Type } as! [EventItemViewModel]
         return items
     }

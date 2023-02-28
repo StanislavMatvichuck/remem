@@ -10,35 +10,24 @@ import Foundation
 
 struct ClockViewModel {
     private let event: Event
+    private let size: Int
+    private let secondsInDay: Int
+    private let secondsInSection: Int
+    private let itemFactory: ClockItemViewModelFactoring
 
     let items: [ClockItemViewModel]
 
-    init(event: Event, sorter: ClockStrategy) {
-        self.items = sorter.sort(orderedByDateHappenings: event.happenings)
-        self.event = event
-    }
-}
-
-protocol ClockStrategy {
-    func sort(orderedByDateHappenings: [Happening]) -> [ClockItemViewModel]
-}
-
-struct DefaultClockSorter: ClockStrategy {
-    let size: Int
-    let secondsInDay: Int
-    var secondsInSection: Int { secondsInDay / size }
-
-    init(size: Int) {
+    init(event: Event, size: Int, itemFactory: ClockItemViewModelFactoring) {
         self.size = size
         self.secondsInDay = 60 * 60 * 24
-    }
+        self.secondsInSection = secondsInDay / size
+        self.itemFactory = itemFactory
+        self.event = event
 
-    func sort(orderedByDateHappenings: [Happening]) -> [ClockItemViewModel] {
-        /// happenings size is bigger than clock size
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
-        for happening in orderedByDateHappenings {
-            var happeningSeconds = seconds(for: happening)
+        for happening in event.happenings {
+            var happeningSeconds = Self.seconds(for: happening)
             var i = 0
 
             while happeningSeconds >= 0 {
@@ -51,20 +40,16 @@ struct DefaultClockSorter: ClockStrategy {
 
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
-        return happeningsPerSection.enumerated().map { index, happeningsAmount in
-            ClockItemViewModel(
+        self.items = happeningsPerSection.enumerated().map { index, happeningsAmount in
+            itemFactory.make(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,
-                clockSize: size
+                size: size
             )
         }
     }
 
-    func seconds(forSection: Int) -> Int {
-        return secondsInSection * (forSection + 1)
-    }
-
-    func seconds(for happening: Happening) -> Int {
+    private static func seconds(for happening: Happening) -> Int {
         Calendar.current.dateComponents(
             [.second],
             from: Calendar.current.startOfDay(for: happening.dateCreated),

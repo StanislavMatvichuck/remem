@@ -10,10 +10,9 @@ import Foundation
 
 struct WeekViewModel {
     private let today: DayIndex
-    private let coordinator: DefaultCoordinator
+    private let coordinator: Coordinator
     private let event: Event
 
-    let itemFactory: WeekItemViewModelFactoring
     var scrollToIndex: Int = 0
     var timeline: DayTimeline<WeekItemViewModel>
     var summaryTimeline: WeekTimeline<Int>
@@ -21,13 +20,12 @@ struct WeekViewModel {
     init(
         today: DayIndex,
         event: Event,
-        coordinator: DefaultCoordinator,
-        itemFactory: WeekItemViewModelFactoring
+        coordinator: Coordinator,
+        itemFactory: AnyObject & WeekItemViewModelFactoring
     ) {
         self.today = today
         self.event = event
         self.coordinator = coordinator
-        self.itemFactory = itemFactory
 
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let startOfWeekToday = WeekIndex(today.date).dayIndex

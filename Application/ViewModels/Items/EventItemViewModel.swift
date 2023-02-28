@@ -16,25 +16,28 @@ struct EventItemViewModel: EventsListItemViewModeling {
 
     private let event: Event
     private let today: DayIndex
-    private let coordinator: DefaultCoordinator
+    private let coordinator: Coordinator
     private let commander: EventsCommanding
 
     let name: String
     let hintEnabled: Bool
     let amount: String
     var renameHandler: EventItemViewModelRenameResponding?
+    let tapHandler: () -> ()
 
     init(
         event: Event,
         today: DayIndex,
         hintEnabled: Bool,
-        coordinator: DefaultCoordinator,
-        commander: EventsCommanding
+        coordinator: Coordinator,
+        commander: EventsCommanding,
+        tapHandler: @escaping () -> ()
     ) {
         self.event = event
         self.today = today
         self.coordinator = coordinator
         self.commander = commander
+        self.tapHandler = tapHandler
 
         self.name = event.name
         self.hintEnabled = hintEnabled
@@ -44,9 +47,7 @@ struct EventItemViewModel: EventsListItemViewModeling {
         }()
     }
 
-    func select() {
-        coordinator.state = .eventDetails(today: today, event: event)
-    }
+    func select() { tapHandler() }
 
     func swipe() {
         event.addHappening(date: .now)

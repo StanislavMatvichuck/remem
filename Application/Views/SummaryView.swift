@@ -38,7 +38,7 @@ final class SummaryView: UIView {
         for item in viewModel.items {
             verticalStack.addArrangedSubview(
                 makeRow(
-                    left: makeLabel(text: item.label, tag: item.labelTag),
+                    left: makeLabel(text: item.title, tag: item.titleTag),
                     right: makeAmountLabel(text: item.value, tag: item.valueTag)
                 )
             )

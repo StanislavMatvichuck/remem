@@ -6,47 +6,43 @@
 //
 
 import Domain
+import UIKit
 
-protocol DayDetailsContainerFactoring { func makeContainer(day: DayIndex) -> DayDetailsContainer }
+protocol DayItemViewModelFactoring { func makeViewModel(happening: Happening) -> DayItemViewModel }
 
-final class DayDetailsContainer {
-    let event: Event
+final class DayDetailsContainer:
+    ControllerFactoring,
+    DayItemViewModelFactoring
+{
+    let parent: WeekContainer
+    var event: Event { parent.event }
     let day: DayIndex
-    let commander: EventsCommanding
-    let updater: Updater<DayDetailsViewController, DayDetailsFactory>
+    let updater: Updater<DayDetailsViewController, DayDetailsViewModelFactory>
 
-    lazy var factory: DayDetailsFactory = {
-        DayDetailsFactory(
-            day: day,
-            event: event,
-            commander: commander,
-            factory: self
-        )
+    lazy var factory: DayDetailsViewModelFactory = {
+        DayDetailsViewModelFactory(parent: self)
     }()
 
-    init(event: Event, day: DayIndex, commander: EventsCommanding) {
+    init(
+        parent: WeekContainer,
+        day: DayIndex
+    ) {
         print("DayDetailsContainer.init")
-        self.event = event
+        self.parent = parent
         self.day = day
-        self.commander = commander
-        let updater = Updater<DayDetailsViewController, DayDetailsFactory>(commander)
+        let updater = Updater<DayDetailsViewController, DayDetailsViewModelFactory>(parent.updater)
         self.updater = updater
         updater.factory = factory
     }
 
     deinit { print("DayDetailsContainer.deinit") }
 
-    func makeController() -> DayDetailsViewController {
+    func make() -> UIViewController {
         let controller = DayDetailsViewController(viewModel: factory.makeViewModel())
         updater.delegate = controller
         return controller
     }
-}
 
-// MARK: - ViewModelFactoring
-protocol DayItemViewModelFactoring { func makeViewModel(happening: Happening) -> DayItemViewModel }
-
-extension DayDetailsContainer: DayItemViewModelFactoring {
     func makeViewModel(happening: Happening) -> DayItemViewModel {
         DayItemViewModel(
             event: event,
@@ -56,18 +52,17 @@ extension DayDetailsContainer: DayItemViewModelFactoring {
     }
 }
 
-struct DayDetailsFactory: ViewModelFactoring {
-    let day: DayIndex
-    let event: Event
-    let commander: EventsCommanding
-    let factory: DayItemViewModelFactoring
+class DayDetailsViewModelFactory: ViewModelFactoring {
+    unowned var parent: DayDetailsContainer
+
+    init(parent: DayDetailsContainer) { self.parent = parent }
 
     func makeViewModel() -> DayDetailsViewModel {
         DayDetailsViewModel(
-            day: day,
-            event: event,
-            commander: commander,
-            itemFactory: factory
+            day: parent.day,
+            event: parent.event,
+            commander: parent.updater,
+            itemFactory: parent
         )
     }
 }

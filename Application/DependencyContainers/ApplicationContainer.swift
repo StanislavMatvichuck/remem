@@ -9,13 +9,14 @@ import DataLayer
 import Domain
 import UIKit
 
-final class ApplicationContainer: EventsListContainerFactoring {
+final class ApplicationContainer {
     let provider: EventsQuerying
     let commander: EventsCommanding
-    let coordinator: DefaultCoordinator
+    let coordinator: Coordinator
 
     init(testingInMemoryMode: Bool = false) {
-        let coordinator = DefaultCoordinator()
+        print("ApplicationContainer.init")
+        let coordinator = Coordinator()
         let repository = CoreDataEventsRepository(
             container: CoreDataStack.createContainer(inMemory: testingInMemoryMode),
             mapper: EventEntityMapper()
@@ -26,20 +27,14 @@ final class ApplicationContainer: EventsListContainerFactoring {
         self.commander = repository
 
         scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
-
-        coordinator.listFactory = self
     }
+
+    deinit { print("ApplicationContainer.deinit") }
 
     func makeRootViewController() -> UIViewController {
-        coordinator.state = .eventsList
-        return coordinator.navController
+        coordinator.show(Navigation.eventsList(factory: makeContainer()))
+        return coordinator.navigationController
     }
 
-    func makeContainer() -> EventsListContainer {
-        EventsListContainer(
-            provider: provider,
-            commander: commander,
-            coordinator: coordinator
-        )
-    }
+    func makeContainer() -> EventsListContainer { EventsListContainer(parent: self) }
 }

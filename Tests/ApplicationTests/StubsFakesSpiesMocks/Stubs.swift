@@ -23,3 +23,5 @@ struct FactoryStub: ViewModelFactoring {
 }
 
 final class DefaultCoordinatorStub: DefaultCoordinator {}
+
+final class CoordinatorStub: Coordinator {}

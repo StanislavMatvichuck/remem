@@ -19,7 +19,7 @@ struct WeekItemViewModel {
     private let event: Event
     private let day: DayIndex
     private let today: DayIndex
-    private let coordinator: DefaultCoordinator
+    private let tapHandler: () -> ()
 
     let isToday: Bool
     let amount: String
@@ -31,12 +31,12 @@ struct WeekItemViewModel {
         event: Event,
         day: DayIndex,
         today: DayIndex,
-        coordinator: DefaultCoordinator
+        tapHandler: @escaping () -> ()
     ) {
         self.day = day
         self.today = today
         self.event = event
-        self.coordinator = coordinator
+        self.tapHandler = tapHandler
 
         let formatter = DateFormatter()
         formatter.dateStyle = .none
@@ -52,8 +52,5 @@ struct WeekItemViewModel {
         self.date = day.date
     }
 
-    // TODO: test this method
-    func select() {
-        coordinator.state = .dayDetails(day: day)
-    }
+    func select() { tapHandler() }
 }

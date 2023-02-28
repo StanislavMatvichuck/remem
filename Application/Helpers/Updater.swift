@@ -19,13 +19,13 @@ protocol ViewModelFactoring {
 }
 
 final class Updater<
-    Receiver: ViewModelDisplaying,
-    Factory: ViewModelFactoring
+    Receiver: AnyObject & ViewModelDisplaying,
+    Factory: AnyObject & ViewModelFactoring
 >:
     EventsCommanding where Receiver.ViewModel == Factory.ViewModel
 {
-    var factory: Factory?
-    var delegate: Receiver?
+    weak var factory: Factory?
+    weak var delegate: Receiver?
     private let commander: EventsCommanding
 
     init(_ commander: EventsCommanding) {

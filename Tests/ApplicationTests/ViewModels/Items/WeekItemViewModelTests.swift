@@ -21,7 +21,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            coordinator: DefaultCoordinatorStub()
+            coordinator: CoordinatorStub()
         )
     }
 

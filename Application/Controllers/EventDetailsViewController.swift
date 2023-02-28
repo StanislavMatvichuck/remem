@@ -35,7 +35,7 @@ class EventDetailsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.visit()
+//        viewModel.visit()
     }
 
     private func contain(controller: UIViewController) {
