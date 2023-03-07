@@ -8,55 +8,26 @@
 import Domain
 import UIKit
 
-protocol ClockItemViewModelFactoring {
-    func make(
-        index: Int,
-        length: CGFloat,
-        size: Int
-    ) -> ClockItemViewModel
-}
-
 final class ClockContainer:
     ControllerFactoring,
-    ClockItemViewModelFactoring
+    ClockViewModelFactoring
 {
     let parent: EventDetailsContainer
+    let commander: UpdatingCommander
     var event: Event { parent.event }
 
-    lazy var updater: Updater<ClockViewController, ClockViewModelFactory> = {
-        let updater = Updater<ClockViewController, ClockViewModelFactory>(parent.commander)
-        updater.factory = viewModelFactory
-        return updater
-    }()
-
-    lazy var viewModelFactory: ClockViewModelFactory = {
-        ClockViewModelFactory(parent: self)
-    }()
-
     init(parent: EventDetailsContainer) {
-        print("ClockContainer.init")
         self.parent = parent
+        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
-    deinit { print("ClockContainer.deinit") }
-
     func make() -> UIViewController {
-        let controller = ClockViewController(viewModel: viewModelFactory.makeViewModel())
-        updater.delegate = controller
+        let controller = ClockViewController(self)
+        commander.delegate = controller
         return controller
     }
 
-    func make(index: Int, length: CGFloat, size: Int) -> ClockItemViewModel {
-        ClockItemViewModel(index: index, length: length, clockSize: size)
-    }
-}
-
-final class ClockViewModelFactory: ViewModelFactoring {
-    unowned let parent: ClockContainer
-
-    init(parent: ClockContainer) { self.parent = parent }
-
-    func makeViewModel() -> ClockViewModel {
-        ClockViewModel(event: parent.event, size: 144, itemFactory: parent)
+    func makeClockViewModel() -> ClockViewModel {
+        ClockViewModel(event: event, size: 144)
     }
 }

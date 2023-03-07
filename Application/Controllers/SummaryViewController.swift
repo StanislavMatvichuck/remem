@@ -7,16 +7,20 @@
 
 import UIKit
 
+protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewModel }
+
 final class SummaryViewController: UIViewController {
     var viewModel: SummaryViewModel { didSet {
         guard isViewLoaded else { return }
         viewRoot.configureContent(viewModel: viewModel)
     }}
 
-    var viewRoot: SummaryView
+    let factory: SummaryViewModelFactoring
+    let viewRoot: SummaryView
 
-    init(viewModel: SummaryViewModel) {
-        self.viewModel = viewModel
+    init(_ factory: SummaryViewModelFactoring) {
+        self.factory = factory
+        self.viewModel = factory.makeSummaryViewModel()
         self.viewRoot = SummaryView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
@@ -24,4 +28,5 @@ final class SummaryViewController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     override func loadView() { view = viewRoot }
+    override func viewDidLoad() {}
 }

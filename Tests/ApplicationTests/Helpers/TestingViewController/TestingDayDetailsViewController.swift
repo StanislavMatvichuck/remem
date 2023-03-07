@@ -16,10 +16,9 @@ extension TestingViewController where Controller == DayDetailsViewController {
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: day)
-            .makeContainer(day: day)
-        sut = container.makeController()
+        let weekContainer = WeekContainer(parent: container)
+        sut = DayDetailsContainer(parent: weekContainer, day: day).make() as? DayDetailsViewController
         sut.loadViewIfNeeded()
-        commander = container.updater
     }
 
     var table: UITableView { sut.viewRoot.happenings }
@@ -38,6 +37,6 @@ extension TestingViewController where Controller == DayDetailsViewController {
     }
 
     func sendEventUpdatesToController() {
-        commander.save(event)
+        sut.update()
     }
 }

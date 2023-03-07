@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol ControllerFactoring {
-    func make() -> UIViewController
-}
+protocol ControllerFactoring { func make() -> UIViewController }
 
 enum Navigation {
     case eventsList(factory: ControllerFactoring)

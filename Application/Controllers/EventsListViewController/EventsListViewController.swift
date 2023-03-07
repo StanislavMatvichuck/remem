@@ -7,12 +7,22 @@
 
 import UIKit
 
+typealias EventsListViewModelHandling =
+    EventItemViewModelRenameHandling &
+    FooterItemViewModelTapHandling
+
+protocol EventsListViewModelFactoring {
+    func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel
+}
+
 final class EventsListViewController: UIViewController, UITableViewDelegate {
+    let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView
-    var viewModel: EventsListViewModel {
+    let widgetUpdater: WidgetViewController
+
+    var viewModel: EventsListViewModel! {
         didSet {
             guard isViewLoaded else { return }
-            viewModel = connectToViewModelHandlers(viewModel: viewModel) /// does not trigger didSet
             updateUI(oldValue)
         }
     }
@@ -32,14 +42,17 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         )
     }()
 
-    // MARK: - Init
-    init(viewModel: EventsListViewModel) {
-        viewRoot = EventsListView()
-        self.viewModel = viewModel
+    init(
+        _ factory: EventsListViewModelFactoring,
+        _ widgetFactory: WidgetViewModelFactoring
+    ) {
+        self.factory = factory
+        self.viewRoot = EventsListView()
+        self.widgetUpdater = WidgetViewController(widgetFactory)
 
         super.init(nibName: nil, bundle: nil)
 
-        self.viewModel = connectToViewModelHandlers(viewModel: viewModel) /// does not trigger didSet
+        self.viewModel = factory.makeEventsListViewModel(self)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -113,25 +126,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    /// - Parameter viewModel: all handlers of this vm will be updated to
-    /// - Parameter controller: self that plays multiple roles by extensions in viewModels files
-    /// - Returns: new version of list view model with all handlers configured to call controller
-    private func connectToViewModelHandlers(viewModel: EventsListViewModel) -> EventsListViewModel {
-        var newViewModel = viewModel
-
-        for (i, item) in newViewModel.items.enumerated() {
-            if let vm = item as? FooterItemViewModel {
-                newViewModel.items[i] = vm.withSelectionHandler(self)
-            }
-
-            if let vm = item as? EventItemViewModel {
-                newViewModel.items[i] = vm.withRenameHandler(self)
-            }
-        }
-
-        return newViewModel
-    }
-
     func tableView(_ table: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let viewModel = viewModel.items[indexPath.row]
         let cell = EventsListCellProvider.cell(
@@ -144,14 +138,15 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 }
 
-extension EventsListViewController: FooterItemViewModelResponding {
-    func selected(_: FooterItemViewModel) {
-        viewModel.showInput()
+extension EventsListViewController:
+    EventItemViewModelRenameHandling,
+    FooterItemViewModelTapHandling
+{
+    func renameTapped(_ item: EventItemViewModel) {
+        viewModel.renamedItem = item
     }
-}
 
-extension EventsListViewController: EventItemViewModelRenameResponding {
-    func renameRequested(_ itemViewModel: EventItemViewModel) {
-        viewModel.renamedItem = itemViewModel
+    func tapped(_: FooterItemViewModel) {
+        viewModel.showInput()
     }
 }

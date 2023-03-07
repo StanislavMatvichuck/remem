@@ -8,7 +8,9 @@
 import Domain
 import UIKit
 
-class DayDetailsViewController: UIViewController {
+protocol DayDetailsViewModelFactoring { func makeDayViewModel() -> DayDetailsViewModel }
+
+final class DayDetailsViewController: UIViewController {
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
@@ -23,6 +25,7 @@ class DayDetailsViewController: UIViewController {
         } else { fatalError("alert is not created") }
     }
 
+    let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
     var viewModel: DayDetailsViewModel {
         didSet {
@@ -36,9 +39,10 @@ class DayDetailsViewController: UIViewController {
     }
 
     // MARK: - Init
-    init(viewModel: DayDetailsViewModel) {
+    init(_ factory: DayDetailsViewModelFactoring) {
+        self.factory = factory
         self.viewRoot = DayDetailsView()
-        self.viewModel = viewModel
+        self.viewModel = factory.makeDayViewModel()
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -91,7 +95,7 @@ class DayDetailsViewController: UIViewController {
         viewRoot.happenings.isEditing.toggle()
     }
 
-    @objc private func handleAdd() {
+    @objc func handleAdd() {
         alert = make()
         present(alert!, animated: true)
     }

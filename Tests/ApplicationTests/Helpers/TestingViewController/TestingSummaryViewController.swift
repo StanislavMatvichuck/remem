@@ -15,13 +15,13 @@ extension TestingViewController where Controller == SummaryViewController {
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: DayIndex.referenceValue)
-        sut = container.makeSummaryViewController()
-        commander = container.weekViewModelUpdater
+
+        sut = SummaryContainer(parent: container).make() as? SummaryViewController
         sut.loadViewIfNeeded()
     }
 
     func assertLabelFor(
-        summaryRow: SummaryViewModel.SummaryRow,
+        summaryRow: SummaryRow,
         file: StaticString = #file,
         line: UInt = #line
     ) {
@@ -30,7 +30,7 @@ extension TestingViewController where Controller == SummaryViewController {
     }
 
     func assertValueFor(
-        summaryRow: SummaryViewModel.SummaryRow,
+        summaryRow: SummaryRow,
         file: StaticString = #file,
         line: UInt = #line
     ) {

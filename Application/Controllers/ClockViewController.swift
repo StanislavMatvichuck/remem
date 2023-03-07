@@ -8,7 +8,10 @@
 import Domain
 import UIKit
 
-class ClockViewController: UIViewController {
+protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
+
+final class ClockViewController: UIViewController {
+    let factory: ClockViewModelFactoring
     let viewRoot: ClockView
     var viewModel: ClockViewModel {
         didSet {
@@ -16,8 +19,9 @@ class ClockViewController: UIViewController {
         }
     }
 
-    init(viewModel: ClockViewModel) {
-        self.viewModel = viewModel
+    init(_ factory: ClockViewModelFactoring) {
+        self.factory = factory
+        self.viewModel = factory.makeClockViewModel()
         self.viewRoot = ClockView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }

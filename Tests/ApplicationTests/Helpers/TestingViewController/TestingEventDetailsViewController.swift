@@ -12,15 +12,15 @@ extension TestingViewController where Controller == EventDetailsViewController {
     func make() {
         let today = DayIndex.referenceValue
         event = Event(name: "Event", dateCreated: today.date)
-        let container = ApplicationContainer(testingInMemoryMode: true)
+
+        sut = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
-            .makeContainer(event: event, today: today)
-        sut = container.makeController()
+            .makeContainer(event: event, today: today).make() as? EventDetailsViewController
+
         sut.loadViewIfNeeded()
-        commander = container.weekViewModelUpdater
     }
 
     func sendEventUpdatesToController() {
-        commander.save(event)
+        sut.update()
     }
 }

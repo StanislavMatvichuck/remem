@@ -6,17 +6,18 @@
 //
 
 import Domain
-
 import UIKit
 
-class EventDetailsViewController: UIViewController {
-    // MARK: - Properties
-    let viewRoot: EventDetailsView
-    var viewModel: EventDetailsViewModel
+protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
 
-    // MARK: - Init
-    init(viewModel: EventDetailsViewModel, controllers: [UIViewController]) {
-        self.viewModel = viewModel
+final class EventDetailsViewController: UIViewController {
+    let factory: EventDetailsViewModelFactoring
+    var viewModel: EventDetailsViewModel
+    let viewRoot: EventDetailsView
+
+    init(factory: EventDetailsViewModelFactoring, controllers: [UIViewController]) {
+        self.factory = factory
+        self.viewModel = factory.makeEventDetailsViewModel()
         self.viewRoot = EventDetailsView()
 
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +36,7 @@ class EventDetailsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        viewModel.visit()
+        viewModel.visit()
     }
 
     private func contain(controller: UIViewController) {

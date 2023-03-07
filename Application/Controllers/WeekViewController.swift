@@ -8,7 +8,9 @@
 import Domain
 import UIKit
 
-class WeekViewController: UIViewController {
+protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
+
+final class WeekViewController: UIViewController {
     var scrollHappened = false
     var viewModel: WeekViewModel {
         didSet {
@@ -17,10 +19,12 @@ class WeekViewController: UIViewController {
         }
     }
 
+    let factory: WeekViewModelFactoring
     let viewRoot: WeekView
 
-    init(viewModel: WeekViewModel) {
-        self.viewModel = viewModel
+    init(_ factory: WeekViewModelFactoring) {
+        self.factory = factory
+        self.viewModel = factory.makeWeekViewModel()
         self.viewRoot = WeekView()
 
         super.init(nibName: nil, bundle: nil)

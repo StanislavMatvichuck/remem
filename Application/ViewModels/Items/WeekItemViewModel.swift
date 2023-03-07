@@ -54,3 +54,7 @@ struct WeekItemViewModel {
 
     func select() { tapHandler() }
 }
+
+protocol WeekItemViewModelFactoring {
+    func makeViewModel(day: DayIndex) -> WeekItemViewModel
+}

@@ -10,16 +10,10 @@ import Foundation
 
 struct SummaryViewModel {
     private let event: Event
-    private let itemFactory: SummaryItemViewModelFactoring
     let items: [SummaryItemViewModel]
 
-    init(
-        event: Event,
-        today: DayIndex,
-        itemFactory: SummaryItemViewModelFactoring)
-    {
+    init(event: Event, today: DayIndex) {
         self.event = event
-        self.itemFactory = itemFactory
 
         let averageNumberFormatter: NumberFormatter = {
             let formatter = NumberFormatter()
@@ -66,11 +60,11 @@ struct SummaryViewModel {
         }()
 
         self.items = [
-            itemFactory.make(SummaryRow.total(value: String(totalAmount))),
-            itemFactory.make(SummaryRow.weekAverage(value: weekAverageAmount)),
-            itemFactory.make(SummaryRow.dayAverage(value: dayAverageAmount)),
-            itemFactory.make(SummaryRow.daysTracked(value: String(daysTrackedAmount))),
-            itemFactory.make(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount))
+            SummaryItemViewModel(SummaryRow.total(value: String(totalAmount))),
+            SummaryItemViewModel(SummaryRow.weekAverage(value: weekAverageAmount)),
+            SummaryItemViewModel(SummaryRow.dayAverage(value: dayAverageAmount)),
+            SummaryItemViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount))),
+            SummaryItemViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount))
         ]
     }
 }
@@ -112,5 +106,14 @@ enum SummaryRow {
         }
     }
 
-    var valueTag: Int { self.labelTag + 1000 }
+    var valueTag: Int { labelTag + 1000 }
+}
+
+extension SummaryItemViewModel {
+    init(_ row: SummaryRow) {
+        title = row.label
+        value = row.value
+        titleTag = row.labelTag
+        valueTag = row.valueTag
+    }
 }

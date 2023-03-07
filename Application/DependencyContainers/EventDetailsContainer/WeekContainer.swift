@@ -8,37 +8,35 @@
 import Domain
 import UIKit
 
-protocol WeekItemViewModelFactoring { func makeViewModel(day: DayIndex) -> WeekItemViewModel }
-
 final class WeekContainer:
     ControllerFactoring,
+    WeekViewModelFactoring,
     WeekItemViewModelFactoring
 {
     let parent: EventDetailsContainer
+    let commander: UpdatingCommander
 
     var event: Event { parent.event }
     var today: DayIndex { parent.today }
-    var coordinator: Coordinator { parent.coordinator }
-
-    lazy var updater: Updater<WeekViewController, WeekViewModelFactory> = {
-        let updater = Updater<WeekViewController, WeekViewModelFactory>(parent.commander)
-        updater.factory = viewModelFactory
-        return updater
-    }()
-
-    lazy var viewModelFactory: WeekViewModelFactory = { WeekViewModelFactory(parent: self) }()
+    var coordinator: Coordinator { parent.parent.parent.coordinator }
 
     init(parent: EventDetailsContainer) {
-        print("WeekContainer.init")
         self.parent = parent
+        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
-    deinit { print("WeekContainer.deinit") }
-
     func make() -> UIViewController {
-        let controller = WeekViewController(viewModel: viewModelFactory.makeViewModel())
-        updater.delegate = controller
+        let controller = WeekViewController(self)
+        commander.delegate = controller
         return controller
+    }
+
+    func makeWeekViewModel() -> WeekViewModel {
+        WeekViewModel(
+            today: today,
+            event: event,
+            itemFactory: self
+        )
     }
 
     func makeViewModel(day: DayIndex) -> WeekItemViewModel {
@@ -56,21 +54,6 @@ final class WeekContainer:
         DayDetailsContainer(
             parent: self,
             day: day
-        )
-    }
-}
-
-final class WeekViewModelFactory: ViewModelFactoring {
-    unowned let parent: WeekContainer
-
-    init(parent: WeekContainer) { self.parent = parent }
-
-    func makeViewModel() -> WeekViewModel {
-        WeekViewModel(
-            today: parent.today,
-            event: parent.event,
-            coordinator: parent.coordinator,
-            itemFactory: parent
         )
     }
 }

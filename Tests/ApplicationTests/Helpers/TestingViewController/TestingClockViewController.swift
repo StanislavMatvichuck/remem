@@ -11,13 +11,14 @@ import XCTest
 
 extension TestingViewController where Controller == ClockViewController {
     func make() {
-        event = Event(name: "Event")
         let today = DayIndex.referenceValue
+        event = Event(name: "Event", dateCreated: today.date)
+
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: today)
-        sut = container.makeClockViewController()
-        commander = container.weekViewModelUpdater
+
+        sut = ClockContainer(parent: container).make() as? ClockViewController
         sut.loadViewIfNeeded()
     }
 
@@ -33,7 +34,7 @@ extension TestingViewController where Controller == ClockViewController {
     }
 
     func sendEventUpdatesToController() {
-        commander.save(event)
+        sut.update()
     }
 
     func forceViewToLayoutInScreenSize() {

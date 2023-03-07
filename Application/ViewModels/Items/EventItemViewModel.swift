@@ -8,6 +8,10 @@
 import Domain
 import Foundation
 
+protocol EventItemViewModelRenameHandling {
+    func renameTapped(_: EventItemViewModel)
+}
+
 struct EventItemViewModel: EventsListItemViewModeling {
     var identifier: String { event.id }
 
@@ -16,28 +20,28 @@ struct EventItemViewModel: EventsListItemViewModeling {
 
     private let event: Event
     private let today: DayIndex
-    private let coordinator: Coordinator
     private let commander: EventsCommanding
 
     let name: String
     let hintEnabled: Bool
     let amount: String
-    var renameHandler: EventItemViewModelRenameResponding?
+
+    let renameHandler: EventItemViewModelRenameHandling?
     let tapHandler: () -> ()
 
     init(
         event: Event,
         today: DayIndex,
         hintEnabled: Bool,
-        coordinator: Coordinator,
         commander: EventsCommanding,
+        renameHandler: EventItemViewModelRenameHandling?,
         tapHandler: @escaping () -> ()
     ) {
         self.event = event
         self.today = today
-        self.coordinator = coordinator
         self.commander = commander
         self.tapHandler = tapHandler
+        self.renameHandler = renameHandler
 
         self.name = event.name
         self.hintEnabled = hintEnabled
@@ -58,24 +62,11 @@ struct EventItemViewModel: EventsListItemViewModeling {
         commander.delete(event)
     }
 
-    func initiateRenaming() {
-        guard let renameHandler else {
-            print("⚠️ EventItemViewModel trying to use renameHandler which is nil")
-            return
-        }
-
-        renameHandler.renameRequested(self)
-    }
+    func initiateRenaming() { renameHandler?.renameTapped(self) }
 
     func rename(to newName: String) {
         event.name = newName
         commander.save(event)
-    }
-
-    func withRenameHandler(_ handler: EventItemViewModelRenameResponding) -> Self {
-        var new = self
-        new.renameHandler = handler
-        return new
     }
 
     static func == (lhs: EventItemViewModel, rhs: EventItemViewModel) -> Bool {
@@ -85,6 +76,11 @@ struct EventItemViewModel: EventsListItemViewModeling {
     }
 }
 
-protocol EventItemViewModelRenameResponding {
-    func renameRequested(_ viewModel: EventItemViewModel)
+protocol EventItemViewModelFactoring {
+    func makeEventItemViewModel(
+        event: Event,
+        today: DayIndex,
+        hintEnabled: Bool,
+        renameHandler: EventItemViewModelRenameHandling?
+    ) -> EventItemViewModel
 }

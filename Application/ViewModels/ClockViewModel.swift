@@ -13,15 +13,13 @@ struct ClockViewModel {
     private let size: Int
     private let secondsInDay: Int
     private let secondsInSection: Int
-    private let itemFactory: ClockItemViewModelFactoring
 
     let items: [ClockItemViewModel]
 
-    init(event: Event, size: Int, itemFactory: ClockItemViewModelFactoring) {
+    init(event: Event, size: Int) {
         self.size = size
         self.secondsInDay = 60 * 60 * 24
         self.secondsInSection = secondsInDay / size
-        self.itemFactory = itemFactory
         self.event = event
 
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
@@ -41,10 +39,10 @@ struct ClockViewModel {
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
         self.items = happeningsPerSection.enumerated().map { index, happeningsAmount in
-            itemFactory.make(
+            ClockItemViewModel(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,
-                size: size
+                clockSize: size
             )
         }
     }

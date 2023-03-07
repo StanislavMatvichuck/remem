@@ -7,6 +7,7 @@
 
 @testable import Application
 import Domain
+import ViewControllerPresentationSpy
 import XCTest
 
 final class EventsListViewControllerTests: XCTestCase, TestingViewController {
@@ -137,16 +138,12 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_singleEvent_showsGestureHint() {
-        /// is it part of list controller or EventItemViewModel?
-        /// should some tests be moved to EventItemViewModel?
         submitEvent()
 
         XCTAssertNotNil(firstEvent.viewRoot.swipingHint)
     }
 
     func test_singleEvent_hasRenameSwipeAction() {
-        /// is it part of list controller or EventItemViewModel?
-        /// should some tests be moved to EventItemViewModel?
         let button = submittedEventTrailingSwipeActionButton(number: 0)
 
         XCTAssertEqual(
@@ -196,31 +193,40 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertEqual(eventsCount, 0)
     }
 
-    // TODO: refactor tests to use string identifiers instead of indexPath
-//    func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
-//        sut.arrangeSingleEventSwiped()
-//
-//        XCTAssertEqual(sut.firstEvent.valueLabel.text, "1")
-//    }
-//
-//    func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
-//        sut.arrangeSingleEventSwiped()
-//        sut.swipeFirstEvent()
-//
-//        XCTAssertEqual(sut.firstEvent.valueLabel.text, "2")
-//    }
-//
-//    func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
-//        sut.arrangeSingleEventSwiped()
-//
-//        XCTAssertEqual(sut.hintText, String(localizationId: "eventsList.hint.firstVisit"))
-//    }
-//
-//    func test_singleEvent_swiped_gestureHintIsNotVisible() {
-//        sut.arrangeSingleEventSwiped()
-//
-//        let event = sut.firstEvent
-//
-//        XCTAssertNil(event.viewRoot.swipingHint)
-//    }
+    func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
+        submitEvent()
+
+        XCTAssertEqual(firstEvent.valueLabel.text, "0")
+
+        swipeFirstEvent()
+
+        XCTAssertEqual(firstEvent.valueLabel.text, "1")
+    }
+
+    func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
+        submitEvent()
+
+        XCTAssertEqual(firstEvent.valueLabel.text, "0")
+
+        swipeFirstEvent()
+        swipeFirstEvent()
+
+        XCTAssertEqual(firstEvent.valueLabel.text, "2")
+    }
+
+    func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
+        arrangeSingleEventSwiped()
+
+        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.firstVisit"))
+    }
+
+    func test_singleEvent_swiped_gestureHintIsNotVisible() {
+        arrangeSingleEventSwiped()
+
+        XCTAssertNil(firstEvent.viewRoot.swipingHint)
+    }
+
+    func test_singleEvent_tapped_showsDetails() {
+        // TODO: write this test
+    }
 }

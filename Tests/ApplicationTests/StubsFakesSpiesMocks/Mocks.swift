@@ -76,19 +76,3 @@ extension UIPanGestureRecognizerMock {
         )
     }
 }
-
-class ReceiverMock: ViewModelDisplaying {
-    private var calledCount = 0
-
-    func update(_: String) {
-        calledCount += 1
-    }
-
-    func assertCalled(
-        count: Int,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) {
-        XCTAssertEqual(calledCount, count, file: file, line: line)
-    }
-}

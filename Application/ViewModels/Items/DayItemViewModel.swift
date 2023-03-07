@@ -35,3 +35,7 @@ struct DayItemViewModel {
         commander.save(event)
     }
 }
+
+protocol DayItemViewModelFactoring {
+    func makeViewModel(happening: Happening) -> DayItemViewModel
+}

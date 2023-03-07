@@ -8,49 +8,46 @@
 import Domain
 import UIKit
 
-protocol EventDetailsViewModelFactoring { func makeViewModel() -> EventDetailsViewModel }
-
 final class EventDetailsContainer:
     ControllerFactoring,
     EventDetailsViewModelFactoring
 {
     let parent: EventsListContainer
-
-    var coordinator: Coordinator { parent.coordinator }
-    var commander: EventsCommanding { parent.updater }
-
     let event: Event
     let today: DayIndex
+    let commander: UpdatingCommander
 
     init(
         parent: EventsListContainer,
         event: Event,
         today: DayIndex
     ) {
-        print("EventDetailsContainer.init")
         self.parent = parent
         self.event = event
         self.today = today
+        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
-    deinit { print("EventDetailsContainer.deinit") }
+    deinit { print("EventDetailsContainer deinit") }
 
     func make() -> UIViewController {
         let weekViewController = WeekContainer(parent: self).make()
         let clockViewController = ClockContainer(parent: self).make()
         let summaryViewController = SummaryContainer(parent: self).make()
 
-        return EventDetailsViewController(
-            viewModel: makeViewModel(),
+        let controller = EventDetailsViewController(
+            factory: self,
             controllers: [
                 weekViewController,
                 clockViewController,
                 summaryViewController
             ]
         )
+        commander.delegate = controller
+        return controller
     }
 
-    func makeViewModel() -> EventDetailsViewModel {
+    func makeEventDetailsViewModel() -> EventDetailsViewModel {
         EventDetailsViewModel(
             event: event,
             commander: commander

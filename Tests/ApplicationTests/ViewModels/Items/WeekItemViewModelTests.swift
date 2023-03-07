@@ -21,11 +21,12 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            coordinator: CoordinatorStub()
+            tapHandler: {}
         )
     }
 
     override func tearDown() {
+        sut = nil
         super.tearDown()
     }
 
@@ -45,7 +46,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: dayLater,
-            coordinator: ApplicationContainer().coordinator
+            tapHandler: {}
         )
 
         XCTAssertFalse(sut.isToday)
@@ -64,7 +65,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            coordinator: ApplicationContainer().coordinator
+            tapHandler: {}
         )
 
         XCTAssertEqual(sut.items.first, "00:00")

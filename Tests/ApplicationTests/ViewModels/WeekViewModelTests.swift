@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-class WeekViewModelTests: XCTestCase {
+final class WeekViewModelTests: XCTestCase {
     private var sut: WeekViewModel!
     private var event: Event!
 
@@ -100,14 +100,13 @@ class WeekViewModelTests: XCTestCase {
         struct WeekItemViewModelFactoringStub: WeekItemViewModelFactoring {
             let event: Event
             let today: DayIndex
-            let coordinator = CoordinatorStub()
 
             func makeViewModel(day: DayIndex) -> WeekItemViewModel {
                 WeekItemViewModel(
                     event: event,
                     day: day,
                     today: today,
-                    coordinator: coordinator
+                    tapHandler: {}
                 )
             }
         }
@@ -115,7 +114,6 @@ class WeekViewModelTests: XCTestCase {
         return WeekViewModel(
             today: today,
             event: event,
-            coordinator: CoordinatorStub(),
             itemFactory: WeekItemViewModelFactoringStub(
                 event: event,
                 today: today

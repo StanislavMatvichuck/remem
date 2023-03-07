@@ -9,6 +9,7 @@
 import Domain
 import XCTest
 
+// TODO: simplify this protocol
 protocol TestingViewController: AnyObject {
     associatedtype Controller
     var sut: Controller! { get set }

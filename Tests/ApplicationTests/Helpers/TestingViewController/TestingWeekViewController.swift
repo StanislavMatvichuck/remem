@@ -15,8 +15,7 @@ extension TestingViewController where Controller == WeekViewController {
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: DayIndex.referenceValue)
-        sut = container.makeWeekViewController()
-        commander = container.weekViewModelUpdater
+        sut = WeekContainer(parent: container).make() as? WeekViewController
         sut.loadViewIfNeeded()
     }
 
@@ -34,6 +33,6 @@ extension TestingViewController where Controller == WeekViewController {
     }
 
     func sendEventUpdatesToController() {
-        commander.save(event)
+        sut.update()
     }
 }

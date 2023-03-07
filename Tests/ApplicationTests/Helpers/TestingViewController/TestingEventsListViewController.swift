@@ -9,11 +9,13 @@
 import Domain
 import XCTest
 
+struct WidgetViewModelFactoringStub: WidgetViewModelFactoring {
+    func makeWidgetViewModel() -> WidgetViewModel { [] }
+}
+
 extension TestingViewController where Controller == EventsListViewController {
     func make() {
-        let container = ApplicationContainer(testingInMemoryMode: true).makeContainer()
-        sut = container.makeController()
-        commander = container.updater
+        sut = ApplicationContainer.make()
         sut.loadViewIfNeeded()
     }
 

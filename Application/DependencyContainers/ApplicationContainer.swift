@@ -15,7 +15,6 @@ final class ApplicationContainer {
     let coordinator: Coordinator
 
     init(testingInMemoryMode: Bool = false) {
-        print("ApplicationContainer.init")
         let coordinator = Coordinator()
         let repository = CoreDataEventsRepository(
             container: CoreDataStack.createContainer(inMemory: testingInMemoryMode),
@@ -28,8 +27,6 @@ final class ApplicationContainer {
 
         scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
     }
-
-    deinit { print("ApplicationContainer.deinit") }
 
     func makeRootViewController() -> UIViewController {
         coordinator.show(Navigation.eventsList(factory: makeContainer()))
