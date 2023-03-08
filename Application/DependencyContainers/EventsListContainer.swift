@@ -27,7 +27,7 @@ final class EventsListContainer:
 
     func make() -> UIViewController {
         let controller = EventsListViewController(self, self)
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 

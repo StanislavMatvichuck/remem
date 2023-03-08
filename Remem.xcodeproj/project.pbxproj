@@ -36,7 +36,7 @@
 		083380422944F9100021281C /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0835D0FE2934CDB50099AFF6 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EE929A64B5900281E51 /* WidgetViewController.swift */; };
-		08396EEC29A6523700281E51 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EEB29A6523700281E51 /* Updater.swift */; };
+		08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EEB29A6523700281E51 /* UpdatingCommander.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */; };
@@ -320,7 +320,7 @@
 		08293CC027B670FC0039E432 /* WeekItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItem.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		08396EE929A64B5900281E51 /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
-		08396EEB29A6523700281E51 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
+		08396EEB29A6523700281E51 /* UpdatingCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingCommander.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -950,7 +950,7 @@
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
-				08396EEB29A6523700281E51 /* Updater.swift */,
+				08396EEB29A6523700281E51 /* UpdatingCommander.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 			);
 			path = Helpers;
@@ -1530,7 +1530,7 @@
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
-				08396EEC29A6523700281E51 /* Updater.swift in Sources */,
+				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08A331EA29A8EBC3000B68A1 /* DayChangeWatcher.swift in Sources */,
 			);

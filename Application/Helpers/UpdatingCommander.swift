@@ -8,12 +8,17 @@
 import Domain
 import Foundation
 
-protocol Updating: AnyObject { func update() }
+protocol Updating { func update() }
+
+extension WeakRef: Updating where T: Updating {
+    func update() { weakRef?.update() }
+}
 
 final class UpdatingCommander: EventsCommanding {
-    weak var delegate: Updating?
+    var delegate: Updating?
 
     private let commander: EventsCommanding
+
     init(delegate: Updating? = nil, commander: EventsCommanding) {
         self.delegate = delegate
         self.commander = commander

@@ -29,7 +29,7 @@ final class DayDetailsContainer:
 
     func make() -> UIViewController {
         let controller = DayDetailsViewController(self)
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 

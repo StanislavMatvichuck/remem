@@ -28,8 +28,6 @@ final class EventDetailsContainer:
         self.commander = UpdatingCommander(commander: parent.commander)
     }
 
-    deinit { print("EventDetailsContainer deinit") }
-
     func make() -> UIViewController {
         let weekViewController = WeekContainer(parent: self).make()
         let clockViewController = ClockContainer(parent: self).make()
@@ -43,7 +41,7 @@ final class EventDetailsContainer:
                 summaryViewController
             ]
         )
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 

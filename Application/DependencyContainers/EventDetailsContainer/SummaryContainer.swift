@@ -25,7 +25,7 @@ final class SummaryContainer:
 
     func make() -> UIViewController {
         let controller = SummaryViewController(self)
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 

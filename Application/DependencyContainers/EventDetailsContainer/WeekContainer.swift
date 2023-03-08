@@ -27,7 +27,7 @@ final class WeekContainer:
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 

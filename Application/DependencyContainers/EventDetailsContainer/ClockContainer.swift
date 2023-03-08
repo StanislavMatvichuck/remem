@@ -23,7 +23,7 @@ final class ClockContainer:
 
     func make() -> UIViewController {
         let controller = ClockViewController(self)
-        commander.delegate = controller
+        commander.delegate = WeakRef(controller)
         return controller
     }
 
