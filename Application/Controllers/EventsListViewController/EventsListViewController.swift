@@ -23,7 +23,16 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     var viewModel: EventsListViewModel! {
         didSet {
             guard isViewLoaded else { return }
-            updateUI(oldValue)
+
+            title = viewModel.title
+
+            dataSource.update(viewModel.items, oldValue)
+
+            if let renamedItem = viewModel.renamedItem {
+                viewRoot.input.rename(oldName: renamedItem.name)
+            } else if viewModel.inputVisible {
+                viewRoot.input.show(value: viewModel.inputContent)
+            }
         }
     }
 
@@ -62,7 +71,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         setupTableView()
         setupEventHandlers()
-        updateUI(nil)
+        update()
     }
 
     private func setupTableView() {
@@ -73,18 +82,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
     private func setupEventHandlers() {
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
-    }
-
-    private func updateUI(_ oldValue: EventsListViewModel?) {
-        title = viewModel.title
-
-        dataSource.update(viewModel.items, oldValue)
-
-        if let renamedItem = viewModel.renamedItem {
-            viewRoot.input.rename(oldName: renamedItem.name)
-        } else if viewModel.inputVisible {
-            viewRoot.input.show(value: viewModel.inputContent)
-        }
     }
 
     @objc private func handleAdd() {
