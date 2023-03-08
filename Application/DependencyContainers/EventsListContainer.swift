@@ -12,22 +12,27 @@ import UIKit
 final class EventsListContainer:
     ControllerFactoring,
     EventsListViewModelFactoring,
-    WidgetViewModelFactoring,
     HintItemViewModelFactoring,
     EventItemViewModelFactoring,
     FooterItemViewModeFactoring
 {
     let commander: UpdatingCommander
+    let watcher: DayWatcher
     let parent: ApplicationContainer
 
     init(parent: ApplicationContainer) {
         self.parent = parent
         self.commander = UpdatingCommander(commander: parent.commander)
+        self.watcher = DayWatcher()
     }
 
     func make() -> UIViewController {
-        let controller = EventsListViewController(self, self)
-        commander.delegate = WeakRef(controller)
+        let controller = EventsListViewController(self, watcher)
+
+        let weakController = WeakRef(controller)
+        commander.delegate = weakController
+        watcher.delegate = weakController
+
         return controller
     }
 
@@ -99,13 +104,6 @@ final class EventsListContainer:
                 ))
             }
         )
-    }
-
-    func makeWidgetViewModel() -> [EventItemViewModel] {
-        makeEventsListViewModel(nil)
-            .items
-            .filter { type(of: $0) is EventItemViewModel.Type }
-            as! [EventItemViewModel]
     }
 
     func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer {

@@ -9,10 +9,6 @@
 import Domain
 import XCTest
 
-struct WidgetViewModelFactoringStub: WidgetViewModelFactoring {
-    func makeWidgetViewModel() -> WidgetViewModel { [] }
-}
-
 extension TestingViewController where Controller == EventsListViewController {
     var table: UITableView { sut.viewRoot.table }
     var eventsCount: Int { table.numberOfRows(inSection: 0) - 2 }

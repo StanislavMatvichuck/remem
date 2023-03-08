@@ -19,6 +19,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView
     let widgetUpdater: WidgetViewController
+    let watcher: Watching
 
     var viewModel: EventsListViewModel! {
         didSet {
@@ -33,6 +34,11 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
             } else if viewModel.inputVisible {
                 viewRoot.input.show(value: viewModel.inputContent)
             }
+
+            widgetUpdater.update(
+                viewModel.items.filter { type(of: $0) is EventItemViewModel.Type }
+                    as! [EventItemViewModel]
+            )
         }
     }
 
@@ -53,15 +59,15 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
     init(
         _ factory: EventsListViewModelFactoring,
-        _ widgetFactory: WidgetViewModelFactoring
+        _ watcher: Watching
     ) {
         self.factory = factory
+        self.watcher = watcher
+
         self.viewRoot = EventsListView()
-        self.widgetUpdater = WidgetViewController(widgetFactory)
+        self.widgetUpdater = WidgetViewController()
 
         super.init(nibName: nil, bundle: nil)
-
-        self.viewModel = factory.makeEventsListViewModel(self)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -72,6 +78,11 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         setupTableView()
         setupEventHandlers()
         update()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        watcher.watch(.now)
     }
 
     private func setupTableView() {

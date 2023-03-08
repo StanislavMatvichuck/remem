@@ -10,10 +10,6 @@ import Foundation
 
 protocol Updating { func update() }
 
-extension WeakRef: Updating where T: Updating {
-    func update() { weakRef?.update() }
-}
-
 final class UpdatingCommander: EventsCommanding {
     var delegate: Updating?
 
@@ -35,25 +31,18 @@ final class UpdatingCommander: EventsCommanding {
     }
 }
 
-extension EventsListViewController: Updating {
-    func update() {
-        viewModel = factory.makeEventsListViewModel(self)
-        widgetUpdater.update()
-    }
-}
-
-extension WeekViewController: Updating { func update() { viewModel = factory.makeWeekViewModel() }}
-extension DayDetailsViewController: Updating { func update() { viewModel = factory.makeDayViewModel() }}
-extension SummaryViewController: Updating { func update() { viewModel = factory.makeSummaryViewModel() }}
-extension ClockViewController: Updating { func update() { viewModel = factory.makeClockViewModel() }}
-
 extension EventDetailsViewController: Updating {
     func update() {
         viewModel = factory.makeEventDetailsViewModel()
 
         for child in children {
-            guard let child = child as? Updating else { continue }
-            child.update()
+            if let child = child as? Updating { child.update() }
         }
     }
 }
+
+extension EventsListViewController: Updating { func update() { viewModel = factory.makeEventsListViewModel(self) }}
+extension WeekViewController: Updating { func update() { viewModel = factory.makeWeekViewModel() }}
+extension SummaryViewController: Updating { func update() { viewModel = factory.makeSummaryViewModel() }}
+extension ClockViewController: Updating { func update() { viewModel = factory.makeClockViewModel() }}
+extension DayDetailsViewController: Updating { func update() { viewModel = factory.makeDayViewModel() }}

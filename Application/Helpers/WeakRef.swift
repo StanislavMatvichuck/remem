@@ -9,10 +9,7 @@ import Foundation
 
 final class WeakRef<T: AnyObject> {
     weak var weakRef: T?
-
-    init(_ weakRef: T?) {
-        self.weakRef = weakRef
-    }
+    init(_ weakRef: T?) { self.weakRef = weakRef }
 }
 
 extension WeakRef: EventItemViewModelRenameHandling where T: EventItemViewModelRenameHandling {
@@ -25,4 +22,8 @@ extension WeakRef: FooterItemViewModelTapHandling where T: FooterItemViewModelTa
     func tapped(_ vm: FooterItemViewModel) {
         weakRef?.tapped(vm)
     }
+}
+
+extension WeakRef: Updating where T: Updating {
+    func update() { weakRef?.update() }
 }
