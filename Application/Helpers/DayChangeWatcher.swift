@@ -7,12 +7,8 @@
 
 import UIKit
 
-protocol DayChangeWatcherDelegate: AnyObject {
-    func handleDayChange()
-}
-
 final class DayChangeWatcher {
-    weak var delegate: DayChangeWatcherDelegate?
+    var delegate: Updating?
 
     private var lastWatchDay: DayIndex?
 
@@ -20,7 +16,7 @@ final class DayChangeWatcher {
         let newDay = DayIndex(date)
 
         if let lastWatchDay, lastWatchDay != newDay {
-            delegate?.handleDayChange()
+            delegate?.update()
         }
 
         lastWatchDay = newDay

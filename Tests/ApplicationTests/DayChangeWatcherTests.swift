@@ -8,10 +8,10 @@
 @testable import Application
 import XCTest
 
-final class DayChangeWatcherDelegateSpy: DayChangeWatcherDelegate {
+final class DayChangeWatcherDelegateSpy: Updating {
     var calledCount: Int = 0
 
-    func handleDayChange() { calledCount += 1 }
+    func update() { calledCount += 1 }
 }
 
 final class DayChangeWatcherTests: XCTestCase {
@@ -36,7 +36,7 @@ final class DayChangeWatcherTests: XCTestCase {
         XCTAssertEqual(delegate.calledCount, 0)
     }
 
-    func test_watch_atDifferentDayIndexes_callsDelegate() {
+    func test_watch_atDifferentDays_callsDelegate() {
         let sut = DayChangeWatcher()
         let delegate = DayChangeWatcherDelegateSpy()
         sut.delegate = delegate
