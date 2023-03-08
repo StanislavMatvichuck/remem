@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct WeekIndex {
+struct WeekIndex: DateIndexing {
     public let date: Date
 
     public init(_ date: Date) {
@@ -25,27 +25,5 @@ struct WeekIndex {
         }()
 
         self.date = startOfWeek
-    }
-}
-
-extension WeekIndex: Comparable {
-    public static func == (lhs: WeekIndex, rhs: WeekIndex) -> Bool {
-        return lhs.date == rhs.date
-    }
-
-    public static func < (lhs: WeekIndex, rhs: WeekIndex) -> Bool {
-        return lhs.date.compare(rhs.date) == .orderedAscending
-    }
-}
-
-extension WeekIndex: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        let dateFormatter: DateFormatter = {
-            let f = DateFormatter()
-            f.dateFormat = "MMMM d"
-            return f
-        }()
-
-        return dateFormatter.string(from: date)
     }
 }

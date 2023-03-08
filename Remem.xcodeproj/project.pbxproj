@@ -13,6 +13,8 @@
 		080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417D2986AEC600C1F54F /* SummaryViewController.swift */; };
 		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
 		080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* SummarySnapshots.swift */; };
+		081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
+		081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		08246C0529B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
 		08246C0629B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
@@ -112,8 +114,8 @@
 		089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
-		08A331E829A8EAFE000B68A1 /* DayChangeWatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */; };
-		08A331EA29A8EBC3000B68A1 /* DayChangeWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */; };
+		08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* WatchingTests.swift */; };
+		08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* Watching.swift */; };
 		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
@@ -300,6 +302,8 @@
 		080C417F2986AF4800C1F54F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		080C41812986B69700C1F54F /* SummarySnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySnapshots.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
+		081391DB29B8C780008069FB /* MinuteIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinuteIndex.swift; sourceTree = "<group>"; };
+		081391DD29B8D25A008069FB /* DateIndexing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndexing.swift; sourceTree = "<group>"; };
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		08246C0429B3212500BD52DB /* Construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Construction.swift; sourceTree = "<group>"; };
@@ -402,8 +406,8 @@
 		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
 		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
-		08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChangeWatcherTests.swift; sourceTree = "<group>"; };
-		08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChangeWatcher.swift; sourceTree = "<group>"; };
+		08A331E729A8EAFE000B68A1 /* WatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingTests.swift; sourceTree = "<group>"; };
+		08A331E929A8EBC3000B68A1 /* Watching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watching.swift; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingDayDetailsViewController.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
@@ -751,7 +755,7 @@
 			isa = PBXGroup;
 			children = (
 				0849699529B4907F00CDBBC8 /* DependencyContainersTests.swift */,
-				08A331E729A8EAFE000B68A1 /* DayChangeWatcherTests.swift */,
+				08A331E729A8EAFE000B68A1 /* WatchingTests.swift */,
 				08D8F0B729AB786500C34041 /* CoordinatorTests.swift */,
 				0887C812298B0C460048EC12 /* Timelines */,
 				087365FE2930DD0C000F28DE /* ViewModels */,
@@ -831,6 +835,8 @@
 				0887C800298AD3590048EC12 /* WeekTimeline.swift */,
 				08FE1857298AC90900DBC78D /* DayIndex.swift */,
 				0887C802298AD39E0048EC12 /* WeekIndex.swift */,
+				081391DD29B8D25A008069FB /* DateIndexing.swift */,
+				081391DB29B8C780008069FB /* MinuteIndex.swift */,
 			);
 			path = Timelines;
 			sourceTree = "<group>";
@@ -943,7 +949,7 @@
 			children = (
 				089C5B9429A7D4A000B1B977 /* Timelines */,
 				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
-				08A331E929A8EBC3000B68A1 /* DayChangeWatcher.swift */,
+				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
@@ -1446,7 +1452,7 @@
 				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
-				08A331E829A8EAFE000B68A1 /* DayChangeWatcherTests.swift in Sources */,
+				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
@@ -1492,6 +1498,7 @@
 				0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockItemViewModel.swift in Sources */,
+				081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -1527,12 +1534,13 @@
 				08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
+				081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
-				08A331EA29A8EBC3000B68A1 /* DayChangeWatcher.swift in Sources */,
+				08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
