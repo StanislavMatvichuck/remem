@@ -15,7 +15,6 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     var commander: EventsCommanding!
     var event: Event!
 
-    var table: UITableView { sut.viewRoot.table }
     var view: EventsListView { sut.viewRoot }
 
     override func setUp() {
@@ -38,19 +37,19 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsHint() {
-        let index = IndexPath(row: 0, section: 0)
-        let hintCell = table.dataSource?.tableView(table, cellForRowAt: index) as! HintItem
+        let hintCell = cell(0) as! HintItem
+
         XCTAssertEqual(hintCell.label.text, HintState.empty.text)
     }
 
     func test_showsAddEventButton() {
-        let index = IndexPath(row: 1, section: 0)
-        let footerCell = table.dataSource?.tableView(table, cellForRowAt: index) as! FooterItem
+        let footerCell = cell(1) as! FooterItem
+
         XCTAssertEqual(footerCell.button.titleLabel?.text, String(localizationId: "button.create"))
     }
 
     func test_empty_hasNoEvents() {
-        XCTAssertEqual(table.numberOfRows(inSection: 0), 2)
+        XCTAssertEqual(eventsCount, 0)
     }
 
     func test_empty_showsHint_empty() {
@@ -66,13 +65,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             ]
         )
 
-        let footerCell = table.dataSource?.tableView(
-            table,
-            cellForRowAt: IndexPath(
-                row: 1,
-                section: 0
-            )
-        ) as! FooterItem
+        let footerCell = cell(1) as! FooterItem
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "button text is white with proper font")
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.brand.cgColor, "highlighted button has brand background")
@@ -82,13 +75,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
-        let footerCell = table.dataSource?.tableView(
-            table,
-            cellForRowAt: IndexPath(
-                row: 1,
-                section: 0
-            )
-        ) as! FooterItem
+        let footerCell = cell(1) as! FooterItem
 
         tap(footerCell.button)
 
@@ -113,13 +100,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             ]
         )
 
-        let footerCell = table.dataSource?.tableView(
-            table,
-            cellForRowAt: IndexPath(
-                row: 2,
-                section: 0
-            )
-        ) as! FooterItem
+        let footerCell = cell(2) as! FooterItem
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.itemBackground.cgColor, "button has regular background")

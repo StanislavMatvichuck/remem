@@ -14,6 +14,9 @@ struct WidgetViewModelFactoringStub: WidgetViewModelFactoring {
 }
 
 extension TestingViewController where Controller == EventsListViewController {
+    var table: UITableView { sut.viewRoot.table }
+    var eventsCount: Int { table.numberOfRows(inSection: 0) - 2 }
+
     func make() {
         sut = ApplicationContainer.make()
         sut.loadViewIfNeeded()
@@ -25,9 +28,7 @@ extension TestingViewController where Controller == EventsListViewController {
     }
 
     func swipeFirstEvent() {
-        let index = IndexPath(row: 1, section: 0)
-
-        if let cell = table.dataSource?.tableView(table, cellForRowAt: index) as? EventItem {
+        if let cell = cell(1) as? EventItem {
             cell.swiper.sendActions(for: .primaryActionTriggered)
         }
     }
@@ -41,10 +42,7 @@ extension TestingViewController where Controller == EventsListViewController {
         )
     }
 
-    var table: UITableView { sut.viewRoot.table }
-    var eventsCount: Int { table.numberOfRows(inSection: 0) - 2 }
-
-    private func cell(_ forInt: Int) -> UITableViewCell {
+    func cell(_ forInt: Int) -> UITableViewCell {
         let index = IndexPath(row: forInt, section: 0)
         return table.dataSource!.tableView(table, cellForRowAt: index)
     }
@@ -61,16 +59,6 @@ extension TestingViewController where Controller == EventsListViewController {
         if let cell = cell(1) as? EventItem { return cell } else {
             fatalError("unable to get EventItem")
         }
-    }
-
-    var footer: FooterItem {
-        let index = IndexPath(row: 0, section: 2)
-
-        guard let cell = table.dataSource?.tableView(table, cellForRowAt: index) as? FooterItem else {
-            fatalError("unable to get footer")
-        }
-
-        return cell
     }
 
     func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
