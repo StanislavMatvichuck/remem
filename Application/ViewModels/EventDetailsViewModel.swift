@@ -24,7 +24,9 @@ struct EventDetailsViewModel {
     var isVisited: Bool { event.dateVisited != nil }
 
     func visit() {
-        event.visit()
-        commander.save(event)
+        if event.dateVisited == nil {
+            event.visit()
+            commander.save(event)
+        }
     }
 }
