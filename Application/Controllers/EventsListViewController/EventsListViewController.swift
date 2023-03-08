@@ -78,44 +78,13 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     private func updateUI(_ oldValue: EventsListViewModel?) {
         title = viewModel.title
 
-        var newSnapshot = makeSnapshot()
-
-        if let oldValue {
-            for newItem in newSnapshot.itemIdentifiers {
-                if let oldItem = oldValue.items.first(where: { $0.identifier == newItem }),
-                   let newItem = viewModel.items.first(where: { $0.identifier == newItem }),
-                   reconfigurationNeeded(oldItem, newItem)
-                {
-                    newSnapshot.reconfigureItems([newItem.identifier])
-                }
-            }
-        }
-
-        dataSource.apply(newSnapshot, animatingDifferences: oldValue != nil)
+        dataSource.update(viewModel.items, oldValue)
 
         if let renamedItem = viewModel.renamedItem {
             viewRoot.input.rename(oldName: renamedItem.name)
         } else if viewModel.inputVisible {
             viewRoot.input.show(value: viewModel.inputContent)
         }
-    }
-
-    private func reconfigurationNeeded<
-        T: EventsListItemViewModeling,
-        U: EventsListItemViewModeling
-    >(_ lhs: T, _ rhs: U) -> Bool {
-        type(of: lhs) == type(of: rhs) &&
-            lhs.identifier == rhs.identifier &&
-            lhs.self != rhs.self as? T
-    }
-
-    private func makeSnapshot() -> NSDiffableDataSourceSnapshot<Int, String> {
-        let itemsIDs = viewModel.items.map { $0.identifier }
-
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(itemsIDs)
-        return snapshot
     }
 
     @objc private func handleAdd() {
