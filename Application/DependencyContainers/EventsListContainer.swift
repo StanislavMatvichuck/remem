@@ -6,7 +6,6 @@
 //
 
 import Domain
-import Foundation
 import UIKit
 
 final class EventsListContainer:
