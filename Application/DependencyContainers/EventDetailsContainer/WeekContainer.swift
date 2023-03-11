@@ -14,20 +14,18 @@ final class WeekContainer:
     WeekItemViewModelFactoring
 {
     let parent: EventDetailsContainer
-    let commander: UpdatingCommander
 
+    var commander: EventsCommanding { parent.commander }
+    var updater: ViewControllersUpdater { parent.updater }
+    var coordinator: Coordinator { parent.parent.parent.coordinator }
     var event: Event { parent.event }
     var today: DayIndex { parent.today }
-    var coordinator: Coordinator { parent.parent.parent.coordinator }
 
-    init(parent: EventDetailsContainer) {
-        self.parent = parent
-        self.commander = UpdatingCommander(commander: parent.commander)
-    }
+    init(parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)
-        commander.delegate = WeakRef(controller)
+        updater.addDelegate(controller)
         return controller
     }
 

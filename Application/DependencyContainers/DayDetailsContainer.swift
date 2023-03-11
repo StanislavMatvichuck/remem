@@ -13,9 +13,11 @@ final class DayDetailsContainer:
     DayDetailsViewModelFactoring,
     DayItemViewModelFactoring
 {
-    let parent: WeekContainer
-    let commander: UpdatingCommander
+    var commander: EventsCommanding { parent.commander }
+    var updater: ViewControllersUpdater { parent.updater }
     var event: Event { parent.event }
+
+    let parent: WeekContainer
     let day: DayIndex
 
     init(
@@ -24,12 +26,11 @@ final class DayDetailsContainer:
     ) {
         self.parent = parent
         self.day = day
-        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
     func make() -> UIViewController {
         let controller = DayDetailsViewController(self)
-        commander.delegate = WeakRef(controller)
+        updater.addDelegate(controller)
         return controller
     }
 

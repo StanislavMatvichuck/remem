@@ -29,6 +29,10 @@
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
 		0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
+		0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877529BC9EDE00FF9839 /* MulticastDelegate.swift */; };
+		0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877729BCA04D00FF9839 /* ViewControllersUpdater.swift */; };
+		0828877B29BCA17700FF9839 /* Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877A29BCA17700FF9839 /* Updating.swift */; };
+		0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */; };
 		08292EC5292E1F6100F46A32 /* ClockViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC4292E1F6100F46A32 /* ClockViewControllerTests.swift */; };
 		08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC6292E24F700F46A32 /* ClockSnapshots.swift */; };
 		08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
@@ -318,6 +322,10 @@
 		0826ACAA28C889FA0021D607 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0826ACAF28C88EF20021D607 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08286B02284170A900FBC022 /* ClockFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockFace.swift; sourceTree = "<group>"; };
+		0828877529BC9EDE00FF9839 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		0828877729BCA04D00FF9839 /* ViewControllersUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersUpdater.swift; sourceTree = "<group>"; };
+		0828877A29BCA17700FF9839 /* Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updating.swift; sourceTree = "<group>"; };
+		0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllersUpdaterTests.swift; sourceTree = "<group>"; };
 		08292EC4292E1F6100F46A32 /* ClockViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewControllerTests.swift; sourceTree = "<group>"; };
 		08292EC6292E24F700F46A32 /* ClockSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSnapshots.swift; sourceTree = "<group>"; };
 		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
@@ -616,6 +624,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0828877929BCA15E00FF9839 /* Updating */ = {
+			isa = PBXGroup;
+			children = (
+				0828877529BC9EDE00FF9839 /* MulticastDelegate.swift */,
+				0828877729BCA04D00FF9839 /* ViewControllersUpdater.swift */,
+				08396EEB29A6523700281E51 /* UpdatingCommander.swift */,
+				0828877A29BCA17700FF9839 /* Updating.swift */,
+			);
+			path = Updating;
+			sourceTree = "<group>";
+		};
 		082A19DE2945DB2500D32B0A /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -763,6 +782,7 @@
 				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
+				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -947,6 +967,7 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0828877929BCA15E00FF9839 /* Updating */,
 				089C5B9429A7D4A000B1B977 /* Timelines */,
 				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
 				08A331E929A8EBC3000B68A1 /* Watching.swift */,
@@ -956,7 +977,6 @@
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
-				08396EEB29A6523700281E51 /* UpdatingCommander.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 			);
 			path = Helpers;
@@ -1432,6 +1452,7 @@
 			files = (
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
+				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
 				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
@@ -1511,12 +1532,14 @@
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
+				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
+				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */,
@@ -1535,6 +1558,7 @@
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */,
+				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,

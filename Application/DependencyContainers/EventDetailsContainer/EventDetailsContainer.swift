@@ -15,7 +15,8 @@ final class EventDetailsContainer:
     let parent: EventsListContainer
     let event: Event
     let today: DayIndex
-    let commander: UpdatingCommander
+    var commander: EventsCommanding { parent.commander }
+    var updater: ViewControllersUpdater { parent.updater }
 
     init(
         parent: EventsListContainer,
@@ -25,7 +26,6 @@ final class EventDetailsContainer:
         self.parent = parent
         self.event = event
         self.today = today
-        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
     func make() -> UIViewController {
@@ -41,7 +41,8 @@ final class EventDetailsContainer:
                 summaryViewController
             ]
         )
-        commander.delegate = WeakRef(controller)
+
+        updater.addDelegate(controller)
         return controller
     }
 

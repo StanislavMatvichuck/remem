@@ -13,6 +13,7 @@ final class ApplicationContainer {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinator
+    let controllersUpdater: ViewControllersUpdater
 
     init(testingInMemoryMode: Bool = false) {
         let coordinator = Coordinator()
@@ -23,9 +24,13 @@ final class ApplicationContainer {
 
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = repository
+        let updatingCommander = UpdatingCommander(commander: repository)
+        self.commander = updatingCommander
 
         scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
+
+        self.controllersUpdater = ViewControllersUpdater()
+        updatingCommander.delegate = controllersUpdater
     }
 
     func makeRootViewController() -> UIViewController {

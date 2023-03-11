@@ -16,20 +16,15 @@ final class EventsListContainer:
     EventItemViewModelFactoring,
     FooterItemViewModeFactoring
 {
-    let commander: UpdatingCommander
     let parent: ApplicationContainer
+    var commander: EventsCommanding { parent.commander }
+    var updater: ViewControllersUpdater { parent.controllersUpdater }
 
-    init(parent: ApplicationContainer) {
-        self.parent = parent
-        self.commander = UpdatingCommander(commander: parent.commander)
-    }
+    init(parent: ApplicationContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = EventsListViewController(self)
-
-        let weakController = WeakRef(controller)
-        commander.delegate = weakController
-
+        updater.addDelegate(controller)
         return controller
     }
 
