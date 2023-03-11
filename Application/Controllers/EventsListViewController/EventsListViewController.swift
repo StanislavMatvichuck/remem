@@ -19,7 +19,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView
     let widgetUpdater: WidgetViewController
-    let watcher: Watching
 
     var viewModel: EventsListViewModel! {
         didSet {
@@ -57,12 +56,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         )
     }()
 
-    init(
-        _ factory: EventsListViewModelFactoring,
-        _ watcher: Watching
-    ) {
+    init(_ factory: EventsListViewModelFactoring) {
         self.factory = factory
-        self.watcher = watcher
 
         self.viewRoot = EventsListView()
         self.widgetUpdater = WidgetViewController()
@@ -78,11 +73,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         setupTableView()
         setupEventHandlers()
         update()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        watcher.watch(.now)
     }
 
     private func setupTableView() {

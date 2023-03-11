@@ -17,21 +17,18 @@ final class EventsListContainer:
     FooterItemViewModeFactoring
 {
     let commander: UpdatingCommander
-    let watcher: DayWatcher
     let parent: ApplicationContainer
 
     init(parent: ApplicationContainer) {
         self.parent = parent
         self.commander = UpdatingCommander(commander: parent.commander)
-        self.watcher = DayWatcher()
     }
 
     func make() -> UIViewController {
-        let controller = EventsListViewController(self, watcher)
+        let controller = EventsListViewController(self)
 
         let weakController = WeakRef(controller)
         commander.delegate = weakController
-        watcher.delegate = weakController
 
         return controller
     }
