@@ -9,6 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var watcher: Watching?
 
     func scene(
         _ scene: UIScene,
@@ -20,7 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
 
-        window.rootViewController = ApplicationContainer().makeRootViewController()
+        let container = ApplicationContainer()
+        window.rootViewController = container.makeRootViewController()
         window.makeKeyAndVisible()
+
+        watcher = container.makeWatcher()
+    }
+
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        watcher?.watch(.now)
     }
 }

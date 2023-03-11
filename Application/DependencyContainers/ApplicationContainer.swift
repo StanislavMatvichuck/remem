@@ -13,7 +13,8 @@ final class ApplicationContainer {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinator
-    let controllersUpdater: ViewControllersUpdater
+    let updater: ViewControllersUpdater
+    let watcher: Watching
 
     init(testingInMemoryMode: Bool = false) {
         let coordinator = Coordinator()
@@ -29,14 +30,21 @@ final class ApplicationContainer {
 
         scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
 
-        self.controllersUpdater = ViewControllersUpdater()
-        updatingCommander.delegate = controllersUpdater
+        self.updater = ViewControllersUpdater()
+        let watcher = DayWatcher()
+        self.watcher = watcher
+
+        let weakUpdater = WeakRef(updater)
+        updatingCommander.delegate = weakUpdater
+        watcher.delegate = weakUpdater
     }
 
     func makeRootViewController() -> UIViewController {
         coordinator.show(Navigation.eventsList(factory: makeContainer()))
         return coordinator.navigationController
     }
+
+    func makeWatcher() -> Watching { watcher }
 
     func makeContainer() -> EventsListContainer { EventsListContainer(parent: self) }
 }

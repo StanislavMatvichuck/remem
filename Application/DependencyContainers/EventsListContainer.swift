@@ -18,7 +18,7 @@ final class EventsListContainer:
 {
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
-    var updater: ViewControllersUpdater { parent.controllersUpdater }
+    var updater: ViewControllersUpdater { parent.updater }
 
     init(parent: ApplicationContainer) { self.parent = parent }
 
