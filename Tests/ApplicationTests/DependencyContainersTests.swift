@@ -11,6 +11,11 @@ import XCTest
 final class DependencyContainersTests: XCTestCase {
     weak var weakSut: UIViewController?
 
+    override func tearDown() {
+        super.tearDown()
+        XCTAssertNil(weakSut)
+    }
+
     func test_eventsListContainer_hasNoCyclingReferences() {
         var vc: EventsListViewController? = ApplicationContainer.make()
         weakSut = vc
@@ -23,12 +28,6 @@ final class DependencyContainersTests: XCTestCase {
         weakSut = vc
 
         vc = nil
-    }
-
-    override func tearDown() {
-        super.tearDown()
-
-        XCTAssertNil(weakSut)
     }
 
     func test_weekContainer_hasNoCyclingReferences() {

@@ -15,7 +15,6 @@ final class EventsListSnapshots:
 {
     var sut: EventsListViewController!
     var event: Event! // is not needed here but required by a protocol
-    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
@@ -52,16 +51,19 @@ final class EventsListSnapshots:
     func test_oneItem_swiped_dark() { executeWithDarkMode(test_oneItem_swiped) }
 
     func test_oneItem_visited() {
-        let event = Event(name: "VisitedEvent")
-        event.visit()
-        event.addHappening(date: .now)
-
-        commander.save(event)
+        sut = EventsListViewController(VisitedEventListFactory())
 
         FBSnapshotVerifyViewController(sut)
     }
 
-    func test_oneItem_visited_dark() { executeWithDarkMode(test_oneItem_visited) }
+    /// Cannot use executeWithDarkMode because sut is recreated
+    func test_oneItem_visited_dark() {
+        sut = EventsListViewController(VisitedEventListFactory())
+        putInViewHierarchy(sut)
+        sut.view.overrideUserInterfaceStyle = .dark
+        executeRunLoop()
+        FBSnapshotVerifyViewController(sut)
+    }
 
     /// Duplicates with EventInput tests
     func test_addButton_inputShown() {

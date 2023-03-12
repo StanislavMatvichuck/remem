@@ -18,6 +18,8 @@
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		08246C0529B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
 		08246C0629B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
+		0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824B87329BDCD6A0053B01A /* Fakes.swift */; };
+		0824B87529BDCD6A0053B01A /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824B87329BDCD6A0053B01A /* Fakes.swift */; };
 		0824D0192981E38E00B6E701 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824D0182981E38E00B6E701 /* Helpers.swift */; };
 		0826AC9228C86ECE0021D607 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9128C86ECE0021D607 /* WidgetKit.framework */; };
 		0826AC9428C86ECE0021D607 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0826AC9328C86ECE0021D607 /* SwiftUI.framework */; };
@@ -311,6 +313,7 @@
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		08246C0429B3212500BD52DB /* Construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Construction.swift; sourceTree = "<group>"; };
+		0824B87329BDCD6A0053B01A /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		0824D0182981E38E00B6E701 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
 		0826AC8F28C86ECE0021D607 /* Widgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1012,6 +1015,7 @@
 			children = (
 				08F82FEA291E71E10033AB0D /* Mocks.swift */,
 				08B628B02981A46600CA57F1 /* Stubs.swift */,
+				0824B87329BDCD6A0053B01A /* Fakes.swift */,
 			);
 			path = StubsFakesSpiesMocks;
 			sourceTree = "<group>";
@@ -1395,6 +1399,7 @@
 			files = (
 				0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */,
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
+				0824B87529BDCD6A0053B01A /* Fakes.swift in Sources */,
 				08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */,
 				08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
@@ -1458,6 +1463,7 @@
 				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
+				0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */,
 				0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */,
 				08246C0529B3212500BD52DB /* Construction.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,

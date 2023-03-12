@@ -130,8 +130,7 @@ final class WeekSnapshots:
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
             .makeContainer(event: event, today: today)
-        sut = container.makeWeekViewController()
-        commander = container.weekViewModelUpdater
+        sut = WeekContainer(parent: container).make() as! WeekViewController
         putInViewHierarchy(sut)
     }
 }
