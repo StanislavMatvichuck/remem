@@ -57,4 +57,18 @@ final class DependencyContainersTests: XCTestCase {
 
         vc = nil
     }
+
+    func test_pdfContainer_hasNoCyclingReferences() {
+        var vc: PdfViewController? = ApplicationContainer.make()
+        weakSut = vc
+
+        vc = nil
+    }
+
+    func test_pdfMakingContainer_hasNoCyclingReferences() {
+        var vc: PdfMakingViewController? = ApplicationContainer.make()
+        weakSut = vc
+
+        vc = nil
+    }
 }

@@ -54,6 +54,14 @@
 		084A8677299A3DFF00300918 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		084A8678299A3E5800300918 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		084A8679299A3FCA00300918 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 084A867B299A3FCA00300918 /* WidgetPreview.plist */; };
+		084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21ED29C08E9200B601DA /* URLProvidingTests.swift */; };
+		084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* LocalFile.swift */; };
+		084B21F229C0929A00B601DA /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
+		084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F329C0943E00B601DA /* PdfMakingView.swift */; };
+		084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F529C0977A00B601DA /* PdfContainer.swift */; };
+		084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F729C0A83400B601DA /* FileSavingTests.swift */; };
+		084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FA29C0AA1D00B601DA /* PdfView.swift */; };
+		084B21FD29C0B03400B601DA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FC29C0B03400B601DA /* Navigation.swift */; };
 		0850075429216E9D007B272C /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 0850075329216E9D007B272C /* iOSSnapshotTestCase */; };
 		0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0850075529216ECF007B272C /* EventsListSnapshots.swift */; };
 		0850075829216F74007B272C /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FEA291E71E10033AB0D /* Mocks.swift */; };
@@ -155,6 +163,12 @@
 		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
+		08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */; };
+		08F467E829BF1E0B00D35AB6 /* PdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */; };
+		08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */; };
+		08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */; };
+		08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */; };
+		08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */; };
 		08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */; };
 		08F50DC52965E70F00B65CDF /* FooterItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */; };
 		08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC62965EEDA00B65CDF /* HintItem.swift */; };
@@ -351,6 +365,14 @@
 		084A867D299A3FD400300918 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
 		084A867E299A3FD400300918 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
 		084A867F299A3FD500300918 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = uk.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
+		084B21ED29C08E9200B601DA /* URLProvidingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidingTests.swift; sourceTree = "<group>"; };
+		084B21EF29C08F1A00B601DA /* LocalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
+		084B21F129C0929A00B601DA /* FileSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaving.swift; sourceTree = "<group>"; };
+		084B21F329C0943E00B601DA /* PdfMakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingView.swift; sourceTree = "<group>"; };
+		084B21F529C0977A00B601DA /* PdfContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfContainer.swift; sourceTree = "<group>"; };
+		084B21F729C0A83400B601DA /* FileSavingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSavingTests.swift; sourceTree = "<group>"; };
+		084B21FA29C0AA1D00B601DA /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
+		084B21FC29C0B03400B601DA /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0850074929216E73007B272C /* ApplicationSnapshotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationSnapshotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0850075529216ECF007B272C /* EventsListSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListSnapshots.swift; sourceTree = "<group>"; };
 		085145C329AE066C00CA533D /* ClockContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockContainer.swift; sourceTree = "<group>"; };
@@ -454,6 +476,12 @@
 		08EC438128BA365400755B54 /* EventItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
+		08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewControllerTests.swift; sourceTree = "<group>"; };
+		08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaker.swift; sourceTree = "<group>"; };
+		08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
+		08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewControllerTests.swift; sourceTree = "<group>"; };
+		08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewController.swift; sourceTree = "<group>"; };
+		08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingContainer.swift; sourceTree = "<group>"; };
 		08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintItemViewModel.swift; sourceTree = "<group>"; };
 		08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterItemViewModel.swift; sourceTree = "<group>"; };
 		08F50DC62965EEDA00B65CDF /* HintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintItem.swift; sourceTree = "<group>"; };
@@ -703,9 +731,11 @@
 			isa = PBXGroup;
 			children = (
 				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
+				08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */,
 				085145C329AE066C00CA533D /* ClockContainer.swift */,
 				085145C729AE092100CA533D /* SummaryContainer.swift */,
 				085145C529AE07C500CA533D /* WeekContainer.swift */,
+				084B21F529C0977A00B601DA /* PdfContainer.swift */,
 			);
 			path = EventDetailsContainer;
 			sourceTree = "<group>";
@@ -757,6 +787,8 @@
 				08D512352787144800C2037F /* EventsListView.swift */,
 				080C417F2986AF4800C1F54F /* SummaryView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
+				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
+				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -786,6 +818,8 @@
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
 				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
+				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
+				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -837,6 +871,8 @@
 				0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */,
 				080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */,
 				08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */,
+				08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */,
+				08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */,
 			);
 			path = ControllersIntegrationTests;
 			sourceTree = "<group>";
@@ -920,6 +956,7 @@
 			children = (
 				08CC506B2906DEEC00840385 /* main.swift */,
 				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
+				084B21FC29C0B03400B601DA /* Navigation.swift */,
 				084D0E232983E8F0008203C3 /* DependencyContainers */,
 				08D512332787140D00C2037F /* Controllers */,
 				08235E7128C5CC3F0026DED2 /* ViewModels */,
@@ -963,6 +1000,8 @@
 				080C417D2986AEC600C1F54F /* SummaryViewController.swift */,
 				0852C6AC283D66170027EF3E /* WeekViewController.swift */,
 				08396EE929A64B5900281E51 /* WidgetViewController.swift */,
+				08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */,
+				08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -981,6 +1020,9 @@
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
+				08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */,
+				084B21EF29C08F1A00B601DA /* LocalFile.swift */,
+				084B21F129C0929A00B601DA /* FileSaving.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1466,6 +1508,7 @@
 				0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */,
 				0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */,
 				08246C0529B3212500BD52DB /* Construction.swift in Sources */,
+				08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
@@ -1477,14 +1520,17 @@
 				087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */,
 				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
 				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
+				084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */,
 				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
+				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
+				08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */,
 				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
 				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,
 				087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */,
@@ -1505,12 +1551,14 @@
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */,
+				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,
 				0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */,
 				08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
+				084B21FD29C0B03400B601DA /* Navigation.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
@@ -1519,6 +1567,7 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				085145C629AE07C500CA533D /* WeekContainer.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
+				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
 				0887C808298AE5770048EC12 /* DayIndex.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
@@ -1530,6 +1579,8 @@
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
+				084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */,
+				084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* FooterItemViewModel.swift in Sources */,
@@ -1538,12 +1589,14 @@
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
+				08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
+				084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
@@ -1551,17 +1604,20 @@
 				08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
+				084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* FooterItem.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
+				08F467E829BF1E0B00D35AB6 /* PdfMaker.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				0887C809298AE5770048EC12 /* WeekIndex.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
+				08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,

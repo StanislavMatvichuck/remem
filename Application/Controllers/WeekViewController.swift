@@ -60,8 +60,17 @@ final class WeekViewController: UIViewController {
             at: IndexPath(row: viewModel.scrollToIndex, section: 0),
             at: .left,
             animated: false)
-        // viewRoot.summary may also be updated here but contentOffset is required
-        print("setInitialScrollPosition offset \(viewRoot.collection.contentOffset.x)")
+
+        updateSummary()
+    }
+    
+    func scrollToPrevious(_ int: Int) {
+        viewRoot.collection.layoutIfNeeded()
+        viewRoot.collection.scrollToItem(
+            at: IndexPath(row: viewModel.scrollToIndex.advanced(by: int), section: 0),
+            at: .left,
+            animated: false)
+
         updateSummary()
     }
 }

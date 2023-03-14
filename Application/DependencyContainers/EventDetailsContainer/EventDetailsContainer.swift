@@ -29,17 +29,14 @@ final class EventDetailsContainer:
     }
 
     func make() -> UIViewController {
-        let weekViewController = WeekContainer(parent: self).make()
-        let clockViewController = ClockContainer(parent: self).make()
-        let summaryViewController = SummaryContainer(parent: self).make()
+        let clock = makeClockViewController()
+        let week = makeWeekViewController()
+        let summary = makeSummaryViewController()
+        let pdf = makePdfMakingViewController(week, summary)
 
         let controller = EventDetailsViewController(
             factory: self,
-            controllers: [
-                weekViewController,
-                clockViewController,
-                summaryViewController
-            ]
+            controllers: [week, clock, summary, pdf]
         )
 
         updater.addDelegate(controller)
@@ -51,5 +48,28 @@ final class EventDetailsContainer:
             event: event,
             commander: commander
         )
+    }
+
+    func makeWeekViewController() -> WeekViewController {
+        WeekContainer(parent: self).make() as! WeekViewController
+    }
+
+    func makeSummaryViewController() -> SummaryViewController {
+        SummaryContainer(parent: self).make() as! SummaryViewController
+    }
+
+    func makeClockViewController() -> ClockViewController {
+        ClockContainer(parent: self).make() as! ClockViewController
+    }
+
+    func makePdfMakingViewController(
+        _ week: WeekViewController,
+        _ summary: SummaryViewController
+    ) -> PdfMakingViewController {
+        PdfMakingContainer(
+            week: week,
+            summary: summary,
+            coordinator: parent.parent.coordinator
+        ).make() as! PdfMakingViewController
     }
 }

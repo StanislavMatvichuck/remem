@@ -7,40 +7,6 @@
 
 import UIKit
 
-protocol ControllerFactoring { func make() -> UIViewController }
-
-enum Navigation {
-    case eventsList(factory: ControllerFactoring)
-    case eventDetails(factory: ControllerFactoring)
-    case dayDetails(factory: ControllerFactoring)
-
-    func show(in navigationController: UINavigationController) {
-        switch self {
-        case .eventsList:
-            navigationController.pushViewController(controller, animated: false)
-        case .eventDetails:
-            navigationController.pushViewController(controller, animated: true)
-        case .dayDetails:
-            let nav = Coordinator.makeStyledNavigationController()
-            nav.pushViewController(controller, animated: false)
-            nav.modalPresentationStyle = .pageSheet
-            if let sheet = nav.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-            }
-
-            navigationController.present(nav, animated: true)
-        }
-    }
-
-    var controller: UIViewController {
-        switch self {
-        case .eventsList(let factory): return factory.make()
-        case .eventDetails(let factory): return factory.make()
-        case .dayDetails(let factory): return factory.make()
-        }
-    }
-}
-
 class Coordinator {
     let navigationController: UINavigationController
 

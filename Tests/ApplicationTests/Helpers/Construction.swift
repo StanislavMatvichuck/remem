@@ -67,4 +67,21 @@ extension ApplicationContainer {
             .makeContainer(day: day)
             .make() as! DayDetailsViewController
     }
+
+    static func make() -> PdfViewController {
+        let container = PdfContainer(provider: LocalFile.testingPdfReport)
+        return container.make() as! PdfViewController
+    }
+
+    static func make() -> PdfMakingViewController {
+        let day = DayIndex.referenceValue
+        let event = Event(name: "", dateCreated: day.date)
+        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: day)
+        return detailsContainer.makePdfMakingViewController(
+            detailsContainer.makeWeekViewController(),
+            detailsContainer.makeSummaryViewController()
+        )
+    }
 }
