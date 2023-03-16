@@ -63,14 +63,13 @@ final class WeekViewController: UIViewController {
 
         updateSummary()
     }
-    
+
     func scrollToPrevious(_ int: Int) {
         viewRoot.collection.layoutIfNeeded()
         viewRoot.collection.scrollToItem(
-            at: IndexPath(row: viewModel.scrollToIndex.advanced(by: int), section: 0),
+            at: IndexPath(row: viewModel.scrollToIndex.advanced(by: -int), section: 0),
             at: .left,
             animated: false)
-
         updateSummary()
     }
 }

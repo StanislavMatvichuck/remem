@@ -157,6 +157,9 @@
 		08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8F0B929AB7A3A00C34041 /* Coordinator.swift */; };
 		08DA2C12284F559200FC418B /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3325A29B4A14B00E59693 /* WeakRef.swift */; };
+		08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B529C31B25006AF35B /* PdfSnapshots.swift */; };
+		08E454B829C31C1A006AF35B /* TestingPdfMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfMakingViewController.swift */; };
+		08E454B929C31C2B006AF35B /* TestingPdfMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfMakingViewController.swift */; };
 		08E63E5529409A0C00F87F25 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
 		08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
 		08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
@@ -470,6 +473,8 @@
 		08D8F0B929AB7A3A00C34041 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		08DA2C11284F559200FC418B /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		08E3325A29B4A14B00E59693 /* WeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRef.swift; sourceTree = "<group>"; };
+		08E454B529C31B25006AF35B /* PdfSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfSnapshots.swift; sourceTree = "<group>"; };
+		08E454B729C31C1A006AF35B /* TestingPdfMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingPdfMakingViewController.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
@@ -692,6 +697,7 @@
 				0850075529216ECF007B272C /* EventsListSnapshots.swift */,
 				080C41812986B69700C1F54F /* SummarySnapshots.swift */,
 				0857A017292FD73000924530 /* WeekSnapshots.swift */,
+				08E454B529C31B25006AF35B /* PdfSnapshots.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -914,7 +920,6 @@
 			isa = PBXGroup;
 			children = (
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
-				08E63E53294099F900F87F25 /* TestingViewController */,
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
 				08246C0429B3212500BD52DB /* Construction.swift */,
 			);
@@ -1048,6 +1053,7 @@
 				08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */,
 				089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */,
 				0861364F2934D64300F1B780 /* TestingWeekViewController.swift */,
+				08E454B729C31C1A006AF35B /* TestingPdfMakingViewController.swift */,
 			);
 			path = TestingViewController;
 			sourceTree = "<group>";
@@ -1066,6 +1072,7 @@
 			isa = PBXGroup;
 			children = (
 				0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */,
+				08E63E53294099F900F87F25 /* TestingViewController */,
 				0870EEF92809B81100336759 /* ApplicationTests */,
 				0850074A29216E73007B272C /* Snapshots */,
 				0867A2D628D469F500E0842C /* DataLayerTests */,
@@ -1449,6 +1456,8 @@
 				08246C0629B3212500BD52DB /* Construction.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,
+				08E454B829C31C1A006AF35B /* TestingPdfMakingViewController.swift in Sources */,
+				08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */,
 				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
 				087791992974858300780F60 /* Atlas.swift in Sources */,
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
@@ -1532,6 +1541,7 @@
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
 				08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */,
 				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
+				08E454B929C31C2B006AF35B /* TestingPdfMakingViewController.swift in Sources */,
 				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,
 				087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */,
 			);
