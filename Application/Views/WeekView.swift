@@ -75,6 +75,7 @@ class WeekView: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIHelper.background
+        clipsToBounds = true
         configureLayout()
     }
 

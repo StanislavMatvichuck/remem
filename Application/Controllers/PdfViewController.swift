@@ -10,7 +10,7 @@ import UIKit
 
 final class PdfViewController: UIViewController {
     private let provider: URLProviding
-    private let viewRoot: PdfView
+    let viewRoot: PdfView
 
     init(_ provider: URLProviding) {
         self.provider = provider

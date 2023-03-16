@@ -63,15 +63,6 @@ final class WeekViewController: UIViewController {
 
         updateSummary()
     }
-
-    func scrollToPrevious(_ int: Int) {
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.collection.scrollToItem(
-            at: IndexPath(row: viewModel.scrollToIndex.advanced(by: -int), section: 0),
-            at: .left,
-            animated: false)
-        updateSummary()
-    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -120,7 +111,7 @@ extension WeekViewController:
         return Int(offset / collectionWidth)
     }
 
-    private func updateSummary() {
+    func updateSummary() {
         let summaryValue = String(viewModel.summaryTimeline[makeWeekIndexForCurrentPosition()] ?? 0)
         viewRoot.summary.text = summaryValue
     }

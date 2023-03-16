@@ -11,12 +11,21 @@ import XCTest
 
 extension TestingViewController where Controller == PdfViewController {
     func make() {
-        let day = DayIndex.referenceValue
-        event = Event(name: "Event", dateCreated: day.date)
+        make(
+            dayCreated: .referenceValue,
+            today: .referenceValue
+        )
+    }
+
+    func make(
+        dayCreated: DayIndex = .referenceValue,
+        today: DayIndex = .referenceValue
+    ) {
+        event = Event(name: "Event", dateCreated: dayCreated.date)
 
         let container = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
-            .makeContainer(event: event, today: day)
+            .makeContainer(event: event, today: today)
 
         let week = container.makeWeekViewController()
         layout(week)
