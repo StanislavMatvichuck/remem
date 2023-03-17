@@ -33,9 +33,11 @@ class WeekItem: UICollectionViewCell {
     let day: UILabel = {
         let label = UILabel(al: true)
         label.font = UIHelper.fontSmallBold
-        label.textColor = UIHelper.itemFont
+        label.backgroundColor = UIColor.primary
+        label.textColor = UIColor.text_secondary
         label.textAlignment = .center
         label.text = " "
+        label.widthAnchor.constraint(equalTo: label.heightAnchor).isActive = true
         return label
     }()
 
@@ -44,7 +46,7 @@ class WeekItem: UICollectionViewCell {
             let newLabel = UILabel(al: true)
             newLabel.textAlignment = .center
             newLabel.font = UIHelper.fontSmallBold
-            newLabel.textColor = UIHelper.brand
+            newLabel.textColor = UIColor.text_primary
             newLabel.adjustsFontSizeToFitWidth = true
             newLabel.minimumScaleFactor = 0.1
             newLabel.numberOfLines = 1
@@ -71,16 +73,10 @@ class WeekItem: UICollectionViewCell {
     private func configureLayout() {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
-        stack.spacing = Self.spacing
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.backgroundColor = UIHelper.itemFont.withAlphaComponent(0.05)
-        stack.layoutMargins = UIEdgeInsets(
-            top: Self.spacing,
-            left: Self.spacing,
-            bottom: Self.spacing,
-            right: Self.spacing
-        )
+        stack.backgroundColor = UIColor.background_secondary
         stack.layer.cornerRadius = UIHelper.radius
+        stack.clipsToBounds = true
 
         for timingLabel in timingLabels.reversed() {
             stack.addArrangedSubview(timingLabel)
@@ -104,7 +100,7 @@ class WeekItem: UICollectionViewCell {
         guard let viewModel = viewModel else { return }
 
         day.text = viewModel.dayNumber
-        day.textColor = viewModel.isToday ? UIHelper.brand : UIHelper.itemFont
+        day.font = viewModel.isToday ? UIHelper.fontBold : UIHelper.font
 
         show(timings: viewModel.items)
     }

@@ -11,7 +11,7 @@ class WeekView: UIView {
     let summary: UILabel = {
         let label = UILabel(al: true)
         label.font = UIHelper.fontBoldBig
-        label.textColor = UIHelper.itemFont
+        label.textColor = UIColor.text_primary
         label.text = "0"
         label.textAlignment = .center
         return label
@@ -58,12 +58,13 @@ class WeekView: UIView {
             label.text = day
             label.textAlignment = .center
             label.font = UIHelper.fontSmallBold
-            label.textColor = UIHelper.itemFont
+            label.textColor = UIColor.secondary
 
             view.addArrangedSubview(label)
 
             NSLayoutConstraint.activate([
                 label.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7),
+                label.heightAnchor.constraint(equalTo: label.widthAnchor)
             ])
         }
 

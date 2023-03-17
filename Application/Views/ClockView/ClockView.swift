@@ -93,13 +93,13 @@ class ClockView: UIView {
         let label = UILabel(al: true)
         label.text = text
         label.font = UIHelper.fontSmallBold
-        label.textColor = UIHelper.clockSectionBackground
+        label.textColor = UIColor.secondary
         return label
     }
 
     private func makeIcon(name: String) -> UIImageView {
         let image = UIImage(systemName: name)?
-            .withTintColor(UIHelper.clockSectionBackground)
+            .withTintColor(UIColor.secondary)
             .withRenderingMode(.alwaysOriginal)
 
         let imageView = UIImageView(image: image)

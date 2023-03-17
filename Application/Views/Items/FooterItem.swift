@@ -9,7 +9,7 @@ import UIKit
 
 class FooterItem: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "FooterItem"
-    
+
     let button: UIButton = {
         let button = UIButton(al: true)
         button.layer.cornerRadius = UIHelper.r2
@@ -22,14 +22,14 @@ class FooterItem: UITableViewCell, EventsListCell {
 
             let background: UIColor = {
                 viewModel.isHighlighted ?
-                    UIHelper.brand :
-                    UIHelper.itemBackground
+                    UIColor.primary :
+                    UIColor.background_secondary
             }()
 
             let foreground: UIColor = {
                 viewModel.isHighlighted ?
-                    UIHelper.colorButtonTextHighLighted :
-                    UIHelper.colorButtonText
+                    UIColor.text_secondary :
+                    UIColor.primary
             }()
 
             let attributes: [NSAttributedString.Key: Any] = [

@@ -13,7 +13,7 @@ final class PdfMakingView: UIView {
 
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: UIHelper.fontSmallBold,
-            NSAttributedString.Key.foregroundColor: UIHelper.colorButtonTextHighLighted,
+            NSAttributedString.Key.foregroundColor: UIColor.text_secondary
         ]
 
         button.setAttributedTitle(
@@ -24,7 +24,7 @@ final class PdfMakingView: UIView {
             for: .normal
         )
 
-        button.backgroundColor = UIHelper.brand
+        button.backgroundColor = UIColor.primary
         button.layer.cornerRadius = UIHelper.r2
         button.heightAnchor.constraint(equalToConstant: UIHelper.d2).isActive = true
 

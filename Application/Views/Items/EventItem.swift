@@ -16,7 +16,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     let viewRoot: RootView = {
         let view = RootView(al: true)
         view.layer.cornerRadius = UIHelper.r2
-        view.backgroundColor = UIHelper.itemBackground
+        view.backgroundColor = UIColor.background_secondary
         return view
     }()
 
@@ -24,8 +24,8 @@ final class EventItem: UITableViewCell, EventsListCell {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.font = UIHelper.font
-        label.textColor = UIHelper.itemFont
+        label.font = UIHelper.fontSmallBold
+        label.textColor = UIColor.text_primary
         return label
     }()
 
@@ -33,7 +33,7 @@ final class EventItem: UITableViewCell, EventsListCell {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.font = UIHelper.font
-        label.textColor = UIHelper.itemFont
+        label.textColor = UIColor.text_primary
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 3
@@ -48,7 +48,7 @@ final class EventItem: UITableViewCell, EventsListCell {
 
     var valueBackgroundCircle: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = UIHelper.background
+        view.backgroundColor = UIColor.background
         view.layer.cornerRadius = UIHelper.r0
 
         NSLayoutConstraint.activate([

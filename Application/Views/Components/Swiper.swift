@@ -75,7 +75,7 @@ class Swiper: UIControl {
 
         let plusLayer = CAShapeLayer()
         plusLayer.frame = CGRect(x: .zero, y: .zero, width: size, height: size)
-        plusLayer.strokeColor = UIHelper.brand.cgColor
+        plusLayer.strokeColor = UIColor.background_secondary.cgColor
         plusLayer.path = path.cgPath
         plusLayer.lineCap = .round
         plusLayer.lineWidth = 3.0
@@ -83,7 +83,7 @@ class Swiper: UIControl {
     }()
 
     private func configureAppearance() {
-        layer.backgroundColor = UIHelper.pinColor.cgColor
+        layer.backgroundColor = UIColor.primary.cgColor
         layer.cornerRadius = UIHelper.r1
         layer.addSublayer(plusLayer)
     }

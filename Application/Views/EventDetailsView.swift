@@ -15,7 +15,7 @@ class EventDetailsView: UIView {
     init() {
         self.scroll = ViewScroll(.vertical)
         super.init(frame: .zero)
-        backgroundColor = UIHelper.background
+        backgroundColor = UIColor.background
         configureLayout()
     }
 

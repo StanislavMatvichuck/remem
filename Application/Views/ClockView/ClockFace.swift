@@ -89,7 +89,7 @@ class ClockFace: UIView {
     }
 
     private func color(for item: ClockItemViewModel) -> CGColor {
-        item.isEmpty ? UIHelper.clockSectionBackground.cgColor : UIHelper.brand.cgColor
+        item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text_primary.cgColor
     }
 }
 

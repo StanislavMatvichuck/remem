@@ -15,14 +15,10 @@ class HintItem: UITableViewCell, EventsListCell {
             guard let viewModel else { return }
 
             label.text = viewModel.title
+            label.textColor = UIColor.secondary
 
-            if viewModel.highlighted {
-                label.font = UIHelper.fontBold
-                label.textColor = UIHelper.itemFont
-            } else {
-                label.font = UIHelper.fontSmallBold
-                label.textColor = UIHelper.hint
-            }
+            if viewModel.highlighted { label.font = UIHelper.fontBold }
+            else { label.font = UIHelper.fontSmall }
         }
     }
 

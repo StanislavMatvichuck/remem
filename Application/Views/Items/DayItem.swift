@@ -16,7 +16,7 @@ class DayItem: UITableViewCell {
 
         label.numberOfLines = 1
         label.font = UIHelper.fontBold
-        label.textColor = UIHelper.itemFont
+        label.textColor = UIColor.text_primary
 
         return label
     }()

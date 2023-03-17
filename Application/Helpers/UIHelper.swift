@@ -7,7 +7,16 @@
 
 import UIKit
 
-struct UIHelper {
+extension UIColor {
+    static let background = UIColor(named: "background")!
+    static let background_secondary = UIColor(named: "background_secondary")!
+    static let primary = UIColor(named: "primary")!
+    static let secondary = UIColor(named: "secondary")!
+    static let text_primary = UIColor(named: "text_primary")!
+    static let text_secondary = UIColor(named: "text_secondary")!
+}
+
+enum UIHelper {
     // colors
     static let background = UIColor.secondarySystemBackground
     static let itemBackground = UIColor.systemBackground
@@ -15,7 +24,7 @@ struct UIHelper {
     static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
     static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!
     static let brand = UIColor.systemBlue
-    static let brandDimmed = UIColor(named: "primary_dimmed")!
+    static let brandDimmed = UIColor(named: "primary")!
     static let secondary = UIColor.systemOrange
     static let itemFont = UIColor.gray
     static let hint = UIColor.systemGray3

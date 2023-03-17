@@ -73,7 +73,7 @@ final class SummaryView: UIView {
     private func makeLabel(text: String, tag: Int) -> UILabel {
         let label = UILabel(al: true)
         label.font = UIHelper.font
-        label.textColor = UIHelper.itemFont
+        label.textColor = UIColor.secondary
         label.text = text
         label.tag = tag
         return label
@@ -82,6 +82,7 @@ final class SummaryView: UIView {
     private func makeAmountLabel(text: String, tag: Int) -> UILabel {
         let label = makeLabel(text: text, tag: tag)
         label.font = UIHelper.fontBold
+        label.textColor = UIColor.text_primary
         return label
     }
 }

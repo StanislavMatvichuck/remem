@@ -76,7 +76,7 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
 
     private let finger: UIView = {
         let image = UIImage(systemName: "hand.point.up.left")?
-            .withTintColor(.systemBlue.withAlphaComponent(1.0))
+            .withTintColor(.secondary.withAlphaComponent(1.0))
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font:
                 .systemFont(ofSize: 40, weight: .regular)))
@@ -158,7 +158,7 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        circle.layer.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
+        circle.layer.backgroundColor = UIColor.secondary.withAlphaComponent(0.1).cgColor
         circle.layer.cornerRadius = circle.bounds.width / 2
     }
 

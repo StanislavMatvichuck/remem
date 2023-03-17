@@ -34,6 +34,6 @@ class DayDetailsView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = UIHelper.background
+        backgroundColor = UIColor.background
     }
 }
