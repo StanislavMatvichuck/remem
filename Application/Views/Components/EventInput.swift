@@ -18,13 +18,8 @@ protocol EventInputing: UIControl {
 class EventInput: UIControl {
     // MARK: - Properties
     var value: String {
-        get {
-            textField.text ?? ""
-        }
-        set {
-            textField.text = newValue
-            barSubmit.isEnabled = !value.isEmpty
-        }
+        get { textField.text ?? "" }
+        set { textField.text = newValue }
     }
 
     var animationCompletionHandler: (() -> Void)?
@@ -37,6 +32,7 @@ class EventInput: UIControl {
         input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
         input.minimumFontSize = UIHelper.fontSmall.pointSize
+        input.returnKeyType = .done
         return input
     }()
 
@@ -68,7 +64,7 @@ class EventInput: UIControl {
         label.text = String(localizationId: "eventsList.new")
         label.textAlignment = .center
         label.font = UIHelper.fontBold
-        label.textColor = UIHelper.itemFont
+        label.textColor = UIColor.secondary
         label.numberOfLines = 0
         return label
     }()
@@ -86,9 +82,12 @@ class EventInput: UIControl {
 
         for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
             let button = UIButton(al: true)
-            let attributes = [NSAttributedString.Key.font: UIHelper.fontBold]
-            let title = NSAttributedString(string: emoji, attributes: attributes)
-            button.setAttributedTitle(title, for: .normal)
+            button.setTitle(emoji, for: .normal)
+            button.titleLabel?.font = UIHelper.fontBoldBig
+            button.titleLabel?.numberOfLines = 1
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
+            button.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7).isActive = true
             scroll.contain(views: button)
         }
 
@@ -98,12 +97,6 @@ class EventInput: UIControl {
     /// Animated constraint that pins textField bottom to keyboard top
     lazy var constraint: NSLayoutConstraint = { emojiContainer.topAnchor.constraint(equalTo: bottomAnchor) }()
 
-    /// Keyboard toolbar items
-    let barCancel = UIBarButtonItem(title: String(localizationId: "button.cancel"),
-                                    style: .plain, target: nil, action: nil)
-    let barSubmit = UIBarButtonItem(title: String(localizationId: "button.create"),
-                                    style: .done, target: nil, action: nil)
-
     // MARK: - Init
     init() {
         super.init(frame: .zero)
@@ -112,7 +105,6 @@ class EventInput: UIControl {
         isUserInteractionEnabled = false
 
         setupLayout()
-        setupInputAccessoryView()
         setupEventHandlers()
     }
 
@@ -128,11 +120,18 @@ extension EventInput: EventInputing {
         background.alpha = 0.0
         isUserInteractionEnabled = true
         textField.becomeFirstResponder()
+
+        if let emojiContainer = emojiContainer.subviews.first as? UIStackView {
+            for (index, emoji) in emojiContainer.arrangedSubviews.enumerated() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + 0.1 * Double(index)) {
+                    emoji.animateEmoji()
+                }
+            }
+        }
     }
 
     func rename(oldName: String) {
         show(value: oldName)
-        barSubmit.title = String(localizationId: "button.rename")
     }
 
     func hide() { handlePressCancel() }
@@ -175,25 +174,6 @@ extension EventInput {
         NSLayoutConstraint.activate([constraint])
     }
 
-    private func setupInputAccessoryView() {
-        let screenW = UIScreen.main.bounds.width
-        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: screenW, height: 44))
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
-        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
-        barSubmit.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
-
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .normal)
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .disabled)
-        barCancel.setTitleTextAttributes([.font: UIHelper.font], for: .selected)
-
-        bar.items = [barCancel, space, barSubmit]
-        bar.sizeToFit()
-
-        textField.inputAccessoryView = bar
-    }
-
     // Events handlers
     private func setupEventHandlers() {
         textField.delegate = self
@@ -210,8 +190,6 @@ extension EventInput {
             action: #selector(handleInputChange),
             for: .editingChanged
         )
-
-        setupToolbarButtons()
         setupEmojiButtons()
         setupKeyboardNotificationsHandlers()
     }
@@ -242,24 +220,15 @@ extension EventInput {
         )
     }
 
-    private func setupToolbarButtons() {
-        barCancel.target = self
-        barCancel.action = #selector(handlePressCancel)
-
-        barSubmit.target = self
-        barSubmit.action = #selector(handlePressSubmit)
-    }
-
     private func dismiss() {
         value = ""
         textField.resignFirstResponder()
         isUserInteractionEnabled = false
-        barSubmit.title = String(localizationId: "button.create")
     }
 
     @objc private func handleTapEmoji(_ sender: UIButton) {
         guard let emojiString = sender.titleLabel?.text else { return }
-
+        sender.animateTapReceiving()
         value += emojiString
     }
 

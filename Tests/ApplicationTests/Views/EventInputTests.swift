@@ -72,30 +72,6 @@ class EventInputTests: XCTestCase {
         XCTAssertNotNil(sut.textField.delegate, "textField delegate must be set")
     }
 
-    func test_shows_keyboardToolbar() {
-        let cancel = sut.barCancel
-        let submit = sut.barSubmit
-        let input = sut.textField
-
-        guard let bar = input.inputAccessoryView as? UIToolbar else {
-            XCTFail("input must have a toolbar")
-            return
-        }
-
-        XCTAssertEqual(bar.items?[0], cancel, "no cancel accessory button")
-        XCTAssertEqual(bar.items?[2], submit, "no submit accessory button")
-
-        XCTAssertEqual(
-            bar.items?[0].title, String(localizationId: "button.cancel"),
-            "cancel button text mismatch"
-        )
-
-        XCTAssertEqual(
-            bar.items?[2].title, String(localizationId: "button.create"),
-            "submit button text mismatch"
-        )
-    }
-
     func test_show_backgroundCoversScreen() {
         sut.show(value: "")
 
@@ -171,32 +147,6 @@ class EventInputTests: XCTestCase {
         XCTAssertEqual(sut.value, emoji.titleLabel?.text)
     }
 
-    func test_whenShown_tappingCancel_hidesInput() {
-        sut.show(value: "")
-        XCTAssertTrue(sut.textField.isFirstResponder, "precondition")
-
-        tap(sut.barCancel)
-
-        assert_inputIsHidden()
-    }
-
-    func test_whenShown_tappingCancel_sendsEditingDidEndOnExitEvent() {
-        assert(thatButton: sut.barCancel, sendsActionsFor: .editingDidEndOnExit)
-    }
-
-    func test_whenShown_tappingSubmit_hidesInput() {
-        sut.show(value: "")
-        XCTAssertTrue(sut.textField.isFirstResponder, "precondition")
-
-        tap(sut.barSubmit)
-
-        assert_inputIsHidden()
-    }
-
-    func test_whenShown_tappingSubmit_sendsEditingDidEndEvent() {
-        assert(thatButton: sut.barSubmit, sendsActionsFor: .editingDidEnd)
-    }
-
     func test_whenShown_tappingKeyboardReturn_shouldSubmit() {
         sut.show(value: "BOGUS")
 
@@ -207,36 +157,10 @@ class EventInputTests: XCTestCase {
         assert_inputIsHidden()
     }
 
-    func test_settingValue_empty_submitDisabled() {
-        sut.value = ""
-
-        XCTAssertFalse(sut.barSubmit.isEnabled)
-    }
-
-    func test_settingValue_notEmpty_submitEnabled() {
-        sut.value = "_"
-
-        XCTAssertTrue(sut.barSubmit.isEnabled)
-    }
-
     func test_gettingValue_returnsTextFieldText() {
         sut.textField.text = "BOGUS"
 
         XCTAssertEqual(sut.value, "BOGUS")
-    }
-
-    func test_rename_submitButtonChangesTitle() {
-        sut.rename(oldName: "OldName")
-
-        XCTAssertEqual(sut.barSubmit.title, String(localizationId: "button.rename"))
-    }
-
-    func test_hide_restoresSubmitButtonTitle() {
-        sut.rename(oldName: "OldName")
-
-        sut.hide()
-
-        XCTAssertEqual(sut.barSubmit.title, String(localizationId: "button.create"))
     }
 }
 
