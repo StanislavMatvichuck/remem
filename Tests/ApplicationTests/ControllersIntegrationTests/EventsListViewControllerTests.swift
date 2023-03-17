@@ -60,7 +60,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIHelper.colorButtonTextHighLighted,
+                NSAttributedString.Key.foregroundColor: UIColor.text_secondary,
                 NSAttributedString.Key.font: UIHelper.fontSmallBold,
             ]
         )
@@ -68,7 +68,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let footerCell = cell(1) as! FooterItem
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "button text is white with proper font")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.brand.cgColor, "highlighted button has brand background")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
     }
 
     func test_createEventButtonTapped_showsKeyboard() {
@@ -95,7 +95,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIHelper.colorButtonText,
+                NSAttributedString.Key.foregroundColor: UIColor.primary,
                 NSAttributedString.Key.font: UIHelper.fontSmallBold,
             ]
         )
@@ -103,7 +103,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let footerCell = cell(2) as! FooterItem
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIHelper.itemBackground.cgColor, "button has regular background")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.background_secondary.cgColor, "button has regular background")
     }
 
     func test_singleEvent_showsHint_firstHappening() {
