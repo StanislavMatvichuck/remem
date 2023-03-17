@@ -38,6 +38,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
                 viewModel.items.filter { type(of: $0) is EventItemViewModel.Type }
                     as! [EventItemViewModel]
             )
+
+            animateEventCellForPressingIfNecessary(oldValue: oldValue)
         }
     }
 
@@ -86,6 +88,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 
     @objc private func handleAdd() {
+        guard !viewRoot.input.value.isEmpty else { return }
+
         if let renamedEventItem = viewModel.renamedItem {
             renamedEventItem.rename(to: viewRoot.input.value)
         } else {
@@ -102,6 +106,18 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         )
         guard let cellWithConfiguration = cell as? TrailingSwipeActionsConfigurationProviding else { return nil }
         return cellWithConfiguration.trailingActionsConfiguration()
+    }
+
+    private func animateEventCellForPressingIfNecessary(oldValue: EventsListViewModel?) {
+        if let oldHint = oldValue?.items.first as? HintItemViewModel, oldHint.title == HintState.placeFirstMark.text,
+           let hint = viewModel.items.first as? HintItemViewModel, hint.title == HintState.pressMe.text
+        {
+            let eventCell = viewRoot.table.visibleCells.first(where: { $0 is EventItem })
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                eventCell?.animateTapReceiving()
+            }
+        }
     }
 }
 
