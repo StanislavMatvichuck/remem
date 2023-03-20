@@ -15,8 +15,8 @@ final class EventItem: UITableViewCell, EventsListCell {
     final class RootView: UIView, UsingSwipingHintDisplaying {}
     let viewRoot: RootView = {
         let view = RootView(al: true)
-        view.layer.cornerRadius = UIHelper.r2
-        view.backgroundColor = UIColor.background_secondary
+        view.layer.cornerRadius = .buttonRadius
+        view.backgroundColor = .background_secondary
         return view
     }()
 
@@ -24,7 +24,7 @@ final class EventItem: UITableViewCell, EventsListCell {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.font = UIHelper.fontSmallBold
+        label.font = .fontSmallBold
         label.textColor = UIColor.text_primary
         return label
     }()
@@ -32,7 +32,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     let nameLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.font = UIHelper.font
+        label.font = .font
         label.textColor = UIColor.text_primary
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -41,19 +41,18 @@ final class EventItem: UITableViewCell, EventsListCell {
     }()
 
     var viewModel: EventItemViewModel? {
-        didSet {
-            handleViewStateUpdate(oldValue)
-        }
+        didSet { handleViewStateUpdate(oldValue) }
     }
 
     var valueBackgroundCircle: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = UIColor.background
-        view.layer.cornerRadius = UIHelper.r0
+        let radius = CGFloat.swiperRadius - .buttonMargin
+        view.layer.cornerRadius = radius
 
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: 2 * UIHelper.r0),
-            view.heightAnchor.constraint(equalToConstant: 2 * UIHelper.r0),
+            view.widthAnchor.constraint(equalToConstant: 2 * radius),
+            view.heightAnchor.constraint(equalToConstant: 2 * radius),
         ])
 
         return view
@@ -86,32 +85,32 @@ final class EventItem: UITableViewCell, EventsListCell {
         NSLayoutConstraint.activate([
             nameLabel.centerXAnchor.constraint(equalTo: viewRoot.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
-            nameLabel.heightAnchor.constraint(equalToConstant: UIHelper.d2),
-            nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * UIHelper.d2),
+            nameLabel.heightAnchor.constraint(equalToConstant: .buttonHeight),
+            nameLabel.widthAnchor.constraint(equalTo: viewRoot.widthAnchor, constant: -2 * .buttonRadius),
         ])
 
         viewRoot.addSubview(valueBackgroundCircle)
         NSLayoutConstraint.activate([
-            valueBackgroundCircle.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.r2),
+            valueBackgroundCircle.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.buttonRadius),
             valueBackgroundCircle.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
         ])
 
         viewRoot.addSubview(valueLabel)
         NSLayoutConstraint.activate([
-            valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -UIHelper.r2),
+            valueLabel.centerXAnchor.constraint(equalTo: viewRoot.trailingAnchor, constant: -.buttonRadius),
             valueLabel.centerYAnchor.constraint(equalTo: viewRoot.centerYAnchor),
         ])
 
         viewRoot.addSubview(swiper)
         contentView.addSubview(viewRoot)
 
-        let height = contentView.heightAnchor.constraint(equalToConstant: UIHelper.height)
+        let height = contentView.heightAnchor.constraint(equalToConstant: 2 * .layoutSquare)
         height.priority = .defaultLow /// tableView constraints fix
 
         NSLayoutConstraint.activate([
             height,
-            viewRoot.heightAnchor.constraint(equalToConstant: UIHelper.d2),
-            viewRoot.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
+            viewRoot.heightAnchor.constraint(equalToConstant: .buttonHeight),
+            viewRoot.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * .buttonMargin),
             viewRoot.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             viewRoot.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
@@ -158,7 +157,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     }
 
     @objc private func handleTap(_ gr: UITapGestureRecognizer) {
-        animateTapReceiving {
+        viewRoot.animateTapReceiving {
             self.viewModel?.select()
         }
     }

@@ -24,7 +24,8 @@ class ClockView: UIView {
     init(viewModel: ClockViewModel) {
         self.clockFace = ClockFace(viewModel: viewModel)
         super.init(frame: .zero)
-        backgroundColor = UIHelper.background
+        backgroundColor = .clear
+//        installDotsPattern(7)
         setupLayout()
     }
 
@@ -92,7 +93,7 @@ class ClockView: UIView {
     private static func makeLabel(_ text: String) -> UILabel {
         let label = UILabel(al: true)
         label.text = text
-        label.font = UIHelper.fontSmallBold
+        label.font = .fontSmallBold
         label.textColor = UIColor.secondary
         return label
     }

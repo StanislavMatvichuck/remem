@@ -41,16 +41,16 @@ class Coordinator {
 
         cancelAppearance.normal.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.font: UIHelper.font,
+            NSAttributedString.Key.font: UIFont.font,
         ]
 
         appearance.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.font: UIHelper.fontSmallBold,
+            NSAttributedString.Key.font: UIFont.fontSmallBold,
         ]
         appearance.largeTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.font: UIHelper.fontBold,
+            NSAttributedString.Key.font: UIFont.fontBold,
         ]
 
         appearance.backButtonAppearance = cancelAppearance

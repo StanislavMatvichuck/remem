@@ -15,8 +15,9 @@ class DayItem: UITableViewCell {
         let label = UILabel(al: true)
 
         label.numberOfLines = 1
-        label.font = UIHelper.fontBold
+        label.font = .fontBold
         label.textColor = UIColor.text_primary
+        label.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
 
         return label
     }()
@@ -24,7 +25,7 @@ class DayItem: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addAndConstrain(label, constant: UIHelper.spacing)
+        contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

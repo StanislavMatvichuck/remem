@@ -17,15 +17,17 @@ class HintItem: UITableViewCell, EventsListCell {
             label.text = viewModel.title
             label.textColor = UIColor.secondary
 
-            if viewModel.highlighted { label.font = UIHelper.fontBold }
-            else { label.font = UIHelper.fontSmall }
+            if viewModel.highlighted { label.font = .fontBold }
+            else { label.font = .fontSmall }
         }
     }
 
     let label: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
-        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.numberOfLines = 1
         return label
     }()
 
@@ -38,12 +40,15 @@ class HintItem: UITableViewCell, EventsListCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
+//        installDotsPattern()
+
         contentView.addSubview(label)
 
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: UIHelper.spacing),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -UIHelper.spacing),
-            label.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            label.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * .buttonMargin),
+            label.heightAnchor.constraint(equalToConstant: .layoutSquare),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }

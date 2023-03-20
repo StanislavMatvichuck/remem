@@ -16,7 +16,7 @@ struct StyledText: View {
 
     var body: some View {
         Text(content)
-            .font(Font(uiFont: UIHelper.font))
-            .foregroundColor(Color(UIHelper.itemFont))
+            .font(Font(uiFont: .font))
+            .foregroundColor(Color(UIColor.text_primary))
     }
 }

@@ -9,8 +9,8 @@ import UIKit
 
 class WeekItem: UICollectionViewCell {
     static let reuseIdentifier = "WeekItem"
-    static let spacing = UIHelper.spacing / 8
-    static let happeningsDisplayedMaximumAmount = 7
+    static let spacing = CGFloat.buttonMargin / 8
+    static let happeningsDisplayedMaximumAmount = 6
     static let layoutSize: CGSize = {
         let screenW = UIScreen.main.bounds.width
 
@@ -25,19 +25,19 @@ class WeekItem: UICollectionViewCell {
             verticalFittingPriority: .fittingSizeLevel
         )
 
-        return CGSize(width: size.width, height: layoutSize.height)
+        return CGSize(width: screenW / 7, height: 3 * screenW / 7)
+//        return CGSize(width: size.width, height: layoutSize.height)
     }()
 
     var viewModel: WeekItemViewModel! { didSet { configureContent() } }
 
     let day: UILabel = {
         let label = UILabel(al: true)
-        label.font = UIHelper.fontSmallBold
+        label.font = .fontSmallBold
         label.backgroundColor = UIColor.primary
         label.textColor = UIColor.text_secondary
         label.textAlignment = .center
         label.text = " "
-        label.widthAnchor.constraint(equalTo: label.heightAnchor).isActive = true
         return label
     }()
 
@@ -45,12 +45,13 @@ class WeekItem: UICollectionViewCell {
         func makeTimeLabel() -> UILabel {
             let newLabel = UILabel(al: true)
             newLabel.textAlignment = .center
-            newLabel.font = UIHelper.fontSmallBold
+            newLabel.font = .fontSmallBold
             newLabel.textColor = UIColor.text_primary
             newLabel.adjustsFontSizeToFitWidth = true
             newLabel.minimumScaleFactor = 0.1
             newLabel.numberOfLines = 1
             newLabel.backgroundColor = .clear
+            newLabel.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7 / 3).isActive = true
             newLabel.text = " "
             return newLabel
         }
@@ -75,7 +76,7 @@ class WeekItem: UICollectionViewCell {
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
         stack.backgroundColor = UIColor.background_secondary
-        stack.layer.cornerRadius = UIHelper.radius
+        stack.layer.cornerRadius = .buttonMargin / 4
         stack.clipsToBounds = true
 
         for timingLabel in timingLabels.reversed() {
@@ -83,7 +84,6 @@ class WeekItem: UICollectionViewCell {
         }
 
         stack.addArrangedSubview(day)
-        stack.addArrangedSubview(UIView(al: true))
 
         contentView.addAndConstrain(stack, left: Self.spacing, right: Self.spacing, bottom: Self.spacing)
     }
@@ -100,7 +100,7 @@ class WeekItem: UICollectionViewCell {
         guard let viewModel = viewModel else { return }
 
         day.text = viewModel.dayNumber
-        day.font = viewModel.isToday ? UIHelper.fontBold : UIHelper.font
+        day.font = viewModel.isToday ? .fontBold : .font
 
         show(timings: viewModel.items)
     }

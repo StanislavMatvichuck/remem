@@ -12,4 +12,5 @@ struct SummaryItemViewModel {
     let value: String
     let titleTag: Int /// used by tests only
     let valueTag: Int /// used by tests only
+    let belongsToUser: Bool
 }

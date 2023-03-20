@@ -25,7 +25,7 @@ struct EventRow: View {
                     }.aspectRatio(1.0, contentMode: .fit)
                 }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
             }.overlay(
-                Divider().background(Color(uiColor: UIHelper.itemFont)),
+                Divider().background(Color(uiColor: UIColor.secondary)),
                 alignment: .bottom
             )
         } else {
@@ -36,6 +36,6 @@ struct EventRow: View {
 
 struct EventRowEmptyView: View {
     var body: some View {
-        Color(uiColor: UIHelper.itemBackground)
+        Color(uiColor: UIColor.background)
     }
 }

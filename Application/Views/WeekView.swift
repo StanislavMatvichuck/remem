@@ -10,10 +10,13 @@ import UIKit
 class WeekView: UIView {
     let summary: UILabel = {
         let label = UILabel(al: true)
-        label.font = UIHelper.fontBoldBig
+        label.font = .fontBoldBig
         label.textColor = UIColor.text_primary
         label.text = "0"
         label.textAlignment = .center
+        label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        label.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7).isActive = true
         return label
     }()
 
@@ -30,12 +33,6 @@ class WeekView: UIView {
         view.isPagingEnabled = true
         view.backgroundColor = .clear
         view.register(WeekItem.self, forCellWithReuseIdentifier: WeekItem.reuseIdentifier)
-        view.horizontalScrollIndicatorInsets = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: -UIHelper.delta1,
-            right: 0
-        )
 
         return view
     }()
@@ -57,7 +54,7 @@ class WeekView: UIView {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = day
             label.textAlignment = .center
-            label.font = UIHelper.fontSmallBold
+            label.font = .fontSmallBold
             label.textColor = UIColor.secondary
 
             view.addArrangedSubview(label)
@@ -75,7 +72,7 @@ class WeekView: UIView {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIHelper.background
+        backgroundColor = .clear
         clipsToBounds = true
         configureLayout()
     }
@@ -88,14 +85,6 @@ class WeekView: UIView {
         stack.addArrangedSubview(summary)
         stack.addArrangedSubview(collection)
         stack.addArrangedSubview(weekdaysLine)
-        stack.spacing = UIHelper.spacing
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layoutMargins = UIEdgeInsets(
-            top: UIHelper.spacing,
-            left: 0,
-            bottom: 0,
-            right: 0
-        )
         addAndConstrain(stack)
 
         collection.heightAnchor.constraint(equalToConstant: WeekItem.layoutSize.height).isActive = true

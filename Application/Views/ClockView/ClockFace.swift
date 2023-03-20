@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ClockFace: UIView {
+final class ClockFace: UIView {
     var viewModel: ClockViewModel {
         didSet {
             CATransaction.begin()
@@ -43,6 +43,16 @@ class ClockFace: UIView {
 
         if layer.sublayers == nil {
             installAnimatedSublayers()
+        }
+    }
+
+    /// Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        for item in viewModel.items {
+            if let shape = layer.sublayers?[item.index] as? CAShapeLayer {
+                shape.strokeColor = color(for: item)
+            }
         }
     }
 

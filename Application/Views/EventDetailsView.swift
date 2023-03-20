@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventDetailsView: UIView {
+final class EventDetailsView: UIView {
     // MARK: - Properties
     let scroll: ViewScroll
 
@@ -15,7 +15,7 @@ class EventDetailsView: UIView {
     init() {
         self.scroll = ViewScroll(.vertical)
         super.init(frame: .zero)
-        backgroundColor = UIColor.background
+        backgroundColor = .background
         configureLayout()
     }
 

@@ -12,7 +12,7 @@ class FooterItem: UITableViewCell, EventsListCell {
 
     let button: UIButton = {
         let button = UIButton(al: true)
-        button.layer.cornerRadius = UIHelper.r2
+        button.layer.cornerRadius = .buttonRadius
         return button
     }()
 
@@ -33,7 +33,7 @@ class FooterItem: UITableViewCell, EventsListCell {
             }()
 
             let attributes: [NSAttributedString.Key: Any] = [
-                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                NSAttributedString.Key.font: UIFont.fontSmallBold,
                 NSAttributedString.Key.foregroundColor: foreground,
             ]
 
@@ -65,13 +65,13 @@ class FooterItem: UITableViewCell, EventsListCell {
 
     private func configureLayout() {
         contentView.addSubview(button)
-        let height = contentView.heightAnchor.constraint(equalToConstant: UIHelper.height)
+        let height = contentView.heightAnchor.constraint(equalToConstant: 2 * .layoutSquare)
         height.priority = .defaultLow /// tableView constraints fix
 
         NSLayoutConstraint.activate([
             height,
-            button.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
-            button.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            button.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * .buttonMargin),
+            button.heightAnchor.constraint(equalToConstant: .buttonHeight),
             button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])

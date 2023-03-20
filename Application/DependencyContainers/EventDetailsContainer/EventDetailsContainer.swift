@@ -36,7 +36,7 @@ final class EventDetailsContainer:
 
         let controller = EventDetailsViewController(
             factory: self,
-            controllers: [week, clock, summary, pdf]
+            controllers: [week, summary, clock, pdf]
         )
 
         updater.addDelegate(controller)

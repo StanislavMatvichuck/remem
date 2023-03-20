@@ -126,8 +126,8 @@ final class DayDetailsViewController: UIViewController {
         alert.addTextField { [weak self] field in
             guard let self else { return }
             field.inputView = self.picker
-            field.font = UIHelper.fontBold
-            field.textColor = UIHelper.itemFont
+            field.font = .fontBold
+            field.textColor = UIColor.text_primary
             field.textAlignment = .center
             field.text = self.viewModel.readableTime
         }

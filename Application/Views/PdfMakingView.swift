@@ -12,8 +12,8 @@ final class PdfMakingView: UIView {
         let button = UIButton(al: true)
 
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIHelper.fontSmallBold,
-            NSAttributedString.Key.foregroundColor: UIColor.text_secondary
+            NSAttributedString.Key.font: UIFont.fontSmallBold,
+            NSAttributedString.Key.foregroundColor: UIColor.text_secondary,
         ]
 
         button.setAttributedTitle(
@@ -25,21 +25,22 @@ final class PdfMakingView: UIView {
         )
 
         button.backgroundColor = UIColor.primary
-        button.layer.cornerRadius = UIHelper.r2
-        button.heightAnchor.constraint(equalToConstant: UIHelper.d2).isActive = true
+        button.layer.cornerRadius = (2 * .layoutSquare - 0.5 * .layoutSquare) / 2
 
         return button
     }()
 
     init() {
         super.init(frame: .zero)
-
-        addAndConstrain(
-            button,
-            left: UIHelper.spacingListHorizontal,
-            right: UIHelper.spacingListHorizontal,
-            bottom: UIHelper.height
-        )
+        addSubview(button)
+        let marginConstant: CGFloat = -0.5 * .layoutSquare
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 2 * .layoutSquare),
+            button.widthAnchor.constraint(equalTo: widthAnchor, constant: marginConstant),
+            button.heightAnchor.constraint(equalTo: heightAnchor, constant: marginConstant),
+            button.centerXAnchor.constraint(equalTo: centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: centerYAnchor),
+        ])
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

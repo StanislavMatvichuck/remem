@@ -19,7 +19,7 @@ final class EventInputSnapshots: FBSnapshotTestCase {
         sut = EventInput()
         
         parent = UIView(frame: UIScreen.main.bounds)
-        parent.backgroundColor = UIHelper.background
+        parent.backgroundColor = .background
         
         /// adds sublayer to make blur effect visible
         let layer = CALayer()

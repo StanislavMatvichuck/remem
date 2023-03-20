@@ -7,14 +7,14 @@
 
 import UIKit
 
-class Swiper: UIControl {
+final class Swiper: UIControl {
     // MARK: - Properties
-    let initialX: CGFloat = UIHelper.r2
-    let size: CGFloat = UIHelper.d1
-    var smallSize: CGFloat { UIHelper.r0 / UIHelper.r1 }
+    let initialX: CGFloat = .buttonRadius
+    let size: CGFloat = 2 * .swiperRadius
+    var smallSize: CGFloat { (size - 2 * .buttonMargin) / size }
     var rotation: CGFloat { CGFloat.pi / 2 }
     var width: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude }
-    var successX: CGFloat { width - UIHelper.r2 }
+    var successX: CGFloat { width - initialX }
     var durationMultiplier: Double { 1 }
     var successDuration: Double { durationMultiplier * 0.2 }
     var fromSuccessDuration: Double { durationMultiplier * 0.2 }
@@ -84,7 +84,7 @@ class Swiper: UIControl {
 
     private func configureAppearance() {
         layer.backgroundColor = UIColor.primary.cgColor
-        layer.cornerRadius = UIHelper.r1
+        layer.cornerRadius = .swiperRadius
         layer.addSublayer(plusLayer)
     }
 }
@@ -131,7 +131,10 @@ extension Swiper {
         group.delegate = self
         group.setValue("success", forKey: "name")
 
-        transform = CGAffineTransform(scaleX: UIHelper.r0 / UIHelper.r1, y: UIHelper.r0 / UIHelper.r1)
+        transform = CGAffineTransform(
+            scaleX: smallSize,
+            y: smallSize
+        )
         layer.add(group, forKey: nil)
     }
 
@@ -179,7 +182,8 @@ extension Swiper {
 extension Swiper {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        layer.backgroundColor = UIHelper.pinColor.cgColor
+        layer.backgroundColor = UIColor.primary.cgColor
+        plusLayer.strokeColor = UIColor.background_secondary.cgColor
     }
 }
 

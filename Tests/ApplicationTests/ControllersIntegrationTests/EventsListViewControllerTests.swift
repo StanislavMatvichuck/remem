@@ -61,7 +61,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             string: String(localizationId: "button.create"),
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.text_secondary,
-                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                NSAttributedString.Key.font: .fontSmallBold,
             ]
         )
 
@@ -96,7 +96,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             string: String(localizationId: "button.create"),
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.primary,
-                NSAttributedString.Key.font: UIHelper.fontSmallBold,
+                NSAttributedString.Key.font: .fontSmallBold,
             ]
         )
 

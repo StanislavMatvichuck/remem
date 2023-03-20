@@ -61,10 +61,10 @@ struct SummaryViewModel {
 
         self.items = [
             SummaryItemViewModel(SummaryRow.total(value: String(totalAmount))),
+            SummaryItemViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount)),
             SummaryItemViewModel(SummaryRow.weekAverage(value: weekAverageAmount)),
             SummaryItemViewModel(SummaryRow.dayAverage(value: dayAverageAmount)),
-            SummaryItemViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount))),
-            SummaryItemViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount))
+            SummaryItemViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount)), belongsToUser: false)
         ]
     }
 }
@@ -110,10 +110,11 @@ enum SummaryRow {
 }
 
 extension SummaryItemViewModel {
-    init(_ row: SummaryRow) {
+    init(_ row: SummaryRow, belongsToUser: Bool = true) {
         title = row.label
         value = row.value
         titleTag = row.labelTag
         valueTag = row.valueTag
+        self.belongsToUser = belongsToUser
     }
 }

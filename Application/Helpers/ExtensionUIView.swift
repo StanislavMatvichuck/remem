@@ -79,3 +79,94 @@ extension UIView {
         layer.add(animation, forKey: nil)
     }
 }
+
+extension UIView {
+    func installDotsPattern(_ rows: Int = 1) {
+        let patternLayer = makePatternLayer()
+
+        let horizontalReplicator = makeReplicatorLayer(
+            layer: patternLayer,
+            count: columns,
+            x: .layoutSquare, y: 0
+        )
+
+        let verticalReplicator = makeReplicatorLayer(
+            layer: horizontalReplicator,
+            count: rows,
+            x: 0, y: .layoutSquare
+        )
+
+        layer.addSublayer(verticalReplicator)
+    }
+
+    private var columns: Int { 7 }
+
+    private func makePatternLayer() -> CALayer {
+        let frame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: .layoutSquare,
+                height: .layoutSquare
+            )
+        )
+        let patternLayer = CAShapeLayer()
+        patternLayer.frame = frame
+        patternLayer.path = makePatternPath().cgPath
+        patternLayer.fillColor = UIColor.secondary.withAlphaComponent(1.0).cgColor
+        patternLayer.mask = makeMaskLayer()
+        return patternLayer
+    }
+
+    private func makeReplicatorLayer(
+        layer: CALayer,
+        count: Int,
+        x: CGFloat,
+        y: CGFloat
+    ) -> CALayer {
+        var transform = CATransform3DIdentity
+        transform = CATransform3DTranslate(transform, x, y, 0)
+
+        let replicator = CAReplicatorLayer()
+        replicator.instanceTransform = transform
+        replicator.instanceCount = count
+        replicator.addSublayer(layer)
+        replicator.frame = bounds
+
+        return replicator
+    }
+
+    private func makePatternPath() -> UIBezierPath {
+        let circleRadius = .layoutSquare / 32
+        let circleSize = CGSize(width: 2 * circleRadius, height: 2 * circleRadius)
+        let x = -circleRadius
+        let y = -circleRadius
+
+        let path = UIBezierPath()
+
+        for point in [
+            CGPoint(x: x, y: y),
+            CGPoint(x: x + .layoutSquare, y: y),
+            CGPoint(x: x + .layoutSquare, y: y + .layoutSquare),
+            CGPoint(x: x, y: y + .layoutSquare),
+        ] {
+            path.append(UIBezierPath(ovalIn: CGRect(
+                origin: point,
+                size: circleSize
+            )))
+        }
+
+        return path
+    }
+
+    private func makeMaskLayer() -> CALayer {
+        let patternMaskLayer = CAShapeLayer()
+        patternMaskLayer.path = UIBezierPath(rect: CGRect(
+            origin: CGPoint(x: 0, y: 0),
+            size: CGSize(
+                width: .layoutSquare,
+                height: .layoutSquare
+            )
+        )).cgPath
+        return patternMaskLayer
+    }
+}

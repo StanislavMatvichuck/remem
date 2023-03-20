@@ -27,11 +27,11 @@ class EventInput: UIControl {
     /// Layout
     let textField: UITextField = {
         let input = UITextField(al: true)
-        input.font = UIHelper.font
+        input.font = .font
         input.textAlignment = .center
         input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
-        input.minimumFontSize = UIHelper.fontSmall.pointSize
+        input.minimumFontSize = UIFont.fontSmall.pointSize
         input.returnKeyType = .done
         return input
     }()
@@ -50,8 +50,8 @@ class EventInput: UIControl {
 
     let viewInput: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = UIHelper.itemBackground
-        view.layer.cornerRadius = UIHelper.r2
+        view.backgroundColor = .background_secondary
+        view.layer.cornerRadius = .buttonRadius
         view.isOpaque = true
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
@@ -63,19 +63,17 @@ class EventInput: UIControl {
         let label = UILabel(al: true)
         label.text = String(localizationId: "eventsList.new")
         label.textAlignment = .center
-        label.font = UIHelper.fontBold
+        label.font = .fontBold
         label.textColor = UIColor.secondary
         label.numberOfLines = 0
         return label
     }()
 
     let emojiContainer: UIScrollView = {
-        let scroll = ViewScroll(.horizontal, spacing: UIHelper.spacing)
+        let scroll = ViewScroll(.horizontal, spacing: .buttonMargin)
         scroll.viewContent.layoutMargins = UIEdgeInsets(
-            top: 0,
-            left: UIHelper.spacing,
-            bottom: 0,
-            right: UIHelper.spacing
+            top: 0, left: .buttonMargin,
+            bottom: 0, right: .buttonMargin
         )
         scroll.viewContent.isLayoutMarginsRelativeArrangement = true
         scroll.showsHorizontalScrollIndicator = false
@@ -83,7 +81,7 @@ class EventInput: UIControl {
         for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
             let button = UIButton(al: true)
             button.setTitle(emoji, for: .normal)
-            button.titleLabel?.font = UIHelper.fontBoldBig
+            button.titleLabel?.font = .fontBoldBig
             button.titleLabel?.numberOfLines = 1
             button.titleLabel?.adjustsFontSizeToFitWidth = true
             button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
@@ -144,7 +142,7 @@ extension EventInput {
         NSLayoutConstraint.activate([
             hint.widthAnchor.constraint(equalTo: background.readableContentGuide.widthAnchor),
             hint.centerXAnchor.constraint(equalTo: background.readableContentGuide.centerXAnchor),
-            hint.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor, constant: UIHelper.spacing),
+            hint.topAnchor.constraint(equalTo: background.safeAreaLayoutGuide.topAnchor, constant: .buttonMargin),
         ])
 
         addAndConstrain(background)
@@ -153,14 +151,14 @@ extension EventInput {
         NSLayoutConstraint.activate([
             textField.centerXAnchor.constraint(equalTo: viewInput.centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: viewInput.centerYAnchor),
-            textField.heightAnchor.constraint(equalToConstant: UIHelper.d2),
-            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * UIHelper.d2),
+            textField.heightAnchor.constraint(equalToConstant: .buttonHeight),
+            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * .buttonHeight),
         ])
 
         addSubview(viewInput)
         NSLayoutConstraint.activate([
-            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * UIHelper.spacingListHorizontal),
-            viewInput.heightAnchor.constraint(equalToConstant: UIHelper.d2),
+            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin),
+            viewInput.heightAnchor.constraint(equalToConstant: .buttonHeight),
             viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
 
@@ -168,7 +166,7 @@ extension EventInput {
         NSLayoutConstraint.activate([
             emojiContainer.widthAnchor.constraint(equalTo: widthAnchor),
             emojiContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -UIHelper.spacing),
+            emojiContainer.bottomAnchor.constraint(equalTo: viewInput.topAnchor, constant: -.buttonMargin),
         ])
 
         NSLayoutConstraint.activate([constraint])
@@ -266,7 +264,7 @@ extension EventInput {
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
 
-        let heightAboveKeyboard = viewInput.bounds.height + emojiContainer.bounds.height + 2 * UIHelper.spacing
+        let heightAboveKeyboard = viewInput.bounds.height + emojiContainer.bounds.height + 2 * .buttonMargin
         let keyboardHeight = keyboardSize.cgRectValue.size.height
         let newConstant = -keyboardHeight - heightAboveKeyboard
 

@@ -14,36 +14,18 @@ extension UIColor {
     static let secondary = UIColor(named: "secondary")!
     static let text_primary = UIColor(named: "text_primary")!
     static let text_secondary = UIColor(named: "text_secondary")!
+    static let temp = UIColor(named: "temp")!
 }
 
-enum UIHelper {
-    // colors
-    static let background = UIColor.secondarySystemBackground
-    static let itemBackground = UIColor.systemBackground
-    static let clockSectionBackground = UIColor.systemGray4
-    static let goalReachedBackground = UIColor(named: "goalReachedBackground")!
-    static let goalNotReachedBackground = UIColor(named: "goalNotReachedBackground")!
-    static let brand = UIColor.systemBlue
-    static let brandDimmed = UIColor(named: "primary")!
-    static let secondary = UIColor.systemOrange
-    static let itemFont = UIColor.gray
-    static let hint = UIColor.systemGray3
-    static let pinColor = Self.brandDimmed
-    static let colorButtonText = brand
-    static let colorButtonTextHighLighted = itemBackground
-    // metrics
-    static let spacing = 8.0
-    static let spacingListHorizontal = 12.0
-    static let radius = 4.0
-    static var r1: CGFloat { 32.0 }
-    static var r2: CGFloat { r1 + delta1 }
-    static var r0: CGFloat { r1 - delta1 }
-    static var delta1: CGFloat { 8 }
-    static var d1: CGFloat { 2 * r1 }
-    static var d2: CGFloat { 2 * r2 }
-    static var height: CGFloat { Self.d2 + Self.spacing }
+extension CGFloat {
+    static let layoutSquare: CGFloat = UIScreen.main.bounds.width / 7
+    static let buttonHeight: CGFloat = 2 * layoutSquare * 0.8
+    static let buttonRadius: CGFloat = buttonHeight / 2
+    static let buttonMargin: CGFloat = layoutSquare - buttonRadius
+    static let swiperRadius: CGFloat = (buttonHeight - buttonMargin) / 2
+}
 
-    // fonts
+extension UIFont {
     static let font: UIFont = makeFont()
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)
     static let fontBoldBig: UIFont = makeFont(size: 48.0, weight: .bold)

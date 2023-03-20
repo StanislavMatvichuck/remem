@@ -1017,17 +1017,17 @@
 				0828877929BCA15E00FF9839 /* Updating */,
 				089C5B9429A7D4A000B1B977 /* Timelines */,
 				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
-				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
-				08DA2C11284F559200FC418B /* UIHelper.swift */,
-				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
-				08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */,
-				084B21EF29C08F1A00B601DA /* LocalFile.swift */,
 				084B21F129C0929A00B601DA /* FileSaving.swift */,
+				084B21EF29C08F1A00B601DA /* LocalFile.swift */,
+				08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */,
+				08DA2C11284F559200FC418B /* UIHelper.swift */,
+				08A331E929A8EBC3000B68A1 /* Watching.swift */,
+				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

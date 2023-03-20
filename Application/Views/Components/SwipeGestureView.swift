@@ -48,17 +48,15 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
     }
 
     private var duration: Double { 1.6 }
-    private var initialConstant: CGFloat { UIHelper.r2 }
-    private var finalConstant: CGFloat {
-        UIScreen.main.bounds.width - 2 * UIHelper.spacingListHorizontal - UIHelper.r2
-    }
+    private var initialConstant: CGFloat { .buttonRadius }
+    private var finalConstant: CGFloat { UIScreen.main.bounds.width - .buttonRadius - 2 * .buttonMargin }
 
     private var horizontalConstraint: NSLayoutConstraint?
     private let circle: UIView = {
         let view = UIView(al: true)
         view.isUserInteractionEnabled = false
 
-        let littleSize = UIHelper.delta1 * 1.5
+        let littleSize = CGFloat.buttonMargin
         let littleCenter = UIView(al: true)
         littleCenter.layer.backgroundColor = UIColor.clear.cgColor
         littleCenter.layer.cornerRadius = littleSize / 2
