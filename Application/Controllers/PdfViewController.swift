@@ -16,7 +16,7 @@ final class PdfViewController: UIViewController {
         self.provider = provider
         self.viewRoot = PdfView(provider.url)
         super.init(nibName: nil, bundle: nil)
-        navigationItem.largeTitleDisplayMode = .never
+        configureNavigationItem()
     }
 
     required init?(coder: NSCoder) {
@@ -24,4 +24,37 @@ final class PdfViewController: UIViewController {
     }
 
     override func loadView() { view = viewRoot }
+
+    private func configureNavigationItem() {
+        navigationItem.largeTitleDisplayMode = .never
+        setupShareButton()
+    }
+
+    private func setupShareButton() {
+        let shareButton = UIBarButtonItem(
+            title: String(localizationId: "pdf.share"),
+            style: .plain,
+            target: self,
+            action: #selector(showShare)
+        )
+
+        navigationItem.rightBarButtonItem = shareButton
+    }
+
+    @objc private func showShare() {
+        let share = makeShare()
+
+        navigationController?.present(share, animated: true)
+    }
+
+    private func makeShare() -> UIViewController {
+        let data = NSData(contentsOf: provider.url)
+
+        let vc = UIActivityViewController(
+            activityItems: [data],
+            applicationActivities: nil
+        )
+
+        return vc
+    }
 }
