@@ -13,7 +13,7 @@ Hello. You are looking at Remem repository, which is a project that I started at
 https://apps.apple.com/ua/app/remem-counting/id1613756077
 
 ## Quick demo
-https://user-images.githubusercontent.com/4983331/218532749-147d6536-195b-479b-aa86-b9bcbcc3464c.mp4
+https://user-images.githubusercontent.com/4983331/226573512-10b9c7ae-cfdb-411b-83ff-75b00c0cf3bb.mp4
 
 
 ## Domain model description
