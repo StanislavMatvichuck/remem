@@ -6,7 +6,7 @@ Hello. You are looking at Remem repository, which is a project that I started at
 
 - [ ] **Volume tests.** Would be cool to be sure that application will behave seamlessly even after 5-10 years of usage.
 - [ ] **Weekly goal.** Having a setup goal allows to track and display the amount of progress towards it.
-- [*] **PDF reports.** This will allow to share your achievements with others with ease.
+- [x] **PDF reports.** This will allow to share your achievements with others with ease.
 - [ ] **Events list sorting variants.** List is static which blocks user from any customisations.
 
 ## Download for ios
