@@ -18,7 +18,7 @@ final class PdfMakingView: UIView {
 
         button.setAttributedTitle(
             NSAttributedString(
-                string: "Create pdf",
+                string: String(localizationId: "pdf.create"),
                 attributes: attributes
             ),
             for: .normal

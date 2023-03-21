@@ -22,3 +22,5 @@
 "widget.title" = "Events list";
 "widget.subtitle" = "First three events with amount for today";
 "widget.emptyRow" = "Add your first event to track";
+
+"pdf.create" = "Make printable A4 pdf";
