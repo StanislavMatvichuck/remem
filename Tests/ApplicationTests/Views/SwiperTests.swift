@@ -21,7 +21,7 @@ class SwiperTests: XCTestCase {
 
         let parentView = UIView(frame: CGRect(x: 0, y: 0,
                                               width: UIScreen.main.bounds.width * 0.8,
-                                              height: .height))
+                                              height: 2 * .layoutSquare))
         parentView.addSubview(sut)
         parentView.layoutIfNeeded()
         parent = parentView

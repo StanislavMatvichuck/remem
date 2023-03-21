@@ -24,6 +24,7 @@ enum Navigation {
         case .eventDetails:
             navigationController.pushViewController(controller, animated: true)
         case .dayDetails:
+            // someone has to provide animator to whom?
             let nav = Coordinator.makeStyledNavigationController()
             nav.pushViewController(controller, animated: false)
             nav.modalPresentationStyle = .pageSheet
@@ -36,6 +37,8 @@ enum Navigation {
             navigationController.pushViewController(controller, animated: true)
         }
     }
+
+    private static let dayDetailsAnimator = DayDetailsAnimator()
 
     var controller: UIViewController {
         switch self {

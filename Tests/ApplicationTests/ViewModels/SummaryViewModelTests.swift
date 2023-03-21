@@ -138,11 +138,12 @@ final class SummaryViewModelTests: XCTestCase {
         XCTAssertEqual(weekAverage, "7")
     }
 
+    // clear demonstration of too high coupling with implementation production code
     private var totalAmount: String { sut.items[0].value }
-    private var weekAverage: String { sut.items[1].value }
-    private var dayAverage: String { sut.items[2].value }
-    private var daysTracked: String { sut.items[3].value }
-    private var daysSinceLastHappening: String { sut.items[4].value }
+    private var daysSinceLastHappening: String { sut.items[1].value }
+    private var weekAverage: String { sut.items[2].value }
+    private var dayAverage: String { sut.items[3].value }
+    private var daysTracked: String { sut.items[4].value }
 
     private func arrange(
         dateCreated: Date = .now,

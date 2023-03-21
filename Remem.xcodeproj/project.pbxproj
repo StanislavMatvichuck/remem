@@ -144,6 +144,7 @@
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
 		08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
+		08C52E7B29CA64090056C116 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C52E7A29CA64090056C116 /* DayDetailsAnimator.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */; };
 		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
 		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
@@ -456,6 +457,7 @@
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplayingTests.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
+		08C52E7A29CA64090056C116 /* DayDetailsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimator.swift; sourceTree = "<group>"; };
 		08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		08CC50692906DE8200840385 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		08CC506B2906DEEC00840385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -916,6 +918,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		08C52E7929CA63E40056C116 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				084B21FC29C0B03400B601DA /* Navigation.swift */,
+				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
+				08C52E7A29CA64090056C116 /* DayDetailsAnimator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		08CC50682906DE6300840385 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,9 +971,8 @@
 		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				08C52E7929CA63E40056C116 /* Navigation */,
 				08CC506B2906DEEC00840385 /* main.swift */,
-				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
-				084B21FC29C0B03400B601DA /* Navigation.swift */,
 				084D0E232983E8F0008203C3 /* DependencyContainers */,
 				08D512332787140D00C2037F /* Controllers */,
 				08235E7128C5CC3F0026DED2 /* ViewModels */,
@@ -1568,6 +1579,7 @@
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
+				08C52E7B29CA64090056C116 /* DayDetailsAnimator.swift in Sources */,
 				084B21FD29C0B03400B601DA /* Navigation.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */,
@@ -1751,7 +1763,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -1780,7 +1792,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -2238,7 +2250,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2271,7 +2283,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;
