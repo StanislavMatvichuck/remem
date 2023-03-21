@@ -54,7 +54,13 @@ extension TestingViewController where Controller == PdfViewController {
 
     private func layout(_ vc: UIViewController) {
         vc.loadViewIfNeeded()
-        vc.view.bounds = UIScreen.main.bounds
+        vc.view.bounds = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: 7 * .layoutSquare,
+                height: 5 * .layoutSquare
+            )
+        )
         vc.view.layoutIfNeeded()
     }
 }

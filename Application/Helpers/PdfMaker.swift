@@ -39,29 +39,34 @@ final class DefaultPdfMaker: PDFMaking {
         return renderer.pdfData(actions: { context in
             context.beginPage()
             height = tileHeight
-            makeWeekPages(context)
-            makeSummaryPage(context)
+            renderControllersInGrid(context)
         })
     }
 
-    private func makeWeekPages(_ context: UIGraphicsPDFRendererContext) {
-        for i in 0 ..< weeksAmount {
+    private func renderControllersInGrid(_ context: UIGraphicsPDFRendererContext) {
+        for i in 0 ... weeksAmount {
             if nextLineNeeded(i) { moveToNextLine(context) }
             if nextPageNeeded(i) { makeNewPage(context) }
 
-            scrollToWeek(i)
-            placeWeekTile(context)
+            if lastTile(i) {
+                placeSummaryTile(context)
+            } else {
+                placeWeekTile(tileNumber: i, context)
+            }
 
-            context.cgContext.translateBy(x: tileWidth, y: 0)
+            moveToNextTile(context)
         }
     }
 
-    private func makeSummaryPage(_ context: UIGraphicsPDFRendererContext) {
-        context.beginPage()
+    private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
+        context.cgContext.scaleBy(x: down, y: down)
         summary.view.layer.render(in: context.cgContext)
+        context.cgContext.scaleBy(x: up, y: up)
     }
 
-    private func placeWeekTile(_ context: UIGraphicsPDFRendererContext) {
+    private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
+        week.scrollTo(i * 7)
+
         context.cgContext.scaleBy(x: down, y: down)
         week.view.layer.render(in: context.cgContext)
         context.cgContext.scaleBy(x: up, y: up)
@@ -75,18 +80,22 @@ final class DefaultPdfMaker: PDFMaking {
         height >= a4Height
     }
 
+    private func lastTile(_ i: Int) -> Bool {
+        i == weeksAmount
+    }
+
     private func moveToNextLine(_ context: UIGraphicsPDFRendererContext) {
         context.cgContext.translateBy(x: -4 * tileWidth, y: tileHeight)
         height += tileHeight
     }
 
-    private func scrollToWeek(_ i: Int) {
-        week.scrollTo(i * 7)
-    }
-
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
         height = 0
+    }
+
+    private func moveToNextTile(_ context: UIGraphicsPDFRendererContext) {
+        context.cgContext.translateBy(x: tileWidth, y: 0)
     }
 }
 
