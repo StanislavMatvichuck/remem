@@ -50,6 +50,7 @@ final class DayDetailsViewModelTests: XCTestCase {
         return DayDetailsViewModel(
             day: day,
             event: event,
+            isToday: false,
             commander: EventsCommandingStub(),
             itemFactory: DayItemViewModelFactoringStub(event: event)
         )

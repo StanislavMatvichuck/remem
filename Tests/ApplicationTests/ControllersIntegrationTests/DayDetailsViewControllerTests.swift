@@ -32,61 +32,15 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsTitle() {
-        let numberString = sut.title!.split(separator: " ").first
-        let wordString = sut.title!.split(separator: " ").last
+        let numberString = sut.viewRoot.title.text!.split(separator: " ").first
+        let wordString = sut.viewRoot.title.text!.split(separator: " ").last
 
         XCTAssertNotNil(Int(numberString!))
         XCTAssertLessThanOrEqual(3, wordString!.count)
     }
 
-    func test_showsEditButton() {
-        let editButton = sut.navigationItem.rightBarButtonItem
-
-        XCTAssertEqual(editButton?.title, String(localizationId: "button.edit"))
-    }
-
-    func test_editButtonTapped_editModeEnabled() {
-        let editButton = sut.navigationItem.rightBarButtonItem
-
-        XCTAssertFalse(sut.viewRoot.happenings.isEditing, "precondition")
-
-        tap(editButton!)
-
-        XCTAssertTrue(sut.viewRoot.happenings.isEditing)
-    }
-
-    func test_editButtonTappedTwoTimes_editModeDisabled() {
-        let editButton = sut.navigationItem.rightBarButtonItem
-
-        XCTAssertFalse(sut.viewRoot.happenings.isEditing, "precondition")
-
-        tap(editButton!)
-        tap(editButton!)
-
-        XCTAssertFalse(sut.viewRoot.happenings.isEditing)
-    }
-
     func test_showsCreateHappeningButton() {
-        let createButton = sut.navigationItem.leftBarButtonItem
-
-        XCTAssertEqual(createButton?.title, String(localizationId: "button.addHappening"))
-    }
-
-    func test_createButtonTaped_createHappeningAlertPresented() {
-        let verifier = AlertVerifier()
-        let createButton = sut.navigationItem.leftBarButtonItem
-
-        tap(createButton!)
-
-        verifier.verify(
-            title: String(localizationId: "button.addHappening"),
-            message: "",
-            animated: true,
-            actions: [
-                .cancel(String(localizationId: "button.cancel")),
-                .default(String(localizationId: "button.addHappening"))
-            ]
-        )
+        XCTAssertEqual(sut.viewRoot.button.titleLabel?.text, String(localizationId: "button.addHappening"))
     }
 
     func test_empty_noHappeningsInList() {
@@ -151,22 +105,6 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         assertCellHasTimeText(at: firstIndex)
         assertCellHasTimeText(at: secondCellIndex)
         assertCellHasTimeText(at: thirdCellIndex)
-    }
-
-    /// Bad test because of viewModel implementation detail
-    // TODO: make integration test for picker
-    func test_createHappeningAlertPresented_scrollingPicker_updatesTimeText() {
-        tap(sut.navigationItem.leftBarButtonItem!)
-
-        sut.viewModel.update(pickerDate: DayIndex.referenceValue.date)
-
-        XCTAssertEqual(sut.timeInput.text, "00:00")
-    }
-
-    func test_createHappeningAlertPresented_initialTimeIsStartOfDay() {
-        tap(sut.navigationItem.leftBarButtonItem!)
-
-        XCTAssertEqual(sut.timeInput.text!.count, 5)
     }
 
     private func assertCellHasTimeText(

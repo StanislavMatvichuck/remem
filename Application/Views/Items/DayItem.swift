@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayItem: UITableViewCell {
+final class DayItem: UITableViewCell {
     static let reuseIdentifier = "DayHappeningCell"
 
     // MARK: - Properties
@@ -26,6 +26,7 @@ class DayItem: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
+        backgroundColor = .clear
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
