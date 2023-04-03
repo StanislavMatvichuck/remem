@@ -24,15 +24,13 @@ enum Navigation {
         case .eventDetails:
             navigationController.pushViewController(controller, animated: true)
         case .dayDetails:
-            // someone has to provide animator to whom?
-            let nav = Coordinator.makeStyledNavigationController()
-            nav.pushViewController(controller, animated: false)
-            nav.modalPresentationStyle = .pageSheet
-            if let sheet = nav.sheetPresentationController {
+            let dayDetails = controller
+            dayDetails.modalPresentationStyle = .pageSheet
+            if let sheet = dayDetails.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
             }
 
-            navigationController.present(nav, animated: true)
+            navigationController.present(dayDetails, animated: true)
         case .pdf:
             navigationController.pushViewController(controller, animated: true)
         }
