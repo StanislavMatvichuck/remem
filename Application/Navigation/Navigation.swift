@@ -17,27 +17,6 @@ enum Navigation {
     case dayDetails(factory: ControllerFactoring)
     case pdf(factory: ControllerFactoring)
 
-    func show(in navigationController: UINavigationController) {
-        switch self {
-        case .eventsList:
-            navigationController.pushViewController(controller, animated: false)
-        case .eventDetails:
-            navigationController.pushViewController(controller, animated: true)
-        case .dayDetails:
-            let dayDetails = controller
-            dayDetails.modalPresentationStyle = .pageSheet
-            if let sheet = dayDetails.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-            }
-
-            navigationController.present(dayDetails, animated: true)
-        case .pdf:
-            navigationController.pushViewController(controller, animated: true)
-        }
-    }
-
-    private static let dayDetailsAnimator = DayDetailsAnimator()
-
     var controller: UIViewController {
         switch self {
         case .eventsList(let factory): return factory.make()

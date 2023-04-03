@@ -9,13 +9,24 @@ import UIKit
 
 final class Coordinator {
     let navigationController: UINavigationController
+    private let dayDetailsAnimator = DayDetailsAnimator()
 
     init() {
         navigationController = Self.makeStyledNavigationController()
     }
 
     func show(_ navigation: Navigation) {
-        navigation.show(in: navigationController)
+        let newController = navigation.controller
+        switch navigation {
+        case .eventsList:
+            navigationController.pushViewController(newController, animated: false)
+        case .eventDetails:
+            navigationController.pushViewController(newController, animated: true)
+        case .dayDetails:
+            navigationController.present(newController, animated: true)
+        case .pdf:
+            navigationController.pushViewController(newController, animated: true)
+        }
     }
 
     // MARK: - UINavigationController styling
