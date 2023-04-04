@@ -20,6 +20,17 @@ final class DayDetailsView: UIView {
         return label
     }()
 
+    let close: UIButton = {
+        let view = UIButton(al: true)
+        let image = UIImage(systemName: "multiply.square.fill")?
+            .withTintColor(.primary)
+            .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
+        view.setImage(image, for: .normal)
+        view.setImage(image, for: .highlighted)
+        return view
+    }()
+
     let happenings: UITableView = {
         let table = UITableView(al: true)
 
@@ -64,10 +75,14 @@ final class DayDetailsView: UIView {
 
     private func configureLayout() {
         let background: UIView = {
-            let view = UIView(al: true)
+            let view = UIStackView(al: true)
+            view.axis = .horizontal
             view.backgroundColor = .secondary
             view.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
-            view.addAndConstrain(title, top: 0, left: .buttonMargin, right: .buttonMargin, bottom: 0)
+            view.isLayoutMarginsRelativeArrangement = true
+            view.layoutMargins = UIEdgeInsets(top: 0, left: .buttonMargin, bottom: 0, right: .buttonMargin)
+            view.addArrangedSubview(title)
+            view.addArrangedSubview(close)
             return view
         }()
 
@@ -77,9 +92,11 @@ final class DayDetailsView: UIView {
             view.addArrangedSubview(picker)
             view.addArrangedSubview(button)
             view.distribution = .fillEqually
-            view.heightAnchor.constraint(equalToConstant: .layoutSquare * 3).isActive = true
+            view.heightAnchor.constraint(equalToConstant: .layoutSquare * 2).isActive = true
             return view
         }()
+
+        close.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         verticalStack.addArrangedSubview(background)
         verticalStack.addArrangedSubview(happenings)
@@ -89,6 +106,8 @@ final class DayDetailsView: UIView {
 
     private func configureAppearance() {
         backgroundColor = .background
+        clipsToBounds = true
+        layer.cornerRadius = .buttonMargin
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {

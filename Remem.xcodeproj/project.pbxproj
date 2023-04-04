@@ -738,12 +738,12 @@
 		085145C929AE0D3E00CA533D /* EventDetailsContainer */ = {
 			isa = PBXGroup;
 			children = (
-				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
-				08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */,
 				085145C329AE066C00CA533D /* ClockContainer.swift */,
+				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
+				084B21F529C0977A00B601DA /* PdfContainer.swift */,
+				08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */,
 				085145C729AE092100CA533D /* SummaryContainer.swift */,
 				085145C529AE07C500CA533D /* WeekContainer.swift */,
-				084B21F529C0977A00B601DA /* PdfContainer.swift */,
 			);
 			path = EventDetailsContainer;
 			sourceTree = "<group>";

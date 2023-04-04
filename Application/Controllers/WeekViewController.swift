@@ -11,6 +11,8 @@ import UIKit
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
+    private let dayDetailsAnimator = DayDetailsAnimator()
+
     var scrollHappened = false
     var viewModel: WeekViewModel {
         didSet {
@@ -93,8 +95,12 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.animateTapReceiving()
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        cell.animateTapReceiving()
+
+        let cellHeight = cell.convert(cell.frame, to: nil).minY
+        dayDetailsAnimator.originHeight = cellHeight
+
         viewModel.timeline[indexPath.row]?.select()
     }
 
@@ -114,5 +120,23 @@ extension WeekViewController:
     func updateSummary() {
         let summaryValue = String(viewModel.summaryTimeline[makeWeekIndexForCurrentPosition()] ?? 0)
         viewRoot.summary.text = summaryValue
+    }
+}
+
+extension WeekViewController: UIViewControllerTransitioningDelegate {
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        dayDetailsAnimator.presenting = true
+        return dayDetailsAnimator
+    }
+
+    func animationController(
+        forDismissed dismissed: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        dayDetailsAnimator.presenting = false
+        return dayDetailsAnimator
     }
 }

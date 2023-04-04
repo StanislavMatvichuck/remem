@@ -9,7 +9,6 @@ import UIKit
 
 final class Coordinator {
     let navigationController: UINavigationController
-    private let dayDetailsAnimator = DayDetailsAnimator()
 
     init() {
         navigationController = Self.makeStyledNavigationController()
@@ -23,7 +22,13 @@ final class Coordinator {
         case .eventDetails:
             navigationController.pushViewController(newController, animated: true)
         case .dayDetails:
-            navigationController.present(newController, animated: true)
+            guard
+                let eventDetailsController = navigationController.topViewController as? EventDetailsViewController,
+                let weekController = eventDetailsController.children.first as? WeekViewController
+            else { return }
+            newController.transitioningDelegate = weekController
+            newController.modalPresentationStyle = .custom
+            weekController.present(newController, animated: true)
         case .pdf:
             navigationController.pushViewController(newController, animated: true)
         }
