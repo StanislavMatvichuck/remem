@@ -17,19 +17,20 @@ struct DayDetailsViewModel {
     private let event: Event
     private let itemFactory: DayItemViewModelFactoring
 
-    let eventId: String
     let items: [DayItemViewModel]
     let title: String
     let isToday: Bool
+    var pickerDate: Date
 
     init(
         day: DayIndex,
         event: Event,
         isToday: Bool,
+        hour: Int,
+        minute: Int,
         commander: EventsCommanding,
         itemFactory: DayItemViewModelFactoring
     ) {
-        self.eventId = event.id
         self.event = event
         self.day = day
         self.commander = commander
@@ -46,6 +47,14 @@ struct DayDetailsViewModel {
         titleFormatter.dateFormat = "d MMMM"
 
         self.title = titleFormatter.string(for: day.date)!
+
+        let dayDate = day.date
+        self.pickerDate = calendar.date(
+            bySettingHour: hour,
+            minute: minute,
+            second: 0,
+            of: dayDate
+        )!
     }
 
     func addHappening(date: Date) {

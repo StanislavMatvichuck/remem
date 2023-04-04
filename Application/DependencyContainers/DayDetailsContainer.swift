@@ -47,6 +47,8 @@ final class DayDetailsContainer:
             day: day,
             event: event,
             isToday: day == parent.today,
+            hour: calendar.component(.hour, from: .now),
+            minute: calendar.component(.minute, from: .now),
             commander: commander,
             itemFactory: self
         )

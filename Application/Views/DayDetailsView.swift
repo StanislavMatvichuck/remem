@@ -58,6 +58,7 @@ final class DayDetailsView: UIView {
     func configure(viewModel: DayDetailsViewModel) {
         configureTitle(viewModel: viewModel)
         configureButton(viewModel: viewModel)
+        picker.date = viewModel.pickerDate
         happenings.reloadData()
     }
 

@@ -13,7 +13,10 @@ protocol DayDetailsViewModelFactoring { func makeDayViewModel() -> DayDetailsVie
 final class DayDetailsViewController: UIViewController {
     let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
-    var viewModel: DayDetailsViewModel { didSet { viewRoot.configure(viewModel: viewModel) } }
+    var viewModel: DayDetailsViewModel { didSet {
+        viewModel.pickerDate = viewRoot.picker.date
+        viewRoot.configure(viewModel: viewModel)
+    } }
 
     init(_ factory: DayDetailsViewModelFactoring) {
         self.factory = factory
