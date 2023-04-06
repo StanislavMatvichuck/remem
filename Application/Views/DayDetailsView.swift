@@ -8,6 +8,8 @@
 import UIKit
 
 final class DayDetailsView: UIView {
+    private static let bg: UIColor = .background_secondary
+
     let verticalStack: UIStackView = {
         let view = UIStackView(al: true)
         view.axis = .vertical
@@ -47,7 +49,7 @@ final class DayDetailsView: UIView {
         let view = UIDatePicker(al: true)
         view.datePickerMode = .time
         view.preferredDatePickerStyle = .wheels
-        view.backgroundColor = .background
+        view.backgroundColor = bg
         return view
     }()
 
@@ -105,7 +107,7 @@ final class DayDetailsView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .background
+        backgroundColor = Self.bg
         clipsToBounds = true
         layer.cornerRadius = .buttonMargin
     }
