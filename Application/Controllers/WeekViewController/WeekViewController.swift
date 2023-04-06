@@ -11,7 +11,14 @@ import UIKit
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
-    private let dayDetailsAnimator = DayDetailsAnimator()
+    private let presentationAnimator = DayDetailsPresentationAnimator()
+    private let dismissAnimator = DayDetailsDismissAnimator()
+    private lazy var cellAnimator = {
+        WeekCellAnimator(collection: viewRoot.collection)
+    }()
+
+    let factory: WeekViewModelFactoring
+    let viewRoot: WeekView
 
     var scrollHappened = false
     var viewModel: WeekViewModel {
@@ -20,9 +27,6 @@ final class WeekViewController: UIViewController {
             updateSummary()
         }
     }
-
-    let factory: WeekViewModelFactoring
-    let viewRoot: WeekView
 
     init(_ factory: WeekViewModelFactoring) {
         self.factory = factory
@@ -84,22 +88,27 @@ extension WeekViewController:
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        guard
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: WeekItem.reuseIdentifier,
-                for: indexPath) as? WeekItem
-        else { fatalError("cell type") }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: WeekItem.reuseIdentifier,
+            for: indexPath) as? WeekItem else { fatalError("cell type") }
+
         cell.viewModel = viewModel.timeline[indexPath.row]
+
+        if cellAnimator.index == indexPath { cellAnimator.prepareForAnimation(cell) }
+
         return cell
     }
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        cell.animateTapReceiving()
 
-        let cellHeight = cell.convert(cell.frame, to: nil).minY
-        dayDetailsAnimator.originHeight = cellHeight
+        let cellYOffset = cell.convert(cell.frame, to: nil).minY
+
+        presentationAnimator.originHeight = cellYOffset
+
+        cellAnimator.index = indexPath
+        cellAnimator.animateBeforePresentation()
 
         viewModel.timeline[indexPath.row]?.select()
     }
@@ -129,14 +138,13 @@ extension WeekViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController,
         source: UIViewController) -> UIViewControllerAnimatedTransitioning?
     {
-        dayDetailsAnimator.presenting = true
-        return dayDetailsAnimator
+        presentationAnimator
     }
 
     func animationController(
         forDismissed dismissed: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        dayDetailsAnimator.presenting = false
-        return dayDetailsAnimator
+        cellAnimator.animateAfterDismiss()
+        return dismissAnimator
     }
 }
