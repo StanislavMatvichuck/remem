@@ -1,5 +1,5 @@
 //
-//  AnimationsHelper.swift
+//  DayDetailsAnimationsHelper.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 06.04.2023.
