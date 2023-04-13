@@ -10,15 +10,7 @@ import UIKit
 final class DayDetailsPresentationController: UIPresentationController {
     let weekViewController: WeekViewController
     let dayDetailsViewController: DayDetailsViewController
-    var presentedDayIndex: IndexPath?
     var transition: UIPercentDrivenInteractiveTransition { weekViewController.dismissTransition }
-
-    init(week: WeekViewController, day: DayDetailsViewController, dayIndex: IndexPath) {
-        self.weekViewController = week
-        self.dayDetailsViewController = day
-        self.presentedDayIndex = dayIndex
-        super.init(presentedViewController: day, presenting: nil)
-    }
 
     lazy var backgroundView: UIView = {
         let backgroundView = UIView(frame: containerView!.frame)
@@ -36,20 +28,26 @@ final class DayDetailsPresentationController: UIPresentationController {
         return backgroundView
     }()
 
+    override var frameOfPresentedViewInContainerView: CGRect {
+        CGRect(
+            x: .layoutSquare,
+            y: containerView?.frame.maxY ?? 0,
+            width: .layoutSquare * 5,
+            height: .layoutSquare * 9
+        )
+    }
+
+    init(week: WeekViewController, day: DayDetailsViewController) {
+        self.weekViewController = week
+        self.dayDetailsViewController = day
+        super.init(presentedViewController: day, presenting: nil)
+    }
+
+    // MARK: - Lifecycle
     override func presentationTransitionWillBegin() {
         containerView?.addSubview(backgroundView)
-
-        guard let index = weekViewController.animatedCellIndex,
-              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
-        else { return }
-
-        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
-            animatedView: animatedCell
-        ))
-
-        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
-            animatedView: backgroundView
-        ))
+        configureCellPresentation()
+        configureBackgroundPresentation()
     }
 
     override func presentationTransitionDidEnd(_: Bool) {
@@ -57,17 +55,8 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     override func dismissalTransitionWillBegin() {
-        guard let index = weekViewController.animatedCellIndex,
-              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
-        else { return }
-
-        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
-            animatedView: animatedCell
-        ))
-
-        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
-            animatedView: backgroundView
-        ))
+        configureCellDismissal()
+        configureBackgroundDismissal()
     }
 
     override func dismissalTransitionDidEnd(_ completed: Bool) {
@@ -80,15 +69,40 @@ final class DayDetailsPresentationController: UIPresentationController {
         }
     }
 
-    override var frameOfPresentedViewInContainerView: CGRect {
-        CGRect(
-            x: .layoutSquare,
-            y: containerView?.frame.maxY ?? 0,
-            width: .layoutSquare * 5,
-            height: .layoutSquare * 9
-        )
+    // MARK: - Private
+    private func configureCellPresentation() {
+        guard let index = weekViewController.animatedCellIndex,
+              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
+        else { return }
+
+        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
+            animatedView: animatedCell
+        ))
     }
 
+    private func configureBackgroundPresentation() {
+        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
+            animatedView: backgroundView
+        ))
+    }
+
+    private func configureCellDismissal() {
+        guard let index = weekViewController.animatedCellIndex,
+              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
+        else { return }
+
+        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
+            animatedView: animatedCell
+        ))
+    }
+
+    private func configureBackgroundDismissal() {
+        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
+            animatedView: backgroundView
+        ))
+    }
+
+    // MARK: - Events handling
     @objc func handle(_ pan: UIPanGestureRecognizer) {
         guard let view = pan.view else { return }
 

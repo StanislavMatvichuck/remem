@@ -133,8 +133,7 @@ extension WeekViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         DayDetailsPresentationController(
             week: self,
-            day: presented as! DayDetailsViewController,
-            dayIndex: animatedCellIndex!
+            day: presented as! DayDetailsViewController
         )
     }
 }
