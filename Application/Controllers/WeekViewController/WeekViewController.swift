@@ -11,8 +11,8 @@ import UIKit
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
-    let presentationAnimator = PresentationAnimator()
-    let dismissAnimator = DismissAnimator()
+    let presentationAnimator = DayDetailsPresentationAnimator()
+    let dismissAnimator = DayDetailsDismissAnimator()
     let dismissTransition: UIPercentDrivenInteractiveTransition = {
         let transition = UIPercentDrivenInteractiveTransition()
         transition.wantsInteractiveStart = false
@@ -131,7 +131,7 @@ extension WeekViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? { dismissAnimator }
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? { dismissTransition }
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        DetailsPresentationController(
+        DayDetailsPresentationController(
             week: self,
             day: presented as! DayDetailsViewController,
             dayIndex: animatedCellIndex!

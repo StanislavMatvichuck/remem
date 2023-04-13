@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PresentationAnimator: DayDetailsAnimator {
+final class DayDetailsPresentationAnimator: DayDetailsAnimator {
     var originHeight: CGFloat = 0.0
 
     override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {

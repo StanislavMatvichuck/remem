@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailsPresentationController: UIPresentationController {
+final class DayDetailsPresentationController: UIPresentationController {
     let weekViewController: WeekViewController
     let dayDetailsViewController: DayDetailsViewController
     var presentedDayIndex: IndexPath?

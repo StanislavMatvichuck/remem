@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DismissAnimator: DayDetailsAnimator {
+final class DayDetailsDismissAnimator: DayDetailsAnimator {
     func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         makeAnimator(using: transitionContext)
     }
