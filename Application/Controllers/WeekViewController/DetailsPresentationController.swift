@@ -28,6 +28,11 @@ final class DetailsPresentationController: UIPresentationController {
             target: self,
             action: #selector(handle)
         ))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTap)
+        ))
+
         return backgroundView
     }()
 
@@ -79,7 +84,7 @@ final class DetailsPresentationController: UIPresentationController {
         }
     }
 
-    override func presentationTransitionDidEnd(_ completed: Bool) {
+    override func presentationTransitionDidEnd(_: Bool) {
         weekViewController.presentationAnimator.clearAdditionalAnimations()
     }
 
@@ -152,7 +157,7 @@ final class DetailsPresentationController: UIPresentationController {
         guard let view = pan.view else { return }
 
         let verticalOffset = pan.translation(in: view).y
-        let progress = max(0.0, min(1.0, verticalOffset / 400))
+        let progress = max(0.0, min(1.0, verticalOffset / 300))
 
         if pan.state == .began {
             transition.wantsInteractiveStart = true
@@ -166,6 +171,10 @@ final class DetailsPresentationController: UIPresentationController {
                 transition.cancel()
             }
         }
+    }
+
+    @objc func handleTap(_: UITapGestureRecognizer) {
+        presentingViewController.dismiss(animated: true)
     }
 
     private func prepareForAnimation(_ view: UIView) {

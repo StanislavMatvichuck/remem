@@ -42,7 +42,6 @@ final class DayDetailsViewController: UIViewController {
 
     private func configureEventHandlers() {
         viewRoot.button.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
-        viewRoot.close.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
     }
 
     @objc private func handleButton() {

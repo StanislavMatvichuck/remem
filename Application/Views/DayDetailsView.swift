@@ -22,17 +22,6 @@ final class DayDetailsView: UIView {
         return label
     }()
 
-    let close: UIButton = {
-        let view = UIButton(al: true)
-        let image = UIImage(systemName: "multiply.square.fill")?
-            .withTintColor(.primary)
-            .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
-        view.setImage(image, for: .normal)
-        view.setImage(image, for: .highlighted)
-        return view
-    }()
-
     let happenings: UITableView = {
         let table = UITableView(al: true)
 
@@ -84,7 +73,6 @@ final class DayDetailsView: UIView {
             view.isLayoutMarginsRelativeArrangement = true
             view.layoutMargins = UIEdgeInsets(top: 0, left: .buttonMargin, bottom: 0, right: .buttonMargin)
             view.addArrangedSubview(title)
-            view.addArrangedSubview(close)
             return view
         }()
 
@@ -97,8 +85,6 @@ final class DayDetailsView: UIView {
             view.heightAnchor.constraint(equalToConstant: .layoutSquare * 2).isActive = true
             return view
         }()
-
-        close.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 
         verticalStack.addArrangedSubview(background)
         verticalStack.addArrangedSubview(happenings)
