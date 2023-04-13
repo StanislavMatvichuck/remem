@@ -7,57 +7,60 @@
 
 import UIKit
 
-final class DayDetailsPresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var originHeight: CGFloat = 0.0
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { AnimationsHelper.totalDuration }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView
-
         guard
-            let detailsView = transitionContext.view(forKey: .to)
+            let detailsView = transitionContext.view(forKey: .to),
+            let detailsVc = transitionContext.viewController(forKey: .to)
         else { fatalError("error getting necessary views for animation") }
 
-        let backgroundView: UIView = {
-            let backgroundView = UIView(frame: containerView.frame)
-            backgroundView.backgroundColor = .secondary
-            backgroundView.alpha = 0
-            return backgroundView
-        }()
-
-        let detailsFrame = CGRect(
-            x: .layoutSquare / 2,
-            y: containerView.frame.maxY,
-            width: .layoutSquare * 6,
-            height: .layoutSquare * 9
-        )
-
-        detailsView.frame = detailsFrame
+        detailsView.frame = transitionContext.finalFrame(for: detailsVc)
+        detailsView.layoutIfNeeded()
         detailsView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
 
+        let containerView = transitionContext.containerView
         containerView.addSubview(detailsView)
-        containerView.addSubview(backgroundView)
         containerView.bringSubviewToFront(detailsView)
 
-        UIView.animate(
-            withDuration: AnimationsHelper.scaleXDuration,
-            delay: AnimationsHelper.scaleXDelay,
-            animations: {
-                detailsView.transform = .init(scaleX: 1, y: 1)
-            }
+        let duration = transitionDuration(using: transitionContext)
+        let yPositionDelay = AnimationsHelper.positionYDelay / AnimationsHelper.totalDuration
+        let xScaleDelay = AnimationsHelper.scaleXDelay / AnimationsHelper.totalDuration
+
+        let animator = UIViewPropertyAnimator(
+            duration: duration,
+            curve: .linear
         )
 
-        UIView.animate(
-            withDuration: AnimationsHelper.positionYDuration,
-            delay: AnimationsHelper.positionYDelay,
-            animations: {
-                detailsView.frame.origin.y = self.originHeight
-                backgroundView.alpha = 0.33
-            },
-            completion: { _ in
-                transitionContext.completeTransition(true)
-            }
-        )
+        animator.addAnimations({
+            detailsView.frame.origin.y = self.originHeight
+        }, delayFactor: yPositionDelay)
+
+        animator.addAnimations({
+            detailsView.transform = .identity
+        }, delayFactor: xScaleDelay)
+
+        for animation in additionalAnimations {
+            animator.addAnimations(animation)
+        }
+
+        animator.addCompletion { _ in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+
+        animator.startAnimation()
+    }
+
+    private var additionalAnimations: [() -> Void] = []
+
+    func add(animation: @escaping () -> Void) {
+        additionalAnimations.append(animation)
+    }
+
+    func clearAdditionalAnimations() {
+        additionalAnimations = []
     }
 }

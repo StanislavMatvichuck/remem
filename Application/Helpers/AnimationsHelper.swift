@@ -13,6 +13,7 @@ struct AnimationsHelper {
     /// DayDetails
     static let scaleXDuration = frameDuration * 5
     static let scaleXDelay = totalDuration - scaleXDuration
+    static let scaleXDelayFactorForDismiss = (totalDuration - scaleXDuration) / totalDuration
     static let positionYDuration = frameDuration * 25
     static let positionYDelay = frameDuration * 5
     static let fadeDuration = positionYDuration

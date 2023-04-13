@@ -11,11 +11,15 @@ import UIKit
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
-    private let presentationAnimator = DayDetailsPresentationAnimator()
-    private let dismissAnimator = DayDetailsDismissAnimator()
-    private lazy var cellAnimator = {
-        WeekCellAnimator(collection: viewRoot.collection)
+    let presentationAnimator = PresentationAnimator()
+    let dismissAnimator = DismissAnimator()
+    let dismissTransition: UIPercentDrivenInteractiveTransition = {
+        let transition = UIPercentDrivenInteractiveTransition()
+        transition.wantsInteractiveStart = false
+        return transition
     }()
+
+    var animatedCellIndex: IndexPath?
 
     let factory: WeekViewModelFactoring
     let viewRoot: WeekView
@@ -65,7 +69,8 @@ final class WeekViewController: UIViewController {
         viewRoot.collection.scrollToItem(
             at: IndexPath(row: viewModel.scrollToIndex, section: 0),
             at: .left,
-            animated: false)
+            animated: false
+        )
 
         updateSummary()
     }
@@ -77,24 +82,13 @@ extension WeekViewController:
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout
 {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int) -> Int
-    {
-        viewModel.timeline.count
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: WeekItem.reuseIdentifier,
-            for: indexPath) as? WeekItem else { fatalError("cell type") }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { viewModel.timeline.count }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekItem.reuseIdentifier, for: indexPath) as? WeekItem else { fatalError("cell type") }
 
         cell.viewModel = viewModel.timeline[indexPath.row]
 
-        if cellAnimator.index == indexPath { cellAnimator.prepareForAnimation(cell) }
+        if animatedCellIndex == indexPath { dismissAnimator.prepareForAnimation(cell) }
 
         return cell
     }
@@ -107,8 +101,7 @@ extension WeekViewController:
 
         presentationAnimator.originHeight = cellYOffset
 
-        cellAnimator.index = indexPath
-        cellAnimator.animateBeforePresentation()
+        animatedCellIndex = indexPath
 
         viewModel.timeline[indexPath.row]?.select()
     }
@@ -132,19 +125,16 @@ extension WeekViewController:
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
 extension WeekViewController: UIViewControllerTransitioningDelegate {
-    func animationController(
-        forPresented presented: UIViewController,
-        presenting: UIViewController,
-        source: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    {
-        presentationAnimator
-    }
-
-    func animationController(
-        forDismissed dismissed: UIViewController
-    ) -> UIViewControllerAnimatedTransitioning? {
-        cellAnimator.animateAfterDismiss()
-        return dismissAnimator
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? { presentationAnimator }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? { dismissAnimator }
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? { dismissTransition }
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        DetailsPresentationController(
+            week: self,
+            day: presented as! DayDetailsViewController,
+            dayIndex: animatedCellIndex!
+        )
     }
 }

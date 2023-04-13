@@ -119,6 +119,7 @@
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
 		089066B729DF0D750047052A /* WeekCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066B629DF0D750047052A /* WeekCellAnimator.swift */; };
 		089066BA29DF12340047052A /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066B929DF12340047052A /* DismissAnimator.swift */; };
+		089066BC29E0150F0047052A /* DetailsPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066BB29E0150F0047052A /* DetailsPresentationController.swift */; };
 		0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */; };
 		0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */; };
 		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
@@ -439,6 +440,7 @@
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
 		089066B629DF0D750047052A /* WeekCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellAnimator.swift; sourceTree = "<group>"; };
 		089066B929DF12340047052A /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		089066BB29E0150F0047052A /* DetailsPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresentationController.swift; sourceTree = "<group>"; };
 		08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerTests.swift; sourceTree = "<group>"; };
 		0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
@@ -880,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				0852C6AC283D66170027EF3E /* WeekViewController.swift */,
+				089066BB29E0150F0047052A /* DetailsPresentationController.swift */,
 				089066B629DF0D750047052A /* WeekCellAnimator.swift */,
 			);
 			path = WeekViewController;
@@ -1639,6 +1642,7 @@
 				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
 				08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
+				089066BC29E0150F0047052A /* DetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
