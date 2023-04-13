@@ -7,14 +7,12 @@
 
 import UIKit
 
-final class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { DayDetailsAnimationsHelper.totalDuration }
-    
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        interruptibleAnimator(using: transitionContext).startAnimation()
+final class DismissAnimator: DayDetailsAnimator {
+    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+        makeAnimator(using: transitionContext)
     }
     
-    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+    override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         guard let detailsView = transitionContext.view(forKey: .from) else { fatalError() }
         
         let duration = transitionDuration(using: transitionContext)
@@ -47,15 +45,5 @@ final class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func prepareForAnimation(_ view: UIView) {
         view.frame.origin.y = .layoutSquare * -4
         view.transform = .init(scaleX: 0.8, y: 1)
-    }
-    
-    private var additionalAnimations: [() -> Void] = []
-    
-    func add(_ animation: @escaping () -> Void) {
-        additionalAnimations.append(animation)
-    }
-    
-    func clearAdditionalAnimations() {
-        additionalAnimations = []
     }
 }

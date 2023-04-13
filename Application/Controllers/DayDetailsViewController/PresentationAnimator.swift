@@ -7,12 +7,10 @@
 
 import UIKit
 
-final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+final class PresentationAnimator: DayDetailsAnimator {
     var originHeight: CGFloat = 0.0
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { DayDetailsAnimationsHelper.totalDuration }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         guard
             let detailsView = transitionContext.view(forKey: .to),
             let detailsVc = transitionContext.viewController(forKey: .to)
@@ -48,16 +46,6 @@ final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitionin
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
 
-        animator.startAnimation()
-    }
-
-    private var additionalAnimations: [() -> Void] = []
-
-    func add(_ animation: @escaping () -> Void) {
-        additionalAnimations.append(animation)
-    }
-
-    func clearAdditionalAnimations() {
-        additionalAnimations = []
+        return animator
     }
 }

@@ -116,9 +116,4 @@ final class DetailsPresentationController: UIPresentationController {
     @objc func handleTap(_: UITapGestureRecognizer) {
         presentingViewController.dismiss(animated: true)
     }
-
-    private func prepareForAnimation(_ view: UIView) {
-        view.frame.origin.y = .layoutSquare * -4
-        view.transform = .init(scaleX: 0.8, y: 1)
-    }
 }
