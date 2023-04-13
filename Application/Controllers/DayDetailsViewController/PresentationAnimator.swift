@@ -10,7 +10,7 @@ import UIKit
 final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var originHeight: CGFloat = 0.0
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { AnimationsHelper.totalDuration }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { DayDetailsAnimationsHelper.totalDuration }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
@@ -27,21 +27,18 @@ final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitionin
         containerView.bringSubviewToFront(detailsView)
 
         let duration = transitionDuration(using: transitionContext)
-        let yPositionDelay = AnimationsHelper.positionYDelay / AnimationsHelper.totalDuration
-        let xScaleDelay = AnimationsHelper.scaleXDelay / AnimationsHelper.totalDuration
+        let height = originHeight
 
         let animator = UIViewPropertyAnimator(
             duration: duration,
-            curve: .linear
+            curve: .easeInOut
         )
 
-        animator.addAnimations({
-            detailsView.frame.origin.y = self.originHeight
-        }, delayFactor: yPositionDelay)
-
-        animator.addAnimations({
-            detailsView.transform = .identity
-        }, delayFactor: xScaleDelay)
+        animator.addAnimations(DayDetailsAnimationsHelper.makePresentationSliding(
+            duration: duration,
+            animatedView: detailsView,
+            targetHeight: height
+        ))
 
         for animation in additionalAnimations {
             animator.addAnimations(animation)
@@ -56,7 +53,7 @@ final class PresentationAnimator: NSObject, UIViewControllerAnimatedTransitionin
 
     private var additionalAnimations: [() -> Void] = []
 
-    func add(animation: @escaping () -> Void) {
+    func add(_ animation: @escaping () -> Void) {
         additionalAnimations.append(animation)
     }
 

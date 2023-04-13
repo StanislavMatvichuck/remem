@@ -117,7 +117,6 @@
 		088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */; };
 		0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627727A0A2520032847C /* EventDetailsViewController.swift */; };
 		0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890627927A0A25E0032847C /* EventDetailsView.swift */; };
-		089066B729DF0D750047052A /* WeekCellAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066B629DF0D750047052A /* WeekCellAnimator.swift */; };
 		089066BA29DF12340047052A /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066B929DF12340047052A /* DismissAnimator.swift */; };
 		089066BC29E0150F0047052A /* DetailsPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066BB29E0150F0047052A /* DetailsPresentationController.swift */; };
 		0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */; };
@@ -133,7 +132,7 @@
 		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* WatchingTests.swift */; };
 		08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* Watching.swift */; };
-		08A79F5629DEC30300855146 /* AnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A79F5529DEC30300855146 /* AnimationsHelper.swift */; };
+		08A79F5629DEC30300855146 /* DayDetailsAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */; };
 		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */; };
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
@@ -438,7 +437,6 @@
 		088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModelTests.swift; sourceTree = "<group>"; };
 		0890627727A0A2520032847C /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		0890627927A0A25E0032847C /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
-		089066B629DF0D750047052A /* WeekCellAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellAnimator.swift; sourceTree = "<group>"; };
 		089066B929DF12340047052A /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		089066BB29E0150F0047052A /* DetailsPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresentationController.swift; sourceTree = "<group>"; };
 		08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerTests.swift; sourceTree = "<group>"; };
@@ -452,7 +450,7 @@
 		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
 		08A331E729A8EAFE000B68A1 /* WatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingTests.swift; sourceTree = "<group>"; };
 		08A331E929A8EBC3000B68A1 /* Watching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watching.swift; sourceTree = "<group>"; };
-		08A79F5529DEC30300855146 /* AnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsHelper.swift; sourceTree = "<group>"; };
+		08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimationsHelper.swift; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingDayDetailsViewController.swift; sourceTree = "<group>"; };
 		08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
@@ -883,7 +881,6 @@
 			children = (
 				0852C6AC283D66170027EF3E /* WeekViewController.swift */,
 				089066BB29E0150F0047052A /* DetailsPresentationController.swift */,
-				089066B629DF0D750047052A /* WeekCellAnimator.swift */,
 			);
 			path = WeekViewController;
 			sourceTree = "<group>";
@@ -1066,7 +1063,7 @@
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
-				08A79F5529DEC30300855146 /* AnimationsHelper.swift */,
+				08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1634,7 +1631,7 @@
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* FooterItemViewModel.swift in Sources */,
-				08A79F5629DEC30300855146 /* AnimationsHelper.swift in Sources */,
+				08A79F5629DEC30300855146 /* DayDetailsAnimationsHelper.swift in Sources */,
 				0848741A2984328700C27155 /* WidgetEventItemViewModel.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayDetailsViewModel.swift in Sources */,
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
@@ -1654,7 +1651,6 @@
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */,
-				089066B729DF0D750047052A /* WeekCellAnimator.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */,

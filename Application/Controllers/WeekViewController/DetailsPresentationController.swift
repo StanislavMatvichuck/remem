@@ -43,45 +43,15 @@ final class DetailsPresentationController: UIPresentationController {
               let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
         else { return }
 
-        weekViewController.presentationAnimator.add {
-            UIView.animateKeyframes(
-                withDuration: AnimationsHelper.totalDuration,
-                delay: 0,
-                animations: {
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0,
-                        relativeDuration: 1 / 3,
-                        animations: {
-                            animatedCell.frame.origin.y -= .layoutSquare * 4
-                        }
-                    )
+        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
+            duration: DayDetailsAnimationsHelper.totalDuration,
+            animatedView: animatedCell
+        ))
 
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0,
-                        relativeDuration: 1 / 6,
-                        animations: {
-                            animatedCell.transform = .init(scaleX: 0.8, y: 1)
-                        }
-                    )
-                }
-            )
-        }
-
-        weekViewController.presentationAnimator.add {
-            UIView.animateKeyframes(
-                withDuration: AnimationsHelper.totalDuration,
-                delay: 0,
-                animations: {
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0.5,
-                        relativeDuration: 0.5,
-                        animations: {
-                            self.backgroundView.alpha = 0.5
-                        }
-                    )
-                }
-            )
-        }
+        weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
+            duration: DayDetailsAnimationsHelper.totalDuration,
+            animatedView: backgroundView
+        ))
     }
 
     override func presentationTransitionDidEnd(_: Bool) {
@@ -93,45 +63,15 @@ final class DetailsPresentationController: UIPresentationController {
               let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
         else { return }
 
-        weekViewController.dismissAnimator.add {
-            UIView.animateKeyframes(
-                withDuration: AnimationsHelper.totalDuration,
-                delay: 0,
-                animations: {
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 3 / 6,
-                        relativeDuration: 1 / 2,
-                        animations: {
-                            animatedCell.frame.origin.y += .layoutSquare * 4
-                        }
-                    )
+        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
+            duration: DayDetailsAnimationsHelper.totalDuration,
+            animatedView: animatedCell
+        ))
 
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 5 / 6,
-                        relativeDuration: 1 / 6,
-                        animations: {
-                            animatedCell.transform = .identity
-                        }
-                    )
-                }
-            )
-        }
-
-        weekViewController.dismissAnimator.add {
-            UIView.animateKeyframes(
-                withDuration: AnimationsHelper.totalDuration,
-                delay: 0,
-                animations: {
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0,
-                        relativeDuration: 0.5,
-                        animations: {
-                            self.backgroundView.alpha = 0
-                        }
-                    )
-                }
-            )
-        }
+        weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
+            duration: DayDetailsAnimationsHelper.totalDuration,
+            animatedView: backgroundView
+        ))
     }
 
     override func dismissalTransitionDidEnd(_ completed: Bool) {

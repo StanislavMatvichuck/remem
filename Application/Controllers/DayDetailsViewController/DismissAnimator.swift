@@ -8,7 +8,7 @@
 import UIKit
 
 final class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { AnimationsHelper.totalDuration }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { DayDetailsAnimationsHelper.totalDuration }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         interruptibleAnimator(using: transitionContext).startAnimation()
@@ -18,33 +18,18 @@ final class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         guard let detailsView = transitionContext.view(forKey: .from) else { fatalError() }
         
         let duration = transitionDuration(using: transitionContext)
+        let height = transitionContext.containerView.frame.maxY
         
         let propertiesAnimator = UIViewPropertyAnimator(
             duration: duration,
-            curve: .easeIn
+            curve: .easeOut
         )
         
-        propertiesAnimator.addAnimations {
-            UIView.animateKeyframes(
-                withDuration: duration,
-                delay: 0,
-                animations: {
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0,
-                        relativeDuration: 5 / 6
-                    ) {
-                        detailsView.frame.origin.y = transitionContext.containerView.frame.maxY
-                    }
-                    
-                    UIView.addKeyframe(
-                        withRelativeStartTime: 0,
-                        relativeDuration: 1 / 6
-                    ) {
-                        detailsView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
-                    }
-                }
-            )
-        }
+        propertiesAnimator.addAnimations(DayDetailsAnimationsHelper.makeDismissSliding(
+            duration: duration,
+            animatedView: detailsView,
+            targetHeight: height
+        ))
         
         for animation in additionalAnimations {
             propertiesAnimator.addAnimations(animation)
@@ -66,7 +51,7 @@ final class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     private var additionalAnimations: [() -> Void] = []
     
-    func add(animation: @escaping () -> Void) {
+    func add(_ animation: @escaping () -> Void) {
         additionalAnimations.append(animation)
     }
     
