@@ -24,7 +24,6 @@ final class DismissAnimator: DayDetailsAnimator {
         )
         
         propertiesAnimator.addAnimations(DayDetailsAnimationsHelper.makeDismissSliding(
-            duration: duration,
             animatedView: detailsView,
             targetHeight: height
         ))

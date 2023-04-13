@@ -33,7 +33,6 @@ final class PresentationAnimator: DayDetailsAnimator {
         )
 
         animator.addAnimations(DayDetailsAnimationsHelper.makePresentationSliding(
-            duration: duration,
             animatedView: detailsView,
             targetHeight: height
         ))

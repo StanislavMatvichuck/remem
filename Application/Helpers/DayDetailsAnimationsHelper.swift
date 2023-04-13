@@ -13,12 +13,11 @@ struct DayDetailsAnimationsHelper {
     static let totalDuration = DayDetailsAnimationsHelper.frameDuration * 30
 
     static func makeDismissSliding(
-        duration: TimeInterval,
         animatedView: UIView,
         targetHeight: CGFloat
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(
@@ -39,12 +38,11 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makePresentationSliding(
-        duration: TimeInterval,
         animatedView: UIView,
         targetHeight: CGFloat
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(
@@ -65,11 +63,10 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeCellPresentationSliding(
-        duration: TimeInterval,
         animatedView: UIView
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(
@@ -92,11 +89,10 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeBackgroundPresentation(
-        duration: TimeInterval,
         animatedView: UIView
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(
@@ -111,11 +107,10 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeCellDismissal(
-        duration: TimeInterval,
         animatedView: UIView
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(
@@ -138,11 +133,10 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeBackgroundDismissal(
-        duration: TimeInterval,
         animatedView: UIView
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
-            withDuration: duration,
+            withDuration: totalDuration,
             delay: 0,
             animations: {
                 UIView.addKeyframe(

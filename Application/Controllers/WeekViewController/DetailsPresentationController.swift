@@ -44,12 +44,10 @@ final class DetailsPresentationController: UIPresentationController {
         else { return }
 
         weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
-            duration: DayDetailsAnimationsHelper.totalDuration,
             animatedView: animatedCell
         ))
 
         weekViewController.presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
-            duration: DayDetailsAnimationsHelper.totalDuration,
             animatedView: backgroundView
         ))
     }
@@ -64,12 +62,10 @@ final class DetailsPresentationController: UIPresentationController {
         else { return }
 
         weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
-            duration: DayDetailsAnimationsHelper.totalDuration,
             animatedView: animatedCell
         ))
 
         weekViewController.dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
-            duration: DayDetailsAnimationsHelper.totalDuration,
             animatedView: backgroundView
         ))
     }
