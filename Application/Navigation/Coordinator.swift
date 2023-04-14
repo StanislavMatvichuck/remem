@@ -22,15 +22,9 @@ final class Coordinator {
         case .eventDetails:
             navigationController.pushViewController(newController, animated: true)
         case .dayDetails(_, let week):
-//            guard
-//                let eventDetailsController = navigationController.topViewController as? EventDetailsViewController, // nil during test, dependency to navigation tree
-//                let weekController = eventDetailsController.children.first as? WeekViewController
-//            else { return }
-            // only transitioningDelegate is required
             newController.transitioningDelegate = week
-//            newController.transitioningDelegate = weekController
             newController.modalPresentationStyle = .custom
-            navigationController.present(newController, animated: true) // uses navigationController for presenting anyway
+            navigationController.present(newController, animated: true)
         case .pdf:
             navigationController.pushViewController(newController, animated: true)
         }
