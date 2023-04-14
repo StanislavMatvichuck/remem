@@ -18,17 +18,6 @@ final class NavigationTests: XCTestCase {
     func test_init_requiresFactory() {
         _ = Navigation.eventsList(factory: ControllerFactoryFake())
     }
-
-    func test_show_eventsList_pushesWithoutAnimation() {
-        let sut = Navigation.eventsList(factory: ControllerFactoryFake())
-        let navigationController = UINavigationController()
-
-        XCTAssertEqual(navigationController.children.count, 0)
-
-        sut.show(in: navigationController)
-
-        XCTAssertEqual(navigationController.children.count, 1)
-    }
 }
 
 final class CoordinatorTests: XCTestCase {

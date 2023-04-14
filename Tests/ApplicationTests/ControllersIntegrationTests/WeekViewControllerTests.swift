@@ -33,6 +33,9 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let collection = sut.viewRoot.collection
         let firstCellIndex = IndexPath(row: 0, section: 0)
 
+        putInViewHierarchy(sut)
+        sut.viewRoot.layoutIfNeeded()
+
         collection.delegate?.collectionView?(
             collection,
             didSelectItemAt: firstCellIndex
