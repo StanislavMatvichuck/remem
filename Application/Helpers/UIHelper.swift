@@ -22,7 +22,7 @@ extension CGFloat {
     static let buttonHeight: CGFloat = 2 * layoutSquare * 0.8
     static let buttonRadius: CGFloat = buttonHeight / 2
     static let buttonMargin: CGFloat = layoutSquare - buttonRadius
-    static let swiperRadius: CGFloat = (buttonHeight - buttonMargin) / 2
+    static let swiperRadius: CGFloat = (buttonHeight - 3 * buttonMargin) / 2
 }
 
 extension UIFont {

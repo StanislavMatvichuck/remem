@@ -122,6 +122,7 @@
 		089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089066BB29E0150F0047052A /* DayDetailsPresentationController.swift */; };
 		0891377A292BCDEF00EFD23D /* WeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */; };
 		0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */; };
+		089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */; };
 		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
 		0897E177297459FA00BD2A56 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = 0897E176297459FA00BD2A56 /* ViewControllerPresentationSpy */; };
 		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
@@ -443,6 +444,7 @@
 		089066BB29E0150F0047052A /* DayDetailsPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsPresentationController.swift; sourceTree = "<group>"; };
 		08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerTests.swift; sourceTree = "<group>"; };
 		0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperAnimationsHelper.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
@@ -1059,6 +1061,7 @@
 				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 				08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */,
+				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1666,6 +1669,7 @@
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
+				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,

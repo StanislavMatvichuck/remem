@@ -47,7 +47,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     var valueBackgroundCircle: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = UIColor.background
-        let radius = CGFloat.swiperRadius - .buttonMargin
+        let radius = CGFloat.swiperRadius
         view.layer.cornerRadius = radius
 
         NSLayoutConstraint.activate([

@@ -8,60 +8,14 @@
 import UIKit
 
 final class Swiper: UIControl {
-    // MARK: - Properties
-    let initialX: CGFloat = .buttonRadius
-    let size: CGFloat = 2 * .swiperRadius
-    var smallSize: CGFloat { (size - 2 * .buttonMargin) / size }
-    var rotation: CGFloat { CGFloat.pi / 2 }
-    var width: CGFloat { superview?.bounds.width ?? .greatestFiniteMagnitude }
+    var initialX: CGFloat { .buttonRadius }
+    var width: CGFloat { superview!.bounds.width }
     var successX: CGFloat { width - initialX }
-    var durationMultiplier: Double { 1 }
-    var successDuration: Double { durationMultiplier * 0.2 }
-    var fromSuccessDuration: Double { durationMultiplier * 0.2 }
-    var returnDuration: Double { durationMultiplier * 0.2 }
+    var size: CGFloat = 2 * .swiperRadius
+    var scaleFactor: CGFloat { .buttonHeight / size }
 
-    var horizontalConstraint: NSLayoutConstraint!
-    var returnCompletionHandler: ((Bool) -> Void)?
-    var successCompletionHandler: ((Bool) -> Void)?
-
-    // MARK: - Init
-    init() {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        accessibilityIdentifier = "Swiper"
-        isAccessibilityElement = true
-    }
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        configureLayout()
-        configureAppearance()
-        addGestureRecognizer(
-            UIPanGestureRecognizer(
-                target: self,
-                action: #selector(handlePan)
-            )
-        )
-    }
-
-    private func configureLayout() {
-        guard let superview else { return }
-
-        horizontalConstraint = centerXAnchor.constraint(
-            equalTo: superview.leadingAnchor,
-            constant: initialX
-        )
-
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: size),
-            heightAnchor.constraint(equalToConstant: size),
-
-            horizontalConstraint,
-            centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-        ])
-    }
+    var swipeAnimator: UIViewPropertyAnimator?
+    var verticalTranslation: CGFloat = 0
 
     lazy var plusLayer: CAShapeLayer = {
         let plusSize = size / 12
@@ -82,6 +36,37 @@ final class Swiper: UIControl {
         return plusLayer
     }()
 
+    // MARK: - Init
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+        accessibilityIdentifier = "Swiper"
+        isAccessibilityElement = true
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        configureLayout()
+        configureAppearance()
+        addGestureRecognizer(UIPanGestureRecognizer(
+            target: self,
+            action: #selector(handlePan)
+        ))
+    }
+
+    private func configureLayout() {
+        guard let superview else { return }
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: size),
+            heightAnchor.constraint(equalToConstant: size),
+
+            centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: initialX),
+            centerYAnchor.constraint(equalTo: superview.centerYAnchor),
+        ])
+    }
+
     private func configureAppearance() {
         layer.backgroundColor = UIColor.primary.cgColor
         layer.cornerRadius = .swiperRadius
@@ -94,87 +79,133 @@ extension Swiper {
     @objc func handlePan(gestureRecognizer: UIPanGestureRecognizer) {
         guard let parent = gestureRecognizer.view else { return }
 
+        let translation = gestureRecognizer.translation(in: parent)
+        let xDelta = translation.x * 2
+        let newXPosition = verticalTranslation + xDelta
+        let progress = (newXPosition - initialX) / (successX - initialX)
+
         switch gestureRecognizer.state {
         case .began:
-            UIDevice.vibrate(.light)
+            makeSwipeAnimator()
         case .changed:
-            let translation = gestureRecognizer.translation(in: parent)
-            let xDelta = translation.x * 2
-            let newXPosition = horizontalConstraint.constant + xDelta
-
-            horizontalConstraint.constant = newXPosition.clamped(to: initialX ... successX)
+            verticalTranslation = newXPosition
+            swipeAnimator?.fractionComplete = progress
             gestureRecognizer.setTranslation(CGPoint.zero, in: parent)
         case .ended, .cancelled:
-            if horizontalConstraint.constant == successX {
+            print("progress \(progress)")
+            if progress >= 1.0 {
                 animateSuccess()
             } else {
-                animateToInitialConstant()
+                swipeAnimator?.isReversed = true
+                swipeAnimator?.continueAnimation(
+                    withTimingParameters: nil,
+                    durationFactor: progress
+                )
             }
+            verticalTranslation = 0
         default: return
         }
     }
 
-    private func animateSuccess() {
-        let scale = CABasicAnimation(keyPath: "transform.scale")
-        scale.fromValue = 1.0
-        scale.toValue = smallSize
-
-        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.fromValue = 0.0
-        rotation.toValue = self.rotation
-
-        let group = CAAnimationGroup()
-        group.duration = successDuration
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        group.fillMode = .backwards
-        group.animations = [scale, rotation]
-        group.delegate = self
-        group.setValue("success", forKey: "name")
-
-        transform = CGAffineTransform(
-            scaleX: smallSize,
-            y: smallSize
-        )
-        layer.add(group, forKey: nil)
-    }
-
-    private func animateToInitialConstant() {
-        UIView.animate(
-            withDuration: returnDuration,
-            delay: 0.0,
-            options: .curveEaseInOut,
-            animations: {
-                self.horizontalConstraint.constant = self.initialX
-                self.superview?.layoutIfNeeded()
-            },
-            completion: returnCompletionHandler
-        )
-    }
-
     func animateFromSuccess() {
-        let scale = CABasicAnimation(keyPath: "transform.scale")
-        scale.fromValue = smallSize
-        scale.toValue = 1
+        let returnAnimator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.forwardDuration,
+            curve: .easeOut
+        ) {
+            self.superview?.transform = .identity
+            self.alpha = 0
+        }
 
-        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.fromValue = self.rotation
-        rotation.toValue = 0
+        returnAnimator.addCompletion { _ in
+            self.swipeAnimator?.stopAnimation(true)
+            self.swipeAnimator?.finishAnimation(at: .start)
+            self.swipeAnimator = nil
+            self.transform = .identity
+            self.verticalTranslation = 0
 
-        let group = CAAnimationGroup()
-        group.duration = fromSuccessDuration
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        group.fillMode = .backwards
-        group.animations = [scale, rotation]
-        group.setValue("fromSuccess", forKey: "name")
-        group.delegate = self
+            let appearanceAnimator = UIViewPropertyAnimator(
+                duration: SwiperAnimationsHelper.forwardDuration,
+                curve: .easeInOut
+            ) {
+                self.alpha = 1
+            }
 
-        transform = .identity
-        layer.add(group, forKey: nil)
+            appearanceAnimator.startAnimation()
+        }
+
+        returnAnimator.startAnimation()
     }
 
     func resetToInitialStateWithoutAnimation() {
-        horizontalConstraint.constant = initialX
+        transform = .identity
         superview?.layoutIfNeeded()
+    }
+
+    // MARK: - Private
+
+    private func makeSwipeAnimator() {
+        resetSwipeAnimator()
+
+        let sizeAnimator = UIViewPropertyAnimator(
+            duration: 0.5,
+            curve: .linear
+        ) {
+            var newTransform = CGAffineTransform.identity
+
+            newTransform = newTransform.concatenating(CGAffineTransform(
+                scaleX: self.scaleFactor,
+                y: self.scaleFactor
+            ))
+
+            newTransform = newTransform.concatenating(CGAffineTransform(
+                translationX: self.successX - self.initialX,
+                y: 0
+            ))
+
+            self.transform = newTransform
+        }
+
+        sizeAnimator.pausesOnCompletion = true
+
+        swipeAnimator = sizeAnimator
+    }
+
+    private func resetSwipeAnimator() {
+        swipeAnimator?.stopAnimation(true)
+        swipeAnimator?.finishAnimation(at: .start)
+        swipeAnimator = nil
+    }
+
+    private func animateSuccess() {
+        let forwardAnimator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.forwardDuration,
+            curve: .easeOut
+        ) {
+            self.superview?.transform = CGAffineTransform(
+                translationX: .buttonMargin,
+                y: 0
+            )
+        }
+
+        forwardAnimator.addCompletion { _ in
+            self.sendActions(for: .primaryActionTriggered)
+        }
+
+        let dropAnimator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.dropDuration,
+            curve: .easeIn
+        ) {
+            self.transform = CGAffineTransform(
+                translationX: self.successX - self.initialX,
+                y: 0
+            )
+        }
+
+        dropAnimator.addCompletion { _ in
+            forwardAnimator.startAnimation()
+        }
+
+        dropAnimator.startAnimation()
     }
 }
 
@@ -184,22 +215,5 @@ extension Swiper {
         super.traitCollectionDidChange(previousTraitCollection)
         layer.backgroundColor = UIColor.primary.cgColor
         plusLayer.strokeColor = UIColor.background_secondary.cgColor
-    }
-}
-
-extension Swiper: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard flag else { return }
-
-        if let name = anim.value(forKey: "name") as? String {
-            if name == "success" {
-                sendActions(for: .primaryActionTriggered)
-                UIDevice.vibrate(.heavy)
-            }
-
-            if name == "fromSuccess" {
-                animateToInitialConstant()
-            }
-        }
     }
 }
