@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HintItem: UITableViewCell, EventsListCell {
+final class HintItem: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "HintItem"
 
     var viewModel: HintItemViewModel? {
@@ -40,17 +40,10 @@ class HintItem: UITableViewCell, EventsListCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
-//        installDotsPattern()
-
-        contentView.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            label.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * .buttonMargin),
-            label.heightAnchor.constraint(equalToConstant: .layoutSquare),
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-        ])
+        contentView.addAndConstrain(label)
+        let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare)
+        heightConstraint.priority = .defaultHigh
+        heightConstraint.isActive = true
     }
 
     private func configureAppearance() {
