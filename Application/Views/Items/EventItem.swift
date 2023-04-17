@@ -72,6 +72,7 @@ final class EventItem: UITableViewCell, EventsListCell {
         viewModel = nil
         viewRoot.swipingHint?.removeFromSuperview()
         swiper.resetToInitialStateWithoutAnimation()
+        swiper.additionalAnimations = []
         super.prepareForReuse()
     }
 
@@ -126,6 +127,11 @@ final class EventItem: UITableViewCell, EventsListCell {
         viewRoot.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(handleTap))
         )
+
+        swiper.additionalAnimations = [
+            { [weak self] in self?.animateCellAbove() },
+            { [weak self] in self?.animateCellBelow() },
+        ]
     }
 
     private func handleViewStateUpdate(_ oldValue: EventItemViewModel? = nil) {
@@ -150,6 +156,72 @@ final class EventItem: UITableViewCell, EventsListCell {
         {
             swiper.animateFromSuccess()
         }
+    }
+
+    private func animateCellAbove() {
+        guard let table = superview as? UITableView,
+              let selfIndex = table.indexPath(for: self)
+        else { return }
+        let indexAbove = IndexPath(row: selfIndex.row - 1, section: selfIndex.section)
+        guard let cellAbove = table.cellForRow(at: indexAbove) else { return }
+
+        let animator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.forwardDuration,
+            curve: .easeOut
+        ) {
+            cellAbove.setAnchorPoint(CGPoint(x: 1 / 7, y: 0.5))
+            cellAbove.transform = CGAffineTransform(rotationAngle: .pi / -180)
+        }
+
+        animator.addCompletion { _ in
+            let secondAnimator = UIViewPropertyAnimator(
+                duration: SwiperAnimationsHelper.forwardDuration,
+                curve: .easeOut
+            ) {
+                cellAbove.transform = .identity
+            }
+
+            secondAnimator.addCompletion { _ in
+                cellAbove.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+            }
+
+            secondAnimator.startAnimation()
+        }
+
+        animator.startAnimation()
+    }
+
+    private func animateCellBelow() {
+        guard let table = superview as? UITableView,
+              let selfIndex = table.indexPath(for: self)
+        else { return }
+        let indexAbove = IndexPath(row: selfIndex.row + 1, section: selfIndex.section)
+        guard let cellAbove = table.cellForRow(at: indexAbove) else { return }
+
+        let animator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.forwardDuration,
+            curve: .easeOut
+        ) {
+            cellAbove.setAnchorPoint(CGPoint(x: 1 / 7, y: 0.5))
+            cellAbove.transform = CGAffineTransform(rotationAngle: .pi / 180)
+        }
+
+        animator.addCompletion { _ in
+            let secondAnimator = UIViewPropertyAnimator(
+                duration: SwiperAnimationsHelper.forwardDuration,
+                curve: .easeOut
+            ) {
+                cellAbove.transform = .identity
+            }
+
+            secondAnimator.addCompletion { _ in
+                cellAbove.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+            }
+
+            secondAnimator.startAnimation()
+        }
+
+        animator.startAnimation()
     }
 
     @objc private func handleSwipe(_ swiper: Swiper) {

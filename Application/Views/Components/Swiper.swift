@@ -17,6 +17,8 @@ final class Swiper: UIControl {
     var swipeAnimator: UIViewPropertyAnimator?
     var verticalTranslation: CGFloat = 0
 
+    var additionalAnimations: [() -> Void] = []
+
     lazy var plusLayer: CAShapeLayer = {
         let plusSize = size / 12
         let center = size / 2
@@ -202,6 +204,7 @@ extension Swiper {
         }
 
         dropAnimator.addCompletion { _ in
+            self.additionalAnimations.forEach { $0() }
             forwardAnimator.startAnimation()
         }
 

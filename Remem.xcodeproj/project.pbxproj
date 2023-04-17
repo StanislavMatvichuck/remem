@@ -13,6 +13,8 @@
 		080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417D2986AEC600C1F54F /* SummaryViewController.swift */; };
 		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
 		080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* SummarySnapshots.swift */; };
+		080F9F2729ED51810013CBFE /* TemporaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2629ED51810013CBFE /* TemporaryItem.swift */; };
+		080F9F2929ED51B70013CBFE /* TemporaryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */; };
 		081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
 		081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
@@ -331,6 +333,8 @@
 		080C417F2986AF4800C1F54F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		080C41812986B69700C1F54F /* SummarySnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySnapshots.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
+		080F9F2629ED51810013CBFE /* TemporaryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryItem.swift; sourceTree = "<group>"; };
+		080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryItemViewModel.swift; sourceTree = "<group>"; };
 		081391DB29B8C780008069FB /* MinuteIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinuteIndex.swift; sourceTree = "<group>"; };
 		081391DD29B8D25A008069FB /* DateIndexing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndexing.swift; sourceTree = "<group>"; };
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
@@ -632,6 +636,7 @@
 				08EC438128BA365400755B54 /* EventItemViewModel.swift */,
 				08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */,
 				08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */,
+				080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */,
 				088E88C228AF916000400180 /* WeekItemViewModel.swift */,
 				085145CA29AE32F000CA533D /* SummaryItemViewModel.swift */,
 			);
@@ -819,6 +824,7 @@
 				08F50DC82965EF5300B65CDF /* FooterItem.swift */,
 				08F50DC62965EEDA00B65CDF /* HintItem.swift */,
 				08293CC027B670FC0039E432 /* WeekItem.swift */,
+				080F9F2629ED51810013CBFE /* TemporaryItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -1640,9 +1646,11 @@
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
+				080F9F2929ED51B70013CBFE /* TemporaryItemViewModel.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
+				080F9F2729ED51810013CBFE /* TemporaryItem.swift in Sources */,
 				084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
