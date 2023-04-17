@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FooterItem: UITableViewCell, EventsListCell {
+final class FooterItem: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "FooterItem"
 
     let button: UIButton = {
@@ -63,18 +63,12 @@ class FooterItem: UITableViewCell, EventsListCell {
         super.prepareForReuse()
     }
 
+    // MARK: - Private
     private func configureLayout() {
-        contentView.addSubview(button)
+        contentView.addAndConstrain(button, constant: .buttonMargin)
         let height = contentView.heightAnchor.constraint(equalToConstant: 2 * .layoutSquare)
-        height.priority = .defaultLow /// tableView constraints fix
-
-        NSLayoutConstraint.activate([
-            height,
-            button.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -2 * .buttonMargin),
-            button.heightAnchor.constraint(equalToConstant: .buttonHeight),
-            button.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-        ])
+        height.priority = .defaultHigh /// tableView constraints fix
+        height.isActive = true
     }
 
     private func configureAppearance() {
@@ -83,11 +77,11 @@ class FooterItem: UITableViewCell, EventsListCell {
     }
 
     private func configureEventHandlers() {
-        button.addTarget(self, action: #selector(handleButton(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleTouchUp), for: .touchUpInside)
     }
 
-    @objc private func handleButton(sender _: UIButton) {
-        animateTapReceiving()
+    // MARK: - Events handling
+    @objc private func handleTouchUp(_: UIButton) {
         viewModel?.select()
     }
 }
