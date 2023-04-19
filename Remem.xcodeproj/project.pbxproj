@@ -13,8 +13,10 @@
 		080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417D2986AEC600C1F54F /* SummaryViewController.swift */; };
 		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
 		080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* SummarySnapshots.swift */; };
-		080F9F2729ED51810013CBFE /* TemporaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2629ED51810013CBFE /* TemporaryItem.swift */; };
-		080F9F2929ED51B70013CBFE /* TemporaryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */; };
+		080F9F2729ED51810013CBFE /* EventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2629ED51810013CBFE /* EventItem.swift */; };
+		080F9F2B29ED6C050013CBFE /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2A29ED6C050013CBFE /* EventItemView.swift */; };
+		080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */; };
+		080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */; };
 		081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
 		081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
@@ -173,7 +175,6 @@
 		08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
-		08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1960128BCC1DF0051A83E /* Swiper.swift */; };
 		08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */; };
 		08F467E829BF1E0B00D35AB6 /* PdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */; };
 		08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */; };
@@ -184,8 +185,6 @@
 		08F50DC52965E70F00B65CDF /* FooterItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */; };
 		08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC62965EEDA00B65CDF /* HintItem.swift */; };
 		08F50DC92965EF5300B65CDF /* FooterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC82965EF5300B65CDF /* FooterItem.swift */; };
-		08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DCA29661D7E00B65CDF /* EventItem.swift */; };
-		08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FE8291E70060033AB0D /* SwiperTests.swift */; };
 		08F82FEB291E71E10033AB0D /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F82FEA291E71E10033AB0D /* Mocks.swift */; };
 		08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F97A3D2950769100AB7051 /* DayItemViewModel.swift */; };
 		08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F9C5EB282BD35F007EAD47 /* ClockView.swift */; };
@@ -333,8 +332,10 @@
 		080C417F2986AF4800C1F54F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		080C41812986B69700C1F54F /* SummarySnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySnapshots.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
-		080F9F2629ED51810013CBFE /* TemporaryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryItem.swift; sourceTree = "<group>"; };
-		080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryItemViewModel.swift; sourceTree = "<group>"; };
+		080F9F2629ED51810013CBFE /* EventItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItem.swift; sourceTree = "<group>"; };
+		080F9F2A29ED6C050013CBFE /* EventItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemView.swift; sourceTree = "<group>"; };
+		080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingSwipe.swift; sourceTree = "<group>"; };
+		080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatingHappeningCreation.swift; sourceTree = "<group>"; };
 		081391DB29B8C780008069FB /* MinuteIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinuteIndex.swift; sourceTree = "<group>"; };
 		081391DD29B8D25A008069FB /* DateIndexing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndexing.swift; sourceTree = "<group>"; };
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
@@ -496,7 +497,6 @@
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
-		08F1960128BCC1DF0051A83E /* Swiper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiper.swift; sourceTree = "<group>"; };
 		08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewControllerTests.swift; sourceTree = "<group>"; };
 		08F467E729BF1E0B00D35AB6 /* PdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaker.swift; sourceTree = "<group>"; };
 		08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
@@ -507,8 +507,6 @@
 		08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterItemViewModel.swift; sourceTree = "<group>"; };
 		08F50DC62965EEDA00B65CDF /* HintItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintItem.swift; sourceTree = "<group>"; };
 		08F50DC82965EF5300B65CDF /* FooterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterItem.swift; sourceTree = "<group>"; };
-		08F50DCA29661D7E00B65CDF /* EventItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItem.swift; sourceTree = "<group>"; };
-		08F82FE8291E70060033AB0D /* SwiperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperTests.swift; sourceTree = "<group>"; };
 		08F82FEA291E71E10033AB0D /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		08F97A3D2950769100AB7051 /* DayItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItemViewModel.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
@@ -636,7 +634,6 @@
 				08EC438128BA365400755B54 /* EventItemViewModel.swift */,
 				08F50DC42965E70F00B65CDF /* FooterItemViewModel.swift */,
 				08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */,
-				080F9F2829ED51B70013CBFE /* TemporaryItemViewModel.swift */,
 				088E88C228AF916000400180 /* WeekItemViewModel.swift */,
 				085145CA29AE32F000CA533D /* SummaryItemViewModel.swift */,
 			);
@@ -792,7 +789,6 @@
 			isa = PBXGroup;
 			children = (
 				0898017827FAF17C0014E110 /* EventInput.swift */,
-				08F1960128BCC1DF0051A83E /* Swiper.swift */,
 				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 			);
@@ -820,11 +816,13 @@
 			isa = PBXGroup;
 			children = (
 				08B26A15289E98B700DFBAC8 /* DayItem.swift */,
-				08F50DCA29661D7E00B65CDF /* EventItem.swift */,
 				08F50DC82965EF5300B65CDF /* FooterItem.swift */,
 				08F50DC62965EEDA00B65CDF /* HintItem.swift */,
 				08293CC027B670FC0039E432 /* WeekItem.swift */,
-				080F9F2629ED51810013CBFE /* TemporaryItem.swift */,
+				080F9F2629ED51810013CBFE /* EventItem.swift */,
+				080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */,
+				080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */,
+				080F9F2A29ED6C050013CBFE /* EventItemView.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -916,7 +914,6 @@
 		0891377E292BEA3800EFD23D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08F82FE8291E70060033AB0D /* SwiperTests.swift */,
 				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 				08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */,
 			);
@@ -1570,7 +1567,6 @@
 				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
 				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
 				084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */,
-				08F82FE9291E70060033AB0D /* SwiperTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
@@ -1619,8 +1615,10 @@
 				085145C629AE07C500CA533D /* WeekContainer.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
 				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
+				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
 				0887C808298AE5770048EC12 /* DayIndex.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
+				080F9F2B29ED6C050013CBFE /* EventItemView.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
@@ -1640,23 +1638,20 @@
 				08FEA39828DC98A600BAA196 /* DayDetailsViewModel.swift in Sources */,
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
-				08F50DCB29661D7E00B65CDF /* EventItem.swift in Sources */,
 				08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
-				080F9F2929ED51B70013CBFE /* TemporaryItemViewModel.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
-				080F9F2729ED51810013CBFE /* TemporaryItem.swift in Sources */,
+				080F9F2729ED51810013CBFE /* EventItem.swift in Sources */,
 				084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
-				08F1960228BCC1DF0051A83E /* Swiper.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayItemViewModel.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
@@ -1680,6 +1675,7 @@
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
+				080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,

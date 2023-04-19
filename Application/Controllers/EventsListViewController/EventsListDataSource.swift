@@ -9,7 +9,8 @@ import UIKit
 
 final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        tableView.dequeueReusableCell(withIdentifier: EventItem.reuseIdentifier, for: indexPath) is EventItem
+        let identifier = itemIdentifier(for: indexPath)
+        return identifier != "Hint" && identifier != "Footer"
     }
 
     func update(
@@ -32,10 +33,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
         apply(newSnapshot, animatingDifferences: oldValue != nil)
     }
 
-    private func reconfigurationNeeded<
-        T: EventsListItemViewModeling,
-        U: EventsListItemViewModeling
-    >(_ lhs: T, _ rhs: U) -> Bool {
+    private func reconfigurationNeeded<T: EventsListItemViewModeling, U: EventsListItemViewModeling>(_ lhs: T, _ rhs: U) -> Bool {
         type(of: lhs) == type(of: rhs) &&
             lhs.identifier == rhs.identifier &&
             lhs.self != rhs.self as? T
@@ -49,20 +47,13 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
         snapshot.appendItems(itemsIDs)
         return snapshot
     }
-}
 
-protocol EventsListCell: UITableViewCell {
-    associatedtype ViewModel: EventsListItemViewModeling
-    var viewModel: ViewModel? { get set }
-    static var reuseIdentifier: String { get }
-}
+    func register(_ table: UITableView) {
+        table.register(EventItem.self, forCellReuseIdentifier: EventItem.reuseIdentifier)
+        table.register(HintItem.self, forCellReuseIdentifier: HintItem.reuseIdentifier)
+        table.register(FooterItem.self, forCellReuseIdentifier: FooterItem.reuseIdentifier)
+    }
 
-protocol TrailingSwipeActionsConfigurationProviding {
-    func trailingActionsConfiguration() -> UISwipeActionsConfiguration
-}
-
-// TODO: Get rid of casting, rely on runtime, or event on compiler if possible
-enum EventsListCellProvider {
     static func cell(
         table: UITableView,
         forIndex: IndexPath,
@@ -84,10 +75,14 @@ enum EventsListCellProvider {
         default: fatalError("unknown cell type")
         }
     }
+}
 
-    static func register(_ table: UITableView) {
-        table.register(EventItem.self, forCellReuseIdentifier: EventItem.reuseIdentifier)
-        table.register(HintItem.self, forCellReuseIdentifier: HintItem.reuseIdentifier)
-        table.register(FooterItem.self, forCellReuseIdentifier: FooterItem.reuseIdentifier)
-    }
+protocol EventsListCell: UITableViewCell {
+    associatedtype ViewModel: EventsListItemViewModeling
+    var viewModel: ViewModel? { get set }
+    static var reuseIdentifier: String { get }
+}
+
+protocol TrailingSwipeActionsConfigurationProviding {
+    func trailingActionsConfiguration() -> UISwipeActionsConfiguration
 }

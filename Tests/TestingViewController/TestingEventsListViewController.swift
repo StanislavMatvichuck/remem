@@ -25,7 +25,7 @@ extension TestingViewController where Controller == EventsListViewController {
 
     func swipeFirstEvent() {
         if let cell = cell(1) as? EventItem {
-            cell.swiper.sendActions(for: .primaryActionTriggered)
+            cell.viewModel?.swipeHandler()
         }
     }
 
@@ -59,6 +59,9 @@ extension TestingViewController where Controller == EventsListViewController {
 
     func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
         submitEvent()
+
+        sut.view.bounds = UIScreen.main.bounds
+        sut.view.layoutIfNeeded()
 
         let index = IndexPath(row: 1, section: 0)
 

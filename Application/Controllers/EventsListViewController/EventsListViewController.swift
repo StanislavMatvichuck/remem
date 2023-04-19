@@ -18,7 +18,9 @@ protocol EventsListViewModelFactoring {
 final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView
+    var dataSource: EventsListDataSource!
     let widgetUpdater: WidgetViewController
+    let cellAnimator: AnimatingHappeningCreation
 
     var viewModel: EventsListViewModel! {
         didSet {
@@ -29,42 +31,44 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
             dataSource.update(viewModel.items, oldValue)
 
             if let renamedItem = viewModel.renamedItem {
-                viewRoot.input.rename(oldName: renamedItem.name)
+                viewRoot.input.rename(oldName: renamedItem.title)
             } else if viewModel.inputVisible {
                 viewRoot.input.show(value: viewModel.inputContent)
             }
 
-            widgetUpdater.update(
-                viewModel.items.filter { type(of: $0) is EventItemViewModel.Type }
-                    as! [EventItemViewModel]
-            )
-
-            animateEventCellForPressingIfNecessary(oldValue: oldValue)
+            widgetUpdater.update(viewModel.items.filter { type(of: $0) is EventItemViewModel.Type } as! [EventItemViewModel])
         }
     }
 
-    lazy var dataSource: EventsListDataSource = {
-        EventsListDataSource(
-            tableView: viewRoot.table,
-            cellProvider: { table, indexPath, identifier in
+    init(
+        viewModelFactory: EventsListViewModelFactoring,
+        view: EventsListView,
+        widgetUpdater: WidgetViewController,
+        cellAnimator: AnimatingHappeningCreation
+    ) {
+        self.factory = viewModelFactory
+        self.viewRoot = view
+        self.widgetUpdater = widgetUpdater
+        self.cellAnimator = cellAnimator
+        super.init(nibName: nil, bundle: nil)
+        self.dataSource = EventsListDataSource(
+            tableView: view.table,
+            cellProvider: { [weak self] table, indexPath, identifier in
+                guard let self else { fatalError() }
+
                 let index = self.viewModel[identifier]!
                 let viewModel = self.viewModel.items[index]
-                return EventsListCellProvider.cell(
+                let cell = EventsListDataSource.cell(
                     table: table,
                     forIndex: indexPath,
                     viewModel: viewModel
                 )
+
+                if let cell = cell as? EventItem { cell.cellAnimator = cellAnimator }
+
+                return cell
             }
         )
-    }()
-
-    init(_ factory: EventsListViewModelFactoring) {
-        self.factory = factory
-
-        self.viewRoot = EventsListView()
-        self.widgetUpdater = WidgetViewController()
-
-        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -80,7 +84,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     private func setupTableView() {
         let table = viewRoot.table
         table.delegate = self
-        EventsListCellProvider.register(table)
+        dataSource.register(table)
     }
 
     private func setupEventHandlers() {
@@ -98,26 +102,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 
     func tableView(_ table: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let viewModel = viewModel.items[indexPath.row]
-        let cell = EventsListCellProvider.cell(
-            table: table,
-            forIndex: indexPath,
-            viewModel: viewModel
-        )
-        guard let cellWithConfiguration = cell as? TrailingSwipeActionsConfigurationProviding else { return nil }
-        return cellWithConfiguration.trailingActionsConfiguration()
-    }
-
-    private func animateEventCellForPressingIfNecessary(oldValue: EventsListViewModel?) {
-        if let oldHint = oldValue?.items.first as? HintItemViewModel, oldHint.title == HintState.placeFirstMark.text,
-           let hint = viewModel.items.first as? HintItemViewModel, hint.title == HintState.pressMe.text
-        {
-            let eventCell = viewRoot.table.visibleCells.first(where: { $0 is EventItem })
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                eventCell?.animateTapReceiving()
-            }
-        }
+        let cell = table.cellForRow(at: indexPath) as! TrailingSwipeActionsConfigurationProviding
+        return cell.trailingActionsConfiguration()
     }
 }
 

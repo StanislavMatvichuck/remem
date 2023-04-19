@@ -34,7 +34,7 @@ final class WidgetViewController {
 
 extension WidgetEventItemViewModel {
     init(item: EventItemViewModel) {
-        name = item.name
-        amount = item.amount
+        name = item.title
+        amount = item.value
     }
 }

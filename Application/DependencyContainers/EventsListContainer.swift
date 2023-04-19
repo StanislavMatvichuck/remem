@@ -22,7 +22,15 @@ final class EventsListContainer:
     init(parent: ApplicationContainer) { self.parent = parent }
 
     func make() -> UIViewController {
-        let controller = EventsListViewController(self)
+        let view = EventsListView()
+        let animator = DefaultHappeningCreationAnimator(table: view.table)
+        let controller = EventsListViewController(
+            viewModelFactory: self,
+            view: view,
+            widgetUpdater: WidgetViewController(),
+            cellAnimator: animator
+        )
+
         updater.addDelegate(controller)
         return controller
     }
@@ -85,14 +93,23 @@ final class EventsListContainer:
     ) -> EventItemViewModel {
         EventItemViewModel(
             event: event,
-            today: today,
             hintEnabled: hintEnabled,
-            commander: commander,
-            renameHandler: WeakRef(renameHandler as? EventsListViewController),
+            today: today,
             tapHandler: {
-                self.parent.coordinator.show(.eventDetails(
-                    factory: self.makeContainer(event: event, today: today)
-                ))
+                self.parent.coordinator.show(.eventDetails(factory: self.makeContainer(
+                    event: event,
+                    today: today
+                )))
+            },
+            swipeHandler: {
+                event.addHappening(date: .now)
+                self.commander.save(event)
+            },
+            renameActionHandler: { renameHandler?.renameTapped($0) },
+            deleteActionHandler: { self.commander.delete(event) },
+            renameHandler: { newName, event in
+                event.name = newName
+                self.commander.save(event)
             }
         )
     }

@@ -27,11 +27,13 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
                 HintItemViewModel(events: [event]),
                 EventItemViewModel(
                     event: event,
-                    today: today,
                     hintEnabled: false,
-                    commander: commander,
-                    renameHandler: nil,
-                    tapHandler: {}
+                    today: today,
+                    tapHandler: {},
+                    swipeHandler: {},
+                    renameActionHandler: { _ in },
+                    deleteActionHandler: {},
+                    renameHandler: { _, _ in }
                 ),
                 FooterItemViewModel(eventsCount: 1, tapHandler: nil),
             ]
