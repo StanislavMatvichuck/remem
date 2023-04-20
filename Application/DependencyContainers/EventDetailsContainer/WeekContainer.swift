@@ -60,7 +60,9 @@ final class WeekContainer:
     func makeContainer(day: DayIndex) -> DayDetailsContainer {
         DayDetailsContainer(
             parent: self,
-            day: day
+            day: day,
+            hour: calendar.component(.hour, from: .now),
+            minute: calendar.component(.minute, from: .now)
         )
     }
 }

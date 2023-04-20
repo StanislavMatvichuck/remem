@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-protocol DayDetailsViewModelFactoring { func makeDayViewModel() -> DayDetailsViewModel }
+protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel() -> DayDetailsViewModel }
 
 final class DayDetailsViewController: UIViewController {
     let factory: DayDetailsViewModelFactoring
@@ -20,7 +20,7 @@ final class DayDetailsViewController: UIViewController {
 
     init(_ factory: DayDetailsViewModelFactoring) {
         self.factory = factory
-        self.viewModel = factory.makeDayViewModel()
+        self.viewModel = factory.makeDayDetailsViewModel()
         self.viewRoot = DayDetailsView(viewModel: viewModel)
 
         super.init(nibName: nil, bundle: nil)

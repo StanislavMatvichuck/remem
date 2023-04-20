@@ -19,13 +19,19 @@ final class DayDetailsContainer:
 
     let parent: WeekContainer
     let day: DayIndex
+    let hour: Int
+    let minute: Int
 
     init(
         parent: WeekContainer,
-        day: DayIndex
+        day: DayIndex,
+        hour: Int,
+        minute: Int
     ) {
         self.parent = parent
         self.day = day
+        self.hour = hour
+        self.minute = minute
     }
 
     func make() -> UIViewController {
@@ -42,13 +48,13 @@ final class DayDetailsContainer:
         )
     }
 
-    func makeDayViewModel() -> DayDetailsViewModel {
+    func makeDayDetailsViewModel() -> DayDetailsViewModel {
         DayDetailsViewModel(
             day: day,
             event: event,
             isToday: day == parent.today,
-            hour: calendar.component(.hour, from: .now),
-            minute: calendar.component(.minute, from: .now),
+            hour: hour,
+            minute: minute,
             commander: commander,
             itemFactory: self
         )
