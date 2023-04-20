@@ -40,7 +40,7 @@ final class HintItem: UITableViewCell, EventsListCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
-        contentView.addAndConstrain(label)
+        contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
         let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare)
         heightConstraint.priority = .defaultHigh
         heightConstraint.isActive = true
