@@ -12,6 +12,7 @@
 "eventsList.hint.swipeLeft" = "swipe left";
 "eventsList.title" = "Events";
 "eventsList.new" = "Short title or emoji";
+"eventsList.timeSince" = "latest happening";
 
 "summary.total" = "Total happenings";
 "summary.weekAverage" = "Week average";

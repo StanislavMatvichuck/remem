@@ -12,6 +12,7 @@
 "eventsList.hint.swipeLeft" = "свайп ліворуч";
 "eventsList.title" = "Події";
 "eventsList.new" = "Коротка назва або емодзі";
+"eventsList.timeSince" = "остання подія";
 
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";

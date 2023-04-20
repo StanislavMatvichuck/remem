@@ -12,6 +12,7 @@
 "eventsList.hint.swipeLeft" = "nach links wischen";
 "eventsList.title" = "Ereignisse";
 "eventsList.new" = "Kurzname oder emoji";
+"eventsList.timeSince" = "neustes geschehen";
 
 "summary.total" = "Totale Happenings";
 "summary.weekAverage" = "Wochendurchschnitt";

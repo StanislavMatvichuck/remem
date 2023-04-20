@@ -37,8 +37,9 @@ struct EventItemViewModel: EventsListItemViewModeling {
     let delete = String(localizationId: "button.delete")
 
     let title: String
-    let hintEnabled: Bool
     let value: String
+    let timeSince: String
+    let hintEnabled: Bool
     let tapHandler: TapHandler
     let swipeHandler: SwipeHandler
     let renameActionHandler: RenameActionHandler
@@ -55,11 +56,20 @@ struct EventItemViewModel: EventsListItemViewModeling {
         deleteActionHandler: @escaping DeleteActionHandler,
         renameHandler: @escaping RenameHandler
     ) {
-        self.event = event
-        self.title = event.name
-        self.hintEnabled = hintEnabled
         self.valueAmount = event.happenings(forDayIndex: today).count
+        self.event = event
+
+        self.title = event.name
         self.value = "\(valueAmount)"
+        self.timeSince = {
+            if let happening = event.happenings.last {
+                return Self.timeSinceDate(date: happening.dateCreated, now: .now)
+            } else {
+                return String(localizationId: "eventsList.timeSince")
+            }
+        }()
+        self.hintEnabled = hintEnabled
+
         self.tapHandler = tapHandler
         self.swipeHandler = swipeHandler
         self.renameActionHandler = renameActionHandler
@@ -77,5 +87,13 @@ struct EventItemViewModel: EventsListItemViewModeling {
         lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value
+    }
+
+    static func timeSinceDate(date: Date, now: Date) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        formatter.maximumUnitCount = 2
+        formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
+        return formatter.string(from: date, to: now) ?? ""
     }
 }

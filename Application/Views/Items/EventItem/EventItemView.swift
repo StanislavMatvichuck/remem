@@ -78,7 +78,6 @@ final class EventItemView: UIView {
         label.numberOfLines = 1
         label.font = .fontSmall
         label.textColor = UIColor.text_secondary
-        label.text = "time since last happening"
         return label
     }()
 
@@ -124,6 +123,7 @@ final class EventItemView: UIView {
     func configure(_ viewModel: EventItemViewModel) {
         nameLabel.text = viewModel.title
         valueLabel.text = viewModel.value
+        timeSinceLabel.text = viewModel.timeSince
         viewModel.hintEnabled ? addSwipingHint() : removeSwipingHint()
     }
 
