@@ -70,6 +70,7 @@ final class EventInputSnapshots: FBSnapshotTestCase {
     private func executeWithDarkMode(_ testCase: () -> Void) {
         parent.overrideUserInterfaceStyle = .dark
         executeRunLoop()
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         testCase()
     }
     

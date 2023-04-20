@@ -61,6 +61,7 @@ final class EventsListSnapshots:
         makeWithVisitedEvent()
         putInViewHierarchy(sut)
         sut.view.overrideUserInterfaceStyle = .dark
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         executeRunLoop()
         FBSnapshotVerifyViewController(sut)
     }
@@ -97,6 +98,7 @@ final class EventsListSnapshots:
     private func executeWithDarkMode(_ testCase: () -> Void) {
         sut.view.overrideUserInterfaceStyle = .dark
         executeRunLoop()
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         testCase()
     }
 

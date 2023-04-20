@@ -41,7 +41,7 @@ final class SwipingHintDisplaySnapshots: FBSnapshotTestCase {
         FBSnapshotVerifyView(sut)
     }
     
-    func testDark() {
+    func test_dark() {
         configureDarkMode()
         FBSnapshotVerifyView(sut)
     }
@@ -72,5 +72,6 @@ final class SwipingHintDisplaySnapshots: FBSnapshotTestCase {
     
     private func configureDarkMode() {
         sut.window?.overrideUserInterfaceStyle = .dark
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
     }
 }

@@ -106,6 +106,7 @@ final class WeekSnapshots:
         sendEventUpdatesToController()
         
         sut.view.overrideUserInterfaceStyle = .dark
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         executeRunLoop()
         
         FBSnapshotVerifyViewController(sut)

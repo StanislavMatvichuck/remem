@@ -15,6 +15,7 @@ final class ZAtlas: FBSnapshotTestCase {
     var spacing: CGFloat { 16.0 * scale }
     var atlasSize: CGSize { CGSize(width: 6 * (width + spacing) * scale, height: 1 * (height + spacing) * scale) }
     var atlasFrame: CGRect { CGRect(origin: .zero, size: atlasSize) }
+    var deviceName: String { UIDevice.current.name }
     
     var parent: UIView!
     
@@ -38,7 +39,7 @@ final class ZAtlas: FBSnapshotTestCase {
     }
     
     func test02_snapshotImageCanBeAdded() {
-        let view = makeImageViewFor(testName: "EventsList/test_empty")
+        let view = makeImageViewFor(testName: "\(deviceName)/light/EventsList/test_empty")
         
         parent.addAndConstrain(view, constant: spacing)
         
@@ -48,10 +49,10 @@ final class ZAtlas: FBSnapshotTestCase {
     func test03_someSnapshotsCanBeAddedHorizontally() {
         parent.addAndConstrain(
             makeRow(testNames: [
-                "EventsList/test_empty",
-                "EventsList/test_addButton_inputShown",
-                "EventsList/test_oneItem",
-                "EventsList/test_oneItem_swiped",
+                "\(deviceName)/light/EventsList/test_empty",
+                "\(deviceName)/light/EventsList/test_addButton_inputShown",
+                "\(deviceName)/light/EventsList/test_oneItem",
+                "\(deviceName)/light/EventsList/test_oneItem_swiped",
             ]),
             constant: spacing)
         
@@ -62,7 +63,7 @@ final class ZAtlas: FBSnapshotTestCase {
         parent.addAndConstrain(
             makeRow(testNames: [
                 nil,
-                "EventsList/test_empty",
+                "\(deviceName)/light/EventsList/test_empty",
             ]),
             constant: spacing)
         
@@ -74,12 +75,12 @@ final class ZAtlas: FBSnapshotTestCase {
         parent.backgroundColor = UIColor.purple
         
         let row01 = makeRow(testNames: [
-            "EventsList/test_empty",
-            "EventsList/test_addButton_inputShown",
-            "EventsList/test_oneItem",
-            "EventsList/test_oneItem_swiped",
-            "EventDetails/test_singleHappening",
-            "EventsList/test_oneItem_visited",
+            "\(deviceName)/light/EventsList/test_empty",
+            "\(deviceName)/light/EventsList/test_addButton_inputShown",
+            "\(deviceName)/light/EventsList/test_oneItem",
+            "\(deviceName)/light/EventsList/test_oneItem_swiped",
+            "\(deviceName)/light/EventDetails/test_singleHappening",
+            "\(deviceName)/light/EventsList/test_oneItem_visited",
         ])
         
         parent.addAndConstrain(row01, constant: spacing)
@@ -92,16 +93,17 @@ final class ZAtlas: FBSnapshotTestCase {
         parent.backgroundColor = UIColor.purple
         
         let row01 = makeRow(testNames: [
-            "EventsList/test_empty_dark",
-            "EventsList/test_addButton_inputShown_dark",
-            "EventsList/test_oneItem_dark",
-            "EventsList/test_oneItem_swiped_dark",
-            "EventDetails/test_singleHappening_dark",
-            "EventsList/test_oneItem_visited_dark",
+            "\(deviceName)/dark/EventsList/test_empty_dark",
+            "\(deviceName)/dark/EventsList/test_addButton_inputShown_dark",
+            "\(deviceName)/dark/EventsList/test_oneItem_dark",
+            "\(deviceName)/dark/EventsList/test_oneItem_swiped_dark",
+            "\(deviceName)/dark/EventDetails/test_singleHappening_dark",
+            "\(deviceName)/dark/EventsList/test_oneItem_visited_dark",
         ])
         
         parent.addAndConstrain(row01, constant: spacing)
         
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         FBSnapshotVerifyView(parent)
     }
     
@@ -127,8 +129,7 @@ final class ZAtlas: FBSnapshotTestCase {
         ])
         
         let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        let screenSize = "_\(Int(width))x\(Int(height))"
-        let path = "\(directory)/\(testName ?? "nil")\(screenSize).png"
+        let path = "\(directory)/\(testName ?? "nil").png"
         
         if let image = UIImage(contentsOfFile: path) {
             view.image = image

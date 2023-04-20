@@ -23,8 +23,9 @@ extension UIUserInterfaceStyle: CustomStringConvertible {
 extension FBSnapshotTestCase {
     func configureCommonOptions() {
         recordMode = false
-        fileNameOptions = [.screenSize]
-        folderName = "\(String(describing: type(of: self)))".replacingOccurrences(of: "Snapshots", with: "")
+        fileNameOptions = [.none]
+        let deviceName = UIDevice.current.name
+        folderName = "\(deviceName)/light/\(String(describing: type(of: self)))".replacingOccurrences(of: "Snapshots", with: "")
     }
 }
 

@@ -33,6 +33,7 @@ final class PdfSnapshots:
 
     func test_referenceDate_dark() {
         sut.view.window?.overrideUserInterfaceStyle = .dark
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         executeRunLoop()
         FBSnapshotVerifyViewController(sut)
     }

@@ -35,6 +35,7 @@ final class SummarySnapshots: FBSnapshotTestCase, TestingViewController {
     private func executeWithDarkMode(testCase: () -> Void) {
         sut.view.window?.overrideUserInterfaceStyle = .dark
         executeRunLoop()
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         testCase()
     }
 }

@@ -81,5 +81,6 @@ final class ClockSnapshots:
 
     private func configureDarkMode() {
         sut.view.window?.overrideUserInterfaceStyle = .dark
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
     }
 }

@@ -42,6 +42,7 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, TestingViewController {
     private func executeWithDarkMode(_ testCase: () -> Void) {
         sut.view.window?.overrideUserInterfaceStyle = .dark
         executeRunLoop()
+        if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         testCase()
     }
     
