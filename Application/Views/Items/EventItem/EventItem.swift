@@ -65,6 +65,18 @@ final class EventItem: UITableViewCell, EventsListCell {
         ))
     }
 
+    private func vibrateOnSwipe() {
+        let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        impactFeedbackGenerator.prepare()
+        impactFeedbackGenerator.impactOccurred()
+    }
+
+    private func vibrateOnSuccess() {
+        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+        notificationFeedbackGenerator.prepare()
+        notificationFeedbackGenerator.notificationOccurred(.success)
+    }
+
     // MARK: - Events handling
     @objc private func handleTap() { viewModel?.tapHandler() }
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
@@ -81,15 +93,21 @@ final class EventItem: UITableViewCell, EventsListCell {
                 forXDistance: distance,
                 andScaleFactor: scale
             )
+
+            vibrateOnSwipe()
+
         case .changed:
             swipeAnimator.set(progress: progress)
         default:
             if progress >= 1.0 {
                 swipeAnimator.animateSuccess { [weak self] in
                     self?.viewModel?.swipeHandler()
+                    self?.vibrateOnSuccess()
                 }
             } else {
-                swipeAnimator.returnToStart(from: progress)
+                swipeAnimator.returnToStart(from: progress) { [weak self] in
+                    self?.vibrateOnSwipe()
+                }
             }
         }
     }

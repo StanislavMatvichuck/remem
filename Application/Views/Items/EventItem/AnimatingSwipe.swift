@@ -10,7 +10,7 @@ import UIKit
 protocol AnimatingSwipe {
     func start(animated: UIView, forXDistance: CGFloat, andScaleFactor: CGFloat)
     func set(progress: CGFloat)
-    func returnToStart(from: CGFloat)
+    func returnToStart(from: CGFloat, completion: @escaping () -> Void)
     func animateSuccess(completion: @escaping () -> Void)
     func prepareForReuse()
 }
@@ -44,12 +44,13 @@ final class DefaultSwipeAnimator: AnimatingSwipe {
         animator.fractionComplete = progress
     }
 
-    func returnToStart(from progress: CGFloat) {
+    func returnToStart(from progress: CGFloat, completion: @escaping () -> Void) {
         animator.isReversed = true
         animator.continueAnimation(
             withTimingParameters: nil,
             durationFactor: progress
         )
+        animator.addCompletion { _ in completion() }
     }
 
     func prepareForReuse() {
