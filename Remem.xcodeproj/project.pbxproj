@@ -770,6 +770,17 @@
 			path = ApplicationUITests;
 			sourceTree = "<group>";
 		};
+		085A2C2F29F15144005C6E5E /* EventItem */ = {
+			isa = PBXGroup;
+			children = (
+				080F9F2629ED51810013CBFE /* EventItem.swift */,
+				080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */,
+				080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */,
+				080F9F2A29ED6C050013CBFE /* EventItemView.swift */,
+			);
+			path = EventItem;
+			sourceTree = "<group>";
+		};
 		0867A2CA28D469F400E0842C /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,13 +829,10 @@
 			isa = PBXGroup;
 			children = (
 				08B26A15289E98B700DFBAC8 /* DayItem.swift */,
+				085A2C2F29F15144005C6E5E /* EventItem */,
 				08F50DC82965EF5300B65CDF /* FooterItem.swift */,
 				08F50DC62965EEDA00B65CDF /* HintItem.swift */,
 				08293CC027B670FC0039E432 /* WeekItem.swift */,
-				080F9F2629ED51810013CBFE /* EventItem.swift */,
-				080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */,
-				080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */,
-				080F9F2A29ED6C050013CBFE /* EventItemView.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
