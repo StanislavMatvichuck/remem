@@ -9,7 +9,7 @@
 import XCTest
 
 final class SwipingHintDisplayingTests: XCTestCase {
-    final class ParentView: UIView, UsingSwipingHintDisplaying {}
+    final class ParentView: UIView {}
     var sut: ParentView!
     var display: SwipingHintDisplaying!
 

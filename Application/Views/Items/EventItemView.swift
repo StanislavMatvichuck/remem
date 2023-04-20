@@ -70,6 +70,7 @@ final class EventItemView: UIView {
     func configure(_ viewModel: EventItemViewModel) {
         nameLabel.text = viewModel.title
         valueLabel.text = viewModel.value
+        viewModel.hintEnabled ? addSwipingHint() : removeSwipingHint()
     }
 
     // MARK: - Private

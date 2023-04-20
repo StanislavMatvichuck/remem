@@ -120,8 +120,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
 
     func test_singleEvent_showsGestureHint() {
         submitEvent()
-        XCTFail("todo")
-//        XCTAssertNotNil(firstEvent.view.swipingHint)
+        XCTAssertNotNil(firstEvent.view.swipingHint)
     }
 
     func test_singleEvent_hasRenameSwipeAction() {
@@ -203,8 +202,8 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
 
     func test_singleEvent_swiped_gestureHintIsNotVisible() {
         arrangeSingleEventSwiped()
-        XCTFail("todo")
-//        XCTAssertNil(firstEvent.view.viewRoot.swipingHint)
+
+        XCTAssertNil(firstEvent.view.swipingHint)
     }
 
     func test_singleEvent_tapped_showsDetails() {

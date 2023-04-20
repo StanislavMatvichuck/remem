@@ -19,7 +19,7 @@ protocol SwipingHintDisplaying: UIView {
     var animationCompletionHandler: (() -> Void)? { get set }
 }
 
-extension UsingSwipingHintDisplaying {
+extension UIView: UsingSwipingHintDisplaying {
     var swipingHint: SwipingHintDisplaying? {
         subviews.filter {
             $0 is SwipingHintDisplaying
@@ -48,8 +48,8 @@ final class SwipingHintDisplay: UIView, SwipingHintDisplaying {
     }
 
     private var duration: Double { 1.6 }
-    private var initialConstant: CGFloat { .buttonRadius }
-    private var finalConstant: CGFloat { UIScreen.main.bounds.width - .buttonRadius - 2 * .buttonMargin }
+    private var initialConstant: CGFloat { .buttonRadius + .buttonMargin }
+    private var finalConstant: CGFloat { bounds.width - initialConstant }
 
     private var horizontalConstraint: NSLayoutConstraint?
     private let circle: UIView = {

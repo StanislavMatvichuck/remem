@@ -48,11 +48,11 @@ final class EventsListContainer:
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
 
-        let eventsViewModels = events.map {
+        let eventsViewModels = events.enumerated().map { index, event in
             makeEventItemViewModel(
-                event: $0,
+                event: event,
                 today: today,
-                hintEnabled: gestureHintEnabled,
+                hintEnabled: gestureHintEnabled && index == 0,
                 renameHandler: handler
             )
         }

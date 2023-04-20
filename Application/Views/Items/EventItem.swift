@@ -36,6 +36,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         swipeAnimator.prepareForReuse()
+        removeSwipingHint()
         viewModel = nil
     }
 
