@@ -20,7 +20,7 @@ final class ZAtlas: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         
         parent = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacing, height: spacing)))
         parent.translatesAutoresizingMaskIntoConstraints = false

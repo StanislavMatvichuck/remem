@@ -18,7 +18,7 @@ final class EventsListSnapshots:
 
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         make()
         putInViewHierarchy(sut)
     }

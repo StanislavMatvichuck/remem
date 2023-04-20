@@ -14,7 +14,7 @@ final class EventInputSnapshots: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         
         sut = EventInput()
         

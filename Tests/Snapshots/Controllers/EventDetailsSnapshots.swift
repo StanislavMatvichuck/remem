@@ -16,7 +16,7 @@ final class EventDetailsSnapshots: FBSnapshotTestCase, TestingViewController {
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         make()
         putInViewHierarchy(sut)
     }

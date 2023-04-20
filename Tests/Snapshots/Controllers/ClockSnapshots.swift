@@ -19,7 +19,7 @@ final class ClockSnapshots:
 
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         make()
         putInViewHierarchy(sut)
     }

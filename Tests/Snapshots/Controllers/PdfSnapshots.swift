@@ -18,7 +18,7 @@ final class PdfSnapshots:
 
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         make()
     }
 

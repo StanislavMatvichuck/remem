@@ -19,7 +19,7 @@ final class WeekSnapshots:
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
     }
     
     override func tearDown() {

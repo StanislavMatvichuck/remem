@@ -13,7 +13,7 @@ final class SwipingHintDisplaySnapshots: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         
         final class ParentView: UIView {}
         

@@ -19,7 +19,7 @@ final class DayDetailsSnapshots:
     
     override func setUp() {
         super.setUp()
-        configureCommonOptions()
+        configureSnapshotsOptions()
         make()
         putInViewHierarchy(sut)
     }
