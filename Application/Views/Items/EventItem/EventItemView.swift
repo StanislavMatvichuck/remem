@@ -28,6 +28,60 @@ final class EventItemView: UIView {
         return label
     }()
 
+    let timeSinceContainer: UIView = {
+        let dotColor = UIColor.background_secondary
+        let backgroundColor = UIColor.secondary_dimmed
+        let dotWidth = .buttonMargin / 3
+
+        let leftDot = UIView(al: true)
+        leftDot.backgroundColor = dotColor
+        leftDot.layer.cornerRadius = dotWidth / 2
+
+        let rightDot = UIView(al: true)
+        rightDot.backgroundColor = dotColor
+        rightDot.layer.cornerRadius = dotWidth / 2
+
+        let corner = UIView(al: true)
+        corner.backgroundColor = backgroundColor
+        corner.layer.cornerRadius = .buttonMargin / 5
+
+        let view = UIView(al: true)
+        view.backgroundColor = backgroundColor
+        view.layer.cornerRadius = .buttonMargin
+
+        view.addSubview(corner)
+        view.addSubview(leftDot)
+        view.addSubview(rightDot)
+        NSLayoutConstraint.activate([
+            corner.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            corner.topAnchor.constraint(equalTo: view.topAnchor),
+            corner.widthAnchor.constraint(equalToConstant: .buttonMargin),
+            corner.heightAnchor.constraint(equalToConstant: .buttonMargin),
+
+            leftDot.centerXAnchor.constraint(equalTo: view.leadingAnchor, constant: .buttonMargin),
+            leftDot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            leftDot.widthAnchor.constraint(equalToConstant: dotWidth),
+            leftDot.heightAnchor.constraint(equalToConstant: dotWidth),
+
+            rightDot.centerXAnchor.constraint(equalTo: view.trailingAnchor, constant: -.buttonMargin),
+            rightDot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            rightDot.widthAnchor.constraint(equalToConstant: dotWidth),
+            rightDot.heightAnchor.constraint(equalToConstant: dotWidth),
+        ])
+
+        return view
+    }()
+
+    let timeSinceLabel: UILabel = {
+        let label = UILabel(al: true)
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.font = .fontSmall
+        label.textColor = UIColor.text_secondary
+        label.text = "time since last happening"
+        return label
+    }()
+
     let circle: UIView = {
         let plusLayer: CAShapeLayer = {
             let plusSize = .buttonRadius / 5
@@ -98,7 +152,10 @@ final class EventItemView: UIView {
         nameLabel.layer.zPosition = 2
         rightSection.layer.zPosition = 1
 
+        timeSinceContainer.addAndConstrain(timeSinceLabel, left: .buttonMargin, right: .buttonMargin)
+
         addSubview(stack)
+        addSubview(timeSinceContainer)
         NSLayoutConstraint.activate([
             leftSection.widthAnchor.constraint(equalToConstant: 2 * .buttonRadius),
             rightSection.widthAnchor.constraint(equalToConstant: 2 * .buttonRadius),
@@ -118,10 +175,15 @@ final class EventItemView: UIView {
             valueBackground.centerXAnchor.constraint(equalTo: rightSection.centerXAnchor),
             valueBackground.centerYAnchor.constraint(equalTo: rightSection.centerYAnchor),
 
+            timeSinceContainer.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
+            timeSinceContainer.centerYAnchor.constraint(equalTo: stack.bottomAnchor),
+            timeSinceContainer.heightAnchor.constraint(equalToConstant: .buttonMargin * 2),
+            timeSinceContainer.widthAnchor.constraint(equalTo: nameLabel.widthAnchor),
+
             stack.heightAnchor.constraint(equalToConstant: .buttonHeight),
             stack.widthAnchor.constraint(equalTo: widthAnchor, constant: .buttonMargin * -2),
             stack.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stack.centerXAnchor.constraint(equalTo: centerXAnchor)
+            stack.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
 

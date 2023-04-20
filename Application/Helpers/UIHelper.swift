@@ -12,6 +12,7 @@ extension UIColor {
     static let background_secondary = UIColor(named: "background_secondary")!
     static let primary = UIColor(named: "primary")!
     static let secondary = UIColor(named: "secondary")!
+    static let secondary_dimmed = UIColor(named: "secondary_dimmed")!
     static let text_primary = UIColor(named: "text_primary")!
     static let text_secondary = UIColor(named: "text_secondary")!
     static let temp = UIColor(named: "temp")!
@@ -30,7 +31,7 @@ extension UIFont {
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)
     static let fontBoldBig: UIFont = makeFont(size: 48.0, weight: .bold)
     static let fontSmallBold: UIFont = makeFont(size: 17.0, weight: .bold)
-    static let fontSmall: UIFont = makeFont(size: 12.0, weight: .regular)
+    static let fontSmall: UIFont = makeFont(size: 12.0, weight: .medium)
 
     private static func makeFont(
         size: CGFloat = 17.0,
