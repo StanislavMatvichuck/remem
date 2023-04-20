@@ -24,16 +24,14 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
     }
 
     func animate(_ item: EventItem) {
-//        print("animateValueIncrement item \(item)")
-
         animateHappeningCreation(item)
 
         guard let index = table.indexPath(for: item) else { return }
         let prevIndex = IndexPath(row: index.row - 1, section: index.section)
         let nextIndex = IndexPath(row: index.row + 1, section: index.section)
 
-        if let neighbour = table.cellForRow(at: prevIndex) { animate(neighbour, .above) }
-        if let neighbour = table.cellForRow(at: nextIndex) { animate(neighbour, .below) }
+        if let neighbour = table.cellForRow(at: prevIndex) as? EventItem { animate(neighbour.view, .above) }
+        if let neighbour = table.cellForRow(at: nextIndex) as? EventItem { animate(neighbour.view, .below) }
     }
 
     private func animateHappeningCreation(_ item: EventItem) {
@@ -92,7 +90,6 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
             duration: SwiperAnimationsHelper.forwardDuration,
             curve: .easeOut
         ) {
-            neighbour.setAnchorPoint(CGPoint(x: 1 / 7, y: 0.5))
             let angle = CGFloat.pi / 180
             neighbour.transform = CGAffineTransform(
                 rotationAngle: position == .above ? -angle : angle
@@ -100,18 +97,12 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
         }
 
         animator.addCompletion { _ in
-            let secondAnimator = UIViewPropertyAnimator(
+            UIViewPropertyAnimator(
                 duration: SwiperAnimationsHelper.forwardDuration,
                 curve: .easeOut
             ) {
                 neighbour.transform = .identity
-            }
-
-            secondAnimator.addCompletion { _ in
-                neighbour.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
-            }
-
-            secondAnimator.startAnimation()
+            }.startAnimation()
         }
 
         animator.startAnimation()
