@@ -21,6 +21,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     var dataSource: EventsListDataSource!
     let widgetUpdater: WidgetViewController
     let cellAnimator: AnimatingHappeningCreation
+    var timer: Timer?
 
     var viewModel: EventsListViewModel! {
         didSet {
@@ -73,12 +74,15 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    deinit { timer?.invalidate() }
+
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         setupTableView()
         setupEventHandlers()
         update()
+        setupTimer()
     }
 
     private func setupTableView() {
@@ -89,6 +93,13 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
     private func setupEventHandlers() {
         viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
+    }
+
+    private func setupTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            self.viewModel = self.factory.makeEventsListViewModel(self)
+        }
     }
 
     @objc private func handleAdd() {

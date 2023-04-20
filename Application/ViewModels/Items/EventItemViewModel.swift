@@ -86,7 +86,8 @@ struct EventItemViewModel: EventsListItemViewModeling {
     static func == (lhs: EventItemViewModel, rhs: EventItemViewModel) -> Bool {
         lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
-            lhs.value == rhs.value
+            lhs.value == rhs.value &&
+            lhs.timeSince == rhs.timeSince
     }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
