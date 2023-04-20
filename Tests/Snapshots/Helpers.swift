@@ -8,6 +8,8 @@
 import iOSSnapshotTestCase
 import UIKit
 
+var deviceName: String { UIDevice.current.name.lowercased().replacingOccurrences(of: " ", with: "") }
+
 extension UIUserInterfaceStyle: CustomStringConvertible {
     public var description: String {
         switch self {
@@ -24,7 +26,6 @@ extension FBSnapshotTestCase {
     func configureCommonOptions() {
         recordMode = false
         fileNameOptions = [.none]
-        let deviceName = UIDevice.current.name
         folderName = "\(deviceName)/light/\(String(describing: type(of: self)))".replacingOccurrences(of: "Snapshots", with: "")
     }
 }

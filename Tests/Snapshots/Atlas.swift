@@ -15,7 +15,6 @@ final class ZAtlas: FBSnapshotTestCase {
     var spacing: CGFloat { 16.0 * scale }
     var atlasSize: CGSize { CGSize(width: 6 * (width + spacing) * scale, height: 1 * (height + spacing) * scale) }
     var atlasFrame: CGRect { CGRect(origin: .zero, size: atlasSize) }
-    var deviceName: String { UIDevice.current.name }
     
     var parent: UIView!
     
