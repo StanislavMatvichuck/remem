@@ -51,14 +51,14 @@ final class EventsListSnapshots:
     func test_oneItem_swiped_dark() { executeWithDarkMode(test_oneItem_swiped) }
 
     func test_oneItem_visited() {
-        sut = EventsListViewController(VisitedEventListFactory())
+        makeWithVisitedEvent()
 
         FBSnapshotVerifyViewController(sut)
     }
 
     /// Cannot use executeWithDarkMode because sut is recreated
     func test_oneItem_visited_dark() {
-        sut = EventsListViewController(VisitedEventListFactory())
+        makeWithVisitedEvent()
         putInViewHierarchy(sut)
         sut.view.overrideUserInterfaceStyle = .dark
         executeRunLoop()

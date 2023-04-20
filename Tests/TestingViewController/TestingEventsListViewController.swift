@@ -76,4 +76,16 @@ extension TestingViewController where Controller == EventsListViewController {
         sut.view.bounds = UIScreen.main.bounds
         sut.view.layoutIfNeeded()
     }
+
+    // MARK: - Specific cases
+    func makeWithVisitedEvent() {
+        let view = EventsListView()
+        let factory = VisitedEventListFactory()
+        sut = EventsListViewController(
+            viewModelFactory: factory,
+            view: view,
+            widgetUpdater: WidgetViewController(),
+            cellAnimator: DefaultHappeningCreationAnimator(table: view.table)
+        )
+    }
 }

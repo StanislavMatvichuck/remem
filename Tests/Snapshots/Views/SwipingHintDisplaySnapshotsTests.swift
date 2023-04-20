@@ -15,7 +15,7 @@ final class SwipingHintDisplaySnapshots: FBSnapshotTestCase {
         super.setUp()
         configureCommonOptions()
         
-        final class ParentView: UIView, UsingSwipingHintDisplaying {}
+        final class ParentView: UIView {}
         
         sut = ParentView(frame: CGRect(
             x: 0, y: 0,

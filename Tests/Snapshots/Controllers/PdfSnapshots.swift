@@ -19,7 +19,6 @@ final class PdfSnapshots:
     override func setUp() {
         super.setUp()
         configureCommonOptions()
-        recordMode = true
         make()
     }
 
