@@ -30,7 +30,7 @@ final class EventItemView: UIView {
 
     let circle: UIView = {
         let plusLayer: CAShapeLayer = {
-            let plusSize = .buttonRadius / 4
+            let plusSize = .buttonRadius / 5
             let center = CGFloat.buttonRadius - .buttonMargin
 
             let path = UIBezierPath()
@@ -123,5 +123,13 @@ final class EventItemView: UIView {
             stack.centerYAnchor.constraint(equalTo: centerYAnchor),
             stack.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
+    }
+
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if let plus = circle.layer.sublayers?.first as? CAShapeLayer {
+            plus.strokeColor = UIColor.background_secondary.cgColor
+        }
     }
 }
