@@ -11,16 +11,7 @@ import UIKit
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
-    let presentationAnimator = DayDetailsPresentationAnimator()
-    let dismissAnimator = DayDetailsDismissAnimator()
-    let dismissTransition: UIPercentDrivenInteractiveTransition = {
-        let transition = UIPercentDrivenInteractiveTransition()
-        transition.wantsInteractiveStart = false
-        return transition
-    }()
-
-    var animatedCellIndex: IndexPath?
-
+    let presenter: WeekToDayDetailsPresenter
     let factory: WeekViewModelFactoring
     let viewRoot: WeekView
 
@@ -36,6 +27,7 @@ final class WeekViewController: UIViewController {
         self.factory = factory
         self.viewModel = factory.makeWeekViewModel()
         self.viewRoot = WeekView()
+        self.presenter = WeekToDayDetailsPresenter()
 
         super.init(nibName: nil, bundle: nil)
 
@@ -88,7 +80,7 @@ extension WeekViewController:
 
         cell.viewModel = viewModel.timeline[indexPath.row]
 
-        if animatedCellIndex == indexPath { dismissAnimator.prepareForAnimation(cell) }
+        if presenter.animatedCellIndex == indexPath { presenter.dismissAnimator.prepareForAnimation(cell) }
 
         return cell
     }
@@ -99,9 +91,8 @@ extension WeekViewController:
 
         let cellYOffset = cell.convert(cell.frame, to: nil).minY
 
-        presentationAnimator.originHeight = cellYOffset
-
-        animatedCellIndex = indexPath
+        presenter.presentationAnimator.originHeight = cellYOffset
+        presenter.animatedCellIndex = indexPath
 
         viewModel.timeline[indexPath.row]?.select()
     }
@@ -127,9 +118,9 @@ extension WeekViewController:
 
 // MARK: - UIViewControllerTransitioningDelegate
 extension WeekViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? { presentationAnimator }
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? { dismissAnimator }
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? { dismissTransition }
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? { presenter.presentationAnimator }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? { presenter.dismissAnimator }
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? { presenter.dismissTransition }
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         DayDetailsPresentationController(
             week: self,
