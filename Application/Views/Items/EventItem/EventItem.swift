@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 17.04.2023.
 //
 
+import AudioToolbox
 import UIKit
 
 final class EventItem: UITableViewCell, EventsListCell {
@@ -77,6 +78,12 @@ final class EventItem: UITableViewCell, EventsListCell {
         notificationFeedbackGenerator.notificationOccurred(.success)
     }
 
+    private func playSound() {
+        var soundID: SystemSoundID = 1104
+        AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: "/System/Library/Audio/UISounds/camera_shutter.caf"), &soundID)
+        AudioServicesPlaySystemSound(soundID)
+    }
+
     // MARK: - Events handling
     @objc private func handleTap() { viewModel?.tapHandler() }
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
@@ -103,6 +110,7 @@ final class EventItem: UITableViewCell, EventsListCell {
                 swipeAnimator.animateSuccess { [weak self] in
                     self?.viewModel?.swipeHandler()
                     self?.vibrateOnSuccess()
+                    self?.playSound()
                 }
             } else {
                 swipeAnimator.returnToStart(from: progress) { [weak self] in
