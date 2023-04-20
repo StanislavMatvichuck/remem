@@ -88,4 +88,11 @@ extension TestingViewController where Controller == EventsListViewController {
             cellAnimator: DefaultHappeningCreationAnimator(table: view.table)
         )
     }
+
+    func makeWithManyEvents() {
+        submitEvent()
+        swipeFirstEvent()
+        submitEvent()
+        submitEvent()
+    }
 }

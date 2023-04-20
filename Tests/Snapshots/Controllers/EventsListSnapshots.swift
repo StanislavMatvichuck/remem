@@ -65,6 +65,13 @@ final class EventsListSnapshots:
         FBSnapshotVerifyViewController(sut)
     }
 
+    func test_manyItems() {
+        makeWithManyEvents()
+        FBSnapshotVerifyViewController(sut)
+    }
+
+    func test_manyItems_dark() { executeWithDarkMode(test_manyItems) }
+
     /// Duplicates with EventInput tests
     func test_addButton_inputShown() {
         usesDrawViewHierarchyInRect = true
