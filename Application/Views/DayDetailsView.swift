@@ -112,5 +112,6 @@ final class DayDetailsView: UIView {
         let title = NSAttributedString(string: viewModel.create, attributes: attributes)
 
         button.setAttributedTitle(title, for: .normal)
+        button.titleLabel?.numberOfLines = 3
     }
 }
