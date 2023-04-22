@@ -813,19 +813,19 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
-				0849699529B4907F00CDBBC8 /* DependencyContainersTests.swift */,
-				08A331E729A8EAFE000B68A1 /* WatchingTests.swift */,
 				08D8F0B729AB786500C34041 /* CoordinatorTests.swift */,
+				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
+				0849699529B4907F00CDBBC8 /* DependencyContainersTests.swift */,
+				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
+				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
+				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
+				08A331E729A8EAFE000B68A1 /* WatchingTests.swift */,
+				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
+				08CC50682906DE6300840385 /* Helpers */,
+				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				0887C812298B0C460048EC12 /* Timelines */,
 				087365FE2930DD0C000F28DE /* ViewModels */,
 				0891377E292BEA3800EFD23D /* Views */,
-				0891377B292BE55600EFD23D /* ControllersIntegrationTests */,
-				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
-				08CC50682906DE6300840385 /* Helpers */,
-				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
-				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
-				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
-				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
