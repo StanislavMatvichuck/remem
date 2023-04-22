@@ -5,8 +5,13 @@
 //  Created by Stanislav Matvichuck on 14.09.2022.
 //
 
+public enum EventsQuerySorter {
+    case alphabetical
+}
+
 public protocol EventsQuerying {
     func get() -> [Event]
+    func get(using: EventsQuerySorter) -> [Event]
 }
 
 public protocol EventsCommanding {

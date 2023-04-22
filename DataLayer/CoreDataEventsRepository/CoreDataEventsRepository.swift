@@ -21,6 +21,24 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
         self.entityMapper = mapper
     }
 
+    public func get(using sort: EventsQuerySorter) -> [Event] {
+        do {
+            switch sort {
+            case .alphabetical:
+                let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+
+                let request = CDEvent.fetchRequest()
+                request.sortDescriptors = [sortDescriptor]
+
+                let fetchedCDEvents = try moc.fetch(request)
+
+                return fetchedCDEvents.map { entityMapper.convert($0)! }
+            }
+        } catch {
+            fatalError("unable to fetch events")
+        }
+    }
+
     public func get() -> [Event] { allEvents.compactMap { entityMapper.convert($0) } }
 
     public func save(_ event: Event) {
