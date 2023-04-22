@@ -17,8 +17,6 @@
 		080F9F2B29ED6C050013CBFE /* EventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2A29ED6C050013CBFE /* EventItemView.swift */; };
 		080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */; };
 		080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */; };
-		081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
-		081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */; };
 		08246C0529B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
@@ -34,7 +32,6 @@
 		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
-		0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
 		0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877529BC9EDE00FF9839 /* MulticastDelegate.swift */; };
 		0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877729BCA04D00FF9839 /* ViewControllersUpdater.swift */; };
@@ -48,6 +45,14 @@
 		0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EAD0A28DDDD55001EE985 /* WidgetEventsQuerying.swift */; };
 		083380422944F9100021281C /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0835D0FE2934CDB50099AFF6 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
+		0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
+		0838C7C429F3F1BD00079453 /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
+		0838C7C529F3F1BD00079453 /* DayTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1855298AC8C100DBC78D /* DayTimeline.swift */; };
+		0838C7C629F3F1BD00079453 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */; };
+		0838C7C729F3F1BD00079453 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
+		0838C7C829F3F1BD00079453 /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
+		0838C7C929F3F1BD00079453 /* WeekTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C800298AD3590048EC12 /* WeekTimeline.swift */; };
+		0838C7CA29F3F1BD00079453 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
 		08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EE929A64B5900281E51 /* WidgetViewController.swift */; };
 		08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EEB29A6523700281E51 /* UpdatingCommander.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
@@ -88,7 +93,6 @@
 		085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
-		0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
@@ -114,10 +118,6 @@
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */; };
 		0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C806298AE5040048EC12 /* ExtensionEvent.swift */; };
-		0887C808298AE5770048EC12 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
-		0887C809298AE5770048EC12 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
-		0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1855298AC8C100DBC78D /* DayTimeline.swift */; };
-		0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C800298AD3590048EC12 /* WeekTimeline.swift */; };
 		0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */; };
 		0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */; };
@@ -203,13 +203,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		080DF8C628DDE9D5001377A9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 08D5121927870D2500C2037F;
-			remoteInfo = Application;
-		};
 		0835D0FC2934CDA50099AFF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08D5121227870D2500C2037F /* Project object */;
@@ -230,13 +223,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 08D5121927870D2500C2037F;
 			remoteInfo = Application;
-		};
-		0867A2D228D469F500E0842C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08D5121227870D2500C2037F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0867A2C828D469F400E0842C;
-			remoteInfo = RememDataLayer;
 		};
 		0867A2DA28D469F500E0842C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -364,6 +350,7 @@
 		08292EC6292E24F700F46A32 /* ClockSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSnapshots.swift; sourceTree = "<group>"; };
 		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItem.swift; sourceTree = "<group>"; };
+		082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		08396EE929A64B5900281E51 /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		08396EEB29A6523700281E51 /* UpdatingCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingCommander.swift; sourceTree = "<group>"; };
@@ -411,7 +398,6 @@
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0861364F2934D64300F1B780 /* TestingWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingWeekViewController.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0867A2D028D469F500E0842C /* DataLayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataLayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
@@ -557,14 +543,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0867A2CD28D469F500E0842C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0867A2D128D469F500E0842C /* DataLayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,14 +771,6 @@
 			path = DataLayer;
 			sourceTree = "<group>";
 		};
-		0867A2D628D469F500E0842C /* DataLayerTests */ = {
-			isa = PBXGroup;
-			children = (
-				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
-			);
-			path = DataLayerTests;
-			sourceTree = "<group>";
-		};
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -853,6 +823,7 @@
 				08F82FE1291E5CFB0033AB0D /* StubsFakesSpiesMocks */,
 				08CC50682906DE6300840385 /* Helpers */,
 				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
+				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
 				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
 				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 			);
@@ -942,10 +913,13 @@
 				08FE1857298AC90900DBC78D /* DayIndex.swift */,
 				0887C802298AD39E0048EC12 /* WeekIndex.swift */,
 				081391DD29B8D25A008069FB /* DateIndexing.swift */,
+				082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */,
 				081391DB29B8C780008069FB /* MinuteIndex.swift */,
 			);
 			path = Timelines;
 			sourceTree = "<group>";
+			tabWidth = 6;
+			usesTabs = 0;
 		};
 		08B89A2428E318F700F4B63B /* Views */ = {
 			isa = PBXGroup;
@@ -999,7 +973,6 @@
 				083BECF128D0A319009157FD /* libDomain.a */,
 				087ED41A28D0A54C0085A37D /* DomainTests.xctest */,
 				0867A2C928D469F400E0842C /* DataLayer.framework */,
-				0867A2D028D469F500E0842C /* DataLayerTests.xctest */,
 				0850074929216E73007B272C /* ApplicationSnapshotsTests.xctest */,
 				0857B5A329892CBC002B400B /* ApplicationUITests.xctest */,
 			);
@@ -1063,8 +1036,8 @@
 		08D5123E278716DA00C2037F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0828877929BCA15E00FF9839 /* Updating */,
 				089C5B9429A7D4A000B1B977 /* Timelines */,
+				0828877929BCA15E00FF9839 /* Updating */,
 				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
@@ -1126,7 +1099,6 @@
 				08E63E53294099F900F87F25 /* TestingViewController */,
 				0870EEF92809B81100336759 /* ApplicationTests */,
 				0850074A29216E73007B272C /* Snapshots */,
-				0867A2D628D469F500E0842C /* DataLayerTests */,
 				087ED41B28D0A54C0085A37D /* DomainTests */,
 			);
 			path = Tests;
@@ -1238,25 +1210,6 @@
 			productReference = 0867A2C928D469F400E0842C /* DataLayer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0867A2CF28D469F500E0842C /* DataLayerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayerTests" */;
-			buildPhases = (
-				0867A2CC28D469F500E0842C /* Sources */,
-				0867A2CD28D469F500E0842C /* Frameworks */,
-				0867A2CE28D469F500E0842C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0867A2D328D469F500E0842C /* PBXTargetDependency */,
-				080DF8C728DDE9D5001377A9 /* PBXTargetDependency */,
-			);
-			name = DataLayerTests;
-			productName = RememDataLayerTests;
-			productReference = 0867A2D028D469F500E0842C /* DataLayerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		0870EEF72809B81100336759 /* ApplicationTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0870EF012809B81100336759 /* Build configuration list for PBXNativeTarget "ApplicationTests" */;
@@ -1347,10 +1300,6 @@
 					0867A2C828D469F400E0842C = {
 						CreatedOnToolsVersion = 14.0;
 					};
-					0867A2CF28D469F500E0842C = {
-						CreatedOnToolsVersion = 14.0;
-						TestTargetID = 08D5121927870D2500C2037F;
-					};
 					0870EEF72809B81100336759 = {
 						CreatedOnToolsVersion = 13.3;
 						LastSwiftMigration = 1400;
@@ -1389,7 +1338,6 @@
 				0826AC8E28C86ECE0021D607 /* Widgets */,
 				0867A2C828D469F400E0842C /* DataLayer */,
 				087ED41928D0A54C0085A37D /* DomainTests */,
-				0867A2CF28D469F500E0842C /* DataLayerTests */,
 				0870EEF72809B81100336759 /* ApplicationTests */,
 				0850074829216E73007B272C /* ApplicationSnapshotsTests */,
 				0857B5A229892CBC002B400B /* ApplicationUITests */,
@@ -1424,13 +1372,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0867A2C728D469F400E0842C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0867A2CE28D469F500E0842C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1545,14 +1486,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0867A2CC28D469F500E0842C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0827BDE028E5D04E00BC29FA /* CoreDataEventsRepositoryTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0870EEF42809B81100336759 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1581,6 +1514,7 @@
 				0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */,
 				0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */,
 				084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */,
+				0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
@@ -1610,12 +1544,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0838C7C429F3F1BD00079453 /* MinuteIndex.swift in Sources */,
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekItemViewModel.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,
-				0887C80B298AE5770048EC12 /* WeekTimeline.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintItem.swift in Sources */,
 				08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */,
+				0838C7CA29F3F1BD00079453 /* WeekIndex.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
@@ -1623,6 +1558,7 @@
 				084B21FD29C0B03400B601DA /* Navigation.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayItem.swift in Sources */,
+				0838C7C929F3F1BD00079453 /* WeekTimeline.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryItemViewModel.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
@@ -1631,14 +1567,11 @@
 				08293CC127B670FC0039E432 /* WeekItem.swift in Sources */,
 				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
-				0887C808298AE5770048EC12 /* DayIndex.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
 				080F9F2B29ED6C050013CBFE /* EventItemView.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
-				0887C80A298AE5770048EC12 /* DayTimeline.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockItemViewModel.swift in Sources */,
-				081391DC29B8C780008069FB /* MinuteIndex.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -1655,12 +1588,14 @@
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
 				08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */,
+				0838C7C629F3F1BD00079453 /* WeekDay.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
+				0838C7C529F3F1BD00079453 /* DayTimeline.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				080F9F2729ED51810013CBFE /* EventItem.swift in Sources */,
 				084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */,
@@ -1672,6 +1607,7 @@
 				08FEA39328DC989A00BAA196 /* EventItemViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */,
+				0838C7C729F3F1BD00079453 /* DayIndex.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* FooterItem.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
@@ -1680,13 +1616,11 @@
 				08F467E829BF1E0B00D35AB6 /* PdfMaker.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
-				0887C809298AE5770048EC12 /* WeekIndex.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintItemViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
-				081391DE29B8D25A008069FB /* DateIndexing.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
@@ -1695,6 +1629,7 @@
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
+				0838C7C829F3F1BD00079453 /* DateIndexing.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */,
 			);
@@ -1703,11 +1638,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		080DF8C728DDE9D5001377A9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 08D5121927870D2500C2037F /* Application */;
-			targetProxy = 080DF8C628DDE9D5001377A9 /* PBXContainerItemProxy */;
-		};
 		0835D0FD2934CDA50099AFF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 083BECF028D0A319009157FD /* Domain */;
@@ -1722,11 +1652,6 @@
 			isa = PBXTargetDependency;
 			target = 08D5121927870D2500C2037F /* Application */;
 			targetProxy = 0857B5A929892CBC002B400B /* PBXContainerItemProxy */;
-		};
-		0867A2D328D469F500E0842C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0867A2C828D469F400E0842C /* DataLayer */;
-			targetProxy = 0867A2D228D469F500E0842C /* PBXContainerItemProxy */;
 		};
 		0867A2DB28D469F500E0842C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1811,7 +1736,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -1840,7 +1765,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -2040,46 +1965,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		0867A2E228D469F500E0842C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
-			};
-			name = Debug;
-		};
-		0867A2E428D469F500E0842C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQ483HLUHB;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDataLayerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Application.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Application";
 			};
 			name = Release;
 		};
@@ -2298,12 +2183,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Remem;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -2331,11 +2217,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Remem;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -2399,15 +2286,6 @@
 			buildConfigurations = (
 				0867A2DF28D469F500E0842C /* Debug */,
 				0867A2E128D469F500E0842C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0867A2E628D469F500E0842C /* Build configuration list for PBXNativeTarget "DataLayerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0867A2E228D469F500E0842C /* Debug */,
-				0867A2E428D469F500E0842C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

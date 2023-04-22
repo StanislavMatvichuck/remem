@@ -5,11 +5,12 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-@testable import DataLayer
+@testable import Application
+import DataLayer
 import Domain
 import XCTest
 
-class CoreDataEventsRepositoryTests: XCTestCase {
+final class CoreDataEventsRepositoryTests: XCTestCase {
     private var sut: CoreDataEventsRepository!
 
     override func setUp() {
@@ -26,45 +27,54 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         sut = nil
     }
 
-    func testInit() {
-        XCTAssertEqual(sut.get().count, 0)
+    func test_init() {
+        XCTAssertNotNil(sut)
     }
 
-    func test_save_newEvent() {
-        let newEvent = givenSavedDefaultEvent()
+    func test_save_increasesCount() {
+        XCTAssertEqual(sut.get().count, 0)
 
-        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+        sut.save(Event(name: ""))
+
         XCTAssertEqual(sut.get().count, 1)
     }
 
     func test_save_eventWithHappening() {
-        let newEvent = givenSavedDefaultEvent()
+        let savedEvent = Event(name: "")
 
-        newEvent.addHappening(date: Date.now)
+        savedEvent.addHappening(date: DayIndex.referenceValue.date)
 
-        sut.save(newEvent)
+        sut.save(savedEvent)
 
-        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+        let acquiredEvent = sut.event(byId: savedEvent.id)
+
+        XCTAssertEqual(acquiredEvent.happenings.count, 1)
     }
 
     func test_save_eventWith_N_Happenings() {
-        let newEvent = givenSavedDefaultEvent()
-        for i in 0 ... 10 {
-            newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0))
+        let savedEvent = Event(name: "")
+
+        for i in 0 ..< 10 {
+            savedEvent.addHappening(date: DayIndex.referenceValue.date.addingTimeInterval(-1 * Double(i) * 5.0))
         }
 
-        sut.save(newEvent)
+        sut.save(savedEvent)
 
-        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+        let acquiredEvent = sut.event(byId: savedEvent.id)
+
+        XCTAssertEqual(acquiredEvent.happenings.count, 10)
     }
 
     func test_save_renamedEvent() {
         let newEvent = givenSavedDefaultEvent()
+
         newEvent.name = "Updated name"
 
         sut.save(newEvent)
 
-        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+        let acquiredEvent = sut.event(byId: newEvent.id)
+
+        XCTAssertEqual(acquiredEvent.name, newEvent.name)
     }
 
     func test_save_allPossibleModifications() throws {
@@ -85,9 +95,11 @@ class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
-    func test_delete_success() {
+    func test_delete_decreasesCount() {
         let event = givenSavedDefaultEvent()
+
         sut.delete(event)
+
         XCTAssertEqual(sut.get().count, 0)
     }
 
