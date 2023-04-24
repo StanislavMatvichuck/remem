@@ -5,8 +5,11 @@
 //  Created by Stanislav Matvichuck on 14.09.2022.
 //
 
+import Foundation
+
 public enum EventsQuerySorter {
     case alphabetical
+    case happeningsCountTotal
 }
 
 public protocol EventsQuerying {
