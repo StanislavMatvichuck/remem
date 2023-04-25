@@ -7,9 +7,16 @@
 
 import Foundation
 
-public enum EventsQuerySorter {
+public enum EventsQuerySorter: CaseIterable {
     case alphabetical
     case happeningsCountTotal
+
+    public var title: String {
+        switch self {
+        case .alphabetical: return "Alphabetical"
+        case .happeningsCountTotal: return "Total happenings"
+        }
+    }
 }
 
 public protocol EventsQuerying {

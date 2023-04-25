@@ -45,10 +45,11 @@ final class EventsListContainer:
         )
 
         let hintVm = makeHintItemViewModel(events: events)
-        let orderingVm = OrderingItemViewModel(items: [
-            OrderingItemViewModel.Item(title: "Alphabetically", reversed: false),
-            OrderingItemViewModel.Item(title: "Total happenings", reversed: false),
-        ])
+
+        let orderingItems = EventsQuerySorter.allCases.map {
+            OrderingItemViewModel.Item(title: $0.title, reversed: false)
+        }
+        let orderingVm = OrderingItemViewModel(items: orderingItems)
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
 
