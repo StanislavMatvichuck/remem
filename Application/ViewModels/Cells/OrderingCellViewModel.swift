@@ -8,14 +8,9 @@
 import Foundation
 
 struct OrderingCellViewModel: EventsListItemViewModeling {
-    struct Item: Equatable {
-        let title: String
-        let reversed: Bool
-    }
-
     var identifier: String { "Ordering" }
 
-    let items: [Item]
+    let items: [OrderingCellItemViewModel]
 }
 
 extension OrderingCellViewModel: Equatable {

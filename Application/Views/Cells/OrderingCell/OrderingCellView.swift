@@ -8,6 +8,13 @@
 import UIKit
 
 final class OrderingCellView: UIView {
+    let scroll: UIScrollView = {
+        let scroll = UIScrollView(al: true)
+        scroll.isPagingEnabled = true
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
+
     let stack: UIStackView = {
         let margin = .layoutSquare * 3.5 - OrderingCellViewItem.width / 2
 
@@ -42,11 +49,7 @@ final class OrderingCellView: UIView {
 
     // MARK: - Private
     private func configureLayout() {
-        let scroll = UIScrollView(al: true)
         scroll.addAndConstrain(stack)
-        scroll.isPagingEnabled = true
-        scroll.showsHorizontalScrollIndicator = false
-
         addAndConstrain(scroll)
     }
 

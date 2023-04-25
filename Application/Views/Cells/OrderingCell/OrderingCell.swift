@@ -22,6 +22,7 @@ final class OrderingCell: UITableViewCell, EventsListCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
         configureAppearance()
+        configureEventHandlers()
     }
 
     required init?(coder: NSCoder) {
@@ -39,5 +40,18 @@ final class OrderingCell: UITableViewCell, EventsListCell {
     private func configureAppearance() {
         selectionStyle = .none
         backgroundColor = .clear
+    }
+
+    private func configureEventHandlers() {
+        view.scroll.delegate = self
+    }
+}
+
+extension OrderingCell: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let itemOffset = OrderingCellViewItem.width + .buttonMargin
+        let selectedIndex = Int(scrollView.contentOffset.x / itemOffset)
+        print(selectedIndex)
+        viewModel?.items[selectedIndex].select()
     }
 }

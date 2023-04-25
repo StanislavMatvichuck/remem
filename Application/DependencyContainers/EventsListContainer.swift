@@ -18,6 +18,7 @@ final class EventsListContainer:
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
+    var ordering: EventsQuerySorter = .alphabetical
 
     init(parent: ApplicationContainer) { self.parent = parent }
 
@@ -37,7 +38,7 @@ final class EventsListContainer:
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let today = DayIndex(.now)
-        let events = parent.provider.get()
+        let events = parent.provider.get(using: ordering)
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
@@ -47,7 +48,10 @@ final class EventsListContainer:
         let hintVm = makeHintItemViewModel(events: events)
 
         let orderingItems = EventsQuerySorter.allCases.map {
-            OrderingCellViewModel.Item(title: $0.title, reversed: false)
+            OrderingCellItemViewModel(sorter: $0) { sorter in
+                self.ordering = sorter
+                self.updater.update()
+            }
         }
         let orderingVm = OrderingCellViewModel(items: orderingItems)
 

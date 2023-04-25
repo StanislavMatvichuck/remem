@@ -50,7 +50,7 @@ final class OrderingCellViewItem: UIStackView {
         return image
     }()
 
-    init(_ vm: OrderingCellViewModel.Item) {
+    init(_ vm: OrderingCellItemViewModel) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -61,7 +61,7 @@ final class OrderingCellViewItem: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureContent(_ vm: OrderingCellViewModel.Item) {
+    func configureContent(_ vm: OrderingCellItemViewModel) {
         title.text = vm.title
     }
 
