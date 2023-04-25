@@ -10,7 +10,9 @@ import UIKit
 final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let identifier = itemIdentifier(for: indexPath)
-        return identifier != "Hint" && identifier != "Footer"
+        return identifier != "Hint" &&
+            identifier != "Footer" &&
+            identifier != "Ordering"
     }
 
     func update(
@@ -51,6 +53,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     func register(_ table: UITableView) {
         table.register(EventItem.self, forCellReuseIdentifier: EventItem.reuseIdentifier)
         table.register(HintItem.self, forCellReuseIdentifier: HintItem.reuseIdentifier)
+        table.register(OrderingItem.self, forCellReuseIdentifier: OrderingItem.reuseIdentifier)
         table.register(FooterItem.self, forCellReuseIdentifier: FooterItem.reuseIdentifier)
     }
 
@@ -62,6 +65,10 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
         switch viewModel {
         case let viewModel as HintItemViewModel:
             let cell = table.dequeueReusableCell(withIdentifier: HintItem.reuseIdentifier, for: forIndex) as! HintItem
+            cell.viewModel = viewModel
+            return cell
+        case let viewModel as OrderingItemViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: OrderingItem.reuseIdentifier, for: forIndex) as! OrderingItem
             cell.viewModel = viewModel
             return cell
         case let viewModel as FooterItemViewModel:

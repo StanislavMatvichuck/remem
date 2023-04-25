@@ -93,6 +93,10 @@
 		085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
+		08677BCF29F7C49600AD5383 /* OrderingItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingItemViewModel.swift */; };
+		08677BD129F7C59800AD5383 /* OrderingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingItem.swift */; };
+		08677BD429F7C65700AD5383 /* OrderingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingItemView.swift */; };
+		08677BD629F7E65A00AD5383 /* OrderingItemViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD529F7E65A00AD5383 /* OrderingItemViewItem.swift */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
@@ -397,6 +401,10 @@
 		085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModelTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0861364F2934D64300F1B780 /* TestingWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingWeekViewController.swift; sourceTree = "<group>"; };
+		08677BCE29F7C49600AD5383 /* OrderingItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingItemViewModel.swift; sourceTree = "<group>"; };
+		08677BD029F7C59800AD5383 /* OrderingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingItem.swift; sourceTree = "<group>"; };
+		08677BD329F7C65700AD5383 /* OrderingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingItemView.swift; sourceTree = "<group>"; };
+		08677BD529F7E65A00AD5383 /* OrderingItemViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingItemViewItem.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
@@ -618,6 +626,7 @@
 				08F50DC22965E6FA00B65CDF /* HintItemViewModel.swift */,
 				088E88C228AF916000400180 /* WeekItemViewModel.swift */,
 				085145CA29AE32F000CA533D /* SummaryItemViewModel.swift */,
+				08677BCE29F7C49600AD5383 /* OrderingItemViewModel.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -762,6 +771,16 @@
 			path = EventItem;
 			sourceTree = "<group>";
 		};
+		08677BD229F7C63E00AD5383 /* OrderingItem */ = {
+			isa = PBXGroup;
+			children = (
+				08677BD029F7C59800AD5383 /* OrderingItem.swift */,
+				08677BD329F7C65700AD5383 /* OrderingItemView.swift */,
+				08677BD529F7E65A00AD5383 /* OrderingItemViewItem.swift */,
+			);
+			path = OrderingItem;
+			sourceTree = "<group>";
+		};
 		0867A2CA28D469F400E0842C /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,6 +820,7 @@
 		086DC6D3288058E70048F22F /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				08677BD229F7C63E00AD5383 /* OrderingItem */,
 				08B26A15289E98B700DFBAC8 /* DayItem.swift */,
 				085A2C2F29F15144005C6E5E /* EventItem */,
 				08F50DC82965EF5300B65CDF /* FooterItem.swift */,
@@ -1561,6 +1581,7 @@
 				0838C7C929F3F1BD00079453 /* WeekTimeline.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryItemViewModel.swift in Sources */,
+				08677BCF29F7C49600AD5383 /* OrderingItemViewModel.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				085145C629AE07C500CA533D /* WeekContainer.swift in Sources */,
@@ -1595,6 +1616,7 @@
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
+				08677BD629F7E65A00AD5383 /* OrderingItemViewItem.swift in Sources */,
 				0838C7C529F3F1BD00079453 /* DayTimeline.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				080F9F2729ED51810013CBFE /* EventItem.swift in Sources */,
@@ -1611,6 +1633,7 @@
 				08F50DC92965EF5300B65CDF /* FooterItem.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
+				08677BD129F7C59800AD5383 /* OrderingItem.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08F467E829BF1E0B00D35AB6 /* PdfMaker.swift in Sources */,
@@ -1626,6 +1649,7 @@
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */,
+				08677BD429F7C65700AD5383 /* OrderingItemView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,

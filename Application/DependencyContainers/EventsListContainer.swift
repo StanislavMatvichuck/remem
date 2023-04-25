@@ -45,6 +45,10 @@ final class EventsListContainer:
         )
 
         let hintVm = makeHintItemViewModel(events: events)
+        let orderingVm = OrderingItemViewModel(items: [
+            OrderingItemViewModel.Item(title: "Alphabetically", reversed: false),
+            OrderingItemViewModel.Item(title: "Total happenings", reversed: false),
+        ])
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
 
@@ -59,6 +63,7 @@ final class EventsListContainer:
 
         var items = [any EventsListItemViewModeling]()
         items.append(hintVm)
+        if events.count >= 2 { items.append(orderingVm) }
         items.append(contentsOf: eventsViewModels)
         items.append(footerVm)
 

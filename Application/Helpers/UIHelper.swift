@@ -31,7 +31,8 @@ extension UIFont {
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)
     static let fontBoldBig: UIFont = makeFont(size: 48.0, weight: .bold)
     static let fontSmallBold: UIFont = makeFont(size: 17.0, weight: .bold)
-    static let fontSmall: UIFont = makeFont(size: 12.0, weight: .medium)
+    static let fontSmall: UIFont = makeFont(size: 12.0, weight: .regular)
+    static let fontExtraSmall: UIFont = makeFont(size: 10.0, weight: .semibold)
 
     private static func makeFont(
         size: CGFloat = 17.0,
