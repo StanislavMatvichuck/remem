@@ -13,6 +13,8 @@
 "eventsList.title" = "События";
 "eventsList.new" = "Короткое имя или эмодзи";
 "eventsList.timeSince" = "последнее происшествие";
+"eventsList.ordering.alphabetically" = "По алфавиту";
+"eventsList.ordering.totalHappenings" = "Всего происшествий";
 
 "summary.total" = "Всего происшествий";
 "summary.weekAverage" = "Среднее за неделю";

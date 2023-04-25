@@ -18,7 +18,9 @@ final class EventsListContainer:
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
-    var ordering: EventsQuerySorter = .alphabetical
+    var ordering: EventsQuerySorter = .alphabetical {
+        didSet { if oldValue != ordering { updater.update() }}
+    }
 
     init(parent: ApplicationContainer) { self.parent = parent }
 
@@ -50,9 +52,9 @@ final class EventsListContainer:
         let orderingItems = EventsQuerySorter.allCases.map {
             OrderingCellItemViewModel(sorter: $0) { sorter in
                 self.ordering = sorter
-                self.updater.update()
             }
         }
+
         let orderingVm = OrderingCellViewModel(items: orderingItems)
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only

@@ -13,6 +13,8 @@
 "eventsList.title" = "Події";
 "eventsList.new" = "Коротка назва або емодзі";
 "eventsList.timeSince" = "остання подія";
+"eventsList.ordering.alphabetically" = "За алфавітом";
+"eventsList.ordering.totalHappenings" = "Загалом випадків";
 
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";

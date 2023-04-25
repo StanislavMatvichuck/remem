@@ -13,6 +13,8 @@
 "eventsList.title" = "Ereignisse";
 "eventsList.new" = "Kurzname oder emoji";
 "eventsList.timeSince" = "neustes geschehen";
+"eventsList.ordering.alphabetically" = "Alphabetisch";
+"eventsList.ordering.totalHappenings" = "Totale Geschehnisse";
 
 "summary.total" = "Totale Happenings";
 "summary.weekAverage" = "Wochendurchschnitt";

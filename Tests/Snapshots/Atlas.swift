@@ -13,7 +13,7 @@ final class ZAtlas: FBSnapshotTestCase {
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     var spacing: CGFloat { 16.0 * scale }
-    var atlasSize: CGSize { CGSize(width: 6 * (width + spacing) * scale, height: 1 * (height + spacing) * scale) }
+    var atlasSize: CGSize { CGSize(width: 7 * (width + spacing) * scale, height: 1 * (height + spacing) * scale) }
     var atlasFrame: CGRect { CGRect(origin: .zero, size: atlasSize) }
     
     var parent: UIView!
@@ -80,6 +80,7 @@ final class ZAtlas: FBSnapshotTestCase {
             "\(deviceName)/light/EventsList/test_oneItem_swiped",
             "\(deviceName)/light/EventDetails/test_singleHappening",
             "\(deviceName)/light/EventsList/test_oneItem_visited",
+            "\(deviceName)/light/EventsList/test_manyItems",
         ])
         
         parent.addAndConstrain(row01, constant: spacing)
@@ -98,6 +99,7 @@ final class ZAtlas: FBSnapshotTestCase {
             "\(deviceName)/dark/EventsList/test_oneItem_swiped_dark",
             "\(deviceName)/dark/EventDetails/test_singleHappening_dark",
             "\(deviceName)/dark/EventsList/test_oneItem_visited_dark",
+            "\(deviceName)/dark/EventsList/test_manyItems_dark",
         ])
         
         parent.addAndConstrain(row01, constant: spacing)

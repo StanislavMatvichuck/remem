@@ -98,6 +98,7 @@
 		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
 		08677BD629F7E65A00AD5383 /* OrderingCellViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */; };
 		08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */; };
+		08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
@@ -407,6 +408,7 @@
 		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
 		08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewItem.swift; sourceTree = "<group>"; };
 		08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellItemViewModel.swift; sourceTree = "<group>"; };
+		08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionEventsQuerySorter.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
@@ -1075,6 +1077,7 @@
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 				08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */,
 				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
+				08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1618,6 +1621,7 @@
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
+				08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08677BD629F7E65A00AD5383 /* OrderingCellViewItem.swift in Sources */,
