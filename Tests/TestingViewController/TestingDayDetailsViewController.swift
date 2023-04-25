@@ -30,10 +30,10 @@ extension TestingViewController where Controller == DayDetailsViewController {
     var firstIndex: IndexPath { IndexPath(row: 0, section: 0) }
     var happeningsAmount: Int { table.numberOfRows(inSection: 0) }
 
-    func happening(at index: IndexPath) -> DayItem {
+    func happening(at index: IndexPath) -> DayCell {
         do {
             let cell = table.dataSource?.tableView(table, cellForRowAt: index)
-            return try XCTUnwrap(cell as? DayItem)
+            return try XCTUnwrap(cell as? DayCell)
         } catch { fatalError("happening getting error") }
     }
 

@@ -19,16 +19,16 @@ extension TestingViewController where Controller == WeekViewController {
         sut.loadViewIfNeeded()
     }
 
-    var firstDay: WeekItem { cell(at: IndexPath(row: 0, section: 0)) }
+    var firstDay: WeekCell { cell(at: IndexPath(row: 0, section: 0)) }
 
-    func cell(at index: IndexPath) -> WeekItem {
+    func cell(at index: IndexPath) -> WeekCell {
         do {
             let cell = sut.viewRoot.collection.dataSource?.collectionView(
                 sut.viewRoot.collection,
                 cellForItemAt: index
             )
 
-            return try XCTUnwrap(cell as? WeekItem)
+            return try XCTUnwrap(cell as? WeekCell)
         } catch { fatalError("error getting day") }
     }
 

@@ -23,7 +23,7 @@ struct EventsListViewModel {
     private let today: DayIndex
     private let commander: EventsCommanding
 
-    var renamedItem: EventItemViewModel?
+    var renamedItem: EventCellViewModel?
     var inputVisible: Bool = false
     var inputContent: String = ""
 

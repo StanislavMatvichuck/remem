@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct DayItemViewModel {
+struct DayCellViewModel {
     private let event: Event
     private let happening: Happening
     private let commander: EventsCommanding
@@ -37,5 +37,5 @@ struct DayItemViewModel {
 }
 
 protocol DayItemViewModelFactoring {
-    func makeViewModel(happening: Happening) -> DayItemViewModel
+    func makeViewModel(happening: Happening) -> DayCellViewModel
 }

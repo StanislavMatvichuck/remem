@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EventItemView: UIView {
+final class EventCellView: UIView {
     let valueLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
@@ -120,7 +120,7 @@ final class EventItemView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    func configure(_ viewModel: EventItemViewModel) {
+    func configure(_ viewModel: EventCellViewModel) {
         nameLabel.text = viewModel.title
         valueLabel.text = viewModel.value
         timeSinceLabel.text = viewModel.timeSince

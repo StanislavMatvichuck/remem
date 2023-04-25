@@ -10,14 +10,14 @@ import Domain
 import XCTest
 
 class WeekItemViewModelTests: XCTestCase {
-    private var sut: WeekItemViewModel!
+    private var sut: WeekCellViewModel!
 
     override func setUp() {
         super.setUp()
         let day = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
 
-        sut = WeekItemViewModel(
+        sut = WeekCellViewModel(
             event: event,
             day: day,
             today: day,
@@ -42,7 +42,7 @@ class WeekItemViewModelTests: XCTestCase {
         let day = DayIndex.referenceValue
         let dayLater = day.adding(dateComponents: DateComponents(hour: 24))
         let event = Event(name: "Event", dateCreated: day.date)
-        let sut = WeekItemViewModel(
+        let sut = WeekCellViewModel(
             event: event,
             day: day,
             today: dayLater,
@@ -61,7 +61,7 @@ class WeekItemViewModelTests: XCTestCase {
         let event = Event(name: "Event", dateCreated: day.date)
         event.addHappening(date: day.date)
 
-        sut = WeekItemViewModel(
+        sut = WeekCellViewModel(
             event: event,
             day: day,
             today: day,

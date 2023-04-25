@@ -51,10 +51,10 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     }
 
     func register(_ table: UITableView) {
-        table.register(EventItem.self, forCellReuseIdentifier: EventItem.reuseIdentifier)
-        table.register(HintItem.self, forCellReuseIdentifier: HintItem.reuseIdentifier)
-        table.register(OrderingItem.self, forCellReuseIdentifier: OrderingItem.reuseIdentifier)
-        table.register(FooterItem.self, forCellReuseIdentifier: FooterItem.reuseIdentifier)
+        table.register(EventCell.self, forCellReuseIdentifier: EventCell.reuseIdentifier)
+        table.register(HintCell.self, forCellReuseIdentifier: HintCell.reuseIdentifier)
+        table.register(OrderingCell.self, forCellReuseIdentifier: OrderingCell.reuseIdentifier)
+        table.register(FooterCell.self, forCellReuseIdentifier: FooterCell.reuseIdentifier)
     }
 
     static func cell(
@@ -63,20 +63,20 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
         viewModel: any EventsListItemViewModeling
     ) -> UITableViewCell {
         switch viewModel {
-        case let viewModel as HintItemViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: HintItem.reuseIdentifier, for: forIndex) as! HintItem
+        case let viewModel as HintCellViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: HintCell.reuseIdentifier, for: forIndex) as! HintCell
             cell.viewModel = viewModel
             return cell
-        case let viewModel as OrderingItemViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: OrderingItem.reuseIdentifier, for: forIndex) as! OrderingItem
+        case let viewModel as OrderingCellViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: OrderingCell.reuseIdentifier, for: forIndex) as! OrderingCell
             cell.viewModel = viewModel
             return cell
-        case let viewModel as FooterItemViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: FooterItem.reuseIdentifier, for: forIndex) as! FooterItem
+        case let viewModel as FooterCellViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: forIndex) as! FooterCell
             cell.viewModel = viewModel
             return cell
-        case let viewModel as EventItemViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: EventItem.reuseIdentifier, for: forIndex) as! EventItem
+        case let viewModel as EventCellViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier, for: forIndex) as! EventCell
             cell.viewModel = viewModel
             return cell
         default: fatalError("unknown cell type")

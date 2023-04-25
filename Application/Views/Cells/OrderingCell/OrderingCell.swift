@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class OrderingItem: UITableViewCell, EventsListCell {
+final class OrderingCell: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "OrderingItem"
 
-    let view = OrderingItemView()
-    var viewModel: OrderingItemViewModel? {
+    let view = OrderingCellView()
+    var viewModel: OrderingCellViewModel? {
         didSet {
             guard let viewModel else { return }
             view.configure(viewModel)

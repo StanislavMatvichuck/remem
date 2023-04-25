@@ -8,13 +8,13 @@
 import AudioToolbox
 import UIKit
 
-final class EventItem: UITableViewCell, EventsListCell {
+final class EventCell: UITableViewCell, EventsListCell {
     static let reuseIdentifier = "TemporaryItem"
 
-    let view = EventItemView()
+    let view = EventCellView()
     let swipeAnimator: AnimatingSwipe = DefaultSwipeAnimator()
     var cellAnimator: AnimatingHappeningCreation?
-    var viewModel: EventItemViewModel? { didSet {
+    var viewModel: EventCellViewModel? { didSet {
         guard let viewModel else { return }
         view.configure(viewModel)
 
@@ -121,7 +121,7 @@ final class EventItem: UITableViewCell, EventsListCell {
     }
 }
 
-extension EventItem: TrailingSwipeActionsConfigurationProviding {
+extension EventCell: TrailingSwipeActionsConfigurationProviding {
     func trailingActionsConfiguration() -> UISwipeActionsConfiguration {
         guard let viewModel else { fatalError("can't create configuration without viewModel") }
 

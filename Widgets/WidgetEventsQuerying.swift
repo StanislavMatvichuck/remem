@@ -8,7 +8,7 @@
 import Foundation
 
 class WidgetEventsQuerying {
-    func getPreview() -> [WidgetEventItemViewModel] {
+    func getPreview() -> [WidgetEventCellViewModel] {
         guard let localURL = Bundle(for: Self.self).url(
             forResource: "WidgetPreview",
             withExtension: "plist"
@@ -22,7 +22,7 @@ class WidgetEventsQuerying {
             return []
         }
 
-        guard let viewModel = try? PropertyListDecoder().decode([WidgetEventItemViewModel].self, from: fileContent) else {
+        guard let viewModel = try? PropertyListDecoder().decode([WidgetEventCellViewModel].self, from: fileContent) else {
             logger.error("WidgetEventsQuerying.getPreview fileContent error")
             return []
         }
@@ -30,7 +30,7 @@ class WidgetEventsQuerying {
         return viewModel
     }
 
-    func getFromFile() -> [WidgetEventItemViewModel] {
+    func getFromFile() -> [WidgetEventCellViewModel] {
         guard let directoryURL = FileManager.default.containerURL(
             forSecurityApplicationGroupIdentifier: "group.remem.io"
         ) else { return [] }
@@ -42,7 +42,7 @@ class WidgetEventsQuerying {
 
         let decoder = PropertyListDecoder()
 
-        guard let viewModel = try? decoder.decode([WidgetEventItemViewModel].self, from: fileContent)
+        guard let viewModel = try? decoder.decode([WidgetEventCellViewModel].self, from: fileContent)
         else { return [] }
 
         return viewModel

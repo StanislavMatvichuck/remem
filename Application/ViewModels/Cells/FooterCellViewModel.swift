@@ -8,10 +8,10 @@
 import Foundation
 
 protocol FooterItemViewModelTapHandling {
-    func tapped(_ vm: FooterItemViewModel)
+    func tapped(_ vm: FooterCellViewModel)
 }
 
-struct FooterItemViewModel: EventsListItemViewModeling {
+struct FooterCellViewModel: EventsListItemViewModeling {
     var identifier: String { "Footer" }
 
     let title = String(localizationId: "button.create")
@@ -25,7 +25,7 @@ struct FooterItemViewModel: EventsListItemViewModeling {
 
     func select() { tapHandler?.tapped(self) }
 
-    static func == (lhs: FooterItemViewModel, rhs: FooterItemViewModel) -> Bool {
+    static func == (lhs: FooterCellViewModel, rhs: FooterCellViewModel) -> Bool {
         lhs.title == rhs.title && lhs.isHighlighted == rhs.isHighlighted
     }
 }
@@ -34,5 +34,5 @@ protocol FooterItemViewModeFactoring {
     func makeFooterItemViewModel(
         eventsCount: Int,
         handler: FooterItemViewModelTapHandling?
-    ) -> FooterItemViewModel
+    ) -> FooterCellViewModel
 }

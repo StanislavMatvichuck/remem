@@ -37,7 +37,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
                 viewRoot.input.show(value: viewModel.inputContent)
             }
 
-            widgetUpdater.update(viewModel.items.filter { type(of: $0) is EventItemViewModel.Type } as! [EventItemViewModel])
+            widgetUpdater.update(viewModel.items.filter { type(of: $0) is EventCellViewModel.Type } as! [EventCellViewModel])
         }
     }
 
@@ -65,7 +65,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
                     viewModel: viewModel
                 )
 
-                if let cell = cell as? EventItem { cell.cellAnimator = cellAnimator }
+                if let cell = cell as? EventCell { cell.cellAnimator = cellAnimator }
 
                 return cell
             }
@@ -122,11 +122,11 @@ extension EventsListViewController:
     EventItemViewModelRenameHandling,
     FooterItemViewModelTapHandling
 {
-    func renameTapped(_ item: EventItemViewModel) {
+    func renameTapped(_ item: EventCellViewModel) {
         viewModel.renamedItem = item
     }
 
-    func tapped(_: FooterItemViewModel) {
+    func tapped(_: FooterCellViewModel) {
         viewModel.showInput()
     }
 }

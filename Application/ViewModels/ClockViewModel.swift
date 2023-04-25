@@ -14,7 +14,7 @@ struct ClockViewModel {
     private let secondsInDay: Int
     private let secondsInSection: Int
 
-    let items: [ClockItemViewModel]
+    let items: [ClockCellViewModel]
 
     init(event: Event, size: Int) {
         self.size = size
@@ -39,7 +39,7 @@ struct ClockViewModel {
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
         self.items = happeningsPerSection.enumerated().map { index, happeningsAmount in
-            ClockItemViewModel(
+            ClockCellViewModel(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,
                 clockSize: size

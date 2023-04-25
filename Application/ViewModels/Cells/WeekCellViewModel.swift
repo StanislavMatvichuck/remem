@@ -15,7 +15,7 @@ extension DayIndex {
     }
 }
 
-struct WeekItemViewModel {
+struct WeekCellViewModel {
     private let event: Event
     private let day: DayIndex
     private let today: DayIndex
@@ -56,5 +56,5 @@ struct WeekItemViewModel {
 }
 
 protocol WeekItemViewModelFactoring {
-    func makeViewModel(day: DayIndex) -> WeekItemViewModel
+    func makeViewModel(day: DayIndex) -> WeekCellViewModel
 }

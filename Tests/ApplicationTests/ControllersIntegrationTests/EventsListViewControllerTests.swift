@@ -37,13 +37,13 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsHint() {
-        let hintCell = cell(0) as! HintItem
+        let hintCell = cell(0) as! HintCell
 
         XCTAssertEqual(hintCell.label.text, HintState.empty.text)
     }
 
     func test_showsAddEventButton() {
-        let footerCell = cell(1) as! FooterItem
+        let footerCell = cell(1) as! FooterCell
 
         XCTAssertEqual(footerCell.button.titleLabel?.text, String(localizationId: "button.create"))
     }
@@ -65,7 +65,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             ]
         )
 
-        let footerCell = cell(1) as! FooterItem
+        let footerCell = cell(1) as! FooterCell
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "button text is white with proper font")
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
@@ -75,7 +75,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         putInViewHierarchy(sut)
         XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
 
-        let footerCell = cell(1) as! FooterItem
+        let footerCell = cell(1) as! FooterCell
 
         tap(footerCell.button)
 
@@ -100,7 +100,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
             ]
         )
 
-        let footerCell = cell(2) as! FooterItem
+        let footerCell = cell(2) as! FooterCell
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.background_secondary.cgColor, "button has regular background")

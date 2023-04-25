@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct EventsList: View {
-    let items: [WidgetEventItemViewModel?]
+    let items: [WidgetEventCellViewModel?]
 
-    init(items: [WidgetEventItemViewModel]) {
+    init(items: [WidgetEventCellViewModel]) {
         if items.isEmpty {
-            self.items = [WidgetEventItemViewModel(name: String(localizationId: "widget.emptyRow"), amount: "!"), nil]
+            self.items = [WidgetEventCellViewModel(name: String(localizationId: "widget.emptyRow"), amount: "!"), nil]
             return
         }
 
-        var result = [WidgetEventItemViewModel?]()
+        var result = [WidgetEventCellViewModel?]()
 
         items.prefix(3).forEach { result.append($0) }
 

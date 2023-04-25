@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct HintItemViewModel: EventsListItemViewModeling {
+struct HintCellViewModel: EventsListItemViewModeling {
     var identifier: String { "Hint" }
 
     let title: String
@@ -26,7 +26,7 @@ struct HintItemViewModel: EventsListItemViewModeling {
         highlighted = hint != .swipeLeft
     }
 
-    static func == (lhs: HintItemViewModel, rhs: HintItemViewModel) -> Bool {
+    static func == (lhs: HintCellViewModel, rhs: HintCellViewModel) -> Bool {
         lhs.title == rhs.title && lhs.highlighted == rhs.highlighted
     }
 }
@@ -48,5 +48,5 @@ enum HintState {
 }
 
 protocol HintItemViewModelFactoring {
-    func makeHintItemViewModel(events: [Event]) -> HintItemViewModel
+    func makeHintItemViewModel(events: [Event]) -> HintCellViewModel
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Used by `Application` and `Widgets` targets
-struct WidgetEventItemViewModel: Codable, Identifiable {
+struct WidgetEventCellViewModel: Codable, Identifiable {
     var id = UUID()
     let name: String
     let amount: String

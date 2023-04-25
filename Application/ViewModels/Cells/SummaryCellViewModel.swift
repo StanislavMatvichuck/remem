@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SummaryItemViewModel {
+struct SummaryCellViewModel {
     let title: String
     let value: String
     let titleTag: Int /// used by tests only

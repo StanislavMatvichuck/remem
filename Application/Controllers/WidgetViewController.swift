@@ -8,7 +8,7 @@
 import Foundation
 import WidgetKit
 
-typealias WidgetViewModel = [EventItemViewModel]
+typealias WidgetViewModel = [EventCellViewModel]
 
 final class WidgetViewController {
     func update(_ vm: WidgetViewModel) {
@@ -20,7 +20,7 @@ final class WidgetViewController {
         let fileURL = directory.appendingPathComponent(filePath)
 
         let encoder = PropertyListEncoder()
-        let writableItems = vm.prefix(3).map { WidgetEventItemViewModel(item: $0) }
+        let writableItems = vm.prefix(3).map { WidgetEventCellViewModel(item: $0) }
 
         do {
             let dataToWrite = try encoder.encode(writableItems)
@@ -32,8 +32,8 @@ final class WidgetViewController {
     }
 }
 
-extension WidgetEventItemViewModel {
-    init(item: EventItemViewModel) {
+extension WidgetEventCellViewModel {
+    init(item: EventCellViewModel) {
         name = item.title
         amount = item.value
     }

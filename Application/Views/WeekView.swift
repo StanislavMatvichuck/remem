@@ -25,14 +25,14 @@ class WeekView: UIView {
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.itemSize = WeekItem.layoutSize
+        layout.itemSize = WeekCell.layoutSize
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
-        view.register(WeekItem.self, forCellWithReuseIdentifier: WeekItem.reuseIdentifier)
+        view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
 
         return view
     }()
@@ -87,6 +87,6 @@ class WeekView: UIView {
         stack.addArrangedSubview(weekdaysLine)
         addAndConstrain(stack)
 
-        collection.heightAnchor.constraint(equalToConstant: WeekItem.layoutSize.height).isActive = true
+        collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height).isActive = true
     }
 }

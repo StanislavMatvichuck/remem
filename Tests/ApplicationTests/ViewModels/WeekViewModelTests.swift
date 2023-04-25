@@ -101,8 +101,8 @@ final class WeekViewModelTests: XCTestCase {
             let event: Event
             let today: DayIndex
 
-            func makeViewModel(day: DayIndex) -> WeekItemViewModel {
-                WeekItemViewModel(
+            func makeViewModel(day: DayIndex) -> WeekCellViewModel {
+                WeekCellViewModel(
                     event: event,
                     day: day,
                     today: today,

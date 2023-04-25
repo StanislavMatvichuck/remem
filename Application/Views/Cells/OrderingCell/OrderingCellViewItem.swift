@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OrderingItemViewItem: UIStackView {
+final class OrderingCellViewItem: UIStackView {
     static let height = CGFloat.layoutSquare * 0.8
     static let width = CGFloat.layoutSquare * 4
     static let accessoryWidth = width / 3.5
@@ -50,7 +50,7 @@ final class OrderingItemViewItem: UIStackView {
         return image
     }()
 
-    init(_ vm: OrderingItemViewModel.Item) {
+    init(_ vm: OrderingCellViewModel.Item) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -61,7 +61,7 @@ final class OrderingItemViewItem: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureContent(_ vm: OrderingItemViewModel.Item) {
+    func configureContent(_ vm: OrderingCellViewModel.Item) {
         title.text = vm.title
     }
 

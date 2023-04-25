@@ -61,9 +61,9 @@ extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DayItem.reuseIdentifier,
+            withIdentifier: DayCell.reuseIdentifier,
             for: indexPath
-        ) as? DayItem else { fatalError("unable to dequeue cell") }
+        ) as? DayCell else { fatalError("unable to dequeue cell") }
         cell.label.text = viewModel.items[indexPath.row].text
         return cell
     }

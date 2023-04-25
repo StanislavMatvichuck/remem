@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeekItem: UICollectionViewCell {
+final class WeekCell: UICollectionViewCell {
     static let reuseIdentifier = "WeekItem"
     static let spacing = CGFloat.buttonMargin / 8
     static let happeningsDisplayedMaximumAmount = 6
@@ -19,7 +19,7 @@ class WeekItem: UICollectionViewCell {
             height: UIView.layoutFittingCompressedSize.height
         )
 
-        let layoutSize = WeekItem().systemLayoutSizeFitting(
+        let layoutSize = WeekCell().systemLayoutSizeFitting(
             size,
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
@@ -29,7 +29,7 @@ class WeekItem: UICollectionViewCell {
 //        return CGSize(width: size.width, height: layoutSize.height)
     }()
 
-    var viewModel: WeekItemViewModel! { didSet { configureContent() } }
+    var viewModel: WeekCellViewModel! { didSet { configureContent() } }
 
     let day: UILabel = {
         let label = UILabel(al: true)
@@ -58,7 +58,7 @@ class WeekItem: UICollectionViewCell {
 
         var result = [UILabel]()
 
-        for _ in 0 ..< WeekItem.happeningsDisplayedMaximumAmount { result.append(makeTimeLabel()) }
+        for _ in 0 ..< WeekCell.happeningsDisplayedMaximumAmount { result.append(makeTimeLabel()) }
 
         return result
     }()

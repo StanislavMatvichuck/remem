@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventRow: View {
     let isLast: Bool
-    let item: WidgetEventItemViewModel?
+    let item: WidgetEventCellViewModel?
 
     @ViewBuilder
     var body: some View {

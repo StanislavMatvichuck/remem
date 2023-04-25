@@ -13,7 +13,7 @@ struct WeekViewModel {
     private let event: Event
 
     var scrollToIndex: Int = 0
-    var timeline: DayTimeline<WeekItemViewModel>
+    var timeline: DayTimeline<WeekCellViewModel>
     var summaryTimeline: WeekTimeline<Int>
 
     init(
@@ -28,7 +28,7 @@ struct WeekViewModel {
         let startOfWeekToday = WeekIndex(today.date).dayIndex
         let endOfWeekToday = startOfWeekToday.adding(days: 14)
 
-        timeline = DayTimeline<WeekItemViewModel>(
+        timeline = DayTimeline<WeekCellViewModel>(
             storage: [:],
             startIndex: startOfWeek,
             endIndex: endOfWeekToday

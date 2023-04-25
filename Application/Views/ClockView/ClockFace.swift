@@ -62,7 +62,7 @@ final class ClockFace: UIView {
         }
     }
 
-    private func makeSublayer(for item: ClockItemViewModel) -> CALayer {
+    private func makeSublayer(for item: ClockCellViewModel) -> CALayer {
         let layer = CAShapeLayer()
         layer.strokeColor = color(for: item)
         layer.path = makePath(for: item)
@@ -72,7 +72,7 @@ final class ClockFace: UIView {
         return layer
     }
 
-    private func makePath(for item: ClockItemViewModel) -> CGPath {
+    private func makePath(for item: ClockCellViewModel) -> CGPath {
         let radius = bounds.width / 2
         let sectionMaximumLength = bounds.width * ClockSectionMultiplier
         let path = UIBezierPath()
@@ -90,15 +90,15 @@ final class ClockFace: UIView {
         return path.cgPath
     }
 
-    private func angle(for item: ClockItemViewModel) -> CGFloat {
+    private func angle(for item: ClockCellViewModel) -> CGFloat {
         (360.0 / CGFloat(item.clockSize)) * CGFloat(item.index)
     }
 
-    private func strokeEnd(for item: ClockItemViewModel) -> CGFloat {
+    private func strokeEnd(for item: ClockCellViewModel) -> CGFloat {
         0.01 + 0.95 * item.length
     }
 
-    private func color(for item: ClockItemViewModel) -> CGColor {
+    private func color(for item: ClockCellViewModel) -> CGColor {
         item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text_primary.cgColor
     }
 }

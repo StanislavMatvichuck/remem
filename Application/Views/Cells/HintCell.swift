@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class HintItem: UITableViewCell, EventsListCell {
+final class HintCell: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "HintItem"
 
-    var viewModel: HintItemViewModel? {
+    var viewModel: HintCellViewModel? {
         didSet {
             guard let viewModel else { return }
 

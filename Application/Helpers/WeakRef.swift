@@ -13,13 +13,13 @@ final class WeakRef<T: AnyObject> {
 }
 
 extension WeakRef: EventItemViewModelRenameHandling where T: EventItemViewModelRenameHandling {
-    func renameTapped(_ item: EventItemViewModel) {
+    func renameTapped(_ item: EventCellViewModel) {
         weakRef?.renameTapped(item)
     }
 }
 
 extension WeakRef: FooterItemViewModelTapHandling where T: FooterItemViewModelTapHandling {
-    func tapped(_ vm: FooterItemViewModel) {
+    func tapped(_ vm: FooterCellViewModel) {
         weakRef?.tapped(vm)
     }
 }

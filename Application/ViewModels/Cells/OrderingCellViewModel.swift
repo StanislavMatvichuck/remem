@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OrderingItemViewModel: EventsListItemViewModeling {
+struct OrderingCellViewModel: EventsListItemViewModeling {
     struct Item: Equatable {
         let title: String
         let reversed: Bool
@@ -18,8 +18,8 @@ struct OrderingItemViewModel: EventsListItemViewModeling {
     let items: [Item]
 }
 
-extension OrderingItemViewModel: Equatable {
-    static func == (lhs: OrderingItemViewModel, rhs: OrderingItemViewModel) -> Bool {
+extension OrderingCellViewModel: Equatable {
+    static func == (lhs: OrderingCellViewModel, rhs: OrderingCellViewModel) -> Bool {
         lhs.items == rhs.items
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AnimatingHappeningCreation {
-    func animate(_: EventItem)
+    func animate(_: EventCell)
 }
 
 final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
@@ -23,18 +23,18 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
         self.table = table
     }
 
-    func animate(_ item: EventItem) {
+    func animate(_ item: EventCell) {
         animateHappeningCreation(item)
 
         guard let index = table.indexPath(for: item) else { return }
         let prevIndex = IndexPath(row: index.row - 1, section: index.section)
         let nextIndex = IndexPath(row: index.row + 1, section: index.section)
 
-        if let neighbour = table.cellForRow(at: prevIndex) as? EventItem { animate(neighbour.view, .above) }
-        if let neighbour = table.cellForRow(at: nextIndex) as? EventItem { animate(neighbour.view, .below) }
+        if let neighbour = table.cellForRow(at: prevIndex) as? EventCell { animate(neighbour.view, .above) }
+        if let neighbour = table.cellForRow(at: nextIndex) as? EventCell { animate(neighbour.view, .below) }
     }
 
-    private func animateHappeningCreation(_ item: EventItem) {
+    private func animateHappeningCreation(_ item: EventCell) {
         let animator = UIViewPropertyAnimator(
             duration: SwiperAnimationsHelper.forwardDuration,
             curve: .easeOut

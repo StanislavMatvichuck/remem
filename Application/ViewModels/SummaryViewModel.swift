@@ -10,7 +10,7 @@ import Foundation
 
 struct SummaryViewModel {
     private let event: Event
-    let items: [SummaryItemViewModel]
+    let items: [SummaryCellViewModel]
 
     init(event: Event, today: DayIndex) {
         self.event = event
@@ -60,11 +60,11 @@ struct SummaryViewModel {
         }()
 
         self.items = [
-            SummaryItemViewModel(SummaryRow.total(value: String(totalAmount))),
-            SummaryItemViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount)),
-            SummaryItemViewModel(SummaryRow.weekAverage(value: weekAverageAmount)),
-            SummaryItemViewModel(SummaryRow.dayAverage(value: dayAverageAmount)),
-            SummaryItemViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount)), belongsToUser: false)
+            SummaryCellViewModel(SummaryRow.total(value: String(totalAmount))),
+            SummaryCellViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount)),
+            SummaryCellViewModel(SummaryRow.weekAverage(value: weekAverageAmount)),
+            SummaryCellViewModel(SummaryRow.dayAverage(value: dayAverageAmount)),
+            SummaryCellViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount)), belongsToUser: false)
         ]
     }
 }
@@ -109,7 +109,7 @@ enum SummaryRow {
     var valueTag: Int { labelTag + 1000 }
 }
 
-extension SummaryItemViewModel {
+extension SummaryCellViewModel {
     init(_ row: SummaryRow, belongsToUser: Bool = true) {
         title = row.label
         value = row.value

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ClockItemViewModel: Equatable {
+struct ClockCellViewModel: Equatable {
     let index: Int
     let length: CGFloat
     let clockSize: Int

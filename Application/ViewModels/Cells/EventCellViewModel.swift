@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 protocol EventItemViewModelRenameHandling {
-    func renameTapped(_: EventItemViewModel)
+    func renameTapped(_: EventCellViewModel)
 }
 
 protocol EventItemViewModelFactoring {
@@ -18,13 +18,13 @@ protocol EventItemViewModelFactoring {
         today: DayIndex,
         hintEnabled: Bool,
         renameHandler: EventItemViewModelRenameHandling?
-    ) -> EventItemViewModel
+    ) -> EventCellViewModel
 }
 
-struct EventItemViewModel: EventsListItemViewModeling {
+struct EventCellViewModel: EventsListItemViewModeling {
     typealias TapHandler = () -> Void
     typealias SwipeHandler = () -> Void
-    typealias RenameActionHandler = (EventItemViewModel) -> Void
+    typealias RenameActionHandler = (EventCellViewModel) -> Void
     typealias DeleteActionHandler = () -> Void
     typealias RenameHandler = (String, Event) -> Void
 
@@ -77,13 +77,13 @@ struct EventItemViewModel: EventsListItemViewModeling {
         self.renameHandler = renameHandler
     }
 
-    func isValueIncreased(_ oldValue: EventItemViewModel) -> Bool {
+    func isValueIncreased(_ oldValue: EventCellViewModel) -> Bool {
         valueAmount > oldValue.valueAmount
     }
 
     func rename(to: String) { renameHandler(to, event) }
 
-    static func == (lhs: EventItemViewModel, rhs: EventItemViewModel) -> Bool {
+    static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
         lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value &&

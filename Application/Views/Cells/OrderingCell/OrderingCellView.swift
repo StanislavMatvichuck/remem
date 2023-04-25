@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class OrderingItemView: UIView {
+final class OrderingCellView: UIView {
     let stack: UIStackView = {
-        let margin = .layoutSquare * 3.5 - OrderingItemViewItem.width / 2
+        let margin = .layoutSquare * 3.5 - OrderingCellViewItem.width / 2
 
         let stack = UIStackView(al: true)
         stack.axis = .horizontal
@@ -32,11 +32,11 @@ final class OrderingItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(_ viewModel: OrderingItemViewModel) {
+    func configure(_ viewModel: OrderingCellViewModel) {
         clearContent()
 
         for item in viewModel.items {
-            stack.addArrangedSubview(OrderingItemViewItem(item))
+            stack.addArrangedSubview(OrderingCellViewItem(item))
         }
     }
 

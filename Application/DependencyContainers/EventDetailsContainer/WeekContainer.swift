@@ -39,8 +39,8 @@ final class WeekContainer:
         )
     }
 
-    func makeViewModel(day: DayIndex) -> WeekItemViewModel {
-        WeekItemViewModel(
+    func makeViewModel(day: DayIndex) -> WeekCellViewModel {
+        WeekCellViewModel(
             event: event,
             day: day,
             today: today,

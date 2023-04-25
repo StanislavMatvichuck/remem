@@ -40,8 +40,8 @@ final class DayDetailsContainer:
         return controller
     }
 
-    func makeViewModel(happening: Happening) -> DayItemViewModel {
-        DayItemViewModel(
+    func makeViewModel(happening: Happening) -> DayCellViewModel {
+        DayCellViewModel(
             event: event,
             happening: happening,
             commander: commander

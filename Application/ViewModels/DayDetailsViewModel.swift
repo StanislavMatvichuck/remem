@@ -17,7 +17,7 @@ struct DayDetailsViewModel {
     private let event: Event
     private let itemFactory: DayItemViewModelFactoring
 
-    let items: [DayItemViewModel]
+    let items: [DayCellViewModel]
     let title: String
     let isToday: Bool
     var pickerDate: Date

@@ -9,9 +9,9 @@ import WidgetKit
 
 struct MediumWidgetTimelineEntry: TimelineEntry {
     var date: Date
-    var items: [WidgetEventItemViewModel]
+    var items: [WidgetEventCellViewModel]
 
-    init(items: [WidgetEventItemViewModel]) {
+    init(items: [WidgetEventCellViewModel]) {
         self.date = .now
         self.items = items
     }

@@ -76,7 +76,7 @@ extension WeekViewController:
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { viewModel.timeline.count }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekItem.reuseIdentifier, for: indexPath) as? WeekItem else { fatalError("cell type") }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.reuseIdentifier, for: indexPath) as? WeekCell else { fatalError("cell type") }
 
         cell.viewModel = viewModel.timeline[indexPath.row]
 

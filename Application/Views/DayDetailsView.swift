@@ -25,7 +25,7 @@ final class DayDetailsView: UIView {
     let happenings: UITableView = {
         let table = UITableView(al: true)
 
-        table.register(DayItem.self, forCellReuseIdentifier: DayItem.reuseIdentifier)
+        table.register(DayCell.self, forCellReuseIdentifier: DayCell.reuseIdentifier)
         table.separatorStyle = .none
         table.tableFooterView = UIView(al: true)
         table.allowsSelection = false

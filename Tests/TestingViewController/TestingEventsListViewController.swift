@@ -24,7 +24,7 @@ extension TestingViewController where Controller == EventsListViewController {
     }
 
     func swipeFirstEvent() {
-        if let cell = cell(1) as? EventItem {
+        if let cell = cell(1) as? EventCell {
             cell.viewModel?.swipeHandler()
         }
     }
@@ -44,15 +44,15 @@ extension TestingViewController where Controller == EventsListViewController {
     }
 
     var hintText: String? {
-        if let hintCell = cell(0) as? HintItem {
+        if let hintCell = cell(0) as? HintCell {
             return hintCell.label.text
         }
 
         return nil
     }
 
-    var firstEvent: EventItem {
-        if let cell = cell(1) as? EventItem { return cell } else {
+    var firstEvent: EventCell {
+        if let cell = cell(1) as? EventCell { return cell } else {
             fatalError("unable to get EventItem")
         }
     }

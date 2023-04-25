@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FooterItem: UITableViewCell, EventsListCell {
+final class FooterCell: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "FooterItem"
 
     let button: UIButton = {
@@ -16,7 +16,7 @@ final class FooterItem: UITableViewCell, EventsListCell {
         return button
     }()
 
-    var viewModel: FooterItemViewModel? {
+    var viewModel: FooterCellViewModel? {
         didSet {
             guard let viewModel else { return }
 

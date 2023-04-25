@@ -24,8 +24,8 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
             today: today,
             commander: commander,
             items: [
-                HintItemViewModel(events: [event]),
-                EventItemViewModel(
+                HintCellViewModel(events: [event]),
+                EventCellViewModel(
                     event: event,
                     hintEnabled: false,
                     today: today,
@@ -35,7 +35,7 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
                     deleteActionHandler: {},
                     renameHandler: { _, _ in }
                 ),
-                FooterItemViewModel(eventsCount: 1, tapHandler: nil),
+                FooterCellViewModel(eventsCount: 1, tapHandler: nil),
             ]
         )
     }

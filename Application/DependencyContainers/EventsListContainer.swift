@@ -47,9 +47,9 @@ final class EventsListContainer:
         let hintVm = makeHintItemViewModel(events: events)
 
         let orderingItems = EventsQuerySorter.allCases.map {
-            OrderingItemViewModel.Item(title: $0.title, reversed: false)
+            OrderingCellViewModel.Item(title: $0.title, reversed: false)
         }
-        let orderingVm = OrderingItemViewModel(items: orderingItems)
+        let orderingVm = OrderingCellViewModel(items: orderingItems)
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
 
@@ -77,15 +77,15 @@ final class EventsListContainer:
         return vm
     }
 
-    func makeHintItemViewModel(events: [Event]) -> HintItemViewModel {
-        HintItemViewModel(events: events)
+    func makeHintItemViewModel(events: [Event]) -> HintCellViewModel {
+        HintCellViewModel(events: events)
     }
 
     func makeFooterItemViewModel(
         eventsCount: Int,
         handler: FooterItemViewModelTapHandling?
-    ) -> FooterItemViewModel {
-        FooterItemViewModel(
+    ) -> FooterCellViewModel {
+        FooterCellViewModel(
             eventsCount: eventsCount,
             tapHandler: WeakRef(handler as? EventsListViewController)
         )
@@ -96,8 +96,8 @@ final class EventsListContainer:
         today: DayIndex,
         hintEnabled: Bool,
         renameHandler: EventItemViewModelRenameHandling?
-    ) -> EventItemViewModel {
-        EventItemViewModel(
+    ) -> EventCellViewModel {
+        EventCellViewModel(
             event: event,
             hintEnabled: hintEnabled,
             today: today,
