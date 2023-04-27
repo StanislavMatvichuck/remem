@@ -11,6 +11,7 @@ extension UIColor {
     static let background = UIColor(named: "background")!
     static let background_secondary = UIColor(named: "background_secondary")!
     static let primary = UIColor(named: "primary")!
+    static let primary_dimmed = UIColor(named: "primary_dimmed")!
     static let secondary = UIColor(named: "secondary")!
     static let secondary_dimmed = UIColor(named: "secondary_dimmed")!
     static let text_primary = UIColor(named: "text_primary")!
