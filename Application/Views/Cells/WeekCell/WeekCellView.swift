@@ -66,6 +66,9 @@ final class WeekCellView: UIView {
         day.text = vm.dayNumber
         day.font = vm.isToday ? .fontBold : .font
 
+        let dayColor = vm.highlighted ? UIColor.primary : UIColor.primary_dimmed
+        day.backgroundColor = dayColor
+
         show(timings: vm.items)
     }
 

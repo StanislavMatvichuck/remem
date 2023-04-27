@@ -25,6 +25,7 @@ struct WeekCellViewModel {
     let amount: String
     let items: [String]
     let dayNumber: String
+    let highlighted: Bool
     let date: Date /// used only by `WeekViewControllerTests`
 
     init(
@@ -46,6 +47,8 @@ struct WeekCellViewModel {
             formatter.string(from: happening.dateCreated)
         }
 
+        let dayCreated = DayIndex(event.dateCreated)
+        self.highlighted = day >= dayCreated && day <= today
         self.dayNumber = String(day.dayInMonth)
         self.amount = String(items.count)
         self.isToday = day == today
