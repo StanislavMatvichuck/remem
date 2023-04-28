@@ -89,7 +89,8 @@ extension WeekViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
 
-        let cellYOffset = cell.convert(cell.frame, to: nil).minY
+        let cellYOffset = viewRoot.convert(viewRoot.accessory.frame, to: nil).minY - .buttonMargin / 2
+//        let cellYOffset = cell.convert(cell.frame, to: nil).minY
 
         presenter.presentationAnimator.originHeight = cellYOffset
         presenter.animatedCellIndex = indexPath

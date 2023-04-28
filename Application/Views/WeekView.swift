@@ -7,18 +7,52 @@
 
 import UIKit
 
-class WeekView: UIView {
+final class WeekView: UIView {
     let summary: UILabel = {
         let label = UILabel(al: true)
         label.font = .fontBoldBig
         label.textColor = UIColor.text_primary
         label.text = "0"
-        label.textAlignment = .center
         label.numberOfLines = 1
-        label.adjustsFontSizeToFitWidth = true
-        label.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7).isActive = true
         return label
     }()
+
+    let goal: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .fontBoldBig
+        label.textColor = UIColor.text_primary
+        label.text = "24"
+        label.numberOfLines = 1
+
+        let accessory = UIView(al: true)
+        accessory.backgroundColor = .primary
+        accessory.layer.cornerRadius = .buttonMargin / 4
+        label.addSubview(accessory)
+        NSLayoutConstraint.activate([
+            accessory.widthAnchor.constraint(equalTo: label.widthAnchor),
+            accessory.heightAnchor.constraint(equalToConstant: .buttonMargin / 2),
+            accessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
+            accessory.centerYAnchor.constraint(equalTo: label.bottomAnchor),
+        ])
+        return label
+    }()
+
+    let progress: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .fontBoldBig
+        label.textColor = UIColor.secondary
+        label.text = "= 67%"
+        label.numberOfLines = 1
+        return label
+    }()
+
+    let progressShade: UIView = {
+        let view = UIView(al: true)
+        view.backgroundColor = .secondary_dimmed
+        return view
+    }()
+
+    let accessory = WeekAccessoryView()
 
     let collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -61,7 +95,7 @@ class WeekView: UIView {
 
             NSLayoutConstraint.activate([
                 label.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7),
-                label.heightAnchor.constraint(equalTo: label.widthAnchor)
+                label.heightAnchor.constraint(equalTo: label.widthAnchor),
             ])
         }
 
@@ -79,14 +113,60 @@ class WeekView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        progressShade.center.x -= 120
+    }
+
+    override func draw(_ rect: CGRect) {
+        accessory.leftDistance = summary.superview!.convert(summary.center, to: nil).x
+    }
+
     private func configureLayout() {
+        let of = UILabel(al: true)
+        of.font = .font
+        of.text = "of"
+        of.textColor = .secondary
+
+        let horizontalStack = UIStackView(al: true)
+        horizontalStack.axis = .horizontal
+        horizontalStack.alignment = .firstBaseline
+
+        horizontalStack.addArrangedSubview(summary)
+        horizontalStack.addArrangedSubview(of)
+        horizontalStack.addArrangedSubview(goal)
+        horizontalStack.addArrangedSubview(progress)
+
+        horizontalStack.setCustomSpacing(.buttonMargin, after: summary)
+        horizontalStack.setCustomSpacing(.buttonMargin, after: of)
+        horizontalStack.setCustomSpacing(.buttonMargin, after: goal)
+
         let stack = UIStackView(al: true)
         stack.axis = .vertical
-        stack.addArrangedSubview(summary)
+        stack.alignment = .center
+        stack.addArrangedSubview(horizontalStack)
+        stack.addArrangedSubview(accessory)
         stack.addArrangedSubview(collection)
         stack.addArrangedSubview(weekdaysLine)
+
+        stack.setCustomSpacing(.buttonMargin, after: accessory)
+
+        addSubview(progressShade)
         addAndConstrain(stack)
 
-        collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height).isActive = true
+        NSLayoutConstraint.activate([
+            horizontalStack.heightAnchor.constraint(equalToConstant: .layoutSquare * 1.5 - .buttonMargin),
+
+            accessory.widthAnchor.constraint(equalTo: widthAnchor),
+            accessory.heightAnchor.constraint(equalToConstant: .layoutSquare / 2),
+
+            collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height),
+            collection.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
+
+            progressShade.topAnchor.constraint(equalTo: topAnchor),
+            progressShade.leadingAnchor.constraint(equalTo: leadingAnchor),
+            progressShade.trailingAnchor.constraint(equalTo: trailingAnchor),
+            progressShade.bottomAnchor.constraint(equalTo: accessory.bottomAnchor),
+        ])
     }
 }

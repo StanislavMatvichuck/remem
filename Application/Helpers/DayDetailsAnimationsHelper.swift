@@ -73,7 +73,7 @@ struct DayDetailsAnimationsHelper {
                     withRelativeStartTime: 0,
                     relativeDuration: 1 / 3,
                     animations: {
-                        animatedView.frame.origin.y -= .layoutSquare * 4
+                        animatedView.frame.origin.y -= .layoutSquare * 5
                     }
                 )
 
@@ -117,7 +117,7 @@ struct DayDetailsAnimationsHelper {
                     withRelativeStartTime: 3 / 6,
                     relativeDuration: 1 / 2,
                     animations: {
-                        animatedView.frame.origin.y += .layoutSquare * 4
+                        animatedView.frame.origin.y += .layoutSquare * 5
                     }
                 )
 

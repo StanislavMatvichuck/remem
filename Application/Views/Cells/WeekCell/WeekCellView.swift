@@ -9,16 +9,11 @@ import UIKit
 
 final class WeekCellView: UIView {
     static let spacing = CGFloat.buttonMargin / 8
-    static let cornerRadius = CGFloat.buttonMargin / 4
+    static let cornerRadius = CGFloat.buttonMargin / 2
     static let bottomDecalHeight = cornerRadius * 2
     static let happeningsDisplayedMaximumAmount = 6
 
-    let bottomDecal: UIView = {
-        let bottomDecal = UIView(al: true)
-        bottomDecal.backgroundColor = .background
-        bottomDecal.layer.cornerRadius = WeekCellView.bottomDecalHeight / 2
-        return bottomDecal
-    }()
+    var maskLayer: CALayer?
 
     let day: UILabel = {
         let label = UILabel(al: true)
@@ -77,26 +72,24 @@ final class WeekCellView: UIView {
         day.text = " "
     }
 
+    override func draw(_ rect: CGRect) {
+        if maskLayer == nil {
+            maskLayer = makeMaskLayer()
+            layer.mask = maskLayer
+        }
+    }
+
     // MARK: - Private
     private func configureLayout() {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
         stack.backgroundColor = UIColor.background_secondary
-        stack.layer.cornerRadius = Self.cornerRadius
         stack.clipsToBounds = true
 
         for timingLabel in timingLabels.reversed() {
             stack.addArrangedSubview(timingLabel)
         }
-
-        day.addSubview(bottomDecal)
-        NSLayoutConstraint.activate([
-            bottomDecal.centerXAnchor.constraint(equalTo: day.centerXAnchor),
-            bottomDecal.centerYAnchor.constraint(equalTo: day.bottomAnchor),
-            bottomDecal.widthAnchor.constraint(equalTo: day.widthAnchor, multiplier: 0.6),
-            bottomDecal.heightAnchor.constraint(equalToConstant: Self.bottomDecalHeight)
-        ])
 
         stack.addArrangedSubview(day)
 
@@ -117,5 +110,38 @@ final class WeekCellView: UIView {
 
     private func hideAll() {
         for timingLabel in timingLabels { timingLabel.text = " " }
+    }
+
+    private func makeMaskLayer() -> CALayer {
+        let maskRect = CGRect(
+            x: Self.spacing,
+            y: 0,
+            width: bounds.width - 2 * Self.spacing,
+            height: bounds.height - Self.spacing + 0.5
+        )
+
+        let bottomCut = UIBezierPath(
+            roundedRect: CGRect(
+                x: bounds.width / 6,
+                y: maskRect.height - Self.cornerRadius,
+                width: bounds.width - bounds.width / 3,
+                height: Self.cornerRadius * 2
+            ),
+            cornerRadius: Self.cornerRadius
+        )
+
+        let outsideCut = UIBezierPath(
+            roundedRect: maskRect,
+            cornerRadius: Self.cornerRadius
+        )
+
+        let maskPath = UIBezierPath()
+        maskPath.usesEvenOddFillRule = true
+        maskPath.append(outsideCut)
+        maskPath.append(bottomCut.reversing())
+
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = maskPath.cgPath
+        return maskLayer
     }
 }
