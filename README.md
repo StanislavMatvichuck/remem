@@ -30,12 +30,14 @@ Existing `Event` can be renamed
 
 ## Atlases produced by snapshot tests. This is production code with test data.
 
-[Atlas for light mode](/Tests/Snapshots/images_en_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
 
-[Atlas for dark mode](/Tests/Snapshots/images_en_64/iphonese(3rdgeneration)/dark/ZAtlas/test06_eventsListBasicFlow_dark.png)
 
-[Atlas for Ukrainian localization](/Tests/Snapshots/images_ua_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
+![Atlas for light mode](/Tests/Snapshots/images_en_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
 
-[Atlas for German localization](/Tests/Snapshots/images_de_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
+![Atlas for dark mode](/Tests/Snapshots/images_en_64/iphonese(3rdgeneration)/dark/ZAtlas/test06_eventsListBasicFlow_dark.png)
 
-[Atlas for Russian localization](/Tests/Snapshots/images_ru_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
+![Atlas for Ukrainian localization](/Tests/Snapshots/images_ua_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
+
+![Atlas for German localization](/Tests/Snapshots/images_de_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
+
+![Atlas for Russian localization](/Tests/Snapshots/images_ru_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
