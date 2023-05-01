@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import Foundation
 import XCTest
 

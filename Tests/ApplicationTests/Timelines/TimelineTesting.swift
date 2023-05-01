@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import Foundation
 
 protocol TimelineTesting {}
@@ -27,6 +28,6 @@ extension DayIndex {
     static var referenceValue: DayIndex { DayIndex(Date(timeIntervalSinceReferenceDate: 0)) }
 
     func adding(dateComponents: DateComponents) -> DayIndex {
-        DayIndex(calendar.date(byAdding: dateComponents, to: date)!)
+        DayIndex(Calendar.current.date(byAdding: dateComponents, to: date)!)
     }
 }

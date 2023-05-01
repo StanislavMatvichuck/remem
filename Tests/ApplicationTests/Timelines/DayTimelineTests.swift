@@ -7,6 +7,7 @@
 
 @testable import Application
 import Foundation
+import Domain
 import XCTest
 
 final class DayTimelineTests: XCTestCase, TimelineTesting {

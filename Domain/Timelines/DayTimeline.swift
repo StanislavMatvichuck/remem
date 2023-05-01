@@ -7,13 +7,20 @@
 
 import Foundation
 
-struct DayTimeline<Element>: RandomAccessCollection {
-    var storage: [Date: Element] = [:]
+public struct DayTimeline<Element>: RandomAccessCollection {
+    private var storage: [Date: Element] = [:]
+    private var calendar: Calendar { .current }
     
-    var startIndex = DayIndex(Date.distantPast)
-    var endIndex = DayIndex(Date.distantPast)
+    public var startIndex = DayIndex(Date.distantPast)
+    public var endIndex = DayIndex(Date.distantPast)
     
-    subscript(i: DayIndex) -> Element? {
+    public init(storage: [Date : Element] = [:], startIndex: DayIndex = DayIndex(Date.distantPast), endIndex: DayIndex = DayIndex(Date.distantPast)) {
+        self.storage = storage
+        self.startIndex = startIndex
+        self.endIndex = endIndex
+    }
+    
+    public subscript(i: DayIndex) -> Element? {
         get {
             return storage[i.date]
         }
@@ -31,7 +38,7 @@ struct DayTimeline<Element>: RandomAccessCollection {
         }
     }
     
-    subscript(date: Date) -> Element? {
+    public subscript(date: Date) -> Element? {
         get {
             return self[DayIndex(date)]
         }
@@ -40,23 +47,23 @@ struct DayTimeline<Element>: RandomAccessCollection {
         }
     }
     
-    subscript(i: Int) -> Element? { self[startIndex.adding(days: i)] }
+    public subscript(i: Int) -> Element? { self[startIndex.adding(days: i)] }
     
-    func index(after i: DayIndex) -> DayIndex {
+    public func index(after i: DayIndex) -> DayIndex {
         let nextDay = calendar.date(byAdding: DateComponents(day: 1), to: i.date)!
         return DayIndex(nextDay)
     }
     
-    func index(before i: DayIndex) -> DayIndex {
+    public func index(before i: DayIndex) -> DayIndex {
         let previousDay = calendar.date(byAdding: DateComponents(day: -1), to: i.date)!
         return DayIndex(previousDay)
     }
     
-    func distance(from start: DayIndex, to end: DayIndex) -> Int {
+    public func distance(from start: DayIndex, to end: DayIndex) -> Int {
         return calendar.dateComponents([.day], from: start.date, to: end.date).day!
     }
     
-    func index(_ i: DayIndex, offsetBy n: Int) -> DayIndex {
+    public func index(_ i: DayIndex, offsetBy n: Int) -> DayIndex {
         let offsetDate = calendar.date(byAdding: DateComponents(day: n), to: i.date)!
         return DayIndex(offsetDate)
     }

@@ -25,12 +25,12 @@ extension TestingViewController where Controller == ClockViewController {
     func addOneHappening(
         at: TimeComponents = TimeComponents(h: 1, m: 1, s: 1)
     ) {
-        var today = calendar.dateComponents([.hour, .minute, .second], from: .now)
+        var today = Calendar.current.dateComponents([.hour, .minute, .second], from: .now)
         today.hour = at.h
         today.minute = at.m
         today.second = at.s
 
-        event.addHappening(date: calendar.date(from: today)!)
+        event.addHappening(date: Calendar.current.date(from: today)!)
     }
 
     func sendEventUpdatesToController() {

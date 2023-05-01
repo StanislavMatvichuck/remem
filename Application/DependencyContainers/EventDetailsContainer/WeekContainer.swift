@@ -61,8 +61,8 @@ final class WeekContainer:
         DayDetailsContainer(
             parent: self,
             day: day,
-            hour: calendar.component(.hour, from: .now),
-            minute: calendar.component(.minute, from: .now)
+            hour: Calendar.current.component(.hour, from: .now),
+            minute: Calendar.current.component(.minute, from: .now)
         )
     }
 }

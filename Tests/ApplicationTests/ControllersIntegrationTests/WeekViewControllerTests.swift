@@ -93,14 +93,14 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let todayCell = try fullyVisibleIndexPaths.filter { index in
             let cell = collection.cellForItem(at: index)
             let weekCell = try XCTUnwrap(cell as? WeekCell)
-            return weekCell.viewModel.isToday
+            return weekCell.viewModel!.isToday
         }
 
         XCTAssertEqual(todayCell.count, 1)
     }
 
     func test_firstDay_showsDayNumber() {
-        XCTAssertEqual(firstDay.day.text, "1")
+        XCTAssertEqual(firstDay.view.day.text, "1")
     }
 
     func test_hasHappening_firstDayShowsHappeningTime() {
@@ -113,7 +113,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
             .makeContainer(event: event, today: today)
         sut = WeekContainer(parent: container).make() as? WeekViewController
 
-        XCTAssertEqual(firstDay.timingLabels.first?.text, "00:00")
+        XCTAssertEqual(firstDay.view.timingLabels.first?.text, "00:00")
     }
 
     func test_showsWeekSummary() {

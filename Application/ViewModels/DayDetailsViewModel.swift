@@ -49,7 +49,7 @@ struct DayDetailsViewModel {
         self.title = titleFormatter.string(for: day.date)!
 
         let dayDate = day.date
-        self.pickerDate = calendar.date(
+        self.pickerDate = Calendar.current.date(
             bySettingHour: hour,
             minute: minute,
             second: 0,

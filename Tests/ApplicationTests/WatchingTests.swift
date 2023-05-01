@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import XCTest
 
 final class ChangeWatcherDelegateSpy: Updating {

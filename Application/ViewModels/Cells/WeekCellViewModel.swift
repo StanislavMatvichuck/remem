@@ -10,7 +10,7 @@ import Foundation
 
 extension DayIndex {
     var dayInMonth: Int {
-        let components = calendar.dateComponents([.day], from: date)
+        let components = Calendar.current.dateComponents([.day], from: date)
         return components.day ?? 1
     }
 }
