@@ -83,7 +83,8 @@ final class OrderingCellViewItem: UIStackView {
         accessory.addSubview(accessoryTopLabel)
         accessory.addSubview(accessoryBottomLabel)
 
-        addArrangedSubview(accessory)
+        // TODO: finish sorting variants to be reversible
+//        addArrangedSubview(accessory)
         addArrangedSubview(title)
 
         NSLayoutConstraint.activate([
