@@ -42,7 +42,7 @@ final class DayDetailsDismissAnimator: DayDetailsAnimator {
     }
     
     func prepareForAnimation(_ view: UIView) {
-        view.frame.origin.y = .layoutSquare * -4
+        view.frame.origin.y = .layoutSquare * -5
         view.transform = .init(scaleX: 0.8, y: 1)
     }
 }
