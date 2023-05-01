@@ -32,6 +32,7 @@ final class WeekViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         configureCollection()
+        viewRoot.goal.delegate = self
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -48,6 +49,12 @@ final class WeekViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollToCurrentWeek()
+    }
+
+    // TODO: add accessory view
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
 
     private func scrollToCurrentWeek() {
@@ -114,6 +121,45 @@ extension WeekViewController:
     func updateSummary() {
         let summaryValue = String(viewModel.summaryTimeline[makeWeekIndexForCurrentPosition()] ?? 0)
         viewRoot.summary.text = summaryValue
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension WeekViewController: UITextFieldDelegate {
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        updateViewAccessory(textField: textField)
+        let currentText = textField.text ?? ""
+        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        return prospectiveText.count <= 4
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.placeholder = nil
+        updateViewAccessory(textField: textField)
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        installDefaultPlaceholder(textField: textField)
+        updateViewAccessory(textField: textField)
+    }
+
+    private func updateViewAccessory(textField: UITextField) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            textField.invalidateIntrinsicContentSize()
+            self.viewRoot.setNeedsDisplay()
+            self.viewRoot.accessory.setNeedsDisplay()
+        }
+    }
+
+    private func installDefaultPlaceholder(textField: UITextField) {
+        if textField.text == "" {
+            textField.attributedPlaceholder = WeekView.goalPlaceholder
+        }
     }
 }
 

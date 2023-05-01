@@ -17,24 +17,37 @@ final class WeekView: UIView {
         return label
     }()
 
-    let goal: UILabel = {
-        let label = UILabel(al: true)
-        label.font = .fontBoldBig
-        label.textColor = UIColor.text_primary
-        label.text = "24"
-        label.numberOfLines = 1
+    static let goalPlaceholder: NSAttributedString = {
+        NSAttributedString(
+            string: "your weekly goal",
+            attributes: [
+                NSAttributedString.Key.font: UIFont.font,
+                NSAttributedString.Key.foregroundColor: UIColor.secondary,
+            ])
+    }()
+
+    let goal: UITextField = {
+        let field = UITextField(al: true)
+        field.font = .fontBoldBig
+        field.textColor = UIColor.text_primary
+        field.keyboardType = .numberPad
+        field.attributedPlaceholder = WeekView.goalPlaceholder
+        field.textAlignment = .center
+        field.returnKeyType = .done
 
         let accessory = UIView(al: true)
         accessory.backgroundColor = .primary
         accessory.layer.cornerRadius = .buttonMargin / 4
-        label.addSubview(accessory)
+
+        field.addSubview(accessory)
         NSLayoutConstraint.activate([
-            accessory.widthAnchor.constraint(equalTo: label.widthAnchor),
+            accessory.widthAnchor.constraint(equalTo: field.widthAnchor),
             accessory.heightAnchor.constraint(equalToConstant: .buttonMargin / 2),
-            accessory.centerXAnchor.constraint(equalTo: label.centerXAnchor),
-            accessory.centerYAnchor.constraint(equalTo: label.bottomAnchor),
+            accessory.centerXAnchor.constraint(equalTo: field.centerXAnchor),
+            accessory.centerYAnchor.constraint(equalTo: field.bottomAnchor),
         ])
-        return label
+
+        return field
     }()
 
     let progress: UILabel = {
@@ -130,7 +143,6 @@ final class WeekView: UIView {
 
         let horizontalStack = UIStackView(al: true)
         horizontalStack.axis = .horizontal
-        horizontalStack.alignment = .firstBaseline
 
         horizontalStack.addArrangedSubview(summary)
         horizontalStack.addArrangedSubview(of)
@@ -168,5 +180,9 @@ final class WeekView: UIView {
             progressShade.trailingAnchor.constraint(equalTo: trailingAnchor),
             progressShade.bottomAnchor.constraint(equalTo: accessory.bottomAnchor),
         ])
+
+        // TODO: remove and animate with help of viewModel
+        progress.isHidden = true
+        progressShade.isHidden = true
     }
 }

@@ -21,7 +21,6 @@ final class WeekAccessoryView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        print(rect)
         sublayer?.removeFromSuperlayer()
         sublayer = make()
         layer.addSublayer(sublayer!)
