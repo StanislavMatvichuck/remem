@@ -841,9 +841,10 @@
 				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
-				080C417F2986AF4800C1F54F /* SummaryView.swift */,
 				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
 				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
+				080C417F2986AF4800C1F54F /* SummaryView.swift */,
+				085502B529FFE21A006102DD /* WeekView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -857,7 +858,6 @@
 				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
 				08677BD229F7C63E00AD5383 /* OrderingCell */,
 				0852873929FA82A800E11860 /* WeekCell */,
-				085502B529FFE21A006102DD /* WeekView */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
