@@ -15,6 +15,7 @@ public class Event: CustomDebugStringConvertible {
     public let id: String
     public var name: String
     public var happenings: [Happening]
+    public var weeklyGoals: [WeeklyGoal] = []
 
     public let dateCreated: Date
     public var dateVisited: Date?
@@ -93,6 +94,33 @@ public extension Event {
         if happeningDeleted == nil { throw EventManipulationError.invalidHappeningDeletion }
 
         return happeningDeleted
+    }
+
+    func weeklyGoalAmount(at date: Date) -> Int {
+        let startOfWeek = WeekIndex(date).date
+
+        if let goalForWeek = weeklyGoals.first(where: { goal in
+            goal.dateCreated == startOfWeek
+        }) { return goalForWeek.amount }
+
+        return 0
+    }
+
+    func setWeeklyGoal(amount: Int, for date: Date) {
+        let startOfWeek = WeekIndex(date).date
+        let newGoal = WeeklyGoal(dateCreated: startOfWeek, amount: amount)
+
+        if let existingIndex = weeklyGoals.firstIndex(where: { goal in
+            goal.dateCreated == startOfWeek
+        }) {
+            weeklyGoals[existingIndex] = newGoal
+        } else if let insertingIndex = weeklyGoals.lastIndex(where: { goal in
+            goal.dateCreated < startOfWeek
+        }) {
+            weeklyGoals.insert(newGoal, at: insertingIndex.advanced(by: 1))
+        } else {
+            weeklyGoals.append(newGoal)
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 @testable import Domain
 import XCTest
 
-class EventTests: XCTestCase {
+final class EventTests: XCTestCase {
     var sut: Event!
 
     override func setUp() {
@@ -136,29 +136,61 @@ class EventTests: XCTestCase {
         XCTAssertNotNil(sut.dateVisited)
     }
 
-    // MOVE THESE TESTS TO APPLICATION LAYER
-//    func test_hasHappeningAtDayOfCreation_getHappeningsForDay_returnsOne() {
-//        let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
-//
-//        let happeningsForFirstDay = sut.happenings(forDayIndex: dayOfCreation)
-//
-//        XCTAssertEqual(happeningsForFirstDay.count, 1)
-//    }
-//
-//    func test_hasHappeningAtDayOfCreation_getHappeningsForNextDay_returnsNone() {
-//        let (sut, dayOfCreation) = arrangeWithOneHappeningOneHourAfterCreation()
-//
-//        let nextDay = dayOfCreation.adding(components: DateComponents(day: 1))
-//        let happeningsForFirstDay = sut.happenings(forDayIndex: nextDay)
-//
-//        XCTAssertEqual(happeningsForFirstDay.count, 0)
-//    }
+    func test_goalAmountAtDate_returns0() {
+        XCTAssertEqual(sut.weeklyGoalAmount(at: Date.distantPast), 0)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: Date.distantFuture), 0)
+    }
 
-//    private func arrangeWithOneHappeningOneHourAfterCreation() -> (Event, DayIndex) {
-//        let day = DayIndex.referenceValue
-//        let date = day.date
-//        let sut = Event(name: "Event", dateCreated: date)
-//        sut.addHappening(date: date.addingTimeInterval(60 * 60))
-//        return (sut, day)
-//    }
+    func test_setGoal() {
+        let eventDateCreated = Date(timeIntervalSinceReferenceDate: 0)
+        sut = Event(name: "Event", dateCreated: eventDateCreated)
+
+        sut.setWeeklyGoal(amount: 1, for: eventDateCreated)
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 1)
+    }
+
+    func test_setGoal_inSameWeek_updatesExistingGoal() {
+        let eventDateCreated = Date(timeIntervalSinceReferenceDate: 0)
+        sut = Event(name: "Event", dateCreated: eventDateCreated)
+
+        sut.setWeeklyGoal(amount: 1, for: eventDateCreated)
+        sut.setWeeklyGoal(amount: 2, for: eventDateCreated.addingTimeInterval(60))
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 2)
+    }
+
+    func test_setGoal_nextWeek_previousGoalPreserved() {
+        let eventDateCreated = Date(timeIntervalSinceReferenceDate: 0)
+        let nextWeekDate = eventDateCreated.addingTimeInterval(60 * 60 * 24 * 7)
+        sut = Event(name: "Event", dateCreated: eventDateCreated)
+
+        sut.setWeeklyGoal(amount: 1, for: eventDateCreated)
+        sut.setWeeklyGoal(amount: 2, for: nextWeekDate)
+        sut.setWeeklyGoal(amount: 3, for: nextWeekDate)
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 1)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: nextWeekDate), 3)
+    }
+
+    func test_setGoal_threeGoalsExist_secondOneCanBeUpdatedWithoutChangesInFirstAndThird() {
+        let eventDateCreated = Date(timeIntervalSinceReferenceDate: 0)
+        let nextWeekDate = eventDateCreated.addingTimeInterval(60 * 60 * 24 * 7)
+        let thirdWeekDate = nextWeekDate.addingTimeInterval(60 * 60 * 24 * 7)
+        sut = Event(name: "Event", dateCreated: eventDateCreated)
+
+        sut.setWeeklyGoal(amount: 1, for: eventDateCreated)
+        sut.setWeeklyGoal(amount: 2, for: nextWeekDate)
+        sut.setWeeklyGoal(amount: 3, for: thirdWeekDate)
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 1)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: nextWeekDate), 2)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: thirdWeekDate), 3)
+
+        sut.setWeeklyGoal(amount: 0, for: nextWeekDate)
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 1)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: nextWeekDate), 0)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: thirdWeekDate), 3)
+    }
 }

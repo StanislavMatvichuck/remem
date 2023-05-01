@@ -65,6 +65,19 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(acquiredEvent.happenings.count, 10)
     }
 
+    func test_save_eventWithGoal_savesGoal() {
+        let goalAmount = 1
+        let eventDateCreated = DayIndex.referenceValue.date
+        let savedEvent = Event(name: "EventWithGoals", dateCreated: eventDateCreated)
+        savedEvent.setWeeklyGoal(amount: goalAmount, for: eventDateCreated)
+
+        sut.save(savedEvent)
+
+        let acquiredEvent = sut.event(byId: savedEvent.id)
+
+        XCTAssertEqual(acquiredEvent.weeklyGoalAmount(at: eventDateCreated), goalAmount)
+    }
+
     func test_save_renamedEvent() {
         let newEvent = givenSavedDefaultEvent()
 
