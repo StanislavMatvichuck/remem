@@ -775,6 +775,15 @@
 			path = WeekCell;
 			sourceTree = "<group>";
 		};
+		085502B529FFE21A006102DD /* WeekView */ = {
+			isa = PBXGroup;
+			children = (
+				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
+				0852C6AE283D66380027EF3E /* WeekView.swift */,
+			);
+			path = WeekView;
+			sourceTree = "<group>";
+		};
 		0857B5A429892CBC002B400B /* ApplicationUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,8 +842,6 @@
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
 				080C417F2986AF4800C1F54F /* SummaryView.swift */,
-				0852C6AE283D66380027EF3E /* WeekView.swift */,
-				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
 				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
 				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
 			);
@@ -844,12 +851,13 @@
 		086DC6D3288058E70048F22F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0852873929FA82A800E11860 /* WeekCell */,
-				08677BD229F7C63E00AD5383 /* OrderingCell */,
 				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
 				085A2C2F29F15144005C6E5E /* EventCell */,
 				08F50DC82965EF5300B65CDF /* FooterCell.swift */,
 				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
+				08677BD229F7C63E00AD5383 /* OrderingCell */,
+				0852873929FA82A800E11860 /* WeekCell */,
+				085502B529FFE21A006102DD /* WeekView */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
