@@ -13,13 +13,13 @@ Hello. You are looking at Remem repository, which is a project that I started at
 [IOS Core Animation Advanced techniques, Nick Lockwood](https://www.amazon.com/iOS-Core-Animation-Advanced-Techniques-ebook/dp/B00EHJCORC)
 
 
-I did some web and cross-platform development using react-native and javascript previously and I always felt that strongly typed languages like Swift or Java demand more of a computer science understanding but provide scalability and higher performance. What I didn’t expect to find is DDD. This approach seems to be very powerful so I decided to put it in practice immediately. Any software project alive must evolve and grow in time so please **feel free to add anything you would like to see as functionality** or concept to issues section. Any code improvement suggestions welcomed too.
+I did some web and cross-platform development using react-native and javascript previously and I always felt that strongly typed languages like Swift or Java demand more of a computer science understanding but provide scalability and higher performance. What I didn’t expect to find is DDD. This approach seems to be very powerful so I decided to put it in practice immediately. Any software project alive must evolve and grow in time so please **feel free to add anything you would like to see as functionality** or concept to issues section. Any code improvement suggestions are welcomed too.
 
 ## Planned features list
 
 - [ ] **Volume tests.** Would be cool to prove mathematically that application will behave seamlessly even after 5-10 years of usage.
-- [ ] **Weekly goal.** Having a setup goal allows to track and display the amount of progress towards it. (wip)
-- [x] **PDF reports.** This will allow to share your achievements with others with ease. (wip)
+- [ ] **Weekly goal.** Having a set goal allows to track and display the amount of progress towards it. (wip)
+- [x] **PDF reports.** This will allow to share your achievements with others easily. (wip)
 - [x] **Events list sorting variants.** List is static which blocks user from any customisations and convenient widget usage. (wip)
 - [ ] **Fancy animated screenshots in store.** During day details interactive transition prototyping I realized that it is quite possible to add a bit of movement to store description with animations. I use [Blender Editor](https://www.blender.org) to create objects in 3D to animate them quickly and make a "movie" that serves as a reference during animation setup in code.
 
