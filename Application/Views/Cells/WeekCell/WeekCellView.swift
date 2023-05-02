@@ -14,6 +14,7 @@ final class WeekCellView: UIView {
     static let happeningsDisplayedMaximumAmount = 6
 
     var maskLayer: CALayer?
+    var pdfMode = false
 
     let day: UILabel = {
         let label = UILabel(al: true)
@@ -70,11 +71,15 @@ final class WeekCellView: UIView {
     func prepareForReuse() {
         hideAll()
         day.text = " "
+        pdfMode = false
     }
 
     override func draw(_ rect: CGRect) {
         if maskLayer == nil {
             maskLayer = makeMaskLayer()
+        }
+
+        if layer.mask == nil && pdfMode == false {
             layer.mask = maskLayer
         }
     }
