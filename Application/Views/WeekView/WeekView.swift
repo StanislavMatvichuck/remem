@@ -132,7 +132,7 @@ final class WeekView: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-        accessory.leftDistance = summary.superview!.convert(summary.center, to: nil).x
+        accessory.leftDistance = summary.superview!.convert(summary.center, to: self).x
     }
 
     private func configureLayout() {
