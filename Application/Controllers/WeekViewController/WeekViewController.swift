@@ -57,6 +57,38 @@ final class WeekViewController: UIViewController {
         view.endEditing(true)
     }
 
+    func updateSummary() {
+        let index = weekIndexForCurrentScrollPosition()
+
+        guard let page = viewModel.pages[index] else { return }
+
+        viewRoot.summary.text = page.sum
+        viewRoot.progress.text = page.progress
+        viewRoot.goal.text = page.goal
+
+        viewRoot.progress.isHidden = page.progress == nil
+
+        if page.goal == nil {
+            viewRoot.installPlaceholder()
+        } else {
+            viewRoot.removePlaceholder()
+        }
+
+        let opacity: Float = page.goalEditable ? 1.0 : 0.2
+        viewRoot.goal.layer.opacity = opacity
+        viewRoot.goal.isUserInteractionEnabled = page.goalEditable
+
+        viewRoot.resizeGoalInputAndRedrawAccessory()
+    }
+
+    // MARK: - Private
+    private func weekIndexForCurrentScrollPosition() -> Int {
+        let collectionWidth = viewRoot.collection.bounds.width
+        let offset = viewRoot.collection.contentOffset.x
+        guard offset != 0 else { return 0 }
+        return Int(offset / collectionWidth)
+    }
+
     private func scrollToCurrentWeek() {
         guard !scrollHappened else { return }
         setInitialScrollPosition()
@@ -72,6 +104,17 @@ final class WeekViewController: UIViewController {
         )
 
         updateSummary()
+    }
+
+    private func scheduleGoalUpdate() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            self.updateGoal()
+        }
+    }
+
+    private func updateGoal() {
+        guard let text = viewRoot.goal.text else { return }
+        viewModel.goalChangeHander(Int(text) ?? 0, .now)
     }
 }
 
@@ -107,92 +150,26 @@ extension WeekViewController:
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updateSummary()
-        redrawAccessory()
-    }
-
-    private func redrawAccessory() {
-        viewRoot.setNeedsDisplay()
-        viewRoot.accessory.setNeedsDisplay()
-    }
-
-    private func makeWeekIndexForCurrentPosition() -> Int {
-        let offset = viewRoot.collection.contentOffset.x
-
-        guard offset != 0 else { return 0 }
-
-        let collectionWidth = viewRoot.collection.bounds.width
-        return Int(offset / collectionWidth)
-    }
-
-    func updateSummary() {
-        let index = makeWeekIndexForCurrentPosition()
-        if let page = viewModel.pages[index] {
-            viewRoot.summary.text = page.sum
-            viewRoot.progress.text = page.progress
-            viewRoot.goal.text = page.goal
-
-            viewRoot.progress.isHidden = page.progress == nil
-
-            if page.goal == nil {
-                installDefaultPlaceholder(textField: viewRoot.goal)
-            } else {
-                viewRoot.goal.placeholder = nil
-            }
-
-            let opacity: Float = page.goalEditable ? 1.0 : 0.2
-
-            viewRoot.goal.layer.opacity = opacity
-            viewRoot.goal.isUserInteractionEnabled = page.goalEditable
-
-            updateViewAccessory(textField: viewRoot.goal)
-        }
     }
 }
 
 // MARK: - UITextFieldDelegate
 extension WeekViewController: UITextFieldDelegate {
-    func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String
-    ) -> Bool {
-        updateViewAccessory(textField: textField)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        scheduleGoalUpdate()
         let currentText = textField.text ?? ""
         let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
-
         return prospectiveText.count <= 4
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.placeholder = nil
-        updateViewAccessory(textField: textField)
-
-        DispatchQueue.main.async {
-            textField.selectedTextRange = textField.textRange(
-                from: textField.endOfDocument,
-                to: textField.endOfDocument
-            )
-        }
+        viewRoot.removePlaceholder()
+        viewRoot.resizeGoalInputAndRedrawAccessory()
+        viewRoot.moveSelectionToEnd()
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        installDefaultPlaceholder(textField: textField)
-        updateViewAccessory(textField: textField)
-        // TODO: empty text produces crash
-        viewModel.goalChangeHander(Int(textField.text!)!, .now)
-    }
-
-    private func updateViewAccessory(textField: UITextField) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            textField.invalidateIntrinsicContentSize()
-            self.redrawAccessory()
-        }
-    }
-
-    private func installDefaultPlaceholder(textField: UITextField) {
-        if textField.text == "" {
-            textField.attributedPlaceholder = WeekView.goalPlaceholder
-        }
+        viewRoot.installPlaceholder()
     }
 }
 

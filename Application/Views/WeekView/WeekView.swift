@@ -8,15 +8,6 @@
 import UIKit
 
 final class WeekView: UIView {
-    let summary: UILabel = {
-        let label = UILabel(al: true)
-        label.font = .fontBoldBig
-        label.textColor = UIColor.text_primary
-        label.text = "0"
-        label.numberOfLines = 1
-        return label
-    }()
-
     static let goalPlaceholder: NSAttributedString = {
         NSAttributedString(
             string: "your weekly goal",
@@ -25,6 +16,15 @@ final class WeekView: UIView {
                 NSAttributedString.Key.foregroundColor: UIColor.secondary,
             ]
         )
+    }()
+
+    let summary: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .fontBoldBig
+        label.textColor = UIColor.text_primary
+        label.text = "0"
+        label.numberOfLines = 1
+        return label
     }()
 
     let goal: UITextField = {
@@ -110,7 +110,6 @@ final class WeekView: UIView {
         return view
     }()
 
-    // MARK: - Init
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -122,13 +121,37 @@ final class WeekView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        progressShade.center.x -= 120
-    }
+    // MARK: - View lifecycle
 
     override func draw(_ rect: CGRect) {
         accessory.leftDistance = summary.superview!.convert(summary.center, to: self).x
+    }
+
+    // MARK: - Public behaviour
+
+    func moveSelectionToEnd() {
+        DispatchQueue.main.async {
+            self.goal.selectedTextRange = self.goal.textRange(
+                from: self.goal.endOfDocument,
+                to: self.goal.endOfDocument
+            )
+        }
+    }
+
+    func resizeGoalInputAndRedrawAccessory() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            self.goal.invalidateIntrinsicContentSize()
+            self.redrawAccessory()
+        }
+    }
+
+    func installPlaceholder() {
+        guard goal.text == "" else { return }
+        goal.attributedPlaceholder = WeekView.goalPlaceholder
+    }
+
+    func removePlaceholder() {
+        goal.placeholder = nil
     }
 
     private func configureLayout() {
@@ -199,4 +222,9 @@ final class WeekView: UIView {
     }
 
     @objc private func handleDone() { endEditing(true) }
+
+    private func redrawAccessory() {
+        setNeedsDisplay()
+        accessory.setNeedsDisplay()
+    }
 }
