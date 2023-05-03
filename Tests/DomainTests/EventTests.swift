@@ -193,4 +193,14 @@ final class EventTests: XCTestCase {
         XCTAssertEqual(sut.weeklyGoalAmount(at: nextWeekDate), 0)
         XCTAssertEqual(sut.weeklyGoalAmount(at: thirdWeekDate), 3)
     }
+
+    func test_setGoal_goalTransfersToNextWeek() {
+        let eventDateCreated = Date(timeIntervalSinceReferenceDate: 0)
+        let nextWeekDate = eventDateCreated.addingTimeInterval(60 * 60 * 24 * 7)
+        sut = Event(name: "Event", dateCreated: eventDateCreated)
+        sut.setWeeklyGoal(amount: 1, for: eventDateCreated)
+
+        XCTAssertEqual(sut.weeklyGoalAmount(at: eventDateCreated), 1)
+        XCTAssertEqual(sut.weeklyGoalAmount(at: nextWeekDate), 1)
+    }
 }

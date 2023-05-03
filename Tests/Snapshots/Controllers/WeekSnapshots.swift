@@ -20,6 +20,7 @@ final class WeekSnapshots:
     override func setUp() {
         super.setUp()
         configureSnapshotsOptions()
+        recordMode = true
     }
     
     override func tearDown() {
@@ -108,6 +109,30 @@ final class WeekSnapshots:
         sut.view.overrideUserInterfaceStyle = .dark
         if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         executeRunLoop()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_eventWithGoal() {
+        make()
+        event.setWeeklyGoal(amount: 1, for: DayIndex.referenceValue.date)
+        sendEventUpdatesToController()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_eventWithTwoGoals_secondGoalAddedAfterAWeek() {
+        let dateCreated = DayIndex.referenceValue
+        let today = dateCreated.adding(days: 7)
+        
+        make(
+            created: dateCreated,
+            today: today
+        )
+        
+        event.setWeeklyGoal(amount: 1, for: dateCreated.date)
+        event.setWeeklyGoal(amount: 2, for: today.date)
+        sendEventUpdatesToController()
         
         FBSnapshotVerifyViewController(sut)
     }

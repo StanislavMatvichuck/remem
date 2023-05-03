@@ -36,7 +36,10 @@ final class WeekContainer:
             today: today,
             event: event,
             itemFactory: self
-        )
+        ) { amount, date in
+            self.event.setWeeklyGoal(amount: amount, for: date)
+            self.commander.save(self.event)
+        }
     }
 
     func makeViewModel(day: DayIndex) -> WeekCellViewModel {
@@ -44,8 +47,8 @@ final class WeekContainer:
             event: event,
             day: day,
             today: today,
-            tapHandler: { [weak self] in
-                guard let self, let controller = self.controller else { return }
+            tapHandler: {
+                guard let controller = self.controller else { return }
 
                 self.coordinator.show(
                     Navigation.dayDetails(

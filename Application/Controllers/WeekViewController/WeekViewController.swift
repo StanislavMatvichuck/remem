@@ -107,6 +107,12 @@ extension WeekViewController:
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updateSummary()
+        redrawAccessory()
+    }
+
+    private func redrawAccessory() {
+        viewRoot.setNeedsDisplay()
+        viewRoot.accessory.setNeedsDisplay()
     }
 
     private func makeWeekIndexForCurrentPosition() -> Int {
@@ -119,8 +125,27 @@ extension WeekViewController:
     }
 
     func updateSummary() {
-        let summaryValue = String(viewModel.summaryTimeline[makeWeekIndexForCurrentPosition()] ?? 0)
-        viewRoot.summary.text = summaryValue
+        let index = makeWeekIndexForCurrentPosition()
+        if let page = viewModel.pages[index] {
+            viewRoot.summary.text = page.sum
+            viewRoot.progress.text = page.progress
+            viewRoot.goal.text = page.goal
+
+            viewRoot.progress.isHidden = page.progress == nil
+
+            if page.goal == nil {
+                installDefaultPlaceholder(textField: viewRoot.goal)
+            } else {
+                viewRoot.goal.placeholder = nil
+            }
+
+            let opacity: Float = page.goalEditable ? 1.0 : 0.2
+
+            viewRoot.goal.layer.opacity = opacity
+            viewRoot.goal.isUserInteractionEnabled = page.goalEditable
+
+            updateViewAccessory(textField: viewRoot.goal)
+        }
     }
 }
 
@@ -146,13 +171,13 @@ extension WeekViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         installDefaultPlaceholder(textField: textField)
         updateViewAccessory(textField: textField)
+        viewModel.goalChangeHander(Int(textField.text!)!, .now)
     }
 
     private func updateViewAccessory(textField: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             textField.invalidateIntrinsicContentSize()
-            self.viewRoot.setNeedsDisplay()
-            self.viewRoot.accessory.setNeedsDisplay()
+            self.redrawAccessory()
         }
     }
 

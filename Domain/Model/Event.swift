@@ -99,9 +99,11 @@ public extension Event {
     func weeklyGoalAmount(at date: Date) -> Int {
         let startOfWeek = WeekIndex(date).date
 
-        if let goalForWeek = weeklyGoals.first(where: { goal in
-            goal.dateCreated == startOfWeek
-        }) { return goalForWeek.amount }
+        if let goalForWeek = weeklyGoals.first(where: { $0.dateCreated == startOfWeek }) {
+            return goalForWeek.amount
+        } else if let lastGoal = weeklyGoals.last, lastGoal.dateCreated < startOfWeek {
+            return lastGoal.amount
+        }
 
         return 0
     }
