@@ -170,6 +170,7 @@ extension WeekViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         viewRoot.installPlaceholder()
+        viewRoot.resizeGoalInputAndRedrawAccessory()
     }
 }
 
