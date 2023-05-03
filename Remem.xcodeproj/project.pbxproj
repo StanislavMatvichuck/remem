@@ -95,6 +95,7 @@
 		085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
+		0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */; };
 		08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */; };
 		08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingCell.swift */; };
 		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
@@ -410,6 +411,7 @@
 		085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModelTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0861364F2934D64300F1B780 /* TestingWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingWeekViewController.swift; sourceTree = "<group>"; };
+		0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputAccessoryView.swift; sourceTree = "<group>"; };
 		08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewModel.swift; sourceTree = "<group>"; };
 		08677BD029F7C59800AD5383 /* OrderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCell.swift; sourceTree = "<group>"; };
 		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 			children = (
 				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
+				0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */,
 			);
 			path = WeekView;
 			sourceTree = "<group>";
@@ -1608,6 +1611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
+				0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekCellViewModel.swift in Sources */,
 				08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,

@@ -23,7 +23,8 @@ final class WeekView: UIView {
             attributes: [
                 NSAttributedString.Key.font: UIFont.font,
                 NSAttributedString.Key.foregroundColor: UIColor.secondary,
-            ])
+            ]
+        )
     }()
 
     let goal: UITextField = {
@@ -116,6 +117,7 @@ final class WeekView: UIView {
         backgroundColor = .clear
         clipsToBounds = true
         configureLayout()
+        configureGoalToolbar()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -187,4 +189,14 @@ final class WeekView: UIView {
         progress.isHidden = true
         progressShade.isHidden = true
     }
+
+    private func configureGoalToolbar() {
+        let view = GoalInputAccessoryView()
+        view.done.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(handleDone)
+        ))
+        goal.inputAccessoryView = view
+    }
+
+    @objc private func handleDone() { endEditing(true) }
 }

@@ -166,11 +166,19 @@ extension WeekViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.placeholder = nil
         updateViewAccessory(textField: textField)
+
+        DispatchQueue.main.async {
+            textField.selectedTextRange = textField.textRange(
+                from: textField.endOfDocument,
+                to: textField.endOfDocument
+            )
+        }
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         installDefaultPlaceholder(textField: textField)
         updateViewAccessory(textField: textField)
+        // TODO: empty text produces crash
         viewModel.goalChangeHander(Int(textField.text!)!, .now)
     }
 
