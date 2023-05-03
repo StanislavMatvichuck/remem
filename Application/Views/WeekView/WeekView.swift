@@ -34,20 +34,14 @@ final class WeekView: UIView {
         field.attributedPlaceholder = WeekView.goalPlaceholder
         field.textAlignment = .center
         field.returnKeyType = .done
+        return field
+    }()
 
+    let goalAccessory: UIView = {
         let accessory = UIView(al: true)
         accessory.backgroundColor = .primary
         accessory.layer.cornerRadius = .buttonMargin / 4
-
-        field.addSubview(accessory)
-        NSLayoutConstraint.activate([
-            accessory.widthAnchor.constraint(equalTo: field.widthAnchor),
-            accessory.heightAnchor.constraint(equalToConstant: .buttonMargin / 2),
-            accessory.centerXAnchor.constraint(equalTo: field.centerXAnchor),
-            accessory.centerYAnchor.constraint(equalTo: field.bottomAnchor),
-        ])
-
-        return field
+        return accessory
     }()
 
     let progress: UILabel = {
@@ -140,6 +134,14 @@ final class WeekView: UIView {
         of.font = .font
         of.text = "of"
         of.textColor = .secondary
+
+        goal.addSubview(goalAccessory)
+        NSLayoutConstraint.activate([
+            goalAccessory.widthAnchor.constraint(equalTo: goal.widthAnchor),
+            goalAccessory.heightAnchor.constraint(equalToConstant: .buttonMargin / 2),
+            goalAccessory.centerXAnchor.constraint(equalTo: goal.centerXAnchor),
+            goalAccessory.centerYAnchor.constraint(equalTo: goal.bottomAnchor),
+        ])
 
         let horizontalStack = UIStackView(al: true)
         horizontalStack.axis = .horizontal
