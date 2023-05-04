@@ -11,5 +11,6 @@ struct WeekViewModelPage {
     let sum: String
     let goal: String?
     let percentage: String?
+    let progress: CGFloat
     let goalEditable: Bool
 }

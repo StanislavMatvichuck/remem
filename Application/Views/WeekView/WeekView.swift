@@ -122,7 +122,6 @@ final class WeekView: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
-        clipsToBounds = true
         configureLayout()
         configureGoalToolbar()
     }
@@ -243,15 +242,11 @@ final class WeekView: UIView {
             collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height),
             collection.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
 
-            progressShade.topAnchor.constraint(equalTo: topAnchor),
-            progressShade.leadingAnchor.constraint(equalTo: leadingAnchor),
-            progressShade.trailingAnchor.constraint(equalTo: trailingAnchor),
+            progressShade.heightAnchor.constraint(equalToConstant: .layoutSquare * 7),
+            progressShade.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
+            progressShade.trailingAnchor.constraint(equalTo: leadingAnchor),
             progressShade.bottomAnchor.constraint(equalTo: accessory.bottomAnchor),
         ])
-
-        // TODO: remove and animate with help of viewModel
-        progress.isHidden = true
-        progressShade.isHidden = true
     }
 
     private func configureGoalToolbar() {
@@ -270,7 +265,7 @@ final class WeekView: UIView {
     }
 
     private func configureGoalDescription(_ page: WeekViewModelPage) {
-        if page.goal == nil {
+        if page.goal == nil, page.goalEditable == false {
             configureSummaryWithoutGoal()
         } else {
             configureSummaryWithGoal(page)
@@ -281,14 +276,47 @@ final class WeekView: UIView {
         progress.isHidden = true
         goal.isHidden = true
         of.isHidden = true
+        configureProgressShade(0)
     }
 
     private func configureSummaryWithGoal(_ page: WeekViewModelPage) {
         progress.isHidden = false
         goal.isHidden = false
         of.isHidden = false
-        removePlaceholder()
+
         progress.text = page.percentage
         goal.text = page.goal
+
+        if page.goalEditable {
+            configureEditableGoal(page)
+        } else {
+            configurePastGoal(page)
+        }
+    }
+
+    private func configureEditableGoal(_ page: WeekViewModelPage) {
+        if page.goal == nil {
+            installPlaceholder()
+            configureProgressShade(0)
+        } else {
+            removePlaceholder()
+            configureProgressShade(page.progress)
+        }
+    }
+
+    private func configurePastGoal(_ page: WeekViewModelPage) {
+        goalAccessory.isHidden = true
+        goal.isUserInteractionEnabled = false
+    }
+
+    private func configureProgressShade(_ progress: CGFloat) {
+        let maxTransition = 7 * CGFloat.layoutSquare
+        let xTranslation = (maxTransition * progress).clamped(to: 0 ... maxTransition)
+
+        let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+            self.progressShade.transform = CGAffineTransform(translationX: xTranslation, y: 0)
+        }
+
+        animator.startAnimation()
     }
 }

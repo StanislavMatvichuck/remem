@@ -87,6 +87,7 @@ struct WeekViewModel {
                 sum: sumString,
                 goal: goalAmount == 0 ? nil : String(goalAmount),
                 percentage: goalAmount == 0 ? nil : progressString,
+                progress: progress,
                 goalEditable: startOfWeekToday == index.dayIndex
             )
 

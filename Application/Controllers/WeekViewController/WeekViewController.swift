@@ -38,7 +38,6 @@ final class WeekViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewRoot.scrollToCurrentWeek(viewModel)
-        configureAnimator()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -88,6 +87,7 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        configureAnimator()
         presenter.animatedCellIndex = indexPath
         viewModel.timeline[indexPath.row]?.select()
     }
