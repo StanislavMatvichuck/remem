@@ -60,6 +60,14 @@ final class WeekView: UIView {
         return view
     }()
 
+    let of: UILabel = {
+        let of = UILabel(al: true)
+        of.font = .font
+        of.text = "of"
+        of.textColor = .secondary
+        return of
+    }()
+
     let accessory = WeekAccessoryView()
 
     let collection: UICollectionView = {
@@ -81,13 +89,11 @@ final class WeekView: UIView {
 
     let weekdaysLine: UIStackView = {
         let view = UIStackView(frame: .zero)
-
         view.axis = .horizontal
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let fmt = DateFormatter()
-
-        var days = fmt.veryShortWeekdaySymbols!
+        let formatter = DateFormatter()
+        var days = formatter.veryShortWeekdaySymbols!
 
         days = Array(days[1..<days.count]) + days[0..<1]
 
@@ -102,7 +108,7 @@ final class WeekView: UIView {
             view.addArrangedSubview(label)
 
             NSLayoutConstraint.activate([
-                label.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 7),
+                label.widthAnchor.constraint(equalToConstant: .layoutSquare),
                 label.heightAnchor.constraint(equalTo: label.widthAnchor),
             ])
         }
@@ -124,7 +130,6 @@ final class WeekView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - View lifecycle
-
     override func draw(_ rect: CGRect) {
         accessory.leftDistance = summary.superview!.convert(summary.center, to: self).x
     }
@@ -133,30 +138,14 @@ final class WeekView: UIView {
 
     func configure(_ vm: WeekViewModel) {
         collection.reloadData()
-        updateSummary(vm)
+        configureSummary(vm)
     }
 
-    func updateSummary(_ vm: WeekViewModel) {
+    func configureSummary(_ vm: WeekViewModel) {
         let index = weekIndexForCurrentScrollPosition()
-
         guard let page = vm.pages[index] else { return }
-
         summary.text = page.sum
-        progress.text = page.progress
-        goal.text = page.goal
-
-        progress.isHidden = page.progress == nil
-
-        if page.goal == nil {
-            installPlaceholder()
-        } else {
-            removePlaceholder()
-        }
-
-        let opacity: Float = page.goalEditable ? 1.0 : 0.2
-        goal.layer.opacity = opacity
-        goal.isUserInteractionEnabled = page.goalEditable
-
+        configureGoalDescription(page)
         resizeGoalInputAndRedrawAccessory()
     }
 
@@ -208,15 +197,10 @@ final class WeekView: UIView {
             animated: false
         )
 
-        updateSummary(vm)
+        configureSummary(vm)
     }
 
     private func configureLayout() {
-        let of = UILabel(al: true)
-        of.font = .font
-        of.text = "of"
-        of.textColor = .secondary
-
         goal.addSubview(goalAccessory)
         NSLayoutConstraint.activate([
             goalAccessory.widthAnchor.constraint(equalTo: goal.widthAnchor),
@@ -283,5 +267,28 @@ final class WeekView: UIView {
     private func redrawAccessory() {
         setNeedsDisplay()
         accessory.setNeedsDisplay()
+    }
+
+    private func configureGoalDescription(_ page: WeekViewModelPage) {
+        if page.goal == nil {
+            configureSummaryWithoutGoal()
+        } else {
+            configureSummaryWithGoal(page)
+        }
+    }
+
+    private func configureSummaryWithoutGoal() {
+        progress.isHidden = true
+        goal.isHidden = true
+        of.isHidden = true
+    }
+
+    private func configureSummaryWithGoal(_ page: WeekViewModelPage) {
+        progress.isHidden = false
+        goal.isHidden = false
+        of.isHidden = false
+        removePlaceholder()
+        progress.text = page.percentage
+        goal.text = page.goal
     }
 }

@@ -93,7 +93,7 @@ extension WeekViewController:
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        viewRoot.updateSummary(viewModel)
+        viewRoot.configureSummary(viewModel)
     }
 }
 

@@ -10,6 +10,6 @@ import Foundation
 struct WeekViewModelPage {
     let sum: String
     let goal: String?
-    let progress: String?
+    let percentage: String?
     let goalEditable: Bool
 }

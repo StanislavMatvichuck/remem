@@ -30,7 +30,7 @@ struct WeekViewModel {
 
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let startOfWeekToday = WeekIndex(today.date).dayIndex
-        let endOfWeekToday = startOfWeekToday.adding(days: 14)
+        let endOfWeekToday = startOfWeekToday.adding(days: 7)
 
         timeline = DayTimeline<WeekCellViewModel>(
             storage: [:],
@@ -86,7 +86,7 @@ struct WeekViewModel {
             let newPage = WeekViewModelPage(
                 sum: sumString,
                 goal: goalAmount == 0 ? nil : String(goalAmount),
-                progress: goalAmount == 0 ? nil : progressString,
+                percentage: goalAmount == 0 ? nil : progressString,
                 goalEditable: startOfWeekToday == index.dayIndex
             )
 
