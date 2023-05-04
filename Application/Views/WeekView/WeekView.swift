@@ -110,6 +110,8 @@ final class WeekView: UIView {
         return view
     }()
 
+    private var scrollHappened = false
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -128,6 +130,35 @@ final class WeekView: UIView {
     }
 
     // MARK: - Public behaviour
+
+    func configure(_ vm: WeekViewModel) {
+        collection.reloadData()
+        updateSummary(vm)
+    }
+
+    func updateSummary(_ vm: WeekViewModel) {
+        let index = weekIndexForCurrentScrollPosition()
+
+        guard let page = vm.pages[index] else { return }
+
+        summary.text = page.sum
+        progress.text = page.progress
+        goal.text = page.goal
+
+        progress.isHidden = page.progress == nil
+
+        if page.goal == nil {
+            installPlaceholder()
+        } else {
+            removePlaceholder()
+        }
+
+        let opacity: Float = page.goalEditable ? 1.0 : 0.2
+        goal.layer.opacity = opacity
+        goal.isUserInteractionEnabled = page.goalEditable
+
+        resizeGoalInputAndRedrawAccessory()
+    }
 
     func moveSelectionToEnd() {
         DispatchQueue.main.async {
@@ -152,6 +183,32 @@ final class WeekView: UIView {
 
     func removePlaceholder() {
         goal.placeholder = nil
+    }
+
+    func scrollToCurrentWeek(_ vm: WeekViewModel) {
+        guard !scrollHappened else { return }
+        setInitialScrollPosition(vm)
+        scrollHappened = true
+    }
+
+    // MARK: - Private
+
+    private func weekIndexForCurrentScrollPosition() -> Int {
+        let collectionWidth = collection.bounds.width
+        let offset = collection.contentOffset.x
+        guard offset != 0 else { return 0 }
+        return Int(offset / collectionWidth)
+    }
+
+    private func setInitialScrollPosition(_ vm: WeekViewModel) {
+        collection.layoutIfNeeded()
+        collection.scrollToItem(
+            at: IndexPath(row: vm.scrollToIndex, section: 0),
+            at: .left,
+            animated: false
+        )
+
+        updateSummary(vm)
     }
 
     private func configureLayout() {

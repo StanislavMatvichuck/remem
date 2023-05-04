@@ -15,97 +15,38 @@ final class WeekViewController: UIViewController {
     let factory: WeekViewModelFactoring
     let viewRoot: WeekView
 
-    var scrollHappened = false
-    var viewModel: WeekViewModel {
-        didSet {
-            viewRoot.collection.reloadData()
-            updateSummary()
-        }
-    }
+    var viewModel: WeekViewModel { didSet { viewRoot.configure(viewModel) }}
 
     init(_ factory: WeekViewModelFactoring) {
         self.factory = factory
         self.viewModel = factory.makeWeekViewModel()
         self.viewRoot = WeekView()
         self.presenter = WeekToDayDetailsPresenter()
-
         super.init(nibName: nil, bundle: nil)
-
-        configureCollection()
-        viewRoot.goal.delegate = self
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    private func configureCollection() {
-        viewRoot.collection.dataSource = self
-        viewRoot.collection.delegate = self
-    }
-
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() { super.viewDidLoad() }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureCollection()
+        viewRoot.goal.delegate = self
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrollToCurrentWeek()
+        viewRoot.scrollToCurrentWeek(viewModel)
+        configureAnimator()
     }
 
-    // TODO: add accessory view
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
 
-    func updateSummary() {
-        let index = weekIndexForCurrentScrollPosition()
-
-        guard let page = viewModel.pages[index] else { return }
-
-        viewRoot.summary.text = page.sum
-        viewRoot.progress.text = page.progress
-        viewRoot.goal.text = page.goal
-
-        viewRoot.progress.isHidden = page.progress == nil
-
-        if page.goal == nil {
-            viewRoot.installPlaceholder()
-        } else {
-            viewRoot.removePlaceholder()
-        }
-
-        let opacity: Float = page.goalEditable ? 1.0 : 0.2
-        viewRoot.goal.layer.opacity = opacity
-        viewRoot.goal.isUserInteractionEnabled = page.goalEditable
-
-        viewRoot.resizeGoalInputAndRedrawAccessory()
-    }
-
     // MARK: - Private
-    private func weekIndexForCurrentScrollPosition() -> Int {
-        let collectionWidth = viewRoot.collection.bounds.width
-        let offset = viewRoot.collection.contentOffset.x
-        guard offset != 0 else { return 0 }
-        return Int(offset / collectionWidth)
-    }
-
-    private func scrollToCurrentWeek() {
-        guard !scrollHappened else { return }
-        setInitialScrollPosition()
-        scrollHappened = true
-    }
-
-    private func setInitialScrollPosition() {
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.collection.scrollToItem(
-            at: IndexPath(row: viewModel.scrollToIndex, section: 0),
-            at: .left,
-            animated: false
-        )
-
-        updateSummary()
-    }
-
     private func scheduleGoalUpdate() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             self.updateGoal()
@@ -115,6 +56,16 @@ final class WeekViewController: UIViewController {
     private func updateGoal() {
         guard let text = viewRoot.goal.text else { return }
         viewModel.goalChangeHander(Int(text) ?? 0, .now)
+    }
+
+    private func configureCollection() {
+        viewRoot.collection.dataSource = self
+        viewRoot.collection.delegate = self
+    }
+
+    private func configureAnimator() {
+        let yOffset = viewRoot.convert(viewRoot.accessory.frame, to: nil).minY - .buttonMargin / 2
+        presenter.presentationAnimator.originHeight = yOffset
     }
 }
 
@@ -137,19 +88,12 @@ extension WeekViewController:
 
     // UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-
-        let cellYOffset = viewRoot.convert(viewRoot.accessory.frame, to: nil).minY - .buttonMargin / 2
-//        let cellYOffset = cell.convert(cell.frame, to: nil).minY
-
-        presenter.presentationAnimator.originHeight = cellYOffset
         presenter.animatedCellIndex = indexPath
-
         viewModel.timeline[indexPath.row]?.select()
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updateSummary()
+        viewRoot.updateSummary(viewModel)
     }
 }
 

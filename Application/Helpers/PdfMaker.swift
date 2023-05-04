@@ -127,6 +127,6 @@ extension WeekViewController {
             animated: false)
         viewRoot.collection.setNeedsLayout()
         viewRoot.collection.layoutIfNeeded()
-        updateSummary()
+        viewRoot.updateSummary(viewModel)
     }
 }
