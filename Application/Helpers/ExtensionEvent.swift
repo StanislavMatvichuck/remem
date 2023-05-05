@@ -25,6 +25,9 @@ extension Event {
         }
     }
 
+    /// Calculates start of week, end of week and filters all event happenings
+    /// - Parameter date: date may be not normalised
+    /// - Returns: amount of happenings that fits between start and end of week
     func happeningsAmount(forWeekAt date: Date) -> Int {
         let startOfWeek = WeekIndex(date)
         var endOfWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfWeek.dayIndex.adding(days: 7).date)
