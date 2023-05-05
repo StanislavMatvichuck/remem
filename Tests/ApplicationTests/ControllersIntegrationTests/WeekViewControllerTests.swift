@@ -112,6 +112,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = WeekContainer(parent: container).make() as? WeekViewController
+        sut.loadViewIfNeeded()
 
         XCTAssertEqual(firstDay.view.timingLabels.first?.text, "00:00")
     }

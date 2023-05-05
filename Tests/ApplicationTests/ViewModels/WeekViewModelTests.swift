@@ -56,8 +56,8 @@ final class WeekViewModelTests: XCTestCase {
         XCTAssertLessThan(21, sut.timeline.count)
     }
 
-    func test_sameDates_numberOfDays_14() {
-        XCTAssertLessThanOrEqual(14, sut.timeline.count)
+    func test_sameDates_showsOneWeek() {
+        XCTAssertLessThanOrEqual(7, sut.timeline.count)
     }
 
     func test_sameDates_scrollToIndex_0() {
@@ -117,7 +117,7 @@ final class WeekViewModelTests: XCTestCase {
             itemFactory: WeekItemViewModelFactoringStub(
                 event: event,
                 today: today
-            )
+            ), goalChangeHandler: { _, _ in }
         )
     }
 
