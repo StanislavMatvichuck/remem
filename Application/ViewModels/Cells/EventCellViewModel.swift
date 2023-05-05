@@ -40,6 +40,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
     let value: String
     let timeSince: String
     let hintEnabled: Bool
+
     let tapHandler: TapHandler
     let swipeHandler: SwipeHandler
     let renameActionHandler: RenameActionHandler
@@ -56,7 +57,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
         deleteActionHandler: @escaping DeleteActionHandler,
         renameHandler: @escaping RenameHandler
     ) {
-        self.valueAmount = event.happenings(forDayIndex: today).count
+        self.valueAmount = event.happeningsAmount(forWeekAt: today.date)
         self.event = event
 
         self.title = event.name

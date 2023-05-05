@@ -21,8 +21,23 @@ extension Event {
         guard let endOfDayDate = Calendar.current.date(from: endOfDayIndex) else { return [] }
 
         return happenings.filter {
-            $0.dateCreated >= startOfDay &&
-                $0.dateCreated < endOfDayDate
+            $0.dateCreated >= startOfDay && $0.dateCreated < endOfDayDate
         }
+    }
+
+    func happeningsAmount(forWeekAt date: Date) -> Int {
+        let startOfWeek = WeekIndex(date)
+        var endOfWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfWeek.dayIndex.adding(days: 7).date)
+        endOfWeekComponents.hour = 23
+        endOfWeekComponents.minute = 59
+        endOfWeekComponents.second = 59
+
+        guard let endOfWeekDate = Calendar.current.date(from: endOfWeekComponents) else { return 0 }
+
+        return happenings.filter {
+            let isLaterThanStartOfWeek = $0.dateCreated >= startOfWeek.date
+            let isEarlierThanEndOfWeek = $0.dateCreated < endOfWeekDate
+            return isLaterThanStartOfWeek && isEarlierThanEndOfWeek
+        }.count
     }
 }
