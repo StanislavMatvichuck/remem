@@ -60,14 +60,9 @@ struct WeekViewModel {
             endIndex: WeekIndex(endOfWeekToday.date)
         )
 
-        for happening in event.happenings {
-            let index = WeekIndex(happening.dateCreated)
-
-            if let summaryValue = summaryCountingTimeline[index] {
-                summaryCountingTimeline[index] = summaryValue + Int(happening.value)
-            } else {
-                summaryCountingTimeline[index] = 1
-            }
+        for weekIndex in summaryCountingTimeline.indices {
+            let amount = event.happeningsAmount(forWeekAt: weekIndex.date)
+            summaryCountingTimeline[weekIndex] = amount
         }
 
         let formatter = NumberFormatter()
