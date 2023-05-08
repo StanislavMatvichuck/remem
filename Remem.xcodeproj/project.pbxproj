@@ -121,6 +121,8 @@
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
+		087A15202A08BE2B00D27520 /* WeekGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A151F2A08BE2B00D27520 /* WeekGoalView.swift */; };
+		087A15222A08C26400D27520 /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A15212A08C26400D27520 /* WeekdaysView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
@@ -438,6 +440,8 @@
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
+		087A151F2A08BE2B00D27520 /* WeekGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGoalView.swift; sourceTree = "<group>"; };
+		087A15212A08C26400D27520 /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -783,9 +787,11 @@
 		085502B529FFE21A006102DD /* WeekView */ = {
 			isa = PBXGroup;
 			children = (
-				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
-				0852C6AE283D66380027EF3E /* WeekView.swift */,
 				0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */,
+				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
+				087A15212A08C26400D27520 /* WeekdaysView.swift */,
+				087A151F2A08BE2B00D27520 /* WeekGoalView.swift */,
+				0852C6AE283D66380027EF3E /* WeekView.swift */,
 			);
 			path = WeekView;
 			sourceTree = "<group>";
@@ -1671,6 +1677,7 @@
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
+				087A15222A08C26400D27520 /* WeekdaysView.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayCellViewModel.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventCellViewModel.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
@@ -1685,6 +1692,7 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
+				087A15202A08BE2B00D27520 /* WeekGoalView.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */,

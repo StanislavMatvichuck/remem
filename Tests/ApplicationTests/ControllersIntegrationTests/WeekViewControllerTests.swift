@@ -118,7 +118,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsWeekSummary() {
-        XCTAssertEqual(sut.viewRoot.summary.text, "0")
+        XCTAssertEqual(sut.viewRoot.goal.summary.text, "0")
     }
 
     func test_eventWithOneHappening_weekSummary_1() {
@@ -126,7 +126,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
 
         sendEventUpdatesToController()
 
-        XCTAssertEqual(sut.viewRoot.summary.text, "1")
+        XCTAssertEqual(sut.viewRoot.goal.summary.text, "1")
     }
 
     func test_eventWithHappeningEachDayOfWeek_weekSummary_7() {
@@ -140,7 +140,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
 
         sendEventUpdatesToController()
 
-        XCTAssertEqual(sut.viewRoot.summary.text, "7")
+        XCTAssertEqual(sut.viewRoot.goal.summary.text, "7")
     }
 
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {

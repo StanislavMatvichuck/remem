@@ -32,7 +32,7 @@ final class WeekViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollection()
-        viewRoot.goal.delegate = self
+        viewRoot.goal.goal.delegate = self
     }
 
     override func viewDidLayoutSubviews() {
@@ -53,7 +53,7 @@ final class WeekViewController: UIViewController {
     }
 
     private func updateGoal() {
-        guard let text = viewRoot.goal.text else { return }
+        guard let text = viewRoot.goal.goal.text else { return }
         viewModel.goalChangeHander(Int(text) ?? 0, .now)
     }
 
@@ -63,7 +63,7 @@ final class WeekViewController: UIViewController {
     }
 
     private func configureAnimator() {
-        let yOffset = viewRoot.convert(viewRoot.accessory.frame, to: nil).minY - .buttonMargin / 2
+        let yOffset = viewRoot.convert(viewRoot.goal.accessory.frame, to: nil).minY - .buttonMargin / 2
         presenter.presentationAnimator.originHeight = yOffset
     }
 }
@@ -107,13 +107,13 @@ extension WeekViewController: UITextFieldDelegate {
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        viewRoot.removePlaceholder()
+        viewRoot.goal.removePlaceholder()
         viewRoot.resizeGoalInputAndRedrawAccessory()
-        viewRoot.moveSelectionToEnd()
+        viewRoot.goal.moveSelectionToEnd()
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        viewRoot.installPlaceholder()
+        viewRoot.goal.installPlaceholder()
         viewRoot.resizeGoalInputAndRedrawAccessory()
     }
 }
