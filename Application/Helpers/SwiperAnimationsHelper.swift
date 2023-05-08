@@ -12,4 +12,5 @@ struct SwiperAnimationsHelper {
     static let frameDuration = TimeInterval(1.0 / 60.0)
     static let dropDuration = Self.frameDuration * 12
     static let forwardDuration = Self.frameDuration * 7
+    static let progressMovementDuration = dropDuration + forwardDuration
 }

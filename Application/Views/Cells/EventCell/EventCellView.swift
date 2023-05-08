@@ -8,6 +8,8 @@
 import UIKit
 
 final class EventCellView: UIView {
+    static let width = CGFloat.layoutSquare * 7 - 2 * CGFloat.buttonMargin
+
     let valueLabel: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
@@ -112,6 +114,14 @@ final class EventCellView: UIView {
         return view
     }()
 
+    let animatedProgress: UIView = {
+        let view = UIView(al: true)
+        view.backgroundColor = .secondary_dimmed
+        view.layer.cornerRadius = .buttonHeight / 2
+        view.layer.opacity = 0.4
+        return view
+    }()
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -120,12 +130,25 @@ final class EventCellView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    private var progress: CGFloat = 0
+    private var animatedProgressConstraint: NSLayoutConstraint?
+
+    // MARK: - Public
     func configure(_ viewModel: EventCellViewModel) {
         nameLabel.text = viewModel.title
         valueLabel.text = viewModel.value
         timeSinceLabel.text = viewModel.timeSince
         viewModel.hintEnabled ? addSwipingHint() : removeSwipingHint()
+        progress = viewModel.progress
+        moveProgress()
     }
+
+    func moveProgress() {
+        let translation = (Self.width * progress).clamped(to: 0 ... Self.width)
+        animatedProgressConstraint?.constant = translation
+    }
+
+    func prepareForReuse() { progress = 0 }
 
     // MARK: - Private
     private func configureLayout() {
@@ -143,6 +166,9 @@ final class EventCellView: UIView {
         let stack = UIStackView(al: true)
         stack.axis = .horizontal
         stack.backgroundColor = .background_secondary
+        stack.clipsToBounds = true
+        stack.addSubview(animatedProgress)
+
         stack.addArrangedSubview(leftSection)
         stack.addArrangedSubview(nameLabel)
         stack.addArrangedSubview(rightSection)
@@ -153,6 +179,9 @@ final class EventCellView: UIView {
         rightSection.layer.zPosition = 1
 
         timeSinceContainer.addAndConstrain(timeSinceLabel, left: .buttonMargin, right: .buttonMargin)
+
+        let animatedProgressConstraint = animatedProgress.trailingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 0)
+        self.animatedProgressConstraint = animatedProgressConstraint
 
         addSubview(stack)
         addSubview(timeSinceContainer)
@@ -184,6 +213,11 @@ final class EventCellView: UIView {
             stack.widthAnchor.constraint(equalTo: widthAnchor, constant: .buttonMargin * -2),
             stack.centerYAnchor.constraint(equalTo: centerYAnchor),
             stack.centerXAnchor.constraint(equalTo: centerXAnchor),
+
+            animatedProgress.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            animatedProgress.heightAnchor.constraint(equalTo: stack.heightAnchor),
+            animatedProgress.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
+            animatedProgressConstraint,
         ])
     }
 

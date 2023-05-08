@@ -23,6 +23,10 @@ final class EventCell: UITableViewCell, EventsListCell {
             if viewModel.isValueIncreased(oldValue) {
                 cellAnimator?.animate(self)
             }
+
+            if viewModel.isProgressIncreased(oldValue) {
+                cellAnimator?.animateProgress(self)
+            }
         }
     }}
 
@@ -34,10 +38,12 @@ final class EventCell: UITableViewCell, EventsListCell {
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         swipeAnimator.prepareForReuse()
         removeSwipingHint()
+        view.prepareForReuse()
         viewModel = nil
     }
 

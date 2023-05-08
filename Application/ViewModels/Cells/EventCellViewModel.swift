@@ -40,6 +40,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
     let value: String
     let timeSince: String
     let hintEnabled: Bool
+    let progress: CGFloat
 
     let tapHandler: TapHandler
     let swipeHandler: SwipeHandler
@@ -59,7 +60,9 @@ struct EventCellViewModel: EventsListItemViewModeling {
     ) {
         self.valueAmount = event.happeningsAmount(forWeekAt: today.date)
         self.event = event
+        let weeklyGoalDescription = EventWeeklyGoalViewModel(weekDate: today.date, event: event, goalEditable: false)
 
+        self.progress = weeklyGoalDescription.progress
         self.title = event.name
         self.value = "\(valueAmount)"
         self.timeSince = {
@@ -82,13 +85,18 @@ struct EventCellViewModel: EventsListItemViewModeling {
         valueAmount > oldValue.valueAmount
     }
 
+    func isProgressIncreased(_ oldValue: EventCellViewModel) -> Bool {
+        progress > oldValue.progress && progress <= 1
+    }
+
     func rename(to: String) { renameHandler(to, event) }
 
     static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
         lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value &&
-            lhs.timeSince == rhs.timeSince
+            lhs.timeSince == rhs.timeSince &&
+            lhs.progress == rhs.progress
     }
 
     static func timeSinceDate(date: Date, now: Date) -> String {

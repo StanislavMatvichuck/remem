@@ -9,6 +9,7 @@ import UIKit
 
 protocol AnimatingHappeningCreation {
     func animate(_: EventCell)
+    func animateProgress(_: EventCell)
 }
 
 final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
@@ -32,6 +33,17 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
 
         if let neighbour = table.cellForRow(at: prevIndex) as? EventCell { animate(neighbour.view, .above) }
         if let neighbour = table.cellForRow(at: nextIndex) as? EventCell { animate(neighbour.view, .below) }
+    }
+
+    func animateProgress(_ cell: EventCell) {
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: SwiperAnimationsHelper.progressMovementDuration,
+            delay: 0,
+            animations: {
+                cell.view.moveProgress()
+                cell.view.layoutIfNeeded()
+            }
+        )
     }
 
     private func animateHappeningCreation(_ item: EventCell) {

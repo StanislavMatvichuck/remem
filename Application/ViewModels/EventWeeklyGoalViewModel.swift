@@ -26,7 +26,7 @@ struct EventWeeklyGoalViewModel {
         let sum = event.happeningsAmount(forWeekAt: weekDate)
         let sumString = String(sum)
         let goalAmount = event.weeklyGoalAmount(at: weekDate)
-        let progress = CGFloat(sum) / CGFloat(goalAmount)
+        let progress = goalAmount == 0 ? 0 : CGFloat(sum) / CGFloat(goalAmount)
         let progressString = Self.formatter.string(from: progress as NSNumber)
 
         self.sum = sumString
