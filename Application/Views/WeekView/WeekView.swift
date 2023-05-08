@@ -265,7 +265,7 @@ final class WeekView: UIView {
         accessory.setNeedsDisplay()
     }
 
-    private func configureGoalDescription(_ page: WeekViewModelPage) {
+    private func configureGoalDescription(_ page: EventWeeklyGoalViewModel) {
         if page.goal == nil, page.goalEditable == false {
             configureSummaryWithoutGoal()
         } else {
@@ -280,7 +280,7 @@ final class WeekView: UIView {
         configureProgressShade(0)
     }
 
-    private func configureSummaryWithGoal(_ page: WeekViewModelPage) {
+    private func configureSummaryWithGoal(_ page: EventWeeklyGoalViewModel) {
         progress.isHidden = false
         goal.isHidden = false
         of.isHidden = false
@@ -295,7 +295,7 @@ final class WeekView: UIView {
         }
     }
 
-    private func configureEditableGoal(_ page: WeekViewModelPage) {
+    private func configureEditableGoal(_ page: EventWeeklyGoalViewModel) {
         if page.goal == nil {
             installPlaceholder()
             configureProgressShade(0)
@@ -303,9 +303,12 @@ final class WeekView: UIView {
             removePlaceholder()
             configureProgressShade(page.progress)
         }
+        
+        goalAccessory.isHidden = false
+        goal.isUserInteractionEnabled = true
     }
 
-    private func configurePastGoal(_ page: WeekViewModelPage) {
+    private func configurePastGoal(_ page: EventWeeklyGoalViewModel) {
         goalAccessory.isHidden = true
         goal.isUserInteractionEnabled = false
     }

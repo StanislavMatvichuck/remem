@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct WeekViewModelPage {
+struct EventWeeklyGoalViewModel {
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent

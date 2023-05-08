@@ -16,7 +16,7 @@ struct WeekViewModel {
     let goalChangeHander: GoalChangeHandler
     var scrollToIndex: Int = 0
     var timeline: DayTimeline<WeekCellViewModel>
-    var pages: WeekTimeline<WeekViewModelPage>
+    var pages: WeekTimeline<EventWeeklyGoalViewModel>
 
     init(
         today: DayIndex,
@@ -63,7 +63,7 @@ struct WeekViewModel {
         }
 
         for index in summaryCountingTimeline.indices {
-            pages[index] = WeekViewModelPage(
+            pages[index] = EventWeeklyGoalViewModel(
                 weekDate: index.date,
                 event: event,
                 goalEditable: startOfWeekToday == index.dayIndex
