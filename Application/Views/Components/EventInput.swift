@@ -52,6 +52,8 @@ class EventInput: UIControl {
         let view = UIView(al: true)
         view.backgroundColor = .background_secondary
         view.layer.cornerRadius = .buttonRadius
+        view.layer.borderColor = UIColor.border.cgColor
+        view.layer.borderWidth = .border
         view.isOpaque = true
         view.layer.shadowRadius = 30
         view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor

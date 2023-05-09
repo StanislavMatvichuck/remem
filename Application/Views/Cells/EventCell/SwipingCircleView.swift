@@ -64,6 +64,8 @@ final class SwipingCircleView: UIView {
         circle.backgroundColor = .primary
         circle.layer.addSublayer(plusLayer)
         circle.layer.cornerRadius = .swiperRadius
+        circle.layer.borderColor = UIColor.border_primary.cgColor
+        circle.layer.borderWidth = .border
     }
 
     // MARK: - Dark mode

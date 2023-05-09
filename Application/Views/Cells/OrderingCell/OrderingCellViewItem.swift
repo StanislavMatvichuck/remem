@@ -55,6 +55,7 @@ final class OrderingCellViewItem: UIStackView {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureContent(vm)
+        configureAppearance()
     }
 
     required init(coder: NSCoder) {
@@ -68,8 +69,6 @@ final class OrderingCellViewItem: UIStackView {
     // MARK: - Private
     private func configureLayout() {
         axis = .horizontal
-        backgroundColor = .background_secondary
-        layer.cornerRadius = Self.height / 2
 
         let accessoryPoint = UIView(al: true)
         accessoryPoint.backgroundColor = .background_secondary
@@ -106,5 +105,12 @@ final class OrderingCellViewItem: UIStackView {
             accessoryBottomLabel.centerXAnchor.constraint(equalTo: accessory.centerXAnchor),
             accessoryBottomLabel.bottomAnchor.constraint(equalTo: accessory.bottomAnchor),
         ])
+    }
+
+    private func configureAppearance() {
+        backgroundColor = .background_secondary
+        layer.cornerRadius = Self.height / 2
+        layer.borderColor = UIColor.border.cgColor
+        layer.borderWidth = .border
     }
 }

@@ -69,6 +69,8 @@ final class EventCellView: UIView {
         stack.backgroundColor = .background_secondary
         stack.layer.cornerRadius = .buttonRadius
         stack.clipsToBounds = true
+        stack.layer.borderColor = UIColor.border.cgColor
+        stack.layer.borderWidth = .border
     }
 
     static func makeLabel(numberOfLines: Int) -> UILabel {

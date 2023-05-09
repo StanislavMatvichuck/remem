@@ -11,20 +11,7 @@ final class WeekCell: UICollectionViewCell {
     static let reuseIdentifier = "WeekItem"
 
     static let layoutSize: CGSize = {
-        let screenW = UIScreen.main.bounds.width
-
-        let size = CGSize(
-            width: screenW / 7,
-            height: UIView.layoutFittingCompressedSize.height
-        )
-
-        let layoutSize = WeekCell().systemLayoutSizeFitting(
-            size,
-            withHorizontalFittingPriority: .required,
-            verticalFittingPriority: .fittingSizeLevel
-        )
-
-        return CGSize(width: screenW / 7, height: 3 * screenW / 7)
+        CGSize(width: .layoutSquare, height: .layoutSquare * 3)
     }()
 
     let view = WeekCellView()

@@ -17,6 +17,9 @@ extension UIColor {
     static let text_primary = UIColor(named: "text_primary")!
     static let text_secondary = UIColor(named: "text_secondary")!
     static let goal_achieved = UIColor(named: "goal_achieved")!
+
+    static let border = UIColor(named: "border")!
+    static let border_primary = UIColor(named: "border_primary")!
 }
 
 extension CGFloat {
@@ -26,6 +29,7 @@ extension CGFloat {
     static let buttonRadius: CGFloat = buttonHeight / 2
     static let buttonMargin: CGFloat = layoutSquare - buttonRadius
     static let swiperRadius: CGFloat = buttonRadius - buttonMargin
+    static let border: CGFloat = 0.5
 }
 
 extension UIFont {

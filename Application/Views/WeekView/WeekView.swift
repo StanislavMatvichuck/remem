@@ -99,7 +99,7 @@ final class WeekView: UIView {
 
         NSLayoutConstraint.activate([
             collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height + .buttonMargin + 3),
-            collection.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
+            collection.widthAnchor.constraint(equalTo: widthAnchor),
             goal.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
         ])
     }

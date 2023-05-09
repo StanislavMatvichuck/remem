@@ -8,7 +8,7 @@
 import UIKit
 
 final class GoalInputAccessoryView: UIStackView {
-    static let buttonsRadius: CGFloat = .buttonMargin / 2
+    static let buttonsRadius: CGFloat = WeekCellView.cornerRadius
 
     let done = make("Done")
     let minus = make("-1")
@@ -34,7 +34,7 @@ final class GoalInputAccessoryView: UIStackView {
         )
 
         let background = UIView(al: true)
-        background.backgroundColor = .secondary
+        background.backgroundColor = .secondary_dimmed
 
         let spacing = UIView(al: true)
         spacing.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -45,7 +45,7 @@ final class GoalInputAccessoryView: UIStackView {
         hint.textColor = .text_secondary
 
         let hintContainer = UIView(al: true)
-        hintContainer.backgroundColor = .secondary
+        hintContainer.backgroundColor = .secondary_dimmed
         hintContainer.layer.cornerRadius = .buttonMargin
         hintContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         hintContainer.addAndConstrain(hint, left: .buttonMargin, right: .buttonMargin)
@@ -69,6 +69,8 @@ final class GoalInputAccessoryView: UIStackView {
         ])
 
         setCustomSpacing(.buttonMargin, after: minus)
+
+        configureAppearance()
     }
 
     required init(coder: NSCoder) {
@@ -77,7 +79,7 @@ final class GoalInputAccessoryView: UIStackView {
 
     private static func makeContainer() -> UIView {
         let container = UIView(al: true)
-        container.backgroundColor = .background_secondary
+        container.backgroundColor = .background
         container.layer.cornerRadius = Self.buttonsRadius
         return container
     }
@@ -95,5 +97,19 @@ final class GoalInputAccessoryView: UIStackView {
         let label = makeLabel(text)
         view.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
         return view
+    }
+
+    private func configureAppearance() {
+        done.layer.cornerRadius = Self.buttonsRadius
+        plus.layer.cornerRadius = Self.buttonsRadius
+        minus.layer.cornerRadius = Self.buttonsRadius
+
+        done.layer.borderWidth = .border
+        plus.layer.borderWidth = .border
+        minus.layer.borderWidth = .border
+
+        done.layer.borderColor = UIColor.border.cgColor
+        plus.layer.borderColor = UIColor.border.cgColor
+        minus.layer.borderColor = UIColor.border.cgColor
     }
 }

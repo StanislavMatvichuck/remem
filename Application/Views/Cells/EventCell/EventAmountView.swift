@@ -50,5 +50,7 @@ final class EventAmountView: UIView {
     private func configureAppearance() {
         background.backgroundColor = .background
         background.layer.cornerRadius = .swiperRadius
+        background.layer.borderColor = UIColor.border.cgColor
+        background.layer.borderWidth = .border
     }
 }

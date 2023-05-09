@@ -10,11 +10,7 @@ import UIKit
 final class FooterCell: UITableViewCell, EventsListCell {
     static var reuseIdentifier = "FooterItem"
 
-    let button: UIButton = {
-        let button = UIButton(al: true)
-        button.layer.cornerRadius = .buttonRadius
-        return button
-    }()
+    let button = UIButton(al: true)
 
     var viewModel: FooterCellViewModel? {
         didSet {
@@ -74,6 +70,9 @@ final class FooterCell: UITableViewCell, EventsListCell {
     private func configureAppearance() {
         selectionStyle = .none
         backgroundColor = .clear
+        button.layer.cornerRadius = .buttonRadius
+        button.layer.borderColor = UIColor.border.cgColor
+        button.layer.borderWidth = .border
     }
 
     private func configureEventHandlers() {
