@@ -9,6 +9,8 @@ import Domain
 import Foundation
 
 struct EventWeeklyGoalViewModel {
+    enum State { case notAchieved, achieved }
+
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
@@ -21,6 +23,7 @@ struct EventWeeklyGoalViewModel {
     let percentage: String?
     let progress: CGFloat
     let goalEditable: Bool
+    let state: State
 
     init(weekDate: Date, event: Event, goalEditable: Bool) {
         let sum = event.happeningsAmount(forWeekAt: weekDate)
@@ -34,5 +37,6 @@ struct EventWeeklyGoalViewModel {
         self.percentage = goalAmount == 0 ? nil : progressString
         self.progress = progress
         self.goalEditable = goalEditable
+        self.state = progress >= 1 ? .achieved : .notAchieved
     }
 }

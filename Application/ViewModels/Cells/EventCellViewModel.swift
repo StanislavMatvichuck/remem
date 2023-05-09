@@ -41,6 +41,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
     let timeSince: String
     let hintEnabled: Bool
     let progress: CGFloat
+    let progressState: EventWeeklyGoalViewModel.State
     let goalAmount: String?
 
     let tapHandler: TapHandler
@@ -76,6 +77,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
 
         self.goalAmount = weeklyGoalDescription.goal
         self.progress = weeklyGoalDescription.progress
+        self.progressState = weeklyGoalDescription.state
 
         self.tapHandler = tapHandler
         self.swipeHandler = swipeHandler

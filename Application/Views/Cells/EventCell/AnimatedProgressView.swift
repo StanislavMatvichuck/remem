@@ -30,6 +30,7 @@ final class AnimatedProgressView: UIView {
     // MARK: - Public
     func configure(_ vm: EventCellViewModel) {
         progress = vm.progress
+        backgroundColor = vm.progressState.color
         move()
     }
 

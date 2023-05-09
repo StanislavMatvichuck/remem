@@ -36,7 +36,6 @@
 		0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826AC9628C86ECE0021D607 /* RememWidgets.swift */; };
 		0826AC9928C86ECF0021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0826AC9828C86ECF0021D607 /* Assets.xcassets */; };
 		0826ACAC28C889FD0021D607 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAA28C889FA0021D607 /* Provider.swift */; };
-		0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
 		08286B03284170A900FBC022 /* ClockFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08286B02284170A900FBC022 /* ClockFace.swift */; };
@@ -148,6 +147,8 @@
 		089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37852A0A2D7900422971 /* SwipingCircleView.swift */; };
 		089B37882A0A32B700422971 /* EventAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37872A0A32B700422971 /* EventAmountView.swift */; };
 		089B378A2A0A3EC500422971 /* AnimatedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37892A0A3EC500422971 /* AnimatedProgressView.swift */; };
+		089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
+		089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */; };
 		089C5B9529A7D51A00B1B977 /* WidgetEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventCellViewModel.swift */; };
 		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
@@ -478,6 +479,7 @@
 		089B37852A0A2D7900422971 /* SwipingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingCircleView.swift; sourceTree = "<group>"; };
 		089B37872A0A32B700422971 /* EventAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAmountView.swift; sourceTree = "<group>"; };
 		089B37892A0A3EC500422971 /* AnimatedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedProgressView.swift; sourceTree = "<group>"; };
+		089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEventWeeklyGoalViewModel.swift; sourceTree = "<group>"; };
 		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
 		08A331E729A8EAFE000B68A1 /* WatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingTests.swift; sourceTree = "<group>"; };
@@ -815,12 +817,12 @@
 		085A2C2F29F15144005C6E5E /* EventCell */ = {
 			isa = PBXGroup;
 			children = (
+				089B37892A0A3EC500422971 /* AnimatedProgressView.swift */,
 				080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */,
 				080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */,
+				089B37872A0A32B700422971 /* EventAmountView.swift */,
 				080F9F2629ED51810013CBFE /* EventCell.swift */,
 				080F9F2A29ED6C050013CBFE /* EventCellView.swift */,
-				089B37892A0A3EC500422971 /* AnimatedProgressView.swift */,
-				089B37872A0A32B700422971 /* EventAmountView.swift */,
 				089B37852A0A2D7900422971 /* SwipingCircleView.swift */,
 				089B37832A0A271D00422971 /* TimeSinceView.swift */,
 			);
@@ -1128,6 +1130,7 @@
 				08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */,
 				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
 				08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */,
+				089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1489,8 +1492,8 @@
 				0826ACAC28C889FD0021D607 /* Provider.swift in Sources */,
 				080AA96D28D768350038C21A /* EventRow.swift in Sources */,
 				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
+				089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */,
 				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
-				0826ACAD28C88E140021D607 /* UIHelper.swift in Sources */,
 				08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */,
 				089C5B9529A7D51A00B1B977 /* WidgetEventCellViewModel.swift in Sources */,
 				0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */,
@@ -1679,6 +1682,7 @@
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
+				089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
 				08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */,

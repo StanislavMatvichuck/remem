@@ -57,6 +57,7 @@ final class WeekGoalView: UIView {
     let progressShade: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = .secondary_dimmed
+        view.layer.opacity = 0.4
         return view
     }()
 
@@ -204,9 +205,12 @@ final class WeekGoalView: UIView {
     private func configureProgressShade(_ progress: CGFloat) {
         let maxTransition = 7 * CGFloat.layoutSquare
         let xTranslation = (maxTransition * progress).clamped(to: 0 ... maxTransition)
+        // TODO: use EventWeeklyGoalViewModel.state here
+        let backgroundColor = progress >= 1 ? UIColor.goal_achieved : UIColor.secondary_dimmed
 
         let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.progressShade.transform = CGAffineTransform(translationX: xTranslation, y: 0)
+            self.progressShade.backgroundColor = backgroundColor
         }
 
         animator.startAnimation()

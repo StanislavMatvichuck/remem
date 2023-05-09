@@ -16,7 +16,7 @@ extension UIColor {
     static let secondary_dimmed = UIColor(named: "secondary_dimmed")!
     static let text_primary = UIColor(named: "text_primary")!
     static let text_secondary = UIColor(named: "text_secondary")!
-    static let temp = UIColor(named: "temp")!
+    static let goal_achieved = UIColor(named: "goal_achieved")!
 }
 
 extension CGFloat {
