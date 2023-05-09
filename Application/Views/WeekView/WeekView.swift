@@ -17,12 +17,14 @@ final class WeekView: UIView {
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
         layout.itemSize = WeekCell.layoutSize
+        
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
+        view.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -3, right: 0)
         view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
         return view
     }()
@@ -96,7 +98,7 @@ final class WeekView: UIView {
         addAndConstrain(stack)
 
         NSLayoutConstraint.activate([
-            collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height),
+            collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height + .buttonMargin + 3),
             collection.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
             goal.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
         ])
