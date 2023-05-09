@@ -86,7 +86,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         submitEvent()
 
         XCTAssertEqual(eventsCount, 1)
-        XCTAssertEqual(firstEvent.view.nameLabel.text, "SubmittedEventName")
+        XCTAssertEqual(firstEvent.view.title.text, "SubmittedEventName")
     }
 
     func test_singleEvent_showsCreateButton_default() {
@@ -160,7 +160,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         view.input.value = "ChangedName"
         _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
 
-        XCTAssertEqual(firstEvent.view.nameLabel.text, "ChangedName")
+        XCTAssertEqual(firstEvent.view.title.text, "ChangedName")
     }
 
     func test_singleEvent_deletePressed_removesEventFromList() {
@@ -176,22 +176,22 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
         submitEvent()
 
-        XCTAssertEqual(firstEvent.view.valueLabel.text, "0")
+        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEvent.view.valueLabel.text, "1")
+        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "1")
     }
 
     func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
         submitEvent()
 
-        XCTAssertEqual(firstEvent.view.valueLabel.text, "0")
+        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEvent.view.valueLabel.text, "2")
+        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "2")
     }
 
     func test_singleEvent_swiped_showsHint_pressToSeeDetails() {

@@ -20,11 +20,12 @@ extension UIColor {
 }
 
 extension CGFloat {
-    static let layoutSquare: CGFloat = UIScreen.main.bounds.width / 7
+    static let screenW: CGFloat = UIScreen.main.bounds.width
+    static let layoutSquare: CGFloat = screenW / 7
     static let buttonHeight: CGFloat = 2 * layoutSquare * 0.8
     static let buttonRadius: CGFloat = buttonHeight / 2
     static let buttonMargin: CGFloat = layoutSquare - buttonRadius
-    static let swiperRadius: CGFloat = (buttonHeight - 3 * buttonMargin) / 2
+    static let swiperRadius: CGFloat = buttonRadius - buttonMargin
 }
 
 extension UIFont {

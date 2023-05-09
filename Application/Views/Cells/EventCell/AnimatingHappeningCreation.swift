@@ -40,7 +40,7 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
             withDuration: SwiperAnimationsHelper.progressMovementDuration,
             delay: 0,
             animations: {
-                cell.view.moveProgress()
+                cell.view.animatedProgress.move()
                 cell.view.layoutIfNeeded()
             }
         )
@@ -65,7 +65,7 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
                 curve: .easeIn
             )
 
-            let circleSnapshot = item.view.circle.snapshotView(afterScreenUpdates: false)
+            let circleSnapshot = item.view.circleContainer.circle.snapshotView(afterScreenUpdates: false)
 
             if let circleSnapshot {
                 circleSnapshot.alpha = 0
@@ -81,13 +81,13 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
 
             returnAnimator.addAnimations {
                 item.view.transform = .identity
-                item.view.circle.alpha = 0
+                item.view.circleContainer.circle.alpha = 0
                 circleSnapshot?.alpha = 1
             }
 
             returnAnimator.addCompletion { _ in
                 item.swipeAnimator.prepareForReuse()
-                item.view.circle.alpha = 1
+                item.view.circleContainer.circle.alpha = 1
                 circleSnapshot?.removeFromSuperview()
             }
 

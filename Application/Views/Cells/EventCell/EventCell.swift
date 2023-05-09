@@ -43,7 +43,7 @@ final class EventCell: UITableViewCell, EventsListCell {
         super.prepareForReuse()
         swipeAnimator.prepareForReuse()
         removeSwipingHint()
-        view.prepareForReuse()
+        view.animatedProgress.prepareForReuse()
         viewModel = nil
     }
 
@@ -66,7 +66,7 @@ final class EventCell: UITableViewCell, EventsListCell {
             action: #selector(handleTap)
         ))
 
-        view.circle.addGestureRecognizer(UIPanGestureRecognizer(
+        view.circleContainer.circle.addGestureRecognizer(UIPanGestureRecognizer(
             target: self,
             action: #selector(handlePan)
         ))
@@ -99,10 +99,10 @@ final class EventCell: UITableViewCell, EventsListCell {
 
         switch pan.state {
         case .began:
-            let distance = contentView.bounds.width - self.view.circle.bounds.width - 4 * .buttonMargin
+            let distance = contentView.bounds.width - self.view.circleContainer.circle.bounds.width - 4 * .buttonMargin
             let scale = .buttonRadius / (CGFloat.buttonRadius - .buttonMargin)
             swipeAnimator.start(
-                animated: self.view.circle,
+                animated: self.view.circleContainer.circle,
                 forXDistance: distance,
                 andScaleFactor: scale
             )
