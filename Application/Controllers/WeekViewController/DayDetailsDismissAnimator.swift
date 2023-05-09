@@ -42,7 +42,8 @@ final class DayDetailsDismissAnimator: DayDetailsAnimator {
     }
     
     func prepareForAnimation(_ view: UIView) {
-        view.frame.origin.y = .layoutSquare * -5
+        // TODO: cells positioning is not consistent, it depends on collection layout and constants in other presenters
+        view.frame.origin.y = .layoutSquare * -5 + 7
         view.transform = .init(scaleX: 0.8, y: 1)
     }
 }
