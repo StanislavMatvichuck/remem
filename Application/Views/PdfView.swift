@@ -11,7 +11,6 @@ final class PdfView: PDFView {
     init(_ url: URL) {
         super.init(frame: .zero)
         displayDirection = .vertical
-        autoScales = true
         document = PDFDocument(url: url)
     }
 

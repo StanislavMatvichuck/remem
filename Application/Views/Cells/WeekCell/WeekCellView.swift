@@ -12,9 +12,6 @@ final class WeekCellView: UIView {
     static let bottomDecalHeight = cornerRadius * 2
     static let happeningsDisplayedMaximumAmount = 6
 
-    var maskLayer: CALayer?
-    var pdfMode = false
-
     let dayContainer = WeekCellDayContainer()
 
     let day: UILabel = {
@@ -94,7 +91,6 @@ final class WeekCellView: UIView {
     func prepareForReuse() {
         hideAll()
         day.text = " "
-        pdfMode = false
     }
 
     // MARK: - Private

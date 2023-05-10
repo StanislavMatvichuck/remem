@@ -62,14 +62,9 @@ final class DefaultPdfMaker: PDFMaking {
 
     private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
         week.scrollTo(i * 7)
-
-        prepareWeekForPdfRendering()
-
         context.cgContext.scaleBy(x: down, y: down)
         week.view.layer.render(in: context.cgContext)
         context.cgContext.scaleBy(x: up, y: up)
-
-        prepareWeekForUIKitRendering()
     }
 
     private func nextLineNeeded(_ i: Int) -> Bool { i > 0 && i % 4 == 0 }
@@ -88,28 +83,5 @@ final class DefaultPdfMaker: PDFMaking {
 
     private func moveToNextTile(_ context: UIGraphicsPDFRendererContext) {
         context.cgContext.translateBy(x: tileWidth, y: 0)
-    }
-
-    private func prepareWeekForPdfRendering() {
-        executeForAllWeekVisibleCells { cell in
-            cell.view.layer.mask = nil
-            cell.view.pdfMode = true
-        }
-    }
-
-    private func prepareWeekForUIKitRendering() {
-        executeForAllWeekVisibleCells { cell in
-            cell.view.pdfMode = false
-        }
-    }
-
-    private func executeForAllWeekVisibleCells(closure: (WeekCell) -> Void) {
-        for row in 0 ..< week.viewRoot.collection.numberOfItems(inSection: 0) {
-            let indexPath = NSIndexPath(row: row, section: 0)
-
-            guard let cell = week.viewRoot.collection.cellForItem(at: indexPath as IndexPath) as? WeekCell else { continue }
-
-            closure(cell)
-        }
     }
 }
