@@ -121,49 +121,15 @@ final class WeekCellView: UIView {
     private func show(timings: [String]) {
         hideAll()
 
-        let displayedTimes = timings.suffix(Self.happeningsDisplayedMaximumAmount).enumerated()
+        let displayedTimes = timings.prefix(Self.happeningsDisplayedMaximumAmount)
 
-        for (index, time) in displayedTimes {
-            timingLabels[index].text = time
-
-            if index == 5 { timingLabels[5].text = "..." }
+        for (index, time) in displayedTimes.enumerated() {
+            let reversedIndex = displayedTimes.count - 1 - index
+            timingLabels[reversedIndex].text = time
         }
     }
 
     private func hideAll() {
         for timingLabel in timingLabels { timingLabel.text = " " }
     }
-
-//    private func makeMaskLayer() -> CALayer {
-//        let maskRect = CGRect(
-//            x: WeekCellDayContainer.spacing,
-//            y: 0,
-//            width: bounds.width - 2 * WeekCellDayContainer.spacing,
-//            height: bounds.height - WeekCellDayContainer.spacing + 0.5
-//        )
-//
-//        let bottomCut = UIBezierPath(
-//            roundedRect: CGRect(
-//                x: bounds.width / 6,
-//                y: maskRect.height - Self.cornerRadius,
-//                width: bounds.width - bounds.width / 3,
-//                height: Self.cornerRadius * 2
-//            ),
-//            cornerRadius: Self.cornerRadius
-//        )
-//
-//        let outsideCut = UIBezierPath(
-//            roundedRect: maskRect,
-//            cornerRadius: Self.cornerRadius
-//        )
-//
-//        let maskPath = UIBezierPath()
-//        maskPath.usesEvenOddFillRule = true
-//        maskPath.append(outsideCut)
-//        maskPath.append(bottomCut.reversing())
-//
-//        let maskLayer = CAShapeLayer()
-//        maskLayer.path = maskPath.cgPath
-//        return maskLayer
-//    }
 }
