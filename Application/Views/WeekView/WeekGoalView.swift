@@ -185,6 +185,18 @@ final class WeekGoalView: UIView {
     }
 
     private func configureEditableGoal(_ page: EventWeeklyGoalViewModel) {
+        configureProgress(page)
+        goalAccessory.isHidden = false
+        goal.isUserInteractionEnabled = true
+    }
+
+    private func configurePastGoal(_ page: EventWeeklyGoalViewModel) {
+        configureProgress(page)
+        goalAccessory.isHidden = true
+        goal.isUserInteractionEnabled = false
+    }
+
+    private func configureProgress(_ page: EventWeeklyGoalViewModel) {
         if page.goal == nil {
             installPlaceholder()
             configureProgressShade(0)
@@ -192,14 +204,6 @@ final class WeekGoalView: UIView {
             removePlaceholder()
             configureProgressShade(page.progress)
         }
-
-        goalAccessory.isHidden = false
-        goal.isUserInteractionEnabled = true
-    }
-
-    private func configurePastGoal(_ page: EventWeeklyGoalViewModel) {
-        goalAccessory.isHidden = true
-        goal.isUserInteractionEnabled = false
     }
 
     private func configureProgressShade(_ progress: CGFloat) {
