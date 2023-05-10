@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol PDFMaking {
-    func make() -> Data
-}
-
 final class DefaultPdfMaker: PDFMaking {
     private let week: WeekViewController
     private let summary: SummaryViewController
@@ -115,18 +111,5 @@ final class DefaultPdfMaker: PDFMaking {
 
             closure(cell)
         }
-    }
-}
-
-extension WeekViewController {
-    func scrollTo(_ int: Int) {
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.collection.scrollToItem(
-            at: IndexPath(row: int, section: 0),
-            at: .left,
-            animated: false)
-        viewRoot.collection.setNeedsLayout()
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.configureSummary(viewModel)
     }
 }

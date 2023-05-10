@@ -26,9 +26,10 @@ final class PdfMakingContainer: ControllerFactoring {
     }
 
     func make() -> UIViewController {
+        let pdfMaker = MobilePdfMaker(week: week, summary: summary)
         let controller = PdfMakingViewController(
             provider: urlProviding,
-            pdfMaker: DefaultPdfMaker(week: week, summary: summary),
+            pdfMaker: pdfMaker,
             saver: DefaultLocalFileSaver(),
             completion: {
                 self.coordinator?.show(.pdf(
