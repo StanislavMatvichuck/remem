@@ -12,6 +12,8 @@ final class WeekCellDayContainer: UIView {
     private static let width = CGFloat.layoutSquare - 2 * spacing
     private static let radius = spacing * 5
 
+    private var dayShape: CAShapeLayer?
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +24,10 @@ final class WeekCellDayContainer: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - Public
-    func set(fill: UIColor, border: UIColor) {}
+    func set(fill: UIColor, border: UIColor) {
+        dayShape?.fillColor = fill.cgColor
+        dayShape?.borderColor = border.cgColor
+    }
 
     // MARK: - Private
     private func configureLayout() {
@@ -79,6 +84,8 @@ final class WeekCellDayContainer: UIView {
         layer.strokeColor = UIColor.border_primary.cgColor
         layer.lineWidth = .border
         layer.path = path.cgPath
+        dayShape = layer
+
         self.layer.addSublayer(layer)
     }
 }
