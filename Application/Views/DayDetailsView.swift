@@ -8,7 +8,7 @@
 import UIKit
 
 final class DayDetailsView: UIView {
-    private static let bg: UIColor = .background_secondary
+    private static let bg: UIColor = .clear
 
     let verticalStack: UIStackView = {
         let view = UIStackView(al: true)
@@ -29,6 +29,7 @@ final class DayDetailsView: UIView {
         table.tableFooterView = nil
         table.allowsSelection = false
         table.backgroundColor = .clear
+        table.backgroundColor = .background_secondary
         return table
     }()
 
@@ -78,6 +79,7 @@ final class DayDetailsView: UIView {
             view.addArrangedSubview(picker)
             view.addArrangedSubview(button)
             view.distribution = .fillEqually
+            view.backgroundColor = .background_secondary
             return view
         }()
 
@@ -101,6 +103,9 @@ final class DayDetailsView: UIView {
 
         button.layer.cornerRadius = .buttonMargin
         button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
+
+        button.layer.borderColor = UIColor.border_primary.cgColor
+        button.layer.borderWidth = .border
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {

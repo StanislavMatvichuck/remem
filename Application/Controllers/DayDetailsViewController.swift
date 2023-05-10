@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
+import AudioToolbox
 import Domain
 import UIKit
 
@@ -46,10 +47,18 @@ final class DayDetailsViewController: UIViewController {
 
     @objc private func handleButton() {
         viewModel.addHappening(date: viewRoot.picker.date)
+        playSound()
+        viewRoot.button.animateTapReceiving()
     }
 
     @objc private func handleClose() {
         presentingViewController?.dismiss(animated: true)
+    }
+
+    private func playSound() {
+        var soundID: SystemSoundID = 1104
+        AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: "/System/Library/Audio/UISounds/camera_shutter.caf"), &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }
 
