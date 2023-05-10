@@ -24,7 +24,7 @@ final class DefaultPdfMaker: PDFMaking {
     var tileHeight: CGFloat { weekHeight * down }
     var down: CGFloat { tileWidth / weekWidth }
     var up: CGFloat { 1 / down }
-    var weeksAmount: Int { week.viewModel.pages.count - 1 }
+    var weeksAmount: Int { week.viewModel.pages.count }
     var height: CGFloat = 0
 
     init(week: WeekViewController, summary: SummaryViewController) {
