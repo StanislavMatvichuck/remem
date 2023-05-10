@@ -101,7 +101,8 @@ struct EventCellViewModel: EventsListItemViewModeling {
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value &&
             lhs.timeSince == rhs.timeSince &&
-            lhs.progress == rhs.progress
+            lhs.progress == rhs.progress &&
+            lhs.goalAmount == rhs.goalAmount
     }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
