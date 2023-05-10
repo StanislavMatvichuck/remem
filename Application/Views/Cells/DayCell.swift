@@ -13,21 +13,30 @@ final class DayCell: UITableViewCell {
     // MARK: - Properties
     var label: UILabel = {
         let label = UILabel(al: true)
-
         label.numberOfLines = 1
         label.font = .fontBold
-        label.textColor = UIColor.text_primary
-        label.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
-
         return label
     }()
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
-        backgroundColor = .clear
+        configureLayout()
+        configureAppearance()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    private func configureLayout() {
+        contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
+        let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare)
+        heightConstraint.priority = .defaultHigh
+        heightConstraint.isActive = true
+    }
+
+    private func configureAppearance() {
+        selectionStyle = .none
+        backgroundColor = .clear
+        label.textColor = UIColor.text_primary
+    }
 }

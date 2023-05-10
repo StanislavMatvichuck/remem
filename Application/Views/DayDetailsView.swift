@@ -24,13 +24,11 @@ final class DayDetailsView: UIView {
 
     let happenings: UITableView = {
         let table = UITableView(al: true)
-
         table.register(DayCell.self, forCellReuseIdentifier: DayCell.reuseIdentifier)
         table.separatorStyle = .none
-        table.tableFooterView = UIView(al: true)
+        table.tableFooterView = nil
         table.allowsSelection = false
         table.backgroundColor = .clear
-
         return table
     }()
 
@@ -67,9 +65,7 @@ final class DayDetailsView: UIView {
     private func configureLayout() {
         let background: UIView = {
             let view = UIStackView(al: true)
-            view.axis = .horizontal
             view.backgroundColor = .secondary
-            view.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
             view.isLayoutMarginsRelativeArrangement = true
             view.layoutMargins = UIEdgeInsets(top: 0, left: .buttonMargin, bottom: 0, right: .buttonMargin)
             view.addArrangedSubview(title)
@@ -82,20 +78,29 @@ final class DayDetailsView: UIView {
             view.addArrangedSubview(picker)
             view.addArrangedSubview(button)
             view.distribution = .fillEqually
-            view.heightAnchor.constraint(equalToConstant: .layoutSquare * 2).isActive = true
             return view
         }()
+
+        background.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         verticalStack.addArrangedSubview(background)
         verticalStack.addArrangedSubview(happenings)
         verticalStack.addArrangedSubview(pickerContainer)
         addAndConstrain(verticalStack)
+
+        NSLayoutConstraint.activate([
+            happenings.heightAnchor.constraint(equalToConstant: .layoutSquare * 6),
+            pickerContainer.heightAnchor.constraint(equalToConstant: .layoutSquare * 2),
+        ])
     }
 
     private func configureAppearance() {
         backgroundColor = Self.bg
         clipsToBounds = true
         layer.cornerRadius = .buttonMargin
+
+        button.layer.cornerRadius = .buttonMargin
+        button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {
@@ -106,7 +111,7 @@ final class DayDetailsView: UIView {
     private func configureButton(viewModel: DayDetailsViewModel) {
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.text_secondary,
-            .font: UIFont.font
+            .font: UIFont.font,
         ]
 
         let title = NSAttributedString(string: viewModel.create, attributes: attributes)

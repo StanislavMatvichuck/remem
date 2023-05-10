@@ -16,13 +16,13 @@ final class DayDetailsPresentationAnimator: DayDetailsAnimator {
             let detailsVc = transitionContext.viewController(forKey: .to)
         else { fatalError("error getting necessary views for animation") }
 
-        detailsView.frame = transitionContext.finalFrame(for: detailsVc)
-        detailsView.layoutIfNeeded()
-        detailsView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
-
         let containerView = transitionContext.containerView
         containerView.addSubview(detailsView)
         containerView.bringSubviewToFront(detailsView)
+
+        detailsView.frame = transitionContext.finalFrame(for: detailsVc)
+        detailsView.layoutIfNeeded()
+        detailsView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
 
         let duration = transitionDuration(using: transitionContext)
         let height = originHeight
