@@ -36,6 +36,6 @@ struct EventRow: View {
 
 struct EventRowEmptyView: View {
     var body: some View {
-        Color(uiColor: UIColor.background)
+        Color(uiColor: UIColor.bg)
     }
 }

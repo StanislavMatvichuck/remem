@@ -8,16 +8,17 @@
 import UIKit
 
 extension UIColor {
-    static let background = UIColor(named: "background")!
-    static let background_secondary = UIColor(named: "background_secondary")!
     static let primary = UIColor(named: "primary")!
-    static let primary_dimmed = UIColor(named: "primary_dimmed")!
     static let secondary = UIColor(named: "secondary")!
-    static let secondary_dimmed = UIColor(named: "secondary_dimmed")!
-    static let text_primary = UIColor(named: "text_primary")!
-    static let text_secondary = UIColor(named: "text_secondary")!
-    static let goal_achieved = UIColor(named: "goal_achieved")!
 
+    static let bg = UIColor(named: "bg")!
+    static let bg_item = UIColor(named: "bg_item")!
+    static let bg_primary = UIColor(named: "bg_primary")!
+    static let bg_secondary = UIColor(named: "bg_secondary")!
+    static let bg_goal = UIColor(named: "bg_goal")!
+    static let bg_goal_achieved = UIColor(named: "bg_goal_achieved")!
+
+    static let text = UIColor(named: "text")!
     static let border = UIColor(named: "border")!
     static let border_primary = UIColor(named: "border_primary")!
 }

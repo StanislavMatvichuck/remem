@@ -13,7 +13,7 @@ final class PdfMakingView: UIView {
 
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: UIFont.fontSmallBold,
-            NSAttributedString.Key.foregroundColor: UIColor.text_secondary,
+            NSAttributedString.Key.foregroundColor: UIColor.bg,
         ]
 
         button.setAttributedTitle(

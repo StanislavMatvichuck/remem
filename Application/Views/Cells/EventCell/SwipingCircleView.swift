@@ -33,7 +33,7 @@ final class SwipingCircleView: UIView {
             height: .buttonRadius * 2
         )
 
-        plusLayer.strokeColor = UIColor.background_secondary.cgColor
+        plusLayer.strokeColor = UIColor.bg_item.cgColor
         plusLayer.path = path.cgPath
         plusLayer.lineCap = .round
         plusLayer.lineWidth = 4.0
@@ -72,7 +72,7 @@ final class SwipingCircleView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if let plus = circle.layer.sublayers?.first as? CAShapeLayer {
-            plus.strokeColor = UIColor.background_secondary.cgColor
+            plus.strokeColor = UIColor.bg_item.cgColor
         }
     }
 }

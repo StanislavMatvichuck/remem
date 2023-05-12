@@ -99,7 +99,7 @@ final class ClockFace: UIView {
     }
 
     private func color(for item: ClockCellViewModel) -> CGColor {
-        item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text_primary.cgColor
+        item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text.cgColor
     }
 }
 

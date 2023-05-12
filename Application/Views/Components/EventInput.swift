@@ -50,7 +50,7 @@ class EventInput: UIControl {
 
     let viewInput: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .background_secondary
+        view.backgroundColor = .bg_item
         view.layer.cornerRadius = .buttonRadius
         view.layer.borderColor = UIColor.border.cgColor
         view.layer.borderWidth = .border

@@ -17,7 +17,7 @@ final class WeekCellView: UIView {
     let day: UILabel = {
         let label = UILabel(al: true)
         label.font = .fontSmallBold
-        label.textColor = UIColor.text_secondary
+        label.textColor = UIColor.bg
         label.textAlignment = .center
         label.text = " "
         return label
@@ -28,7 +28,7 @@ final class WeekCellView: UIView {
             let newLabel = UILabel(al: true)
             newLabel.textAlignment = .center
             newLabel.font = .fontSmallBold
-            newLabel.textColor = UIColor.text_primary
+            newLabel.textColor = UIColor.text
             newLabel.adjustsFontSizeToFitWidth = true
             newLabel.minimumScaleFactor = 0.1
             newLabel.numberOfLines = 1
@@ -69,7 +69,7 @@ final class WeekCellView: UIView {
         if stackSublayer == nil {
             let borderLayer = CAShapeLayer()
             borderLayer.path = UIBezierPath(roundedRect: stack.bounds, cornerRadius: Self.cornerRadius).cgPath
-            borderLayer.fillColor = UIColor.background_secondary.cgColor
+            borderLayer.fillColor = UIColor.bg_item.cgColor
             borderLayer.strokeColor = UIColor.border.cgColor
             borderLayer.lineWidth = .border
             stackSublayer = borderLayer
@@ -82,8 +82,8 @@ final class WeekCellView: UIView {
         day.text = vm.dayNumber
         day.font = vm.isToday ? .fontBold : .font
 
-        let dayColor = vm.highlighted ? UIColor.primary : UIColor.primary_dimmed
-        dayContainer.set(fill: dayColor, border: .goal_achieved)
+        let dayColor = vm.highlighted ? UIColor.primary : UIColor.bg_primary
+        dayContainer.set(fill: dayColor, border: .border_primary)
 
         show(timings: vm.items)
     }
@@ -110,7 +110,7 @@ final class WeekCellView: UIView {
     }
 
     private func configureAppearance() {
-        stack.backgroundColor = UIColor.background_secondary
+        stack.backgroundColor = UIColor.bg_secondary
         stack.layer.cornerRadius = Self.cornerRadius
     }
 

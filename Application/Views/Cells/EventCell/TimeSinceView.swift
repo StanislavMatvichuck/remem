@@ -9,8 +9,8 @@ import UIKit
 
 final class TimeSinceView: UIStackView {
     static let dotWidth = .buttonMargin / 3
-    static let dotColor = UIColor.background_secondary
-    static let backgroundColor = UIColor.secondary_dimmed
+    static let dotColor = UIColor.bg_item
+    static let backgroundColor = UIColor.bg_secondary
     static let height = CGFloat.buttonMargin * 2
 
     let corner: UIView = {
@@ -27,7 +27,7 @@ final class TimeSinceView: UIStackView {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.font = .fontSmall
-        label.textColor = UIColor.text_secondary
+        label.textColor = UIColor.bg
         return label
     }()
 

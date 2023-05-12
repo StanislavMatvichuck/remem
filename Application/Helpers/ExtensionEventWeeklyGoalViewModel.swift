@@ -10,8 +10,8 @@ import UIKit
 extension EventWeeklyGoalViewModel.State {
     var color: UIColor {
         switch self {
-        case .achieved: return UIColor.goal_achieved
-        case .notAchieved: return UIColor.secondary_dimmed
+        case .achieved: return UIColor.bg_goal_achieved
+        case .notAchieved: return UIColor.bg_goal
         }
     }
 }

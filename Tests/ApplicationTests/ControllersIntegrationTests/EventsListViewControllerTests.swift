@@ -60,7 +60,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let title = NSAttributedString(
             string: String(localizationId: "button.create"),
             attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.text_secondary,
+                NSAttributedString.Key.foregroundColor: UIColor.bg,
                 NSAttributedString.Key.font: UIFont.fontSmallBold,
             ]
         )
@@ -103,7 +103,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let footerCell = cell(2) as! FooterCell
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.background_secondary.cgColor, "button has regular background")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_secondary.cgColor, "button has regular background")
     }
 
     func test_singleEvent_showsHint_firstHappening() {

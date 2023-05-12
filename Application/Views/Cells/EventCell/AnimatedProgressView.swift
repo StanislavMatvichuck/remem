@@ -56,8 +56,6 @@ final class AnimatedProgressView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .secondary_dimmed
         layer.cornerRadius = .buttonRadius
-        layer.opacity = 0.4
     }
 }

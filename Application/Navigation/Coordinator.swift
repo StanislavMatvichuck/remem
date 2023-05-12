@@ -34,7 +34,7 @@ final class Coordinator {
     static func makeStyledNavigationController() -> UINavigationController {
         let appearance = makeNavigationBarAppearance()
         let nav = UINavigationController()
-        nav.navigationBar.tintColor = UIColor.text_secondary
+        nav.navigationBar.tintColor = UIColor.bg
         nav.navigationBar.prefersLargeTitles = true
         nav.navigationBar.standardAppearance = appearance
         nav.navigationBar.compactAppearance = appearance
@@ -44,7 +44,7 @@ final class Coordinator {
     }
 
     private static func makeNavigationBarAppearance() -> UINavigationBarAppearance {
-        let textColor = UIColor.text_secondary
+        let textColor = UIColor.bg
         let appearance = UINavigationBarAppearance()
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = UIColor.secondary

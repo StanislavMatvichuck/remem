@@ -97,7 +97,7 @@ final class WeekAccessoryView: UIView {
         shapeLayer.frame = bounds
         shapeLayer.path = path.cgPath
         shapeLayer.strokeColor = UIColor.secondary.cgColor
-        shapeLayer.fillColor = UIColor.background.cgColor
+        shapeLayer.fillColor = UIColor.bg.cgColor
         shapeLayer.lineWidth = 3
         shapeLayer.lineCap = .round
         shapeLayer.lineJoin = .round

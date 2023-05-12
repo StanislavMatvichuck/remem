@@ -21,7 +21,7 @@ final class WeekGoalView: UIView {
     let summary: UILabel = {
         let label = UILabel(al: true)
         label.font = .fontBoldBig
-        label.textColor = UIColor.text_primary
+        label.textColor = UIColor.text
         label.text = "0"
         label.numberOfLines = 1
         return label
@@ -30,7 +30,7 @@ final class WeekGoalView: UIView {
     let goal: UITextField = {
         let field = UITextField(al: true)
         field.font = .fontBoldBig
-        field.textColor = UIColor.text_primary
+        field.textColor = UIColor.text
         field.keyboardType = .numberPad
         field.attributedPlaceholder = WeekGoalView.goalPlaceholder
         field.textAlignment = .center
@@ -56,8 +56,7 @@ final class WeekGoalView: UIView {
 
     let progressShade: UIView = {
         let view = UIView(al: true)
-        view.backgroundColor = .secondary_dimmed
-        view.layer.opacity = 0.4
+        view.backgroundColor = .bg_secondary
         return view
     }()
 
@@ -210,7 +209,7 @@ final class WeekGoalView: UIView {
         let maxTransition = 7 * CGFloat.layoutSquare
         let xTranslation = (maxTransition * progress).clamped(to: 0 ... maxTransition)
         // TODO: use EventWeeklyGoalViewModel.state here
-        let backgroundColor = progress >= 1 ? UIColor.goal_achieved : UIColor.secondary_dimmed
+        let backgroundColor = progress >= 1 ? UIColor.bg_goal_achieved : UIColor.bg_goal
 
         let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.progressShade.transform = CGAffineTransform(translationX: xTranslation, y: 0)

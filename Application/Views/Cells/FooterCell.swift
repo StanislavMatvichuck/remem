@@ -19,12 +19,12 @@ final class FooterCell: UITableViewCell, EventsListCell {
             let background: UIColor = {
                 viewModel.isHighlighted ?
                     UIColor.primary :
-                    UIColor.background_secondary
+                    UIColor.bg_item
             }()
 
             let foreground: UIColor = {
                 viewModel.isHighlighted ?
-                    UIColor.text_secondary :
+                    UIColor.bg :
                     UIColor.primary
             }()
 

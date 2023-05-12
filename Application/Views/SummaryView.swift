@@ -74,7 +74,7 @@ final class SummaryView: UIView {
     private func makeAmountLabel(text: String, tag: Int, highlighted: Bool) -> UILabel {
         let label = makeLabel(text: text, tag: tag)
         label.font = .fontBold
-        label.textColor = highlighted ? .text_primary : .secondary
+        label.textColor = highlighted ? .text : .secondary
         label.textAlignment = .center
         return label
     }

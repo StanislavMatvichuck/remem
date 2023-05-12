@@ -25,7 +25,7 @@ final class OrderingCellViewItem: UIStackView {
     let accessoryTopLabel: UILabel = {
         let accessoryTopLabel = UILabel(al: true)
         accessoryTopLabel.font = .fontExtraSmall
-        accessoryTopLabel.textColor = .secondary_dimmed
+        accessoryTopLabel.textColor = .bg_secondary
         accessoryTopLabel.text = "start"
         return accessoryTopLabel
     }()
@@ -33,14 +33,14 @@ final class OrderingCellViewItem: UIStackView {
     let accessoryBottomLabel: UILabel = {
         let accessoryBottomLabel = UILabel(al: true)
         accessoryBottomLabel.font = .fontExtraSmall
-        accessoryBottomLabel.textColor = .secondary_dimmed
+        accessoryBottomLabel.textColor = .bg_secondary
         accessoryBottomLabel.text = "end"
         return accessoryBottomLabel
     }()
 
     let image: UIImageView = {
         let symbol = UIImage(systemName: "triangle.fill")?
-            .withTintColor(.secondary_dimmed)
+            .withTintColor(.bg_secondary)
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 18)))
 
@@ -71,7 +71,7 @@ final class OrderingCellViewItem: UIStackView {
         axis = .horizontal
 
         let accessoryPoint = UIView(al: true)
-        accessoryPoint.backgroundColor = .background_secondary
+        accessoryPoint.backgroundColor = .bg_secondary
         accessoryPoint.layer.cornerRadius = Self.accessoryPointWidth / 2
 
         let accessory = UIView(al: true)
@@ -108,7 +108,7 @@ final class OrderingCellViewItem: UIStackView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .background_secondary
+        backgroundColor = .bg_item
         layer.cornerRadius = Self.height / 2
         layer.borderColor = UIColor.border.cgColor
         layer.borderWidth = .border

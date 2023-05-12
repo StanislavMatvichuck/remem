@@ -34,7 +34,7 @@ final class GoalInputAccessoryView: UIStackView {
         )
 
         let background = UIView(al: true)
-        background.backgroundColor = .secondary_dimmed
+        background.backgroundColor = .bg_secondary
 
         let spacing = UIView(al: true)
         spacing.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -42,10 +42,10 @@ final class GoalInputAccessoryView: UIStackView {
         let hint = UILabel(al: true)
         hint.text = "set zero to stop tracking"
         hint.font = .fontSmall
-        hint.textColor = .text_secondary
+        hint.textColor = .bg
 
         let hintContainer = UIView(al: true)
-        hintContainer.backgroundColor = .secondary_dimmed
+        hintContainer.backgroundColor = .bg_secondary
         hintContainer.layer.cornerRadius = .buttonMargin
         hintContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         hintContainer.addAndConstrain(hint, left: .buttonMargin, right: .buttonMargin)
@@ -79,7 +79,7 @@ final class GoalInputAccessoryView: UIStackView {
 
     private static func makeContainer() -> UIView {
         let container = UIView(al: true)
-        container.backgroundColor = .background
+        container.backgroundColor = .bg
         container.layer.cornerRadius = Self.buttonsRadius
         return container
     }

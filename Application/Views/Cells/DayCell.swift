@@ -37,6 +37,6 @@ final class DayCell: UITableViewCell {
     private func configureAppearance() {
         selectionStyle = .none
         backgroundColor = .clear
-        label.textColor = UIColor.text_primary
+        label.textColor = UIColor.text
     }
 }

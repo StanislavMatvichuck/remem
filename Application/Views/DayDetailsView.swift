@@ -18,7 +18,7 @@ final class DayDetailsView: UIView {
 
     let title: UILabel = {
         let label = UILabel(al: true)
-        label.textColor = .text_secondary
+        label.textColor = .bg
         return label
     }()
 
@@ -29,7 +29,7 @@ final class DayDetailsView: UIView {
         table.tableFooterView = nil
         table.allowsSelection = false
         table.backgroundColor = .clear
-        table.backgroundColor = .background_secondary
+        table.backgroundColor = .bg_item
         return table
     }()
 
@@ -79,7 +79,7 @@ final class DayDetailsView: UIView {
             view.addArrangedSubview(picker)
             view.addArrangedSubview(button)
             view.distribution = .fillEqually
-            view.backgroundColor = .background_secondary
+            view.backgroundColor = .bg_item
             return view
         }()
 
@@ -115,7 +115,7 @@ final class DayDetailsView: UIView {
 
     private func configureButton(viewModel: DayDetailsViewModel) {
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.text_secondary,
+            .foregroundColor: UIColor.bg,
             .font: UIFont.font,
         ]
 

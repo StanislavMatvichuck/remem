@@ -31,7 +31,7 @@ struct EventsList: View {
         ZStack(
             alignment: .center,
             content: {
-                Color(uiColor: UIColor.background).ignoresSafeArea()
+                Color(uiColor: UIColor.bg).ignoresSafeArea()
                 VStack(spacing: spacing) {
                     ForEach(items.indices) {
                         EventRow(isLast: $0 == 0, item: items[$0])
