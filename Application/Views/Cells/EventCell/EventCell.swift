@@ -78,18 +78,6 @@ final class EventCell: UITableViewCell, EventsListCell {
         impactFeedbackGenerator.impactOccurred()
     }
 
-    private func vibrateOnSuccess() {
-        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-        notificationFeedbackGenerator.prepare()
-        notificationFeedbackGenerator.notificationOccurred(.success)
-    }
-
-    private func playSound() {
-        var soundID: SystemSoundID = 1104
-        AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: "/System/Library/Audio/UISounds/camera_shutter.caf"), &soundID)
-        AudioServicesPlaySystemSound(soundID)
-    }
-
     // MARK: - Events handling
     @objc private func handleTap() { viewModel?.tapHandler() }
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
@@ -115,8 +103,6 @@ final class EventCell: UITableViewCell, EventsListCell {
             if progress >= 1.0 {
                 swipeAnimator.animateSuccess { [weak self] in
                     self?.viewModel?.swipeHandler()
-                    self?.vibrateOnSuccess()
-                    self?.playSound()
                 }
             } else {
                 swipeAnimator.returnToStart(from: progress) { [weak self] in

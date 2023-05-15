@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 19.04.2023.
 //
 
+import AudioToolbox
 import UIKit
 
 protocol AnimatingHappeningCreation {
@@ -54,7 +55,7 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
 
         animator.addAnimations {
             item.view.transform = CGAffineTransform(
-                translationX: .buttonMargin,
+                translationX: .buttonHeight,
                 y: 0
             )
         }
@@ -81,9 +82,10 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
 
             returnAnimator.addAnimations {
                 item.view.transform = .identity
-                item.view.circleContainer.circle.alpha = 0
                 circleSnapshot?.alpha = 1
             }
+
+            item.view.circleContainer.circle.alpha = 0
 
             returnAnimator.addCompletion { _ in
                 item.swipeAnimator.prepareForReuse()
@@ -92,6 +94,8 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
             }
 
             returnAnimator.startAnimation()
+            self.vibrateOnSuccess()
+            self.playSound()
         }
 
         animator.startAnimation()
@@ -102,7 +106,7 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
             duration: SwiperAnimationsHelper.forwardDuration,
             curve: .easeOut
         ) {
-            let angle = CGFloat.pi / 180
+            let angle = CGFloat.pi / 180 * 3
             neighbour.transform = CGAffineTransform(
                 rotationAngle: position == .above ? -angle : angle
             )
@@ -118,5 +122,17 @@ final class DefaultHappeningCreationAnimator: AnimatingHappeningCreation {
         }
 
         animator.startAnimation()
+    }
+
+    private func vibrateOnSuccess() {
+        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+        notificationFeedbackGenerator.prepare()
+        notificationFeedbackGenerator.notificationOccurred(.success)
+    }
+
+    private func playSound() {
+        var soundID: SystemSoundID = 1104
+        AudioServicesCreateSystemSoundID(NSURL(fileURLWithPath: "/System/Library/Audio/UISounds/camera_shutter.caf"), &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }
