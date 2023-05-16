@@ -7,9 +7,9 @@
 
 import UIKit
 
-class EventsListView: UIView {
+final class EventsListView: UIView {
     // MARK: - Properties
-    let input = EventInput()
+    let input = EventInputView()
 
     let table: UITableView = {
         let table = UITableView(al: true)

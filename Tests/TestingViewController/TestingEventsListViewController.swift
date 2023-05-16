@@ -33,8 +33,8 @@ extension TestingViewController where Controller == EventsListViewController {
         let input = sut.viewRoot.input
         input.value = "SubmittedEventName"
 
-        _ = input.textField.delegate?.textFieldShouldReturn?(
-            input.textField
+        _ = input.inputContainer.textField.delegate?.textFieldShouldReturn?(
+            input.inputContainer.textField
         )
     }
 

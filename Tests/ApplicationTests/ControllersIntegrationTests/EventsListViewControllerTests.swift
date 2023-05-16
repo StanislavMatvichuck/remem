@@ -73,13 +73,13 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
 
     func test_createEventButtonTapped_showsKeyboard() {
         putInViewHierarchy(sut)
-        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
+        XCTAssertFalse(view.input.inputContainer.textField.isFirstResponder, "precondition")
 
         let footerCell = cell(1) as! FooterCell
 
         tap(footerCell.button)
 
-        XCTAssertTrue(view.input.textField.isFirstResponder, "keyboard is shown")
+        XCTAssertTrue(view.input.inputContainer.textField.isFirstResponder, "keyboard is shown")
     }
 
     func test_submittingEvent_addsEventToList() {
@@ -103,7 +103,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
         let footerCell = cell(2) as! FooterCell
 
         XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_secondary.cgColor, "button has regular background")
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "button has regular background")
     }
 
     func test_singleEvent_showsHint_firstHappening() {
@@ -143,13 +143,13 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
 
     func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
         putInViewHierarchy(sut)
-        XCTAssertFalse(view.input.textField.isFirstResponder, "precondition")
+        XCTAssertFalse(view.input.inputContainer.textField.isFirstResponder, "precondition")
 
         let button = submittedEventTrailingSwipeActionButton(number: 0)
 
         button.handler(button, UIView()) { _ in }
 
-        XCTAssertTrue(view.input.textField.isFirstResponder)
+        XCTAssertTrue(view.input.inputContainer.textField.isFirstResponder)
         XCTAssertEqual(view.input.value, "SubmittedEventName")
     }
 
@@ -158,7 +158,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
 
         button.handler(button, UIView()) { _ in }
         view.input.value = "ChangedName"
-        _ = view.input.textField.delegate?.textFieldShouldReturn?(view.input.textField)
+        _ = view.input.inputContainer.textField.delegate?.textFieldShouldReturn?(view.input.inputContainer.textField)
 
         XCTAssertEqual(firstEvent.view.title.text, "ChangedName")
     }

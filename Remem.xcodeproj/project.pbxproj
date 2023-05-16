@@ -125,6 +125,9 @@
 		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
 		087A15202A08BE2B00D27520 /* WeekGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A151F2A08BE2B00D27520 /* WeekGoalView.swift */; };
 		087A15222A08C26400D27520 /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A15212A08C26400D27520 /* WeekdaysView.swift */; };
+		087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFBF2A13F4610005B4D9 /* EmojiView.swift */; };
+		087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC12A13F7840005B4D9 /* InputView.swift */; };
+		087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
@@ -144,7 +147,7 @@
 		089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */; };
 		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
 		0897E177297459FA00BD2A56 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = 0897E176297459FA00BD2A56 /* ViewControllerPresentationSpy */; };
-		0898017927FAF17C0014E110 /* EventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInput.swift */; };
+		0898017927FAF17C0014E110 /* EventInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInputView.swift */; };
 		089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37832A0A271D00422971 /* TimeSinceView.swift */; };
 		089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37852A0A2D7900422971 /* SwipingCircleView.swift */; };
@@ -453,6 +456,9 @@
 		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
 		087A151F2A08BE2B00D27520 /* WeekGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGoalView.swift; sourceTree = "<group>"; };
 		087A15212A08C26400D27520 /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
+		087AFFBF2A13F4610005B4D9 /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
+		087AFFC12A13F7840005B4D9 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,7 +485,7 @@
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
-		0898017827FAF17C0014E110 /* EventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInput.swift; sourceTree = "<group>"; };
+		0898017827FAF17C0014E110 /* EventInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputView.swift; sourceTree = "<group>"; };
 		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
 		089B37832A0A271D00422971 /* TimeSinceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSinceView.swift; sourceTree = "<group>"; };
 		089B37852A0A2D7900422971 /* SwipingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingCircleView.swift; sourceTree = "<group>"; };
@@ -947,10 +953,21 @@
 		087AFFBE2A13F4000005B4D9 /* EventsListView */ = {
 			isa = PBXGroup;
 			children = (
-				0898017827FAF17C0014E110 /* EventInput.swift */,
+				087AFFC52A13FA9E0005B4D9 /* EventInputView */,
 				08D512352787144800C2037F /* EventsListView.swift */,
+				087AFFC12A13F7840005B4D9 /* InputView.swift */,
 			);
 			path = EventsListView;
+			sourceTree = "<group>";
+		};
+		087AFFC52A13FA9E0005B4D9 /* EventInputView */ = {
+			isa = PBXGroup;
+			children = (
+				087AFFBF2A13F4610005B4D9 /* EmojiView.swift */,
+				087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */,
+				0898017827FAF17C0014E110 /* EventInputView.swift */,
+			);
+			path = EventInputView;
 			sourceTree = "<group>";
 		};
 		087ED41B28D0A54C0085A37D /* DomainTests */ = {
@@ -1658,9 +1675,11 @@
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */,
+				087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekCellViewModel.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */,
+				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
 				08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */,
@@ -1674,7 +1693,7 @@
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */,
 				08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */,
-				0898017927FAF17C0014E110 /* EventInput.swift in Sources */,
+				0898017927FAF17C0014E110 /* EventInputView.swift in Sources */,
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				085145C629AE07C500CA533D /* WeekContainer.swift in Sources */,
@@ -1699,6 +1718,7 @@
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* FooterCellViewModel.swift in Sources */,
 				08A79F5629DEC30300855146 /* DayDetailsAnimationsHelper.swift in Sources */,
+				087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */,
 				0848741A2984328700C27155 /* WidgetEventCellViewModel.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayDetailsViewModel.swift in Sources */,
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
