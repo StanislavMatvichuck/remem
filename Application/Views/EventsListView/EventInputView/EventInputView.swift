@@ -17,8 +17,8 @@ protocol EventInputing: UIControl {
 
 final class EventInputView: UIControl {
     var value: String {
-        get { inputContainer.textField.text ?? "" }
-        set { inputContainer.textField.text = newValue }
+        get { inputContainer.field.text ?? "" }
+        set { inputContainer.field.text = newValue }
     }
 
     var animationCompletionHandler: (() -> Void)?
@@ -53,15 +53,15 @@ final class EventInputView: UIControl {
 
             inputContainer.widthAnchor.constraint(equalTo: widthAnchor),
             inputContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-
             emojiContainer.widthAnchor.constraint(equalTo: widthAnchor),
             emojiContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emojiContainer.bottomAnchor.constraint(equalTo: inputContainer.viewInput.topAnchor, constant: -.buttonMargin),
+
+            emojiContainer.bottomAnchor.constraint(equalTo: inputContainer.topAnchor, constant: -.buttonMargin),
         ])
     }
 
     private func setupEventHandlers() {
-        inputContainer.textField.delegate = self
+        inputContainer.field.delegate = self
 
         background.addGestureRecognizer(
             UITapGestureRecognizer(
@@ -70,7 +70,7 @@ final class EventInputView: UIControl {
             )
         )
 
-        inputContainer.textField.addTarget(
+        inputContainer.field.addTarget(
             self,
             action: #selector(handleInputChange),
             for: .editingChanged
@@ -113,7 +113,7 @@ extension EventInputView: EventInputing {
         background.isHidden = false
         background.alpha = 0.0
         isUserInteractionEnabled = true
-        inputContainer.textField.becomeFirstResponder()
+        inputContainer.field.becomeFirstResponder()
 
         if let emojiContainer = emojiContainer.subviews.first as? UIStackView {
             for (index, emoji) in emojiContainer.arrangedSubviews.enumerated() {
@@ -135,7 +135,7 @@ extension EventInputView: EventInputing {
 extension EventInputView {
     private func dismiss() {
         value = ""
-        inputContainer.textField.resignFirstResponder()
+        inputContainer.field.resignFirstResponder()
         isUserInteractionEnabled = false
     }
 
@@ -156,7 +156,7 @@ extension EventInputView {
     }
 
     @objc private func handleInputChange() {
-        value = inputContainer.textField.text ?? ""
+        value = inputContainer.field.text ?? ""
     }
 }
 
@@ -178,8 +178,8 @@ extension EventInputView {
             let curveType = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int,
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
-
-        let heightAboveKeyboard = inputContainer.viewInput.bounds.height + emojiContainer.bounds.height + 2 * .buttonMargin
+        print(#function)
+        let heightAboveKeyboard = inputContainer.background.bounds.height + emojiContainer.bounds.height + 2 * .buttonMargin
         let keyboardHeight = keyboardSize.cgRectValue.size.height
         let newConstant = -keyboardHeight - heightAboveKeyboard
 
@@ -207,7 +207,7 @@ extension EventInputView {
             let curveType = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int,
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
-
+        print(#function)
         let animator = UIViewPropertyAnimator(
             duration: duration,
             curve: curve,
@@ -230,7 +230,7 @@ extension EventInputView {
 extension EventInputView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        inputContainer.viewInput.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+        inputContainer.background.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
     }
 }
 

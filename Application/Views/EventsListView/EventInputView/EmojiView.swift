@@ -29,6 +29,8 @@ final class EmojiView: ViewScroll {
         for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
             let button = UIButton(al: true)
             button.setTitle(emoji, for: .normal)
+            button.accessibilityIdentifier = emoji
+            button.isAccessibilityElement = true
             button.titleLabel?.font = .fontBoldBig
             button.titleLabel?.numberOfLines = 1
             button.titleLabel?.adjustsFontSizeToFitWidth = true

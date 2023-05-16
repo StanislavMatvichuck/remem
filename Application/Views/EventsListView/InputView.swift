@@ -8,7 +8,7 @@
 import UIKit
 
 final class InputView: UIView {
-    let textField: UITextField = {
+    let field: UITextField = {
         let input = UITextField(al: true)
         input.font = .font
         input.textAlignment = .center
@@ -16,10 +16,12 @@ final class InputView: UIView {
         input.adjustsFontSizeToFitWidth = true
         input.minimumFontSize = UIFont.fontSmall.pointSize
         input.returnKeyType = .done
+        input.isAccessibilityElement = true
+        input.accessibilityIdentifier = "EventInput"
         return input
     }()
 
-    let viewInput: UIView = {
+    let background: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = .bg_item
         view.layer.cornerRadius = .buttonRadius
@@ -43,19 +45,22 @@ final class InputView: UIView {
 
     // MARK: - Private
     private func configureLayout() {
-        viewInput.addSubview(textField)
+        background.addSubview(field)
         NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: viewInput.centerXAnchor),
-            textField.centerYAnchor.constraint(equalTo: viewInput.centerYAnchor),
-            textField.heightAnchor.constraint(equalToConstant: .buttonHeight),
-            textField.widthAnchor.constraint(equalTo: viewInput.widthAnchor, constant: -2 * .buttonHeight),
+            field.centerXAnchor.constraint(equalTo: background.centerXAnchor),
+            field.centerYAnchor.constraint(equalTo: background.centerYAnchor),
+            field.heightAnchor.constraint(equalToConstant: .buttonHeight),
+            field.widthAnchor.constraint(equalTo: background.widthAnchor, constant: -2 * .buttonHeight),
         ])
 
-        addSubview(viewInput)
+        addSubview(background)
         NSLayoutConstraint.activate([
-            viewInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin),
-            viewInput.heightAnchor.constraint(equalToConstant: .buttonHeight),
-            viewInput.centerXAnchor.constraint(equalTo: centerXAnchor),
+            background.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin),
+            background.heightAnchor.constraint(equalToConstant: .buttonHeight),
+            background.centerXAnchor.constraint(equalTo: centerXAnchor),
+            background.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            heightAnchor.constraint(equalTo: background.heightAnchor),
         ])
     }
 
