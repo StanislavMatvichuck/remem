@@ -8,7 +8,7 @@
 import UIKit
 
 final class FooterCell: UITableViewCell, EventsListCell {
-    static var reuseIdentifier = "FooterItem"
+    static var reuseIdentifier = "FooterCell"
 
     let button = UIButton(al: true)
 
@@ -47,6 +47,7 @@ final class FooterCell: UITableViewCell, EventsListCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessibilityIdentifier = Self.reuseIdentifier
         configureLayout()
         configureAppearance()
         configureEventHandlers()
