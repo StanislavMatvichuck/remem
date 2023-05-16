@@ -868,7 +868,6 @@
 		0868209327BFAD6500551F6A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0898017827FAF17C0014E110 /* EventInput.swift */,
 				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 				0868209427BFAD7F00551F6A /* ViewScroll.swift */,
 			);
@@ -883,7 +882,7 @@
 				0868209327BFAD6500551F6A /* Components */,
 				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 				0890627927A0A25E0032847C /* EventDetailsView.swift */,
-				08D512352787144800C2037F /* EventsListView.swift */,
+				087AFFBE2A13F4000005B4D9 /* EventsListView */,
 				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
 				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
 				080C417F2986AF4800C1F54F /* SummaryView.swift */,
@@ -943,6 +942,15 @@
 				08286B02284170A900FBC022 /* ClockFace.swift */,
 			);
 			path = ClockView;
+			sourceTree = "<group>";
+		};
+		087AFFBE2A13F4000005B4D9 /* EventsListView */ = {
+			isa = PBXGroup;
+			children = (
+				0898017827FAF17C0014E110 /* EventInput.swift */,
+				08D512352787144800C2037F /* EventsListView.swift */,
+			);
+			path = EventsListView;
 			sourceTree = "<group>";
 		};
 		087ED41B28D0A54C0085A37D /* DomainTests */ = {
