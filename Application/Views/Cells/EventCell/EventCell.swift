@@ -9,7 +9,7 @@ import AudioToolbox
 import UIKit
 
 final class EventCell: UITableViewCell, EventsListCell {
-    static let reuseIdentifier = "TemporaryItem"
+    static let reuseIdentifier = "EventCell"
 
     let view = EventCellView()
     let swipeAnimator: AnimatingSwipe = DefaultSwipeAnimator()
@@ -32,6 +32,7 @@ final class EventCell: UITableViewCell, EventsListCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessibilityIdentifier = Self.reuseIdentifier
         configureLayout()
         configureAppearance()
         configureEventHandlers()
