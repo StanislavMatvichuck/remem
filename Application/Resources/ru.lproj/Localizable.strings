@@ -22,9 +22,12 @@
 "summary.daysTracked" = "Дней отслежено";
 "summary.daysSinceLastHappening" = "Дней после последнего происшествия";
 
+"eventDetails.of" = "из";
+"eventDetails.placeholder" = "твоя цель на неделю";
+
 "widget.title" = "Список событий";
 "widget.subtitle" = "Первые три события с количеством случаев на сегодня";
 "widget.emptyRow" = "Добавь первое событие чтобы отслеживать";
 
-"pdf.create" = "Создать А4 pdf для печати";
+"pdf.create" = "Экспорт в pdf";
 "pdf.share" = "Поделиться";

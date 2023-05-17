@@ -16,6 +16,9 @@
 "eventsList.ordering.alphabetically" = "Alphabetically";
 "eventsList.ordering.totalHappenings" = "Total happenings";
 
+"eventDetails.of" = "of";
+"eventDetails.placeholder" = "your weekly goal";
+
 "summary.total" = "Total happenings";
 "summary.weekAverage" = "Week average";
 "summary.dayAverage" = "Day average";
@@ -26,5 +29,5 @@
 "widget.subtitle" = "First three events with amount for today";
 "widget.emptyRow" = "Add your first event to track";
 
-"pdf.create" = "Make printable A4 pdf";
+"pdf.create" = "Export to pdf";
 "pdf.share" = "Share";

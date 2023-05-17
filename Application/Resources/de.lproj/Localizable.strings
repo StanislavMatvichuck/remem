@@ -22,9 +22,12 @@
 "summary.daysTracked" = "Tage verfolgt";
 "summary.daysSinceLastHappening" = "Tage seit dem letzten Ereignis";
 
+"eventDetails.of" = "of";
+"eventDetails.placeholder" = "Ihr wöchentliches Ziel";
+
 "widget.title" = "Ereignisliste";
 "widget.subtitle" = "Die ersten drei Ereignisse mit Betrag für heute";
 "widget.emptyRow" = "Fügen Sie Ihr erstes Ereignis zum Verfolgen hinzu";
 
-"pdf.create" = "Druckbares A4-pdf erstellen";
+"pdf.create" = "als PDF exportieren";
 "pdf.share" = "Aktie";

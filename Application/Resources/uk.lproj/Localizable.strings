@@ -16,6 +16,9 @@
 "eventsList.ordering.alphabetically" = "За алфавітом";
 "eventsList.ordering.totalHappenings" = "Загалом випадків";
 
+"eventDetails.of" = "із";
+"eventDetails.placeholder" = "твоя мета на тиждень";
+
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";
 "summary.dayAverage" = "Середнє за добу";
@@ -26,5 +29,5 @@
 "widget.subtitle" = "Перші три події з кількістю випадків на сьогодні";
 "widget.emptyRow" = "Додай першу подію щоб відслідковувати";
 
-"pdf.create" = "Створити A4 pdf для друку";
+"pdf.create" = "Експортувати в pdf";
 "pdf.share" = "Поділитися";

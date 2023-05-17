@@ -10,7 +10,7 @@ import UIKit
 final class WeekGoalView: UIView {
     static let goalPlaceholder: NSAttributedString = {
         NSAttributedString(
-            string: "your weekly goal",
+            string: String(localizationId: "eventDetails.placeholder"),
             attributes: [
                 NSAttributedString.Key.font: UIFont.font,
                 NSAttributedString.Key.foregroundColor: UIColor.secondary,
@@ -63,7 +63,7 @@ final class WeekGoalView: UIView {
     let of: UILabel = {
         let of = UILabel(al: true)
         of.font = .font
-        of.text = "of"
+        of.text = String(localizationId: "eventDetails.of")
         of.textColor = .secondary
         return of
     }()
