@@ -113,4 +113,10 @@ final class OrderingCellViewItem: UIStackView {
         layer.borderColor = UIColor.border.cgColor
         layer.borderWidth = .border
     }
+    
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
+    }
 }

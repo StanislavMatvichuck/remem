@@ -62,7 +62,7 @@ final class WeekCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var stackSublayer: CALayer?
+    var stackSublayer: CAShapeLayer?
 
     // MARK: - View lifecycle
     override func draw(_ rect: CGRect) {
@@ -110,8 +110,11 @@ final class WeekCellView: UIView {
     }
 
     private func configureAppearance() {
-        stack.backgroundColor = UIColor.bg_secondary
+        stack.backgroundColor = .clear
         stack.layer.cornerRadius = Self.cornerRadius
+
+        stackSublayer?.fillColor = UIColor.bg_item.cgColor
+        stackSublayer?.strokeColor = UIColor.border.cgColor
     }
 
     private func show(timings: [String]) {
@@ -127,5 +130,11 @@ final class WeekCellView: UIView {
 
     private func hideAll() {
         for timingLabel in timingLabels { timingLabel.text = " " }
+    }
+
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
     }
 }

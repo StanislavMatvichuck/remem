@@ -53,4 +53,10 @@ final class EventAmountView: UIView {
         background.layer.borderColor = UIColor.border.cgColor
         background.layer.borderWidth = .border
     }
+
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
+    }
 }

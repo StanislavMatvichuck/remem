@@ -84,4 +84,10 @@ final class FooterCell: UITableViewCell, EventsListCell {
     @objc private func handleTouchUp(_: UIButton) {
         viewModel?.select()
     }
+
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
+    }
 }

@@ -83,4 +83,10 @@ final class EventCellView: UIView {
         label.numberOfLines = numberOfLines
         return label
     }
+    
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
+    }
 }

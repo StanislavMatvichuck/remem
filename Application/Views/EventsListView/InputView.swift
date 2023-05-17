@@ -12,7 +12,6 @@ final class InputView: UIView {
         let input = UITextField(al: true)
         input.font = .font
         input.textAlignment = .center
-        input.backgroundColor = .clear
         input.adjustsFontSizeToFitWidth = true
         input.minimumFontSize = UIFont.fontSmall.pointSize
         input.returnKeyType = .done
@@ -21,18 +20,7 @@ final class InputView: UIView {
         return input
     }()
 
-    let background: UIView = {
-        let view = UIView(al: true)
-        view.backgroundColor = .bg_item
-        view.layer.cornerRadius = .buttonRadius
-        view.layer.borderColor = UIColor.border.cgColor
-        view.layer.borderWidth = .border
-        view.isOpaque = true
-        view.layer.shadowRadius = 30
-        view.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
-        view.layer.shadowOpacity = 1
-        return view
-    }()
+    let background = UIView(al: true)
 
     init() {
         super.init(frame: .zero)
@@ -64,5 +52,23 @@ final class InputView: UIView {
         ])
     }
 
-    private func configureAppearance() {}
+    private func configureAppearance() {
+        field.backgroundColor = .clear
+        background.backgroundColor = .bg_item
+        background.isOpaque = true
+
+        background.layer.cornerRadius = .buttonRadius
+        background.layer.borderColor = UIColor.border.cgColor
+        background.layer.borderWidth = .border
+
+        background.layer.shadowRadius = 30
+        background.layer.shadowColor = UIColor.secondarySystemBackground.cgColor
+        background.layer.shadowOpacity = 1
+    }
+
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
+    }
 }

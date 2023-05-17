@@ -13,6 +13,8 @@ final class WeekCellDayContainer: UIView {
     private static let radius = spacing * 5
 
     private var dayShape: CAShapeLayer?
+    private var fillColor: UIColor?
+    private var borderColor: UIColor?
 
     init() {
         super.init(frame: .zero)
@@ -25,6 +27,8 @@ final class WeekCellDayContainer: UIView {
 
     // MARK: - Public
     func set(fill: UIColor, border: UIColor) {
+        fillColor = fill
+        borderColor = border
         dayShape?.fillColor = fill.cgColor
         dayShape?.borderColor = border.cgColor
     }
@@ -35,9 +39,32 @@ final class WeekCellDayContainer: UIView {
             widthAnchor.constraint(equalToConstant: Self.width),
             heightAnchor.constraint(equalToConstant: Self.width),
         ])
+
+        guard dayShape == nil else { return }
+        dayShape = makeSublayer()
+        layer.addSublayer(dayShape!)
     }
 
     private func configureAppearance() {
+        guard let dayShape, let fillColor, let borderColor else { return }
+        dayShape.fillColor = fillColor.cgColor
+        dayShape.strokeColor = borderColor.cgColor
+    }
+
+    private func makeSublayer() -> CAShapeLayer {
+        let frame = CGRect(origin: .zero, size: CGSize(width: Self.width, height: Self.width))
+        let path = makePath()
+
+        let layer = CAShapeLayer()
+        layer.frame = frame
+        layer.fillColor = UIColor.primary.cgColor
+        layer.strokeColor = UIColor.border_primary.cgColor
+        layer.lineWidth = .border
+        layer.path = path.cgPath
+        return layer
+    }
+
+    private func makePath() -> UIBezierPath {
         let width = Self.width
         let radius = Self.radius
         let center = width / 2
@@ -77,15 +104,12 @@ final class WeekCellDayContainer: UIView {
         path.addArc(withCenter: arcCenters[4], radius: radius, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
         path.addLine(to: linePins[6])
         path.addArc(withCenter: arcCenters[5], radius: radius, startAngle: .pi, endAngle: .pi * 3 / 2, clockwise: true)
+        return path
+    }
 
-        let layer = CAShapeLayer()
-        layer.frame = CGRect(origin: .zero, size: CGSize(width: Self.width, height: Self.width))
-        layer.fillColor = UIColor.primary.cgColor
-        layer.strokeColor = UIColor.border_primary.cgColor
-        layer.lineWidth = .border
-        layer.path = path.cgPath
-        dayShape = layer
-
-        self.layer.addSublayer(layer)
+    // MARK: - Dark mode
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        configureAppearance()
     }
 }
