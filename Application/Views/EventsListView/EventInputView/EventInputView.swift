@@ -178,8 +178,10 @@ extension EventInputView {
             let curveType = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int,
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
-        print(#function)
-        let heightAboveKeyboard = inputContainer.background.bounds.height + emojiContainer.bounds.height + 2 * .buttonMargin
+        let inputContainerHeight = inputContainer.background.bounds.height
+        let emojiContainerHeight = emojiContainer.bounds.height
+        let marginsCompensation = 2 * .buttonMargin
+        let heightAboveKeyboard = inputContainerHeight + emojiContainerHeight + marginsCompensation
         let keyboardHeight = keyboardSize.cgRectValue.size.height
         let newConstant = -keyboardHeight - heightAboveKeyboard
 
@@ -207,7 +209,7 @@ extension EventInputView {
             let curveType = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int,
             let curve = UIView.AnimationCurve(rawValue: curveType)
         else { return }
-        print(#function)
+
         let animator = UIViewPropertyAnimator(
             duration: duration,
             curve: curve,

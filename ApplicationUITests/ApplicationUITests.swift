@@ -9,18 +9,16 @@ import XCTest
 
 final class ApplicationUITests: XCTestCase {
     private var app: XCUIApplication!
-    private var firstEventCell: XCUIElement!
-    private var footer: XCUIElement!
+    private var firstEventCell: XCUIElement! { app.tables.firstMatch.cells["EventCell"].firstMatch }
+    private var footer: XCUIElement! { app.tables.firstMatch.cells["FooterCell"].firstMatch }
+    private var field: XCUIElement! { app.textFields.element }
 
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
-        firstEventCell = app.tables.firstMatch.cells["EventCell"].firstMatch
-        footer = app.tables.firstMatch.cells["FooterCell"].firstMatch
     }
 
     override func tearDown() {
-        firstEventCell = nil
         app = nil
         super.tearDown()
     }
@@ -51,32 +49,26 @@ final class ApplicationUITests: XCTestCase {
         app.launch()
 
         footer.tap()
-
-        sleep(1)
-
-        app.keys["C"].tap()
-        app.keys["o"].tap()
-        app.keys["f"].tap()
-        app.keys["f"].tap()
-        app.keys["e"].tap()
-        app.keys["e"].tap()
-        app.keys["space"].tap()
-
-        sleep(1)
-
-        app.keyboards.buttons["Done"].tap()
+        submitFirstEvent()
 
         footer.tap()
+        submitSecondEvent()
+    }
 
-        sleep(1)
-
-        app.keys["W"].tap()
-        app.keys["a"].tap()
-        app.keys["t"].tap()
-        app.keys["e"].tap()
-        app.keys["r"].tap()
+    private func submitFirstEvent() {
+        field.typeText("Coffee")
+        let coffeeEmoji = app.buttons["☕️"]
+        coffeeEmoji.tap()
         app.keyboards.buttons["Done"].tap()
+    }
 
-        sleep(1)
+    private func submitSecondEvent() {
+        field.typeText("Second event title")
+        app.keyboards.buttons["Done"].tap()
+    }
+
+    private func submitThirdEvent() {
+        field.typeText("Third event title")
+        app.keyboards.buttons["Done"].tap()
     }
 }

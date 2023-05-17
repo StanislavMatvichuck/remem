@@ -69,7 +69,7 @@ class EventInputTests: XCTestCase {
     }
 
     func test_shows_textField() {
-        XCTAssertNotNil(sut.inputContainer.textField.delegate, "textField delegate must be set")
+        XCTAssertNotNil(sut.inputContainer.field.delegate, "textField delegate must be set")
     }
 
     func test_show_backgroundCoversScreen() {
@@ -85,11 +85,11 @@ class EventInputTests: XCTestCase {
     }
 
     func test_show_keyboardShouldAppear() {
-        XCTAssertFalse(sut.inputContainer.textField.isFirstResponder, "precondition")
+        XCTAssertFalse(sut.inputContainer.field.isFirstResponder, "precondition")
 
         sut.show(value: "")
 
-        XCTAssertTrue(sut.inputContainer.textField.isFirstResponder)
+        XCTAssertTrue(sut.inputContainer.field.isFirstResponder)
     }
 
     func test_show_backgroundIsNotHidden() {
@@ -152,13 +152,13 @@ class EventInputTests: XCTestCase {
 
         assert_inputIsShown(value: "BOGUS")
 
-        _ = sut.inputContainer.textField.delegate?.textFieldShouldReturn?(sut.inputContainer.textField)
+        _ = sut.inputContainer.field.delegate?.textFieldShouldReturn?(sut.inputContainer.field)
 
         assert_inputIsHidden()
     }
 
     func test_gettingValue_returnsTextFieldText() {
-        sut.inputContainer.textField.text = "BOGUS"
+        sut.inputContainer.field.text = "BOGUS"
 
         XCTAssertEqual(sut.value, "BOGUS")
     }
@@ -198,7 +198,7 @@ private extension EventInputTests {
         line: UInt = #line
     ) {
         XCTAssertFalse(
-            sut.inputContainer.textField.isFirstResponder,
+            sut.inputContainer.field.isFirstResponder,
             "keyboard must hide",
             file: file, line: line
         )
@@ -221,7 +221,7 @@ private extension EventInputTests {
         line: UInt = #line
     ) {
         XCTAssertEqual(
-            sut.inputContainer.textField.text, value,
+            sut.inputContainer.field.text, value,
             "text must match show argument",
             file: file, line: line
         )
@@ -231,7 +231,7 @@ private extension EventInputTests {
             file: file, line: line
         )
         XCTAssertTrue(
-            sut.inputContainer.textField.isFirstResponder,
+            sut.inputContainer.field.isFirstResponder,
             "input must show keyboard",
             file: file, line: line
         )
