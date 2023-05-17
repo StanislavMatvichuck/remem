@@ -15,6 +15,7 @@ final class MobilePdfMaker: PDFMaking {
 
     let pageWidth = CGFloat.screenW * 0.94
     var pageHeight: CGFloat { tileHeight * 2 + 1 }
+    var page: CGRect { CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageHeight)) }
     var weekWidth: CGFloat { week.view.layer.bounds.width }
     var weekHeight: CGFloat { week.view.layer.bounds.height }
     var tileWidth: CGFloat { pageWidth / 2 }
@@ -31,17 +32,16 @@ final class MobilePdfMaker: PDFMaking {
     }
 
     func make() -> Data {
-        let a4Bounds = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
-        let renderer = UIGraphicsPDFRenderer(bounds: a4Bounds)
-
-        return renderer.pdfData(actions: { context in
-            context.beginPage()
-            height = tileHeight
+        let renderer = UIGraphicsPDFRenderer(bounds: page)
+        let data = renderer.pdfData(actions: { context in
             renderControllersInGrid(context)
         })
+        return data
     }
 
     private func renderControllersInGrid(_ context: UIGraphicsPDFRendererContext) {
+        makeNewPage(context)
+
         for i in 0 ... weeksAmount {
             if nextLineNeeded(i) { moveToNextLine(context) }
             if nextPageNeeded(i) { makeNewPage(context) }
@@ -81,6 +81,8 @@ final class MobilePdfMaker: PDFMaking {
 
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
+        context.cgContext.setFillColor(UIColor.bg.cgColor)
+        context.cgContext.fill(page)
         height = tileHeight
     }
 
