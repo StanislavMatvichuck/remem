@@ -13,9 +13,22 @@ final class WeekSnapshots:
     FBSnapshotTestCase,
     TestingViewController
 {
+    // MARK: - Setup
     var sut: WeekViewController!
     var commander: EventsCommanding!
     var event: Event!
+    
+    var dayCreated = DayIndex.referenceValue
+    var today = DayIndex.referenceValue
+    
+    func make() {
+        event = Event(name: "Event", dateCreated: dayCreated.date)
+        let container = ApplicationContainer(testingInMemoryMode: true)
+            .makeContainer()
+            .makeContainer(event: event, today: today)
+        sut = WeekContainer(parent: container).make() as! WeekViewController
+        putInViewHierarchy(sut)
+    }
     
     override func setUp() {
         super.setUp()
@@ -27,6 +40,7 @@ final class WeekSnapshots:
         super.tearDown()
     }
     
+    // MARK: - Test cases
     func test_empty() {
         make()
         
@@ -34,44 +48,46 @@ final class WeekSnapshots:
     }
     
     func test_empty_todayOffsetByOneDay() {
-        make(today: DayIndex.referenceValue.adding(days: 1))
+        today = DayIndex.referenceValue.adding(days: 1)
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetByOneDay() {
-        let day = DayIndex.referenceValue.adding(days: 1)
-        make(created: day, today: day)
+        dayCreated = DayIndex.referenceValue.adding(days: 1)
+        today = dayCreated
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_todayOffsetByTwoDaysAndDateCreatedOffsetByOneDay() {
-        make(
-            created: DayIndex.referenceValue.adding(days: 1),
-            today: DayIndex.referenceValue.adding(days: 1).adding(days: 1)
-        )
+        dayCreated = DayIndex.referenceValue.adding(days: 1)
+        today = dayCreated.adding(days: 1)
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_dateCreatedOffsetIs3_todayOffsetIs7() {
-        make(
-            created: DayIndex.referenceValue.adding(days: 3),
-            today: DayIndex.referenceValue.adding(days: 3).adding(days: 4)
-        )
+        dayCreated = DayIndex.referenceValue.adding(days: 3)
+        today = dayCreated.adding(days: 4)
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset11() {
-        make(today: DayIndex.referenceValue.adding(days: 11))
+        today = DayIndex.referenceValue.adding(days: 11)
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
     
     func test_empty_createdOffset0_todayOffset1year() {
-        make(today: DayIndex.referenceValue.adding(days: 365))
+        today = DayIndex.referenceValue.adding(days: 365)
+        make()
         
         FBSnapshotVerifyViewController(sut)
     }
@@ -121,21 +137,90 @@ final class WeekSnapshots:
     }
     
     func test_eventWithTwoGoals_secondGoalAddedAfterAWeek() {
-        let dateCreated = DayIndex.referenceValue
-        let today = dateCreated.adding(days: 7)
+        dayCreated = DayIndex.referenceValue
+        today = dayCreated.adding(days: 7)
+        make()
         
-        make(
-            created: dateCreated,
-            today: today
-        )
-        
-        event.setWeeklyGoal(amount: 1, for: dateCreated.date)
+        event.setWeeklyGoal(amount: 1, for: dayCreated.date)
         event.setWeeklyGoal(amount: 2, for: today.date)
         sendEventUpdatesToController()
         
         FBSnapshotVerifyViewController(sut)
     }
     
+    func test_currentWeek_withoutGoal() {
+        arrangeTwoWeeks()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_currentWeek_goalSet_amountIsZero() {
+        arrangeTwoWeeks()
+        
+        event.setWeeklyGoal(amount: 12, for: today.date)
+        sendEventUpdatesToController()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_currentWeek_goalSet_amountIsNotZero() {
+        arrangeTwoWeeks()
+        
+        event.setWeeklyGoal(amount: 12, for: today.date)
+        event.addHappening(date: today.date)
+        event.addHappening(date: today.date.addingTimeInterval(60))
+        event.addHappening(date: today.date.addingTimeInterval(60 * 60))
+        sendEventUpdatesToController()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_currentWeek_goalSet_goalAchieved() {
+        arrangeTwoWeeks()
+        
+        event.setWeeklyGoal(amount: 12, for: today.date)
+        
+        for _ in 0 ..< 12 { event.addHappening(date: today.date) }
+        
+        sendEventUpdatesToController()
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_pastWeek_withoutGoal() {
+        arrangeTwoWeeks()
+        
+        sut.viewModel.scrollToIndex = 0
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_pastWeek_goalSet_amountIsZero() {
+        arrangeTwoWeeks()
+        
+        event.setWeeklyGoal(amount: 12, for: dayCreated.date)
+        sendEventUpdatesToController()
+        
+        sut.viewModel.scrollToIndex = 0
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    func test_pastWeek_goalSet_amountIsNotZero() {
+        arrangeTwoWeeks()
+        
+        event.setWeeklyGoal(amount: 12, for: dayCreated.date)
+        event.addHappening(date: dayCreated.adding(days: 1).date)
+        event.addHappening(date: dayCreated.adding(days: 2).date)
+        event.addHappening(date: dayCreated.adding(days: 3).date)
+        sendEventUpdatesToController()
+        
+        sut.viewModel.scrollToIndex = 0
+        
+        FBSnapshotVerifyViewController(sut)
+    }
+    
+    // MARK: - Private
     private func addHappeningsAtEachMinute(minutes: Int, dayOffset: Int) {
         for i in 0 ..< minutes {
             event.addHappening(date:
@@ -146,16 +231,9 @@ final class WeekSnapshots:
         }
     }
     
-    private func make(
-        created: DayIndex = DayIndex.referenceValue,
-        today: DayIndex = DayIndex.referenceValue
-    ) {
-        // make as regular and perform updates here?
-        event = Event(name: "Event", dateCreated: created.date)
-        let container = ApplicationContainer(testingInMemoryMode: true)
-            .makeContainer()
-            .makeContainer(event: event, today: today)
-        sut = WeekContainer(parent: container).make() as! WeekViewController
-        putInViewHierarchy(sut)
+    private func arrangeTwoWeeks() {
+        dayCreated = DayIndex.referenceValue.adding(days: 1)
+        today = dayCreated.adding(days: 9)
+        make()
     }
 }
