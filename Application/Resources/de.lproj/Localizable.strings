@@ -16,14 +16,20 @@
 "eventsList.ordering.alphabetically" = "Alphabetisch";
 "eventsList.ordering.totalHappenings" = "Totale Geschehnisse";
 
+"eventDetails.of" = "of";
+"eventDetails.placeholder" = "Ihr wöchentliches Ziel";
+
+"weeklyGoal.week" = "Woche";
+"weeklyGoal.amount" = "menge";
+"weeklyGoal.goal" = "ziel";
+"weeklyGoal.progress" = "fortschritt %";
+"weeklyGoal.goalPlaceholder" = "wöchentliches Ziel hinzufügen";
+
 "summary.total" = "Totale Happenings";
 "summary.weekAverage" = "Wochendurchschnitt";
 "summary.dayAverage" = "Tagesdurchschnitt";
 "summary.daysTracked" = "Tage verfolgt";
 "summary.daysSinceLastHappening" = "Tage seit dem letzten Ereignis";
-
-"eventDetails.of" = "of";
-"eventDetails.placeholder" = "Ihr wöchentliches Ziel";
 
 "widget.title" = "Ereignisliste";
 "widget.subtitle" = "Die ersten drei Ereignisse mit Betrag für heute";

@@ -11,7 +11,8 @@ import UIKit
 final class WeekContainer:
     ControllerFactoring,
     WeekViewModelFactoring,
-    WeekItemViewModelFactoring
+    WeekItemViewModelFactoring,
+    NewEventWeeklyGoalViewModelFactoring
 {
     let parent: EventDetailsContainer
 
@@ -35,7 +36,8 @@ final class WeekContainer:
         WeekViewModel(
             today: today,
             event: event,
-            itemFactory: self
+            itemFactory: self,
+            weekItemFactory: self
         ) { amount, date in
             self.event.setWeeklyGoal(amount: amount, for: date)
             self.commander.save(self.event)
@@ -57,6 +59,19 @@ final class WeekContainer:
                     )
                 )
             }
+        )
+    }
+
+    func makeViewModel(today: DayIndex, week: WeekIndex) -> WeekSummaryViewModel {
+        let startWeek = WeekIndex(event.dateCreated)
+        let endWeek = WeekIndex(today.date)
+        let fullTimeline = WeekTimeline<Int>(storage: [:], startIndex: startWeek, endIndex: endWeek)
+        let weekTimeline = WeekTimeline<Int>(storage: [:], startIndex: startWeek, endIndex: week)
+        return WeekSummaryViewModel(
+            weekDate: week.date,
+            event: event,
+            weekNumber: weekTimeline.count,
+            isCurrentWeek: fullTimeline.count == weekTimeline.count
         )
     }
 

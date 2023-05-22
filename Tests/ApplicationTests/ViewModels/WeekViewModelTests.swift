@@ -97,28 +97,10 @@ final class WeekViewModelTests: XCTestCase {
         created: DayIndex,
         event: Event
     ) -> WeekViewModel {
-        struct WeekItemViewModelFactoringStub: WeekItemViewModelFactoring {
-            let event: Event
-            let today: DayIndex
-
-            func makeViewModel(day: DayIndex) -> WeekCellViewModel {
-                WeekCellViewModel(
-                    event: event,
-                    day: day,
-                    today: today,
-                    tapHandler: {}
-                )
-            }
-        }
-
-        return WeekViewModel(
-            today: today,
-            event: event,
-            itemFactory: WeekItemViewModelFactoringStub(
-                event: event,
-                today: today
-            ), goalChangeHandler: { _, _ in }
-        )
+        let container = ApplicationContainer(testingInMemoryMode: true)
+        let details = container.makeContainer().makeContainer(event: event, today: today)
+        let week = details.makeWeekViewController()
+        return week.viewModel
     }
 
     private func arrangeRandomDates() {

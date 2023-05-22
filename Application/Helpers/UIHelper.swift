@@ -19,6 +19,7 @@ extension UIColor {
     static let bg_goal_achieved = UIColor(named: "bg_goal_achieved")!
 
     static let text = UIColor(named: "text")!
+    static let text_goalAchieved = UIColor(named: "text_goalAchieved")!
     static let border = UIColor(named: "border")!
     static let border_primary = UIColor(named: "border_primary")!
 }
@@ -39,6 +40,7 @@ extension UIFont {
     static let fontBoldBig: UIFont = makeFont(size: 48.0, weight: .bold)
     static let fontSmallBold: UIFont = makeFont(size: 17.0, weight: .bold)
     static let fontSmall: UIFont = makeFont(size: 12.0, weight: .regular)
+    static let fontWeeklyGoalSubtitle: UIFont = makeFont(size:12, weight: .bold)
     static let fontExtraSmall: UIFont = makeFont(size: 10.0, weight: .semibold)
 
     private static func makeFont(

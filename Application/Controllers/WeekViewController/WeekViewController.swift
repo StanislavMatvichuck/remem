@@ -63,7 +63,7 @@ final class WeekViewController: UIViewController {
     }
 
     private func configureAnimator() {
-        let yOffset = viewRoot.convert(viewRoot.goal.accessory.frame, to: nil).minY - .buttonMargin / 2
+        let yOffset = viewRoot.convert(viewRoot.goal.frame, to: nil).minY - .buttonMargin / 2
         presenter.presentationAnimator.originHeight = yOffset
     }
 }

@@ -19,6 +19,12 @@
 "eventDetails.of" = "із";
 "eventDetails.placeholder" = "твоя мета на тиждень";
 
+"weeklyGoal.week" = "Тиждень";
+"weeklyGoal.amount" = "сума";
+"weeklyGoal.goal" = "ціль";
+"weeklyGoal.progress" = "прогрес %";
+"weeklyGoal.goalPlaceholder" = "додати тижневу ціль";
+
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";
 "summary.dayAverage" = "Середнє за добу";

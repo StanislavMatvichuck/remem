@@ -8,7 +8,7 @@
 import UIKit
 
 final class WeekView: UIView {
-    let goal = WeekGoalView()
+    let goal = WeekSummaryView()
     let weekdays = WeekdaysView()
 
     let collection: UICollectionView = {
@@ -17,7 +17,6 @@ final class WeekView: UIView {
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
         layout.itemSize = WeekCell.layoutSize
-        
 
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +35,6 @@ final class WeekView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
-        configureGoalToolbar()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -49,16 +47,14 @@ final class WeekView: UIView {
 
     func configureSummary(_ vm: WeekViewModel) {
         let index = weekIndexForCurrentScrollPosition()
-        guard let page = vm.pages[index] else { return }
-        goal.summary.text = page.sum
-        goal.configureGoalDescription(page)
+        guard let page = vm.newPages[index] else { return }
+        goal.configure(page)
         resizeGoalInputAndRedrawAccessory()
     }
 
     func resizeGoalInputAndRedrawAccessory() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             self.goal.invalidateIntrinsicContentSize()
-            self.goal.redrawAccessory()
         }
     }
 
@@ -108,14 +104,4 @@ final class WeekView: UIView {
         clipsToBounds = true
         backgroundColor = .clear
     }
-
-    private func configureGoalToolbar() {
-        let view = GoalInputAccessoryView()
-        view.done.addGestureRecognizer(UITapGestureRecognizer(
-            target: self, action: #selector(handleDone)
-        ))
-        goal.goal.inputAccessoryView = view
-    }
-
-    @objc private func handleDone() { endEditing(true) }
 }

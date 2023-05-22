@@ -14,14 +14,18 @@ struct WeekViewModel {
     private let event: Event
 
     let goalChangeHander: GoalChangeHandler
+
     var scrollToIndex: Int = 0
     var timeline: DayTimeline<WeekCellViewModel>
+
     var pages: WeekTimeline<EventWeeklyGoalViewModel>
+    var newPages: WeekTimeline<WeekSummaryViewModel>
 
     init(
         today: DayIndex,
         event: Event,
         itemFactory: WeekItemViewModelFactoring,
+        weekItemFactory: NewEventWeeklyGoalViewModelFactoring,
         goalChangeHandler: @escaping GoalChangeHandler
     ) {
         self.today = today
@@ -51,6 +55,17 @@ struct WeekViewModel {
             startIndex: WeekIndex(startOfWeek.date),
             endIndex: WeekIndex(endOfWeekToday.date)
         )
+
+        newPages = WeekTimeline(
+            storage: [:],
+            startIndex: WeekIndex(startOfWeek.date),
+            endIndex: WeekIndex(endOfWeekToday.date)
+        )
+
+        for i in 0 ..< pages.count {
+            let nextWeek = WeekIndex(WeekIndex(event.dateCreated).dayIndex.adding(days: 7 * i).date)
+            newPages[nextWeek] = weekItemFactory.makeViewModel(today: today, week: nextWeek)
+        }
 
         var summaryCountingTimeline: WeekTimeline<Int> = WeekTimeline(
             storage: [:],

@@ -16,14 +16,20 @@
 "eventsList.ordering.alphabetically" = "По алфавиту";
 "eventsList.ordering.totalHappenings" = "Всего происшествий";
 
+"eventDetails.of" = "из";
+"eventDetails.placeholder" = "твоя цель на неделю";
+
+"weeklyGoal.week" = "Неделя";
+"weeklyGoal.amount" = "сумма";
+"weeklyGoal.goal" = "цель";
+"weeklyGoal.progress" = "прогресс %";
+"weeklyGoal.goalPlaceholder" = "добавить недельную цель";
+
 "summary.total" = "Всего происшествий";
 "summary.weekAverage" = "Среднее за неделю";
 "summary.dayAverage" = "Среднее за день";
 "summary.daysTracked" = "Дней отслежено";
 "summary.daysSinceLastHappening" = "Дней после последнего происшествия";
-
-"eventDetails.of" = "из";
-"eventDetails.placeholder" = "твоя цель на неделю";
 
 "widget.title" = "Список событий";
 "widget.subtitle" = "Первые три события с количеством случаев на сегодня";

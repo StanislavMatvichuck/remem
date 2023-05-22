@@ -19,6 +19,12 @@
 "eventDetails.of" = "of";
 "eventDetails.placeholder" = "your weekly goal";
 
+"weeklyGoal.week" = "Week";
+"weeklyGoal.amount" = "amount";
+"weeklyGoal.goal" = "goal";
+"weeklyGoal.progress" = "progress %";
+"weeklyGoal.goalPlaceholder" = "add weekly goal";
+
 "summary.total" = "Total happenings";
 "summary.weekAverage" = "Week average";
 "summary.dayAverage" = "Day average";
