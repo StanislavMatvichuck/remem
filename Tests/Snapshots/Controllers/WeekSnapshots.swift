@@ -11,7 +11,8 @@ import iOSSnapshotTestCase
 
 final class WeekSnapshots:
     FBSnapshotTestCase,
-    TestingViewController
+    TestingViewController,
+    MakingSnapshotsRowView
 {
     // MARK: - Setup
     var sut: WeekViewController!
@@ -33,6 +34,7 @@ final class WeekSnapshots:
     override func setUp() {
         super.setUp()
         configureSnapshotsOptions()
+        recordMode = true
     }
     
     override func tearDown() {
@@ -218,6 +220,22 @@ final class WeekSnapshots:
         sut.viewModel.scrollToIndex = 0
         
         FBSnapshotVerifyViewController(sut)
+    }
+    
+    var height: CGFloat { .layoutSquare * 6 }
+    
+    func test_weekGoalStateAtlas() {
+        let atlas = make([
+            "Week/test_pastWeek_withoutGoal",
+            "Week/test_currentWeek_withoutGoal",
+            "Week/test_currentWeek_goalSet_amountIsZero",
+            "Week/test_currentWeek_goalSet_amountIsNotZero",
+            "Week/test_currentWeek_goalSet_goalAchieved",
+            "Week/test_pastWeek_goalSet_amountIsZero",
+            "Week/test_pastWeek_goalSet_amountIsNotZero",
+        ])
+        
+        FBSnapshotVerifyView(atlas)
     }
     
     // MARK: - Private
