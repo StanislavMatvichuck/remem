@@ -30,7 +30,7 @@ extension Event {
     /// - Returns: amount of happenings that fits between start and end of week
     func happeningsAmount(forWeekAt date: Date) -> Int {
         let startOfWeek = WeekIndex(date)
-        var endOfWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfWeek.dayIndex.adding(days: 7).date)
+        var endOfWeekComponents = Calendar.current.dateComponents([.year, .month, .day], from: startOfWeek.dayIndex.adding(days: 6).date)
         endOfWeekComponents.hour = 23
         endOfWeekComponents.minute = 59
         endOfWeekComponents.second = 59
