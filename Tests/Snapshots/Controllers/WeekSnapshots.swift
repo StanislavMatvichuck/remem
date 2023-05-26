@@ -192,7 +192,7 @@ final class WeekSnapshots:
     func test_pastWeek_withoutGoal() {
         arrangeTwoWeeks()
         
-        sut.viewModel.scrollToIndex = 0
+        sut.viewModel.timelineVisibleIndex = 0
         
         FBSnapshotVerifyViewController(sut)
     }
@@ -203,7 +203,7 @@ final class WeekSnapshots:
         event.setWeeklyGoal(amount: 12, for: dayCreated.date)
         sendEventUpdatesToController()
         
-        sut.viewModel.scrollToIndex = 0
+        sut.viewModel.timelineVisibleIndex = 0
         
         FBSnapshotVerifyViewController(sut)
     }
@@ -217,7 +217,7 @@ final class WeekSnapshots:
         event.addHappening(date: dayCreated.adding(days: 3).date)
         sendEventUpdatesToController()
         
-        sut.viewModel.scrollToIndex = 0
+        sut.viewModel.timelineVisibleIndex = 0
         
         FBSnapshotVerifyViewController(sut)
     }
