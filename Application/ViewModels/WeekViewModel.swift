@@ -15,11 +15,11 @@ struct WeekViewModel {
 
     let goalChangeHander: GoalChangeHandler
 
-    var scrollToIndex: Int = 0
+    var timelineVisibleIndex: Int = 0
     var timeline: DayTimeline<WeekCellViewModel>
 
-    var pages: WeekTimeline<EventWeeklyGoalViewModel>
-    var newPages: WeekTimeline<WeekSummaryViewModel>
+    var pagesVisibleIndex: Int { timelineVisibleIndex / 7 }
+    var pages: WeekTimeline<WeekSummaryViewModel>
 
     init(
         today: DayIndex,
@@ -45,7 +45,7 @@ struct WeekViewModel {
         for i in 0 ..< timeline.count {
             let nextDay = startOfWeek.adding(days: i)
 
-            if nextDay == startOfWeekToday { scrollToIndex = i }
+            if nextDay == startOfWeekToday { timelineVisibleIndex = i }
 
             timeline[nextDay] = itemFactory.makeViewModel(day: nextDay)
         }
@@ -56,33 +56,9 @@ struct WeekViewModel {
             endIndex: WeekIndex(endOfWeekToday.date)
         )
 
-        newPages = WeekTimeline(
-            storage: [:],
-            startIndex: WeekIndex(startOfWeek.date),
-            endIndex: WeekIndex(endOfWeekToday.date)
-        )
-
         for i in 0 ..< pages.count {
             let nextWeek = WeekIndex(WeekIndex(event.dateCreated).dayIndex.adding(days: 7 * i).date)
-            newPages[nextWeek] = weekItemFactory.makeViewModel(today: today, week: nextWeek)
-        }
-
-        var summaryCountingTimeline: WeekTimeline<Int> = WeekTimeline(
-            storage: [:],
-            startIndex: WeekIndex(startOfWeek.date),
-            endIndex: WeekIndex(endOfWeekToday.date)
-        )
-
-        for weekIndex in summaryCountingTimeline.indices {
-            summaryCountingTimeline[weekIndex] = event.happeningsAmount(forWeekAt: weekIndex.date)
-        }
-
-        for index in summaryCountingTimeline.indices {
-            pages[index] = EventWeeklyGoalViewModel(
-                weekDate: index.date,
-                event: event,
-                goalEditable: startOfWeekToday == index.dayIndex
-            )
+            pages[nextWeek] = weekItemFactory.makeViewModel(today: today, week: nextWeek)
         }
     }
 }

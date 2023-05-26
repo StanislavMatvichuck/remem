@@ -5,7 +5,6 @@
 //  Created by Stanislav Matvichuck on 01.02.2023.
 //
 
-@testable import Application
 import Domain
 import Foundation
 
@@ -22,6 +21,7 @@ extension TimelineTesting {
     var twoDaysLater: Date { dateTime.addingTimeInterval(60 * 60 * 24 * 2) }
     var afterAWeek: Date { dateTime.addingTimeInterval(60 * 60 * 12 * 2 * 7) }
     var afterTwoWeeks: Date { dateTime.addingTimeInterval(60 * 60 * 12 * 2 * 7 * 2) }
+    var afterThreeWeeks: Date { dateTime.addingTimeInterval(60 * 60 * 12 * 2 * 7 * 3) }
 }
 
 extension DayIndex {

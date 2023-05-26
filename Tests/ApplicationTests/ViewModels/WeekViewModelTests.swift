@@ -61,7 +61,7 @@ final class WeekViewModelTests: XCTestCase {
     }
 
     func test_sameDates_scrollToIndex_0() {
-        XCTAssertEqual(sut.scrollToIndex, 0)
+        XCTAssertEqual(sut.timelineVisibleIndex, 0)
     }
 
     func test_dateCreatedHasWeekdayOffset_firstCellIsMondayBeforeDateCreated() {
@@ -82,7 +82,7 @@ final class WeekViewModelTests: XCTestCase {
     func test_randomDates_scrollToIndex_isAlwaysMonday() {
         arrangeRandomDates()
 
-        let date = sut.timeline[sut.scrollToIndex]?.date
+        let date = sut.timeline[sut.timelineVisibleIndex]?.date
         XCTAssertEqual(WeekDay.make(date!), WeekDay.monday)
     }
 
