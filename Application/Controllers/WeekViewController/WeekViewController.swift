@@ -33,11 +33,7 @@ final class WeekViewController: UIViewController {
         super.viewDidLoad()
         configureCollection()
         viewRoot.goal.goal.delegate = self
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        viewRoot.scrollToCurrentWeek(viewModel)
+        viewRoot.configure(viewModel)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,8 +88,17 @@ extension WeekViewController:
         viewModel.timeline[indexPath.row]?.select()
     }
 
+    // MARK: - UIScrollViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        viewRoot.configureSummary(viewModel)
+        let collectionWidth = scrollView.bounds.width
+        let offset = scrollView.contentOffset.x
+        let newTimelineIndex = Int(offset / collectionWidth) * 7
+
+        if offset == 0 {
+            viewModel.timelineVisibleIndex = 0
+        } else {
+            viewModel.timelineVisibleIndex = newTimelineIndex
+        }
     }
 }
 

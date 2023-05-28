@@ -10,6 +10,7 @@ import UIKit
 final class WeekView: UIView {
     let goal = WeekSummaryView()
     let weekdays = WeekdaysView()
+    var scrollTo: IndexPath?
 
     let collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,8 +29,6 @@ final class WeekView: UIView {
         return view
     }()
 
-    private var scrollHappened = false
-
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -43,44 +42,18 @@ final class WeekView: UIView {
     func configure(_ vm: WeekViewModel) {
         collection.reloadData()
         configureSummary(vm)
+        scrollTo = IndexPath(row: vm.timelineVisibleIndex, section: 0)
     }
 
     func configureSummary(_ vm: WeekViewModel) {
-        let index = weekIndexForCurrentScrollPosition()
-        guard let page = vm.newPages[index] else { return }
+        guard let page = vm.pages[vm.pagesVisibleIndex] else { return }
         goal.configure(page)
-        resizeGoalInputAndRedrawAccessory()
     }
 
     func resizeGoalInputAndRedrawAccessory() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             self.goal.invalidateIntrinsicContentSize()
         }
-    }
-
-    func scrollToCurrentWeek(_ vm: WeekViewModel) {
-        guard !scrollHappened else { return }
-        setInitialScrollPosition(vm)
-        scrollHappened = true
-    }
-
-    // MARK: - Private
-    private func weekIndexForCurrentScrollPosition() -> Int {
-        let collectionWidth = collection.bounds.width
-        let offset = collection.contentOffset.x
-        guard offset != 0 else { return 0 }
-        return Int(offset / collectionWidth)
-    }
-
-    private func setInitialScrollPosition(_ vm: WeekViewModel) {
-        collection.layoutIfNeeded()
-        collection.scrollToItem(
-            at: IndexPath(row: vm.scrollToIndex, section: 0),
-            at: .left,
-            animated: false
-        )
-
-        configureSummary(vm)
     }
 
     private func configureLayout() {
@@ -103,5 +76,14 @@ final class WeekView: UIView {
     private func configureAppearance() {
         clipsToBounds = true
         backgroundColor = .clear
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        collection.layoutIfNeeded()
+        if let scrollTo {
+            collection.scrollToItem(at: scrollTo, at: .left, animated: false)
+        }
     }
 }

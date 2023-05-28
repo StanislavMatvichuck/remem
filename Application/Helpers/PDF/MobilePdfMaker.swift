@@ -63,7 +63,9 @@ final class MobilePdfMaker: PDFMaking {
     }
 
     private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
-        week.scrollTo(i * 7)
+        week.viewModel.timelineVisibleIndex = i * 7
+        week.viewRoot.setNeedsLayout()
+        week.viewRoot.layoutIfNeeded()
 
         context.cgContext.scaleBy(x: down, y: down)
         week.view.layer.render(in: context.cgContext)

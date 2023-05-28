@@ -63,40 +63,26 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertEqual(todays.count, 1)
     }
 
+    private var randomDaysAmount: Int { Int.random(in: 0 ..< 1000) }
+
     func test_todayDay_visibleWhenAppears() throws {
         /// Random numbers may be replaced with cycle but then it takes significant time to execute
-        let createdRandomOffset = Int.random(in: 0 ..< 1000)
-        let todayRandomOffset = Int.random(in: 0 ..< 1000)
+        let created = DayIndex.referenceValue.adding(days: randomDaysAmount)
+        let today = created.adding(days: randomDaysAmount)
 
-        let created = DayIndex.referenceValue.adding(dateComponents: DateComponents(day: createdRandomOffset))
-        let event = Event(name: "Event", dateCreated: created.date)
-        let today = created.adding(dateComponents: DateComponents(day: todayRandomOffset))
-
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        sut = ApplicationContainer(testingInMemoryMode: true)
             .makeContainer()
-            .makeContainer(event: event, today: today)
-        sut = WeekContainer(parent: container).make() as? WeekViewController
+            .makeContainer(
+                event: Event(
+                    name: "Event",
+                    dateCreated: created.date
+                ),
+                today: today
+            ).makeWeekViewController()
 
         layoutInScreen()
 
-        let collection = sut.viewRoot.collection
-        let renderedIndexPaths = collection.indexPathsForVisibleItems
-        let fullyVisibleIndexPaths = renderedIndexPaths.filter { indexPath in
-            let layoutAttribute = collection.layoutAttributesForItem(at: indexPath)!
-            let cellFrame = layoutAttribute.frame
-            let isCellFullyVisible =
-                cellFrame.minX >= collection.bounds.minX &&
-                cellFrame.maxX.rounded(.down) <= collection.bounds.maxX
-            return isCellFullyVisible
-        }
-
-        let todayCell = try fullyVisibleIndexPaths.filter { index in
-            let cell = collection.cellForItem(at: index)
-            let weekCell = try XCTUnwrap(cell as? WeekCell)
-            return weekCell.viewModel!.isToday
-        }
-
-        XCTAssertEqual(todayCell.count, 1)
+        XCTAssertEqual(try todayVisibleIndexPaths().count, 1)
     }
 
     func test_firstDay_showsDayNumber() {
@@ -160,8 +146,29 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
     }
 
     private func layoutInScreen() {
-        putInViewHierarchy(sut)
-        sut.view.bounds = UIScreen.main.bounds
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.addSubview(sut.view)
         sut.view.layoutIfNeeded()
+    }
+
+    private func fullyVisibleIndexPaths() -> [IndexPath] {
+        let collection = sut.viewRoot.collection
+        let renderedIndexPaths = collection.indexPathsForVisibleItems
+        return renderedIndexPaths.filter { indexPath in
+            let layoutAttribute = collection.layoutAttributesForItem(at: indexPath)!
+            let cellFrame = layoutAttribute.frame
+            let isCellFullyVisible =
+                cellFrame.minX >= collection.bounds.minX &&
+                cellFrame.maxX.rounded(.down) <= collection.bounds.maxX
+            return isCellFullyVisible
+        }
+    }
+
+    private func todayVisibleIndexPaths() throws -> [IndexPath] {
+        try fullyVisibleIndexPaths().filter { index in
+            let cell = sut.viewRoot.collection.cellForItem(at: index)
+            let weekCell = try XCTUnwrap(cell as? WeekCell)
+            return weekCell.viewModel!.isToday
+        }
     }
 }

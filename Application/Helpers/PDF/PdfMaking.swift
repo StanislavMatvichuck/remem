@@ -10,16 +10,3 @@ import Foundation
 protocol PDFMaking {
     func make() -> Data
 }
-
-extension WeekViewController {
-    func scrollTo(_ int: Int) {
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.collection.scrollToItem(
-            at: IndexPath(row: int, section: 0),
-            at: .left,
-            animated: false)
-        viewRoot.collection.setNeedsLayout()
-        viewRoot.collection.layoutIfNeeded()
-        viewRoot.configureSummary(viewModel)
-    }
-}
