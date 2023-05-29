@@ -34,7 +34,6 @@ final class WeekSnapshots:
     override func setUp() {
         super.setUp()
         configureSnapshotsOptions()
-        recordMode = true
     }
     
     override func tearDown() {
