@@ -40,9 +40,6 @@ struct EventRow: View {
             }.overlay(
                 Divider().overlay(Color(uiColor: UIColor.bg_secondary)),
                 alignment: .bottom
-            ).overlay(
-                TimeSinceText(item.timeSince),
-                alignment: .bottom
             )
         } else {
             EventRowEmptyView()
