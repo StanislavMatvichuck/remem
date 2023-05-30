@@ -16,10 +16,10 @@ extension DayIndex {
 }
 
 struct WeekCellViewModel {
+    typealias TapHandler = () -> Void
     private let event: Event
     private let day: DayIndex
     private let today: DayIndex
-    private let tapHandler: () -> ()
 
     let isToday: Bool
     let amount: String
@@ -27,12 +27,13 @@ struct WeekCellViewModel {
     let dayNumber: String
     let highlighted: Bool
     let date: Date /// used only by `WeekViewControllerTests`
+    let tapHandler: () -> Void
 
     init(
         event: Event,
         day: DayIndex,
         today: DayIndex,
-        tapHandler: @escaping () -> ()
+        tapHandler: @escaping TapHandler
     ) {
         self.day = day
         self.today = today
@@ -54,8 +55,6 @@ struct WeekCellViewModel {
         self.isToday = day == today
         self.date = day.date
     }
-
-    func select() { tapHandler() }
 }
 
 protocol WeekItemViewModelFactoring {

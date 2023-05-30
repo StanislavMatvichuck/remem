@@ -85,7 +85,7 @@ extension WeekViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         configureAnimator()
         presenter.animatedCellIndex = indexPath
-        viewModel.timeline[indexPath.row]?.select()
+        viewModel.timeline[indexPath.row]?.tapHandler()
     }
 
     // MARK: - UIScrollViewDelegate
