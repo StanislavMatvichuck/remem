@@ -11,22 +11,25 @@ final class PdfMakingContainer: ControllerFactoring {
     let urlProviding: URLProviding
     let week: WeekViewController
     let summary: SummaryViewController
+    let clock: ClockViewController
     let coordinator: Coordinator?
 
     init(
         week: WeekViewController,
         summary: SummaryViewController,
+        clock: ClockViewController,
         coordinator: Coordinator? = nil,
         urlProviding: URLProviding = LocalFile.pdfReport
     ) {
         self.week = week
         self.summary = summary
+        self.clock = clock
         self.coordinator = coordinator
         self.urlProviding = urlProviding
     }
 
     func make() -> UIViewController {
-        let pdfMaker = MobilePdfMaker(week: week, summary: summary)
+        let pdfMaker = MobilePdfMaker(week: week, summary: summary, clock: clock)
         let controller = PdfMakingViewController(
             provider: urlProviding,
             pdfMaker: pdfMaker,

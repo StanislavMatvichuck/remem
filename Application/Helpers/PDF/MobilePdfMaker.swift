@@ -12,6 +12,7 @@ import UIKit
 final class MobilePdfMaker: PDFMaking {
     private let week: WeekViewController
     private let summary: SummaryViewController
+    private let clock: ClockViewController
 
     let pageWidth = CGFloat.screenW * 0.94
     var pageHeight: CGFloat { tileHeight * 2 + 1 }
@@ -19,16 +20,17 @@ final class MobilePdfMaker: PDFMaking {
     var weekWidth: CGFloat { week.view.layer.bounds.width }
     var weekHeight: CGFloat { week.view.layer.bounds.height }
     var tileWidth: CGFloat { pageWidth / 2 }
-    var tileHeight: CGFloat { weekHeight * down }
+    var tileHeight: CGFloat { tileWidth }
     var down: CGFloat { tileWidth / weekWidth }
     var up: CGFloat { 1 / down }
     var weeksAmount: Int { week.viewModel.pages.count }
     var gridColumns: Int { 2 }
     var height: CGFloat = 0
 
-    init(week: WeekViewController, summary: SummaryViewController) {
+    init(week: WeekViewController, summary: SummaryViewController, clock: ClockViewController) {
         self.week = week
         self.summary = summary
+        self.clock = clock
     }
 
     func make() -> Data {
@@ -42,18 +44,32 @@ final class MobilePdfMaker: PDFMaking {
     private func renderControllersInGrid(_ context: UIGraphicsPDFRendererContext) {
         makeNewPage(context)
 
-        for i in 0 ... weeksAmount {
+        placeFirstTile(context)
+        moveToNextTile(context)
+
+        placeSummaryTile(context)
+        moveToNextTile(context)
+        moveToNextLine(context)
+
+        placeClockTile(context)
+        moveToNextTile(context)
+
+        makeNewPage(context)
+
+        for i in 0 ..< weeksAmount {
             if nextLineNeeded(i) { moveToNextLine(context) }
             if nextPageNeeded(i) { makeNewPage(context) }
 
-            if lastTile(i) {
-                placeSummaryTile(context)
-            } else {
-                placeWeekTile(tileNumber: i, context)
-            }
-
+            placeWeekTile(tileNumber: i, context)
             moveToNextTile(context)
         }
+    }
+
+    private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {}
+    private func placeClockTile(_ context: UIGraphicsPDFRendererContext) {
+        context.cgContext.scaleBy(x: down, y: down)
+        clock.view.layer.render(in: context.cgContext)
+        context.cgContext.scaleBy(x: up, y: up)
     }
 
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {

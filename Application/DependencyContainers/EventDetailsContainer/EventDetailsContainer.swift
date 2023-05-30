@@ -32,7 +32,7 @@ final class EventDetailsContainer:
         let clock = makeClockViewController()
         let week = makeWeekViewController()
         let summary = makeSummaryViewController()
-        let pdf = makePdfMakingViewController(week, summary)
+        let pdf = makePdfMakingViewController(week, summary, clock)
 
         let controller = EventDetailsViewController(
             factory: self,
@@ -64,11 +64,13 @@ final class EventDetailsContainer:
 
     func makePdfMakingViewController(
         _ week: WeekViewController,
-        _ summary: SummaryViewController
+        _ summary: SummaryViewController,
+        _ clock: ClockViewController
     ) -> PdfMakingViewController {
         PdfMakingContainer(
             week: week,
             summary: summary,
+            clock: clock,
             coordinator: parent.parent.coordinator
         ).make() as! PdfMakingViewController
     }
