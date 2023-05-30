@@ -9,31 +9,27 @@ import Domain
 import Foundation
 
 struct DayCellViewModel {
-    private let event: Event
-    private let happening: Happening
-    private let commander: EventsCommanding
-
-    let text: String
-
-    init(
-        event: Event,
-        happening: Happening,
-        commander: EventsCommanding
-    ) {
+    static let formatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
+        return dateFormatter
+    }()
 
-        self.commander = commander
-        self.event = event
+    typealias RemoveHandler = (Happening) -> Void
+
+    let text: String
+    let removeHandler: RemoveHandler
+
+    private let happening: Happening
+
+    init(happening: Happening, remove: @escaping RemoveHandler) {
         self.happening = happening
-        self.text = dateFormatter.string(from: happening.dateCreated)
+        self.text = Self.formatter.string(from: happening.dateCreated)
+        self.removeHandler = remove
     }
 
-    func remove() {
-        do { try event.remove(happening: happening) } catch {}
-        commander.save(event)
-    }
+    func remove() { removeHandler(happening) }
 }
 
 protocol DayItemViewModelFactoring {

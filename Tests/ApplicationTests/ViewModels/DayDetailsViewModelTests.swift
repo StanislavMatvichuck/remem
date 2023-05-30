@@ -43,7 +43,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             let commander = EventsCommandingStub()
 
             func makeViewModel(happening: Happening) -> DayCellViewModel {
-                DayCellViewModel(event: event, happening: happening, commander: commander)
+                DayCellViewModel(happening: happening) { _ in }
             }
         }
 

@@ -41,11 +41,10 @@ final class DayDetailsContainer:
     }
 
     func makeViewModel(happening: Happening) -> DayCellViewModel {
-        DayCellViewModel(
-            event: event,
-            happening: happening,
-            commander: commander
-        )
+        DayCellViewModel(happening: happening) { happening in
+            do { try self.event.remove(happening: happening) } catch {}
+            self.commander.save(self.event)
+        }
     }
 
     func makeDayDetailsViewModel() -> DayDetailsViewModel {
