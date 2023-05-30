@@ -44,10 +44,10 @@ final class EventDetailsContainer:
     }
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel {
-        EventDetailsViewModel(
-            event: event,
-            commander: commander
-        )
+        EventDetailsViewModel(event: event) { event in
+            event.visit()
+            self.commander.save(event)
+        }
     }
 
     func makeWeekViewController() -> WeekViewController {

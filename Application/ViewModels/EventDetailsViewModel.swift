@@ -9,24 +9,21 @@ import Domain
 import Foundation
 
 struct EventDetailsViewModel {
-    private let event: Event
-    private let commander: EventsCommanding
+    typealias VisitHandler = (Event) -> Void
 
-    init(
-        event: Event,
-        commander: EventsCommanding
-    ) {
+    let visitHandler: VisitHandler
+
+    private let event: Event
+
+    init(event: Event, visitHandler: @escaping VisitHandler) {
         self.event = event
-        self.commander = commander
+        self.visitHandler = visitHandler
     }
 
     var title: String { event.name }
     var isVisited: Bool { event.dateVisited != nil }
 
     func visit() {
-        if event.dateVisited == nil {
-            event.visit()
-            commander.save(event)
-        }
+        if event.dateVisited == nil { visitHandler(event) }
     }
 }
