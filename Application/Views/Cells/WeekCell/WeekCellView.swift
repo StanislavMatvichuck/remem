@@ -84,6 +84,7 @@ final class WeekCellView: UIView {
 
         let dayColor = vm.highlighted ? UIColor.primary : UIColor.bg_primary
         dayContainer.set(fill: dayColor, border: .border_primary)
+        dayContainer.setNeedsDisplay()
 
         show(timings: vm.items)
     }
@@ -91,6 +92,7 @@ final class WeekCellView: UIView {
     func prepareForReuse() {
         hideAll()
         day.text = " "
+        dayContainer.prepareForReuse()
     }
 
     // MARK: - Private

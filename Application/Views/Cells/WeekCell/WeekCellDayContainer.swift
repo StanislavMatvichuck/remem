@@ -20,17 +20,29 @@ final class WeekCellDayContainer: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
-        configureAppearance()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    override func draw(_ rect: CGRect) {
+        if dayShape == nil {
+            let shape = makeSublayer()
+            dayShape = shape
+            layer.insertSublayer(shape, at: 0)
+        }
+
+        configureAppearance()
+    }
 
     // MARK: - Public
     func set(fill: UIColor, border: UIColor) {
         fillColor = fill
         borderColor = border
-        dayShape?.fillColor = fill.cgColor
-        dayShape?.borderColor = border.cgColor
+    }
+
+    func prepareForReuse() {
+        dayShape?.removeFromSuperlayer()
+        dayShape = nil
     }
 
     // MARK: - Private
@@ -39,10 +51,6 @@ final class WeekCellDayContainer: UIView {
             widthAnchor.constraint(equalToConstant: Self.width),
             heightAnchor.constraint(equalToConstant: Self.width),
         ])
-
-        guard dayShape == nil else { return }
-        dayShape = makeSublayer()
-        layer.addSublayer(dayShape!)
     }
 
     private func configureAppearance() {
@@ -57,8 +65,6 @@ final class WeekCellDayContainer: UIView {
 
         let layer = CAShapeLayer()
         layer.frame = frame
-        layer.fillColor = UIColor.primary.cgColor
-        layer.strokeColor = UIColor.border_primary.cgColor
         layer.lineWidth = .border
         layer.path = path.cgPath
         return layer
