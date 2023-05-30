@@ -27,11 +27,7 @@ final class EventAmountView: UIView {
 
     // MARK: - Public
     func configure(_ vm: EventCellViewModel) {
-        if let goal = vm.goalAmount {
-            label.text = "\(vm.value)/\(goal)"
-        } else {
-            label.text = vm.value
-        }
+        label.text = vm.value
     }
 
     // MARK: - Private

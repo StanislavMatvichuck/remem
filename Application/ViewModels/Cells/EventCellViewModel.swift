@@ -65,7 +65,6 @@ struct EventCellViewModel: EventsListItemViewModeling {
         let weeklyGoalDescription = EventWeeklyGoalViewModel(weekDate: today.date, event: event, goalEditable: false)
 
         self.title = event.name
-        self.value = "\(valueAmount)"
         self.hintEnabled = hintEnabled
         self.timeSince = {
             if let happening = event.happenings.last {
@@ -78,6 +77,12 @@ struct EventCellViewModel: EventsListItemViewModeling {
         self.goalAmount = weeklyGoalDescription.goal
         self.progress = weeklyGoalDescription.progress
         self.progressState = weeklyGoalDescription.state
+
+        if let goal = goalAmount {
+            self.value = "\(valueAmount)/\(goal)"
+        } else {
+            self.value = "\(valueAmount)"
+        }
 
         self.tapHandler = tapHandler
         self.swipeHandler = swipeHandler
