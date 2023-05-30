@@ -27,6 +27,7 @@ extension UIView: UsingSwipingHintDisplaying {
     }
 
     func addSwipingHint() {
+        guard parseTestingLaunchParameters().isEmpty else { return }
         let display = SwipingHintDisplay()
         addAndConstrain(display)
         layoutIfNeeded()

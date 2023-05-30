@@ -25,8 +25,6 @@ extension TimelineTesting {
 }
 
 extension DayIndex {
-    static var referenceValue: DayIndex { DayIndex(Date(timeIntervalSinceReferenceDate: 0)) }
-
     func adding(dateComponents: DateComponents) -> DayIndex {
         DayIndex(Calendar.current.date(byAdding: dateComponents, to: date)!)
     }

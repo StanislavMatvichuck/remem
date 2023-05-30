@@ -68,9 +68,15 @@ final class EventsListContainer:
             )
         }
 
+        // ui testing recording may impact this logic
         var items = [any EventsListItemViewModeling]()
-        items.append(hintVm)
-        if events.count >= 2 { items.append(orderingVm) }
+
+        // TODO: think about how to improve testing code separation
+        if parseTestingLaunchParameters().isEmpty {
+            items.append(hintVm)
+            if events.count >= 2 { items.append(orderingVm) }
+        }
+
         items.append(contentsOf: eventsViewModels)
         items.append(footerVm)
 

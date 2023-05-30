@@ -17,6 +17,8 @@ public struct DayIndex: DateIndexing {
     public func adding(days: Int) -> DayIndex {
         DayIndex(Calendar.current.date(byAdding: DateComponents(day: days), to: date)!)
     }
+    
+    public static var referenceValue: DayIndex { DayIndex(Date(timeIntervalSinceReferenceDate: 0)) }
 }
 
 public extension WeekIndex {

@@ -9,45 +9,47 @@ import CoreData
 import DataLayer
 import Domain
 
-enum TestingCase {
-    case EmptyEvents(amount: Int)
+enum TestingLaunchParameter: String {
+    case empty, singleEvent
 }
 
 func scanLaunchArgumentsAndPrepareRepositoryIfNeeded(_ repository: CoreDataEventsRepository) {
-    let launchArgument = CommandLine.arguments.first { $0.hasPrefix("eventsAmount") } ?? " "
-    let index = launchArgument.index(after: launchArgument.lastIndex(of: " ")!)
+    let params = parseTestingLaunchParameters()
 
-    if let amount = Int(launchArgument.suffix(from: index)) {
-        prepare(repository, for: .EmptyEvents(amount: amount))
+    if params.contains(.empty) {
+        prepare(repository, for: .empty)
+    } else if params.contains(.singleEvent) {
+        prepare(repository, for: .singleEvent)
     }
 }
 
-func prepare(_ repository: CoreDataEventsRepository, for testingCase: TestingCase) {
-    for event in repository.get() {
-        repository.delete(event)
+func parseTestingLaunchParameters() -> [TestingLaunchParameter] {
+    let launchArguments = ProcessInfo.processInfo.arguments
+
+    var recognizedParameters: [TestingLaunchParameter] = []
+
+    for argument in launchArguments {
+        if let parameter = TestingLaunchParameter(rawValue: argument) {
+            recognizedParameters.append(parameter)
+        }
     }
 
+    return recognizedParameters
+}
+
+func prepare(_ repository: CoreDataEventsRepository, for testingCase: TestingLaunchParameter) {
+    removeAllEventsFrom(repository: repository)
+
     switch testingCase {
-    case .EmptyEvents(let amount):
-        for i in 0 ..< amount {
-            let day = DayIndex(.now).adding(days: -2 * 365)
-            let event = Event(name: "Event\(i)", dateCreated: day.date)
-            let daysTrackedAmount: Int = {
-                var timeline = DayTimeline<Bool>()
-                timeline[DayIndex(event.dateCreated)] = true
-                timeline[DayIndex(.now)] = true
-                return timeline.count
-            }()
+    case .empty: return
+    case .singleEvent:
+        let event = Event(name: "Single event", dateCreated: DayIndex.referenceValue.date)
+        repository.save(event)
+    }
+}
 
-            for j in 0 ..< daysTrackedAmount {
-                let date = day.adding(days: j).date.addingTimeInterval(
-                    TimeInterval(
-                        Double(Int.random(in: 0 ..< 100)) / 100.0 * 60.0 * 60.0 * 24.0
-                    ))
-                event.addHappening(date: date)
-            }
-
-            repository.save(event)
-        }
+func removeAllEventsFrom(repository: CoreDataEventsRepository) {
+    for event in repository.get() {
+        repository.delete(event)
     }
 }
