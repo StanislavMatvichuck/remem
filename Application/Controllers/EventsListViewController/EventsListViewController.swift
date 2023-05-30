@@ -108,7 +108,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         if let renamedEventItem = viewModel.renamedItem {
             renamedEventItem.rename(to: viewRoot.input.value)
         } else {
-            viewModel.add(name: viewRoot.input.value)
+            viewModel.addHandler(viewRoot.input.value)
         }
     }
 

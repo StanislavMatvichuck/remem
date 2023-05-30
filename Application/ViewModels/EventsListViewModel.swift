@@ -20,8 +20,9 @@ extension EventsListItemViewModeling {
 struct EventsListViewModel {
     static let title = String(localizationId: "eventsList.title")
 
+    typealias AddEventHandler = (String) -> Void
+
     private let today: DayIndex
-    private let commander: EventsCommanding
 
     var renamedItem: EventCellViewModel?
     var inputVisible: Bool = false
@@ -29,18 +30,16 @@ struct EventsListViewModel {
 
     var items: [any EventsListItemViewModeling]
 
+    let addHandler: AddEventHandler
+
     init(
         today: DayIndex,
-        commander: EventsCommanding,
-        items: [any EventsListItemViewModeling]
+        items: [any EventsListItemViewModeling],
+        addHandler: @escaping AddEventHandler
     ) {
         self.today = today
-        self.commander = commander
         self.items = items
-    }
-
-    func add(name: String) {
-        commander.save(Event(name: name))
+        self.addHandler = addHandler
     }
 
     mutating func showInput() {

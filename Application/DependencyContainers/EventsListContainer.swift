@@ -82,9 +82,8 @@ final class EventsListContainer:
 
         let vm = EventsListViewModel(
             today: today,
-            commander: commander,
             items: items
-        )
+        ) { name in self.commander.save(Event(name: name)) }
 
         return vm
     }

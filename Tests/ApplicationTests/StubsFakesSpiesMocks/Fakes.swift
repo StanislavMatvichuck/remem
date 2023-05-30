@@ -22,7 +22,6 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
     func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel {
         EventsListViewModel(
             today: today,
-            commander: commander,
             items: [
                 HintCellViewModel(events: [event]),
                 EventCellViewModel(
@@ -37,6 +36,6 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
                 ),
                 FooterCellViewModel(eventsCount: 1, tapHandler: nil),
             ]
-        )
+        ) { _ in }
     }
 }
