@@ -36,5 +36,6 @@ extension WidgetEventCellViewModel {
     init(item: EventCellViewModel) {
         title = item.title
         value = item.value
+        timeSince = item.timeSince
     }
 }

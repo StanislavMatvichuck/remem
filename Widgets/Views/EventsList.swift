@@ -12,7 +12,7 @@ struct EventsList: View {
 
     init(items: [WidgetEventCellViewModel]) {
         if items.isEmpty {
-            self.items = [WidgetEventCellViewModel(title: String(localizationId: "widget.emptyRow"), value: "!"), nil]
+            self.items = [.empty, nil]
             return
         }
 
@@ -34,7 +34,7 @@ struct EventsList: View {
                 Color(uiColor: UIColor.bg).ignoresSafeArea()
                 VStack(spacing: spacing) {
                     ForEach(items.indices) {
-                        EventRow(isLast: $0 == 0, item: items[$0])
+                        EventRow(item: items[$0])
                     }
                 }.padding(EdgeInsets(
                     top: spacing,

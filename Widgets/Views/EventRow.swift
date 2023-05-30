@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EventRow: View {
-    let isLast: Bool
     let item: WidgetEventCellViewModel?
 
     @ViewBuilder
@@ -25,7 +24,10 @@ struct EventRow: View {
                     }.aspectRatio(1.0, contentMode: .fit)
                 }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
             }.overlay(
-                Divider().background(Color(uiColor: UIColor.secondary)),
+                Divider().overlay(Color(uiColor: UIColor.bg_secondary)),
+                alignment: .bottom
+            ).overlay(
+                TimeSinceText(item.timeSince),
                 alignment: .bottom
             )
         } else {

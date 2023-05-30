@@ -20,3 +20,17 @@ struct StyledText: View {
             .foregroundColor(Color(UIColor.text))
     }
 }
+
+struct TimeSinceText: View {
+    private let content: String
+
+    init(_ content: String) {
+        self.content = content
+    }
+
+    var body: some View {
+        Text(content)
+            .font(Font(uiFont: .fontSmall))
+            .foregroundColor(Color(UIColor.bg_secondary))
+    }
+}
