@@ -37,3 +37,6 @@
 
 "pdf.create" = "Экспорт в pdf";
 "pdf.share" = "Поделиться";
+"pdf.titlePage.title" = "pdf отчет";
+"pdf.titlePage.start" = "старт";
+"pdf.titlePage.finish" = "финиш";

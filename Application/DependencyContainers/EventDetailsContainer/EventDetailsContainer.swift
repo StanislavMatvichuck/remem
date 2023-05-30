@@ -68,6 +68,7 @@ final class EventDetailsContainer:
         _ clock: ClockViewController
     ) -> PdfMakingViewController {
         PdfMakingContainer(
+            event: event,
             week: week,
             summary: summary,
             clock: clock,

@@ -37,3 +37,6 @@
 
 "pdf.create" = "Export to pdf";
 "pdf.share" = "Share";
+"pdf.titlePage.title" = "pdf report";
+"pdf.titlePage.start" = "start";
+"pdf.titlePage.finish" = "finish";

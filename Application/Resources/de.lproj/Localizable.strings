@@ -37,3 +37,6 @@
 
 "pdf.create" = "als PDF exportieren";
 "pdf.share" = "Aktie";
+"pdf.titlePage.title" = "PDF-Bericht";
+"pdf.titlePage.start" = "start";
+"pdf.titlePage.finish" = "beenden";
