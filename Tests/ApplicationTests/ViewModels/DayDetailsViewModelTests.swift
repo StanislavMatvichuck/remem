@@ -53,8 +53,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             isToday: false,
             hour: 1,
             minute: 1,
-            commander: EventsCommandingStub(),
-            itemFactory: DayItemViewModelFactoringStub(event: event)
+            itemFactory: DayItemViewModelFactoringStub(event: event),
+            addHappeningHandler: { _ in }
         )
     }
 }

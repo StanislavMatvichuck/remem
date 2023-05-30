@@ -54,8 +54,10 @@ final class DayDetailsContainer:
             isToday: day == parent.today,
             hour: hour,
             minute: minute,
-            commander: commander,
             itemFactory: self
-        )
+        ) { date in
+            self.event.addHappening(date: date)
+            self.commander.save(self.event)
+        }
     }
 }

@@ -46,7 +46,7 @@ final class DayDetailsViewController: UIViewController {
     }
 
     @objc private func handleButton() {
-        viewModel.addHappening(date: viewRoot.picker.date)
+        viewModel.addHappeningHandler(viewRoot.picker.date)
         playSound()
         viewRoot.button.animateTapReceiving()
     }

@@ -13,13 +13,15 @@ struct DayDetailsViewModel {
     static let delete = String(localizationId: "button.delete")
 
     private let day: DayIndex
-    private let commander: EventsCommanding
     private let event: Event
     private let itemFactory: DayItemViewModelFactoring
+
+    typealias AddHappeningHandler = (Date) -> Void
 
     let items: [DayCellViewModel]
     let title: String
     let isToday: Bool
+    let addHappeningHandler: AddHappeningHandler
     var pickerDate: Date
 
     init(
@@ -28,13 +30,13 @@ struct DayDetailsViewModel {
         isToday: Bool,
         hour: Int,
         minute: Int,
-        commander: EventsCommanding,
-        itemFactory: DayItemViewModelFactoring
+        itemFactory: DayItemViewModelFactoring,
+        addHappeningHandler: @escaping AddHappeningHandler
     ) {
         self.event = event
         self.day = day
-        self.commander = commander
         self.itemFactory = itemFactory
+        self.addHappeningHandler = addHappeningHandler
         self.isToday = isToday
 
         let happenings = event.happenings(forDayIndex: day)
@@ -55,10 +57,5 @@ struct DayDetailsViewModel {
             second: 0,
             of: dayDate
         )!
-    }
-
-    func addHappening(date: Date) {
-        event.addHappening(date: date)
-        commander.save(event)
     }
 }
