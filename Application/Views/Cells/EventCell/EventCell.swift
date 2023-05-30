@@ -120,7 +120,7 @@ extension EventCell: TrailingSwipeActionsConfigurationProviding {
 
         let renameAction = UIContextualAction(
             style: .normal,
-            title: viewModel.rename,
+            title: EventCellViewModel.rename,
             handler: { _, _, completion in
                 self.viewModel?.renameActionHandler(viewModel)
                 completion(true)
@@ -129,7 +129,7 @@ extension EventCell: TrailingSwipeActionsConfigurationProviding {
 
         let deleteAction = UIContextualAction(
             style: .destructive,
-            title: viewModel.delete,
+            title: EventCellViewModel.delete,
             handler: { _, _, completion in
                 self.viewModel?.deleteActionHandler()
                 completion(true)

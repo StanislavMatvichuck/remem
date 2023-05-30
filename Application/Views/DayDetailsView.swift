@@ -119,7 +119,7 @@ final class DayDetailsView: UIView {
             .font: UIFont.font,
         ]
 
-        let title = NSAttributedString(string: viewModel.create, attributes: attributes)
+        let title = NSAttributedString(string: DayDetailsViewModel.create, attributes: attributes)
 
         button.setAttributedTitle(title, for: .normal)
         button.titleLabel?.numberOfLines = 3

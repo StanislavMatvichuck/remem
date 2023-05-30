@@ -12,9 +12,10 @@ protocol FooterItemViewModelTapHandling {
 }
 
 struct FooterCellViewModel: EventsListItemViewModeling {
+    static let title = String(localizationId: "button.create")
+
     var identifier: String { "Footer" }
 
-    let title = String(localizationId: "button.create")
     let isHighlighted: Bool
     let tapHandler: FooterItemViewModelTapHandling?
 
@@ -26,7 +27,7 @@ struct FooterCellViewModel: EventsListItemViewModeling {
     func select() { tapHandler?.tapped(self) }
 
     static func == (lhs: FooterCellViewModel, rhs: FooterCellViewModel) -> Bool {
-        lhs.title == rhs.title && lhs.isHighlighted == rhs.isHighlighted
+        lhs.isHighlighted == rhs.isHighlighted
     }
 }
 

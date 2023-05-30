@@ -33,8 +33,8 @@ struct EventCellViewModel: EventsListItemViewModeling {
     private let event: Event
     private let valueAmount: Int
 
-    let rename = String(localizationId: "button.rename")
-    let delete = String(localizationId: "button.delete")
+    static let rename = String(localizationId: "button.rename")
+    static let delete = String(localizationId: "button.delete")
 
     let title: String
     let value: String

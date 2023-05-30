@@ -27,7 +27,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         didSet {
             guard isViewLoaded else { return }
 
-            title = viewModel.title
+            title = EventsListViewModel.title
 
             dataSource.update(viewModel.items, oldValue)
 

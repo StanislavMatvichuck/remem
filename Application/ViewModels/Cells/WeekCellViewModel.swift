@@ -16,10 +16,14 @@ extension DayIndex {
 }
 
 struct WeekCellViewModel {
+    static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
     typealias TapHandler = () -> Void
-    private let event: Event
-    private let day: DayIndex
-    private let today: DayIndex
 
     let isToday: Bool
     let amount: String
@@ -27,7 +31,11 @@ struct WeekCellViewModel {
     let dayNumber: String
     let highlighted: Bool
     let date: Date /// used only by `WeekViewControllerTests`
-    let tapHandler: () -> Void
+    let tapHandler: TapHandler
+
+    private let event: Event
+    private let day: DayIndex
+    private let today: DayIndex
 
     init(
         event: Event,
@@ -40,12 +48,8 @@ struct WeekCellViewModel {
         self.event = event
         self.tapHandler = tapHandler
 
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-
         self.items = event.happenings(forDayIndex: day).map { happening in
-            formatter.string(from: happening.dateCreated)
+            Self.formatter.string(from: happening.dateCreated)
         }
 
         let dayCreated = DayIndex(event.dateCreated)

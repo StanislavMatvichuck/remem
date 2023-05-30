@@ -35,7 +35,7 @@ final class FooterCell: UITableViewCell, EventsListCell {
 
             button.setAttributedTitle(
                 NSAttributedString(
-                    string: viewModel.title,
+                    string: FooterCellViewModel.title,
                     attributes: attributes
                 ),
                 for: .normal

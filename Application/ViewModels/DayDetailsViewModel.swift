@@ -9,8 +9,8 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
-    let create = String(localizationId: "button.addHappening")
-    let delete = String(localizationId: "button.delete")
+    static let create = String(localizationId: "button.addHappening")
+    static let delete = String(localizationId: "button.delete")
 
     private let day: DayIndex
     private let commander: EventsCommanding

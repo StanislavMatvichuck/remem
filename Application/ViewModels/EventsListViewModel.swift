@@ -18,7 +18,7 @@ extension EventsListItemViewModeling {
 }
 
 struct EventsListViewModel {
-    let title = String(localizationId: "eventsList.title")
+    static let title = String(localizationId: "eventsList.title")
 
     private let today: DayIndex
     private let commander: EventsCommanding

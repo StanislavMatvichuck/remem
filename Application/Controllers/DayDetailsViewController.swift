@@ -81,7 +81,7 @@ extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
         UISwipeActionsConfiguration(actions: [
             UIContextualAction(
                 style: .destructive,
-                title: viewModel.delete
+                title: DayDetailsViewModel.delete
             ) { _, _, completion in
                 self.viewModel.items[index.row].remove()
                 completion(true)
