@@ -18,11 +18,18 @@ final class EventsListContainer:
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
-    var ordering: EventsQuerySorter = .alphabetical {
-        didSet { if oldValue != ordering { updater.update() }}
+    let orderingRepository = UserDefaultsEventsQuerySorterRepository()
+    var ordering: EventsQuerySorter {
+        didSet { if oldValue != ordering {
+            orderingRepository.set(current: ordering)
+            updater.update()
+        }}
     }
 
-    init(parent: ApplicationContainer) { self.parent = parent }
+    init(parent: ApplicationContainer) {
+        self.parent = parent
+        self.ordering = orderingRepository.getCurrent()
+    }
 
     func make() -> UIViewController {
         let view = EventsListView()
@@ -55,7 +62,10 @@ final class EventsListContainer:
             }
         }
 
-        let orderingVm = OrderingCellViewModel(items: orderingItems)
+        let orderingVm = OrderingCellViewModel(
+            items: orderingItems,
+            selectedItemIndex: orderingItems.firstIndex { $0.hasSame(sorter: self.ordering) } ?? 0
+        )
 
         let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
 

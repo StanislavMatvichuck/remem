@@ -51,7 +51,6 @@ extension OrderingCell: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let itemOffset = OrderingCellViewItem.width + .buttonMargin
         let selectedIndex = Int(scrollView.contentOffset.x / itemOffset)
-        print(selectedIndex)
         viewModel?.items[selectedIndex].select()
     }
 }

@@ -11,6 +11,7 @@ struct OrderingCellViewModel: EventsListItemViewModeling {
     var identifier: String { "Ordering" }
 
     let items: [OrderingCellItemViewModel]
+    let selectedItemIndex: Int
 }
 
 extension OrderingCellViewModel: Equatable {

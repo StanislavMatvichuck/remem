@@ -28,4 +28,8 @@ struct OrderingCellItemViewModel: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.title == rhs.title && lhs.reversed == rhs.reversed
     }
+
+    func hasSame(sorter: EventsQuerySorter) -> Bool {
+        return self.sorter == sorter
+    }
 }

@@ -29,6 +29,8 @@ final class OrderingCellView: UIView {
         return stack
     }()
 
+    private var scrollToIndex: Int?
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +47,8 @@ final class OrderingCellView: UIView {
         for item in viewModel.items {
             stack.addArrangedSubview(OrderingCellViewItem(item))
         }
+
+        scrollToIndex = viewModel.selectedItemIndex
     }
 
     // MARK: - Private
@@ -55,5 +59,14 @@ final class OrderingCellView: UIView {
 
     private func clearContent() {
         for view in stack.arrangedSubviews { view.removeFromSuperview() }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        scroll.layoutIfNeeded()
+        if let scrollToIndex {
+            let offset = CGPoint(x: CGFloat(scrollToIndex) * OrderingCellViewItem.width + .buttonMargin, y: 0)
+            scroll.setContentOffset(offset, animated: false)
+        }
     }
 }

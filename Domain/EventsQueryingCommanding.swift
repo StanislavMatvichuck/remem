@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum EventsQuerySorter: CaseIterable {
+public enum EventsQuerySorter: String, CaseIterable {
     case alphabetical
     case happeningsCountTotal
 }
