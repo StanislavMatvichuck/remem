@@ -10,6 +10,6 @@ import Foundation
 /// Used by `Application` and `Widgets` targets
 struct WidgetEventCellViewModel: Codable, Identifiable {
     var id = UUID()
-    let name: String
-    let amount: String
+    let title: String
+    let value: String
 }

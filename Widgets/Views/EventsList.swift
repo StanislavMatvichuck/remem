@@ -12,7 +12,7 @@ struct EventsList: View {
 
     init(items: [WidgetEventCellViewModel]) {
         if items.isEmpty {
-            self.items = [WidgetEventCellViewModel(name: String(localizationId: "widget.emptyRow"), amount: "!"), nil]
+            self.items = [WidgetEventCellViewModel(title: String(localizationId: "widget.emptyRow"), value: "!"), nil]
             return
         }
 

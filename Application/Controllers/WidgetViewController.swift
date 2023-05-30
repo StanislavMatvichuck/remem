@@ -34,7 +34,7 @@ final class WidgetViewController {
 
 extension WidgetEventCellViewModel {
     init(item: EventCellViewModel) {
-        name = item.title
-        amount = item.value
+        title = item.title
+        value = item.value
     }
 }
