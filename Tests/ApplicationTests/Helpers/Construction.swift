@@ -81,7 +81,8 @@ extension ApplicationContainer {
             .makeContainer(event: event, today: day)
         return detailsContainer.makePdfMakingViewController(
             detailsContainer.makeWeekViewController(),
-            detailsContainer.makeSummaryViewController()
+            detailsContainer.makeSummaryViewController(),
+            detailsContainer.makeClockViewController()
         )
     }
 }

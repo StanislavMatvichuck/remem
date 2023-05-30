@@ -33,11 +33,16 @@ extension TestingViewController where Controller == PdfViewController {
         let summary = container.makeSummaryViewController()
         layout(summary)
 
+        let clock = container.makeClockViewController()
+        layout(clock)
+
         let url = LocalFile.testingPdfReport
 
         let pdfMakingContainer = PdfMakingContainer(
+            event: event,
             week: week,
             summary: summary,
+            clock: clock,
             coordinator: container.parent.parent.coordinator,
             urlProviding: url
         )
@@ -58,7 +63,7 @@ extension TestingViewController where Controller == PdfViewController {
             origin: .zero,
             size: CGSize(
                 width: 7 * .layoutSquare,
-                height: 5 * .layoutSquare
+                height: 7 * .layoutSquare
             )
         )
         vc.view.layoutIfNeeded()
