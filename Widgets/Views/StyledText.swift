@@ -31,6 +31,6 @@ struct TimeSinceText: View {
     var body: some View {
         Text(content)
             .font(Font(uiFont: .fontSmall))
-            .foregroundColor(Color(UIColor.bg_secondary))
+            .foregroundColor(Color(UIColor.secondary))
     }
 }

@@ -37,5 +37,7 @@ extension WidgetEventCellViewModel {
         title = item.title
         value = item.value
         timeSince = item.timeSince
+        progress = item.progress
+        goalState = GoalState(rawValue: item.progressState.rawValue)!
     }
 }

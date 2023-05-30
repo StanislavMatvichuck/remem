@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct EventWeeklyGoalViewModel {
-    enum State { case notAchieved, achieved }
+    enum State: Int { case notAchieved, achieved }
 
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
