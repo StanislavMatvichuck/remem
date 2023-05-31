@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WeeklyGoal {
+public struct WeeklyGoal: Equatable {
     public let dateCreated: Date
     public let amount: Int
 }

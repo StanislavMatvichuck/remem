@@ -14,12 +14,8 @@ enum TestingLaunchParameter: String {
 }
 
 func scanLaunchArgumentsAndPrepareRepositoryIfNeeded(_ repository: CoreDataEventsRepository) {
-    let params = parseTestingLaunchParameters()
-
-    if params.contains(.empty) {
-        prepare(repository, for: .empty)
-    } else if params.contains(.singleEvent) {
-        prepare(repository, for: .singleEvent)
+    if let testingParameter = parseTestingLaunchParameters().first {
+        prepare(repository, for: testingParameter)
     }
 }
 

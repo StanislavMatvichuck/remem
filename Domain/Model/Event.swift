@@ -11,7 +11,7 @@ public enum EventManipulationError: Error {
     case invalidHappeningDeletion
 }
 
-public class Event: CustomDebugStringConvertible {
+public class Event {
     public let id: String
     public var name: String
     public var happenings: [Happening]
@@ -55,14 +55,6 @@ public class Event: CustomDebugStringConvertible {
         self.dateCreated = dateCreated
         self.dateVisited = dateVisited
     }
-
-    public var debugDescription: String {
-        """
-        name: \(name)
-        dateCreated: \(dateCreated.debugDescription)
-        happeningsCount: \(happenings.count)
-        """
-    }
 }
 
 // MARK: - Public
@@ -99,7 +91,7 @@ public extension Event {
     func weeklyGoalAmount(at date: Date) -> Int {
         let startOfWeek = WeekIndex(date).date
 
-        if let goalForWeek = weeklyGoals.first(where: { $0.dateCreated == startOfWeek }) {
+        if let goalForWeek = weeklyGoals.last(where: { $0.dateCreated <= startOfWeek }) {
             return goalForWeek.amount
         } else if let lastGoal = weeklyGoals.last, lastGoal.dateCreated < startOfWeek {
             return lastGoal.amount
@@ -129,6 +121,11 @@ public extension Event {
 // MARK: - Equatable
 extension Event: Equatable {
     public static func == (lhs: Event, rhs: Event) -> Bool {
-        return lhs.id == rhs.id
+        lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.happenings == rhs.happenings &&
+            lhs.weeklyGoals == rhs.weeklyGoals &&
+            lhs.dateCreated == rhs.dateCreated &&
+            lhs.dateVisited == rhs.dateVisited
     }
 }

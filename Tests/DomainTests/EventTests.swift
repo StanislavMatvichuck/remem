@@ -208,20 +208,46 @@ final class EventTests: XCTestCase, TimelineTesting {
         let dateCreated = dateTime
         let event = Event(name: "", dateCreated: dateCreated)
 
-        let goalsDescriptors: [(Date, Int)] = [
-            (anHourLater, 1),
-            (afterAWeek, 2),
-            (afterTwoWeeks, 3),
-            (afterTwoWeeks.addingTimeInterval(60 * 60 * 2), 0),
-            (afterTwoWeeks.addingTimeInterval(60 * 60 * 3), 0),
-            (afterTwoWeeks.addingTimeInterval(60 * 60 * 4), 0),
-            (afterTwoWeeks.addingTimeInterval(60 * 60 * 5), 4),
-        ]
-
-        goalsDescriptors.forEach { event.setWeeklyGoal(amount: $0.1, for: $0.0) }
+        [(anHourLater, 1),
+         (afterAWeek, 2),
+         (afterTwoWeeks, 3),
+         (afterTwoWeeks.addingTimeInterval(60 * 60 * 2), 0),
+         (afterTwoWeeks.addingTimeInterval(60 * 60 * 3), 0),
+         (afterTwoWeeks.addingTimeInterval(60 * 60 * 4), 0),
+         (afterTwoWeeks.addingTimeInterval(60 * 60 * 5), 4)]
+            .forEach { event.setWeeklyGoal(amount: $0.1, for: $0.0) }
 
         XCTAssertEqual(event.weeklyGoalAmount(at: anHourLater), 1)
         XCTAssertEqual(event.weeklyGoalAmount(at: afterAWeek), 2)
         XCTAssertEqual(event.weeklyGoalAmount(at: afterTwoWeeks), 4)
+    }
+
+    func test_goalUpdateAfterTwoWeeks_secondWeekShowsPreviousGoal_notZero() {
+        let twoWeeksAgo = DayIndex.referenceValue
+        let oneWeekAgo = twoWeeksAgo.adding(days: 7)
+        let today = twoWeeksAgo.adding(days: 14)
+        let event = Event(name: "", dateCreated: twoWeeksAgo.date)
+        event.setWeeklyGoal(amount: 1, for: twoWeeksAgo.date)
+        event.setWeeklyGoal(amount: 2, for: today.date)
+
+        XCTAssertEqual(event.weeklyGoalAmount(at: twoWeeksAgo.date), 1)
+        XCTAssertEqual(event.weeklyGoalAmount(at: oneWeekAgo.date), 1)
+        XCTAssertEqual(event.weeklyGoalAmount(at: today.date), 2)
+    }
+
+    func test_goalUpdateAfterThreeWeeks_secondWeekShowsPreviousGoal_notZero() {
+        let threeWeeksAgo = DayIndex.referenceValue
+        let twoWeeksAgo = threeWeeksAgo.adding(days: 7)
+        let oneWeekAgo = threeWeeksAgo.adding(days: 14)
+        let today = threeWeeksAgo.adding(days: 21)
+
+        let event = Event(name: "", dateCreated: threeWeeksAgo.date)
+        event.setWeeklyGoal(amount: 1, for: threeWeeksAgo.date)
+        event.setWeeklyGoal(amount: 2, for: today.date)
+
+        XCTAssertEqual(event.weeklyGoalAmount(at: threeWeeksAgo.date), 1)
+        XCTAssertEqual(event.weeklyGoalAmount(at: oneWeekAgo.date), 1)
+        XCTAssertEqual(event.weeklyGoalAmount(at: twoWeeksAgo.date), 1)
+        XCTAssertEqual(event.weeklyGoalAmount(at: today.date), 2)
     }
 }

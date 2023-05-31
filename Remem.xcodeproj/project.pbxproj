@@ -97,6 +97,7 @@
 		085896B22A2652BA00390C76 /* PdfTitlePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */; };
 		085896B52A26540700390C76 /* PdfTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PdfTitlePageView.swift */; };
 		085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */; };
+		085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */; };
 		085A2C2E29F1426D005C6E5E /* WeekToDayDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C2D29F1426D005C6E5E /* WeekToDayDetailsPresenter.swift */; };
 		085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
@@ -434,6 +435,7 @@
 		085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfTitlePageViewModel.swift; sourceTree = "<group>"; };
 		085896B42A26540700390C76 /* PdfTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfTitlePageView.swift; sourceTree = "<group>"; };
 		085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQuerySorterRepository.swift; sourceTree = "<group>"; };
+		085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapperTests.swift; sourceTree = "<group>"; };
 		085A2C2D29F1426D005C6E5E /* WeekToDayDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekToDayDetailsPresenter.swift; sourceTree = "<group>"; };
 		085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModelTests.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 			children = (
 				08D8F0B729AB786500C34041 /* CoordinatorTests.swift */,
 				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
+				085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */,
 				0849699529B4907F00CDBBC8 /* DependencyContainersTests.swift */,
 				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
@@ -1650,6 +1653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,

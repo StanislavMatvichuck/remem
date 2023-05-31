@@ -47,8 +47,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         sut.save(savedEvent)
 
         let acquiredEvent = sut.event(byId: savedEvent.id)
-
-        XCTAssertEqual(acquiredEvent.happenings.count, 1)
+        XCTAssertEqual(acquiredEvent, savedEvent)
     }
 
     func test_save_eventWith_N_Happenings() {
@@ -61,8 +60,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         sut.save(savedEvent)
 
         let acquiredEvent = sut.event(byId: savedEvent.id)
-
-        XCTAssertEqual(acquiredEvent.happenings.count, 10)
+        XCTAssertEqual(acquiredEvent, savedEvent)
     }
 
     func test_save_eventWithGoal_savesGoal() {
@@ -74,8 +72,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         sut.save(savedEvent)
 
         let acquiredEvent = sut.event(byId: savedEvent.id)
-
-        XCTAssertEqual(acquiredEvent.weeklyGoalAmount(at: eventDateCreated), goalAmount)
+        XCTAssertEqual(acquiredEvent, savedEvent)
     }
 
     func test_save_renamedEvent() {
@@ -86,8 +83,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         sut.save(newEvent)
 
         let acquiredEvent = sut.event(byId: newEvent.id)
-
-        XCTAssertEqual(acquiredEvent.name, newEvent.name)
+        XCTAssertEqual(acquiredEvent, newEvent)
     }
 
     func test_save_allPossibleModifications() throws {
