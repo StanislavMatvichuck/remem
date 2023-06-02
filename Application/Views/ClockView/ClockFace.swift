@@ -8,6 +8,10 @@
 import UIKit
 
 final class ClockFace: UIView {
+    static let sectionMaximumLength = CGFloat.layoutSquare * 1.5
+    static let lineWidth: CGFloat = 7
+    static var lineCapRadius: CGFloat { lineWidth / 2 }
+
     var viewModel: ClockViewModel {
         didSet {
             CATransaction.begin()
@@ -68,30 +72,28 @@ final class ClockFace: UIView {
         layer.path = makePath(for: item)
         layer.strokeEnd = strokeEnd(for: item)
         layer.lineCap = .round
-        layer.lineWidth = 3.0
+        layer.lineWidth = Self.lineWidth
         return layer
     }
 
     private func makePath(for item: ClockCellViewModel) -> CGPath {
-        let radius = bounds.width / 2
-        let sectionMaximumLength = bounds.width * ClockSectionMultiplier
+        let radius = CGFloat.layoutSquare * 3.5
+
+        let lineStart = CGPoint(x: 0, y: radius - Self.sectionMaximumLength)
+        let lineEnd = CGPoint(x: 0, y: radius - Self.lineCapRadius)
+
         let path = UIBezierPath()
-        path.move(to: .zero)
-        path.move(to: CGPoint(x: 0, y: radius - sectionMaximumLength))
-        path.addLine(to: CGPoint(x: 0, y: radius))
-        path.move(to: CGPoint(x: 0, y: radius))
-        path.move(to: CGPoint(x: 0, y: -radius))
-        path.rotate(degree: angle(for: item))
-        path.apply(CGAffineTransform(
-            translationX: radius,
-            y: radius
-        ))
+        path.move(to: lineStart)
+        path.addLine(to: lineEnd)
+
+        path.apply(.identity.rotated(by: angle(for: item)))
+        path.apply(CGAffineTransform(translationX: radius, y: radius))
 
         return path.cgPath
     }
 
     private func angle(for item: ClockCellViewModel) -> CGFloat {
-        (360.0 / CGFloat(item.clockSize)) * CGFloat(item.index)
+        2 * .pi / CGFloat(item.clockSize) * CGFloat(item.index)
     }
 
     private func strokeEnd(for item: ClockCellViewModel) -> CGFloat {
@@ -100,19 +102,5 @@ final class ClockFace: UIView {
 
     private func color(for item: ClockCellViewModel) -> CGColor {
         item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text.cgColor
-    }
-}
-
-extension UIBezierPath {
-    func rotate(degree: CGFloat) {
-        let bounds: CGRect = cgPath.boundingBox
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-
-        let radians = degree / 180.0 * .pi
-        var transform: CGAffineTransform = .identity
-        transform = transform.translatedBy(x: center.x, y: center.y)
-        transform = transform.rotated(by: radians)
-        transform = transform.translatedBy(x: -center.x, y: -center.y)
-        apply(transform)
     }
 }

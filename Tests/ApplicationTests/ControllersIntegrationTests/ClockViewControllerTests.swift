@@ -25,8 +25,8 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
         super.tearDown()
     }
 
-    func test_empty_has144sections() {
-        XCTAssertEqual(sections.count, 144)
+    func test_empty_has24sections() {
+        XCTAssertEqual(sections.count, 24)
     }
 
     func test_empty_allSectionsAreEmpty() {

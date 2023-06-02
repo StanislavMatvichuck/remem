@@ -7,25 +7,23 @@
 
 import UIKit
 
-let ClockSectionMultiplier: CGFloat = 0.15
-let ClockDigitsOffset: CGFloat = 8.0
+final class ClockView: UIView {
+    private static let digitsRadius = CGFloat.layoutSquare * 1.65
+    private static let digitsAngle = 2 * CGFloat.pi / 24
+    private static let digitsAngleOffset = CGFloat.pi / 2
 
-class ClockView: UIView {
-    // MARK: - Properties
     let clockFace: ClockFace
 
-    let topDigits = makeLabel("12")
-    let rightDigits = makeLabel("18")
-    let bottomDigits = makeLabel("00")
-    let leftDigits = makeLabel("06")
-    private var updatedConstraints: [NSLayoutConstraint] = []
+    let clockSymbols = [
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+        "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
+    ]
 
     // MARK: - Init
     init(viewModel: ClockViewModel) {
         self.clockFace = ClockFace(viewModel: viewModel)
         super.init(frame: .zero)
         backgroundColor = .clear
-//        installDotsPattern(7)
         setupLayout()
     }
 
@@ -34,7 +32,7 @@ class ClockView: UIView {
     private func setupLayout() {
         addSubview(clockFace)
 
-        addLabels()
+        configureDigits()
         addIcons()
 
         NSLayoutConstraint.activate([
@@ -45,33 +43,28 @@ class ClockView: UIView {
         ])
     }
 
-    private func addLabels() {
-        addSubview(topDigits)
-        addSubview(rightDigits)
-        addSubview(bottomDigits)
-        addSubview(leftDigits)
+    private func configureDigits() {
+        let digitsLabels = clockSymbols.enumerated().map {
+            $0 % 3 == 0 ?
+                Self.makeCapitalizedLabel($1) :
+                Self.makeLabel($1)
+        }
 
-        let topConstraint = topDigits.topAnchor.constraint(equalTo: clockFace.topAnchor)
-        let rightConstraint = rightDigits.trailingAnchor.constraint(equalTo: clockFace.trailingAnchor)
-        let bottomConstraint = bottomDigits.bottomAnchor.constraint(equalTo: clockFace.bottomAnchor)
-        let leftConstraint = leftDigits.leadingAnchor.constraint(equalTo: clockFace.leadingAnchor)
+        for (index, label) in digitsLabels.enumerated() {
+            addSubview(label)
+            label.centerXAnchor.constraint(equalTo: centerXAnchor, constant: xForDigit(index)).isActive = true
+            label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: yForDigit(index)).isActive = true
+        }
+    }
 
-        NSLayoutConstraint.activate([
-            topDigits.centerXAnchor.constraint(equalTo: clockFace.centerXAnchor),
-            rightDigits.centerYAnchor.constraint(equalTo: clockFace.centerYAnchor),
-            bottomDigits.centerXAnchor.constraint(equalTo: clockFace.centerXAnchor),
-            leftDigits.centerYAnchor.constraint(equalTo: clockFace.centerYAnchor),
+    private func xForDigit(_ index: Int) -> CGFloat {
+        let angle = Self.digitsAngle * CGFloat(index) + Self.digitsAngleOffset
+        return Self.digitsRadius * cos(angle)
+    }
 
-            topConstraint,
-            rightConstraint,
-            bottomConstraint,
-            leftConstraint,
-        ])
-
-        updatedConstraints.append(topConstraint)
-        updatedConstraints.append(rightConstraint)
-        updatedConstraints.append(bottomConstraint)
-        updatedConstraints.append(leftConstraint)
+    private func yForDigit(_ index: Int) -> CGFloat {
+        let angle = Self.digitsAngle * CGFloat(index) + Self.digitsAngleOffset
+        return Self.digitsRadius * sin(angle)
     }
 
     private func addIcons() {
@@ -81,47 +74,44 @@ class ClockView: UIView {
         addSubview(imageViewDay)
         addSubview(imageViewNight)
 
+        let radius = Self.digitsRadius / 2
+        let sunAngle = 3 * Self.digitsAngleOffset
+        let moonAngle = Self.digitsAngleOffset
+
         NSLayoutConstraint.activate([
             imageViewDay.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageViewNight.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            imageViewDay.topAnchor.constraint(equalTo: topDigits.bottomAnchor),
-            imageViewNight.bottomAnchor.constraint(equalTo: bottomDigits.topAnchor),
+            imageViewDay.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(sunAngle)),
+            imageViewNight.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(moonAngle)),
         ])
     }
 
     private static func makeLabel(_ text: String) -> UILabel {
         let label = UILabel(al: true)
         label.text = text
-        label.font = .fontSmallBold
+        label.font = .fontClock
+        label.textColor = UIColor.secondary
+        return label
+    }
+
+    private static func makeCapitalizedLabel(_ text: String) -> UILabel {
+        let label = UILabel(al: true)
+        label.text = text
+        label.font = .fontClockCapitalised
         label.textColor = UIColor.secondary
         return label
     }
 
     private func makeIcon(name: String) -> UIImageView {
         let image = UIImage(systemName: name)?
-            .withTintColor(UIColor.secondary)
+            .withTintColor(UIColor.bg_secondary)
             .withRenderingMode(.alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
 
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         return imageView
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        updatedConstraints.forEach {
-            guard $0.constant == 0 else { return }
-
-            $0.constant = bounds.width * ClockSectionMultiplier + ClockDigitsOffset
-
-            if $0.firstAnchor.isEqual(rightDigits.trailingAnchor) ||
-                $0.firstAnchor.isEqual(bottomDigits.bottomAnchor)
-            {
-                $0.constant *= -1
-            }
-        }
     }
 }

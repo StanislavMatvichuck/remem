@@ -28,6 +28,6 @@ final class ClockContainer:
     }
 
     func makeClockViewModel() -> ClockViewModel {
-        ClockViewModel(event: event, size: 144)
+        ClockViewModel(event: event, size: 24)
     }
 }
