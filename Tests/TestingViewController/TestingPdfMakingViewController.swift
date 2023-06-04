@@ -23,7 +23,7 @@ extension TestingViewController where Controller == PdfViewController {
     ) {
         event = Event(name: "Event", dateCreated: dayCreated.date)
 
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: today)
 
@@ -40,6 +40,7 @@ extension TestingViewController where Controller == PdfViewController {
 
         let pdfMakingContainer = PdfMakingContainer(
             event: event,
+            currentMoment: today.date,
             week: week,
             summary: summary,
             clock: clock,

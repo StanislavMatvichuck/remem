@@ -54,6 +54,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
         event: Event,
         hintEnabled: Bool,
         today: DayIndex,
+        currentMoment: Date,
         tapHandler: @escaping TapHandler,
         swipeHandler: @escaping SwipeHandler,
         renameActionHandler: @escaping RenameActionHandler,
@@ -68,7 +69,7 @@ struct EventCellViewModel: EventsListItemViewModeling {
         self.hintEnabled = hintEnabled
         self.timeSince = {
             if let happening = event.happenings.last {
-                return Self.timeSinceDate(date: happening.dateCreated, now: .now)
+                return Self.timeSinceDate(date: happening.dateCreated, now: currentMoment)
             } else {
                 return String(localizationId: "eventsList.timeSince")
             }

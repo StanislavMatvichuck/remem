@@ -15,7 +15,7 @@ final class WeekContainer:
     NewEventWeeklyGoalViewModelFactoring
 {
     let parent: EventDetailsContainer
-
+    var currentMoment: Date { parent.parent.parent.currentMoment }
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
     var coordinator: Coordinator { parent.parent.parent.coordinator }
@@ -79,8 +79,8 @@ final class WeekContainer:
         DayDetailsContainer(
             parent: self,
             day: day,
-            hour: Calendar.current.component(.hour, from: .now),
-            minute: Calendar.current.component(.minute, from: .now)
+            hour: Calendar.current.component(.hour, from: currentMoment),
+            minute: Calendar.current.component(.minute, from: currentMoment)
         )
     }
 }

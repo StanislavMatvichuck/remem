@@ -11,6 +11,7 @@ import UIKit
 final class PdfMakingContainer: ControllerFactoring {
     let urlProviding: URLProviding
     let event: Event
+    let currentMoment: Date
     let week: WeekViewController
     let summary: SummaryViewController
     let clock: ClockViewController
@@ -18,6 +19,7 @@ final class PdfMakingContainer: ControllerFactoring {
 
     init(
         event: Event,
+        currentMoment: Date,
         week: WeekViewController,
         summary: SummaryViewController,
         clock: ClockViewController,
@@ -25,6 +27,7 @@ final class PdfMakingContainer: ControllerFactoring {
         urlProviding: URLProviding = LocalFile.pdfReport
     ) {
         self.event = event
+        self.currentMoment = currentMoment
         self.week = week
         self.summary = summary
         self.clock = clock
@@ -53,6 +56,6 @@ final class PdfMakingContainer: ControllerFactoring {
     }
 
     func makePdfTitlePageViewModel() -> PdfTitlePageViewModel {
-        PdfTitlePageViewModel(event: event, dateCreated: .now)
+        PdfTitlePageViewModel(event: event, dateCreated: currentMoment)
     }
 }

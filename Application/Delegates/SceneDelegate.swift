@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
 
-        let container = ApplicationContainer()
+        let launchMode = ApplicationContainer.parseLaunchMode()
+        let container = ApplicationContainer(mode: launchMode)
+
         window.rootViewController = container.makeRootViewController()
         window.makeKeyAndVisible()
 

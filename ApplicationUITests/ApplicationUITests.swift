@@ -46,7 +46,9 @@ final class ApplicationUITests: XCTestCase {
 
     let pauseSeconds: UInt32 = 1
 
-    func test_recordPresentationSequence_addingFreshEvents() {
+    // MARK: - AppPreview02
+
+    func test_recordAppPreview02_addingEvents_swipingEvents() {
         app.launchArguments = ["empty"]
         app.launch()
 
@@ -68,10 +70,33 @@ final class ApplicationUITests: XCTestCase {
         swipeCell(at: 1)
         swipeCell(at: 0)
         swipeCell(at: 1)
-        
+
         cell(at: 1).tap()
         sleep(2)
     }
+
+    func test_recordAppPreview02_viewAndExport() {
+        app.launchArguments = ["viewAndExport"]
+        app.launch()
+        
+        cell(at: 1).tap()
+        sleep(2)
+        
+        weekCell(at: 1).tap()
+        
+        sleep(2)
+    }
+
+    func test_recordAppPreview02_addWeeklyGoal() {}
+
+    // MARK: - AppPreview03
+
+    func test_recordAppPreview03_widget() {}
+    func test_recordAppPreview03_eventsListSorting() {}
+    func test_recordAppPreview03_darkMode() {}
+    func test_recordAppPreview03_localization() {}
+
+    // MARK: - Private
 
     private func swipeCell(at index: Int) {
         let cell = cell(at: index)
@@ -84,6 +109,10 @@ final class ApplicationUITests: XCTestCase {
 
     private func cell(at index: Int) -> XCUIElement {
         app.tables.firstMatch.cells.element(boundBy: index)
+    }
+    
+    private func weekCell(at index: Int) -> XCUIElement {
+        app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
 
     private func submitFirstEvent() {
@@ -123,7 +152,7 @@ final class ApplicationUITests: XCTestCase {
     }
 
     private func submitThirdEvent() {
-        field.typeText("Any event you want to track")
+        field.typeText("Any event you want to count")
         sleep(pauseSeconds)
         app.keyboards.buttons["Done"].tap()
     }

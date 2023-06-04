@@ -97,7 +97,7 @@ final class WeekViewModelTests: XCTestCase {
         created: DayIndex,
         event: Event
     ) -> WeekViewModel {
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
         let details = container.makeContainer().makeContainer(event: event, today: today)
         let week = details.makeWeekViewController()
         return week.viewModel

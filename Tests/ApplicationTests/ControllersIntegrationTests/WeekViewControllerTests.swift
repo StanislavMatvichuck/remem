@@ -70,7 +70,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let created = DayIndex.referenceValue.adding(days: randomDaysAmount)
         let today = created.adding(days: randomDaysAmount)
 
-        sut = ApplicationContainer(testingInMemoryMode: true)
+        sut = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(
                 event: Event(
@@ -94,7 +94,7 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
 
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = WeekContainer(parent: container).make() as? WeekViewController

@@ -26,6 +26,10 @@ final class EventsListContainer:
         }}
     }
 
+    var uiTestingDisabled: Bool {
+        parent.mode != .empty && parent.mode != .viewAndExport
+    }
+
     init(parent: ApplicationContainer) {
         self.parent = parent
         self.ordering = orderingRepository.getCurrent()
@@ -46,7 +50,7 @@ final class EventsListContainer:
     }
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
-        let today = DayIndex(.now)
+        let today = DayIndex(parent.currentMoment)
         let events = parent.provider.get(using: ordering)
 
         let footerVm = makeFooterItemViewModel(
@@ -67,22 +71,22 @@ final class EventsListContainer:
             selectedItemIndex: orderingItems.firstIndex { $0.hasSame(sorter: self.ordering) } ?? 0
         )
 
-        let gestureHintEnabled = hintVm.title == HintState.placeFirstMark.text // make this for first row only
-
         let eventsViewModels = events.enumerated().map { index, event in
-            makeEventItemViewModel(
+            let userShouldSeeGestureHint = hintVm.title == HintState.placeFirstMark.text
+            let isFirstRow = index == 0
+            let hintEnabled = userShouldSeeGestureHint && isFirstRow && uiTestingDisabled
+
+            return makeEventItemViewModel(
                 event: event,
                 today: today,
-                hintEnabled: gestureHintEnabled && index == 0,
+                hintEnabled: hintEnabled,
                 renameHandler: handler
             )
         }
 
-        // ui testing recording may impact this logic
         var items = [any EventsListItemViewModeling]()
 
-        // TODO: think about how to improve testing code separation
-        if parseTestingLaunchParameters().isEmpty {
+        if uiTestingDisabled {
             items.append(hintVm)
             if events.count >= 2 { items.append(orderingVm) }
         }
@@ -122,6 +126,7 @@ final class EventsListContainer:
             event: event,
             hintEnabled: hintEnabled,
             today: today,
+            currentMoment: parent.currentMoment,
             tapHandler: {
                 self.parent.coordinator.show(.eventDetails(factory: self.makeContainer(
                     event: event,

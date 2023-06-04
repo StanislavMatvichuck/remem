@@ -12,7 +12,7 @@ import XCTest
 extension TestingViewController where Controller == SummaryViewController {
     func make() {
         event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: DayIndex.referenceValue)
 

@@ -10,25 +10,34 @@ import Domain
 import UIKit
 
 final class ApplicationContainer {
+    enum LaunchMode: String {
+        case empty, singleEvent, viewAndExport, unitTest, uikit
+    }
+
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinator
     let updater: ViewControllersUpdater
     let watcher: Watching
+    var currentMoment: Date {
+        if mode == .viewAndExport {
+            return DayIndex.referenceValue.adding(days: 7).date
+        }
+        return .now
+    }
 
-    init(testingInMemoryMode: Bool = false) {
+    let mode: LaunchMode
+
+    init(mode: LaunchMode) {
+        self.mode = mode
+
         let coordinator = Coordinator()
-        let repository = CoreDataEventsRepository(
-            container: CoreDataStack.createContainer(inMemory: testingInMemoryMode),
-            mapper: EventEntityMapper()
-        )
+        let repository = Self.makeRepository(mode)
 
         self.coordinator = coordinator
         self.provider = repository
         let updatingCommander = UpdatingCommander(commander: repository)
         self.commander = updatingCommander
-
-        scanLaunchArgumentsAndPrepareRepositoryIfNeeded(repository)
 
         self.updater = ViewControllersUpdater()
         let watcher = DayWatcher()
@@ -37,6 +46,42 @@ final class ApplicationContainer {
         let weakUpdater = WeakRef(updater)
         updatingCommander.delegate = weakUpdater
         watcher.delegate = weakUpdater
+    }
+
+    private static func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {
+        let repository = CoreDataEventsRepository(
+            container: CoreDataStack.createContainer(inMemory: mode != .uikit),
+            mapper: EventEntityMapper()
+        )
+
+        let dateCreated = DayIndex.referenceValue.date
+        switch mode {
+        case .singleEvent:
+            let event = Event(name: "Single event", dateCreated: dateCreated)
+            repository.save(event)
+        case .viewAndExport:
+            let firstEvent = Event(name: "Any event you want to count", dateCreated: dateCreated)
+            let secondEvent = Event(name: "Coffee ☕️", dateCreated: dateCreated)
+            let thirdEvent = Event(name: "Fitness 👟", dateCreated: dateCreated)
+            repository.save(firstEvent)
+            repository.save(secondEvent)
+            repository.save(thirdEvent)
+        default: break
+        }
+
+        return repository
+    }
+
+    static func parseLaunchMode() -> LaunchMode {
+        let launchArguments = ProcessInfo.processInfo.arguments
+
+        for argument in launchArguments {
+            if let parameter = LaunchMode(rawValue: argument) {
+                return parameter
+            }
+        }
+
+        return .uikit
     }
 
     func makeRootViewController() -> UIViewController {

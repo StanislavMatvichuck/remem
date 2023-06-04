@@ -126,7 +126,7 @@ final class WeekSummaryViewModelTests: XCTestCase {
     }
 
     private func makeForEventAnd(today: DayIndex) -> WeekSummaryViewModel {
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
         let details = container.makeContainer().makeContainer(event: event, today: today)
         return details.makeWeekViewController().viewModel.pages.first!!
     }

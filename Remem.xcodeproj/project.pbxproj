@@ -123,7 +123,6 @@
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		087366002930DD29000F28DE /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087365FF2930DD29000F28DE /* WeekViewModelTests.swift */; };
 		087366022930E000000F28DE /* WeekItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087366012930E000000F28DE /* WeekItemViewModelTests.swift */; };
-		08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
@@ -462,7 +461,6 @@
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		087365FF2930DD29000F28DE /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
 		087366012930E000000F28DE /* WeekItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekItemViewModelTests.swift; sourceTree = "<group>"; };
-		08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTesting.swift; sourceTree = "<group>"; };
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
@@ -1190,7 +1188,6 @@
 			children = (
 				085196392A0C1CCC00FD8FD8 /* PDF */,
 				0828877929BCA15E00FF9839 /* Updating */,
-				08738E9529A252FE00458FF4 /* CoreDataStackTesting.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
@@ -1719,7 +1716,6 @@
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
-				08738E9729A2CF5600458FF4 /* CoreDataStackTesting.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,

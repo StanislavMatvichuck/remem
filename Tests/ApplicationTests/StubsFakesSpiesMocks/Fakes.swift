@@ -28,6 +28,7 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
                     event: event,
                     hintEnabled: false,
                     today: today,
+                    currentMoment: DayIndex.referenceValue.date,
                     tapHandler: {},
                     swipeHandler: {},
                     renameActionHandler: { _ in },

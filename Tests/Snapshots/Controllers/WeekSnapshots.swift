@@ -24,7 +24,7 @@ final class WeekSnapshots:
     
     func make() {
         event = Event(name: "Event", dateCreated: dayCreated.date)
-        let container = ApplicationContainer(testingInMemoryMode: true)
+        let container = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: today)
         sut = WeekContainer(parent: container).make() as! WeekViewController

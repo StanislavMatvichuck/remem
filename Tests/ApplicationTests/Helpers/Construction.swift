@@ -11,7 +11,7 @@ import Foundation
 
 extension ApplicationContainer {
     static func make() -> EventsListViewController {
-        ApplicationContainer(testingInMemoryMode: true)
+        ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .make() as! EventsListViewController
     }
@@ -20,7 +20,7 @@ extension ApplicationContainer {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
 
-        return ApplicationContainer(testingInMemoryMode: true)
+        return ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
             .make() as! EventDetailsViewController
@@ -29,7 +29,7 @@ extension ApplicationContainer {
     static func make() -> WeekViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+        let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
 
@@ -39,7 +39,7 @@ extension ApplicationContainer {
     static func make() -> ClockViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+        let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
 
@@ -49,7 +49,7 @@ extension ApplicationContainer {
     static func make() -> SummaryViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+        let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
 
@@ -59,7 +59,7 @@ extension ApplicationContainer {
     static func make() -> DayDetailsViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+        let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
 
@@ -76,7 +76,7 @@ extension ApplicationContainer {
     static func make() -> PdfMakingViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(testingInMemoryMode: true)
+        let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
         return detailsContainer.makePdfMakingViewController(
