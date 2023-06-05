@@ -11,9 +11,6 @@ import UIKit
 
 final class ApplicationContainer {
     typealias Repository = EventsQuerying & EventsCommanding
-    enum LaunchMode: String {
-        case empty, singleEvent, viewAndExport, unitTest, uikit
-    }
 
     let mode: LaunchMode
     let provider: EventsQuerying

@@ -23,19 +23,8 @@ final class ApplicationUITests: XCTestCase {
         super.tearDown()
     }
 
-    func testVolume() {
-        app.launchArguments = ["eventsAmount 100"]
-        app.launch()
-
-        firstEventCell.tap()
-
-        let detailsScreenBack = app.navigationBars.buttons.firstMatch
-        detailsScreenBack.waitForExistence(timeout: 5)
-        detailsScreenBack.tap()
-    }
-
     func test_swipe() {
-        app.launchArguments = ["eventsAmount 1"]
+        app.launchArguments = [LaunchMode.singleEvent.rawValue]
         app.launch()
 
         let swiper = firstEventCell.descendants(matching: .any)["Swiper"]
@@ -49,7 +38,7 @@ final class ApplicationUITests: XCTestCase {
     // MARK: - AppPreview02
 
     func test_recordAppPreview02_addingEvents_swipingEvents() {
-        app.launchArguments = ["empty"]
+        app.launchArguments = [LaunchMode.empty.rawValue]
         app.launch()
 
         footer.tap()
@@ -70,13 +59,11 @@ final class ApplicationUITests: XCTestCase {
         swipeCell(at: 1)
         swipeCell(at: 0)
         swipeCell(at: 1)
-
-        cell(at: 1).tap()
-        sleep(2)
+        sleep(pauseSeconds)
     }
 
     func test_recordAppPreview02_viewAndExport() {
-        app.launchArguments = ["viewAndExport"]
+        app.launchArguments = [LaunchMode.viewAndExport.rawValue]
         app.launch()
 
         /// Open event details
@@ -143,9 +130,10 @@ final class ApplicationUITests: XCTestCase {
     private func weekCell(at index: Int) -> XCUIElement {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
-
+    
+    /// This method required auto capitalization to be turned off
+    /// Auto correction better be turned off too
     private func submitFirstEvent() {
-//        field.typeText("Coffee ")
         app.keyboards.buttons["shift"].tap()
         app.keys["C"].tap()
         app.keys["o"].tap()

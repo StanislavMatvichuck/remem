@@ -165,6 +165,8 @@
 		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
+		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
+		089E4B492A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
 		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* WatchingTests.swift */; };
 		08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* Watching.swift */; };
@@ -509,6 +511,7 @@
 		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
 		089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestAccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		089E4B472A2DEAB300727624 /* LaunchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchMode.swift; sourceTree = "<group>"; };
 		08A331E729A8EAFE000B68A1 /* WatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingTests.swift; sourceTree = "<group>"; };
 		08A331E929A8EBC3000B68A1 /* Watching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watching.swift; sourceTree = "<group>"; };
 		08A375FF2A1795820037D43A /* WeekSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryView.swift; sourceTree = "<group>"; };
@@ -1210,6 +1213,7 @@
 				085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */,
 				08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */,
 				089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */,
+				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1637,6 +1641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089E4B492A2DEAB300727624 /* LaunchMode.swift in Sources */,
 				0857B5A629892CBC002B400B /* ApplicationUITests.swift in Sources */,
 				089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */,
 			);
@@ -1757,6 +1762,7 @@
 				085A2C2E29F1426D005C6E5E /* WeekToDayDetailsPresenter.swift in Sources */,
 				084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */,
 				084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */,
+				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,
 				0852873D29FAC82A00E11860 /* WeekAccessoryView.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,

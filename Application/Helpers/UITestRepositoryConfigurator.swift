@@ -13,7 +13,7 @@ final class UITestRepositoryConfigurator {
 
     func configure(
         repository: ApplicationContainer.Repository,
-        for mode: ApplicationContainer.LaunchMode
+        for mode: LaunchMode
     ) {
         let dateCreated = DayIndex.referenceValue.date
         switch mode {
