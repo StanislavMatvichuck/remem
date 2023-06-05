@@ -26,13 +26,14 @@ final class EventsListContainer:
         }}
     }
 
-    var uiTestingDisabled: Bool {
-        parent.mode != .empty && parent.mode != .viewAndExport
-    }
+    var uiTestingDisabled: Bool
 
     init(parent: ApplicationContainer) {
+        let uiTestingDisabled = parent.mode != .empty && parent.mode != .viewAndExport
+        let ordering = uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
         self.parent = parent
-        self.ordering = orderingRepository.getCurrent()
+        self.uiTestingDisabled = uiTestingDisabled
+        self.ordering = ordering
     }
 
     func make() -> UIViewController {
