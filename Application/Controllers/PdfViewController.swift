@@ -37,6 +37,8 @@ final class PdfViewController: UIViewController {
             target: self,
             action: #selector(showShare)
         )
+        
+        shareButton.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonPdfShare.rawValue
 
         navigationItem.rightBarButtonItem = shareButton
     }

@@ -26,6 +26,7 @@ final class PdfMakingView: UIView {
 
         button.backgroundColor = UIColor.primary
         button.layer.cornerRadius = (2 * .layoutSquare - 0.5 * .layoutSquare) / 2
+        button.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonPdfCreate.rawValue
 
         return button
     }()

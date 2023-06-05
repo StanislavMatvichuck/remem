@@ -14,13 +14,19 @@ final class EventDetailsView: UIView {
     // MARK: - Init
     init() {
         self.scroll = ViewScroll(.vertical)
+        self.scroll.accessibilityIdentifier = UITestAccessibilityIdentifier.eventDetailsScroll.rawValue
         super.init(frame: .zero)
-        backgroundColor = .bg
+
         configureLayout()
+        configureAppearance()
     }
 
     private func configureLayout() {
         addAndConstrain(scroll)
+    }
+
+    private func configureAppearance() {
+        backgroundColor = .bg
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

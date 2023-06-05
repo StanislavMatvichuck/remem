@@ -78,13 +78,42 @@ final class ApplicationUITests: XCTestCase {
     func test_recordAppPreview02_viewAndExport() {
         app.launchArguments = ["viewAndExport"]
         app.launch()
-        
+
+        /// Open event details
         cell(at: 1).tap()
-        sleep(2)
+        sleep(pauseSeconds)
+
+        app.collectionViews.firstMatch.swipeRight()
+        sleep(pauseSeconds)
+
+        app.collectionViews.firstMatch.swipeLeft()
+        sleep(pauseSeconds)
+
+        app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
+        sleep(pauseSeconds)
+
+        /// Open pdf report
+        app.buttons[UITestAccessibilityIdentifier.buttonPdfCreate.rawValue].tap()
+        sleep(pauseSeconds)
+
+        app.buttons[UITestAccessibilityIdentifier.buttonPdfShare.rawValue].tap()
+        sleep(pauseSeconds)
+
+        /// Open mail share modal
+        app.cells["Mail"].tap()
+        sleep(pauseSeconds)
         
-        weekCell(at: 1).tap()
+        app.textFields["toField"].tap()
+        app.textFields["toField"].typeText("someEmail@gmail.com")
+        app.textViews["subjectField"].tap()
+        app.textViews["subjectField"].typeText("Coffee drinking report")
+        app.buttons["Mail.sendButton"].tap()
         
-        sleep(2)
+        /// Back to event details
+        app.navigationBars.buttons.firstMatch.tap()
+        /// Back to list
+        app.navigationBars.buttons.firstMatch.tap()
+        sleep(pauseSeconds)
     }
 
     func test_recordAppPreview02_addWeeklyGoal() {}
@@ -110,7 +139,7 @@ final class ApplicationUITests: XCTestCase {
     private func cell(at index: Int) -> XCUIElement {
         app.tables.firstMatch.cells.element(boundBy: index)
     }
-    
+
     private func weekCell(at index: Int) -> XCUIElement {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
