@@ -10,6 +10,7 @@ import Domain
 import UIKit
 
 final class ApplicationContainer {
+    typealias Repository = EventsQuerying & EventsCommanding
     enum LaunchMode: String {
         case empty, singleEvent, viewAndExport, unitTest, uikit
     }
@@ -54,6 +55,12 @@ final class ApplicationContainer {
             mapper: EventEntityMapper()
         )
 
+        configure(repository: repository, for: mode)
+
+        return repository
+    }
+
+    private static func configure(repository: Repository, for mode: LaunchMode) {
         let dateCreated = DayIndex.referenceValue.date
         switch mode {
         case .singleEvent:
@@ -68,8 +75,6 @@ final class ApplicationContainer {
             repository.save(thirdEvent)
         default: break
         }
-
-        return repository
     }
 
     static func parseLaunchMode() -> LaunchMode {
