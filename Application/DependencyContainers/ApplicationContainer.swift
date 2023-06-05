@@ -15,66 +15,43 @@ final class ApplicationContainer {
         case empty, singleEvent, viewAndExport, unitTest, uikit
     }
 
+    let mode: LaunchMode
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinator
     let updater: ViewControllersUpdater
     let watcher: Watching
-    var currentMoment: Date {
-        if mode == .viewAndExport {
-            return DayIndex.referenceValue.adding(days: 7).date
-        }
-        return .now
-    }
 
-    let mode: LaunchMode
+    var currentMoment: Date { mode == .viewAndExport ? UITestRepositoryConfigurator.viewAndExportToday.date : .now }
 
     init(mode: LaunchMode) {
-        self.mode = mode
+        func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {
+            let repository = CoreDataEventsRepository(
+                container: CoreDataStack.createContainer(inMemory: mode != .uikit),
+                mapper: EventEntityMapper()
+            )
+
+            let repositoryConfigurator = UITestRepositoryConfigurator()
+            repositoryConfigurator.configure(repository: repository, for: mode)
+
+            return repository
+        }
 
         let coordinator = Coordinator()
-        let repository = Self.makeRepository(mode)
+        let repository = makeRepository(mode)
+        let updatingCommander = UpdatingCommander(commander: repository)
+        let watcher = DayWatcher()
 
+        self.mode = mode
         self.coordinator = coordinator
         self.provider = repository
-        let updatingCommander = UpdatingCommander(commander: repository)
         self.commander = updatingCommander
-
         self.updater = ViewControllersUpdater()
-        let watcher = DayWatcher()
         self.watcher = watcher
 
         let weakUpdater = WeakRef(updater)
         updatingCommander.delegate = weakUpdater
         watcher.delegate = weakUpdater
-    }
-
-    private static func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {
-        let repository = CoreDataEventsRepository(
-            container: CoreDataStack.createContainer(inMemory: mode != .uikit),
-            mapper: EventEntityMapper()
-        )
-
-        configure(repository: repository, for: mode)
-
-        return repository
-    }
-
-    private static func configure(repository: Repository, for mode: LaunchMode) {
-        let dateCreated = DayIndex.referenceValue.date
-        switch mode {
-        case .singleEvent:
-            let event = Event(name: "Single event", dateCreated: dateCreated)
-            repository.save(event)
-        case .viewAndExport:
-            let firstEvent = Event(name: "Any event you want to count", dateCreated: dateCreated)
-            let secondEvent = Event(name: "Coffee ☕️", dateCreated: dateCreated)
-            let thirdEvent = Event(name: "Fitness 👟", dateCreated: dateCreated)
-            repository.save(firstEvent)
-            repository.save(secondEvent)
-            repository.save(thirdEvent)
-        default: break
-        }
     }
 
     static func parseLaunchMode() -> LaunchMode {
