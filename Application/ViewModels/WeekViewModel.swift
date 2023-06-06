@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct WeekViewModel {
-    typealias GoalChangeHandler = (Int, Date) -> Void
+    typealias GoalChangeHandler = (Int) -> Void
     private let today: DayIndex
     private let event: Event
 

@@ -29,7 +29,10 @@ final class EventsListContainer:
     var uiTestingDisabled: Bool
 
     init(parent: ApplicationContainer) {
-        let uiTestingDisabled = parent.mode != .empty && parent.mode != .viewAndExport
+        let uiTestingDisabled =
+            parent.mode != .appPreview02_addingEventsAndSwiping &&
+            parent.mode != .appPreview02_viewAndExport &&
+            parent.mode != .appPreview02_addWeeklyGoal
         let ordering = uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
         self.parent = parent
         self.uiTestingDisabled = uiTestingDisabled
@@ -135,7 +138,7 @@ final class EventsListContainer:
                 )))
             },
             swipeHandler: {
-                event.addHappening(date: .now)
+                event.addHappening(date: self.parent.currentMoment)
                 self.commander.save(event)
             },
             renameActionHandler: { renameHandler?.renameTapped($0) },

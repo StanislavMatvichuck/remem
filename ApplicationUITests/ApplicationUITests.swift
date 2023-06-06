@@ -38,7 +38,7 @@ final class ApplicationUITests: XCTestCase {
     // MARK: - AppPreview02
 
     func test_recordAppPreview02_addingEvents_swipingEvents() {
-        app.launchArguments = [LaunchMode.empty.rawValue]
+        app.launchArguments = [LaunchMode.appPreview02_addingEventsAndSwiping.rawValue]
         app.launch()
 
         footer.tap()
@@ -63,7 +63,7 @@ final class ApplicationUITests: XCTestCase {
     }
 
     func test_recordAppPreview02_viewAndExport() {
-        app.launchArguments = [LaunchMode.viewAndExport.rawValue]
+        app.launchArguments = [LaunchMode.appPreview02_viewAndExport.rawValue]
         app.launch()
 
         /// Open event details
@@ -89,13 +89,13 @@ final class ApplicationUITests: XCTestCase {
         /// Open mail share modal
         app.cells["Mail"].tap()
         sleep(pauseSeconds)
-        
+
         app.textFields["toField"].tap()
         app.textFields["toField"].typeText("someEmail@gmail.com")
         app.textViews["subjectField"].tap()
         app.textViews["subjectField"].typeText("Coffee drinking report")
         app.buttons["Mail.sendButton"].tap()
-        
+
         /// Back to event details
         app.navigationBars.buttons.firstMatch.tap()
         /// Back to list
@@ -103,7 +103,30 @@ final class ApplicationUITests: XCTestCase {
         sleep(pauseSeconds)
     }
 
-    func test_recordAppPreview02_addWeeklyGoal() {}
+    func test_recordAppPreview02_addWeeklyGoal() {
+        app.launchArguments = [LaunchMode.appPreview02_addWeeklyGoal.rawValue]
+        app.launch()
+
+        /// Open event details
+        cell(at: 2).tap()
+        sleep(pauseSeconds)
+
+        /// Add goal
+        app.textFields[UITestAccessibilityIdentifier.textFieldGoal.rawValue].tap()
+        sleep(pauseSeconds)
+        app.keys["5"].tap()
+        app.otherElements[UITestAccessibilityIdentifier.buttonGoalDone.rawValue].tap()
+        sleep(pauseSeconds)
+
+        /// Back to list
+        app.navigationBars.buttons.firstMatch.tap()
+        sleep(pauseSeconds)
+        
+        swipeCell(at: 2)
+        sleep(pauseSeconds)
+        swipeCell(at: 2)
+        sleep(pauseSeconds)
+    }
 
     // MARK: - AppPreview03
 
@@ -130,7 +153,7 @@ final class ApplicationUITests: XCTestCase {
     private func weekCell(at index: Int) -> XCUIElement {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
-    
+
     /// This method required auto capitalization to be turned off
     /// Auto correction better be turned off too
     private func submitFirstEvent() {

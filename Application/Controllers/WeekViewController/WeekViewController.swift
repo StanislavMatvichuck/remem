@@ -50,7 +50,7 @@ final class WeekViewController: UIViewController {
 
     private func updateGoal() {
         guard let text = viewRoot.goal.goal.text else { return }
-        viewModel.goalChangeHander(Int(text) ?? 0, .now)
+        viewModel.goalChangeHander(Int(text) ?? 0)
     }
 
     private func configureCollection() {

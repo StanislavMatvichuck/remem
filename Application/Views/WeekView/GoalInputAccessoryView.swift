@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: localization
 final class GoalInputAccessoryView: UIStackView {
     static let buttonsRadius: CGFloat = WeekCellView.cornerRadius
 
@@ -71,6 +72,7 @@ final class GoalInputAccessoryView: UIStackView {
         setCustomSpacing(.buttonMargin, after: minus)
 
         configureAppearance()
+        done.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonGoalDone.rawValue
     }
 
     required init(coder: NSCoder) {

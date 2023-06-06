@@ -24,6 +24,7 @@ final class WeekSummaryView: UIView {
         field.returnKeyType = .done
         field.borderStyle = .none
         field.tintColor = .secondary
+        field.accessibilityIdentifier = UITestAccessibilityIdentifier.textFieldGoal.rawValue
         return field
     }()
 

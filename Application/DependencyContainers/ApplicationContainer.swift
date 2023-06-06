@@ -19,7 +19,13 @@ final class ApplicationContainer {
     let updater: ViewControllersUpdater
     let watcher: Watching
 
-    var currentMoment: Date { mode == .viewAndExport ? UITestRepositoryConfigurator.viewAndExportToday.date : .now }
+    var currentMoment: Date {
+        currentMomentInjected ? UITestRepositoryConfigurator.viewAndExportToday.date : .now
+    }
+
+    private var currentMomentInjected: Bool {
+        mode == .appPreview02_viewAndExport || mode == .appPreview02_addWeeklyGoal
+    }
 
     init(mode: LaunchMode) {
         func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {

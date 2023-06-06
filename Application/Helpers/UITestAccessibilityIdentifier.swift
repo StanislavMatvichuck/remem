@@ -9,6 +9,8 @@ import Foundation
 
 enum UITestAccessibilityIdentifier: String {
     case eventDetailsScroll
+    case textFieldGoal
+    case buttonGoalDone
     case buttonPdfCreate
     case buttonPdfShare
 }

@@ -38,8 +38,8 @@ final class WeekContainer:
             event: event,
             itemFactory: self,
             weekItemFactory: self
-        ) { amount, date in
-            self.event.setWeeklyGoal(amount: amount, for: date)
+        ) { amount in
+            self.event.setWeeklyGoal(amount: amount, for: self.currentMoment)
             self.commander.save(self.event)
         }
     }
