@@ -84,7 +84,6 @@
 		0851963B2A0C1CE600FD8FD8 /* PdfMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */; };
 		0851963D2A0C1D1700FD8FD8 /* MobilePdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */; };
 		0852873B29FA82B300E11860 /* WeekCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852873A29FA82B300E11860 /* WeekCellView.swift */; };
-		0852873D29FAC82A00E11860 /* WeekAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */; };
 		0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockViewController.swift */; };
 		0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C6AC283D66170027EF3E /* WeekViewController.swift */; };
@@ -127,7 +126,6 @@
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
-		087A15202A08BE2B00D27520 /* WeekGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A151F2A08BE2B00D27520 /* WeekGoalView.swift */; };
 		087A15222A08C26400D27520 /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087A15212A08C26400D27520 /* WeekdaysView.swift */; };
 		087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFBF2A13F4610005B4D9 /* EmojiView.swift */; };
 		087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC12A13F7840005B4D9 /* InputView.swift */; };
@@ -424,7 +422,6 @@
 		0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaking.swift; sourceTree = "<group>"; };
 		0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePdfMaker.swift; sourceTree = "<group>"; };
 		0852873A29FA82B300E11860 /* WeekCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellView.swift; sourceTree = "<group>"; };
-		0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAccessoryView.swift; sourceTree = "<group>"; };
 		0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListContainer.swift; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		0852C6AC283D66170027EF3E /* WeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
@@ -470,7 +467,6 @@
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
-		087A151F2A08BE2B00D27520 /* WeekGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGoalView.swift; sourceTree = "<group>"; };
 		087A15212A08C26400D27520 /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		087AFFBF2A13F4610005B4D9 /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		087AFFC12A13F7840005B4D9 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -847,9 +843,7 @@
 			isa = PBXGroup;
 			children = (
 				0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */,
-				0852873C29FAC82A00E11860 /* WeekAccessoryView.swift */,
 				087A15212A08C26400D27520 /* WeekdaysView.swift */,
-				087A151F2A08BE2B00D27520 /* WeekGoalView.swift */,
 				08A375FF2A1795820037D43A /* WeekSummaryView.swift */,
 				0852C6AE283D66380027EF3E /* WeekView.swift */,
 			);
@@ -1763,7 +1757,6 @@
 				084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */,
 				084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */,
 				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,
-				0852873D29FAC82A00E11860 /* WeekAccessoryView.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* FooterCellViewModel.swift in Sources */,
@@ -1812,7 +1805,6 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
-				087A15202A08BE2B00D27520 /* WeekGoalView.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
 				08FEA39D28DC98A600BAA196 /* WeekViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */,
