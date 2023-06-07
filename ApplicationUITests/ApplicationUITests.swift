@@ -121,7 +121,7 @@ final class ApplicationUITests: XCTestCase {
         /// Back to list
         app.navigationBars.buttons.firstMatch.tap()
         sleep(pauseSeconds)
-        
+
         swipeCell(at: 2)
         sleep(pauseSeconds)
         swipeCell(at: 2)
@@ -130,7 +130,16 @@ final class ApplicationUITests: XCTestCase {
 
     // MARK: - AppPreview03
 
-    func test_recordAppPreview03_widget() {}
+    func test_recordAppPreview03_widget() {
+        // open app
+        app.launchArguments = [LaunchMode.appPreview02_widget.rawValue]
+        app.launch()
+        sleep(pauseSeconds)
+        // hide app to allow widget adding
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+        sleep(pauseSeconds)
+    }
+
     func test_recordAppPreview03_eventsListSorting() {}
     func test_recordAppPreview03_darkMode() {}
     func test_recordAppPreview03_localization() {}

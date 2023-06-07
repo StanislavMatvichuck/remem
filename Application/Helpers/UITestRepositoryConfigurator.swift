@@ -40,7 +40,7 @@ final class UITestRepositoryConfigurator {
             repository.save(firstEvent)
             repository.save(secondEvent)
             repository.save(thirdEvent)
-        case .appPreview02_addWeeklyGoal:
+        case .appPreview02_addWeeklyGoal, .appPreview02_widget:
             let firstEvent = Event(name: "Any event you want to count", dateCreated: dateCreated)
             let secondEvent = Event(name: "Coffee ☕️", dateCreated: dateCreated)
             let thirdEvent = Event(name: "Fitness 👟", dateCreated: dateCreated)

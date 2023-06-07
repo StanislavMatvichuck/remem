@@ -23,8 +23,10 @@ final class ApplicationContainer {
         currentMomentInjected ? UITestRepositoryConfigurator.viewAndExportToday.date : .now
     }
 
-    private var currentMomentInjected: Bool {
-        mode == .appPreview02_viewAndExport || mode == .appPreview02_addWeeklyGoal
+    private var currentMomentInjected: Bool { return
+        mode == .appPreview02_viewAndExport ||
+        mode == .appPreview02_addWeeklyGoal ||
+        mode == .appPreview02_widget
     }
 
     init(mode: LaunchMode) {

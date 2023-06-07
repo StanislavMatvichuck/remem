@@ -12,6 +12,7 @@ enum LaunchMode: String {
          singleEvent,
          appPreview02_viewAndExport,
          appPreview02_addWeeklyGoal,
+         appPreview02_widget,
          unitTest,
          uikit
 }
