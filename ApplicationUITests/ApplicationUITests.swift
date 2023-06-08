@@ -23,16 +23,6 @@ final class ApplicationUITests: XCTestCase {
         super.tearDown()
     }
 
-    func test_swipe() {
-        app.launchArguments = [LaunchMode.singleEvent.rawValue]
-        app.launch()
-
-        let swiper = firstEventCell.descendants(matching: .any)["Swiper"]
-        let valueLabel = firstEventCell.staticTexts.element(boundBy: 1)
-
-        swiper.press(forDuration: 0, thenDragTo: valueLabel)
-    }
-
     let pauseSeconds: UInt32 = 1
 
     // MARK: - AppPreview02
@@ -40,6 +30,8 @@ final class ApplicationUITests: XCTestCase {
     func test_recordAppPreview02_addingEvents_swipingEvents() {
         app.launchArguments = [LaunchMode.appPreview02_addingEventsAndSwiping.rawValue]
         app.launch()
+
+        pressRecordButtonInControlCenter()
 
         footer.tap()
         submitFirstEvent()
@@ -51,20 +43,15 @@ final class ApplicationUITests: XCTestCase {
 
         footer.tap()
         submitThirdEvent()
-        sleep(pauseSeconds)
 
-        swipeCell(at: 0)
-        swipeCell(at: 1)
-        swipeCell(at: 2)
-        swipeCell(at: 1)
-        swipeCell(at: 0)
-        swipeCell(at: 1)
-        sleep(pauseSeconds)
+        pressRecordButtonInControlCenter()
     }
 
     func test_recordAppPreview02_viewAndExport() {
         app.launchArguments = [LaunchMode.appPreview02_viewAndExport.rawValue]
         app.launch()
+
+        pressRecordButtonInControlCenter()
 
         /// Open event details
         cell(at: 1).tap()
@@ -101,11 +88,15 @@ final class ApplicationUITests: XCTestCase {
         /// Back to list
         app.navigationBars.buttons.firstMatch.tap()
         sleep(pauseSeconds)
+
+        pressRecordButtonInControlCenter()
     }
 
     func test_recordAppPreview02_addWeeklyGoal() {
         app.launchArguments = [LaunchMode.appPreview02_addWeeklyGoal.rawValue]
         app.launch()
+
+        pressRecordButtonInControlCenter()
 
         /// Open event details
         cell(at: 2).tap()
@@ -126,6 +117,8 @@ final class ApplicationUITests: XCTestCase {
         sleep(pauseSeconds)
         swipeCell(at: 2)
         sleep(pauseSeconds)
+
+        pressRecordButtonInControlCenter()
     }
 
     // MARK: - AppPreview03
@@ -135,9 +128,13 @@ final class ApplicationUITests: XCTestCase {
         app.launchArguments = [LaunchMode.appPreview02_widget.rawValue]
         app.launch()
         sleep(pauseSeconds)
+        pressRecordButtonInControlCenter()
         // hide app to allow widget adding
         XCUIDevice.shared.press(XCUIDevice.Button.home)
+        sleep(3)
+        app.activate()
         sleep(pauseSeconds)
+        pressRecordButtonInControlCenter()
     }
 
     func test_recordAppPreview03_eventsListSorting() {}
@@ -163,17 +160,8 @@ final class ApplicationUITests: XCTestCase {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
 
-    /// This method required auto capitalization to be turned off
-    /// Auto correction better be turned off too
     private func submitFirstEvent() {
-        app.keyboards.buttons["shift"].tap()
-        app.keys["C"].tap()
-        app.keys["o"].tap()
-        app.keys["f"].tap()
-        app.keys["f"].tap()
-        app.keys["e"].tap()
-        app.keys["e"].tap()
-        app.keys["space"].tap()
+        field.typeText("Coffee ")
 
         let coffeeEmoji = app.buttons["☕️"]
         coffeeEmoji.tap()
@@ -183,15 +171,7 @@ final class ApplicationUITests: XCTestCase {
     }
 
     private func submitSecondEvent() {
-        app.keyboards.buttons["shift"].tap()
-        app.keys["F"].tap()
-        app.keys["i"].tap()
-        app.keys["t"].tap()
-        app.keys["n"].tap()
-        app.keys["e"].tap()
-        app.keys["s"].tap()
-        app.keys["s"].tap()
-        app.keys["space"].tap()
+        field.typeText("Fitness ")
 
         let coffeeEmoji = app.buttons["👟"]
         coffeeEmoji.tap()
@@ -201,8 +181,33 @@ final class ApplicationUITests: XCTestCase {
     }
 
     private func submitThirdEvent() {
-        field.typeText("Any event you want to count")
+        field.typeText("Сar broke down 🚙")
+
         sleep(pauseSeconds)
         app.keyboards.buttons["Done"].tap()
+    }
+
+    private func pressRecordButtonInControlCenter() {
+        openControlCenter(from: app)
+        sleep(1)
+        tapRecordButton()
+        sleep(1)
+        closeControlCenter(from: app)
+        sleep(2)
+    }
+
+    private func openControlCenter(from app: XCUIApplication) {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.01))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.2))
+        start.press(forDuration: 0.1, thenDragTo: end)
+    }
+
+    private func closeControlCenter(from app: XCUIApplication) {
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9)).tap()
+    }
+
+    private func tapRecordButton() {
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        springboard.buttons["Screen Recording"].tap()
     }
 }

@@ -76,7 +76,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;open  ./Users/stanislavmatvichuck/Work/remem/Remem/Tests/ApplicationSnapshotsTests/Images_64/Clock&#10;&#10;&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;open  ./Users/stanislavmatvichuck/Work/remem/Remem/Tests/Snapshots/images_en_64/iphonese(3rdgeneration)/light/ZAtlas/&#10;&#10;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
