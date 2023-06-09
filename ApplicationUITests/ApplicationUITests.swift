@@ -24,11 +24,11 @@ final class ApplicationUITests: XCTestCase {
         super.tearDown()
     }
 
-    let pauseSeconds: UInt32 = 1
+    let pauseSeconds: UInt32 = 0
 
     // MARK: - AppPreview02
 
-    func test_recordAppPreview02_addingEvents() {
+    func test_recordAppPreview02_01_addingEvents() {
         executeWith(mode: .appPreview02_addingEvents, recording: recording) {
             footer.tap()
             submitFirstEvent()
@@ -43,7 +43,7 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview02_swipingEvents() {
+    func test_recordAppPreview02_02_swipingEvents() {
         executeWith(mode: .appPreview02_swipingEvents, recording: recording) {
             swipeCell(at: 0)
             swipeCell(at: 1)
@@ -55,7 +55,7 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview02_viewDetailsAndExport() {
+    func test_recordAppPreview02_03_viewDetailsAndExport() {
         executeWith(mode: .appPreview02_viewDetailsAndExport, recording: recording) {
             /// Open event details
             cell(at: 1).tap()
@@ -95,7 +95,7 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview02_addWeeklyGoal() {
+    func test_recordAppPreview02_04_addWeeklyGoal() {
         executeWith(mode: .appPreview02_addWeeklyGoal, recording: recording) {
             /// Open event details
             cell(at: 2).tap()
@@ -121,7 +121,7 @@ final class ApplicationUITests: XCTestCase {
 
     // MARK: - AppPreview03
 
-    func test_recordAppPreview03_widget() {
+    func test_recordAppPreview03_05_widget() {
         executeWith(mode: .appPreview03_widget, recording: recording) {
             XCUIDevice.shared.press(XCUIDevice.Button.home)
             sleep(3)
@@ -130,9 +130,9 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview03_eventsListSorting() {}
-    func test_recordAppPreview03_darkMode() {}
-    func test_recordAppPreview03_localization() {}
+    func test_recordAppPreview03_06_eventsListSorting() {}
+    func test_recordAppPreview03_07_darkMode() {}
+    func test_recordAppPreview03_08_localization() {}
 
     // MARK: - Private
 
