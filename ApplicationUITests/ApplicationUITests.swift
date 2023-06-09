@@ -12,6 +12,7 @@ final class ApplicationUITests: XCTestCase {
     private var firstEventCell: XCUIElement! { cell(at: 0) }
     private var footer: XCUIElement! { app.tables.firstMatch.cells["FooterCell"].firstMatch }
     private var field: XCUIElement! { app.textFields.element }
+    private let recording: Bool = true
 
     override func setUp() {
         super.setUp()
@@ -27,114 +28,106 @@ final class ApplicationUITests: XCTestCase {
 
     // MARK: - AppPreview02
 
-    func test_recordAppPreview02_addingEvents_swipingEvents() {
-        app.launchArguments = [LaunchMode.appPreview02_addingEventsAndSwiping.rawValue]
-        app.launch()
+    func test_recordAppPreview02_addingEvents() {
+        executeWith(mode: .appPreview02_addingEvents, recording: recording) {
+            footer.tap()
+            submitFirstEvent()
+            sleep(pauseSeconds)
 
-        pressRecordButtonInControlCenter()
+            footer.tap()
+            submitSecondEvent()
+            sleep(pauseSeconds)
 
-        footer.tap()
-        submitFirstEvent()
-        sleep(pauseSeconds)
-
-        footer.tap()
-        submitSecondEvent()
-        sleep(pauseSeconds)
-
-        footer.tap()
-        submitThirdEvent()
-
-        pressRecordButtonInControlCenter()
+            footer.tap()
+            submitThirdEvent()
+        }
     }
 
-    func test_recordAppPreview02_viewAndExport() {
-        app.launchArguments = [LaunchMode.appPreview02_viewAndExport.rawValue]
-        app.launch()
+    func test_recordAppPreview02_swipingEvents() {
+        executeWith(mode: .appPreview02_swipingEvents, recording: recording) {
+            swipeCell(at: 0)
+            swipeCell(at: 1)
+            swipeCell(at: 2)
 
-        pressRecordButtonInControlCenter()
+            swipeCell(at: 2)
+            swipeCell(at: 1)
+            swipeCell(at: 2)
+        }
+    }
 
-        /// Open event details
-        cell(at: 1).tap()
-        sleep(pauseSeconds)
+    func test_recordAppPreview02_viewDetailsAndExport() {
+        executeWith(mode: .appPreview02_viewDetailsAndExport, recording: recording) {
+            /// Open event details
+            cell(at: 1).tap()
+            sleep(pauseSeconds)
 
-        app.collectionViews.firstMatch.swipeRight()
-        sleep(pauseSeconds)
+            app.collectionViews.firstMatch.swipeRight()
+            sleep(pauseSeconds)
 
-        app.collectionViews.firstMatch.swipeLeft()
-        sleep(pauseSeconds)
+            app.collectionViews.firstMatch.swipeLeft()
+            sleep(pauseSeconds)
 
-        app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
-        sleep(pauseSeconds)
+            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
+            sleep(pauseSeconds)
 
-        /// Open pdf report
-        app.buttons[UITestAccessibilityIdentifier.buttonPdfCreate.rawValue].tap()
-        sleep(pauseSeconds)
+            /// Open pdf report
+            app.buttons[UITestAccessibilityIdentifier.buttonPdfCreate.rawValue].tap()
+            sleep(pauseSeconds)
 
-        app.buttons[UITestAccessibilityIdentifier.buttonPdfShare.rawValue].tap()
-        sleep(pauseSeconds)
+            app.buttons[UITestAccessibilityIdentifier.buttonPdfShare.rawValue].tap()
+            sleep(pauseSeconds)
 
-        /// Open mail share modal
-        app.cells["Mail"].tap()
-        sleep(pauseSeconds)
+            /// Open mail share modal
+            app.cells["Mail"].tap()
+            sleep(pauseSeconds)
 
-        app.textFields["toField"].tap()
-        app.textFields["toField"].typeText("someEmail@gmail.com")
-        app.textViews["subjectField"].tap()
-        app.textViews["subjectField"].typeText("Coffee drinking report")
-        app.buttons["Mail.sendButton"].tap()
+            app.textFields["toField"].tap()
+            app.textFields["toField"].typeText("someEmail@gmail.com")
+            app.textViews["subjectField"].tap()
+            app.textViews["subjectField"].typeText("Coffee drinking report")
+            app.buttons["Mail.sendButton"].tap()
 
-        /// Back to event details
-        app.navigationBars.buttons.firstMatch.tap()
-        /// Back to list
-        app.navigationBars.buttons.firstMatch.tap()
-        sleep(pauseSeconds)
-
-        pressRecordButtonInControlCenter()
+            /// Back to event details
+            app.navigationBars.buttons.firstMatch.tap()
+            /// Back to list
+            app.navigationBars.buttons.firstMatch.tap()
+            sleep(pauseSeconds)
+        }
     }
 
     func test_recordAppPreview02_addWeeklyGoal() {
-        app.launchArguments = [LaunchMode.appPreview02_addWeeklyGoal.rawValue]
-        app.launch()
+        executeWith(mode: .appPreview02_addWeeklyGoal, recording: recording) {
+            /// Open event details
+            cell(at: 2).tap()
+            sleep(pauseSeconds)
 
-        pressRecordButtonInControlCenter()
+            /// Add goal
+            app.textFields[UITestAccessibilityIdentifier.textFieldGoal.rawValue].tap()
+            sleep(pauseSeconds)
+            app.keys["5"].tap()
+            app.otherElements[UITestAccessibilityIdentifier.buttonGoalDone.rawValue].tap()
+            sleep(pauseSeconds)
 
-        /// Open event details
-        cell(at: 2).tap()
-        sleep(pauseSeconds)
+            /// Back to list
+            app.navigationBars.buttons.firstMatch.tap()
+            sleep(pauseSeconds)
 
-        /// Add goal
-        app.textFields[UITestAccessibilityIdentifier.textFieldGoal.rawValue].tap()
-        sleep(pauseSeconds)
-        app.keys["5"].tap()
-        app.otherElements[UITestAccessibilityIdentifier.buttonGoalDone.rawValue].tap()
-        sleep(pauseSeconds)
-
-        /// Back to list
-        app.navigationBars.buttons.firstMatch.tap()
-        sleep(pauseSeconds)
-
-        swipeCell(at: 2)
-        sleep(pauseSeconds)
-        swipeCell(at: 2)
-        sleep(pauseSeconds)
-
-        pressRecordButtonInControlCenter()
+            swipeCell(at: 2)
+            sleep(pauseSeconds)
+            swipeCell(at: 2)
+            sleep(pauseSeconds)
+        }
     }
 
     // MARK: - AppPreview03
 
     func test_recordAppPreview03_widget() {
-        // open app
-        app.launchArguments = [LaunchMode.appPreview02_widget.rawValue]
-        app.launch()
-        sleep(pauseSeconds)
-        pressRecordButtonInControlCenter()
-        // hide app to allow widget adding
-        XCUIDevice.shared.press(XCUIDevice.Button.home)
-        sleep(3)
-        app.activate()
-        sleep(pauseSeconds)
-        pressRecordButtonInControlCenter()
+        executeWith(mode: .appPreview03_widget, recording: recording) {
+            XCUIDevice.shared.press(XCUIDevice.Button.home)
+            sleep(3)
+            app.activate()
+            sleep(pauseSeconds)
+        }
     }
 
     func test_recordAppPreview03_eventsListSorting() {}
@@ -142,6 +135,14 @@ final class ApplicationUITests: XCTestCase {
     func test_recordAppPreview03_localization() {}
 
     // MARK: - Private
+
+    private func executeWith(mode: LaunchMode, recording: Bool = false, block: () -> Void = {}) {
+        app.launchArguments = [mode.rawValue]
+        app.launch()
+        if recording { pressRecordButtonInControlCenter() }
+        block()
+        if recording { pressRecordButtonInControlCenter() }
+    }
 
     private func swipeCell(at index: Int) {
         let cell = cell(at: index)
@@ -160,7 +161,7 @@ final class ApplicationUITests: XCTestCase {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
 
-    private func submitFirstEvent() {
+    private func submitSecondEvent() {
         field.typeText("Coffee ")
 
         let coffeeEmoji = app.buttons["☕️"]
@@ -170,7 +171,7 @@ final class ApplicationUITests: XCTestCase {
         app.keyboards.buttons["Done"].tap()
     }
 
-    private func submitSecondEvent() {
+    private func submitThirdEvent() {
         field.typeText("Fitness ")
 
         let coffeeEmoji = app.buttons["👟"]
@@ -180,8 +181,8 @@ final class ApplicationUITests: XCTestCase {
         app.keyboards.buttons["Done"].tap()
     }
 
-    private func submitThirdEvent() {
-        field.typeText("Сar broke down 🚙")
+    private func submitFirstEvent() {
+        field.typeText("Car broke down 🚙")
 
         sleep(pauseSeconds)
         app.keyboards.buttons["Done"].tap()

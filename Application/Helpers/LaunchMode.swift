@@ -8,11 +8,11 @@
 import Foundation
 
 enum LaunchMode: String {
-    case appPreview02_addingEventsAndSwiping,
-         singleEvent,
-         appPreview02_viewAndExport,
+    case appPreview02_addingEvents,
+         appPreview02_swipingEvents,
+         appPreview02_viewDetailsAndExport,
          appPreview02_addWeeklyGoal,
-         appPreview02_widget,
+         appPreview03_widget,
          unitTest,
          uikit
 }

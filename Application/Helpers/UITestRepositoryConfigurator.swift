@@ -10,19 +10,27 @@ import Foundation
 
 final class UITestRepositoryConfigurator {
     static let viewAndExportToday = DayIndex.referenceValue.adding(days: 18)
+    static let eventsNames = ["Car broke down 🚙", "Coffee ☕️", "Fitness 👟"]
 
     func configure(
         repository: ApplicationContainer.Repository,
         for mode: LaunchMode
     ) {
         let dateCreated = DayIndex.referenceValue.date
+        let firstEvent = Event(name: Self.eventsNames[0], dateCreated: dateCreated)
+        let secondEvent = Event(name: Self.eventsNames[1], dateCreated: dateCreated)
+        let thirdEvent = Event(name: Self.eventsNames[2], dateCreated: dateCreated)
+
+        func addEvents() {
+            repository.save(firstEvent)
+            repository.save(secondEvent)
+            repository.save(thirdEvent)
+        }
+
         switch mode {
-        case .singleEvent:
-            let event = Event(name: "Single event", dateCreated: dateCreated)
-            repository.save(event)
-        case .appPreview02_viewAndExport:
-            let firstEvent = Event(name: "Any event you want to count", dateCreated: dateCreated)
-            let secondEvent = Event(name: "Coffee ☕️", dateCreated: dateCreated)
+        case .appPreview02_swipingEvents:
+            addEvents()
+        case .appPreview02_viewDetailsAndExport:
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(7) + hours(8) + minutes(13)))
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(8) + hours(9) + minutes(5)))
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(9) + hours(8) + minutes(47)))
@@ -36,21 +44,12 @@ final class UITestRepositoryConfigurator {
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(8) + minutes(7)))
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(16) + hours(8) + minutes(35)))
             secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(17) + hours(8) + minutes(42)))
-            let thirdEvent = Event(name: "Fitness 👟", dateCreated: dateCreated)
-            repository.save(firstEvent)
-            repository.save(secondEvent)
-            repository.save(thirdEvent)
-        case .appPreview02_addWeeklyGoal, .appPreview02_widget:
-            let firstEvent = Event(name: "Any event you want to count", dateCreated: dateCreated)
-            let secondEvent = Event(name: "Coffee ☕️", dateCreated: dateCreated)
-            let thirdEvent = Event(name: "Fitness 👟", dateCreated: dateCreated)
+            addEvents()
+        case .appPreview02_addWeeklyGoal, .appPreview03_widget:
             thirdEvent.addHappening(date: dateCreated.addingTimeInterval(days(14) + hours(18) + minutes(13)))
             thirdEvent.addHappening(date: dateCreated.addingTimeInterval(days(16) + hours(20) + minutes(30)))
             thirdEvent.addHappening(date: dateCreated.addingTimeInterval(days(17) + hours(17) + minutes(15)))
-
-            repository.save(firstEvent)
-            repository.save(secondEvent)
-            repository.save(thirdEvent)
+            addEvents()
         default: break
         }
     }

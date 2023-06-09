@@ -24,9 +24,9 @@ final class ApplicationContainer {
     }
 
     private var currentMomentInjected: Bool { return
-        mode == .appPreview02_viewAndExport ||
+        mode == .appPreview02_viewDetailsAndExport ||
         mode == .appPreview02_addWeeklyGoal ||
-        mode == .appPreview02_widget
+        mode == .appPreview03_widget
     }
 
     init(mode: LaunchMode) {

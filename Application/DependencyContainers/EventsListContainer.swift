@@ -30,10 +30,13 @@ final class EventsListContainer:
 
     init(parent: ApplicationContainer) {
         let uiTestingDisabled =
-            parent.mode != .appPreview02_addingEventsAndSwiping &&
-            parent.mode != .appPreview02_viewAndExport &&
-            parent.mode != .appPreview02_addWeeklyGoal
+            parent.mode != .appPreview02_addingEvents &&
+            parent.mode != .appPreview02_swipingEvents &&
+            parent.mode != .appPreview02_viewDetailsAndExport &&
+            parent.mode != .appPreview02_addWeeklyGoal &&
+            parent.mode != .appPreview03_widget
         let ordering = uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
+
         self.parent = parent
         self.uiTestingDisabled = uiTestingDisabled
         self.ordering = ordering
@@ -56,6 +59,7 @@ final class EventsListContainer:
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let today = DayIndex(parent.currentMoment)
         let events = parent.provider.get(using: ordering)
+        print("getting events using \(ordering)")
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
