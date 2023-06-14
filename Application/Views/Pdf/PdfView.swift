@@ -7,11 +7,21 @@
 
 import PDFKit
 
-final class PdfView: PDFView {
+final class PdfView: UIView {
+    let url: URL
+
     init(_ url: URL) {
+        self.url = url
         super.init(frame: .zero)
-        displayDirection = .vertical
-        document = PDFDocument(url: url)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    override func didMoveToSuperview() {
+        let document = PDFDocument(url: url)
+        let pdfView = PDFKit.PDFView(frame: bounds)
+        pdfView.displayDirection = .vertical
+        pdfView.document = document
+        addSubview(pdfView)
     }
 
     required init?(coder: NSCoder) {
