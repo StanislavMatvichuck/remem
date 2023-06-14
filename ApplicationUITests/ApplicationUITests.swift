@@ -28,7 +28,7 @@ final class ApplicationUITests: XCTestCase {
 
     // MARK: - AppPreview02
 
-    func test_recordAppPreview02_01_addingEvents() {
+    func test01_addingEvents() {
         executeWith(mode: .appPreview02_addingEvents, recording: recording) {
             footer.tap()
             submitFirstEvent()
@@ -43,7 +43,7 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview02_02_swipingEvents() {
+    func test02_swipingEvents() {
         executeWith(mode: .appPreview02_swipingEvents, recording: recording) {
             swipeCell(at: 0)
             swipeCell(at: 1)
@@ -55,7 +55,7 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview02_03_viewDetailsAndExport() {
+    func test03_viewDetailsAndExport() {
         executeWith(mode: .appPreview02_viewDetailsAndExport, recording: recording) {
             /// Open event details
             cell(at: 1).tap()
@@ -85,17 +85,13 @@ final class ApplicationUITests: XCTestCase {
             app.textFields["toField"].typeText("someEmail@gmail.com")
             app.textViews["subjectField"].tap()
             app.textViews["subjectField"].typeText("Coffee drinking report")
+            
+            /// Close mail share modal
             app.buttons["Mail.sendButton"].tap()
-
-            /// Back to event details
-            app.navigationBars.buttons.firstMatch.tap()
-            /// Back to list
-            app.navigationBars.buttons.firstMatch.tap()
-            sleep(pauseSeconds)
         }
     }
 
-    func test_recordAppPreview02_04_addWeeklyGoal() {
+    func test04_addWeeklyGoal() {
         executeWith(mode: .appPreview02_addWeeklyGoal, recording: recording) {
             /// Open event details
             cell(at: 2).tap()
@@ -121,7 +117,7 @@ final class ApplicationUITests: XCTestCase {
 
     // MARK: - AppPreview03
 
-    func test_recordAppPreview03_05_widget() {
+    func test05_widget() {
         executeWith(mode: .appPreview03_widget, recording: recording) {
             XCUIDevice.shared.press(XCUIDevice.Button.home)
             sleep(3)
@@ -130,9 +126,9 @@ final class ApplicationUITests: XCTestCase {
         }
     }
 
-    func test_recordAppPreview03_06_eventsListSorting() {}
-    func test_recordAppPreview03_07_darkMode() {}
-    func test_recordAppPreview03_08_localization() {}
+    func test06_eventsListSorting() {}
+    func test07_darkMode() {}
+    func test08_localization() {}
 
     // MARK: - Private
 
