@@ -14,15 +14,18 @@ final class PdfView: UIView {
     init(_ url: URL) {
         self.url = url
         super.init(frame: .zero)
-    }
-
-    override func didMoveToSuperview() {
         let document = PDFDocument(url: url)
-        let pdf = PDFKit.PDFView(frame: bounds)
+        let pdf = PDFView()
+        pdf.translatesAutoresizingMaskIntoConstraints = false
         pdf.displayDirection = .vertical
-        pdf.autoScales = true
         pdf.document = document
         addSubview(pdf)
+        NSLayoutConstraint.activate([
+            pdf.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            pdf.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pdf.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pdf.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
         self.pdf = pdf
     }
 

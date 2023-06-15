@@ -29,92 +29,73 @@ final class PdfTitlePageView: UIView {
     let stack: UIStackView = {
         let verticalStack = UIStackView(al: true)
         verticalStack.axis = .vertical
+        verticalStack.alignment = .fill
         return verticalStack
     }()
 
     init() {
         super.init(frame: .zero)
         configureLayout()
-        configureAppearance()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     func configure(_ vm: PdfTitlePageViewModel) {
-        removeAllRows()
-
-        stack.addArrangedSubview(makeRow(
-            left: makeAmountLabel(text: "\(vm.eventTitle) \(PdfTitlePageViewModel.title)", tag: 0, highlighted: true),
-            right: makeLabel(text: "", tag: 1)
-        ))
-
-        stack.addArrangedSubview(makeRow(
-            left: makeAmountLabel(text: vm.readableStart, tag: 2, highlighted: true),
-            right: makeLabel(text: PdfTitlePageViewModel.start, tag: 3)
-        ))
-
-        stack.addArrangedSubview(makeRow(
-            left: makeAmountLabel(text: vm.readableFinish, tag: 4, highlighted: true),
-            right: makeLabel(text: PdfTitlePageViewModel.finish, tag: 5)
-        ))
-
         let spacer = UIView(al: true)
         spacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        stack.addArrangedSubview(spacer)
 
-        stack.addArrangedSubview(makeRow(
-            left: makeAmountLabel(text: "By hour", tag: 6, highlighted: true),
-            right: makeLabel(text: "", tag: 7)
-        ))
+        removeAllRows()
+        stack.addArrangedSubview(make(title: vm.eventTitle))
+        stack.addArrangedSubview(makeAmountLabel(text: PdfTitlePageViewModel.start, highlighted: false))
+        stack.addArrangedSubview(makeAmountLabel(text: vm.readableStart, highlighted: true))
+        stack.addArrangedSubview(makeAmountLabel(text: PdfTitlePageViewModel.finish, highlighted: false))
+        stack.addArrangedSubview(makeAmountLabel(text: vm.readableFinish, highlighted: true))
+        stack.addArrangedSubview(spacer)
+        stack.addArrangedSubview(makeAmountLabel(text: "By hour", highlighted: true))
     }
 
     // MARK: - Private
     private func configureLayout() {
-        addAndConstrain(stack, left: .buttonMargin, right: .buttonMargin)
+        addAndConstrain(stack)
     }
 
     private func removeAllRows() {
         for view in stack.arrangedSubviews { view.removeFromSuperview() }
     }
 
-    private func configureAppearance() {}
-
-    // MARK: - Copied from SummaryView
-    private func makeRow(left: UILabel, right: UILabel) -> UIStackView {
-        let stack = UIStackView(al: true)
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.addArrangedSubview(left)
-        stack.addArrangedSubview(right)
-        stack.setCustomSpacing(.buttonMargin, after: left)
-
-        left.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
-        right.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
-        left.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-
-        return stack
-    }
-
-    private func makeLabel(text: String, tag: Int) -> UILabel {
+    private func makeAmountLabel(text: String, highlighted: Bool) -> UILabel {
         let label = UILabel(al: true)
         label.font = .font
         label.textColor = UIColor.secondary
         label.text = text
-        label.tag = tag
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.33
+        label.textAlignment = .center
         label.numberOfLines = 1
+        label.font = .fontBold
+        label.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
+        label.textColor = highlighted ? .text : .secondary
         return label
     }
 
-    private func makeAmountLabel(text: String, tag: Int, highlighted: Bool) -> UILabel {
-        let label = makeLabel(text: text, tag: tag)
-        label.font = .fontBold
-        label.textColor = highlighted ? .text : .secondary
-        label.textAlignment = .left
+    private func make(title: String) -> UIView {
+        let label = UILabel(al: true)
+        label.textColor = .bg
+        label.font = .fontBoldBig
+        label.text = title
+        label.minimumScaleFactor = 0.2
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.33
         label.numberOfLines = 1
-        return label
+
+        let container = UIView(al: true)
+        container.backgroundColor = .primary
+        container.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
+
+        NSLayoutConstraint.activate([
+            container.heightAnchor.constraint(equalToConstant: .layoutSquare)
+        ])
+
+        return container
     }
 }
