@@ -55,6 +55,7 @@ extension TestingViewController where Controller == PdfViewController {
         let pdfContainer = PdfContainer(provider: url)
         sut = pdfContainer.make() as? PdfViewController
         sut.loadViewIfNeeded()
+        sut.viewRoot.bounds = UIScreen.main.bounds
         putInViewHierarchy(sut)
     }
 
