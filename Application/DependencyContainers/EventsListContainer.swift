@@ -26,19 +26,11 @@ final class EventsListContainer:
         }}
     }
 
-    var uiTestingDisabled: Bool
+    var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
     init(parent: ApplicationContainer) {
-        let uiTestingDisabled =
-            parent.mode != .appPreview02_addingEvents &&
-            parent.mode != .appPreview02_swipingEvents &&
-            parent.mode != .appPreview02_viewDetailsAndExport &&
-            parent.mode != .appPreview02_addWeeklyGoal &&
-            parent.mode != .appPreview03_widget
-        let ordering = uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
-
+        let ordering = parent.mode.uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
         self.parent = parent
-        self.uiTestingDisabled = uiTestingDisabled
         self.ordering = ordering
     }
 

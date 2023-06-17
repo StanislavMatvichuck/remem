@@ -13,6 +13,23 @@ enum LaunchMode: String {
          appPreview02_viewDetailsAndExport,
          appPreview02_addWeeklyGoal,
          appPreview03_widget,
+         appPreview03_darkMode,
          unitTest,
          uikit
+
+    var currentMomentInjected: Bool { return
+        self == .appPreview02_viewDetailsAndExport ||
+        self == .appPreview02_addWeeklyGoal ||
+        self == .appPreview03_widget ||
+        self == .appPreview03_darkMode
+    }
+
+    var uiTestingDisabled: Bool { return
+        self != .appPreview02_addingEvents &&
+        self != .appPreview02_swipingEvents &&
+        self != .appPreview02_viewDetailsAndExport &&
+        self != .appPreview02_addWeeklyGoal &&
+        self != .appPreview03_widget &&
+        self != .appPreview03_darkMode
+    }
 }

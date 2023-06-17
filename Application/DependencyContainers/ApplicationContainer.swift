@@ -20,13 +20,7 @@ final class ApplicationContainer {
     let watcher: Watching
 
     var currentMoment: Date {
-        currentMomentInjected ? UITestRepositoryConfigurator.viewAndExportToday.date : .now
-    }
-
-    private var currentMomentInjected: Bool { return
-        mode == .appPreview02_viewDetailsAndExport ||
-        mode == .appPreview02_addWeeklyGoal ||
-        mode == .appPreview03_widget
+        mode.currentMomentInjected ? UITestRepositoryConfigurator.viewAndExportToday.date : .now
     }
 
     init(mode: LaunchMode) {

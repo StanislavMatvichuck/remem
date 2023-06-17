@@ -120,15 +120,21 @@ final class ApplicationUITests: XCTestCase {
     func test05_widget() {
         executeWith(mode: .appPreview03_widget, recording: recording) {
             XCUIDevice.shared.press(XCUIDevice.Button.home)
-            sleep(3)
+            sleep(11)
             app.activate()
             sleep(pauseSeconds)
         }
     }
 
-    func test06_eventsListSorting() {}
-    func test07_darkMode() {}
-    func test08_localization() {}
+    func test06_darkMode() {
+        executeWith(mode: .appPreview03_darkMode, recording: recording) {
+            toggleDarkModeInControlCenter()
+            cell(at: 2).tap()
+            app.swipeUp()
+            app.swipeDown()
+            app.navigationBars.buttons.firstMatch.tap()
+        }
+    }
 
     // MARK: - Private
 
@@ -193,6 +199,18 @@ final class ApplicationUITests: XCTestCase {
         sleep(2)
     }
 
+    private func toggleDarkModeInControlCenter() {
+        openControlCenter(from: app)
+//        sleep(1)
+        tapBrightness()
+//        sleep(1)
+        tapDarkMode()
+//        sleep(1)
+        closeControlCenter(from: app)
+//        sleep(1)
+        closeControlCenter(from: app)
+    }
+
     private func openControlCenter(from app: XCUIApplication) {
         let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.01))
         let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.2))
@@ -203,8 +221,17 @@ final class ApplicationUITests: XCTestCase {
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9)).tap()
     }
 
+    let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+
     private func tapRecordButton() {
-        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         springboard.buttons["Screen Recording"].tap()
+    }
+
+    private func tapBrightness() {
+        springboard.otherElements["Brightness"].press(forDuration: 2)
+    }
+
+    private func tapDarkMode() {
+        springboard.buttons["Dark Mode"].tap()
     }
 }
