@@ -20,7 +20,7 @@ extension EventDetailsViewController: Updating {
 }
 
 extension EventsListViewController: Updating { func update() { viewModel = factory.makeEventsListViewModel(self) }}
-extension WeekViewController: Updating { func update() { viewModel = factory.makeWeekViewModel() }}
+extension WeekViewController: Updating { func update() { viewModel = factory.makeWeekViewModel(visibleDayIndex: viewModel.timelineVisibleIndex) }}
 extension SummaryViewController: Updating { func update() { viewModel = factory.makeSummaryViewModel() }}
 extension ClockViewController: Updating { func update() { viewModel = factory.makeClockViewModel() }}
 extension DayDetailsViewController: Updating { func update() { viewModel = factory.makeDayDetailsViewModel() }}

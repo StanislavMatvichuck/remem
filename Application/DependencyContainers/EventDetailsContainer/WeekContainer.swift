@@ -32,12 +32,13 @@ final class WeekContainer:
         return controller
     }
 
-    func makeWeekViewModel() -> WeekViewModel {
+    func makeWeekViewModel(visibleDayIndex: Int? = nil) -> WeekViewModel {
         WeekViewModel(
             today: today,
             event: event,
             itemFactory: self,
-            weekItemFactory: self
+            weekItemFactory: self,
+            visibleDayIndex: visibleDayIndex
         ) { amount in
             self.event.setWeeklyGoal(amount: amount, for: self.currentMoment)
             self.commander.save(self.event)

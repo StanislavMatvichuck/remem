@@ -15,6 +15,7 @@ struct WeekViewModel {
 
     let goalChangeHander: GoalChangeHandler
 
+    // TODO: hide access to arrays and indexes
     var timelineVisibleIndex: Int = 0
     var timeline: DayTimeline<WeekCellViewModel>
 
@@ -26,6 +27,7 @@ struct WeekViewModel {
         event: Event,
         itemFactory: WeekItemViewModelFactoring,
         weekItemFactory: NewEventWeeklyGoalViewModelFactoring,
+        visibleDayIndex: Int?,
         goalChangeHandler: @escaping GoalChangeHandler
     ) {
         self.today = today
@@ -59,6 +61,10 @@ struct WeekViewModel {
         for i in 0 ..< pages.count {
             let nextWeek = WeekIndex(WeekIndex(event.dateCreated).dayIndex.adding(days: 7 * i).date)
             pages[nextWeek] = weekItemFactory.makeViewModel(today: today, week: nextWeek)
+        }
+
+        if let visibleDayIndex {
+            timelineVisibleIndex = visibleDayIndex
         }
     }
 }

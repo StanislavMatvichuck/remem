@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
+protocol WeekViewModelFactoring { func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel }
 
 final class WeekViewController: UIViewController {
     let presenter: WeekToDayDetailsPresenter
@@ -19,7 +19,7 @@ final class WeekViewController: UIViewController {
 
     init(_ factory: WeekViewModelFactoring) {
         self.factory = factory
-        self.viewModel = factory.makeWeekViewModel()
+        self.viewModel = factory.makeWeekViewModel(visibleDayIndex: nil)
         self.viewRoot = WeekView()
         self.presenter = WeekToDayDetailsPresenter()
         super.init(nibName: nil, bundle: nil)
@@ -93,12 +93,7 @@ extension WeekViewController:
         let collectionWidth = scrollView.bounds.width
         let offset = scrollView.contentOffset.x
         let newTimelineIndex = Int(offset / collectionWidth) * 7
-
-        if offset == 0 {
-            viewModel.timelineVisibleIndex = 0
-        } else {
-            viewModel.timelineVisibleIndex = newTimelineIndex
-        }
+        viewModel = factory.makeWeekViewModel(visibleDayIndex: newTimelineIndex)
     }
 }
 
