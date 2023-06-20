@@ -6,6 +6,10 @@
 //
 
 import Foundation
+import os
+
+/// Logs can be accessed with Console application
+let logger = Logger(subsystem: "io.remem", category: "widget")
 
 class WidgetEventsQuerying {
     func getPreview() -> [WidgetEventCellViewModel] {
@@ -23,7 +27,7 @@ class WidgetEventsQuerying {
         }
 
         guard let viewModel = try? PropertyListDecoder().decode([WidgetEventCellViewModel].self, from: fileContent) else {
-            logger.error("WidgetEventsQuerying.getPreview fileContent error")
+            logger.error("WidgetEventsQuerying.getPreview decoding error")
             return []
         }
 

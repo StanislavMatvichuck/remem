@@ -5,11 +5,8 @@
 //  Created by Stanislav Matvichuck on 07.09.2022.
 //
 
-import os
 import SwiftUI
 import WidgetKit
-
-let logger = Logger(subsystem: "io.remem", category: "widget")
 
 @main
 struct RememWidgets: Widget, PreviewProvider {

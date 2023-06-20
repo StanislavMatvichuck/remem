@@ -31,9 +31,9 @@
 "summary.daysTracked" = "Діб відслідковано";
 "summary.daysSinceLastHappening" = "Діб після останнього випадку";
 
-"widget.title" = "Список подій";
-"widget.subtitle" = "Перші три події з кількістю випадків на сьогодні";
-"widget.emptyRow" = "Додай першу подію щоб відслідковувати";
+"widget.title" = "Поточний тиждень";
+"widget.subtitle" = "Перші три події з вашого списку";
+"widget.emptyRow" = "Створіть подію";
 
 "pdf.create" = "Експортувати в pdf";
 "pdf.share" = "Поділитися";

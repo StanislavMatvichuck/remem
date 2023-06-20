@@ -31,9 +31,9 @@
 "summary.daysTracked" = "Дней отслежено";
 "summary.daysSinceLastHappening" = "Дней после последнего происшествия";
 
-"widget.title" = "Список событий";
-"widget.subtitle" = "Первые три события с количеством случаев на сегодня";
-"widget.emptyRow" = "Добавь первое событие чтобы отслеживать";
+"widget.title" = "Текущая неделя";
+"widget.subtitle" = "Первые три события из вашего списка";
+"widget.emptyRow" = "Создайте событие";
 
 "pdf.create" = "Экспорт в pdf";
 "pdf.share" = "Поделиться";

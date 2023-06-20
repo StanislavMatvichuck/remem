@@ -5,26 +5,44 @@
 	<dict>
 		<key>id</key>
 		<string>090AA720-E2EF-4C8E-AE3F-389EC64AF95C</string>
-		<key>amount</key>
+		<key>value</key>
 		<string>3</string>
-		<key>name</key>
-		<string>Склянка водички 🥛</string>
+		<key>title</key>
+		<string>глава із 📖</string>
+		<key>timeSince</key>
+		<string></string>
+		<key>progress</key>
+		<real>0</real>
+		<key>goalState</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>2BAD065B-A649-49DD-9D07-8CAEBA53ABEB</string>
-		<key>amount</key>
-		<string>1</string>
-		<key>name</key>
-		<string>Полив рослин 🪴</string>
+		<key>value</key>
+		<string>2/3</string>
+		<key>title</key>
+		<string>полив рослинки 🪴</string>
+		<key>timeSince</key>
+		<string></string>
+		<key>progress</key>
+		<real>0.666666</real>
+		<key>goalState</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>B08CCC21-04CF-4B86-ABD1-64C208BCADC9</string>
-		<key>amount</key>
-		<string>0</string>
-		<key>name</key>
-		<string>Медитація 🧘🏻‍♀️</string>
+		<key>value</key>
+		<string>1/3</string>
+		<key>title</key>
+		<string>медитація 🧘🏻‍♀️</string>
+		<key>timeSince</key>
+		<string></string>
+		<key>progress</key>
+		<real>0.333333</real>
+		<key>goalState</key>
+		<integer>0</integer>
 	</dict>
 </array>
 </plist>
