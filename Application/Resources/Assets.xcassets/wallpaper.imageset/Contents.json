@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "wallpaper.jpg",
+      "filename" : "wallpaperFontHeightFixed.jpg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "wallpaperFontHeightFixed_dark.jpg",
       "idiom" : "universal"
     }
   ],
