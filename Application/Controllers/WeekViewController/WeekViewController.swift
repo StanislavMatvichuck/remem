@@ -8,7 +8,9 @@
 import Domain
 import UIKit
 
-protocol WeekViewModelFactoring { func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel }
+protocol WeekViewModelFactoring {
+    func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel
+}
 
 final class WeekViewController: UIViewController {
     let presenter: WeekToDayDetailsPresenter
@@ -50,7 +52,7 @@ final class WeekViewController: UIViewController {
 
     private func updateGoal() {
         guard let text = viewRoot.goal.goal.text else { return }
-        viewModel.goalChangeHander(Int(text) ?? 0)
+        viewModel.goalChangeHandler(Int(text) ?? 0)
     }
 
     private func configureCollection() {
@@ -76,7 +78,9 @@ extension WeekViewController:
 
         cell.viewModel = viewModel.timeline[indexPath.row]
 
-        if presenter.animatedCellIndex == indexPath { presenter.dismissAnimator.prepareForAnimation(cell) }
+        if presenter.animatedCellIndex == indexPath {
+            presenter.dismissAnimator.prepareForAnimation(cell, height: -viewRoot.dayCellVerticalDistanceToBottom)
+        }
 
         return cell
     }
@@ -85,7 +89,7 @@ extension WeekViewController:
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         configureAnimator()
         presenter.animatedCellIndex = indexPath
-        viewModel.timeline[indexPath.row]?.tapHandler()
+        viewModel.timeline[indexPath.row]?.tapHandler(self)
     }
 
     // MARK: - UIScrollViewDelegate

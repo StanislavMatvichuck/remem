@@ -13,8 +13,7 @@ struct WeekViewModel {
     private let today: DayIndex
     private let event: Event
 
-    let goalChangeHander: GoalChangeHandler
-
+    let goalChangeHandler: GoalChangeHandler
     // TODO: hide access to arrays and indexes
     var timelineVisibleIndex: Int = 0
     var timeline: DayTimeline<WeekCellViewModel>
@@ -32,7 +31,7 @@ struct WeekViewModel {
     ) {
         self.today = today
         self.event = event
-        goalChangeHander = goalChangeHandler
+        self.goalChangeHandler = goalChangeHandler
 
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let startOfWeekToday = WeekIndex(today.date).dayIndex

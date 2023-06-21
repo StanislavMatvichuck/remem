@@ -21,14 +21,12 @@ final class WeekContainer:
     var coordinator: Coordinator { parent.parent.parent.coordinator }
     var event: Event { parent.event }
     var today: DayIndex { parent.today }
-    weak var controller: WeekViewController?
 
     init(parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)
         updater.addDelegate(controller)
-        self.controller = controller
         return controller
     }
 
@@ -50,9 +48,7 @@ final class WeekContainer:
             event: event,
             day: day,
             today: today,
-            tapHandler: {
-                guard let controller = self.controller else { return }
-
+            tapHandler: { controller in
                 self.coordinator.show(
                     Navigation.dayDetails(
                         factory: self.makeContainer(day: day),

@@ -56,6 +56,12 @@ final class WeekView: UIView {
         }
     }
 
+    var dayCellVerticalDistanceToBottom: CGFloat { collection.frame.maxY - collectionAndCellVerticalDifference / 2 }
+    var dayCellDefaultFrameY: CGFloat { collectionAndCellVerticalDifference / 2 }
+
+    private var collectionAndCellVerticalDifference: CGFloat { collection.bounds.height - WeekCell.layoutSize.height }
+
+    // MARK: - Private
     private func configureLayout() {
         let stack = UIStackView(al: true)
         stack.axis = .vertical

@@ -11,7 +11,6 @@ struct DayDetailsAnimationsHelper {
     typealias AnimationBlock = () -> Void
     static let frameDuration = TimeInterval(1.0 / 60.0)
     static let totalDuration = DayDetailsAnimationsHelper.frameDuration * 30
-    static let cellVerticalOffset = .layoutSquare * 5 + .buttonMargin
 
     static func makeDismissSliding(
         animatedView: UIView,
@@ -64,7 +63,8 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeCellPresentationSliding(
-        animatedView: UIView
+        animatedView: UIView,
+        heightTo: CGFloat
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
             withDuration: totalDuration,
@@ -74,7 +74,7 @@ struct DayDetailsAnimationsHelper {
                     withRelativeStartTime: 0,
                     relativeDuration: 1 / 3,
                     animations: {
-                        animatedView.frame.origin.y -= Self.cellVerticalOffset
+                        animatedView.frame.origin.y = animatedView.frame.origin.y - heightTo
                     }
                 )
 
@@ -108,7 +108,8 @@ struct DayDetailsAnimationsHelper {
     }}
 
     static func makeCellDismissal(
-        animatedView: UIView
+        animatedView: UIView,
+        heightTo: CGFloat
     ) -> AnimationBlock {{
         UIView.animateKeyframes(
             withDuration: totalDuration,
@@ -118,7 +119,7 @@ struct DayDetailsAnimationsHelper {
                     withRelativeStartTime: 3 / 6,
                     relativeDuration: 1 / 2,
                     animations: {
-                        animatedView.frame.origin.y += Self.cellVerticalOffset
+                        animatedView.frame.origin.y = heightTo
                     }
                 )
 

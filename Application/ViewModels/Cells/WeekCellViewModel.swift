@@ -23,7 +23,8 @@ struct WeekCellViewModel {
         return formatter
     }()
 
-    typealias TapHandler = () -> Void
+    /// Weak design because vm knows about uiKit
+    typealias TapHandler = (WeekViewController) -> Void
 
     let isToday: Bool
     let amount: String

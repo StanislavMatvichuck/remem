@@ -21,7 +21,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            tapHandler: {}
+            tapHandler: { _ in }
         )
     }
 
@@ -46,7 +46,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: dayLater,
-            tapHandler: {}
+            tapHandler: { _ in }
         )
 
         XCTAssertFalse(sut.isToday)
@@ -65,7 +65,7 @@ class WeekItemViewModelTests: XCTestCase {
             event: event,
             day: day,
             today: day,
-            tapHandler: {}
+            tapHandler: { _ in }
         )
 
         XCTAssertEqual(sut.items.first, "00:00")

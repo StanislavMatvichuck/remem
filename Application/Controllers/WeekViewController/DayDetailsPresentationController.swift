@@ -9,7 +9,7 @@ import UIKit
 
 final class DayDetailsPresentationController: UIPresentationController {
     let weekViewController: WeekViewController
-    let dayDetailsViewController: DayDetailsViewController
+    var weekView: WeekView { weekViewController.viewRoot }
     var presenter: WeekToDayDetailsPresenter { weekViewController.presenter }
     var transition: UIPercentDrivenInteractiveTransition { presenter.dismissTransition }
 
@@ -40,7 +40,6 @@ final class DayDetailsPresentationController: UIPresentationController {
 
     init(week: WeekViewController, day: DayDetailsViewController) {
         self.weekViewController = week
-        self.dayDetailsViewController = day
         super.init(presentedViewController: day, presenting: nil)
     }
 
@@ -73,11 +72,12 @@ final class DayDetailsPresentationController: UIPresentationController {
     // MARK: - Private
     private func configureCellPresentation() {
         guard let index = presenter.animatedCellIndex,
-              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
+              let cell = weekViewController.viewRoot.collection.cellForItem(at: index)
         else { return }
 
         presenter.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
-            animatedView: animatedCell
+            animatedView: cell,
+            heightTo: weekView.dayCellVerticalDistanceToBottom
         ))
     }
 
@@ -89,11 +89,12 @@ final class DayDetailsPresentationController: UIPresentationController {
 
     private func configureCellDismissal() {
         guard let index = presenter.animatedCellIndex,
-              let animatedCell = weekViewController.viewRoot.collection.cellForItem(at: index)
+              let cell = weekViewController.viewRoot.collection.cellForItem(at: index)
         else { return }
 
         presenter.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
-            animatedView: animatedCell
+            animatedView: cell,
+            heightTo: weekView.dayCellDefaultFrameY
         ))
     }
 
