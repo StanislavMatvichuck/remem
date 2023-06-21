@@ -407,6 +407,7 @@
 		084A867D299A3FD400300918 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
 		084A867E299A3FD400300918 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
 		084A867F299A3FD500300918 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = uk.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
+		084B178D2A432150002BE641 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		084B21ED29C08E9200B601DA /* URLProvidingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidingTests.swift; sourceTree = "<group>"; };
 		084B21EF29C08F1A00B601DA /* LocalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		084B21F129C0929A00B601DA /* FileSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaving.swift; sourceTree = "<group>"; };
@@ -1921,6 +1922,7 @@
 				086FFE652816971A0054266E /* uk */,
 				086FFE6C28169DA70054266E /* ru */,
 				088B8455298D3CBA00F72EAA /* de */,
+				084B178D2A432150002BE641 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
