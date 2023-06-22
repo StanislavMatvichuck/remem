@@ -26,9 +26,15 @@ I did some web and cross-platform development using react-native and javascript 
 ## Download for ios
 https://apps.apple.com/ua/app/remem-counting/id1613756077
 
-## Quick demo
-![AppPreview01](https://github.com/StanislavMatvichuck/remem/assets/4983331/20a5116c-f287-443c-bc09-615c99f33803)
+## App Previews in store
+<details>
+  <summary>Click to view</summary>
+
+  ![AppPreview01](https://github.com/StanislavMatvichuck/remem/assets/4983331/20a5116c-f287-443c-bc09-615c99f33803)
+
 ![AppPreview02](https://github.com/StanislavMatvichuck/remem/assets/4983331/ace70188-5500-46f6-a73a-7d56d004b797)
+
+</details>
 
 ## Atlases produced by snapshot tests. It is production code with test data.
 
