@@ -130,6 +130,10 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertEqual(sut.viewRoot.goal.amount.text, "7")
     }
 
+    // MARK: - Accessory button plus
+    func test_noGoal_buttonPlusTapped_setsGoalToOne() {}
+
+    // MARK: - Private
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
         let vm = sut.viewModel.timeline[index.row]!
 

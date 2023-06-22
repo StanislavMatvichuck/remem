@@ -58,11 +58,8 @@ final class WeekSummaryView: UIView {
         label.numberOfLines = 1
         return label
     }()
-
-    let goalAccessory: UIView = {
-        let view = UIView(al: true)
-        return view
-    }()
+    
+    let accessory = GoalInputAccessoryView()
 
     let animatedProgressIndicator: UIView = {
         let view = UIView(al: true)
@@ -98,7 +95,6 @@ final class WeekSummaryView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
-        configureGoalToolbar()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -120,7 +116,6 @@ final class WeekSummaryView: UIView {
         progress.text = vm.progress
         goalBackground.isHidden = vm.goalHidden
         progressBackground.isHidden = vm.progressHidden
-        goalAccessory.isHidden = vm.goalTappable
         goalBackground.backgroundColor = vm.goalTappable ? .bg_primary : .bg_secondary
         progress.textColor = vm.goalAchieved ? .text_goalAchieved : .secondary
         configureProgressShade(vm.progressValue)
@@ -226,16 +221,6 @@ final class WeekSummaryView: UIView {
         goalSubtitle.textColor = .bg_item
         progressSubtitle.textColor = .bg_item
     }
-
-    private func configureGoalToolbar() {
-        let view = GoalInputAccessoryView()
-        view.done.addGestureRecognizer(UITapGestureRecognizer(
-            target: self, action: #selector(handleDone)
-        ))
-        goal.inputAccessoryView = view
-    }
-
-    @objc private func handleDone() { endEditing(true) }
 
     private func configureProgressShade(_ progress: CGFloat) {
         animatedTopConstraint.isActive = false

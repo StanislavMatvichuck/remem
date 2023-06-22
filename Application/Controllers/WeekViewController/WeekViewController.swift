@@ -36,12 +36,24 @@ final class WeekViewController: UIViewController {
         configureCollection()
         viewRoot.goal.goal.delegate = self
         viewRoot.configure(viewModel)
+        configureGoalAccessory()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
+
+    // MARK: - Events handling
+    private func configureGoalAccessory() {
+        let accessory = viewRoot.goal.accessory
+        viewRoot.goal.goal.inputAccessoryView = accessory
+        accessory.done.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(handleDone)
+        ))
+    }
+
+    @objc private func handleDone() { viewRoot.endEditing(true) }
 
     // MARK: - Private
     private func scheduleGoalUpdate() {
