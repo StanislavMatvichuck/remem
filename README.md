@@ -27,7 +27,10 @@ I did some web and cross-platform development using react-native and javascript 
 https://apps.apple.com/ua/app/remem-counting/id1613756077
 
 ## Quick demo
-https://user-images.githubusercontent.com/4983331/226573512-10b9c7ae-cfdb-411b-83ff-75b00c0cf3bb.mp4
+https://github.com/StanislavMatvichuck/remem/assets/4983331/20a5116c-f287-443c-bc09-615c99f33803
+https://github.com/StanislavMatvichuck/remem/assets/4983331/ace70188-5500-46f6-a73a-7d56d004b797
+
+
 
 ## Atlases produced by snapshot tests. It is production code with test data.
 
