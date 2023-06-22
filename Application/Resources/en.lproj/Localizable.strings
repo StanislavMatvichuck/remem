@@ -40,3 +40,4 @@
 "pdf.titlePage.title" = "pdf report";
 "pdf.titlePage.start" = "start";
 "pdf.titlePage.finish" = "finish";
+"pdf.download" = "download from app store";

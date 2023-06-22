@@ -61,6 +61,7 @@ final class MobilePdfMaker: PDFMaking {
 
         placeClockTile(context)
         moveToNextTile(context)
+        placeQRTile(context)
 
         makeNewPage(context)
 
@@ -103,6 +104,16 @@ final class MobilePdfMaker: PDFMaking {
 
         context.cgContext.scaleBy(x: down, y: down)
         week.view.layer.render(in: context.cgContext)
+        context.cgContext.scaleBy(x: up, y: up)
+    }
+
+    private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
+        let view = PdfQRPageView()
+        view.frame = CGRect(origin: .zero, size: CGSize(width: weekWidth, height: weekWidth))
+        view.layoutIfNeeded()
+
+        context.cgContext.scaleBy(x: down, y: down)
+        view.layer.render(in: context.cgContext)
         context.cgContext.scaleBy(x: up, y: up)
     }
 

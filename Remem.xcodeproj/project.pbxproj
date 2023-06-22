@@ -117,6 +117,7 @@
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
+		086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */; };
 		086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E397129809C5800CCE80E /* EventDetailsContainer.swift */; };
 		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -455,6 +456,7 @@
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
+		086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfQRPageView.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086E397129809C5800CCE80E /* EventDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContainer.swift; sourceTree = "<group>"; };
 		086E39732981431C00CCE80E /* DayDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsContainer.swift; sourceTree = "<group>"; };
@@ -871,6 +873,7 @@
 				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
 				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
 				085896B42A26540700390C76 /* PdfTitlePageView.swift */,
+				086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */,
 			);
 			path = Pdf;
 			sourceTree = "<group>";
@@ -1808,6 +1811,7 @@
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
 				08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */,
 				085896B22A2652BA00390C76 /* PdfTitlePageViewModel.swift in Sources */,
+				086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
 				08F467E829BF1E0B00D35AB6 /* DefaultPdfMaker.swift in Sources */,

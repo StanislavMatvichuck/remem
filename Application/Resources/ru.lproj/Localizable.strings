@@ -40,3 +40,4 @@
 "pdf.titlePage.title" = "pdf отчет";
 "pdf.titlePage.start" = "старт";
 "pdf.titlePage.finish" = "финиш";
+"pdf.download" = "загрузить из app store";
