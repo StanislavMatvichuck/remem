@@ -79,8 +79,8 @@ final class GoalInputAccessoryView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private static func makeContainer() -> UIView {
-        let container = UIView(al: true)
+    private static func makeContainer() -> UIButton {
+        let container = UIButton(al: true)
         container.backgroundColor = .bg
         container.layer.cornerRadius = Self.buttonsRadius
         return container
@@ -94,7 +94,7 @@ final class GoalInputAccessoryView: UIStackView {
         return label
     }
 
-    private static func make(_ text: String) -> UIView {
+    private static func make(_ text: String) -> UIButton {
         let view = makeContainer()
         let label = makeLabel(text)
         view.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)

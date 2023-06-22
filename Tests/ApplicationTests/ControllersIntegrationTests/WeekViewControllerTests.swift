@@ -17,6 +17,9 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
     var event: Event!
     var commander: EventsCommanding!
 
+    var buttonPlus: UIButton { sut.viewRoot.goal.accessory.plus }
+    var buttonMinus: UIButton { sut.viewRoot.goal.accessory.minus }
+
     override func setUp() {
         super.setUp()
         make()
@@ -131,7 +134,44 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
     }
 
     // MARK: - Accessory button plus
-    func test_noGoal_buttonPlusTapped_setsGoalToOne() {}
+    func test_noGoal_buttonPlusTapped_setsGoalToOne() {
+        tap(buttonPlus)
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "1")
+    }
+
+    func test_goalIsOne_buttonPlusTapped_setsGoalToTwo() {
+        arrangeEventWithGoalOf(1)
+
+        tap(buttonPlus)
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "2")
+    }
+
+    // MARK: - Accessory button minus
+    func test_noGoal_buttonMinusTapped_nothingHappens() {
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "")
+
+        tap(buttonMinus)
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "")
+    }
+
+    func test_goalIsOne_buttonMinusTapped_nothingHappens() {
+        arrangeEventWithGoalOf(1)
+
+        tap(buttonMinus)
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "1")
+    }
+
+    func test_goalIsTwo_buttonMinusTapped_setsGoalToOne() {
+        arrangeEventWithGoalOf(2)
+
+        tap(buttonMinus)
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, "1")
+    }
 
     // MARK: - Private
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
@@ -174,5 +214,16 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
             let weekCell = try XCTUnwrap(cell as? WeekCell)
             return weekCell.viewModel!.isToday
         }
+    }
+
+    private func arrangeEventWithGoalOf(
+        _ goalAmount: Int,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        event.setWeeklyGoal(amount: goalAmount, for: event.dateCreated)
+        sendEventUpdatesToController()
+
+        XCTAssertEqual(sut.viewRoot.goal.goal.text, String(goalAmount), file: file, line: line)
     }
 }

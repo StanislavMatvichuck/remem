@@ -51,9 +51,41 @@ final class WeekViewController: UIViewController {
         accessory.done.addGestureRecognizer(UITapGestureRecognizer(
             target: self, action: #selector(handleDone)
         ))
+        accessory.plus.addTarget(self, action: #selector(handlePlus), for: .touchUpInside)
+        accessory.minus.addTarget(self, action: #selector(handleMinus), for: .touchUpInside)
     }
 
-    @objc private func handleDone() { viewRoot.endEditing(true) }
+    @objc private func handleDone() {
+        viewRoot.endEditing(true)
+    }
+
+    @objc private func handlePlus() {
+        let parsedAmount = textInputParsedAmount()
+        let increasedAmount = parsedAmount + 1
+        let increasedAmountString = String(increasedAmount)
+        updateGoalFieldWith(amount: increasedAmountString)
+    }
+
+    @objc private func handleMinus() {
+        let parsedAmount = textInputParsedAmount()
+        let decreasedAmount = parsedAmount - 1
+
+        guard decreasedAmount >= 1 else { return }
+
+        let decreasedAmountString = String(decreasedAmount)
+        updateGoalFieldWith(amount: decreasedAmountString)
+    }
+
+    private func textInputParsedAmount() -> Int { Int(viewRoot.goal.goal.text ?? "") ?? 0 }
+    private func updateGoalFieldWith(amount: String) {
+        let input = viewRoot.goal.goal
+        input.text = amount
+        input.delegate?.textField?(
+            input,
+            shouldChangeCharactersIn: NSRange(),
+            replacementString: amount
+        )
+    }
 
     // MARK: - Private
     private func scheduleGoalUpdate() {
