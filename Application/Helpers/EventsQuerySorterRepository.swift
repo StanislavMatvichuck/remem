@@ -9,20 +9,25 @@ import Domain
 import Foundation
 
 protocol EventsQuerySorterRepository {
-    func getCurrent() -> EventsQuerySorter
+    func get() -> EventsQuerySorter
     func set(current: EventsQuerySorter)
 }
 
 struct UserDefaultsEventsQuerySorterRepository: EventsQuerySorterRepository {
-    func getCurrent() -> EventsQuerySorter {
-        if let orderingString = UserDefaults.standard.string(forKey: "EventsQuerySorter"),
+    private var defaults: UserDefaults { UserDefaults.standard }
+    private static let key = "EventsQuerySorter"
+
+    func get() -> EventsQuerySorter {
+        if let orderingString = defaults.string(forKey: Self.key),
            let ordering = EventsQuerySorter(rawValue: orderingString)
-        { return ordering }
+        {
+            return ordering
+        }
 
         return .alphabetical
     }
 
     func set(current: EventsQuerySorter) {
-        UserDefaults.standard.setValue(current.rawValue, forKey: "EventsQuerySorter")
+        defaults.setValue(current.rawValue, forKey: Self.key)
     }
 }

@@ -97,8 +97,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
     private func setupTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            guard let self else { return }
-            self.viewModel = self.factory.makeEventsListViewModel(self)
+            self?.update()
         }
     }
 

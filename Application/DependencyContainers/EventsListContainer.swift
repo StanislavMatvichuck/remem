@@ -19,19 +19,11 @@ final class EventsListContainer:
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
     let orderingRepository = UserDefaultsEventsQuerySorterRepository()
-    var ordering: EventsQuerySorter {
-        didSet { if oldValue != ordering {
-            orderingRepository.set(current: ordering)
-            updater.update()
-        }}
-    }
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
     init(parent: ApplicationContainer) {
-        let ordering = parent.mode.uiTestingDisabled ? orderingRepository.getCurrent() : .alphabetical
         self.parent = parent
-        self.ordering = ordering
     }
 
     func make() -> UIViewController {
@@ -50,8 +42,8 @@ final class EventsListContainer:
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let today = DayIndex(parent.currentMoment)
+        let ordering = uiTestingDisabled ? orderingRepository.get() : .alphabetical
         let events = parent.provider.get(using: ordering)
-        print("getting events using \(ordering)")
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
@@ -61,14 +53,19 @@ final class EventsListContainer:
         let hintVm = makeHintItemViewModel(events: events)
 
         let orderingItems = EventsQuerySorter.allCases.map {
-            OrderingCellItemViewModel(sorter: $0) { sorter in
-                self.ordering = sorter
+            OrderingCellItemViewModel(sorter: $0) { newSorter in
+                let currentSorter = self.orderingRepository.get()
+
+                if newSorter != currentSorter {
+                    self.orderingRepository.set(current: newSorter)
+                    self.updater.update()
+                }
             }
         }
 
         let orderingVm = OrderingCellViewModel(
             items: orderingItems,
-            selectedItemIndex: orderingItems.firstIndex { $0.hasSame(sorter: self.ordering) } ?? 0
+            selectedItemIndex: orderingItems.firstIndex { $0.hasSame(sorter: ordering) } ?? 0
         )
 
         let eventsViewModels = events.enumerated().map { index, event in
@@ -97,7 +94,9 @@ final class EventsListContainer:
         let vm = EventsListViewModel(
             today: today,
             items: items
-        ) { name in self.commander.save(Event(name: name)) }
+        ) { name in
+            self.commander.save(Event(name: name))
+        }
 
         return vm
     }
