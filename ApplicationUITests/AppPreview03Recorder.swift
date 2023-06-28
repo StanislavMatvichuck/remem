@@ -18,7 +18,7 @@ final class AppPreview03Recorder: AppPreviewRecorder {
             /// Add goal
             app.textFields[UITestAccessibilityIdentifier.textFieldGoal.rawValue].tap()
             app.keys["5"].tap()
-            app.otherElements[UITestAccessibilityIdentifier.buttonGoalDone.rawValue].tap()
+            app.buttons[UITestAccessibilityIdentifier.buttonGoalDone.rawValue].tap()
 
             /// Back to list
             app.navigationBars.buttons.firstMatch.tap()
@@ -43,7 +43,6 @@ final class AppPreview03Recorder: AppPreviewRecorder {
             cell(at: 2).tap()
             app.swipeUp()
             app.swipeDown()
-            app.navigationBars.buttons.firstMatch.tap()
         }
     }
 
