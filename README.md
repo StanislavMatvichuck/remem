@@ -18,10 +18,10 @@ I did some web and cross-platform development using react-native and javascript 
 ## Planned features list
 
 - [ ] **Volume tests.** Would be cool to prove mathematically that application will behave seamlessly even after 5-10 years of usage.
-- [ ] **Weekly goal.** Having a set goal allows to track and display the amount of progress towards it. (wip)
+- [x] **Weekly goal.** Having a set goal allows to track and display the amount of progress towards it. (wip)
 - [x] **PDF reports.** This will allow to share your achievements with others easily. (wip)
 - [x] **Events list sorting variants.** List is static which blocks user from any customisations and convenient widget usage. (wip)
-- [ ] **Fancy animated screenshots in store.** During day details interactive transition prototyping I realized that it is quite possible to add a bit of movement to store description with animations. I use [Blender Editor](https://www.blender.org) to create objects in 3D to animate them quickly and make a "movie" that serves as a reference during animation setup in code.
+- [x] **Fancy animated screenshots in store.** During day details interactive transition prototyping I realized that it is quite possible to add a bit of movement to store description with animations. I use [Blender Editor](https://www.blender.org) to create objects in 3D to animate them quickly and make a "movie" that serves as a reference during animation setup in code.
 
 ## Download for ios
 https://apps.apple.com/ua/app/remem-counting/id1613756077
@@ -30,10 +30,9 @@ https://apps.apple.com/ua/app/remem-counting/id1613756077
 <details>
   <summary>Click to view</summary>
 
-  ![AppPreview01](https://github.com/StanislavMatvichuck/remem/assets/4983331/20a5116c-f287-443c-bc09-615c99f33803)
-
-![AppPreview02](https://github.com/StanislavMatvichuck/remem/assets/4983331/ace70188-5500-46f6-a73a-7d56d004b797)
-
+  ![AppPreview01](https://github.com/StanislavMatvichuck/remem/assets/4983331/1a292ac5-0b41-44f6-abfd-d19a2c8cba82)
+  ![AppPreview02](https://github.com/StanislavMatvichuck/remem/assets/4983331/addf98c5-280c-4435-9e83-4f994b3f2045)
+  ![AppPreview03](https://github.com/StanislavMatvichuck/remem/assets/4983331/f24466b9-5afa-423a-8d28-8a6bb68fd04f)
 </details>
 
 ## Atlases produced by snapshot tests. It is production code with test data.
