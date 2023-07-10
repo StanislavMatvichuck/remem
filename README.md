@@ -51,16 +51,3 @@ German localization
 Russian localization
 
 ![Atlas for Russian localization](/Tests/Snapshots/images_ru_64/iphonese(3rdgeneration)/light/ZAtlas/test05_eventsListBasicFlow.png)
-
-
-## Domain model description
-
-An `Event` can be added by providing `name`
-
-A `Happening` can be added to `Event` at certain `dateTime`
-
-Existing `Happening` can be removed from `Event`
-
-Existing `Event` can be deleted
-
-Existing `Event` can be renamed
