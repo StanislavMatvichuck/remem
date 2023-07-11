@@ -31,6 +31,7 @@ Any software project alive must evolve and grow in time so please **feel free to
 ## App Previews in store
 <details>
   <summary>Click to view</summary>
+  
   ![AppPreview01](https://github.com/StanislavMatvichuck/remem/assets/4983331/1a292ac5-0b41-44f6-abfd-d19a2c8cba82)
   ![AppPreview02](https://github.com/StanislavMatvichuck/remem/assets/4983331/addf98c5-280c-4435-9e83-4f994b3f2045)
   ![AppPreview03](https://github.com/StanislavMatvichuck/remem/assets/4983331/f24466b9-5afa-423a-8d28-8a6bb68fd04f)
