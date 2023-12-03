@@ -102,6 +102,8 @@
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
 		086136502934D64300F1B780 /* TestingWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861364F2934D64300F1B780 /* TestingWeekViewController.swift */; };
 		0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */; };
+		0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */; };
+		0865DC482B1CA46D00E128FB /* PdfMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */; };
 		08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */; };
 		08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingCell.swift */; };
 		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
@@ -446,6 +448,8 @@
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
 		0861364F2934D64300F1B780 /* TestingWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingWeekViewController.swift; sourceTree = "<group>"; };
 		0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputAccessoryView.swift; sourceTree = "<group>"; };
+		0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModelTests.swift; sourceTree = "<group>"; };
+		0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModel.swift; sourceTree = "<group>"; };
 		08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewModel.swift; sourceTree = "<group>"; };
 		08677BD029F7C59800AD5383 /* OrderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCell.swift; sourceTree = "<group>"; };
 		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
@@ -682,6 +686,7 @@
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */,
+				0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -979,6 +984,7 @@
 				088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */,
 				087365FF2930DD29000F28DE /* WeekViewModelTests.swift */,
 				08A376032A1796260037D43A /* WeekSummaryViewModelTests.swift */,
+				0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1697,6 +1703,7 @@
 				0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
+				0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */,
@@ -1752,6 +1759,7 @@
 				085145C629AE07C500CA533D /* WeekContainer.swift in Sources */,
 				08293CC127B670FC0039E432 /* WeekCell.swift in Sources */,
 				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
+				0865DC482B1CA46D00E128FB /* PdfMakingViewModel.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
 				0852C6AD283D66170027EF3E /* WeekViewController.swift in Sources */,
 				08A376022A1795F20037D43A /* WeekSummaryViewModel.swift in Sources */,
@@ -1941,7 +1949,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -1953,7 +1961,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1970,7 +1978,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -1982,7 +1990,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2388,7 +2396,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2405,7 +2413,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2422,7 +2430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;
@@ -2438,7 +2446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
