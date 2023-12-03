@@ -33,10 +33,11 @@ final class EventDetailsContainer:
         let week = makeWeekViewController()
         let summary = makeSummaryViewController()
         let pdf = makePdfMakingViewController(week, summary, clock)
+        let visualisation = makeVisualisationMakingViewController()
 
         let controller = EventDetailsViewController(
             factory: self,
-            controllers: [week, summary, clock, pdf]
+            controllers: [week, summary, clock, pdf, visualisation]
         )
 
         updater.addDelegate(controller)
@@ -75,5 +76,9 @@ final class EventDetailsContainer:
             clock: clock,
             coordinator: parent.parent.coordinator
         ).make() as! PdfMakingViewController
+    }
+
+    func makeVisualisationMakingViewController() -> VisualisationMakingViewController {
+        VisualisationMakingViewController(VisualisationMakingView())
     }
 }

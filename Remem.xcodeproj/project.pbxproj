@@ -104,6 +104,10 @@
 		0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */; };
 		0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */; };
 		0865DC482B1CA46D00E128FB /* PdfMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */; };
+		0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */; };
+		0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */; };
+		0865DC532B1CD45200E128FB /* VisualisationMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */; };
+		0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */; };
 		08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */; };
 		08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingCell.swift */; };
 		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
@@ -391,6 +395,7 @@
 		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		082D80DA2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewControllerTests.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		0834D6B32A0AA387008F0124 /* WeekCellDayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellDayContainer.swift; sourceTree = "<group>"; };
 		08396EE929A64B5900281E51 /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
@@ -450,6 +455,10 @@
 		0862A5432A025F82001CDF2F /* GoalInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputAccessoryView.swift; sourceTree = "<group>"; };
 		0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModel.swift; sourceTree = "<group>"; };
+		0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewController.swift; sourceTree = "<group>"; };
+		0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingView.swift; sourceTree = "<group>"; };
+		0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewModel.swift; sourceTree = "<group>"; };
+		0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewControllerTests.swift; sourceTree = "<group>"; };
 		08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewModel.swift; sourceTree = "<group>"; };
 		08677BD029F7C59800AD5383 /* OrderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCell.swift; sourceTree = "<group>"; };
 		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
@@ -687,6 +696,7 @@
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */,
 				0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */,
+				0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -898,6 +908,14 @@
 			path = EventCell;
 			sourceTree = "<group>";
 		};
+		0865DC4F2B1CB3C100E128FB /* Visualisation */ = {
+			isa = PBXGroup;
+			children = (
+				0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */,
+			);
+			path = Visualisation;
+			sourceTree = "<group>";
+		};
 		08677BD229F7C63E00AD5383 /* OrderingCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -929,6 +947,7 @@
 		086DC6D12880578E0048F22F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0865DC4F2B1CB3C100E128FB /* Visualisation */,
 				085896B32A2653F400390C76 /* Pdf */,
 				086DC6D3288058E70048F22F /* Cells */,
 				0879AC8F2879B12400D8DD8E /* ClockView */,
@@ -985,6 +1004,7 @@
 				087365FF2930DD29000F28DE /* WeekViewModelTests.swift */,
 				08A376032A1796260037D43A /* WeekSummaryViewModelTests.swift */,
 				0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */,
+				082D80DA2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1060,6 +1080,7 @@
 				08913779292BCDEF00EFD23D /* WeekViewControllerTests.swift */,
 				08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */,
 				08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */,
+				0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */,
 			);
 			path = ControllersIntegrationTests;
 			sourceTree = "<group>";
@@ -1197,6 +1218,7 @@
 				08396EE929A64B5900281E51 /* WidgetViewController.swift */,
 				08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */,
 				08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */,
+				0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1678,6 +1700,8 @@
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
+				082D80DB2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift in Sources */,
+				0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
@@ -1734,6 +1758,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
+				0865DC532B1CD45200E128FB /* VisualisationMakingViewModel.swift in Sources */,
 				0862A5442A025F82001CDF2F /* GoalInputAccessoryView.swift in Sources */,
 				087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */,
 				08FEA39428DC989E00BAA196 /* WeekCellViewModel.swift in Sources */,
@@ -1752,6 +1777,7 @@
 				08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */,
+				0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */,
 				08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInputView.swift in Sources */,
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
@@ -1840,6 +1866,7 @@
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
+				0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				0834D6B42A0AA387008F0124 /* WeekCellDayContainer.swift in Sources */,

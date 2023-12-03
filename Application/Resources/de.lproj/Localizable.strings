@@ -41,3 +41,5 @@
 "pdf.titlePage.start" = "start";
 "pdf.titlePage.finish" = "beenden";
 "pdf.download" = "download from store";
+
+"visualisation.create" = "Zeig mir was du hast";

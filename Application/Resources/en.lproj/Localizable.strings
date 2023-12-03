@@ -41,3 +41,5 @@
 "pdf.titlePage.start" = "start";
 "pdf.titlePage.finish" = "finish";
 "pdf.download" = "download from app store";
+
+"visualisation.create" = "Show me what you got";
