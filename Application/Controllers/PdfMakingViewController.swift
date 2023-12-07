@@ -7,24 +7,19 @@
 
 import UIKit
 
-final class PdfMakingViewController: UIViewController {
-    private let provider: URLProviding
-    private let pdfMaker: PDFMaking
-    private let saver: FileSaving
-    private let completion: () -> ()
-    let viewRoot: PdfMakingView
+protocol PdfMakingViewModelFactoring {
+    func makePdfMakingViewModel() -> PdfMakingViewModel
+}
 
-    init(
-        provider: URLProviding,
-        pdfMaker: PDFMaking,
-        saver: FileSaving,
-        completion: @escaping () -> ()
-    ) {
-        self.provider = provider
-        self.pdfMaker = pdfMaker
-        self.saver = saver
-        self.completion = completion
+final class PdfMakingViewController: UIViewController {
+    let viewRoot: PdfMakingView
+    let factory: PdfMakingViewModelFactoring
+    let viewModel: PdfMakingViewModel
+
+    init(_ factory: PdfMakingViewModelFactoring) {
+        self.factory = factory
         self.viewRoot = PdfMakingView()
+        self.viewModel = factory.makePdfMakingViewModel()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -42,7 +37,6 @@ final class PdfMakingViewController: UIViewController {
 
     @objc func handleTap(_: UIButton) {
         viewRoot.button.animateTapReceiving()
-        saver.save(pdfMaker.make(), to: provider.url)
-        completion()
+        viewModel.tapHandler()
     }
 }

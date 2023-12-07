@@ -68,14 +68,7 @@ final class EventDetailsContainer:
         _ summary: SummaryViewController,
         _ clock: ClockViewController
     ) -> PdfMakingViewController {
-        PdfMakingContainer(
-            event: event,
-            currentMoment: parent.parent.currentMoment,
-            week: week,
-            summary: summary,
-            clock: clock,
-            coordinator: parent.parent.coordinator
-        ).make() as! PdfMakingViewController
+        PdfMakingContainer(parent: self).make() as! PdfMakingViewController
     }
 
     func makeVisualisationMakingViewController() -> VisualisationMakingViewController {

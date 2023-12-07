@@ -10,9 +10,6 @@ import UIKit
 
 // TODO: remove duplications in pdf makers
 final class MobilePdfMaker: PDFMaking {
-    private let week: WeekViewController
-    private let summary: SummaryViewController
-    private let clock: ClockViewController
     private let titlePageViewModel: PdfTitlePageViewModel
 
     let pageWidth = CGFloat.screenW * 0.94
@@ -21,23 +18,15 @@ final class MobilePdfMaker: PDFMaking {
 
     var pageHeight: CGFloat { tileHeight * 2 + 1 }
     var page: CGRect { CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageHeight)) }
-    var weekWidth: CGFloat { week.view.layer.bounds.width }
+    
 
-    var down: CGFloat { tileWidth / weekWidth }
+    var down: CGFloat { tileWidth / pageWidth }
     var up: CGFloat { 1 / down }
-    var weeksAmount: Int { week.viewModel.pages.count }
+    var weeksAmount: Int { 3 }
     var gridColumns: Int { 2 }
     var height: CGFloat = 0
 
-    init(
-        week: WeekViewController,
-        summary: SummaryViewController,
-        clock: ClockViewController,
-        titleVm: PdfTitlePageViewModel
-    ) {
-        self.week = week
-        self.summary = summary
-        self.clock = clock
+    init(titleVm: PdfTitlePageViewModel) {
         self.titlePageViewModel = titleVm
     }
 
@@ -76,7 +65,7 @@ final class MobilePdfMaker: PDFMaking {
 
     private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {
         let view = PdfTitlePageView()
-        view.frame = CGRect(origin: .zero, size: CGSize(width: weekWidth, height: weekWidth))
+        view.frame = CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageWidth))
         view.configure(titlePageViewModel)
         view.layoutIfNeeded()
 
@@ -87,29 +76,31 @@ final class MobilePdfMaker: PDFMaking {
 
     private func placeClockTile(_ context: UIGraphicsPDFRendererContext) {
         context.cgContext.scaleBy(x: down, y: down)
-        clock.view.layer.render(in: context.cgContext)
+//        clock.view.layer.render(in: context.cgContext)
+        let clock = ClockView(viewModel: titlePageViewModel.clockViewModel)
+        clock.layer.render(in: context.cgContext)
         context.cgContext.scaleBy(x: up, y: up)
     }
 
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
-        context.cgContext.scaleBy(x: down, y: down)
-        summary.view.layer.render(in: context.cgContext)
-        context.cgContext.scaleBy(x: up, y: up)
+//        context.cgContext.scaleBy(x: down, y: down)
+//        summary.view.layer.render(in: context.cgContext)
+//        context.cgContext.scaleBy(x: up, y: up)
     }
 
     private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
-        week.viewModel.timelineVisibleIndex = i * 7
-        week.viewRoot.setNeedsLayout()
-        week.viewRoot.layoutIfNeeded()
-
-        context.cgContext.scaleBy(x: down, y: down)
-        week.view.layer.render(in: context.cgContext)
-        context.cgContext.scaleBy(x: up, y: up)
+//        week.viewModel.timelineVisibleIndex = i * 7
+//        week.viewRoot.setNeedsLayout()
+//        week.viewRoot.layoutIfNeeded()
+//
+//        context.cgContext.scaleBy(x: down, y: down)
+//        week.view.layer.render(in: context.cgContext)
+//        context.cgContext.scaleBy(x: up, y: up)
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
         let view = PdfQRPageView()
-        view.frame = CGRect(origin: .zero, size: CGSize(width: weekWidth, height: weekWidth))
+        view.frame = CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageWidth))
         view.layoutIfNeeded()
 
         context.cgContext.scaleBy(x: down, y: down)

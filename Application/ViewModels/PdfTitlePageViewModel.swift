@@ -22,10 +22,12 @@ struct PdfTitlePageViewModel {
     let readableStart: String
     let readableFinish: String
     let eventTitle: String
+    let clockViewModel: ClockViewModel
 
     init(event: Event, dateCreated: Date) {
         eventTitle = event.name
         readableStart = Self.formatter.string(from: event.dateCreated)
         readableFinish = Self.formatter.string(from: dateCreated)
+        clockViewModel = ClockViewModel(event: event, size: 24)
     }
 }

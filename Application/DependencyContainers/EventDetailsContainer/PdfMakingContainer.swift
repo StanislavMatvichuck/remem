@@ -8,54 +8,44 @@
 import Domain
 import UIKit
 
-final class PdfMakingContainer: ControllerFactoring {
+final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring {
+    let parent: EventDetailsContainer
     let urlProviding: URLProviding
-    let event: Event
-    let currentMoment: Date
-    let week: WeekViewController
-    let summary: SummaryViewController
-    let clock: ClockViewController
-    let coordinator: Coordinator?
+
+    var coordinator: Coordinator { parent.parent.parent.coordinator }
+    var moment: Date { parent.parent.parent.currentMoment }
+    var event: Event { parent.event }
 
     init(
-        event: Event,
-        currentMoment: Date,
-        week: WeekViewController,
-        summary: SummaryViewController,
-        clock: ClockViewController,
-        coordinator: Coordinator? = nil,
+        parent: EventDetailsContainer,
         urlProviding: URLProviding = LocalFile.pdfReport
     ) {
-        self.event = event
-        self.currentMoment = currentMoment
-        self.week = week
-        self.summary = summary
-        self.clock = clock
-        self.coordinator = coordinator
+        self.parent = parent
         self.urlProviding = urlProviding
     }
 
     func make() -> UIViewController {
-        let pdfMaker = MobilePdfMaker(
-            week: week,
-            summary: summary,
-            clock: clock,
-            titleVm: makePdfTitlePageViewModel()
-        )
-        let controller = PdfMakingViewController(
-            provider: urlProviding,
-            pdfMaker: pdfMaker,
-            saver: DefaultLocalFileSaver(),
-            completion: {
-                self.coordinator?.show(.pdf(
-                    factory: PdfContainer(provider: self.urlProviding)
-                ))
-            }
-        )
-        return controller
+        PdfMakingViewController(self)
+    }
+
+    func makePdfMakingViewModel() -> PdfMakingViewModel {
+        PdfMakingViewModel {
+            let pdfData = MobilePdfMaker(
+                titleVm: self.makePdfTitlePageViewModel()
+            ).make()
+
+            let saver = DefaultLocalFileSaver()
+            saver.save(pdfData, to: self.urlProviding.url)
+
+            let pdfContainer = PdfContainer(provider: self.urlProviding)
+            self.coordinator.show(.pdf(factory: pdfContainer))
+        }
     }
 
     func makePdfTitlePageViewModel() -> PdfTitlePageViewModel {
-        PdfTitlePageViewModel(event: event, dateCreated: currentMoment)
+        PdfTitlePageViewModel(
+            event: event,
+            dateCreated: moment
+        )
     }
 }

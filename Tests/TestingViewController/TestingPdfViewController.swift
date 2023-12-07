@@ -38,15 +38,7 @@ extension TestingViewController where Controller == PdfViewController {
 
         let url = LocalFile.testingPdfReport
 
-        let pdfMakingContainer = PdfMakingContainer(
-            event: event,
-            currentMoment: today.date,
-            week: week,
-            summary: summary,
-            clock: clock,
-            coordinator: container.parent.parent.coordinator,
-            urlProviding: url
-        )
+        let pdfMakingContainer = PdfMakingContainer(parent: container)
 
         let pdfMaker = pdfMakingContainer.make() as! PdfMakingViewController
         pdfMaker.loadViewIfNeeded()
