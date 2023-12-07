@@ -31,7 +31,7 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
     func makePdfMakingViewModel() -> PdfMakingViewModel {
         PdfMakingViewModel {
             let pdfData = MobilePdfMaker(
-                titleVm: self.makePdfTitlePageViewModel()
+                viewModel: self.makePdfViewModel()
             ).make()
 
             let saver = DefaultLocalFileSaver()
@@ -42,8 +42,8 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
         }
     }
 
-    func makePdfTitlePageViewModel() -> PdfTitlePageViewModel {
-        PdfTitlePageViewModel(
+    func makePdfViewModel() -> PdfViewModel {
+        PdfViewModel(
             event: event,
             dateCreated: moment
         )

@@ -93,7 +93,7 @@
 		0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01B292FE66F00924530 /* EventDetailsSnapshots.swift */; };
 		0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
 		0857B5A629892CBC002B400B /* AppPreview02Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */; };
-		085896B22A2652BA00390C76 /* PdfTitlePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */; };
+		085896B22A2652BA00390C76 /* PdfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PdfViewModel.swift */; };
 		085896B52A26540700390C76 /* PdfTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PdfTitlePageView.swift */; };
 		085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */; };
 		085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */; };
@@ -444,7 +444,7 @@
 		0857A01D292FFD5900924530 /* TestingClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingClockViewController.swift; sourceTree = "<group>"; };
 		0857B5A329892CBC002B400B /* ApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview02Recorder.swift; sourceTree = "<group>"; };
-		085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfTitlePageViewModel.swift; sourceTree = "<group>"; };
+		085896B12A2652BA00390C76 /* PdfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewModel.swift; sourceTree = "<group>"; };
 		085896B42A26540700390C76 /* PdfTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfTitlePageView.swift; sourceTree = "<group>"; };
 		085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQuerySorterRepository.swift; sourceTree = "<group>"; };
 		085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapperTests.swift; sourceTree = "<group>"; };
@@ -694,7 +694,7 @@
 				08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */,
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
-				085896B12A2652BA00390C76 /* PdfTitlePageViewModel.swift */,
+				085896B12A2652BA00390C76 /* PdfViewModel.swift */,
 				0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */,
 				0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */,
 			);
@@ -1700,7 +1700,6 @@
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
-				082D80DB2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift in Sources */,
 				0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
@@ -1844,7 +1843,7 @@
 				08A376002A1795820037D43A /* WeekSummaryView.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
 				08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */,
-				085896B22A2652BA00390C76 /* PdfTitlePageViewModel.swift in Sources */,
+				085896B22A2652BA00390C76 /* PdfViewModel.swift in Sources */,
 				086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,

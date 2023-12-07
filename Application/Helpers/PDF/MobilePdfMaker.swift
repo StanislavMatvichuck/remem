@@ -10,7 +10,7 @@ import UIKit
 
 // TODO: remove duplications in pdf makers
 final class MobilePdfMaker: PDFMaking {
-    private let titlePageViewModel: PdfTitlePageViewModel
+    private let viewModel: PdfViewModel
 
     let pageWidth = CGFloat.screenW * 0.94
     var tileWidth: CGFloat { pageWidth / 2 }
@@ -18,7 +18,6 @@ final class MobilePdfMaker: PDFMaking {
 
     var pageHeight: CGFloat { tileHeight * 2 + 1 }
     var page: CGRect { CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageHeight)) }
-    
 
     var down: CGFloat { tileWidth / pageWidth }
     var up: CGFloat { 1 / down }
@@ -26,8 +25,8 @@ final class MobilePdfMaker: PDFMaking {
     var gridColumns: Int { 2 }
     var height: CGFloat = 0
 
-    init(titleVm: PdfTitlePageViewModel) {
-        self.titlePageViewModel = titleVm
+    init(viewModel: PdfViewModel) {
+        self.viewModel = viewModel
     }
 
     func make() -> Data {
@@ -66,7 +65,7 @@ final class MobilePdfMaker: PDFMaking {
     private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {
         let view = PdfTitlePageView()
         view.frame = CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageWidth))
-        view.configure(titlePageViewModel)
+        view.configure(viewModel)
         view.layoutIfNeeded()
 
         context.cgContext.scaleBy(x: down, y: down)
@@ -77,7 +76,7 @@ final class MobilePdfMaker: PDFMaking {
     private func placeClockTile(_ context: UIGraphicsPDFRendererContext) {
         context.cgContext.scaleBy(x: down, y: down)
 //        clock.view.layer.render(in: context.cgContext)
-        let clock = ClockView(viewModel: titlePageViewModel.clockViewModel)
+        let clock = ClockView(viewModel: viewModel.clockViewModel)
         clock.layer.render(in: context.cgContext)
         context.cgContext.scaleBy(x: up, y: up)
     }
