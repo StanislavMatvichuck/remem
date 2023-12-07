@@ -10,20 +10,17 @@ import UIKit
 
 // TODO: remove duplications in pdf makers
 final class MobilePdfMaker: PDFMaking {
+    private static let pageWidth = CGFloat.screenW * 0.94
+
+    private let page = CGRect(
+        origin: .zero,
+        size: CGSize(
+            width: pageWidth,
+            height: pageWidth
+        )
+    )
+
     private let viewModel: PdfViewModel
-
-    let pageWidth = CGFloat.screenW * 0.94
-    var tileWidth: CGFloat { pageWidth / 2 }
-    var tileHeight: CGFloat { tileWidth }
-
-    var pageHeight: CGFloat { tileHeight * 2 + 1 }
-    var page: CGRect { CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageHeight)) }
-
-    var down: CGFloat { tileWidth / pageWidth }
-    var up: CGFloat { 1 / down }
-    var weeksAmount: Int { 3 }
-    var gridColumns: Int { 2 }
-    var height: CGFloat = 0
 
     init(viewModel: PdfViewModel) {
         self.viewModel = viewModel
@@ -41,50 +38,50 @@ final class MobilePdfMaker: PDFMaking {
         makeNewPage(context)
 
         placeFirstTile(context)
-        moveToNextTile(context)
-
-        placeSummaryTile(context)
-        moveToNextTile(context)
-        moveToNextLine(context)
-
-        placeClockTile(context)
-        moveToNextTile(context)
-        placeQRTile(context)
-
         makeNewPage(context)
 
-        for i in 0 ..< weeksAmount {
-            if nextLineNeeded(i) { moveToNextLine(context) }
-            if nextPageNeeded(i) { makeNewPage(context) }
+        placeSummaryTile(context)
+        makeNewPage(context)
 
+        placeClockTile(context)
+        makeNewPage(context)
+
+        placeQRTile(context)
+        makeNewPage(context)
+
+        for i in 0 ..< viewModel.weeksAmount {
             placeWeekTile(tileNumber: i, context)
-            moveToNextTile(context)
+            makeNewPage(context)
         }
     }
 
     private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {
         let view = PdfTitlePageView()
-        view.frame = CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageWidth))
+        view.frame = page
         view.configure(viewModel)
         view.layoutIfNeeded()
 
-        context.cgContext.scaleBy(x: down, y: down)
         view.layer.render(in: context.cgContext)
-        context.cgContext.scaleBy(x: up, y: up)
     }
 
     private func placeClockTile(_ context: UIGraphicsPDFRendererContext) {
-        context.cgContext.scaleBy(x: down, y: down)
-//        clock.view.layer.render(in: context.cgContext)
         let clock = ClockView(viewModel: viewModel.clockViewModel)
-        clock.layer.render(in: context.cgContext)
-        context.cgContext.scaleBy(x: up, y: up)
+        let view = UIView(frame: page)
+
+        view.addSubview(clock)
+        clock.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        clock.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        clock.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.layoutIfNeeded()
+        view.layer.render(in: context.cgContext)
     }
 
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
-//        context.cgContext.scaleBy(x: down, y: down)
-//        summary.view.layer.render(in: context.cgContext)
-//        context.cgContext.scaleBy(x: up, y: up)
+        let view = SummaryView(viewModel: viewModel.summaryViewModel)
+        view.frame = page
+        view.layoutIfNeeded()
+        view.layer.render(in: context.cgContext)
     }
 
     private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
@@ -99,31 +96,17 @@ final class MobilePdfMaker: PDFMaking {
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
         let view = PdfQRPageView()
-        view.frame = CGRect(origin: .zero, size: CGSize(width: pageWidth, height: pageWidth))
+        view.frame = page
         view.layoutIfNeeded()
 
-        context.cgContext.scaleBy(x: down, y: down)
         view.layer.render(in: context.cgContext)
-        context.cgContext.scaleBy(x: up, y: up)
     }
 
-    private func nextLineNeeded(_ i: Int) -> Bool { i > 0 && i % gridColumns == 0 }
-    private func nextPageNeeded(_ i: Int) -> Bool { height >= pageHeight }
-    private func lastTile(_ i: Int) -> Bool { i == weeksAmount }
-
-    private func moveToNextLine(_ context: UIGraphicsPDFRendererContext) {
-        context.cgContext.translateBy(x: -CGFloat(gridColumns) * tileWidth, y: tileHeight)
-        height += tileHeight
-    }
+    private func lastTile(_ i: Int) -> Bool { i == viewModel.weeksAmount }
 
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
         context.cgContext.setFillColor(UIColor.bg.cgColor)
         context.cgContext.fill(page)
-        height = tileHeight
-    }
-
-    private func moveToNextTile(_ context: UIGraphicsPDFRendererContext) {
-        context.cgContext.translateBy(x: tileWidth, y: 0)
     }
 }

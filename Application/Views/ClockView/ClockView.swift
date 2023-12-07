@@ -8,11 +8,13 @@
 import UIKit
 
 final class ClockView: UIView {
-    private static let digitsRadius = CGFloat.layoutSquare * 1.65
     private static let digitsAngle = 2 * CGFloat.pi / 24
     private static let digitsAngleOffset = CGFloat.pi / 2
 
     let clockFace: ClockFace
+    private var digitsInstalled = false
+    private var iconsInstalled = false
+    private var digitsRadius: CGFloat { bounds.width / 4.5 }
 
     let clockSymbols = [
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
@@ -23,6 +25,7 @@ final class ClockView: UIView {
     init(viewModel: ClockViewModel) {
         self.clockFace = ClockFace(viewModel: viewModel)
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
         setupLayout()
     }
@@ -32,9 +35,6 @@ final class ClockView: UIView {
     private func setupLayout() {
         addSubview(clockFace)
 
-        configureDigits()
-        addIcons()
-
         NSLayoutConstraint.activate([
             clockFace.widthAnchor.constraint(equalTo: widthAnchor),
             clockFace.heightAnchor.constraint(equalTo: heightAnchor),
@@ -43,7 +43,15 @@ final class ClockView: UIView {
         ])
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureDigits()
+        addIcons()
+    }
+
     private func configureDigits() {
+        guard !digitsInstalled else { return }
+
         let digitsLabels = clockSymbols.enumerated().map {
             $0 % 3 == 0 ?
                 Self.makeCapitalizedLabel($1) :
@@ -55,26 +63,30 @@ final class ClockView: UIView {
             label.centerXAnchor.constraint(equalTo: centerXAnchor, constant: xForDigit(index)).isActive = true
             label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: yForDigit(index)).isActive = true
         }
+
+        digitsInstalled = true
     }
 
     private func xForDigit(_ index: Int) -> CGFloat {
         let angle = Self.digitsAngle * CGFloat(index) + Self.digitsAngleOffset
-        return Self.digitsRadius * cos(angle)
+        return digitsRadius * cos(angle)
     }
 
     private func yForDigit(_ index: Int) -> CGFloat {
         let angle = Self.digitsAngle * CGFloat(index) + Self.digitsAngleOffset
-        return Self.digitsRadius * sin(angle)
+        return digitsRadius * sin(angle)
     }
 
     private func addIcons() {
+        guard !iconsInstalled else { return }
+
         let imageViewDay = makeIcon(name: "sun.max")
         let imageViewNight = makeIcon(name: "moon.stars")
 
         addSubview(imageViewDay)
         addSubview(imageViewNight)
 
-        let radius = Self.digitsRadius / 2
+        let radius = digitsRadius / 2
         let sunAngle = 3 * Self.digitsAngleOffset
         let moonAngle = Self.digitsAngleOffset
 
@@ -85,6 +97,8 @@ final class ClockView: UIView {
             imageViewDay.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(sunAngle)),
             imageViewNight.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(moonAngle)),
         ])
+
+        iconsInstalled = true
     }
 
     private static func makeLabel(_ text: String) -> UILabel {

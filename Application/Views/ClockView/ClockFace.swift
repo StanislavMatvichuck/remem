@@ -77,7 +77,7 @@ final class ClockFace: UIView {
     }
 
     private func makePath(for item: ClockCellViewModel) -> CGPath {
-        let radius = CGFloat.layoutSquare * 3.5
+        let radius = bounds.width / 2
 
         let lineStart = CGPoint(x: 0, y: radius - Self.sectionMaximumLength)
         let lineEnd = CGPoint(x: 0, y: radius - Self.lineCapRadius)
@@ -97,7 +97,7 @@ final class ClockFace: UIView {
     }
 
     private func strokeEnd(for item: ClockCellViewModel) -> CGFloat {
-        0.01 + 0.95 * item.length
+        0.001 + 0.95 * item.length
     }
 
     private func color(for item: ClockCellViewModel) -> CGColor {

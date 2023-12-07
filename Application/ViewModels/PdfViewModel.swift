@@ -23,11 +23,14 @@ struct PdfViewModel {
     let readableFinish: String
     let eventTitle: String
     let clockViewModel: ClockViewModel
+    let summaryViewModel: SummaryViewModel
+    let weeksAmount: Int = 3
 
     init(event: Event, dateCreated: Date) {
         eventTitle = event.name
         readableStart = Self.formatter.string(from: event.dateCreated)
         readableFinish = Self.formatter.string(from: dateCreated)
         clockViewModel = ClockViewModel(event: event, size: 24)
+        summaryViewModel = SummaryViewModel(event: event, today: DayIndex(dateCreated))
     }
 }
