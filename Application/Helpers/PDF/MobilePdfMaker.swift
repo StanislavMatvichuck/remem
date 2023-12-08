@@ -36,18 +36,16 @@ final class MobilePdfMaker: PDFMaking {
 
     private func renderControllersInGrid(_ context: UIGraphicsPDFRendererContext) {
         makeNewPage(context)
-
         placeFirstTile(context)
-        makeNewPage(context)
 
+        makeNewPage(context)
         placeSummaryTile(context)
-        makeNewPage(context)
 
+        makeNewPage(context)
         placeClockTile(context)
-        makeNewPage(context)
 
-        placeQRTile(context)
         makeNewPage(context)
+        placeQRTile(context)
 
         for i in 0 ..< viewModel.weeksAmount {
             placeWeekTile(tileNumber: i, context)
@@ -80,12 +78,12 @@ final class MobilePdfMaker: PDFMaking {
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
         let summary = SummaryView(viewModel: viewModel.summaryViewModel)
         let view = UIView(frame: page)
-        
+
         view.addSubview(summary)
         summary.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         summary.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         summary.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+
         view.layoutIfNeeded()
         view.layer.render(in: context.cgContext)
     }
@@ -101,10 +99,15 @@ final class MobilePdfMaker: PDFMaking {
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
-        let view = PdfQRPageView()
-        view.frame = page
-        view.layoutIfNeeded()
+        let qr = PdfQRPageView()
+        let view = UIView(frame: page)
 
+        view.addSubview(qr)
+        qr.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        qr.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        qr.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.layoutIfNeeded()
         view.layer.render(in: context.cgContext)
     }
 

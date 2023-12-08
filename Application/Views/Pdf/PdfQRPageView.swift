@@ -8,23 +8,11 @@
 import UIKit
 
 final class PdfQRPageView: UIView {
-    init() {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        configureLayout()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func configureLayout() {
-        let width = UIScreen.main.bounds.width / 2
-
+    let stack: UIStackView = {
         let image = UIImage(named: "qr")?.withTintColor(.secondary)
-        let view = UIImageView(al: true)
-        view.image = image
-        view.contentMode = .scaleAspectFit
+        let imageView = UIImageView(al: true)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
 
         let label = UILabel(al: true)
         label.font = .fontBold
@@ -37,13 +25,23 @@ final class PdfQRPageView: UIView {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
         stack.alignment = .center
-        stack.addArrangedSubview(view)
+        stack.addArrangedSubview(imageView)
         stack.addArrangedSubview(label)
+        
+        imageView.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.5).isActive = true
+        imageView.heightAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.5).isActive = true
+        label.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.9).isActive = true
 
-        view.widthAnchor.constraint(equalToConstant: width).isActive = true
-        view.heightAnchor.constraint(equalToConstant: width).isActive = true
-        label.widthAnchor.constraint(equalToConstant: width * 2).isActive = true
+        return stack
+    }()
 
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         addAndConstrain(stack)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
