@@ -78,8 +78,14 @@ final class MobilePdfMaker: PDFMaking {
     }
 
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
-        let view = SummaryView(viewModel: viewModel.summaryViewModel)
-        view.frame = page
+        let summary = SummaryView(viewModel: viewModel.summaryViewModel)
+        let view = UIView(frame: page)
+        
+        view.addSubview(summary)
+        summary.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        summary.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        summary.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         view.layoutIfNeeded()
         view.layer.render(in: context.cgContext)
     }

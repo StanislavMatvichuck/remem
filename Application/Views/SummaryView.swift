@@ -16,6 +16,7 @@ final class SummaryView: UIView {
 
     init(viewModel: SummaryViewModel) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
         configureContent(viewModel: viewModel)
