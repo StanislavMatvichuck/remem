@@ -96,7 +96,7 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
 
         sendEventUpdatesToController()
 
-        let fullSections = sections.filter { $0.strokeEnd == 0.96 }
+        let fullSections = sections.filter { $0.strokeEnd == ClockFace.sectionLengthShortener + ClockFace.sectionMinimumLength }
 
         XCTAssertLessThanOrEqual(1, fullSections.count)
     }
@@ -108,6 +108,6 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
     }
 
     private var nonEmptySections: [CAShapeLayer] {
-        sections.filter { $0.strokeEnd > 0.01 }
+        sections.filter { $0.strokeEnd > ClockFace.sectionMinimumLength }
     }
 }

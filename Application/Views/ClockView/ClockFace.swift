@@ -8,7 +8,9 @@
 import UIKit
 
 final class ClockFace: UIView {
+    static let sectionMinimumLength = 0.001
     static let sectionMaximumLength = CGFloat.layoutSquare * 1.5
+    static let sectionLengthShortener = 0.95
     static let lineWidth: CGFloat = 7
     static var lineCapRadius: CGFloat { lineWidth / 2 }
 
@@ -16,18 +18,7 @@ final class ClockFace: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setAnimationDuration(0.5)
-
-            for oldItem in oldValue.items {
-                let index = oldItem.index
-                let newItem = viewModel.items[index]
-
-                if newItem != oldItem {
-                    guard let layer = layer.sublayers?[index] as? CAShapeLayer else { continue }
-                    layer.strokeEnd = strokeEnd(for: newItem)
-                    layer.strokeColor = color(for: newItem)
-                }
-            }
-
+            updateExistingSublayersIfNeeded(oldValue)
             CATransaction.commit()
         }
     }
@@ -44,25 +35,20 @@ final class ClockFace: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        if layer.sublayers == nil {
-            installAnimatedSublayers()
-        }
+        installAnimatedSublayers()
     }
 
     /// Dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        for item in viewModel.items {
-            if let shape = layer.sublayers?[item.index] as? CAShapeLayer {
-                shape.strokeColor = color(for: item)
-            }
-        }
+        updateExistingSublayersColor()
     }
 
     private func installAnimatedSublayers() {
-        viewModel.items.forEach {
-            layer.addSublayer(makeSublayer(for: $0))
+        if layer.sublayers == nil {
+            viewModel.items.forEach {
+                layer.addSublayer(makeSublayer(for: $0))
+            }
         }
     }
 
@@ -97,10 +83,31 @@ final class ClockFace: UIView {
     }
 
     private func strokeEnd(for item: ClockCellViewModel) -> CGFloat {
-        0.001 + 0.95 * item.length
+        Self.sectionMinimumLength + Self.sectionLengthShortener * item.length
     }
 
     private func color(for item: ClockCellViewModel) -> CGColor {
         item.isEmpty ? UIColor.secondary.withAlphaComponent(0.5).cgColor : UIColor.text.cgColor
+    }
+
+    private func updateExistingSublayersIfNeeded(_ oldValue: ClockViewModel) {
+        for oldItem in oldValue.items {
+            let index = oldItem.index
+            let newItem = viewModel.items[index]
+
+            if newItem != oldItem {
+                guard let layer = layer.sublayers?[index] as? CAShapeLayer else { continue }
+                layer.strokeEnd = strokeEnd(for: newItem)
+                layer.strokeColor = color(for: newItem)
+            }
+        }
+    }
+
+    private func updateExistingSublayersColor() {
+        for item in viewModel.items {
+            if let shape = layer.sublayers?[item.index] as? CAShapeLayer {
+                shape.strokeColor = color(for: item)
+            }
+        }
     }
 }

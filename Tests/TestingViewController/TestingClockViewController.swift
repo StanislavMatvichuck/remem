@@ -19,7 +19,6 @@ extension TestingViewController where Controller == ClockViewController {
             .makeContainer(event: event, today: today)
 
         sut = ClockContainer(parent: container).make() as? ClockViewController
-        sut.loadViewIfNeeded()
     }
 
     func addOneHappening(
@@ -38,8 +37,10 @@ extension TestingViewController where Controller == ClockViewController {
     }
 
     func forceViewToLayoutInScreenSize() {
-        sut.view.bounds = UIScreen.main.bounds
-        sut.view.layoutIfNeeded()
+        let view = sut.viewRoot
+        view.clockFace.setNeedsLayout()
+        view.frame = UIScreen.main.bounds
+        view.layoutIfNeeded()
     }
 }
 
