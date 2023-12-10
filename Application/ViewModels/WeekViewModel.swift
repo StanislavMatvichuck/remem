@@ -24,8 +24,8 @@ struct WeekViewModel {
     init(
         today: DayIndex,
         event: Event,
-        itemFactory: WeekItemViewModelFactoring,
-        weekItemFactory: NewEventWeeklyGoalViewModelFactoring,
+        weekCellFactory: WeekCellViewModelFactoring,
+        weekSummaryFactory: WeekSummaryViewModelFactoring,
         visibleDayIndex: Int?,
         goalChangeHandler: @escaping GoalChangeHandler
     ) {
@@ -48,7 +48,7 @@ struct WeekViewModel {
 
             if nextDay == startOfWeekToday { timelineVisibleIndex = i }
 
-            timeline[nextDay] = itemFactory.makeViewModel(day: nextDay)
+            timeline[nextDay] = weekCellFactory.makeViewModel(day: nextDay)
         }
 
         pages = WeekTimeline(
@@ -59,7 +59,7 @@ struct WeekViewModel {
 
         for i in 0 ..< pages.count {
             let nextWeek = WeekIndex(WeekIndex(event.dateCreated).dayIndex.adding(days: 7 * i).date)
-            pages[nextWeek] = weekItemFactory.makeViewModel(today: today, week: nextWeek)
+            pages[nextWeek] = weekSummaryFactory.makeViewModel(today: today, week: nextWeek)
         }
 
         if let visibleDayIndex {

@@ -53,6 +53,6 @@ struct WeekSummaryViewModel {
     }
 }
 
-protocol NewEventWeeklyGoalViewModelFactoring {
+protocol WeekSummaryViewModelFactoring {
     func makeViewModel(today: DayIndex, week: WeekIndex) -> WeekSummaryViewModel
 }

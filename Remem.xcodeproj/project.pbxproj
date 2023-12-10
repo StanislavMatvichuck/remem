@@ -222,7 +222,6 @@
 		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */; };
-		08F467E829BF1E0B00D35AB6 /* DefaultPdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E729BF1E0B00D35AB6 /* DefaultPdfMaker.swift */; };
 		08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */; };
 		08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */; };
 		08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */; };
@@ -576,7 +575,6 @@
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewControllerTests.swift; sourceTree = "<group>"; };
-		08F467E729BF1E0B00D35AB6 /* DefaultPdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPdfMaker.swift; sourceTree = "<group>"; };
 		08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
 		08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewControllerTests.swift; sourceTree = "<group>"; };
 		08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewController.swift; sourceTree = "<group>"; };
@@ -844,7 +842,6 @@
 		085196392A0C1CCC00FD8FD8 /* PDF */ = {
 			isa = PBXGroup;
 			children = (
-				08F467E729BF1E0B00D35AB6 /* DefaultPdfMaker.swift */,
 				0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */,
 				0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */,
 			);
@@ -1847,7 +1844,6 @@
 				086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
-				08F467E829BF1E0B00D35AB6 /* DefaultPdfMaker.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				0852C6AF283D66380027EF3E /* WeekView.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,

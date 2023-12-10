@@ -11,8 +11,8 @@ import UIKit
 final class WeekContainer:
     ControllerFactoring,
     WeekViewModelFactoring,
-    WeekItemViewModelFactoring,
-    NewEventWeeklyGoalViewModelFactoring
+    WeekCellViewModelFactoring,
+    WeekSummaryViewModelFactoring
 {
     let parent: EventDetailsContainer
     var currentMoment: Date { parent.parent.parent.currentMoment }
@@ -34,8 +34,8 @@ final class WeekContainer:
         WeekViewModel(
             today: today,
             event: event,
-            itemFactory: self,
-            weekItemFactory: self,
+            weekCellFactory: self,
+            weekSummaryFactory: self,
             visibleDayIndex: visibleDayIndex
         ) { amount in
             self.event.setWeeklyGoal(amount: amount, for: self.currentMoment)

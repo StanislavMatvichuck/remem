@@ -62,6 +62,6 @@ struct WeekCellViewModel {
     }
 }
 
-protocol WeekItemViewModelFactoring {
+protocol WeekCellViewModelFactoring {
     func makeViewModel(day: DayIndex) -> WeekCellViewModel
 }

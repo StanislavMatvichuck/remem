@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-// TODO: remove duplications in pdf makers
 final class MobilePdfMaker: PDFMaking {
     private static let pageWidth = CGFloat.screenW * 0.94
 
@@ -96,6 +95,7 @@ final class MobilePdfMaker: PDFMaking {
 //        context.cgContext.scaleBy(x: down, y: down)
 //        week.view.layer.render(in: context.cgContext)
 //        context.cgContext.scaleBy(x: up, y: up)
+        let week = WeekView()
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
