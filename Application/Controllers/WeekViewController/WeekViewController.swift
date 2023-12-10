@@ -165,16 +165,3 @@ extension WeekViewController: UITextFieldDelegate {
         viewRoot.resizeGoalInputAndRedrawAccessory()
     }
 }
-
-// MARK: - UIViewControllerTransitioningDelegate
-extension WeekViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? { presenter.presentationAnimator }
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? { presenter.dismissAnimator }
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? { presenter.dismissTransition }
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        DayDetailsPresentationController(
-            week: self,
-            day: presented as! DayDetailsViewController
-        )
-    }
-}
