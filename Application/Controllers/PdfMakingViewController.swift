@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol PdfMakingViewModelFactoring {
-    func makePdfMakingViewModel() -> PdfMakingViewModel
-}
+
 
 final class PdfMakingViewController: UIViewController {
     let viewRoot: PdfMakingView

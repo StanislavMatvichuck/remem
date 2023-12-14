@@ -8,10 +8,6 @@
 import Domain
 import Foundation
 
-protocol WeekViewModelFactoring {
-    func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel
-}
-
 struct WeekViewModel {
     typealias GoalChangeHandler = (Int) -> Void
     private let today: DayIndex

@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
+
 
 final class EventDetailsViewController: UIViewController {
     let factory: EventDetailsViewModelFactoring

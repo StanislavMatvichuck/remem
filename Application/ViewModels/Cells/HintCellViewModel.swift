@@ -46,7 +46,3 @@ enum HintState {
         }
     }
 }
-
-protocol HintItemViewModelFactoring {
-    func makeHintItemViewModel(events: [Event]) -> HintCellViewModel
-}

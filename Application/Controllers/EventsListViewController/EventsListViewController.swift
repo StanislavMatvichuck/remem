@@ -7,14 +7,6 @@
 
 import UIKit
 
-typealias EventsListViewModelHandling =
-    EventItemViewModelRenameHandling &
-    FooterItemViewModelTapHandling
-
-protocol EventsListViewModelFactoring {
-    func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel
-}
-
 final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView

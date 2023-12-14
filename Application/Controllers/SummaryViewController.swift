@@ -7,8 +7,6 @@
 
 import UIKit
 
-protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewModel }
-
 final class SummaryViewController: UIViewController {
     var viewModel: SummaryViewModel { didSet {
         guard isViewLoaded else { return }

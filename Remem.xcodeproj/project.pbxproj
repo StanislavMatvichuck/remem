@@ -201,6 +201,7 @@
 		08CB230829FFB53C00F3B484 /* WeeklyGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */; };
 		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
 		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
+		08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */; };
 		08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
 		08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121F27870D2500C2037F /* SceneDelegate.swift */; };
@@ -552,6 +553,7 @@
 		08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyGoal.swift; sourceTree = "<group>"; };
 		08CC50692906DE8200840385 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		08CC506B2906DEEC00840385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactoring.swift; sourceTree = "<group>"; };
 		08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventWeeklyGoalViewModel.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08D5121D27870D2500C2037F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -685,18 +687,19 @@
 		08235E7128C5CC3F0026DED2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */,
 				08235E7228C5CC680026DED2 /* Cells */,
 				080BF1442884A22C00DDF55F /* ClockViewModel.swift */,
 				08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */,
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
-				08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */,
-				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
-				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
-				085896B12A2652BA00390C76 /* PdfViewModel.swift */,
 				0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */,
+				085896B12A2652BA00390C76 /* PdfViewModel.swift */,
+				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 				0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */,
+				08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */,
+				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1791,6 +1794,7 @@
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
+				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,

@@ -32,6 +32,4 @@ struct DayCellViewModel {
     func remove() { removeHandler(happening) }
 }
 
-protocol DayItemViewModelFactoring {
-    func makeViewModel(happening: Happening) -> DayCellViewModel
-}
+

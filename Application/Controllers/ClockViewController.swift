@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
+
 
 final class ClockViewController: UIViewController {
     let factory: ClockViewModelFactoring

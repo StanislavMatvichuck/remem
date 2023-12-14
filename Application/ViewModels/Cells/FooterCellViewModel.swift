@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol FooterItemViewModelTapHandling {
-    func tapped(_ vm: FooterCellViewModel)
-}
-
 struct FooterCellViewModel: EventsListItemViewModeling {
     static let title = String(localizationId: "button.create")
 
@@ -29,11 +25,4 @@ struct FooterCellViewModel: EventsListItemViewModeling {
     static func == (lhs: FooterCellViewModel, rhs: FooterCellViewModel) -> Bool {
         lhs.isHighlighted == rhs.isHighlighted
     }
-}
-
-protocol FooterItemViewModeFactoring {
-    func makeFooterItemViewModel(
-        eventsCount: Int,
-        handler: FooterItemViewModelTapHandling?
-    ) -> FooterCellViewModel
 }

@@ -9,7 +9,7 @@ import AudioToolbox
 import Domain
 import UIKit
 
-protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel() -> DayDetailsViewModel }
+
 
 final class DayDetailsViewController: UIViewController {
     let factory: DayDetailsViewModelFactoring

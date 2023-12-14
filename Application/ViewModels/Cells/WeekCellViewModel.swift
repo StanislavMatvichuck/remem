@@ -15,14 +15,6 @@ extension DayIndex {
     }
 }
 
-protocol WeekCellViewModelFactoring {
-    func makeViewModel(
-        indexPath: IndexPath,
-        cellPresentationAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock,
-        cellDismissAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock
-    ) -> WeekCellViewModel
-}
-
 struct WeekCellViewModel {
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()

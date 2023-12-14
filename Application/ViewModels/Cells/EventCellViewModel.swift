@@ -8,19 +8,6 @@
 import Domain
 import Foundation
 
-protocol EventItemViewModelRenameHandling {
-    func renameTapped(_: EventCellViewModel)
-}
-
-protocol EventItemViewModelFactoring {
-    func makeEventItemViewModel(
-        event: Event,
-        today: DayIndex,
-        hintEnabled: Bool,
-        renameHandler: EventItemViewModelRenameHandling?
-    ) -> EventCellViewModel
-}
-
 struct EventCellViewModel: EventsListItemViewModeling {
     typealias TapHandler = () -> Void
     typealias SwipeHandler = () -> Void
