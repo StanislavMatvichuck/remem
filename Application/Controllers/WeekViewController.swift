@@ -18,7 +18,6 @@ final class WeekViewController: UIViewController {
         self.factory = factory
         self.viewModel = factory.makeWeekViewModel(visibleDayIndex: nil)
         self.viewRoot = WeekView(viewModel)
-        viewRoot.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,7 +29,6 @@ final class WeekViewController: UIViewController {
         super.viewDidLoad()
         configureCollection()
         viewRoot.goal.goal.delegate = self
-        viewRoot.configure(viewModel)
         configureGoalAccessory()
     }
 
@@ -95,7 +93,6 @@ final class WeekViewController: UIViewController {
     }
 
     private func configureCollection() {
-        viewRoot.collection.dataSource = viewRoot
         viewRoot.collection.delegate = self
     }
 }

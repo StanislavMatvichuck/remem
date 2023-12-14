@@ -10,10 +10,6 @@ import UIKit
 final class WeekCell: UICollectionViewCell {
     static let reuseIdentifier = "WeekItem"
 
-    static let layoutSize: CGSize = {
-        CGSize(width: .layoutSquare, height: .layoutSquare * 3)
-    }()
-
     let view = WeekCellView()
     var viewModel: WeekCellViewModel? { didSet {
         guard let viewModel else { return }

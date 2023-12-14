@@ -12,34 +12,37 @@ final class WeekView: UIView {
     let goal = WeekSummaryView()
     let weekdays = WeekdaysView()
     var scrollTo: IndexPath?
-
-    let collection: UICollectionView = {
+    let layout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.itemSize = WeekCell.layoutSize
+        return layout
+    }()
 
+    lazy var collection: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = false
         view.isPagingEnabled = true
         view.backgroundColor = .clear
-        view.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -3, right: 0)
         view.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.reuseIdentifier)
+        view.backgroundColor = .red
         return view
     }()
 
     var dayCellVerticalDistanceToBottom: CGFloat { collection.frame.maxY - collectionAndCellVerticalDifference / 2 }
     var dayCellDefaultFrameY: CGFloat { collectionAndCellVerticalDifference / 2 }
-    var collectionAndCellVerticalDifference: CGFloat { collection.bounds.height - WeekCell.layoutSize.height }
+    var collectionAndCellVerticalDifference: CGFloat { collection.bounds.height - bounds.width * 3 / 7 }
 
     var viewModel: WeekViewModel { didSet { configure(viewModel) }}
 
     init(_ viewModel: WeekViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
+        configure(viewModel)
         translatesAutoresizingMaskIntoConstraints = false
+        collection.dataSource = self
         configureLayout()
         configureAppearance()
     }
@@ -48,8 +51,21 @@ final class WeekView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         collection.layoutIfNeeded()
+        configureCellSizeUsingBounds()
+        scrollCollection()
+    }
+
+    private var cellSizeConfigurationNeeded = true
+    private func configureCellSizeUsingBounds() {
+        guard cellSizeConfigurationNeeded else { return }
+        let cellWidth = collection.bounds.width / 7
+        let cellHeight = cellWidth * 3
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        cellSizeConfigurationNeeded = false
+    }
+
+    private func scrollCollection() {
         if let scrollTo {
             collection.scrollToItem(at: scrollTo, at: .left, animated: false)
         }
@@ -77,7 +93,7 @@ final class WeekView: UIView {
     private func configureLayout() {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
-        stack.alignment = .center
+        stack.distribution = .fill
         stack.addArrangedSubview(goal)
         stack.addArrangedSubview(collection)
         stack.addArrangedSubview(weekdays)
@@ -85,20 +101,15 @@ final class WeekView: UIView {
         addAndConstrain(stack)
 
         NSLayoutConstraint.activate([
-            collection.heightAnchor.constraint(equalToConstant: WeekCell.layoutSize.height + .buttonMargin + 3),
+            goal.widthAnchor.constraint(equalTo: widthAnchor),
             collection.widthAnchor.constraint(equalTo: widthAnchor),
-            goal.widthAnchor.constraint(equalToConstant: .layoutSquare * 7),
+            collection.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 3 / 7),
         ])
     }
 
     private func configureAppearance() {
         clipsToBounds = true
         backgroundColor = .clear
-    }
-
-    private func prepareForAnimation(_ view: UIView) {
-        view.frame.origin.y = dayCellVerticalDistanceToBottom
-        view.transform = .init(scaleX: 0.8, y: 1)
     }
 }
 

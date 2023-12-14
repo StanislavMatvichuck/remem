@@ -45,7 +45,10 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
     func makePdfViewModel() -> PdfViewModel {
         PdfViewModel(
             event: event,
-            dateCreated: moment
+            dateCreated: moment,
+            clockViewModel: ClockContainer(parent: parent).makeClockViewModel(),
+            summaryViewModel: SummaryContainer(parent: parent).makeSummaryViewModel(),
+            weekViewModel: WeekContainer(parent: parent).makeWeekViewModel()
         )
     }
 }

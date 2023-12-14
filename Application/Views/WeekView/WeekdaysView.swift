@@ -12,6 +12,7 @@ final class WeekdaysView: UIStackView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         axis = .horizontal
+        distribution = .fillEqually
         configureLayout()
         configureAppearance()
     }
@@ -34,11 +35,6 @@ final class WeekdaysView: UIStackView {
             label.textColor = UIColor.secondary
 
             addArrangedSubview(label)
-
-            NSLayoutConstraint.activate([
-                label.widthAnchor.constraint(equalToConstant: .layoutSquare),
-                label.heightAnchor.constraint(equalTo: label.widthAnchor),
-            ])
         }
     }
 

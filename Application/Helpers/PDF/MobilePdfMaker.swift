@@ -46,9 +46,9 @@ final class MobilePdfMaker: PDFMaking {
         makeNewPage(context)
         placeQRTile(context)
 
-        for i in 0 ..< viewModel.weeksAmount {
-            placeWeekTile(tileNumber: i, context)
+        for i in 0 ..< viewModel.weekViewModel.pages.count {
             makeNewPage(context)
+            placeWeekTile(tileNumber: i, context)
         }
     }
 
@@ -88,14 +88,14 @@ final class MobilePdfMaker: PDFMaking {
     }
 
     private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
-//        week.viewModel.timelineVisibleIndex = i * 7
-//        week.viewRoot.setNeedsLayout()
-//        week.viewRoot.layoutIfNeeded()
-//
-//        context.cgContext.scaleBy(x: down, y: down)
-//        week.view.layer.render(in: context.cgContext)
-//        context.cgContext.scaleBy(x: up, y: up)
-        let week = WeekView()
+        var viewModel = viewModel.weekViewModel
+        viewModel.timelineVisibleIndex = i * 7
+        let week = WeekView(viewModel)
+        week.translatesAutoresizingMaskIntoConstraints = true
+        week.frame = page
+        week.layoutIfNeeded()
+
+        week.layer.render(in: context.cgContext)
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
@@ -111,7 +111,7 @@ final class MobilePdfMaker: PDFMaking {
         view.layer.render(in: context.cgContext)
     }
 
-    private func lastTile(_ i: Int) -> Bool { i == viewModel.weeksAmount }
+    private func lastTile(_ i: Int) -> Bool { i == viewModel.weekViewModel.pages.count }
 
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
