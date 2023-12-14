@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 24.05.2022.
 //
 
+import Domain
 import UIKit
 
 final class WeekView: UIView {
@@ -29,7 +30,14 @@ final class WeekView: UIView {
         return view
     }()
 
-    init() {
+    var dayCellVerticalDistanceToBottom: CGFloat { collection.frame.maxY - collectionAndCellVerticalDifference / 2 }
+    var dayCellDefaultFrameY: CGFloat { collectionAndCellVerticalDifference / 2 }
+    var collectionAndCellVerticalDifference: CGFloat { collection.bounds.height - WeekCell.layoutSize.height }
+
+    var viewModel: WeekViewModel { didSet { configure(viewModel) }}
+
+    init(_ viewModel: WeekViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -38,11 +46,20 @@ final class WeekView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        collection.layoutIfNeeded()
+        if let scrollTo {
+            collection.scrollToItem(at: scrollTo, at: .left, animated: false)
+        }
+    }
+
     // MARK: - Public behaviour
-    func configure(_ vm: WeekViewModel) {
+    func configure(_ viewModel: WeekViewModel) {
         collection.reloadData()
-        configureSummary(vm)
-        scrollTo = IndexPath(row: vm.timelineVisibleIndex, section: 0)
+        configureSummary(viewModel)
+        scrollTo = IndexPath(row: viewModel.timelineVisibleIndex, section: 0)
     }
 
     func configureSummary(_ vm: WeekViewModel) {
@@ -55,11 +72,6 @@ final class WeekView: UIView {
             self.goal.invalidateIntrinsicContentSize()
         }
     }
-
-    var dayCellVerticalDistanceToBottom: CGFloat { collection.frame.maxY - collectionAndCellVerticalDifference / 2 }
-    var dayCellDefaultFrameY: CGFloat { collectionAndCellVerticalDifference / 2 }
-
-    private var collectionAndCellVerticalDifference: CGFloat { collection.bounds.height - WeekCell.layoutSize.height }
 
     // MARK: - Private
     private func configureLayout() {
@@ -84,12 +96,27 @@ final class WeekView: UIView {
         backgroundColor = .clear
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func prepareForAnimation(_ view: UIView) {
+        view.frame.origin.y = dayCellVerticalDistanceToBottom
+        view.transform = .init(scaleX: 0.8, y: 1)
+    }
+}
 
-        collection.layoutIfNeeded()
-        if let scrollTo {
-            collection.scrollToItem(at: scrollTo, at: .left, animated: false)
+// MARK: - UICollectionViewDataSource
+extension WeekView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { viewModel.timelineCount }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: WeekCell.reuseIdentifier,
+            for: indexPath) as? WeekCell
+        else { fatalError("cell type") }
+
+        cell.viewModel = viewModel.weekCellFactory.makeViewModel(indexPath: indexPath, cellPresentationAnimationBlock: {}, cellDismissAnimationBlock: {})
+
+        if let animatedIndex = viewModel.timelineAnimatedCellIndex, animatedIndex == indexPath.row {
+            cell.frame.origin.y = -dayCellVerticalDistanceToBottom
         }
+
+        return cell
     }
 }

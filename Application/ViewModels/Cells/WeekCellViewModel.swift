@@ -15,6 +15,14 @@ extension DayIndex {
     }
 }
 
+protocol WeekCellViewModelFactoring {
+    func makeViewModel(
+        indexPath: IndexPath,
+        cellPresentationAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock,
+        cellDismissAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock
+    ) -> WeekCellViewModel
+}
+
 struct WeekCellViewModel {
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,26 +31,23 @@ struct WeekCellViewModel {
         return formatter
     }()
 
-    /// Weak design because vm knows about uiKit
-    typealias TapHandler = (WeekViewController) -> Void
-
     let isToday: Bool
     let amount: String
     let items: [String]
     let dayNumber: String
     let highlighted: Bool
     let date: Date /// used only by `WeekViewControllerTests`
-    let tapHandler: TapHandler
 
     private let event: Event
-    private let day: DayIndex
+    let day: DayIndex
+    let tapHandler: () -> ()
     private let today: DayIndex
 
     init(
         event: Event,
         day: DayIndex,
         today: DayIndex,
-        tapHandler: @escaping TapHandler
+        tapHandler: @escaping () -> ()
     ) {
         self.day = day
         self.today = today
@@ -60,8 +65,4 @@ struct WeekCellViewModel {
         self.isToday = day == today
         self.date = day.date
     }
-}
-
-protocol WeekCellViewModelFactoring {
-    func makeViewModel(day: DayIndex) -> WeekCellViewModel
 }

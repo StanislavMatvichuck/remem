@@ -8,12 +8,7 @@
 import Domain
 import UIKit
 
-protocol WeekViewModelFactoring {
-    func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel
-}
-
 final class WeekViewController: UIViewController {
-    let presenter: WeekToDayDetailsPresenter
     let factory: WeekViewModelFactoring
     let viewRoot: WeekView
 
@@ -22,8 +17,8 @@ final class WeekViewController: UIViewController {
     init(_ factory: WeekViewModelFactoring) {
         self.factory = factory
         self.viewModel = factory.makeWeekViewModel(visibleDayIndex: nil)
-        self.viewRoot = WeekView()
-        self.presenter = WeekToDayDetailsPresenter()
+        self.viewRoot = WeekView(viewModel)
+        viewRoot.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -80,7 +75,7 @@ final class WeekViewController: UIViewController {
     private func updateGoalFieldWith(amount: String) {
         let input = viewRoot.goal.goal
         input.text = amount
-        input.delegate?.textField?(
+        _ = input.delegate?.textField?(
             input,
             shouldChangeCharactersIn: NSRange(),
             replacementString: amount
@@ -100,40 +95,26 @@ final class WeekViewController: UIViewController {
     }
 
     private func configureCollection() {
-        viewRoot.collection.dataSource = self
+        viewRoot.collection.dataSource = viewRoot
         viewRoot.collection.delegate = self
-    }
-
-    private func configureAnimator() {
-        let yOffset = viewRoot.convert(viewRoot.goal.title.frame, to: nil).maxY
-        presenter.presentationAnimator.originHeight = yOffset
     }
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension WeekViewController:
-    UICollectionViewDataSource,
-    UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout
-{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { viewModel.timeline.count }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.reuseIdentifier, for: indexPath) as? WeekCell else { fatalError("cell type") }
-
-        cell.viewModel = viewModel.timeline[indexPath.row]
-
-        if presenter.animatedCellIndex == indexPath {
-            presenter.dismissAnimator.prepareForAnimation(cell, height: -viewRoot.dayCellVerticalDistanceToBottom)
-        }
-
-        return cell
-    }
-
-    // UICollectionViewDelegate
+// MARK: - UICollectionViewDelegateFlowLayout
+extension WeekViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        configureAnimator()
-        presenter.animatedCellIndex = indexPath
-        viewModel.timeline[indexPath.row]?.tapHandler(self)
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        viewModel.weekCellFactory.makeViewModel(
+            indexPath: indexPath,
+            cellPresentationAnimationBlock: DayDetailsAnimationsHelper.makeCellPresentationSliding(
+                animatedView: cell,
+                heightTo: viewRoot.dayCellVerticalDistanceToBottom
+            ),
+            cellDismissAnimationBlock: DayDetailsAnimationsHelper.makeCellDismissal(
+                animatedView: cell,
+                heightTo: viewRoot.dayCellDefaultFrameY
+            )
+        ).tapHandler()
     }
 
     // MARK: - UIScrollViewDelegate

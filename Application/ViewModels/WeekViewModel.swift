@@ -8,6 +8,10 @@
 import Domain
 import Foundation
 
+protocol WeekViewModelFactoring {
+    func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel
+}
+
 struct WeekViewModel {
     typealias GoalChangeHandler = (Int) -> Void
     private let today: DayIndex
@@ -16,10 +20,14 @@ struct WeekViewModel {
     let goalChangeHandler: GoalChangeHandler
     // TODO: hide access to arrays and indexes
     var timelineVisibleIndex: Int = 0
-    var timeline: DayTimeline<WeekCellViewModel>
+    var timelineAnimatedCellIndex: Int?
+    var timelineCount: Int
 
     var pagesVisibleIndex: Int { timelineVisibleIndex / 7 }
     var pages: WeekTimeline<WeekSummaryViewModel>
+
+    let weekCellFactory: WeekCellViewModelFactoring
+    let startOfWeek: DayIndex
 
     init(
         today: DayIndex,
@@ -32,24 +40,17 @@ struct WeekViewModel {
         self.today = today
         self.event = event
         self.goalChangeHandler = goalChangeHandler
+        self.weekCellFactory = weekCellFactory
 
-        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
+        startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let startOfWeekToday = WeekIndex(today.date).dayIndex
         let endOfWeekToday = startOfWeekToday.adding(days: 7)
 
-        timeline = DayTimeline<WeekCellViewModel>(
+        timelineCount = DayTimeline<WeekCellViewModel>(
             storage: [:],
             startIndex: startOfWeek,
             endIndex: endOfWeekToday
-        )
-
-        for i in 0 ..< timeline.count {
-            let nextDay = startOfWeek.adding(days: i)
-
-            if nextDay == startOfWeekToday { timelineVisibleIndex = i }
-
-            timeline[nextDay] = weekCellFactory.makeViewModel(day: nextDay)
-        }
+        ).count
 
         pages = WeekTimeline(
             storage: [:],
@@ -64,6 +65,8 @@ struct WeekViewModel {
 
         if let visibleDayIndex {
             timelineVisibleIndex = visibleDayIndex
+        } else {
+            timelineVisibleIndex = timelineCount - 7
         }
     }
 }

@@ -17,13 +17,13 @@ final class DayDetailsContainer:
     var updater: ViewControllersUpdater { parent.updater }
     var event: Event { parent.event }
 
-    let parent: WeekContainer
+    let parent: EventDetailsContainer
     let day: DayIndex
     let hour: Int
     let minute: Int
 
     init(
-        parent: WeekContainer,
+        parent: EventDetailsContainer,
         day: DayIndex,
         hour: Int,
         minute: Int

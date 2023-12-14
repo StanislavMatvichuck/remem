@@ -8,7 +8,11 @@
 import UIKit
 
 final class DayDetailsPresentationAnimator: DayDetailsAnimator {
-    var originHeight: CGFloat = 0.0
+    let originHeight: CGFloat
+
+    init(originHeight: CGFloat) {
+        self.originHeight = originHeight
+    }
 
     override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         guard

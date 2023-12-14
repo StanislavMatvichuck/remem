@@ -8,10 +8,12 @@
 import UIKit
 
 final class DayDetailsPresentationController: UIPresentationController {
-    let weekViewController: WeekViewController
-    var weekView: WeekView { weekViewController.viewRoot }
-    var presenter: WeekToDayDetailsPresenter { weekViewController.presenter }
-    var transition: UIPercentDrivenInteractiveTransition { presenter.dismissTransition }
+    weak var presentationDelegate: (AnyObject & DayDetailsPresentationControllerDelegate)?
+
+    let presentationAnimator: DayDetailsPresentationAnimator
+    let dismissAnimator: DayDetailsDismissAnimator
+    let dismissTransition: UIPercentDrivenInteractiveTransition
+    let container: DayDetailsPresentationContainer
 
     lazy var backgroundView: UIView = {
         let backgroundView = UIView(frame: containerView!.frame)
@@ -29,6 +31,21 @@ final class DayDetailsPresentationController: UIPresentationController {
         return backgroundView
     }()
 
+    init(
+        presented: UIViewController,
+        presenting: UIViewController?,
+        presentationAnimator: DayDetailsPresentationAnimator,
+        dismissAnimator: DayDetailsDismissAnimator,
+        dismissTransition: UIPercentDrivenInteractiveTransition,
+        container: DayDetailsPresentationContainer
+    ) {
+        self.presentationAnimator = presentationAnimator
+        self.dismissAnimator = dismissAnimator
+        self.dismissTransition = dismissTransition
+        self.container = container
+        super.init(presentedViewController: presented, presenting: presenting)
+    }
+
     override var frameOfPresentedViewInContainerView: CGRect {
         CGRect(
             x: .layoutSquare,
@@ -36,11 +53,6 @@ final class DayDetailsPresentationController: UIPresentationController {
             width: .layoutSquare * 5,
             height: .layoutSquare * 9
         )
-    }
-
-    init(week: WeekViewController, day: DayDetailsViewController) {
-        self.weekViewController = week
-        super.init(presentedViewController: day, presenting: nil)
     }
 
     // MARK: - Lifecycle
@@ -51,7 +63,7 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     override func presentationTransitionDidEnd(_: Bool) {
-        presenter.presentationAnimator.clearAdditionalAnimations()
+        presentationAnimator.clearAdditionalAnimations()
     }
 
     override func dismissalTransitionWillBegin() {
@@ -60,46 +72,34 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     override func dismissalTransitionDidEnd(_ completed: Bool) {
-        transition.wantsInteractiveStart = false
-        presenter.dismissAnimator.clearAdditionalAnimations()
+        dismissTransition.wantsInteractiveStart = false
+        dismissAnimator.clearAdditionalAnimations()
 
         if completed {
             backgroundView.removeFromSuperview()
-            presenter.animatedCellIndex = nil
+            presentationDelegate?.dismissCompleted()
         }
     }
 
     // MARK: - Private
     private func configureCellPresentation() {
-        guard let index = presenter.animatedCellIndex,
-              let cell = weekViewController.viewRoot.collection.cellForItem(at: index)
-        else { return }
-
-        presenter.presentationAnimator.add(DayDetailsAnimationsHelper.makeCellPresentationSliding(
-            animatedView: cell,
-            heightTo: weekView.dayCellVerticalDistanceToBottom
-        ))
+        guard let cellPresentationAnimationBlock = container.cellPresentationAnimationBlock else { return }
+        presentationAnimator.add(cellPresentationAnimationBlock)
     }
 
     private func configureBackgroundPresentation() {
-        presenter.presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
+        presentationAnimator.add(DayDetailsAnimationsHelper.makeBackgroundPresentation(
             animatedView: backgroundView
         ))
     }
 
     private func configureCellDismissal() {
-        guard let index = presenter.animatedCellIndex,
-              let cell = weekViewController.viewRoot.collection.cellForItem(at: index)
-        else { return }
-
-        presenter.dismissAnimator.add(DayDetailsAnimationsHelper.makeCellDismissal(
-            animatedView: cell,
-            heightTo: weekView.dayCellDefaultFrameY
-        ))
+        guard let cellDismissAnimationBlock = container.cellDismissAnimationBlock else { return }
+        dismissAnimator.add(cellDismissAnimationBlock)
     }
 
     private func configureBackgroundDismissal() {
-        presenter.dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
+        dismissAnimator.add(DayDetailsAnimationsHelper.makeBackgroundDismissal(
             animatedView: backgroundView
         ))
     }
@@ -112,15 +112,15 @@ final class DayDetailsPresentationController: UIPresentationController {
         let progress = max(0.0, min(1.0, verticalOffset / 300))
 
         if pan.state == .began {
-            transition.wantsInteractiveStart = true
+            dismissTransition.wantsInteractiveStart = true
             presentingViewController.dismiss(animated: true)
         } else if pan.state == .changed {
-            transition.update(progress)
+            dismissTransition.update(progress)
         } else if pan.state == .ended {
             if progress >= 0.5 {
-                transition.finish()
+                dismissTransition.finish()
             } else {
-                transition.cancel()
+                dismissTransition.cancel()
             }
         }
     }

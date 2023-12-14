@@ -18,7 +18,7 @@ extension TestingViewController where Controller == DayDetailsViewController {
             .makeContainer(event: event, today: day)
         let weekContainer = WeekContainer(parent: container)
         sut = DayDetailsContainer(
-            parent: weekContainer,
+            parent: container,
             day: day,
             hour: 0,
             minute: 0

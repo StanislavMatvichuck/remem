@@ -21,10 +21,8 @@ final class Coordinator {
             navigationController.pushViewController(newController, animated: false)
         case .eventDetails:
             navigationController.pushViewController(newController, animated: true)
-        case .dayDetails(_, let week):
-            newController.transitioningDelegate = week.presenter
-            newController.modalPresentationStyle = .custom
-            week.present(newController, animated: true)
+        case .dayDetails:
+            navigationController.present(newController, animated: true)
         case .pdf:
             navigationController.pushViewController(newController, animated: true)
         }

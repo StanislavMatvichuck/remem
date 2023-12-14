@@ -54,16 +54,27 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_lastDayIsSunday() {
-        let daysCount = sut.viewModel.timeline.count
+        let daysCount = sut.viewModel.timelineCount
         let lastCellIndex = IndexPath(row: daysCount - 1, section: 0)
 
         XCTAssertEqual(dayOfWeek(at: lastCellIndex), WeekDay.sunday)
     }
 
-    func test_hasTodayDay() {
-        let todays = sut.viewModel.timeline.filter { ($0?.isToday)! }
+    func test_hasTodayDayAndOnlyOne() {
+        var todaysFound = 0
 
-        XCTAssertEqual(todays.count, 1)
+        for i in 0 ... sut.viewModel.timelineCount {
+            let weekCellViewModel = sut.viewModel.weekCellFactory.makeViewModel(
+                indexPath: IndexPath(row: i, section: 0),
+                cellPresentationAnimationBlock: {},
+                cellDismissAnimationBlock: {}
+            )
+            if weekCellViewModel.isToday {
+                todaysFound += 1
+            }
+        }
+
+        XCTAssertEqual(todaysFound, 1)
     }
 
     private var randomDaysAmount: Int { Int.random(in: 0 ..< 1000) }
@@ -175,7 +186,11 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
 
     // MARK: - Private
     private func dayOfWeek(at index: IndexPath) -> WeekDay? {
-        let vm = sut.viewModel.timeline[index.row]!
+        let vm = sut.viewModel.weekCellFactory.makeViewModel(
+            indexPath: index,
+            cellPresentationAnimationBlock: {},
+            cellDismissAnimationBlock: {}
+        )
 
         let dayOfWeekNumber = Calendar.current.dateComponents(
             [.weekday],

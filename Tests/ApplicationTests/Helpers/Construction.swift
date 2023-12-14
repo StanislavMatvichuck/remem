@@ -62,10 +62,15 @@ extension ApplicationContainer {
         let detailsContainer = ApplicationContainer(mode: .unitTest)
             .makeContainer()
             .makeContainer(event: event, today: day)
+        let currentMoment = detailsContainer.parent.parent.currentMoment
+        let dayDetailsContainer = DayDetailsContainer(
+            parent: detailsContainer,
+            day: day,
+            hour: Calendar.current.component(.hour, from: currentMoment),
+            minute: Calendar.current.component(.minute, from: currentMoment)
+        )
 
-        return WeekContainer(parent: detailsContainer)
-            .makeContainer(day: day)
-            .make() as! DayDetailsViewController
+        return dayDetailsContainer.make() as! DayDetailsViewController
     }
 
     static func make() -> PdfViewController {

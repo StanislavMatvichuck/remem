@@ -40,9 +40,4 @@ final class DayDetailsDismissAnimator: DayDetailsAnimator {
         
         return propertiesAnimator
     }
-    
-    func prepareForAnimation(_ view: UIView, height: CGFloat) {
-        view.frame.origin.y = height
-        view.transform = .init(scaleX: 0.8, y: 1)
-    }
 }

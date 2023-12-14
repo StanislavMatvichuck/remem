@@ -39,7 +39,17 @@ final class WeekViewModelTests: XCTestCase {
             event: event
         )
 
-        XCTAssertEqual(sut.timeline.first??.items.count, 1)
+        XCTAssertEqual(firstWeekCell.items.count, 1)
+    }
+
+    var firstWeekCell: WeekCellViewModel { weekCell(at: 0) }
+
+    func weekCell(at: Int) -> WeekCellViewModel {
+        sut.weekCellFactory.makeViewModel(
+            indexPath: IndexPath(row: at, section: 0),
+            cellPresentationAnimationBlock: {},
+            cellDismissAnimationBlock: {}
+        )
     }
 
     func test_todayAfterCreation_numberOfDays_moreThan21() {
@@ -53,11 +63,11 @@ final class WeekViewModelTests: XCTestCase {
             event: event
         )
 
-        XCTAssertLessThan(21, sut.timeline.count)
+        XCTAssertLessThan(21, sut.timelineCount)
     }
 
     func test_sameDates_showsOneWeek() {
-        XCTAssertLessThanOrEqual(7, sut.timeline.count)
+        XCTAssertLessThanOrEqual(7, sut.timelineCount)
     }
 
     func test_sameDates_scrollToIndex_0() {
@@ -73,7 +83,7 @@ final class WeekViewModelTests: XCTestCase {
                 event: event
             )
 
-            let firstItemDayNumber = Int(sut.timeline.first??.dayNumber ?? "1") ?? 1
+            let firstItemDayNumber = Int(firstWeekCell.dayNumber) ?? 1
 
             XCTAssertEqual(firstItemDayNumber, 1)
         }
@@ -82,14 +92,14 @@ final class WeekViewModelTests: XCTestCase {
     func test_randomDates_scrollToIndex_isAlwaysMonday() {
         arrangeRandomDates()
 
-        let date = sut.timeline[sut.timelineVisibleIndex]?.date
-        XCTAssertEqual(WeekDay.make(date!), WeekDay.monday)
+        let date = weekCell(at: sut.timelineVisibleIndex).date
+        XCTAssertEqual(WeekDay.make(date), WeekDay.monday)
     }
 
     func test_randomDates_numberOfDays_multipleOf7() {
         arrangeRandomDates()
 
-        XCTAssertEqual(sut.timeline.count % 7, 0)
+        XCTAssertEqual(sut.timelineCount % 7, 0)
     }
 
     private func make(
@@ -99,8 +109,8 @@ final class WeekViewModelTests: XCTestCase {
     ) -> WeekViewModel {
         let container = ApplicationContainer(mode: .unitTest)
         let details = container.makeContainer().makeContainer(event: event, today: today)
-        let week = details.makeWeekViewController()
-        return week.viewModel
+        let weekContainer = WeekContainer(parent: details)
+        return weekContainer.makeWeekViewModel()
     }
 
     private func arrangeRandomDates() {

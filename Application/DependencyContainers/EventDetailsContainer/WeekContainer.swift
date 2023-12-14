@@ -15,6 +15,7 @@ final class WeekContainer:
     WeekSummaryViewModelFactoring
 {
     let parent: EventDetailsContainer
+
     var currentMoment: Date { parent.parent.parent.currentMoment }
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
@@ -43,19 +44,41 @@ final class WeekContainer:
         }
     }
 
-    func makeViewModel(day: DayIndex) -> WeekCellViewModel {
-        WeekCellViewModel(
+    func makeViewModel(
+        indexPath: IndexPath,
+        cellPresentationAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock = {},
+        cellDismissAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock = {}
+    ) -> WeekCellViewModel {
+        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
+        let day = startOfWeek.adding(days: indexPath.row)
+
+        let tapHandler = {
+            let dayDetailsContainer = DayDetailsContainer(
+                parent: self.parent,
+                day: day,
+                hour: Calendar.current.component(.hour, from: self.currentMoment),
+                minute: Calendar.current.component(.minute, from: self.currentMoment)
+            )
+
+            let presentationContainer = DayDetailsPresentationContainer(
+                parent: self.parent,
+                dayDetailsContainer: dayDetailsContainer,
+                presentationAnimator: DayDetailsPresentationAnimator(originHeight: 100)
+            )
+
+            presentationContainer.cellPresentationAnimationBlock = cellPresentationAnimationBlock
+            presentationContainer.cellDismissAnimationBlock = cellDismissAnimationBlock
+
+            self.parent.parent.parent.coordinator.show(.dayDetails(
+                factory: presentationContainer
+            ))
+        }
+
+        return WeekCellViewModel(
             event: event,
             day: day,
             today: today,
-            tapHandler: { controller in
-                self.coordinator.show(
-                    Navigation.dayDetails(
-                        factory: self.makeContainer(day: day),
-                        week: controller
-                    )
-                )
-            }
+            tapHandler: tapHandler
         )
     }
 
@@ -69,15 +92,6 @@ final class WeekContainer:
             event: event,
             weekNumber: weekTimeline.count,
             isCurrentWeek: fullTimeline.count == weekTimeline.count
-        )
-    }
-
-    func makeContainer(day: DayIndex) -> DayDetailsContainer {
-        DayDetailsContainer(
-            parent: self,
-            day: day,
-            hour: Calendar.current.component(.hour, from: currentMoment),
-            minute: Calendar.current.component(.minute, from: currentMoment)
         )
     }
 }
