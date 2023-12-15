@@ -9,18 +9,11 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
-    private let event: Event
-    private let size: Int
-    private let secondsInDay: Int
-    private let secondsInSection: Int
-
-    let items: [ClockCellViewModel]
+    let cells: [ClockCellViewModel]
 
     init(event: Event, size: Int) {
-        self.size = size
-        self.secondsInDay = 60 * 60 * 24
-        self.secondsInSection = secondsInDay / size
-        self.event = event
+        let secondsInDay = 60 * 60 * 24
+        let secondsInSection = secondsInDay / size
 
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
@@ -38,7 +31,7 @@ struct ClockViewModel {
 
         let max = CGFloat(happeningsPerSection.max() ?? 0)
 
-        self.items = happeningsPerSection.enumerated().map { index, happeningsAmount in
+        self.cells = happeningsPerSection.enumerated().map { index, happeningsAmount in
             ClockCellViewModel(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,

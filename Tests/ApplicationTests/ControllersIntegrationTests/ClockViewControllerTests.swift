@@ -41,7 +41,7 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
-        for _ in 0 ..< sut.viewModel.items.count {
+        for _ in 0 ..< sut.viewModel.cells.count {
             addOneHappening()
         }
 

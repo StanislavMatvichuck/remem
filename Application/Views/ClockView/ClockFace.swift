@@ -46,7 +46,7 @@ final class ClockFace: UIView {
 
     private func installAnimatedSublayers() {
         if layer.sublayers == nil {
-            viewModel.items.forEach {
+            viewModel.cells.forEach {
                 layer.addSublayer(makeSublayer(for: $0))
             }
         }
@@ -91,9 +91,9 @@ final class ClockFace: UIView {
     }
 
     private func updateExistingSublayersIfNeeded(_ oldValue: ClockViewModel) {
-        for oldItem in oldValue.items {
+        for oldItem in oldValue.cells {
             let index = oldItem.index
-            let newItem = viewModel.items[index]
+            let newItem = viewModel.cells[index]
 
             if newItem != oldItem {
                 guard let layer = layer.sublayers?[index] as? CAShapeLayer else { continue }
@@ -104,7 +104,7 @@ final class ClockFace: UIView {
     }
 
     private func updateExistingSublayersColor() {
-        for item in viewModel.items {
+        for item in viewModel.cells {
             if let shape = layer.sublayers?[item.index] as? CAShapeLayer {
                 shape.strokeColor = color(for: item)
             }
