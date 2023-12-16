@@ -47,7 +47,10 @@ struct ClockViewModel {
             cellIndex += 1
         }
 
-        newHappeningsPerSection[cellIndex - 1] += 1
+        let insertionIndex = cellIndex - 1
+        if insertionIndex >= 0 {
+            newHappeningsPerSection[insertionIndex] += 1
+        }
 
         return newHappeningsPerSection
     }

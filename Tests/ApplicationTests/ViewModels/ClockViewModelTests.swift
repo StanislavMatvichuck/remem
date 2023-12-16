@@ -19,6 +19,14 @@ final class ClockViewModelTests: XCTestCase {
         XCTAssertEqual(sut.cells.count, Self.size)
     }
 
+    func test_initForDayHappenings_empty_allSectionsAreEmpty() {
+        let event = Event(name: "")
+        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let notEmptySections = sut.cells.filter { !$0.isEmpty }
+
+        XCTAssertEqual(notEmptySections.count, 0)
+    }
+
     // MARK: - InitForDayHappenings
 
     func test_initForDayHappenings_atStartOfDay_hasFirstCellFullLength() {
@@ -61,6 +69,84 @@ final class ClockViewModelTests: XCTestCase {
         let sut = ClockViewModel(withNightHappeningsOf: event, andSize: Self.size)
 
         XCTAssertEqual(sut.cells.last?.length, 1)
+    }
+
+    func test_initForDayHappenings_manyHappenings_atOneTime_oneSectionIsNotEmpty() {
+        let event = Event(name: "")
+        addOneHappening(to: event)
+        addOneHappening(to: event)
+        addOneHappening(to: event)
+        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let notEmptySections = sut.cells.filter { !$0.isEmpty }
+
+        XCTAssertEqual(notEmptySections.count, 1)
+    }
+
+    func test_initForDayHappenings_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {
+        let time = TimeComponents(h: 10, m: 30, s: 45)
+        let time02 = TimeComponents(h: 11, m: 35, s: 45)
+
+        let event = Event(name: "")
+        addOneHappening(at: time, to: event)
+        addOneHappening(at: time02, to: event)
+        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let notEmptySections = sut.cells.filter { !$0.isEmpty }
+
+        XCTAssertEqual(notEmptySections.count, 2, "precondition")
+        XCTAssertEqual(
+            sut.cells[0].length,
+            sut.cells[1].length
+        )
+    }
+
+    /// also make snapshots for these cases
+    func test_manyHappenings_moreAtExactHour_hourSectionsAreBigger() {}
+    func test_initForDayHappenings_manyHappenings_evenlyDistributed_allSectionsHaveFullSize() {
+        let event = Event(name: "")
+
+        for h in 0 ..< 24 {
+            for m in 0 ..< 60 {
+                addOneHappening(at: TimeComponents(h: h, m: m, s: 0), to: event)
+            }
+        }
+
+        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+
+        for cell in sut.cells {
+            XCTAssertEqual(cell.length, 1)
+        }
+    }
+
+    func test_initForNightHappenings_manyHappenings_evenlyDistributed_allSectionsHaveFullSize() {
+        let event = Event(name: "")
+
+        for h in 0 ..< 24 {
+            for m in 0 ..< 60 {
+                addOneHappening(at: TimeComponents(h: h, m: m, s: 0), to: event)
+            }
+        }
+
+        let sut = ClockViewModel(withNightHappeningsOf: event, andSize: Self.size)
+
+        for cell in sut.cells {
+            XCTAssertEqual(cell.length, 1)
+        }
+    }
+
+    func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
+        let event = Event(name: "")
+
+        for _ in 0 ..< Int.random(in: 1 ..< 100) {
+            addOneHappening(at: TimeComponents(
+                h: Int.random(in: 0 ..< 24),
+                m: Int.random(in: 0 ..< 60),
+                s: Int.random(in: 0 ..< 60)
+            ), to: event)
+        }
+
+        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+
+        XCTAssertGreaterThanOrEqual(sut.cells.filter { $0.length == 1.0 }.count, 1)
     }
 
     private func addOneHappening(
