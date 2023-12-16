@@ -186,6 +186,7 @@
 		08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */; };
 		08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */; };
 		08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayCell.swift */; };
+		08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B42F732B2CCF6400850BAD /* ClockViewModelTests.swift */; };
 		08B628B12981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
 		08B628B22981A46600CA57F1 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B02981A46600CA57F1 /* Stubs.swift */; };
 		08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
@@ -396,7 +397,6 @@
 		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
 		08293CC027B670FC0039E432 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
-		082D80DA2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewControllerTests.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		0834D6B32A0AA387008F0124 /* WeekCellDayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCellDayContainer.swift; sourceTree = "<group>"; };
 		08396EE929A64B5900281E51 /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
@@ -541,6 +541,7 @@
 		08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsView.swift; sourceTree = "<group>"; };
 		08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewModel.swift; sourceTree = "<group>"; };
 		08B26A15289E98B700DFBAC8 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		08B42F732B2CCF6400850BAD /* ClockViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModelTests.swift; sourceTree = "<group>"; };
 		08B628B02981A46600CA57F1 /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventDetailsViewController.swift; sourceTree = "<group>"; };
 		08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestRepositoryConfigurator.swift; sourceTree = "<group>"; };
@@ -1007,7 +1008,7 @@
 				087365FF2930DD29000F28DE /* WeekViewModelTests.swift */,
 				08A376032A1796260037D43A /* WeekSummaryViewModelTests.swift */,
 				0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */,
-				082D80DA2B1CD8150073B30A /* VisualisationMakingViewControllerTests.swift */,
+				08B42F732B2CCF6400850BAD /* ClockViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1739,6 +1740,7 @@
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
 				08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */,
 				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
+				08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */,
 				085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */,
 				08E454B929C31C2B006AF35B /* TestingPdfViewController.swift in Sources */,
 				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,

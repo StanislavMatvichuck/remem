@@ -25,8 +25,8 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
         super.tearDown()
     }
 
-    func test_empty_has24sections() {
-        XCTAssertEqual(sections.count, 24)
+    func test_empty_has48sections() {
+        XCTAssertEqual(sections.count, 48)
     }
 
     func test_empty_allSectionsAreEmpty() {
@@ -51,8 +51,8 @@ final class ClockViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_manyHappenings_atTwoTimes_twoSectionsHaveEqualSize() {
-        let time = TimeComponents(h: 12, m: 30, s: 45)
-        let time02 = TimeComponents(h: 13, m: 35, s: 45)
+        let time = TimeComponents(h: 10, m: 30, s: 45)
+        let time02 = TimeComponents(h: 11, m: 35, s: 45)
 
         addOneHappening(at: time)
         addOneHappening(at: time02)

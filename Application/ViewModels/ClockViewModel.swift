@@ -9,42 +9,67 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
+    private static let secondsInDay = 60 * 60 * 24
+    private static let secondsInHalfOfDay = secondsInDay / 2
+
     let cells: [ClockCellViewModel]
 
-    init(event: Event, size: Int) {
-        let secondsInDay = 60 * 60 * 24
-        let secondsInSection = secondsInDay / size
-
+    init(withDayHappeningsOf event: Event, andSize size: Int) {
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
-        for happening in event.happenings {
-            var happeningSeconds = Self.seconds(for: happening)
-            var i = 0
-
-            while happeningSeconds >= 0 {
-                happeningSeconds -= secondsInSection
-                i += 1
-            }
-
-            happeningsPerSection[i - 1] += 1
+        event.happenings.forEach {
+            guard $0.secondsFromStartOfTheDay < Self.secondsInHalfOfDay else { return }
+            happeningsPerSection = Self.add(happening: $0, to: happeningsPerSection, withLowerBound: 0)
         }
 
-        let max = CGFloat(happeningsPerSection.max() ?? 0)
+        self.cells = Self.make(happeningsPerSection: happeningsPerSection)
+    }
 
-        self.cells = happeningsPerSection.enumerated().map { index, happeningsAmount in
+    init(withNightHappeningsOf event: Event, andSize size: Int) {
+        var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
+
+        event.happenings.forEach {
+            happeningsPerSection = Self.add(happening: $0, to: happeningsPerSection, withLowerBound: Self.secondsInHalfOfDay)
+        }
+
+        self.cells = Self.make(happeningsPerSection: happeningsPerSection)
+    }
+
+    private static func add(happening: Happening, to happeningsPerSection: [Int], withLowerBound: Int) -> [Int] {
+        let secondsInSection = Self.secondsInHalfOfDay / happeningsPerSection.count
+
+        var cellIndex = 0
+        var happeningSeconds = happening.secondsFromStartOfTheDay
+        var newHappeningsPerSection = happeningsPerSection
+
+        while happeningSeconds >= withLowerBound {
+            happeningSeconds -= secondsInSection
+            cellIndex += 1
+        }
+
+        newHappeningsPerSection[cellIndex - 1] += 1
+
+        return newHappeningsPerSection
+    }
+
+    private static func make(happeningsPerSection: [Int]) -> [ClockCellViewModel] {
+        let max = CGFloat(happeningsPerSection.max() ?? 0)
+        return happeningsPerSection.enumerated().map { index, happeningsAmount in
             ClockCellViewModel(
                 index: index,
                 length: max == 0 ? 0.0 : CGFloat(happeningsAmount) / max,
-                clockSize: size
+                clockSize: happeningsPerSection.count
             )
         }
     }
+}
 
-    private static func seconds(for happening: Happening) -> Int {
+extension Happening {
+    var secondsFromStartOfTheDay: Int {
         Calendar.current.dateComponents(
             [.second],
-            from: Calendar.current.startOfDay(for: happening.dateCreated),
-            to: happening.dateCreated
+            from: Calendar.current.startOfDay(for: dateCreated),
+            to: dateCreated
         ).second ?? 0
     }
 }
