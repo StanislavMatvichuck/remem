@@ -41,7 +41,10 @@ final class MobilePdfMaker: PDFMaking {
         placeSummaryTile(context)
 
         makeNewPage(context)
-        placeClockTile(context)
+        placeClockTile(context, viewModel: viewModel.clockViewModelDay)
+
+        makeNewPage(context)
+        placeClockTile(context, viewModel: viewModel.clockViewModelNight)
 
         makeNewPage(context)
         placeQRTile(context)
@@ -61,8 +64,8 @@ final class MobilePdfMaker: PDFMaking {
         view.layer.render(in: context.cgContext)
     }
 
-    private func placeClockTile(_ context: UIGraphicsPDFRendererContext) {
-        let clock = ClockView(viewModel: viewModel.clockViewModel)
+    private func placeClockTile(_ context: UIGraphicsPDFRendererContext, viewModel: ClockViewModel) {
+        let clock = ClockView(viewModel: viewModel)
         let view = UIView(frame: page)
 
         view.addSubview(clock)
