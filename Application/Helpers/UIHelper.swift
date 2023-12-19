@@ -43,7 +43,7 @@ extension UIFont {
     static let fontWeeklyGoalSubtitle: UIFont = makeFont(size: 12, weight: .bold)
     static let fontExtraSmall: UIFont = makeFont(size: 10.0, weight: .semibold)
     static let fontClockCapitalised: UIFont = makeFont(size: 20.0, weight: .bold)
-    static let fontClock: UIFont = makeFont(size: 12.0, weight: .regular)
+    static let fontClock: UIFont = makeFont(size: 18.0, weight: .regular)
 
     private static func makeFont(
         size: CGFloat = 17.0,

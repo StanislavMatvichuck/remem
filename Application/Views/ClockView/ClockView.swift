@@ -8,8 +8,8 @@
 import UIKit
 
 final class ClockView: UIView {
-    private static let digitsAngle = 2 * CGFloat.pi / 24
-    private static let digitsAngleOffset = CGFloat.pi / 2
+    private static let digitsAngle = CGFloat.pi / 6
+    private static let digitsAngleOffset = -CGFloat.pi / 2
 
     let clockFace: ClockFace
     private var digitsInstalled = false
@@ -20,6 +20,8 @@ final class ClockView: UIView {
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
     ]
+
+    let clockSymbolsDay = ["12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
 
     // MARK: - Init
     init(viewModel: ClockViewModel) {
@@ -52,7 +54,7 @@ final class ClockView: UIView {
     private func configureDigits() {
         guard !digitsInstalled else { return }
 
-        let digitsLabels = clockSymbols.enumerated().map {
+        let digitsLabels = clockSymbolsDay.enumerated().map {
             $0 % 3 == 0 ?
                 Self.makeCapitalizedLabel($1) :
                 Self.makeLabel($1)
@@ -81,22 +83,12 @@ final class ClockView: UIView {
         guard !iconsInstalled else { return }
 
         let imageViewDay = makeIcon(name: "sun.max")
-        let imageViewNight = makeIcon(name: "moon.stars")
+//        let imageViewNight = makeIcon(name: "moon.stars")
 
         addSubview(imageViewDay)
-        addSubview(imageViewNight)
 
-        let radius = digitsRadius / 2
-        let sunAngle = 3 * Self.digitsAngleOffset
-        let moonAngle = Self.digitsAngleOffset
-
-        NSLayoutConstraint.activate([
-            imageViewDay.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageViewNight.centerXAnchor.constraint(equalTo: centerXAnchor),
-
-            imageViewDay.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(sunAngle)),
-            imageViewNight.centerYAnchor.constraint(equalTo: centerYAnchor, constant: radius * sin(moonAngle)),
-        ])
+        imageViewDay.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        imageViewDay.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 
         iconsInstalled = true
     }

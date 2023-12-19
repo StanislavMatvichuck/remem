@@ -65,8 +65,8 @@ final class ClockFace: UIView {
     private func makePath(for item: ClockCellViewModel) -> CGPath {
         let radius = bounds.width / 2
 
-        let lineStart = CGPoint(x: 0, y: radius - Self.sectionMaximumLength)
-        let lineEnd = CGPoint(x: 0, y: radius - Self.lineCapRadius)
+        let lineStart = CGPoint(x: 0, y: Self.sectionMaximumLength - radius)
+        let lineEnd = CGPoint(x: 0, y: Self.lineCapRadius - radius)
 
         let path = UIBezierPath()
         path.move(to: lineStart)

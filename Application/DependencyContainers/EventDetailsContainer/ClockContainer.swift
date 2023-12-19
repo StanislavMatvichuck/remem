@@ -12,7 +12,7 @@ final class ClockContainer:
     ControllerFactoring,
     ClockViewModelFactoring
 {
-    let clockSize = 48
+    let clockSize = 64
     let parent: EventDetailsContainer
     let commander: UpdatingCommander
     var event: Event { parent.event }
@@ -29,6 +29,6 @@ final class ClockContainer:
     }
 
     func makeClockViewModel() -> ClockViewModel {
-        ClockViewModel(withDayHappeningsOf: event, andSize: clockSize)
+        ClockViewModel(withNightHappeningsOf: event, andSize: clockSize)
     }
 }
