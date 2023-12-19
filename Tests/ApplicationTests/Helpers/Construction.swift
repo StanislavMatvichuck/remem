@@ -43,7 +43,7 @@ extension ApplicationContainer {
             .makeContainer()
             .makeContainer(event: event, today: day)
 
-        return ClockContainer(parent: detailsContainer).make() as! ClockViewController
+        return ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
     }
 
     static func make() -> SummaryViewController {
@@ -87,7 +87,7 @@ extension ApplicationContainer {
         return detailsContainer.makePdfMakingViewController(
             detailsContainer.makeWeekViewController(),
             detailsContainer.makeSummaryViewController(),
-            detailsContainer.makeClockViewController()
+            ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
         )
     }
 }

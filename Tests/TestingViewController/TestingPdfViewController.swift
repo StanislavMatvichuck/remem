@@ -33,7 +33,7 @@ extension TestingViewController where Controller == PdfViewController {
         let summary = container.makeSummaryViewController()
         layout(summary)
 
-        let clock = container.makeClockViewController()
+        let clock = ClockContainer(parent: container, type: .night).make() as! ClockViewController
         layout(clock)
 
         let url = LocalFile.testingPdfReport

@@ -12,20 +12,15 @@ final class ClockView: UIView {
     private static let digitsAngleOffset = -CGFloat.pi / 2
 
     let clockFace: ClockFace
+    var viewModel: ClockViewModel
     private var digitsInstalled = false
     private var iconsInstalled = false
     private var digitsRadius: CGFloat { bounds.width / 4.5 }
 
-    let clockSymbols = [
-        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-        "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
-    ]
-
-    let clockSymbolsDay = ["12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
-
     // MARK: - Init
     init(viewModel: ClockViewModel) {
         self.clockFace = ClockFace(viewModel: viewModel)
+        self.viewModel = viewModel
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
@@ -54,7 +49,7 @@ final class ClockView: UIView {
     private func configureDigits() {
         guard !digitsInstalled else { return }
 
-        let digitsLabels = clockSymbolsDay.enumerated().map {
+        let digitsLabels = viewModel.type.symbols.enumerated().map {
             $0 % 3 == 0 ?
                 Self.makeCapitalizedLabel($1) :
                 Self.makeLabel($1)
@@ -82,8 +77,7 @@ final class ClockView: UIView {
     private func addIcons() {
         guard !iconsInstalled else { return }
 
-        let imageViewDay = makeIcon(name: "sun.max")
-//        let imageViewNight = makeIcon(name: "moon.stars")
+        let imageViewDay = makeIcon(name: viewModel.type.imageName)
 
         addSubview(imageViewDay)
 

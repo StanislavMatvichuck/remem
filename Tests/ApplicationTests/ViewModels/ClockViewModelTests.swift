@@ -14,14 +14,14 @@ final class ClockViewModelTests: XCTestCase {
 
     func test_initForDayHappenings_empty_hasSizeCells() {
         let event = Event(name: "")
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         XCTAssertEqual(sut.cells.count, Self.size)
     }
 
     func test_initForDayHappenings_empty_allSectionsAreEmpty() {
         let event = Event(name: "")
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
         let notEmptySections = sut.cells.filter { !$0.isEmpty }
 
         XCTAssertEqual(notEmptySections.count, 0)
@@ -32,7 +32,7 @@ final class ClockViewModelTests: XCTestCase {
     func test_initForDayHappenings_atStartOfDay_hasFirstCellFullLength() {
         let event = Event(name: "")
         addOneHappening(to: event)
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         XCTAssertEqual(sut.cells.first?.length, 1)
     }
@@ -40,7 +40,7 @@ final class ClockViewModelTests: XCTestCase {
     func test_initForDayHappenings_beforeMiddleOfDay_hasLastCellWithLength() {
         let event = Event(name: "")
         addOneHappening(at: TimeComponents(h: 11, m: 59, s: 59), to: event)
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         XCTAssertEqual(sut.cells.last?.length, 1)
     }
@@ -48,7 +48,7 @@ final class ClockViewModelTests: XCTestCase {
     func test_initForDayHappenings_afterMiddleOfDay_hasNoCellsWithLength() {
         let event = Event(name: "")
         addOneHappening(at: TimeComponents(h: 12, m: 0, s: 0), to: event)
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         XCTAssertEqual(sut.cells.filter { !$0.isEmpty }.count, 0)
     }
@@ -58,7 +58,7 @@ final class ClockViewModelTests: XCTestCase {
     func test_initForNightHappenings_atStartOfNight_hasFirstCellFullLength() {
         let event = Event(name: "")
         addOneHappening(at: TimeComponents(h: 12, m: 0, s: 0), to: event)
-        let sut = ClockViewModel(withNightHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .night)
 
         XCTAssertEqual(sut.cells.first?.length, 1)
     }
@@ -66,7 +66,7 @@ final class ClockViewModelTests: XCTestCase {
     func test_initForNightHappenings_beforeEndOfNight_hasLastCellWithLength() {
         let event = Event(name: "")
         addOneHappening(at: TimeComponents(h: 23, m: 59, s: 59), to: event)
-        let sut = ClockViewModel(withNightHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .night)
 
         XCTAssertEqual(sut.cells.last?.length, 1)
     }
@@ -76,7 +76,7 @@ final class ClockViewModelTests: XCTestCase {
         addOneHappening(to: event)
         addOneHappening(to: event)
         addOneHappening(to: event)
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
         let notEmptySections = sut.cells.filter { !$0.isEmpty }
 
         XCTAssertEqual(notEmptySections.count, 1)
@@ -89,7 +89,7 @@ final class ClockViewModelTests: XCTestCase {
         let event = Event(name: "")
         addOneHappening(at: time, to: event)
         addOneHappening(at: time02, to: event)
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
         let notEmptySections = sut.cells.filter { !$0.isEmpty }
 
         XCTAssertEqual(notEmptySections.count, 2, "precondition")
@@ -110,7 +110,7 @@ final class ClockViewModelTests: XCTestCase {
             }
         }
 
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         for cell in sut.cells {
             XCTAssertEqual(cell.length, 1)
@@ -126,7 +126,7 @@ final class ClockViewModelTests: XCTestCase {
             }
         }
 
-        let sut = ClockViewModel(withNightHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .night)
 
         for cell in sut.cells {
             XCTAssertEqual(cell.length, 1)
@@ -144,7 +144,7 @@ final class ClockViewModelTests: XCTestCase {
             ), to: event)
         }
 
-        let sut = ClockViewModel(withDayHappeningsOf: event, andSize: Self.size)
+        let sut = ClockViewModel(event: event, size: Self.size, type: .day)
 
         XCTAssertGreaterThanOrEqual(sut.cells.filter { $0.length == 1.0 }.count, 1)
     }

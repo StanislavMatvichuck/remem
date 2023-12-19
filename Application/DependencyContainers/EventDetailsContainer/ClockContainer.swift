@@ -14,21 +14,23 @@ final class ClockContainer:
 {
     let clockSize = 64
     let parent: EventDetailsContainer
-    let commander: UpdatingCommander
-    var event: Event { parent.event }
+    let type: ClockViewModel.ClockType
 
-    init(parent: EventDetailsContainer) {
+    var event: Event { parent.event }
+    var updater: ViewControllersUpdater { parent.updater }
+
+    init(parent: EventDetailsContainer, type: ClockViewModel.ClockType) {
         self.parent = parent
-        self.commander = UpdatingCommander(commander: parent.commander)
+        self.type = type
     }
 
     func make() -> UIViewController {
         let controller = ClockViewController(self)
-        commander.delegate = WeakRef(controller)
+        updater.addDelegate(WeakRef(controller))
         return controller
     }
 
     func makeClockViewModel() -> ClockViewModel {
-        ClockViewModel(withNightHappeningsOf: event, andSize: clockSize)
+        ClockViewModel(event: event, size: clockSize, type: type)
     }
 }

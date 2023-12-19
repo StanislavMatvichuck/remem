@@ -9,12 +9,38 @@ import Domain
 import Foundation
 
 struct ClockViewModel {
+    enum ClockType {
+        case day, night
+
+        var symbols: [String] {
+            switch self {
+            case .day: return ["12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+            case .night: return ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
+            }
+        }
+
+        var imageName: String {
+            switch self {
+            case .day: return "sun.max"
+            case .night: return "moon.stars"
+            }
+        }
+    }
+
     private static let secondsInDay = 60 * 60 * 24
     private static let secondsInHalfOfDay = secondsInDay / 2
 
+    let type: ClockType
     let cells: [ClockCellViewModel]
 
-    init(withDayHappeningsOf event: Event, andSize size: Int) {
+    init(event: Event, size: Int, type: ClockType) {
+        switch type {
+        case .day: self.init(withDayHappeningsOf: event, andSize: size)
+        case .night: self.init(withNightHappeningsOf: event, andSize: size)
+        }
+    }
+
+    private init(withDayHappeningsOf event: Event, andSize size: Int) {
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
         event.happenings.forEach {
@@ -23,9 +49,10 @@ struct ClockViewModel {
         }
 
         self.cells = Self.make(happeningsPerSection: happeningsPerSection)
+        self.type = .day
     }
 
-    init(withNightHappeningsOf event: Event, andSize size: Int) {
+    private init(withNightHappeningsOf event: Event, andSize size: Int) {
         var happeningsPerSection: [Int] = Array(repeating: 0, count: size)
 
         event.happenings.forEach {
@@ -33,6 +60,7 @@ struct ClockViewModel {
         }
 
         self.cells = Self.make(happeningsPerSection: happeningsPerSection)
+        self.type = .night
     }
 
     private static func add(happening: Happening, to happeningsPerSection: [Int], withLowerBound: Int) -> [Int] {

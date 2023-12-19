@@ -18,7 +18,7 @@ extension TestingViewController where Controller == ClockViewController {
             .makeContainer()
             .makeContainer(event: event, today: today)
 
-        sut = ClockContainer(parent: container).make() as? ClockViewController
+        sut = ClockContainer(parent: container, type: .night).make() as? ClockViewController
     }
 
     func addOneHappening(
