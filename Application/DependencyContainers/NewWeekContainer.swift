@@ -10,7 +10,7 @@ import Foundation
 
 final class NewWeekContainer:
     NewWeekViewModelFactoring,
-    NewWeekCellViewModelFactoring
+    NewWeekDayViewModelFactoring
 {
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
@@ -21,10 +21,10 @@ final class NewWeekContainer:
     }
 
     func makeNewWeekViewModel() -> NewWeekViewModel {
-        NewWeekViewModel(event: event, cellFactory: self)
+        NewWeekViewModel(event: event, dayFactory: self)
     }
 
-    func makeNewWeekCellViewModel(index: Int) -> NewWeekCellViewModel {
-        NewWeekCellViewModel(event: event, index: index, today: today)
+    func makeNewWeekDayViewModel(index: Int) -> NewWeekDayViewModel {
+        NewWeekDayViewModel(event: event, index: index, today: today)
     }
 }

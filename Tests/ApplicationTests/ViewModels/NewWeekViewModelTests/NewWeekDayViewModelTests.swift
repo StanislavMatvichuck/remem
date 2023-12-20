@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-final class NewWeekCellViewModelTest: XCTestCase {
+final class NewWeekDayViewModelTest: XCTestCase {
     func test_dayNumber_withEventDateCreatedAtReferenceDate_firstIndex_isOne() {
         let sut = make(for: IndexPath(row: 0, section: 0))
 
@@ -28,7 +28,7 @@ final class NewWeekCellViewModelTest: XCTestCase {
         XCTAssertTrue(sut.isToday)
     }
 
-    private func make(for index: IndexPath) -> NewWeekCellViewModel {
+    private func make(for index: IndexPath) -> NewWeekDayViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         let today = eventDayCreated.adding(days: 0)
@@ -38,7 +38,7 @@ final class NewWeekCellViewModelTest: XCTestCase {
                 .makeContainer(event: event, today: today)
         )
 
-        let sut = container.makeNewWeekCellViewModel(index: index.row)
+        let sut = container.makeNewWeekDayViewModel(index: index.row)
 
         return sut
     }

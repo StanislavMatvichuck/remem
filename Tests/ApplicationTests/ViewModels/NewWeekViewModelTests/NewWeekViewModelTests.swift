@@ -70,19 +70,19 @@ final class NewWeekViewModelTests: XCTestCase {
     func test_cellsCount_withEventDateCreatedAndTodaySameDay_isSeven() {
         let (sut, today) = make(withDateCreatedAndTodayOffset: 0)
 
-        XCTAssertEqual(sut.cellsCount(forToday: today), 7)
+        XCTAssertEqual(sut.daysCount(forToday: today), 7)
     }
 
     func test_cellsCount_withEventDateCreatedAndTodayAfterSixDays_isSeven() {
         let (sut, today) = make(withDateCreatedAndTodayOffset: 6)
 
-        XCTAssertEqual(sut.cellsCount(forToday: today), 7)
+        XCTAssertEqual(sut.daysCount(forToday: today), 7)
     }
 
     func test_cellsCount_withEventDateCreatedAndTodayAfterSevenDays_isFourteen() {
         let (sut, today) = make(withDateCreatedAndTodayOffset: 7)
 
-        XCTAssertEqual(sut.cellsCount(forToday: today), 14)
+        XCTAssertEqual(sut.daysCount(forToday: today), 14)
     }
 
     private func make(withDateCreatedAndTodayOffset offset: Int) -> (sut: NewWeekViewModel, today: Date) {

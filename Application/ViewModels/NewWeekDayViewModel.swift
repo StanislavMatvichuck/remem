@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct NewWeekCellViewModel {
+struct NewWeekDayViewModel {
     let dayNumber: String
     let isToday: Bool
 
