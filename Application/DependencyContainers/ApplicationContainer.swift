@@ -19,9 +19,7 @@ final class ApplicationContainer {
     let updater: ViewControllersUpdater
     let watcher: Watching
 
-    var currentMoment: Date {
-        mode.currentMomentInjected ? UITestRepositoryConfigurator.viewAndExportToday.date : .now
-    }
+    var currentMoment: Date { mode.currentMoment }
 
     init(mode: LaunchMode) {
         func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {

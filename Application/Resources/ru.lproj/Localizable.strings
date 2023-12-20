@@ -43,3 +43,6 @@
 "pdf.download" = "загрузить из app store";
 
 "visualisation.create" = "Покажите на что способны";
+
+"newWeek.weekNumberDescription" = "Неделя";
+"newWeek.totalNumberDescription" = "всего";

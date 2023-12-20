@@ -71,3 +71,6 @@ protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewM
 protocol PdfMakingViewModelFactoring {
     func makePdfMakingViewModel() -> PdfMakingViewModel
 }
+
+protocol NewWeekViewModelFactoring { func makeNewWeekViewModel() -> NewWeekViewModel }
+protocol NewWeekCellViewModelFactoring { func makeNewWeekCellViewModel(index: Int) -> NewWeekCellViewModel }

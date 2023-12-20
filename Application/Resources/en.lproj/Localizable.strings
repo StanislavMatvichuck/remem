@@ -43,3 +43,6 @@
 "pdf.download" = "download from app store";
 
 "visualisation.create" = "Show me what you got";
+
+"newWeek.weekNumberDescription" = "Week";
+"newWeek.totalNumberDescription" = "total";

@@ -43,3 +43,6 @@
 "pdf.download" = "download from store";
 
 "visualisation.create" = "Zeig mir was du hast";
+
+"newWeek.weekNumberDescription" = "Woche";
+"newWeek.totalNumberDescription" = "summe";
