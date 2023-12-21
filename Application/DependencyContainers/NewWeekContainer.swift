@@ -10,18 +10,25 @@ import Foundation
 
 final class NewWeekContainer:
     NewWeekViewModelFactoring,
-    NewWeekDayViewModelFactoring
+    NewWeekDayViewModelFactoring,
+    NewWeekPageViewModelFactoring
 {
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
-    private var today: Date { parent.parent.parent.currentMoment }
+    /// This property is used for unit testing. TODO:  A single approach to all containers according to current moment must be found.
+    private let today: Date
 
-    init(_ parent: EventDetailsContainer) {
+    init(_ parent: EventDetailsContainer, today: Date) {
         self.parent = parent
+        self.today = today
     }
 
     func makeNewWeekViewModel() -> NewWeekViewModel {
-        NewWeekViewModel(event: event, dayFactory: self)
+        NewWeekViewModel(event: event, pageFactory: self, today: today)
+    }
+
+    func makeNewWeekPageViewModel(index: Int) -> NewWeekPageViewModel {
+        NewWeekPageViewModel(event: event, dayFactory: self, index: index, today: today)
     }
 
     func makeNewWeekDayViewModel(index: Int) -> NewWeekDayViewModel {

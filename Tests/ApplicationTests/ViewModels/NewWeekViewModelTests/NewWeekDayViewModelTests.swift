@@ -35,7 +35,8 @@ final class NewWeekDayViewModelTest: XCTestCase {
         let container = NewWeekContainer(
             ApplicationContainer(mode: .unitTest)
                 .makeContainer()
-                .makeContainer(event: event, today: today)
+                .makeContainer(event: event, today: today),
+            today: today.date
         )
 
         let sut = container.makeNewWeekDayViewModel(index: index.row)

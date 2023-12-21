@@ -135,6 +135,8 @@
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
 		087433BB2B33752D00336FC3 /* NewWeekViewSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BA2B33752D00336FC3 /* NewWeekViewSnapshots.swift */; };
 		087433BE2B3375E000336FC3 /* NewWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BD2B3375E000336FC3 /* NewWeekView.swift */; };
+		087433C32B33814C00336FC3 /* NewWeekPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C22B33814C00336FC3 /* NewWeekPageViewModel.swift */; };
+		087433C52B33816700336FC3 /* NewWeekPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C42B33816700336FC3 /* NewWeekPageViewModelTests.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
@@ -493,6 +495,8 @@
 		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
 		087433BA2B33752D00336FC3 /* NewWeekViewSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekViewSnapshots.swift; sourceTree = "<group>"; };
 		087433BD2B3375E000336FC3 /* NewWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekView.swift; sourceTree = "<group>"; };
+		087433C22B33814C00336FC3 /* NewWeekPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekPageViewModel.swift; sourceTree = "<group>"; };
+		087433C42B33816700336FC3 /* NewWeekPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekPageViewModelTests.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
@@ -714,6 +718,7 @@
 				08D6E1D3288806FA003BF595 /* WeekViewModel.swift */,
 				085BD7A62B31CE9C000283E1 /* NewWeekViewModel.swift */,
 				08D5D0E52B32660000B71512 /* NewWeekDayViewModel.swift */,
+				087433C22B33814C00336FC3 /* NewWeekPageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1270,6 +1275,7 @@
 			isa = PBXGroup;
 			children = (
 				085BD7A42B31CD9F000283E1 /* NewWeekViewModelTests.swift */,
+				087433C42B33816700336FC3 /* NewWeekPageViewModelTests.swift */,
 				08D5D0E32B325DF300B71512 /* NewWeekDayViewModelTests.swift */,
 			);
 			path = NewWeekViewModelTests;
@@ -1764,6 +1770,7 @@
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
 				0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
+				087433C52B33816700336FC3 /* NewWeekPageViewModelTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
 				08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */,
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
@@ -1903,6 +1910,7 @@
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
 				080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */,
+				087433C32B33814C00336FC3 /* NewWeekPageViewModel.swift in Sources */,
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
 				08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
