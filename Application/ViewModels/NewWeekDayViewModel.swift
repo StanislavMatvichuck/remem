@@ -10,14 +10,21 @@ import Foundation
 
 struct NewWeekDayViewModel {
     let dayNumber: String
-    let isToday: Bool
     let dayName: String
+    let isToday: Bool
+    let isDimmed: Bool
 
     init(event: Event, index: Int, today: Date) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
-        let cellDay = startOfWeek.adding(days: index)
-        self.isToday = cellDay.date == today // make nice injection at Application Container
-        self.dayNumber = String(cellDay.dayInMonth)
-        self.dayName = cellDay.date.formatted(Date.FormatStyle().weekday(.narrow))
+        let day = startOfWeek.adding(days: index)
+        let dayDate = day.date
+
+        self.isToday = dayDate == today
+        self.dayNumber = String(day.dayInMonth)
+        self.dayName = dayDate.formatted(Date.FormatStyle().weekday(.narrow))
+
+        let dayBeforeEventIsCreated = dayDate < event.dateCreated
+        let dayAfterToday = dayDate > today
+        self.isDimmed = dayBeforeEventIsCreated || dayAfterToday
     }
 }

@@ -34,7 +34,25 @@ final class NewWeekDayViewModelTest: XCTestCase {
         XCTAssertEqual(sut.dayName, "M")
     }
 
-    private func make(for index: IndexPath) -> NewWeekDayViewModel {
+    func test_dayName_withEventDateCreatedAtReferenceDate_eighthIndex_isM() {
+        let sut = make(for: IndexPath(row: 0, section: 0), pageIndex: 1)
+
+        XCTAssertEqual(sut.dayName, "M")
+    }
+
+    func test_isDimmed_withEventDateCreatedAtRererenceDateAndTodayAtReferenceDate_firstIndex_false() {
+        let sut = make(for: IndexPath(row: 0, section: 0))
+
+        XCTAssertFalse(sut.isDimmed)
+    }
+
+    func test_isDimmed_withEventDateCreatedAtRererenceDateAndTodayAtReferenceDate_secondIndex_true() {
+        let sut = make(for: IndexPath(row: 1, section: 0))
+
+        XCTAssertTrue(sut.isDimmed)
+    }
+
+    private func make(for index: IndexPath, pageIndex: Int = 0) -> NewWeekDayViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         let today = eventDayCreated.adding(days: 0)
@@ -45,7 +63,7 @@ final class NewWeekDayViewModelTest: XCTestCase {
             today: today.date
         )
 
-        let sut = container.makeNewWeekDayViewModel(index: index.row, pageIndex: 0)
+        let sut = container.makeNewWeekDayViewModel(index: index.row, pageIndex: pageIndex)
 
         return sut
     }

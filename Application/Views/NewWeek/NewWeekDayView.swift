@@ -84,5 +84,8 @@ final class NewWeekDayView: UIView {
     private func configureContent(_ viewModel: NewWeekDayViewModel) {
         dayName.text = viewModel.dayName
         dayNumber.text = viewModel.dayNumber
+
+        dayNumber.font = viewModel.isToday ? .fontBold : .font
+        dayNumberContainer.backgroundColor = viewModel.isDimmed ? .bg_primary : .primary
     }
 }
