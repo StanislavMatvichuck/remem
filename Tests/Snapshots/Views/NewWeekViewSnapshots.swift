@@ -20,6 +20,7 @@ final class NewWeekViewSnapshots: FBSnapshotTestCase {
     func test_JanuaryFirstOf2000() {
         let today = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: today.date)
+        event.addHappening(date: today.date)
         let container = NewWeekContainer(
             EventDetailsContainer(
                 parent: EventsListContainer(

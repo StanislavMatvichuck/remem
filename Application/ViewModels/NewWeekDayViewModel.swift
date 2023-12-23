@@ -13,6 +13,8 @@ struct NewWeekDayViewModel {
     let dayName: String
     let isToday: Bool
     let isDimmed: Bool
+    let hasHappenings: Bool
+    let happeningsAmount: String
 
     init(event: Event, index: Int, today: Date) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
@@ -26,5 +28,9 @@ struct NewWeekDayViewModel {
         let dayBeforeEventIsCreated = dayDate < event.dateCreated
         let dayAfterToday = dayDate > today
         self.isDimmed = dayBeforeEventIsCreated || dayAfterToday
+
+        let happeningsAmount = event.happenings(forDayIndex: day).count
+        self.happeningsAmount = "\(happeningsAmount)"
+        self.hasHappenings = happeningsAmount > 0
     }
 }

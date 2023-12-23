@@ -32,6 +32,18 @@ final class NewWeekDayView: UIView {
         return view
     }()
 
+    let happeningsDisplay: UIView = {
+        let view = UIView(al: true)
+        return view
+    }()
+
+    let happeningsAmount: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .fontSmallBold
+        label.textAlignment = .center
+        return label
+    }()
+
     var viewModel: NewWeekDayViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
@@ -47,6 +59,9 @@ final class NewWeekDayView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
+        happeningsDisplay.addAndConstrain(happeningsAmount)
+        happeningsDisplayBackground.addAndConstrain(happeningsDisplay)
+
         let clippingStack = UIStackView(al: true)
         clippingStack.axis = .vertical
         clippingStack.alignment = .center
@@ -79,6 +94,8 @@ final class NewWeekDayView: UIView {
         happeningsDisplayBackground.backgroundColor = .bg_item
         dayName.textColor = .secondary
         dayNumber.textColor = .bg_item
+        happeningsAmount.textColor = .bg_item
+        happeningsDisplay.backgroundColor = .bg_secondary
     }
 
     private func configureContent(_ viewModel: NewWeekDayViewModel) {
@@ -87,5 +104,8 @@ final class NewWeekDayView: UIView {
 
         dayNumber.font = viewModel.isToday ? .fontBold : .font
         dayNumberContainer.backgroundColor = viewModel.isDimmed ? .bg_primary : .primary
+
+        happeningsDisplay.isHidden = !viewModel.hasHappenings
+        happeningsAmount.text = viewModel.happeningsAmount
     }
 }
