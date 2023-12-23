@@ -52,4 +52,10 @@ struct NewWeekPageViewModel {
         let nameOfMonth = dateFormatter.string(from: today)
         return nameOfMonth
     }
+
+    var daysCount: Int { 7 }
+
+    func day(for index: Int) -> NewWeekDayViewModel {
+        dayFactory.makeNewWeekDayViewModel(index: index, pageIndex: self.index)
+    }
 }

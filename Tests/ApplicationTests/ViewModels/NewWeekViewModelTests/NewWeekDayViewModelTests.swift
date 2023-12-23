@@ -28,6 +28,12 @@ final class NewWeekDayViewModelTest: XCTestCase {
         XCTAssertTrue(sut.isToday)
     }
 
+    func test_dayName_withEventDateCreatedAtReferenceDate_firstIndex_isM() {
+        let sut = make(for: IndexPath(row: 0, section: 0))
+
+        XCTAssertEqual(sut.dayName, "M")
+    }
+
     private func make(for index: IndexPath) -> NewWeekDayViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
@@ -39,7 +45,7 @@ final class NewWeekDayViewModelTest: XCTestCase {
             today: today.date
         )
 
-        let sut = container.makeNewWeekDayViewModel(index: index.row)
+        let sut = container.makeNewWeekDayViewModel(index: index.row, pageIndex: 0)
 
         return sut
     }

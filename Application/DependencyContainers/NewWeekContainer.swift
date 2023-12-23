@@ -31,7 +31,7 @@ final class NewWeekContainer:
         NewWeekPageViewModel(event: event, dayFactory: self, index: index, today: today)
     }
 
-    func makeNewWeekDayViewModel(index: Int) -> NewWeekDayViewModel {
-        NewWeekDayViewModel(event: event, index: index, today: today)
+    func makeNewWeekDayViewModel(index: Int, pageIndex: Int) -> NewWeekDayViewModel {
+        NewWeekDayViewModel(event: event, index: pageIndex * 7 + index, today: today)
     }
 }

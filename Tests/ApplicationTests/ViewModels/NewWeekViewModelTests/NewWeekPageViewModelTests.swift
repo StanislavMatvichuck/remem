@@ -63,8 +63,8 @@ final class NewWeekPageViewModelTests: XCTestCase {
         XCTAssertEqual(sut.localisedMonth, "January")
     }
 
-    func test_localisedDays_hasSevenShortNames() {
-        XCTAssertEqual(NewWeekPageViewModel.localisedDaysNames.count, 7)
+    func test_daysCount_isSeven() {
+        XCTAssertEqual(make(withDateCreatedAndTodayOffset: 0).daysCount, 7)
     }
 
     private func make(withDateCreatedAndTodayOffset offset: Int) -> NewWeekPageViewModel {

@@ -34,6 +34,10 @@ extension CGFloat {
     static let border: CGFloat = 0.5
 }
 
+extension CGRect {
+    static let screenSquare = CGRect(x: 0, y: 0, width: .screenW, height: .screenW)
+}
+
 extension UIFont {
     static let font: UIFont = makeFont()
     static let fontBold: UIFont = makeFont(size: 32.0, weight: .bold)

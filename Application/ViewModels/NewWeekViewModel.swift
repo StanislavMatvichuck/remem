@@ -36,25 +36,4 @@ struct NewWeekViewModel {
     func page(at index: Int) -> NewWeekPageViewModel {
         pageFactory.makeNewWeekPageViewModel(index: index)
     }
-
-//    /// Days visible amount
-//    /// - Parameter today: first visible day
-//    /// - Returns: amount that is divided by seven
-//    func daysCount(forToday today: Date) -> Int {
-//        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
-//        let startOfWeekToday = WeekIndex(today).dayIndex
-//        let endOfWeekToday = startOfWeekToday.adding(days: 7)
-//
-//        let calendar = Calendar.current
-//        let daysDifference = calendar.dateComponents([.day], from: startOfWeek.date, to: endOfWeekToday.date).day ?? 0
-//
-//        return daysDifference
-//    }
-//
-//    /// Used by UICollectionView in NewWeekView
-//    /// - Parameter index: days distance from start of the week of event creation
-//    /// - Returns: cell that describe day of the week
-//    func day(at index: IndexPath) -> NewWeekDayViewModel? {
-//        dayFactory.makeNewWeekDayViewModel(index: index.row)
-//    }
 }
