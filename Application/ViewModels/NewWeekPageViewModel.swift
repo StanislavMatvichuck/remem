@@ -49,7 +49,7 @@ struct NewWeekPageViewModel {
         let from = WeekIndex(event.dateCreated).date
         let to = WeekIndex(today).date
         let weeksDifference = Calendar.current.dateComponents(
-            [.year, .weekOfYear],
+            [.weekOfYear],
             from: from,
             to: to
         ).weekOfYear ?? 0
