@@ -7,39 +7,19 @@
 
 import UIKit
 
-final class NewWeekDayView: UIView {
-    let dayName: UILabel = {
+final class NewWeekDayView: UIStackView {
+    private let roundContainer: UIStackView = {
+        let roundView = UIStackView(al: true)
+        roundView.axis = .vertical
+        roundView.alignment = .fill
+        return roundView
+    }()
+
+    private let happenings = NewWeekDayHappeningView()
+    private let dayNumber = NewWeekDayNumberView()
+    private let dayName: UILabel = {
         let label = UILabel(al: true)
         label.font = .font
-        return label
-    }()
-
-    let dayNumber: UILabel = {
-        let label = UILabel(al: true)
-        label.font = .font
-        return label
-    }()
-
-    let dayNumberContainer: UIView = {
-        let view = UIView(al: true)
-        view.widthAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        return view
-    }()
-
-    let happeningsDisplayBackground: UIView = {
-        let view = UIView(al: true)
-        view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3).isActive = true
-        return view
-    }()
-
-    let happeningsDisplay: UIView = {
-        let view = UIView(al: true)
-        return view
-    }()
-
-    let happeningsAmount: UILabel = {
-        let label = UILabel(al: true)
-        label.font = .fontSmallBold
         label.textAlignment = .center
         return label
     }()
@@ -52,60 +32,37 @@ final class NewWeekDayView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+
         configureLayout()
         configureAppearance()
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
-    private func configureLayout() {
-        happeningsDisplay.addAndConstrain(happeningsAmount)
-        happeningsDisplayBackground.addAndConstrain(happeningsDisplay)
-
-        let clippingStack = UIStackView(al: true)
-        clippingStack.axis = .vertical
-        clippingStack.alignment = .center
-        clippingStack.addArrangedSubview(happeningsDisplayBackground)
-        clippingStack.addArrangedSubview(dayNumberContainer)
-        clippingStack.layer.cornerRadius = NewWeekPageView.daySpacing / 2
-        clippingStack.clipsToBounds = true
-
-        let verticalStack = UIStackView(al: true)
-        verticalStack.axis = .vertical
-        verticalStack.alignment = .center
-
-        dayNumberContainer.addSubview(dayNumber)
-        dayNumber.centerXAnchor.constraint(equalTo: dayNumberContainer.centerXAnchor).isActive = true
-        dayNumber.centerYAnchor.constraint(equalTo: dayNumberContainer.centerYAnchor).isActive = true
-
-        verticalStack.addArrangedSubview(clippingStack)
-        verticalStack.addArrangedSubview(dayName)
-
-        happeningsDisplayBackground.widthAnchor.constraint(equalTo: verticalStack.widthAnchor).isActive = true
-        dayNumberContainer.widthAnchor.constraint(equalTo: verticalStack.widthAnchor).isActive = true
-
-        verticalStack.setCustomSpacing(NewWeekPageView.daySpacing, after: clippingStack)
-
-        addAndConstrain(verticalStack)
-    }
+    required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureAppearance() {
-        dayNumberContainer.backgroundColor = .primary
-        happeningsDisplayBackground.backgroundColor = .bg_item
         dayName.textColor = .secondary
-        dayNumber.textColor = .bg_item
-        happeningsAmount.textColor = .bg_item
-        happeningsDisplay.backgroundColor = .bg_secondary
+        roundContainer.layer.cornerRadius = NewWeekPageView.daySpacing / 2
+        roundContainer.clipsToBounds = true
+        roundContainer.backgroundColor = .bg_item
     }
 
     private func configureContent(_ viewModel: NewWeekDayViewModel) {
         dayName.text = viewModel.dayName
-        dayNumber.text = viewModel.dayNumber
 
-        dayNumber.font = viewModel.isToday ? .fontBold : .font
-        dayNumberContainer.backgroundColor = viewModel.isDimmed ? .bg_primary : .primary
+        dayNumber.configureContent(viewModel)
+        happenings.configureContent(viewModel)
+    }
 
-        happeningsDisplay.isHidden = !viewModel.hasHappenings
-        happeningsAmount.text = viewModel.happeningsAmount
+    private func configureLayout() {
+        axis = .vertical
+
+        roundContainer.addArrangedSubview(happenings)
+        roundContainer.addArrangedSubview(dayNumber)
+
+        addArrangedSubview(roundContainer)
+        addArrangedSubview(dayName)
+        dayName.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+
+        setCustomSpacing(NewWeekPageView.daySpacing, after: roundContainer)
     }
 }

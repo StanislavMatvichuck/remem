@@ -77,7 +77,7 @@ final class NewWeekPageView: UICollectionViewCell {
         month.text = viewModel.localisedMonth
         for day in days.arrangedSubviews { day.removeFromSuperview() }
 
-        for index in 0 ..< viewModel.daysCount {
+        for index in 0 ..< NewWeekPageViewModel.daysCount {
             let day = NewWeekDayView()
             day.viewModel = viewModel.day(for: index)
             days.addArrangedSubview(day)

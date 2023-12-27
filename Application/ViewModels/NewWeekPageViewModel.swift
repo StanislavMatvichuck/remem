@@ -9,12 +9,13 @@ import Domain
 import Foundation
 
 struct NewWeekPageViewModel {
+    static let daysCount: Int = 7
     static let weekNumberDescription = String(localized: "newWeek.weekNumberDescription")
     static let totalNumberDescription = String(localized: "newWeek.totalNumberDescription")
     static let localisedDaysNames = {
         let formatter = DateFormatter()
         var days = formatter.veryShortWeekdaySymbols!
-        return Array(days[1..<days.count]) + days[0..<1]
+        return Array(days[1 ..< days.count]) + days[0 ..< 1]
     }()
 
     private let event: Event
@@ -27,7 +28,23 @@ struct NewWeekPageViewModel {
         self.dayFactory = dayFactory
         self.index = index
         self.today = today
+        self.weekMaximumHappeningsCount = {
+            var maximum = 0
+
+            for dayNumber in 0 ..< Self.daysCount {
+                let dayIndex = dayNumber + index * 7
+                let day = DayIndex(event.dateCreated).adding(days: dayIndex)
+                let dayHappeningsAmount = event.happenings(forDayIndex: day).count
+                if maximum < dayHappeningsAmount {
+                    maximum = dayHappeningsAmount
+                }
+            }
+
+            return maximum
+        }()
     }
+
+    let weekMaximumHappeningsCount: Int
 
     var weekNumber: Int {
         let from = event.dateCreated
@@ -53,9 +70,11 @@ struct NewWeekPageViewModel {
         return nameOfMonth
     }
 
-    var daysCount: Int { 7 }
-
     func day(for index: Int) -> NewWeekDayViewModel {
-        dayFactory.makeNewWeekDayViewModel(index: index, pageIndex: self.index)
+        dayFactory.makeNewWeekDayViewModel(
+            index: index,
+            pageIndex: self.index,
+            weekMaximum: weekMaximumHappeningsCount
+        )
     }
 }

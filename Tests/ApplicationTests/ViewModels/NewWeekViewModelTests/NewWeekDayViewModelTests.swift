@@ -87,11 +87,48 @@ final class NewWeekDayViewModelTest: XCTestCase {
             for: IndexPath(row: 0, section: 0),
             withHappeningsAt: [
                 DayIndex.referenceValue.date,
-                DayIndex.referenceValue.date
+                DayIndex.referenceValue.date,
             ]
         )
 
         XCTAssertEqual(sut.happeningsAmount, "2")
+    }
+
+    func test_relativeLength_mon1_one() {
+        let sut = make(
+            for: IndexPath(row: 0, section: 0),
+            withHappeningsAt: [DayIndex.referenceValue.date]
+        )
+
+        XCTAssertEqual(sut.relativeLength, 1)
+    }
+
+    func test_relativeLength_mon1_tue2_half() {
+        let sut = make(
+            for: IndexPath(row: 0, section: 0),
+            withHappeningsAt: [
+                DayIndex.referenceValue.date,
+                DayIndex.referenceValue.adding(days: 1).date,
+                DayIndex.referenceValue.adding(days: 1).date,
+            ]
+        )
+
+        XCTAssertEqual(sut.relativeLength, 0.5)
+    }
+
+    func test_relativeLength_mon1_tue3() {
+        let happenings = [
+            DayIndex.referenceValue.date,
+            DayIndex.referenceValue.adding(days: 1).date,
+            DayIndex.referenceValue.adding(days: 1).date,
+            DayIndex.referenceValue.adding(days: 1).date,
+        ]
+
+        let sutMonday = make(for: IndexPath(row: 0, section: 0), withHappeningsAt: happenings)
+        let sutTuesday = make(for: IndexPath(row: 1, section: 0), withHappeningsAt: happenings)
+
+        XCTAssertEqual(sutMonday.relativeLength, 0.333, accuracy: 0.001)
+        XCTAssertEqual(sutTuesday.relativeLength, 1.0, accuracy: 0.001)
     }
 
     private func make(
@@ -111,7 +148,12 @@ final class NewWeekDayViewModelTest: XCTestCase {
             today: today.date
         )
 
-        let sut = container.makeNewWeekDayViewModel(index: index.row, pageIndex: pageIndex)
+        let page = container.makeNewWeekPageViewModel(index: pageIndex)
+        let sut = container.makeNewWeekDayViewModel(
+            index: index.row,
+            pageIndex: pageIndex,
+            weekMaximum: page.weekMaximumHappeningsCount
+        )
 
         return sut
     }

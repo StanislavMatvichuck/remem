@@ -73,5 +73,5 @@ protocol PdfMakingViewModelFactoring {
 }
 
 protocol NewWeekViewModelFactoring { func makeNewWeekViewModel() -> NewWeekViewModel }
-protocol NewWeekDayViewModelFactoring { func makeNewWeekDayViewModel(index: Int, pageIndex: Int) -> NewWeekDayViewModel }
+protocol NewWeekDayViewModelFactoring { func makeNewWeekDayViewModel(index: Int, pageIndex: Int, weekMaximum: Int) -> NewWeekDayViewModel }
 protocol NewWeekPageViewModelFactoring { func makeNewWeekPageViewModel(index: Int) -> NewWeekPageViewModel }

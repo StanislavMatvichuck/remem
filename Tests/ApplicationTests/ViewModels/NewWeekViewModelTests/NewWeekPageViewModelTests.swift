@@ -46,25 +46,47 @@ final class NewWeekPageViewModelTests: XCTestCase {
 
     /// May be tested in Event class
     func test_amountNumber_withOneHappeningAtToday_isOne() {
-        let sut = makeWithOneHappening()
+        let sut = make()
 
         XCTAssertEqual(sut.totalNumber, 1)
     }
 
     func test_titleHasWeekNumberAndTotalNumberLocalized() {
-        let sut = makeWithOneHappening()
+        let sut = make()
 
         XCTAssertEqual(sut.title, "Week 1 total 1")
     }
 
     func test_localisedMonth_isFullMonthName() {
-        let sut = makeWithOneHappening()
+        let sut = make()
 
         XCTAssertEqual(sut.localisedMonth, "January")
     }
 
     func test_daysCount_isSeven() {
-        XCTAssertEqual(make(withDateCreatedAndTodayOffset: 0).daysCount, 7)
+        XCTAssertEqual(NewWeekPageViewModel.daysCount, 7)
+    }
+
+    func test_weekMaximumHappenings_noHappenings_zero() {
+        let sut = make(withDateCreatedAndTodayOffset: 0)
+
+        XCTAssertEqual(sut.weekMaximumHappeningsCount, 0)
+    }
+
+    func test_weekMaximumHappenings_oneHappening_one() {
+        let sut = make()
+
+        XCTAssertEqual(sut.weekMaximumHappeningsCount, 1)
+    }
+
+    func test_weekMaximumHappenings_oneHappeningMondayTwoTuesday_two() {
+        let sut = make(with: [
+            DayIndex.referenceValue.date,
+            DayIndex.referenceValue.adding(days: 1).date,
+            DayIndex.referenceValue.adding(days: 1).date,
+        ])
+
+        XCTAssertEqual(sut.weekMaximumHappeningsCount, 2)
     }
 
     private func make(withDateCreatedAndTodayOffset offset: Int) -> NewWeekPageViewModel {
@@ -89,10 +111,11 @@ final class NewWeekPageViewModelTests: XCTestCase {
         return sut
     }
 
-    private func makeWithOneHappening() -> NewWeekPageViewModel {
+    private func make(with happenings: [Date] = [DayIndex.referenceValue.date]) -> NewWeekPageViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
-        event.addHappening(date: eventDayCreated.date.addingTimeInterval(60))
+        happenings.forEach { event.addHappening(date: $0) }
+
         let today = eventDayCreated.adding(days: 0)
         let container = NewWeekContainer(
             ApplicationContainer(mode: .unitTest)
