@@ -13,9 +13,8 @@ final class NewWeekPageView: UICollectionViewCell {
 
     let title: UILabel = {
         let label = UILabel(al: true)
-        label.font = .fontClock
+        label.font = .fontWeekTitle
         label.textAlignment = .center
-
         return label
     }()
 
@@ -23,7 +22,6 @@ final class NewWeekPageView: UICollectionViewCell {
         let label = UILabel(al: true)
         label.font = .font
         label.textAlignment = .center
-
         return label
     }()
 
@@ -34,12 +32,10 @@ final class NewWeekPageView: UICollectionViewCell {
         return stack
     }()
 
-    var viewModel: NewWeekPageViewModel? {
-        didSet {
-            guard let viewModel else { return }
-            configureContent(viewModel)
-        }
-    }
+    var viewModel: NewWeekPageViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContent(viewModel)
+    } }
 
     override init(frame: CGRect) {
         super.init(frame: frame)

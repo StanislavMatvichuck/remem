@@ -168,6 +168,8 @@
 		0897E177297459FA00BD2A56 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = 0897E176297459FA00BD2A56 /* ViewControllerPresentationSpy */; };
 		0898017927FAF17C0014E110 /* EventInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInputView.swift */; };
 		089AC5F22B3C53BF00577781 /* NewWeekDayNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F12B3C53BF00577781 /* NewWeekDayNumberView.swift */; };
+		089AC5F42B3C60F000577781 /* NewWeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F32B3C60F000577781 /* NewWeekViewControllerTests.swift */; };
+		089AC5F62B3C61C300577781 /* NewWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F52B3C61C300577781 /* NewWeekViewController.swift */; };
 		089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37832A0A271D00422971 /* TimeSinceView.swift */; };
 		089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37852A0A2D7900422971 /* SwipingCircleView.swift */; };
@@ -540,6 +542,8 @@
 		0898017827FAF17C0014E110 /* EventInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputView.swift; sourceTree = "<group>"; };
 		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
 		089AC5F12B3C53BF00577781 /* NewWeekDayNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekDayNumberView.swift; sourceTree = "<group>"; };
+		089AC5F32B3C60F000577781 /* NewWeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekViewControllerTests.swift; sourceTree = "<group>"; };
+		089AC5F52B3C61C300577781 /* NewWeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWeekViewController.swift; sourceTree = "<group>"; };
 		089B37832A0A271D00422971 /* TimeSinceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSinceView.swift; sourceTree = "<group>"; };
 		089B37852A0A2D7900422971 /* SwipingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingCircleView.swift; sourceTree = "<group>"; };
 		089B37872A0A32B700422971 /* EventAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAmountView.swift; sourceTree = "<group>"; };
@@ -1114,6 +1118,7 @@
 				08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */,
 				08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */,
 				0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */,
+				089AC5F32B3C60F000577781 /* NewWeekViewControllerTests.swift */,
 			);
 			path = ControllersIntegrationTests;
 			sourceTree = "<group>";
@@ -1245,6 +1250,7 @@
 				08E174502B292A990018256D /* DayDetailsPresentationController */,
 				08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */,
 				0852C6AC283D66170027EF3E /* WeekViewController.swift */,
+				089AC5F52B3C61C300577781 /* NewWeekViewController.swift */,
 				0852C69D283D39CA0027EF3E /* ClockViewController.swift */,
 				0890627727A0A2520032847C /* EventDetailsViewController.swift */,
 				0812D8BD2966F0910010C66D /* EventsListViewController */,
@@ -1756,6 +1762,7 @@
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
 				0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */,
+				089AC5F42B3C60F000577781 /* NewWeekViewControllerTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
@@ -1932,6 +1939,7 @@
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5D0E62B32660000B71512 /* NewWeekDayViewModel.swift in Sources */,
+				089AC5F62B3C61C300577781 /* NewWeekViewController.swift in Sources */,
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
 				0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,

@@ -148,7 +148,7 @@ final class NewWeekDayViewModelTest: XCTestCase {
             today: today.date
         )
 
-        let page = container.makeNewWeekPageViewModel(index: pageIndex)
+        let page = container.makeNewWeekPageViewModel(pageIndex: pageIndex)
         let sut = container.makeNewWeekDayViewModel(
             index: index.row,
             pageIndex: pageIndex,

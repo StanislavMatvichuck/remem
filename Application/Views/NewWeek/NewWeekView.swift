@@ -30,7 +30,6 @@ final class NewWeekView: UIView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         collection.dataSource = self
-        collection.delegate = self
         configureLayout()
         configureAppearance()
     }
@@ -38,6 +37,7 @@ final class NewWeekView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
+        widthAnchor.constraint(equalTo: heightAnchor).isActive = true
         addAndConstrain(collection)
     }
 
@@ -51,7 +51,7 @@ final class NewWeekView: UIView {
     }
 }
 
-extension NewWeekView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension NewWeekView: UICollectionViewDataSource {
     var viewModelErrorMessage: String { "view has no access to viewModel" }
 
     func collectionView(
@@ -72,14 +72,5 @@ extension NewWeekView: UICollectionViewDataSource, UICollectionViewDelegateFlowL
         else { fatalError(viewModelErrorMessage) }
         page.viewModel = viewModel.page(at: indexPath.row)
         return page
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: width)
     }
 }

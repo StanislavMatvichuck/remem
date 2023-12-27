@@ -40,7 +40,9 @@ final class NewWeekDayHappeningView: UIView {
 
     func configureContent(_ viewModel: NewWeekDayViewModel) {
         relativeLength = viewModel.relativeLength
-        number.isHidden = !viewModel.hasHappenings
+        let isHidden = !viewModel.hasHappenings
+        number.isHidden = isHidden
+        background.isHidden = isHidden
         number.text = viewModel.happeningsAmount
     }
 

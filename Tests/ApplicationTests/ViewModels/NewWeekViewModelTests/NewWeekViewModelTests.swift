@@ -34,6 +34,24 @@ final class NewWeekViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pagesCount, 4)
     }
 
+    func test_pageAt_withEventDateCreatedAndTodayAfterSevenDays_firstIndex_weekNumber_isOne() {
+        let sut = make(withDateCreatedAndTodayOffset: 7)
+
+        XCTAssertEqual(sut.page(at: 0).weekNumber, 1)
+    }
+
+    func test_pageAt_withEventDateCreatedAndTodayAfterSevenDays_secondIndex_weekNumber_isTwo() {
+        let sut = make(withDateCreatedAndTodayOffset: 7)
+
+        XCTAssertEqual(sut.page(at: 1).weekNumber, 2)
+    }
+
+    func test_pageAt_withEventDateCreatedAndTodayAfterTwentyDays_thirdIndex_weekNumber_isThree() {
+        let sut = make(withDateCreatedAndTodayOffset: 20)
+
+        XCTAssertEqual(sut.page(at: 2).weekNumber, 3)
+    }
+
     private func make(withDateCreatedAndTodayOffset: Int) -> NewWeekViewModel {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         let today = DayIndex(event.dateCreated).adding(days: withDateCreatedAndTodayOffset)

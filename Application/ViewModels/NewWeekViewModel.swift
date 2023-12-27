@@ -26,7 +26,7 @@ struct NewWeekViewModel {
 
         let calendar = Calendar.current
         let weeksDifference = calendar.dateComponents(
-            [.weekOfYear],
+            [.year, .weekOfYear],
             from: startOfWeek.date,
             to: endOfWeekToday.date
         ).weekOfYear ?? 0
@@ -34,6 +34,6 @@ struct NewWeekViewModel {
     }
 
     func page(at index: Int) -> NewWeekPageViewModel {
-        pageFactory.makeNewWeekPageViewModel(index: index)
+        pageFactory.makeNewWeekPageViewModel(pageIndex: index)
     }
 }

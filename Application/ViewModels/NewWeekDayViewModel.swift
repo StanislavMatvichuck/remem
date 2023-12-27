@@ -26,7 +26,7 @@ struct NewWeekDayViewModel {
         self.dayNumber = String(day.dayInMonth)
         self.dayName = dayDate.formatted(Date.FormatStyle().weekday(.narrow))
 
-        let dayBeforeEventIsCreated = dayDate < event.dateCreated
+        let dayBeforeEventIsCreated = day < DayIndex(event.dateCreated)
         let dayAfterToday = dayDate > today
         self.isDimmed = dayBeforeEventIsCreated || dayAfterToday
 
@@ -34,6 +34,7 @@ struct NewWeekDayViewModel {
         self.happeningsAmount = "\(happeningsAmount)"
         self.hasHappenings = happeningsAmount > 0
 
-        self.relativeLength = CGFloat(happeningsAmount) / CGFloat(weekMaximum)
+        let relativeLength = CGFloat(happeningsAmount) / CGFloat(weekMaximum)
+        self.relativeLength = weekMaximum == 0 ? 0 : relativeLength
     }
 }

@@ -106,7 +106,7 @@ final class NewWeekPageViewModelTests: XCTestCase {
             today: today.date
         )
 
-        let sut = container.makeNewWeekPageViewModel(index: 0)
+        let sut = container.makeNewWeekPageViewModel(pageIndex: offset / 7)
 
         return sut
     }
@@ -124,7 +124,7 @@ final class NewWeekPageViewModelTests: XCTestCase {
             today: today.date
         )
 
-        let sut = container.makeNewWeekPageViewModel(index: 0)
+        let sut = container.makeNewWeekPageViewModel(pageIndex: 0)
 
         return sut
     }

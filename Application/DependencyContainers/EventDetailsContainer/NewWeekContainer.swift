@@ -6,9 +6,10 @@
 //
 
 import Domain
-import Foundation
+import UIKit
 
 final class NewWeekContainer:
+    ControllerFactoring,
     NewWeekViewModelFactoring,
     NewWeekDayViewModelFactoring,
     NewWeekPageViewModelFactoring
@@ -23,12 +24,24 @@ final class NewWeekContainer:
         self.today = today
     }
 
+    func make() -> UIViewController {
+        let controller = NewWeekViewController(self)
+        return controller
+    }
+
     func makeNewWeekViewModel() -> NewWeekViewModel {
         NewWeekViewModel(event: event, pageFactory: self, today: today)
     }
 
-    func makeNewWeekPageViewModel(index: Int) -> NewWeekPageViewModel {
-        NewWeekPageViewModel(event: event, dayFactory: self, index: index, today: today)
+    func makeNewWeekPageViewModel(pageIndex: Int) -> NewWeekPageViewModel {
+        let startWeekIndex = WeekIndex(event.dateCreated)
+        let today = startWeekIndex.dayIndex.adding(days: pageIndex * 7)
+        return NewWeekPageViewModel(
+            event: event,
+            dayFactory: self,
+            pageIndex: pageIndex,
+            today: today.date
+        )
     }
 
     func makeNewWeekDayViewModel(index: Int, pageIndex: Int, weekMaximum: Int) -> NewWeekDayViewModel {

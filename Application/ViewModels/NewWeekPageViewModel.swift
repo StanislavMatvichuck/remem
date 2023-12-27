@@ -20,24 +20,23 @@ struct NewWeekPageViewModel {
 
     private let event: Event
     private let dayFactory: NewWeekDayViewModelFactoring
-    private let index: Int
+    private let pageIndex: Int
     private let today: Date
 
-    init(event: Event, dayFactory: NewWeekDayViewModelFactoring, index: Int, today: Date) {
+    init(event: Event, dayFactory: NewWeekDayViewModelFactoring, pageIndex: Int, today: Date) {
         self.event = event
         self.dayFactory = dayFactory
-        self.index = index
+        self.pageIndex = pageIndex
         self.today = today
         self.weekMaximumHappeningsCount = {
             var maximum = 0
 
             for dayNumber in 0 ..< Self.daysCount {
-                let dayIndex = dayNumber + index * 7
-                let day = DayIndex(event.dateCreated).adding(days: dayIndex)
+                let dayIndex = dayNumber + pageIndex * 7
+                let day = WeekIndex(event.dateCreated).dayIndex.adding(days: dayIndex)
                 let dayHappeningsAmount = event.happenings(forDayIndex: day).count
-                if maximum < dayHappeningsAmount {
-                    maximum = dayHappeningsAmount
-                }
+
+                if maximum < dayHappeningsAmount { maximum = dayHappeningsAmount }
             }
 
             return maximum
@@ -47,14 +46,18 @@ struct NewWeekPageViewModel {
     let weekMaximumHappeningsCount: Int
 
     var weekNumber: Int {
-        let from = event.dateCreated
-        let weeksDifference = Calendar.current.dateComponents([.weekOfMonth], from: from, to: today).weekOfMonth ?? 0
+        let from = WeekIndex(event.dateCreated).date
+        let to = WeekIndex(today).date
+        let weeksDifference = Calendar.current.dateComponents(
+            [.year, .weekOfYear],
+            from: from,
+            to: to
+        ).weekOfYear ?? 0
+
         return weeksDifference + 1
     }
 
-    var totalNumber: Int {
-        event.happeningsAmount(forWeekAt: today)
-    }
+    var totalNumber: Int { event.happeningsAmount(forWeekAt: today) }
 
     var title: String {
         Self.weekNumberDescription +
@@ -73,7 +76,7 @@ struct NewWeekPageViewModel {
     func day(for index: Int) -> NewWeekDayViewModel {
         dayFactory.makeNewWeekDayViewModel(
             index: index,
-            pageIndex: self.index,
+            pageIndex: pageIndex,
             weekMaximum: weekMaximumHappeningsCount
         )
     }
