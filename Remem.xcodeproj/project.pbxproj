@@ -844,7 +844,6 @@
 				086E39732981431C00CCE80E /* DayDetailsContainer.swift */,
 				085145C929AE0D3E00CA533D /* EventDetailsContainer */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
-				081015572B331656004CE297 /* NewWeekContainer.swift */,
 			);
 			path = DependencyContainers;
 			sourceTree = "<group>";
@@ -864,6 +863,7 @@
 		085145C929AE0D3E00CA533D /* EventDetailsContainer */ = {
 			isa = PBXGroup;
 			children = (
+				081015572B331656004CE297 /* NewWeekContainer.swift */,
 				085145C329AE066C00CA533D /* ClockContainer.swift */,
 				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
 				084B21F529C0977A00B601DA /* PdfContainer.swift */,
