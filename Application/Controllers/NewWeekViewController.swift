@@ -30,8 +30,17 @@ final class NewWeekViewController: UIViewController {
         viewModel = factory.makeNewWeekViewModel()
     }
     
+    override func viewDidLayoutSubviews() {
+        scrollToLastPage()
+    }
+    
     private func configureCollection() {
         viewRoot.collection.delegate = self
+    }
+    
+    private func scrollToLastPage() {
+        let lastPageIndex = IndexPath(row: viewModel.pagesCount - 1, section: 0)
+        viewRoot.collection.scrollToItem(at: lastPageIndex, at: .right, animated: false)
     }
 }
 

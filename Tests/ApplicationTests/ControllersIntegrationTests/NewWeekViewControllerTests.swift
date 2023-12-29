@@ -48,4 +48,23 @@ final class NewWeekViewControllerTests: XCTestCase {
 
         XCTAssertNotNil(sut.viewRoot.viewModel)
     }
+
+    func test_scrollsToLastPage() {
+        let eventCreatedDate = DayIndex.referenceValue
+        let today = eventCreatedDate.adding(days: 7)
+        let container = NewWeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: Event(name: "", dateCreated: eventCreatedDate.date),
+                today: today),
+            today: today.date)
+
+        let sut = container.make() as! NewWeekViewController
+        sut.view.frame = .screenSquare
+        sut.view.layoutIfNeeded()
+
+        XCTAssertTrue(sut.viewRoot.collection.contentOffset.x == .screenW)
+    }
 }
