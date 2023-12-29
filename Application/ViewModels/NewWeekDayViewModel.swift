@@ -9,6 +9,8 @@ import Domain
 import Foundation
 
 struct NewWeekDayViewModel {
+    typealias TapHandler = () -> ()
+
     let dayNumber: String
     let dayName: String
     let isToday: Bool
@@ -16,8 +18,15 @@ struct NewWeekDayViewModel {
     let hasHappenings: Bool
     let happeningsAmount: String
     let relativeLength: CGFloat
+    let tapHandler: TapHandler
 
-    init(event: Event, index: Int, today: Date, weekMaximum: Int) {
+    init(
+        event: Event,
+        index: Int,
+        today: Date,
+        weekMaximum: Int,
+        tapHandler: @escaping TapHandler = {}
+    ) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: index)
         let dayDate = day.date
@@ -36,5 +45,7 @@ struct NewWeekDayViewModel {
 
         let relativeLength = CGFloat(happeningsAmount) / CGFloat(weekMaximum)
         self.relativeLength = weekMaximum == 0 ? 0 : relativeLength
+
+        self.tapHandler = tapHandler
     }
 }

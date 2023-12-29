@@ -45,11 +45,24 @@ final class NewWeekContainer:
     }
 
     func makeNewWeekDayViewModel(index: Int, pageIndex: Int, weekMaximum: Int) -> NewWeekDayViewModel {
-        NewWeekDayViewModel(
+        let dayIndex = pageIndex * 7 + index
+        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
+        let day = startOfWeek.adding(days: dayIndex)
+
+        return NewWeekDayViewModel(
             event: event,
-            index: pageIndex * 7 + index,
+            index: dayIndex,
             today: today,
             weekMaximum: weekMaximum
-        )
+        ) {
+            self.parent.parent.parent.coordinator.show(
+                .dayDetails(factory: DayDetailsContainer(
+                    parent: self.parent,
+                    day: day,
+                    hour: Calendar.current.component(.hour, from: self.parent.parent.parent.currentMoment),
+                    minute: Calendar.current.component(.minute, from: self.parent.parent.parent.currentMoment)
+                ))
+            )
+        }
     }
 }

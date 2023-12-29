@@ -51,7 +51,12 @@ final class NewWeekDayView: UIStackView {
 
         dayNumber.configureContent(viewModel)
         happenings.configureContent(viewModel)
+
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        roundContainer.addGestureRecognizer(tapRecognizer)
     }
+
+    @objc private func handleTap() { viewModel?.tapHandler() }
 
     private func configureLayout() {
         axis = .vertical
