@@ -49,7 +49,7 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
             clockViewModelDay: ClockContainer(parent: parent, type: .day).makeClockViewModel(),
             clockViewModelNight: ClockContainer(parent: parent, type: .night).makeClockViewModel(),
             summaryViewModel: SummaryContainer(parent: parent).makeSummaryViewModel(),
-            weekViewModel: WeekContainer(parent: parent).makeWeekViewModel()
+            weekViewModel: WeekContainer(parent).makeWeekViewModel()
         )
     }
 }

@@ -11,37 +11,42 @@ import Foundation
 
 extension ApplicationContainer {
     static func make() -> EventsListViewController {
-        ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .make() as! EventsListViewController
+        EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as! EventsListViewController
     }
 
     static func make() -> EventDetailsViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
 
-        return ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
-            .make() as! EventDetailsViewController
+        return EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ),
+            event: event, today: day
+        ).make() as! EventDetailsViewController
     }
 
     static func make() -> WeekViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
+        let container = WeekContainer(EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ),
+            event: event, today: day
+        ))
 
-        return WeekContainer(parent: detailsContainer).make() as! WeekViewController
+        return container.make() as! WeekViewController
     }
 
     static func make() -> ClockViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
+        let detailsContainer = EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ), event: event, today: day
+        )
 
         return ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
     }
@@ -49,9 +54,11 @@ extension ApplicationContainer {
     static func make() -> SummaryViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
+        let detailsContainer = EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ), event: event, today: day
+        )
 
         return SummaryContainer(parent: detailsContainer).make() as! SummaryViewController
     }
@@ -59,9 +66,11 @@ extension ApplicationContainer {
     static func make() -> DayDetailsViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
+        let detailsContainer = EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ), event: event, today: day
+        )
         let currentMoment = detailsContainer.parent.parent.currentMoment
         let dayDetailsContainer = DayDetailsContainer(
             parent: detailsContainer,
@@ -81,13 +90,14 @@ extension ApplicationContainer {
     static func make() -> PdfMakingViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: day)
-        return detailsContainer.makePdfMakingViewController(
-            detailsContainer.makeWeekViewController(),
-            detailsContainer.makeSummaryViewController(),
-            ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
+        let detailsContainer = EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ), event: event, today: day
         )
+
+        let pdfContainer = PdfMakingContainer(parent: detailsContainer)
+
+        return pdfContainer.make() as! PdfMakingViewController
     }
 }

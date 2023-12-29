@@ -91,7 +91,7 @@ final class WeekSummaryViewModelTests: XCTestCase {
         XCTAssertFalse(sut.goalAchieved)
         XCTAssertFalse(sut.goalHidden)
         XCTAssertEqual("12", sut.goal)
-        
+
         XCTAssertFalse(sut.progressHidden)
         XCTAssertEqual("25", sut.progress)
     }
@@ -126,8 +126,15 @@ final class WeekSummaryViewModelTests: XCTestCase {
     }
 
     private func makeForEventAnd(today: DayIndex) -> WeekSummaryViewModel {
-        let container = ApplicationContainer(mode: .unitTest)
-        let details = container.makeContainer().makeContainer(event: event, today: today)
-        return details.makeWeekViewController().viewModel.pages.first!!
+        let container = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event,
+                today: today
+            ))
+
+        return container.makeViewModel(today: today, week: WeekIndex(event.dateCreated))
     }
 }

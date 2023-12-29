@@ -22,9 +22,7 @@ final class EventsListContainer:
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
-    init(parent: ApplicationContainer) {
-        self.parent = parent
-    }
+    init(_ parent: ApplicationContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let view = EventsListView()
@@ -127,10 +125,13 @@ final class EventsListContainer:
             today: today,
             currentMoment: parent.currentMoment,
             tapHandler: {
-                self.parent.coordinator.show(.eventDetails(factory: self.makeContainer(
-                    event: event,
-                    today: today
-                )))
+                self.parent.coordinator.show(.eventDetails(factory:
+                    EventDetailsContainer(
+                        self,
+                        event: event,
+                        today: today
+                    )
+                ))
             },
             swipeHandler: {
                 event.addHappening(date: self.parent.currentMoment)
@@ -142,14 +143,6 @@ final class EventsListContainer:
                 event.name = newName
                 self.commander.save(event)
             }
-        )
-    }
-
-    func makeContainer(event: Event, today: DayIndex) -> EventDetailsContainer {
-        EventDetailsContainer(
-            parent: self,
-            event: event,
-            today: today
         )
     }
 }

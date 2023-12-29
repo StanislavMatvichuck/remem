@@ -12,10 +12,16 @@ import XCTest
 extension TestingViewController where Controller == WeekViewController {
     func make() {
         event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
-        let container = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: DayIndex.referenceValue)
-        sut = WeekContainer(parent: container).make() as? WeekViewController
+        let container = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event,
+                today: DayIndex.referenceValue
+            )
+        )
+        sut = container.make() as? WeekViewController
         sut.loadViewIfNeeded()
     }
 

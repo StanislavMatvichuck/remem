@@ -58,10 +58,8 @@ final class NewWeekViewModelTests: XCTestCase {
         return
             NewWeekContainer(
                 EventDetailsContainer(
-                    parent: EventsListContainer(
-                        parent: ApplicationContainer(
-                            mode: .unitTest
-                        )
+                    EventsListContainer(
+                        ApplicationContainer(mode: .unitTest)
                     ),
                     event: event,
                     today: today

@@ -102,15 +102,15 @@ final class WeekViewModelTests: XCTestCase {
         XCTAssertEqual(sut.timelineCount % 7, 0)
     }
 
-    private func make(
-        today: DayIndex,
-        created: DayIndex,
-        event: Event
-    ) -> WeekViewModel {
-        let container = ApplicationContainer(mode: .unitTest)
-        let details = container.makeContainer().makeContainer(event: event, today: today)
-        let weekContainer = WeekContainer(parent: details)
-        return weekContainer.makeWeekViewModel()
+    private func make(today: DayIndex, created: DayIndex, event: Event) -> WeekViewModel {
+        WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event,
+                today: today
+            )).makeWeekViewModel()
     }
 
     private func arrangeRandomDates() {

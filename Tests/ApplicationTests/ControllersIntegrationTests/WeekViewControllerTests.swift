@@ -84,15 +84,16 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let created = DayIndex.referenceValue.adding(days: randomDaysAmount)
         let today = created.adding(days: randomDaysAmount)
 
-        sut = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(
-                event: Event(
-                    name: "Event",
-                    dateCreated: created.date
+        let event = Event(name: "Event", dateCreated: created.date)
+
+        sut = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
                 ),
+                event: event,
                 today: today
-            ).makeWeekViewController()
+            )).make() as! WeekViewController
 
         layoutInScreen()
 
@@ -108,10 +109,13 @@ final class WeekViewControllerTests: XCTestCase, TestingViewController {
         let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
 
-        let container = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: today)
-        sut = WeekContainer(parent: container).make() as? WeekViewController
+        let container = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ), event: event, today: today
+            ))
+        sut = container.make() as? WeekViewController
         sut.loadViewIfNeeded()
 
         XCTAssertEqual(firstDay.view.timingLabels.first?.text, "00:00")

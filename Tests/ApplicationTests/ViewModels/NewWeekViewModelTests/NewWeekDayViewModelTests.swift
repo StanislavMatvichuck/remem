@@ -142,9 +142,11 @@ final class NewWeekDayViewModelTest: XCTestCase {
 
         let today = eventDayCreated.adding(days: 0)
         let container = NewWeekContainer(
-            ApplicationContainer(mode: .unitTest)
-                .makeContainer()
-                .makeContainer(event: event, today: today),
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ), event: event, today: today
+            ),
             today: today.date
         )
 

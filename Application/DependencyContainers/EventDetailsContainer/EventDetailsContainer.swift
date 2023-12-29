@@ -19,7 +19,7 @@ final class EventDetailsContainer:
     var updater: ViewControllersUpdater { parent.updater }
 
     init(
-        parent: EventsListContainer,
+        _ parent: EventsListContainer,
         event: Event,
         today: DayIndex
     ) {
@@ -32,10 +32,10 @@ final class EventDetailsContainer:
         let clockNight = ClockContainer(parent: self, type: .night).make() as! ClockViewController
         let clockDay = ClockContainer(parent: self, type: .day).make() as! ClockViewController
         let newWeek = NewWeekContainer(self, today: today.date).make()
-        let week = makeWeekViewController()
-        let summary = makeSummaryViewController()
-        let pdf = makePdfMakingViewController(week, summary, clockNight)
-        let visualisation = makeVisualisationMakingViewController()
+        let week = WeekContainer(self).make() as! WeekViewController
+        let summary = SummaryContainer(parent: self).make() as! SummaryViewController
+        let pdf = PdfMakingContainer(parent: self).make()
+        let visualisation = VisualisationMakingViewController(VisualisationMakingView())
 
         let controller = EventDetailsViewController(
             factory: self,
@@ -51,25 +51,5 @@ final class EventDetailsContainer:
             event.visit()
             self.commander.save(event)
         }
-    }
-
-    func makeWeekViewController() -> WeekViewController {
-        WeekContainer(parent: self).make() as! WeekViewController
-    }
-
-    func makeSummaryViewController() -> SummaryViewController {
-        SummaryContainer(parent: self).make() as! SummaryViewController
-    }
-
-    func makePdfMakingViewController(
-        _ week: WeekViewController,
-        _ summary: SummaryViewController,
-        _ clock: ClockViewController
-    ) -> PdfMakingViewController {
-        PdfMakingContainer(parent: self).make() as! PdfMakingViewController
-    }
-
-    func makeVisualisationMakingViewController() -> VisualisationMakingViewController {
-        VisualisationMakingViewController(VisualisationMakingView())
     }
 }

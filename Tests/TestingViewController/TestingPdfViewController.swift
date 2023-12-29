@@ -23,18 +23,11 @@ extension TestingViewController where Controller == PdfViewController {
     ) {
         event = Event(name: "Event", dateCreated: dayCreated.date)
 
-        let container = ApplicationContainer(mode: .unitTest)
-            .makeContainer()
-            .makeContainer(event: event, today: today)
-
-        let week = container.makeWeekViewController()
-        layout(week)
-
-        let summary = container.makeSummaryViewController()
-        layout(summary)
-
-        let clock = ClockContainer(parent: container, type: .night).make() as! ClockViewController
-        layout(clock)
+        let container = EventDetailsContainer(
+            EventsListContainer(
+                ApplicationContainer(mode: .unitTest)
+            ), event: event, today: today
+        )
 
         let url = LocalFile.testingPdfReport
 

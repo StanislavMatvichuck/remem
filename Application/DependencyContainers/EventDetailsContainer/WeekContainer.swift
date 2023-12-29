@@ -23,7 +23,7 @@ final class WeekContainer:
     var event: Event { parent.event }
     var today: DayIndex { parent.today }
 
-    init(parent: EventDetailsContainer) { self.parent = parent }
+    init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)

@@ -64,11 +64,9 @@ final class ApplicationContainer {
     }
 
     func makeRootViewController() -> UIViewController {
-        coordinator.show(Navigation.eventsList(factory: makeContainer()))
+        coordinator.show(Navigation.eventsList(factory: EventsListContainer(self)))
         return coordinator.navigationController
     }
 
     func makeWatcher() -> Watching { watcher }
-
-    func makeContainer() -> EventsListContainer { EventsListContainer(parent: self) }
 }
