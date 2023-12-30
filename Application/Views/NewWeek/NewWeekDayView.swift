@@ -56,7 +56,22 @@ final class NewWeekDayView: UIStackView {
         roundContainer.addGestureRecognizer(tapRecognizer)
     }
 
-    @objc private func handleTap() { viewModel?.tapHandler() }
+    @objc private func handleTap() {
+        guard let daysContainer = superview,
+              let weekContainer = daysContainer.superview
+        else { return }
+
+        viewModel?.tapHandler(
+            DayDetailsAnimationsHelper.makeCellPresentationSliding(
+                animatedView: self,
+                heightTo: weekContainer.frame.maxY
+            ),
+            DayDetailsAnimationsHelper.makeCellDismissal(
+                animatedView: self,
+                heightTo: 0
+            )
+        )
+    }
 
     private func configureLayout() {
         axis = .vertical

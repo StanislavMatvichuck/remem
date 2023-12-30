@@ -9,7 +9,8 @@ import Domain
 import Foundation
 
 struct NewWeekDayViewModel {
-    typealias TapHandler = () -> ()
+    typealias TapHandler = (@escaping AnimationBlock, @escaping AnimationBlock) -> ()
+    typealias AnimationBlock = () -> ()
 
     let dayNumber: String
     let dayName: String
@@ -25,7 +26,7 @@ struct NewWeekDayViewModel {
         index: Int,
         today: Date,
         weekMaximum: Int,
-        tapHandler: @escaping TapHandler = {}
+        tapHandler: @escaping TapHandler = { _, _ in }
     ) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: index)

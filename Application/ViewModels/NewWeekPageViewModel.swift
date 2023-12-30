@@ -12,11 +12,6 @@ struct NewWeekPageViewModel {
     static let daysCount: Int = 7
     static let weekNumberDescription = String(localized: "newWeek.weekNumberDescription")
     static let totalNumberDescription = String(localized: "newWeek.totalNumberDescription")
-    static let localisedDaysNames = {
-        let formatter = DateFormatter()
-        var days = formatter.veryShortWeekdaySymbols!
-        return Array(days[1 ..< days.count]) + days[0 ..< 1]
-    }()
 
     private let event: Event
     private let dayFactory: NewWeekDayViewModelFactoring
@@ -73,9 +68,9 @@ struct NewWeekPageViewModel {
         return nameOfMonth
     }
 
-    func day(for index: Int) -> NewWeekDayViewModel {
+    func day(dayNumberInWeek: Int) -> NewWeekDayViewModel {
         dayFactory.makeNewWeekDayViewModel(
-            index: index,
+            dayNumberInWeek: dayNumberInWeek,
             pageIndex: pageIndex,
             weekMaximum: weekMaximumHappeningsCount
         )

@@ -80,7 +80,7 @@ final class NewWeekPageView: UICollectionViewCell {
 
         for index in 0 ..< NewWeekPageViewModel.daysCount {
             let day = NewWeekDayView()
-            day.viewModel = viewModel.day(for: index)
+            day.viewModel = viewModel.day(dayNumberInWeek: index)
             days.addArrangedSubview(day)
         }
     }

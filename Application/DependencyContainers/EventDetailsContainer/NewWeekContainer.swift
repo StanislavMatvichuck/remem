@@ -44,8 +44,12 @@ final class NewWeekContainer:
         )
     }
 
-    func makeNewWeekDayViewModel(index: Int, pageIndex: Int, weekMaximum: Int) -> NewWeekDayViewModel {
-        let dayIndex = pageIndex * 7 + index
+    func makeNewWeekDayViewModel(
+        dayNumberInWeek: Int,
+        pageIndex: Int,
+        weekMaximum: Int
+    ) -> NewWeekDayViewModel {
+        let dayIndex = pageIndex * 7 + dayNumberInWeek
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: dayIndex)
 
@@ -54,15 +58,26 @@ final class NewWeekContainer:
             index: dayIndex,
             today: today,
             weekMaximum: weekMaximum
-        ) {
-            self.parent.parent.parent.coordinator.show(
-                .dayDetails(factory: DayDetailsContainer(
-                    parent: self.parent,
-                    day: day,
-                    hour: Calendar.current.component(.hour, from: self.parent.parent.parent.currentMoment),
-                    minute: Calendar.current.component(.minute, from: self.parent.parent.parent.currentMoment)
-                ))
+        ) { presentationAnimation, dismissAnimation in
+            let dayDetailsContainer = DayDetailsContainer(
+                parent: self.parent,
+                day: day,
+                hour: Calendar.current.component(.hour, from: self.parent.parent.parent.currentMoment),
+                minute: Calendar.current.component(.minute, from: self.parent.parent.parent.currentMoment)
             )
+
+            let presentationContainer = DayDetailsPresentationContainer(
+                parent: self.parent,
+                dayDetailsContainer: dayDetailsContainer,
+                presentationAnimator: DayDetailsPresentationAnimator(originHeight: 100)
+            )
+
+            presentationContainer.cellPresentationAnimationBlock = presentationAnimation
+            presentationContainer.cellDismissAnimationBlock = dismissAnimation
+
+            self.parent.parent.parent.coordinator.show(.dayDetails(
+                factory: presentationContainer
+            ))
         }
     }
 }

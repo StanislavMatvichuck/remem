@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-final class NewWeekDayViewModelTest: XCTestCase {
+final class NewWeekDayViewModelTests: XCTestCase {
     func test_dayNumber_withEventDateCreatedAtReferenceDate_firstIndex_isOne() {
         let sut = make(for: IndexPath(row: 0, section: 0))
 
@@ -152,7 +152,7 @@ final class NewWeekDayViewModelTest: XCTestCase {
 
         let page = container.makeNewWeekPageViewModel(pageIndex: pageIndex)
         let sut = container.makeNewWeekDayViewModel(
-            index: index.row,
+            dayNumberInWeek: index.row,
             pageIndex: pageIndex,
             weekMaximum: page.weekMaximumHappeningsCount
         )
