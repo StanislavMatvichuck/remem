@@ -145,7 +145,7 @@ final class NewWeekDayViewModelTests: XCTestCase {
             EventDetailsContainer(
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
-                ), event: event, today: today
+                ), event: event
             ),
             today: today.date
         )

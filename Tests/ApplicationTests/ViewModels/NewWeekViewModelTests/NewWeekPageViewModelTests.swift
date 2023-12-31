@@ -98,8 +98,7 @@ final class NewWeekPageViewModelTests: XCTestCase {
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
                 ),
-                event: event,
-                today: today
+                event: event
             ),
             today: today.date
         )
@@ -118,7 +117,7 @@ final class NewWeekPageViewModelTests: XCTestCase {
         let container = NewWeekContainer(
             EventDetailsContainer(
                 EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                event: event, today: today
+                event: event
             ),
             today: today.date
         )

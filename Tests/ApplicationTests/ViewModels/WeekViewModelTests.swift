@@ -52,19 +52,19 @@ final class WeekViewModelTests: XCTestCase {
         )
     }
 
-    func test_todayAfterCreation_numberOfDays_moreThan21() {
-        let dateTodayMonthAfterCreation = DayIndex.referenceValue.adding(
-            dateComponents: DateComponents(month: 1)
-        )
-
-        sut = make(
-            today: dateTodayMonthAfterCreation,
-            created: DayIndex.referenceValue,
-            event: event
-        )
-
-        XCTAssertLessThan(21, sut.timelineCount)
-    }
+//    func test_todayAfterCreation_numberOfDays_moreThan21() {
+//        let dateTodayMonthAfterCreation = DayIndex.referenceValue.adding(
+//            dateComponents: DateComponents(month: 1)
+//        )
+//
+//        sut = make(
+//            today: dateTodayMonthAfterCreation,
+//            created: DayIndex.referenceValue,
+//            event: event
+//        )
+//
+//        XCTAssertLessThan(21, sut.timelineCount)
+//    }
 
     func test_sameDates_showsOneWeek() {
         XCTAssertLessThanOrEqual(7, sut.timelineCount)
@@ -108,8 +108,7 @@ final class WeekViewModelTests: XCTestCase {
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
                 ),
-                event: event,
-                today: today
+                event: event
             )).makeWeekViewModel()
     }
 

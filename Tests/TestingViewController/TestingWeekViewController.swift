@@ -14,11 +14,8 @@ extension TestingViewController where Controller == WeekViewController {
         event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
         let container = WeekContainer(
             EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event,
-                today: DayIndex.referenceValue
+                EventsListContainer(ApplicationContainer(mode: .unitTest)),
+                event: event
             )
         )
         sut = container.make() as? WeekViewController

@@ -21,7 +21,7 @@ final class WeekContainer:
     var updater: ViewControllersUpdater { parent.updater }
     var coordinator: Coordinator { parent.parent.parent.coordinator }
     var event: Event { parent.event }
-    var today: DayIndex { parent.today }
+    var today: DayIndex { DayIndex(parent.currentMoment) }
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 

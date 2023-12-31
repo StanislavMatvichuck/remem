@@ -12,7 +12,7 @@ import XCTest
 extension TestingViewController where Controller == SummaryViewController {
     func make() {
         event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
-        let container = EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)), event: event, today: DayIndex.referenceValue)
+        let container = EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)), event: event)
 
         sut = SummaryContainer(parent: container).make() as? SummaryViewController
         sut.loadViewIfNeeded()

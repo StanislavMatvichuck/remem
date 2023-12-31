@@ -24,9 +24,8 @@ extension TestingViewController where Controller == PdfViewController {
         event = Event(name: "Event", dateCreated: dayCreated.date)
 
         let container = EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ), event: event, today: today
+            EventsListContainer(ApplicationContainer(mode: .unitTest)),
+            event: event
         )
 
         let url = LocalFile.testingPdfReport

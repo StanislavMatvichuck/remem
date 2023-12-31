@@ -14,7 +14,7 @@ extension TestingViewController where Controller == ClockViewController {
         let today = DayIndex.referenceValue
         event = Event(name: "Event", dateCreated: today.date)
 
-        let container = EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)), event: event, today: today)
+        let container = EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)), event: event)
 
         sut = ClockContainer(parent: container, type: .night).make() as? ClockViewController
     }

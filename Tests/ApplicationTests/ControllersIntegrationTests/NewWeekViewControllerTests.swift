@@ -14,8 +14,7 @@ final class NewWeekViewControllerTests: XCTestCase {
         let container = NewWeekContainer(
             EventDetailsContainer(
                 EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                event: Event(name: ""),
-                today: .referenceValue),
+                event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
         let sut = container.make() as! NewWeekViewController
@@ -26,8 +25,7 @@ final class NewWeekViewControllerTests: XCTestCase {
     func test_configuresCollection() {
         let container = NewWeekContainer(
             EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                                  event: Event(name: ""),
-                                  today: .referenceValue),
+                                  event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
         let sut = container.make() as! NewWeekViewController
@@ -39,8 +37,7 @@ final class NewWeekViewControllerTests: XCTestCase {
     func test_configuresViewModel() {
         let container = NewWeekContainer(
             EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                                  event: Event(name: ""),
-                                  today: .referenceValue),
+                                  event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
         let sut = container.make() as! NewWeekViewController
@@ -57,8 +54,7 @@ final class NewWeekViewControllerTests: XCTestCase {
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
                 ),
-                event: Event(name: "", dateCreated: eventCreatedDate.date),
-                today: today),
+                event: Event(name: "", dateCreated: eventCreatedDate.date)),
             today: today.date)
 
         let sut = container.make() as! NewWeekViewController

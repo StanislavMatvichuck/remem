@@ -22,7 +22,7 @@ extension ApplicationContainer {
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
             ),
-            event: event, today: day
+            event: event
         ).make() as! EventDetailsViewController
     }
 
@@ -33,7 +33,7 @@ extension ApplicationContainer {
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
             ),
-            event: event, today: day
+            event: event
         ))
 
         return container.make() as! WeekViewController
@@ -45,7 +45,7 @@ extension ApplicationContainer {
         let detailsContainer = EventDetailsContainer(
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
-            ), event: event, today: day
+            ), event: event
         )
 
         return ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
@@ -57,7 +57,7 @@ extension ApplicationContainer {
         let detailsContainer = EventDetailsContainer(
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
-            ), event: event, today: day
+            ), event: event
         )
 
         return SummaryContainer(parent: detailsContainer).make() as! SummaryViewController
@@ -69,7 +69,7 @@ extension ApplicationContainer {
         let detailsContainer = EventDetailsContainer(
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
-            ), event: event, today: day
+            ), event: event
         )
         let currentMoment = detailsContainer.parent.parent.currentMoment
         let dayDetailsContainer = DayDetailsContainer(
@@ -93,7 +93,7 @@ extension ApplicationContainer {
         let detailsContainer = EventDetailsContainer(
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
-            ), event: event, today: day
+            ), event: event
         )
 
         let pdfContainer = PdfMakingContainer(parent: detailsContainer)

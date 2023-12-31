@@ -16,7 +16,7 @@ final class SummaryContainer:
     let commander: UpdatingCommander
 
     var event: Event { parent.event }
-    var today: DayIndex { parent.today }
+    var today: DayIndex { DayIndex(parent.currentMoment) }
 
     init(parent: EventDetailsContainer) {
         self.parent = parent

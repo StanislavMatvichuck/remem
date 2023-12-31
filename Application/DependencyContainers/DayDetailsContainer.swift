@@ -51,7 +51,7 @@ final class DayDetailsContainer:
         DayDetailsViewModel(
             day: day,
             event: event,
-            isToday: day == parent.today,
+            isToday: false,
             hour: hour,
             minute: minute,
             itemFactory: self

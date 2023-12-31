@@ -131,8 +131,7 @@ final class WeekSummaryViewModelTests: XCTestCase {
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
                 ),
-                event: event,
-                today: today
+                event: event
             ))
 
         return container.makeViewModel(today: today, week: WeekIndex(event.dateCreated))

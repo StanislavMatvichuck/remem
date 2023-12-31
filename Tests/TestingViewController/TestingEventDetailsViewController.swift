@@ -16,7 +16,7 @@ extension TestingViewController where Controller == EventDetailsViewController {
         sut = EventDetailsContainer(
             EventsListContainer(
                 ApplicationContainer(mode: .unitTest)
-            ), event: event, today: today
+            ), event: event
         ).make() as? EventDetailsViewController
 
         sut.loadViewIfNeeded()
