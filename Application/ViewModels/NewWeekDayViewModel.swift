@@ -32,7 +32,7 @@ struct NewWeekDayViewModel {
         let day = startOfWeek.adding(days: index)
         let dayDate = day.date
 
-        self.isToday = dayDate == today
+        self.isToday = day == DayIndex(today)
         self.dayNumber = String(day.dayInMonth)
         self.dayName = dayDate.formatted(Date.FormatStyle().weekday(.narrow))
 
