@@ -43,7 +43,7 @@ final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsWeek() {
-        XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1)
+        XCTAssertEqual(sut.children.filter { $0 is NewWeekViewController }.count, 1)
     }
 
     func test_showsClocks() {
@@ -56,9 +56,5 @@ final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
 
     func test_showsPdfMakingView() {
         XCTAssertEqual(sut.children.filter { $0 is PdfMakingViewController }.count, 1)
-    }
-    
-    func test_showsVisualisationMakingView() {
-        XCTAssertEqual(sut.children.filter { $0 is VisualisationMakingViewController }.count, 1)
     }
 }
