@@ -14,7 +14,7 @@ extension TestingViewController where Controller == EventsListViewController {
     var eventsCount: Int { table.numberOfRows(inSection: 0) - 2 }
 
     func make() {
-        sut = ApplicationContainer.make()
+        sut = EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as? EventsListViewController
         sut.loadViewIfNeeded()
     }
 

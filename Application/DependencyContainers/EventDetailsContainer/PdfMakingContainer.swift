@@ -17,7 +17,7 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
     var event: Event { parent.event }
 
     init(
-        parent: EventDetailsContainer,
+        _ parent: EventDetailsContainer,
         urlProviding: URLProviding = LocalFile.pdfReport
     ) {
         self.parent = parent
@@ -49,7 +49,7 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
             clockViewModelDay: ClockContainer(parent: parent, type: .day).makeClockViewModel(),
             clockViewModelNight: ClockContainer(parent: parent, type: .night).makeClockViewModel(),
             summaryViewModel: SummaryContainer(parent: parent).makeSummaryViewModel(),
-            weekViewModel: WeekContainer(parent, today: moment).makeWeekViewModel()
+            weekViewModel: WeekContainer(parent).makeWeekViewModel()
         )
     }
 }

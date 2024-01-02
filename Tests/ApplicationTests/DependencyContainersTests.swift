@@ -100,7 +100,7 @@ extension ApplicationContainer {
                     ApplicationContainer(mode: .unitTest)
                 ),
                 event: event
-            ), today: day.date
+            )
         )
 
         return container.make() as! WeekViewController

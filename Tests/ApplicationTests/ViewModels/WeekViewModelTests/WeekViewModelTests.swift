@@ -52,18 +52,83 @@ final class WeekViewModelTests: XCTestCase {
         XCTAssertEqual(sut.page(at: 2).weekNumber, 3)
     }
 
-    private func make(withDateCreatedAndTodayOffset: Int) -> WeekViewModel {
+    func test_dayMaximumAmount_noHappenings_zero() {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let today = DayIndex(event.dateCreated).adding(days: withDateCreatedAndTodayOffset)
-        return
-            WeekContainer(
-                EventDetailsContainer(
-                    EventsListContainer(
-                        ApplicationContainer(mode: .unitTest)
-                    ),
-                    event: event
+        let sut = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
                 ),
-                today: today.date
-            ).makeWeekViewModel()
+                event: event
+            )
+        ).makeWeekViewModel()
+
+        XCTAssertEqual(sut.dayMaximum, 0)
+    }
+
+    func test_dayMaximumAmount_oneHappening_one() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let sut = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event
+            )
+        ).makeWeekViewModel()
+
+        XCTAssertEqual(sut.dayMaximum, 1)
+    }
+
+    func test_dayMaximumAmount_oneHappeningFiveHappenings_five() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        for happeningIndex in [
+            DayIndex.referenceValue.adding(days: 0),
+            DayIndex.referenceValue.adding(days: 1),
+            DayIndex.referenceValue.adding(days: 1),
+            DayIndex.referenceValue.adding(days: 1),
+            DayIndex.referenceValue.adding(days: 1),
+            DayIndex.referenceValue.adding(days: 1),
+        ] {
+            event.addHappening(date: happeningIndex.date)
+        }
+
+        let sut = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event
+            )
+        ).makeWeekViewModel()
+
+        XCTAssertEqual(sut.dayMaximum, 5)
+    }
+
+    private func make(withHappeningsAt dates: [Date]) -> WeekViewModel {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+
+        for date in dates { event.addHappening(date: date) }
+
+        return WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event
+            )
+        ).makeWeekViewModel()
+    }
+
+    private func make(withDateCreatedAndTodayOffset: Int) -> WeekViewModel {
+        WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .injectedCurrentMoment, currentMoment: DayIndex.referenceValue.adding(days: withDateCreatedAndTodayOffset).date)
+                ),
+                event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
+            )
+        ).makeWeekViewModel()
     }
 }

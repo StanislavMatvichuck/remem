@@ -16,13 +16,10 @@ final class WeekContainer:
 {
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
-    /// This property is used for unit testing. TODO:  A single approach to all containers according to current moment must be found.
-    private let today: Date
+    private var currentMoment: Date { parent.parent.parent.currentMoment }
+    private var calendar: Calendar { Calendar.current }
 
-    init(_ parent: EventDetailsContainer, today: Date) {
-        self.parent = parent
-        self.today = today
-    }
+    init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)
@@ -30,40 +27,33 @@ final class WeekContainer:
     }
 
     func makeWeekViewModel() -> WeekViewModel {
-        WeekViewModel(event: event, pageFactory: self, today: today)
+        WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment)
     }
 
-    func makeWeekPageViewModel(pageIndex: Int) -> WeekPageViewModel {
-        let startWeekIndex = WeekIndex(event.dateCreated)
-        let today = startWeekIndex.dayIndex.adding(days: pageIndex * 7)
-        return WeekPageViewModel(
+    func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {
+        WeekPageViewModel(
             event: event,
             dayFactory: self,
             pageIndex: pageIndex,
-            today: today.date
+            dailyMaximum: dailyMaximum
         )
     }
 
-    func makeWeekDayViewModel(
-        dayNumberInWeek: Int,
-        pageIndex: Int,
-        weekMaximum: Int
-    ) -> WeekDayViewModel {
-        let dayIndex = pageIndex * 7 + dayNumberInWeek
+    func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: dayIndex)
 
         return WeekDayViewModel(
             event: event,
             index: dayIndex,
-            today: today,
-            weekMaximum: weekMaximum
+            today: currentMoment,
+            dailyMaximum: dailyMaximum
         ) { presentationAnimation, dismissAnimation in
             let dayDetailsContainer = DayDetailsContainer(
                 parent: self.parent,
                 day: day,
-                hour: Calendar.current.component(.hour, from: self.parent.parent.parent.currentMoment),
-                minute: Calendar.current.component(.minute, from: self.parent.parent.parent.currentMoment)
+                hour: self.calendar.component(.hour, from: self.currentMoment),
+                minute: self.calendar.component(.minute, from: self.currentMoment)
             )
 
             let presentationContainer = DayDetailsPresentationContainer(

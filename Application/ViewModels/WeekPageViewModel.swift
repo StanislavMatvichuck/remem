@@ -16,33 +16,28 @@ struct WeekPageViewModel {
     private let event: Event
     private let dayFactory: WeekDayViewModelFactoring
     private let pageIndex: Int
-    private let today: Date
+    private let lastDayStart: Date
+    private let dailyMaximum: Int
 
-    init(event: Event, dayFactory: WeekDayViewModelFactoring, pageIndex: Int, today: Date) {
+    init(
+        event: Event,
+        dayFactory: WeekDayViewModelFactoring,
+        pageIndex: Int,
+        dailyMaximum: Int
+    ) {
         self.event = event
         self.dayFactory = dayFactory
         self.pageIndex = pageIndex
-        self.today = today
-        self.weekMaximumHappeningsCount = {
-            var maximum = 0
+        self.dailyMaximum = dailyMaximum
 
-            for dayNumber in 0 ..< Self.daysCount {
-                let dayIndex = dayNumber + pageIndex * 7
-                let day = WeekIndex(event.dateCreated).dayIndex.adding(days: dayIndex)
-                let dayHappeningsAmount = event.happenings(forDayIndex: day).count
-
-                if maximum < dayHappeningsAmount { maximum = dayHappeningsAmount }
-            }
-
-            return maximum
-        }()
+        let startWeekIndex = WeekIndex(event.dateCreated)
+        let endOfWeekIndex = startWeekIndex.dayIndex.adding(days: pageIndex * 7)
+        self.lastDayStart = endOfWeekIndex.date
     }
-
-    let weekMaximumHappeningsCount: Int
 
     var weekNumber: Int {
         let from = WeekIndex(event.dateCreated).date
-        let to = WeekIndex(today).date
+        let to = WeekIndex(lastDayStart).date
         let weeksDifference = Calendar.current.dateComponents(
             [.weekOfYear],
             from: from,
@@ -52,7 +47,7 @@ struct WeekPageViewModel {
         return weeksDifference + 1
     }
 
-    var totalNumber: Int { event.happeningsAmount(forWeekAt: today) }
+    var totalNumber: Int { event.happeningsAmount(forWeekAt: lastDayStart) }
 
     var title: String {
         Self.weekNumberDescription +
@@ -64,15 +59,14 @@ struct WeekPageViewModel {
     var localisedMonth: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
-        let nameOfMonth = dateFormatter.string(from: today)
+        let nameOfMonth = dateFormatter.string(from: lastDayStart)
         return nameOfMonth
     }
 
     func day(dayNumberInWeek: Int) -> WeekDayViewModel {
         dayFactory.makeWeekDayViewModel(
-            dayNumberInWeek: dayNumberInWeek,
-            pageIndex: pageIndex,
-            weekMaximum: weekMaximumHappeningsCount
+            dayIndex: pageIndex * 7 + dayNumberInWeek,
+            dailyMaximum: dailyMaximum
         )
     }
 }

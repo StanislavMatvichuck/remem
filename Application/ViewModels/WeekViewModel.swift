@@ -11,29 +11,49 @@ import Foundation
 struct WeekViewModel {
     private let event: Event
     private let pageFactory: WeekPageViewModelFactoring
-    private let today: Date
+    private let createUntil: Date
 
-    init(event: Event, pageFactory: WeekPageViewModelFactoring, today: Date) {
+    let dayMaximum: Int
+    let pagesCount: Int
+
+    init(
+        event: Event,
+        pageFactory: WeekPageViewModelFactoring,
+        createUntil: Date
+    ) {
+        let pagesCount = {
+            let startOfFirstWeek = WeekIndex(event.dateCreated).dayIndex
+            let startOfLastWeek = WeekIndex(createUntil).dayIndex
+            let endOfLastWeek = startOfLastWeek.adding(days: 7)
+
+            let calendar = Calendar.current
+            let weeksDifference = calendar.dateComponents(
+                [.weekOfYear],
+                from: startOfFirstWeek.date,
+                to: endOfLastWeek.date
+            ).weekOfYear ?? 0
+            return weeksDifference
+        }()
+
         self.event = event
         self.pageFactory = pageFactory
-        self.today = today
-    }
+        self.createUntil = createUntil
+        self.pagesCount = pagesCount
+        self.dayMaximum = {
+            let daysAmount = pagesCount * 7
 
-    var pagesCount: Int {
-        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
-        let startOfWeekToday = WeekIndex(today).dayIndex
-        let endOfWeekToday = startOfWeekToday.adding(days: 7)
+            var maximum = 0
+            for dayNumber in 0 ..< daysAmount - 1 {
+                let startOfWeekEvent = WeekIndex(event.dateCreated).dayIndex
+                let dayHappenings = event.happenings(forDayIndex: startOfWeekEvent.adding(days: dayNumber)).count
+                if dayHappenings > maximum { maximum = dayHappenings }
+            }
 
-        let calendar = Calendar.current
-        let weeksDifference = calendar.dateComponents(
-            [.weekOfYear],
-            from: startOfWeek.date,
-            to: endOfWeekToday.date
-        ).weekOfYear ?? 0
-        return weeksDifference
+            return maximum
+        }()
     }
 
     func page(at index: Int) -> WeekPageViewModel {
-        pageFactory.makeWeekPageViewModel(pageIndex: index)
+        pageFactory.makeWeekPageViewModel(pageIndex: index, dailyMaximum: dayMaximum)
     }
 }

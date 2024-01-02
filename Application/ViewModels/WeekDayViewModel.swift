@@ -25,7 +25,7 @@ struct WeekDayViewModel {
         event: Event,
         index: Int,
         today: Date,
-        weekMaximum: Int,
+        dailyMaximum: Int,
         tapHandler: @escaping TapHandler = { _, _ in }
     ) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
@@ -44,8 +44,8 @@ struct WeekDayViewModel {
         self.happeningsAmount = "\(happeningsAmount)"
         self.hasHappenings = happeningsAmount > 0
 
-        let relativeLength = CGFloat(happeningsAmount) / CGFloat(weekMaximum)
-        self.relativeLength = weekMaximum == 0 ? 0 : relativeLength
+        let relativeLength = CGFloat(happeningsAmount) / CGFloat(dailyMaximum)
+        self.relativeLength = dailyMaximum == 0 ? 0 : relativeLength
 
         self.tapHandler = tapHandler
     }

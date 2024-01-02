@@ -67,43 +67,15 @@ final class WeekPageViewModelTests: XCTestCase {
         XCTAssertEqual(WeekPageViewModel.daysCount, 7)
     }
 
-    func test_weekMaximumHappenings_noHappenings_zero() {
-        let sut = make(withDateCreatedAndTodayOffset: 0)
-
-        XCTAssertEqual(sut.weekMaximumHappeningsCount, 0)
-    }
-
-    func test_weekMaximumHappenings_oneHappening_one() {
-        let sut = make()
-
-        XCTAssertEqual(sut.weekMaximumHappeningsCount, 1)
-    }
-
-    func test_weekMaximumHappenings_oneHappeningMondayTwoTuesday_two() {
-        let sut = make(with: [
-            DayIndex.referenceValue.date,
-            DayIndex.referenceValue.adding(days: 1).date,
-            DayIndex.referenceValue.adding(days: 1).date,
-        ])
-
-        XCTAssertEqual(sut.weekMaximumHappeningsCount, 2)
-    }
-
     private func make(withDateCreatedAndTodayOffset offset: Int) -> WeekPageViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
-        let today = eventDayCreated.adding(days: offset)
-        let container = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            ),
-            today: today.date
-        )
+        let container = WeekContainer(EventDetailsContainer(
+            EventsListContainer(ApplicationContainer(mode: .unitTest)),
+            event: event
+        ))
 
-        let sut = container.makeWeekPageViewModel(pageIndex: offset / 7)
+        let sut = container.makeWeekPageViewModel(pageIndex: offset / 7, dailyMaximum: 0)
 
         return sut
     }
@@ -113,16 +85,12 @@ final class WeekPageViewModelTests: XCTestCase {
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         happenings.forEach { event.addHappening(date: $0) }
 
-        let today = eventDayCreated.adding(days: 0)
-        let container = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                event: event
-            ),
-            today: today.date
-        )
+        let container = WeekContainer(EventDetailsContainer(
+            EventsListContainer(ApplicationContainer(mode: .unitTest)),
+            event: event
+        ))
 
-        let sut = container.makeWeekPageViewModel(pageIndex: 0)
+        let sut = container.makeWeekPageViewModel(pageIndex: 0, dailyMaximum: 0)
 
         return sut
     }

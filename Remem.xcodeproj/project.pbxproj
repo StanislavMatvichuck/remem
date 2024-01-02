@@ -28,8 +28,6 @@
 		081C432129FFC46600ACC4D7 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
 		081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
 		0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */; };
-		08246C0529B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
-		08246C0629B3212500BD52DB /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08246C0429B3212500BD52DB /* Construction.swift */; };
 		0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824B87329BDCD6A0053B01A /* Fakes.swift */; };
 		0824B87529BDCD6A0053B01A /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824B87329BDCD6A0053B01A /* Fakes.swift */; };
 		0824D0192981E38E00B6E701 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824D0182981E38E00B6E701 /* Helpers.swift */; };
@@ -120,6 +118,7 @@
 		086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E397129809C5800CCE80E /* EventDetailsContainer.swift */; };
 		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
+		0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */; };
 		0870FD782A3E36130002C403 /* AppPreview03Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870FD772A3E36130002C403 /* AppPreview03Recorder.swift */; };
 		0870FD7A2A3E37430002C403 /* AppPreviewRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870FD792A3E37430002C403 /* AppPreviewRecorder.swift */; };
 		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
@@ -129,7 +128,7 @@
 		087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
-		087791992974858300780F60 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* Atlas.swift */; };
+		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
 		087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFBF2A13F4610005B4D9 /* EmojiView.swift */; };
 		087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC12A13F7840005B4D9 /* InputView.swift */; };
 		087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */; };
@@ -243,6 +242,20 @@
 		08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080656E9283B946000C09409 /* ClockCellViewModel.swift */; };
 		08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080BF1442884A22C00DDF55F /* ClockViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		0870AFB02B4458A40005BE11 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = file.skybox;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# rctool\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		0835D0FC2934CDA50099AFF6 /* PBXContainerItemProxy */ = {
@@ -372,7 +385,6 @@
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimator.swift; sourceTree = "<group>"; };
-		08246C0429B3212500BD52DB /* Construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Construction.swift; sourceTree = "<group>"; };
 		0824B87329BDCD6A0053B01A /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		0824D0182981E38E00B6E701 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		08268D0428A5682900CA73E1 /* GoalAdded03.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoalAdded03.xcdatamodel; sourceTree = "<group>"; };
@@ -468,6 +480,7 @@
 		086FFE6B281699E40054266E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		086FFE6C28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		086FFE6D28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasProducing.swift; sourceTree = "<group>"; };
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0870FD772A3E36130002C403 /* AppPreview03Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview03Recorder.swift; sourceTree = "<group>"; };
 		0870FD792A3E37430002C403 /* AppPreviewRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewRecorder.swift; sourceTree = "<group>"; };
@@ -478,7 +491,7 @@
 		087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModelTests.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
-		087791982974858300780F60 /* Atlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
+		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
 		087AFFBF2A13F4610005B4D9 /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		087AFFC12A13F7840005B4D9 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -821,8 +834,9 @@
 			children = (
 				084D0E222983E8B3008203C3 /* Views */,
 				084D0E212983E892008203C3 /* Controllers */,
-				087791982974858300780F60 /* Atlas.swift */,
+				087791982974858300780F60 /* ZAtlas.swift */,
 				0824D0182981E38E00B6E701 /* Helpers.swift */,
+				0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */,
 				08A376062A182A4D0037D43A /* MakingSnapshotsRowView.swift */,
 			);
 			path = Snapshots;
@@ -1109,7 +1123,6 @@
 			children = (
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
-				08246C0429B3212500BD52DB /* Construction.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1409,6 +1422,7 @@
 				0870EEF62809B81100336759 /* Resources */,
 			);
 			buildRules = (
+				0870AFB02B4458A40005BE11 /* PBXBuildRule */,
 			);
 			dependencies = (
 				0835D0FD2934CDA50099AFF6 /* PBXTargetDependency */,
@@ -1639,17 +1653,17 @@
 				0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */,
 				0850075A29217244007B272C /* UIKit.swift in Sources */,
 				0824B87529BDCD6A0053B01A /* Fakes.swift in Sources */,
+				0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */,
 				08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */,
 				08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
-				08246C0629B3212500BD52DB /* Construction.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
 				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,
 				08E454B829C31C1A006AF35B /* TestingPdfViewController.swift in Sources */,
 				08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */,
 				08B628B22981A46600CA57F1 /* Stubs.swift in Sources */,
-				087791992974858300780F60 /* Atlas.swift in Sources */,
+				087791992974858300780F60 /* ZAtlas.swift in Sources */,
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
 				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
 				08A376072A182A4D0037D43A /* MakingSnapshotsRowView.swift in Sources */,
@@ -1704,7 +1718,6 @@
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
 				0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */,
-				08246C0529B3212500BD52DB /* Construction.swift in Sources */,
 				08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
@@ -2056,6 +2069,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2082,6 +2096,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
