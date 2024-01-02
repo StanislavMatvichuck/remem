@@ -9,7 +9,7 @@ import PDFKit
 
 final class PdfView: UIView {
     private let url: URL
-    private var pdf: PDFView?
+    var pdf: PDFView?
 
     init(_ url: URL) {
         self.url = url
@@ -31,20 +31,5 @@ final class PdfView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Public
-    /// Used by tests only
-    func scrollTo(page number: Int) {
-        guard
-            let pdf,
-            let document = pdf.document,
-            let page = document.page(at: number)
-        else { return }
-
-        let firstPageBounds = page.bounds(for: pdf.displayBox)
-        let rect = CGRect(x: 0, y: firstPageBounds.height, width: 1.0, height: 1.0)
-
-        pdf.go(to: rect, on: page)
     }
 }

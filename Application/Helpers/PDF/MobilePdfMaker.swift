@@ -90,19 +90,20 @@ final class MobilePdfMaker: NSObject, PDFMaking {
         view.layer.render(in: context.cgContext)
     }
 
-    // 6 8 11 15 21 26 29 32 38 41 44 48 are not scrolled
     private func placeWeekTile(tileNumber: Int, _ context: UIGraphicsPDFRendererContext) {
         let view = UIView(frame: page)
 
         let week = WeekView()
-        week.viewModel = viewModel.weekViewModel
         week.collection.delegate = self
+        week.viewModel = viewModel.weekViewModel
 
         view.addAndConstrain(week)
         view.layoutIfNeeded()
 
-        week.collection.scrollToItem(at: IndexPath(row: tileNumber, section: 0), at: .right, animated: false)
-        week.layoutIfNeeded()
+        let weekPage = week.collection.dequeueReusableCell(withReuseIdentifier: WeekPageView.reuseIdentifier, for: IndexPath(row: tileNumber, section: 0))
+        week.collection.scrollRectToVisible(weekPage.frame, animated: false)
+
+        view.layoutIfNeeded()
 
         view.layer.render(in: context.cgContext)
     }
