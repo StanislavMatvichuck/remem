@@ -58,9 +58,10 @@ final class WeekViewControllerTests: XCTestCase {
             today: today.date)
 
         let sut = container.make() as! WeekViewController
+        sut.view.translatesAutoresizingMaskIntoConstraints = true
         sut.view.frame = .screenSquare
         sut.view.layoutIfNeeded()
 
-        XCTAssertTrue(sut.viewRoot.collection.contentOffset.x == .screenW)
+        XCTAssertEqual(sut.viewRoot.collection.contentOffset.x, .screenW)
     }
 }
