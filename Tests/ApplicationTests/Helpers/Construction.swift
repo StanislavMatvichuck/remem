@@ -29,12 +29,13 @@ extension ApplicationContainer {
     static func make() -> WeekViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let container = WeekContainer(EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ),
-            event: event
-        ))
+        let container = WeekContainer(
+            EventDetailsContainer(
+                EventsListContainer(
+                    ApplicationContainer(mode: .unitTest)
+                ),
+                event: event
+            ), today: day.date)
 
         return container.make() as! WeekViewController
     }

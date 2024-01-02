@@ -55,17 +55,17 @@ final class WeekViewSnapshots: FBSnapshotTestCase {
 
         let container = WeekContainer(
             EventDetailsContainer(
-                parent: EventsListContainer(
-                    parent: ApplicationContainer(
+                EventsListContainer(
+                    ApplicationContainer(
                         mode: .unitTest
                     )
                 ),
-                event: event,
-                today: today
+                event: event
             ),
             today: today.date
         )
-        let sut = WeekView(frame: .screenSquare)
+        let sut = WeekView()
+        sut.frame = .screenSquare
         sut.viewModel = container.makeWeekViewModel()
         sut.layoutIfNeeded()
 
