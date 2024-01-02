@@ -18,10 +18,11 @@ final class ApplicationContainer {
     let coordinator: Coordinator
     let updater: ViewControllersUpdater
     let watcher: Watching
+    let injectedCurrentMoment: Date
 
-    var currentMoment: Date { mode.currentMoment }
+    var currentMoment: Date { mode == .injectedCurrentMoment ? injectedCurrentMoment : mode.currentMoment }
 
-    init(mode: LaunchMode) {
+    init(mode: LaunchMode, currentMoment: Date = DayIndex.referenceValue.date) {
         func makeRepository(_ mode: LaunchMode) -> EventsQuerying & EventsCommanding {
             let repository = CoreDataEventsRepository(
                 container: CoreDataStack.createContainer(inMemory: mode != .uikit),
@@ -40,6 +41,7 @@ final class ApplicationContainer {
         let watcher = DayWatcher()
 
         self.mode = mode
+        self.injectedCurrentMoment = currentMoment
         self.coordinator = coordinator
         self.provider = repository
         self.commander = updatingCommander

@@ -16,7 +16,8 @@ enum LaunchMode: String {
          appPreview03_widget,
          appPreview03_darkMode,
          unitTest,
-         uikit
+         uikit,
+         injectedCurrentMoment
 
     var uiTestingDisabled: Bool { return
         self != .appPreview02_addingEvents &&
