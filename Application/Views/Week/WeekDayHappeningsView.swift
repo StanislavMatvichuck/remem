@@ -18,7 +18,7 @@ final class WeekDayHappeningView: UIView {
     private let background: UIView = {
         let view = UIView(al: true)
         view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 4).isActive = true
-        view.layer.cornerRadius = WeekPageView.daySpacing / 2
+        view.layer.cornerRadius = .layoutSquare / 10 * 1.6
         return view
     }()
 

@@ -9,7 +9,7 @@ import UIKit
 
 final class WeekPageView: UICollectionViewCell {
     static let reuseIdentifier: String = "WeekPageView"
-    static let daySpacing: CGFloat = .layoutSquare / 5
+    static let daySpacing: CGFloat = .layoutSquare / 10
 
     let title: UILabel = {
         let label = UILabel(al: true)
@@ -29,6 +29,22 @@ final class WeekPageView: UICollectionViewCell {
         let stack = UIStackView(al: true)
         stack.distribution = .fillEqually
         stack.spacing = WeekPageView.daySpacing
+        return stack
+    }()
+
+    let daysBackground: UIStackView = {
+        let stack = UIStackView(al: true)
+        stack.distribution = .fillEqually
+        stack.spacing = WeekPageView.daySpacing
+
+        for _ in 0 ..< 7 {
+            let dayBackground = UIView(al: true)
+            dayBackground.backgroundColor = .border
+            dayBackground.layer.cornerRadius = .layoutSquare / 10 * 1.6
+            dayBackground.heightAnchor.constraint(equalTo: dayBackground.widthAnchor, multiplier: 4).isActive = true
+            stack.addArrangedSubview(dayBackground)
+        }
+
         return stack
     }()
 
@@ -57,10 +73,19 @@ final class WeekPageView: UICollectionViewCell {
 
         contentView.addSubview(verticalStack)
 
-        days.widthAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1, constant: Self.daySpacing * -2).isActive = true
-        verticalStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        verticalStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        verticalStack.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        days.addSubview(daysBackground)
+
+        NSLayoutConstraint.activate([
+            days.widthAnchor.constraint(equalTo: daysBackground.widthAnchor),
+            days.widthAnchor.constraint(equalTo: verticalStack.widthAnchor, constant: Self.daySpacing * -2),
+
+            daysBackground.centerXAnchor.constraint(equalTo: days.centerXAnchor),
+            daysBackground.topAnchor.constraint(equalTo: days.topAnchor),
+
+            verticalStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            verticalStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            verticalStack.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+        ])
     }
 
     private func configureAppearance() {

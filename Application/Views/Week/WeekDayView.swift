@@ -41,7 +41,9 @@ final class WeekDayView: UIStackView {
 
     private func configureAppearance() {
         dayName.textColor = .secondary
-        roundContainer.layer.cornerRadius = WeekPageView.daySpacing / 2
+        roundContainer.layer.cornerRadius = .layoutSquare / 10 * 1.6
+        roundContainer.layer.borderColor = UIColor.border.cgColor
+        roundContainer.layer.borderWidth = .border
         roundContainer.clipsToBounds = true
         roundContainer.backgroundColor = .bg_item
     }
