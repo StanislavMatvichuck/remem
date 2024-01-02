@@ -27,8 +27,9 @@ final class NewWeekView: UIView {
         }
     }
 
-    override init(frame: CGRect = .zero) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         configureLayout()
         configureAppearance()

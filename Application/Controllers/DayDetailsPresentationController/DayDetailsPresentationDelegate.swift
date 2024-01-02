@@ -10,9 +10,3 @@ import Foundation
 protocol DayDetailsPresentationControllerDelegate {
     func dismissCompleted()
 }
-
-extension WeekViewController: DayDetailsPresentationControllerDelegate {
-    func dismissCompleted() {
-        viewModel.timelineAnimatedCellIndex = nil
-    }
-}

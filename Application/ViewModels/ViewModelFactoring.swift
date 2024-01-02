@@ -40,20 +40,8 @@ protocol HintItemViewModelFactoring {
     func makeHintItemViewModel(events: [Event]) -> HintCellViewModel
 }
 
-protocol WeekCellViewModelFactoring {
-    func makeViewModel(
-        indexPath: IndexPath,
-        cellPresentationAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock,
-        cellDismissAnimationBlock: @escaping DayDetailsAnimationsHelper.AnimationBlock
-    ) -> WeekCellViewModel
-}
-
 protocol WeekSummaryViewModelFactoring {
     func makeViewModel(today: DayIndex, week: WeekIndex) -> WeekSummaryViewModel
-}
-
-protocol WeekViewModelFactoring {
-    func makeWeekViewModel(visibleDayIndex: Int?) -> WeekViewModel
 }
 
 protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel() -> DayDetailsViewModel }

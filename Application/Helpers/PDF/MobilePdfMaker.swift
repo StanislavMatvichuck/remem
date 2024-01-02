@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class MobilePdfMaker: PDFMaking {
+final class MobilePdfMaker: NSObject, PDFMaking {
     private static let pageWidth = CGFloat.screenW * 0.94
 
     private let page = CGRect(
@@ -49,7 +49,7 @@ final class MobilePdfMaker: PDFMaking {
         makeNewPage(context)
         placeQRTile(context)
 
-        for i in 0 ..< viewModel.weekViewModel.pages.count {
+        for i in 0 ..< viewModel.weekViewModel.pagesCount {
             makeNewPage(context)
             placeWeekTile(tileNumber: i, context)
         }
@@ -90,15 +90,21 @@ final class MobilePdfMaker: PDFMaking {
         view.layer.render(in: context.cgContext)
     }
 
-    private func placeWeekTile(tileNumber i: Int, _ context: UIGraphicsPDFRendererContext) {
-        var viewModel = viewModel.weekViewModel
-        viewModel.timelineVisibleIndex = i * 7
-        let week = WeekView(viewModel)
-        week.translatesAutoresizingMaskIntoConstraints = true
-        week.frame = page
+    // 6 8 11 15 21 26 29 32 38 41 44 48 are not scrolled
+    private func placeWeekTile(tileNumber: Int, _ context: UIGraphicsPDFRendererContext) {
+        let view = UIView(frame: page)
+
+        let week = NewWeekView()
+        week.viewModel = viewModel.weekViewModel
+        week.collection.delegate = self
+
+        view.addAndConstrain(week)
+        view.layoutIfNeeded()
+
+        week.collection.scrollToItem(at: IndexPath(row: tileNumber, section: 0), at: .right, animated: false)
         week.layoutIfNeeded()
 
-        week.layer.render(in: context.cgContext)
+        view.layer.render(in: context.cgContext)
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
@@ -114,11 +120,19 @@ final class MobilePdfMaker: PDFMaking {
         view.layer.render(in: context.cgContext)
     }
 
-    private func lastTile(_ i: Int) -> Bool { i == viewModel.weekViewModel.pages.count }
-
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
         context.cgContext.setFillColor(UIColor.bg.cgColor)
         context.cgContext.fill(page)
+    }
+}
+
+extension MobilePdfMaker:
+    UICollectionViewDelegate,
+    UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        return CGSize(width: width, height: width)
     }
 }

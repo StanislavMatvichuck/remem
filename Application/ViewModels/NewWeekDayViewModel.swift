@@ -50,3 +50,10 @@ struct NewWeekDayViewModel {
         self.tapHandler = tapHandler
     }
 }
+
+extension DayIndex {
+    var dayInMonth: Int {
+        let components = Calendar.current.dateComponents([.day], from: date)
+        return components.day ?? 1
+    }
+}

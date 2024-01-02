@@ -24,7 +24,7 @@ struct PdfViewModel {
     let clockViewModelDay: ClockViewModel
     let clockViewModelNight: ClockViewModel
     let summaryViewModel: SummaryViewModel
-    let weekViewModel: WeekViewModel
+    let weekViewModel: NewWeekViewModel
 
     init(
         event: Event,
@@ -32,7 +32,7 @@ struct PdfViewModel {
         clockViewModelDay: ClockViewModel,
         clockViewModelNight: ClockViewModel,
         summaryViewModel: SummaryViewModel,
-        weekViewModel: WeekViewModel
+        weekViewModel: NewWeekViewModel
     ) {
         eventTitle = event.name
         readableStart = Self.formatter.string(from: event.dateCreated)
