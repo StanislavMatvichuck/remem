@@ -44,5 +44,5 @@
 
 "visualisation.create" = "Zeig mir was du hast";
 
-"newWeek.weekNumberDescription" = "Woche";
-"newWeek.totalNumberDescription" = "summe";
+"Week.weekNumberDescription" = "Woche";
+"Week.totalNumberDescription" = "summe";

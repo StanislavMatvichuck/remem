@@ -43,7 +43,7 @@ final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsWeek() {
-        XCTAssertEqual(sut.children.filter { $0 is NewWeekViewController }.count, 1)
+        XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1)
     }
 
     func test_showsClocks() {

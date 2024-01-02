@@ -1,5 +1,5 @@
 //
-//  NewWeekDayHappeningsView.swift
+//  WeekDayHappeningsView.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 26.12.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewWeekDayHappeningView: UIView {
+final class WeekDayHappeningView: UIView {
     private let number: UILabel = {
         let label = UILabel(al: true)
         label.font = .fontSmallBold
@@ -18,7 +18,7 @@ final class NewWeekDayHappeningView: UIView {
     private let background: UIView = {
         let view = UIView(al: true)
         view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 4).isActive = true
-        view.layer.cornerRadius = NewWeekPageView.daySpacing / 2
+        view.layer.cornerRadius = WeekPageView.daySpacing / 2
         return view
     }()
 
@@ -38,7 +38,7 @@ final class NewWeekDayHappeningView: UIView {
         super.layoutSubviews()
     }
 
-    func configureContent(_ viewModel: NewWeekDayViewModel) {
+    func configureContent(_ viewModel: WeekDayViewModel) {
         relativeLength = viewModel.relativeLength
         let isHidden = !viewModel.hasHappenings
         number.isHidden = isHidden

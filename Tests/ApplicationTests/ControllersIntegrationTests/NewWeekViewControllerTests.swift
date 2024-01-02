@@ -1,5 +1,5 @@
 //
-//  NewWeekViewControllerTests.swift
+//  WeekViewControllerTests.swift
 //  ApplicationTests
 //
 //  Created by Stanislav Matvichuck on 27.12.2023.
@@ -9,38 +9,38 @@
 import Domain
 import XCTest
 
-final class NewWeekViewControllerTests: XCTestCase {
-    func test_showsNewWeekView() {
-        let container = NewWeekContainer(
+final class WeekViewControllerTests: XCTestCase {
+    func test_showsWeekView() {
+        let container = WeekContainer(
             EventDetailsContainer(
                 EventsListContainer(ApplicationContainer(mode: .unitTest)),
                 event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
-        let sut = container.make() as! NewWeekViewController
+        let sut = container.make() as! WeekViewController
 
-        XCTAssertTrue(sut.view is NewWeekView)
+        XCTAssertTrue(sut.view is WeekView)
     }
 
     func test_configuresCollection() {
-        let container = NewWeekContainer(
+        let container = WeekContainer(
             EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)),
                                   event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
-        let sut = container.make() as! NewWeekViewController
+        let sut = container.make() as! WeekViewController
         sut.loadViewIfNeeded()
 
         XCTAssertNotNil(sut.viewRoot.collection.delegate)
     }
 
     func test_configuresViewModel() {
-        let container = NewWeekContainer(
+        let container = WeekContainer(
             EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)),
                                   event: Event(name: "")),
             today: DayIndex.referenceValue.date)
 
-        let sut = container.make() as! NewWeekViewController
+        let sut = container.make() as! WeekViewController
         sut.loadViewIfNeeded()
 
         XCTAssertNotNil(sut.viewRoot.viewModel)
@@ -49,7 +49,7 @@ final class NewWeekViewControllerTests: XCTestCase {
     func test_scrollsToLastPage() {
         let eventCreatedDate = DayIndex.referenceValue
         let today = eventCreatedDate.adding(days: 7)
-        let container = NewWeekContainer(
+        let container = WeekContainer(
             EventDetailsContainer(
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
@@ -57,7 +57,7 @@ final class NewWeekViewControllerTests: XCTestCase {
                 event: Event(name: "", dateCreated: eventCreatedDate.date)),
             today: today.date)
 
-        let sut = container.make() as! NewWeekViewController
+        let sut = container.make() as! WeekViewController
         sut.view.frame = .screenSquare
         sut.view.layoutIfNeeded()
 

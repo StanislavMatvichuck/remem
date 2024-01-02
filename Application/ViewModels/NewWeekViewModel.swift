@@ -1,5 +1,5 @@
 //
-//  NewWeekViewModel.swift
+//  WeekViewModel.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 19.12.2023.
@@ -8,12 +8,12 @@
 import Domain
 import Foundation
 
-struct NewWeekViewModel {
+struct WeekViewModel {
     private let event: Event
-    private let pageFactory: NewWeekPageViewModelFactoring
+    private let pageFactory: WeekPageViewModelFactoring
     private let today: Date
 
-    init(event: Event, pageFactory: NewWeekPageViewModelFactoring, today: Date) {
+    init(event: Event, pageFactory: WeekPageViewModelFactoring, today: Date) {
         self.event = event
         self.pageFactory = pageFactory
         self.today = today
@@ -33,7 +33,7 @@ struct NewWeekViewModel {
         return weeksDifference
     }
 
-    func page(at index: Int) -> NewWeekPageViewModel {
-        pageFactory.makeNewWeekPageViewModel(pageIndex: index)
+    func page(at index: Int) -> WeekPageViewModel {
+        pageFactory.makeWeekPageViewModel(pageIndex: index)
     }
 }

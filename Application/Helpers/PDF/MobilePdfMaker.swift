@@ -94,7 +94,7 @@ final class MobilePdfMaker: NSObject, PDFMaking {
     private func placeWeekTile(tileNumber: Int, _ context: UIGraphicsPDFRendererContext) {
         let view = UIView(frame: page)
 
-        let week = NewWeekView()
+        let week = WeekView()
         week.viewModel = viewModel.weekViewModel
         week.collection.delegate = self
 

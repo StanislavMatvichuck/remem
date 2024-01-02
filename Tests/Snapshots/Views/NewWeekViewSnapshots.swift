@@ -1,5 +1,5 @@
 //
-//  NewWeekViewSnapshots.swift
+//  WeekViewSnapshots.swift
 //  ApplicationSnapshotsTests
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -10,7 +10,7 @@ import Domain
 import Foundation
 import iOSSnapshotTestCase
 
-final class NewWeekViewSnapshots: FBSnapshotTestCase {
+final class WeekViewSnapshots: FBSnapshotTestCase {
     override func setUp() {
         super.setUp()
         configureSnapshotsOptions()
@@ -53,7 +53,7 @@ final class NewWeekViewSnapshots: FBSnapshotTestCase {
 
         happenings.forEach { event.addHappening(date: $0) }
 
-        let container = NewWeekContainer(
+        let container = WeekContainer(
             EventDetailsContainer(
                 parent: EventsListContainer(
                     parent: ApplicationContainer(
@@ -65,8 +65,8 @@ final class NewWeekViewSnapshots: FBSnapshotTestCase {
             ),
             today: today.date
         )
-        let sut = NewWeekView(frame: .screenSquare)
-        sut.viewModel = container.makeNewWeekViewModel()
+        let sut = WeekView(frame: .screenSquare)
+        sut.viewModel = container.makeWeekViewModel()
         sut.layoutIfNeeded()
 
         FBSnapshotVerifyView(sut)

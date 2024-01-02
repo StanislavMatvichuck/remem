@@ -1,5 +1,5 @@
 //
-//  NewWeekCellViewModelTests.swift
+//  WeekCellViewModelTests.swift
 //  ApplicationTests
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-final class NewWeekDayViewModelTests: XCTestCase {
+final class WeekDayViewModelTests: XCTestCase {
     func test_dayNumber_withEventDateCreatedAtReferenceDate_firstIndex_isOne() {
         let sut = make(for: IndexPath(row: 0, section: 0))
 
@@ -135,13 +135,13 @@ final class NewWeekDayViewModelTests: XCTestCase {
         for index: IndexPath,
         pageIndex: Int = 0,
         withHappeningsAt: [Date] = []
-    ) -> NewWeekDayViewModel {
+    ) -> WeekDayViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         withHappeningsAt.forEach { event.addHappening(date: $0) }
 
         let today = eventDayCreated.adding(days: 0)
-        let container = NewWeekContainer(
+        let container = WeekContainer(
             EventDetailsContainer(
                 EventsListContainer(
                     ApplicationContainer(mode: .unitTest)
@@ -150,8 +150,8 @@ final class NewWeekDayViewModelTests: XCTestCase {
             today: today.date
         )
 
-        let page = container.makeNewWeekPageViewModel(pageIndex: pageIndex)
-        let sut = container.makeNewWeekDayViewModel(
+        let page = container.makeWeekPageViewModel(pageIndex: pageIndex)
+        let sut = container.makeWeekDayViewModel(
             dayNumberInWeek: index.row,
             pageIndex: pageIndex,
             weekMaximum: page.weekMaximumHappeningsCount

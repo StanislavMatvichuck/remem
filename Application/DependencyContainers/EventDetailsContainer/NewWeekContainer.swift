@@ -1,5 +1,5 @@
 //
-//  NewWeekContainer.swift
+//  WeekContainer.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -8,11 +8,11 @@
 import Domain
 import UIKit
 
-final class NewWeekContainer:
+final class WeekContainer:
     ControllerFactoring,
-    NewWeekViewModelFactoring,
-    NewWeekDayViewModelFactoring,
-    NewWeekPageViewModelFactoring
+    WeekViewModelFactoring,
+    WeekDayViewModelFactoring,
+    WeekPageViewModelFactoring
 {
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
@@ -25,18 +25,18 @@ final class NewWeekContainer:
     }
 
     func make() -> UIViewController {
-        let controller = NewWeekViewController(self)
+        let controller = WeekViewController(self)
         return controller
     }
 
-    func makeNewWeekViewModel() -> NewWeekViewModel {
-        NewWeekViewModel(event: event, pageFactory: self, today: today)
+    func makeWeekViewModel() -> WeekViewModel {
+        WeekViewModel(event: event, pageFactory: self, today: today)
     }
 
-    func makeNewWeekPageViewModel(pageIndex: Int) -> NewWeekPageViewModel {
+    func makeWeekPageViewModel(pageIndex: Int) -> WeekPageViewModel {
         let startWeekIndex = WeekIndex(event.dateCreated)
         let today = startWeekIndex.dayIndex.adding(days: pageIndex * 7)
-        return NewWeekPageViewModel(
+        return WeekPageViewModel(
             event: event,
             dayFactory: self,
             pageIndex: pageIndex,
@@ -44,16 +44,16 @@ final class NewWeekContainer:
         )
     }
 
-    func makeNewWeekDayViewModel(
+    func makeWeekDayViewModel(
         dayNumberInWeek: Int,
         pageIndex: Int,
         weekMaximum: Int
-    ) -> NewWeekDayViewModel {
+    ) -> WeekDayViewModel {
         let dayIndex = pageIndex * 7 + dayNumberInWeek
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: dayIndex)
 
-        return NewWeekDayViewModel(
+        return WeekDayViewModel(
             event: event,
             index: dayIndex,
             today: today,

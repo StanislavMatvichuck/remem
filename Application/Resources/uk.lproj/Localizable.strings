@@ -44,5 +44,5 @@
 
 "visualisation.create" = "Продемонструйте на що ви здатні";
 
-"newWeek.weekNumberDescription" = "Тиждень";
-"newWeek.totalNumberDescription" = "загалом";
+"Week.weekNumberDescription" = "Тиждень";
+"Week.totalNumberDescription" = "загалом";

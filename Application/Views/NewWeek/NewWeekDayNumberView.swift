@@ -1,5 +1,5 @@
 //
-//  NewWeekDayNumberView.swift
+//  WeekDayNumberView.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 27.12.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewWeekDayNumberView: UIView {
+final class WeekDayNumberView: UIView {
     private let number: UILabel = {
         let label = UILabel(al: true)
         label.font = .font
@@ -23,7 +23,7 @@ final class NewWeekDayNumberView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    func configureContent(_ viewModel: NewWeekDayViewModel) {
+    func configureContent(_ viewModel: WeekDayViewModel) {
         number.text = viewModel.dayNumber
 
         number.font = viewModel.isToday ? .fontBold : .font

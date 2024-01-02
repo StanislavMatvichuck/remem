@@ -26,14 +26,14 @@ final class EventDetailsContainer:
     func make() -> UIViewController {
         let clockNight = ClockContainer(parent: self, type: .night).make() as! ClockViewController
         let clockDay = ClockContainer(parent: self, type: .day).make() as! ClockViewController
-        let newWeek = NewWeekContainer(self, today: currentMoment).make()
+        let Week = WeekContainer(self, today: currentMoment).make()
         let summary = SummaryContainer(parent: self).make() as! SummaryViewController
         let pdf = PdfMakingContainer(parent: self).make()
 
         let controller = EventDetailsViewController(
             factory: self,
             controllers: [
-                newWeek,
+                Week,
                 summary,
                 clockDay,
                 clockNight,

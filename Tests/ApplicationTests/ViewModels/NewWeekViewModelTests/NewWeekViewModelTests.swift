@@ -1,5 +1,5 @@
 //
-//  NewWeekViewModelTests.swift
+//  WeekViewModelTests.swift
 //  ApplicationTests
 //
 //  Created by Stanislav Matvichuck on 19.12.2023.
@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-final class NewWeekViewModelTests: XCTestCase {
+final class WeekViewModelTests: XCTestCase {
     func test_pagesCount_withEventDateCreatedAndTodaySameDay_isOne() {
         let sut = make(withDateCreatedAndTodayOffset: 0)
 
@@ -52,11 +52,11 @@ final class NewWeekViewModelTests: XCTestCase {
         XCTAssertEqual(sut.page(at: 2).weekNumber, 3)
     }
 
-    private func make(withDateCreatedAndTodayOffset: Int) -> NewWeekViewModel {
+    private func make(withDateCreatedAndTodayOffset: Int) -> WeekViewModel {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         let today = DayIndex(event.dateCreated).adding(days: withDateCreatedAndTodayOffset)
         return
-            NewWeekContainer(
+            WeekContainer(
                 EventDetailsContainer(
                     EventsListContainer(
                         ApplicationContainer(mode: .unitTest)
@@ -64,6 +64,6 @@ final class NewWeekViewModelTests: XCTestCase {
                     event: event
                 ),
                 today: today.date
-            ).makeNewWeekViewModel()
+            ).makeWeekViewModel()
     }
 }

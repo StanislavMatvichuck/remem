@@ -1,5 +1,5 @@
 //
-//  NewWeekView.swift
+//  WeekView.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewWeekView: UIView {
+final class WeekView: UIView {
     let collection: UICollectionView = {
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
@@ -16,11 +16,11 @@ final class NewWeekView: UIView {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.isPagingEnabled = true
-        collection.register(NewWeekPageView.self, forCellWithReuseIdentifier: NewWeekPageView.reuseIdentifier)
+        collection.register(WeekPageView.self, forCellWithReuseIdentifier: WeekPageView.reuseIdentifier)
         return collection
     }()
 
-    var viewModel: NewWeekViewModel? {
+    var viewModel: WeekViewModel? {
         didSet {
             guard let viewModel else { return }
             configureContentFor(viewModel)
@@ -47,12 +47,12 @@ final class NewWeekView: UIView {
         collection.backgroundColor = .clear
     }
 
-    private func configureContentFor(_ viewModel: NewWeekViewModel) {
+    private func configureContentFor(_ viewModel: WeekViewModel) {
         collection.reloadData()
     }
 }
 
-extension NewWeekView: UICollectionViewDataSource {
+extension WeekView: UICollectionViewDataSource {
     var viewModelErrorMessage: String { "view has no access to viewModel" }
 
     func collectionView(
@@ -68,8 +68,8 @@ extension NewWeekView: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         guard let page = collectionView.dequeueReusableCell(
-            withReuseIdentifier: NewWeekPageView.reuseIdentifier,
-            for: indexPath) as? NewWeekPageView, let viewModel
+            withReuseIdentifier: WeekPageView.reuseIdentifier,
+            for: indexPath) as? WeekPageView, let viewModel
         else { fatalError(viewModelErrorMessage) }
         page.viewModel = viewModel.page(at: indexPath.row)
         return page

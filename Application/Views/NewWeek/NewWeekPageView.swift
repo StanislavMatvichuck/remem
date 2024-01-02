@@ -1,5 +1,5 @@
 //
-//  NewWeekPageView.swift
+//  WeekPageView.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 21.12.2023.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class NewWeekPageView: UICollectionViewCell {
-    static let reuseIdentifier: String = "NewWeekPageView"
+final class WeekPageView: UICollectionViewCell {
+    static let reuseIdentifier: String = "WeekPageView"
     static let daySpacing: CGFloat = .layoutSquare / 5
 
     let title: UILabel = {
@@ -28,11 +28,11 @@ final class NewWeekPageView: UICollectionViewCell {
     let days: UIStackView = {
         let stack = UIStackView(al: true)
         stack.distribution = .fillEqually
-        stack.spacing = NewWeekPageView.daySpacing
+        stack.spacing = WeekPageView.daySpacing
         return stack
     }()
 
-    var viewModel: NewWeekPageViewModel? { didSet {
+    var viewModel: WeekPageViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
     } }
@@ -68,18 +68,18 @@ final class NewWeekPageView: UICollectionViewCell {
         title.textColor = .secondary
     }
 
-    private func configureContent(_ viewModel: NewWeekPageViewModel) {
+    private func configureContent(_ viewModel: WeekPageViewModel) {
         title.text = viewModel.title
         month.text = viewModel.localisedMonth
 
         configureDays(viewModel)
     }
 
-    private func configureDays(_ viewModel: NewWeekPageViewModel) {
+    private func configureDays(_ viewModel: WeekPageViewModel) {
         for day in days.arrangedSubviews { day.removeFromSuperview() }
 
-        for index in 0 ..< NewWeekPageViewModel.daysCount {
-            let day = NewWeekDayView()
+        for index in 0 ..< WeekPageViewModel.daysCount {
+            let day = WeekDayView()
             day.viewModel = viewModel.day(dayNumberInWeek: index)
             days.addArrangedSubview(day)
         }

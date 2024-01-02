@@ -1,5 +1,5 @@
 //
-//  NewWeekViewController.swift
+//  WeekViewController.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 27.12.2023.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-final class NewWeekViewController: UIViewController {
-    let factory: NewWeekViewModelFactoring
-    let viewRoot: NewWeekView
+final class WeekViewController: UIViewController {
+    let factory: WeekViewModelFactoring
+    let viewRoot: WeekView
     
-    var viewModel: NewWeekViewModel { didSet { viewRoot.viewModel = viewModel }}
+    var viewModel: WeekViewModel { didSet { viewRoot.viewModel = viewModel }}
     
-    init(_ factory: NewWeekViewModelFactoring) {
+    init(_ factory: WeekViewModelFactoring) {
         self.factory = factory
-        self.viewModel = factory.makeNewWeekViewModel()
-        self.viewRoot = NewWeekView()
+        self.viewModel = factory.makeWeekViewModel()
+        self.viewRoot = WeekView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +27,7 @@ final class NewWeekViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollection()
-        viewModel = factory.makeNewWeekViewModel()
+        viewModel = factory.makeWeekViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,7 +44,7 @@ final class NewWeekViewController: UIViewController {
     }
 }
 
-extension NewWeekViewController:
+extension WeekViewController:
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout
 {

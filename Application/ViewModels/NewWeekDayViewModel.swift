@@ -1,5 +1,5 @@
 //
-//  NewWeekCellViewModel.swift
+//  WeekCellViewModel.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct NewWeekDayViewModel {
+struct WeekDayViewModel {
     typealias TapHandler = (@escaping AnimationBlock, @escaping AnimationBlock) -> ()
     typealias AnimationBlock = () -> ()
 

@@ -1,5 +1,5 @@
 //
-//  NewWeekDayView.swift
+//  WeekDayView.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 22.12.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewWeekDayView: UIStackView {
+final class WeekDayView: UIStackView {
     private let roundContainer: UIStackView = {
         let roundView = UIStackView(al: true)
         roundView.axis = .vertical
@@ -15,8 +15,8 @@ final class NewWeekDayView: UIStackView {
         return roundView
     }()
 
-    private let happenings = NewWeekDayHappeningView()
-    private let dayNumber = NewWeekDayNumberView()
+    private let happenings = WeekDayHappeningView()
+    private let dayNumber = WeekDayNumberView()
     private let dayName: UILabel = {
         let label = UILabel(al: true)
         label.font = .font
@@ -24,7 +24,7 @@ final class NewWeekDayView: UIStackView {
         return label
     }()
 
-    var viewModel: NewWeekDayViewModel? { didSet {
+    var viewModel: WeekDayViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
     }}
@@ -41,12 +41,12 @@ final class NewWeekDayView: UIStackView {
 
     private func configureAppearance() {
         dayName.textColor = .secondary
-        roundContainer.layer.cornerRadius = NewWeekPageView.daySpacing / 2
+        roundContainer.layer.cornerRadius = WeekPageView.daySpacing / 2
         roundContainer.clipsToBounds = true
         roundContainer.backgroundColor = .bg_item
     }
 
-    private func configureContent(_ viewModel: NewWeekDayViewModel) {
+    private func configureContent(_ viewModel: WeekDayViewModel) {
         dayName.text = viewModel.dayName
 
         dayNumber.configureContent(viewModel)
@@ -83,6 +83,6 @@ final class NewWeekDayView: UIStackView {
         addArrangedSubview(dayName)
         dayName.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
 
-        setCustomSpacing(NewWeekPageView.daySpacing, after: roundContainer)
+        setCustomSpacing(WeekPageView.daySpacing, after: roundContainer)
     }
 }

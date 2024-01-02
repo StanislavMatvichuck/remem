@@ -1,5 +1,5 @@
 //
-//  NewWeekPageViewModel.swift
+//  WeekPageViewModel.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 20.12.2023.
@@ -8,17 +8,17 @@
 import Domain
 import Foundation
 
-struct NewWeekPageViewModel {
+struct WeekPageViewModel {
     static let daysCount: Int = 7
-    static let weekNumberDescription = String(localized: "newWeek.weekNumberDescription")
-    static let totalNumberDescription = String(localized: "newWeek.totalNumberDescription")
+    static let weekNumberDescription = String(localized: "Week.weekNumberDescription")
+    static let totalNumberDescription = String(localized: "Week.totalNumberDescription")
 
     private let event: Event
-    private let dayFactory: NewWeekDayViewModelFactoring
+    private let dayFactory: WeekDayViewModelFactoring
     private let pageIndex: Int
     private let today: Date
 
-    init(event: Event, dayFactory: NewWeekDayViewModelFactoring, pageIndex: Int, today: Date) {
+    init(event: Event, dayFactory: WeekDayViewModelFactoring, pageIndex: Int, today: Date) {
         self.event = event
         self.dayFactory = dayFactory
         self.pageIndex = pageIndex
@@ -68,8 +68,8 @@ struct NewWeekPageViewModel {
         return nameOfMonth
     }
 
-    func day(dayNumberInWeek: Int) -> NewWeekDayViewModel {
-        dayFactory.makeNewWeekDayViewModel(
+    func day(dayNumberInWeek: Int) -> WeekDayViewModel {
+        dayFactory.makeWeekDayViewModel(
             dayNumberInWeek: dayNumberInWeek,
             pageIndex: pageIndex,
             weekMaximum: weekMaximumHappeningsCount
