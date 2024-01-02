@@ -8,8 +8,8 @@
 import iOSSnapshotTestCase
 import UIKit
 
-final class ZAtlas: FBSnapshotTestCase {
-    var scale: CGFloat { 0.5 }
+final class ZAtlas: FBSnapshotTestCase, AtlasProducing {
+    let scale: CGFloat = 0.5
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     var spacing: CGFloat { 16.0 * scale }
@@ -17,6 +17,7 @@ final class ZAtlas: FBSnapshotTestCase {
     var atlasFrame: CGRect { CGRect(origin: .zero, size: atlasSize) }
     
     var parent: UIView!
+    var atlas: UIView!
     
     override func setUp() {
         super.setUp()
@@ -25,6 +26,7 @@ final class ZAtlas: FBSnapshotTestCase {
         parent = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacing, height: spacing)))
         parent.translatesAutoresizingMaskIntoConstraints = false
         parent.backgroundColor = UIColor.purple
+        configureAtlasView()
     }
     
     override func tearDown() {
@@ -106,36 +108,5 @@ final class ZAtlas: FBSnapshotTestCase {
         
         if let folderName { self.folderName = folderName.replacingOccurrences(of: "light", with: "dark") }
         FBSnapshotVerifyView(parent)
-    }
-    
-    private func makeRow(testNames: [String?]) -> UIStackView {
-        let horizontalStack = UIStackView()
-        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStack.axis = .horizontal
-        horizontalStack.spacing = spacing * scale
-        
-        for name in testNames {
-            horizontalStack.addArrangedSubview(makeImageViewFor(testName: name))
-        }
-        
-        return horizontalStack
-    }
-    
-    private func makeImageViewFor(testName: String?) -> UIImageView {
-        let view = UIImageView(image: nil)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: width * scale),
-            view.heightAnchor.constraint(equalToConstant: height * scale),
-        ])
-        
-        let directory = getReferenceImageDirectory(withDefault: nil).appending("_64")
-        let path = "\(directory)/\(testName ?? "nil").png"
-        
-        if let image = UIImage(contentsOfFile: path) {
-            view.image = image
-        } else { print("image not found for \(path)") }
-        
-        return view
     }
 }
