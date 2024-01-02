@@ -8,11 +8,11 @@
 import UIKit
 
 final class DayDetailsPresentationAnimator: DayDetailsAnimator {
-    let originHeight: CGFloat
-
-    init(originHeight: CGFloat) {
-        self.originHeight = originHeight
-    }
+    static let originHeight: CGFloat = {
+        let screenHeightLeftover: CGFloat = .screenH - .screenW * 0.66666 * 1.6
+        let originHeight: CGFloat = screenHeightLeftover / 2
+        return originHeight
+    }()
 
     override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         guard
@@ -29,7 +29,6 @@ final class DayDetailsPresentationAnimator: DayDetailsAnimator {
         containerView.bringSubviewToFront(detailsView)
 
         let duration = transitionDuration(using: transitionContext)
-        let height = originHeight
 
         let animator = UIViewPropertyAnimator(
             duration: duration,
@@ -38,7 +37,7 @@ final class DayDetailsPresentationAnimator: DayDetailsAnimator {
 
         animator.addAnimations(DayDetailsAnimationsHelper.makePresentationSliding(
             animatedView: detailsView,
-            targetHeight: height
+            targetHeight: Self.originHeight
         ))
 
         for animation in additionalAnimations {

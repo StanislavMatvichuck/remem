@@ -16,9 +16,20 @@ final class DayDetailsPresentationController: UIPresentationController {
     let container: DayDetailsPresentationContainer
 
     lazy var backgroundView: UIView = {
+        let dayDetailsBackground = UIView(frame: CGRect(
+            x: frameOfPresentedViewInContainerView.minX,
+            y: DayDetailsPresentationAnimator.originHeight,
+            width: frameOfPresentedViewInContainerView.width,
+            height: frameOfPresentedViewInContainerView.height
+        ))
+        dayDetailsBackground.backgroundColor = .border
+        dayDetailsBackground.layer.cornerRadius = .buttonMargin
+
         let backgroundView = UIView(frame: containerView!.frame)
-        backgroundView.backgroundColor = .secondary
+        backgroundView.backgroundColor = .bg
         backgroundView.alpha = 0
+
+        backgroundView.addSubview(dayDetailsBackground)
         backgroundView.addGestureRecognizer(UIPanGestureRecognizer(
             target: self,
             action: #selector(handle)
@@ -47,11 +58,17 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        CGRect(
-            x: .layoutSquare,
+        let relativeWidth: CGFloat = 0.66666
+        let width: CGFloat = .screenW * relativeWidth
+
+        let leftMargin: CGFloat = (.screenW - width) / 2
+        let height = width * 1.6
+
+        return CGRect(
+            x: leftMargin,
             y: containerView?.frame.maxY ?? 0,
-            width: .layoutSquare * 5,
-            height: .layoutSquare * 9
+            width: width,
+            height: height
         )
     }
 

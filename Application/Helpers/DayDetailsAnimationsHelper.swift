@@ -100,7 +100,7 @@ struct DayDetailsAnimationsHelper {
                     withRelativeStartTime: 0.5,
                     relativeDuration: 0.5,
                     animations: {
-                        animatedView.alpha = 0.5
+                        animatedView.alpha = 1.0
                     }
                 )
             }

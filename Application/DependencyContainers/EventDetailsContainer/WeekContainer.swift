@@ -59,7 +59,7 @@ final class WeekContainer:
             let presentationContainer = DayDetailsPresentationContainer(
                 parent: self.parent,
                 dayDetailsContainer: dayDetailsContainer,
-                presentationAnimator: DayDetailsPresentationAnimator(originHeight: 100)
+                presentationAnimator: DayDetailsPresentationAnimator()
             )
 
             presentationContainer.cellPresentationAnimationBlock = presentationAnimation

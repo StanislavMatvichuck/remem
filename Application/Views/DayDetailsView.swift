@@ -19,6 +19,7 @@ final class DayDetailsView: UIView {
     let title: UILabel = {
         let label = UILabel(al: true)
         label.textColor = .bg
+        label.textAlignment = .center
         return label
     }()
 
@@ -68,7 +69,7 @@ final class DayDetailsView: UIView {
             let view = UIStackView(al: true)
             view.backgroundColor = .secondary
             view.isLayoutMarginsRelativeArrangement = true
-            view.layoutMargins = UIEdgeInsets(top: 0, left: .buttonMargin, bottom: 0, right: .buttonMargin)
+            view.layoutMargins = UIEdgeInsets(top: .buttonMargin * 2, left: .buttonMargin, bottom: .buttonMargin * 2, right: .buttonMargin)
             view.addArrangedSubview(title)
             return view
         }()
@@ -91,7 +92,6 @@ final class DayDetailsView: UIView {
         addAndConstrain(verticalStack)
 
         NSLayoutConstraint.activate([
-            happenings.heightAnchor.constraint(equalToConstant: .layoutSquare * 6),
             pickerContainer.heightAnchor.constraint(equalToConstant: .layoutSquare * 2),
         ])
     }

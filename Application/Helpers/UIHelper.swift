@@ -26,6 +26,7 @@ extension UIColor {
 
 extension CGFloat {
     static let screenW: CGFloat = UIScreen.main.bounds.width
+    static let screenH: CGFloat = UIScreen.main.bounds.height
     static let layoutSquare: CGFloat = screenW / 7
     static let buttonHeight: CGFloat = 2 * layoutSquare * 0.8
     static let buttonRadius: CGFloat = buttonHeight / 2
