@@ -12,8 +12,8 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
     let parent: EventDetailsContainer
     let urlProviding: URLProviding
 
-    var coordinator: Coordinator { parent.parent.parent.coordinator }
-    var moment: Date { parent.parent.parent.currentMoment }
+    var coordinator: Coordinator { parent.parent.coordinator }
+    var moment: Date { parent.parent.currentMoment }
     var event: Event { parent.event }
 
     init(

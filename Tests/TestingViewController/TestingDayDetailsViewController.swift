@@ -13,7 +13,7 @@ extension TestingViewController where Controller == DayDetailsViewController {
     func make() {
         let day = DayIndex.referenceValue
         event = Event(name: "Event")
-        let container = EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)), event: event)
+        let container = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
         sut = DayDetailsContainer(
             parent: container,
             day: day,

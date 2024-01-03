@@ -12,13 +12,13 @@ final class EventDetailsContainer:
     ControllerFactoring,
     EventDetailsViewModelFactoring
 {
-    let parent: EventsListContainer
+    let parent: ApplicationContainer
     let event: Event
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
-    var currentMoment: Date { parent.parent.currentMoment }
+    var currentMoment: Date { parent.currentMoment }
 
-    init(_ parent: EventsListContainer, event: Event) {
+    init(_ parent: ApplicationContainer, event: Event) {
         self.parent = parent
         self.event = event
     }

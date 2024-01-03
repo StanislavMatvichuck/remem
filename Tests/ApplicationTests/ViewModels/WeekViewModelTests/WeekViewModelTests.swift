@@ -54,14 +54,7 @@ final class WeekViewModelTests: XCTestCase {
 
     func test_dayMaximumAmount_noHappenings_zero() {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let sut = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            )
-        ).makeWeekViewModel()
+        let sut = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)).makeWeekViewModel()
 
         XCTAssertEqual(sut.dayMaximum, 0)
     }
@@ -69,14 +62,7 @@ final class WeekViewModelTests: XCTestCase {
     func test_dayMaximumAmount_oneHappening_one() {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
-        let sut = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            )
-        ).makeWeekViewModel()
+        let sut = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)).makeWeekViewModel()
 
         XCTAssertEqual(sut.dayMaximum, 1)
     }
@@ -94,14 +80,7 @@ final class WeekViewModelTests: XCTestCase {
             event.addHappening(date: happeningIndex.date)
         }
 
-        let sut = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            )
-        ).makeWeekViewModel()
+        let sut = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)).makeWeekViewModel()
 
         XCTAssertEqual(sut.dayMaximum, 5)
     }
@@ -111,24 +90,14 @@ final class WeekViewModelTests: XCTestCase {
 
         for date in dates { event.addHappening(date: date) }
 
-        return WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            )
-        ).makeWeekViewModel()
+        return WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)).makeWeekViewModel()
     }
 
     private func make(withDateCreatedAndTodayOffset: Int) -> WeekViewModel {
-        WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .injectedCurrentMoment, currentMoment: DayIndex.referenceValue.adding(days: withDateCreatedAndTodayOffset).date)
-                ),
-                event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
-            )
+        WeekContainer(EventDetailsContainer(ApplicationContainer(
+                mode: .injectedCurrentMoment,
+                currentMoment: DayIndex.referenceValue.adding(days: withDateCreatedAndTodayOffset).date),
+            event: Event(name: "", dateCreated: DayIndex.referenceValue.date))
         ).makeWeekViewModel()
     }
 }

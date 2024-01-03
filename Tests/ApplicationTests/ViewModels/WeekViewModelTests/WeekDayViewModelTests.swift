@@ -140,13 +140,7 @@ final class WeekDayViewModelTests: XCTestCase {
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         withHappeningsAt.forEach { event.addHappening(date: $0) }
 
-        let container = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ), event: event
-            )
-        )
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
 
         let sut = container.makeWeekViewModel().page(at: pageIndex).day(dayNumberInWeek: index.row - pageIndex * 7)
 

@@ -11,10 +11,7 @@ import XCTest
 
 final class WeekViewControllerTests: XCTestCase {
     func test_showsWeekView() {
-        let container = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
 
         let sut = container.make() as! WeekViewController
 
@@ -22,9 +19,7 @@ final class WeekViewControllerTests: XCTestCase {
     }
 
     func test_configuresCollection() {
-        let container = WeekContainer(EventDetailsContainer(
-            EventsListContainer(ApplicationContainer(mode: .unitTest)),
-            event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
 
         let sut = container.make() as! WeekViewController
         sut.loadViewIfNeeded()
@@ -33,9 +28,7 @@ final class WeekViewControllerTests: XCTestCase {
     }
 
     func test_configuresViewModel() {
-        let container = WeekContainer(
-            EventDetailsContainer(EventsListContainer(ApplicationContainer(mode: .unitTest)),
-                                  event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: Event(name: "", dateCreated: DayIndex.referenceValue.date)))
 
         let sut = container.make() as! WeekViewController
         sut.loadViewIfNeeded()
@@ -45,11 +38,11 @@ final class WeekViewControllerTests: XCTestCase {
 
     func test_scrollsToLastPage() {
         let eventCreatedDate = DayIndex.referenceValue
-        let container = WeekContainer(EventDetailsContainer(
-            EventsListContainer(ApplicationContainer(
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(
                 mode: .injectedCurrentMoment,
-                currentMoment: eventCreatedDate.adding(days: 7).date)),
-            event: Event(name: "", dateCreated: eventCreatedDate.date)))
+                currentMoment: eventCreatedDate.adding(days: 7).date),
+            event: Event(name: "", dateCreated: eventCreatedDate.date))
+        )
 
         let sut = container.make() as! WeekViewController
         sut.view.translatesAutoresizingMaskIntoConstraints = true

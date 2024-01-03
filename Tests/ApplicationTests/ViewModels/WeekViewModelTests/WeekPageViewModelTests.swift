@@ -70,10 +70,7 @@ final class WeekPageViewModelTests: XCTestCase {
     private func make(withDateCreatedAndTodayOffset offset: Int) -> WeekPageViewModel {
         let eventDayCreated = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: eventDayCreated.date)
-        let container = WeekContainer(EventDetailsContainer(
-            EventsListContainer(ApplicationContainer(mode: .unitTest)),
-            event: event
-        ))
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
 
         let sut = container.makeWeekPageViewModel(pageIndex: offset / 7, dailyMaximum: 0)
 
@@ -85,10 +82,7 @@ final class WeekPageViewModelTests: XCTestCase {
         let event = Event(name: "", dateCreated: eventDayCreated.date)
         happenings.forEach { event.addHappening(date: $0) }
 
-        let container = WeekContainer(EventDetailsContainer(
-            EventsListContainer(ApplicationContainer(mode: .unitTest)),
-            event: event
-        ))
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
 
         let sut = container.makeWeekPageViewModel(pageIndex: 0, dailyMaximum: 0)
 

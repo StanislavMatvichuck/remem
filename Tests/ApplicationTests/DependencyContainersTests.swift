@@ -83,25 +83,13 @@ extension ApplicationContainer {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
 
-        return EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ),
-            event: event
-        ).make() as! EventDetailsViewController
+        return EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event).make() as! EventDetailsViewController
     }
 
     static func make() -> WeekViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let container = WeekContainer(
-            EventDetailsContainer(
-                EventsListContainer(
-                    ApplicationContainer(mode: .unitTest)
-                ),
-                event: event
-            )
-        )
+        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
 
         return container.make() as! WeekViewController
     }
@@ -109,11 +97,7 @@ extension ApplicationContainer {
     static func make() -> ClockViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ), event: event
-        )
+        let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
 
         return ClockContainer(parent: detailsContainer, type: .night).make() as! ClockViewController
     }
@@ -121,11 +105,7 @@ extension ApplicationContainer {
     static func make() -> SummaryViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ), event: event
-        )
+        let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
 
         return SummaryContainer(parent: detailsContainer).make() as! SummaryViewController
     }
@@ -133,12 +113,8 @@ extension ApplicationContainer {
     static func make() -> DayDetailsViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ), event: event
-        )
-        let currentMoment = detailsContainer.parent.parent.currentMoment
+        let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
+        let currentMoment = detailsContainer.parent.currentMoment
         let dayDetailsContainer = DayDetailsContainer(
             parent: detailsContainer,
             day: day,
@@ -157,11 +133,7 @@ extension ApplicationContainer {
     static func make() -> PdfMakingViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
-        let detailsContainer = EventDetailsContainer(
-            EventsListContainer(
-                ApplicationContainer(mode: .unitTest)
-            ), event: event
-        )
+        let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
 
         let pdfContainer = PdfMakingContainer(detailsContainer)
 

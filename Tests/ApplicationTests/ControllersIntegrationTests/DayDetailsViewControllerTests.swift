@@ -40,7 +40,7 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_showsCreateHappeningButton() {
-        XCTAssertEqual(sut.viewRoot.button.titleLabel?.text, String(localizationId: "button.addHappening"))
+        XCTAssertEqual(sut.viewRoot.button.attributedTitle(for: .normal)?.string, String(localizationId: "button.addHappening"))
     }
 
     func test_empty_noHappeningsInList() {

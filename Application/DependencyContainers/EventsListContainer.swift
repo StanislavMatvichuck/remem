@@ -126,7 +126,7 @@ final class EventsListContainer:
             currentMoment: parent.currentMoment,
             tapHandler: {
                 self.parent.coordinator.show(.eventDetails(factory:
-                    EventDetailsContainer(self, event: event)
+                    EventDetailsContainer(self.parent, event: event)
                 ))
             },
             swipeHandler: {

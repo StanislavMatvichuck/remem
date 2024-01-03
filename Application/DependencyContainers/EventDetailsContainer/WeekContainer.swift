@@ -16,7 +16,8 @@ final class WeekContainer:
 {
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
-    private var currentMoment: Date { parent.parent.parent.currentMoment }
+    private var currentMoment: Date { parent.parent.currentMoment }
+    private var coordinator: Coordinator { parent.parent.coordinator }
     private var calendar: Calendar { Calendar.current }
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
@@ -65,7 +66,7 @@ final class WeekContainer:
             presentationContainer.cellPresentationAnimationBlock = presentationAnimation
             presentationContainer.cellDismissAnimationBlock = dismissAnimation
 
-            self.parent.parent.parent.coordinator.show(.dayDetails(
+            self.coordinator.show(.dayDetails(
                 factory: presentationContainer
             ))
         }

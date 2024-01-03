@@ -24,10 +24,14 @@ extension TestingViewController where Controller == PdfViewController {
     var url: URLProviding { LocalFile.testingPdfReport }
 
     private func createTemporaryLocalFileForReading(dateCreated: Date, currentMoment: Date) {
-        PdfMakingContainer(EventDetailsContainer(
-            EventsListContainer(ApplicationContainer(mode: .injectedCurrentMoment, currentMoment: currentMoment)),
-            event: Event(name: "Event", dateCreated: dateCreated)
-        ), urlProviding: url).makePdfMakingViewModel().tapHandler()
+        PdfMakingContainer(
+            EventDetailsContainer(ApplicationContainer(
+                mode: .injectedCurrentMoment,
+                currentMoment: currentMoment
+            ),
+            event: Event(name: "Event", dateCreated: dateCreated)),
+            urlProviding: url
+        ).makePdfMakingViewModel().tapHandler()
     }
 
     private func configureSut() {

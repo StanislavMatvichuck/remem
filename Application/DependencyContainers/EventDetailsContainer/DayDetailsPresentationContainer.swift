@@ -13,6 +13,7 @@ final class DayDetailsPresentationContainer: NSObject, UIViewControllerTransitio
     let dismissAnimator: DayDetailsDismissAnimator
     let dismissTransition: UIPercentDrivenInteractiveTransition
     let parent: EventDetailsContainer
+    var navigationController: UINavigationController { parent.parent.coordinator.navigationController }
     let dayDetailsContainer: DayDetailsContainer
 
     var cellPresentationAnimationBlock: DayDetailsAnimationsHelper.AnimationBlock?
@@ -65,7 +66,7 @@ final class DayDetailsPresentationContainer: NSObject, UIViewControllerTransitio
     ) -> UIPresentationController? {
         DayDetailsPresentationController(
             presented: presented,
-            presenting: parent.parent.parent.coordinator.navigationController,
+            presenting: navigationController,
             presentationAnimator: presentationAnimator,
             dismissAnimator: dismissAnimator,
             dismissTransition: dismissTransition,
