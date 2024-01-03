@@ -9,11 +9,10 @@ import AudioToolbox
 import Domain
 import UIKit
 
-
-
 final class DayDetailsViewController: UIViewController {
     let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
+
     var viewModel: DayDetailsViewModel { didSet {
         viewModel.pickerDate = viewRoot.picker.date
         viewRoot.configure(viewModel: viewModel)

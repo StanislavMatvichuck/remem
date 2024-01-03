@@ -8,7 +8,8 @@
 import UIKit
 
 final class DayDetailsView: UIView {
-    private static let bg: UIColor = .clear
+    static let margin: CGFloat = .buttonMargin / 1.2
+    static let radius: CGFloat = margin * 2.6
 
     let verticalStack: UIStackView = {
         let view = UIStackView(al: true)
@@ -29,8 +30,6 @@ final class DayDetailsView: UIView {
         table.separatorStyle = .none
         table.tableFooterView = nil
         table.allowsSelection = false
-        table.backgroundColor = .clear
-        table.backgroundColor = .bg_item
         return table
     }()
 
@@ -38,13 +37,23 @@ final class DayDetailsView: UIView {
         let view = UIDatePicker(al: true)
         view.datePickerMode = .time
         view.preferredDatePickerStyle = .wheels
-        view.backgroundColor = bg
+        view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         return view
     }()
 
     let button: UIButton = {
-        let view = UIButton(al: true)
-        view.backgroundColor = .primary
+        var configuration = UIButton.Configuration.plain()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: DayDetailsView.margin * 2, leading: 0, bottom: DayDetailsView.margin * 2, trailing: 0)
+        let view = UIButton(configuration: configuration)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let titleBackground: UIStackView = {
+        let view = UIStackView(al: true)
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(top: DayDetailsView.margin * 2, left: DayDetailsView.margin, bottom: DayDetailsView.margin * 2, right: DayDetailsView.margin)
+        view.setContentHuggingPriority(.defaultLow, for: .vertical)
         return view
     }()
 
@@ -65,47 +74,26 @@ final class DayDetailsView: UIView {
     }
 
     private func configureLayout() {
-        let background: UIView = {
-            let view = UIStackView(al: true)
-            view.backgroundColor = .secondary
-            view.isLayoutMarginsRelativeArrangement = true
-            view.layoutMargins = UIEdgeInsets(top: .buttonMargin * 2, left: .buttonMargin, bottom: .buttonMargin * 2, right: .buttonMargin)
-            view.addArrangedSubview(title)
-            return view
-        }()
-
-        let pickerContainer: UIStackView = {
-            let view = UIStackView(al: true)
-            view.axis = .horizontal
-            view.addArrangedSubview(picker)
-            view.addArrangedSubview(button)
-            view.distribution = .fillEqually
-            view.backgroundColor = .bg_item
-            return view
-        }()
-
-        background.setContentHuggingPriority(.defaultLow, for: .vertical)
-
-        verticalStack.addArrangedSubview(background)
+        titleBackground.addArrangedSubview(title)
+        verticalStack.addArrangedSubview(titleBackground)
         verticalStack.addArrangedSubview(happenings)
-        verticalStack.addArrangedSubview(pickerContainer)
-        addAndConstrain(verticalStack)
+        verticalStack.addArrangedSubview(picker)
+        verticalStack.addArrangedSubview(button)
 
-        NSLayoutConstraint.activate([
-            pickerContainer.heightAnchor.constraint(equalToConstant: .layoutSquare * 2),
-        ])
+        addAndConstrain(verticalStack)
     }
 
     private func configureAppearance() {
-        backgroundColor = Self.bg
+        backgroundColor = .bg_item
         clipsToBounds = true
-        layer.cornerRadius = .buttonMargin
+        layer.cornerRadius = Self.radius
 
-        button.layer.cornerRadius = .buttonMargin
-        button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
-
+        picker.backgroundColor = .clear
+        happenings.backgroundColor = .clear
+        titleBackground.backgroundColor = .secondary
         button.layer.borderColor = UIColor.border_primary.cgColor
         button.layer.borderWidth = .border
+        button.backgroundColor = .primary
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {
@@ -115,13 +103,12 @@ final class DayDetailsView: UIView {
 
     private func configureButton(viewModel: DayDetailsViewModel) {
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.bg,
+            .foregroundColor: UIColor.bg_item,
             .font: UIFont.font,
         ]
 
         let title = NSAttributedString(string: DayDetailsViewModel.create, attributes: attributes)
 
         button.setAttributedTitle(title, for: .normal)
-        button.titleLabel?.numberOfLines = 3
     }
 }

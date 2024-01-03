@@ -16,20 +16,41 @@ final class DayDetailsPresentationController: UIPresentationController {
     let container: DayDetailsPresentationContainer
 
     lazy var backgroundView: UIView = {
+        let borderWidth = DayDetailsView.margin * 3
+        let dayDetailsLeftOffset = frameOfPresentedViewInContainerView.minX - borderWidth / 2
+        let dayDetailsTopOffset = DayDetailsPresentationAnimator.originHeight - borderWidth / 2
+        let dayDetailsBackgroundWidth = frameOfPresentedViewInContainerView.width + borderWidth
+        let dayDetailsBackgroundHeight = frameOfPresentedViewInContainerView.height + borderWidth
         let dayDetailsBackground = UIView(frame: CGRect(
-            x: frameOfPresentedViewInContainerView.minX,
-            y: DayDetailsPresentationAnimator.originHeight,
-            width: frameOfPresentedViewInContainerView.width,
-            height: frameOfPresentedViewInContainerView.height
+            x: dayDetailsLeftOffset,
+            y: dayDetailsTopOffset,
+            width: dayDetailsBackgroundWidth,
+            height: dayDetailsBackgroundHeight
         ))
         dayDetailsBackground.backgroundColor = .border
-        dayDetailsBackground.layer.cornerRadius = .buttonMargin
+        dayDetailsBackground.layer.cornerRadius = DayDetailsView.radius
+        dayDetailsBackground.layer.borderColor = UIColor.border.cgColor
+        dayDetailsBackground.layer.borderWidth = borderWidth
+        dayDetailsBackground.clipsToBounds = false
+
+        let shapeLayer = CAGradientLayer()
+        shapeLayer.frame = CGRect(
+            x: dayDetailsLeftOffset,
+            y: dayDetailsBackground.frame.maxY - borderWidth,
+            width: dayDetailsBackgroundWidth,
+            height: containerView!.frame.maxY - dayDetailsBackground.frame.maxY
+        )
+        shapeLayer.type = .axial
+        shapeLayer.startPoint = CGPoint(x: 0, y: 0)
+        shapeLayer.endPoint = CGPoint(x: 0, y: 1)
+        shapeLayer.colors = [UIColor.border.cgColor, UIColor.bg.cgColor]
 
         let backgroundView = UIView(frame: containerView!.frame)
         backgroundView.backgroundColor = .bg
         backgroundView.alpha = 0
 
         backgroundView.addSubview(dayDetailsBackground)
+        backgroundView.layer.addSublayer(shapeLayer)
         backgroundView.addGestureRecognizer(UIPanGestureRecognizer(
             target: self,
             action: #selector(handle)
@@ -62,7 +83,7 @@ final class DayDetailsPresentationController: UIPresentationController {
         let width: CGFloat = .screenW * relativeWidth
 
         let leftMargin: CGFloat = (.screenW - width) / 2
-        let height = width * 1.6
+        let height = width * 1.8
 
         return CGRect(
             x: leftMargin,

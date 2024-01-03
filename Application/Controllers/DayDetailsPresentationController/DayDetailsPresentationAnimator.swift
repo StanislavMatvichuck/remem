@@ -9,7 +9,7 @@ import UIKit
 
 final class DayDetailsPresentationAnimator: DayDetailsAnimator {
     static let originHeight: CGFloat = {
-        let screenHeightLeftover: CGFloat = .screenH - .screenW * 0.66666 * 1.6
+        let screenHeightLeftover: CGFloat = .screenH - .screenW * 0.66666 * 1.8
         let originHeight: CGFloat = screenHeightLeftover / 2
         return originHeight
     }()

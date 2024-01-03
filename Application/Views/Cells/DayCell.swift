@@ -14,7 +14,8 @@ final class DayCell: UITableViewCell {
     var label: UILabel = {
         let label = UILabel(al: true)
         label.numberOfLines = 1
-        label.font = .fontBold
+        label.font = .font
+        label.textAlignment = .center
         return label
     }()
 
@@ -28,10 +29,7 @@ final class DayCell: UITableViewCell {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     private func configureLayout() {
-        contentView.addAndConstrain(label, left: .buttonMargin, right: .buttonMargin)
-        let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare)
-        heightConstraint.priority = .defaultHigh
-        heightConstraint.isActive = true
+        contentView.addAndConstrain(label, constant: DayDetailsView.margin)
     }
 
     private func configureAppearance() {
