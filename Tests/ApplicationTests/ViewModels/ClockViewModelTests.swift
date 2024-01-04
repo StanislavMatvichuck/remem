@@ -133,6 +133,7 @@ final class ClockViewModelTests: XCTestCase {
         }
     }
 
+    // TODO: Breaks after clock is divided by day and night types
     func test_manyHappenings_randomlyDistributed_atLeastOneSectionFull() {
         let event = Event(name: "")
 
