@@ -18,12 +18,14 @@ final class WeekContainer:
     private var event: Event { parent.event }
     private var currentMoment: Date { parent.parent.currentMoment }
     private var coordinator: Coordinator { parent.parent.coordinator }
+    private var updater: ViewControllersUpdater { parent.parent.updater }
     private var calendar: Calendar { Calendar.current }
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = WeekViewController(self)
+        updater.addDelegate(WeakRef(controller))
         return controller
     }
 

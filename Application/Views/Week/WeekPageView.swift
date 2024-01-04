@@ -86,6 +86,15 @@ final class WeekPageView: UICollectionViewCell {
             verticalStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             verticalStack.widthAnchor.constraint(equalTo: contentView.widthAnchor),
         ])
+
+        configureDaysLayout()
+    }
+
+    private func configureDaysLayout() {
+        for _ in 0 ..< WeekPageViewModel.daysCount {
+            let day = WeekDayView()
+            days.addArrangedSubview(day)
+        }
     }
 
     private func configureAppearance() {
@@ -97,16 +106,14 @@ final class WeekPageView: UICollectionViewCell {
         title.text = viewModel.title
         month.text = viewModel.localisedMonth
 
-        configureDays(viewModel)
+        configureDaysContent(viewModel)
     }
 
-    private func configureDays(_ viewModel: WeekPageViewModel) {
-        for day in days.arrangedSubviews { day.removeFromSuperview() }
-
+    private func configureDaysContent(_ viewModel: WeekPageViewModel) {
         for index in 0 ..< WeekPageViewModel.daysCount {
-            let day = WeekDayView()
-            day.viewModel = viewModel.day(dayNumberInWeek: index)
-            days.addArrangedSubview(day)
+            if let dayView = days.arrangedSubviews[index] as? WeekDayView {
+                dayView.viewModel = viewModel.day(dayNumberInWeek: index)
+            }
         }
     }
 }

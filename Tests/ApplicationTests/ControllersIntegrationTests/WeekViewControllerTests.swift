@@ -51,4 +51,28 @@ final class WeekViewControllerTests: XCTestCase {
 
         XCTAssertEqual(sut.viewRoot.collection.contentOffset.x, .screenW)
     }
+
+    func test_receivesUpdatesFromApplicationContainerCommander() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        let appContainer = ApplicationContainer(mode: .unitTest)
+        appContainer.commander.save(event)
+
+        let container = WeekContainer(EventDetailsContainer(appContainer, event: event))
+        let sut = container.make() as! WeekViewController
+        sut.loadViewIfNeeded()
+
+        let firstIndex = IndexPath(row: 0, section: 0)
+        let firstPage = sut.viewRoot.collection.dataSource?.collectionView(sut.viewRoot.collection, cellForItemAt: firstIndex) as! WeekPageView
+        let firstPageTitle = firstPage.title.text
+
+        XCTAssertEqual(firstPageTitle, "Week 1 total 0", "precondition")
+
+        event.addHappening(date: DayIndex.referenceValue.date)
+        appContainer.commander.save(event)
+
+        let updatedFirstPage = sut.viewRoot.collection.dataSource?.collectionView(sut.viewRoot.collection, cellForItemAt: firstIndex) as! WeekPageView
+        let updatedFirstPageTitle = updatedFirstPage.title.text
+
+        XCTAssertEqual(updatedFirstPageTitle, "Week 1 total 1", "title changes because of added happening")
+    }
 }

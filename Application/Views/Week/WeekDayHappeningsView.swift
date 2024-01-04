@@ -22,7 +22,11 @@ final class WeekDayHappeningView: UIView {
         return view
     }()
 
-    private var relativeLength: CGFloat = 0
+    private var relativeLength: CGFloat = 0 { didSet { if oldValue != relativeLength { setNeedsLayout() }} }
+
+    private lazy var animatedTopConstraint: NSLayoutConstraint = {
+        number.topAnchor.constraint(equalTo: topAnchor, constant: 0)
+    }()
 
     init() {
         super.init(frame: .zero)
@@ -61,7 +65,8 @@ final class WeekDayHappeningView: UIView {
             number.centerXAnchor.constraint(equalTo: centerXAnchor),
             background.widthAnchor.constraint(equalTo: widthAnchor),
             background.topAnchor.constraint(equalTo: number.topAnchor),
-            background.centerXAnchor.constraint(equalTo: number.centerXAnchor)
+            background.centerXAnchor.constraint(equalTo: number.centerXAnchor),
+            animatedTopConstraint
         ])
     }
 
@@ -73,6 +78,6 @@ final class WeekDayHappeningView: UIView {
         let coefficient = 1 - relativeLength
         let constant = freeSpaceHeight * coefficient
 
-        number.topAnchor.constraint(equalTo: topAnchor, constant: constant).isActive = true
+        animatedTopConstraint.constant = constant
     }
 }
