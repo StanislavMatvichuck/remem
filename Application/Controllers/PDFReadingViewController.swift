@@ -8,13 +8,13 @@
 import PDFKit
 import UIKit
 
-final class PdfViewController: UIViewController {
+final class PDFReadingViewController: UIViewController {
     private let provider: URLProviding
-    let viewRoot: PdfView
+    let viewRoot: PDFReadingView
 
     init(_ provider: URLProviding) {
         self.provider = provider
-        self.viewRoot = PdfView(provider.url)
+        self.viewRoot = PDFReadingView(provider.url)
         super.init(nibName: nil, bundle: nil)
         configureNavigationItem()
     }

@@ -28,7 +28,7 @@ final class EventDetailsContainer:
         let clockDay = ClockContainer(parent: self, type: .day).make() as! ClockViewController
         let week = WeekContainer(self).make()
         let summary = SummaryContainer(parent: self).make() as! SummaryViewController
-        let pdf = PdfMakingContainer(self).make()
+        let pdf = PDFWritingContainer(self).make()
 
         let controller = EventDetailsViewController(
             factory: self,

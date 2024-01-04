@@ -14,7 +14,7 @@ final class PdfSnapshots:
     TestingViewController,
     AtlasProducing
 {
-    var sut: PdfViewController!
+    var sut: PDFReadingViewController!
     var event: Event!
     var atlas: UIView!
 
@@ -146,7 +146,7 @@ final class PdfSnapshots:
 
     // MARK: - Public
     /// Used by tests only
-    private func scrollTo(page number: Int, view: PdfView) {
+    private func scrollTo(page number: Int, view: PDFReadingView) {
         guard
             let pdf = view.pdf,
             let document = pdf.document,

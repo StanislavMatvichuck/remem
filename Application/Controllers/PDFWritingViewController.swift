@@ -1,5 +1,5 @@
 //
-//  PdfMakingViewController.swift
+//  PDFWritingViewController.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 13.03.2023.
@@ -9,14 +9,14 @@ import UIKit
 
 
 
-final class PdfMakingViewController: UIViewController {
-    let viewRoot: PdfMakingView
-    let factory: PdfMakingViewModelFactoring
-    let viewModel: PdfMakingViewModel
+final class PDFWritingViewController: UIViewController {
+    let viewRoot: PDFWritingView
+    let factory: PDFWritingViewModelFactoring
+    let viewModel: PDFWritingViewModel
 
-    init(_ factory: PdfMakingViewModelFactoring) {
+    init(_ factory: PDFWritingViewModelFactoring) {
         self.factory = factory
-        self.viewRoot = PdfMakingView()
+        self.viewRoot = PDFWritingView()
         self.viewModel = factory.makePdfMakingViewModel()
         super.init(nibName: nil, bundle: nil)
     }

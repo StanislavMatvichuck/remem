@@ -1,5 +1,5 @@
 //
-//  PdfMakingViewControllerTests.swift
+//  PDFWritingViewControllerTests.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 13.03.2023.
@@ -9,14 +9,14 @@
 import Domain
 import XCTest
 
-final class PdfMakingViewControllerTests: XCTestCase {
-    var sut: PdfMakingViewController!
+final class PDFWritingViewControllerTests: XCTestCase {
+    var sut: PDFWritingViewController!
     var calledCount = 0
 
     override func setUp() {
         super.setUp()
 
-        sut = PdfMakingViewController(
+        sut = PDFWritingViewController(
             PdfMakingViewModelFactoryStub(handler: {
                 [weak self] in self?.calledCount += 1
             })
@@ -45,14 +45,14 @@ final class PdfMakingViewControllerTests: XCTestCase {
 //    }
 
     func test_showsLocalizedTitle() {
-        XCTAssertEqual(sut.viewRoot.button.titleLabel?.text, PdfMakingViewModel.title)
+        XCTAssertEqual(sut.viewRoot.button.titleLabel?.text, PDFWritingViewModel.title)
     }
 }
 
-struct PdfMakingViewModelFactoryStub: PdfMakingViewModelFactoring {
-    let handler: PdfMakingViewModel.TapHandler
+struct PdfMakingViewModelFactoryStub: PDFWritingViewModelFactoring {
+    let handler: PDFWritingViewModel.TapHandler
 
-    func makePdfMakingViewModel() -> PdfMakingViewModel {
-        PdfMakingViewModel(tapHandler: handler)
+    func makePdfMakingViewModel() -> PDFWritingViewModel {
+        PDFWritingViewModel(tapHandler: handler)
     }
 }

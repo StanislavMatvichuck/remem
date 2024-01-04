@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PdfQRPageView: UIView {
+final class PDFWritingQRPageView: UIView {
     let stack: UIStackView = {
         let image = UIImage(named: "qr")?.withTintColor(.secondary)
         let imageView = UIImageView(al: true)

@@ -8,8 +8,8 @@
 @testable import Application
 import XCTest
 
-final class PdfViewControllerTests: XCTestCase {
+final class PDFReadingViewControllerTests: XCTestCase {
     func test_init_requiresURLProviding() {
-        let sut = PdfViewController(LocalFile.testingPdfReport)
+        PDFReadingViewController(LocalFile.testingPdfReport)
     }
 }

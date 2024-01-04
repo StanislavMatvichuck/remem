@@ -7,22 +7,22 @@
 
 import UIKit
 
-final class PdfTitlePageView: UIView {
+final class PDFWritingTitlePageView: UIView {
     let title: UILabel = {
         let label = UILabel(al: true)
-        label.text = PdfViewModel.title
+        label.text = PDFReadingViewModel.title
         return label
     }()
 
     let start: UILabel = {
         let label = UILabel(al: true)
-        label.text = PdfViewModel.start
+        label.text = PDFReadingViewModel.start
         return label
     }()
 
     let finish: UILabel = {
         let label = UILabel(al: true)
-        label.text = PdfViewModel.finish
+        label.text = PDFReadingViewModel.finish
         return label
     }()
 
@@ -40,15 +40,15 @@ final class PdfTitlePageView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    func configure(_ vm: PdfViewModel) {
+    func configure(_ vm: PDFReadingViewModel) {
         let spacer = UIView(al: true)
         spacer.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         removeAllRows()
         stack.addArrangedSubview(make(title: vm.eventTitle))
-        stack.addArrangedSubview(makeAmountLabel(text: PdfViewModel.start, highlighted: false))
+        stack.addArrangedSubview(makeAmountLabel(text: PDFReadingViewModel.start, highlighted: false))
         stack.addArrangedSubview(makeAmountLabel(text: vm.readableStart, highlighted: true))
-        stack.addArrangedSubview(makeAmountLabel(text: PdfViewModel.finish, highlighted: false))
+        stack.addArrangedSubview(makeAmountLabel(text: PDFReadingViewModel.finish, highlighted: false))
         stack.addArrangedSubview(makeAmountLabel(text: vm.readableFinish, highlighted: true))
         stack.addArrangedSubview(spacer)
         stack.addArrangedSubview(makeAmountLabel(text: "By hour", highlighted: true))

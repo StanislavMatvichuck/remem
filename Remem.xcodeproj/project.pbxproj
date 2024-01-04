@@ -64,10 +64,10 @@
 		084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21ED29C08E9200B601DA /* URLProvidingTests.swift */; };
 		084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* LocalFile.swift */; };
 		084B21F229C0929A00B601DA /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
-		084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F329C0943E00B601DA /* PdfMakingView.swift */; };
-		084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F529C0977A00B601DA /* PdfContainer.swift */; };
+		084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F329C0943E00B601DA /* PDFWritingView.swift */; };
+		084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F529C0977A00B601DA /* PDFReadingContainer.swift */; };
 		084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F729C0A83400B601DA /* FileSavingTests.swift */; };
-		084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FA29C0AA1D00B601DA /* PdfView.swift */; };
+		084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */; };
 		084B21FD29C0B03400B601DA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FC29C0B03400B601DA /* Navigation.swift */; };
 		0850075429216E9D007B272C /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 0850075329216E9D007B272C /* iOSSnapshotTestCase */; };
 		0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0850075529216ECF007B272C /* EventsListSnapshots.swift */; };
@@ -76,8 +76,8 @@
 		085145C429AE066C00CA533D /* ClockContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C329AE066C00CA533D /* ClockContainer.swift */; };
 		085145C829AE092100CA533D /* SummaryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C729AE092100CA533D /* SummaryContainer.swift */; };
 		085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */; };
-		0851963B2A0C1CE600FD8FD8 /* PdfMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */; };
-		0851963D2A0C1D1700FD8FD8 /* MobilePdfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */; };
+		0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963A2A0C1CE600FD8FD8 /* PDFWriting.swift */; };
+		0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963C2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift */; };
 		0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockViewController.swift */; };
 		0857A018292FD73000924530 /* WeekSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A017292FD73000924530 /* WeekSnapshots.swift */; };
@@ -85,16 +85,16 @@
 		0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01B292FE66F00924530 /* EventDetailsSnapshots.swift */; };
 		0857A01E292FFD5900924530 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
 		0857B5A629892CBC002B400B /* AppPreview02Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */; };
-		085896B22A2652BA00390C76 /* PdfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PdfViewModel.swift */; };
-		085896B52A26540700390C76 /* PdfTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PdfTitlePageView.swift */; };
+		085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */; };
+		085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */; };
 		085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */; };
 		085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */; };
 		085A2C3229F19E3A005C6E5E /* EventItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */; };
 		085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */; };
 		085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
-		0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */; };
-		0865DC482B1CA46D00E128FB /* PdfMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */; };
+		0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */; };
+		0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */; };
 		0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */; };
 		0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */; };
 		0865DC532B1CD45200E128FB /* VisualisationMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */; };
@@ -114,7 +114,7 @@
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
-		086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */; };
+		086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BC99F2A44F29A00766CF7 /* PDFWritingQRPageView.swift */; };
 		086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E397129809C5800CCE80E /* EventDetailsContainer.swift */; };
 		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -221,11 +221,11 @@
 		08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
 		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
-		08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */; };
-		08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */; };
-		08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */; };
-		08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */; };
-		08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */; };
+		08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */; };
+		08F467EA29BF2A6E00D35AB6 /* PDFReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */; };
+		08F467ED29BF3B2A00D35AB6 /* PDFWritingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EB29BF3B2600D35AB6 /* PDFWritingViewControllerTests.swift */; };
+		08F467EF29BF3B7800D35AB6 /* PDFWritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EE29BF3B7800D35AB6 /* PDFWritingViewController.swift */; };
+		08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467F029BF3E6B00D35AB6 /* PDFWritingContainer.swift */; };
 		08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */; };
 		08F50DC52965E70F00B65CDF /* FooterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC42965E70F00B65CDF /* FooterCellViewModel.swift */; };
 		08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC62965EEDA00B65CDF /* HintCell.swift */; };
@@ -426,18 +426,18 @@
 		084B21ED29C08E9200B601DA /* URLProvidingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidingTests.swift; sourceTree = "<group>"; };
 		084B21EF29C08F1A00B601DA /* LocalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		084B21F129C0929A00B601DA /* FileSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaving.swift; sourceTree = "<group>"; };
-		084B21F329C0943E00B601DA /* PdfMakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingView.swift; sourceTree = "<group>"; };
-		084B21F529C0977A00B601DA /* PdfContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfContainer.swift; sourceTree = "<group>"; };
+		084B21F329C0943E00B601DA /* PDFWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingView.swift; sourceTree = "<group>"; };
+		084B21F529C0977A00B601DA /* PDFReadingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingContainer.swift; sourceTree = "<group>"; };
 		084B21F729C0A83400B601DA /* FileSavingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSavingTests.swift; sourceTree = "<group>"; };
-		084B21FA29C0AA1D00B601DA /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
+		084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingView.swift; sourceTree = "<group>"; };
 		084B21FC29C0B03400B601DA /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0850074929216E73007B272C /* ApplicationSnapshotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationSnapshotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0850075529216ECF007B272C /* EventsListSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListSnapshots.swift; sourceTree = "<group>"; };
 		085145C329AE066C00CA533D /* ClockContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockContainer.swift; sourceTree = "<group>"; };
 		085145C729AE092100CA533D /* SummaryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryContainer.swift; sourceTree = "<group>"; };
 		085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCellViewModel.swift; sourceTree = "<group>"; };
-		0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMaking.swift; sourceTree = "<group>"; };
-		0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilePdfMaker.swift; sourceTree = "<group>"; };
+		0851963A2A0C1CE600FD8FD8 /* PDFWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWriting.swift; sourceTree = "<group>"; };
+		0851963C2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingDataGenerator.swift; sourceTree = "<group>"; };
 		0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListContainer.swift; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		085502B429FFDC9D006102DD /* AddedWeeklyGoal07.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AddedWeeklyGoal07.xcdatamodel; sourceTree = "<group>"; };
@@ -447,16 +447,16 @@
 		0857A01D292FFD5900924530 /* TestingClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingClockViewController.swift; sourceTree = "<group>"; };
 		0857B5A329892CBC002B400B /* ApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview02Recorder.swift; sourceTree = "<group>"; };
-		085896B12A2652BA00390C76 /* PdfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewModel.swift; sourceTree = "<group>"; };
-		085896B42A26540700390C76 /* PdfTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfTitlePageView.swift; sourceTree = "<group>"; };
+		085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewModel.swift; sourceTree = "<group>"; };
+		085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingTitlePageView.swift; sourceTree = "<group>"; };
 		085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQuerySorterRepository.swift; sourceTree = "<group>"; };
 		085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapperTests.swift; sourceTree = "<group>"; };
 		085A2C3029F19CFC005C6E5E /* EventItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
-		0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModelTests.swift; sourceTree = "<group>"; };
-		0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewModel.swift; sourceTree = "<group>"; };
+		0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModelTests.swift; sourceTree = "<group>"; };
+		0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModel.swift; sourceTree = "<group>"; };
 		0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewController.swift; sourceTree = "<group>"; };
 		0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingView.swift; sourceTree = "<group>"; };
 		0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewModel.swift; sourceTree = "<group>"; };
@@ -471,7 +471,7 @@
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
-		086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfQRPageView.swift; sourceTree = "<group>"; };
+		086BC99F2A44F29A00766CF7 /* PDFWritingQRPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingQRPageView.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086E397129809C5800CCE80E /* EventDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContainer.swift; sourceTree = "<group>"; };
 		086E39732981431C00CCE80E /* DayDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsContainer.swift; sourceTree = "<group>"; };
@@ -586,11 +586,11 @@
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
-		08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewControllerTests.swift; sourceTree = "<group>"; };
-		08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
-		08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewControllerTests.swift; sourceTree = "<group>"; };
-		08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingViewController.swift; sourceTree = "<group>"; };
-		08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfMakingContainer.swift; sourceTree = "<group>"; };
+		08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewControllerTests.swift; sourceTree = "<group>"; };
+		08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewController.swift; sourceTree = "<group>"; };
+		08F467EB29BF3B2600D35AB6 /* PDFWritingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewControllerTests.swift; sourceTree = "<group>"; };
+		08F467EE29BF3B7800D35AB6 /* PDFWritingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewController.swift; sourceTree = "<group>"; };
+		08F467F029BF3E6B00D35AB6 /* PDFWritingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingContainer.swift; sourceTree = "<group>"; };
 		08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintCellViewModel.swift; sourceTree = "<group>"; };
 		08F50DC42965E70F00B65CDF /* FooterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCellViewModel.swift; sourceTree = "<group>"; };
 		08F50DC62965EEDA00B65CDF /* HintCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintCell.swift; sourceTree = "<group>"; };
@@ -702,8 +702,8 @@
 				08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
-				0865DC472B1CA46D00E128FB /* PdfMakingViewModel.swift */,
-				085896B12A2652BA00390C76 /* PdfViewModel.swift */,
+				0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */,
+				085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */,
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 				0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */,
 				08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */,
@@ -848,8 +848,8 @@
 				081015572B331656004CE297 /* WeekContainer.swift */,
 				085145C329AE066C00CA533D /* ClockContainer.swift */,
 				086E397129809C5800CCE80E /* EventDetailsContainer.swift */,
-				084B21F529C0977A00B601DA /* PdfContainer.swift */,
-				08F467F029BF3E6B00D35AB6 /* PdfMakingContainer.swift */,
+				084B21F529C0977A00B601DA /* PDFReadingContainer.swift */,
+				08F467F029BF3E6B00D35AB6 /* PDFWritingContainer.swift */,
 				085145C729AE092100CA533D /* SummaryContainer.swift */,
 				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
 			);
@@ -859,8 +859,8 @@
 		085196392A0C1CCC00FD8FD8 /* PDF */ = {
 			isa = PBXGroup;
 			children = (
-				0851963C2A0C1D1700FD8FD8 /* MobilePdfMaker.swift */,
-				0851963A2A0C1CE600FD8FD8 /* PdfMaking.swift */,
+				0851963C2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift */,
+				0851963A2A0C1CE600FD8FD8 /* PDFWriting.swift */,
 			);
 			path = PDF;
 			sourceTree = "<group>";
@@ -878,10 +878,10 @@
 		085896B32A2653F400390C76 /* Pdf */ = {
 			isa = PBXGroup;
 			children = (
-				084B21FA29C0AA1D00B601DA /* PdfView.swift */,
-				084B21F329C0943E00B601DA /* PdfMakingView.swift */,
-				085896B42A26540700390C76 /* PdfTitlePageView.swift */,
-				086BC99F2A44F29A00766CF7 /* PdfQRPageView.swift */,
+				084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */,
+				084B21F329C0943E00B601DA /* PDFWritingView.swift */,
+				085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */,
+				086BC99F2A44F29A00766CF7 /* PDFWritingQRPageView.swift */,
 			);
 			path = Pdf;
 			sourceTree = "<group>";
@@ -994,7 +994,7 @@
 				082A19DE2945DB2500D32B0A /* Items */,
 				08AF5449293740E800032487 /* DayDetailsViewModelTests.swift */,
 				088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */,
-				0865DC452B1CA3B300E128FB /* PdfMakingViewModelTests.swift */,
+				0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */,
 				08B42F732B2CCF6400850BAD /* ClockViewModelTests.swift */,
 			);
 			path = ViewModels;
@@ -1066,8 +1066,8 @@
 				081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */,
 				080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */,
-				08F467E329BF1C1C00D35AB6 /* PdfViewControllerTests.swift */,
-				08F467EB29BF3B2600D35AB6 /* PdfMakingViewControllerTests.swift */,
+				08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */,
+				08F467EB29BF3B2600D35AB6 /* PDFWritingViewControllerTests.swift */,
 				0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */,
 				089AC5F32B3C60F000577781 /* WeekViewControllerTests.swift */,
 			);
@@ -1205,8 +1205,8 @@
 				0812D8BD2966F0910010C66D /* EventsListViewController */,
 				080C417D2986AEC600C1F54F /* SummaryViewController.swift */,
 				08396EE929A64B5900281E51 /* WidgetViewController.swift */,
-				08F467E929BF2A6E00D35AB6 /* PdfViewController.swift */,
-				08F467EE29BF3B7800D35AB6 /* PdfMakingViewController.swift */,
+				08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */,
+				08F467EE29BF3B7800D35AB6 /* PDFWritingViewController.swift */,
 				0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */,
 			);
 			path = Controllers;
@@ -1718,7 +1718,7 @@
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
 				0824B87429BDCD6A0053B01A /* Fakes.swift in Sources */,
-				08F467E429BF1C1C00D35AB6 /* PdfViewControllerTests.swift in Sources */,
+				08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
@@ -1731,7 +1731,7 @@
 				0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
-				0865DC462B1CA3B300E128FB /* PdfMakingViewModelTests.swift in Sources */,
+				0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
@@ -1739,7 +1739,7 @@
 				083141D229142DCE00D5AB8A /* UIKit.swift in Sources */,
 				0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */,
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
-				08F467ED29BF3B2A00D35AB6 /* PdfMakingViewControllerTests.swift in Sources */,
+				08F467ED29BF3B2A00D35AB6 /* PDFWritingViewControllerTests.swift in Sources */,
 				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
 				08D5D0E42B325DF300B71512 /* WeekDayViewModelTests.swift in Sources */,
 				08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */,
@@ -1769,12 +1769,12 @@
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
-				08F467F129BF3E6B00D35AB6 /* PdfMakingContainer.swift in Sources */,
+				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
-				085896B52A26540700390C76 /* PdfTitlePageView.swift in Sources */,
+				085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */,
 				08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */,
 				084B21FD29C0B03400B601DA /* Navigation.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
@@ -1788,7 +1788,7 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				087433BE2B3375E000336FC3 /* WeekView.swift in Sources */,
 				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
-				0865DC482B1CA46D00E128FB /* PdfMakingViewModel.swift in Sources */,
+				0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
 				08A376022A1795F20037D43A /* WeekSummaryViewModel.swift in Sources */,
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
@@ -1805,7 +1805,7 @@
 				089B37882A0A32B700422971 /* EventAmountView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
 				084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */,
-				084B21F629C0977A00B601DA /* PdfContainer.swift in Sources */,
+				084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */,
 				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
@@ -1817,7 +1817,7 @@
 				08E1744F2B27064D0018256D /* DayDetailsPresentationContainer.swift in Sources */,
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
-				08F467EA29BF2A6E00D35AB6 /* PdfViewController.swift in Sources */,
+				08F467EA29BF2A6E00D35AB6 /* PDFReadingViewController.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */,
@@ -1825,16 +1825,16 @@
 				089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */,
 				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
-				0851963D2A0C1D1700FD8FD8 /* MobilePdfMaker.swift in Sources */,
+				0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */,
 				089308AA2B3B07550059D51A /* WeekDayHappeningsView.swift in Sources */,
 				08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */,
-				0851963B2A0C1CE600FD8FD8 /* PdfMaking.swift in Sources */,
+				0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
 				08677BD629F7E65A00AD5383 /* OrderingCellViewItem.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				080F9F2729ED51810013CBFE /* EventCell.swift in Sources */,
-				084B21F429C0943E00B601DA /* PdfMakingView.swift in Sources */,
+				084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */,
 				085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
@@ -1844,13 +1844,13 @@
 				08FEA39328DC989A00BAA196 /* EventCellViewModel.swift in Sources */,
 				089B378A2A0A3EC500422971 /* AnimatedProgressView.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
-				084B21FB29C0AA1D00B601DA /* PdfView.swift in Sources */,
+				084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* FooterCell.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
 				08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */,
-				085896B22A2652BA00390C76 /* PdfViewModel.swift in Sources */,
-				086BC9A02A44F29A00766CF7 /* PdfQRPageView.swift in Sources */,
+				085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */,
+				086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
@@ -1858,7 +1858,7 @@
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				088AF7462B34D99F0039EF83 /* WeekPageView.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
-				08F467EF29BF3B7800D35AB6 /* PdfMakingViewController.swift in Sources */,
+				08F467EF29BF3B7800D35AB6 /* PDFWritingViewController.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class MobilePdfMaker: NSObject, PDFMaking {
+final class PDFWritingDataGenerator: NSObject, PDFWriting {
     private static let pageWidth = CGFloat.screenW * 0.94
 
     private let page = CGRect(
@@ -19,9 +19,9 @@ final class MobilePdfMaker: NSObject, PDFMaking {
         )
     )
 
-    private let viewModel: PdfViewModel
+    private let viewModel: PDFReadingViewModel
 
-    init(viewModel: PdfViewModel) {
+    init(viewModel: PDFReadingViewModel) {
         self.viewModel = viewModel
     }
 
@@ -56,7 +56,7 @@ final class MobilePdfMaker: NSObject, PDFMaking {
     }
 
     private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {
-        let view = PdfTitlePageView()
+        let view = PDFWritingTitlePageView()
         view.frame = page
         view.configure(viewModel)
         view.layoutIfNeeded()
@@ -109,7 +109,7 @@ final class MobilePdfMaker: NSObject, PDFMaking {
     }
 
     private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
-        let qr = PdfQRPageView()
+        let qr = PDFWritingQRPageView()
         let view = UIView(frame: page)
 
         view.addSubview(qr)
@@ -128,7 +128,7 @@ final class MobilePdfMaker: NSObject, PDFMaking {
     }
 }
 
-extension MobilePdfMaker:
+extension PDFWritingDataGenerator:
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout
 {

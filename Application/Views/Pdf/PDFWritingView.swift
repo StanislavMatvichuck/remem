@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PdfMakingView: UIView {
+final class PDFWritingView: UIView {
     let button: UIButton = {
         let button = UIButton(al: true)
 
@@ -18,7 +18,7 @@ final class PdfMakingView: UIView {
 
         button.setAttributedTitle(
             NSAttributedString(
-                string: PdfMakingViewModel.title,
+                string: PDFWritingViewModel.title,
                 attributes: attributes
             ),
             for: .normal

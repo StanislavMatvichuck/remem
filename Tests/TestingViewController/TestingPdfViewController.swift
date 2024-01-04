@@ -1,5 +1,5 @@
 //
-//  TestingPdfMakingViewController.swift
+//  TestingPDFWritingViewController.swift
 //  ApplicationSnapshotsTests
 //
 //  Created by Stanislav Matvichuck on 16.03.2023.
@@ -9,7 +9,7 @@
 import Domain
 import XCTest
 
-extension TestingViewController where Controller == PdfViewController {
+extension TestingViewController where Controller == PDFReadingViewController {
     func make() {}
 
     func make(
@@ -24,7 +24,7 @@ extension TestingViewController where Controller == PdfViewController {
     var url: URLProviding { LocalFile.testingPdfReport }
 
     private func createTemporaryLocalFileForReading(dateCreated: Date, currentMoment: Date) {
-        PdfMakingContainer(
+        PDFWritingContainer(
             EventDetailsContainer(ApplicationContainer(
                 mode: .injectedCurrentMoment,
                 currentMoment: currentMoment
@@ -35,9 +35,9 @@ extension TestingViewController where Controller == PdfViewController {
     }
 
     private func configureSut() {
-        let pdfContainer = PdfContainer(provider: url)
+        let pdfContainer = PDFReadingContainer(provider: url)
 
-        sut = pdfContainer.make() as? PdfViewController
+        sut = pdfContainer.make() as? PDFReadingViewController
         sut.loadViewIfNeeded()
         sut.viewRoot.bounds = UIScreen.main.bounds
     }

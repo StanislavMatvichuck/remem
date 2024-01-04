@@ -56,8 +56,8 @@ protocol EventsListViewModelFactoring {
 }
 
 protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewModel }
-protocol PdfMakingViewModelFactoring {
-    func makePdfMakingViewModel() -> PdfMakingViewModel
+protocol PDFWritingViewModelFactoring {
+    func makePdfMakingViewModel() -> PDFWritingViewModel
 }
 
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }

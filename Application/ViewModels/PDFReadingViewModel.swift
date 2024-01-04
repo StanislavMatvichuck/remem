@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct PdfViewModel {
+struct PDFReadingViewModel {
     static let title = String(localizationId: "pdf.titlePage.title")
     static let start = String(localizationId: "pdf.titlePage.start")
     static let finish = String(localizationId: "pdf.titlePage.finish")

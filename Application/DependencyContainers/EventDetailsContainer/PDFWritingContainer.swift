@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring {
+final class PDFWritingContainer: ControllerFactoring, PDFWritingViewModelFactoring {
     let parent: EventDetailsContainer
     let urlProviding: URLProviding
 
@@ -25,25 +25,25 @@ final class PdfMakingContainer: ControllerFactoring, PdfMakingViewModelFactoring
     }
 
     func make() -> UIViewController {
-        PdfMakingViewController(self)
+        PDFWritingViewController(self)
     }
 
-    func makePdfMakingViewModel() -> PdfMakingViewModel {
-        PdfMakingViewModel {
-            let pdfData = MobilePdfMaker(
+    func makePdfMakingViewModel() -> PDFWritingViewModel {
+        PDFWritingViewModel {
+            let pdfData = PDFWritingDataGenerator(
                 viewModel: self.makePdfViewModel()
             ).make()
 
             let saver = DefaultLocalFileSaver()
             saver.save(pdfData, to: self.urlProviding.url)
 
-            let pdfContainer = PdfContainer(provider: self.urlProviding)
+            let pdfContainer = PDFReadingContainer(provider: self.urlProviding)
             self.coordinator.show(.pdf(factory: pdfContainer))
         }
     }
 
-    func makePdfViewModel() -> PdfViewModel {
-        PdfViewModel(
+    func makePdfViewModel() -> PDFReadingViewModel {
+        PDFReadingViewModel(
             event: event,
             dateCreated: moment,
             clockViewModelDay: ClockContainer(parent: parent, type: .day).makeClockViewModel(),

@@ -8,8 +8,8 @@
 @testable import Application
 import XCTest
 
-final class PdfMakingViewModelTests: XCTestCase {
+final class PDFWritingViewModelTests: XCTestCase {
     func test_localisedTitle() {
-        XCTAssertEqual(PdfMakingViewModel.title, String(localizationId: "pdf.create"))
+        XCTAssertEqual(PDFWritingViewModel.title, String(localizationId: "pdf.create"))
     }
 }

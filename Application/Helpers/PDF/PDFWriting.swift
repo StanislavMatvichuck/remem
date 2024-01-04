@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol PDFMaking {
+protocol PDFWriting {
     func make() -> Data
 }

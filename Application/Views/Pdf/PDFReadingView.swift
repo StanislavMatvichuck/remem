@@ -7,7 +7,7 @@
 
 import PDFKit
 
-final class PdfView: UIView {
+final class PDFReadingView: UIView {
     private let url: URL
     var pdf: PDFView?
 

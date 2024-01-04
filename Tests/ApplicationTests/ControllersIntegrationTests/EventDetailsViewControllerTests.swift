@@ -54,7 +54,7 @@ final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertEqual(sut.children.filter { $0 is SummaryViewController }.count, 1)
     }
 
-    func test_showsPdfMakingView() {
-        XCTAssertEqual(sut.children.filter { $0 is PdfMakingViewController }.count, 1)
+    func test_showsPDFWritingView() {
+        XCTAssertEqual(sut.children.filter { $0 is PDFWritingViewController }.count, 1)
     }
 }

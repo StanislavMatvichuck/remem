@@ -59,15 +59,15 @@ final class DependencyContainersTests: XCTestCase {
         vc = nil
     }
 
-    func test_pdfContainer_hasNoCyclingReferences() {
-        var vc: PdfViewController? = ApplicationContainer.make()
+    func test_pdfReadingContainer_hasNoCyclingReferences() {
+        var vc: PDFReadingViewController? = ApplicationContainer.make()
         weakSut = vc
 
         vc = nil
     }
 
-    func test_pdfMakingContainer_hasNoCyclingReferences() {
-        var vc: PdfMakingViewController? = ApplicationContainer.make()
+    func test_pdfWritignContainer_hasNoCyclingReferences() {
+        var vc: PDFWritingViewController? = ApplicationContainer.make()
         weakSut = vc
 
         vc = nil
@@ -125,18 +125,18 @@ extension ApplicationContainer {
         return dayDetailsContainer.make() as! DayDetailsViewController
     }
 
-    static func make() -> PdfViewController {
-        let container = PdfContainer(provider: LocalFile.testingPdfReport)
-        return container.make() as! PdfViewController
+    static func make() -> PDFReadingViewController {
+        let container = PDFReadingContainer(provider: LocalFile.testingPdfReport)
+        return container.make() as! PDFReadingViewController
     }
 
-    static func make() -> PdfMakingViewController {
+    static func make() -> PDFWritingViewController {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
         let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
 
-        let pdfContainer = PdfMakingContainer(detailsContainer)
+        let pdfContainer = PDFWritingContainer(detailsContainer)
 
-        return pdfContainer.make() as! PdfMakingViewController
+        return pdfContainer.make() as! PDFWritingViewController
     }
 }

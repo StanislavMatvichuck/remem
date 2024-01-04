@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class PdfContainer: ControllerFactoring {
+final class PDFReadingContainer: ControllerFactoring {
     let provider: URLProviding
 
     init(provider: URLProviding) { self.provider = provider }
 
     func make() -> UIViewController {
-        PdfViewController(provider)
+        PDFReadingViewController(provider)
     }
 }
