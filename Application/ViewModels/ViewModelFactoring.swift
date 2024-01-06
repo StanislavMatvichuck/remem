@@ -12,10 +12,9 @@ protocol DayItemViewModelFactoring {
     func makeViewModel(happening: Happening) -> DayCellViewModel
 }
 
-protocol EventItemViewModelFactoring {
+protocol EventCellViewModelFactoring {
     func makeEventItemViewModel(
         event: Event,
-        today: DayIndex,
         hintEnabled: Bool,
         renameHandler: EventItemViewModelRenameHandling?
     ) -> EventCellViewModel

@@ -39,7 +39,7 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     func test_showsHint() {
         let hintCell = cell(0) as! HintCell
 
-        XCTAssertEqual(hintCell.label.text, HintState.empty.text)
+        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
     }
 
     func test_showsAddEventButton() {

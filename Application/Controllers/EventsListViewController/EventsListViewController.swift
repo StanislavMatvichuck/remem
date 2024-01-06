@@ -12,7 +12,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     let viewRoot: EventsListView
     var dataSource: EventsListDataSource!
     let widgetUpdater: WidgetViewController
-    let cellAnimator: AnimatingHappeningCreation
     var timer: Timer?
 
     var viewModel: EventsListViewModel! {
@@ -21,7 +20,9 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
             title = EventsListViewModel.title
 
-            dataSource.update(viewModel.items, oldValue)
+            if let oldValue { viewModel = viewModel.configureAnimationForEventCells(oldValue) }
+
+            dataSource.update(viewModel, oldValue)
 
             if let renamedItem = viewModel.renamedItem {
                 viewRoot.input.rename(oldName: renamedItem.title)
@@ -29,37 +30,29 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
                 viewRoot.input.show(value: viewModel.inputContent)
             }
 
-            widgetUpdater.update(viewModel.items.filter { type(of: $0) is EventCellViewModel.Type } as! [EventCellViewModel])
+            widgetUpdater.update(viewModel)
         }
     }
 
     init(
         viewModelFactory: EventsListViewModelFactoring,
         view: EventsListView,
-        widgetUpdater: WidgetViewController,
-        cellAnimator: AnimatingHappeningCreation
+        widgetUpdater: WidgetViewController
     ) {
         self.factory = viewModelFactory
         self.viewRoot = view
         self.widgetUpdater = widgetUpdater
-        self.cellAnimator = cellAnimator
         super.init(nibName: nil, bundle: nil)
         self.dataSource = EventsListDataSource(
             tableView: view.table,
             cellProvider: { [weak self] table, indexPath, identifier in
-                guard let self else { fatalError() }
-
-                let index = self.viewModel[identifier]!
-                let viewModel = self.viewModel.items[index]
-                let cell = EventsListDataSource.cell(
+                guard let self, let viewModel = self.viewModel.cellAt(identifier: identifier)
+                else { fatalError("data source unable to use its provider") }
+                return EventsListDataSource.cell(
                     table: table,
                     forIndex: indexPath,
                     viewModel: viewModel
                 )
-
-                if let cell = cell as? EventCell { cell.cellAnimator = cellAnimator }
-
-                return cell
             }
         )
     }

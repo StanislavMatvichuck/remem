@@ -16,15 +16,15 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     }
 
     func update(
-        _ items: [any EventsListItemViewModeling],
+        _ viewModel: EventsListViewModel,
         _ oldValue: EventsListViewModel?
     ) {
-        var newSnapshot = makeSnapshot(items: items)
+        var newSnapshot = makeSnapshot(for: viewModel)
 
         if let oldValue {
             for newItem in newSnapshot.itemIdentifiers {
-                if let oldItem = oldValue.items.first(where: { $0.identifier == newItem }),
-                   let newItem = items.first(where: { $0.identifier == newItem }),
+                if let oldItem = oldValue.cellAt(identifier: newItem),
+                   let newItem = viewModel.cellAt(identifier: newItem),
                    reconfigurationNeeded(oldItem, newItem)
                 {
                     newSnapshot.reconfigureItems([newItem.identifier])
@@ -36,17 +36,25 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     }
 
     private func reconfigurationNeeded<T: EventsListItemViewModeling, U: EventsListItemViewModeling>(_ lhs: T, _ rhs: U) -> Bool {
-        type(of: lhs) == type(of: rhs) &&
-            lhs.identifier == rhs.identifier &&
-            lhs.self != rhs.self as? T
+        let cellsHaveSameType = type(of: lhs) == type(of: rhs)
+        let cellsHaveSameId = lhs.identifier == rhs.identifier
+        let cellsHaveDifferentContent = lhs.self != rhs.self as? T
+        let cellMustBeAnimated = {
+            if let eventCell = rhs as? EventCellViewModel,
+               eventCell.animation != .none
+            { return true }
+            return false
+        }()
+
+        return
+            cellsHaveSameType && cellsHaveSameId && cellsHaveDifferentContent ||
+            cellMustBeAnimated
     }
 
-    private func makeSnapshot(items: [any EventsListItemViewModeling]) -> NSDiffableDataSourceSnapshot<Int, String> {
-        let itemsIDs = items.map { $0.identifier }
-
+    private func makeSnapshot(for vm: EventsListViewModel) -> NSDiffableDataSourceSnapshot<Int, String> {
         var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
         snapshot.appendSections([0])
-        snapshot.appendItems(itemsIDs)
+        snapshot.appendItems(vm.cellsIdentifiers)
         return snapshot
     }
 

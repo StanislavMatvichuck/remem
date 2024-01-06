@@ -12,7 +12,7 @@ final class EventsListContainer:
     ControllerFactoring,
     EventsListViewModelFactoring,
     HintItemViewModelFactoring,
-    EventItemViewModelFactoring,
+    EventCellViewModelFactoring,
     FooterItemViewModeFactoring
 {
     let parent: ApplicationContainer
@@ -25,13 +25,10 @@ final class EventsListContainer:
     init(_ parent: ApplicationContainer) { self.parent = parent }
 
     func make() -> UIViewController {
-        let view = EventsListView()
-        let animator = DefaultHappeningCreationAnimator(table: view.table)
         let controller = EventsListViewController(
             viewModelFactory: self,
-            view: view,
-            widgetUpdater: WidgetViewController(),
-            cellAnimator: animator
+            view: EventsListView(),
+            widgetUpdater: WidgetViewController()
         )
 
         updater.addDelegate(controller)
@@ -39,8 +36,7 @@ final class EventsListContainer:
     }
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
-        let today = DayIndex(parent.currentMoment)
-        let ordering = uiTestingDisabled ? orderingRepository.get() : .alphabetical
+        let ordering = uiTestingDisabled && parent.mode != .unitTest ? orderingRepository.get() : .alphabetical
         let events = parent.provider.get(using: ordering)
 
         let footerVm = makeFooterItemViewModel(
@@ -67,13 +63,12 @@ final class EventsListContainer:
         )
 
         let eventsViewModels = events.enumerated().map { index, event in
-            let userShouldSeeGestureHint = hintVm.title == HintState.placeFirstMark.text
+            let userShouldSeeGestureHint = hintVm.title == HintCellViewModel.HintState.swipeFirstTime.text
             let isFirstRow = index == 0
             let hintEnabled = userShouldSeeGestureHint && isFirstRow && uiTestingDisabled
 
             return makeEventItemViewModel(
                 event: event,
-                today: today,
                 hintEnabled: hintEnabled,
                 renameHandler: handler
             )
@@ -89,10 +84,7 @@ final class EventsListContainer:
         items.append(contentsOf: eventsViewModels)
         items.append(footerVm)
 
-        let vm = EventsListViewModel(
-            today: today,
-            items: items
-        ) { name in
+        let vm = EventsListViewModel(items: items) { name in
             self.commander.save(Event(name: name))
         }
 
@@ -115,14 +107,12 @@ final class EventsListContainer:
 
     func makeEventItemViewModel(
         event: Event,
-        today: DayIndex,
         hintEnabled: Bool,
         renameHandler: EventItemViewModelRenameHandling?
     ) -> EventCellViewModel {
         EventCellViewModel(
             event: event,
             hintEnabled: hintEnabled,
-            today: today,
             currentMoment: parent.currentMoment,
             tapHandler: {
                 self.parent.coordinator.show(.eventDetails(factory:
@@ -138,7 +128,8 @@ final class EventsListContainer:
             renameHandler: { newName, event in
                 event.name = newName
                 self.commander.save(event)
-            }
+            },
+            animation: .none
         )
     }
 }

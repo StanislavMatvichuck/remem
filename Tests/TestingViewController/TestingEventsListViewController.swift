@@ -84,8 +84,7 @@ extension TestingViewController where Controller == EventsListViewController {
         sut = EventsListViewController(
             viewModelFactory: factory,
             view: view,
-            widgetUpdater: WidgetViewController(),
-            cellAnimator: DefaultHappeningCreationAnimator(table: view.table)
+            widgetUpdater: WidgetViewController()
         )
     }
 

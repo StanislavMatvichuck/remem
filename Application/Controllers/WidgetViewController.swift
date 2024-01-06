@@ -8,10 +8,8 @@
 import Foundation
 import WidgetKit
 
-typealias WidgetViewModel = [EventCellViewModel]
-
 final class WidgetViewController {
-    func update(_ vm: WidgetViewModel) {
+    func update(_ viewModel: EventsListViewModel) {
         guard let directory = FileManager.default.containerURL(
             forSecurityApplicationGroupIdentifier: "group.remem.io"
         ) else { return }
@@ -20,14 +18,15 @@ final class WidgetViewController {
         let fileURL = directory.appendingPathComponent(filePath)
 
         let encoder = PropertyListEncoder()
-        let writableItems = vm.prefix(3).map { WidgetEventCellViewModel(item: $0) }
+        let eventCells = viewModel.eventCells
+        let writableItems = eventCells.prefix(3).map { WidgetEventCellViewModel(item: $0) }
 
         do {
             let dataToWrite = try encoder.encode(writableItems)
             try dataToWrite.write(to: fileURL)
             WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
         } catch {
-            fatalError("unable to update widget \(fileURL.absoluteString) \(vm) \(writableItems)")
+            fatalError("unable to update widget \(fileURL.absoluteString) \(viewModel) \(writableItems)")
         }
     }
 }

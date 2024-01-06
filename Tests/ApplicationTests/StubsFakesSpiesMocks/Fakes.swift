@@ -21,19 +21,18 @@ struct VisitedEventListFactory: EventsListViewModelFactoring {
 
     func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel {
         EventsListViewModel(
-            today: today,
             items: [
                 HintCellViewModel(events: [event]),
                 EventCellViewModel(
                     event: event,
                     hintEnabled: false,
-                    today: today,
                     currentMoment: DayIndex.referenceValue.date,
                     tapHandler: {},
                     swipeHandler: {},
                     renameActionHandler: { _ in },
                     deleteActionHandler: {},
-                    renameHandler: { _, _ in }
+                    renameHandler: { _, _ in },
+                    animation: .none
                 ),
                 FooterCellViewModel(eventsCount: 1, tapHandler: nil),
             ]

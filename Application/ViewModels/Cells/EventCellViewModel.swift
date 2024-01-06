@@ -9,6 +9,8 @@ import Domain
 import Foundation
 
 struct EventCellViewModel: EventsListItemViewModeling {
+    enum Animations { case swipe, aboveSwipe, belowSwipe, none }
+
     typealias TapHandler = () -> Void
     typealias SwipeHandler = () -> Void
     typealias RenameActionHandler = (EventCellViewModel) -> Void
@@ -36,21 +38,25 @@ struct EventCellViewModel: EventsListItemViewModeling {
     let renameActionHandler: RenameActionHandler
     let deleteActionHandler: DeleteActionHandler
     let renameHandler: RenameHandler
+    let currentMoment: Date
+    var animation: Animations
 
     init(
         event: Event,
         hintEnabled: Bool,
-        today: DayIndex,
         currentMoment: Date,
         tapHandler: @escaping TapHandler,
         swipeHandler: @escaping SwipeHandler,
         renameActionHandler: @escaping RenameActionHandler,
         deleteActionHandler: @escaping DeleteActionHandler,
-        renameHandler: @escaping RenameHandler
+        renameHandler: @escaping RenameHandler,
+        animation: Animations
     ) {
-        self.valueAmount = event.happeningsAmount(forWeekAt: today.date)
+        self.animation = animation
+        self.currentMoment = currentMoment
+        self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment)
         self.event = event
-        let weeklyGoalDescription = EventWeeklyGoalViewModel(weekDate: today.date, event: event, goalEditable: false)
+        let weeklyGoalDescription = EventWeeklyGoalViewModel(weekDate: currentMoment, event: event, goalEditable: false)
 
         self.title = event.name
         self.hintEnabled = hintEnabled
@@ -89,13 +95,28 @@ struct EventCellViewModel: EventsListItemViewModeling {
 
     func rename(to: String) { renameHandler(to, event) }
 
+    func clone(withAnimation: Animations) -> EventCellViewModel {
+        EventCellViewModel(
+            event: event,
+            hintEnabled: hintEnabled,
+            currentMoment: currentMoment,
+            tapHandler: tapHandler,
+            swipeHandler: swipeHandler,
+            renameActionHandler: renameActionHandler,
+            deleteActionHandler: deleteActionHandler,
+            renameHandler: renameHandler,
+            animation: withAnimation
+        )
+    }
+
     static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
         lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value &&
             lhs.timeSince == rhs.timeSince &&
             lhs.progress == rhs.progress &&
-            lhs.goalAmount == rhs.goalAmount
+            lhs.goalAmount == rhs.goalAmount &&
+            lhs.animation == rhs.animation
     }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
