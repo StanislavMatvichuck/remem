@@ -43,7 +43,7 @@ struct WeekViewModel {
             let daysAmount = pagesCount * 7
 
             var maximum = 0
-            for dayNumber in 0 ..< daysAmount - 1 {
+            for dayNumber in 0 ... daysAmount - 1 {
                 let startOfWeekEvent = WeekIndex(event.dateCreated).dayIndex
                 let dayHappenings = event.happenings(forDayIndex: startOfWeekEvent.adding(days: dayNumber)).count
                 if dayHappenings > maximum { maximum = dayHappenings }

@@ -84,6 +84,19 @@ final class WeekViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.dayMaximum, 5)
     }
+    
+    func test_dayMaximumAmount_oneHappeningAtSunday_one() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        for happeningIndex in [
+            DayIndex.referenceValue.adding(days: 6),
+        ] {
+            event.addHappening(date: happeningIndex.date)
+        }
+
+        let sut = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)).makeWeekViewModel()
+        
+        XCTAssertEqual(sut.dayMaximum, 1)
+    }
 
     private func make(withHappeningsAt dates: [Date]) -> WeekViewModel {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
