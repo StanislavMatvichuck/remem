@@ -31,6 +31,11 @@ final class DayDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.items.count, 0)
     }
 
+    func test_cellsCount_empty_zero() {
+        let appC = ApplicationContainer(mode: .unitTest)
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+    }
+
     private func make(happenings: [Happening] = []) -> DayDetailsViewModel {
         let day = DayIndex.referenceValue
         let event = Event(name: "Event", dateCreated: day.date)
@@ -38,7 +43,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             event.addHappening(date: happening.dateCreated)
         }
 
-        struct DayItemViewModelFactoringStub: DayItemViewModelFactoring {
+        struct DayItemViewModelFactoringStub: DayCellViewModelFactoring {
             let event: Event
             let commander = EventsCommandingStub()
 

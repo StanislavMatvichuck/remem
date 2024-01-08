@@ -52,12 +52,7 @@ final class WeekContainer:
             today: currentMoment,
             dailyMaximum: dailyMaximum
         ) { presentationAnimation, dismissAnimation in
-            let dayDetailsContainer = DayDetailsContainer(
-                parent: self.parent,
-                day: day,
-                hour: self.calendar.component(.hour, from: self.currentMoment),
-                minute: self.calendar.component(.minute, from: self.currentMoment)
-            )
+            let dayDetailsContainer = DayDetailsContainer(self.parent)
 
             let presentationContainer = DayDetailsPresentationContainer(
                 parent: self.parent,

@@ -11,28 +11,18 @@ import UIKit
 final class DayDetailsContainer:
     ControllerFactoring,
     DayDetailsViewModelFactoring,
-    DayItemViewModelFactoring
+    DayCellViewModelFactoring
 {
+    let parent: EventDetailsContainer
+
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
     var event: Event { parent.event }
+    var currentMoment: Date { parent.currentMoment }
+    var hour: Int { Calendar.current.component(.hour, from: currentMoment) }
+    var minute: Int { Calendar.current.component(.minute, from: currentMoment) }
 
-    let parent: EventDetailsContainer
-    let day: DayIndex
-    let hour: Int
-    let minute: Int
-
-    init(
-        parent: EventDetailsContainer,
-        day: DayIndex,
-        hour: Int,
-        minute: Int
-    ) {
-        self.parent = parent
-        self.day = day
-        self.hour = hour
-        self.minute = minute
-    }
+    init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
         let controller = DayDetailsViewController(self)
@@ -49,7 +39,7 @@ final class DayDetailsContainer:
 
     func makeDayDetailsViewModel() -> DayDetailsViewModel {
         DayDetailsViewModel(
-            day: day,
+            day: DayIndex(currentMoment),
             event: event,
             isToday: false,
             hour: hour,

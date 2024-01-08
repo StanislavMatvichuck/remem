@@ -14,12 +14,7 @@ extension TestingViewController where Controller == DayDetailsViewController {
         let day = DayIndex.referenceValue
         event = Event(name: "Event")
         let container = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
-        sut = DayDetailsContainer(
-            parent: container,
-            day: day,
-            hour: 0,
-            minute: 0
-        ).make() as? DayDetailsViewController
+        sut = DayDetailsContainer(container).make() as? DayDetailsViewController
         sut.loadViewIfNeeded()
     }
 

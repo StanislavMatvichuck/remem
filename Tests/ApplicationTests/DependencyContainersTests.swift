@@ -114,14 +114,7 @@ extension ApplicationContainer {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
         let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
-        let currentMoment = detailsContainer.parent.currentMoment
-        let dayDetailsContainer = DayDetailsContainer(
-            parent: detailsContainer,
-            day: day,
-            hour: Calendar.current.component(.hour, from: currentMoment),
-            minute: Calendar.current.component(.minute, from: currentMoment)
-        )
-
+        let dayDetailsContainer = DayDetailsContainer(detailsContainer)
         return dayDetailsContainer.make() as! DayDetailsViewController
     }
 

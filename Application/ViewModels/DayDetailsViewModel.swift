@@ -14,7 +14,7 @@ struct DayDetailsViewModel {
 
     private let day: DayIndex
     private let event: Event
-    private let itemFactory: DayItemViewModelFactoring
+    private let itemFactory: DayCellViewModelFactoring
 
     typealias AddHappeningHandler = (Date) -> Void
 
@@ -30,7 +30,7 @@ struct DayDetailsViewModel {
         isToday: Bool,
         hour: Int,
         minute: Int,
-        itemFactory: DayItemViewModelFactoring,
+        itemFactory: DayCellViewModelFactoring,
         addHappeningHandler: @escaping AddHappeningHandler
     ) {
         self.event = event
