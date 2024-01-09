@@ -8,19 +8,20 @@
 import UIKit
 
 final class DayDetailsPresentationAnimator: DayDetailsAnimator {
-    static let originHeight: CGFloat = {
-        let screenHeightLeftover: CGFloat = .screenH - .screenW * 0.66666 * 1.8
-        let originHeight: CGFloat = screenHeightLeftover / 2
-        return originHeight
-    }()
-
     override func makeAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         guard
             let detailsView = transitionContext.view(forKey: .to),
             let detailsVc = transitionContext.viewController(forKey: .to)
         else { fatalError("error getting necessary views for animation") }
 
-        detailsView.frame = transitionContext.finalFrame(for: detailsVc)
+        let finalFrame = transitionContext.finalFrame(for: detailsVc)
+        let startingFrame = CGRect(
+            x: finalFrame.minX,
+            y: transitionContext.containerView.frame.maxY,
+            width: finalFrame.width,
+            height: finalFrame.height
+        )
+        detailsView.frame = startingFrame
         detailsView.layoutIfNeeded()
         detailsView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
 
@@ -37,7 +38,7 @@ final class DayDetailsPresentationAnimator: DayDetailsAnimator {
 
         animator.addAnimations(DayDetailsAnimationsHelper.makePresentationSliding(
             animatedView: detailsView,
-            targetHeight: Self.originHeight
+            targetHeight: finalFrame.minY
         ))
 
         for animation in additionalAnimations {

@@ -52,7 +52,7 @@ final class WeekContainer:
             today: currentMoment,
             dailyMaximum: dailyMaximum
         ) { presentationAnimation, dismissAnimation in
-            let dayDetailsContainer = DayDetailsContainer(self.parent)
+            let dayDetailsContainer = DayDetailsContainer(self.parent, startOfDay: day.date)
 
             let presentationContainer = DayDetailsPresentationContainer(
                 parent: self.parent,

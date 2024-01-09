@@ -31,5 +31,3 @@ struct DayCellViewModel {
 
     func remove() { removeHandler(happening) }
 }
-
-

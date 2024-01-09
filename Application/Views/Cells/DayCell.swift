@@ -7,21 +7,26 @@
 
 import UIKit
 
-final class DayCell: UITableViewCell {
+final class DayCell: UICollectionViewCell {
     static let reuseIdentifier = "DayHappeningCell"
 
-    // MARK: - Properties
-    var label: UILabel = {
+    let label: UILabel = {
         let label = UILabel(al: true)
         label.numberOfLines = 1
         label.font = .font
         label.textAlignment = .center
+        label.minimumScaleFactor = 0.6
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
-    // MARK: - Init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    var viewModel: DayCellViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContent(viewModel)
+    }}
+
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         configureLayout()
         configureAppearance()
     }
@@ -33,8 +38,9 @@ final class DayCell: UITableViewCell {
     }
 
     private func configureAppearance() {
-        selectionStyle = .none
         backgroundColor = .clear
         label.textColor = UIColor.text
     }
+
+    private func configureContent(_ vm: DayCellViewModel) { label.text = vm.text }
 }

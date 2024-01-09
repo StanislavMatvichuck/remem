@@ -14,15 +14,13 @@ final class DayDetailsViewController: UIViewController {
     let viewRoot: DayDetailsView
 
     var viewModel: DayDetailsViewModel { didSet {
-        viewModel.pickerDate = viewRoot.picker.date
-        viewRoot.configure(viewModel: viewModel)
+        viewRoot.viewModel = viewModel
     } }
 
     init(_ factory: DayDetailsViewModelFactoring) {
         self.factory = factory
         self.viewModel = factory.makeDayDetailsViewModel()
-        self.viewRoot = DayDetailsView(viewModel: viewModel)
-
+        self.viewRoot = DayDetailsView()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -31,17 +29,18 @@ final class DayDetailsViewController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
+        viewModel = factory.makeDayDetailsViewModel()
         configureTableView()
         configureEventHandlers()
     }
 
     private func configureTableView() {
-        viewRoot.happenings.dataSource = self
-        viewRoot.happenings.delegate = self
+        viewRoot.happeningsCollection.delegate = self
     }
 
     private func configureEventHandlers() {
-        viewRoot.button.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
+        let recogniser = UITapGestureRecognizer(target: self, action: #selector(handleButton))
+        viewRoot.buttonBackground.addGestureRecognizer(recogniser)
     }
 
     @objc private func handleButton() {
@@ -54,30 +53,12 @@ final class DayDetailsViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource, UITableViewDelegate
-extension DayDetailsViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        viewModel.items.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DayCell.reuseIdentifier,
-            for: indexPath
-        ) as? DayCell else { fatalError("unable to dequeue cell") }
-        cell.label.text = viewModel.items[indexPath.row].text
-        return cell
-    }
-
-    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt index: IndexPath) -> UISwipeActionsConfiguration? {
-        UISwipeActionsConfiguration(actions: [
-            UIContextualAction(
-                style: .destructive,
-                title: DayDetailsViewModel.delete
-            ) { _, _, completion in
-                self.viewModel.items[index.row].remove()
-                completion(true)
-            },
-        ])
+extension DayDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout _: UICollectionViewLayout,
+                        sizeForItemAt _: IndexPath) -> CGSize
+    {
+        let width = collectionView.bounds.width / 4
+        return CGSize(width: width, height: width)
     }
 }

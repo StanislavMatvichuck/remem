@@ -18,7 +18,7 @@ final class DayDetailsPresentationController: UIPresentationController {
     lazy var backgroundView: UIView = {
         let borderWidth = DayDetailsView.margin * 3
         let dayDetailsLeftOffset = frameOfPresentedViewInContainerView.minX - borderWidth / 2
-        let dayDetailsTopOffset = DayDetailsPresentationAnimator.originHeight - borderWidth / 2
+        let dayDetailsTopOffset = frameOfPresentedViewInContainerView.minY - borderWidth / 2
         let dayDetailsBackgroundWidth = frameOfPresentedViewInContainerView.width + borderWidth
         let dayDetailsBackgroundHeight = frameOfPresentedViewInContainerView.height + borderWidth
         let dayDetailsBackground = UIView(frame: CGRect(
@@ -78,19 +78,27 @@ final class DayDetailsPresentationController: UIPresentationController {
         super.init(presentedViewController: presented, presenting: presenting)
     }
 
-    override var frameOfPresentedViewInContainerView: CGRect {
-        let relativeWidth: CGFloat = 0.66666
+    lazy var detailsViewCalculatedRect = {
+        let relativeWidth: CGFloat = 2 / 3
         let width: CGFloat = .screenW * relativeWidth
+        let container = UIView(frame: containerView!.bounds)
 
-        let leftMargin: CGFloat = (.screenW - width) / 2
-        let height = width * 1.8
+        let detailsView = DayDetailsView()
+        detailsView.translatesAutoresizingMaskIntoConstraints = false
 
-        return CGRect(
-            x: leftMargin,
-            y: containerView?.frame.maxY ?? 0,
-            width: width,
-            height: height
-        )
+        container.addSubview(detailsView)
+        detailsView.widthAnchor.constraint(equalToConstant: width).isActive = true
+        detailsView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        detailsView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+
+        detailsView.layoutIfNeeded()
+        container.layoutIfNeeded()
+
+        return detailsView.frame
+    }()
+
+    override var frameOfPresentedViewInContainerView: CGRect {
+        detailsViewCalculatedRect
     }
 
     // MARK: - Lifecycle

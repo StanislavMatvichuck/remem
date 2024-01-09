@@ -13,14 +13,14 @@ final class DayDetailsViewModelTests: XCTestCase {
     func test_eventWithNoHappenings_showsNothing() {
         let sut = make()
 
-        XCTAssertEqual(sut.items.count, 0)
+        XCTAssertEqual(sut.cellsCount, 0)
     }
 
     func test_eventWithHappeningAtSameDay_showsHappening() {
         let happening = Happening(dateCreated: DayIndex.referenceValue.date)
         let sut = make(happenings: [happening])
 
-        XCTAssertEqual(sut.items.count, 1)
+        XCTAssertEqual(sut.cellsCount, 1)
     }
 
     func test_eventWithHappeningAtAnotherDay_showsNothing() {
@@ -28,12 +28,33 @@ final class DayDetailsViewModelTests: XCTestCase {
         let happening = Happening(dateCreated: date)
         let sut = make(happenings: [happening])
 
-        XCTAssertEqual(sut.items.count, 0)
+        XCTAssertEqual(sut.cellsCount, 0)
     }
 
     func test_cellsCount_empty_zero() {
         let appC = ApplicationContainer(mode: .unitTest)
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+
+        XCTAssertEqual(sut.cellsCount, 0)
+    }
+
+    func test_cellsCount_oneHappening_one() {
+        let appC = ApplicationContainer(mode: .unitTest)
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+
+        XCTAssertEqual(sut.cellsCount, 1)
+    }
+
+    func test_cellAtIndex_firstCell() {
+        let appC = ApplicationContainer(mode: .unitTest)
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+
+        XCTAssertEqual(sut.cellAt(index: 0).text, "00:00")
     }
 
     private func make(happenings: [Happening] = []) -> DayDetailsViewModel {
@@ -53,12 +74,10 @@ final class DayDetailsViewModelTests: XCTestCase {
         }
 
         return DayDetailsViewModel(
-            day: day,
+            currentMoment: DayIndex.referenceValue.date,
             event: event,
             isToday: false,
-            hour: 1,
-            minute: 1,
-            itemFactory: DayItemViewModelFactoringStub(event: event),
+            factory: DayItemViewModelFactoringStub(event: event),
             addHappeningHandler: { _ in }
         )
     }

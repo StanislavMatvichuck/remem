@@ -12,50 +12,51 @@ struct DayDetailsViewModel {
     static let create = String(localizationId: "button.addHappening")
     static let delete = String(localizationId: "button.delete")
 
-    private let day: DayIndex
     private let event: Event
-    private let itemFactory: DayCellViewModelFactoring
+    private let factory: DayCellViewModelFactoring
 
     typealias AddHappeningHandler = (Date) -> Void
 
-    let items: [DayCellViewModel]
     let title: String
     let isToday: Bool
     let addHappeningHandler: AddHappeningHandler
+    let cellsCount: Int
+    let currentMoment: Date
+    let startOfDay: Date
     var pickerDate: Date
 
     init(
-        day: DayIndex,
+        currentMoment: Date,
         event: Event,
-        isToday: Bool,
-        hour: Int,
-        minute: Int,
-        itemFactory: DayCellViewModelFactoring,
+        startOfDay: Date,
+        factory: DayCellViewModelFactoring,
         addHappeningHandler: @escaping AddHappeningHandler
     ) {
         self.event = event
-        self.day = day
-        self.itemFactory = itemFactory
+        self.factory = factory
+        self.currentMoment = currentMoment
         self.addHappeningHandler = addHappeningHandler
-        self.isToday = isToday
-
-        let happenings = event.happenings(forDayIndex: day)
-
-        self.items = happenings.map {
-            itemFactory.makeViewModel(happening: $0)
-        }
+        self.isToday = DayIndex(currentMoment).date == startOfDay
+        self.startOfDay = startOfDay
+        self.cellsCount = event.happenings(forDayIndex: DayIndex(startOfDay)).count
 
         let titleFormatter = DateFormatter()
         titleFormatter.dateFormat = "d MMMM"
 
-        self.title = titleFormatter.string(for: day.date)!
+        self.title = titleFormatter.string(for: startOfDay)!
 
-        let dayDate = day.date
+        let hour = 0
+        let minute = 0
         self.pickerDate = Calendar.current.date(
             bySettingHour: hour,
             minute: minute,
             second: 0,
-            of: dayDate
+            of: startOfDay
         )!
+    }
+
+    func cellAt(index: Int) -> DayCellViewModel {
+        let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
+        return factory.makeViewModel(happening: happenings[index])
     }
 }

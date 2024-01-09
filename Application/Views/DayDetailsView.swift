@@ -21,16 +21,26 @@ final class DayDetailsView: UIView {
         let label = UILabel(al: true)
         label.textColor = .bg
         label.textAlignment = .center
+        label.numberOfLines = 1
         return label
     }()
 
-    let happenings: UITableView = {
-        let table = UITableView(al: true)
-        table.register(DayCell.self, forCellReuseIdentifier: DayCell.reuseIdentifier)
-        table.separatorStyle = .none
-        table.tableFooterView = nil
-        table.allowsSelection = false
-        return table
+    let titleBackground: UIView = {
+        let view = UIView(al: true)
+        return view
+    }()
+
+    let happeningsCollection: UICollectionView = {
+        let collectionLayout = UICollectionViewFlowLayout()
+        collectionLayout.scrollDirection = .vertical
+        collectionLayout.minimumInteritemSpacing = 0.0
+        collectionLayout.minimumLineSpacing = 0.0
+
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
+        collection.widthAnchor.constraint(equalTo: collection.heightAnchor).isActive = true
+        return collection
     }()
 
     let picker: UIDatePicker = {
@@ -41,44 +51,56 @@ final class DayDetailsView: UIView {
         return view
     }()
 
-    let button: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: DayDetailsView.margin * 2, leading: 0, bottom: DayDetailsView.margin * 2, trailing: 0)
-        let view = UIButton(configuration: configuration)
-        view.translatesAutoresizingMaskIntoConstraints = false
+    let button: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .font
+        label.textColor = .bg_item
+        label.text = DayDetailsViewModel.create
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        return label
+    }()
+
+    let buttonBackground: UIView = {
+        let view = UIView(al: true)
         return view
     }()
 
-    let titleBackground: UIStackView = {
-        let view = UIStackView(al: true)
-        view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: DayDetailsView.margin * 2, left: DayDetailsView.margin, bottom: DayDetailsView.margin * 2, right: DayDetailsView.margin)
-        view.setContentHuggingPriority(.defaultLow, for: .vertical)
-        return view
-    }()
+    var viewModel: DayDetailsViewModel? { didSet {
+        guard let viewModel else { return }
+        configure(viewModel: viewModel)
+    }}
 
-    init(viewModel: DayDetailsViewModel) {
+    init() {
         super.init(frame: .zero)
+        happeningsCollection.dataSource = self
         configureLayout()
         configureAppearance()
-        configure(viewModel: viewModel)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     func configure(viewModel: DayDetailsViewModel) {
         configureTitle(viewModel: viewModel)
-        configureButton(viewModel: viewModel)
         picker.date = viewModel.pickerDate
-        happenings.reloadData()
+        happeningsCollection.reloadData()
     }
 
     private func configureLayout() {
-        titleBackground.addArrangedSubview(title)
+        titleBackground.addAndConstrain(title)
+        buttonBackground.addAndConstrain(button)
+
         verticalStack.addArrangedSubview(titleBackground)
-        verticalStack.addArrangedSubview(happenings)
+        verticalStack.addArrangedSubview(happeningsCollection)
         verticalStack.addArrangedSubview(picker)
-        verticalStack.addArrangedSubview(button)
+        verticalStack.addArrangedSubview(buttonBackground)
+
+        titleBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
+        buttonBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
 
         addAndConstrain(verticalStack)
     }
@@ -89,26 +111,33 @@ final class DayDetailsView: UIView {
         layer.cornerRadius = Self.radius
 
         picker.backgroundColor = .clear
-        happenings.backgroundColor = .clear
         titleBackground.backgroundColor = .secondary
-        button.layer.borderColor = UIColor.border_primary.cgColor
-        button.layer.borderWidth = .border
-        button.backgroundColor = .primary
+        buttonBackground.backgroundColor = .primary
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {
         title.text = viewModel.title
         title.font = viewModel.isToday ? .fontBold : .font
     }
+}
 
-    private func configureButton(viewModel: DayDetailsViewModel) {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.bg_item,
-            .font: UIFont.font,
-        ]
+extension DayDetailsView: UICollectionViewDataSource {
+    var viewModelErrorMessage: String { "view requires viewModel to display" }
 
-        let title = NSAttributedString(string: DayDetailsViewModel.create, attributes: attributes)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let viewModel else { return 0 }
+        return viewModel.cellsCount
+    }
 
-        button.setAttributedTitle(title, for: .normal)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard
+            let viewModel,
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DayCell.reuseIdentifier,
+                for: indexPath
+            ) as? DayCell
+        else { fatalError(viewModelErrorMessage) }
+        cell.viewModel = viewModel.cellAt(index: indexPath.row)
+        return cell
     }
 }
