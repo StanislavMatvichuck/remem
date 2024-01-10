@@ -81,6 +81,14 @@ extension DayDetailsViewController: UICollectionViewDragDelegate {
         let dragItem = UIDragItem(itemProvider: provider)
         return [dragItem]
     }
+
+    func collectionView(_: UICollectionView, dragSessionWillBegin _: UIDragSession) {
+        viewModel?.enableDrag()
+    }
+
+    func collectionView(_: UICollectionView, dragSessionDidEnd _: UIDragSession) {
+        viewModel?.disableDrag()
+    }
 }
 
 extension DayDetailsViewController: UIDropInteractionDelegate {

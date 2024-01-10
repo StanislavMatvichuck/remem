@@ -19,6 +19,8 @@
 "eventDetails.of" = "of";
 "eventDetails.placeholder" = "your weekly goal";
 
+"dropToDelete" = "Drop here to delete";
+
 "weeklyGoal.week" = "Week";
 "weeklyGoal.amount" = "amount";
 "weeklyGoal.goal" = "goal";

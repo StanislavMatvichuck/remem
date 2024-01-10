@@ -19,6 +19,8 @@
 "eventDetails.of" = "із";
 "eventDetails.placeholder" = "твоя мета на тиждень";
 
+"dropToDelete" = "Відпустіть тут щоб видалити";
+
 "weeklyGoal.week" = "Тиждень";
 "weeklyGoal.amount" = "сума";
 "weeklyGoal.goal" = "ціль";

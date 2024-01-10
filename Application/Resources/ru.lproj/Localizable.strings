@@ -19,6 +19,8 @@
 "eventDetails.of" = "из";
 "eventDetails.placeholder" = "твоя цель на неделю";
 
+"dropToDelete" = "Отпустите здесь чтобы удалить";
+
 "weeklyGoal.week" = "Неделя";
 "weeklyGoal.amount" = "сумма";
 "weeklyGoal.goal" = "цель";

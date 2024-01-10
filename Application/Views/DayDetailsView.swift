@@ -61,6 +61,17 @@ final class DayDetailsView: UIView {
         return label
     }()
 
+    let delete: UILabel = {
+        let label = UILabel(al: true)
+        label.font = .font
+        label.textColor = .bg_item
+        label.text = DayDetailsViewModel.delete
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.layer.opacity = 0
+        return label
+    }()
+
     let buttonBackground: UIView = {
         let view = UIView(al: true)
         return view
@@ -88,11 +99,41 @@ final class DayDetailsView: UIView {
         configureTitle(viewModel: viewModel)
         picker.date = viewModel.pickerDate
         happeningsCollection.reloadData()
+        animateFor(viewModel.animation)
+    }
+
+    private let duration = TimeInterval(0.5)
+
+    private func animateFor(_ animation: DayDetailsViewModel.Animation) {
+        switch animation {
+        case .none:
+            UIView.animateKeyframes(withDuration: duration, delay: 0, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                    self.buttonBackground.backgroundColor = .primary
+                })
+
+                UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                    self.button.layer.opacity = 1
+                    self.delete.layer.opacity = 0
+                })
+            })
+        case .deleteDropArea:
+            UIView.animateKeyframes(withDuration: duration, delay: 0, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                    self.buttonBackground.backgroundColor = .red
+                })
+                UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                    self.button.layer.opacity = 0
+                    self.delete.layer.opacity = 1
+                })
+            })
+        }
     }
 
     private func configureLayout() {
         titleBackground.addAndConstrain(title)
         buttonBackground.addAndConstrain(button)
+        buttonBackground.addAndConstrain(delete)
 
         verticalStack.addArrangedSubview(titleBackground)
         verticalStack.addArrangedSubview(happeningsCollection)

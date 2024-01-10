@@ -9,8 +9,9 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
+    enum Animation { case none, deleteDropArea }
     static let create = String(localizationId: "button.addHappening")
-    static let delete = String(localizationId: "button.delete")
+    static let delete = String(localizationId: "dropToDelete")
 
     private static let titleFormatter = {
         let titleFormatter = DateFormatter()
@@ -30,6 +31,7 @@ struct DayDetailsViewModel {
     let currentMoment: Date
     let startOfDay: Date
     var pickerDate: Date
+    var animation: Animation
 
     init(
         currentMoment: Date,
@@ -60,6 +62,8 @@ struct DayDetailsViewModel {
                 of: startOfDay
             )!
         }()
+
+        self.animation = .none
     }
 
     func cellAt(index: Int) -> DayCellViewModel {
@@ -67,7 +71,7 @@ struct DayDetailsViewModel {
         return factory.makeViewModel(happening: happenings[index])
     }
 
-    mutating func handlePicker(date: Date) {
-        pickerDate = date
-    }
+    mutating func handlePicker(date: Date) { pickerDate = date }
+    mutating func enableDrag() { animation = .deleteDropArea }
+    mutating func disableDrag() { animation = .none }
 }

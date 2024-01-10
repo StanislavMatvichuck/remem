@@ -19,6 +19,8 @@
 "eventDetails.of" = "of";
 "eventDetails.placeholder" = "Ihr wöchentliches Ziel";
 
+"dropToDelete" = "Zum Löschen hierher fallen lassen";
+
 "weeklyGoal.week" = "Woche";
 "weeklyGoal.amount" = "menge";
 "weeklyGoal.goal" = "ziel";
