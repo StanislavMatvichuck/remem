@@ -13,7 +13,7 @@ extension TestingViewController where Controller == DayDetailsViewController {
     func make() {
         event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
         let container = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
-        sut = DayDetailsContainer(container).make() as? DayDetailsViewController
+        sut = DayDetailsContainer(container, startOfDay: DayIndex.referenceValue.date).make() as? DayDetailsViewController
         sut.loadViewIfNeeded()
     }
 

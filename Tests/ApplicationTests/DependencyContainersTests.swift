@@ -114,7 +114,7 @@ extension ApplicationContainer {
         let day = DayIndex.referenceValue
         let event = Event(name: "", dateCreated: day.date)
         let detailsContainer = EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event)
-        let dayDetailsContainer = DayDetailsContainer(detailsContainer)
+        let dayDetailsContainer = DayDetailsContainer(detailsContainer, startOfDay: DayIndex.referenceValue.date)
         return dayDetailsContainer.make() as! DayDetailsViewController
     }
 

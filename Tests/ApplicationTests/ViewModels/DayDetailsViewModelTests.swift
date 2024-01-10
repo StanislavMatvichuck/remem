@@ -34,7 +34,7 @@ final class DayDetailsViewModelTests: XCTestCase {
     func test_cellsCount_empty_zero() {
         let appC = ApplicationContainer(mode: .unitTest)
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
 
         XCTAssertEqual(sut.cellsCount, 0)
     }
@@ -43,7 +43,7 @@ final class DayDetailsViewModelTests: XCTestCase {
         let appC = ApplicationContainer(mode: .unitTest)
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
-        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
 
         XCTAssertEqual(sut.cellsCount, 1)
     }
@@ -52,7 +52,7 @@ final class DayDetailsViewModelTests: XCTestCase {
         let appC = ApplicationContainer(mode: .unitTest)
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
-        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event)).makeDayDetailsViewModel()
+        let sut = DayDetailsContainer(EventDetailsContainer(appC, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
 
         XCTAssertEqual(sut.cellAt(index: 0).text, "00:00")
     }
@@ -76,7 +76,7 @@ final class DayDetailsViewModelTests: XCTestCase {
         return DayDetailsViewModel(
             currentMoment: DayIndex.referenceValue.date,
             event: event,
-            isToday: false,
+            startOfDay: DayIndex.referenceValue.date,
             factory: DayItemViewModelFactoringStub(event: event),
             addHappeningHandler: { _ in }
         )
