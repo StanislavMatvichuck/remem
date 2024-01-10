@@ -12,6 +12,12 @@ struct DayDetailsViewModel {
     static let create = String(localizationId: "button.addHappening")
     static let delete = String(localizationId: "button.delete")
 
+    private static let titleFormatter = {
+        let titleFormatter = DateFormatter()
+        titleFormatter.dateFormat = "d MMMM"
+        return titleFormatter
+    }()
+
     private let event: Event
     private let factory: DayCellViewModelFactoring
 
@@ -29,6 +35,7 @@ struct DayDetailsViewModel {
         currentMoment: Date,
         event: Event,
         startOfDay: Date,
+        pickerDate: Date?,
         factory: DayCellViewModelFactoring,
         addHappeningHandler: @escaping AddHappeningHandler
     ) {
@@ -40,23 +47,27 @@ struct DayDetailsViewModel {
         self.startOfDay = startOfDay
         self.cellsCount = event.happenings(forDayIndex: DayIndex(startOfDay)).count
 
-        let titleFormatter = DateFormatter()
-        titleFormatter.dateFormat = "d MMMM"
+        self.title = Self.titleFormatter.string(for: startOfDay)!
 
-        self.title = titleFormatter.string(for: startOfDay)!
-
-        let hour = 0
-        let minute = 0
-        self.pickerDate = Calendar.current.date(
-            bySettingHour: hour,
-            minute: minute,
-            second: 0,
-            of: startOfDay
-        )!
+        self.pickerDate = pickerDate ?? {
+            let cal = Calendar.current
+            let hour = cal.dateComponents([.hour], from: currentMoment).hour ?? 0
+            let minute = cal.dateComponents([.minute], from: currentMoment).minute ?? 0
+            return cal.date(
+                bySettingHour: hour,
+                minute: minute,
+                second: 0,
+                of: startOfDay
+            )!
+        }()
     }
 
     func cellAt(index: Int) -> DayCellViewModel {
         let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
         return factory.makeViewModel(happening: happenings[index])
+    }
+
+    mutating func handlePicker(date: Date) {
+        pickerDate = date
     }
 }

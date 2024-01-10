@@ -13,13 +13,12 @@ final class DayDetailsViewController: UIViewController {
     let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
 
-    var viewModel: DayDetailsViewModel { didSet {
+    var viewModel: DayDetailsViewModel? { didSet {
         viewRoot.viewModel = viewModel
     } }
 
     init(_ factory: DayDetailsViewModelFactoring) {
         self.factory = factory
-        self.viewModel = factory.makeDayDetailsViewModel()
         self.viewRoot = DayDetailsView()
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,7 +28,7 @@ final class DayDetailsViewController: UIViewController {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        viewModel = factory.makeDayDetailsViewModel()
+        viewModel = factory.makeDayDetailsViewModel(pickerDate: nil)
         configureCollection()
         configureEventHandlers()
     }
@@ -44,15 +43,21 @@ final class DayDetailsViewController: UIViewController {
         viewRoot.buttonBackground.addGestureRecognizer(recogniser)
 
         viewRoot.buttonBackground.addInteraction(UIDropInteraction(delegate: self))
+
+        viewRoot.picker.addTarget(self, action: #selector(handlePicker), for: .valueChanged)
     }
 
     @objc private func handleButton() {
-        viewModel.addHappeningHandler(viewRoot.picker.date)
+        viewModel?.addHappeningHandler(viewRoot.picker.date)
         viewRoot.button.animateTapReceiving()
     }
 
     @objc private func handleClose() {
         presentingViewController?.dismiss(animated: true)
+    }
+
+    @objc private func handlePicker() {
+        viewModel?.handlePicker(date: viewRoot.picker.date)
     }
 }
 
@@ -88,7 +93,7 @@ extension DayDetailsViewController: UIDropInteractionDelegate {
         session.loadObjects(ofClass: NSString.self) { object in
             let indexString = object.first!
             if let index = Int(indexString as! String) {
-                self.viewModel.cellAt(index: index).remove()
+                self.viewModel?.cellAt(index: index).remove()
             }
         }
     }

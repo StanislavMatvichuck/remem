@@ -23,4 +23,6 @@ extension EventsListViewController: Updating { func update() { viewModel = facto
 extension WeekViewController: Updating { func update() { viewModel = factory.makeWeekViewModel() }}
 extension SummaryViewController: Updating { func update() { viewModel = factory.makeSummaryViewModel() }}
 extension ClockViewController: Updating { func update() { viewModel = factory.makeClockViewModel() }}
-extension DayDetailsViewController: Updating { func update() { viewModel = factory.makeDayDetailsViewModel() }}
+extension DayDetailsViewController: Updating { func update() {
+    viewModel = factory.makeDayDetailsViewModel(pickerDate: viewModel?.pickerDate)
+}}

@@ -8,9 +8,7 @@
 import Domain
 import Foundation
 
-protocol DayCellViewModelFactoring {
-    func makeViewModel(happening: Happening) -> DayCellViewModel
-}
+protocol DayCellViewModelFactoring { func makeViewModel(happening: Happening) -> DayCellViewModel }
 
 protocol EventCellViewModelFactoring {
     func makeEventItemViewModel(
@@ -20,13 +18,8 @@ protocol EventCellViewModelFactoring {
     ) -> EventCellViewModel
 }
 
-protocol EventItemViewModelRenameHandling {
-    func renameTapped(_: EventCellViewModel)
-}
-
-protocol FooterItemViewModelTapHandling {
-    func tapped(_ vm: FooterCellViewModel)
-}
+protocol EventItemViewModelRenameHandling { func renameTapped(_: EventCellViewModel) }
+protocol FooterItemViewModelTapHandling { func tapped(_ vm: FooterCellViewModel) }
 
 protocol FooterItemViewModeFactoring {
     func makeFooterItemViewModel(
@@ -43,7 +36,7 @@ protocol WeekSummaryViewModelFactoring {
     func makeViewModel(today: DayIndex, week: WeekIndex) -> WeekSummaryViewModel
 }
 
-protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel() -> DayDetailsViewModel }
+protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel }
 protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
 protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
 typealias EventsListViewModelHandling =

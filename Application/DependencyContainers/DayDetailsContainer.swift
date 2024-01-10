@@ -41,11 +41,12 @@ final class DayDetailsContainer:
         }
     }
 
-    func makeDayDetailsViewModel() -> DayDetailsViewModel {
+    func makeDayDetailsViewModel(pickerDate: Date? = nil) -> DayDetailsViewModel {
         DayDetailsViewModel(
             currentMoment: currentMoment,
             event: event,
             startOfDay: startOfDay,
+            pickerDate: pickerDate,
             factory: self
         ) { date in
             self.event.addHappening(date: date)
