@@ -42,5 +42,5 @@ final class DayCell: UICollectionViewCell {
         label.textColor = UIColor.text
     }
 
-    private func configureContent(_ vm: DayCellViewModel) { label.text = vm.text }
+    private func configureContent(_ vm: DayCellViewModel) { label.text = vm.time }
 }

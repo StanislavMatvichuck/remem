@@ -93,6 +93,7 @@
 		085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */; };
 		085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */; };
 		086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086055F82795EC0600DDDD02 /* ExtensionComparable.swift */; };
+		0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */; };
 		0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */; };
 		0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */; };
 		0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */; };
@@ -456,6 +457,7 @@
 		085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
 		086055F82795EC0600DDDD02 /* ExtensionComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionComparable.swift; sourceTree = "<group>"; };
+		0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModel.swift; sourceTree = "<group>"; };
 		0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewController.swift; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 				0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */,
 				088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */,
 				08D5D0E22B325DBC00B71512 /* WeekViewModelTests */,
+				0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1701,6 +1704,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */,
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
