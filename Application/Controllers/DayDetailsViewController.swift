@@ -30,17 +30,20 @@ final class DayDetailsViewController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         viewModel = factory.makeDayDetailsViewModel()
-        configureTableView()
+        configureCollection()
         configureEventHandlers()
     }
 
-    private func configureTableView() {
+    private func configureCollection() {
         viewRoot.happeningsCollection.delegate = self
+        viewRoot.happeningsCollection.dragDelegate = self
     }
 
     private func configureEventHandlers() {
         let recogniser = UITapGestureRecognizer(target: self, action: #selector(handleButton))
         viewRoot.buttonBackground.addGestureRecognizer(recogniser)
+
+        viewRoot.buttonBackground.addInteraction(UIDropInteraction(delegate: self))
     }
 
     @objc private func handleButton() {
@@ -60,5 +63,33 @@ extension DayDetailsViewController: UICollectionViewDelegate, UICollectionViewDe
     {
         let width = collectionView.bounds.width / 4
         return CGSize(width: width, height: width)
+    }
+}
+
+extension DayDetailsViewController: UICollectionViewDragDelegate {
+    func collectionView(
+        _: UICollectionView,
+        itemsForBeginning _: UIDragSession,
+        at index: IndexPath) -> [UIDragItem]
+    {
+        let provider = NSItemProvider(object: "\(index.row)" as NSString)
+        let dragItem = UIDragItem(itemProvider: provider)
+        return [dragItem]
+    }
+}
+
+extension DayDetailsViewController: UIDropInteractionDelegate {
+    func dropInteraction(_: UIDropInteraction, canHandle _: UIDropSession) -> Bool { true }
+    func dropInteraction(_: UIDropInteraction, sessionDidUpdate _: UIDropSession) -> UIDropProposal {
+        UIDropProposal(operation: .move)
+    }
+
+    func dropInteraction(_: UIDropInteraction, performDrop session: UIDropSession) {
+        session.loadObjects(ofClass: NSString.self) { object in
+            let indexString = object.first!
+            if let index = Int(indexString as! String) {
+                self.viewModel.cellAt(index: index).remove()
+            }
+        }
     }
 }

@@ -75,6 +75,16 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         assertCellHasTimeText(at: thirdCellIndex)
     }
 
+    func test_manyHappenings_allowsItemDrag() {
+        XCTAssertTrue(sut is UICollectionViewDragDelegate)
+        XCTAssertNotNil(sut.viewRoot.happeningsCollection.dragDelegate)
+    }
+
+    func test_manyHappenings_allowsDraggedItemsDrop() {
+        XCTAssertTrue(sut is UIDropInteractionDelegate)
+        XCTAssertNotEqual(sut.viewRoot.buttonBackground.interactions.count, 0, "interaction must be added to button to allow drop to delete")
+    }
+
     private func assertCellHasTimeText(
         at index: IndexPath,
         file: StaticString = #file,
