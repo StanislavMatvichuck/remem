@@ -9,7 +9,7 @@
 "eventsList.hint.empty" = "Add an event you want to track";
 "eventsList.hint.firstHappening" = "Swipe when event happened";
 "eventsList.hint.firstVisit" = "Press to see details";
-"eventsList.hint.swipeLeft" = "swipe left";
+"eventsList.hint.permanentlyVisible" = "long tap to change order";
 "eventsList.title" = "Events";
 "eventsList.new" = "Short title or emoji";
 "eventsList.timeSince" = "latest happening";

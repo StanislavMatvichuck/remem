@@ -9,7 +9,7 @@
 "eventsList.hint.empty" = "Добавь событие чтобы отслеживать";
 "eventsList.hint.firstHappening" = "Свайп когда событие произошло";
 "eventsList.hint.firstVisit" = "Нажми чтобы посмотреть подробности";
-"eventsList.hint.swipeLeft" = "свайп влево";
+"eventsList.hint.permanentlyVisible" = "длинное нажатие чтобы поменять порядок";
 "eventsList.title" = "События";
 "eventsList.new" = "Короткое имя или эмодзи";
 "eventsList.timeSince" = "последнее происшествие";

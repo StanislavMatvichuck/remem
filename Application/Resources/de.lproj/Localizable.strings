@@ -9,7 +9,7 @@
 "eventsList.hint.empty" = "Ereignis zur Verfolgung hinzufügen";
 "eventsList.hint.firstHappening" = "Wischen Sie, wenn das Ereignis passiert ist";
 "eventsList.hint.firstVisit" = "Klicken, um Details anzuzeigen";
-"eventsList.hint.swipeLeft" = "nach links wischen";
+"eventsList.hint.permanentlyVisible" = "Langes Tippen, um die Reihenfolge zu ändern";
 "eventsList.title" = "Ereignisse";
 "eventsList.new" = "Kurzname oder emoji";
 "eventsList.timeSince" = "neustes geschehen";

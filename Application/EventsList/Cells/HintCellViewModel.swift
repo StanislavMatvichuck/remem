@@ -20,7 +20,7 @@ struct HintCellViewModel: EventsListItemViewModeling {
             case .addFirstEvent: return String(localizationId: "eventsList.hint.empty")
             case .swipeFirstTime: return String(localizationId: "eventsList.hint.firstHappening")
             case .pressMe: return String(localizationId: "eventsList.hint.firstVisit")
-            case .permanentlyVisible: return String(localizationId: "eventsList.hint.swipeLeft")
+            case .permanentlyVisible: return String(localizationId: "eventsList.hint.permanentlyVisible")
             }
         }
     }
