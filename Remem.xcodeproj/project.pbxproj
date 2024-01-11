@@ -659,22 +659,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0812D8BD2966F0910010C66D /* EventsListViewController */ = {
-			isa = PBXGroup;
-			children = (
-				0875E27B298EF91A00622125 /* EventsListViewController.swift */,
-				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
-			);
-			path = EventsListViewController;
-			sourceTree = "<group>";
-		};
 		0816B6E32B500B2B00A29815 /* DayDetails */ = {
 			isa = PBXGroup;
 			children = (
-				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
-				08F97A3D2950769100AB7051 /* DayCellViewModel.swift */,
 				086E39732981431C00CCE80E /* DayDetailsContainer.swift */,
 				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
+				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
+				08F97A3D2950769100AB7051 /* DayCellViewModel.swift */,
 				08E174502B292A990018256D /* DayDetailsPresentationController */,
 				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 				08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */,
@@ -813,6 +804,20 @@
 			path = ControllersInfrastructure;
 			sourceTree = "<group>";
 		};
+		0816B6F32B50124800A29815 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
+				085A2C2F29F15144005C6E5E /* EventCell */,
+				08F50DC82965EF5300B65CDF /* FooterCell.swift */,
+				08F50DC42965E70F00B65CDF /* FooterCellViewModel.swift */,
+				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
+				08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */,
+				08677BD229F7C63E00AD5383 /* OrderingCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0826AC9028C86ECE0021D607 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -907,6 +912,7 @@
 		085A2C2F29F15144005C6E5E /* EventCell */ = {
 			isa = PBXGroup;
 			children = (
+				08EC438128BA365400755B54 /* EventCellViewModel.swift */,
 				089B37892A0A3EC500422971 /* AnimatedProgressView.swift */,
 				080F9F3029EFC6710013CBFE /* AnimatingHappeningCreation.swift */,
 				080F9F2E29EEEB600013CBFE /* AnimatingSwipe.swift */,
@@ -922,6 +928,8 @@
 		08677BD229F7C63E00AD5383 /* OrderingCell */ = {
 			isa = PBXGroup;
 			children = (
+				08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */,
+				08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */,
 				08677BD029F7C59800AD5383 /* OrderingCell.swift */,
 				08677BD329F7C65700AD5383 /* OrderingCellView.swift */,
 				08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */,
@@ -973,19 +981,10 @@
 			path = Week;
 			sourceTree = "<group>";
 		};
-		087AFFBE2A13F4000005B4D9 /* EventsListView */ = {
-			isa = PBXGroup;
-			children = (
-				087AFFC52A13FA9E0005B4D9 /* EventInputView */,
-				08D512352787144800C2037F /* EventsListView.swift */,
-				087AFFC12A13F7840005B4D9 /* InputView.swift */,
-			);
-			path = EventsListView;
-			sourceTree = "<group>";
-		};
 		087AFFC52A13FA9E0005B4D9 /* EventInputView */ = {
 			isa = PBXGroup;
 			children = (
+				087AFFC12A13F7840005B4D9 /* InputView.swift */,
 				087AFFBF2A13F4610005B4D9 /* EmojiView.swift */,
 				087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */,
 				0898017827FAF17C0014E110 /* EventInputView.swift */,
@@ -1066,23 +1065,23 @@
 		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				0816B6E62B500CBB00A29815 /* ControllersInfrastructure */,
-				0816B6E52B500BE600A29815 /* Widget */,
-				0816B6E42B500BBF00A29815 /* PDF */,
-				0816B6E32B500B2B00A29815 /* DayDetails */,
+				08CC506B2906DEEC00840385 /* main.swift */,
+				08D5121D27870D2500C2037F /* AppDelegate.swift */,
+				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
+				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
+				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
 				08DFFADF2B5009080063B389 /* Clock */,
-				08DFFADE2B5008D40063B389 /* Summary */,
-				08DFFADD2B5008730063B389 /* Week */,
+				0816B6E62B500CBB00A29815 /* ControllersInfrastructure */,
+				0816B6E32B500B2B00A29815 /* DayDetails */,
 				08DFFADC2B5008260063B389 /* EventDetails */,
 				08DFFADB2B5007B50063B389 /* EventsList */,
-				08C52E7929CA63E40056C116 /* Navigation */,
-				08CC506B2906DEEC00840385 /* main.swift */,
-				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
-				08D5121D27870D2500C2037F /* AppDelegate.swift */,
-				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
-				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
 				08D5123E278716DA00C2037F /* Helpers */,
+				08C52E7929CA63E40056C116 /* Navigation */,
+				0816B6E42B500BBF00A29815 /* PDF */,
 				08D512312787135300C2037F /* Resources */,
+				08DFFADE2B5008D40063B389 /* Summary */,
+				08DFFADD2B5008730063B389 /* Week */,
+				0816B6E52B500BE600A29815 /* Widget */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1137,21 +1136,14 @@
 		08DFFADB2B5007B50063B389 /* EventsList */ = {
 			isa = PBXGroup;
 			children = (
-				085A2C2F29F15144005C6E5E /* EventCell */,
-				08EC438128BA365400755B54 /* EventCellViewModel.swift */,
+				0816B6F32B50124800A29815 /* Cells */,
+				087AFFC52A13FA9E0005B4D9 /* EventInputView */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
-				087AFFBE2A13F4000005B4D9 /* EventsListView */,
-				0812D8BD2966F0910010C66D /* EventsListViewController */,
+				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
+				08D512352787144800C2037F /* EventsListView.swift */,
+				0875E27B298EF91A00622125 /* EventsListViewController.swift */,
 				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
-				08F50DC82965EF5300B65CDF /* FooterCell.swift */,
-				08F50DC42965E70F00B65CDF /* FooterCellViewModel.swift */,
-				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
-				08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */,
-				08677BD229F7C63E00AD5383 /* OrderingCell */,
-				08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */,
-				08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */,
-				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 			);
 			path = EventsList;
 			sourceTree = "<group>";
