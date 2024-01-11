@@ -22,9 +22,7 @@
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		081C431C29FFC46600ACC4D7 /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081C431D29FFC46600ACC4D7 /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
-		081C431E29FFC46600ACC4D7 /* DayTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1855298AC8C100DBC78D /* DayTimeline.swift */; };
 		081C431F29FFC46600ACC4D7 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */; };
-		081C432029FFC46600ACC4D7 /* WeekTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C800298AD3590048EC12 /* WeekTimeline.swift */; };
 		081C432129FFC46600ACC4D7 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
 		081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
 		0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */; };
@@ -96,10 +94,6 @@
 		0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */; };
 		0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */; };
 		0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */; };
-		0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */; };
-		0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */; };
-		0865DC532B1CD45200E128FB /* VisualisationMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */; };
-		0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */; };
 		08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */; };
 		08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingCell.swift */; };
 		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
@@ -139,9 +133,7 @@
 		087ED42A28D0A78A0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A678E28D1E2AA00889A97 /* EventsQueryingCommanding.swift */; };
 		0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C806298AE5040048EC12 /* ExtensionEvent.swift */; };
-		0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */; };
 		0887C810298AE6280048EC12 /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
-		0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */; };
 		088AF7462B34D99F0039EF83 /* WeekPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AF7452B34D99F0039EF83 /* WeekPageView.swift */; };
 		088AF7482B34F8E40039EF83 /* WeekDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AF7472B34F8E40039EF83 /* WeekDayView.swift */; };
 		088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */; };
@@ -176,7 +168,6 @@
 		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* WatchingTests.swift */; };
 		08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* Watching.swift */; };
-		08A376022A1795F20037D43A /* WeekSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */; };
 		08A376072A182A4D0037D43A /* MakingSnapshotsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A376062A182A4D0037D43A /* MakingSnapshotsRowView.swift */; };
 		08A79F5629DEC30300855146 /* DayDetailsAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */; };
 		08AF544729373D9200032487 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
@@ -460,10 +451,6 @@
 		0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModel.swift; sourceTree = "<group>"; };
-		0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewController.swift; sourceTree = "<group>"; };
-		0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingView.swift; sourceTree = "<group>"; };
-		0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewModel.swift; sourceTree = "<group>"; };
-		0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualisationMakingViewControllerTests.swift; sourceTree = "<group>"; };
 		08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewModel.swift; sourceTree = "<group>"; };
 		08677BD029F7C59800AD5383 /* OrderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCell.swift; sourceTree = "<group>"; };
 		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
@@ -502,9 +489,6 @@
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0880C3B528009DFA00970254 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTimelineTests.swift; sourceTree = "<group>"; };
-		0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTimelineTests.swift; sourceTree = "<group>"; };
-		0887C800298AD3590048EC12 /* WeekTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTimeline.swift; sourceTree = "<group>"; };
 		0887C802298AD39E0048EC12 /* WeekIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekIndex.swift; sourceTree = "<group>"; };
 		0887C804298AD9B60048EC12 /* TimelineTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTesting.swift; sourceTree = "<group>"; };
 		0887C806298AE5040048EC12 /* ExtensionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEvent.swift; sourceTree = "<group>"; };
@@ -542,7 +526,6 @@
 		08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModelTests.swift; sourceTree = "<group>"; };
 		08A331E729A8EAFE000B68A1 /* WatchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingTests.swift; sourceTree = "<group>"; };
 		08A331E929A8EBC3000B68A1 /* Watching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watching.swift; sourceTree = "<group>"; };
-		08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSummaryViewModel.swift; sourceTree = "<group>"; };
 		08A376062A182A4D0037D43A /* MakingSnapshotsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakingSnapshotsRowView.swift; sourceTree = "<group>"; };
 		08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimationsHelper.swift; sourceTree = "<group>"; };
 		08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingDayDetailsViewController.swift; sourceTree = "<group>"; };
@@ -603,7 +586,6 @@
 		08F97A3D2950769100AB7051 /* DayCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellViewModel.swift; sourceTree = "<group>"; };
 		08F9C5EB282BD35F007EAD47 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
-		08FE1855298AC8C100DBC78D /* DayTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTimeline.swift; sourceTree = "<group>"; };
 		08FE1857298AC90900DBC78D /* DayIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -709,8 +691,6 @@
 				0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */,
 				085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */,
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
-				0865DC522B1CD45200E128FB /* VisualisationMakingViewModel.swift */,
-				08A376012A1795F20037D43A /* WeekSummaryViewModel.swift */,
 				085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */,
 				08D5D0E52B32660000B71512 /* WeekDayViewModel.swift */,
 				087433C22B33814C00336FC3 /* WeekPageViewModel.swift */,
@@ -897,14 +877,6 @@
 			path = EventCell;
 			sourceTree = "<group>";
 		};
-		0865DC4F2B1CB3C100E128FB /* Visualisation */ = {
-			isa = PBXGroup;
-			children = (
-				0865DC502B1CD35E00E128FB /* VisualisationMakingView.swift */,
-			);
-			path = Visualisation;
-			sourceTree = "<group>";
-		};
 		08677BD229F7C63E00AD5383 /* OrderingCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,7 +909,6 @@
 			isa = PBXGroup;
 			children = (
 				087433BC2B3375D400336FC3 /* Week */,
-				0865DC4F2B1CB3C100E128FB /* Visualisation */,
 				085896B32A2653F400390C76 /* Pdf */,
 				086DC6D3288058E70048F22F /* Cells */,
 				0879AC8F2879B12400D8DD8E /* ClockView */,
@@ -1050,8 +1021,6 @@
 		0887C812298B0C460048EC12 /* Timelines */ = {
 			isa = PBXGroup;
 			children = (
-				0887C7FC298AC9FF0048EC12 /* DayTimelineTests.swift */,
-				0887C7FE298AD30E0048EC12 /* WeekTimelineTests.swift */,
 				0887C804298AD9B60048EC12 /* TimelineTesting.swift */,
 			);
 			path = Timelines;
@@ -1066,7 +1035,6 @@
 				080C41792986ACE400C1F54F /* SummaryViewControllerTests.swift */,
 				08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */,
 				08F467EB29BF3B2600D35AB6 /* PDFWritingViewControllerTests.swift */,
-				0865DC562B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift */,
 				089AC5F32B3C60F000577781 /* WeekViewControllerTests.swift */,
 			);
 			path = ControllersIntegrationTests;
@@ -1084,8 +1052,6 @@
 		089C5B9429A7D4A000B1B977 /* Timelines */ = {
 			isa = PBXGroup;
 			children = (
-				08FE1855298AC8C100DBC78D /* DayTimeline.swift */,
-				0887C800298AD3590048EC12 /* WeekTimeline.swift */,
 				08FE1857298AC90900DBC78D /* DayIndex.swift */,
 				0887C802298AD39E0048EC12 /* WeekIndex.swift */,
 				081391DD29B8D25A008069FB /* DateIndexing.swift */,
@@ -1205,7 +1171,6 @@
 				08396EE929A64B5900281E51 /* WidgetViewController.swift */,
 				08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */,
 				08F467EE29BF3B7800D35AB6 /* PDFWritingViewController.swift */,
-				0865DC4D2B1CB34E00E128FB /* VisualisationMakingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1635,10 +1600,8 @@
 				08855C6929278F7B0067D196 /* EventsQueryingCommanding.swift in Sources */,
 				081C431F29FFC46600ACC4D7 /* WeekDay.swift in Sources */,
 				081C431D29FFC46600ACC4D7 /* MinuteIndex.swift in Sources */,
-				081C432029FFC46600ACC4D7 /* WeekTimeline.swift in Sources */,
 				081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
-				081C431E29FFC46600ACC4D7 /* DayTimeline.swift in Sources */,
 				081C431C29FFC46600ACC4D7 /* DateIndexing.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
 			);
@@ -1706,9 +1669,7 @@
 			files = (
 				0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */,
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
-				0887C80F298AE6280048EC12 /* WeekTimelineTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
-				0865DC572B1CD50800E128FB /* VisualisationMakingViewControllerTests.swift in Sources */,
 				089AC5F42B3C60F000577781 /* WeekViewControllerTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
@@ -1745,7 +1706,6 @@
 				08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */,
 				085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */,
 				08E454B929C31C2B006AF35B /* TestingPdfViewController.swift in Sources */,
-				0887C811298AE6280048EC12 /* DayTimelineTests.swift in Sources */,
 				085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1764,7 +1724,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
-				0865DC532B1CD45200E128FB /* VisualisationMakingViewModel.swift in Sources */,
 				087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */,
@@ -1781,7 +1740,6 @@
 				08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */,
-				0865DC4E2B1CB34E00E128FB /* VisualisationMakingViewController.swift in Sources */,
 				08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInputView.swift in Sources */,
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
@@ -1790,7 +1748,6 @@
 				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
 				0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
-				08A376022A1795F20037D43A /* WeekSummaryViewModel.swift in Sources */,
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
 				081015582B331656004CE297 /* WeekContainer.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
@@ -1873,7 +1830,6 @@
 				08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */,
 				089AC5F62B3C61C300577781 /* WeekViewController.swift in Sources */,
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
-				0865DC512B1CD35E00E128FB /* VisualisationMakingView.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */,

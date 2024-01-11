@@ -32,10 +32,6 @@ protocol HintItemViewModelFactoring {
     func makeHintItemViewModel(events: [Event]) -> HintCellViewModel
 }
 
-protocol WeekSummaryViewModelFactoring {
-    func makeViewModel(today: DayIndex, week: WeekIndex) -> WeekSummaryViewModel
-}
-
 protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel }
 protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
 protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }

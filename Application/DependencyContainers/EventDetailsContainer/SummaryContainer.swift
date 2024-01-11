@@ -16,7 +16,7 @@ final class SummaryContainer:
     let commander: UpdatingCommander
 
     var event: Event { parent.event }
-    var today: DayIndex { DayIndex(parent.currentMoment) }
+    var currentMoment: Date { parent.currentMoment }
 
     init(parent: EventDetailsContainer) {
         self.parent = parent
@@ -30,9 +30,6 @@ final class SummaryContainer:
     }
 
     func makeSummaryViewModel() -> SummaryViewModel {
-        SummaryViewModel(
-            event: event,
-            today: today
-        )
+        SummaryViewModel(event: event, createdUntil: currentMoment)
     }
 }

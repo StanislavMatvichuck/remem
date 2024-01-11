@@ -133,7 +133,7 @@ final class SummaryViewModelTests: XCTestCase {
             event.addHappening(date: DayIndex.referenceValue.adding(days: i).date)
         }
 
-        sut = SummaryViewModel(event: event, today: today)
+        sut = SummaryViewModel(event: event, createdUntil: today.date)
 
         XCTAssertEqual(weekAverage, "7")
     }
@@ -146,27 +146,27 @@ final class SummaryViewModelTests: XCTestCase {
     private var daysTracked: String { sut.items[4].value }
 
     private func arrange(
-        dateCreated: Date = .now,
+        dateCreated: Date = DayIndex.referenceValue.date,
         happenings: [Happening] = []
     ) {
         event = Event(name: "Event", dateCreated: dateCreated)
 
         for happening in happenings { event.addHappening(date: happening.dateCreated) }
 
-        sut = SummaryViewModel(event: event, today: DayIndex(.now))
+        sut = SummaryViewModel(event: event, createdUntil: DayIndex.referenceValue.date)
     }
 
     private var yesterday: Date {
         Calendar.current.date(
             byAdding: DateComponents(day: -1),
-            to: .now
+            to: DayIndex.referenceValue.date
         )!
     }
 
     private var weekAgo: Date {
         Calendar.current.date(
             byAdding: DateComponents(day: -7),
-            to: .now
+            to: DayIndex.referenceValue.date
         )!
     }
 }

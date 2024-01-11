@@ -10,10 +10,12 @@ import Foundation
 
 struct SummaryViewModel {
     private let event: Event
+    private let createdUntil: Date
     let items: [SummaryCellViewModel]
 
-    init(event: Event, today: DayIndex) {
+    init(event: Event, createdUntil: Date) {
         self.event = event
+        self.createdUntil = createdUntil
 
         let averageNumberFormatter: NumberFormatter = {
             let formatter = NumberFormatter()
@@ -27,19 +29,33 @@ struct SummaryViewModel {
         }
 
         let weekAverageAmount: String = {
-            var timeline = WeekTimeline<Bool>()
-            timeline[WeekIndex(event.dateCreated)] = true
-            timeline[WeekIndex(today.date)] = true
-            let weeksAmount = timeline.count
-            let number = NSNumber(value: Double(totalAmount) / Double(weeksAmount))
+            let startOfFirstWeek = WeekIndex(event.dateCreated).dayIndex
+            let startOfLastWeek = WeekIndex(createdUntil).dayIndex
+            let endOfLastWeek = startOfLastWeek.adding(days: 7)
+
+            let calendar = Calendar.current
+            let weeksDifference = calendar.dateComponents(
+                [.weekOfYear],
+                from: startOfFirstWeek.date,
+                to: endOfLastWeek.date
+            ).weekOfYear ?? 0
+
+            let number = NSNumber(value: Double(totalAmount) / Double(weeksDifference))
             return averageNumberFormatter.string(from: number)!
         }()
 
         let daysTrackedAmount: Int = {
-            var timeline = DayTimeline<Bool>()
-            timeline[DayIndex(event.dateCreated)] = true
-            timeline[today] = true
-            return timeline.count
+            let firstDay = DayIndex(event.dateCreated)
+            let lastDay = DayIndex(createdUntil)
+
+            let calendar = Calendar.current
+            let daysDifference = calendar.dateComponents(
+                [.day],
+                from: firstDay.date,
+                to: lastDay.date
+            ).day ?? 0
+
+            return daysDifference + 1
         }()
 
         let dayAverageAmount = {
@@ -51,12 +67,16 @@ struct SummaryViewModel {
 
         let daysSinceLastHappeningAmount: String = {
             guard let lastHappeningDate = event.happenings.last?.dateCreated else { return "0" }
+            let lastDay = DayIndex(createdUntil)
 
-            var timeline = DayTimeline<Bool>()
-            timeline[DayIndex(lastHappeningDate)] = true
-            timeline[today] = true
+            let calendar = Calendar.current
+            let daysDifference = calendar.dateComponents(
+                [.day],
+                from: lastHappeningDate,
+                to: lastDay.date
+            ).day ?? 0
 
-            return String(timeline.count - 1)
+            return String(daysDifference)
         }()
 
         self.items = [
