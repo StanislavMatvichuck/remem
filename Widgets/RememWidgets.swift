@@ -24,6 +24,8 @@ struct RememWidgets: Widget, PreviewProvider {
         .configurationDisplayName(String(localizationId: "widget.title"))
         .description(String(localizationId: "widget.subtitle"))
         .supportedFamilies([.systemMedium])
+        .containerBackgroundRemovable(false)
+        .contentMarginsDisabled()
     }
 
     // PreviewProvider

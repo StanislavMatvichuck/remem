@@ -31,7 +31,6 @@ struct EventsList: View {
         ZStack(
             alignment: .center,
             content: {
-                Color(uiColor: UIColor.bg).ignoresSafeArea()
                 VStack(spacing: spacing) {
                     ForEach(items.indices) {
                         EventRow(item: items[$0])
@@ -43,6 +42,8 @@ struct EventsList: View {
                     trailing: 0
                 ))
             }
-        )
+        ).containerBackground(for: .widget, content: {
+            Color(uiColor: UIColor.bg)
+        })
     }
 }
