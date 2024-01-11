@@ -9,7 +9,7 @@
 "eventsList.hint.empty" = "Додай подію яку бажаєш відслідковувати";
 "eventsList.hint.firstHappening" = "Свайп коли подія відбулася";
 "eventsList.hint.firstVisit" = "Тиць щоб подивитись подробиці";
-"eventsList.hint.swipeLeft" = "свайп ліворуч";
+"eventsList.hint.permanentlyVisible" = "довге натискання щоб змінити порядок";
 "eventsList.title" = "Події";
 "eventsList.new" = "Коротка назва або емодзі";
 "eventsList.timeSince" = "остання подія";
