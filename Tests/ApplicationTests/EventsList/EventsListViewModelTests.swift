@@ -125,6 +125,23 @@ final class EventsListViewModelTests: XCTestCase {
         XCTAssertNil(sut.eventCellIdNext(to: c))
     }
     
+    func test_isEventAtIndex_noEvents_firstAndSecondIndex_false() {
+        XCTAssertFalse(sut.isEventAt(index: 0))
+        XCTAssertFalse(sut.isEventAt(index: 1))
+    }
+    
+    func test_isEventAtIndex_oneEvent_firstIndex_false() {
+        configureSUTWithOneEvent()
+        
+        XCTAssertFalse(sut.isEventAt(index: 0))
+    }
+    
+    func test_isEventAtIndex_oneEvent_secondIndex_true() {
+        configureSUTWithOneEvent()
+        
+        XCTAssertTrue(sut.isEventAt(index: 1))
+    }
+    
     private func configureSUTWithThreeEvents() -> (a: String, b: String, c: String) {
         let eventA = Event(name: "A", dateCreated: DayIndex.referenceValue.date)
         let eventB = Event(name: "B", dateCreated: DayIndex.referenceValue.date)

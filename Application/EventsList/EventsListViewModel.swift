@@ -99,6 +99,8 @@ struct EventsListViewModel {
         return nil
     }
 
+    func isEventAt(index: Int) -> Bool { cells[index] as? EventCellViewModel != nil }
+
     private mutating func configure(animation: EventCellViewModel.Animations, for cellId: String) {
         for (index, cell) in cells.enumerated() {
             guard

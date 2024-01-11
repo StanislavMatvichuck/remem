@@ -67,6 +67,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     private func setupTableView() {
         let table = viewRoot.table
         table.delegate = self
+        table.dragDelegate = self
         dataSource.register(table)
     }
 
@@ -75,8 +76,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 
     private func setupTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            self?.update()
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
+            [weak self] _ in self?.update()
         }
     }
 
@@ -106,5 +107,18 @@ extension EventsListViewController:
 
     func tapped(_: FooterCellViewModel) {
         viewModel.showInput()
+    }
+}
+
+extension EventsListViewController: UITableViewDragDelegate {
+    func tableView(
+        _: UITableView,
+        itemsForBeginning _: UIDragSession,
+        at indexPath: IndexPath
+    ) -> [UIDragItem] {
+        guard viewModel.isEventAt(index: indexPath.row) else { return [] }
+        let provider = NSItemProvider(object: "\(indexPath.row)" as NSString)
+        let dragItem = UIDragItem(itemProvider: provider)
+        return [dragItem]
     }
 }

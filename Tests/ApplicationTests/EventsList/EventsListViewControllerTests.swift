@@ -209,6 +209,11 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     func test_singleEvent_tapped_showsDetails() {
         // TODO: write this test
     }
+    
+    func test_allowsEventsDrag() {
+        XCTAssertTrue(sut is UITableViewDragDelegate)
+        XCTAssertNotNil(sut.viewRoot.table.dragDelegate)
+    }
 }
 
 struct VisitedEventListFactory: EventsListViewModelFactoring {
