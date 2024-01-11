@@ -59,9 +59,8 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
     }
 
     func register(_ table: UITableView) {
-        table.register(EventCell.self, forCellReuseIdentifier: EventCell.reuseIdentifier)
         table.register(HintCell.self, forCellReuseIdentifier: HintCell.reuseIdentifier)
-        table.register(OrderingCell.self, forCellReuseIdentifier: OrderingCell.reuseIdentifier)
+        table.register(EventCell.self, forCellReuseIdentifier: EventCell.reuseIdentifier)
         table.register(FooterCell.self, forCellReuseIdentifier: FooterCell.reuseIdentifier)
     }
 
@@ -75,16 +74,12 @@ final class EventsListDataSource: UITableViewDiffableDataSource<Int, String> {
             let cell = table.dequeueReusableCell(withIdentifier: HintCell.reuseIdentifier, for: forIndex) as! HintCell
             cell.viewModel = viewModel
             return cell
-        case let viewModel as OrderingCellViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: OrderingCell.reuseIdentifier, for: forIndex) as! OrderingCell
+        case let viewModel as EventCellViewModel:
+            let cell = table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier, for: forIndex) as! EventCell
             cell.viewModel = viewModel
             return cell
         case let viewModel as FooterCellViewModel:
             let cell = table.dequeueReusableCell(withIdentifier: FooterCell.reuseIdentifier, for: forIndex) as! FooterCell
-            cell.viewModel = viewModel
-            return cell
-        case let viewModel as EventCellViewModel:
-            let cell = table.dequeueReusableCell(withIdentifier: EventCell.reuseIdentifier, for: forIndex) as! EventCell
             cell.viewModel = viewModel
             return cell
         default: fatalError("unknown cell type")

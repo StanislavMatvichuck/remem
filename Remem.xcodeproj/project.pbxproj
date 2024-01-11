@@ -91,11 +91,6 @@
 		0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */; };
 		0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */; };
 		0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */; };
-		08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */; };
-		08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD029F7C59800AD5383 /* OrderingCell.swift */; };
-		08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD329F7C65700AD5383 /* OrderingCellView.swift */; };
-		08677BD629F7E65A00AD5383 /* OrderingCellViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */; };
-		08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */; };
 		08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -443,11 +438,6 @@
 		0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModel.swift; sourceTree = "<group>"; };
-		08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewModel.swift; sourceTree = "<group>"; };
-		08677BD029F7C59800AD5383 /* OrderingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCell.swift; sourceTree = "<group>"; };
-		08677BD329F7C65700AD5383 /* OrderingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellView.swift; sourceTree = "<group>"; };
-		08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellViewItem.swift; sourceTree = "<group>"; };
-		08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingCellItemViewModel.swift; sourceTree = "<group>"; };
 		08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionEventsQuerySorter.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
@@ -813,7 +803,6 @@
 				08F50DC42965E70F00B65CDF /* FooterCellViewModel.swift */,
 				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
 				08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */,
-				08677BD229F7C63E00AD5383 /* OrderingCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -923,18 +912,6 @@
 				089B37832A0A271D00422971 /* TimeSinceView.swift */,
 			);
 			path = EventCell;
-			sourceTree = "<group>";
-		};
-		08677BD229F7C63E00AD5383 /* OrderingCell */ = {
-			isa = PBXGroup;
-			children = (
-				08677BD729F7F61B00AD5383 /* OrderingCellItemViewModel.swift */,
-				08677BCE29F7C49600AD5383 /* OrderingCellViewModel.swift */,
-				08677BD029F7C59800AD5383 /* OrderingCell.swift */,
-				08677BD329F7C65700AD5383 /* OrderingCellView.swift */,
-				08677BD529F7E65A00AD5383 /* OrderingCellViewItem.swift */,
-			);
-			path = OrderingCell;
 			sourceTree = "<group>";
 		};
 		0867A2CA28D469F400E0842C /* DataLayer */ = {
@@ -1698,7 +1675,6 @@
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
-				08677BD829F7F61B00AD5383 /* OrderingCellItemViewModel.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
@@ -1712,7 +1688,6 @@
 				08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */,
-				08677BCF29F7C49600AD5383 /* OrderingCellViewModel.swift in Sources */,
 				0898017927FAF17C0014E110 /* EventInputView.swift in Sources */,
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
@@ -1760,7 +1735,6 @@
 				0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,
-				08677BD629F7E65A00AD5383 /* OrderingCellViewItem.swift in Sources */,
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				080F9F2729ED51810013CBFE /* EventCell.swift in Sources */,
 				084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */,
@@ -1777,7 +1751,6 @@
 				08F50DC92965EF5300B65CDF /* FooterCell.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
-				08677BD129F7C59800AD5383 /* OrderingCell.swift in Sources */,
 				085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */,
 				086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
@@ -1796,7 +1769,6 @@
 				080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */,
 				087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */,
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
-				08677BD429F7C65700AD5383 /* OrderingCellView.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */,
@@ -1926,6 +1898,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1955,6 +1930,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2283,7 +2261,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2340,7 +2318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2359,7 +2337,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2394,7 +2372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 35;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;

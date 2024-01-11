@@ -46,22 +46,6 @@ final class EventsListContainer:
 
         let hintVm = makeHintItemViewModel(events: events)
 
-        let orderingItems = EventsQuerySorter.allCases.map {
-            OrderingCellItemViewModel(sorter: $0) { newSorter in
-                let currentSorter = self.orderingRepository.get()
-
-                if newSorter != currentSorter {
-                    self.orderingRepository.set(current: newSorter)
-                    self.updater.update()
-                }
-            }
-        }
-
-        let orderingVm = OrderingCellViewModel(
-            items: orderingItems,
-            selectedItemIndex: orderingItems.firstIndex { $0.hasSame(sorter: ordering) } ?? 0
-        )
-
         let eventsViewModels = events.enumerated().map { index, event in
             let userShouldSeeGestureHint = hintVm.title == HintCellViewModel.HintState.swipeFirstTime.text
             let isFirstRow = index == 0
@@ -76,10 +60,7 @@ final class EventsListContainer:
 
         var items = [any EventsListItemViewModeling]()
 
-        if uiTestingDisabled {
-            items.append(hintVm)
-            if events.count >= 2 { items.append(orderingVm) }
-        }
+        if uiTestingDisabled { items.append(hintVm) }
 
         items.append(contentsOf: eventsViewModels)
         items.append(footerVm)
