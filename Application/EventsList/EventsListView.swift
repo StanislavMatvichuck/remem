@@ -26,5 +26,13 @@ final class EventsListView: UIView {
         addAndConstrain(input)
     }
 
+    func configureContent(_ viewModel: EventsListViewModel) {
+        if let renamedItem = viewModel.renamedItem {
+            input.rename(oldName: renamedItem.title)
+        } else if viewModel.inputVisible {
+            input.show(value: viewModel.inputContent)
+        }
+    }
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

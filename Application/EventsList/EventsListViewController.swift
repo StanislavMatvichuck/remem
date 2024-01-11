@@ -23,13 +23,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
             if let oldValue { viewModel = viewModel.configureAnimationForEventCells(oldValue) }
 
             dataSource.update(viewModel, oldValue)
-
-            if let renamedItem = viewModel.renamedItem {
-                viewRoot.input.rename(oldName: renamedItem.title)
-            } else if viewModel.inputVisible {
-                viewRoot.input.show(value: viewModel.inputContent)
-            }
-
+            viewRoot.configureContent(viewModel)
             widgetUpdater.update(viewModel)
         }
     }
