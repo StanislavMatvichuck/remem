@@ -7,17 +7,9 @@
 
 import Domain
 
-protocol EventsListItemViewModeling: Equatable {
-    var identifier: String { get }
-}
-
-extension EventsListItemViewModeling {
-    func hasSame(identifier: String) -> Bool {
-        self.identifier == identifier
-    }
-}
-
 struct EventsListViewModel {
+    enum Section: Int, CaseIterable { case hint, events, createEvent }
+
     static let title = String(localizationId: "eventsList.title")
 
     typealias AddEventHandler = (String) -> Void
@@ -26,88 +18,75 @@ struct EventsListViewModel {
     var inputVisible: Bool = false
     var inputContent: String = ""
 
-    private var cells: [any EventsListItemViewModeling]
+    private var cells: [Section: [AnyHashable]]
 
     let addHandler: AddEventHandler
 
     init(
-        items: [any EventsListItemViewModeling],
+        cells: [Section: [AnyHashable]],
         addHandler: @escaping AddEventHandler
     ) {
-        self.cells = items
+        self.cells = cells
         self.addHandler = addHandler
     }
 
-    mutating func showInput() {
-        inputVisible = true
-    }
+    private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }
 
-    var cellsIdentifiers: [String] { cells.map { $0.identifier } }
+    mutating func showInput() { inputVisible = true }
 
-    func cellAt(identifier: String) -> (any EventsListItemViewModeling)? {
-        cells.first(where: { $0.identifier == identifier })
-    }
-
-    var eventCells: [EventCellViewModel] {
-        cells.filter { type(of: $0) is EventCellViewModel.Type } as! [EventCellViewModel]
-    }
-
-    func configureAnimationForEventCells(_ oldValue: EventsListViewModel) -> EventsListViewModel {
-        var configured = self
-
-        for oldEvent in oldValue.eventCells {
+    mutating func configureAnimationForEventCells(_ oldViewModel: EventsListViewModel?) {
+        guard let oldViewModel else { return }
+        for (index, oldCell) in oldViewModel.eventCells.enumerated() {
             guard
-                let newEventCell = cellAt(identifier: oldEvent.identifier),
-                let newEvent = newEventCell as? EventCellViewModel,
-                newEvent.isValueIncreased(oldEvent)
+                let newCell = (cells[.events] as? [EventCellViewModel])?[index],
+                newCell.isValueIncreased(oldCell)
             else { continue }
-            configured.configure(animation: .swipe, for: newEvent.identifier)
+            configure(animation: .swipe, for: newCell)
 
-            if let previousEventId = eventCellIdPrevious(to: newEvent.identifier) {
-                configured.configure(animation: .aboveSwipe, for: previousEventId)
+            if let previousCell = eventCellRelative(to: newCell, offset: -1) {
+                configure(animation: .aboveSwipe, for: previousCell)
             }
 
-            if let nextEventId = eventCellIdNext(to: newEvent.identifier) {
-                configured.configure(animation: .belowSwipe, for: nextEventId)
+            if let nextEventId = eventCellRelative(to: newCell, offset: 1) {
+                configure(animation: .belowSwipe, for: nextEventId)
             }
         }
-
-        return configured
     }
 
-    func eventCellIdPrevious(to cellId: String) -> String? {
-        for (index, cell) in cells.enumerated() {
+    var sections: [Section] {
+        var result: [Section] = []
+        for section in Section.allCases {
+            if cells[section] != nil { result.append(section) }
+        }
+        return result
+    }
+
+    func eventCellRelative(to cell: EventCellViewModel, offset: Int) -> EventCellViewModel? {
+        guard let eventsCells = cells[.events] else { return nil }
+
+        for (index, iterationCell) in eventCells.enumerated() {
+            let modifiedIndex = index + offset
+
             guard
-                cell.identifier == cellId,
-                let previousCell = cells[index - 1] as? EventCellViewModel
+                iterationCell.identifier == cell.identifier,
+                modifiedIndex >= 0,
+                modifiedIndex < eventsCells.count,
+                let result = eventsCells[modifiedIndex] as? EventCellViewModel
             else { continue }
-            return previousCell.identifier
+            return result
         }
 
         return nil
     }
 
-    func eventCellIdNext(to cellId: String) -> String? {
-        for (index, cell) in cells.enumerated() {
+    private mutating func configure(animation: EventCellViewModel.Animations, for cell: EventCellViewModel) {
+        for (index, iterationCell) in eventCells.enumerated() {
             guard
-                cell.identifier == cellId,
-                let previousCell = cells[index + 1] as? EventCellViewModel
+                iterationCell.identifier == cell.identifier
             else { continue }
-            return previousCell.identifier
-        }
-
-        return nil
-    }
-
-    func isEventAt(index: Int) -> Bool { cells[index] as? EventCellViewModel != nil }
-
-    private mutating func configure(animation: EventCellViewModel.Animations, for cellId: String) {
-        for (index, cell) in cells.enumerated() {
-            guard
-                cell.identifier == cellId,
-                let eventCell = cell as? EventCellViewModel
-            else { continue }
-            cells[index] = eventCell.clone(withAnimation: animation)
+            cells[.events]![index] = iterationCell.clone(withAnimation: animation)
         }
     }
+
+    func cells(for section: Section) -> [AnyHashable] { cells[section] ?? [] }
 }

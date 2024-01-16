@@ -11,138 +11,95 @@ import XCTest
 
 final class EventsListViewModelTests: XCTestCase {
     var sut: EventsListViewModel!
-    
+
     override func setUp() {
         super.setUp()
         let appC = ApplicationContainer(mode: .unitTest)
         let container = EventsListContainer(appC)
         sut = container.makeEventsListViewModel(nil)
     }
-    
+
     override func tearDown() {
         super.tearDown()
         sut = nil
     }
 
-    /// This test covers container more then a `EventsListViewModel`
-    func test_cellAtIndex_noEvents_firstCellIsHintCell() {
-        let cell = sut.cellAt(identifier: HintCellViewModel(events: []).identifier)
-        
-        XCTAssertTrue(cell is HintCellViewModel)
-        guard let cell = cell as? HintCellViewModel else { XCTFail(); return }
-        XCTAssertEqual(cell.title, HintCellViewModel.HintState.addFirstEvent.text, "first hint must be to add first event")
-    }
-    
-    func test_cellAtIndex_noEvents_secondCellIsFooterCell() {
-        let cell = sut.cellAt(identifier: FooterCellViewModel(eventsCount: 0, tapHandler: nil).identifier)
-        
-        XCTAssertTrue(cell is FooterCellViewModel)
-    }
-    
-    func test_cellAtIndex_oneEvent_secondCellIsEventCell() {
-        let id = configureSUTWithOneEvent()
-    
-        let cell = sut.cellAt(identifier: id)
-        
-        XCTAssertTrue(cell is EventCellViewModel)
-    }
-    
-    func test_cellAtIndex_oneEvent_hintAsksToSwipeEvent() {
-        configureSUTWithOneEvent()
-        
-        let cell = sut.cellAt(identifier: HintCellViewModel(events: []).identifier)
-        
-        XCTAssertTrue(cell is HintCellViewModel)
-        guard let cell = cell as? HintCellViewModel else { XCTFail(); return }
-        XCTAssertEqual(cell.title, HintCellViewModel.HintState.swipeFirstTime.text, "second hint must be to swipe added event")
-    }
-    
-    func test_eventCell_animation_none() {
-        let id = configureSUTWithOneEvent()
-        
-        let cell = sut.cellAt(identifier: id)
-        
-        if let cell = cell as? EventCellViewModel {
-            XCTAssertEqual(cell.animation, .none)
-        } else { XCTFail() }
-    }
-    
     func test_configureAnimationForEventCells_usingOldValue_addedHappeningForSecondEvent_neighboursReceiveAnimations() {
-        let (a, b, c) = configureSUTWithThreeEventsAndOldValue()
-        
-        if let cell = sut.cellAt(identifier: a) as? EventCellViewModel {
-            XCTAssertEqual(cell.animation, .aboveSwipe)
-        } else { XCTFail() }
-        
-        if let cell = sut.cellAt(identifier: b) as? EventCellViewModel {
-            XCTAssertEqual(cell.animation, .swipe)
-        } else { XCTFail() }
-        
-        if let cell = sut.cellAt(identifier: c) as? EventCellViewModel {
-            XCTAssertEqual(cell.animation, .belowSwipe)
-        } else { XCTFail() }
+        configureSUTWithThreeEventsAndOldValue()
+        let eventCells = sut.cells(for: .events)
+        guard
+            let firstCell = eventCells[0] as? EventCellViewModel,
+            let secondCell = eventCells[1] as? EventCellViewModel,
+            let thirdCell = eventCells[2] as? EventCellViewModel
+        else { return XCTFail() }
+
+        XCTAssertEqual(firstCell.animation, .aboveSwipe)
+        XCTAssertEqual(secondCell.animation, .swipe)
+        XCTAssertEqual(thirdCell.animation, .belowSwipe)
     }
-    
+
     func test_configureAnimationForEventCells_usingSameValue_noneForAllCells() {
-        let (a, b, c) = configureSUTWithThreeEvents()
-        
-        sut = sut.configureAnimationForEventCells(sut)
-        
-        if let cell = sut.cellAt(identifier: a) as? EventCellViewModel {
+        configureSUTWithThreeEvents()
+
+        sut.configureAnimationForEventCells(sut)
+        let eventCells = sut.cells(for: .events)
+
+        if let cell = eventCells[0] as? EventCellViewModel {
             XCTAssertEqual(cell.animation, .none)
         } else { XCTFail() }
-        
-        if let cell = sut.cellAt(identifier: b) as? EventCellViewModel {
+
+        if let cell = eventCells[1] as? EventCellViewModel {
             XCTAssertEqual(cell.animation, .none)
         } else { XCTFail() }
-        
-        if let cell = sut.cellAt(identifier: c) as? EventCellViewModel {
+
+        if let cell = eventCells[2] as? EventCellViewModel {
             XCTAssertEqual(cell.animation, .none)
         } else { XCTFail() }
     }
 
     func test_eventCellIdPreviousTo_threeEventsByAlphabet_idOfSecondEventCell_returnsFirst() {
-        let (a, b, _) = configureSUTWithThreeEvents()
+        configureSUTWithThreeEvents()
+        let eventCells = sut.cells(for: .events)
+        guard
+            let firstCell = eventCells[0] as? EventCellViewModel,
+            let secondCell = eventCells[1] as? EventCellViewModel
+        else { return XCTFail() }
 
-        XCTAssertEqual(sut.eventCellIdPrevious(to: b), a)
+        XCTAssertEqual(sut.eventCellRelative(to: secondCell, offset: -1), firstCell)
     }
 
     func test_eventCellIdPreviousTo_threeEventsByAlphabet_idOfFirstEventCell_returnsNil() {
-        let (a, _, _) = configureSUTWithThreeEvents()
+        configureSUTWithThreeEvents()
+        let eventCells = sut.cells(for: .events)
+        guard
+            let firstCell = eventCells[0] as? EventCellViewModel
+        else { return XCTFail() }
 
-        XCTAssertNil(sut.eventCellIdPrevious(to: a))
+        XCTAssertNil(sut.eventCellRelative(to: firstCell, offset: -1))
     }
 
     func test_eventCellIdNextTo_threeEventsByAlphabet_idOfSecondEventCell_returnsThird() {
-        let (_, b, c) = configureSUTWithThreeEvents()
+        configureSUTWithThreeEvents()
+        let eventCells = sut.cells(for: .events)
+        guard
+            let secondCell = eventCells[1] as? EventCellViewModel,
+            let thirdCell = eventCells[2] as? EventCellViewModel
+        else { return XCTFail() }
 
-        XCTAssertEqual(sut.eventCellIdNext(to: b), c)
+        XCTAssertEqual(sut.eventCellRelative(to: secondCell, offset: 1), thirdCell)
     }
 
     func test_eventCellIdNextTo_threeEventsByAlphabet_idOfThirdEventCell_returnsNil() {
-        let (_, _, c) = configureSUTWithThreeEvents()
+        configureSUTWithThreeEvents()
+        let eventCells = sut.cells(for: .events)
+        guard
+            let thirdCell = eventCells[2] as? EventCellViewModel
+        else { return XCTFail() }
 
-        XCTAssertNil(sut.eventCellIdNext(to: c))
+        XCTAssertNil(sut.eventCellRelative(to: thirdCell, offset: 1))
     }
-    
-    func test_isEventAtIndex_noEvents_firstAndSecondIndex_false() {
-        XCTAssertFalse(sut.isEventAt(index: 0))
-        XCTAssertFalse(sut.isEventAt(index: 1))
-    }
-    
-    func test_isEventAtIndex_oneEvent_firstIndex_false() {
-        configureSUTWithOneEvent()
-        
-        XCTAssertFalse(sut.isEventAt(index: 0))
-    }
-    
-    func test_isEventAtIndex_oneEvent_secondIndex_true() {
-        configureSUTWithOneEvent()
-        
-        XCTAssertTrue(sut.isEventAt(index: 1))
-    }
-    
-    private func configureSUTWithThreeEvents() -> (a: String, b: String, c: String) {
+
+    private func configureSUTWithThreeEvents() {
         let eventA = Event(name: "A", dateCreated: DayIndex.referenceValue.date)
         let eventB = Event(name: "B", dateCreated: DayIndex.referenceValue.date)
         let eventC = Event(name: "C", dateCreated: DayIndex.referenceValue.date)
@@ -153,20 +110,17 @@ final class EventsListViewModelTests: XCTestCase {
 
         let container = EventsListContainer(appC)
         sut = container.makeEventsListViewModel(nil)
-        return (eventA.id, eventB.id, eventC.id)
     }
-    
-    @discardableResult
-    private func configureSUTWithOneEvent() -> String {
+
+    private func configureSUTWithOneEvent() {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         let appC = ApplicationContainer(mode: .unitTest)
         appC.commander.save(event)
         let container = EventsListContainer(appC)
         sut = container.makeEventsListViewModel(nil)
-        return event.id
     }
-    
-    private func configureSUTWithThreeEventsAndOldValue() -> (a: String, b: String, c: String) {
+
+    private func configureSUTWithThreeEventsAndOldValue() {
         let eventA = Event(name: "A", dateCreated: DayIndex.referenceValue.date)
         let eventB = Event(name: "B", dateCreated: DayIndex.referenceValue.date)
         let eventC = Event(name: "C", dateCreated: DayIndex.referenceValue.date)
@@ -176,12 +130,11 @@ final class EventsListViewModelTests: XCTestCase {
         appC.commander.save(eventC)
         let container = EventsListContainer(appC)
         let oldValue = container.makeEventsListViewModel(nil)
-        
+
         eventB.addHappening(date: DayIndex.referenceValue.date)
         appC.commander.save(eventB)
-        
+
         sut = container.makeEventsListViewModel(nil)
-        sut = sut.configureAnimationForEventCells(oldValue)
-        return (eventA.id, eventB.id, eventC.id)
+        sut.configureAnimationForEventCells(oldValue)
     }
 }

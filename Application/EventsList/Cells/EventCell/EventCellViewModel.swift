@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct EventCellViewModel: EventsListItemViewModeling {
+struct EventCellViewModel: Hashable {
     enum Animations { case swipe, aboveSwipe, belowSwipe, none }
 
     typealias TapHandler = () -> Void
@@ -118,6 +118,8 @@ struct EventCellViewModel: EventsListItemViewModeling {
             lhs.goalAmount == rhs.goalAmount &&
             lhs.animation == rhs.animation
     }
+
+    func hash(into hasher: inout Hasher) { hasher.combine(event.id) }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
         let formatter = DateComponentsFormatter()

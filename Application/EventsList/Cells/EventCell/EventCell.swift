@@ -8,7 +8,7 @@
 import AudioToolbox
 import UIKit
 
-final class EventCell: UITableViewCell, EventsListCell {
+final class EventCell: UITableViewCell {
     static let reuseIdentifier = "EventCell"
 
     let view = EventCellView()
@@ -112,34 +112,6 @@ final class EventCell: UITableViewCell, EventsListCell {
                 swipeAnimator.returnToStart(from: progress) {}
             }
         }
-    }
-}
-
-extension EventCell: TrailingSwipeActionsConfigurationProviding {
-    func trailingActionsConfiguration() -> UISwipeActionsConfiguration {
-        guard let viewModel else { fatalError("can't create configuration without viewModel") }
-
-        let renameAction = UIContextualAction(
-            style: .normal,
-            title: EventCellViewModel.rename,
-            handler: { _, _, completion in
-                self.viewModel?.renameActionHandler(viewModel)
-                completion(true)
-            }
-        )
-
-        let deleteAction = UIContextualAction(
-            style: .destructive,
-            title: EventCellViewModel.delete,
-            handler: { _, _, completion in
-                self.viewModel?.deleteActionHandler()
-                completion(true)
-            }
-        )
-
-        return UISwipeActionsConfiguration(
-            actions: [renameAction, deleteAction]
-        )
     }
 }
 

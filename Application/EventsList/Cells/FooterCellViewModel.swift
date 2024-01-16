@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct FooterCellViewModel: EventsListItemViewModeling {
+struct FooterCellViewModel: Hashable {
     static let title = String(localizationId: "button.create")
-
-    var identifier: String { "Footer" }
 
     let isHighlighted: Bool
     let tapHandler: FooterItemViewModelTapHandling?
@@ -24,5 +22,9 @@ struct FooterCellViewModel: EventsListItemViewModeling {
 
     static func == (lhs: FooterCellViewModel, rhs: FooterCellViewModel) -> Bool {
         lhs.isHighlighted == rhs.isHighlighted
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine("Footer")
     }
 }

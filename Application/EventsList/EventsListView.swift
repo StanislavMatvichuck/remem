@@ -8,7 +8,6 @@
 import UIKit
 
 final class EventsListView: UIView {
-    // MARK: - Properties
     let input = EventInputView()
 
     let table: UITableView = {
@@ -18,7 +17,14 @@ final class EventsListView: UIView {
         return table
     }()
 
-    // MARK: - Init
+    lazy var dataSource = EventsListDataSource(table: table)
+
+    var viewModel: EventsListViewModel? { didSet {
+        guard let viewModel else { return }
+        dataSource.viewModel = viewModel
+        configureContent(viewModel)
+    }}
+
     init() {
         super.init(frame: .zero)
         backgroundColor = .bg

@@ -10,20 +10,22 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-final class EventsListViewControllerTests: XCTestCase, TestingViewController {
+final class EventsListViewControllerTests: XCTestCase {
     var sut: EventsListViewController!
     var commander: EventsCommanding!
-    var event: Event!
-
-    var view: EventsListView { sut.viewRoot }
 
     override func setUp() {
         super.setUp()
-        make()
+        let appContainer = ApplicationContainer(mode: .unitTest)
+        let container = EventsListContainer(appContainer)
+        sut = container.make() as? EventsListViewController
+        commander = appContainer.commander
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
-        clear()
+        sut = nil
+        commander = nil
         super.tearDown()
     }
 
@@ -32,219 +34,113 @@ final class EventsListViewControllerTests: XCTestCase, TestingViewController {
     }
 
     func test_tableIsConfigured() {
-        XCTAssertNotNil(table.dataSource)
-        XCTAssertNotNil(table.delegate)
-    }
-
-    func test_showsHint() {
-        let hintCell = cell(0) as! HintCell
-
-        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
-    }
-
-    func test_showsAddEventButton() {
-        let footerCell = cell(1) as! FooterCell
-
-        XCTAssertEqual(footerCell.button.titleLabel?.text, String(localizationId: "button.create"))
-    }
-
-    func test_empty_hasNoEvents() {
-        XCTAssertEqual(eventsCount, 0)
-    }
-
-    func test_empty_showsHint_empty() {
-        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.empty"))
-    }
-
-    func test_empty_showsCreateEventButton_highlighted() {
-        let title = NSAttributedString(
-            string: String(localizationId: "button.create"),
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.bg,
-                NSAttributedString.Key.font: UIFont.fontSmallBold,
-            ]
-        )
-
-        let footerCell = cell(1) as! FooterCell
-
-        XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "button text is white with proper font")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
+        XCTAssertNotNil(sut.viewRoot.table.dataSource)
+        XCTAssertNotNil(sut.viewRoot.table.delegate)
     }
 
     func test_createEventButtonTapped_showsKeyboard() {
         putInViewHierarchy(sut)
-        XCTAssertFalse(view.input.inputContainer.field.isFirstResponder, "precondition")
+        XCTAssertFalse(sut.viewRoot.input.inputContainer.field.isFirstResponder, "precondition")
 
-        let footerCell = cell(1) as! FooterCell
+        let index = IndexPath(row: 0, section: 2)
+        let table = sut.viewRoot.table
+        guard let footerCell = table.dataSource?.tableView(
+            table,
+            cellForRowAt: index
+        ) as? FooterCell else { return XCTFail() }
 
         tap(footerCell.button)
 
-        XCTAssertTrue(view.input.inputContainer.field.isFirstResponder, "keyboard is shown")
+        XCTAssertTrue(sut.viewRoot.input.inputContainer.field.isFirstResponder, "keyboard is shown")
     }
 
     func test_submittingEvent_addsEventToList() {
         submitEvent()
 
-        XCTAssertEqual(eventsCount, 1)
-        XCTAssertEqual(firstEvent.view.title.text, "SubmittedEventName")
+        let eventsAmount = sut.viewRoot.table.numberOfRows(inSection: EventsListViewModel.Section.events.rawValue)
+
+        XCTAssertEqual(eventsAmount, 1)
     }
 
-    func test_singleEvent_showsCreateButton_default() {
-        submitEvent()
+    var firstEventCell: EventCell {
+        let index = IndexPath(row: 0, section: 1)
+        let table = sut.viewRoot.table
 
-        let title = NSAttributedString(
-            string: String(localizationId: "button.create"),
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.primary,
-                NSAttributedString.Key.font: UIFont.fontSmallBold,
-            ]
-        )
-
-        let footerCell = cell(2) as! FooterCell
-
-        XCTAssertEqual(footerCell.button.attributedTitle(for: .normal), title, "Button text and styling")
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "button has regular background")
-    }
-
-    func test_singleEvent_showsHint_firstHappening() {
-        submitEvent()
-
-        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.firstHappening"))
-    }
-
-    func test_singleEvent_showsOneEvent() {
-        submitEvent()
-
-        XCTAssertNotNil(firstEvent)
-    }
-
-    func test_singleEvent_showsGestureHint() {
-        submitEvent()
-        XCTAssertNotNil(firstEvent.view.swipingHint)
-    }
-
-    func test_singleEvent_hasRenameSwipeAction() {
-        let button = submittedEventTrailingSwipeActionButton(number: 0)
-
-        XCTAssertEqual(
-            button.title,
-            String(localizationId: "button.rename")
-        )
-    }
-
-    func test_singleEvent_hasDeleteSwipeAction() {
-        let button = submittedEventTrailingSwipeActionButton(number: 1)
-
-        XCTAssertEqual(
-            button.title,
-            String(localizationId: "button.delete")
-        )
-    }
-
-    func test_singleEvent_renamePressed_showsKeyboardWithEventName() {
-        putInViewHierarchy(sut)
-        XCTAssertFalse(view.input.inputContainer.field.isFirstResponder, "precondition")
-
-        let button = submittedEventTrailingSwipeActionButton(number: 0)
-
-        button.handler(button, UIView()) { _ in }
-
-        XCTAssertTrue(view.input.inputContainer.field.isFirstResponder)
-        XCTAssertEqual(view.input.value, "SubmittedEventName")
-    }
-
-    func test_singleEvent_submittingRename_eventNameUpdated() {
-        let button = submittedEventTrailingSwipeActionButton(number: 0)
-
-        button.handler(button, UIView()) { _ in }
-        view.input.value = "ChangedName"
-        _ = view.input.inputContainer.field.delegate?.textFieldShouldReturn?(view.input.inputContainer.field)
-
-        XCTAssertEqual(firstEvent.view.title.text, "ChangedName")
-    }
-
-    func test_singleEvent_deletePressed_removesEventFromList() {
-        let button = submittedEventTrailingSwipeActionButton(number: 1)
-
-        XCTAssertEqual(eventsCount, 1, "precondition")
-
-        button.handler(button, UIView()) { _ in }
-
-        XCTAssertEqual(eventsCount, 0)
+        return table.dataSource?.tableView(
+            table,
+            cellForRowAt: index
+        ) as! EventCell
     }
 
     func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
         submitEvent()
 
-        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "0")
+        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "1")
+        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "1")
     }
 
     func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
         submitEvent()
 
-        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "0")
+        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEvent.view.amountContainer.label.text, "2")
+        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "2")
     }
 
     func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
-        arrangeSingleEventSwiped()
+        submitEvent()
+        swipeFirstEvent()
 
-        XCTAssertEqual(hintText, String(localizationId: "eventsList.hint.firstVisit"))
+        let index = IndexPath(row: 0, section: EventsListViewModel.Section.hint.rawValue)
+        let table = sut.viewRoot.table
+        guard
+            let hintCell = table.dataSource?.tableView(table, cellForRowAt: index)
+            as? HintCell
+        else { return XCTFail() }
+        
+        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.pressMe.text)
     }
 
     func test_singleEvent_swiped_gestureHintIsNotVisible() {
-        arrangeSingleEventSwiped()
-
-        XCTAssertNil(firstEvent.view.swipingHint)
+        submitEvent()
+        swipeFirstEvent()
+        
+        XCTAssertNil(firstEventCell.view.swipingHint)
     }
 
     func test_singleEvent_tapped_showsDetails() {
         // TODO: write this test
     }
-    
+
     func test_allowsEventsDrag() {
         XCTAssertTrue(sut is UITableViewDragDelegate)
         XCTAssertNotNil(sut.viewRoot.table.dragDelegate)
     }
-}
 
-struct VisitedEventListFactory: EventsListViewModelFactoring {
-    let event: Event = {
-        let event = Event(name: "VisitedEvent", dateCreated: DayIndex.referenceValue.date)
-        event.visit()
-        event.addHappening(date: DayIndex.referenceValue.date)
-        return event
-    }()
+    func test_allowsItemsDrop() {
+        XCTAssertTrue(sut is UITableViewDropDelegate)
+        XCTAssertNotNil(sut.viewRoot.table.dropDelegate)
+    }
 
-    let commander = EventsCommandingStub()
-    let today = DayIndex.referenceValue
+    private func submitEvent() {
+        let input = sut.viewRoot.input
+        input.value = "SubmittedEventName"
 
-    func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel {
-        EventsListViewModel(
-            items: [
-                HintCellViewModel(events: [event]),
-                EventCellViewModel(
-                    event: event,
-                    hintEnabled: false,
-                    currentMoment: DayIndex.referenceValue.date,
-                    tapHandler: {},
-                    swipeHandler: {},
-                    renameActionHandler: { _ in },
-                    deleteActionHandler: {},
-                    renameHandler: { _, _ in },
-                    animation: .none
-                ),
-                FooterCellViewModel(eventsCount: 1, tapHandler: nil),
-            ]
-        ) { _ in }
+        _ = input.inputContainer.field.delegate?.textFieldShouldReturn?(
+            input.inputContainer.field
+        )
+    }
+
+    func swipeFirstEvent() {
+        if let cell = (sut.viewModel?.cells(for: .events) as? [EventCellViewModel])?.first {
+            cell.swipeHandler()
+        }
     }
 }
 

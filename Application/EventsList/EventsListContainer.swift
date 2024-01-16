@@ -58,14 +58,14 @@ final class EventsListContainer:
             )
         }
 
-        var items = [any EventsListItemViewModeling]()
+        var cells = [EventsListViewModel.Section: [AnyHashable]]()
 
-        if uiTestingDisabled { items.append(hintVm) }
+        if uiTestingDisabled { cells.updateValue([hintVm], forKey: .hint) }
 
-        items.append(contentsOf: eventsViewModels)
-        items.append(footerVm)
+        cells.updateValue(eventsViewModels, forKey: .events)
+        cells.updateValue([footerVm], forKey: .createEvent)
 
-        let vm = EventsListViewModel(items: items) { name in
+        let vm = EventsListViewModel(cells: cells) { name in
             self.commander.save(Event(name: name))
         }
 

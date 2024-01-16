@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HintCell: UITableViewCell, EventsListCell {
+final class HintCell: UITableViewCell {
     static var reuseIdentifier = "HintItem"
 
     var viewModel: HintCellViewModel? {

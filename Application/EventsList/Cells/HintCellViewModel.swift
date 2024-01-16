@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct HintCellViewModel: EventsListItemViewModeling {
+struct HintCellViewModel: Hashable {
     enum HintState {
         case addFirstEvent
         case swipeFirstTime
@@ -24,8 +24,6 @@ struct HintCellViewModel: EventsListItemViewModeling {
             }
         }
     }
-
-    var identifier: String { "Hint" }
 
     let title: String
     let highlighted: Bool
@@ -44,5 +42,9 @@ struct HintCellViewModel: EventsListItemViewModeling {
 
     static func == (lhs: HintCellViewModel, rhs: HintCellViewModel) -> Bool {
         lhs.title == rhs.title && lhs.highlighted == rhs.highlighted
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine("Hint")
     }
 }
