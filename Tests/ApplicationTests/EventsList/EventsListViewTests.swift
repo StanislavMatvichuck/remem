@@ -10,103 +10,98 @@ import Domain
 import XCTest
 
 final class EventsListViewTests: XCTestCase {
+    // MARK: - Setup
+
+    private var sut: EventsListView!
+    private var container: EventsListContainer!
+
+    override func setUp() {
+        super.setUp()
+        configureEmptySutAndContainer()
+    }
+
+    override func tearDown() {
+        sut = nil
+        container = nil
+        super.tearDown()
+    }
+
+    // MARK: - Tests
+
     func test_init() { _ = EventsListView() }
 
     func test_showsHint_addFirstEvent() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-        let indexPath = IndexPath(row: 0, section: 0) // too attached to implementation?
-        let table = sut.table
-        guard
-            let hintCell = table.dataSource?.tableView(table, cellForRowAt: indexPath)
-            as? HintCell
-        else { fatalError() }
-
         XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
     }
 
     func test_showsCreateEvent_highlighted() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-        let indexPath = IndexPath(row: 0, section: 2) // too attached to implementation?
-        let table = sut.table
-        guard
-            let footerCell = table.dataSource?.tableView(table, cellForRowAt: indexPath)
-            as? FooterCell
-        else { fatalError() }
-
         XCTAssertEqual(footerCell.button.titleLabel?.text, FooterCellViewModel.title)
         XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
     }
 
     func test_showsNoEvents() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-        let table = sut.table
-
-        XCTAssertEqual(table.dataSource?.tableView(table, numberOfRowsInSection: 1), 0)
+        XCTAssertEqual(sut.table.dataSource?.tableView(sut.table, numberOfRowsInSection: 1), 0)
     }
 
     func test_oneEvent_showsEvent_withHintCell() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        appContainer.commander.save(event)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-        let indexPath = IndexPath(row: 0, section: 1) // too attached to implementation?
-        let table = sut.table
-        guard
-            let eventCell = table.dataSource?.tableView(table, cellForRowAt: indexPath) as? EventCell
-        else { fatalError() }
+        configureWithOneEvent()
 
         XCTAssertNotNil(eventCell.view.swipingHint)
     }
 
     func test_oneEvent_hintAsksToSwipeEvent() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        appContainer.commander.save(event)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-        let indexPath = IndexPath(row: 0, section: 0) // too attached to implementation?
-        let table = sut.table
-        guard
-            let hintCell = table.dataSource?.tableView(table, cellForRowAt: indexPath) as? HintCell
-        else { fatalError() }
+        configureWithOneEvent()
 
         XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.swipeFirstTime.text)
     }
 
     func test_oneEvent_showsCreateEvent_default() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        configureWithOneEvent()
+
+        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
+    }
+
+    // MARK: - Creation
+
+    private func configureEmptySutAndContainer() {
         let appContainer = ApplicationContainer(mode: .unitTest)
-        appContainer.commander.save(event)
         let container = EventsListContainer(appContainer)
         let viewModel = container.makeEventsListViewModel(nil)
         let sut = EventsListView()
         sut.viewModel = viewModel
-        let indexPath = IndexPath(row: 0, section: 2) // too attached to implementation?
-        let table = sut.table
-        guard
-            let footerCell = table.dataSource?.tableView(table, cellForRowAt: indexPath)
-            as? FooterCell
-        else { fatalError() }
 
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
+        self.sut = sut
+        self.container = container
+    }
+
+    private func configureWithOneEvent() {
+        container.commander.save(Event(name: "", dateCreated: DayIndex.referenceValue.date))
+        sut.viewModel = container.makeEventsListViewModel(nil)
+    }
+
+    // MARK: - Cells getting
+
+    private var hintCell: HintCell {
+        let section = EventsListViewModel.Section.hint.rawValue
+        if let cell = firstCellAt(section) as? HintCell { return cell }
+        else { fatalError("unable to get cell of requested type") }
+    }
+
+    private var eventCell: EventCell {
+        let section = EventsListViewModel.Section.events.rawValue
+        if let cell = firstCellAt(section) as? EventCell { return cell }
+        else { fatalError("unable to get cell of requested type") }
+    }
+
+    private var footerCell: FooterCell {
+        let section = EventsListViewModel.Section.createEvent.rawValue
+        if let cell = firstCellAt(section) as? FooterCell { return cell }
+        else { fatalError("unable to get cell of requested type") }
+    }
+
+    private func firstCellAt(_ section: Int) -> UITableViewCell? {
+        let table = sut.table
+        let indexPath = IndexPath(row: 0, section: section)
+        return table.dataSource?.tableView(table, cellForRowAt: indexPath)
     }
 }
