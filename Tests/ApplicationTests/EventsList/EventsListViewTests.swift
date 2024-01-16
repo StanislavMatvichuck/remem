@@ -31,12 +31,12 @@ final class EventsListViewTests: XCTestCase {
     func test_init() { _ = EventsListView() }
 
     func test_showsHint_addFirstEvent() {
-        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
+        XCTAssertEqual(sut.hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
     }
 
     func test_showsCreateEvent_highlighted() {
-        XCTAssertEqual(footerCell.button.titleLabel?.text, FooterCellViewModel.title)
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
+        XCTAssertEqual(sut.footerCell.button.titleLabel?.text, FooterCellViewModel.title)
+        XCTAssertEqual(sut.footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
     }
 
     func test_showsNoEvents() {
@@ -46,19 +46,19 @@ final class EventsListViewTests: XCTestCase {
     func test_oneEvent_showsEvent_withHintCell() {
         configureWithOneEvent()
 
-        XCTAssertNotNil(eventCell.view.swipingHint)
+        XCTAssertNotNil(sut.eventCell.view.swipingHint)
     }
 
     func test_oneEvent_hintAsksToSwipeEvent() {
         configureWithOneEvent()
 
-        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.swipeFirstTime.text)
+        XCTAssertEqual(sut.hintCell.label.text, HintCellViewModel.HintState.swipeFirstTime.text)
     }
 
     func test_oneEvent_showsCreateEvent_default() {
         configureWithOneEvent()
 
-        XCTAssertEqual(footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
+        XCTAssertEqual(sut.footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
     }
 
     // MARK: - Creation
@@ -78,29 +78,30 @@ final class EventsListViewTests: XCTestCase {
         container.commander.save(Event(name: "", dateCreated: DayIndex.referenceValue.date))
         sut.viewModel = container.makeEventsListViewModel(nil)
     }
+}
 
-    // MARK: - Cells getting
-
-    private var hintCell: HintCell {
+// MARK: - Cells getting
+/// Used by `EventsListViewTests` and `EventsListViewControllerTests`
+extension EventsListView {
+    var hintCell: HintCell {
         let section = EventsListViewModel.Section.hint.rawValue
         if let cell = firstCellAt(section) as? HintCell { return cell }
         else { fatalError("unable to get cell of requested type") }
     }
 
-    private var eventCell: EventCell {
+    var eventCell: EventCell {
         let section = EventsListViewModel.Section.events.rawValue
         if let cell = firstCellAt(section) as? EventCell { return cell }
         else { fatalError("unable to get cell of requested type") }
     }
 
-    private var footerCell: FooterCell {
+    var footerCell: FooterCell {
         let section = EventsListViewModel.Section.createEvent.rawValue
         if let cell = firstCellAt(section) as? FooterCell { return cell }
         else { fatalError("unable to get cell of requested type") }
     }
 
     private func firstCellAt(_ section: Int) -> UITableViewCell? {
-        let table = sut.table
         let indexPath = IndexPath(row: 0, section: section)
         return table.dataSource?.tableView(table, cellForRowAt: indexPath)
     }

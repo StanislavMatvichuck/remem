@@ -11,23 +11,21 @@ import ViewControllerPresentationSpy
 import XCTest
 
 final class EventsListViewControllerTests: XCTestCase {
+    // MARK: - Setup
+
     var sut: EventsListViewController!
-    var commander: EventsCommanding!
 
     override func setUp() {
         super.setUp()
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let container = EventsListContainer(appContainer)
-        sut = container.make() as? EventsListViewController
-        commander = appContainer.commander
-        sut.loadViewIfNeeded()
+        configureEmpty()
     }
 
     override func tearDown() {
         sut = nil
-        commander = nil
         super.tearDown()
     }
+
+    // MARK: - Tests
 
     func test_showsTitle() {
         XCTAssertEqual(sut.title, String(localizationId: "eventsList.title"))
@@ -42,13 +40,7 @@ final class EventsListViewControllerTests: XCTestCase {
         putInViewHierarchy(sut)
         XCTAssertFalse(sut.viewRoot.input.inputContainer.field.isFirstResponder, "precondition")
 
-        let index = IndexPath(row: 0, section: 2)
-        let table = sut.viewRoot.table
-        guard let footerCell = table.dataSource?.tableView(
-            table,
-            cellForRowAt: index
-        ) as? FooterCell else { return XCTFail() }
-
+        let footerCell = sut.viewRoot.footerCell
         tap(footerCell.button)
 
         XCTAssertTrue(sut.viewRoot.input.inputContainer.field.isFirstResponder, "keyboard is shown")
@@ -62,56 +54,39 @@ final class EventsListViewControllerTests: XCTestCase {
         XCTAssertEqual(eventsAmount, 1)
     }
 
-    var firstEventCell: EventCell {
-        let index = IndexPath(row: 0, section: 1)
-        let table = sut.viewRoot.table
-
-        return table.dataSource?.tableView(
-            table,
-            cellForRowAt: index
-        ) as! EventCell
-    }
-
     func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
         submitEvent()
 
-        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "0")
+        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "1")
+        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "1")
     }
 
     func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
         submitEvent()
 
-        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "0")
+        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "0")
 
         swipeFirstEvent()
         swipeFirstEvent()
 
-        XCTAssertEqual(firstEventCell.view.amountContainer.label.text, "2")
+        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "2")
     }
 
     func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
         submitEvent()
         swipeFirstEvent()
 
-        let index = IndexPath(row: 0, section: EventsListViewModel.Section.hint.rawValue)
-        let table = sut.viewRoot.table
-        guard
-            let hintCell = table.dataSource?.tableView(table, cellForRowAt: index)
-            as? HintCell
-        else { return XCTFail() }
-        
-        XCTAssertEqual(hintCell.label.text, HintCellViewModel.HintState.pressMe.text)
+        XCTAssertEqual(sut.viewRoot.hintCell.label.text, HintCellViewModel.HintState.pressMe.text)
     }
 
     func test_singleEvent_swiped_gestureHintIsNotVisible() {
         submitEvent()
         swipeFirstEvent()
-        
-        XCTAssertNil(firstEventCell.view.swipingHint)
+
+        XCTAssertNil(sut.viewRoot.eventCell.view.swipingHint)
     }
 
     func test_singleEvent_tapped_showsDetails() {
@@ -128,6 +103,15 @@ final class EventsListViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.viewRoot.table.dropDelegate)
     }
 
+    // MARK: - Creation and helpers
+
+    private func configureEmpty() {
+        let appContainer = ApplicationContainer(mode: .unitTest)
+        let container = EventsListContainer(appContainer)
+        sut = container.make() as? EventsListViewController
+        sut.loadViewIfNeeded()
+    }
+
     private func submitEvent() {
         let input = sut.viewRoot.input
         input.value = "SubmittedEventName"
@@ -137,14 +121,5 @@ final class EventsListViewControllerTests: XCTestCase {
         )
     }
 
-    func swipeFirstEvent() {
-        if let cell = (sut.viewModel?.cells(for: .events) as? [EventCellViewModel])?.first {
-            cell.swipeHandler()
-        }
-    }
-}
-
-struct EventsCommandingStub: EventsCommanding {
-    func save(_: Event) {}
-    func delete(_: Event) {}
+    private func swipeFirstEvent() { sut.viewRoot.eventCell.viewModel?.swipeHandler() }
 }
