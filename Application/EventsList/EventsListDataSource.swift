@@ -30,6 +30,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
         }
     }
 
+    /// This method is tested poorly
     private func makeSnapshot(for vm: EventsListViewModel) -> Snapshot {
         var snapshot = Snapshot()
 
@@ -40,6 +41,12 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
                 vm.cells(for: section),
                 toSection: section
             )
+        }
+
+        /// Allows animation for same cells N times
+        if let eventCells = vm.cells(for: .events) as? [EventCellViewModel] {
+            let animatedEventCells = eventCells.filter { $0.animation != .none }
+            snapshot.reconfigureItems(animatedEventCells)
         }
 
         return snapshot
