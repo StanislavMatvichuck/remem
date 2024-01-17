@@ -16,17 +16,17 @@ public struct EventsSorterRepository: EventsSorterQuerying, EventsSorterCommandi
 
     public init(_ provider: URLProviding) { self.provider = provider }
 
-    public func get() -> Domain.EventsQuerySorter {
+    public func get() -> Domain.EventsSorter {
         do {
             let data = try Data(contentsOf: provider.url)
-            let sorter = try Self.decoder.decode([EventsQuerySorter].self, from: data)
+            let sorter = try Self.decoder.decode([EventsSorter].self, from: data)
             return sorter.first!
         } catch {
             return .alphabetical
         }
     }
 
-    public func set(_ sorter: Domain.EventsQuerySorter) {
+    public func set(_ sorter: Domain.EventsSorter) {
         do {
             let data = try Self.encoder.encode([sorter])
             try data.write(to: provider.url)

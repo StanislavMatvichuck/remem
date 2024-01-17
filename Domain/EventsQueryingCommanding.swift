@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum EventsQuerySorter: Codable, Equatable {
+public enum EventsSorter: Codable, Equatable {
     case alphabetical
     case happeningsCountTotal
     case manual(identifiers: [String])
@@ -15,7 +15,7 @@ public enum EventsQuerySorter: Codable, Equatable {
 
 public protocol EventsQuerying {
     func get() -> [Event]
-    func get(using: EventsQuerySorter) -> [Event]
+    func get(using: EventsSorter) -> [Event]
 }
 
 public protocol EventsCommanding {
@@ -24,9 +24,9 @@ public protocol EventsCommanding {
 }
 
 public protocol EventsSorterQuerying {
-    func get() -> EventsQuerySorter
+    func get() -> EventsSorter
 }
 
 public protocol EventsSorterCommanding {
-    func set(_: EventsQuerySorter)
+    func set(_: EventsSorter)
 }

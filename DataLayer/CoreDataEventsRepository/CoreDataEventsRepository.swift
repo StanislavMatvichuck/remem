@@ -21,7 +21,7 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
         self.entityMapper = mapper
     }
 
-    public func get(using sort: EventsQuerySorter) -> [Event] {
+    public func get(using sort: EventsSorter) -> [Event] {
         do {
             switch sort {
             case .happeningsCountTotal:

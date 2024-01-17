@@ -30,7 +30,7 @@ final class EventsSorterRepositoryTests: XCTestCase {
     }
 
     func test_get_alphabetical() {
-        XCTAssertEqual(sut.get(), EventsQuerySorter.alphabetical)
+        XCTAssertEqual(sut.get(), EventsSorter.alphabetical)
     }
 
     func test_set_acceptsSorter() {
@@ -44,7 +44,7 @@ final class EventsSorterRepositoryTests: XCTestCase {
     }
 
     func test_set_acceptsManualWithStringsArray_getReturnsSameValue() {
-        let manualSorter = EventsQuerySorter.manual(identifiers: ["a", "b", "c"])
+        let manualSorter = EventsSorter.manual(identifiers: ["a", "b", "c"])
 
         sut.set(manualSorter)
 
