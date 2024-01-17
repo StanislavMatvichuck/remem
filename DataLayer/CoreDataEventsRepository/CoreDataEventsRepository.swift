@@ -24,7 +24,20 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
     public func get(using sort: EventsQuerySorter) -> [Event] {
         do {
             switch sort {
-            case .alphabetical:
+            case .happeningsCountTotal:
+                // sort descriptor implementation
+                let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+                let request = CDEvent.fetchRequest()
+                request.sortDescriptors = [sortDescriptor]
+                let fetchedCDEvents = try moc.fetch(request)
+
+                // sorting implementation
+                let sortedCDEvents = fetchedCDEvents.sorted { event1, event2 in
+                    event1.happenings?.count ?? 0 >= event2.happenings?.count ?? 0
+                }
+
+                return sortedCDEvents.map { entityMapper.convert($0)! }
+            default:
                 let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
 
                 let request = CDEvent.fetchRequest()
@@ -33,19 +46,6 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
                 let fetchedCDEvents = try moc.fetch(request)
 
                 return fetchedCDEvents.map { entityMapper.convert($0)! }
-            case .happeningsCountTotal:
-                // sort descriptor implementation
-                let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-                let request = CDEvent.fetchRequest()
-                request.sortDescriptors = [sortDescriptor]
-                let fetchedCDEvents = try moc.fetch(request)
-                
-                // sorting implementation
-                let sortedCDEvents = fetchedCDEvents.sorted { event1, event2 in
-                    event1.happenings?.count ?? 0 >= event2.happenings?.count ?? 0
-                }
-
-                return sortedCDEvents.map { entityMapper.convert($0)! }
             }
         } catch {
             fatalError("unable to fetch events")

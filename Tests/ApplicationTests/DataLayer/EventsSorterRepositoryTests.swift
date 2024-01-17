@@ -42,4 +42,12 @@ final class EventsSorterRepositoryTests: XCTestCase {
 
         XCTAssertEqual(sut.get(), .happeningsCountTotal)
     }
+
+    func test_set_acceptsManualWithStringsArray_getReturnsSameValue() {
+        let manualSorter = EventsQuerySorter.manual(identifiers: ["a", "b", "c"])
+
+        sut.set(manualSorter)
+
+        XCTAssertEqual(sut.get(), manualSorter)
+    }
 }

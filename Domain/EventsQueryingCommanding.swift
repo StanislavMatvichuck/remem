@@ -7,9 +7,10 @@
 
 import Foundation
 
-public enum EventsQuerySorter: String, CaseIterable, Codable {
+public enum EventsQuerySorter: Codable, Equatable {
     case alphabetical
     case happeningsCountTotal
+    case manual(identifiers: [String])
 }
 
 public protocol EventsQuerying {
