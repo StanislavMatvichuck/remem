@@ -25,6 +25,18 @@ final class EventsSortingCellViewModelTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
+    func test_initWithActiveSorter_isActive_matches_true() {
+        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .alphabetical)
+
+        XCTAssertTrue(sut.isActive)
+    }
+
+    func test_initWithActiveSorter_isActive_doesNotMatch_false() {
+        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .manual(identifiers: []))
+
+        XCTAssertFalse(sut.isActive)
+    }
+
     func test_title() {
         sut = EventsSortingCellViewModel(.alphabetical)
         XCTAssertEqual(sut.title, "By name")

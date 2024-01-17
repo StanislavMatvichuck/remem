@@ -18,8 +18,14 @@ extension EventsSorter {
 
 struct EventsSortingCellViewModel {
     let title: String
+    let isActive: Bool
 
-    init(_ sorter: EventsSorter) {
+    init(_ sorter: EventsSorter, activeSorter: EventsSorter? = nil) {
         title = sorter.title
+
+        isActive = {
+            if let activeSorter { activeSorter == sorter }
+            else { false }
+        }()
     }
 }
