@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FileSaving {
+public protocol FileSaving {
     func save(_: Data, to: URL)
 }
 

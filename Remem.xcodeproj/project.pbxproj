@@ -110,6 +110,8 @@
 		087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */; };
 		0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* URLProviding.swift */; };
 		0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
+		0875B43F2B57D84A004C0575 /* EventsSorterRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */; };
+		0875B4412B57D874004C0575 /* EventsSorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4402B57D874004C0575 /* EventsSorterRepository.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -457,6 +459,8 @@
 		087433BD2B3375E000336FC3 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		087433C22B33814C00336FC3 /* WeekPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModel.swift; sourceTree = "<group>"; };
 		087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModelTests.swift; sourceTree = "<group>"; };
+		0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepositoryTests.swift; sourceTree = "<group>"; };
+		0875B4402B57D874004C0575 /* EventsSorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepository.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
@@ -785,6 +789,7 @@
 				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 				085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */,
 				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
+				0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -925,6 +930,7 @@
 				084B21EF29C08F1A00B601DA /* URLProviding.swift */,
 				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
+				0875B4402B57D874004C0575 /* EventsSorterRepository.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -1607,6 +1613,7 @@
 				0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */,
 				0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */,
 				0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */,
+				0875B4412B57D874004C0575 /* EventsSorterRepository.swift in Sources */,
 				0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */,
 				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
 				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
@@ -1627,6 +1634,7 @@
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				08A0CB562B48649700DF2CD3 /* EventsListViewModelTests.swift in Sources */,
+				0875B43F2B57D84A004C0575 /* EventsSorterRepositoryTests.swift in Sources */,
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
 				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
 				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum EventsQuerySorter: String, CaseIterable {
+public enum EventsQuerySorter: String, CaseIterable, Codable {
     case alphabetical
     case happeningsCountTotal
 }
@@ -20,4 +20,12 @@ public protocol EventsQuerying {
 public protocol EventsCommanding {
     func save(_: Event)
     func delete(_: Event)
+}
+
+public protocol EventsSorterQuerying {
+    func get() -> EventsQuerySorter
+}
+
+public protocol EventsSorterCommanding {
+    func set(_: EventsQuerySorter)
 }
