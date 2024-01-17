@@ -68,7 +68,7 @@ final class FooterCell: UITableViewCell {
         height.isActive = true
     }
 
-    private func configureAppearance() {
+    @objc private func configureAppearance() {
         selectionStyle = .none
         backgroundColor = .clear
         button.layer.cornerRadius = .buttonRadius
@@ -78,16 +78,11 @@ final class FooterCell: UITableViewCell {
 
     private func configureEventHandlers() {
         button.addTarget(self, action: #selector(handleTouchUp), for: .touchUpInside)
+        registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance))
     }
 
     // MARK: - Events handling
     @objc private func handleTouchUp(_: UIButton) {
         viewModel?.select()
-    }
-
-    // MARK: - Dark mode
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        configureAppearance()
     }
 }
