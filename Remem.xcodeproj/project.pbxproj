@@ -51,7 +51,6 @@
 		08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EE929A64B5900281E51 /* WidgetViewController.swift */; };
 		08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EEB29A6523700281E51 /* UpdatingCommander.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
-		083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */; };
 		083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */; };
 		0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */; };
 		0848741A2984328700C27155 /* WidgetEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventCellViewModel.swift */; };
@@ -88,7 +87,6 @@
 		0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */; };
 		0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */; };
 		0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */; };
-		08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */; };
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
@@ -392,7 +390,6 @@
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
-		083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIDevice.swift; sourceTree = "<group>"; };
 		083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListDataSource.swift; sourceTree = "<group>"; };
 		0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewControllerTests.swift; sourceTree = "<group>"; };
 		08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepositoryTests.swift; sourceTree = "<group>"; };
@@ -438,7 +435,6 @@
 		0861B4E82B4F02A0005A7480 /* DayCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC452B1CA3B300E128FB /* PDFWritingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModelTests.swift; sourceTree = "<group>"; };
 		0865DC472B1CA46D00E128FB /* PDFWritingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingViewModel.swift; sourceTree = "<group>"; };
-		08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtenstionEventsQuerySorter.swift; sourceTree = "<group>"; };
 		0867A2C928D469F400E0842C /* DataLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
@@ -696,6 +692,7 @@
 		0816B6E62B500CBB00A29815 /* ControllersInfrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				0828877529BC9EDE00FF9839 /* MulticastDelegate.swift */,
 				0828877729BCA04D00FF9839 /* ViewControllersUpdater.swift */,
 				08396EEB29A6523700281E51 /* UpdatingCommander.swift */,
@@ -784,6 +781,8 @@
 		0816B6F02B500E7000A29815 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
+				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 				085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */,
 				08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */,
 			);
@@ -793,6 +792,7 @@
 		0816B6F12B500EA800A29815 /* ControllersInfrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				08A331E729A8EAFE000B68A1 /* WatchingTests.swift */,
 				0828877C29BCA1E500FF9839 /* ViewControllersUpdaterTests.swift */,
 			);
 			path = ControllersInfrastructure;
@@ -943,11 +943,8 @@
 				0816B6E92B500E0A00A29815 /* EventDetails */,
 				0816B6E82B500E0200A29815 /* EventsList */,
 				0849699529B4907F00CDBBC8 /* DependencyContainersTests.swift */,
-				084B21F729C0A83400B601DA /* FileSavingTests.swift */,
 				08CC50692906DE8200840385 /* TestingAppDelegate.swift */,
 				083141D129142DCE00D5AB8A /* UIKit.swift */,
-				084B21ED29C08E9200B601DA /* URLProvidingTests.swift */,
-				08A331E729A8EAFE000B68A1 /* WatchingTests.swift */,
 			);
 			path = ApplicationTests;
 			sourceTree = "<group>";
@@ -1090,14 +1087,11 @@
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */,
 				08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */,
-				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
-				08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */,
 				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */,
 				08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */,
-				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 			);
 			path = Helpers;
@@ -1686,7 +1680,6 @@
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
-				083D3897279B0A7100134A15 /* ExtensionUIDevice.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
 				085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */,
 				08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */,
@@ -1736,7 +1729,6 @@
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
 				0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */,
 				089308AA2B3B07550059D51A /* WeekDayHappeningsView.swift in Sources */,
-				08677BDA29F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift in Sources */,
 				0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */,
 				086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */,
 				08FEA39528DC98A600BAA196 /* EventDetailsViewModel.swift in Sources */,

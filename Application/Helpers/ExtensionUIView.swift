@@ -63,7 +63,6 @@ extension UIView {
         animation.repeatCount = 1
         animation.delegate = AnimationDelegate(completionHandler: completionHandler)
 
-        UIDevice.vibrate(.medium)
         layer.add(animation, forKey: nil)
     }
 
