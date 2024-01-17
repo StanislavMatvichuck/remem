@@ -60,8 +60,6 @@
 		084A8678299A3E5800300918 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		084A8679299A3FCA00300918 /* WidgetPreview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 084A867B299A3FCA00300918 /* WidgetPreview.plist */; };
 		084B21EE29C08E9200B601DA /* URLProvidingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21ED29C08E9200B601DA /* URLProvidingTests.swift */; };
-		084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* LocalFile.swift */; };
-		084B21F229C0929A00B601DA /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
 		084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F329C0943E00B601DA /* PDFWritingView.swift */; };
 		084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F529C0977A00B601DA /* PDFReadingContainer.swift */; };
 		084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F729C0A83400B601DA /* FileSavingTests.swift */; };
@@ -82,7 +80,6 @@
 		0857B5A629892CBC002B400B /* AppPreview02Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */; };
 		085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */; };
 		085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */; };
-		085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */; };
 		085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */; };
 		085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */; };
 		085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */; };
@@ -113,6 +110,8 @@
 		087433BE2B3375E000336FC3 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BD2B3375E000336FC3 /* WeekView.swift */; };
 		087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C22B33814C00336FC3 /* WeekPageViewModel.swift */; };
 		087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */; };
+		0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* URLProviding.swift */; };
+		0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -407,7 +406,7 @@
 		084A867F299A3FD500300918 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = uk.lproj/WidgetPreview.plist; sourceTree = "<group>"; };
 		084B178D2A432150002BE641 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		084B21ED29C08E9200B601DA /* URLProvidingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidingTests.swift; sourceTree = "<group>"; };
-		084B21EF29C08F1A00B601DA /* LocalFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
+		084B21EF29C08F1A00B601DA /* URLProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProviding.swift; sourceTree = "<group>"; };
 		084B21F129C0929A00B601DA /* FileSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSaving.swift; sourceTree = "<group>"; };
 		084B21F329C0943E00B601DA /* PDFWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingView.swift; sourceTree = "<group>"; };
 		084B21F529C0977A00B601DA /* PDFReadingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingContainer.swift; sourceTree = "<group>"; };
@@ -431,7 +430,6 @@
 		0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview02Recorder.swift; sourceTree = "<group>"; };
 		085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewModel.swift; sourceTree = "<group>"; };
 		085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingTitlePageView.swift; sourceTree = "<group>"; };
-		085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsQuerySorterRepository.swift; sourceTree = "<group>"; };
 		085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapperTests.swift; sourceTree = "<group>"; };
 		085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
@@ -923,6 +921,8 @@
 		0867A2CA28D469F400E0842C /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				084B21F129C0929A00B601DA /* FileSaving.swift */,
+				084B21EF29C08F1A00B601DA /* URLProviding.swift */,
 				08E5B91728998042000B08BC /* CoreDataEventsRepository */,
 				0880C3B528009DFA00970254 /* CoreDataStack.swift */,
 			);
@@ -1086,7 +1086,6 @@
 			isa = PBXGroup;
 			children = (
 				08A79F5529DEC30300855146 /* DayDetailsAnimationsHelper.swift */,
-				085896B62A267C7300390C76 /* EventsQuerySorterRepository.swift */,
 				086055F82795EC0600DDDD02 /* ExtensionComparable.swift */,
 				0887C806298AE5040048EC12 /* ExtensionEvent.swift */,
 				089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */,
@@ -1094,8 +1093,6 @@
 				083D3896279B0A7100134A15 /* ExtensionUIDevice.swift */,
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				08677BD929F7FC6300AD5383 /* ExtenstionEventsQuerySorter.swift */,
-				084B21F129C0929A00B601DA /* FileSaving.swift */,
-				084B21EF29C08F1A00B601DA /* LocalFile.swift */,
 				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
 				089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */,
@@ -1615,6 +1612,8 @@
 			files = (
 				0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */,
 				0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */,
+				0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */,
+				0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */,
 				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
 				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
 				0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */,
@@ -1700,7 +1699,6 @@
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				087433BE2B3375E000336FC3 /* WeekView.swift in Sources */,
-				084B21F229C0929A00B601DA /* FileSaving.swift in Sources */,
 				0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
@@ -1716,7 +1714,6 @@
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				089B37882A0A32B700422971 /* EventAmountView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
-				084B21F029C08F1A00B601DA /* LocalFile.swift in Sources */,
 				084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */,
 				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
@@ -1746,7 +1743,6 @@
 				08FEA39928DC98A600BAA196 /* EventsListViewModel.swift in Sources */,
 				080F9F2729ED51810013CBFE /* EventCell.swift in Sources */,
 				084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */,
-				085896B72A267C7300390C76 /* EventsQuerySorterRepository.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,

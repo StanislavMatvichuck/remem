@@ -34,11 +34,13 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
 
                 return fetchedCDEvents.map { entityMapper.convert($0)! }
             case .happeningsCountTotal:
+                // sort descriptor implementation
                 let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
                 let request = CDEvent.fetchRequest()
                 request.sortDescriptors = [sortDescriptor]
                 let fetchedCDEvents = try moc.fetch(request)
-
+                
+                // sorting implementation
                 let sortedCDEvents = fetchedCDEvents.sorted { event1, event2 in
                     event1.happenings?.count ?? 0 >= event2.happenings?.count ?? 0
                 }
@@ -77,6 +79,8 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
     private var allEvents: [CDEvent] {
         do {
             let request = CDEvent.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
             return try moc.fetch(request)
         } catch {
             fatalError("Unable to fetch events")

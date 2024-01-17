@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import XCTest
 
 final class URLProvidingTests: XCTestCase {

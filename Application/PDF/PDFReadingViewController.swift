@@ -7,6 +7,7 @@
 
 import PDFKit
 import UIKit
+import DataLayer
 
 final class PDFReadingViewController: UIViewController {
     private let provider: URLProviding

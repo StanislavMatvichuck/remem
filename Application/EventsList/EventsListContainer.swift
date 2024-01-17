@@ -18,7 +18,6 @@ final class EventsListContainer:
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
-    let orderingRepository = UserDefaultsEventsQuerySorterRepository()
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
@@ -36,8 +35,7 @@ final class EventsListContainer:
     }
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
-        let ordering = uiTestingDisabled && parent.mode != .unitTest ? orderingRepository.get() : .alphabetical
-        let events = parent.provider.get(using: ordering)
+        let events = parent.provider.get()
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,

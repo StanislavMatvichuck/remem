@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol URLProviding {
+public protocol URLProviding {
     var url: URL { get }
 }
 
-enum LocalFile: URLProviding {
-    case pdfReport, widget, testingPdfReport, testingWidget
+public enum LocalFile: URLProviding {
+    case pdfReport, widget, testingPdfReport, testingWidget, eventsQuerySorter, testingEventsQuerySorter
 
-    var url: URL {
+    public var url: URL {
         let documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let containerDir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.remem.io")!
 
@@ -23,6 +23,8 @@ enum LocalFile: URLProviding {
         case .testingPdfReport: return documentDir.appendingPathComponent("TestingReport.pdf")
         case .widget: return containerDir.appendingPathComponent("RememWidgets.plist")
         case .testingWidget: return containerDir.appendingPathComponent("RememTestingWidgets.plist")
+        case .eventsQuerySorter: return documentDir.appendingPathComponent("EventsQuerySorter.plist")
+        case .testingEventsQuerySorter: return documentDir.appendingPathComponent("TestingEventsQuerySorter.plist")
         }
     }
 }

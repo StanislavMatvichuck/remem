@@ -8,6 +8,7 @@
 @testable import Application
 import Domain
 import XCTest
+import DataLayer
 
 extension TestingViewController where Controller == PDFReadingViewController {
     func make() {}

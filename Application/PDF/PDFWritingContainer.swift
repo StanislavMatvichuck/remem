@@ -7,6 +7,7 @@
 
 import Domain
 import UIKit
+import DataLayer
 
 final class PDFWritingContainer: ControllerFactoring, PDFWritingViewModelFactoring {
     let parent: EventDetailsContainer
