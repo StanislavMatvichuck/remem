@@ -16,6 +16,10 @@
 "eventsList.ordering.alphabetically" = "Alphabetically";
 "eventsList.ordering.totalHappenings" = "Total happenings";
 
+"eventsSorting.name" = "By name";
+"eventsSorting.total" = "By total";
+"eventsSorting.manual" = "Manual";
+
 "eventDetails.of" = "of";
 "eventDetails.placeholder" = "your weekly goal";
 

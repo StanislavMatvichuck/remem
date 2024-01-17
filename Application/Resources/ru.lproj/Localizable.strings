@@ -16,6 +16,10 @@
 "eventsList.ordering.alphabetically" = "По алфавиту";
 "eventsList.ordering.totalHappenings" = "Всего происшествий";
 
+"eventsSorting.name" = "По имени";
+"eventsSorting.total" = "По количеству";
+"eventsSorting.manual" = "Ручное";
+
 "eventDetails.of" = "из";
 "eventDetails.placeholder" = "твоя цель на неделю";
 

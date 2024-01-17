@@ -112,6 +112,8 @@
 		0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
 		0875B43F2B57D84A004C0575 /* EventsSorterRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */; };
 		0875B4412B57D874004C0575 /* EventsSorterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4402B57D874004C0575 /* EventsSorterRepository.swift */; };
+		0875B4442B57F083004C0575 /* EventsSortingCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4432B57F083004C0575 /* EventsSortingCellViewModelTests.swift */; };
+		0875B4472B57F0C3004C0575 /* EventsSortingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -461,6 +463,8 @@
 		087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModelTests.swift; sourceTree = "<group>"; };
 		0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepositoryTests.swift; sourceTree = "<group>"; };
 		0875B4402B57D874004C0575 /* EventsSorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepository.swift; sourceTree = "<group>"; };
+		0875B4432B57F083004C0575 /* EventsSortingCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingCellViewModelTests.swift; sourceTree = "<group>"; };
+		0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingCellViewModel.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
@@ -938,6 +942,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				0875B4422B57F045004C0575 /* EventsSorting */,
 				0816B6F12B500EA800A29815 /* ControllersInfrastructure */,
 				0816B6F02B500E7000A29815 /* DataLayer */,
 				0816B6EF2B500E5E00A29815 /* Navigation */,
@@ -965,6 +970,22 @@
 				089AC5F12B3C53BF00577781 /* WeekDayNumberView.swift */,
 			);
 			path = Week;
+			sourceTree = "<group>";
+		};
+		0875B4422B57F045004C0575 /* EventsSorting */ = {
+			isa = PBXGroup;
+			children = (
+				0875B4432B57F083004C0575 /* EventsSortingCellViewModelTests.swift */,
+			);
+			path = EventsSorting;
+			sourceTree = "<group>";
+		};
+		0875B4452B57F0A4004C0575 /* EventsSorting */ = {
+			isa = PBXGroup;
+			children = (
+				0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */,
+			);
+			path = EventsSorting;
 			sourceTree = "<group>";
 		};
 		087AFFC52A13FA9E0005B4D9 /* EventInputView */ = {
@@ -1060,6 +1081,7 @@
 				0816B6E62B500CBB00A29815 /* ControllersInfrastructure */,
 				0816B6E32B500B2B00A29815 /* DayDetails */,
 				08DFFADC2B5008260063B389 /* EventDetails */,
+				0875B4452B57F0A4004C0575 /* EventsSorting */,
 				08DFFADB2B5007B50063B389 /* EventsList */,
 				08D5123E278716DA00C2037F /* Helpers */,
 				08C52E7929CA63E40056C116 /* Navigation */,
@@ -1631,6 +1653,7 @@
 				08D871592B55575E0065DA6B /* EventsListViewTests.swift in Sources */,
 				08FE8B992B51929D005E780E /* EventsListDataSourceTests.swift in Sources */,
 				089AC5F42B3C60F000577781 /* WeekViewControllerTests.swift in Sources */,
+				0875B4442B57F083004C0575 /* EventsSortingCellViewModelTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0844342728F6DFF900A30FB2 /* EventsListViewControllerTests.swift in Sources */,
 				08A0CB562B48649700DF2CD3 /* EventsListViewModelTests.swift in Sources */,
@@ -1746,6 +1769,7 @@
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,
+				0875B4472B57F0C3004C0575 /* EventsSortingCellViewModel.swift in Sources */,
 				08286B03284170A900FBC022 /* ClockFace.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayCellViewModel.swift in Sources */,
 				08FEA39328DC989A00BAA196 /* EventCellViewModel.swift in Sources */,

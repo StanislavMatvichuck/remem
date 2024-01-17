@@ -16,6 +16,10 @@
 "eventsList.ordering.alphabetically" = "Alphabetisch";
 "eventsList.ordering.totalHappenings" = "Totale Geschehnisse";
 
+"eventsSorting.name" = "Namentlich";
+"eventsSorting.total" = "Insgesamt";
+"eventsSorting.manual" = "Handbuch";
+
 "eventDetails.of" = "of";
 "eventDetails.placeholder" = "Ihr wöchentliches Ziel";
 
