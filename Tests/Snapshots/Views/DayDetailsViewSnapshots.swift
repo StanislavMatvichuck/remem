@@ -19,7 +19,7 @@ final class DayDetailsViewSnapshots: FBSnapshotTestCase {
     func test_empty() {
         let container = ApplicationContainer(mode: .unitTest)
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let vm = DayDetailsContainer(EventDetailsContainer(container, event: event)).makeDayDetailsViewModel()
+        let vm = DayDetailsContainer(EventDetailsContainer(container, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
         let sut = DayDetailsView()
         sut.viewModel = vm
         sut.happeningsCollection.delegate = self
@@ -41,7 +41,7 @@ final class DayDetailsViewSnapshots: FBSnapshotTestCase {
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
-        let vm = DayDetailsContainer(EventDetailsContainer(container, event: event)).makeDayDetailsViewModel()
+        let vm = DayDetailsContainer(EventDetailsContainer(container, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
         let sut = DayDetailsView()
         sut.viewModel = vm
         sut.happeningsCollection.delegate = self
