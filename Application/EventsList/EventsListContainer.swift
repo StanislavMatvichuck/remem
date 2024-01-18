@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 24.01.2023.
 //
 
+import DataLayer
 import Domain
 import UIKit
 
@@ -18,10 +19,21 @@ final class EventsListContainer:
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
+    let sortingProvider: EventsSortingQuerying
+    let sortingCommander: EventsSortingCommanding
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
-    init(_ parent: ApplicationContainer) { self.parent = parent }
+    init(_ parent: ApplicationContainer) {
+        self.parent = parent
+        let sortingRepository = EventsSorterRepository(
+            parent.mode == .uikit ?
+                LocalFile.eventsQuerySorter :
+                LocalFile.testingEventsQuerySorter
+        )
+        self.sortingProvider = sortingRepository
+        self.sortingCommander = sortingRepository
+    }
 
     func make() -> UIViewController {
         let controller = EventsListViewController(
@@ -35,7 +47,8 @@ final class EventsListContainer:
     }
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
-        let events = parent.provider.get()
+        let sorter = sortingProvider.get()
+        let events = parent.provider.get(using: sorter)
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
