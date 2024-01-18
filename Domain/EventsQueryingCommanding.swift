@@ -29,10 +29,10 @@ public protocol EventsCommanding {
     func delete(_: Event)
 }
 
-public protocol EventsSorterQuerying {
+public protocol EventsSortingQuerying {
     func get() -> EventsSorter
 }
 
-public protocol EventsSorterCommanding {
+public protocol EventsSortingCommanding {
     func set(_: EventsSorter)
 }
