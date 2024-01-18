@@ -65,7 +65,6 @@
 		084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */; };
 		084B21FD29C0B03400B601DA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FC29C0B03400B601DA /* Navigation.swift */; };
 		0850075429216E9D007B272C /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 0850075329216E9D007B272C /* iOSSnapshotTestCase */; };
-		0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0850075529216ECF007B272C /* EventsListSnapshots.swift */; };
 		085145C429AE066C00CA533D /* ClockContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C329AE066C00CA533D /* ClockContainer.swift */; };
 		085145C829AE092100CA533D /* SummaryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C729AE092100CA533D /* SummaryContainer.swift */; };
 		085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */; };
@@ -116,6 +115,19 @@
 		0875B4472B57F0C3004C0575 /* EventsSortingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */; };
 		0875B4492B57F6AC004C0575 /* EventsSortingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4482B57F6AC004C0575 /* EventsSortingViewModelTests.swift */; };
 		0875B44B2B57F6CD004C0575 /* EventsSortingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */; };
+		0875B44D2B582066004C0575 /* EventsSortingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B44C2B582066004C0575 /* EventsSortingViewTests.swift */; };
+		0875B44F2B582093004C0575 /* EventsSortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B44E2B582093004C0575 /* EventsSortingView.swift */; };
+		0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4502B593780004C0575 /* EventsSortingCellView.swift */; };
+		0875B4552B5953CB004C0575 /* EventsSortingSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4542B5953CB004C0575 /* EventsSortingSnapshots.swift */; };
+		0875B4562B5955E3004C0575 /* TestingPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */; };
+		0875B4572B5955E3004C0575 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
+		0875B4582B5955E3004C0575 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
+		0875B4592B5955E3004C0575 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
+		0875B45A2B5955E3004C0575 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
+		0875B45B2B5955E3004C0575 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
+		0875B45C2B5955E3004C0575 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
+		0875B45D2B5955FF004C0575 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083141D129142DCE00D5AB8A /* UIKit.swift */; };
+		0875B45E2B59583D004C0575 /* EventsListSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0850075529216ECF007B272C /* EventsListSnapshots.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -153,13 +165,11 @@
 		089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */; };
 		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
-		089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
 		08A0CB562B48649700DF2CD3 /* EventsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */; };
-		08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E729A8EAFE000B68A1 /* WatchingTests.swift */; };
 		08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A331E929A8EBC3000B68A1 /* Watching.swift */; };
 		08A376072A182A4D0037D43A /* MakingSnapshotsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A376062A182A4D0037D43A /* MakingSnapshotsRowView.swift */; };
@@ -171,7 +181,6 @@
 		08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B26A15289E98B700DFBAC8 /* DayCell.swift */; };
 		08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B42F732B2CCF6400850BAD /* ClockViewModelTests.swift */; };
 		08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
-		08B628B52981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
 		08B8178A294506E30095D891 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
@@ -201,11 +210,7 @@
 		08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E174512B292ABF0018256D /* DayDetailsPresentationDelegate.swift */; };
 		08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3325A29B4A14B00E59693 /* WeakRef.swift */; };
 		08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B529C31B25006AF35B /* PdfSnapshots.swift */; };
-		08E454B829C31C1A006AF35B /* TestingPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */; };
 		08E454B929C31C2B006AF35B /* TestingPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */; };
-		08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A01D292FFD5900924530 /* TestingClockViewController.swift */; };
-		08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
-		08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */; };
 		08F467EA29BF2A6E00D35AB6 /* PDFReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */; };
@@ -469,6 +474,10 @@
 		0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingCellViewModel.swift; sourceTree = "<group>"; };
 		0875B4482B57F6AC004C0575 /* EventsSortingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingViewModelTests.swift; sourceTree = "<group>"; };
 		0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingViewModel.swift; sourceTree = "<group>"; };
+		0875B44C2B582066004C0575 /* EventsSortingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingViewTests.swift; sourceTree = "<group>"; };
+		0875B44E2B582093004C0575 /* EventsSortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingView.swift; sourceTree = "<group>"; };
+		0875B4502B593780004C0575 /* EventsSortingCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingCellView.swift; sourceTree = "<group>"; };
+		0875B4542B5953CB004C0575 /* EventsSortingSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingSnapshots.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
@@ -888,6 +897,7 @@
 				08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */,
 				087433BA2B33752D00336FC3 /* WeekViewSnapshots.swift */,
 				082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */,
+				0875B4542B5953CB004C0575 /* EventsSortingSnapshots.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -981,6 +991,7 @@
 			children = (
 				0875B4432B57F083004C0575 /* EventsSortingCellViewModelTests.swift */,
 				0875B4482B57F6AC004C0575 /* EventsSortingViewModelTests.swift */,
+				0875B44C2B582066004C0575 /* EventsSortingViewTests.swift */,
 			);
 			path = EventsSorting;
 			sourceTree = "<group>";
@@ -990,6 +1001,8 @@
 			children = (
 				0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */,
 				0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */,
+				0875B44E2B582093004C0575 /* EventsSortingView.swift */,
+				0875B4502B593780004C0575 /* EventsSortingCellView.swift */,
 			);
 			path = EventsSorting;
 			sourceTree = "<group>";
@@ -1598,28 +1611,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0875B45E2B59583D004C0575 /* EventsListSnapshots.swift in Sources */,
 				0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */,
 				0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */,
-				08E63E5629409A0C00F87F25 /* TestingClockViewController.swift in Sources */,
+				0875B4582B5955E3004C0575 /* TestingEventDetailsViewController.swift in Sources */,
 				082458132B4C270C00362B84 /* DayDetailsViewSnapshots.swift in Sources */,
-				08A331E629A8DADB000B68A1 /* TestingSummaryViewController.swift in Sources */,
+				0875B45D2B5955FF004C0575 /* UIKit.swift in Sources */,
 				08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */,
+				0875B4552B5953CB004C0575 /* EventsSortingSnapshots.swift in Sources */,
 				0857A01C292FE66F00924530 /* EventDetailsSnapshots.swift in Sources */,
 				08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */,
-				0850075629216ECF007B272C /* EventsListSnapshots.swift in Sources */,
-				08E454B829C31C1A006AF35B /* TestingPdfViewController.swift in Sources */,
+				0875B45A2B5955E3004C0575 /* TestingDayDetailsViewController.swift in Sources */,
+				0875B4562B5955E3004C0575 /* TestingPdfViewController.swift in Sources */,
 				08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */,
 				087791992974858300780F60 /* ZAtlas.swift in Sources */,
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
+				0875B45C2B5955E3004C0575 /* TestingEventsListViewController.swift in Sources */,
+				0875B45B2B5955E3004C0575 /* TestingClockViewController.swift in Sources */,
+				0875B4572B5955E3004C0575 /* TestingSummaryViewController.swift in Sources */,
 				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
 				08A376072A182A4D0037D43A /* MakingSnapshotsRowView.swift in Sources */,
-				08E63E5729409A0C00F87F25 /* TestingDayDetailsViewController.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,
-				08B628B52981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
-				08E63E5829409A0C00F87F25 /* TestingEventsListViewController.swift in Sources */,
 				0824D0192981E38E00B6E701 /* Helpers.swift in Sources */,
-				089C5B9829A7F12200B1B977 /* TestingViewController.swift in Sources */,
 				087433BB2B33752D00336FC3 /* WeekViewSnapshots.swift in Sources */,
+				0875B4592B5955E3004C0575 /* TestingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1680,6 +1695,7 @@
 				0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */,
 				08B628B42981BD2F00CA57F1 /* TestingEventDetailsViewController.swift in Sources */,
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
+				0875B44D2B582066004C0575 /* EventsSortingViewTests.swift in Sources */,
 				0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */,
@@ -1739,6 +1755,7 @@
 				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
+				0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
 				089AC5F22B3C53BF00577781 /* WeekDayNumberView.swift in Sources */,
 				089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */,
@@ -1774,6 +1791,7 @@
 				080F9F2729ED51810013CBFE /* EventCell.swift in Sources */,
 				084B21F429C0943E00B601DA /* PDFWritingView.swift in Sources */,
 				0890627827A0A2520032847C /* EventDetailsViewController.swift in Sources */,
+				0875B44F2B582093004C0575 /* EventsSortingView.swift in Sources */,
 				0828877629BC9EDE00FF9839 /* MulticastDelegate.swift in Sources */,
 				0875B44B2B57F6CD004C0575 /* EventsSortingViewModel.swift in Sources */,
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,
