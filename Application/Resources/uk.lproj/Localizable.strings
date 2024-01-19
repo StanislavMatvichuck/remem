@@ -16,6 +16,7 @@
 "eventsList.ordering.alphabetically" = "За алфавітом";
 "eventsList.ordering.totalHappenings" = "Загалом випадків";
 
+"eventsSorting.title" = "Упорядкування";
 "eventsSorting.name" = "За ім'ям";
 "eventsSorting.total" = "За кількістю";
 "eventsSorting.manual" = "Ручне";

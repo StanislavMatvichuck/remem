@@ -43,6 +43,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         setupTableView()
         setupEventHandlers()
+        setupEventsSortingButton()
         update()
         setupTimer()
     }
@@ -53,6 +54,19 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         table.dragDelegate = self
         table.dropDelegate = self
         table.dragInteractionEnabled = true
+    }
+
+    private func setupEventsSortingButton() {
+        let item = UIBarButtonItem(
+            title: EventsListViewModel.eventsSortingLabel,
+            style: .plain, target: self,
+            action: #selector(handleEventsSortingTap)
+        )
+        navigationItem.setRightBarButton(item, animated: false)
+    }
+
+    @objc private func handleEventsSortingTap() {
+        viewModel?.eventsSortingHandler()
     }
 
     private func setupEventHandlers() {

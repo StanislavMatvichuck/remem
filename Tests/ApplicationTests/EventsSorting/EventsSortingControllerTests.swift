@@ -13,7 +13,11 @@ final class EventsSortingControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = EventsSortingController()
+        let applicationContainer = ApplicationContainer(mode: .unitTest)
+        let listContainer = EventsListContainer(applicationContainer)
+        let container = EventsSortingContainer(provider: listContainer.sortingProvider)
+        sut = EventsSortingController(container)
+        sut.loadViewIfNeeded()
     }
 
     override func tearDown() {
@@ -21,6 +25,9 @@ final class EventsSortingControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_init() { XCTAssertNotNil(sut) }
+    func test_init_requiresFactory() { XCTAssertNotNil(sut) }
     func test_showsEventsSortingView() { XCTAssertNotNil(sut.view as? EventsSortingView) }
+    func test_configuresContent() {
+        XCTAssertNotNil((sut.view as? EventsSortingView)?.viewModel)
+    }
 }

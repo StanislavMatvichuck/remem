@@ -27,4 +27,5 @@ final class EventsListContainerTests: XCTestCase {
 
     func test_storesEventsSortingQuerying() { sut.sortingProvider is EventsSortingQuerying }
     func test_storesEventsSortingCommanding() { sut.sortingCommander is EventsSortingCommanding }
+    func test_makeEventsSortingTapHandler() { XCTAssertNotNil(sut.makeEventsSortingTapHandler()) }
 }

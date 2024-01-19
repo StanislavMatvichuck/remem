@@ -19,6 +19,8 @@ final class Coordinator {
         switch navigation {
         case .eventsList:
             navigationController.pushViewController(newController, animated: false)
+        case .eventsSorting:
+            navigationController.present(newController, animated: true)
         case .eventDetails:
             navigationController.pushViewController(newController, animated: true)
         case .dayDetails:

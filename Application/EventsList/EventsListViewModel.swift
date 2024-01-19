@@ -11,8 +11,10 @@ struct EventsListViewModel {
     enum Section: Int, CaseIterable { case hint, events, createEvent }
 
     static let title = String(localizationId: "eventsList.title")
+    static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
 
     typealias AddEventHandler = (String) -> Void
+    typealias SortingTapHandler = () -> Void
 
     var renamedItem: EventCellViewModel?
     var inputVisible: Bool = false
@@ -21,13 +23,16 @@ struct EventsListViewModel {
     private var cells: [Section: [AnyHashable]]
 
     let addHandler: AddEventHandler
+    let eventsSortingHandler: SortingTapHandler
 
     init(
         cells: [Section: [AnyHashable]],
-        addHandler: @escaping AddEventHandler
+        addHandler: @escaping AddEventHandler,
+        eventsSortingHandler: @escaping SortingTapHandler
     ) {
         self.cells = cells
         self.addHandler = addHandler
+        self.eventsSortingHandler = eventsSortingHandler
     }
 
     private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }

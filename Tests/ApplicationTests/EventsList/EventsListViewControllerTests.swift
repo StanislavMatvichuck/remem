@@ -103,6 +103,10 @@ final class EventsListViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.viewRoot.table.dropDelegate)
     }
 
+    func test_configuresEventsSortingButton() {
+        XCTAssertEqual(sut.navigationItem.rightBarButtonItem?.title, "Ordering")
+    }
+
     // MARK: - Creation and helpers
 
     private func configureEmpty() {

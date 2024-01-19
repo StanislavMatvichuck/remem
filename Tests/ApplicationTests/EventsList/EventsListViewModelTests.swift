@@ -29,6 +29,11 @@ final class EventsListViewModelTests: XCTestCase {
     }
 
     // MARK: - Tests
+    func test_eventsSortingPresentingButtonText_ordering() {
+        XCTAssertEqual(EventsListViewModel.eventsSortingLabel, "Ordering")
+    }
+
+    func test_handleEventsSortingTap() { sut.eventsSortingHandler() }
 
     func test_configureAnimationForEventCells_usingOldValue_addedHappeningForSecondEvent_neighboursReceiveAnimations() {
         arrangeWithSecondEventSwiped()

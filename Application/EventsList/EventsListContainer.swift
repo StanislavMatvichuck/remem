@@ -76,9 +76,11 @@ final class EventsListContainer:
         cells.updateValue(eventsViewModels, forKey: .events)
         cells.updateValue([footerVm], forKey: .createEvent)
 
-        let vm = EventsListViewModel(cells: cells) { name in
-            self.commander.save(Event(name: name))
-        }
+        let vm = EventsListViewModel(
+            cells: cells,
+            addHandler: makeAddEventHandler(),
+            eventsSortingHandler: makeEventsSortingTapHandler()
+        )
 
         return vm
     }
@@ -124,4 +126,14 @@ final class EventsListContainer:
             animation: .none
         )
     }
+
+    func makeAddEventHandler() -> (String) -> Void {{
+        name in self.commander.save(Event(name: name))
+    }}
+
+    func makeEventsSortingTapHandler() -> () -> Void {{
+        self.parent.coordinator.show(.eventsSorting(
+            factory: EventsSortingContainer(provider: self.sortingProvider)
+        ))
+    }}
 }

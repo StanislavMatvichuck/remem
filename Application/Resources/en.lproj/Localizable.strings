@@ -16,6 +16,7 @@
 "eventsList.ordering.alphabetically" = "Alphabetically";
 "eventsList.ordering.totalHappenings" = "Total happenings";
 
+"eventsSorting.title" = "Ordering";
 "eventsSorting.name" = "By name";
 "eventsSorting.total" = "By total";
 "eventsSorting.manual" = "Manual";

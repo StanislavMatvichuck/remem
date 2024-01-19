@@ -51,3 +51,5 @@ protocol PDFWritingViewModelFactoring {
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 protocol WeekPageViewModelFactoring { func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel }
 protocol WeekDayViewModelFactoring { func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel }
+
+protocol EventsSortingViewModelFactoring { func makeEventsSortingViewModel() -> EventsSortingViewModel }
