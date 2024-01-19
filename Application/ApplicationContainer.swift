@@ -37,7 +37,7 @@ final class ApplicationContainer {
 
         let coordinator = Coordinator()
         let repository = makeRepository(mode)
-        let updatingCommander = UpdatingCommander(commander: repository)
+        let updatingCommander = UpdatingEventsCommander(commander: repository)
         let watcher = DayWatcher()
 
         self.mode = mode

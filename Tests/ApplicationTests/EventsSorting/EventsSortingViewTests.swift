@@ -18,7 +18,8 @@ final class EventsSortingViewTests: XCTestCase {
         let listContainer = EventsListContainer(applicationContainer)
         let container = EventsSortingContainer(
             provider: listContainer.sortingProvider,
-            commander: listContainer.sortingCommander
+            commander: listContainer.sortingCommander,
+            updater: listContainer.updater
         )
         let viewModel = container.makeEventsSortingViewModel()
         sut = EventsSortingView()

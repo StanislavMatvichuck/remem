@@ -17,7 +17,11 @@ final class EventsSortingContainerTests: XCTestCase {
 
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(provider: listContainer.sortingProvider, commander: listContainer.sortingCommander)
+        sut = EventsSortingContainer(
+            provider: listContainer.sortingProvider,
+            commander: listContainer.sortingCommander,
+            updater: listContainer.updater
+        )
     }
 
     override func tearDown() {
@@ -57,6 +61,7 @@ final class EventsSortingContainerTests: XCTestCase {
         sut = EventsSortingContainer(
             provider: listContainer.sortingProvider,
             commander: listContainer.sortingCommander,
+            updater: listContainer.updater,
             topOffset: topOffset
         )
 

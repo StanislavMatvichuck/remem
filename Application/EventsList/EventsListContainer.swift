@@ -32,7 +32,9 @@ final class EventsListContainer:
                 LocalFile.testingEventsQuerySorter
         )
         self.sortingProvider = sortingRepository
-        self.sortingCommander = sortingRepository
+        let updatingSortingCommander = UpdatingEventsSortingCommander(sortingRepository)
+        self.sortingCommander = updatingSortingCommander
+        updatingSortingCommander.delegate = updater
     }
 
     func make() -> UIViewController {
@@ -136,6 +138,7 @@ final class EventsListContainer:
             factory: EventsSortingContainer(
                 provider: self.sortingProvider,
                 commander: self.sortingCommander,
+                updater: self.updater,
                 topOffset: topOffset
             )
         ))

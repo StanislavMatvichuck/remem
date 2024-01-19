@@ -26,3 +26,7 @@ extension ClockViewController: Updating { func update() { viewModel = factory.ma
 extension DayDetailsViewController: Updating { func update() {
     viewModel = factory.makeDayDetailsViewModel(pickerDate: viewModel?.pickerDate)
 }}
+
+extension EventsSortingController: Updating { func update() {
+    viewModel = factory.makeEventsSortingViewModel()
+}}

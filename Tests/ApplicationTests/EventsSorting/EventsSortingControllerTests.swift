@@ -17,7 +17,8 @@ final class EventsSortingControllerTests: XCTestCase {
         let listContainer = EventsListContainer(applicationContainer)
         let container = EventsSortingContainer(
             provider: listContainer.sortingProvider,
-            commander: listContainer.sortingCommander
+            commander: listContainer.sortingCommander,
+            updater: listContainer.updater
         )
         sut = EventsSortingController(container)
         sut.loadViewIfNeeded()
@@ -33,4 +34,6 @@ final class EventsSortingControllerTests: XCTestCase {
     func test_configuresContent() {
         XCTAssertNotNil((sut.view as? EventsSortingView)?.viewModel)
     }
+
+    func test_updatable() { XCTAssertNotNil(sut as? Updating) }
 }

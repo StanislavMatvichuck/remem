@@ -13,19 +13,18 @@ final class SummaryContainer:
     SummaryViewModelFactoring
 {
     let parent: EventDetailsContainer
-    let commander: UpdatingCommander
+    var commander: ViewControllersUpdater { parent.updater }
 
     var event: Event { parent.event }
     var currentMoment: Date { parent.currentMoment }
 
     init(parent: EventDetailsContainer) {
         self.parent = parent
-        self.commander = UpdatingCommander(commander: parent.commander)
     }
 
     func make() -> UIViewController {
         let controller = SummaryViewController(self)
-        commander.delegate = WeakRef(controller)
+        commander.addDelegate(WeakRef(controller))
         return controller
     }
 

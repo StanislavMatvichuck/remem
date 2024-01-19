@@ -17,6 +17,7 @@ final class EventsSortingContainer: NSObject,
 
     private let provider: EventsSortingQuerying
     private let commander: EventsSortingCommanding
+    private let updater: ViewControllersUpdater
     private let presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
@@ -24,10 +25,12 @@ final class EventsSortingContainer: NSObject,
     init(
         provider: EventsSortingQuerying,
         commander: EventsSortingCommanding,
+        updater: ViewControllersUpdater,
         topOffset: CGFloat = 0
     ) {
         self.provider = provider
         self.commander = commander
+        self.updater = updater
         self.presentationTopOffset = topOffset
     }
 
@@ -35,6 +38,7 @@ final class EventsSortingContainer: NSObject,
         let controller = EventsSortingController(self)
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
+        updater.addDelegate(controller)
         return controller
     }
 

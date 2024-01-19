@@ -10,8 +10,8 @@ import UIKit
 
 final class EventsSortingController: UIViewController {
     // MARK: - Properties
-    private let viewRoot = EventsSortingView()
-    private let factory: EventsSortingViewModelFactoring
+    let viewRoot = EventsSortingView()
+    let factory: EventsSortingViewModelFactoring
 
     var viewModel: EventsSortingViewModel? { didSet {
         guard let viewModel else { return }

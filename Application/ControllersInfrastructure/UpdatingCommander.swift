@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-final class UpdatingCommander: EventsCommanding {
+final class UpdatingEventsCommander: EventsCommanding {
     var delegate: Updating?
 
     private let commander: EventsCommanding
@@ -25,6 +25,22 @@ final class UpdatingCommander: EventsCommanding {
 
     func delete(_ event: Event) {
         commander.delete(event)
+        delegate?.update()
+    }
+}
+
+final class UpdatingEventsSortingCommander: EventsSortingCommanding {
+    var delegate: Updating?
+
+    private let commander: EventsSortingCommanding
+
+    init(delegate: Updating? = nil, _ commander: EventsSortingCommanding) {
+        self.delegate = delegate
+        self.commander = commander
+    }
+
+    func set(_ sorter: EventsSorter) {
+        commander.set(sorter)
         delegate?.update()
     }
 }
