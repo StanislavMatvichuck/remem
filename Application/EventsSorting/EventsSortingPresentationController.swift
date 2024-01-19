@@ -9,6 +9,12 @@ import UIKit
 
 final class EventsSortingPresentationController: UIPresentationController {
     let topOffset: CGFloat
+    lazy var background: UIView = {
+        let view = UIView(frame: containerView?.bounds ?? .zero)
+        let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapHandler)
+        return view
+    }()
 
     init(presentedViewController: UIViewController, presenting: UIViewController?, topOffset: CGFloat = 0) {
         self.topOffset = topOffset
@@ -32,4 +38,12 @@ final class EventsSortingPresentationController: UIPresentationController {
 
         return newSize
     }
+
+    // MARK: - Lifecycle
+    override func presentationTransitionWillBegin() {
+        containerView?.addSubview(background)
+    }
+
+    // MARK: - Events handling
+    @objc private func handleTap() { presentingViewController.dismiss(animated: true) }
 }
