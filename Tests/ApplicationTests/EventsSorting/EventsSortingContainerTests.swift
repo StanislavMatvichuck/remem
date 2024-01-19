@@ -69,7 +69,7 @@ final class EventsSortingContainerTests: XCTestCase {
 
         XCTAssertTrue(presentedViewFrame.width > 0)
         XCTAssertTrue(presentedViewFrame.width < screenHalf)
-        XCTAssertEqual(presentedViewFrame.minY, topOffset)
+        XCTAssertEqual(presentedViewFrame.minY, topOffset + EventsSortingContainer.topSpacing)
     }
 
     func test_presentationController_addsBackgroundViewWithTapHandler() {

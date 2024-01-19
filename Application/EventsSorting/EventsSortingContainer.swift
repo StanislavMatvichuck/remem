@@ -12,6 +12,8 @@ final class EventsSortingContainer: NSObject,
     ControllerFactoring,
     EventsSortingViewModelFactoring
 {
+    static let topSpacing: CGFloat = .layoutSquare / 2
+
     private let provider: EventsSortingQuerying
     private let presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
@@ -43,7 +45,7 @@ extension EventsSortingContainer: UIViewControllerTransitioningDelegate {
         EventsSortingPresentationController(
             presentedViewController: presented,
             presenting: presenting,
-            topOffset: presentationTopOffset
+            topOffset: presentationTopOffset + Self.topSpacing
         )
     }
 

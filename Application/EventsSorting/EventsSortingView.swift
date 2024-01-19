@@ -36,6 +36,10 @@ final class EventsSortingView: UIView {
 
     private func configureAppearance() {
         backgroundColor = .bg_item
+
+        layer.cornerRadius = .layoutSquare / 4
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        clipsToBounds = true
     }
 
     private func configureContent(_ vm: EventsSortingViewModel) {
