@@ -45,6 +45,7 @@ struct EventsListViewModel {
         for (index, oldCell) in oldViewModel.eventCells.enumerated() {
             guard
                 let newCell = (cells[.events] as? [EventCellViewModel])?[index],
+                newCell.identifier == oldCell.identifier,
                 newCell.isValueIncreased(oldCell)
             else { continue }
             configure(animation: .swipe, for: newCell)
