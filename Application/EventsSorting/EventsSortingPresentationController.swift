@@ -23,7 +23,7 @@ final class EventsSortingPresentationController: UIPresentationController {
 
     override var frameOfPresentedViewInContainerView: CGRect {
         let containerWidth = containerView?.bounds.width ?? UIScreen.main.bounds.width
-        let finalWidth = containerWidth / 3
+        let finalWidth = containerWidth * 0.4
         let finalHeight = 3 * .buttonHeight
         let newSize = CGRect(
             origin: CGPoint(

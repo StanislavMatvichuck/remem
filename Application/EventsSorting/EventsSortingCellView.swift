@@ -31,7 +31,8 @@ final class EventsSortingCellView: UIView {
     // MARK: - Private
     private func configureLayout() {
         heightAnchor.constraint(equalToConstant: .buttonHeight).isActive = true
-        addAndConstrain(title, left: .buttonMargin, right: .buttonMargin)
+        let horizontalMargin = CGFloat.buttonMargin + EventsSortingView.borderWidth
+        addAndConstrain(title, left: horizontalMargin, right: horizontalMargin)
     }
 
     private func configureAppearance() {

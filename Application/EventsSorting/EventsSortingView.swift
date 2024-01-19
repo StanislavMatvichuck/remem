@@ -8,6 +8,7 @@
 import UIKit
 
 final class EventsSortingView: UIView {
+    static let borderWidth : CGFloat = .buttonMargin
     let stack = {
         let view = UIStackView(al: true)
         view.axis = .vertical
@@ -37,6 +38,8 @@ final class EventsSortingView: UIView {
     private func configureAppearance() {
         backgroundColor = .bg_item
 
+        layer.borderWidth = Self.borderWidth
+        layer.borderColor = UIColor.border.cgColor
         layer.cornerRadius = .layoutSquare / 4
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         clipsToBounds = true

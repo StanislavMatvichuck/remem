@@ -33,7 +33,7 @@ final class EventsSortingPresentationAnimator: NSObject, UIViewControllerAnimate
 
         let animator = EventsSortingAnimationsHelper.propertyAnimator(
             presentedView: presentedView,
-            newOriginX: finalFrame.minX
+            newOriginX: finalFrame.minX + EventsSortingView.borderWidth
         )
 
         animator.addCompletion { _ in
