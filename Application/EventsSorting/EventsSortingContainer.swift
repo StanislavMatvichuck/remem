@@ -10,12 +10,15 @@ import UIKit
 
 final class EventsSortingContainer: NSObject,
     ControllerFactoring,
-    UIViewControllerTransitioningDelegate,
     EventsSortingViewModelFactoring
 {
     private let provider: EventsSortingQuerying
+    private let presentationTopOffset: CGFloat
 
-    init(provider: EventsSortingQuerying) { self.provider = provider }
+    init(_ provider: EventsSortingQuerying, topOffset: CGFloat = 0) {
+        self.provider = provider
+        self.presentationTopOffset = topOffset
+    }
 
     func make() -> UIViewController {
         let controller = EventsSortingController(self)
@@ -26,5 +29,19 @@ final class EventsSortingContainer: NSObject,
 
     func makeEventsSortingViewModel() -> EventsSortingViewModel {
         EventsSortingViewModel(provider.get())
+    }
+}
+
+extension EventsSortingContainer: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        EventsSortingPresentationController(
+            presentedViewController: presented,
+            presenting: presenting,
+            topOffset: presentationTopOffset
+        )
     }
 }

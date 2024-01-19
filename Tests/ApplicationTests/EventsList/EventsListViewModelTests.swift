@@ -33,7 +33,7 @@ final class EventsListViewModelTests: XCTestCase {
         XCTAssertEqual(EventsListViewModel.eventsSortingLabel, "Ordering")
     }
 
-    func test_handleEventsSortingTap() { sut.eventsSortingHandler() }
+    func test_handleEventsSortingTap() { sut.eventsSortingHandler(0) }
 
     func test_configureAnimationForEventCells_usingOldValue_addedHappeningForSecondEvent_neighboursReceiveAnimations() {
         arrangeWithSecondEventSwiped()

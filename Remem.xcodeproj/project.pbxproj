@@ -133,6 +133,7 @@
 		0875B4642B59DCAA004C0575 /* EventsSortingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4632B59DCAA004C0575 /* EventsSortingControllerTests.swift */; };
 		0875B4662B59DCDC004C0575 /* EventsSortingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4652B59DCDC004C0575 /* EventsSortingController.swift */; };
 		0875B4682B59DFF2004C0575 /* EventsListContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4672B59DFF2004C0575 /* EventsListContainerTests.swift */; };
+		0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -488,6 +489,7 @@
 		0875B4632B59DCAA004C0575 /* EventsSortingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingControllerTests.swift; sourceTree = "<group>"; };
 		0875B4652B59DCDC004C0575 /* EventsSortingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingController.swift; sourceTree = "<group>"; };
 		0875B4672B59DFF2004C0575 /* EventsListContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListContainerTests.swift; sourceTree = "<group>"; };
+		0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingPresentationController.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 				0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */,
 				0875B44E2B582093004C0575 /* EventsSortingView.swift */,
 				0875B4502B593780004C0575 /* EventsSortingCellView.swift */,
+				0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */,
 				0875B4612B59C77E004C0575 /* EventsSortingContainer.swift */,
 				0875B4652B59DCDC004C0575 /* EventsSortingController.swift */,
 			);
@@ -1771,6 +1774,7 @@
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
+				0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */,

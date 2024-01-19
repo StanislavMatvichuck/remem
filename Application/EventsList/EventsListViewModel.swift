@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Foundation
 
 struct EventsListViewModel {
     enum Section: Int, CaseIterable { case hint, events, createEvent }
@@ -14,7 +15,7 @@ struct EventsListViewModel {
     static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
 
     typealias AddEventHandler = (String) -> Void
-    typealias SortingTapHandler = () -> Void
+    typealias SortingTapHandler = (CGFloat) -> Void
 
     var renamedItem: EventCellViewModel?
     var inputVisible: Bool = false

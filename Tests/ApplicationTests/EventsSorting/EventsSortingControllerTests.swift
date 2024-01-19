@@ -15,7 +15,7 @@ final class EventsSortingControllerTests: XCTestCase {
         super.setUp()
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        let container = EventsSortingContainer(provider: listContainer.sortingProvider)
+        let container = EventsSortingContainer(listContainer.sortingProvider)
         sut = EventsSortingController(container)
         sut.loadViewIfNeeded()
     }

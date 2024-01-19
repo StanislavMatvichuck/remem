@@ -127,13 +127,16 @@ final class EventsListContainer:
         )
     }
 
-    func makeAddEventHandler() -> (String) -> Void {{
+    func makeAddEventHandler() -> EventsListViewModel.AddEventHandler {{
         name in self.commander.save(Event(name: name))
     }}
 
-    func makeEventsSortingTapHandler() -> () -> Void {{
+    func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset in
         self.parent.coordinator.show(.eventsSorting(
-            factory: EventsSortingContainer(provider: self.sortingProvider)
+            factory: EventsSortingContainer(
+                self.sortingProvider,
+                topOffset: topOffset
+            )
         ))
     }}
 }

@@ -17,7 +17,7 @@ final class EventsSortingContainerTests: XCTestCase {
 
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(provider: listContainer.sortingProvider)
+        sut = EventsSortingContainer(listContainer.sortingProvider)
     }
 
     override func tearDown() {
@@ -25,7 +25,7 @@ final class EventsSortingContainerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_init_requiresEventsSortingQuerying() { XCTAssertNotNil(sut) }
+    func test_init_requiresEventsSortingQueryingAndTopOffset() { XCTAssertNotNil(sut) }
 
     func test_conformsToControllerFactoring() { sut is ControllerFactoring }
 
@@ -40,5 +40,35 @@ final class EventsSortingContainerTests: XCTestCase {
         let controller = sut.make()
 
         XCTAssertNotNil(controller as? EventsSortingController)
+    }
+
+    func test_presentationController_notNil() {
+        XCTAssertNotNil(sut.presentationController(
+            forPresented: UIViewController(),
+            presenting: UIViewController(),
+            source: UIViewController()
+        ))
+    }
+
+    func test_presentationController_withTopOffsetProvided_configuresFinalFrame() {
+        let topOffset = CGFloat(30)
+        let applicationContainer = ApplicationContainer(mode: .unitTest)
+        let listContainer = EventsListContainer(applicationContainer)
+        sut = EventsSortingContainer(listContainer.sortingProvider, topOffset: topOffset)
+
+        let presenting = UIViewController()
+        presenting.view.frame = UIScreen.main.bounds
+
+        let presentedViewFrame = sut.presentationController(
+            forPresented: UIViewController(),
+            presenting: presenting,
+            source: presenting
+        )!.frameOfPresentedViewInContainerView
+
+        let screenHalf = UIScreen.main.bounds.width / 2
+
+        XCTAssertTrue(presentedViewFrame.width > 0)
+        XCTAssertTrue(presentedViewFrame.width < screenHalf)
+        XCTAssertEqual(presentedViewFrame.minY, topOffset)
     }
 }

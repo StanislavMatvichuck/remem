@@ -66,7 +66,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 
     @objc private func handleEventsSortingTap() {
-        viewModel?.eventsSortingHandler()
+        viewModel?.eventsSortingHandler(view.safeAreaInsets.top)
     }
 
     private func setupEventHandlers() {
