@@ -17,7 +17,7 @@ final class EventsSortingContainerTests: XCTestCase {
 
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(listContainer.sortingProvider)
+        sut = EventsSortingContainer(provider: listContainer.sortingProvider, commander: listContainer.sortingCommander)
     }
 
     override func tearDown() {
@@ -25,7 +25,7 @@ final class EventsSortingContainerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_init_requiresEventsSortingQueryingAndTopOffset() { XCTAssertNotNil(sut) }
+    func test_init() { XCTAssertNotNil(sut) }
 
     func test_conformsToControllerFactoring() { sut is ControllerFactoring }
 
@@ -54,7 +54,11 @@ final class EventsSortingContainerTests: XCTestCase {
         let topOffset = CGFloat(30)
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(listContainer.sortingProvider, topOffset: topOffset)
+        sut = EventsSortingContainer(
+            provider: listContainer.sortingProvider,
+            commander: listContainer.sortingCommander,
+            topOffset: topOffset
+        )
 
         let presenting = UIViewController()
         presenting.view.frame = UIScreen.main.bounds
@@ -98,4 +102,6 @@ final class EventsSortingContainerTests: XCTestCase {
     func test_animationForDismiss() {
         XCTAssertNotNil(sut.animationController(forDismissed: UIViewController()))
     }
+
+    func test_makeTapHandler() { XCTAssertNotNil(sut.makeTapHandler()) }
 }

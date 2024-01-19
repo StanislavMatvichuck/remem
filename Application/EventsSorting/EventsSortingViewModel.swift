@@ -9,14 +9,13 @@ import Domain
 import Foundation
 
 struct EventsSortingViewModel {
-    private static let sorters: [EventsSorter] = EventsSorter.allCases
+    static let count = EventsSorter.allCases.count
+    
+    private let factory: EventsSortingCellViewModelFactoring
 
-    let count = sorters.count
-    private let activeSorter: EventsSorter?
-
-    init(_ activeSorter: EventsSorter? = nil) { self.activeSorter = activeSorter }
+    init(_ factory: EventsSortingCellViewModelFactoring) { self.factory = factory }
 
     func cell(at index: Int) -> EventsSortingCellViewModel {
-        EventsSortingCellViewModel(Self.sorters[index], activeSorter: activeSorter)
+        factory.makeEventsSortingCellViewModel(index: index)
     }
 }

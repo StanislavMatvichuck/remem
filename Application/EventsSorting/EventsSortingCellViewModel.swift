@@ -17,10 +17,17 @@ extension EventsSorter {
 }
 
 struct EventsSortingCellViewModel {
+    typealias TapHandler = (EventsSorter) -> Void
     let title: String
     let isActive: Bool
 
-    init(_ sorter: EventsSorter, activeSorter: EventsSorter? = nil) {
+    private let sorter: EventsSorter
+    private let handler: TapHandler?
+
+    init(_ sorter: EventsSorter, activeSorter: EventsSorter? = nil, handler: TapHandler? = nil) {
+        self.sorter = sorter
+        self.handler = handler
+
         title = sorter.title
 
         isActive = {
@@ -28,4 +35,6 @@ struct EventsSortingCellViewModel {
             else { false }
         }()
     }
+
+    func handleTap() { handler?(sorter) }
 }

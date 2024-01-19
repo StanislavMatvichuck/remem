@@ -24,6 +24,7 @@ final class EventsSortingCellView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
+        configureEventHandlers()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -44,5 +45,14 @@ final class EventsSortingCellView: UIView {
         title.text = vm.title
         backgroundColor = vm.isActive ? .primary : .clear
         title.textColor = vm.isActive ? .bg_item : .text
+    }
+
+    private func configureEventHandlers() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tap)
+    }
+
+    @objc private func handleTap() {
+        viewModel?.handleTap()
     }
 }

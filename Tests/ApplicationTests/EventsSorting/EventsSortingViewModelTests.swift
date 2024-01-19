@@ -14,7 +14,13 @@ final class EventsSortingViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = EventsSortingViewModel()
+        let applicationContainer = ApplicationContainer(mode: .unitTest)
+        let listContainer = EventsListContainer(applicationContainer)
+        let container = EventsSortingContainer(
+            provider: listContainer.sortingProvider,
+            commander: listContainer.sortingCommander
+        )
+        sut = container.makeEventsSortingViewModel()
     }
 
     override func tearDown() {
@@ -25,19 +31,15 @@ final class EventsSortingViewModelTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
-    func test_count_three() { XCTAssertEqual(sut.count, 3) }
+    func test_count_three() { XCTAssertEqual(EventsSortingViewModel.count, 3) }
 
     func test_initWithActiveSorterAlphabetical_cellAt_first_isActiveTrue() {
-        sut = EventsSortingViewModel(EventsSorter.alphabetical)
-
         let cell = sut.cell(at: 0)
 
         XCTAssertTrue(cell.isActive)
     }
 
     func test_initWithActiveSorterAlphabetical_cellAt_second_isActiveFalse() {
-        sut = EventsSortingViewModel(EventsSorter.alphabetical)
-
         let cell = sut.cell(at: 1)
 
         XCTAssertFalse(cell.isActive)

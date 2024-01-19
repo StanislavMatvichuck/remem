@@ -10,17 +10,24 @@ import UIKit
 
 final class EventsSortingContainer: NSObject,
     ControllerFactoring,
-    EventsSortingViewModelFactoring
+    EventsSortingViewModelFactoring,
+    EventsSortingCellViewModelFactoring
 {
     static let topSpacing: CGFloat = .layoutSquare / 2
 
     private let provider: EventsSortingQuerying
+    private let commander: EventsSortingCommanding
     private let presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
 
-    init(_ provider: EventsSortingQuerying, topOffset: CGFloat = 0) {
+    init(
+        provider: EventsSortingQuerying,
+        commander: EventsSortingCommanding,
+        topOffset: CGFloat = 0
+    ) {
         self.provider = provider
+        self.commander = commander
         self.presentationTopOffset = topOffset
     }
 
@@ -32,7 +39,20 @@ final class EventsSortingContainer: NSObject,
     }
 
     func makeEventsSortingViewModel() -> EventsSortingViewModel {
-        EventsSortingViewModel(provider.get())
+        EventsSortingViewModel(self)
+    }
+
+    func makeTapHandler() -> EventsSortingCellViewModel.TapHandler {{ selectedSorter in
+        self.commander.set(selectedSorter)
+    }}
+
+    func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel {
+        let sorters = EventsSorter.allCases
+        return EventsSortingCellViewModel(
+            sorters[index],
+            activeSorter: provider.get(),
+            handler: makeTapHandler()
+        )
     }
 }
 

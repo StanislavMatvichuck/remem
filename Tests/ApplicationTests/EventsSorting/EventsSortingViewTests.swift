@@ -14,7 +14,13 @@ final class EventsSortingViewTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let viewModel = EventsSortingViewModel()
+        let applicationContainer = ApplicationContainer(mode: .unitTest)
+        let listContainer = EventsListContainer(applicationContainer)
+        let container = EventsSortingContainer(
+            provider: listContainer.sortingProvider,
+            commander: listContainer.sortingCommander
+        )
+        let viewModel = container.makeEventsSortingViewModel()
         sut = EventsSortingView()
         sut.viewModel = viewModel
     }

@@ -134,7 +134,8 @@ final class EventsListContainer:
     func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset in
         self.parent.coordinator.show(.eventsSorting(
             factory: EventsSortingContainer(
-                self.sortingProvider,
+                provider: self.sortingProvider,
+                commander: self.sortingCommander,
                 topOffset: topOffset
             )
         ))

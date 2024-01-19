@@ -8,7 +8,7 @@
 import UIKit
 
 final class EventsSortingView: UIView {
-    static let borderWidth : CGFloat = .buttonMargin
+    static let borderWidth: CGFloat = 1
     let stack = {
         let view = UIStackView(al: true)
         view.axis = .vertical
@@ -48,7 +48,7 @@ final class EventsSortingView: UIView {
     private func configureContent(_ vm: EventsSortingViewModel) {
         for cell in stack.arrangedSubviews { cell.removeFromSuperview() }
 
-        for index in 0 ..< vm.count {
+        for index in 0 ..< EventsSortingViewModel.count {
             let cellView = EventsSortingCellView()
             cellView.viewModel = vm.cell(at: index)
 

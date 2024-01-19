@@ -53,3 +53,4 @@ protocol WeekPageViewModelFactoring { func makeWeekPageViewModel(pageIndex: Int,
 protocol WeekDayViewModelFactoring { func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel }
 
 protocol EventsSortingViewModelFactoring { func makeEventsSortingViewModel() -> EventsSortingViewModel }
+protocol EventsSortingCellViewModelFactoring { func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel }
