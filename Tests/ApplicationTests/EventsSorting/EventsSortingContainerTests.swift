@@ -86,4 +86,16 @@ final class EventsSortingContainerTests: XCTestCase {
 
         XCTAssertGreaterThan(background.gestureRecognizers?.count ?? 0, 0)
     }
+
+    func test_animationForPresentation() {
+        XCTAssertNotNil(sut.animationController(
+            forPresented: UIViewController(),
+            presenting: UIViewController(),
+            source: UIViewController()
+        ))
+    }
+
+    func test_animationForDismiss() {
+        XCTAssertNotNil(sut.animationController(forDismissed: UIViewController()))
+    }
 }

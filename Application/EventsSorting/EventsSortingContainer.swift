@@ -14,6 +14,8 @@ final class EventsSortingContainer: NSObject,
 {
     private let provider: EventsSortingQuerying
     private let presentationTopOffset: CGFloat
+    private let presentationAnimator = EventsSortingPresentationAnimator()
+    private let dismissAnimator = EventsSortingDismissAnimator()
 
     init(_ provider: EventsSortingQuerying, topOffset: CGFloat = 0) {
         self.provider = provider
@@ -43,5 +45,17 @@ extension EventsSortingContainer: UIViewControllerTransitioningDelegate {
             presenting: presenting,
             topOffset: presentationTopOffset
         )
+    }
+
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        presentationAnimator
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        dismissAnimator
     }
 }

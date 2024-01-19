@@ -134,6 +134,9 @@
 		0875B4662B59DCDC004C0575 /* EventsSortingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4652B59DCDC004C0575 /* EventsSortingController.swift */; };
 		0875B4682B59DFF2004C0575 /* EventsListContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4672B59DFF2004C0575 /* EventsListContainerTests.swift */; };
 		0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */; };
+		0875B46C2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */; };
+		0875B46E2B5A874F004C0575 /* EventsSortingDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */; };
+		0875B4702B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */; };
 		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
@@ -490,6 +493,9 @@
 		0875B4652B59DCDC004C0575 /* EventsSortingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingController.swift; sourceTree = "<group>"; };
 		0875B4672B59DFF2004C0575 /* EventsListContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListContainerTests.swift; sourceTree = "<group>"; };
 		0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingPresentationController.swift; sourceTree = "<group>"; };
+		0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingPresentationAnimator.swift; sourceTree = "<group>"; };
+		0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingDismissAnimator.swift; sourceTree = "<group>"; };
+		0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingAnimationsHelper.swift; sourceTree = "<group>"; };
 		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
@@ -1020,6 +1026,9 @@
 				0875B4502B593780004C0575 /* EventsSortingCellView.swift */,
 				0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */,
 				0875B4612B59C77E004C0575 /* EventsSortingContainer.swift */,
+				0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */,
+				0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */,
+				0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */,
 				0875B4652B59DCDC004C0575 /* EventsSortingController.swift */,
 			);
 			path = EventsSorting;
@@ -1768,14 +1777,17 @@
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				087433BE2B3375E000336FC3 /* WeekView.swift in Sources */,
 				0865DC482B1CA46D00E128FB /* PDFWritingViewModel.swift in Sources */,
+				0875B4702B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift in Sources */,
 				080F9F3129EFC6710013CBFE /* AnimatingHappeningCreation.swift in Sources */,
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
 				081015582B331656004CE297 /* WeekContainer.swift in Sources */,
+				0875B46E2B5A874F004C0575 /* EventsSortingDismissAnimator.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
 				0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */,
+				0875B46C2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift in Sources */,
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
