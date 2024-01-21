@@ -8,15 +8,7 @@
 import Foundation
 
 public enum EventsSorter: Codable, Equatable, CaseIterable {
-    public static var allCases: [EventsSorter] = [
-        .alphabetical,
-        .happeningsCountTotal,
-        .manual(identifiers: [])
-    ]
-
-    case alphabetical
-    case happeningsCountTotal
-    case manual(identifiers: [String])
+    case alphabetical, happeningsCountTotal, manual
 }
 
 public protocol EventsQuerying {

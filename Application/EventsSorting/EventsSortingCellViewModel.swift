@@ -12,7 +12,7 @@ extension EventsSorter {
     var title: String { switch self {
     case .alphabetical: String(localizationId: "eventsSorting.name")
     case .happeningsCountTotal: String(localizationId: "eventsSorting.total")
-    case .manual(let identifiers): String(localizationId: "eventsSorting.manual")
+    case .manual: String(localizationId: "eventsSorting.manual")
     } }
 }
 

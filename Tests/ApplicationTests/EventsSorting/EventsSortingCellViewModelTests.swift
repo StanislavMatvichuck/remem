@@ -32,7 +32,7 @@ final class EventsSortingCellViewModelTests: XCTestCase {
     }
 
     func test_initWithActiveSorter_isActive_doesNotMatch_false() {
-        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .manual(identifiers: []))
+        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .manual)
 
         XCTAssertFalse(sut.isActive)
     }
@@ -44,7 +44,7 @@ final class EventsSortingCellViewModelTests: XCTestCase {
         sut = EventsSortingCellViewModel(.happeningsCountTotal)
         XCTAssertEqual(sut.title, "By total")
 
-        sut = EventsSortingCellViewModel(.manual(identifiers: []))
+        sut = EventsSortingCellViewModel(.manual)
         XCTAssertEqual(sut.title, "Manual")
     }
 }
