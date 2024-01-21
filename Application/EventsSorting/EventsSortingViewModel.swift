@@ -9,11 +9,16 @@ import Domain
 import Foundation
 
 struct EventsSortingViewModel {
-    static let count = EventsSorter.allCases.count
-    
     private let factory: EventsSortingCellViewModelFactoring
 
-    init(_ factory: EventsSortingCellViewModelFactoring) { self.factory = factory }
+    let count: Int
+    let manualSortingEnabled: Bool
+
+    init(_ factory: EventsSortingCellViewModelFactoring, manualSortingEnabled: Bool) {
+        self.factory = factory
+        self.manualSortingEnabled = manualSortingEnabled
+        self.count = manualSortingEnabled ? 3 : 2
+    }
 
     func cell(at index: Int) -> EventsSortingCellViewModel {
         factory.makeEventsSortingCellViewModel(index: index)

@@ -9,6 +9,8 @@ import UIKit
 
 final class EventsSortingPresentationController: UIPresentationController {
     let topOffset: CGFloat
+    let cellsCount: Int
+
     lazy var background: UIView = {
         let view = UIView(frame: containerView?.bounds ?? .zero)
         let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -16,15 +18,22 @@ final class EventsSortingPresentationController: UIPresentationController {
         return view
     }()
 
-    init(presentedViewController: UIViewController, presenting: UIViewController?, topOffset: CGFloat = 0) {
+    init(
+        presentedViewController: UIViewController,
+        presenting: UIViewController?,
+        topOffset: CGFloat = 0,
+        cellsCount: Int
+    ) {
         self.topOffset = topOffset
+        self.cellsCount = cellsCount
         super.init(presentedViewController: presentedViewController, presenting: presenting)
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
         let containerWidth = containerView?.bounds.width ?? UIScreen.main.bounds.width
         let finalWidth = containerWidth * 0.4
-        let finalHeight = 3 * .buttonHeight
+        let finalHeight = CGFloat(cellsCount) * .buttonHeight
+
         let newSize = CGRect(
             origin: CGPoint(
                 x: containerWidth - finalWidth,

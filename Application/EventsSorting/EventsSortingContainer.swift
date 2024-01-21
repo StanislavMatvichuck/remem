@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 18.01.2024.
 //
 
+import DataLayer
 import Domain
 import UIKit
 
@@ -21,6 +22,7 @@ final class EventsSortingContainer: NSObject,
     private let presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
+    private let manualSortingQuerying: EventsSortingManualQuerying
 
     init(
         provider: EventsSortingQuerying,
@@ -32,6 +34,7 @@ final class EventsSortingContainer: NSObject,
         self.commander = commander
         self.updater = updater
         self.presentationTopOffset = topOffset
+        self.manualSortingQuerying = EventsSorterManualRepository(LocalFile.eventsQueryManualSorter)
     }
 
     func make() -> UIViewController {
@@ -43,7 +46,7 @@ final class EventsSortingContainer: NSObject,
     }
 
     func makeEventsSortingViewModel() -> EventsSortingViewModel {
-        EventsSortingViewModel(self)
+        EventsSortingViewModel(self, manualSortingEnabled: manualSortingQuerying.get().count != 0)
     }
 
     func makeTapHandler() -> EventsSortingCellViewModel.TapHandler {{ selectedSorter in
@@ -69,7 +72,8 @@ extension EventsSortingContainer: UIViewControllerTransitioningDelegate {
         EventsSortingPresentationController(
             presentedViewController: presented,
             presenting: presenting,
-            topOffset: presentationTopOffset + Self.topSpacing
+            topOffset: presentationTopOffset + Self.topSpacing,
+            cellsCount: makeEventsSortingViewModel().count
         )
     }
 

@@ -31,11 +31,6 @@ final class EventsSortingViewTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_init() {
-        XCTAssertNotNil(sut)
-    }
-
-    func test_displaysThreeCellsAndSpacer() {
-        XCTAssertEqual(sut.stack.arrangedSubviews.count, 4)
-    }
+    func test_init() { XCTAssertNotNil(sut) }
+    func test_displaysTwoCellsAndSpacer() { XCTAssertEqual(sut.stack.arrangedSubviews.count, 3) }
 }

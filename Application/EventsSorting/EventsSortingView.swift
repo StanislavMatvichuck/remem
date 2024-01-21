@@ -48,7 +48,7 @@ final class EventsSortingView: UIView {
     private func configureContent(_ vm: EventsSortingViewModel) {
         for cell in stack.arrangedSubviews { cell.removeFromSuperview() }
 
-        for index in 0 ..< EventsSortingViewModel.count {
+        for index in 0 ..< vm.count {
             let cellView = EventsSortingCellView()
             cellView.viewModel = vm.cell(at: index)
 
