@@ -12,7 +12,14 @@ public protocol URLProviding {
 }
 
 public enum LocalFile: URLProviding {
-    case pdfReport, widget, testingPdfReport, testingWidget, eventsQuerySorter, testingEventsQuerySorter
+    case pdfReport,
+         widget,
+         testingPdfReport,
+         testingWidget,
+         eventsQuerySorter,
+         testingEventsQuerySorter,
+         eventsQueryManualSorter,
+         testingEventsQueryManualSorter
 
     public var url: URL {
         let documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -25,6 +32,8 @@ public enum LocalFile: URLProviding {
         case .testingWidget: return containerDir.appendingPathComponent("RememTestingWidgets.plist")
         case .eventsQuerySorter: return documentDir.appendingPathComponent("EventsQuerySorter.plist")
         case .testingEventsQuerySorter: return documentDir.appendingPathComponent("TestingEventsQuerySorter.plist")
+        case .eventsQueryManualSorter: return documentDir.appendingPathComponent("EventsManualQuerySorter.plist")
+        case .testingEventsQueryManualSorter: return documentDir.appendingPathComponent("TestingEventsQueryManualSorter.plist")
         }
     }
 }
