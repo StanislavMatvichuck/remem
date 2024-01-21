@@ -50,7 +50,7 @@ final class EventsListContainer:
 
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let sorter = sortingProvider.get()
-        let events = parent.provider.get(using: sorter)
+        let events = parent.provider.get()
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,

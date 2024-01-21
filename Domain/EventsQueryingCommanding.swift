@@ -21,7 +21,6 @@ public enum EventsSorter: Codable, Equatable, CaseIterable {
 
 public protocol EventsQuerying {
     func get() -> [Event]
-    func get(using: EventsSorter) -> [Event]
 }
 
 public protocol EventsCommanding {

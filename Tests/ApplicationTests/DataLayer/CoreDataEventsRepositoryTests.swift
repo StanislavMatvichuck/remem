@@ -112,38 +112,6 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         XCTAssertEqual(sut.get().count, 0)
     }
 
-    func test_getUsingSorter_sortedAlphabetically() {
-        let event01 = Event(name: "a")
-        let event02 = Event(name: "b")
-        let event03 = Event(name: "c")
-
-        sut.save(event01)
-        sut.save(event03)
-        sut.save(event02)
-
-        XCTAssertEqual(event01.name, sut.get(using: .alphabetical)[0].name)
-        XCTAssertEqual(event02.name, sut.get(using: .alphabetical)[1].name)
-        XCTAssertEqual(event03.name, sut.get(using: .alphabetical)[2].name)
-    }
-
-    func test_getUsingSorter_byHappeningsAmount() {
-        let date = DayIndex.referenceValue.date
-        let event01 = Event(name: "c", dateCreated: date)
-        event01.addHappening(date: date)
-        event01.addHappening(date: date)
-        let event02 = Event(name: "b", dateCreated: date)
-        event02.addHappening(date: date)
-        let event03 = Event(name: "a", dateCreated: date)
-
-        sut.save(event01)
-        sut.save(event03)
-        sut.save(event02)
-
-        XCTAssertEqual(event01.name, sut.get(using: .happeningsCountTotal)[0].name)
-        XCTAssertEqual(event02.name, sut.get(using: .happeningsCountTotal)[1].name)
-        XCTAssertEqual(event03.name, sut.get(using: .happeningsCountTotal)[2].name)
-    }
-
     private func givenSavedDefaultEvent() -> Event {
         let newEvent = Event(name: "Event")
         sut.save(newEvent)
