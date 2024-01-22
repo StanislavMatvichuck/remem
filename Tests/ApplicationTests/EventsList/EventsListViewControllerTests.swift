@@ -93,18 +93,30 @@ final class EventsListViewControllerTests: XCTestCase {
         // TODO: write this test
     }
 
-    func test_allowsEventsDrag() {
+    func test_allowsDrag() {
         XCTAssertTrue(sut is UITableViewDragDelegate)
         XCTAssertNotNil(sut.viewRoot.table.dragDelegate)
     }
 
-    func test_allowsItemsDrop() {
+    func test_allowsDrop() {
         XCTAssertTrue(sut is UITableViewDropDelegate)
         XCTAssertNotNil(sut.viewRoot.table.dropDelegate)
     }
 
     func test_configuresEventsSortingButton() {
         XCTAssertEqual(sut.navigationItem.rightBarButtonItem?.title, "Ordering")
+    }
+
+    func test_allowsDragForEventsOnly() {
+        submitEvent()
+
+        let hintIndex = IndexPath(row: 0, section: EventsListViewModel.Section.hint.rawValue)
+        let footerIndex = IndexPath(row: 0, section: EventsListViewModel.Section.createEvent.rawValue)
+        let eventIndex = IndexPath(row: 0, section: EventsListViewModel.Section.events.rawValue)
+
+        XCTAssertEqual(sut.dragItems(for: hintIndex).count, 0)
+        XCTAssertEqual(sut.dragItems(for: eventIndex).count, 1)
+        XCTAssertEqual(sut.dragItems(for: footerIndex).count, 0)
     }
 
     // MARK: - Creation and helpers

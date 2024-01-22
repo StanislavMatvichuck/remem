@@ -47,6 +47,11 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
         viewModel.manualSortingHandler(eventsIdentifiers)
     }
 
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        let eventsSection = EventsListViewModel.Section.events.rawValue
+        return indexPath.section == eventsSection
+    }
+
     /// This method is tested poorly
     private func makeSnapshot(for vm: EventsListViewModel) -> Snapshot {
         var snapshot = Snapshot()

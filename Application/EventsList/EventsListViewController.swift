@@ -108,7 +108,12 @@ extension EventsListViewController: UITableViewDragDelegate {
         _: UITableView,
         itemsForBeginning _: UIDragSession,
         at indexPath: IndexPath
-    ) -> [UIDragItem] {
+    ) -> [UIDragItem] { dragItems(for: indexPath) }
+
+    func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
+        let eventsSection = EventsListViewModel.Section.events.rawValue
+        guard indexPath.section == eventsSection else { return [] }
+
         let provider = NSItemProvider(object: "\(indexPath.row)" as NSString)
         let dragItem = UIDragItem(itemProvider: provider)
         return [dragItem]
