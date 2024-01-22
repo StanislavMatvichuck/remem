@@ -11,7 +11,7 @@
 "eventsList.hint.firstVisit" = "Тиць щоб подивитись подробиці";
 "eventsList.hint.permanentlyVisible" = "довге натискання щоб змінити порядок";
 "eventsList.title" = "Події";
-"eventsList.new" = "Коротка назва або емодзі";
+"eventsList.new" = "Коротке ім'я або емодзі";
 "eventsList.timeSince" = "остання подія";
 "eventsList.ordering.alphabetically" = "За алфавітом";
 "eventsList.ordering.totalHappenings" = "Загалом випадків";
