@@ -91,7 +91,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
             ) as! EventCell
             cell.viewModel = cellViewModel
             return cell
-        case let cellViewModel as FooterCellViewModel:
+        case let cellViewModel as CreateEventCellViewModel:
             let cell = table.dequeueReusableCell(
                 withIdentifier: FooterCell.reuseIdentifier,
                 for: indexPath

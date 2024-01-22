@@ -95,7 +95,7 @@ final class EventsListViewModelTests: XCTestCase {
         appC.commander.save(eventC)
 
         let container = EventsListContainer(appC)
-        sut = container.makeEventsListViewModel(nil)
+        sut = container.makeEventsListViewModel()
         self.container = container
         secondEvent = eventB
     }
@@ -105,7 +105,7 @@ final class EventsListViewModelTests: XCTestCase {
         container.commander.save(secondEvent)
         // Imitates controller update cycle with didSet observer
         let oldValue = sut
-        sut = container.makeEventsListViewModel(nil)
+        sut = container.makeEventsListViewModel()
         sut.configureAnimationForEventCells(oldValue)
     }
 

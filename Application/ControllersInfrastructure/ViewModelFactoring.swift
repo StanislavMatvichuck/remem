@@ -11,36 +11,26 @@ import Foundation
 protocol DayCellViewModelFactoring { func makeViewModel(happening: Happening) -> DayCellViewModel }
 
 protocol EventCellViewModelFactoring {
-    func makeEventItemViewModel(
-        event: Event,
-        hintEnabled: Bool,
-        renameHandler: EventItemViewModelRenameHandling?
-    ) -> EventCellViewModel
+    func makeEventCellViewModel(event: Event, hintEnabled: Bool) -> EventCellViewModel
 }
 
-protocol EventItemViewModelRenameHandling { func renameTapped(_: EventCellViewModel) }
-protocol FooterItemViewModelTapHandling { func tapped(_ vm: FooterCellViewModel) }
-
-protocol FooterItemViewModeFactoring {
-    func makeFooterItemViewModel(
+protocol CreateEventCellViewModelFactoring {
+    func makeCreateEventCellViewModel(
         eventsCount: Int,
-        handler: FooterItemViewModelTapHandling?
-    ) -> FooterCellViewModel
+        handler: CreateEventCellViewModel.TapHandler?
+    ) -> CreateEventCellViewModel
 }
 
-protocol HintItemViewModelFactoring {
-    func makeHintItemViewModel(events: [Event]) -> HintCellViewModel
+protocol HintCellViewModelFactoring {
+    func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
 }
 
 protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel }
 protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
 protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
-typealias EventsListViewModelHandling =
-    EventItemViewModelRenameHandling &
-    FooterItemViewModelTapHandling
 
 protocol EventsListViewModelFactoring {
-    func makeEventsListViewModel(_: EventsListViewModelHandling?) -> EventsListViewModel
+    func makeEventsListViewModel() -> EventsListViewModel
 }
 
 protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewModel }

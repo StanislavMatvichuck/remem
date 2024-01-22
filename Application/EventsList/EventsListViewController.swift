@@ -46,7 +46,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         setupTableView()
-        setupEventHandlers()
         setupEventsSortingButton()
         update()
         setupTimer()
@@ -73,10 +72,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         viewModel?.eventsSortingHandler(view.safeAreaInsets.top, autoDismiss)
     }
 
-    private func setupEventHandlers() {
-        viewRoot.input.addTarget(self, action: #selector(handleAdd), for: .editingDidEnd)
-    }
-
     private func setupTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             [weak self] _ in self?.update()
@@ -91,19 +86,6 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         } else {
             viewModel?.addHandler(viewRoot.input.value)
         }
-    }
-}
-
-extension EventsListViewController:
-    EventItemViewModelRenameHandling,
-    FooterItemViewModelTapHandling
-{
-    func renameTapped(_ item: EventCellViewModel) {
-        viewModel?.renamedItem = item
-    }
-
-    func tapped(_: FooterCellViewModel) {
-        viewModel?.showInput()
     }
 }
 

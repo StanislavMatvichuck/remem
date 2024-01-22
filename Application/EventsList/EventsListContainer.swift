@@ -12,9 +12,9 @@ import UIKit
 final class EventsListContainer:
     ControllerFactoring,
     EventsListViewModelFactoring,
-    HintItemViewModelFactoring,
+    HintCellViewModelFactoring,
     EventCellViewModelFactoring,
-    FooterItemViewModeFactoring
+    CreateEventCellViewModelFactoring
 {
     private static let sortingExecutor = EventsSortingExecutor()
 
@@ -63,7 +63,7 @@ final class EventsListContainer:
         return controller
     }
 
-    func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
+    func makeEventsListViewModel() -> EventsListViewModel {
         let sorter = sortingProvider.get()
         let events = parent.provider.get()
         let manualIdentifiers = manualSortingProvider.get()
@@ -73,31 +73,29 @@ final class EventsListContainer:
             manualIdentifiers: manualIdentifiers
         )
 
-        let footerVm = makeFooterItemViewModel(
+        let createEventCell = makeCreateEventCellViewModel(
             eventsCount: events.count,
-            handler: handler
+            handler: {}
         )
 
-        let hintVm = makeHintItemViewModel(events: events)
+        let hintVm = makeHintCellViewModel(events: events)
 
         let eventsViewModels = sortedEvents.enumerated().map { index, event in
             let userShouldSeeGestureHint = hintVm.title == HintCellViewModel.HintState.swipeFirstTime.text
             let isFirstRow = index == 0
             let hintEnabled = userShouldSeeGestureHint && isFirstRow && uiTestingDisabled
 
-            return makeEventItemViewModel(
+            return makeEventCellViewModel(
                 event: event,
-                hintEnabled: hintEnabled,
-                renameHandler: handler
+                hintEnabled: hintEnabled
             )
         }
 
         var cells = [EventsListViewModel.Section: [AnyHashable]]()
 
         if uiTestingDisabled { cells.updateValue([hintVm], forKey: .hint) }
-
         cells.updateValue(eventsViewModels, forKey: .events)
-        cells.updateValue([footerVm], forKey: .createEvent)
+        cells.updateValue([createEventCell], forKey: .createEvent)
 
         let vm = EventsListViewModel(
             cells: cells,
@@ -110,25 +108,11 @@ final class EventsListContainer:
         return vm
     }
 
-    func makeHintItemViewModel(events: [Event]) -> HintCellViewModel {
+    func makeHintCellViewModel(events: [Event]) -> HintCellViewModel {
         HintCellViewModel(events: events)
     }
 
-    func makeFooterItemViewModel(
-        eventsCount: Int,
-        handler: FooterItemViewModelTapHandling?
-    ) -> FooterCellViewModel {
-        FooterCellViewModel(
-            eventsCount: eventsCount,
-            tapHandler: WeakRef(handler as? EventsListViewController)
-        )
-    }
-
-    func makeEventItemViewModel(
-        event: Event,
-        hintEnabled: Bool,
-        renameHandler: EventItemViewModelRenameHandling?
-    ) -> EventCellViewModel {
+    func makeEventCellViewModel(event: Event, hintEnabled: Bool) -> EventCellViewModel {
         EventCellViewModel(
             event: event,
             hintEnabled: hintEnabled,
@@ -142,13 +126,23 @@ final class EventsListContainer:
                 event.addHappening(date: self.parent.currentMoment)
                 self.commander.save(event)
             },
-            renameActionHandler: { renameHandler?.renameTapped($0) },
+            renameActionHandler: { _ in },
             deleteActionHandler: { self.commander.delete(event) },
             renameHandler: { newName, event in
                 event.name = newName
                 self.commander.save(event)
             },
             animation: .none
+        )
+    }
+
+    func makeCreateEventCellViewModel(
+        eventsCount: Int,
+        handler: CreateEventCellViewModel.TapHandler?
+    ) -> CreateEventCellViewModel {
+        CreateEventCellViewModel(
+            eventsCount: eventsCount,
+            tapHandler: {}
         )
     }
 

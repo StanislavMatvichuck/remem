@@ -68,12 +68,12 @@ final class EventCellViewModelTests: XCTestCase {
         appC.commander.save(event)
 
         let container = EventsListContainer(appC)
-        let oldValue = container.makeEventItemViewModel(event: event, hintEnabled: true, renameHandler: nil)
+        let oldValue = container.makeEventCellViewModel(event: event, hintEnabled: true)
 
         event.addHappening(date: DayIndex.referenceValue.date)
         appC.commander.save(event)
 
-        let sut = container.makeEventItemViewModel(event: event, hintEnabled: false, renameHandler: nil)
+        let sut = container.makeEventCellViewModel(event: event, hintEnabled: false)
 
         XCTAssertTrue(sut.isValueIncreased(oldValue))
     }

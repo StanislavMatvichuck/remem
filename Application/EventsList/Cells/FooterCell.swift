@@ -12,7 +12,7 @@ final class FooterCell: UITableViewCell {
 
     let button = UIButton(al: true)
 
-    var viewModel: FooterCellViewModel? {
+    var viewModel: CreateEventCellViewModel? {
         didSet {
             guard let viewModel else { return }
 
@@ -35,7 +35,7 @@ final class FooterCell: UITableViewCell {
 
             button.setAttributedTitle(
                 NSAttributedString(
-                    string: FooterCellViewModel.title,
+                    string: CreateEventCellViewModel.title,
                     attributes: attributes
                 ),
                 for: .normal
@@ -82,7 +82,5 @@ final class FooterCell: UITableViewCell {
     }
 
     // MARK: - Events handling
-    @objc private func handleTouchUp(_: UIButton) {
-        viewModel?.select()
-    }
+    @objc private func handleTouchUp(_: UIButton) { viewModel?.handleTap() }
 }

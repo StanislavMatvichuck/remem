@@ -35,7 +35,7 @@ final class EventsListViewTests: XCTestCase {
     }
 
     func test_showsCreateEvent_highlighted() {
-        XCTAssertEqual(sut.footerCell.button.titleLabel?.text, FooterCellViewModel.title)
+        XCTAssertEqual(sut.footerCell.button.titleLabel?.text, CreateEventCellViewModel.title)
         XCTAssertEqual(sut.footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
     }
 
@@ -66,7 +66,7 @@ final class EventsListViewTests: XCTestCase {
     private func configureEmptySutAndContainer() {
         let appContainer = ApplicationContainer(mode: .unitTest)
         let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel(nil)
+        let viewModel = container.makeEventsListViewModel()
         let sut = EventsListView()
         sut.viewModel = viewModel
 
@@ -76,7 +76,7 @@ final class EventsListViewTests: XCTestCase {
 
     private func configureWithOneEvent() {
         container.commander.save(Event(name: "", dateCreated: DayIndex.referenceValue.date))
-        sut.viewModel = container.makeEventsListViewModel(nil)
+        sut.viewModel = container.makeEventsListViewModel()
     }
 }
 

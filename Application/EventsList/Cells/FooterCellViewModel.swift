@@ -7,24 +7,23 @@
 
 import Foundation
 
-struct FooterCellViewModel: Hashable {
+struct CreateEventCellViewModel: Hashable {
+    typealias TapHandler = () -> Void
     static let title = String(localizationId: "button.create")
 
     let isHighlighted: Bool
-    let tapHandler: FooterItemViewModelTapHandling?
+    private let tapHandler: TapHandler?
 
-    init(eventsCount: Int, tapHandler: FooterItemViewModelTapHandling?) {
+    init(eventsCount: Int, tapHandler: TapHandler? = nil) {
         self.isHighlighted = eventsCount == 0
         self.tapHandler = tapHandler
     }
 
-    func select() { tapHandler?.tapped(self) }
+    func handleTap() { tapHandler?() }
 
-    static func == (lhs: FooterCellViewModel, rhs: FooterCellViewModel) -> Bool {
+    static func == (lhs: CreateEventCellViewModel, rhs: CreateEventCellViewModel) -> Bool {
         lhs.isHighlighted == rhs.isHighlighted
     }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine("Footer")
-    }
+
+    func hash(into hasher: inout Hasher) { hasher.combine("Footer") }
 }
