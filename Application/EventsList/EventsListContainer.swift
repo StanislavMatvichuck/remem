@@ -18,9 +18,10 @@ final class EventsListContainer:
 {
     private static let sortingExecutor = EventsSortingExecutor()
 
-    let parent: ApplicationContainer
+    private let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
+
     let sortingProvider: EventsSortingQuerying
     let sortingCommander: EventsSortingCommanding
     let manualSortingProvider: EventsSortingManualQuerying
@@ -63,6 +64,8 @@ final class EventsListContainer:
         return controller
     }
 
+    // MARK: - ViewModels factoring
+
     func makeEventsListViewModel() -> EventsListViewModel {
         let sorter = sortingProvider.get()
         let events = parent.provider.get()
@@ -100,7 +103,6 @@ final class EventsListContainer:
         let vm = EventsListViewModel(
             cells: cells,
             sorter: sortingProvider.get(),
-            addHandler: makeAddEventHandler(),
             eventsSortingHandler: makeEventsSortingTapHandler(),
             manualSortingHandler: makeManualSortingHandler()
         )
@@ -117,21 +119,8 @@ final class EventsListContainer:
             event: event,
             hintEnabled: hintEnabled,
             currentMoment: parent.currentMoment,
-            tapHandler: {
-                self.parent.coordinator.show(.eventDetails(factory:
-                    EventDetailsContainer(self.parent, event: event)
-                ))
-            },
-            swipeHandler: {
-                event.addHappening(date: self.parent.currentMoment)
-                self.commander.save(event)
-            },
-            renameActionHandler: { _ in },
-            deleteActionHandler: { self.commander.delete(event) },
-            renameHandler: { newName, event in
-                event.name = newName
-                self.commander.save(event)
-            },
+            tapHandler: makeEventCellTapHandler(event: event),
+            swipeHandler: makeEventCellSwipeHandler(event: event),
             animation: .none
         )
     }
@@ -146,8 +135,17 @@ final class EventsListContainer:
         )
     }
 
-    func makeAddEventHandler() -> EventsListViewModel.AddEventHandler {{
-        name in self.commander.save(Event(name: name))
+    // MARK: - Handlers factoring
+
+    func makeEventCellTapHandler(event: Event) -> EventCellViewModel.TapHandler {{
+        self.parent.coordinator.show(.eventDetails(factory:
+            EventDetailsContainer(self.parent, event: event)
+        ))
+    }}
+
+    func makeEventCellSwipeHandler(event: Event) -> EventCellViewModel.SwipeHandler {{
+        event.addHappening(date: self.parent.currentMoment)
+        self.commander.save(event)
     }}
 
     func makeManualSortingHandler() -> EventsListViewModel.ManualSortingHandler {{
@@ -156,7 +154,8 @@ final class EventsListContainer:
         self.sortingCommander.set(.manual)
     }}
 
-    func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset, autoDismiss in
+    func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{
+        topOffset, autoDismiss in
         self.parent.coordinator.show(.eventsSorting(
             factory: EventsSortingContainer(
                 self,

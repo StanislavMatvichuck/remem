@@ -22,7 +22,6 @@ final class EventsListView: UIView {
     var viewModel: EventsListViewModel? { didSet {
         guard let viewModel else { return }
         dataSource.viewModel = viewModel
-        configureContent(viewModel)
     }}
 
     init() {
@@ -30,14 +29,6 @@ final class EventsListView: UIView {
         backgroundColor = .bg
         addAndConstrain(table)
         addAndConstrain(input)
-    }
-
-    func configureContent(_ viewModel: EventsListViewModel) {
-        if let renamedItem = viewModel.renamedItem {
-            input.rename(oldName: renamedItem.title)
-        } else if viewModel.inputVisible {
-            input.show(value: viewModel.inputContent)
-        }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

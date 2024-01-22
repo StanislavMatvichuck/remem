@@ -44,7 +44,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
         let movedEvent = eventsIdentifiers.remove(at: sourceIndexPath.row)
         eventsIdentifiers.insert(movedEvent, at: destinationIndexPath.row)
 
-        viewModel.manualSortingHandler(eventsIdentifiers)
+        viewModel.manualSortingHandler?(eventsIdentifiers)
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

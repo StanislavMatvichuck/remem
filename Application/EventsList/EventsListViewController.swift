@@ -69,22 +69,12 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     }
 
     @objc private func handleEventsSortingTap(autoDismiss: Bool = false) {
-        viewModel?.eventsSortingHandler(view.safeAreaInsets.top, autoDismiss)
+        viewModel?.eventsSortingHandler?(view.safeAreaInsets.top, autoDismiss)
     }
 
     private func setupTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             [weak self] _ in self?.update()
-        }
-    }
-
-    @objc private func handleAdd() {
-        guard !viewRoot.input.value.isEmpty else { return }
-
-        if let renamedEventItem = viewModel?.renamedItem {
-            renamedEventItem.rename(to: viewRoot.input.value)
-        } else {
-            viewModel?.addHandler(viewRoot.input.value)
         }
     }
 }

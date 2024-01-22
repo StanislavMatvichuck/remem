@@ -11,19 +11,16 @@ import Foundation
 struct EventCellViewModel: Hashable {
     enum Animations { case swipe, aboveSwipe, belowSwipe, none }
 
+    static let rename = String(localizationId: "button.rename")
+    static let delete = String(localizationId: "button.delete")
+
     typealias TapHandler = () -> Void
     typealias SwipeHandler = () -> Void
-    typealias RenameActionHandler = (EventCellViewModel) -> Void
-    typealias DeleteActionHandler = () -> Void
-    typealias RenameHandler = (String, Event) -> Void
 
     var identifier: String { event.id }
 
     private let event: Event
     private let valueAmount: Int
-
-    static let rename = String(localizationId: "button.rename")
-    static let delete = String(localizationId: "button.delete")
 
     let title: String
     let value: String
@@ -35,10 +32,7 @@ struct EventCellViewModel: Hashable {
 
     let tapHandler: TapHandler
     let swipeHandler: SwipeHandler
-    let renameActionHandler: RenameActionHandler
-    let deleteActionHandler: DeleteActionHandler
-    let renameHandler: RenameHandler
-    let currentMoment: Date
+    private let currentMoment: Date
     var animation: Animations
 
     init(
@@ -47,9 +41,6 @@ struct EventCellViewModel: Hashable {
         currentMoment: Date,
         tapHandler: @escaping TapHandler,
         swipeHandler: @escaping SwipeHandler,
-        renameActionHandler: @escaping RenameActionHandler,
-        deleteActionHandler: @escaping DeleteActionHandler,
-        renameHandler: @escaping RenameHandler,
         animation: Animations
     ) {
         self.animation = animation
@@ -80,9 +71,6 @@ struct EventCellViewModel: Hashable {
 
         self.tapHandler = tapHandler
         self.swipeHandler = swipeHandler
-        self.renameActionHandler = renameActionHandler
-        self.deleteActionHandler = deleteActionHandler
-        self.renameHandler = renameHandler
     }
 
     func isValueIncreased(_ oldValue: EventCellViewModel) -> Bool {
@@ -93,8 +81,6 @@ struct EventCellViewModel: Hashable {
         progress > oldValue.progress && progress <= 1
     }
 
-    func rename(to: String) { renameHandler(to, event) }
-
     func clone(withAnimation: Animations) -> EventCellViewModel {
         EventCellViewModel(
             event: event,
@@ -102,9 +88,6 @@ struct EventCellViewModel: Hashable {
             currentMoment: currentMoment,
             tapHandler: tapHandler,
             swipeHandler: swipeHandler,
-            renameActionHandler: renameActionHandler,
-            deleteActionHandler: deleteActionHandler,
-            renameHandler: renameHandler,
             animation: withAnimation
         )
     }

@@ -14,38 +14,35 @@ struct EventsListViewModel {
     static let title = String(localizationId: "eventsList.title")
     static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
 
-    typealias AddEventHandler = (String) -> Void
     typealias SortingTapHandler = (CGFloat, Bool) -> Void
     typealias ManualSortingHandler = ([String]) -> Void
 
-    var renamedItem: EventCellViewModel?
-    var inputVisible: Bool = false
-    var inputContent: String = ""
-
     private var cells: [Section: [AnyHashable]]
     private let sorter: EventsSorter
-
-    let addHandler: AddEventHandler
-    let eventsSortingHandler: SortingTapHandler
-    let manualSortingHandler: ManualSortingHandler
+    let eventsSortingHandler: SortingTapHandler?
+    let manualSortingHandler: ManualSortingHandler?
 
     init(
         cells: [Section: [AnyHashable]],
         sorter: EventsSorter,
-        addHandler: @escaping AddEventHandler,
-        eventsSortingHandler: @escaping SortingTapHandler,
-        manualSortingHandler: @escaping ManualSortingHandler
+        eventsSortingHandler: SortingTapHandler? = nil,
+        manualSortingHandler: ManualSortingHandler? = nil
     ) {
         self.cells = cells
         self.sorter = sorter
-        self.addHandler = addHandler
         self.eventsSortingHandler = eventsSortingHandler
         self.manualSortingHandler = manualSortingHandler
     }
 
-    private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }
+    var sections: [Section] {
+        var result: [Section] = []
+        for section in Section.allCases {
+            if cells[section] != nil { result.append(section) }
+        }
+        return result
+    }
 
-    mutating func showInput() { inputVisible = true }
+    func cells(for section: Section) -> [AnyHashable] { cells[section] ?? [] }
 
     mutating func configureAnimationForEventCells(_ oldViewModel: EventsListViewModel?) {
         guard let oldViewModel else { return }
@@ -72,14 +69,6 @@ struct EventsListViewModel {
         return sorter == .manual && oldValue.sorter != .manual
     }
 
-    var sections: [Section] {
-        var result: [Section] = []
-        for section in Section.allCases {
-            if cells[section] != nil { result.append(section) }
-        }
-        return result
-    }
-
     func eventCellRelative(to cell: EventCellViewModel, offset: Int) -> EventCellViewModel? {
         guard let eventsCells = cells[.events] else { return nil }
 
@@ -98,6 +87,7 @@ struct EventsListViewModel {
         return nil
     }
 
+    // MARK: - Private
     private mutating func configure(animation: EventCellViewModel.Animations, for cell: EventCellViewModel) {
         for (index, iterationCell) in eventCells.enumerated() {
             guard
@@ -107,5 +97,5 @@ struct EventsListViewModel {
         }
     }
 
-    func cells(for section: Section) -> [AnyHashable] { cells[section] ?? [] }
+    private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }
 }
