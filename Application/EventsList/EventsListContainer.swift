@@ -16,6 +16,8 @@ final class EventsListContainer:
     EventCellViewModelFactoring,
     FooterItemViewModeFactoring
 {
+    private static let sortingExecutor = EventsSortingExecutor()
+
     let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
@@ -51,6 +53,7 @@ final class EventsListContainer:
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let sorter = sortingProvider.get()
         let events = parent.provider.get()
+        let sortedEvents = Self.sortingExecutor.sort(events: events, sorter: sortingProvider.get())
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
@@ -59,7 +62,7 @@ final class EventsListContainer:
 
         let hintVm = makeHintItemViewModel(events: events)
 
-        let eventsViewModels = events.enumerated().map { index, event in
+        let eventsViewModels = sortedEvents.enumerated().map { index, event in
             let userShouldSeeGestureHint = hintVm.title == HintCellViewModel.HintState.swipeFirstTime.text
             let isFirstRow = index == 0
             let hintEnabled = userShouldSeeGestureHint && isFirstRow && uiTestingDisabled
