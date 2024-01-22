@@ -18,7 +18,7 @@ final class EventsSortingSnapshots: FBSnapshotTestCase {
     override func tearDown() { super.tearDown() }
 
     func test_initialState() {
-        let viewModel = EventsSortingViewModel(.happeningsCountTotal)
+        let viewModel = EventsSortingViewModel(.total)
         let sut = EventsSortingView()
         sut.viewModel = viewModel
         sut.frame = UIScreen.main.bounds

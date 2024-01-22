@@ -1,23 +1,14 @@
 //
-//  EventsRepository.swift
+//  EventsSorting.swift
 //  Domain
 //
-//  Created by Stanislav Matvichuck on 14.09.2022.
+//  Created by Stanislav Matvichuck on 22.01.2024.
 //
 
 import Foundation
 
 public enum EventsSorter: Codable, Equatable, CaseIterable {
-    case alphabetical, happeningsCountTotal, manual
-}
-
-public protocol EventsQuerying {
-    func get() -> [Event]
-}
-
-public protocol EventsCommanding {
-    func save(_: Event)
-    func delete(_: Event)
+    case name, total, manual
 }
 
 public protocol EventsSortingQuerying { func get() -> EventsSorter }

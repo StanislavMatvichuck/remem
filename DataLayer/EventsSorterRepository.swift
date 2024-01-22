@@ -22,7 +22,7 @@ public struct EventsSorterRepository: EventsSortingQuerying, EventsSortingComman
             let sorter = try Self.decoder.decode([EventsSorter].self, from: data)
             return sorter.first!
         } catch {
-            return .alphabetical
+            return .name
         }
     }
 

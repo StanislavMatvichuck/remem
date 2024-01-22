@@ -10,8 +10,8 @@ import Foundation
 
 extension EventsSorter {
     var title: String { switch self {
-    case .alphabetical: String(localizationId: "eventsSorting.name")
-    case .happeningsCountTotal: String(localizationId: "eventsSorting.total")
+    case .name: String(localizationId: "eventsSorting.name")
+    case .total: String(localizationId: "eventsSorting.total")
     case .manual: String(localizationId: "eventsSorting.manual")
     } }
 }

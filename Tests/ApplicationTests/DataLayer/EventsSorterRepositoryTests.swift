@@ -29,17 +29,17 @@ final class EventsSorterRepositoryTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
-    func test_get_alphabetical() {
-        XCTAssertEqual(sut.get(), EventsSorter.alphabetical)
+    func test_get_name() {
+        XCTAssertEqual(sut.get(), EventsSorter.name)
     }
 
     func test_set_acceptsSorter() {
-        sut.set(.happeningsCountTotal)
+        sut.set(.total)
     }
 
     func test_get_afterSettingHappeningsCount_happeningsCount() {
-        sut.set(.happeningsCountTotal)
+        sut.set(.total)
 
-        XCTAssertEqual(sut.get(), .happeningsCountTotal)
+        XCTAssertEqual(sut.get(), .total)
     }
 }

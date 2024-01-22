@@ -14,7 +14,7 @@ final class EventsSortingCellViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = EventsSortingCellViewModel(EventsSorter.alphabetical)
+        sut = EventsSortingCellViewModel(EventsSorter.name)
     }
 
     override func tearDown() {
@@ -26,22 +26,22 @@ final class EventsSortingCellViewModelTests: XCTestCase {
     }
 
     func test_initWithActiveSorter_isActive_matches_true() {
-        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .alphabetical)
+        sut = EventsSortingCellViewModel(.name, activeSorter: .name)
 
         XCTAssertTrue(sut.isActive)
     }
 
     func test_initWithActiveSorter_isActive_doesNotMatch_false() {
-        sut = EventsSortingCellViewModel(.alphabetical, activeSorter: .manual)
+        sut = EventsSortingCellViewModel(.name, activeSorter: .manual)
 
         XCTAssertFalse(sut.isActive)
     }
 
     func test_title() {
-        sut = EventsSortingCellViewModel(.alphabetical)
+        sut = EventsSortingCellViewModel(.name)
         XCTAssertEqual(sut.title, "By name")
 
-        sut = EventsSortingCellViewModel(.happeningsCountTotal)
+        sut = EventsSortingCellViewModel(.total)
         XCTAssertEqual(sut.title, "By total")
 
         sut = EventsSortingCellViewModel(.manual)
