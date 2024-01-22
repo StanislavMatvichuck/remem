@@ -21,7 +21,9 @@ final class EventsSorterManualRepositoryTests: XCTestCase {
 
     override func tearDown() {
         sut = nil
-        do { try FileManager().removeItem(at: LocalFile.testingEventsQueryManualSorter.url) } catch {}
+        do { try FileManager().removeItem(at: LocalFile.testingEventsQueryManualSorter.url) } catch {
+            print("cannot delete")
+        }
         super.tearDown()
     }
 

@@ -30,6 +30,23 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
         }
     }
 
+    override func tableView(
+        _ tableView: UITableView,
+        moveRowAt sourceIndexPath: IndexPath,
+        to destinationIndexPath: IndexPath
+    ) {
+        guard
+            let eventsCells = viewModel?.cells(for: .events) as? [EventCellViewModel],
+            let viewModel
+        else { return }
+
+        var eventsIdentifiers = eventsCells.map { $0.identifier }
+        let movedEvent = eventsIdentifiers.remove(at: sourceIndexPath.row)
+        eventsIdentifiers.insert(movedEvent, at: destinationIndexPath.row)
+
+        viewModel.manualSortingHandler(eventsIdentifiers)
+    }
+
     /// This method is tested poorly
     private func makeSnapshot(for vm: EventsListViewModel) -> Snapshot {
         var snapshot = Snapshot()

@@ -17,11 +17,7 @@ final class EventsSortingContainerTests: XCTestCase {
 
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(
-            provider: listContainer.sortingProvider,
-            commander: listContainer.sortingCommander,
-            updater: listContainer.updater
-        )
+        sut = EventsSortingContainer(listContainer)
     }
 
     override func tearDown() {
@@ -58,12 +54,7 @@ final class EventsSortingContainerTests: XCTestCase {
         let topOffset = CGFloat(30)
         let applicationContainer = ApplicationContainer(mode: .unitTest)
         let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(
-            provider: listContainer.sortingProvider,
-            commander: listContainer.sortingCommander,
-            updater: listContainer.updater,
-            topOffset: topOffset
-        )
+        sut = EventsSortingContainer(listContainer, topOffset: topOffset)
 
         let presenting = UIViewController()
         presenting.view.frame = UIScreen.main.bounds

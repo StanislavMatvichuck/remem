@@ -9,11 +9,15 @@ import Domain
 import Foundation
 
 struct EventsSortingExecutor {
-    func sort(events: [Event], sorter: EventsSorter) -> [Event] {
+    func sort(
+        events: [Event],
+        sorter: EventsSorter,
+        manualIdentifiers: [String] = []
+    ) -> [Event] {
         switch sorter {
         case .name: sortByName(events)
         case .total: sortByTotal(events)
-        default: fatalError("sorter not supported yet")
+        case .manual: sortManually(events, manualIdentifiers)
         }
     }
 
@@ -27,5 +31,24 @@ struct EventsSortingExecutor {
         events.sorted { prevEvent, nextEvent in
             prevEvent.name < nextEvent.name
         }
+    }
+
+    private func sortManually(_ events: [Event], _ identifiers: [String]) -> [Event] {
+        var processedEvents = events
+        var sortedEvents = [Event]()
+
+        for identifier in identifiers {
+            if let (index, existingIncomingEvent) = processedEvents.enumerated().first(where: { _, event in
+                event.id == identifier
+            }) {
+                sortedEvents.append(existingIncomingEvent)
+                processedEvents.remove(at: index)
+            }
+        }
+
+        // adding new events to the end
+        sortedEvents.append(contentsOf: processedEvents)
+
+        return sortedEvents
     }
 }

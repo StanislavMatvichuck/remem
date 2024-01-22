@@ -23,18 +23,31 @@ final class EventsListContainer:
     var updater: ViewControllersUpdater { parent.updater }
     let sortingProvider: EventsSortingQuerying
     let sortingCommander: EventsSortingCommanding
+    let manualSortingProvider: EventsSortingManualQuerying
+    let manualSortingCommander: EventsSortingManualCommanding
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
     init(_ parent: ApplicationContainer) {
         self.parent = parent
+
         let sortingRepository = EventsSorterRepository(
             parent.mode == .uikit ?
                 LocalFile.eventsQuerySorter :
                 LocalFile.testingEventsQuerySorter
         )
-        self.sortingProvider = sortingRepository
+
+        let manualSortingRepository = EventsSorterManualRepository(
+            parent.mode == .uikit ?
+                LocalFile.eventsQueryManualSorter :
+                LocalFile.testingEventsQueryManualSorter
+        )
+
         let updatingSortingCommander = UpdatingEventsSortingCommander(sortingRepository)
+
+        self.sortingProvider = sortingRepository
+        self.manualSortingProvider = manualSortingRepository
+        self.manualSortingCommander = manualSortingRepository
         self.sortingCommander = updatingSortingCommander
         updatingSortingCommander.delegate = updater
     }
@@ -53,7 +66,12 @@ final class EventsListContainer:
     func makeEventsListViewModel(_ handler: EventsListViewModelHandling?) -> EventsListViewModel {
         let sorter = sortingProvider.get()
         let events = parent.provider.get()
-        let sortedEvents = Self.sortingExecutor.sort(events: events, sorter: sortingProvider.get())
+        let manualIdentifiers = manualSortingProvider.get()
+        let sortedEvents = Self.sortingExecutor.sort(
+            events: events,
+            sorter: sorter,
+            manualIdentifiers: manualIdentifiers
+        )
 
         let footerVm = makeFooterItemViewModel(
             eventsCount: events.count,
@@ -84,7 +102,8 @@ final class EventsListContainer:
         let vm = EventsListViewModel(
             cells: cells,
             addHandler: makeAddEventHandler(),
-            eventsSortingHandler: makeEventsSortingTapHandler()
+            eventsSortingHandler: makeEventsSortingTapHandler(),
+            manualSortingHandler: makeManualSortingHandler()
         )
 
         return vm
@@ -136,14 +155,15 @@ final class EventsListContainer:
         name in self.commander.save(Event(name: name))
     }}
 
+    func makeManualSortingHandler() -> EventsListViewModel.ManualSortingHandler {{
+        eventsIdentifiers in
+        self.manualSortingCommander.set(eventsIdentifiers)
+        self.sortingCommander.set(.manual)
+    }}
+
     func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset in
         self.parent.coordinator.show(.eventsSorting(
-            factory: EventsSortingContainer(
-                provider: self.sortingProvider,
-                commander: self.sortingCommander,
-                updater: self.updater,
-                topOffset: topOffset
-            )
+            factory: EventsSortingContainer(self, topOffset: topOffset)
         ))
     }}
 }

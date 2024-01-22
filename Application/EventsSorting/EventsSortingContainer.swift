@@ -16,25 +16,20 @@ final class EventsSortingContainer: NSObject,
 {
     static let topSpacing: CGFloat = .layoutSquare / 2
 
-    private let provider: EventsSortingQuerying
-    private let commander: EventsSortingCommanding
-    private let updater: ViewControllersUpdater
+    private let parent: EventsListContainer
+    private var provider: EventsSortingQuerying { parent.sortingProvider }
+    private var commander: EventsSortingCommanding { parent.sortingCommander }
+    private var updater: ViewControllersUpdater { parent.updater }
+    private var manualSortingQuerying: EventsSortingManualQuerying { parent.manualSortingProvider }
+    private var manualSortingCommanding: EventsSortingManualCommanding { parent.manualSortingCommander }
+
     private let presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
-    private let manualSortingQuerying: EventsSortingManualQuerying
 
-    init(
-        provider: EventsSortingQuerying,
-        commander: EventsSortingCommanding,
-        updater: ViewControllersUpdater,
-        topOffset: CGFloat = 0
-    ) {
-        self.provider = provider
-        self.commander = commander
-        self.updater = updater
+    init(_ parent: EventsListContainer, topOffset: CGFloat = 0) {
+        self.parent = parent
         self.presentationTopOffset = topOffset
-        self.manualSortingQuerying = EventsSorterManualRepository(LocalFile.eventsQueryManualSorter)
     }
 
     func make() -> UIViewController {
@@ -54,9 +49,8 @@ final class EventsSortingContainer: NSObject,
     }}
 
     func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel {
-        let sorters = EventsSorter.allCases
-        return EventsSortingCellViewModel(
-            sorters[index],
+        EventsSortingCellViewModel(
+            EventsSorter.allCases[index],
             activeSorter: provider.get(),
             handler: makeTapHandler()
         )

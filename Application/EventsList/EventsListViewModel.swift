@@ -16,6 +16,7 @@ struct EventsListViewModel {
 
     typealias AddEventHandler = (String) -> Void
     typealias SortingTapHandler = (CGFloat) -> Void
+    typealias ManualSortingHandler = ([String]) -> Void
 
     var renamedItem: EventCellViewModel?
     var inputVisible: Bool = false
@@ -25,15 +26,18 @@ struct EventsListViewModel {
 
     let addHandler: AddEventHandler
     let eventsSortingHandler: SortingTapHandler
+    let manualSortingHandler: ManualSortingHandler
 
     init(
         cells: [Section: [AnyHashable]],
         addHandler: @escaping AddEventHandler,
-        eventsSortingHandler: @escaping SortingTapHandler
+        eventsSortingHandler: @escaping SortingTapHandler,
+        manualSortingHandler: @escaping ManualSortingHandler
     ) {
         self.cells = cells
         self.addHandler = addHandler
         self.eventsSortingHandler = eventsSortingHandler
+        self.manualSortingHandler = manualSortingHandler
     }
 
     private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }
