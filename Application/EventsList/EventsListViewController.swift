@@ -125,8 +125,12 @@ extension EventsListViewController: UITableViewDropDelegate {
     func tableView(
         _: UITableView,
         dropSessionDidUpdate _: UIDropSession,
-        withDestinationIndexPath _: IndexPath?
+        withDestinationIndexPath indexPath: IndexPath?
     ) -> UITableViewDropProposal {
-        UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        if indexPath?.section == EventsListViewModel.Section.events.rawValue {
+            UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        } else {
+            UITableViewDropProposal(operation: .forbidden)
+        }
     }
 }
