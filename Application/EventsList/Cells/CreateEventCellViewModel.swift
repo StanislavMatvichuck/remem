@@ -1,5 +1,5 @@
 //
-//  FooterItemViewModel.swift
+//  CreateEventCellViewModel.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 04.01.2023.

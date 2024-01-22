@@ -93,9 +93,9 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
             return cell
         case let cellViewModel as CreateEventCellViewModel:
             let cell = table.dequeueReusableCell(
-                withIdentifier: FooterCell.reuseIdentifier,
+                withIdentifier: CreateEventCell.reuseIdentifier,
                 for: indexPath
-            ) as! FooterCell
+            ) as! CreateEventCell
             cell.viewModel = cellViewModel
             return cell
         default: fatalError("unknown cell type")
@@ -107,12 +107,12 @@ extension EventsListViewModel.Section {
     var registeredClass: AnyClass? { switch self {
     case .hint: HintCell.self
     case .events: EventCell.self
-    case .createEvent: FooterCell.self
+    case .createEvent: CreateEventCell.self
     } }
 
     var reuseIdentifier: String { switch self {
     case .hint: HintCell.reuseIdentifier
     case .events: EventCell.reuseIdentifier
-    case .createEvent: FooterCell.reuseIdentifier
+    case .createEvent: CreateEventCell.reuseIdentifier
     } }
 }

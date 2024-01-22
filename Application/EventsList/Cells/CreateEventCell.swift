@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FooterCell: UITableViewCell {
+final class CreateEventCell: UITableViewCell {
     static var reuseIdentifier = "FooterCell"
 
     let button = UIButton(al: true)

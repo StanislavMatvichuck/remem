@@ -95,9 +95,9 @@ extension EventsListView {
         else { fatalError("unable to get cell of requested type") }
     }
 
-    var footerCell: FooterCell {
+    var footerCell: CreateEventCell {
         let section = EventsListViewModel.Section.createEvent.rawValue
-        if let cell = firstCellAt(section) as? FooterCell { return cell }
+        if let cell = firstCellAt(section) as? CreateEventCell { return cell }
         else { fatalError("unable to get cell of requested type") }
     }
 
