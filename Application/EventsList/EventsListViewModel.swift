@@ -15,7 +15,7 @@ struct EventsListViewModel {
     static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
 
     typealias AddEventHandler = (String) -> Void
-    typealias SortingTapHandler = (CGFloat) -> Void
+    typealias SortingTapHandler = (CGFloat, Bool) -> Void
     typealias ManualSortingHandler = ([String]) -> Void
 
     var renamedItem: EventCellViewModel?

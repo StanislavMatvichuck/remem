@@ -23,9 +23,7 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
             if viewModel.shouldPresentManualSorting(oldValue),
                presentedViewController == nil
-            {
-                handleEventsSortingTap()
-            }
+            { handleEventsSortingTap(autoDismiss: true) }
         }
     }
 
@@ -71,8 +69,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         navigationItem.setRightBarButton(item, animated: false)
     }
 
-    @objc private func handleEventsSortingTap() {
-        viewModel?.eventsSortingHandler(view.safeAreaInsets.top)
+    @objc private func handleEventsSortingTap(autoDismiss: Bool = false) {
+        viewModel?.eventsSortingHandler(view.safeAreaInsets.top, autoDismiss)
     }
 
     private func setupEventHandlers() {

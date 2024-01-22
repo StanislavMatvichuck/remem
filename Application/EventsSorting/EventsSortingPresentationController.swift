@@ -10,6 +10,7 @@ import UIKit
 final class EventsSortingPresentationController: UIPresentationController {
     let topOffset: CGFloat
     let cellsCount: Int
+    let shouldDismissAutomatically: Bool
 
     lazy var background: UIView = {
         let view = UIView(frame: containerView?.bounds ?? .zero)
@@ -22,10 +23,12 @@ final class EventsSortingPresentationController: UIPresentationController {
         presentedViewController: UIViewController,
         presenting: UIViewController?,
         topOffset: CGFloat = 0,
-        cellsCount: Int
+        cellsCount: Int,
+        shouldDismissAutomatically: Bool
     ) {
         self.topOffset = topOffset
         self.cellsCount = cellsCount
+        self.shouldDismissAutomatically = shouldDismissAutomatically
         super.init(presentedViewController: presentedViewController, presenting: presenting)
     }
 
@@ -51,6 +54,14 @@ final class EventsSortingPresentationController: UIPresentationController {
     // MARK: - Lifecycle
     override func presentationTransitionWillBegin() {
         containerView?.addSubview(background)
+    }
+
+    override func presentationTransitionDidEnd(_ completed: Bool) {
+        guard completed, shouldDismissAutomatically else { return }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + EventsSortingAnimationsHelper.duration) {
+            self.presentingViewController.dismiss(animated: true)
+        }
     }
 
     // MARK: - Events handling

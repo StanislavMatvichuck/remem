@@ -162,9 +162,13 @@ final class EventsListContainer:
         self.sortingCommander.set(.manual)
     }}
 
-    func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset in
+    func makeEventsSortingTapHandler() -> EventsListViewModel.SortingTapHandler {{ topOffset, autoDismiss in
         self.parent.coordinator.show(.eventsSorting(
-            factory: EventsSortingContainer(self, topOffset: topOffset)
+            factory: EventsSortingContainer(
+                self,
+                topOffset: topOffset,
+                shouldDismissAutomatically: autoDismiss
+            )
         ))
     }}
 }

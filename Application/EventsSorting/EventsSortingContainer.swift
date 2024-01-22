@@ -17,6 +17,7 @@ final class EventsSortingContainer: NSObject,
     static let topSpacing: CGFloat = .layoutSquare / 2
 
     private let parent: EventsListContainer
+    private let shouldDismissAutomatically: Bool
     private var provider: EventsSortingQuerying { parent.sortingProvider }
     private var commander: EventsSortingCommanding { parent.sortingCommander }
     private var updater: ViewControllersUpdater { parent.updater }
@@ -27,8 +28,13 @@ final class EventsSortingContainer: NSObject,
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
 
-    init(_ parent: EventsListContainer, topOffset: CGFloat = 0) {
+    init(
+        _ parent: EventsListContainer,
+        topOffset: CGFloat = 0,
+        shouldDismissAutomatically: Bool = false
+    ) {
         self.parent = parent
+        self.shouldDismissAutomatically = shouldDismissAutomatically
         self.presentationTopOffset = topOffset
     }
 
@@ -67,7 +73,8 @@ extension EventsSortingContainer: UIViewControllerTransitioningDelegate {
             presentedViewController: presented,
             presenting: presenting,
             topOffset: presentationTopOffset + Self.topSpacing,
-            cellsCount: makeEventsSortingViewModel().count
+            cellsCount: makeEventsSortingViewModel().count,
+            shouldDismissAutomatically: shouldDismissAutomatically
         )
     }
 
