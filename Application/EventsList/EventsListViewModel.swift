@@ -23,6 +23,7 @@ struct EventsListViewModel {
     var inputContent: String = ""
 
     private var cells: [Section: [AnyHashable]]
+    private let sorter: EventsSorter
 
     let addHandler: AddEventHandler
     let eventsSortingHandler: SortingTapHandler
@@ -30,11 +31,13 @@ struct EventsListViewModel {
 
     init(
         cells: [Section: [AnyHashable]],
+        sorter: EventsSorter,
         addHandler: @escaping AddEventHandler,
         eventsSortingHandler: @escaping SortingTapHandler,
         manualSortingHandler: @escaping ManualSortingHandler
     ) {
         self.cells = cells
+        self.sorter = sorter
         self.addHandler = addHandler
         self.eventsSortingHandler = eventsSortingHandler
         self.manualSortingHandler = manualSortingHandler
@@ -62,6 +65,11 @@ struct EventsListViewModel {
                 configure(animation: .belowSwipe, for: nextEventId)
             }
         }
+    }
+
+    func shouldPresentManualSorting(_ oldValue: EventsListViewModel? = nil) -> Bool {
+        guard let oldValue else { return false }
+        return sorter == .manual && oldValue.sorter != .manual
     }
 
     var sections: [Section] {

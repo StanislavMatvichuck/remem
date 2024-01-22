@@ -101,6 +101,7 @@ final class EventsListContainer:
 
         let vm = EventsListViewModel(
             cells: cells,
+            sorter: sortingProvider.get(),
             addHandler: makeAddEventHandler(),
             eventsSortingHandler: makeEventsSortingTapHandler(),
             manualSortingHandler: makeManualSortingHandler()

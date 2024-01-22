@@ -20,6 +20,12 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
             viewRoot.viewModel = viewModel
             guard let viewModel else { return }
             widgetUpdater.update(viewModel)
+
+            if viewModel.shouldPresentManualSorting(oldValue),
+               presentedViewController == nil
+            {
+                handleEventsSortingTap()
+            }
         }
     }
 

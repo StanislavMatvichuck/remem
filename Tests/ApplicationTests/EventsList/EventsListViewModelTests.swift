@@ -67,6 +67,22 @@ final class EventsListViewModelTests: XCTestCase {
         XCTAssertNil(sut.eventCellRelative(to: thirdCell, offset: 1))
     }
 
+    func test_shouldPresentManualSorting_noOldValue_false() {
+        XCTAssertFalse(sut.shouldPresentManualSorting())
+    }
+
+    func test_shouldPresentManualSorting_oldValueWithNotManualSorting_true() {
+        let newSut = EventsListViewModel(
+            cells: [:],
+            sorter: .manual,
+            addHandler: { _ in },
+            eventsSortingHandler: { _ in },
+            manualSortingHandler: { _ in }
+        )
+
+        XCTAssertTrue(newSut.shouldPresentManualSorting(sut))
+    }
+
     // MARK: - Creation
 
     private func configureSUTWithThreeEvents() {
