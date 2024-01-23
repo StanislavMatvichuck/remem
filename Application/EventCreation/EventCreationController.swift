@@ -7,15 +7,17 @@
 
 import UIKit
 
-final class EventCreationController: UIViewController {
+final class EventCreationController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
+    private let factory: EventCreationViewModelFactoring
     private let viewRoot = EventCreationView()
     private var viewModel: EventCreationViewModel? { didSet {
         viewRoot.viewModel = viewModel
     }}
 
     // MARK: - Init
-    init() {
+    init(_ factory: EventCreationViewModelFactoring) {
+        self.factory = factory
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
@@ -27,7 +29,7 @@ final class EventCreationController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = EventCreationViewModel()
+        viewModel = factory.makeEventCreationViewModel()
         configureEventHandlers()
     }
 
@@ -39,6 +41,8 @@ final class EventCreationController: UIViewController {
     }
 
     private func configureEventHandlers() {
+        viewRoot.input.delegate = self
+
         viewRoot.addGestureRecognizer(UITapGestureRecognizer(
             target: self,
             action: #selector(handleTap)
@@ -55,4 +59,10 @@ final class EventCreationController: UIViewController {
     @objc private func handleTap() { dismiss(animated: true) }
     @objc private func handleEmojiTap(sender: UIButton) { viewModel?.handle(emoji: sender.tag) }
     @objc private func handleTextField() { viewModel?.createdEventName = viewRoot.input.text! }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        viewModel?.submit()
+        dismiss(animated: true)
+        return true
+    }
 }

@@ -9,20 +9,28 @@
 import XCTest
 
 final class EventCreationControllerTests: XCTestCase {
-    func test_init() {
-        let sut = EventCreationController()
+    var sut: EventCreationController!
+
+    override func setUp() {
+        super.setUp()
+        let appContainer = ApplicationContainer(mode: .uikit)
+        let container = EventCreationContainer(parent: appContainer)
+        sut = EventCreationController(container)
     }
 
-    func test_presentedInFullScreen() {
-        let sut = EventCreationController()
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
 
+    func test_init_requiresFactory() { XCTAssertNotNil(sut) }
+
+    func test_presentedInFullScreen() {
         XCTAssertEqual(sut.modalPresentationStyle, .overFullScreen)
         XCTAssertEqual(sut.modalTransitionStyle, .crossDissolve)
     }
 
     func test_dismissedByTouch() {
-        let sut = EventCreationController()
-
         if let view = sut.view as? EventCreationView {
             XCTAssertNotNil(view.gestureRecognizers)
             XCTAssertNotEqual(view.gestureRecognizers?.count, 0)
@@ -32,16 +40,12 @@ final class EventCreationControllerTests: XCTestCase {
     }
 
     func test_configuresViewModel() {
-        let sut = EventCreationController()
-
         guard let view = sut.view as? EventCreationView else { XCTFail(); return }
 
         XCTAssertNotNil(view.viewModel)
     }
 
     func test_emojiTap_addsItToName() {
-        let sut = EventCreationController()
-
         guard let view = sut.view as? EventCreationView,
               let list = view.subviews[2] as? EmojiView,
               let emoji = list.viewContent.arrangedSubviews.first as? UIButton
@@ -50,6 +54,12 @@ final class EventCreationControllerTests: XCTestCase {
         tap(emoji)
 
         XCTAssertEqual(view.input.text, emoji.titleLabel?.text)
+    }
+
+    func test_keyboardDoneButtonTap_dismissesController() {
+        // TODO: finish this test
+//        guard let view = sut.view as? EventCreationView else { XCTFail(); return }
+//        _ = view.input.delegate?.textFieldShouldReturn?(view.input)
     }
 
 //    func test_submittingEvent_addsEventToList() {

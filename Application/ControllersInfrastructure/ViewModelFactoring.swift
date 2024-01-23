@@ -21,6 +21,10 @@ protocol CreateEventCellViewModelFactoring {
     ) -> CreateEventCellViewModel
 }
 
+protocol EventCreationViewModelFactoring {
+    func makeEventCreationViewModel() -> EventCreationViewModel
+}
+
 protocol HintCellViewModelFactoring {
     func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
 }

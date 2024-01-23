@@ -17,8 +17,15 @@ final class EventCreationContainerTests: XCTestCase {
 
     func test_makesEventCreationController() {
         let appContainer = ApplicationContainer(mode: .unitTest)
-        let sut = EventCreationContainer(parent: appContainer)
+        let sut: ControllerFactoring = EventCreationContainer(parent: appContainer)
 
         XCTAssertNotNil(sut.make() as? EventCreationController)
+    }
+
+    func test_makesEventCreationViewModel() {
+        let appContainer = ApplicationContainer(mode: .unitTest)
+        let sut: EventCreationViewModelFactoring = EventCreationContainer(parent: appContainer)
+
+        XCTAssertNotNil(sut.makeEventCreationViewModel())
     }
 }
