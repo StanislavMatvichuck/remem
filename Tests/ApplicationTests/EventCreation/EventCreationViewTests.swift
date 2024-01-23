@@ -19,4 +19,16 @@ final class EventCreationViewTests: XCTestCase {
 
         XCTAssertNotNil(sut.subviews.first as? UIVisualEffectView)
     }
+
+    func test_hasHint() {
+        let sut = EventCreationView()
+
+        XCTAssertNotNil(sut.subviews[1] as? UILabel)
+    }
+
+    func test_hasTextInput() {
+        let sut = EventCreationView()
+
+        XCTAssertNotNil(sut.subviews[2] as? UITextField)
+    }
 }

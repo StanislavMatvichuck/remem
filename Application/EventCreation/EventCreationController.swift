@@ -5,11 +5,9 @@
 //  Created by Stanislav Matvichuck on 23.01.2024.
 //
 
-import Foundation
-
 import UIKit
 
-class EventCreationController: UIViewController {
+final class EventCreationController: UIViewController {
     // MARK: - Properties
     private let viewRoot = EventCreationView()
 
@@ -30,6 +28,11 @@ class EventCreationController: UIViewController {
             target: self,
             action: #selector(handleTap)
         ))
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewRoot.input.becomeFirstResponder()
     }
 
     @objc private func handleTap() {
