@@ -17,7 +17,7 @@ final class EventCreationViewTests: XCTestCase {
     func test_hasBlurView() {
         let sut = EventCreationView()
 
-        XCTAssertNotNil(sut.subviews.first as? UIVisualEffectView)
+        XCTAssertNotNil(sut.subviews[0] as? UIVisualEffectView)
     }
 
     func test_hasHint() {
@@ -26,9 +26,15 @@ final class EventCreationViewTests: XCTestCase {
         XCTAssertNotNil(sut.subviews[1] as? UILabel)
     }
 
+    func test_hasEmojiList() {
+        let sut = EventCreationView()
+
+        XCTAssertNotNil(sut.subviews[2] as? EmojiView)
+    }
+
     func test_hasTextInput() {
         let sut = EventCreationView()
 
-        XCTAssertNotNil(sut.subviews[2] as? UITextField)
+        XCTAssertNotNil(sut.subviews[3] as? UITextField)
     }
 }

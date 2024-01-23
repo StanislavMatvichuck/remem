@@ -36,6 +36,8 @@ final class EventCreationView: UIView {
         return input
     }()
 
+    private let emoji = EmojiView()
+
     private lazy var constraint: NSLayoutConstraint = {
         input.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
     }()
@@ -51,16 +53,22 @@ final class EventCreationView: UIView {
 
     // MARK: - Private
     private func configureLayout() {
+        let margin = -2 * CGFloat.buttonMargin
         addAndConstrain(blur)
         addSubview(hint)
+        addSubview(emoji)
         addSubview(input)
         NSLayoutConstraint.activate([
             hint.centerXAnchor.constraint(equalTo: centerXAnchor),
-            hint.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0, constant: -.buttonMargin),
-            hint.bottomAnchor.constraint(equalTo: input.topAnchor, constant: -.buttonMargin),
+            emoji.centerXAnchor.constraint(equalTo: centerXAnchor),
             input.centerXAnchor.constraint(equalTo: centerXAnchor),
-            input.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin),
+            hint.widthAnchor.constraint(equalTo: widthAnchor, constant: margin),
+            emoji.widthAnchor.constraint(equalTo: widthAnchor),
+            input.widthAnchor.constraint(equalTo: widthAnchor, constant: margin),
             input.heightAnchor.constraint(equalToConstant: .buttonHeight),
+
+            hint.bottomAnchor.constraint(equalTo: emoji.topAnchor, constant: -.buttonMargin),
+            emoji.bottomAnchor.constraint(equalTo: input.topAnchor, constant: -.buttonMargin),
             constraint
         ])
     }
