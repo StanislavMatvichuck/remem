@@ -31,16 +31,27 @@ final class EventCreationControllerTests: XCTestCase {
         }
     }
 
-//    func test_createEventButtonTapped_showsKeyboard() {
-//        putInViewHierarchy(sut)
-//        XCTAssertFalse(sut.viewRoot.input.inputContainer.field.isFirstResponder, "precondition")
-//
-//        let footerCell = sut.viewRoot.footerCell
-//        tap(footerCell.button)
-//
-//        XCTAssertTrue(sut.viewRoot.input.inputContainer.field.isFirstResponder, "keyboard is shown")
-//    }
-//
+    func test_configuresViewModel() {
+        let sut = EventCreationController()
+
+        guard let view = sut.view as? EventCreationView else { XCTFail(); return }
+
+        XCTAssertNotNil(view.viewModel)
+    }
+
+    func test_emojiTap_addsItToName() {
+        let sut = EventCreationController()
+
+        guard let view = sut.view as? EventCreationView,
+              let list = view.subviews[2] as? EmojiView,
+              let emoji = list.viewContent.arrangedSubviews.first as? UIButton
+        else { XCTFail(); return }
+
+        tap(emoji)
+
+        XCTAssertEqual(view.input.text, emoji.titleLabel?.text)
+    }
+
 //    func test_submittingEvent_addsEventToList() {
 //        submitEvent()
 //

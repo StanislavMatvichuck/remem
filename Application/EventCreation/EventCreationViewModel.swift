@@ -25,4 +25,6 @@ struct EventCreationViewModel {
         guard createdEventName.count > 0 else { return }
         submitHandler?(createdEventName)
     }
+
+    mutating func handle(emoji: Int) { createdEventName += self.emoji[emoji] }
 }

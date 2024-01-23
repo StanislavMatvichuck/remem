@@ -8,6 +8,11 @@
 import UIKit
 
 final class EmojiView: ViewScroll {
+    var viewModel: EventCreationViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContent(viewModel)
+    }}
+
     init() {
         super.init(.horizontal, spacing: .buttonMargin)
         configureLayout()
@@ -18,18 +23,6 @@ final class EmojiView: ViewScroll {
 
     // MARK: - Private
     private func configureLayout() {
-        configureMargins()
-
-        for emoji in ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"] {
-            contain(views: makeButton(emoji))
-        }
-    }
-
-    private func configureAppearance() {
-        showsHorizontalScrollIndicator = false
-    }
-
-    private func configureMargins() {
         viewContent.isLayoutMarginsRelativeArrangement = true
         viewContent.layoutMargins = UIEdgeInsets(
             top: 0, left: .buttonMargin,
@@ -37,7 +30,17 @@ final class EmojiView: ViewScroll {
         )
     }
 
-    private func makeButton(_ text: String) -> UIButton {
+    private func configureAppearance() {
+        showsHorizontalScrollIndicator = false
+    }
+
+    private func configureContent(_ vm: EventCreationViewModel) {
+        for (index, emoji) in vm.emoji.enumerated() {
+            contain(views: makeButton(emoji, index: index))
+        }
+    }
+
+    private func makeButton(_ text: String, index: Int) -> UIButton {
         let button = UIButton(al: true)
         button.setTitle(text, for: .normal)
         button.accessibilityIdentifier = text
@@ -47,6 +50,7 @@ final class EmojiView: ViewScroll {
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         button.widthAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
+        button.tag = index
         return button
     }
 }

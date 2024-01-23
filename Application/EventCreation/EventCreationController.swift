@@ -10,6 +10,9 @@ import UIKit
 final class EventCreationController: UIViewController {
     // MARK: - Properties
     private let viewRoot = EventCreationView()
+    private var viewModel: EventCreationViewModel? { didSet {
+        viewRoot.viewModel = viewModel
+    }}
 
     // MARK: - Init
     init() {
@@ -24,18 +27,32 @@ final class EventCreationController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewRoot.addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleTap)
-        ))
+        viewModel = EventCreationViewModel()
+        configureEventHandlers()
     }
+
+    deinit { NotificationCenter.default.removeObserver(self) }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewRoot.input.becomeFirstResponder()
     }
 
-    @objc private func handleTap() {
-        dismiss(animated: true)
+    private func configureEventHandlers() {
+        viewRoot.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTap)
+        ))
+
+        viewRoot.emojiButtons.forEach { $0.addTarget(self, action: #selector(handleEmojiTap), for: .touchUpInside) }
+
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(handleTextField),
+            name: UITextField.textDidChangeNotification, object: nil
+        )
     }
+
+    @objc private func handleTap() { dismiss(animated: true) }
+    @objc private func handleEmojiTap(sender: UIButton) { viewModel?.handle(emoji: sender.tag) }
+    @objc private func handleTextField() { viewModel?.createdEventName = viewRoot.input.text! }
 }

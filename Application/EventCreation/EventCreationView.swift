@@ -38,9 +38,16 @@ final class EventCreationView: UIView {
 
     private let emoji = EmojiView()
 
+    var emojiButtons: [UIButton] { emoji.viewContent.arrangedSubviews as! [UIButton] }
+
     private lazy var constraint: NSLayoutConstraint = {
         input.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
     }()
+
+    var viewModel: EventCreationViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContent(viewModel)
+    }}
 
     init() {
         super.init(frame: .zero)
@@ -78,6 +85,11 @@ final class EventCreationView: UIView {
         hint.textColor = .secondary
         input.backgroundColor = .bg_item
         input.layer.cornerRadius = .buttonHeight / 2
+    }
+
+    private func configureContent(_ vm: EventCreationViewModel) {
+        if emoji.viewModel == nil { emoji.viewModel = vm }
+        input.text = vm.createdEventName
     }
 
     // MARK: - Keyboard handling
