@@ -131,7 +131,7 @@ final class EventsListContainer:
     ) -> CreateEventCellViewModel {
         CreateEventCellViewModel(
             eventsCount: eventsCount,
-            tapHandler: {}
+            tapHandler: makeCreateEventCellTapHandler()
         )
     }
 
@@ -162,6 +162,12 @@ final class EventsListContainer:
                 topOffset: topOffset,
                 shouldDismissAutomatically: autoDismiss
             )
+        ))
+    }}
+
+    func makeCreateEventCellTapHandler() -> CreateEventCellViewModel.TapHandler {{
+        self.parent.coordinator.show(.eventCreation(
+            factory: EventCreationContainer(parent: self.parent)
         ))
     }}
 }

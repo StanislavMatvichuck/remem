@@ -17,6 +17,8 @@ final class Coordinator {
     func show(_ navigation: Navigation) {
         let newController = navigation.controller
         switch navigation {
+        case .eventCreation:
+            navigationController.present(newController, animated: true)
         case .eventsList:
             navigationController.pushViewController(newController, animated: false)
         case .eventsSorting:

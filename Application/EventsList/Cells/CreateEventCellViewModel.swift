@@ -8,8 +8,9 @@
 import Foundation
 
 struct CreateEventCellViewModel: Hashable {
-    typealias TapHandler = () -> Void
     static let title = String(localizationId: "button.create")
+
+    typealias TapHandler = () -> Void
 
     let isHighlighted: Bool
     private let tapHandler: TapHandler?
