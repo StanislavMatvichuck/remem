@@ -111,14 +111,7 @@ final class EventsListViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
     }
 
-    private func submitEvent() {
-        let input = sut.viewRoot.input
-        input.value = "SubmittedEventName"
-
-        _ = input.inputContainer.field.delegate?.textFieldShouldReturn?(
-            input.inputContainer.field
-        )
-    }
+    private func submitEvent() {}
 
     private func swipeFirstEvent() { sut.viewRoot.eventCell.viewModel?.swipeHandler() }
 }

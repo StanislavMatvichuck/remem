@@ -35,14 +35,7 @@ extension TestingViewController where Controller == EventsListViewController {
         }
     }
 
-    func submitEvent() {
-        let input = sut.viewRoot.input
-        input.value = "SubmittedEventName"
-
-        _ = input.inputContainer.field.delegate?.textFieldShouldReturn?(
-            input.inputContainer.field
-        )
-    }
+    func submitEvent() {}
 
     var hintText: String? {
         if let cell = (sut.viewModel?.cells(for: .hint) as? [HintCellViewModel])?.first {

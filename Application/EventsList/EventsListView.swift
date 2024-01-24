@@ -8,8 +8,6 @@
 import UIKit
 
 final class EventsListView: UIView {
-    let input = EventInputView()
-
     let table: UITableView = {
         let table = UITableView(al: true)
         table.backgroundColor = .clear
@@ -28,7 +26,6 @@ final class EventsListView: UIView {
         super.init(frame: .zero)
         backgroundColor = .bg
         addAndConstrain(table)
-        addAndConstrain(input)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

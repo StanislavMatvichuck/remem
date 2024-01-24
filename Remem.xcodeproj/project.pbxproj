@@ -143,8 +143,6 @@
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
 		087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFBF2A13F4610005B4D9 /* EmojiView.swift */; };
-		087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC12A13F7840005B4D9 /* InputView.swift */; };
-		087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		087ED42528D0A5530085A37D /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED41428D0A4F20085A37D /* EventTests.swift */; };
@@ -168,9 +166,7 @@
 		0891377D292BE57400EFD23D /* DayDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891377C292BE57400EFD23D /* DayDetailsViewControllerTests.swift */; };
 		089308AA2B3B07550059D51A /* WeekDayHappeningsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089308A92B3B07550059D51A /* WeekDayHappeningsView.swift */; };
 		089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */; };
-		0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0896B3A22915196000D6BF71 /* EventInputTests.swift */; };
 		0897E177297459FA00BD2A56 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = 0897E176297459FA00BD2A56 /* ViewControllerPresentationSpy */; };
-		0898017927FAF17C0014E110 /* EventInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0898017827FAF17C0014E110 /* EventInputView.swift */; };
 		089AC5F22B3C53BF00577781 /* WeekDayNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F12B3C53BF00577781 /* WeekDayNumberView.swift */; };
 		089AC5F42B3C60F000577781 /* WeekViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F32B3C60F000577781 /* WeekViewControllerTests.swift */; };
 		089AC5F62B3C61C300577781 /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089AC5F52B3C61C300577781 /* WeekViewController.swift */; };
@@ -514,8 +510,6 @@
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
 		087AFFBF2A13F4610005B4D9 /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
-		087AFFC12A13F7840005B4D9 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		087ED41A28D0A54C0085A37D /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -545,8 +539,6 @@
 		089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiperAnimationsHelper.swift; sourceTree = "<group>"; };
 		0895FB5F28E23C66006716F4 /* WidgetDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDescription.swift; sourceTree = "<group>"; };
 		08961F4F289BA99900F3E179 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
-		0896B3A22915196000D6BF71 /* EventInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputTests.swift; sourceTree = "<group>"; };
-		0898017827FAF17C0014E110 /* EventInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputView.swift; sourceTree = "<group>"; };
 		0899188D2987ED5C00E5D61A /* ApplicationSnapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ApplicationSnapshots.xctestplan; sourceTree = "<group>"; };
 		089AC5F12B3C53BF00577781 /* WeekDayNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayNumberView.swift; sourceTree = "<group>"; };
 		089AC5F32B3C60F000577781 /* WeekViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewControllerTests.swift; sourceTree = "<group>"; };
@@ -770,7 +762,6 @@
 			children = (
 				085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */,
 				08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */,
-				0896B3A22915196000D6BF71 /* EventInputTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */,
 				08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */,
 				08FE8B982B51929D005E780E /* EventsListDataSourceTests.swift */,
@@ -1063,17 +1054,6 @@
 			path = EventsSorting;
 			sourceTree = "<group>";
 		};
-		087AFFC52A13FA9E0005B4D9 /* EventInputView */ = {
-			isa = PBXGroup;
-			children = (
-				087AFFC12A13F7840005B4D9 /* InputView.swift */,
-				087AFFBF2A13F4610005B4D9 /* EmojiView.swift */,
-				087AFFC32A13F7B30005B4D9 /* BackgroundView.swift */,
-				0898017827FAF17C0014E110 /* EventInputView.swift */,
-			);
-			path = EventInputView;
-			sourceTree = "<group>";
-		};
 		087ED41B28D0A54C0085A37D /* DomainTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1099,6 +1079,7 @@
 		08B57DA12B5ED2C00046D307 /* EventCreation */ = {
 			isa = PBXGroup;
 			children = (
+				087AFFBF2A13F4610005B4D9 /* EmojiView.swift */,
 				08B57DA52B5ED3540046D307 /* EventCreationViewModel.swift */,
 				0881E4B02B5F382600F68CAE /* EventCreationContainer.swift */,
 				0881E4B22B5F386100F68CAE /* EventCreationController.swift */,
@@ -1237,7 +1218,6 @@
 			isa = PBXGroup;
 			children = (
 				0816B6F32B50124800A29815 /* Cells */,
-				087AFFC52A13FA9E0005B4D9 /* EventInputView */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
@@ -1768,7 +1748,6 @@
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
 				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
 				0827DD642B5E723C00E0661D /* EventsSortingExecutorTests.swift in Sources */,
-				0896B3A32915196000D6BF71 /* EventInputTests.swift in Sources */,
 				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
 				08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
@@ -1818,7 +1797,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
-				087AFFC42A13F7B30005B4D9 /* BackgroundView.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
@@ -1832,7 +1810,6 @@
 				08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
 				085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */,
-				0898017927FAF17C0014E110 /* EventInputView.swift in Sources */,
 				08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */,
 				0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */,
 				087433BE2B3375E000336FC3 /* WeekView.swift in Sources */,
@@ -1862,7 +1839,6 @@
 				08F50DC52965E70F00B65CDF /* CreateEventCellViewModel.swift in Sources */,
 				0881E4B32B5F386100F68CAE /* EventCreationController.swift in Sources */,
 				08A79F5629DEC30300855146 /* DayDetailsAnimationsHelper.swift in Sources */,
-				087AFFC22A13F7840005B4D9 /* InputView.swift in Sources */,
 				0848741A2984328700C27155 /* WidgetEventCellViewModel.swift in Sources */,
 				08FEA39828DC98A600BAA196 /* DayDetailsViewModel.swift in Sources */,
 				08E1744F2B27064D0018256D /* DayDetailsPresentationContainer.swift in Sources */,
