@@ -93,7 +93,8 @@ struct EventCellViewModel: Hashable {
     }
 
     static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
-        lhs.title == rhs.title &&
+        lhs.identifier == rhs.identifier &&
+            lhs.title == rhs.title &&
             lhs.hintEnabled == rhs.hintEnabled &&
             lhs.value == rhs.value &&
             lhs.timeSince == rhs.timeSince &&
