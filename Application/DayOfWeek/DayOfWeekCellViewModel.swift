@@ -13,6 +13,7 @@ struct DayOfWeekCellViewModel {
     let percent: String
     let value: String
     let isHidden: Bool
+    let relativeLength: CGFloat
 
     init(_ index: Int, value: Int = 0, valueTotal: Int = 0) {
         let formatter = NumberFormatter()
@@ -22,11 +23,12 @@ struct DayOfWeekCellViewModel {
 
         self.value = "\(value)"
 
-        let calculatedPercent = CGFloat(value) / CGFloat(valueTotal)
+        let calculatedPercent = value == 0 ? 0 : CGFloat(value) / CGFloat(valueTotal)
         let readablePercent = formatter.string(from: calculatedPercent as NSNumber)
 
-        self.percent = value == 0 ? "\(0)" : readablePercent!
+        self.percent = readablePercent!
         self.isHidden = value == 0
+        self.relativeLength = calculatedPercent
 
         let date = DayIndex.referenceValue.adding(days: index).date
         self.shortDayName = date.formatted(Date.FormatStyle().weekday(.narrow))

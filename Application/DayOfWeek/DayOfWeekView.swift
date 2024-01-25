@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DayOfWeekView: UIStackView {
+final class DayOfWeekView: UIView {
     var viewModel: DayOfWeekViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
@@ -15,9 +15,6 @@ final class DayOfWeekView: UIStackView {
 
     init() {
         super.init(frame: .zero)
-        axis = .horizontal
-        distribution = .fillEqually
-        alignment = .trailing
         configureLayout()
         configureAppearance()
     }
@@ -25,15 +22,31 @@ final class DayOfWeekView: UIStackView {
     required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - Private
-    private func configureLayout() {}
+    private let stack: UIStackView = {
+        let stack = UIStackView(al: true)
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.alignment = .trailing
+        stack.spacing = WeekPageView.daySpacing
+        return stack
+    }()
+
+    private func configureLayout() {
+        addAndConstrain(
+            stack,
+            top: 0, left: WeekPageView.daySpacing,
+            right: WeekPageView.daySpacing, bottom: 0
+        )
+    }
+
     private func configureAppearance() {}
     private func configureContent(_ vm: DayOfWeekViewModel) {
-        arrangedSubviews.forEach { $0.removeFromSuperview() }
+        stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         for index in 0 ..< vm.count {
             let cell = DayOfWeekCellView()
             cell.viewModel = vm.cell(at: index)
-            addArrangedSubview(cell)
+            stack.addArrangedSubview(cell)
         }
     }
 }

@@ -47,9 +47,10 @@ final class DayOfWeekCellViewModelTests: XCTestCase {
         XCTAssertEqual(sut.shortDayName, "S")
     }
 
-    func test_percentage_zero() { XCTAssertEqual(sut.percent, "0") }
+    func test_percentage_zero() { XCTAssertEqual(sut.percent, "0%") }
     func test_value_zero() { XCTAssertEqual(sut.value, "0") }
     func test_isHidden_true() { XCTAssertTrue(sut.isHidden) }
+    func test_relativeLength_zero() { XCTAssertEqual(sut.relativeLength, 0.0) }
 
     func test_initValueOne_isHidden_false() {
         sut = DayOfWeekCellViewModel(0, value: 1, valueTotal: 1)
