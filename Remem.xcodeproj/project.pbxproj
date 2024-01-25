@@ -72,8 +72,17 @@
 		085145CB29AE32F000CA533D /* SummaryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */; };
 		0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963A2A0C1CE600FD8FD8 /* PDFWriting.swift */; };
 		0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851963C2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift */; };
-		0852404C2B615330004F9BDA /* DayOfWeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852404B2B615330004F9BDA /* DayOfWeekCellViewModel.swift */; };
+		0852404C2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852404B2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift */; };
 		0852404F2B61534B004F9BDA /* DayOfWeekCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852404E2B61534B004F9BDA /* DayOfWeekCellViewModel.swift */; };
+		085240512B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240502B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift */; };
+		085240532B61A5C6004F9BDA /* DayOfWeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240522B61A5C6004F9BDA /* DayOfWeekViewModel.swift */; };
+		085240552B61C9E1004F9BDA /* DayOfWeekViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240542B61C9E1004F9BDA /* DayOfWeekViewTests.swift */; };
+		085240572B61C9F1004F9BDA /* DayOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240562B61C9F1004F9BDA /* DayOfWeekView.swift */; };
+		085240592B61CB22004F9BDA /* DayOfWeekControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240582B61CB22004F9BDA /* DayOfWeekControllerTests.swift */; };
+		0852405B2B61CB39004F9BDA /* DayOfWeekController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852405A2B61CB39004F9BDA /* DayOfWeekController.swift */; };
+		0852405D2B61CD22004F9BDA /* DayOfWeekCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852405C2B61CD22004F9BDA /* DayOfWeekCellView.swift */; };
+		0852405F2B61D46B004F9BDA /* DayOfWeekContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852405E2B61D46B004F9BDA /* DayOfWeekContainerTests.swift */; };
+		085240612B61D480004F9BDA /* DayOfWeekContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085240602B61D480004F9BDA /* DayOfWeekContainer.swift */; };
 		0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */; };
 		0852C69E283D39CA0027EF3E /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0852C69D283D39CA0027EF3E /* ClockViewController.swift */; };
 		0857A01A292FD8A900924530 /* DayDetailsSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857A019292FD8A900924530 /* DayDetailsSnapshots.swift */; };
@@ -449,8 +458,17 @@
 		085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCellViewModel.swift; sourceTree = "<group>"; };
 		0851963A2A0C1CE600FD8FD8 /* PDFWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWriting.swift; sourceTree = "<group>"; };
 		0851963C2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingDataGenerator.swift; sourceTree = "<group>"; };
-		0852404B2B615330004F9BDA /* DayOfWeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCellViewModel.swift; sourceTree = "<group>"; };
+		0852404B2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCellViewModelTests.swift; sourceTree = "<group>"; };
 		0852404E2B61534B004F9BDA /* DayOfWeekCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCellViewModel.swift; sourceTree = "<group>"; };
+		085240502B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekViewModelTests.swift; sourceTree = "<group>"; };
+		085240522B61A5C6004F9BDA /* DayOfWeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekViewModel.swift; sourceTree = "<group>"; };
+		085240542B61C9E1004F9BDA /* DayOfWeekViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekViewTests.swift; sourceTree = "<group>"; };
+		085240562B61C9F1004F9BDA /* DayOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekView.swift; sourceTree = "<group>"; };
+		085240582B61CB22004F9BDA /* DayOfWeekControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekControllerTests.swift; sourceTree = "<group>"; };
+		0852405A2B61CB39004F9BDA /* DayOfWeekController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekController.swift; sourceTree = "<group>"; };
+		0852405C2B61CD22004F9BDA /* DayOfWeekCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCellView.swift; sourceTree = "<group>"; };
+		0852405E2B61D46B004F9BDA /* DayOfWeekContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekContainerTests.swift; sourceTree = "<group>"; };
+		085240602B61D480004F9BDA /* DayOfWeekContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekContainer.swift; sourceTree = "<group>"; };
 		0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListContainer.swift; sourceTree = "<group>"; };
 		0852C69D283D39CA0027EF3E /* ClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		085502B429FFDC9D006102DD /* AddedWeeklyGoal07.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AddedWeeklyGoal07.xcdatamodel; sourceTree = "<group>"; };
@@ -958,7 +976,11 @@
 		0852404A2B615314004F9BDA /* DayOfWeek */ = {
 			isa = PBXGroup;
 			children = (
-				0852404B2B615330004F9BDA /* DayOfWeekCellViewModel.swift */,
+				0852404B2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift */,
+				0852405E2B61D46B004F9BDA /* DayOfWeekContainerTests.swift */,
+				085240582B61CB22004F9BDA /* DayOfWeekControllerTests.swift */,
+				085240502B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift */,
+				085240542B61C9E1004F9BDA /* DayOfWeekViewTests.swift */,
 			);
 			path = DayOfWeek;
 			sourceTree = "<group>";
@@ -966,7 +988,12 @@
 		0852404D2B615342004F9BDA /* DayOfWeek */ = {
 			isa = PBXGroup;
 			children = (
+				0852405C2B61CD22004F9BDA /* DayOfWeekCellView.swift */,
 				0852404E2B61534B004F9BDA /* DayOfWeekCellViewModel.swift */,
+				085240602B61D480004F9BDA /* DayOfWeekContainer.swift */,
+				0852405A2B61CB39004F9BDA /* DayOfWeekController.swift */,
+				085240562B61C9F1004F9BDA /* DayOfWeekView.swift */,
+				085240522B61A5C6004F9BDA /* DayOfWeekViewModel.swift */,
 			);
 			path = DayOfWeek;
 			sourceTree = "<group>";
@@ -1753,15 +1780,17 @@
 			files = (
 				0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */,
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
-				0852404C2B615330004F9BDA /* DayOfWeekCellViewModel.swift in Sources */,
+				0852404C2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift in Sources */,
 				0875B4492B57F6AC004C0575 /* EventsSortingViewModelTests.swift in Sources */,
 				0875B4642B59DCAA004C0575 /* EventsSortingControllerTests.swift in Sources */,
+				085240512B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
 				08D871592B55575E0065DA6B /* EventsListViewTests.swift in Sources */,
 				08FE8B992B51929D005E780E /* EventsListDataSourceTests.swift in Sources */,
 				089AC5F42B3C60F000577781 /* WeekViewControllerTests.swift in Sources */,
 				08B57DA42B5ED3340046D307 /* EventCreationViewModelTests.swift in Sources */,
 				0875B4442B57F083004C0575 /* EventsSortingCellViewModelTests.swift in Sources */,
+				085240552B61C9E1004F9BDA /* DayOfWeekViewTests.swift in Sources */,
 				0828877E29BCA23200FF9839 /* ViewControllersUpdaterTests.swift in Sources */,
 				0875B4682B59DFF2004C0575 /* EventsListContainerTests.swift in Sources */,
 				0881E4BB2B5F3B6000F68CAE /* EventCreationViewTests.swift in Sources */,
@@ -1786,6 +1815,7 @@
 				084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */,
 				0875B44D2B582066004C0575 /* EventsSortingViewTests.swift in Sources */,
 				0865DC462B1CA3B300E128FB /* PDFWritingViewModelTests.swift in Sources */,
+				0852405F2B61D46B004F9BDA /* DayOfWeekContainerTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
 				087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryViewControllerTests.swift in Sources */,
@@ -1797,6 +1827,7 @@
 				088FD150298839BC00C94031 /* SummaryViewModelTests.swift in Sources */,
 				08F467ED29BF3B2A00D35AB6 /* PDFWritingViewControllerTests.swift in Sources */,
 				089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */,
+				085240592B61CB22004F9BDA /* DayOfWeekControllerTests.swift in Sources */,
 				08D5D0E42B325DF300B71512 /* WeekDayViewModelTests.swift in Sources */,
 				08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */,
 				085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */,
@@ -1842,8 +1873,10 @@
 				081015582B331656004CE297 /* WeekContainer.swift in Sources */,
 				0875B46E2B5A874F004C0575 /* EventsSortingDismissAnimator.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
+				085240532B61A5C6004F9BDA /* DayOfWeekViewModel.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
 				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
+				0852405B2B61CB39004F9BDA /* DayOfWeekController.swift in Sources */,
 				0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */,
 				08FEA39B28DC98A600BAA196 /* ClockCellViewModel.swift in Sources */,
 				0875B46C2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift in Sources */,
@@ -1897,9 +1930,11 @@
 				0875B4662B59DCDC004C0575 /* EventsSortingController.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */,
+				0852405D2B61CD22004F9BDA /* DayOfWeekCellView.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* CreateEventCell.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
 				08F9C5EC282BD35F007EAD47 /* ClockView.swift in Sources */,
+				085240572B61C9F1004F9BDA /* DayOfWeekView.swift in Sources */,
 				085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */,
 				086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
@@ -1920,6 +1955,7 @@
 				0852404F2B61534B004F9BDA /* DayOfWeekCellViewModel.swift in Sources */,
 				080F9F2F29EEEB600013CBFE /* AnimatingSwipe.swift in Sources */,
 				087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */,
+				085240612B61D480004F9BDA /* DayOfWeekContainer.swift in Sources */,
 				0827DD622B5E721C00E0661D /* EventsSortingExecutor.swift in Sources */,
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
 				0875B4622B59C77E004C0575 /* EventsSortingContainer.swift in Sources */,

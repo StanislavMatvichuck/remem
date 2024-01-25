@@ -27,6 +27,10 @@ extension DayDetailsViewController: Updating { func update() {
     viewModel = factory.makeDayDetailsViewModel(pickerDate: viewModel?.pickerDate)
 }}
 
+extension DayOfWeekController: Updating { func update() {
+    viewModel = factory.makeDayOfWeekViewModel()
+}}
+
 extension EventsSortingController: Updating { func update() {
     viewModel = factory.makeEventsSortingViewModel()
 }}

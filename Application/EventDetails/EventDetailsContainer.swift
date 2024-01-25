@@ -29,11 +29,13 @@ final class EventDetailsContainer:
         let week = WeekContainer(self).make()
         let summary = SummaryContainer(parent: self).make() as! SummaryViewController
         let pdf = PDFWritingContainer(self).make()
+        let dayOfWeek = DayOfWeekContainer(self).make()
 
         let controller = EventDetailsViewController(
             factory: self,
             controllers: [
                 week,
+                dayOfWeek,
                 summary,
                 clockDay,
                 clockNight,

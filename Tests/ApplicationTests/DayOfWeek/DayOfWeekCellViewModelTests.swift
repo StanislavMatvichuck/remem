@@ -1,5 +1,5 @@
 //
-//  DayOfWeekCellViewModel.swift
+//  DayOfWeekCellViewModelTests.swift
 //  ApplicationTests
 //
 //  Created by Stanislav Matvichuck on 24.01.2024.
@@ -47,8 +47,8 @@ final class DayOfWeekCellViewModelTests: XCTestCase {
         XCTAssertEqual(sut.shortDayName, "S")
     }
 
-    func test_percentage_zero() { XCTAssertEqual(sut.percent, 0) }
-    func test_value_zero() { XCTAssertEqual(sut.value, 0) }
+    func test_percentage_zero() { XCTAssertEqual(sut.percent, "0") }
+    func test_value_zero() { XCTAssertEqual(sut.value, "0") }
     func test_isHidden_true() { XCTAssertTrue(sut.isHidden) }
 
     func test_initValueOne_isHidden_false() {
@@ -60,12 +60,12 @@ final class DayOfWeekCellViewModelTests: XCTestCase {
     func test_initValueOneValueTotalTwo_percentage_one() {
         sut = DayOfWeekCellViewModel(0, value: 1, valueTotal: 1)
 
-        XCTAssertEqual(sut.percent, 1.0)
+        XCTAssertEqual(sut.percent, "100%")
     }
 
     func test_initValueOneValueTotalTwo_percentage_half() {
         sut = DayOfWeekCellViewModel(0, value: 1, valueTotal: 2)
 
-        XCTAssertEqual(sut.percent, 0.5)
+        XCTAssertEqual(sut.percent, "50%")
     }
 }
