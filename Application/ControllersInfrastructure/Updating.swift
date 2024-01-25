@@ -34,3 +34,9 @@ extension DayOfWeekController: Updating { func update() {
 extension EventsSortingController: Updating { func update() {
     viewModel = factory.makeEventsSortingViewModel()
 }}
+
+extension HourDistributionController: Updating {
+    func update() {
+        viewModel = factory.makeHourDistributionViewModel()
+    }
+}

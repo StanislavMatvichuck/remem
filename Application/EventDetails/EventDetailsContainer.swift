@@ -24,22 +24,14 @@ final class EventDetailsContainer:
     }
 
     func make() -> UIViewController {
-        let clockNight = ClockContainer(parent: self, type: .night).make() as! ClockViewController
-        let clockDay = ClockContainer(parent: self, type: .day).make() as! ClockViewController
-        let week = WeekContainer(self).make()
-        let summary = SummaryContainer(parent: self).make() as! SummaryViewController
-        let pdf = PDFWritingContainer(self).make()
-        let dayOfWeek = DayOfWeekContainer(self).make()
-
         let controller = EventDetailsViewController(
             factory: self,
             controllers: [
-                week,
-                dayOfWeek,
-                summary,
-                clockDay,
-                clockNight,
-                pdf
+                WeekContainer(self).make(),
+                HourDistributionContainer(self).make(),
+                DayOfWeekContainer(self).make(),
+                SummaryContainer(parent: self).make(),
+                PDFWritingContainer(self).make()
             ]
         )
 

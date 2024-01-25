@@ -15,7 +15,6 @@ struct DayOfWeekViewModel {
     private let cellsValues: [Int]
 
     init(_ happenings: [Happening] = []) {
-        self.valueTotal = happenings.count
         var cellsValues = Array(repeating: 0, count: count)
 
         for happening in happenings {
@@ -29,6 +28,7 @@ struct DayOfWeekViewModel {
         }
 
         self.cellsValues = cellsValues
+        self.valueTotal = cellsValues.max() ?? 0
     }
 
     func cell(at index: Int) -> DayOfWeekCellViewModel {

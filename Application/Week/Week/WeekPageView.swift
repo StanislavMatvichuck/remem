@@ -77,7 +77,7 @@ final class WeekPageView: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             days.widthAnchor.constraint(equalTo: daysBackground.widthAnchor),
-            days.widthAnchor.constraint(equalTo: verticalStack.widthAnchor, constant: Self.daySpacing * -2),
+            days.widthAnchor.constraint(equalTo: verticalStack.widthAnchor, constant: -2 * .buttonMargin),
 
             daysBackground.centerXAnchor.constraint(equalTo: days.centerXAnchor),
             daysBackground.topAnchor.constraint(equalTo: days.topAnchor),

@@ -39,7 +39,7 @@ final class DayOfWeekCellView: UIStackView {
         let hName = dayName.bounds.height
         let hValue = dayValue.bounds.height
         let hPercent = percent.bounds.height
-        let hRemaining = hTotal - hName - hValue - hPercent - 1 * WeekPageView.daySpacing
+        let hRemaining = hTotal - hName - hValue - hPercent - 2 * WeekPageView.daySpacing
 
         constraint.constant = -hRemaining * viewModel.relativeLength
     }

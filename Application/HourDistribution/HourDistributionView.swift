@@ -37,11 +37,13 @@ final class HourDistributionView: UIView {
             right: .buttonMargin, bottom: 0
         )
 
-        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3).isActive = true
+        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.2 / 3).isActive = true
     }
 
     private func configureAppearance() {}
     private func configureContent(_ vm: HourDistributionViewModel) {
+        stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
         for index in 0 ..< vm.count {
             let cell = HourDistributionCellView()
             cell.viewModel = vm.cell(at: index)

@@ -34,8 +34,8 @@ final class DayOfWeekView: UIView {
     private func configureLayout() {
         addAndConstrain(
             stack,
-            top: 0, left: WeekPageView.daySpacing,
-            right: WeekPageView.daySpacing, bottom: 0
+            top: 0, left: .buttonMargin,
+            right: .buttonMargin, bottom: 0
         )
     }
 

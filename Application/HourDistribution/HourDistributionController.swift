@@ -10,7 +10,7 @@ import UIKit
 final class HourDistributionController: UIViewController {
     // MARK: - Properties
     private let viewRoot = HourDistributionView()
-    private let factory: HourDistributionViewModelFactoring
+    let factory: HourDistributionViewModelFactoring
     var viewModel: HourDistributionViewModel? { didSet {
         viewRoot.viewModel = viewModel
     }}
