@@ -7,12 +7,19 @@
 
 import UIKit
 
-final class HourDistributionContainer: ControllerFactoring {
+final class HourDistributionContainer:
+    ControllerFactoring,
+    HourDistributionViewModelFactoring
+{
     private let parent: EventDetailsContainer
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController {
-        HourDistributionController()
+        HourDistributionController(self)
+    }
+
+    func makeHourDistributionViewModel() -> HourDistributionViewModel {
+        HourDistributionViewModel(parent.event.happenings)
     }
 }

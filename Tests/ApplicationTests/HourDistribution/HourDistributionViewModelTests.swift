@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import Foundation
 import XCTest
 
@@ -27,4 +28,13 @@ final class HourDistributionViewModelTests: XCTestCase {
     func test_init() { XCTAssertNotNil(sut) }
     func test_count_24() { XCTAssertEqual(sut.count, 24) }
     func test_cellAtIndex() { XCTAssertNotNil(sut.cell(at: 0)) }
+    func test_valueTotal_zero() { XCTAssertEqual(sut.valueTotal, 0) }
+    
+    func test_initWithHappening_valueTotal_1() {
+        sut = HourDistributionViewModel([
+            Happening(dateCreated: DayIndex.referenceValue.date)
+        ])
+        
+        XCTAssertEqual(sut.valueTotal, 1)
+    }
 }

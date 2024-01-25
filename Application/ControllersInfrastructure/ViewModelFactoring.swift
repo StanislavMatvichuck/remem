@@ -29,6 +29,10 @@ protocol DayOfWeekViewModelFactoring {
     func makeDayOfWeekViewModel() -> DayOfWeekViewModel
 }
 
+protocol HourDistributionViewModelFactoring {
+    func makeHourDistributionViewModel() -> HourDistributionViewModel
+}
+
 protocol HintCellViewModelFactoring {
     func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
 }

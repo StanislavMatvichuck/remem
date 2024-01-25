@@ -8,6 +8,19 @@
 import UIKit
 
 final class HourDistributionView: UIView {
+    var viewModel: HourDistributionViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContent(viewModel)
+    }}
+
+    private let stack: UIStackView = {
+        let view = UIStackView(al: true)
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = 2.0
+        return view
+    }()
+
     init() {
         super.init(frame: .zero)
         configureLayout()
@@ -17,6 +30,22 @@ final class HourDistributionView: UIView {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - Private
-    private func configureLayout() {}
+    private func configureLayout() {
+        addAndConstrain(
+            stack,
+            top: 0, left: .buttonMargin,
+            right: .buttonMargin, bottom: 0
+        )
+
+        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3).isActive = true
+    }
+
     private func configureAppearance() {}
+    private func configureContent(_ vm: HourDistributionViewModel) {
+        for index in 0 ..< vm.count {
+            let cell = HourDistributionCellView()
+            cell.viewModel = vm.cell(at: index)
+            stack.addArrangedSubview(cell)
+        }
+    }
 }

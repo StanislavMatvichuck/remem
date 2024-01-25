@@ -29,6 +29,7 @@
 		081A15672B6291A300EDA8A2 /* HourDistributionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A15662B6291A300EDA8A2 /* HourDistributionController.swift */; };
 		081A15692B6291F200EDA8A2 /* HourDistributionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A15682B6291F200EDA8A2 /* HourDistributionViewTests.swift */; };
 		081A156B2B62920500EDA8A2 /* HourDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A156A2B62920500EDA8A2 /* HourDistributionView.swift */; };
+		081A156D2B62968D00EDA8A2 /* HourDistributionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A156C2B62968D00EDA8A2 /* HourDistributionCellView.swift */; };
 		081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */; };
 		081C431C29FFC46600ACC4D7 /* DateIndexing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DD29B8D25A008069FB /* DateIndexing.swift */; };
 		081C431D29FFC46600ACC4D7 /* MinuteIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081391DB29B8C780008069FB /* MinuteIndex.swift */; };
@@ -421,6 +422,7 @@
 		081A15662B6291A300EDA8A2 /* HourDistributionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionController.swift; sourceTree = "<group>"; };
 		081A15682B6291F200EDA8A2 /* HourDistributionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionViewTests.swift; sourceTree = "<group>"; };
 		081A156A2B62920500EDA8A2 /* HourDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionView.swift; sourceTree = "<group>"; };
+		081A156C2B62968D00EDA8A2 /* HourDistributionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionCellView.swift; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimator.swift; sourceTree = "<group>"; };
 		082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewSnapshots.swift; sourceTree = "<group>"; };
@@ -930,6 +932,7 @@
 				081A15662B6291A300EDA8A2 /* HourDistributionController.swift */,
 				081A15622B62911200EDA8A2 /* HourDistributionContainer.swift */,
 				081A156A2B62920500EDA8A2 /* HourDistributionView.swift */,
+				081A156C2B62968D00EDA8A2 /* HourDistributionCellView.swift */,
 			);
 			path = HourDistribution;
 			sourceTree = "<group>";
@@ -1953,6 +1956,7 @@
 				08E1744F2B27064D0018256D /* DayDetailsPresentationContainer.swift in Sources */,
 				080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */,
 				08FEA39C28DC98A600BAA196 /* ClockViewModel.swift in Sources */,
+				081A156D2B62968D00EDA8A2 /* HourDistributionCellView.swift in Sources */,
 				08F467EA29BF2A6E00D35AB6 /* PDFReadingViewController.swift in Sources */,
 				0828877829BCA04D00FF9839 /* ViewControllersUpdater.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,

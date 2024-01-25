@@ -15,6 +15,7 @@ final class HourDistributionViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sut = HourDistributionView()
+        sut.viewModel = HourDistributionViewModel()
     }
     
     override func tearDown() {
@@ -25,4 +26,5 @@ final class HourDistributionViewTests: XCTestCase {
     // MARK: - Tests
     
     func test_init() { XCTAssertNotNil(sut) }
+    func test_viewModel() { XCTAssertNotNil(sut.viewModel) }
 }
