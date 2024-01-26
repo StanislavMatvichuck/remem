@@ -14,12 +14,19 @@ struct EventsSortingViewModel {
     let count: Int
     let manualSortingEnabled: Bool
     let activeSorterIndex: Int
+    let animateFrom: EventsSorter?
 
-    init(_ factory: EventsSortingCellViewModelFactoring, manualSortingEnabled: Bool, activeSorterIndex: Int = 0) {
+    init(
+        _ factory: EventsSortingCellViewModelFactoring,
+        manualSortingEnabled: Bool,
+        activeSorterIndex: Int = 0,
+        animateFrom: EventsSorter?
+    ) {
         self.factory = factory
         self.manualSortingEnabled = manualSortingEnabled
         self.activeSorterIndex = activeSorterIndex
         self.count = manualSortingEnabled ? 3 : 2
+        self.animateFrom = animateFrom
     }
 
     func cell(at index: Int) -> EventsSortingCellViewModel {

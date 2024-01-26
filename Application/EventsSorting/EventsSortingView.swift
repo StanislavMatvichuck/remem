@@ -9,6 +9,7 @@ import UIKit
 
 final class EventsSortingView: UIView {
     static let borderWidth: CGFloat = 1
+
     let stack = {
         let view = UIStackView(al: true)
         view.axis = .vertical
@@ -20,14 +21,7 @@ final class EventsSortingView: UIView {
         configureContent(viewModel)
     } }
 
-    private lazy var constraint: NSLayoutConstraint = {
-        selectionBackground.topAnchor.constraint(equalTo: topAnchor)
-    }()
-
-    private let selectionBackground: UIView = {
-        let view = UIView(al: true)
-        return view
-    }()
+    var cells: [EventsSortingCellView]?
 
     init() {
         super.init(frame: .zero)
@@ -37,7 +31,29 @@ final class EventsSortingView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    func animateSelectionBackground(to: Int, completion: (() -> Void)? = nil) {
+        let a = UIViewPropertyAnimator(
+            duration: EventsSortingAnimationsHelper.duration,
+            curve: .easeInOut,
+            animations: {
+                self.constraint.constant = CGFloat(to) * .buttonHeight
+                self.layoutIfNeeded()
+            }
+        )
+        a.addCompletion { _ in completion?() }
+        a.startAnimation()
+    }
+
     // MARK: - Private
+    private lazy var constraint: NSLayoutConstraint = {
+        selectionBackground.topAnchor.constraint(equalTo: topAnchor)
+    }()
+
+    private let selectionBackground: UIView = {
+        let view = UIView(al: true)
+        return view
+    }()
+
     private func configureLayout() {
         addSubview(selectionBackground)
         selectionBackground.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -58,8 +74,6 @@ final class EventsSortingView: UIView {
         clipsToBounds = true
     }
 
-    var cells: [EventsSortingCellView]?
-
     private func configureContent(_ vm: EventsSortingViewModel) {
         installCellsIfNeeded(vm)
 
@@ -67,7 +81,11 @@ final class EventsSortingView: UIView {
             cells?[index].viewModel = vm.cell(at: index)
         }
 
-        animateSelectionBackground(to: vm.activeSorterIndex)
+        if let from = vm.animateFrom {
+            animateSelectionBackground(to: from.rawValue)
+        } else {
+            animateSelectionBackground(to: vm.activeSorterIndex)
+        }
     }
 
     private func installCellsIfNeeded(_ vm: EventsSortingViewModel) {
@@ -88,16 +106,5 @@ final class EventsSortingView: UIView {
             spacer.setContentHuggingPriority(.defaultLow, for: .vertical)
             stack.addArrangedSubview(spacer)
         }
-    }
-
-    private func animateSelectionBackground(to: Int) {
-        UIViewPropertyAnimator(
-            duration: EventsSortingAnimationsHelper.duration,
-            curve: .easeInOut,
-            animations: {
-                self.constraint.constant = CGFloat(to) * .buttonHeight
-                self.layoutIfNeeded()
-            }
-        ).startAnimation()
     }
 }

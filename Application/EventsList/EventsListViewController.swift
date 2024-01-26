@@ -5,6 +5,7 @@
 //  Created by Stanislav Matvichuck on 04.02.2023.
 //
 
+import Domain
 import UIKit
 
 final class EventsListViewController: UIViewController, UITableViewDelegate {
@@ -23,7 +24,9 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
 
             if viewModel.shouldPresentManualSorting(oldValue),
                presentedViewController == nil
-            { handleEventsSortingTap(autoDismiss: true) }
+            {
+                viewModel.eventsSortingHandler?(view.safeAreaInsets.top, oldValue?.sorter)
+            }
         }
     }
 
@@ -68,8 +71,8 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         navigationItem.setRightBarButton(item, animated: false)
     }
 
-    @objc private func handleEventsSortingTap(autoDismiss: Bool = false) {
-        viewModel?.eventsSortingHandler?(view.safeAreaInsets.top, autoDismiss)
+    @objc private func handleEventsSortingTap() {
+        viewModel?.eventsSortingHandler?(view.safeAreaInsets.top, nil)
     }
 
     private func setupTimer() {

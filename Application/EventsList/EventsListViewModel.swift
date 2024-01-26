@@ -14,11 +14,11 @@ struct EventsListViewModel {
     static let title = String(localizationId: "eventsList.title")
     static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
 
-    typealias SortingTapHandler = (CGFloat, Bool) -> Void
+    typealias SortingTapHandler = (CGFloat, EventsSorter?) -> Void
     typealias ManualSortingHandler = ([String]) -> Void
 
     private var cells: [Section: [AnyHashable]]
-    private let sorter: EventsSorter
+    let sorter: EventsSorter
     let eventsSortingHandler: SortingTapHandler?
     let manualSortingHandler: ManualSortingHandler?
 

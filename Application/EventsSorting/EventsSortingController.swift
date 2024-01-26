@@ -32,4 +32,18 @@ final class EventsSortingController: UIViewController {
         super.viewDidLoad()
         viewModel = factory.makeEventsSortingViewModel()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateToManualWithDismissIfNeeded()
+    }
+
+    // MARK: - Private
+    private func animateToManualWithDismissIfNeeded() {
+        guard let viewModel, viewModel.animateFrom != nil else { return }
+
+        viewRoot.animateSelectionBackground(to: viewModel.activeSorterIndex) {
+            self.dismiss(animated: true)
+        }
+    }
 }
