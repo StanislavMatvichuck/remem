@@ -47,7 +47,11 @@ final class EventsSortingContainer: NSObject,
     }
 
     func makeEventsSortingViewModel() -> EventsSortingViewModel {
-        EventsSortingViewModel(self, manualSortingEnabled: manualSortingQuerying.get().count != 0)
+        EventsSortingViewModel(
+            self,
+            manualSortingEnabled: manualSortingQuerying.get().count != 0,
+            activeSorterIndex: provider.get().rawValue
+        )
     }
 
     func makeTapHandler() -> EventsSortingCellViewModel.TapHandler {{ selectedSorter in

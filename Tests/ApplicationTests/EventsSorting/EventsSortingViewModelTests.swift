@@ -51,6 +51,8 @@ final class EventsSortingViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.count, 3)
     }
+
+    func test_activeSorterIndex() { XCTAssertEqual(sut.activeSorterIndex, 0) }
 }
 
 struct EventsSortingCellFactoryStub: EventsSortingCellViewModelFactoring {

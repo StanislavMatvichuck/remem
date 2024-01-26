@@ -13,10 +13,12 @@ struct EventsSortingViewModel {
 
     let count: Int
     let manualSortingEnabled: Bool
+    let activeSorterIndex: Int
 
-    init(_ factory: EventsSortingCellViewModelFactoring, manualSortingEnabled: Bool) {
+    init(_ factory: EventsSortingCellViewModelFactoring, manualSortingEnabled: Bool, activeSorterIndex: Int = 0) {
         self.factory = factory
         self.manualSortingEnabled = manualSortingEnabled
+        self.activeSorterIndex = activeSorterIndex
         self.count = manualSortingEnabled ? 3 : 2
     }
 

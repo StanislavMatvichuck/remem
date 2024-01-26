@@ -43,8 +43,6 @@ final class EventsSortingCellView: UIView {
 
     private func configureContent(_ vm: EventsSortingCellViewModel) {
         title.text = vm.title
-        backgroundColor = vm.isActive ? .primary : .clear
-        title.textColor = vm.isActive ? .bg_item : .text
     }
 
     private func configureEventHandlers() {

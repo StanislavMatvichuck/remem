@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum EventsSorter: Codable, Equatable, CaseIterable {
+public enum EventsSorter: Int, Codable, Equatable, CaseIterable {
     case name, total, manual
 }
 
