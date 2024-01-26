@@ -143,6 +143,7 @@ final class DayDetailsView: UIView {
         titleBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
         buttonBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
 
+        happeningsCollection.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: -DayCell.margin).isActive = true
         addAndConstrain(verticalStack)
     }
 
