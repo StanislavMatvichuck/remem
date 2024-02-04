@@ -39,8 +39,8 @@ final class EventCell: UITableViewCell {
     // MARK: - Private
     private func configureLayout() {
         contentView.addSubview(staticBackgroundView)
-
         contentView.addAndConstrain(view)
+
         let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare * 2)
         heightConstraint.priority = .defaultHigh
         heightConstraint.isActive = true
@@ -52,7 +52,7 @@ final class EventCell: UITableViewCell {
     }
 
     private func configureAppearance() {
-        backgroundColor = .clear
+        backgroundColor = .bg
         selectionStyle = .none
         staticBackgroundView.backgroundColor = .border
         staticBackgroundView.layer.cornerRadius = view.stack.layer.cornerRadius
@@ -79,19 +79,11 @@ final class EventCell: UITableViewCell {
 private extension EventCell {
     func playAnimation(_ animation: EventCellViewModel.Animations) {
         switch animation {
-        case .swipe: animateHappeningCreation()
-        case .aboveSwipe: animateHappeningNeighbour()
-        case .belowSwipe: animateHappeningNeighbour(isAbove: false)
+        case .swipe: SwiperAnimationsHelper.animateHappening(view)
+        case .aboveSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: true)
+        case .belowSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: false)
         case .none: return
         }
-    }
-
-    func animateHappeningCreation() {
-        SwiperAnimationsHelper.animateHappening(view)
-    }
-
-    func animateHappeningNeighbour(isAbove: Bool = true) {
-        SwiperAnimationsHelper.animate(neighbour: view, isAbove: isAbove)
     }
 
     func animateGoalProgress() {
