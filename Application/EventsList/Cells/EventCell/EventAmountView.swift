@@ -8,7 +8,17 @@
 import UIKit
 
 final class EventAmountView: UIView {
-    let label = EventCellView.makeLabel(numberOfLines: 1)
+    let label = {
+        let label = UILabel(al: true)
+        label.textAlignment = .center
+        label.font = .font
+        label.textColor = UIColor.text
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 1
+        return label
+    }()
+
     let background: UIView = {
         let view = UIView(al: true)
         view.widthAnchor.constraint(equalToConstant: .swiperRadius * 2).isActive = true

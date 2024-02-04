@@ -8,7 +8,22 @@
 import UIKit
 
 final class EventCellView: UIView {
-    let title = EventCellView.makeLabel(numberOfLines: 3)
+    let stack: UIStackView = {
+        let view = UIStackView(al: true)
+        return view
+    }()
+
+    let title = {
+        let label = UILabel(al: true)
+        label.textAlignment = .center
+        label.font = .font
+        label.textColor = UIColor.text
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 3
+        return label
+    }()
+
     let timeSince = TimeSinceView()
     let circleContainer = SwipingCircleView()
     let amountContainer = EventAmountView()
@@ -31,11 +46,6 @@ final class EventCellView: UIView {
         timeSince.configure(vm.timeSince)
         vm.hintEnabled ? addSwipingHint() : removeSwipingHint()
     }
-
-    let stack: UIStackView = {
-        let view = UIStackView(al: true)
-        return view
-    }()
 
     // MARK: - Private
     private func configureLayout() {
@@ -73,17 +83,6 @@ final class EventCellView: UIView {
         stack.layer.borderWidth = .border
     }
 
-    static func makeLabel(numberOfLines: Int) -> UILabel {
-        let label = UILabel(al: true)
-        label.textAlignment = .center
-        label.font = .font
-        label.textColor = UIColor.text
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.numberOfLines = numberOfLines
-        return label
-    }
-    
     // MARK: - Dark mode
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
