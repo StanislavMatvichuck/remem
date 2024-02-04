@@ -53,6 +53,8 @@ final class UITestRepositoryConfigurator {
             addFitnessHappenings(thirdEvent)
             mockAddingWeeklyGoal(thirdEvent)
             addEvents()
+        case .eventsListInteractions:
+            addEvents()
         default: break
         }
     }

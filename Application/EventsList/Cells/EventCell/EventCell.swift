@@ -5,7 +5,6 @@
 //  Created by Stanislav Matvichuck on 17.04.2023.
 //
 
-import AudioToolbox
 import UIKit
 
 final class EventCell: UITableViewCell {
@@ -13,7 +12,7 @@ final class EventCell: UITableViewCell {
 
     let view = EventCellView()
     let staticBackgroundView = UIView(al: true)
-    let swipeAnimator: AnimatingSwipe = DefaultSwipeAnimator()
+
     var viewModel: EventCellViewModel? { didSet {
         guard let viewModel else { return }
         view.configure(viewModel)
@@ -32,7 +31,6 @@ final class EventCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        swipeAnimator.prepareForReuse()
         removeSwipingHint()
         view.animatedProgress.prepareForReuse()
         viewModel = nil
@@ -60,166 +58,42 @@ final class EventCell: UITableViewCell {
         staticBackgroundView.layer.cornerRadius = view.stack.layer.cornerRadius
     }
 
+    // MARK: - Events handling
     private func configureEventHandlers() {
         view.addGestureRecognizer(UITapGestureRecognizer(
             target: self,
             action: #selector(handleTap)
         ))
 
-        view.circleContainer.circle.addGestureRecognizer(UIPanGestureRecognizer(
-            target: self,
-            action: #selector(handlePan)
-        ))
+        view.circleContainer.addTarget(
+            self, action: #selector(handleSwipe),
+            for: .valueChanged
+        )
     }
 
-    private func playAnimation(_ animation: EventCellViewModel.Animations) {
-        switch animation {
-        case .swipe:
-            animateHappeningCreation()
-        case .aboveSwipe:
-            animateNeighborHappeningCreationReactionAbove()
-        case .belowSwipe:
-            animateNeighborHappeningCreationReactionBelow()
-        case .none:
-            return
-        }
-    }
-
-    // MARK: - Events handling
+    @objc private func handleSwipe() { viewModel?.swipeHandler() }
     @objc private func handleTap() { viewModel?.tapHandler() }
-    @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
-        guard let view = pan.view else { return }
-        let translation = max(0, pan.translation(in: view).x)
-        let progress = abs(translation * 5 / contentView.bounds.width)
-        let progressSufficient = progress >= 1.0
-
-        switch pan.state {
-        case .began:
-            let distance = contentView.bounds.width - self.view.circleContainer.circle.bounds.width - 4 * .buttonMargin
-            let scale = .buttonRadius / (CGFloat.buttonRadius - .buttonMargin)
-            swipeAnimator.start(
-                animated: self.view.circleContainer.circle,
-                forXDistance: distance,
-                andScaleFactor: scale
-            )
-
-        case .changed:
-            swipeAnimator.set(progress: progress)
-        default:
-            if progressSufficient {
-                swipeAnimator.animateSuccess { [weak self] in self?.viewModel?.swipeHandler() }
-            } else {
-                swipeAnimator.returnToStart(from: progress) {}
-            }
-        }
-    }
 }
 
 // MARK: - Happening creation animations
-extension EventCell {
+private extension EventCell {
+    func playAnimation(_ animation: EventCellViewModel.Animations) {
+        switch animation {
+        case .swipe: animateHappeningCreation()
+        case .aboveSwipe: animateHappeningNeighbour()
+        case .belowSwipe: animateHappeningNeighbour(isAbove: false)
+        case .none: return
+        }
+    }
+
     func animateHappeningCreation() {
-        let animator = UIViewPropertyAnimator(
-            duration: SwiperAnimationsHelper.forwardDuration,
-            curve: .easeOut
-        )
-
-        let view = self.view
-
-        animator.addAnimations {
-            view.transform = CGAffineTransform(
-                translationX: .buttonHeight,
-                y: 0
-            )
-        }
-
-        animator.addCompletion { _ in
-            let returnAnimator = UIViewPropertyAnimator(
-                duration: SwiperAnimationsHelper.forwardDuration,
-                curve: .easeIn
-            )
-
-            let circleSnapshot = view.circleContainer.circle.snapshotView(afterScreenUpdates: false)
-
-            if let circleSnapshot {
-                circleSnapshot.alpha = 0
-                circleSnapshot.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(circleSnapshot)
-                NSLayoutConstraint.activate([
-                    circleSnapshot.widthAnchor.constraint(equalToConstant: (.buttonRadius - .buttonMargin) * 2),
-                    circleSnapshot.heightAnchor.constraint(equalToConstant: (.buttonRadius - .buttonMargin) * 2),
-                    circleSnapshot.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                    circleSnapshot.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .buttonMargin * 2),
-                ])
-            }
-
-            returnAnimator.addAnimations {
-                view.transform = .identity
-                circleSnapshot?.alpha = 1
-            }
-
-            view.circleContainer.circle.alpha = 0
-
-            returnAnimator.addCompletion { _ in
-                self.swipeAnimator.prepareForReuse()
-                view.circleContainer.circle.alpha = 1
-                circleSnapshot?.removeFromSuperview()
-            }
-
-            returnAnimator.startAnimation()
-        }
-
-        animator.startAnimation()
+        SwiperAnimationsHelper.animateHappening(view)
     }
 
-    func animateNeighborHappeningCreationReactionAbove() {
-        let animator = UIViewPropertyAnimator(
-            duration: SwiperAnimationsHelper.forwardDuration,
-            curve: .easeOut
-        ) {
-            let angle = CGFloat.pi / 180 * 3
-            self.view.transform = CGAffineTransform(
-                rotationAngle: -angle
-            )
-        }
-
-        animator.addCompletion { _ in
-            UIViewPropertyAnimator(
-                duration: SwiperAnimationsHelper.forwardDuration,
-                curve: .easeOut
-            ) {
-                self.view.transform = .identity
-            }.startAnimation()
-        }
-
-        animator.startAnimation()
+    func animateHappeningNeighbour(isAbove: Bool = true) {
+        SwiperAnimationsHelper.animate(neighbour: view, isAbove: isAbove)
     }
 
-    func animateNeighborHappeningCreationReactionBelow() {
-        let animator = UIViewPropertyAnimator(
-            duration: SwiperAnimationsHelper.forwardDuration,
-            curve: .easeOut
-        ) {
-            let angle = CGFloat.pi / 180 * 3
-            self.view.transform = CGAffineTransform(
-                rotationAngle: angle
-            )
-        }
-
-        animator.addCompletion { _ in
-            UIViewPropertyAnimator(
-                duration: SwiperAnimationsHelper.forwardDuration,
-                curve: .easeOut
-            ) {
-                self.view.transform = .identity
-            }.startAnimation()
-        }
-
-        animator.startAnimation()
-    }
-}
-
-// MARK: - Goal progress animation
-extension EventCell {
     func animateGoalProgress() {
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: SwiperAnimationsHelper.progressMovementDuration,

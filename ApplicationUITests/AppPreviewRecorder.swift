@@ -15,6 +15,7 @@ enum LaunchMode: String {
          appPreview02_addWeeklyGoal,
          appPreview03_widget,
          appPreview03_darkMode,
+         eventsListInteractions,
          unitTest,
          uikit
 }
