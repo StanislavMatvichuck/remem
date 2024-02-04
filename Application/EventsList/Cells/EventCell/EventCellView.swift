@@ -62,7 +62,7 @@ final class EventCellView: UIView {
         addSubview(timeSince)
         NSLayoutConstraint.activate([
             timeSince.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
-            timeSince.centerYAnchor.constraint(equalTo: stack.bottomAnchor),
+            timeSince.bottomAnchor.constraint(equalTo: stack.bottomAnchor),
             timeSince.heightAnchor.constraint(equalToConstant: .buttonMargin * 2),
             timeSince.widthAnchor.constraint(equalTo: title.widthAnchor),
 

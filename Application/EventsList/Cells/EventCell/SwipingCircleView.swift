@@ -9,7 +9,7 @@ import UIKit
 
 final class SwipingCircleView: UIControl {
     static let scale = CGFloat.buttonRadius / (.buttonRadius - .buttonMargin)
-    static let plusSize = CGFloat.buttonRadius / 3
+    static let plusSize = CGFloat.buttonRadius / 5
 
     private let circle: UIView = {
         let view = UIView(al: true)
@@ -43,7 +43,7 @@ final class SwipingCircleView: UIControl {
         return plusLayer
     }()
 
-    var BADSUPERVIEWBOUNDS: CGFloat { superview!.superview!.bounds.width }
+    private var BADSUPERVIEWBOUNDS: CGFloat { superview!.superview!.bounds.width }
 
     private let animator = UIViewPropertyAnimator(
         duration: SwiperAnimationsHelper.forwardDuration,
@@ -88,7 +88,7 @@ final class SwipingCircleView: UIControl {
 
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
         let translation = max(0, pan.translation(in: circle).x)
-        let progress = abs(translation * 5 / BADSUPERVIEWBOUNDS)
+        let progress = abs(translation * 4 / BADSUPERVIEWBOUNDS)
         let progressSufficient = progress >= 1.0
 
         switch pan.state {

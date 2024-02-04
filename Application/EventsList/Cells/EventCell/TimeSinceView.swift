@@ -13,10 +13,17 @@ final class TimeSinceView: UIStackView {
     static let backgroundColor = UIColor.bg_secondary
     static let height = CGFloat.buttonMargin * 2
 
-    let corner: UIView = {
+    let leftCorner: UIView = {
         let view = UIView(al: true)
         view.backgroundColor = backgroundColor
-        view.layer.cornerRadius = .buttonMargin / 5
+        view.widthAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
+        view.heightAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
+        return view
+    }()
+
+    let rightCorner: UIView = {
+        let view = UIView(al: true)
+        view.backgroundColor = backgroundColor
         view.widthAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
         view.heightAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
         return view
@@ -46,14 +53,18 @@ final class TimeSinceView: UIStackView {
     // MARK: - Private
     private func configureLayout() {
         alignment = .center
-        addSubview(corner)
+        addSubview(leftCorner)
+        addSubview(rightCorner)
         addArrangedSubview(Self.makeDot())
         addArrangedSubview(label)
         addArrangedSubview(Self.makeDot())
 
         NSLayoutConstraint.activate([
-            corner.topAnchor.constraint(equalTo: topAnchor),
-            corner.trailingAnchor.constraint(equalTo: trailingAnchor),
+            leftCorner.bottomAnchor.constraint(equalTo: bottomAnchor),
+            leftCorner.leadingAnchor.constraint(equalTo: leadingAnchor),
+
+            rightCorner.bottomAnchor.constraint(equalTo: bottomAnchor),
+            rightCorner.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
 
