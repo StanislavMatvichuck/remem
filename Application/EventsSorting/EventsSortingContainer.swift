@@ -31,7 +31,7 @@ final class EventsSortingContainer: NSObject,
     init(
         _ parent: EventsListContainer,
         topOffset: CGFloat = 0,
-        animateFrom: EventsSorter?
+        animateFrom: EventsSorter? = nil
     ) {
         self.parent = parent
         self.animateFrom = animateFrom

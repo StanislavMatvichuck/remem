@@ -20,7 +20,7 @@ struct EventsSortingViewModel {
         _ factory: EventsSortingCellViewModelFactoring,
         manualSortingEnabled: Bool,
         activeSorterIndex: Int = 0,
-        animateFrom: EventsSorter?
+        animateFrom: EventsSorter? = nil
     ) {
         self.factory = factory
         self.manualSortingEnabled = manualSortingEnabled
