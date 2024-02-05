@@ -94,12 +94,12 @@ final class EventsListViewControllerTests: XCTestCase {
         submitEvent()
 
         let hintIndex = IndexPath(row: 0, section: EventsListViewModel.Section.hint.rawValue)
-        let footerIndex = IndexPath(row: 0, section: EventsListViewModel.Section.createEvent.rawValue)
         let eventIndex = IndexPath(row: 0, section: EventsListViewModel.Section.events.rawValue)
+        let createEventIndex = IndexPath(row: 0, section: EventsListViewModel.Section.createEvent.rawValue)
 
         XCTAssertEqual(sut.dragItems(for: hintIndex).count, 0)
         XCTAssertEqual(sut.dragItems(for: eventIndex).count, 1)
-        XCTAssertEqual(sut.dragItems(for: footerIndex).count, 0)
+        XCTAssertEqual(sut.dragItems(for: createEventIndex).count, 0)
     }
 
     // MARK: - Creation and helpers

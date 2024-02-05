@@ -26,5 +26,5 @@ struct CreateEventCellViewModel: Hashable {
         lhs.isHighlighted == rhs.isHighlighted
     }
 
-    func hash(into hasher: inout Hasher) { hasher.combine("Footer") }
+    func hash(into hasher: inout Hasher) { hasher.combine("CreateEventCellViewModel") }
 }

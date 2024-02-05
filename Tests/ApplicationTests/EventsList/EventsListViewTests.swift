@@ -35,8 +35,8 @@ final class EventsListViewTests: XCTestCase {
     }
 
     func test_showsCreateEvent_highlighted() {
-        XCTAssertEqual(sut.footerCell.button.titleLabel?.text, CreateEventCellViewModel.title)
-        XCTAssertEqual(sut.footerCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
+        XCTAssertEqual(sut.createEventCell.button.titleLabel?.text, CreateEventCellViewModel.title)
+        XCTAssertEqual(sut.createEventCell.button.backgroundColor?.cgColor, UIColor.primary.cgColor, "highlighted button has brand background")
     }
 
     func test_showsNoEvents() {
@@ -58,7 +58,7 @@ final class EventsListViewTests: XCTestCase {
     func test_oneEvent_showsCreateEvent_default() {
         configureWithOneEvent()
 
-        XCTAssertEqual(sut.footerCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
+        XCTAssertEqual(sut.createEventCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
     }
 
     // MARK: - Creation
@@ -95,7 +95,7 @@ extension EventsListView {
         else { fatalError("unable to get cell of requested type") }
     }
 
-    var footerCell: CreateEventCell {
+    var createEventCell: CreateEventCell {
         let section = EventsListViewModel.Section.createEvent.rawValue
         if let cell = firstCellAt(section) as? CreateEventCell { return cell }
         else { fatalError("unable to get cell of requested type") }

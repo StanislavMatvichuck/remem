@@ -1,5 +1,5 @@
 //
-//  FooterItem.swift
+//  CreateEventCell.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 04.01.2023.
@@ -8,7 +8,7 @@
 import UIKit
 
 final class CreateEventCell: UITableViewCell {
-    static var reuseIdentifier = "FooterCell"
+    static var reuseIdentifier = "CreateEventCell"
 
     let button = UIButton(al: true)
 

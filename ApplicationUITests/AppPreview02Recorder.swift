@@ -9,18 +9,18 @@ import XCTest
 
 final class AppPreview02Recorder: AppPreviewRecorder {
     var firstEventCell: XCUIElement! { cell(at: 0) }
-    var footer: XCUIElement! { app.tables.firstMatch.cells["FooterCell"].firstMatch }
+    var createEvent: XCUIElement! { app.tables.firstMatch.cells["CreateEventCell"].firstMatch }
     var field: XCUIElement! { app.textFields.element }
 
     func test01_addingEvents() {
         executeWith(mode: .appPreview02_addingEvents, recording: recording) {
-            footer.tap()
+            createEvent.tap()
             submitFirstEvent()
 
-            footer.tap()
+            createEvent.tap()
             submitSecondEvent()
 
-            footer.tap()
+            createEvent.tap()
             submitThirdEvent()
         }
     }
