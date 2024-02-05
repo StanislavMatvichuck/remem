@@ -24,6 +24,14 @@ final class EventCellView: UIView {
         return label
     }()
 
+    let fireDecal: UILabel = {
+        let label = UILabel(al: true)
+        label.text = "🔥"
+        label.font = .fontBold
+        label.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
+        return label
+    }()
+
     let timeSince = TimeSinceView()
     let circleContainer = SwipingCircleView()
     let amountContainer = EventAmountView()
@@ -63,6 +71,7 @@ final class EventCellView: UIView {
         addSubview(stack)
         addSubview(timeSince)
         addAndConstrain(circleContainer)
+        addSubview(fireDecal)
 
         NSLayoutConstraint.activate([
             timeSince.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
@@ -76,6 +85,9 @@ final class EventCellView: UIView {
             stack.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             animatedProgress.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
+            
+            fireDecal.centerYAnchor.constraint(equalTo: centerYAnchor),
+            fireDecal.trailingAnchor.constraint(equalTo: leadingAnchor),
         ])
     }
 
