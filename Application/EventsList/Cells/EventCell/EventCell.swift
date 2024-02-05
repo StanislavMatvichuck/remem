@@ -16,7 +16,6 @@ final class EventCell: UITableViewCell {
     var viewModel: EventCellViewModel? { didSet {
         guard let viewModel else { return }
         view.configure(viewModel)
-        playAnimation(viewModel.animation)
     }}
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,6 +32,7 @@ final class EventCell: UITableViewCell {
         super.prepareForReuse()
         removeSwipingHint()
         view.animatedProgress.prepareForReuse()
+        view.circleContainer.prepareForReuse()
         viewModel = nil
     }
 
@@ -43,12 +43,14 @@ final class EventCell: UITableViewCell {
 
         let heightConstraint = contentView.heightAnchor.constraint(equalToConstant: .layoutSquare * 2)
         heightConstraint.priority = .defaultHigh
-        heightConstraint.isActive = true
 
-        staticBackgroundView.widthAnchor.constraint(equalTo: view.stack.widthAnchor).isActive = true
-        staticBackgroundView.heightAnchor.constraint(equalTo: view.stack.heightAnchor).isActive = true
-        staticBackgroundView.centerXAnchor.constraint(equalTo: view.stack.centerXAnchor).isActive = true
-        staticBackgroundView.centerYAnchor.constraint(equalTo: view.stack.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            heightConstraint,
+            staticBackgroundView.widthAnchor.constraint(equalTo: view.stack.widthAnchor),
+            staticBackgroundView.heightAnchor.constraint(equalTo: view.stack.heightAnchor),
+            staticBackgroundView.centerXAnchor.constraint(equalTo: view.stack.centerXAnchor),
+            staticBackgroundView.centerYAnchor.constraint(equalTo: view.stack.centerYAnchor),
+        ])
     }
 
     private func configureAppearance() {
@@ -76,13 +78,15 @@ final class EventCell: UITableViewCell {
 }
 
 // MARK: - Happening creation animations
-private extension EventCell {
-    func playAnimation(_ animation: EventCellViewModel.Animations) {
-        switch animation {
-        case .swipe: SwiperAnimationsHelper.animateHappening(view)
+extension EventCell {
+    func playAnimation() {
+        switch viewModel?.animation {
+        case .swipe:
+            view.circleContainer.prepareForHappeningCreationAnimation()
+            SwiperAnimationsHelper.animateHappening(view)
         case .aboveSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: true)
         case .belowSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: false)
-        case .none: return
+        default: return
         }
     }
 

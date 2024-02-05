@@ -19,13 +19,24 @@ struct SwiperAnimationsHelper {
             withDuration: Self.forwardDuration,
             delay: 0,
             options: .curveEaseInOut,
-            animations: {
-                view.transform = CGAffineTransform(
-                    translationX: .buttonHeight,
-                    y: 0
+            animations: { view.transform = CGAffineTransform(
+                translationX: .buttonHeight + .buttonMargin, y: 0
+            ) },
+            completion: { _ in
+                view.circleContainer.hideCircle()
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: Self.forwardDuration,
+                    delay: 0,
+                    options: .curveEaseInOut,
+                    animations: { view.transform = CGAffineTransform(
+                        translationX: -CGFloat.buttonHeight, y: 0
+                    ) },
+                    completion: { _ in
+                        view.circleContainer.placeCircleAtLeft()
+                        Self.animateBack(view)
+                    }
                 )
-            },
-            completion: { _ in Self.animateBack(view) }
+            }
         )
     }
 
@@ -44,7 +55,10 @@ struct SwiperAnimationsHelper {
         )
     }
 
-    static func animateBack(_ view: UIView) {
+    static func animateBack(_ view: EventCellView) {
+        view.circleContainer.showCircle()
+        view.circleContainer.placeCircleAtDefault()
+
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: Self.forwardDuration,
             delay: 0,

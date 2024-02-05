@@ -10,15 +10,22 @@ import UIKit
 
 final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
-    let viewRoot: EventsListView
-    let widgetUpdater: WidgetViewController
-    var timer: Timer?
+
+    private let viewRoot: EventsListView
+    private let widgetUpdater: WidgetViewController
+    private var timer: Timer?
+    /// Needed to setup animations play only once after swipe and do not play after scroll
+    private var executedEventCellsAnimations: Set<EventCellViewModel> = Set()
 
     var viewModel: EventsListViewModel? {
         didSet {
+            executedEventCellsAnimations.removeAll()
+
             guard isViewLoaded else { return }
             title = EventsListViewModel.title
+
             viewRoot.viewModel = viewModel
+
             guard let viewModel else { return }
             widgetUpdater.update(viewModel)
 
@@ -78,6 +85,16 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     private func setupTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             [weak self] _ in self?.update()
+        }
+    }
+
+    func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt _: IndexPath) {
+        if let cell = cell as? EventCell,
+           let vm = cell.viewModel,
+           !executedEventCellsAnimations.contains(vm)
+        {
+            cell.playAnimation()
+            executedEventCellsAnimations.insert(vm)
         }
     }
 }

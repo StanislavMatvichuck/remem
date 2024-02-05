@@ -49,8 +49,10 @@ final class EventCellView: UIView {
 
     // MARK: - Private
     private func configureLayout() {
+        let circleSpacer = UIView(al: true)
+        circleSpacer.widthAnchor.constraint(equalToConstant: .buttonHeight).isActive = true
         stack.addSubview(animatedProgress)
-        stack.addArrangedSubview(circleContainer)
+        stack.addArrangedSubview(circleSpacer)
         stack.addArrangedSubview(title)
         stack.addArrangedSubview(amountContainer)
 
@@ -60,6 +62,8 @@ final class EventCellView: UIView {
 
         addSubview(stack)
         addSubview(timeSince)
+        addAndConstrain(circleContainer)
+
         NSLayoutConstraint.activate([
             timeSince.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
             timeSince.bottomAnchor.constraint(equalTo: stack.bottomAnchor),

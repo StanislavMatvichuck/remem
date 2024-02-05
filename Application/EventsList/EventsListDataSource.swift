@@ -68,7 +68,7 @@ final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewMo
         /// Allows animation for same cells N times
         if let eventCells = vm.cells(for: .events) as? [EventCellViewModel] {
             let animatedEventCells = eventCells.filter { $0.animation != .none }
-            snapshot.reconfigureItems(animatedEventCells)
+            snapshot.reloadItems(animatedEventCells)
         }
 
         return snapshot

@@ -43,7 +43,7 @@ final class SwipingCircleView: UIControl {
         return plusLayer
     }()
 
-    private var BADSUPERVIEWBOUNDS: CGFloat { superview!.superview!.bounds.width }
+    private var width: CGFloat { bounds.width }
 
     private let animator = UIViewPropertyAnimator(
         duration: SwiperAnimationsHelper.forwardDuration,
@@ -60,13 +60,29 @@ final class SwipingCircleView: UIControl {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    func prepareForReuse() { circle.transform = .identity }
+
+    func prepareForHappeningCreationAnimation() {
+        circle.transform = makeCircleTransform()
+    }
+
+    func placeCircleAtLeft() {
+        circle.transform = CGAffineTransform(translationX: -CGFloat.buttonHeight, y: 0)
+    }
+
+    func placeCircleAtDefault() {
+        circle.transform = .identity
+        layoutIfNeeded()
+    }
+
+    func hideCircle() { circle.isHidden = true }
+    func showCircle() { circle.isHidden = false }
+
     // MARK: - Private
     private func configureLayout() {
         addSubview(circle)
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: .buttonHeight),
-            heightAnchor.constraint(equalToConstant: .buttonHeight),
-            circle.centerXAnchor.constraint(equalTo: centerXAnchor),
+            circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2 * CGFloat.buttonMargin),
             circle.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
@@ -87,8 +103,8 @@ final class SwipingCircleView: UIControl {
     }
 
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
-        let translation = max(0, pan.translation(in: circle).x)
-        let progress = abs(translation * 4 / BADSUPERVIEWBOUNDS)
+        let translation = max(0, pan.translation(in: self).x)
+        let progress = abs(translation * 4 / width)
         let progressSufficient = progress >= 1.0
 
         switch pan.state {
@@ -113,7 +129,10 @@ final class SwipingCircleView: UIControl {
             y: Self.scale
         ))
 
-        let distance = BADSUPERVIEWBOUNDS - circle.bounds.width - 4 * .buttonMargin
+        let totalWidth = width
+        let circleWidth = circle.bounds.width
+        let marginsCompensation = 4 * .buttonMargin
+        let distance = totalWidth - circleWidth - marginsCompensation
         newTransform = newTransform.concatenating(CGAffineTransform(
             translationX: distance,
             y: 0
