@@ -11,7 +11,7 @@ import UIKit
 final class EventsListViewController: UIViewController, UITableViewDelegate {
     let factory: EventsListViewModelFactoring
 
-    private let viewRoot: EventsListView
+    let viewRoot: EventsListView
     private let widgetUpdater: WidgetViewController
     private var timer: Timer?
     /// Needed to setup animations play only once after swipe and do not play after scroll

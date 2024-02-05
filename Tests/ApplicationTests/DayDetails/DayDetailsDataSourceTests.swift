@@ -14,7 +14,7 @@ final class DayDetailsDataSourceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sut = DayDetailsDataSource(UICollectionView())
+        sut = DayDetailsDataSource(UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     }
     
     override func tearDown() {

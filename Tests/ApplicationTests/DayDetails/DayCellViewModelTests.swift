@@ -12,6 +12,7 @@ import XCTest
 final class DayDellViewModelTests: XCTestCase {
     func test_time_happeningAtStart_0000() {
         let sut = DayCellViewModel(
+            index: 0,
             happening: Happening(dateCreated: DayIndex.referenceValue.date),
             remove: { _ in }
         )
