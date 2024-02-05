@@ -8,7 +8,9 @@
 import Domain
 import Foundation
 
-protocol DayCellViewModelFactoring { func makeViewModel(happening: Happening) -> DayCellViewModel }
+protocol DayCellViewModelFactoring {
+    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel
+}
 
 protocol EventCellViewModelFactoring {
     func makeEventCellViewModel(event: Event, hintEnabled: Bool) -> EventCellViewModel

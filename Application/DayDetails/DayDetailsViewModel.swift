@@ -68,7 +68,7 @@ struct DayDetailsViewModel {
 
     func cellAt(index: Int) -> DayCellViewModel {
         let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
-        return factory.makeViewModel(happening: happenings[index])
+        return factory.makeViewModel(index: index, happening: happenings[index])
     }
 
     mutating func handlePicker(date: Date) { pickerDate = date }

@@ -34,8 +34,8 @@ final class DayDetailsContainer:
         return controller
     }
 
-    func makeViewModel(happening: Happening) -> DayCellViewModel {
-        DayCellViewModel(happening: happening) { happening in
+    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel {
+        DayCellViewModel(index: index, happening: happening) { happening in
             do { try self.event.remove(happening: happening) } catch {}
             self.commander.save(self.event)
         }

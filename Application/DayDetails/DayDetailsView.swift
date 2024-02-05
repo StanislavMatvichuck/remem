@@ -80,17 +80,15 @@ final class DayDetailsView: UIView {
     var viewModel: DayDetailsViewModel? { didSet {
         guard let viewModel else { return }
         configure(viewModel: viewModel)
+        dataSource.viewModel = viewModel
     }}
+
+    lazy var dataSource = DayDetailsDataSource(happeningsCollection)
 
     init() {
         super.init(frame: .zero)
-        happeningsCollection.dataSource = self
         configureLayout()
         configureAppearance()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -160,26 +158,5 @@ final class DayDetailsView: UIView {
     private func configureTitle(viewModel: DayDetailsViewModel) {
         title.text = viewModel.title
         title.font = viewModel.isToday ? .fontBold : .font
-    }
-}
-
-extension DayDetailsView: UICollectionViewDataSource {
-    var viewModelErrorMessage: String { "view requires viewModel to display" }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let viewModel else { return 0 }
-        return viewModel.cellsCount
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let viewModel,
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: DayCell.reuseIdentifier,
-                for: indexPath
-            ) as? DayCell
-        else { fatalError(viewModelErrorMessage) }
-        cell.viewModel = viewModel.cellAt(index: indexPath.row)
-        return cell
     }
 }
