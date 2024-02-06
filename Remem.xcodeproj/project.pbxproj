@@ -753,15 +753,13 @@
 		0816B6E32B500B2B00A29815 /* DayDetails */ = {
 			isa = PBXGroup;
 			children = (
+				089F08DE2B72493600EA953A /* View */,
 				086E39732981431C00CCE80E /* DayDetailsContainer.swift */,
 				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
-				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
 				08F97A3D2950769100AB7051 /* DayCellViewModel.swift */,
 				08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */,
 				08E174502B292A990018256D /* DayDetailsPresentationController */,
-				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 				08B26A0F289E919F00DFBAC8 /* DayDetailsViewController.swift */,
-				089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */,
 			);
 			path = DayDetails;
 			sourceTree = "<group>";
@@ -1178,6 +1176,16 @@
 			sourceTree = "<group>";
 			tabWidth = 6;
 			usesTabs = 0;
+		};
+		089F08DE2B72493600EA953A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
+				089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */,
+				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
 		};
 		08B57DA12B5ED2C00046D307 /* EventCreation */ = {
 			isa = PBXGroup;
