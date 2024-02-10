@@ -8,8 +8,19 @@
 import Domain
 import Foundation
 
-protocol DayCellViewModelFactoring {
-    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel
+// MARK: - EventsSorting
+
+protocol EventsSortingViewModelFactoring { func makeEventsSortingViewModel() -> EventsSortingViewModel }
+protocol EventsSortingCellViewModelFactoring { func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel }
+
+// MARK: - EventsList
+
+protocol EventsListViewModelFactoring {
+    func makeEventsListViewModel() -> EventsListViewModel
+}
+
+protocol HintCellViewModelFactoring {
+    func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
 }
 
 protocol EventCellViewModelFactoring {
@@ -23,38 +34,41 @@ protocol CreateEventCellViewModelFactoring {
     ) -> CreateEventCellViewModel
 }
 
+// MARK: - EventCreation
+
 protocol EventCreationViewModelFactoring {
     func makeEventCreationViewModel() -> EventCreationViewModel
+}
+
+// MARK: - EventDetails
+
+protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
+protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
+protocol WeekPageViewModelFactoring { func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel }
+protocol WeekDayViewModelFactoring { func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel }
+protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
+protocol HourDistributionViewModelFactoring {
+    func makeHourDistributionViewModel() -> HourDistributionViewModel
 }
 
 protocol DayOfWeekViewModelFactoring {
     func makeDayOfWeekViewModel() -> DayOfWeekViewModel
 }
 
-protocol HourDistributionViewModelFactoring {
-    func makeHourDistributionViewModel() -> HourDistributionViewModel
-}
-
-protocol HintCellViewModelFactoring {
-    func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
-}
-
-protocol DayDetailsViewModelFactoring { func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel }
-protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
-protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> EventDetailsViewModel }
-
-protocol EventsListViewModelFactoring {
-    func makeEventsListViewModel() -> EventsListViewModel
-}
-
 protocol SummaryViewModelFactoring { func makeSummaryViewModel() -> SummaryViewModel }
+
+// MARK: - DayDetails
+
+protocol DayDetailsViewModelFactoring {
+    func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel
+}
+
+protocol DayCellViewModelFactoring {
+    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel
+}
+
+// MARK: - PDF
+
 protocol PDFWritingViewModelFactoring {
     func makePdfMakingViewModel() -> PDFWritingViewModel
 }
-
-protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
-protocol WeekPageViewModelFactoring { func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel }
-protocol WeekDayViewModelFactoring { func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel }
-
-protocol EventsSortingViewModelFactoring { func makeEventsSortingViewModel() -> EventsSortingViewModel }
-protocol EventsSortingCellViewModelFactoring { func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel }
