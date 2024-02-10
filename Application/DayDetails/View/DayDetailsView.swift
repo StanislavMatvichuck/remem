@@ -95,16 +95,16 @@ final class DayDetailsView: UIView {
 
     func configure(viewModel: DayDetailsViewModel) {
         configureTitle(viewModel: viewModel)
-        picker.date = viewModel.pickerDate
+        picker.date = viewModel.pickerDate//
         happeningsCollection.reloadData()
-        animateFor(viewModel.animation)
+        animateFor(viewModel.animation)//
     }
 
     private let duration = TimeInterval(0.5)
 
-    private func animateFor(_ animation: DayDetailsViewModel.Animation) {
+    private func animateFor(_ animation: DayDetailsViewModel.Animation?) {
         switch animation {
-        case .none:
+        case nil:
             UIView.animateKeyframes(withDuration: duration, delay: 0, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
                     self.buttonBackground.backgroundColor = .primary

@@ -36,9 +36,7 @@ final class DayDetailsDataSource: UICollectionViewDiffableDataSource<Int, DayCel
 
         snapshot.appendSections([0])
 
-        for cellIndex in 0 ..< vm.cellsCount {
-            snapshot.appendItems([vm.cellAt(index: cellIndex)], toSection: 0)
-        }
+        snapshot.appendItems(vm.cells, toSection: 0)
 
         /// Allows animation for same cells N times
 //        if let eventCells = vm.cells(for: .events) as? [EventCellViewModel] {

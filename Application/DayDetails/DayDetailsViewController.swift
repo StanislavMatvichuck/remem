@@ -48,7 +48,7 @@ final class DayDetailsViewController: UIViewController {
     }
 
     @objc private func handleButton() {
-        viewModel?.addHappeningHandler(viewRoot.picker.date)
+        viewModel?.addHappening()
         viewRoot.button.animateTapReceiving()
     }
 
@@ -101,7 +101,7 @@ extension DayDetailsViewController: UIDropInteractionDelegate {
         session.loadObjects(ofClass: NSString.self) { object in
             let indexString = object.first!
             if let index = Int(indexString as! String) {
-                self.viewModel?.cellAt(index: index).remove()
+                self.viewModel?.cells[index].remove()
             }
         }
     }

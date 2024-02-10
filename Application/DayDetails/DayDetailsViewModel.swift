@@ -9,48 +9,33 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
-    enum Animation { case none, deleteDropArea }
     static let create = String(localizationId: "button.addHappening")
     static let delete = String(localizationId: "dropToDelete")
 
-    private static let titleFormatter = {
-        let titleFormatter = DateFormatter()
-        titleFormatter.dateFormat = "d MMMM"
-        return titleFormatter
-    }()
-
-    private let event: Event
-    private let factory: DayCellViewModelFactoring
-
     typealias AddHappeningHandler = (Date) -> Void
+
+    enum Animation { case deleteDropArea }
 
     let title: String
     let isToday: Bool
-    let addHappeningHandler: AddHappeningHandler
-    let cellsCount: Int
-    let currentMoment: Date
-    let startOfDay: Date
+    let cells: [DayCellViewModel]
+    var animation: Animation?
     var pickerDate: Date
-    var animation: Animation
+
+    private let addHappeningHandler: AddHappeningHandler
 
     init(
         currentMoment: Date,
-        event: Event,
         startOfDay: Date,
         pickerDate: Date?,
-        factory: DayCellViewModelFactoring,
+        cells: [DayCellViewModel],
         addHappeningHandler: @escaping AddHappeningHandler
     ) {
-        self.event = event
-        self.factory = factory
-        self.currentMoment = currentMoment
-        self.addHappeningHandler = addHappeningHandler
+        self.title = Self.titleFormatter.string(from: startOfDay)
         self.isToday = DayIndex(currentMoment).date == startOfDay
-        self.startOfDay = startOfDay
-        self.cellsCount = event.happenings(forDayIndex: DayIndex(startOfDay)).count
-
-        self.title = Self.titleFormatter.string(for: startOfDay)!
-
+        self.cells = cells
+        self.animation = nil
+        self.addHappeningHandler = addHappeningHandler
         self.pickerDate = pickerDate ?? {
             let cal = Calendar.current
             let hour = cal.dateComponents([.hour], from: currentMoment).hour ?? 0
@@ -62,16 +47,17 @@ struct DayDetailsViewModel {
                 of: startOfDay
             )!
         }()
-
-        self.animation = .none
     }
 
-    func cellAt(index: Int) -> DayCellViewModel {
-        let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
-        return factory.makeViewModel(index: index, happening: happenings[index])
-    }
-
-    mutating func handlePicker(date: Date) { pickerDate = date }
     mutating func enableDrag() { animation = .deleteDropArea }
-    mutating func disableDrag() { animation = .none }
+    mutating func disableDrag() { animation = nil }
+    mutating func handlePicker(date: Date) { pickerDate = date }
+
+    func addHappening() { addHappeningHandler(pickerDate) }
+
+    private static let titleFormatter = {
+        let titleFormatter = DateFormatter()
+        titleFormatter.dateFormat = "d MMMM"
+        return titleFormatter
+    }()
 }

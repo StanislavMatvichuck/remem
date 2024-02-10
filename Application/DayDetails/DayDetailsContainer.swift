@@ -41,16 +41,32 @@ final class DayDetailsContainer:
         }
     }
 
-    func makeDayDetailsViewModel(pickerDate: Date? = nil) -> DayDetailsViewModel {
-        DayDetailsViewModel(
+    func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel {
+        let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
+        let cells = happenings.enumerated().map { index, happening in
+            DayCellViewModel(
+                index: index,
+                happening: happening,
+                remove: makeRemoveHappeningHandler()
+            )
+        }
+
+        return DayDetailsViewModel(
             currentMoment: currentMoment,
-            event: event,
             startOfDay: startOfDay,
             pickerDate: pickerDate,
-            factory: self
-        ) { date in
-            self.event.addHappening(date: date)
-            self.commander.save(self.event)
-        }
+            cells: cells,
+            addHappeningHandler: makeAddHappeningHandler()
+        )
     }
+
+    func makeAddHappeningHandler() -> DayDetailsViewModel.AddHappeningHandler { { date in
+        self.event.addHappening(date: date)
+        self.commander.save(self.event)
+    }}
+
+    func makeRemoveHappeningHandler() -> DayCellViewModel.RemoveHandler {{ happening in
+        do { try self.event.remove(happening: happening) } catch {}
+        self.commander.save(self.event)
+    }}
 }

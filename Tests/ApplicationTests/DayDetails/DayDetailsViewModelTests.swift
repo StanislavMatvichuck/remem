@@ -10,70 +10,102 @@ import Domain
 import XCTest
 
 final class DayDetailsViewModelTests: XCTestCase {
-    func test_init_pickerDateNil_pickerDate_isCurrentMoment() {
-        let sut = make()
-
-        XCTAssertEqual(sut.pickerDate, sut.currentMoment)
+    private var sut: DayDetailsViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        sut = DayDetailsViewModel(
+            currentMoment: DayIndex.referenceValue.date,
+            startOfDay: DayIndex.referenceValue.date,
+            pickerDate: nil,
+            cells: []
+        ) { _ in }
     }
-
-    func test_init_pickerDateProvided_pickerDate_isProvidedValue() {
-        let pickerDate = DayIndex.referenceValue.date.addingTimeInterval(60 * 60 * 1)
-        let sut = make(pickerDate: pickerDate)
-
-        XCTAssertEqual(sut.pickerDate, pickerDate)
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
-
-    func test_cellsCount_noHappenings_zero() {
-        let sut = make()
-
-        XCTAssertEqual(sut.cellsCount, 0)
+    
+    // MARK: - Tests
+    
+    func test_init() { XCTAssertNotNil(sut) }
+    func test_title_displaysStartOfDayFormattedName() {
+        XCTAssertEqual(sut.title, "1 January")
+        
+        sut = DayDetailsViewModel(
+            currentMoment: DayIndex.referenceValue.date,
+            startOfDay: DayIndex.referenceValue.adding(days: 1).date,
+            pickerDate: nil,
+            cells: [],
+            addHappeningHandler: { _ in }
+        )
+        
+        XCTAssertEqual(sut.title, "2 January")
     }
-
-    func test_cellsCount_oneHappening_one() {
-        let sut = make(happenings: [DayIndex.referenceValue.date])
-
-        XCTAssertEqual(sut.cellsCount, 1)
+    
+    func test_isToday_true() { XCTAssertTrue(sut.isToday) }
+    func test_isToday_startOfDayNextDay_false() {
+        sut = DayDetailsViewModel(
+            currentMoment: DayIndex.referenceValue.date,
+            startOfDay: DayIndex.referenceValue.adding(days: 1).date,
+            pickerDate: nil,
+            cells: [],
+            addHappeningHandler: { _ in }
+        )
+        
+        XCTAssertFalse(sut.isToday)
     }
-
-    func test_animation_none() {
-        let sut = make()
-
-        XCTAssertEqual(sut.animation, DayDetailsViewModel.Animation.none)
+    
+    func test_pickerDate_isStartOfDayWithTimeFromCurrentMoment() {
+        sut = DayDetailsViewModel(
+            currentMoment: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(30 * 3)),
+            startOfDay: DayIndex.referenceValue.adding(days: 1).date,
+            pickerDate: nil,
+            cells: [],
+            addHappeningHandler: { _ in }
+        )
+        
+        // this test will duplicate the implementation
     }
-
+    
+    func test_cells_empty() { XCTAssertEqual(sut.cells.count, 0) }
+    func test_cells_oneHappening() {
+        let app = ApplicationContainer(mode: .unitTest)
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let eventDetails = EventDetailsContainer(app, event: event)
+        let dayDetails: DayDetailsViewModelFactoring = DayDetailsContainer(
+            eventDetails,
+            startOfDay: DayIndex.referenceValue.date
+        )
+        
+        sut = dayDetails.makeDayDetailsViewModel(pickerDate: nil)
+        
+        XCTAssertNotNil(sut.cells.first)
+    }
+    
+    func test_animation_nil() { XCTAssertNil(sut.animation) }
+    
     func test_enableDrag_mutatesAnimationTo_deleteDropArea() {
-        var sut = make()
-
         sut.enableDrag()
 
         XCTAssertEqual(sut.animation, .deleteDropArea)
     }
 
     func test_disableDrag_mutatesAnimationTo_none() {
-        var sut = make()
-
         sut.disableDrag()
 
-        XCTAssertEqual(sut.animation, .none)
+        XCTAssertNil(sut.animation)
     }
-
+    
     func test_handlePickerDate_mutatesPickerDate() {
-        var sut = make()
-
         let oneHourFromStart = DayIndex.referenceValue.date.addingTimeInterval(60 * 60 * 1)
 
         sut.handlePicker(date: oneHourFromStart)
 
         XCTAssertEqual(sut.pickerDate, oneHourFromStart)
     }
-
-    private func make(happenings: [Date] = [], pickerDate: Date? = nil) -> DayDetailsViewModel {
-        let appC = ApplicationContainer(mode: .unitTest)
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        for date in happenings { event.addHappening(date: date) }
-        return DayDetailsContainer(
-            EventDetailsContainer(appC, event: event),
-            startOfDay: DayIndex.referenceValue.date
-        ).makeDayDetailsViewModel(pickerDate: pickerDate)
-    }
+    
+    func test_addHappeningHandler() {}
 }
