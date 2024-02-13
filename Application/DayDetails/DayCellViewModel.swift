@@ -8,8 +8,10 @@
 import Domain
 import Foundation
 
-struct DayCellViewModel: Equatable, Hashable {
-    typealias RemoveHandler = (Happening) -> Void
+struct DayCellViewModel: Identifiable {
+    typealias RemoveHandler = (Self, Happening) -> Void
+
+    enum Animation { case new }
 
     private static let formatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -18,28 +20,43 @@ struct DayCellViewModel: Equatable, Hashable {
         return dateFormatter
     }()
 
-    private let identifier: Int
     private let removeHandler: RemoveHandler
     private let happening: Happening
+    let id: UUID
 
     let time: String
+    var animation: Animation?
 
-    init(index: Int, happening: Happening, remove: @escaping RemoveHandler) {
-        self.identifier = index
+    init(
+        id: UUID,
+        happening: Happening,
+        animation: Animation? = nil,
+        remove: @escaping RemoveHandler
+    ) {
+        self.id = id
+
         self.happening = happening
         self.time = Self.formatter.string(from: happening.dateCreated)
+        self.animation = animation
         self.removeHandler = remove
     }
 
-    func remove() { removeHandler(happening) }
+    func remove() { removeHandler(self, happening) }
+    func removeAnimation() -> DayCellViewModel {
+        DayCellViewModel(
+            id: id,
+            happening: happening,
+            remove: removeHandler
+        )
+    }
+}
 
+extension DayCellViewModel: Equatable, Hashable {
     static func == (lhs: DayCellViewModel, rhs: DayCellViewModel) -> Bool {
-        lhs.happening.dateCreated == rhs.happening.dateCreated &&
-            lhs.identifier == rhs.identifier
+        lhs.id == rhs.id
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(happening.dateCreated)
-        hasher.combine(identifier)
+        hasher.combine(id)
     }
 }

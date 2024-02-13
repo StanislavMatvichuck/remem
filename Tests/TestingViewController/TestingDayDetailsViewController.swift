@@ -36,7 +36,7 @@ extension TestingViewController where Controller == DayDetailsViewController {
     }
 
     func addHappening(at date: Date) {
-        event.addHappening(date: date)
+        sut.viewModel?.addHappening()
     }
 
     func sendEventUpdatesToController() {

@@ -34,23 +34,17 @@ final class DayDetailsContainer:
         return controller
     }
 
-    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel {
-        DayCellViewModel(index: index, happening: happening) { happening in
-            do { try self.event.remove(happening: happening) } catch {}
-            self.commander.save(self.event)
+    private var happenings: [Happening] { event.happenings(forDayIndex: DayIndex(startOfDay)) }
+    /// Storage that provides unique ids for the lifetime of presentation
+    private lazy var cells: [DayCellViewModel] = {
+        happenings.map { happening in
+            makeDayCellViewModel(happening: happening)
         }
-    }
+    }()
+
+    // MARK: - ViewModels
 
     func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel {
-        let happenings = event.happenings(forDayIndex: DayIndex(startOfDay))
-        let cells = happenings.enumerated().map { index, happening in
-            DayCellViewModel(
-                index: index,
-                happening: happening,
-                remove: makeRemoveHappeningHandler()
-            )
-        }
-
         return DayDetailsViewModel(
             currentMoment: currentMoment,
             startOfDay: startOfDay,
@@ -60,12 +54,32 @@ final class DayDetailsContainer:
         )
     }
 
+    func makeDayCellViewModel(happening: Happening) -> DayCellViewModel {
+        DayCellViewModel(
+            id: UUID(),
+            happening: happening,
+            remove: makeRemoveHappeningHandler()
+        )
+    }
+
+    // MARK: - Handlers
+
     func makeAddHappeningHandler() -> DayDetailsViewModel.AddHappeningHandler { { date in
-        self.event.addHappening(date: date)
-        self.commander.save(self.event)
+        let event = self.event
+        let happening = event.addHappening(date: date)
+
+        if let index = self.happenings.lastIndex(of: happening) {
+            self.cells.insert(self.makeDayCellViewModel(happening: happening), at: index)
+        }
+
+        self.commander.save(event)
     }}
 
-    func makeRemoveHappeningHandler() -> DayCellViewModel.RemoveHandler {{ happening in
+    func makeRemoveHappeningHandler() -> DayCellViewModel.RemoveHandler {{ cell, happening in
+        if let index = self.cells.firstIndex(of: cell) {
+            self.cells.remove(at: index)
+        }
+
         do { try self.event.remove(happening: happening) } catch {}
         self.commander.save(self.event)
     }}

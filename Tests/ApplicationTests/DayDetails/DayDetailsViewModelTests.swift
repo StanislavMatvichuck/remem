@@ -10,6 +10,8 @@ import Domain
 import XCTest
 
 final class DayDetailsViewModelTests: XCTestCase {
+    /// things created in container are part of view model logic but it looks bad to test them here
+    /// then what are those handlers and where should they be tested
     private var sut: DayDetailsViewModel!
     
     override func setUp() {
@@ -107,5 +109,16 @@ final class DayDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pickerDate, oneHourFromStart)
     }
     
-    func test_addHappeningHandler() {}
+    func test_assignCellsAnimations_newHappening() {
+        let app = ApplicationContainer(mode: .unitTest)
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let eventDetails = EventDetailsContainer(app, event: event)
+        let container = DayDetailsContainer(eventDetails, startOfDay: DayIndex.referenceValue.date)
+        var end = container.makeDayDetailsViewModel(pickerDate: nil)
+        
+        end.configureCellsAnimations(sut)
+        
+        XCTAssertEqual(end.cells.first?.animation, DayCellViewModel.Animation.new)
+    }
 }

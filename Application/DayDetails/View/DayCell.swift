@@ -30,6 +30,8 @@ final class DayCell: UICollectionViewCell {
         return view
     }()
 
+    private let animatedBackground = UIView(al: true)
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureLayout()
@@ -41,6 +43,7 @@ final class DayCell: UICollectionViewCell {
     private func configureLayout() {
         background.addAndConstrain(label, top: 0, left: Self.margin, right: Self.margin, bottom: 0)
         contentView.addAndConstrain(background, top: Self.margin, left: Self.margin)
+        contentView.addAndConstrain(animatedBackground, top: Self.margin, left: Self.margin)
     }
 
     private func configureAppearance() {
@@ -49,7 +52,22 @@ final class DayCell: UICollectionViewCell {
         label.font = .fontSmallBold
         background.layer.backgroundColor = UIColor.border.cgColor
         background.layer.cornerRadius = .layoutSquare / 5
+        animatedBackground.backgroundColor = UIColor.primary
+        animatedBackground.layer.cornerRadius = .layoutSquare / 5
+        animatedBackground.layer.opacity = 0.0
     }
 
-    private func configureContent(_ vm: DayCellViewModel) { label.text = vm.time }
+    private func configureContent(_ vm: DayCellViewModel) {
+        label.text = vm.time
+        if vm.animation == .new { animateCreation() }
+    }
+
+    private func animateCreation() {
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 1.0
+        animation.toValue = 0.0
+        animation.duration = 1 / 3
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animatedBackground.layer.add(animation, forKey: nil)
+    }
 }

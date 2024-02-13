@@ -18,7 +18,7 @@ struct DayDetailsViewModel {
 
     let title: String
     let isToday: Bool
-    let cells: [DayCellViewModel]
+    var cells: [DayCellViewModel]
     var animation: Animation?
     var pickerDate: Date
 
@@ -49,11 +49,24 @@ struct DayDetailsViewModel {
         }()
     }
 
+    func addHappening() { addHappeningHandler(pickerDate) }
     mutating func enableDrag() { animation = .deleteDropArea }
     mutating func disableDrag() { animation = nil }
     mutating func handlePicker(date: Date) { pickerDate = date }
 
-    func addHappening() { addHappeningHandler(pickerDate) }
+    mutating func configureCellsAnimations(_ oldValue: DayDetailsViewModel?) {
+        guard let oldValue else { return }
+        cells = cells.map { cell in
+            var updatedCell = cell
+            updatedCell.animation = .new
+
+            for oldCell in oldValue.cells {
+                if cell == oldCell { updatedCell.animation = nil }
+            }
+
+            return updatedCell
+        }
+    }
 
     private static let titleFormatter = {
         let titleFormatter = DateFormatter()

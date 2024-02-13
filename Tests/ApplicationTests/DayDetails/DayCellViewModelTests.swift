@@ -9,12 +9,12 @@
 import Domain
 import XCTest
 
-final class DayDellViewModelTests: XCTestCase {
+final class DayCellViewModelTests: XCTestCase {
     func test_time_happeningAtStart_0000() {
         let sut = DayCellViewModel(
-            index: 0,
+            id: UUID(),
             happening: Happening(dateCreated: DayIndex.referenceValue.date),
-            remove: { _ in }
+            remove: { _, _ in }
         )
 
         XCTAssertEqual(sut.time, "00:00")

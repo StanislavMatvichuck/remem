@@ -64,7 +64,7 @@ protocol DayDetailsViewModelFactoring {
 }
 
 protocol DayCellViewModelFactoring {
-    func makeViewModel(index: Int, happening: Happening) -> DayCellViewModel
+    func makeDayCellViewModel(happening: Happening) -> DayCellViewModel
 }
 
 // MARK: - PDF

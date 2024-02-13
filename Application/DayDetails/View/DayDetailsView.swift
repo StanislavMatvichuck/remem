@@ -95,9 +95,8 @@ final class DayDetailsView: UIView {
 
     func configure(viewModel: DayDetailsViewModel) {
         configureTitle(viewModel: viewModel)
-        picker.date = viewModel.pickerDate//
-        happeningsCollection.reloadData()
-        animateFor(viewModel.animation)//
+        picker.date = viewModel.pickerDate
+        animateFor(viewModel.animation)
     }
 
     private let duration = TimeInterval(0.5)
