@@ -26,7 +26,6 @@ final class EventsListViewController:
             executedEventCellsAnimations.removeAll()
             viewModel?.configureAnimationForEventCells(oldValue: oldValue)
 
-            guard isViewLoaded else { return }
             title = EventsListViewModel.title
 
             viewRoot.viewModel = viewModel

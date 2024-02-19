@@ -16,7 +16,7 @@ final class EventCell: UICollectionViewCell {
     var viewModel: EventCellViewModel? { didSet {
         guard let viewModel else { return }
         view.configure(viewModel)
-        playAnimation()
+        playAnimationIfNeeded(oldValue)
     }}
 
     override init(frame: CGRect) {
@@ -79,7 +79,10 @@ final class EventCell: UICollectionViewCell {
 
 // MARK: - Happening creation animations
 extension EventCell {
-    func playAnimation() {
+    func playAnimationIfNeeded(_ oldValue: EventCellViewModel?) {
+        /// exists after controller.viewModel.didSet
+        /// does not exist after cell reusing (during scroll and first render)
+        guard oldValue != nil else { return }
         switch viewModel?.animation {
         case .swipe:
             view.circleContainer.prepareForHappeningCreationAnimation()
