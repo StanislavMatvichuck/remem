@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-struct HintCellViewModel: Hashable {
+struct HintCellViewModel {
     enum HintState {
         case addFirstEvent
         case swipeFirstTime
@@ -38,13 +38,5 @@ struct HintCellViewModel: Hashable {
 
         title = hint.text
         highlighted = hint != .permanentlyVisible
-    }
-
-    static func == (lhs: HintCellViewModel, rhs: HintCellViewModel) -> Bool {
-        lhs.title == rhs.title && lhs.highlighted == rhs.highlighted
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine("Hint")
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EventCell: UITableViewCell {
+final class EventCell: UICollectionViewCell {
     static let reuseIdentifier = "EventCell"
 
     let view = EventCellView()
@@ -16,10 +16,11 @@ final class EventCell: UITableViewCell {
     var viewModel: EventCellViewModel? { didSet {
         guard let viewModel else { return }
         view.configure(viewModel)
+        playAnimation()
     }}
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         accessibilityIdentifier = Self.reuseIdentifier
         configureLayout()
         configureAppearance()
@@ -55,7 +56,6 @@ final class EventCell: UITableViewCell {
 
     private func configureAppearance() {
         backgroundColor = .bg
-        selectionStyle = .none
         staticBackgroundView.backgroundColor = .border
         staticBackgroundView.layer.cornerRadius = view.stack.layer.cornerRadius
     }

@@ -7,112 +7,72 @@
 
 import UIKit
 
-final class EventsListDataSource: UITableViewDiffableDataSource<EventsListViewModel.Section, AnyHashable> {
-    typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, AnyHashable>
+protocol EventsListDataProviding {
+    var viewModel: EventsListViewModel? { get }
+}
 
-    let table: UITableView
+struct EventsListDataSource {
+    typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
+    typealias DataSource = UICollectionViewDiffableDataSource<EventsListViewModel.Section, String>
 
-    var viewModel: EventsListViewModel? {
-        didSet {
-            guard var viewModel else { return }
-            viewModel.configureAnimationForEventCells(oldValue)
-            apply(makeSnapshot(for: viewModel), animatingDifferences: true)
+    private let provider: EventsListDataProviding
+    private let dataSource: DataSource
+
+    init(list: UICollectionView, provider: EventsListDataProviding) {
+        let hintCellRegistration = UICollectionView.CellRegistration<HintCell, HintCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
+        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, EventCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
+        let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
+
+        self.provider = provider
+        dataSource = DataSource(collectionView: list) {
+            collectionView, indexPath, itemIdentifier in
+
+            guard let item = provider.viewModel?.cell(identifier: itemIdentifier) else { fatalError() }
+
+            switch indexPath.section {
+            case EventsListViewModel.Section.hint.rawValue:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: hintCellRegistration,
+                    for: indexPath,
+                    item: item as? HintCellViewModel
+                )
+            case EventsListViewModel.Section.events.rawValue:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: eventCellRegistration,
+                    for: indexPath,
+                    item: item as? EventCellViewModel
+                )
+            case EventsListViewModel.Section.createEvent.rawValue:
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: createEventCellRegistration,
+                    for: indexPath,
+                    item: item as? CreateEventCellViewModel
+                )
+            default: fatalError()
+            }
         }
     }
 
-    init(table: UITableView) {
-        self.table = table
-        super.init(tableView: table, cellProvider: Self.Provider)
-        defaultRowAnimation = .none
-
-        for sectionType in EventsListViewModel.Section.allCases {
-            table.register(sectionType.registeredClass, forCellReuseIdentifier: sectionType.reuseIdentifier)
-        }
-    }
-
-    override func tableView(
-        _ tableView: UITableView,
-        moveRowAt sourceIndexPath: IndexPath,
-        to destinationIndexPath: IndexPath
-    ) {
+    func applySnapshot(_ oldValue: EventsListViewModel?) {
         guard
-            let eventsCells = viewModel?.cells(for: .events) as? [EventCellViewModel],
-            let viewModel
+            let viewModel = provider.viewModel,
+            !viewModel.removalDropAreaEnabled
         else { return }
-
-        var eventsIdentifiers = eventsCells.map { $0.identifier }
-        let movedEvent = eventsIdentifiers.remove(at: sourceIndexPath.row)
-        eventsIdentifiers.insert(movedEvent, at: destinationIndexPath.row)
-
-        viewModel.manualSortingHandler?(eventsIdentifiers)
-    }
-
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        let eventsSection = EventsListViewModel.Section.events.rawValue
-        return indexPath.section == eventsSection
-    }
-
-    /// This method is tested poorly
-    private func makeSnapshot(for vm: EventsListViewModel) -> Snapshot {
         var snapshot = Snapshot()
 
-        snapshot.appendSections(vm.sections)
-
-        for section in vm.sections {
+        for section in viewModel.sections {
+            snapshot.appendSections([section])
             snapshot.appendItems(
-                vm.cells(for: section),
+                viewModel.cellsIdentifiers(for: section),
                 toSection: section
             )
         }
 
-        /// Allows animation for same cells N times
-        if let eventCells = vm.cells(for: .events) as? [EventCellViewModel] {
-            let animatedEventCells = eventCells.filter { $0.animation != .none }
-            snapshot.reloadItems(animatedEventCells)
+        if let oldValue {
+            let reconfiguredIdentifiers = viewModel.cellsRequireReconfigurationIds(oldValue: oldValue)
+            snapshot.reconfigureItems(reconfiguredIdentifiers)
         }
 
-        return snapshot
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
-
-    static let Provider: UITableViewDiffableDataSourceReferenceCellProvider = {
-        table, indexPath, cellViewModel in
-        switch cellViewModel {
-        case let cellViewModel as HintCellViewModel:
-            let cell = table.dequeueReusableCell(
-                withIdentifier: HintCell.reuseIdentifier,
-                for: indexPath
-            ) as! HintCell
-            cell.viewModel = cellViewModel
-            return cell
-        case let cellViewModel as EventCellViewModel:
-            let cell = table.dequeueReusableCell(
-                withIdentifier: EventCell.reuseIdentifier,
-                for: indexPath
-            ) as! EventCell
-            cell.viewModel = cellViewModel
-            return cell
-        case let cellViewModel as CreateEventCellViewModel:
-            let cell = table.dequeueReusableCell(
-                withIdentifier: CreateEventCell.reuseIdentifier,
-                for: indexPath
-            ) as! CreateEventCell
-            cell.viewModel = cellViewModel
-            return cell
-        default: fatalError("unknown cell type")
-        }
-    }
-}
-
-extension EventsListViewModel.Section {
-    var registeredClass: AnyClass? { switch self {
-    case .hint: HintCell.self
-    case .events: EventCell.self
-    case .createEvent: CreateEventCell.self
-    } }
-
-    var reuseIdentifier: String { switch self {
-    case .hint: HintCell.reuseIdentifier
-    case .events: EventCell.reuseIdentifier
-    case .createEvent: CreateEventCell.reuseIdentifier
-    } }
 }

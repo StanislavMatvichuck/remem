@@ -44,11 +44,7 @@ final class SwipingCircleView: UIControl {
     }()
 
     private var width: CGFloat { bounds.width }
-
-    private let animator = UIViewPropertyAnimator(
-        duration: SwiperAnimationsHelper.forwardDuration,
-        curve: .easeInOut
-    )
+    private var animator: UIViewPropertyAnimator?
 
     init() {
         super.init(frame: .zero)
@@ -60,10 +56,27 @@ final class SwipingCircleView: UIControl {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    private func configureAnimatorIfNeeded() {
+        guard animator == nil else { return }
+
+        let animator = UIViewPropertyAnimator(
+            duration: SwiperAnimationsHelper.forwardDuration,
+            curve: .easeInOut
+        )
+        animator.addAnimations {
+            let transform = self.makeCircleTransform()
+            self.circle.transform = transform
+        }
+
+        self.animator = animator
+    }
+
     func prepareForReuse() { circle.transform = .identity }
 
     func prepareForHappeningCreationAnimation() {
-        circle.transform = makeCircleTransform()
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .end)
+        animator = nil
     }
 
     func placeCircleAtLeft() {
@@ -109,15 +122,13 @@ final class SwipingCircleView: UIControl {
 
         switch pan.state {
         case .began:
-            animator.addAnimations {
-                let transform = self.makeCircleTransform()
-                self.circle.transform = transform
-            }
+            configureAnimatorIfNeeded()
         case .changed:
-            animator.fractionComplete = progress
+            animator?.fractionComplete = progress
         default:
-            progressSufficient ? sendActions(for: .valueChanged) : nil
-            returnToStart(from: progress)
+            progressSufficient ?
+                sendActions(for: .valueChanged) :
+                returnToStart(from: progress)
         }
     }
 
@@ -142,8 +153,11 @@ final class SwipingCircleView: UIControl {
     }
 
     private func returnToStart(from progress: CGFloat) {
-        animator.isReversed = true
-        animator.continueAnimation(
+        animator?.isReversed = true
+        animator?.addCompletion { position in
+            if position == .start { self.animator = nil }
+        }
+        animator?.continueAnimation(
             withTimingParameters: nil,
             durationFactor: progress
         )

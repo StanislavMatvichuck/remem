@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CreateEventCellViewModel: Hashable {
+struct CreateEventCellViewModel {
     static let title = String(localizationId: "button.create")
 
     typealias TapHandler = () -> Void
@@ -21,10 +21,4 @@ struct CreateEventCellViewModel: Hashable {
     }
 
     func handleTap() { tapHandler?() }
-
-    static func == (lhs: CreateEventCellViewModel, rhs: CreateEventCellViewModel) -> Bool {
-        lhs.isHighlighted == rhs.isHighlighted
-    }
-
-    func hash(into hasher: inout Hasher) { hasher.combine("CreateEventCellViewModel") }
 }

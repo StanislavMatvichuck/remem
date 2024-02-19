@@ -77,8 +77,7 @@ final class EventsListContainer:
         )
 
         let createEventCell = makeCreateEventCellViewModel(
-            eventsCount: events.count,
-            handler: {}
+            eventsCount: events.count
         )
 
         let hintVm = makeHintCellViewModel(events: events)
@@ -94,7 +93,7 @@ final class EventsListContainer:
             )
         }
 
-        var cells = [EventsListViewModel.Section: [AnyHashable]]()
+        var cells = [EventsListViewModel.Section: [any EventsListCellViewModel]]()
 
         if uiTestingDisabled { cells.updateValue([hintVm], forKey: .hint) }
         cells.updateValue(eventsViewModels, forKey: .events)
@@ -121,14 +120,12 @@ final class EventsListContainer:
             currentMoment: parent.currentMoment,
             tapHandler: makeEventCellTapHandler(event: event),
             swipeHandler: makeEventCellSwipeHandler(event: event),
+            removeHandler: makeEventCellRemoveHandler(event: event),
             animation: .none
         )
     }
 
-    func makeCreateEventCellViewModel(
-        eventsCount: Int,
-        handler: CreateEventCellViewModel.TapHandler?
-    ) -> CreateEventCellViewModel {
+    func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel {
         CreateEventCellViewModel(
             eventsCount: eventsCount,
             tapHandler: makeCreateEventCellTapHandler()
@@ -146,6 +143,10 @@ final class EventsListContainer:
     func makeEventCellSwipeHandler(event: Event) -> EventCellViewModel.SwipeHandler {{
         event.addHappening(date: self.parent.currentMoment)
         self.commander.save(event)
+    }}
+
+    func makeEventCellRemoveHandler(event: Event) -> EventCellViewModel.RemoveHandler {{
+        self.commander.delete(event)
     }}
 
     func makeManualSortingHandler() -> EventsListViewModel.ManualSortingHandler {{

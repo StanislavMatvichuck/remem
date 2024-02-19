@@ -8,18 +8,23 @@
 import Domain
 import UIKit
 
-final class EventsListViewController: UIViewController, UITableViewDelegate {
+final class EventsListViewController:
+    UIViewController,
+    UICollectionViewDelegate,
+    UICollectionViewDelegateFlowLayout
+{
     let factory: EventsListViewModelFactoring
 
     let viewRoot: EventsListView
     private let widgetUpdater: WidgetViewController
     private var timer: Timer?
     /// Needed to setup animations play only once after swipe and do not play after scroll
-    private var executedEventCellsAnimations: Set<EventCellViewModel> = Set()
+    private var executedEventCellsAnimations: Set<EventCellViewModel.Animations> = Set()
 
     var viewModel: EventsListViewModel? {
         didSet {
             executedEventCellsAnimations.removeAll()
+            viewModel?.configureAnimationForEventCells(oldValue: oldValue)
 
             guard isViewLoaded else { return }
             title = EventsListViewModel.title
@@ -55,18 +60,17 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
-        setupTableView()
+        configureList()
         setupEventsSortingButton()
         update()
         setupTimer()
     }
 
-    private func setupTableView() {
-        let table = viewRoot.table
-        table.delegate = self
-        table.dragDelegate = self
-        table.dropDelegate = self
-        table.dragInteractionEnabled = true
+    private func configureList() {
+        viewRoot.list.delegate = self
+        viewRoot.list.dragDelegate = self
+        viewRoot.list.dropDelegate = self
+        viewRoot.list.dragInteractionEnabled = true
     }
 
     private func setupEventsSortingButton() {
@@ -88,45 +92,48 @@ final class EventsListViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt _: IndexPath) {
-        if let cell = cell as? EventCell,
-           let vm = cell.viewModel,
-           !executedEventCellsAnimations.contains(vm)
-        {
-            cell.playAnimation()
-            executedEventCellsAnimations.insert(vm)
-        }
+    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: .eventsListCellHeight)
     }
 }
 
-extension EventsListViewController: UITableViewDragDelegate {
-    func tableView(
-        _: UITableView,
-        itemsForBeginning _: UIDragSession,
-        at indexPath: IndexPath
-    ) -> [UIDragItem] { dragItems(for: indexPath) }
+extension EventsListViewController: UICollectionViewDragDelegate {
+    func collectionView(_: UICollectionView, itemsForBeginning _: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        dragItems(indexPath)
+    }
 
-    func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
+    func dragItems(_ indexPath: IndexPath) -> [UIDragItem] {
         let eventsSection = EventsListViewModel.Section.events.rawValue
         guard indexPath.section == eventsSection else { return [] }
-
-        let provider = NSItemProvider(object: "\(indexPath.row)" as NSString)
+        let eventIndex = indexPath.row
+        let provider = NSItemProvider(object: "\(eventIndex)" as NSString)
         let dragItem = UIDragItem(itemProvider: provider)
+        viewModel?.startDragFor(eventIndex: eventIndex)
         return [dragItem]
+    }
+
+    func collectionView(_: UICollectionView, dragSessionDidEnd _: UIDragSession) {
+        viewModel?.disableRemoval()
     }
 }
 
-extension EventsListViewController: UITableViewDropDelegate {
-    func tableView(_: UITableView, performDropWith _: UITableViewDropCoordinator) {}
-    func tableView(
-        _: UITableView,
-        dropSessionDidUpdate _: UIDropSession,
-        withDestinationIndexPath indexPath: IndexPath?
-    ) -> UITableViewDropProposal {
+extension EventsListViewController: UICollectionViewDropDelegate {
+    func collectionView(_: UICollectionView, performDropWith _: UICollectionViewDropCoordinator) {
+//        coordinator.destinationIndexPath
+    }
+
+    func collectionView(_: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath indexPath: IndexPath?) -> UICollectionViewDropProposal {
+        viewRoot.updateRemovalDropAreaPosition(x: session.location(in: viewRoot).x)
+
+        viewModel?.updateFinger(
+            position: session.location(in: viewRoot).x,
+            maxPosition: viewRoot.bounds.width
+        )
+
         if indexPath?.section == EventsListViewModel.Section.events.rawValue {
-            UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-        } else {
-            UITableViewDropProposal(operation: .forbidden)
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
+
+        return UICollectionViewDropProposal(operation: .cancel)
     }
 }

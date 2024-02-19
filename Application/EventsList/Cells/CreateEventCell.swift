@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateEventCell: UITableViewCell {
+final class CreateEventCell: UICollectionViewCell {
     static var reuseIdentifier = "CreateEventCell"
 
     let button = UIButton(al: true)
@@ -45,8 +45,8 @@ final class CreateEventCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         accessibilityIdentifier = Self.reuseIdentifier
         configureLayout()
         configureAppearance()
@@ -69,7 +69,6 @@ final class CreateEventCell: UITableViewCell {
     }
 
     @objc private func configureAppearance() {
-        selectionStyle = .none
         backgroundColor = .clear
         button.layer.cornerRadius = .buttonRadius
         button.layer.borderColor = UIColor.border.cgColor

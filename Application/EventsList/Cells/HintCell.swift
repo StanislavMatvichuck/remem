@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HintCell: UITableViewCell {
+final class HintCell: UICollectionViewCell {
     static var reuseIdentifier = "HintItem"
 
     var viewModel: HintCellViewModel? {
@@ -31,8 +31,8 @@ final class HintCell: UITableViewCell {
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureLayout()
         configureAppearance()
     }
@@ -48,7 +48,6 @@ final class HintCell: UITableViewCell {
 
     private func configureAppearance() {
         backgroundColor = .clear
-        selectionStyle = .none
     }
 
     override func prepareForReuse() {

@@ -8,7 +8,9 @@
 import Domain
 import Foundation
 
-struct EventCellViewModel: Hashable {
+struct EventCellViewModel {
+    var id: String { event.id } /// used by `EventsListCellViewModel`
+
     enum Animations { case swipe, aboveSwipe, belowSwipe, none }
 
     static let rename = String(localizationId: "button.rename")
@@ -16,8 +18,7 @@ struct EventCellViewModel: Hashable {
 
     typealias TapHandler = () -> Void
     typealias SwipeHandler = () -> Void
-
-    var identifier: String { event.id }
+    typealias RemoveHandler = () -> Void
 
     private let event: Event
     private let valueAmount: Int
@@ -29,11 +30,12 @@ struct EventCellViewModel: Hashable {
     let progress: CGFloat
     let progressState: EventWeeklyGoalViewModel.State
     let goalAmount: String?
+    var animation: Animations
 
     let tapHandler: TapHandler
     let swipeHandler: SwipeHandler
+    let removeHandler: RemoveHandler
     private let currentMoment: Date
-    var animation: Animations
 
     init(
         event: Event,
@@ -41,6 +43,7 @@ struct EventCellViewModel: Hashable {
         currentMoment: Date,
         tapHandler: @escaping TapHandler,
         swipeHandler: @escaping SwipeHandler,
+        removeHandler: @escaping RemoveHandler,
         animation: Animations
     ) {
         self.animation = animation
@@ -71,6 +74,7 @@ struct EventCellViewModel: Hashable {
 
         self.tapHandler = tapHandler
         self.swipeHandler = swipeHandler
+        self.removeHandler = removeHandler
     }
 
     func isValueIncreased(_ oldValue: EventCellViewModel) -> Bool {
@@ -88,22 +92,12 @@ struct EventCellViewModel: Hashable {
             currentMoment: currentMoment,
             tapHandler: tapHandler,
             swipeHandler: swipeHandler,
+            removeHandler: removeHandler,
             animation: withAnimation
         )
     }
 
-    static func == (lhs: EventCellViewModel, rhs: EventCellViewModel) -> Bool {
-        lhs.identifier == rhs.identifier &&
-            lhs.title == rhs.title &&
-            lhs.hintEnabled == rhs.hintEnabled &&
-            lhs.value == rhs.value &&
-            lhs.timeSince == rhs.timeSince &&
-            lhs.progress == rhs.progress &&
-            lhs.goalAmount == rhs.goalAmount &&
-            lhs.animation == rhs.animation
-    }
-
-    func hash(into hasher: inout Hasher) { hasher.combine(event.id) }
+    func remove() { removeHandler() }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
         let formatter = DateComponentsFormatter()

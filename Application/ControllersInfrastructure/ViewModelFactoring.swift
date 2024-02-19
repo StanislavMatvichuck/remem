@@ -28,10 +28,7 @@ protocol EventCellViewModelFactoring {
 }
 
 protocol CreateEventCellViewModelFactoring {
-    func makeCreateEventCellViewModel(
-        eventsCount: Int,
-        handler: CreateEventCellViewModel.TapHandler?
-    ) -> CreateEventCellViewModel
+    func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel
 }
 
 // MARK: - EventCreation

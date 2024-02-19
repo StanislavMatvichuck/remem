@@ -119,6 +119,7 @@
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
+		0869C4992B7FF52B0007D6E0 /* EventsListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869C4982B7FF52B0007D6E0 /* EventsListCellViewModel.swift */; };
 		086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BC99F2A44F29A00766CF7 /* PDFWritingQRPageView.swift */; };
 		086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E397129809C5800CCE80E /* EventDetailsContainer.swift */; };
 		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
@@ -515,6 +516,7 @@
 		0867A2F628D481C300E0842C /* Remem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Remem.entitlements; path = Application/Resources/Remem.entitlements; sourceTree = SOURCE_ROOT; };
 		0867A2FE28D4928500E0842C /* RememWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RememWidgetsExtension.entitlements; path = Widgets/Resources/RememWidgetsExtension.entitlements; sourceTree = SOURCE_ROOT; };
 		0868209427BFAD7F00551F6A /* ViewScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScroll.swift; sourceTree = "<group>"; };
+		0869C4982B7FF52B0007D6E0 /* EventsListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListCellViewModel.swift; sourceTree = "<group>"; };
 		086BC99F2A44F29A00766CF7 /* PDFWritingQRPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingQRPageView.swift; sourceTree = "<group>"; };
 		086DC6D528805F1E0048F22F /* EventsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		086E397129809C5800CCE80E /* EventDetailsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContainer.swift; sourceTree = "<group>"; };
@@ -910,9 +912,7 @@
 				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
 				085A2C2F29F15144005C6E5E /* EventCell */,
 				08F50DC82965EF5300B65CDF /* CreateEventCell.swift */,
-				08F50DC42965E70F00B65CDF /* CreateEventCellViewModel.swift */,
 				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
-				08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1064,7 +1064,6 @@
 		085A2C2F29F15144005C6E5E /* EventCell */ = {
 			isa = PBXGroup;
 			children = (
-				08EC438128BA365400755B54 /* EventCellViewModel.swift */,
 				089B37892A0A3EC500422971 /* AnimatedProgressView.swift */,
 				089B37872A0A32B700422971 /* EventAmountView.swift */,
 				080F9F2629ED51810013CBFE /* EventCell.swift */,
@@ -1086,6 +1085,18 @@
 				08A811812B5D387C00C031BF /* EventsSorterManualRepository.swift */,
 			);
 			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		0869C49A2B7FFBAF0007D6E0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
+				0869C4982B7FF52B0007D6E0 /* EventsListCellViewModel.swift */,
+				08F50DC22965E6FA00B65CDF /* HintCellViewModel.swift */,
+				08EC438128BA365400755B54 /* EventCellViewModel.swift */,
+				08F50DC42965E70F00B65CDF /* CreateEventCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
@@ -1330,12 +1341,12 @@
 		08DFFADB2B5007B50063B389 /* EventsList */ = {
 			isa = PBXGroup;
 			children = (
+				0869C49A2B7FFBAF0007D6E0 /* ViewModel */,
 				0816B6F32B50124800A29815 /* Cells */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
 				0875E27B298EF91A00622125 /* EventsListViewController.swift */,
-				086DC6D528805F1E0048F22F /* EventsListViewModel.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
 			);
 			path = EventsList;
@@ -1921,6 +1932,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
+				0869C4992B7FF52B0007D6E0 /* EventsListCellViewModel.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
