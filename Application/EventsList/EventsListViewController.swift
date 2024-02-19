@@ -117,8 +117,19 @@ extension EventsListViewController: UICollectionViewDragDelegate {
 }
 
 extension EventsListViewController: UICollectionViewDropDelegate {
-    func collectionView(_: UICollectionView, performDropWith _: UICollectionViewDropCoordinator) {
-//        coordinator.destinationIndexPath
+    func collectionView(_: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard
+            let viewModel,
+            let from = viewModel.draggedCellIndex,
+            let to = coordinator.destinationIndexPath?.row
+        else { return }
+
+        var eventsIdentifiers = viewModel.cellsIdentifiers(for: .events)
+
+        let movedEvent = eventsIdentifiers.remove(at: from)
+        eventsIdentifiers.insert(movedEvent, at: to)
+
+        viewModel.manualSortingHandler?(eventsIdentifiers)
     }
 
     func collectionView(_: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath indexPath: IndexPath?) -> UICollectionViewDropProposal {

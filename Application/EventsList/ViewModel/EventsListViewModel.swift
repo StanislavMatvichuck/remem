@@ -22,7 +22,7 @@ struct EventsListViewModel {
     let eventsSortingHandler: SortingTapHandler?
     let manualSortingHandler: ManualSortingHandler?
     var removalDropAreaEnabled = false
-    var draggedCell: EventCellViewModel?
+    var draggedCellIndex: Int?
     private var fingerPosition: CGFloat = 0.0
     private var fingerPositionMax: CGFloat = 0.0
 
@@ -121,12 +121,13 @@ struct EventsListViewModel {
     }
 
     mutating func startDragFor(eventIndex: Int) {
-        draggedCell = eventCells[eventIndex]
+        draggedCellIndex = eventIndex
         removalDropAreaEnabled = true
     }
 
     mutating func disableRemoval() {
-        if isRemovingEnabled, let draggedCell {
+        if let draggedCellIndex, isRemovingEnabled {
+            let draggedCell = eventCells[draggedCellIndex]
             draggedCell.remove()
             return
         }
