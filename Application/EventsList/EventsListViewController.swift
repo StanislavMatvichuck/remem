@@ -18,12 +18,10 @@ final class EventsListViewController:
     let viewRoot: EventsListView
     private let widgetUpdater: WidgetViewController
     private var timer: Timer?
-    /// Needed to setup animations play only once after swipe and do not play after scroll
-    private var executedEventCellsAnimations: Set<EventCellViewModel.Animations> = Set()
 
     var viewModel: EventsListViewModel? {
         didSet {
-            executedEventCellsAnimations.removeAll()
+            print("controller.viewModel.didSet")
             viewModel?.configureAnimationForEventCells(oldValue: oldValue)
 
             title = EventsListViewModel.title
@@ -110,25 +108,24 @@ extension EventsListViewController: UICollectionViewDragDelegate {
         viewModel?.startDragFor(eventIndex: eventIndex)
         return [dragItem]
     }
-
-    func collectionView(_: UICollectionView, dragSessionDidEnd _: UIDragSession) {
-        viewModel?.disableRemoval()
-    }
 }
 
 extension EventsListViewController: UICollectionViewDropDelegate {
     func collectionView(_: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        if let item = coordinator.items.first,
+           let destination = coordinator.destinationIndexPath
+        {
+            coordinator.drop(item.dragItem, toItemAt: destination)
+        }
+
         guard
             let viewModel,
             let from = viewModel.draggedCellIndex,
             let to = coordinator.destinationIndexPath?.row
         else { return }
-
         var eventsIdentifiers = viewModel.cellsIdentifiers(for: .events)
-
         let movedEvent = eventsIdentifiers.remove(at: from)
         eventsIdentifiers.insert(movedEvent, at: to)
-
         viewModel.manualSortingHandler?(eventsIdentifiers)
     }
 
