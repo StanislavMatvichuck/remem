@@ -40,7 +40,8 @@ final class EventsListViewTests: XCTestCase {
     }
 
     func test_showsNoEvents() {
-        XCTAssertEqual(sut.table.dataSource?.tableView(sut.table, numberOfRowsInSection: 1), 0)
+        let eventsSection = EventsListViewModel.Section.events.rawValue
+        XCTAssertEqual(sut.list.dataSource?.collectionView(sut.list, numberOfItemsInSection: eventsSection), 0)
     }
 
     func test_oneEvent_showsEvent_withHintCell() {
@@ -101,8 +102,8 @@ extension EventsListView {
         else { fatalError("unable to get cell of requested type") }
     }
 
-    private func firstCellAt(_ section: Int) -> UITableViewCell? {
+    private func firstCellAt(_ section: Int) -> UICollectionViewCell? {
         let indexPath = IndexPath(row: 0, section: section)
-        return table.dataSource?.tableView(table, cellForRowAt: indexPath)
+        return list.dataSource?.collectionView(list, cellForItemAt: indexPath)
     }
 }

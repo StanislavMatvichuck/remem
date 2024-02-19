@@ -32,8 +32,8 @@ final class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_tableIsConfigured() {
-        XCTAssertNotNil(sut.viewRoot.table.dataSource)
-        XCTAssertNotNil(sut.viewRoot.table.delegate)
+        XCTAssertNotNil(sut.viewRoot.list.dataSource)
+        XCTAssertNotNil(sut.viewRoot.list.delegate)
     }
 
     // TODO: fix sumbitEvent()
@@ -77,13 +77,13 @@ final class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_allowsDrag() {
-        XCTAssertTrue(sut is UITableViewDragDelegate)
-        XCTAssertNotNil(sut.viewRoot.table.dragDelegate)
+        XCTAssertTrue(sut is UICollectionViewDragDelegate)
+        XCTAssertNotNil(sut.viewRoot.list.dragDelegate)
     }
 
     func test_allowsDrop() {
-        XCTAssertTrue(sut is UITableViewDropDelegate)
-        XCTAssertNotNil(sut.viewRoot.table.dropDelegate)
+        XCTAssertTrue(sut is UICollectionViewDropDelegate)
+        XCTAssertNotNil(sut.viewRoot.list.dropDelegate)
     }
 
     func test_configuresEventsSortingButton() {
@@ -91,15 +91,15 @@ final class EventsListViewControllerTests: XCTestCase {
     }
 
     func test_allowsDragForEventsOnly() {
-        submitEvent()
+        configureWithOneEvent()
 
         let hintIndex = IndexPath(row: 0, section: EventsListViewModel.Section.hint.rawValue)
         let eventIndex = IndexPath(row: 0, section: EventsListViewModel.Section.events.rawValue)
         let createEventIndex = IndexPath(row: 0, section: EventsListViewModel.Section.createEvent.rawValue)
 
-        XCTAssertEqual(sut.dragItems(for: hintIndex).count, 0)
-        XCTAssertEqual(sut.dragItems(for: eventIndex).count, 1)
-        XCTAssertEqual(sut.dragItems(for: createEventIndex).count, 0)
+        XCTAssertEqual(sut.dragItems(hintIndex).count, 0)
+        XCTAssertEqual(sut.dragItems(eventIndex).count, 1)
+        XCTAssertEqual(sut.dragItems(createEventIndex).count, 0)
     }
 
     // MARK: - Creation and helpers
@@ -111,7 +111,14 @@ final class EventsListViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
     }
 
-    private func submitEvent() {}
+    private func configureWithOneEvent() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        let appContainer = ApplicationContainer(mode: .unitTest)
+        appContainer.commander.save(event)
+        let container = EventsListContainer(appContainer)
+        sut = container.make() as? EventsListViewController
+        sut.loadViewIfNeeded()
+    }
 
     private func swipeFirstEvent() { sut.viewRoot.eventCell.viewModel?.swipeHandler() }
 }

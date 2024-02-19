@@ -10,13 +10,9 @@ import Domain
 import XCTest
 
 extension TestingViewController where Controller == EventsListViewController {
-    var table: UITableView { sut.viewRoot.table }
+    var list: UICollectionView { sut.viewRoot.list }
     var eventsCount: Int {
-        let presentSections = sut.viewModel!.sections
-        for (index, presentSection) in presentSections.enumerated() {
-            if presentSection == .events { return table.numberOfRows(inSection: index) }
-        }
-        return 0
+        sut.viewModel?.cellsIdentifiers(for: .events).count ?? 0
     }
 
     func make() {
@@ -30,46 +26,29 @@ extension TestingViewController where Controller == EventsListViewController {
     }
 
     func swipeFirstEvent() {
-        if let cell = (sut.viewModel?.cells(for: .events) as? [EventCellViewModel])?.first {
-            cell.swipeHandler()
-        }
+        if let cellId = sut.viewModel?.cellsIdentifiers(for: .events).first,
+           let cell = sut.viewModel?.cell(identifier: cellId) as? EventCellViewModel
+        { cell.swipeHandler() }
     }
 
     func submitEvent() {}
 
     var hintText: String? {
-        if let cell = (sut.viewModel?.cells(for: .hint) as? [HintCellViewModel])?.first {
-            return cell.title
-        }
-
-        return nil
+        if let cellId = sut.viewModel?.cellsIdentifiers(for: .hint).first,
+           let cell = sut.viewModel?.cell(identifier: cellId) as? HintCellViewModel
+        { cell.title } else { nil }
     }
 
     var firstEvent: EventCell {
         let presentSections = sut.viewModel!.sections
         for (index, presentSection) in presentSections.enumerated() {
             if presentSection == .events {
-                return table.cellForRow(
+                return list.cellForItem(
                     at: IndexPath(row: 0, section: index)
                 ) as! EventCell
             }
         }
         fatalError()
-    }
-
-    func submittedEventTrailingSwipeActionButton(number: Int) -> UIContextualAction {
-        submitEvent()
-
-        sut.view.bounds = UIScreen.main.bounds
-        sut.view.layoutIfNeeded()
-
-        let index = IndexPath(row: 1, section: 0)
-
-        guard let config = table.delegate?.tableView?(table, trailingSwipeActionsConfigurationForRowAt: index) else {
-            fatalError("unable to get trailing swiping action for first event")
-        }
-
-        return config.actions[number]
     }
 
     func forceViewToLayoutInScreenSize() {

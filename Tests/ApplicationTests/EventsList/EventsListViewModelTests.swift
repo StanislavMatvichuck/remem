@@ -44,27 +44,11 @@ final class EventsListViewModelTests: XCTestCase {
     }
 
     func test_configureAnimationForEventCells_usingSameValue_noneForAllCells() {
-        sut.configureAnimationForEventCells(sut)
+        sut.configureAnimationForEventCells(oldValue: sut)
 
         XCTAssertEqual(firstCell.animation, .none)
         XCTAssertEqual(secondCell.animation, .none)
         XCTAssertEqual(thirdCell.animation, .none)
-    }
-
-    func test_eventCellIdPreviousTo_threeEventsByAlphabet_idOfSecondEventCell_returnsFirst() {
-        XCTAssertEqual(sut.eventCellRelative(to: secondCell, offset: -1), firstCell)
-    }
-
-    func test_eventCellIdPreviousTo_threeEventsByAlphabet_idOfFirstEventCell_returnsNil() {
-        XCTAssertNil(sut.eventCellRelative(to: firstCell, offset: -1))
-    }
-
-    func test_eventCellIdNextTo_threeEventsByAlphabet_idOfSecondEventCell_returnsThird() {
-        XCTAssertEqual(sut.eventCellRelative(to: secondCell, offset: 1), thirdCell)
-    }
-
-    func test_eventCellIdNextTo_threeEventsByAlphabet_idOfThirdEventCell_returnsNil() {
-        XCTAssertNil(sut.eventCellRelative(to: thirdCell, offset: 1))
     }
 
     func test_shouldPresentManualSorting_noOldValue_false() {
@@ -105,10 +89,14 @@ final class EventsListViewModelTests: XCTestCase {
         // Imitates controller update cycle with didSet observer
         let oldValue = sut
         sut = container.makeEventsListViewModel()
-        sut.configureAnimationForEventCells(oldValue)
+        sut.configureAnimationForEventCells(oldValue: oldValue)
     }
 
-    private var eventCells: [EventCellViewModel] { sut.cells(for: .events) as! [EventCellViewModel] }
+    private var eventCells: [EventCellViewModel] {
+        let eventCellsIds = sut.cellsIdentifiers(for: .events)
+        let cells = eventCellsIds.map { sut.cell(identifier: $0) as! EventCellViewModel }
+        return cells
+    }
     private var firstCell: EventCellViewModel { eventCells[0] }
     private var secondCell: EventCellViewModel { eventCells[1] }
     private var thirdCell: EventCellViewModel { eventCells[2] }
