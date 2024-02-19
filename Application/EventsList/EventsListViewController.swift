@@ -21,7 +21,6 @@ final class EventsListViewController:
 
     var viewModel: EventsListViewModel? {
         didSet {
-            print("controller.viewModel.didSet")
             viewModel?.configureAnimationForEventCells(oldValue: oldValue)
 
             title = EventsListViewModel.title
@@ -91,56 +90,5 @@ final class EventsListViewController:
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: .eventsListCellHeight)
-    }
-}
-
-extension EventsListViewController: UICollectionViewDragDelegate {
-    func collectionView(_: UICollectionView, itemsForBeginning _: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        dragItems(indexPath)
-    }
-
-    func dragItems(_ indexPath: IndexPath) -> [UIDragItem] {
-        let eventsSection = EventsListViewModel.Section.events.rawValue
-        guard indexPath.section == eventsSection else { return [] }
-        let eventIndex = indexPath.row
-        let provider = NSItemProvider(object: "\(eventIndex)" as NSString)
-        let dragItem = UIDragItem(itemProvider: provider)
-        viewModel?.startDragFor(eventIndex: eventIndex)
-        return [dragItem]
-    }
-}
-
-extension EventsListViewController: UICollectionViewDropDelegate {
-    func collectionView(_: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        if let item = coordinator.items.first,
-           let destination = coordinator.destinationIndexPath
-        {
-            coordinator.drop(item.dragItem, toItemAt: destination)
-        }
-
-        guard
-            let viewModel,
-            let from = viewModel.draggedCellIndex,
-            let to = coordinator.destinationIndexPath?.row
-        else { return }
-        var eventsIdentifiers = viewModel.cellsIdentifiers(for: .events)
-        let movedEvent = eventsIdentifiers.remove(at: from)
-        eventsIdentifiers.insert(movedEvent, at: to)
-        viewModel.manualSortingHandler?(eventsIdentifiers)
-    }
-
-    func collectionView(_: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath indexPath: IndexPath?) -> UICollectionViewDropProposal {
-        viewRoot.updateRemovalDropAreaPosition(x: session.location(in: viewRoot).x)
-
-        viewModel?.updateFinger(
-            position: session.location(in: viewRoot).x,
-            maxPosition: viewRoot.bounds.width
-        )
-
-        if indexPath?.section == EventsListViewModel.Section.events.rawValue {
-            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-        }
-
-        return UICollectionViewDropProposal(operation: .cancel)
     }
 }

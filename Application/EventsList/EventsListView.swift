@@ -8,15 +8,15 @@
 import UIKit
 
 final class EventsListView: UIView, EventsListDataProviding {
-    private static let removalDropAreaDefaultOpacity: Float = 0.5
-
+    static let removalDropAreaDefaultOpacity: Float = 0.5
+    
     let list: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     let removalDropArea: UIView = {
         let view = UIView(al: true)
         let image = UIImage(systemName: "trash.fill")?
@@ -30,65 +30,67 @@ final class EventsListView: UIView, EventsListDataProviding {
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.buttonMargin).isActive = true
         return view
     }()
-
+    
     lazy var dataSource = EventsListDataSource(list: list, provider: self)
-
+    
     var viewModel: EventsListViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
         dataSource.applySnapshot(oldValue)
     }}
-
+    
     lazy var animatedConstraint: NSLayoutConstraint = { removalDropArea.trailingAnchor.constraint(equalTo: leadingAnchor) }()
-
+    
     init() {
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
+        configureDropArea()
     }
-
+    
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-
+    
     func updateRemovalDropAreaPosition(x: CGFloat) {
         let constant = (bounds.width - x) / 3
-
+        
         let lowerBound = CGFloat.buttonMargin
         let upperBound = removalDropArea.bounds.width - 2 * removalDropArea.layer.cornerRadius
         let clampedConstant = constant.clamped(to: lowerBound ... upperBound)
-
+        
         animatedConstraint.constant = clampedConstant
-
-        if let viewModel, viewModel.isRemovingEnabled {
-            removalDropArea.layer.opacity = 1.0
-        } else {
-            removalDropArea.layer.opacity = Self.removalDropAreaDefaultOpacity
-        }
     }
-
+    
     // MARK: - Private
-
+    
     private func configureLayout() {
         addAndConstrain(list)
-
+        
         addSubview(removalDropArea)
-        removalDropArea.widthAnchor.constraint(equalToConstant: .screenW / 3).isActive = true
-        removalDropArea.heightAnchor.constraint(equalTo: removalDropArea.widthAnchor, multiplier: 2.5).isActive = true
+        removalDropArea.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3).isActive = true
+        removalDropArea.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, constant: -2 * .buttonMargin).isActive = true
         animatedConstraint.isActive = true
         removalDropArea.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
-
+    
     private func configureAppearance() {
         list.backgroundColor = .clear
-
+        
         backgroundColor = .bg
         removalDropArea.backgroundColor = UIColor.red
         removalDropArea.layer.cornerRadius = CGFloat.buttonMargin
         removalDropArea.isHidden = true
-        removalDropArea.isUserInteractionEnabled = false
         removalDropArea.layer.opacity = Self.removalDropAreaDefaultOpacity
     }
-
+    
     private func configureContent(_ viewModel: EventsListViewModel) {
-        removalDropArea.isHidden = !viewModel.removalDropAreaEnabled
+        removalDropArea.isHidden = viewModel.removalDropAreaHidden
+        removalDropArea.layer.opacity = viewModel.removalDropAreaActive ?
+            1.0 :
+            Self.removalDropAreaDefaultOpacity
+    }
+    
+    private func configureDropArea() {
+        let dropInteraction = UIDropInteraction(delegate: self)
+        removalDropArea.addInteraction(dropInteraction)
     }
 }

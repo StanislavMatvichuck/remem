@@ -229,6 +229,8 @@
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
 		08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
+		08C23EBA2B83C145004DF159 /* EventsListViewController+DragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */; };
+		08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */; };
 		08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */; };
 		08CB230829FFB53C00F3B484 /* WeeklyGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */; };
@@ -624,6 +626,8 @@
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplayingTests.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
+		08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListViewController+DragAndDrop.swift"; sourceTree = "<group>"; };
+		08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListView+Drop.swift"; sourceTree = "<group>"; };
 		08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsPresentationAnimator.swift; sourceTree = "<group>"; };
 		08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyGoal.swift; sourceTree = "<group>"; };
@@ -1346,7 +1350,9 @@
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
+				08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */,
 				0875E27B298EF91A00622125 /* EventsListViewController.swift */,
+				08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
 			);
 			path = EventsList;
@@ -2035,6 +2041,7 @@
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				081A156B2B62920500EDA8A2 /* HourDistributionView.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
+				08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */,
 				089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */,
 				0881E4B52B5F387900F68CAE /* EventCreationView.swift in Sources */,
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
@@ -2051,6 +2058,7 @@
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */,
 				089AC5F62B3C61C300577781 /* WeekViewController.swift in Sources */,
+				08C23EBA2B83C145004DF159 /* EventsListViewController+DragAndDrop.swift in Sources */,
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
 				08396EEC29A6523700281E51 /* UpdatingCommander.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,

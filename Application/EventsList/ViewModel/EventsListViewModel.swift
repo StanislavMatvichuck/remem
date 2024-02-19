@@ -21,10 +21,9 @@ struct EventsListViewModel {
     let sorter: EventsSorter
     let eventsSortingHandler: SortingTapHandler?
     let manualSortingHandler: ManualSortingHandler?
-    var removalDropAreaEnabled = false
+    var removalDropAreaHidden = true
+    var removalDropAreaActive = false
     var draggedCellIndex: Int?
-    private var fingerPosition: CGFloat = 0.0
-    private var fingerPositionMax: CGFloat = 0.0
 
     init(
         cells: [Section: [any EventsListCellViewModel]],
@@ -60,8 +59,6 @@ struct EventsListViewModel {
         }
         return nil
     }
-
-    var isRemovingEnabled: Bool { fingerPosition <= fingerPositionMax / 3 }
 
     mutating func configureAnimationForEventCells(oldValue: EventsListViewModel?) {
         guard let oldValue else { return }
@@ -120,25 +117,23 @@ struct EventsListViewModel {
         return sorter == .manual && oldValue.sorter != .manual
     }
 
+    func removeDraggedCell() {
+        guard let draggedCellIndex else { return }
+        let eventCellsIdentifiers = cellsIdentifiers(for: .events)
+        let cellIdentifier = eventCellsIdentifiers[draggedCellIndex]
+        if let cell = cell(identifier: cellIdentifier) as? EventCellViewModel {
+            cell.remove()
+        }
+    }
+
     mutating func startDragFor(eventIndex: Int) {
         draggedCellIndex = eventIndex
-        removalDropAreaEnabled = true
+        removalDropAreaHidden = false
     }
 
-    mutating func disableRemoval() {
-        if let draggedCellIndex, isRemovingEnabled {
-            let draggedCell = eventCells[draggedCellIndex]
-            draggedCell.remove()
-            return
-        }
-
-        removalDropAreaEnabled = false
-    }
-
-    mutating func updateFinger(position: CGFloat, maxPosition: CGFloat) {
-        fingerPosition = position
-        fingerPositionMax = maxPosition
-    }
+    mutating func endDrag() { removalDropAreaHidden = true }
+    mutating func activateDropArea() { removalDropAreaActive = true }
+    mutating func deactivateDropArea() { removalDropAreaActive = false }
 
     // MARK: - Private
     private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }

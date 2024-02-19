@@ -56,7 +56,7 @@ struct EventsListDataSource {
     func applySnapshot(_ oldValue: EventsListViewModel?) {
         guard
             let viewModel = provider.viewModel,
-            !viewModel.removalDropAreaEnabled
+            viewModel.removalDropAreaHidden
         else { return }
         var snapshot = Snapshot()
 
