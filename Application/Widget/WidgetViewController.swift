@@ -18,8 +18,14 @@ final class WidgetViewController {
         let fileURL = directory.appendingPathComponent(filePath)
 
         let encoder = PropertyListEncoder()
-        guard let eventCells = viewModel.cells(for: .events) as? [EventCellViewModel] else { return }
-        let writableItems = eventCells.prefix(3).map { WidgetEventCellViewModel(item: $0) }
+        let eventsCellsIdentifiers = viewModel.cellsIdentifiers(for: .events)
+        var writableItems = [WidgetEventCellViewModel]()
+
+        eventsCellsIdentifiers.prefix(3).forEach {
+            if let eventCell = viewModel.cell(identifier: $0) as? EventCellViewModel {
+                writableItems.append(WidgetEventCellViewModel(item: eventCell))
+            }
+        }
 
         do {
             let dataToWrite = try encoder.encode(writableItems)
