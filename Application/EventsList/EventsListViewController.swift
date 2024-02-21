@@ -51,7 +51,10 @@ final class EventsListViewController:
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    deinit { timer?.invalidate() }
+    deinit {
+        timer?.invalidate()
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -60,6 +63,7 @@ final class EventsListViewController:
         setupEventsSortingButton()
         update()
         setupTimer()
+        configureForegroundNotification()
     }
 
     private func configureList() {
@@ -67,6 +71,18 @@ final class EventsListViewController:
         viewRoot.list.dragDelegate = self
         viewRoot.list.dropDelegate = self
         viewRoot.list.dragInteractionEnabled = true
+    }
+
+    private func configureForegroundNotification() {
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(handleForeground),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+    }
+
+    @objc private func handleForeground() {
+        viewRoot.startHintAnimationIfNeeded()
     }
 
     private func setupEventsSortingButton() {
