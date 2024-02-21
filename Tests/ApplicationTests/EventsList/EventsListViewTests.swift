@@ -44,12 +44,6 @@ final class EventsListViewTests: XCTestCase {
         XCTAssertEqual(sut.list.dataSource?.collectionView(sut.list, numberOfItemsInSection: eventsSection), 0)
     }
 
-    func test_oneEvent_showsEvent_withHintCell() {
-        configureWithOneEvent()
-
-        XCTAssertNotNil(sut.eventCell.view.swipingHint)
-    }
-
     func test_oneEvent_hintAsksToSwipeEvent() {
         configureWithOneEvent()
 

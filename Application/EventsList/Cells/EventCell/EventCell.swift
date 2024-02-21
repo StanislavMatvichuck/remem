@@ -31,9 +31,7 @@ final class EventCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        removeSwipingHint()
-        view.animatedProgress.prepareForReuse()
-        view.circleContainer.prepareForReuse()
+        view.prepareForReuse()
         viewModel = nil
     }
 

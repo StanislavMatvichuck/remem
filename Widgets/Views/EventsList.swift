@@ -28,22 +28,40 @@ struct EventsList: View {
     var body: some View {
         let spacing: CGFloat = 0
 
-        ZStack(
-            alignment: .center,
-            content: {
-                VStack(spacing: spacing) {
-                    ForEach(items.indices) {
-                        EventRow(item: items[$0])
-                    }
-                }.padding(EdgeInsets(
-                    top: spacing,
-                    leading: 0,
-                    bottom: spacing,
-                    trailing: 0
-                ))
-            }
-        ).containerBackground(for: .widget, content: {
-            Color(uiColor: UIColor.bg)
-        })
+        if #available(iOSApplicationExtension 17.0, *) {
+            ZStack(
+                alignment: .center,
+                content: {
+                    VStack(spacing: spacing) {
+                        ForEach(items.indices) {
+                            EventRow(item: items[$0])
+                        }
+                    }.padding(EdgeInsets(
+                        top: spacing,
+                        leading: 0,
+                        bottom: spacing,
+                        trailing: 0
+                    ))
+                }
+            ).containerBackground(for: .widget, content: {
+                Color(uiColor: UIColor.bg)
+            })
+        } else {
+            ZStack(
+                alignment: .center,
+                content: {
+                    VStack(spacing: spacing) {
+                        ForEach(items.indices) {
+                            EventRow(item: items[$0])
+                        }
+                    }.padding(EdgeInsets(
+                        top: spacing,
+                        leading: 0,
+                        bottom: spacing,
+                        trailing: 0
+                    ))
+                }
+            )
+        }
     }
 }

@@ -77,7 +77,9 @@ final class CreateEventCell: UICollectionViewCell {
 
     private func configureEventHandlers() {
         button.addTarget(self, action: #selector(handleTouchUp), for: .touchUpInside)
-        registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance))
+        if #available(iOS 17.0, *) {
+            registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance))
+        }
     }
 
     // MARK: - Events handling

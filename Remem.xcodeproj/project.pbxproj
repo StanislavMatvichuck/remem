@@ -127,7 +127,7 @@
 		0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */; };
 		0870FD782A3E36130002C403 /* AppPreview03Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870FD772A3E36130002C403 /* AppPreview03Recorder.swift */; };
 		0870FD7A2A3E37430002C403 /* AppPreviewRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870FD792A3E37430002C403 /* AppPreviewRecorder.swift */; };
-		0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */; };
+		0873EFC4281B208A00A18F53 /* SwipeHintDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0873EFC3281B208A00A18F53 /* SwipeHintDisplay.swift */; };
 		087433BB2B33752D00336FC3 /* WeekViewSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BA2B33752D00336FC3 /* WeekViewSnapshots.swift */; };
 		087433BE2B3375E000336FC3 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BD2B3375E000336FC3 /* WeekView.swift */; };
 		087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C22B33814C00336FC3 /* WeekPageViewModel.swift */; };
@@ -227,7 +227,6 @@
 		08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
-		08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
 		08C23EBA2B83C145004DF159 /* EventsListViewController+DragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */; };
 		08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */; };
@@ -532,7 +531,7 @@
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0870FD772A3E36130002C403 /* AppPreview03Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreview03Recorder.swift; sourceTree = "<group>"; };
 		0870FD792A3E37430002C403 /* AppPreviewRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreviewRecorder.swift; sourceTree = "<group>"; };
-		0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureView.swift; sourceTree = "<group>"; };
+		0873EFC3281B208A00A18F53 /* SwipeHintDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeHintDisplay.swift; sourceTree = "<group>"; };
 		087433BA2B33752D00336FC3 /* WeekViewSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewSnapshots.swift; sourceTree = "<group>"; };
 		087433BD2B3375E000336FC3 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		087433C22B33814C00336FC3 /* WeekPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModel.swift; sourceTree = "<group>"; };
@@ -624,7 +623,6 @@
 		08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestRepositoryConfigurator.swift; sourceTree = "<group>"; };
 		08B89A2528E3190600F4B63B /* StyledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledText.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
-		08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplayingTests.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
 		08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListViewController+DragAndDrop.swift"; sourceTree = "<group>"; };
 		08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListView+Drop.swift"; sourceTree = "<group>"; };
@@ -815,7 +813,6 @@
 			isa = PBXGroup;
 			children = (
 				085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */,
-				08BBFCD8296EC9CE00F455AE /* SwipingHintDisplayingTests.swift */,
 				0844342628F6DFF900A30FB2 /* EventsListViewControllerTests.swift */,
 				08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */,
 				08FE8B982B51929D005E780E /* EventsListDataSourceTests.swift */,
@@ -1067,7 +1064,7 @@
 		085A2C2F29F15144005C6E5E /* EventCell */ = {
 			isa = PBXGroup;
 			children = (
-				0873EFC3281B208A00A18F53 /* SwipeGestureView.swift */,
+				0873EFC3281B208A00A18F53 /* SwipeHintDisplay.swift */,
 				089B37892A0A3EC500422971 /* AnimatedProgressView.swift */,
 				089B37872A0A32B700422971 /* EventAmountView.swift */,
 				080F9F2629ED51810013CBFE /* EventCell.swift */,
@@ -1883,7 +1880,6 @@
 				0849699629B4907F00CDBBC8 /* DependencyContainersTests.swift in Sources */,
 				08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */,
 				0827DD642B5E723C00E0661D /* EventsSortingExecutorTests.swift in Sources */,
-				08BBFCD9296EC9CE00F455AE /* SwipingHintDisplayingTests.swift in Sources */,
 				08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
@@ -1976,7 +1972,7 @@
 				089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				089B37882A0A32B700422971 /* EventAmountView.swift in Sources */,
-				0873EFC4281B208A00A18F53 /* SwipeGestureView.swift in Sources */,
+				0873EFC4281B208A00A18F53 /* SwipeHintDisplay.swift in Sources */,
 				084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */,
 				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
@@ -2174,7 +2170,7 @@
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2206,7 +2202,7 @@
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2360,7 +2356,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2396,7 +2392,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2425,7 +2421,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2451,7 +2447,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2474,7 +2470,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
@@ -2492,7 +2488,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.RememDomainTests;
@@ -2556,7 +2552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2614,7 +2610,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2646,7 +2642,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2680,7 +2676,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

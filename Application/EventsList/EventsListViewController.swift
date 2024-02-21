@@ -91,4 +91,9 @@ final class EventsListViewController:
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: .eventsListCellHeight)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewRoot.startHintAnimationIfNeeded()
+    }
 }

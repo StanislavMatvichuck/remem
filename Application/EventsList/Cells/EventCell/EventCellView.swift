@@ -36,6 +36,7 @@ final class EventCellView: UIView {
     let circleContainer = SwipingCircleView()
     let amountContainer = EventAmountView()
     let animatedProgress = AnimatedProgressView()
+    let hintDisplay = SwipeHintDisplay()
 
     init() {
         super.init(frame: .zero)
@@ -52,7 +53,13 @@ final class EventCellView: UIView {
         amountContainer.configure(vm)
         animatedProgress.configure(vm)
         timeSince.configure(vm.timeSince)
-        vm.hintEnabled ? addSwipingHint() : removeSwipingHint()
+        hintDisplay.configure(vm)
+    }
+
+    func prepareForReuse() {
+        animatedProgress.prepareForReuse()
+        circleContainer.prepareForReuse()
+        hintDisplay.prepareForReuse()
     }
 
     // MARK: - Private
@@ -64,6 +71,7 @@ final class EventCellView: UIView {
         stack.addArrangedSubview(title)
         stack.addArrangedSubview(amountContainer)
 
+        hintDisplay.layer.zPosition = 4
         circleContainer.layer.zPosition = 3
         title.layer.zPosition = 2
         amountContainer.layer.zPosition = 1
@@ -72,6 +80,7 @@ final class EventCellView: UIView {
         addSubview(timeSince)
         addAndConstrain(circleContainer)
         addSubview(fireDecal)
+        addAndConstrain(hintDisplay)
 
         NSLayoutConstraint.activate([
             timeSince.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
@@ -85,7 +94,6 @@ final class EventCellView: UIView {
             stack.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             animatedProgress.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
-            
             fireDecal.centerYAnchor.constraint(equalTo: centerYAnchor),
             fireDecal.trailingAnchor.constraint(equalTo: leadingAnchor),
         ])

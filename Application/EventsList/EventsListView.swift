@@ -60,6 +60,29 @@ final class EventsListView: UIView, EventsListDataProviding {
         animatedConstraint.constant = clampedConstant
     }
     
+    func startHintAnimationIfNeeded() {
+        guard
+            let viewModel,
+            let eventsSection = viewModel.sections.first(where: { section in
+                section == .events
+            }),
+            viewModel.cellsIdentifiers(for: .events).count > 0
+        else { return }
+
+        let firstEventCellIndexPath = IndexPath(
+            row: 0,
+            section: eventsSection.rawValue
+        )
+
+        guard
+            let eventCell = list.cellForItem(
+                at: firstEventCellIndexPath
+            ) as? EventCell
+        else { return }
+
+        eventCell.view.hintDisplay.startAnimationIfNeeded()
+    }
+    
     // MARK: - Private
     
     private func configureLayout() {
