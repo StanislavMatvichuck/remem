@@ -8,7 +8,7 @@
 import Foundation
 
 public enum EventsSorter: Int, Codable, Equatable, CaseIterable {
-    case name, total, manual
+    case name, dateCreated, total, manual
 }
 
 public protocol EventsSortingQuerying { func get() -> EventsSorter }

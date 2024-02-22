@@ -16,9 +16,10 @@
 "eventsList.ordering.alphabetically" = "По алфавиту";
 "eventsList.ordering.totalHappenings" = "Всего происшествий";
 
-"eventsSorting.name" = "Упорядочивание";
+"eventsSorting.title" = "Упорядочивание";
 "eventsSorting.name" = "По имени";
 "eventsSorting.total" = "По количеству";
+"eventsSorting.dateCreated" = "По времени создания";
 "eventsSorting.manual" = "Ручное";
 
 "eventDetails.of" = "из";

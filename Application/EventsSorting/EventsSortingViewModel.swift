@@ -25,7 +25,7 @@ struct EventsSortingViewModel {
         self.factory = factory
         self.manualSortingEnabled = manualSortingEnabled
         self.activeSorterIndex = activeSorterIndex
-        self.count = manualSortingEnabled ? 3 : 2
+        self.count = manualSortingEnabled ? 4 : 3
         self.animateFrom = animateFrom
     }
 

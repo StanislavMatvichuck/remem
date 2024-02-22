@@ -19,6 +19,7 @@
 "eventsSorting.title" = "Bestellung";
 "eventsSorting.name" = "Namentlich";
 "eventsSorting.total" = "Insgesamt";
+"eventsSorting.dateCreated" = "Nach Erstellungsdatum";
 "eventsSorting.manual" = "Handbuch";
 
 "eventDetails.of" = "of";

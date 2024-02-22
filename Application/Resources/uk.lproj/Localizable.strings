@@ -19,6 +19,7 @@
 "eventsSorting.title" = "Упорядкування";
 "eventsSorting.name" = "За ім'ям";
 "eventsSorting.total" = "За кількістю";
+"eventsSorting.dateCreated" = "За часом створення";
 "eventsSorting.manual" = "Ручне";
 
 "eventDetails.of" = "із";

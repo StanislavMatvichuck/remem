@@ -19,6 +19,7 @@
 "eventsSorting.title" = "Ordering";
 "eventsSorting.name" = "By name";
 "eventsSorting.total" = "By total";
+"eventsSorting.dateCreated" = "By date created";
 "eventsSorting.manual" = "Manual";
 
 "eventDetails.of" = "of";
