@@ -22,6 +22,6 @@ final class DayOfWeekContainer:
     }
 
     func makeDayOfWeekViewModel() -> DayOfWeekViewModel {
-        DayOfWeekViewModel(parent.event.happenings)
+        DayOfWeekViewModel(parent.event.happenings, currentMoment: parent.currentMoment)
     }
 }

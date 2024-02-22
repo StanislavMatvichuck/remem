@@ -13,8 +13,18 @@ struct DayOfWeekViewModel {
     let valueTotal: Int
 
     private let cellsValues: [Int]
+    private let currentMoment: Date?
+    private var currentDayIndex: Int? {
+        if let currentMoment,
+           let weekDayFromCalendar = Calendar.current.dateComponents(
+               [.weekday],
+               from: currentMoment
+           ).weekday
+        { return [6, 0, 1, 2, 3, 4, 5][weekDayFromCalendar - 1] }
+        return nil
+    }
 
-    init(_ happenings: [Happening] = []) {
+    init(_ happenings: [Happening] = [], currentMoment: Date? = nil) {
         var cellsValues = Array(repeating: 0, count: count)
 
         for happening in happenings {
@@ -29,13 +39,15 @@ struct DayOfWeekViewModel {
 
         self.cellsValues = cellsValues
         self.valueTotal = cellsValues.max() ?? 0
+        self.currentMoment = currentMoment
     }
 
     func cell(at index: Int) -> DayOfWeekCellViewModel {
         DayOfWeekCellViewModel(
             index,
             value: cellsValues[index],
-            valueTotal: valueTotal
+            valueTotal: valueTotal,
+            isToday: currentDayIndex == index
         )
     }
 }

@@ -117,5 +117,8 @@ final class DayOfWeekCellView: UIStackView {
         percent.isHidden = vm.isHidden
         dayValue.isHidden = vm.isHidden
         flexibleBackground.isHidden = vm.isHidden
+
+        dayName.font = vm.isToday ? .fontSmallBold : .font
+        flexibleBackground.backgroundColor = vm.isToday ? .secondary : .bg_secondary
     }
 }
