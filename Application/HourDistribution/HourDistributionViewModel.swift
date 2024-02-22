@@ -13,8 +13,9 @@ struct HourDistributionViewModel {
     let valueTotal: Int
 
     private let cellsValues: [Int]
+    private let currentHour: Int?
 
-    init(_ happenings: [Happening] = []) {
+    init(_ happenings: [Happening] = [], currentHour: Int? = nil) {
         var cellsValues = Array(repeating: 0, count: count)
 
         for happening in happenings {
@@ -24,13 +25,15 @@ struct HourDistributionViewModel {
 
         self.cellsValues = cellsValues
         self.valueTotal = cellsValues.max() ?? 0
+        self.currentHour = currentHour
     }
 
     func cell(at index: Int) -> HourDistributionCellViewModel {
         HourDistributionCellViewModel(
             index,
             valueTotal: valueTotal,
-            value: cellsValues[index]
+            value: cellsValues[index],
+            isCurrentHour: currentHour != nil && currentHour == index
         )
     }
 }

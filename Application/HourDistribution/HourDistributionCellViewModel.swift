@@ -11,8 +11,14 @@ struct HourDistributionCellViewModel {
     let relativeLength: CGFloat
     let hours: String
     let isHidden: Bool
+    let isCurrentHour: Bool
 
-    init(_ index: Int, valueTotal: Int = 0, value: Int = 0) {
+    init(
+        _ index: Int,
+        valueTotal: Int = 0,
+        value: Int = 0,
+        isCurrentHour: Bool = false
+    ) {
         hours = {
             switch index {
             case 0: "00"
@@ -32,5 +38,6 @@ struct HourDistributionCellViewModel {
 
         relativeLength = value == 0 ? 0 : CGFloat(value) / CGFloat(valueTotal)
         isHidden = value == 0
+        self.isCurrentHour = isCurrentHour
     }
 }
