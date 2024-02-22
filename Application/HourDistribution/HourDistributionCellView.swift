@@ -88,11 +88,11 @@ final class HourDistributionCellView: UIStackView {
 
     private func configureContent(_ vm: HourDistributionCellViewModel) {
         hour.text = vm.hours
-        flexibleBackground.backgroundColor = vm.isHidden ? .bg_secondary : .secondary
-        hour.textColor = vm.isCurrentHour ? .primary : .secondary
+        flexibleBackground.backgroundColor = vm.isHidden ? .bg_secondary.withAlphaComponent(0.3) : .bg_secondary
+        hour.font = vm.isCurrentHour ? .fontExtraSmallBold : .fontExtraSmall
         
         if vm.isCurrentHour {
-            flexibleBackground.backgroundColor = .primary
+            flexibleBackground.backgroundColor = .secondary
         }
     }
 }
