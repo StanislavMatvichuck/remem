@@ -78,7 +78,8 @@ final class PDFWritingDataGenerator: NSObject, PDFWriting {
     }
 
     private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
-        let summary = SummaryView(viewModel: viewModel.summaryViewModel)
+        let summary = SummaryView()
+        summary.viewModel = viewModel.summaryViewModel
         let view = UIView(frame: page)
 
         view.addSubview(summary)

@@ -132,6 +132,8 @@
 		087433BE2B3375E000336FC3 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433BD2B3375E000336FC3 /* WeekView.swift */; };
 		087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C22B33814C00336FC3 /* WeekPageViewModel.swift */; };
 		087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */; };
+		08752B0E2B8836ED00ECCE77 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08752B0D2B8836ED00ECCE77 /* SummaryCell.swift */; };
+		08752B102B8838D900ECCE77 /* SummaryViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08752B0F2B8838D900ECCE77 /* SummaryViewDiffableDataSource.swift */; };
 		0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21EF29C08F1A00B601DA /* URLProviding.swift */; };
 		0875B43B2B57D0EF004C0575 /* FileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F129C0929A00B601DA /* FileSaving.swift */; };
 		0875B43F2B57D84A004C0575 /* EventsSorterRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */; };
@@ -145,7 +147,6 @@
 		0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4502B593780004C0575 /* EventsSortingCellView.swift */; };
 		0875B4552B5953CB004C0575 /* EventsSortingSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B4542B5953CB004C0575 /* EventsSortingSnapshots.swift */; };
 		0875B4562B5955E3004C0575 /* TestingPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */; };
-		0875B4572B5955E3004C0575 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		0875B4582B5955E3004C0575 /* TestingEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */; };
 		0875B4592B5955E3004C0575 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
 		0875B45A2B5955E3004C0575 /* TestingDayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */; };
@@ -201,7 +202,6 @@
 		089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */; };
 		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
-		089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */; };
 		089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
@@ -536,6 +536,8 @@
 		087433BD2B3375E000336FC3 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		087433C22B33814C00336FC3 /* WeekPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModel.swift; sourceTree = "<group>"; };
 		087433C42B33816700336FC3 /* WeekPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPageViewModelTests.swift; sourceTree = "<group>"; };
+		08752B0D2B8836ED00ECCE77 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
+		08752B0F2B8838D900ECCE77 /* SummaryViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		0875B43E2B57D84A004C0575 /* EventsSorterRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepositoryTests.swift; sourceTree = "<group>"; };
 		0875B4402B57D874004C0575 /* EventsSorterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorterRepository.swift; sourceTree = "<group>"; };
 		0875B4432B57F083004C0575 /* EventsSortingCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingCellViewModelTests.swift; sourceTree = "<group>"; };
@@ -598,7 +600,6 @@
 		089B37892A0A3EC500422971 /* AnimatedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedProgressView.swift; sourceTree = "<group>"; };
 		089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEventWeeklyGoalViewModel.swift; sourceTree = "<group>"; };
 		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
-		089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingSummaryViewController.swift; sourceTree = "<group>"; };
 		089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestAccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		089E4B472A2DEAB300727624 /* LaunchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchMode.swift; sourceTree = "<group>"; };
 		089F08DA2B7197FF00EA953A /* DayDetailsDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsDataSourceTests.swift; sourceTree = "<group>"; };
@@ -1386,6 +1387,8 @@
 				085145CA29AE32F000CA533D /* SummaryCellViewModel.swift */,
 				085145C729AE092100CA533D /* SummaryContainer.swift */,
 				080C417F2986AF4800C1F54F /* SummaryView.swift */,
+				08752B0F2B8838D900ECCE77 /* SummaryViewDiffableDataSource.swift */,
+				08752B0D2B8836ED00ECCE77 /* SummaryCell.swift */,
 				080C417D2986AEC600C1F54F /* SummaryViewController.swift */,
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 			);
@@ -1436,7 +1439,6 @@
 				08AF544629373D9200032487 /* TestingDayDetailsViewController.swift */,
 				08B628B32981BD2F00CA57F1 /* TestingEventDetailsViewController.swift */,
 				08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */,
-				089C5B9929A8221F00B1B977 /* TestingSummaryViewController.swift */,
 				08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */,
 			);
 			path = TestingViewController;
@@ -1814,7 +1816,6 @@
 				080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */,
 				0875B45C2B5955E3004C0575 /* TestingEventsListViewController.swift in Sources */,
 				0875B45B2B5955E3004C0575 /* TestingClockViewController.swift in Sources */,
-				0875B4572B5955E3004C0575 /* TestingSummaryViewController.swift in Sources */,
 				089B0F71298BBAE90065F53D /* TimelineTesting.swift in Sources */,
 				08A376072A182A4D0037D43A /* MakingSnapshotsRowView.swift in Sources */,
 				0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */,
@@ -1882,7 +1883,6 @@
 				0827DD642B5E723C00E0661D /* EventsSortingExecutorTests.swift in Sources */,
 				08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
-				089C5B9A29A8221F00B1B977 /* TestingSummaryViewController.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,
 				081BAFA1292B892F00112C76 /* EventDetailsViewControllerTests.swift in Sources */,
 				08A811842B5D391D00C031BF /* EventsSorterManualRepository.swift in Sources */,
@@ -1968,6 +1968,7 @@
 				0890627A27A0A25E0032847C /* EventDetailsView.swift in Sources */,
 				0875B4512B593780004C0575 /* EventsSortingCellView.swift in Sources */,
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
+				08752B0E2B8836ED00ECCE77 /* SummaryCell.swift in Sources */,
 				089AC5F22B3C53BF00577781 /* WeekDayNumberView.swift in Sources */,
 				089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
@@ -2051,6 +2052,7 @@
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
 				0875B4622B59C77E004C0575 /* EventsSortingContainer.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsViewController.swift in Sources */,
+				08752B102B8838D900ECCE77 /* SummaryViewDiffableDataSource.swift in Sources */,
 				08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */,
 				08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */,
 				089AC5F62B3C61C300577781 /* WeekViewController.swift in Sources */,
@@ -2629,7 +2631,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2647,7 +2649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -2664,7 +2666,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Application/Resources/Remem.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Application/Resources/Info.plist;
@@ -2681,7 +2683,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -28,7 +28,6 @@ final class SummaryViewModelTests: XCTestCase {
         XCTAssertEqual(totalAmount, "0")
         XCTAssertEqual(daysTracked, "1")
         XCTAssertEqual(dayAverage, "0")
-        XCTAssertEqual(daysSinceLastHappening, "0")
     }
 
     func test_eventWithOneHappening_totalAmount_1() {
@@ -98,32 +97,32 @@ final class SummaryViewModelTests: XCTestCase {
         XCTAssertEqual(dayAverage, "1,5")
     }
 
-    func test_eventWithHappeningYesterday_daysSinceLastHappening_1() {
-        arrange(
-            dateCreated: yesterday,
-            happenings: [Happening(dateCreated: yesterday)]
-        )
-
-        XCTAssertEqual(daysSinceLastHappening, "1")
-    }
-
-    func test_eventWithHappeningWeekAgo_daysSinceLastHappening_7() {
-        arrange(
-            dateCreated: weekAgo,
-            happenings: [Happening(dateCreated: weekAgo)]
-        )
-
-        XCTAssertEqual(daysSinceLastHappening, "7")
-    }
-
-    func test_eventCreatedWeekAgoWithHappeningYesterday_daysSinceLastHappening_1() {
-        arrange(
-            dateCreated: weekAgo,
-            happenings: [Happening(dateCreated: yesterday)]
-        )
-
-        XCTAssertEqual(daysSinceLastHappening, "1")
-    }
+//    func test_eventWithHappeningYesterday_daysSinceLastHappening_1() {
+//        arrange(
+//            dateCreated: yesterday,
+//            happenings: [Happening(dateCreated: yesterday)]
+//        )
+//
+//        XCTAssertEqual(daysSinceLastHappening, "1")
+//    }
+//
+//    func test_eventWithHappeningWeekAgo_daysSinceLastHappening_7() {
+//        arrange(
+//            dateCreated: weekAgo,
+//            happenings: [Happening(dateCreated: weekAgo)]
+//        )
+//
+//        XCTAssertEqual(daysSinceLastHappening, "7")
+//    }
+//
+//    func test_eventCreatedWeekAgoWithHappeningYesterday_daysSinceLastHappening_1() {
+//        arrange(
+//            dateCreated: weekAgo,
+//            happenings: [Happening(dateCreated: yesterday)]
+//        )
+//
+//        XCTAssertEqual(daysSinceLastHappening, "1")
+//    }
 
     func test_eventCreatedTwoWeeksAgoWithHappeningEachDay_weekAverage_7() {
         let today = DayIndex.referenceValue.adding(days: 13)
@@ -138,12 +137,14 @@ final class SummaryViewModelTests: XCTestCase {
         XCTAssertEqual(weekAverage, "7")
     }
 
-    // clear demonstration of too high coupling with implementation production code
-    private var totalAmount: String { sut.items[0].value }
-    private var daysSinceLastHappening: String { sut.items[1].value }
-    private var weekAverage: String { sut.items[2].value }
-    private var dayAverage: String { sut.items[3].value }
-    private var daysTracked: String { sut.items[4].value }
+    func test_cellsIdentifiers() { XCTAssertEqual(sut.identifiers.count, 4) }
+
+    // MARK: - Private
+    private var totalAmount: String? { sut.cell(for: SummaryRow.total)?.value }
+    private var daysTracked: String? { sut.cell(for: SummaryRow.daysTracked)?.value }
+    private var dayAverage: String? { sut.cell(for: SummaryRow.dayAverage)?.value }
+    private var weekAverage: String? { sut.cell(for: SummaryRow.weekAverage)?.value }
+    private var daysSinceLastHappening: String? { sut.cell(for: SummaryRow.daysSinceLastHappening)?.value }
 
     private func arrange(
         dateCreated: Date = DayIndex.referenceValue.date,

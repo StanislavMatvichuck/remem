@@ -33,7 +33,7 @@
 "weeklyGoal.progress" = "progress %";
 "weeklyGoal.goalPlaceholder" = "add weekly goal";
 
-"summary.total" = "Total happenings";
+"summary.total" = "Total";
 "summary.weekAverage" = "Week average";
 "summary.dayAverage" = "Day average";
 "summary.daysTracked" = "Days tracked";

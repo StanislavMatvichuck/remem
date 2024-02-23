@@ -80,61 +80,44 @@ struct SummaryViewModel {
         }()
 
         self.items = [
-            SummaryCellViewModel(SummaryRow.total(value: String(totalAmount))),
-            SummaryCellViewModel(SummaryRow.daysSinceLastHappening(value: daysSinceLastHappeningAmount)),
-            SummaryCellViewModel(SummaryRow.weekAverage(value: weekAverageAmount)),
-            SummaryCellViewModel(SummaryRow.dayAverage(value: dayAverageAmount)),
-            SummaryCellViewModel(SummaryRow.daysTracked(value: String(daysTrackedAmount)), belongsToUser: false)
+            SummaryCellViewModel(SummaryRow.total, value: String(totalAmount)),
+            SummaryCellViewModel(SummaryRow.daysTracked, value: String(daysTrackedAmount)),
+            SummaryCellViewModel(SummaryRow.dayAverage, value: dayAverageAmount),
+            SummaryCellViewModel(SummaryRow.weekAverage, value: weekAverageAmount)
         ]
+    }
+
+    var identifiers: [SummaryRow] { items.map { $0.id }}
+
+    func cell(for id: SummaryRow) -> SummaryCellViewModel? {
+        items.first { $0.id == id }
     }
 }
 
-enum SummaryRow {
-    case total(value: String)
-    case weekAverage(value: String)
-    case dayAverage(value: String)
-    case daysTracked(value: String)
-    case daysSinceLastHappening(value: String)
+enum SummaryRow: CaseIterable {
+    case total, daysTracked, dayAverage, weekAverage, daysSinceLastHappening
 
-    var label: String {
-        switch self {
-        case .total: return String(localizationId: "summary.total")
-        case .weekAverage: return String(localizationId: "summary.weekAverage")
-        case .dayAverage: return String(localizationId: "summary.dayAverage")
-        case .daysTracked: return String(localizationId: "summary.daysTracked")
-        case .daysSinceLastHappening: return String(localizationId: "summary.daysSinceLastHappening")
-        }
-    }
+    var title: String { switch self {
+    case .total: return String(localizationId: "summary.total") + "\n"
+    case .weekAverage: return String(localizationId: "summary.weekAverage") + "\n"
+    case .dayAverage: return String(localizationId: "summary.dayAverage") + "\n"
+    case .daysTracked: return String(localizationId: "summary.daysTracked") + "\n"
+    case .daysSinceLastHappening: return String(localizationId: "summary.daysSinceLastHappening") + "\n"
+    } }
 
-    var value: String {
-        switch self {
-        case .total(let amount): return amount
-        case .weekAverage(let amount): return amount
-        case .dayAverage(let amount): return amount
-        case .daysTracked(let amount): return amount
-        case .daysSinceLastHappening(let amount): return amount
-        }
-    }
-
-    var labelTag: Int {
-        switch self {
-        case .total: return 1
-        case .weekAverage: return 2
-        case .dayAverage: return 3
-        case .daysTracked: return 4
-        case .daysSinceLastHappening: return 5
-        }
-    }
-
-    var valueTag: Int { labelTag + 1000 }
+    var id: String { switch self {
+    case .total: return "total"
+    case .weekAverage: return "weekAverage"
+    case .dayAverage: return "dayAverage"
+    case .daysTracked: return "daysTracked"
+    case .daysSinceLastHappening: return "daysSinceLastHappening"
+    } }
 }
 
 extension SummaryCellViewModel {
-    init(_ row: SummaryRow, belongsToUser: Bool = true) {
-        title = row.label
-        value = row.value
-        titleTag = row.labelTag
-        valueTag = row.valueTag
-        self.belongsToUser = belongsToUser
+    init(_ row: SummaryRow, value: String) {
+        id = row
+        title = row.title
+        self.value = value
     }
 }

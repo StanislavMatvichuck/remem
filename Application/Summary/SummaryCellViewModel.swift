@@ -7,10 +7,8 @@
 
 import Foundation
 
-struct SummaryCellViewModel {
+struct SummaryCellViewModel: Identifiable {
+    let id: SummaryRow
     let title: String
     let value: String
-    let titleTag: Int /// used by tests only
-    let valueTag: Int /// used by tests only
-    let belongsToUser: Bool
 }

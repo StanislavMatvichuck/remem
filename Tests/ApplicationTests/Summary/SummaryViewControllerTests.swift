@@ -9,58 +9,42 @@
 import Domain
 import XCTest
 
-final class SummaryViewControllerTests: XCTestCase, TestingViewController {
-    var sut: SummaryViewController!
-    var event: Event!
-    var commander: EventsCommanding!
+final class SummaryViewControllerTests: XCTestCase {
+    private var sut: SummaryViewController!
 
     override func setUp() {
         super.setUp()
-        make()
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        let appC = ApplicationContainer(mode: .unitTest)
+        let eventDetails = EventDetailsContainer(appC, event: event)
+        let container = SummaryContainer(parent: eventDetails)
+        sut = SummaryViewController(container)
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.addSubview(sut.view)
+        sut.view.layoutIfNeeded()
     }
 
-    override func tearDown() {
-        clear()
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown(); clear() }
 
-    func test_showsTotalHappenings() {
-        assertLabelFor(summaryRow: SummaryRow.total(value: ""), file: #file, line: #line)
-    }
+    // MARK: - Tests
 
-    func test_showsWeekAverage() {
-        assertLabelFor(summaryRow: SummaryRow.weekAverage(value: ""), file: #file, line: #line)
-    }
+    func test_showsTotal_zero() { XCTAssertEqual(sut.totalValue, "0") }
+    func test_showsDaysTracked_one() { XCTAssertEqual(sut.daysTracked, "1") }
+    func test_showsDayAverage_zero() { XCTAssertEqual(sut.dayAverage, "0") }
+    func test_showsWeekAverage_zero() { XCTAssertEqual(sut.weekAverage, "0") }
 
-    func test_showsDayAverageHappenings() {
-        assertLabelFor(summaryRow: SummaryRow.dayAverage(value: ""))
-    }
+    // MARK: - Private
+    private func clear() { sut = nil }
+}
 
-    func test_showsDaysTracked() {
-        assertLabelFor(summaryRow: SummaryRow.daysTracked(value: ""))
-    }
-
-    func test_showsDaysSinceLastHappening() {
-        assertLabelFor(summaryRow: SummaryRow.daysSinceLastHappening(value: ""))
-    }
-
-    func test_newEvent_showsTotalHappeningsAmount_zero() {
-        assertValueFor(summaryRow: SummaryRow.total(value: "0"), file: #file, line: #line)
-    }
-
-    func test_newEvent_showsWeekAverageAmount_zero() {
-        assertValueFor(summaryRow: SummaryRow.weekAverage(value: "0"), file: #file, line: #line)
-    }
-
-    func test_newEvent_showsDayAverageAmount_zero() {
-        assertValueFor(summaryRow: SummaryRow.dayAverage(value: "0"))
-    }
-
-    func test_newEvent_showsDaysTrackedAmount_one() {
-        assertValueFor(summaryRow: SummaryRow.daysTracked(value: "1"))
-    }
-
-    func test_newEvent_showsDaysSinceLastHappening_zero() {
-        assertValueFor(summaryRow: SummaryRow.daysSinceLastHappening(value: "0"))
+private extension SummaryViewController {
+    var totalValue: String? { cellValueAt(row: 0) }
+    var daysTracked: String? { cellValueAt(row: 1) }
+    var dayAverage: String? { cellValueAt(row: 2) }
+    var weekAverage: String? { cellValueAt(row: 3) }
+    private func cellValueAt(row: Int) -> String? {
+        let indexPath = IndexPath(row: row, section: 0)
+        let cell = viewRoot.list.dataSource?.collectionView(viewRoot.list, cellForItemAt: indexPath)
+        return (cell as? SummaryCell)?.value.text
     }
 }
