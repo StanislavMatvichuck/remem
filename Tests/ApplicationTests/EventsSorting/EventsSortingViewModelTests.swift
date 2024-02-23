@@ -28,7 +28,7 @@ final class EventsSortingViewModelTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
 
-    func test_count_two() { XCTAssertEqual(sut.count, 2) }
+    func test_count_three() { XCTAssertEqual(sut.count, 3) }
 
     func test_initWithActiveSorterName_cellAt_first_isActiveTrue() {
         let cell = sut.cell(at: 0)
@@ -46,10 +46,10 @@ final class EventsSortingViewModelTests: XCTestCase {
         XCTAssertFalse(sut.manualSortingEnabled)
     }
 
-    func test_count_manualSortingEnabled_three() {
+    func test_count_manualSortingEnabled_four() {
         sut = EventsSortingViewModel(EventsSortingCellFactoryStub(), manualSortingEnabled: true)
 
-        XCTAssertEqual(sut.count, 3)
+        XCTAssertEqual(sut.count, 4)
     }
 
     func test_activeSorterIndex() { XCTAssertEqual(sut.activeSorterIndex, 0) }
