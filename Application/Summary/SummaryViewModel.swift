@@ -11,7 +11,8 @@ import Foundation
 struct SummaryViewModel {
     private let event: Event
     private let createdUntil: Date
-    let items: [SummaryCellViewModel]
+    var items: [SummaryCellViewModel]
+    var dateCreated: Date { event.dateCreated }
 
     init(event: Event, createdUntil: Date) {
         self.event = event
@@ -95,7 +96,7 @@ struct SummaryViewModel {
 }
 
 enum SummaryRow: CaseIterable {
-    case total, daysTracked, dayAverage, weekAverage, daysSinceLastHappening
+    case total, daysTracked, dayAverage, weekAverage, daysSinceLastHappening, dateStart, dateEnd
 
     var title: String { switch self {
     case .total: return String(localizationId: "summary.total") + "\n"
@@ -103,6 +104,8 @@ enum SummaryRow: CaseIterable {
     case .dayAverage: return String(localizationId: "summary.dayAverage") + "\n"
     case .daysTracked: return String(localizationId: "summary.daysTracked") + "\n"
     case .daysSinceLastHappening: return String(localizationId: "summary.daysSinceLastHappening") + "\n"
+    case .dateStart: return String(localizationId: "summary.dateStart") + "\n"
+    case .dateEnd: return String(localizationId: "summary.dateEnd") + "\n"
     } }
 
     var id: String { switch self {
@@ -111,6 +114,8 @@ enum SummaryRow: CaseIterable {
     case .dayAverage: return "dayAverage"
     case .daysTracked: return "daysTracked"
     case .daysSinceLastHappening: return "daysSinceLastHappening"
+    case .dateStart: return "dateStart"
+    case .dateEnd: return "dateEnd"
     } }
 }
 

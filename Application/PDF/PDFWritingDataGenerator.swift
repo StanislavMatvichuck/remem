@@ -8,133 +8,54 @@
 import Foundation
 import UIKit
 
-final class PDFWritingDataGenerator: NSObject, PDFWriting {
-    private static let pageWidth = CGFloat.screenW * 0.94
+struct PDFDataGenerator {
+    private let pages: [PdfRenderingPage]
 
-    private let page = CGRect(
-        origin: .zero,
-        size: CGSize(
-            width: pageWidth,
-            height: pageWidth
-        )
-    )
-
-    private let viewModel: PDFReadingViewModel
-
-    init(viewModel: PDFReadingViewModel) {
-        self.viewModel = viewModel
-    }
+    init(pages: [PdfRenderingPage]) { self.pages = pages }
 
     func make() -> Data {
-        let renderer = UIGraphicsPDFRenderer(bounds: page)
+        let renderer = UIGraphicsPDFRenderer(bounds: PdfRenderingPage.size)
         let data = renderer.pdfData(actions: { context in
-            renderControllersInGrid(context)
+            render(context)
         })
         return data
     }
 
-    private func renderControllersInGrid(_ context: UIGraphicsPDFRendererContext) {
-        makeNewPage(context)
-        placeFirstTile(context)
-
-        makeNewPage(context)
-        placeSummaryTile(context)
-
-        makeNewPage(context)
-        placeClockTile(context, viewModel: viewModel.clockViewModelDay)
-
-        makeNewPage(context)
-        placeClockTile(context, viewModel: viewModel.clockViewModelNight)
-
-        makeNewPage(context)
-        placeQRTile(context)
-
-        for i in 0 ..< viewModel.weekViewModel.pagesCount {
+    // MARK: - Private
+    private func render(_ context: UIGraphicsPDFRendererContext) {
+        for page in pages {
             makeNewPage(context)
-            placeWeekTile(tileNumber: i, context)
+
+            let pageView = UIView(frame: PdfRenderingPage.size)
+            let renderer = page.renderer
+            renderer.translatesAutoresizingMaskIntoConstraints = false
+            renderer.configure(page)
+            pageView.addSubview(renderer)
+            renderer.centerXAnchor.constraint(equalTo: pageView.centerXAnchor).isActive = true
+            renderer.widthAnchor.constraint(equalTo: pageView.widthAnchor).isActive = true
+            renderer.centerYAnchor.constraint(equalTo: pageView.centerYAnchor).isActive = true
+
+            if let text = page.title {
+                let title = UILabel(al: true)
+                title.font = .font
+                title.textColor = .secondary
+                title.text = text
+                pageView.addSubview(title)
+                title.centerXAnchor.constraint(equalTo: pageView.centerXAnchor).isActive = true
+                title.widthAnchor.constraint(equalTo: pageView.widthAnchor, constant: -2 * .buttonMargin).isActive = true
+                title.bottomAnchor.constraint(equalTo: renderer.topAnchor).isActive = true
+            }
+
+            pageView.layoutIfNeeded()
+            renderer.scrollIfNeeded()
+
+            pageView.layer.render(in: context.cgContext)
         }
-    }
-
-    private func placeFirstTile(_ context: UIGraphicsPDFRendererContext) {
-        let view = PDFWritingTitlePageView()
-        view.frame = page
-        view.configure(viewModel)
-        view.layoutIfNeeded()
-
-        view.layer.render(in: context.cgContext)
-    }
-
-    private func placeClockTile(_ context: UIGraphicsPDFRendererContext, viewModel: ClockViewModel) {
-        let clock = ClockView(viewModel: viewModel)
-        let view = UIView(frame: page)
-
-        view.addSubview(clock)
-        clock.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        clock.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        clock.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
-        view.layoutIfNeeded()
-        view.layer.render(in: context.cgContext)
-    }
-
-    private func placeSummaryTile(_ context: UIGraphicsPDFRendererContext) {
-        let summary = SummaryView()
-        summary.viewModel = viewModel.summaryViewModel
-        let view = UIView(frame: page)
-
-        view.addSubview(summary)
-        summary.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        summary.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        summary.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
-        view.layoutIfNeeded()
-        view.layer.render(in: context.cgContext)
-    }
-
-    private func placeWeekTile(tileNumber: Int, _ context: UIGraphicsPDFRendererContext) {
-        let view = UIView(frame: page)
-
-        let week = WeekView()
-        week.collection.delegate = self
-        week.viewModel = viewModel.weekViewModel
-
-        view.addAndConstrain(week)
-        view.layoutIfNeeded()
-
-        let weekPage = week.collection.dequeueReusableCell(withReuseIdentifier: WeekPageView.reuseIdentifier, for: IndexPath(row: tileNumber, section: 0))
-        week.collection.scrollRectToVisible(weekPage.frame, animated: false)
-
-        view.layoutIfNeeded()
-
-        view.layer.render(in: context.cgContext)
-    }
-
-    private func placeQRTile(_ context: UIGraphicsPDFRendererContext) {
-        let qr = PDFWritingQRPageView()
-        let view = UIView(frame: page)
-
-        view.addSubview(qr)
-        qr.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        qr.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        qr.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-
-        view.layoutIfNeeded()
-        view.layer.render(in: context.cgContext)
     }
 
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
         context.cgContext.setFillColor(UIColor.bg.cgColor)
-        context.cgContext.fill(page)
-    }
-}
-
-extension PDFWritingDataGenerator:
-    UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout
-{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: width)
+        context.cgContext.fill(PdfRenderingPage.size)
     }
 }

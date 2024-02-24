@@ -26,7 +26,6 @@ final class WeekViewController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollection()
         viewModel = factory.makeWeekViewModel()
     }
     
@@ -34,22 +33,8 @@ final class WeekViewController: UIViewController {
         scrollToLastPage()
     }
     
-    private func configureCollection() {
-        viewRoot.collection.delegate = self
-    }
-    
     private func scrollToLastPage() {
         let lastPageIndex = IndexPath(row: viewModel.pagesCount - 1, section: 0)
         viewRoot.collection.scrollToItem(at: lastPageIndex, at: .right, animated: false)
-    }
-}
-
-extension WeekViewController:
-    UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout
-{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: width)
     }
 }

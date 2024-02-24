@@ -48,6 +48,8 @@ final class SummaryCell: UICollectionViewCell {
         stack.layer.cornerRadius = .buttonMargin
         title.font = .font
         value.font = .fontWeekTitle
+        value.adjustsFontSizeToFitWidth = true
+        value.minimumScaleFactor = 0.1
         value.textColor = .bg
         title.textColor = .bg
     }

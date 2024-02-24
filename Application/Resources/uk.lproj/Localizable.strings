@@ -38,6 +38,8 @@
 "summary.dayAverage" = "Середнє за добу";
 "summary.daysTracked" = "Діб відслідковано";
 "summary.daysSinceLastHappening" = "Діб після останнього випадку";
+"summary.dateStart" = "Початок";
+"summary.dateEnd" = "Кінець";
 
 "widget.title" = "Поточний тиждень";
 "widget.subtitle" = "Перші три події з вашого списку";
@@ -45,10 +47,7 @@
 
 "pdf.create" = "Експортувати в pdf";
 "pdf.share" = "Поділитися";
-"pdf.titlePage.title" = "pdf звіт";
-"pdf.titlePage.start" = "старт";
-"pdf.titlePage.finish" = "фініш";
-"pdf.download" = "завантажити з app store";
+"pdf.titlePage.title" = "Звіт по запису свайпів";
 
 "visualisation.create" = "Продемонструйте на що ви здатні";
 

@@ -19,6 +19,7 @@ final class PDFReadingView: UIView {
         pdf.translatesAutoresizingMaskIntoConstraints = false
         pdf.displayDirection = .vertical
         pdf.document = document
+        pdf.scaleFactor = 0.9
         addSubview(pdf)
         NSLayoutConstraint.activate([
             pdf.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),

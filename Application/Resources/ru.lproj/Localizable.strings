@@ -38,6 +38,8 @@
 "summary.dayAverage" = "Среднее за день";
 "summary.daysTracked" = "Дней отслежено";
 "summary.daysSinceLastHappening" = "Дней после последнего происшествия";
+"summary.dateStart" = "Начало";
+"summary.dateEnd" = "Конец";
 
 "widget.title" = "Текущая неделя";
 "widget.subtitle" = "Первые три события из вашего списка";
@@ -45,10 +47,7 @@
 
 "pdf.create" = "Экспорт в pdf";
 "pdf.share" = "Поделиться";
-"pdf.titlePage.title" = "pdf отчет";
-"pdf.titlePage.start" = "старт";
-"pdf.titlePage.finish" = "финиш";
-"pdf.download" = "загрузить из app store";
+"pdf.titlePage.title" = "Отчет по записи свайпов";
 
 "visualisation.create" = "Покажите на что способны";
 

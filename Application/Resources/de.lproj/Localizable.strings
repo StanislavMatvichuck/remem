@@ -38,6 +38,8 @@
 "summary.dayAverage" = "Tagesdurchschnitt";
 "summary.daysTracked" = "Tage verfolgt";
 "summary.daysSinceLastHappening" = "Tage seit dem letzten Ereignis";
+"summary.dateStart" = "Start";
+"summary.dateEnd" = "Ende";
 
 "widget.title" = "Diese Woche";
 "widget.subtitle" = "Die ersten drei Ereignisse aus Ihrer Liste";
@@ -45,10 +47,7 @@
 
 "pdf.create" = "als PDF exportieren";
 "pdf.share" = "Aktie";
-"pdf.titlePage.title" = "PDF-Bericht";
-"pdf.titlePage.start" = "start";
-"pdf.titlePage.finish" = "beenden";
-"pdf.download" = "download from store";
+"pdf.titlePage.title" = "Swipes-Aufzeichnungsbericht";
 
 "visualisation.create" = "Zeig mir was du hast";
 

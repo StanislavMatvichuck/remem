@@ -31,6 +31,7 @@ final class WeekView: UIView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
+        collection.delegate = self
         configureLayout()
         configureAppearance()
     }
@@ -73,5 +74,12 @@ extension WeekView: UICollectionViewDataSource {
         else { fatalError(viewModelErrorMessage) }
         page.viewModel = viewModel.page(at: indexPath.row)
         return page
+    }
+}
+
+extension WeekView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
+        return CGSize(width: width, height: width)
     }
 }

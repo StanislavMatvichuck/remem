@@ -25,20 +25,5 @@ final class SummaryViewController: UIViewController {
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     override func loadView() { view = viewRoot }
-    override func viewDidLoad() {
-        configureList()
-        viewModel = factory.makeSummaryViewModel()
-    }
-
-    // MARK: - Private
-    private func configureList() { viewRoot.list.delegate = self }
-}
-
-extension SummaryViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let availableWidth = collectionView.bounds.width - .buttonMargin
-        let cellWidth = (availableWidth / 2).rounded(.down)
-        let cellHeight = 2 * .layoutSquare
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
+    override func viewDidLoad() { viewModel = factory.makeSummaryViewModel() }
 }
