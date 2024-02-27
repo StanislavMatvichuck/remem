@@ -88,6 +88,7 @@ public extension Event {
         return happeningDeleted
     }
 
+    /// This method deals with weekly goal only, not scalable
     func weeklyGoalAmount(at date: Date) -> Int {
         let startOfWeek = WeekIndex(date).date
 
@@ -100,6 +101,7 @@ public extension Event {
         return 0
     }
 
+    /// This method deals with weekly goal only, not scalable
     func setWeeklyGoal(amount: Int, for date: Date) {
         let startOfWeek = WeekIndex(date).date
         let newGoal = WeeklyGoal(dateCreated: startOfWeek, amount: amount)

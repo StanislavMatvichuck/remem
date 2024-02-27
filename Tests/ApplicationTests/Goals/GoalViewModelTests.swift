@@ -15,7 +15,11 @@ final class GoalViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = GoalViewModel(goal: Goal(dateCreated: DayIndex.referenceValue.date, value: 1))
+        sut = GoalViewModel(goal: Goal(
+            dateCreated: DayIndex.referenceValue.date,
+            value: 1,
+            event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        ))
     }
 
     override func tearDown() {
@@ -29,7 +33,12 @@ final class GoalViewModelTests: XCTestCase {
     func test_readableDateCreated_localizedTextAndFormattedGoalDateCreated() {
         XCTAssertEqual(sut.readableDateCreated, "Goal created at 1 Jan 2001")
 
-        sut = GoalViewModel(goal: Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: 0))
+        sut = GoalViewModel(goal: Goal(
+            dateCreated: DayIndex.referenceValue.adding(days: 1).date,
+            value: 0,
+            event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        ))
+
         XCTAssertEqual(sut.readableDateCreated, "Goal created at 2 Jan 2001")
     }
 
