@@ -33,6 +33,9 @@
 "weeklyGoal.progress" = "прогресс %";
 "weeklyGoal.goalPlaceholder" = "добавить недельную цель";
 
+"goal.createdAt" = "Цель создано";
+"goal.leftToAchieve" = "осталось до достижения";
+
 "summary.total" = "Всего происшествий";
 "summary.weekAverage" = "Среднее за неделю";
 "summary.dayAverage" = "Среднее за день";

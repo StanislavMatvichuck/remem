@@ -33,6 +33,9 @@
 "weeklyGoal.progress" = "прогрес %";
 "weeklyGoal.goalPlaceholder" = "додати тижневу ціль";
 
+"goal.createdAt" = "Мету створено";
+"goal.leftToAchieve" = "залишилось для досягнення";
+
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";
 "summary.dayAverage" = "Середнє за добу";

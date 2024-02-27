@@ -256,6 +256,10 @@
 		08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3325A29B4A14B00E59693 /* WeakRef.swift */; };
 		08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B529C31B25006AF35B /* PdfSnapshots.swift */; };
 		08E454B929C31C2B006AF35B /* TestingPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */; };
+		08EAD4E82B8D020500557C4D /* GoalViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */; };
+		08EAD4EB2B8D024400557C4D /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */; };
+		08EAD4ED2B8D050D00557C4D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EC2B8D050D00557C4D /* GoalTests.swift */; };
+		08EAD4EF2B8D052D00557C4D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EE2B8D052D00557C4D /* Goal.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
 		08F467E429BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */; };
 		08F467EA29BF2A6E00D35AB6 /* PDFReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PDFReadingViewController.swift */; };
@@ -661,6 +665,10 @@
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
+		08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModelTests.swift; sourceTree = "<group>"; };
+		08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
+		08EAD4EC2B8D050D00557C4D /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
+		08EAD4EE2B8D052D00557C4D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
 		08F467E329BF1C1C00D35AB6 /* PDFReadingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewControllerTests.swift; sourceTree = "<group>"; };
@@ -755,6 +763,7 @@
 				083BECF328D0A31A009157FD /* Event.swift */,
 				08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */,
 				087ED40D28D0A3F60085A37D /* Happening.swift */,
+				08EAD4EE2B8D052D00557C4D /* Goal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1110,6 +1119,7 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				08EAD4E62B8D01F600557C4D /* Goals */,
 				081A15562B6287F700EDA8A2 /* HourDistribution */,
 				0852404A2B615314004F9BDA /* DayOfWeek */,
 				08B57DA22B5ED3030046D307 /* EventCreation */,
@@ -1178,6 +1188,7 @@
 			isa = PBXGroup;
 			children = (
 				087ED41428D0A4F20085A37D /* EventTests.swift */,
+				08EAD4EC2B8D050D00557C4D /* GoalTests.swift */,
 			);
 			path = DomainTests;
 			sourceTree = "<group>";
@@ -1293,6 +1304,7 @@
 				08DFFADC2B5008260063B389 /* EventDetails */,
 				081A15592B62886300EDA8A2 /* HourDistribution */,
 				08DFFADD2B5008730063B389 /* Week */,
+				08EAD4E92B8D023200557C4D /* Goals */,
 				0816B6E32B500B2B00A29815 /* DayDetails */,
 				0852404D2B615342004F9BDA /* DayOfWeek */,
 				08DFFADF2B5009080063B389 /* Clock */,
@@ -1448,6 +1460,22 @@
 				08E454B729C31C1A006AF35B /* TestingPdfViewController.swift */,
 			);
 			path = TestingViewController;
+			sourceTree = "<group>";
+		};
+		08EAD4E62B8D01F600557C4D /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		08EAD4E92B8D023200557C4D /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */,
+			);
+			path = Goals;
 			sourceTree = "<group>";
 		};
 		08FEA39E28DC9A4000BAA196 /* Tests */ = {
@@ -1796,6 +1824,7 @@
 				081C431D29FFC46600ACC4D7 /* MinuteIndex.swift in Sources */,
 				081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */,
 				087ED40E28D0A3F60085A37D /* Happening.swift in Sources */,
+				08EAD4EF2B8D052D00557C4D /* Goal.swift in Sources */,
 				081C431C29FFC46600ACC4D7 /* DateIndexing.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
 			);
@@ -1866,6 +1895,7 @@
 				0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */,
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0852404C2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift in Sources */,
+				08EAD4E82B8D020500557C4D /* GoalViewModelTests.swift in Sources */,
 				0875B4492B57F6AC004C0575 /* EventsSortingViewModelTests.swift in Sources */,
 				0875B4642B59DCAA004C0575 /* EventsSortingControllerTests.swift in Sources */,
 				085240512B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift in Sources */,
@@ -1931,6 +1961,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				087ED42528D0A5530085A37D /* EventTests.swift in Sources */,
+				08EAD4ED2B8D050D00557C4D /* GoalTests.swift in Sources */,
 				0800A0712A1E2F3200E1D1BA /* TimelineTesting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2035,6 +2066,7 @@
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */,
 				08D512362787144800C2037F /* EventsListView.swift in Sources */,
+				08EAD4EB2B8D024400557C4D /* GoalViewModel.swift in Sources */,
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				080949A02B8A3B9400ACAC61 /* PDFRenderingPage.swift in Sources */,

@@ -33,6 +33,9 @@
 "weeklyGoal.progress" = "fortschritt %";
 "weeklyGoal.goalPlaceholder" = "wöchentliches Ziel hinzufügen";
 
+"goal.createdAt" = "Ziel erstellt bei";
+"goal.leftToAchieve" = "bleibt zu erreichen";
+
 "summary.total" = "Totale Happenings";
 "summary.weekAverage" = "Wochendurchschnitt";
 "summary.dayAverage" = "Tagesdurchschnitt";
