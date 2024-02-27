@@ -76,6 +76,20 @@ final class GoalTests: XCTestCase {
         
         XCTAssertEqual(sut.achievedAt, happeningDateCreatedThatMakesProgressOfOne)
     }
+    
+    func test_leftToAchieve() {
+        let value = 5
+        let event = Event.makeDefault()
+        event.addHappening(date: DayIndex.referenceValue.date)
+        
+        sut = Goal(
+            dateCreated: DayIndex.referenceValue.date,
+            value: Int32(value),
+            event: event
+        )
+        
+        XCTAssertEqual(sut.leftToAchieve, value - 1)
+    }
 }
 
 private extension Event {

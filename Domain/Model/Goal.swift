@@ -11,6 +11,7 @@ public struct Goal {
     public let dateCreated: Date
     public let value: Int32
     public let progress: CGFloat
+    public let leftToAchieve: Int
     public var achieved: Bool { progress >= 1.0 }
     public var achievedAt: Date?
 
@@ -30,7 +31,7 @@ public struct Goal {
 
         for happening in event.happenings {
             /// cut all happenings that created before goal
-            if happening.dateCreated <= dateCreated { continue }
+            if happening.dateCreated < dateCreated { continue }
 
             countedHappenings += 1
 
@@ -48,5 +49,8 @@ public struct Goal {
         } else {
             self.progress = 0
         }
+
+        let leftToAchieve = Int(value) - countedHappenings
+        self.leftToAchieve = leftToAchieve > 0 ? leftToAchieve : 0
     }
 }

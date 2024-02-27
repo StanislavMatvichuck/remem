@@ -29,7 +29,7 @@ struct GoalViewModel {
             Self.textCreatedAt + " " +
             Self.dateFormatter.string(from: goal.dateCreated)
         readableLeftToAchieve =
-            String(describing: goal.value) + " " +
+            String(describing: goal.leftToAchieve) + " " +
             Self.textLeftToAchieve
 
         progress = 0

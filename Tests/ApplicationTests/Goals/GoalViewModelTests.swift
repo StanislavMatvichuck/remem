@@ -42,8 +42,16 @@ final class GoalViewModelTests: XCTestCase {
         XCTAssertEqual(sut.readableDateCreated, "Goal created at 2 Jan 2001")
     }
 
-    func test_leftToAchieve_localizedTextAndGoalValue() {
-        XCTAssertEqual(sut.readableLeftToAchieve, "1 left to achieve")
+    func test_leftToAchieve_localizedTextAndGoalLeftToAchieve() {
+        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        event.addHappening(date: DayIndex.referenceValue.date)
+        sut = GoalViewModel(goal: Goal(
+            dateCreated: DayIndex.referenceValue.date,
+            value: 3,
+            event: event
+        ))
+
+        XCTAssertEqual(sut.readableLeftToAchieve, "2 left to achieve")
     }
 
     func test_progress_zero() { XCTAssertEqual(sut.progress, 0) }
