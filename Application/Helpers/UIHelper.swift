@@ -36,7 +36,7 @@ extension CGFloat {
     static let buttonRadius: CGFloat = buttonHeight / 2
     static let buttonMargin: CGFloat = layoutSquare - buttonRadius
     static let swiperRadius: CGFloat = buttonRadius - buttonMargin
-    static let border: CGFloat = 0.8
+    static let border: CGFloat = 1.0
 }
 
 extension CGRect {

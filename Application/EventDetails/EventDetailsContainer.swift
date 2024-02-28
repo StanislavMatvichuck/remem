@@ -28,10 +28,10 @@ final class EventDetailsContainer:
             factory: self,
             controllers: [
                 WeekContainer(self).make(),
-                HourDistributionContainer(self).make(),
-                DayOfWeekContainer(self).make(),
                 SummaryContainer(parent: self).make(),
                 GoalsContainer().make(),
+                HourDistributionContainer(self).make(),
+                DayOfWeekContainer(self).make(),
                 PDFWritingContainer(self).make()
             ]
         )
