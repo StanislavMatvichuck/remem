@@ -33,6 +33,7 @@
 "weeklyGoal.progress" = "progress %";
 "weeklyGoal.goalPlaceholder" = "add weekly goal";
 
+"goals.create" = "Create goal";
 "goal.createdAt" = "Goal created at";
 "goal.leftToAchieve" = "left to achieve";
 

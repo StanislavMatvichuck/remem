@@ -20,6 +20,7 @@ extension UIColor {
 
     static let text = UIColor(named: "text")!
     static let text_goalAchieved = UIColor(named: "text_goalAchieved")!
+    static let text_secondary = UIColor(named: "text_secondary")!
     static let border = UIColor(named: "border")!
     static let border_primary = UIColor(named: "border_primary")!
 }

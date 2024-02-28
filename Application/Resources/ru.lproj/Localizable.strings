@@ -33,6 +33,7 @@
 "weeklyGoal.progress" = "прогресс %";
 "weeklyGoal.goalPlaceholder" = "добавить недельную цель";
 
+"goals.create" = "Создать цель";
 "goal.createdAt" = "Цель создано";
 "goal.leftToAchieve" = "осталось до достижения";
 

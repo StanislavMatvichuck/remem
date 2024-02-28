@@ -48,6 +48,9 @@ protocol HourDistributionViewModelFactoring {
     func makeHourDistributionViewModel() -> HourDistributionViewModel
 }
 
+protocol GoalsViewModelFactoring { func makeGoalsViewModel() -> GoalsViewModel }
+protocol GoalViewModelFactoring { func makeGoalViewModel() -> GoalViewModel }
+
 protocol DayOfWeekViewModelFactoring {
     func makeDayOfWeekViewModel() -> DayOfWeekViewModel
 }

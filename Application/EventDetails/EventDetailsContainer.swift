@@ -31,6 +31,7 @@ final class EventDetailsContainer:
                 HourDistributionContainer(self).make(),
                 DayOfWeekContainer(self).make(),
                 SummaryContainer(parent: self).make(),
+                GoalsContainer().make(),
                 PDFWritingContainer(self).make()
             ]
         )

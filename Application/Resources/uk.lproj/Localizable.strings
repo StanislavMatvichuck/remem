@@ -33,7 +33,8 @@
 "weeklyGoal.progress" = "прогрес %";
 "weeklyGoal.goalPlaceholder" = "додати тижневу ціль";
 
-"goal.createdAt" = "Мету створено";
+"goals.create" = "Створити ціль";
+"goal.createdAt" = "Ціль створено";
 "goal.leftToAchieve" = "залишилось для досягнення";
 
 "summary.total" = "Загалом випадків";
