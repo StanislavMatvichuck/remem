@@ -84,9 +84,9 @@ final class EventCellView: UIView {
 
         NSLayoutConstraint.activate([
             timeSince.centerXAnchor.constraint(equalTo: stack.centerXAnchor),
-            timeSince.bottomAnchor.constraint(equalTo: stack.bottomAnchor),
+            timeSince.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -.border),
             timeSince.heightAnchor.constraint(equalToConstant: .buttonMargin * 2),
-            timeSince.widthAnchor.constraint(equalTo: title.widthAnchor),
+            timeSince.widthAnchor.constraint(equalTo: title.widthAnchor, multiplier: 3 / 4),
 
             stack.heightAnchor.constraint(equalToConstant: .buttonHeight),
             stack.widthAnchor.constraint(equalTo: widthAnchor, constant: .buttonMargin * -2),

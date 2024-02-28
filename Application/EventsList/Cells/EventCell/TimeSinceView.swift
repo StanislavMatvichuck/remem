@@ -13,28 +13,14 @@ final class TimeSinceView: UIStackView {
     static let backgroundColor = UIColor.bg_secondary
     static let height = CGFloat.buttonMargin * 2
 
-    let leftCorner: UIView = {
-        let view = UIView(al: true)
-        view.backgroundColor = backgroundColor
-        view.widthAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
-        view.heightAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
-        return view
-    }()
-
-    let rightCorner: UIView = {
-        let view = UIView(al: true)
-        view.backgroundColor = backgroundColor
-        view.widthAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
-        view.heightAnchor.constraint(equalToConstant: TimeSinceView.height / 2).isActive = true
-        return view
-    }()
-
     let label: UILabel = {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.font = .fontSmall
         label.textColor = UIColor.bg
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
 
@@ -53,24 +39,15 @@ final class TimeSinceView: UIStackView {
     // MARK: - Private
     private func configureLayout() {
         alignment = .center
-        addSubview(leftCorner)
-        addSubview(rightCorner)
         addArrangedSubview(Self.makeDot())
         addArrangedSubview(label)
         addArrangedSubview(Self.makeDot())
-
-        NSLayoutConstraint.activate([
-            leftCorner.bottomAnchor.constraint(equalTo: bottomAnchor),
-            leftCorner.leadingAnchor.constraint(equalTo: leadingAnchor),
-
-            rightCorner.bottomAnchor.constraint(equalTo: bottomAnchor),
-            rightCorner.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
     }
 
     private func configureAppearance() {
         backgroundColor = Self.backgroundColor
         layer.cornerRadius = .buttonMargin
+        layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
     }
 
     private static func makeDot() -> UIView {

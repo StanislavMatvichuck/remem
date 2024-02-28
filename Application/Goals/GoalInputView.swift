@@ -60,10 +60,9 @@ final class GoalInputView: UIStackView {
 
     private func configureAppearance() {
         input.font = .fontBold
-        input.textColor = UIColor.primary
-        input.backgroundColor = UIColor.bg.withAlphaComponent(0.1)
+        input.textColor = UIColor.bg
+        input.backgroundColor = .bg_secondary_dimmed
         input.layer.cornerRadius = .buttonMargin
-        input.layoutMargins = UIEdgeInsets(top: 0, left: .buttonMargin, bottom: 0, right: .buttonMargin)
     }
 }
 

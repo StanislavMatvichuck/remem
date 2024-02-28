@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 final class GoalsView: UIView {
-    private static let color = UIColor.primary
-
     let buttonCreateGoal: UIButton = {
         let button = UIButton(al: true)
         button.setTitle(GoalsViewModel.createGoal, for: .normal)
@@ -56,9 +54,10 @@ final class GoalsView: UIView {
     }
 
     private func configureAppearance() {
-        buttonCreateGoal.backgroundColor = Self.color.withAlphaComponent(0.7)
-        buttonCreateGoal.layer.borderWidth = 1
-        buttonCreateGoal.layer.borderColor = Self.color.cgColor
+        let color = UIColor.bg_primary
+        buttonCreateGoal.backgroundColor = color
+        buttonCreateGoal.layer.borderWidth = .border
+        buttonCreateGoal.layer.borderColor = color.cgColor
         buttonCreateGoal.layer.cornerRadius = CGFloat.buttonMargin
         buttonCreateGoal.setTitleColor(UIColor.bg, for: .normal)
     }

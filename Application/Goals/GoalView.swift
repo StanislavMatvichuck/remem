@@ -61,7 +61,7 @@ final class GoalView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .secondary.withAlphaComponent(0.7)
+        backgroundColor = .bg_secondary
         layer.borderWidth = 1
         layer.borderColor = UIColor.secondary.cgColor
         layer.cornerRadius = CGFloat.buttonMargin

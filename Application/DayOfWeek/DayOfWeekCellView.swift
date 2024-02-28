@@ -86,7 +86,7 @@ final class DayOfWeekCellView: UIStackView {
         addArrangedSubview(flexibleBackground)
         addArrangedSubview(dayName)
 
-        setCustomSpacing(0, after: percent)
+        setCustomSpacing(1, after: percent)
 
         NSLayoutConstraint.activate([
             dayValue.centerXAnchor.constraint(equalTo: flexibleBackground.centerXAnchor),
@@ -107,6 +107,7 @@ final class DayOfWeekCellView: UIStackView {
         dayValue.textColor = .bg_item
         flexibleBackground.backgroundColor = .bg_secondary
         flexibleBackground.layer.cornerRadius = .layoutSquare / 10 * 1.6
+        flexibleBackground.layer.borderColor = UIColor.border_secondary.cgColor
     }
 
     private func configureContent(_ vm: DayOfWeekCellViewModel) {
@@ -114,11 +115,11 @@ final class DayOfWeekCellView: UIStackView {
         dayValue.text = "\(vm.value)"
         dayName.text = vm.shortDayName
 
-        percent.isHidden = vm.isHidden
+//        percent.isHidden = vm.isHidden
         dayValue.isHidden = vm.isHidden
-        flexibleBackground.isHidden = vm.isHidden
+//        flexibleBackground.isHidden = vm.isHidden
 
         dayName.font = vm.isToday ? .fontSmallBold : .font
-        flexibleBackground.backgroundColor = vm.isToday ? .secondary : .bg_secondary
+        flexibleBackground.layer.borderWidth = vm.isToday ? .border * 2 : .border
     }
 }

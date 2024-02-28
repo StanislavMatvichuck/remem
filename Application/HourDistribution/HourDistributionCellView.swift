@@ -83,16 +83,14 @@ final class HourDistributionCellView: UIStackView {
         hour.textColor = .secondary
         hour.font = .fontSmall
 
-        flexibleBackground.backgroundColor = .secondary
+        flexibleBackground.layer.borderWidth = .border
+        flexibleBackground.layer.borderColor = UIColor.border_secondary.cgColor
     }
 
     private func configureContent(_ vm: HourDistributionCellViewModel) {
         hour.text = vm.hours
-        flexibleBackground.backgroundColor = vm.isHidden ? .bg_secondary.withAlphaComponent(0.3) : .bg_secondary
+        flexibleBackground.backgroundColor = vm.isHidden ? .bg_secondary_dimmed : .bg_secondary
         hour.font = vm.isCurrentHour ? .fontExtraSmallBold : .fontExtraSmall
-        
-        if vm.isCurrentHour {
-            flexibleBackground.backgroundColor = .secondary
-        }
+        flexibleBackground.layer.borderWidth = vm.isCurrentHour ? .border * 2 : .border
     }
 }
