@@ -8,6 +8,7 @@
 import Foundation
 
 public struct Goal {
+    public let id: String
     public let dateCreated: Date
     public let value: Int32
     public let progress: CGFloat
@@ -18,10 +19,12 @@ public struct Goal {
     private let event: Event
 
     public init(
+        id: String = UUID().uuidString,
         dateCreated: Date,
         value: Int32,
         event: Event
     ) {
+        self.id = id
         self.dateCreated = dateCreated
         self.value = value
         self.event = event

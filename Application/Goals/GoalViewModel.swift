@@ -18,6 +18,7 @@ struct GoalViewModel {
         return formatter
     }()
 
+    var id: String { goal.id }
     let readableDateCreated: String
     let readableLeftToAchieve: String
     let progress: CGFloat
