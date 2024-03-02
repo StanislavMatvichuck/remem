@@ -29,7 +29,7 @@ final class EventDetailsContainer:
             controllers: [
                 WeekContainer(self).make(),
                 SummaryContainer(parent: self).make(),
-                GoalsContainer().make(),
+                GoalsContainer(self).make(),
                 HourDistributionContainer(self).make(),
                 DayOfWeekContainer(self).make(),
                 PDFWritingContainer(self).make()

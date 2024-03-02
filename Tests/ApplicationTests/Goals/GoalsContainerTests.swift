@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import Foundation
 import XCTest
 
@@ -14,7 +15,15 @@ final class GoalsContainerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sut = GoalsContainer()
+        sut = GoalsContainer(
+            EventDetailsContainer(
+                ApplicationContainer(mode: .unitTest),
+                event: Event(
+                    name: "",
+                    dateCreated: DayIndex.referenceValue.date
+                )
+            )
+        )
     }
     
     override func tearDown() {

@@ -8,30 +8,20 @@
 import Foundation
 import UIKit
 
-final class GoalsView: UIView {
-    let buttonCreateGoal: UIButton = {
-        let button = UIButton(al: true)
-        button.setTitle(GoalsViewModel.createGoal, for: .normal)
-        return button
-    }()
-
-    let list: UIStackView = {
-        let view = UIStackView(al: true)
-        view.axis = .vertical
-        view.spacing = .buttonMargin
+final class GoalsView: UIView, GoalsDataProviding {
+    let list: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: GoalsView.makeLayout())
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     var viewModel: GoalsViewModel? { didSet {
-        guard let viewModel else { return }
-
-        for subview in list.arrangedSubviews { subview.removeFromSuperview() }
-
-        for cell in viewModel.cells {
-            let cellView = GoalView()
-            list.addArrangedSubview(cellView)
-        }
+        dataSource.applySnapshot(oldValue)
+        setNeedsLayout()
     }}
+
+    lazy var heightConstraint: NSLayoutConstraint = { list.heightAnchor.constraint(equalToConstant: 7 * .layoutSquare) }()
+    lazy var dataSource = GoalsDataSource(list: list, provider: self)
 
     init() {
         super.init(frame: .zero)
@@ -42,23 +32,38 @@ final class GoalsView: UIView {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        list.layoutIfNeeded()
+        heightConstraint.constant = list.contentSize.height
+    }
+
     // MARK: - Private
     private func configureLayout() {
-        let stack = UIStackView(al: true)
-        stack.axis = .vertical
-        stack.addArrangedSubview(list)
-        stack.addArrangedSubview(buttonCreateGoal)
-        stack.spacing = .buttonMargin
-        addAndConstrain(stack, constant: .buttonMargin)
-        buttonCreateGoal.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
+        addAndConstrain(list)
+        heightConstraint.isActive = true
     }
 
     private func configureAppearance() {
-        let color = UIColor.bg_primary
-        buttonCreateGoal.backgroundColor = color
-        buttonCreateGoal.layer.borderWidth = .border
-        buttonCreateGoal.layer.borderColor = color.cgColor
-        buttonCreateGoal.layer.cornerRadius = CGFloat.buttonMargin
-        buttonCreateGoal.setTitleColor(UIColor.bg, for: .normal)
+        list.backgroundColor = .clear
+    }
+
+    private static func makeLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, _ in
+            let heightDimension: NSCollectionLayoutDimension = .estimated(3 * .layoutSquare)
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+            let isCreateGoalSection = sectionIndex == GoalsViewModel.Section.createGoal.rawValue
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = .buttonMargin
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: isCreateGoalSection ? 0 : .buttonMargin, leading: .buttonMargin,
+                bottom: .buttonMargin, trailing: .buttonMargin
+            )
+            return section
+        }
     }
 }

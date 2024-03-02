@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import Domain
 import Foundation
 import XCTest
 
@@ -14,7 +15,15 @@ final class GoalsViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let container = GoalsContainer()
+        let container = GoalsContainer(
+            EventDetailsContainer(
+                ApplicationContainer(mode: .unitTest),
+                event: Event(
+                    name: "",
+                    dateCreated: DayIndex.referenceValue.date
+                )
+            )
+        )
         sut = container.make() as? GoalsViewController
         sut.loadViewIfNeeded()
     }

@@ -8,13 +8,7 @@
 import Domain
 import UIKit
 
-final class GoalView: UIView {
-    let viewModel = GoalViewModel(goal: Goal(
-        dateCreated: DayIndex.referenceValue.date,
-        value: 3,
-        event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
-    ))
-
+final class GoalCell: UICollectionViewCell {
     let createdAt: UILabel = {
         let label = UILabel(al: true)
         label.numberOfLines = 1
@@ -34,12 +28,15 @@ final class GoalView: UIView {
     let input = GoalInputView()
     let progress = GoalProgressView()
 
-    init() {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
+    var viewModel: GoalViewModel? { didSet {
+        guard let viewModel else { return }
+        configure(content: viewModel)
+    } }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureLayout()
         configureAppearance()
-        configure(content: viewModel)
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

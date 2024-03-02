@@ -19,3 +19,11 @@ extension GoalViewModel: GoalCellViewModeling {
             lhs.progress == rhs.progress
     }
 }
+
+extension CreateGoalViewModel: GoalCellViewModeling {
+    var id: String { "CreateGoalViewModel" }
+
+    static func == (lhs: CreateGoalViewModel, rhs: CreateGoalViewModel) -> Bool {
+        lhs.id == rhs.id
+    }
+}

@@ -23,6 +23,10 @@
 		0816B6E72B500D0500A29815 /* WidgetEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventCellViewModel.swift */; };
 		0816D0C32B909A80005FD6A0 /* GoalCellViewModelingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0C22B909A80005FD6A0 /* GoalCellViewModelingTests.swift */; };
 		0816D0C52B909AD7005FD6A0 /* GoalCellViewModeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */; };
+		0816D0C72B90A29C005FD6A0 /* CreateGoalViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0C62B90A29C005FD6A0 /* CreateGoalViewModelTests.swift */; };
+		0816D0C92B90A2D8005FD6A0 /* CreateGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */; };
+		0816D0CB2B90A435005FD6A0 /* CreateGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */; };
+		0816D0CD2B90AA2A005FD6A0 /* GoalsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */; };
 		081A15582B62881E00EDA8A2 /* HourDistributionCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A15572B62881E00EDA8A2 /* HourDistributionCellViewModelTests.swift */; };
 		081A155B2B62887000EDA8A2 /* HourDistributionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A155A2B62887000EDA8A2 /* HourDistributionCellViewModel.swift */; };
 		081A155D2B628D3200EDA8A2 /* HourDistributionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A155C2B628D3200EDA8A2 /* HourDistributionViewModelTests.swift */; };
@@ -180,7 +184,7 @@
 		087D426A2B8E3AB90075004D /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D42692B8E3AB80075004D /* GoalsViewController.swift */; };
 		087D426C2B8E58A70075004D /* GoalsContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D426B2B8E58A70075004D /* GoalsContainerTests.swift */; };
 		087D426E2B8E58CF0075004D /* GoalsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D426D2B8E58CF0075004D /* GoalsContainer.swift */; };
-		087D42702B8E894F0075004D /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D426F2B8E894F0075004D /* GoalView.swift */; };
+		087D42702B8E894F0075004D /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D426F2B8E894F0075004D /* GoalCell.swift */; };
 		087D42722B8EA7690075004D /* GoalInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D42712B8EA7690075004D /* GoalInputView.swift */; };
 		087ED40E28D0A3F60085A37D /* Happening.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087ED40D28D0A3F60085A37D /* Happening.swift */; };
 		087ED41E28D0A54C0085A37D /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -438,6 +442,10 @@
 		081391DD29B8D25A008069FB /* DateIndexing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndexing.swift; sourceTree = "<group>"; };
 		0816D0C22B909A80005FD6A0 /* GoalCellViewModelingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCellViewModelingTests.swift; sourceTree = "<group>"; };
 		0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCellViewModeling.swift; sourceTree = "<group>"; };
+		0816D0C62B90A29C005FD6A0 /* CreateGoalViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalViewModelTests.swift; sourceTree = "<group>"; };
+		0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalViewModel.swift; sourceTree = "<group>"; };
+		0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalCell.swift; sourceTree = "<group>"; };
+		0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsDataSource.swift; sourceTree = "<group>"; };
 		0816F4472933C05200F3937A /* RemovedGoal06.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RemovedGoal06.xcdatamodel; sourceTree = "<group>"; };
 		081A15572B62881E00EDA8A2 /* HourDistributionCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionCellViewModelTests.swift; sourceTree = "<group>"; };
 		081A155A2B62887000EDA8A2 /* HourDistributionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionCellViewModel.swift; sourceTree = "<group>"; };
@@ -593,7 +601,7 @@
 		087D42692B8E3AB80075004D /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		087D426B2B8E58A70075004D /* GoalsContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsContainerTests.swift; sourceTree = "<group>"; };
 		087D426D2B8E58CF0075004D /* GoalsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsContainer.swift; sourceTree = "<group>"; };
-		087D426F2B8E894F0075004D /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
+		087D426F2B8E894F0075004D /* GoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		087D42712B8EA7690075004D /* GoalInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalInputView.swift; sourceTree = "<group>"; };
 		087ED40D28D0A3F60085A37D /* Happening.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happening.swift; sourceTree = "<group>"; };
 		087ED41428D0A4F20085A37D /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
@@ -1494,6 +1502,7 @@
 				08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */,
 				087D425F2B8E37300075004D /* GoalsViewTests.swift */,
 				087D42632B8E38960075004D /* GoalsViewModelTests.swift */,
+				0816D0C62B90A29C005FD6A0 /* CreateGoalViewModelTests.swift */,
 				0816D0C22B909A80005FD6A0 /* GoalCellViewModelingTests.swift */,
 				087D42672B8E3A8F0075004D /* GoalsViewControllerTests.swift */,
 				087D426B2B8E58A70075004D /* GoalsContainerTests.swift */,
@@ -1508,8 +1517,11 @@
 				087D42652B8E38B10075004D /* GoalsViewModel.swift */,
 				087D42692B8E3AB80075004D /* GoalsViewController.swift */,
 				087D42612B8E37480075004D /* GoalsView.swift */,
-				087D426F2B8E894F0075004D /* GoalView.swift */,
+				0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */,
+				0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */,
+				087D426F2B8E894F0075004D /* GoalCell.swift */,
 				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
+				0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */,
 				087D42712B8EA7690075004D /* GoalInputView.swift */,
 				087D426D2B8E58CF0075004D /* GoalsContainer.swift */,
 				0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */,
@@ -1995,6 +2007,7 @@
 				08B42F742B2CCF6400850BAD /* ClockViewModelTests.swift in Sources */,
 				085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */,
 				08E454B929C31C2B006AF35B /* TestingPdfViewController.swift in Sources */,
+				0816D0C72B90A29C005FD6A0 /* CreateGoalViewModelTests.swift in Sources */,
 				0881E4B92B5F3AE800F68CAE /* EventCreationControllerTests.swift in Sources */,
 				085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */,
 			);
@@ -2041,6 +2054,7 @@
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				085240532B61A5C6004F9BDA /* DayOfWeekViewModel.swift in Sources */,
 				080C41802986AF4800C1F54F /* SummaryView.swift in Sources */,
+				0816D0C92B90A2D8005FD6A0 /* CreateGoalViewModel.swift in Sources */,
 				08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */,
 				0852405B2B61CB39004F9BDA /* DayOfWeekController.swift in Sources */,
 				0875B46A2B59FC7B004C0575 /* EventsSortingPresentationController.swift in Sources */,
@@ -2104,6 +2118,7 @@
 				0875B4662B59DCDC004C0575 /* EventsSortingController.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */,
+				0816D0CD2B90AA2A005FD6A0 /* GoalsDataSource.swift in Sources */,
 				0852405D2B61CD22004F9BDA /* DayOfWeekCellView.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* CreateEventCell.swift in Sources */,
 				080C417C2986AE3200C1F54F /* SummaryViewModel.swift in Sources */,
@@ -2119,7 +2134,7 @@
 				08DA2C12284F559200FC418B /* UIHelper.swift in Sources */,
 				08CC506C2906DEEC00840385 /* main.swift in Sources */,
 				080949A02B8A3B9400ACAC61 /* PDFRenderingPage.swift in Sources */,
-				087D42702B8E894F0075004D /* GoalView.swift in Sources */,
+				087D42702B8E894F0075004D /* GoalCell.swift in Sources */,
 				088AF7462B34D99F0039EF83 /* WeekPageView.swift in Sources */,
 				081A15672B6291A300EDA8A2 /* HourDistributionController.swift in Sources */,
 				081A155F2B628D9D00EDA8A2 /* HourDistributionViewModel.swift in Sources */,
@@ -2131,6 +2146,7 @@
 				08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */,
 				089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */,
 				087D426E2B8E58CF0075004D /* GoalsContainer.swift in Sources */,
+				0816D0CB2B90A435005FD6A0 /* CreateGoalCell.swift in Sources */,
 				0881E4B52B5F387900F68CAE /* EventCreationView.swift in Sources */,
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,

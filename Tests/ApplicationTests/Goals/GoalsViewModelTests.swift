@@ -25,10 +25,7 @@ final class GoalsViewModelTests: XCTestCase {
     // MARK: - Tests
     
     func test_init() { XCTAssertNotNil(sut) }
-    func test_createGoalText() { XCTAssertEqual(GoalsViewModel.createGoal, "Create goal") }
-    func test_init_acceptsCreateGoalButtonTapHandler() {
-        sut = GoalsViewModel(createGoalTapHandler: {})
-    }
-    
-    func test_handleCreateTap() { sut.handleCreateTap() }
+    func test_sections() { XCTAssertNotNil(sut.sections) }
+    func test_identifiersForSection() { XCTAssertNotNil(sut.cellsIdentifiers(for: .goals)) }
+    func test_cellForIdentifier() { XCTAssertNil(sut.cell(identifier: "")) }
 }

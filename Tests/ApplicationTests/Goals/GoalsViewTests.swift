@@ -25,7 +25,4 @@ final class GoalsViewTests: XCTestCase {
     // MARK: - Tests
     
     func test_init() { XCTAssertNotNil(sut) }
-    func test_showsCreateGoalButton() {
-        XCTAssertEqual(sut.buttonCreateGoal.titleLabel?.text, "Create goal")
-    }
 }

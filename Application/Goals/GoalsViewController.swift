@@ -26,14 +26,5 @@ final class GoalsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = factory.makeGoalsViewModel()
-        configureTapHandlers()
-    }
-    
-    private func configureTapHandlers() {
-        viewRoot.buttonCreateGoal.addTarget(self, action: #selector(handleCreateTap), for: .touchUpInside)
-    }
-    
-    @objc private func handleCreateTap() {
-        viewModel?.handleCreateTap()
     }
 }

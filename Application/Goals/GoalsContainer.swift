@@ -14,16 +14,26 @@ final class GoalsContainer:
     GoalViewModelFactoring
 {
     private var goals: [GoalViewModel] = []
-    private var controller: Updating?
+    private let parent: EventDetailsContainer
+    private var updater: Updating { parent.updater }
+    
+    init(_ parent: EventDetailsContainer) {
+        self.parent = parent
+    }
 
     func make() -> UIViewController {
         let controller = GoalsViewController(factory: self)
-        self.controller = controller
+        parent.updater.addDelegate(controller)
         return controller
     }
 
+    // MARK: - ViewModels
+
     func makeGoalsViewModel() -> GoalsViewModel {
-        GoalsViewModel(cells: goals, createGoalTapHandler: makeCreateEventCellTapHandler())
+        GoalsViewModel(cells: [
+            .goals: goals,
+            .createGoal: [makeCreateGoalViewModel()]
+        ])
     }
 
     func makeGoalViewModel() -> GoalViewModel {
@@ -34,10 +44,14 @@ final class GoalsContainer:
         ))
     }
 
+    func makeCreateGoalViewModel() -> CreateGoalViewModel {
+        CreateGoalViewModel(handler: makeCreateGoalTapHandler())
+    }
+
     // MARK: - Handlers
-    func makeCreateEventCellTapHandler() -> GoalsViewModel.CreateButtonTapHandler {{
+    func makeCreateGoalTapHandler() -> CreateGoalViewModel.TapHandler {{
         self.goals.append(self.makeGoalViewModel())
-        self.controller?.update()
+        self.updater.update()
         print(#function)
     }}
 }
