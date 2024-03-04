@@ -28,11 +28,16 @@ final class GoalProgressView: UIView {
         layer.path = circularPath.cgPath
         layer.lineCap = .round
         layer.lineWidth = .buttonMargin / 2
-        layer.strokeEnd = 0.9
+        layer.strokeStart = 0
+        layer.strokeEnd = viewModel?.progress ?? 0
         layer.strokeColor = UIColor.bg.cgColor
         layer.fillColor = UIColor.clear.cgColor
         return layer
     }()
+
+    var viewModel: GoalViewModel? { didSet {
+        percent.text = viewModel?.readablePercent
+    }}
 
     let percent = UILabel(al: true)
 
@@ -41,7 +46,6 @@ final class GoalProgressView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
-        configureContent()
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -62,10 +66,8 @@ final class GoalProgressView: UIView {
     private func configureAppearance() {
         percent.font = .font
         percent.textColor = .bg
-    }
-
-    private func configureContent() {
-        percent.text = "90%"
+        percent.adjustsFontSizeToFitWidth = true
+        percent.minimumScaleFactor = 0.3
     }
 
     private func configureCircleIfNeeded() {

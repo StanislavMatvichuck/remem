@@ -16,7 +16,8 @@ final class GoalsContainer:
     private var goals: [GoalViewModel] = []
     private let parent: EventDetailsContainer
     private var updater: Updating { parent.updater }
-    
+    private var event: Event { parent.event }
+
     init(_ parent: EventDetailsContainer) {
         self.parent = parent
     }
@@ -40,7 +41,7 @@ final class GoalsContainer:
         GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
             value: Int32(goals.count),
-            event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
+            event: event
         ))
     }
 

@@ -72,5 +72,6 @@ final class GoalCell: UICollectionViewCell {
     private func configure(content vm: GoalViewModel) {
         createdAt.text = vm.readableDateCreated
         leftToAchieve.text = vm.readableLeftToAchieve
+        progress.viewModel = vm
     }
 }
