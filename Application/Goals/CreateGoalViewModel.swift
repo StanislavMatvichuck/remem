@@ -9,11 +9,8 @@ import Foundation
 
 struct CreateGoalViewModel {
     static let createGoal = String(localizationId: "goals.create")
-    typealias TapHandler = () -> Void
 
-    private let handler: TapHandler?
+    let command: GoalCreateCommand?
 
-    init(handler: TapHandler? = nil) { self.handler = handler }
-
-    func handleTap() { handler?() }
+    init(command: GoalCreateCommand? = nil) { self.command = command }
 }

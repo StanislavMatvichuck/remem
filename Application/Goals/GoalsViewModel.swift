@@ -35,5 +35,5 @@ struct GoalsViewModel {
         return nil
     }
 
-    func cellsRequireReconfigurationIds(oldValue: GoalsViewModel) -> [String] { [] }
+    func cellsRequireReconfigurationIds(oldValue: GoalsViewModel) -> [String] { cells[.goals]?.map { $0.id } ?? [] }
 }

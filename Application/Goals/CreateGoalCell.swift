@@ -40,5 +40,5 @@ final class CreateGoalCell: UICollectionViewCell {
     }
 
     private func configureTapHandler() { button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) }
-    @objc private func handleTap() { viewModel?.handleTap() }
+    @objc private func handleTap() { viewModel?.command?.execute() }
 }

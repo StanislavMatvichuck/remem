@@ -36,7 +36,9 @@ final class GoalProgressView: UIView {
     }()
 
     var viewModel: GoalViewModel? { didSet {
-        percent.text = viewModel?.readablePercent
+        guard let viewModel else { return }
+        percent.text = viewModel.readablePercent
+        if circleConfigured { circle.strokeEnd = viewModel.progress }
     }}
 
     let percent = UILabel(al: true)

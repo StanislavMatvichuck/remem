@@ -35,11 +35,17 @@ final class GoalInputView: UIStackView {
         return view
     }()
 
+    var viewModel: GoalViewModel? { didSet {
+        guard let viewModel else { return }
+        input.text = viewModel.readableValue
+    }}
+
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
+        configureButtons()
     }
 
     required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -64,6 +70,19 @@ final class GoalInputView: UIStackView {
         input.backgroundColor = .bg_secondary_dimmed
         input.layer.cornerRadius = .buttonMargin
     }
+
+    private func configureButtons() {
+        let plusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapPlus))
+        plus.addGestureRecognizer(plusGR)
+        plus.isUserInteractionEnabled = true
+
+        let minusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapMinus))
+        minus.addGestureRecognizer(minusGR)
+        minus.isUserInteractionEnabled = true
+    }
+
+    @objc private func handleTapPlus() { viewModel?.incrementCommand?.execute() }
+    @objc private func handleTapMinus() { viewModel?.decrementCommand?.execute() }
 }
 
 final class GoalInput: UITextField {

@@ -30,8 +30,11 @@ final class GoalCell: UICollectionViewCell {
 
     var viewModel: GoalViewModel? { didSet {
         guard let viewModel else { return }
-        configure(content: viewModel)
-    } }
+        createdAt.text = viewModel.readableDateCreated
+        leftToAchieve.text = viewModel.readableLeftToAchieve
+        progress.viewModel = viewModel
+        input.viewModel = viewModel
+    }}
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,11 +70,5 @@ final class GoalCell: UICollectionViewCell {
         createdAt.textColor = .bg
         leftToAchieve.font = .font
         leftToAchieve.textColor = .text_secondary
-    }
-
-    private func configure(content vm: GoalViewModel) {
-        createdAt.text = vm.readableDateCreated
-        leftToAchieve.text = vm.readableLeftToAchieve
-        progress.viewModel = vm
     }
 }

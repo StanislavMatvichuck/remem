@@ -31,9 +31,16 @@ struct GoalViewModel {
     let readableValue: String
     let progress: CGFloat
     let isAchieved: Bool
+    let incrementCommand: Command?
+    let decrementCommand: Command?
 
-    init(goal: Goal) {
+    init(
+        goal: Goal,
+        incrementCommand: Command? = nil,
+        decrementCommand: Command? = nil
+    ) {
         self.goal = goal
+
         readableDateCreated =
             Self.textCreatedAt + " " +
             Self.dateFormatter.string(from: goal.dateCreated)
@@ -45,5 +52,7 @@ struct GoalViewModel {
         isAchieved = false
         readablePercent = Self.percentFormatter.string(from: NSNumber(floatLiteral: Double(goal.progress)))!
         readableValue = "\(goal.value.amount)"
+        self.incrementCommand = incrementCommand
+        self.decrementCommand = decrementCommand
     }
 }
