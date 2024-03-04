@@ -18,9 +18,16 @@ struct GoalViewModel {
         return formatter
     }()
 
+    private static let percentFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        return formatter
+    }()
+
     var id: String { goal.id }
     let readableDateCreated: String
     let readableLeftToAchieve: String
+    let readablePercent: String
     let progress: CGFloat
     let isAchieved: Bool
 
@@ -33,7 +40,8 @@ struct GoalViewModel {
             String(describing: goal.leftToAchieve) + " " +
             Self.textLeftToAchieve
 
-        progress = 0
+        progress = goal.progress.clamped(to: 0 ... 1)
         isAchieved = false
+        readablePercent = Self.percentFormatter.string(from: NSNumber(floatLiteral: Double(goal.progress)))!
     }
 }
