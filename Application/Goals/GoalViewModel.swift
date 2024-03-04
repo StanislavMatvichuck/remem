@@ -28,6 +28,7 @@ struct GoalViewModel {
     let readableDateCreated: String
     let readableLeftToAchieve: String
     let readablePercent: String
+    let readableValue: String
     let progress: CGFloat
     let isAchieved: Bool
 
@@ -43,5 +44,6 @@ struct GoalViewModel {
         progress = goal.progress.clamped(to: 0 ... 1)
         isAchieved = false
         readablePercent = Self.percentFormatter.string(from: NSNumber(floatLiteral: Double(goal.progress)))!
+        readableValue = "\(goal.value.amount)"
     }
 }

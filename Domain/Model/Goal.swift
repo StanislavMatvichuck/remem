@@ -7,30 +7,50 @@
 
 import Foundation
 
-public struct Goal {
+public class Goal {
     public let id: String
     public let dateCreated: Date
-    public let value: Int32
-    public let progress: CGFloat
-    public let leftToAchieve: Int
+    public var value: GoalValue
     public var achieved: Bool { progress >= 1.0 }
-    public var achievedAt: Date?
 
     private let event: Event
+    private var contributingHappeningsCount: Int {
+        var count = 0
+
+        for happening in event.happenings {
+            /// cut all happenings that created before goal
+            if happening.dateCreated < dateCreated { continue }
+            count += 1
+        }
+
+        return count
+    }
 
     public init(
         id: String = UUID().uuidString,
         dateCreated: Date,
-        value: Int32,
+        value: GoalValue = GoalValue(),
         event: Event
     ) {
         self.id = id
         self.dateCreated = dateCreated
         self.value = value
         self.event = event
+    }
 
-        var countedHappenings = 0
+    public var progress: CGFloat {
+        let count = contributingHappeningsCount
+        return count == 0 ? 0 : CGFloat(count) / CGFloat(value.amount)
+    }
+
+    public var leftToAchieve: Int {
+        let leftToAchieve = Int(value.amount) - contributingHappeningsCount
+        return leftToAchieve > 0 ? leftToAchieve : 0
+    }
+
+    public var achievedAt: Date? {
         var achievedAt: Date?
+        var countedHappenings = 0
 
         for happening in event.happenings {
             /// cut all happenings that created before goal
@@ -39,21 +59,24 @@ public struct Goal {
             countedHappenings += 1
 
             /// first happening that achieves goal
-            if countedHappenings >= value, achievedAt == nil {
+            if countedHappenings >= value.amount, achievedAt == nil {
                 achievedAt = happening.dateCreated
             }
         }
 
-        self.achievedAt = achievedAt
+        return achievedAt
+    }
 
-        if countedHappenings != 0 {
-            let progress = CGFloat(countedHappenings) / CGFloat(value)
-            self.progress = progress
+    public func update(value: Int) { self.value = GoalValue(amount: value) }
+}
+
+public struct GoalValue: Equatable {
+    public let amount: Int32
+    public init(amount: Int = 1) {
+        if amount > 1 {
+            self.amount = Int32(amount)
         } else {
-            self.progress = 0
+            self.amount = 1
         }
-
-        let leftToAchieve = Int(value) - countedHappenings
-        self.leftToAchieve = leftToAchieve > 0 ? leftToAchieve : 0
     }
 }

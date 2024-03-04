@@ -17,6 +17,7 @@ final class GoalsContainer:
     private let parent: EventDetailsContainer
     private var updater: Updating { parent.updater }
     private var event: Event { parent.event }
+    private var now: Date { parent.currentMoment }
 
     init(_ parent: EventDetailsContainer) {
         self.parent = parent
@@ -39,8 +40,8 @@ final class GoalsContainer:
 
     func makeGoalViewModel() -> GoalViewModel {
         GoalViewModel(goal: Goal(
-            dateCreated: DayIndex.referenceValue.date,
-            value: Int32(goals.count),
+            dateCreated: now,
+            value: GoalValue(amount: goals.count),
             event: event
         ))
     }

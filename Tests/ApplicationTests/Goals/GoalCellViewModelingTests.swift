@@ -19,7 +19,6 @@ final class GoalCellViewModelingTests: XCTestCase {
         super.setUp()
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 0,
             event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
         ))
     }

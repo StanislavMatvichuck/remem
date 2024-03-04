@@ -17,7 +17,6 @@ final class GoalViewModelTests: XCTestCase {
         super.setUp()
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 1,
             event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
         ))
     }
@@ -35,7 +34,6 @@ final class GoalViewModelTests: XCTestCase {
 
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.adding(days: 1).date,
-            value: 0,
             event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
         ))
 
@@ -47,7 +45,7 @@ final class GoalViewModelTests: XCTestCase {
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 3,
+            value: GoalValue(amount: 3),
             event: event
         ))
 
@@ -64,7 +62,7 @@ final class GoalViewModelTests: XCTestCase {
 
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 3,
+            value: GoalValue(amount: 3),
             event: event
         ))
 
@@ -78,7 +76,7 @@ final class GoalViewModelTests: XCTestCase {
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 3,
+            value: GoalValue(amount: 3),
             event: event
         ))
 
@@ -93,10 +91,12 @@ final class GoalViewModelTests: XCTestCase {
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 3,
+            value: GoalValue(amount: 3),
             event: event
         ))
 
         XCTAssertEqual(sut.readablePercent, "133%")
     }
+
+    func test_readableValue_1() { XCTAssertEqual(sut.readableValue, "1") }
 }

@@ -16,7 +16,6 @@ final class GoalTests: XCTestCase {
         super.setUp()
         sut = Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: 0,
             event: Event.makeDefault()
         )
     }
@@ -32,7 +31,7 @@ final class GoalTests: XCTestCase {
     func test_progress_doesNotIncludeEventHappeningsBeforeDateCreated() {
         let event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.date)
-        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: 1, event: event)
+        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, event: event)
         
         XCTAssertEqual(sut.progress, 0)
     }
@@ -40,7 +39,7 @@ final class GoalTests: XCTestCase {
     func test_progress_countEventHappeningAfterDateCreated() {
         let event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.adding(days: 1).date)
-        sut = Goal(dateCreated: DayIndex.referenceValue.date, value: 1, event: event)
+        sut = Goal(dateCreated: DayIndex.referenceValue.date, event: event)
         
         XCTAssertEqual(sut.progress, 1.0)
         XCTAssertTrue(sut.achieved)
@@ -51,7 +50,7 @@ final class GoalTests: XCTestCase {
         event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
         event.addHappening(date: DayIndex.referenceValue.adding(days: 2).date)
         event.addHappening(date: DayIndex.referenceValue.adding(days: 3).date)
-        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: 3, event: event)
+        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: GoalValue(amount: 3), event: event)
         
         XCTAssertEqual(sut.progress, 2 / 3)
         XCTAssertFalse(sut.achieved)
@@ -72,7 +71,7 @@ final class GoalTests: XCTestCase {
         /// happening that makes progress more than one
         event.addHappening(date: DayIndex.referenceValue.adding(days: 5).date)
         
-        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: 3, event: event)
+        sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, value: GoalValue(amount: 3), event: event)
         
         XCTAssertEqual(sut.achievedAt, happeningDateCreatedThatMakesProgressOfOne)
     }
@@ -84,11 +83,27 @@ final class GoalTests: XCTestCase {
         
         sut = Goal(
             dateCreated: DayIndex.referenceValue.date,
-            value: Int32(value),
+            value: GoalValue(amount: value),
             event: event
         )
         
         XCTAssertEqual(sut.leftToAchieve, value - 1)
+    }
+    
+    func test_updateValue() {
+        let newValue = 2
+        
+        sut.update(value: newValue)
+        
+        XCTAssertEqual(sut.value, GoalValue(amount: newValue))
+    }
+    
+    func test_updateValue_lessThenOne_doesNothing() {
+        let newValue: Int = 0
+        
+        sut.update(value: newValue)
+        
+        XCTAssertEqual(sut.value, GoalValue(amount: newValue))
     }
 }
 
