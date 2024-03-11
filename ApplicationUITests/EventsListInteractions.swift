@@ -38,8 +38,8 @@ final class EventsListInteractions: XCTestCase {
     // MARK: - Private
     private func swipeCell(at index: Int) {
         let cell = cell(at: index)
-        let swiper = cell.descendants(matching: .any)["Swiper"]
-        let valueLabel = cell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventCellValue.rawValue]
+        let swiper = cell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+        let valueLabel = cell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventValue.rawValue]
 
         swiper.press(
             forDuration: 0,
@@ -53,7 +53,7 @@ final class EventsListInteractions: XCTestCase {
 
     private func tapCell(at index: Int) {
         let cell = cell(at: index)
-        let swiper = cell.descendants(matching: .any)["Swiper"]
+        let swiper = cell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
 
         swiper.tap()
     }

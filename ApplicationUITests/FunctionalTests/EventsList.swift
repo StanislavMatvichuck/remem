@@ -60,6 +60,33 @@ final class EventsListFunctionalTests: XCTestCase {
         XCTAssertEqual(cellsAmount, 2, "Event is removed, only hint and create event button remain")
     }
 
+    func test_eventValueIncreasedAfterSwipe() {
+        /// Arrange: create event
+        let createdEventName = "Swiped event"
+        createEventButton.tap()
+        eventNameInput.typeText(createdEventName)
+        submitKeyboard()
+
+        /// Act: swipe
+        let createdEventCell = cell(at: 1)
+        let value = createdEventCell.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
+        let swiper = createdEventCell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+
+        XCTAssertEqual(value.label, "0", "New event has no swipes")
+
+        swiper.press(
+            forDuration: 0.1,
+            thenDragTo: value,
+            withVelocity: 150,
+            thenHoldForDuration: 0.1
+        )
+
+        sleep(1)
+
+        /// Assert: value has increased
+        XCTAssertEqual(value.label, "1", "Swipe is recorded and new value is visible")
+    }
+
     // MARK: - Private
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch
