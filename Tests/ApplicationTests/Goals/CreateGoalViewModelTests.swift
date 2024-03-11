@@ -26,6 +26,6 @@ final class CreateGoalViewModelTests: XCTestCase {
     
     func test_init() { XCTAssertNotNil(sut) }
     func test_createGoalText() { XCTAssertEqual(CreateGoalViewModel.createGoal, "Create goal") }
-    func test_init_acceptsTapHandler() { sut = CreateGoalViewModel(handler: {}) }
-    func test_handleCreateTap() { sut.handleTap() }
+    func test_init_acceptsTapHandler() { sut = CreateGoalViewModel() }
+    func test_handleCreateTap() { sut.command?.execute() }
 }
