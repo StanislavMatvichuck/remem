@@ -87,12 +87,53 @@ final class EventsListFunctionalTests: XCTestCase {
         XCTAssertEqual(value.label, "1", "Swipe is recorded and new value is visible")
     }
 
+    func test_eventIsVisitedAfterTap() {
+        /// Arrange: create event and swipe it
+        let createdEventName = "Visited event"
+        createEventButton.tap()
+        eventNameInput.typeText(createdEventName)
+        submitKeyboard()
+
+        let createdEventCell = cell(at: 1)
+        let value = createdEventCell.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
+        let swiper = createdEventCell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+
+        XCTAssertEqual(value.label, "0", "New event has no swipes")
+
+        swiper.press(
+            forDuration: 0.1,
+            thenDragTo: value,
+            withVelocity: 150,
+            thenHoldForDuration: 0.1
+        )
+
+        XCTAssertEqual(hint.label, "Press to see details", "hint asks to tap event")
+
+        sleep(1)
+
+        /// Act: open event details and return back
+        createdEventCell.tap()
+
+        let eventDetailsBackToEventsListButton = app.navigationBars.buttons.firstMatch
+        eventDetailsBackToEventsListButton.tap()
+
+        /// Assert: hint must have final state
+        XCTAssertEqual(hint.label, "long tap to change order", "hint changes after event is visited")
+    }
+
     // MARK: - Private
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch
             .cells.matching(identifier:
                 UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
             ).firstMatch
+    }
+
+    private var hint: XCUIElement {
+        app.collectionViews.firstMatch
+            .cells.matching(identifier:
+                UITestAccessibilityIdentifier.hint.rawValue
+            ).firstMatch.staticTexts.firstMatch
     }
 
     private var eventNameInput: XCUIElement {
