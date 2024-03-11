@@ -47,7 +47,8 @@ final class CreateEventCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        accessibilityIdentifier = Self.reuseIdentifier
+        isAccessibilityElement = true
+        accessibilityIdentifier = UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
         configureLayout()
         configureAppearance()
         configureEventHandlers()

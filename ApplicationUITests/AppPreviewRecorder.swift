@@ -7,19 +7,6 @@
 
 import XCTest
 
-/// Duplication from Application target
-enum LaunchMode: String {
-    case appPreview02_addingEvents,
-         appPreview02_swipingEvents,
-         appPreview02_viewDetailsAndExport,
-         appPreview02_addWeeklyGoal,
-         appPreview03_widget,
-         appPreview03_darkMode,
-         eventsListInteractions,
-         unitTest,
-         uikit
-}
-
 class AppPreviewRecorder: XCTestCase {
     let recording: Bool = true
     let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")

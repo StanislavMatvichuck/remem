@@ -16,6 +16,7 @@ enum LaunchMode: String {
          appPreview03_widget,
          appPreview03_darkMode,
          eventsListInteractions,
+         eventsListFunctionalTests,
          unitTest,
          uikit,
          injectedCurrentMoment

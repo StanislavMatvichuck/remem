@@ -21,6 +21,8 @@ final class EventCellView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 3
+        label.isAccessibilityElement = true
+        label.accessibilityIdentifier = UITestAccessibilityIdentifier.eventTitle.rawValue
         return label
     }()
 

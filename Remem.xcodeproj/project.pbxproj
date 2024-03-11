@@ -111,6 +111,8 @@
 		085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */; };
 		085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */; };
 		085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */; };
+		0858F71A2B9F8A45005F16A3 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858F7192B9F8A45005F16A3 /* EventsList.swift */; };
+		0858F71C2B9F8AE2005F16A3 /* LaunchModeDuplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858F71B2B9F8AE2005F16A3 /* LaunchModeDuplication.swift */; };
 		085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */; };
 		085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */; };
 		085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */; };
@@ -546,6 +548,8 @@
 		085896B12A2652BA00390C76 /* PDFReadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingViewModel.swift; sourceTree = "<group>"; };
 		085896B42A26540700390C76 /* PDFWritingTitlePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingTitlePageView.swift; sourceTree = "<group>"; };
 		085896B82A279D6A00390C76 /* EventEntityMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapperTests.swift; sourceTree = "<group>"; };
+		0858F7192B9F8A45005F16A3 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
+		0858F71B2B9F8AE2005F16A3 /* LaunchModeDuplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModeDuplication.swift; sourceTree = "<group>"; };
 		085A2C3029F19CFC005C6E5E /* EventCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A42B31CD9F000283E1 /* WeekViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModelTests.swift; sourceTree = "<group>"; };
 		085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewModel.swift; sourceTree = "<group>"; };
@@ -1125,12 +1129,22 @@
 		0857B5A429892CBC002B400B /* ApplicationUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0858F7182B9F8A30005F16A3 /* FunctionalTests */,
 				0857B5A529892CBC002B400B /* AppPreview02Recorder.swift */,
 				0870FD772A3E36130002C403 /* AppPreview03Recorder.swift */,
 				0870FD792A3E37430002C403 /* AppPreviewRecorder.swift */,
 				080354F72B67BFA4003EA6AA /* EventsListInteractions.swift */,
+				0858F71B2B9F8AE2005F16A3 /* LaunchModeDuplication.swift */,
 			);
 			path = ApplicationUITests;
+			sourceTree = "<group>";
+		};
+		0858F7182B9F8A30005F16A3 /* FunctionalTests */ = {
+			isa = PBXGroup;
+			children = (
+				0858F7192B9F8A45005F16A3 /* EventsList.swift */,
+			);
+			path = FunctionalTests;
 			sourceTree = "<group>";
 		};
 		085A2C2F29F15144005C6E5E /* EventCell */ = {
@@ -1957,8 +1971,10 @@
 			files = (
 				0870FD782A3E36130002C403 /* AppPreview03Recorder.swift in Sources */,
 				080354F82B67BFA4003EA6AA /* EventsListInteractions.swift in Sources */,
+				0858F71C2B9F8AE2005F16A3 /* LaunchModeDuplication.swift in Sources */,
 				0857B5A629892CBC002B400B /* AppPreview02Recorder.swift in Sources */,
 				0870FD7A2A3E37430002C403 /* AppPreviewRecorder.swift in Sources */,
+				0858F71A2B9F8A45005F16A3 /* EventsList.swift in Sources */,
 				089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
