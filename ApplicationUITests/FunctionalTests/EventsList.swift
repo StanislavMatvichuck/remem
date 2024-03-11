@@ -35,6 +35,31 @@ final class EventsListFunctionalTests: XCTestCase {
         XCTAssertEqual(valueLabel.label, createdEventName, "Event name must match entered name")
     }
 
+    func test_eventCanBeRemoved() {
+        /// Arrange: create event
+        let createdEventName = "Deleted event"
+        createEventButton.tap()
+        eventNameInput.typeText(createdEventName)
+        submitKeyboard()
+
+        /// Act: perform drag and drop
+        let createdEventCell = cell(at: 1)
+        let removeArea = app.descendants(matching: .any)[UITestAccessibilityIdentifier.removeEventArea.rawValue]
+
+        createdEventCell.press(
+            forDuration: 1.0,
+            thenDragTo: removeArea,
+            withVelocity: 150,
+            thenHoldForDuration: 0.1
+        )
+
+        sleep(1)
+
+        /// Assert: event is not in the list anymore
+        let cellsAmount = app.collectionViews.cells.count
+        XCTAssertEqual(cellsAmount, 2, "Event is removed, only hint and create event button remain")
+    }
+
     // MARK: - Private
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch

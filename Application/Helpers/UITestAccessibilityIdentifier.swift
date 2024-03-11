@@ -15,5 +15,6 @@ enum UITestAccessibilityIdentifier: String {
          buttonPdfShare,
          eventCellValue,
          eventTitle,
-         buttonCreteEvent
+         buttonCreteEvent,
+         removeEventArea
 }

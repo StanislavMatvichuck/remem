@@ -67,6 +67,7 @@ final class CreateEventCell: UICollectionViewCell {
         let height = contentView.heightAnchor.constraint(equalToConstant: 2 * .layoutSquare)
         height.priority = .defaultHigh /// tableView constraints fix
         height.isActive = true
+        addInvisibleDropAreaForUITesting()
     }
 
     @objc private func configureAppearance() {
@@ -81,6 +82,18 @@ final class CreateEventCell: UICollectionViewCell {
         if #available(iOS 17.0, *) {
             registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance))
         }
+    }
+
+    private func addInvisibleDropAreaForUITesting() {
+        let uiTestingDropArea = UIView(al: true)
+        uiTestingDropArea.isAccessibilityElement = true
+        uiTestingDropArea.accessibilityIdentifier = UITestAccessibilityIdentifier.removeEventArea.rawValue
+        uiTestingDropArea.backgroundColor = .clear
+        contentView.addSubview(uiTestingDropArea)
+        uiTestingDropArea.widthAnchor.constraint(equalToConstant: 1.0).isActive = true
+        uiTestingDropArea.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
+        uiTestingDropArea.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .buttonMargin).isActive = true
+        uiTestingDropArea.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 
     // MARK: - Events handling
