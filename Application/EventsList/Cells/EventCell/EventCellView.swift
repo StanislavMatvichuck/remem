@@ -78,7 +78,7 @@ final class EventCellView: UIView {
 
         addSubview(stack)
         addSubview(timeSince)
-        addAndConstrain(circleContainer)
+        addSubview(circleContainer)
         addSubview(fireDecal)
         addAndConstrain(hintDisplay)
 
@@ -96,6 +96,10 @@ final class EventCellView: UIView {
             animatedProgress.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
             fireDecal.centerYAnchor.constraint(equalTo: centerYAnchor),
             fireDecal.trailingAnchor.constraint(equalTo: leadingAnchor),
+            circleContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            circleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .buttonMargin),
+            circleContainer.widthAnchor.constraint(equalToConstant: .buttonHeight),
+            circleContainer.heightAnchor.constraint(equalToConstant: .buttonHeight),
         ])
     }
 

@@ -39,7 +39,7 @@ final class EventsListInteractions: XCTestCase {
     private func swipeCell(at index: Int) {
         let cell = cell(at: index)
         let swiper = cell.descendants(matching: .any)["Swiper"]
-        let valueLabel = cell.staticTexts.element(boundBy: 1)
+        let valueLabel = cell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventCellValue.rawValue]
 
         swiper.press(
             forDuration: 0,
@@ -59,6 +59,6 @@ final class EventsListInteractions: XCTestCase {
     }
 
     private func cell(at index: Int) -> XCUIElement {
-        app.tables.firstMatch.cells.element(boundBy: index)
+        app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
 }

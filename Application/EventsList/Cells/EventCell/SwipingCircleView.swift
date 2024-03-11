@@ -43,7 +43,7 @@ final class SwipingCircleView: UIControl {
         return plusLayer
     }()
 
-    private var width: CGFloat { bounds.width }
+    private var width: CGFloat { superview!.bounds.width }
     private var animator: UIViewPropertyAnimator?
 
     init() {
@@ -94,10 +94,8 @@ final class SwipingCircleView: UIControl {
     // MARK: - Private
     private func configureLayout() {
         addSubview(circle)
-        NSLayoutConstraint.activate([
-            circle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2 * CGFloat.buttonMargin),
-            circle.centerYAnchor.constraint(equalTo: centerYAnchor),
-        ])
+        circle.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        circle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 
     private func configureAppearance() {

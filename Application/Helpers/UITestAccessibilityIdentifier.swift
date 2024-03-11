@@ -13,4 +13,5 @@ enum UITestAccessibilityIdentifier: String {
     case buttonGoalDone
     case buttonPdfCreate
     case buttonPdfShare
+    case eventCellValue
 }
