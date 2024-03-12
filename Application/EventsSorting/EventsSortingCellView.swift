@@ -11,6 +11,8 @@ final class EventsSortingCellView: UIView {
     let title: UILabel = {
         let label = UILabel(al: true)
         label.font = .font
+        label.isAccessibilityElement = true
+        label.accessibilityIdentifier = UITestAccessibilityIdentifier.orderingVariant.rawValue
         return label
     }()
 

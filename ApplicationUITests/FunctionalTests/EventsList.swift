@@ -121,6 +121,43 @@ final class EventsListFunctionalTests: XCTestCase {
         XCTAssertEqual(hint.label, "long tap to change order", "hint changes after event is visited")
     }
 
+    /// This test is not repeatable because eventSorting repository reads value from previous test
+    func test_orderingByDate() {
+        /// Arrange: create events
+        let createdEventNames = ["C", "B", "A"]
+
+        for name in createdEventNames {
+            createEventButton.tap()
+            eventNameInput.typeText(name)
+            submitKeyboard()
+        }
+
+        let first = cell(at: 1).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+        let second = cell(at: 2).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+        let third = cell(at: 3).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+
+        /// Act: change ordering to alphabetical
+        let orderingButton = app.navigationBars.buttons.firstMatch
+        orderingButton.tap()
+
+        let byNameOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By name"]
+        byNameOrderingButton.tap()
+
+        /// Assert: events sorted alphabetically
+        XCTAssertEqual(first.label, "A")
+        XCTAssertEqual(second.label, "B")
+        XCTAssertEqual(third.label, "C")
+
+        /// Act: change ordering by date of creation
+        let byDateOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By date created"]
+        byDateOrderingButton.tap()
+
+        /// Assert: events are reordered by date
+        XCTAssertEqual(first.label, "C")
+        XCTAssertEqual(second.label, "B")
+        XCTAssertEqual(third.label, "A")
+    }
+
     // MARK: - Private
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch

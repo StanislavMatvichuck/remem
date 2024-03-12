@@ -18,5 +18,6 @@ enum UITestAccessibilityIdentifier: String {
          eventSwiper,
          buttonCreteEvent,
          removeEventArea,
-         hint
+         hint,
+         orderingVariant
 }
