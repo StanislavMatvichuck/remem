@@ -18,8 +18,8 @@ final class EventsListFunctionalTests: XCTestCase {
     }
 
     override func tearDown() {
-        app = nil
         super.tearDown()
+        app = nil
     }
 
     // MARK: - Tests
@@ -156,6 +156,48 @@ final class EventsListFunctionalTests: XCTestCase {
         XCTAssertEqual(first.label, "C")
         XCTAssertEqual(second.label, "B")
         XCTAssertEqual(third.label, "A")
+    }
+
+    func test_dragAndDropToReorder() {
+        /// Arrange: create events
+        let createdEventNames = ["A", "B", "C"]
+
+        for name in createdEventNames {
+            createEventButton.tap()
+            eventNameInput.typeText(name)
+            submitKeyboard()
+        }
+
+        let first = cell(at: 1).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+        let second = cell(at: 2).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+        let third = cell(at: 3).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+
+        _ = third.waitForExistence(timeout: 1.0)
+
+        /// Act: drag third event to first
+        third.press(
+            forDuration: 1.0,
+            thenDragTo: first,
+            withVelocity: 150,
+            thenHoldForDuration: 0.1
+        )
+
+        /// Assert: manual ordering appears after drag and drop
+        let manualOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["Manual"]
+        _ = manualOrderingButton.waitForExistence(timeout: 1.0)
+
+        /// Assert: manual ordering is applied
+        XCTAssertEqual(first.label, "C")
+        XCTAssertEqual(second.label, "A")
+        XCTAssertEqual(third.label, "B")
+
+        /// Kind of tearDown to reset testing repository to initial state
+        let orderingButton = app.navigationBars.buttons.firstMatch
+        orderingButton.tap()
+
+        let byNameOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By name"]
+        _ = byNameOrderingButton.waitForExistence(timeout: 1.0)
+        byNameOrderingButton.tap()
     }
 
     // MARK: - Private
