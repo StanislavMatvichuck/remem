@@ -25,28 +25,20 @@ final class EventsListFunctionalTests: XCTestCase {
     // MARK: - Tests
     func test_eventAddedToEmptyList() {
         let createdEventName = "Event.name"
-        createEventButton.tap()
-        eventNameInput.typeText(createdEventName)
-        submitKeyboard()
+        createEventWith(name: createdEventName)
 
-        let createdEventCell = cell(at: 1)
-        let valueLabel = createdEventCell.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventTitle.rawValue]
-        XCTAssertTrue(valueLabel.waitForExistence(timeout: 1.0), "List must show created event")
-        XCTAssertEqual(valueLabel.label, createdEventName, "Event name must match entered name")
+        XCTAssertTrue(firstEventTitle.waitForExistence(timeout: 1.0), "List must show created event")
+        XCTAssertEqual(firstEventTitle.label, createdEventName, "Event name must match entered name")
     }
 
     func test_eventCanBeRemoved() {
         /// Arrange: create event
-        let createdEventName = "Deleted event"
-        createEventButton.tap()
-        eventNameInput.typeText(createdEventName)
-        submitKeyboard()
+        createEventWith(name: "Deleted event")
 
         /// Act: perform drag and drop
-        let createdEventCell = cell(at: 1)
         let removeArea = app.descendants(matching: .any)[UITestAccessibilityIdentifier.removeEventArea.rawValue]
 
-        createdEventCell.press(
+        firstEvent.press(
             forDuration: 1.0,
             thenDragTo: removeArea,
             withVelocity: 150,
@@ -62,15 +54,11 @@ final class EventsListFunctionalTests: XCTestCase {
 
     func test_eventValueIncreasedAfterSwipe() {
         /// Arrange: create event
-        let createdEventName = "Swiped event"
-        createEventButton.tap()
-        eventNameInput.typeText(createdEventName)
-        submitKeyboard()
+        createEventWith(name: "Swiped event")
 
         /// Act: swipe
-        let createdEventCell = cell(at: 1)
-        let value = createdEventCell.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
-        let swiper = createdEventCell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+        let value = firstEvent.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
+        let swiper = firstEvent.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
 
         XCTAssertEqual(value.label, "0", "New event has no swipes")
 
@@ -89,14 +77,10 @@ final class EventsListFunctionalTests: XCTestCase {
 
     func test_eventIsVisitedAfterTap() {
         /// Arrange: create event and swipe it
-        let createdEventName = "Visited event"
-        createEventButton.tap()
-        eventNameInput.typeText(createdEventName)
-        submitKeyboard()
+        createEventWith(name: "Visited event")
 
-        let createdEventCell = cell(at: 1)
-        let value = createdEventCell.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
-        let swiper = createdEventCell.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+        let value = firstEvent.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
+        let swiper = firstEvent.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
 
         XCTAssertEqual(value.label, "0", "New event has no swipes")
 
@@ -112,7 +96,7 @@ final class EventsListFunctionalTests: XCTestCase {
         sleep(1)
 
         /// Act: open event details and return back
-        createdEventCell.tap()
+        firstEvent.tap()
 
         let eventDetailsBackToEventsListButton = app.navigationBars.buttons.firstMatch
         eventDetailsBackToEventsListButton.tap()
@@ -124,106 +108,128 @@ final class EventsListFunctionalTests: XCTestCase {
     /// This test is not repeatable because eventSorting repository reads value from previous test
     func test_orderingByDate() {
         /// Arrange: create events
-        let createdEventNames = ["C", "B", "A"]
-
-        for name in createdEventNames {
-            createEventButton.tap()
-            eventNameInput.typeText(name)
-            submitKeyboard()
-        }
-
-        let first = cell(at: 1).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
-        let second = cell(at: 2).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
-        let third = cell(at: 3).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
+        for name in ["C", "B", "A"] { createEventWith(name: name) }
 
         /// Act: change ordering to alphabetical
         let orderingButton = app.navigationBars.buttons.firstMatch
         orderingButton.tap()
 
-        let byNameOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By name"]
+        _ = byNameOrderingButton.waitForExistence(timeout: 1.0)
         byNameOrderingButton.tap()
 
         /// Assert: events sorted alphabetically
-        XCTAssertEqual(first.label, "A")
-        XCTAssertEqual(second.label, "B")
-        XCTAssertEqual(third.label, "C")
+        XCTAssertEqual(firstEventTitle.label, "A")
+        XCTAssertEqual(secondEventTitle.label, "B")
+        XCTAssertEqual(thirdEventTitle.label, "C")
 
         /// Act: change ordering by date of creation
-        let byDateOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By date created"]
+        _ = byDateOrderingButton.waitForExistence(timeout: 1.0)
         byDateOrderingButton.tap()
 
         /// Assert: events are reordered by date
-        XCTAssertEqual(first.label, "C")
-        XCTAssertEqual(second.label, "B")
-        XCTAssertEqual(third.label, "A")
+        XCTAssertEqual(firstEventTitle.label, "C")
+        XCTAssertEqual(secondEventTitle.label, "B")
+        XCTAssertEqual(thirdEventTitle.label, "A")
     }
 
     func test_dragAndDropToReorder() {
         /// Arrange: create events
-        let createdEventNames = ["A", "B", "C"]
+        for name in ["A", "B", "C"] { createEventWith(name: name) }
 
-        for name in createdEventNames {
-            createEventButton.tap()
-            eventNameInput.typeText(name)
-            submitKeyboard()
-        }
-
-        let first = cell(at: 1).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
-        let second = cell(at: 2).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
-        let third = cell(at: 3).staticTexts[UITestAccessibilityIdentifier.eventTitle.rawValue]
-
-        _ = third.waitForExistence(timeout: 1.0)
+        _ = thirdEventTitle.waitForExistence(timeout: 1.0)
 
         /// Act: drag third event to first
-        third.press(
+        thirdEventTitle.press(
             forDuration: 1.0,
-            thenDragTo: first,
+            thenDragTo: firstEventTitle,
             withVelocity: 150,
             thenHoldForDuration: 0.1
         )
 
         /// Assert: manual ordering appears after drag and drop
-        let manualOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["Manual"]
         _ = manualOrderingButton.waitForExistence(timeout: 1.0)
 
         /// Assert: manual ordering is applied
-        XCTAssertEqual(first.label, "C")
-        XCTAssertEqual(second.label, "A")
-        XCTAssertEqual(third.label, "B")
+        XCTAssertEqual(firstEventTitle.label, "C")
+        XCTAssertEqual(secondEventTitle.label, "A")
+        XCTAssertEqual(thirdEventTitle.label, "B")
 
         /// Kind of tearDown to reset testing repository to initial state
         let orderingButton = app.navigationBars.buttons.firstMatch
         orderingButton.tap()
 
-        let byNameOrderingButton = app.staticTexts.matching(identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue)["By name"]
         _ = byNameOrderingButton.waitForExistence(timeout: 1.0)
         byNameOrderingButton.tap()
     }
 
     // MARK: - Private
+
+    //
+    // Elements querying
+    //
     private var createEventButton: XCUIElement {
-        app.collectionViews.firstMatch
-            .cells.matching(identifier:
-                UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
-            ).firstMatch
+        app.collectionViews.firstMatch.cells.matching(
+            identifier: UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
+        ).firstMatch
     }
 
     private var hint: XCUIElement {
-        app.collectionViews.firstMatch
-            .cells.matching(identifier:
-                UITestAccessibilityIdentifier.hint.rawValue
-            ).firstMatch.staticTexts.firstMatch
+        app.collectionViews.firstMatch.cells.matching(
+            identifier: UITestAccessibilityIdentifier.hint.rawValue
+        ).firstMatch.staticTexts.firstMatch
     }
 
     private var eventNameInput: XCUIElement {
         app.textFields.firstMatch
     }
 
-    private func submitKeyboard() {
-        app.keyboards.buttons["Done"].tap()
+    private var firstEvent: XCUIElement { cell(at: 1) }
+
+    private var firstEventTitle: XCUIElement {
+        firstEvent.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventTitle.rawValue]
+    }
+
+    private var secondEventTitle: XCUIElement {
+        cell(at: 2).descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventTitle.rawValue]
+    }
+
+    private var thirdEventTitle: XCUIElement {
+        cell(at: 3).descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventTitle.rawValue]
     }
 
     private func cell(at index: Int) -> XCUIElement {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
+    }
+
+    private var byNameOrderingButton: XCUIElement {
+        app.staticTexts.matching(
+            identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue
+        )["By name"]
+    }
+
+    private var byDateOrderingButton: XCUIElement {
+        app.staticTexts.matching(
+            identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue
+        )["By date created"]
+    }
+
+    private var manualOrderingButton: XCUIElement {
+        app.staticTexts.matching(
+            identifier: UITestAccessibilityIdentifier.orderingVariant.rawValue
+        )["Manual"]
+    }
+
+    //
+    // User input
+    //
+
+    private func createEventWith(name: String) {
+        createEventButton.tap()
+        eventNameInput.typeText(name)
+        submitKeyboard()
+    }
+
+    private func submitKeyboard() {
+        app.keyboards.buttons["Done"].tap()
     }
 }
