@@ -65,6 +65,7 @@
 		08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC6292E24F700F46A32 /* ClockSnapshots.swift */; };
 		08292EC9292E5B8500F46A32 /* TestingEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */; };
 		083141D229142DCE00D5AB8A /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083141D129142DCE00D5AB8A /* UIKit.swift */; };
+		0831A1132BA0804D002233D5 /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0831A1122BA0804D002233D5 /* EventDetails.swift */; };
 		0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EAD0A28DDDD55001EE985 /* WidgetEventsQuerying.swift */; };
 		083380422944F9100021281C /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0835D0FE2934CDB50099AFF6 /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
@@ -494,6 +495,7 @@
 		08292EC8292E5B8500F46A32 /* TestingEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingEventsListViewController.swift; sourceTree = "<group>"; };
 		082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		0831A1122BA0804D002233D5 /* EventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
 		08396EE929A64B5900281E51 /* WidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewController.swift; sourceTree = "<group>"; };
 		08396EEB29A6523700281E51 /* UpdatingCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingCommander.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1143,6 +1145,7 @@
 			isa = PBXGroup;
 			children = (
 				0858F7192B9F8A45005F16A3 /* EventsList.swift */,
+				0831A1122BA0804D002233D5 /* EventDetails.swift */,
 			);
 			path = FunctionalTests;
 			sourceTree = "<group>";
@@ -1974,6 +1977,7 @@
 				0858F71C2B9F8AE2005F16A3 /* LaunchModeDuplication.swift in Sources */,
 				0857B5A629892CBC002B400B /* AppPreview02Recorder.swift in Sources */,
 				0870FD7A2A3E37430002C403 /* AppPreviewRecorder.swift in Sources */,
+				0831A1132BA0804D002233D5 /* EventDetails.swift in Sources */,
 				0858F71A2B9F8A45005F16A3 /* EventsList.swift in Sources */,
 				089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */,
 			);

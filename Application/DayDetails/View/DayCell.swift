@@ -36,6 +36,8 @@ final class DayCell: UICollectionViewCell {
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
+        isAccessibilityElement = true
+        accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappening.rawValue
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -40,6 +40,8 @@ final class DayDetailsView: UIView {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
         collection.widthAnchor.constraint(equalTo: collection.heightAnchor).isActive = true
+        collection.isAccessibilityElement = true
+        collection.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue
         return collection
     }()
 
@@ -58,6 +60,8 @@ final class DayDetailsView: UIView {
         label.text = DayDetailsViewModel.create
         label.textAlignment = .center
         label.numberOfLines = 1
+        label.isAccessibilityElement = true
+        label.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue
         return label
     }()
 

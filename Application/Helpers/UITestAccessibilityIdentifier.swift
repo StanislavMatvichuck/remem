@@ -19,5 +19,9 @@ enum UITestAccessibilityIdentifier: String {
          buttonCreteEvent,
          removeEventArea,
          hint,
-         orderingVariant
+         orderingVariant,
+         weekDay,
+         dayDetailsHappening,
+         dayDetailsAddHappening,
+         dayDetailsHappeningsList
 }
