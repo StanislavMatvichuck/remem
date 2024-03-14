@@ -64,16 +64,58 @@ final class WeekDayView: UIStackView {
               let weekContainer = daysContainer.superview
         else { return }
 
-        viewModel?.tapHandler(
-            DayDetailsAnimationsHelper.makeCellPresentationSliding(
-                animatedView: self,
-                heightTo: weekContainer.frame.maxY
-            ),
-            DayDetailsAnimationsHelper.makeCellDismissal(
-                animatedView: self,
-                heightTo: 0
+        let presentationAnimationBlock = { [weak self, weak weekContainer] in
+            guard let self, let weekContainer else { return }
+
+            UIView.animateKeyframes(
+                withDuration: DayDetailsAnimationsHelper.totalDuration,
+                delay: 0,
+                animations: {
+                    UIView.addKeyframe(
+                        withRelativeStartTime: 0,
+                        relativeDuration: 1 / 3,
+                        animations: {
+                            self.frame.origin.y = self.frame.origin.y - weekContainer.frame.maxY
+                        }
+                    )
+
+                    UIView.addKeyframe(
+                        withRelativeStartTime: 0,
+                        relativeDuration: 1 / 6,
+                        animations: {
+                            self.transform = .init(scaleX: 0.8, y: 1)
+                        }
+                    )
+                }
             )
-        )
+        }
+
+        let dismissAnimationBlock = { [weak self] in
+            guard let self else { return }
+            UIView.animateKeyframes(
+                withDuration: DayDetailsAnimationsHelper.totalDuration,
+                delay: 0,
+                animations: {
+                    UIView.addKeyframe(
+                        withRelativeStartTime: 3 / 6,
+                        relativeDuration: 1 / 2,
+                        animations: {
+                            self.frame.origin.y = 0
+                        }
+                    )
+
+                    UIView.addKeyframe(
+                        withRelativeStartTime: 5 / 6,
+                        relativeDuration: 1 / 6,
+                        animations: {
+                            self.transform = .identity
+                        }
+                    )
+                }
+            )
+        }
+
+        viewModel?.tapHandler(presentationAnimationBlock, dismissAnimationBlock)
     }
 
     private func configureLayout() {
