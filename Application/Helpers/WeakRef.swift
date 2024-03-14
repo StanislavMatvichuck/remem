@@ -15,3 +15,19 @@ final class WeakRef<T: AnyObject> {
 extension WeakRef: Updating where T: Updating {
     func update() { weakRef?.update() }
 }
+
+extension WeakRef: EventsListDataProviding where T: EventsListDataProviding {
+    var viewModel: EventsListViewModel? { weakRef?.viewModel }
+}
+
+extension WeakRef: DayDetailsDataProviding where T: DayDetailsDataProviding {
+    var viewModel: DayDetailsViewModel? { weakRef?.viewModel }
+}
+
+extension WeakRef: SummaryDataProviding where T: SummaryDataProviding {
+    var viewModel: SummaryViewModel? { weakRef?.viewModel }
+}
+
+extension WeakRef: GoalsDataProviding where T: GoalsDataProviding {
+    var viewModel: GoalsViewModel? { weakRef?.viewModel }
+}

@@ -21,7 +21,7 @@ final class GoalsView: UIView, GoalsDataProviding {
     }}
 
     lazy var heightConstraint: NSLayoutConstraint = { list.heightAnchor.constraint(equalToConstant: 7 * .layoutSquare) }()
-    lazy var dataSource = GoalsDataSource(list: list, provider: self)
+    lazy var dataSource = GoalsDataSource(list: list, provider: WeakRef(self))
 
     init() {
         super.init(frame: .zero)

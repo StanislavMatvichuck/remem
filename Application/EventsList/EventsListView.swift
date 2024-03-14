@@ -31,7 +31,7 @@ final class EventsListView: UIView, EventsListDataProviding {
         return view
     }()
     
-    lazy var dataSource = EventsListDataSource(list: list, provider: self)
+    lazy var dataSource = EventsListDataSource(list: list, provider: WeakRef(self))
     
     var viewModel: EventsListViewModel? { didSet {
         guard let viewModel else { return }

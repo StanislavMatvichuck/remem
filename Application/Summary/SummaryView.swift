@@ -21,7 +21,7 @@ final class SummaryView: UIView, SummaryDataProviding {
         dataSource.applySnapshot(oldValue)
     }}
 
-    lazy var dataSource = SummaryViewDiffableDataSource(list: list, provider: self)
+    lazy var dataSource = SummaryViewDiffableDataSource(list: list, provider: WeakRef(self))
     lazy var heightConstraint: NSLayoutConstraint = list.heightAnchor.constraint(equalToConstant: 4 * .layoutSquare + .buttonMargin) 
 
     init() {
