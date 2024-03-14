@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct DayCellViewModel: Identifiable {
-    typealias RemoveHandler = (Self, Happening) -> Void
+    typealias RemoveHandler = () -> Void
 
     enum Animation { case new }
 
@@ -20,15 +20,15 @@ struct DayCellViewModel: Identifiable {
         return dateFormatter
     }()
 
-    private let removeHandler: RemoveHandler
+    let removeHandler: RemoveHandler
     private let happening: Happening
-    let id: UUID
+    let id: String
 
     let time: String
     var animation: Animation?
 
     init(
-        id: UUID,
+        id: String,
         happening: Happening,
         animation: Animation? = nil,
         remove: @escaping RemoveHandler
@@ -41,7 +41,6 @@ struct DayCellViewModel: Identifiable {
         self.removeHandler = remove
     }
 
-    func remove() { removeHandler(self, happening) }
     func removeAnimation() -> DayCellViewModel {
         DayCellViewModel(
             id: id,

@@ -14,6 +14,7 @@ final class DayDetailsViewController: UIViewController {
     let viewRoot: DayDetailsView
 
     var viewModel: DayDetailsViewModel? { didSet {
+        viewModel?.configureCellsAnimations(oldValue)
         viewRoot.viewModel = viewModel
     } }
 
@@ -34,7 +35,6 @@ final class DayDetailsViewController: UIViewController {
     }
 
     private func configureCollection() {
-        viewRoot.happeningsCollection.delegate = self
         viewRoot.happeningsCollection.dragDelegate = self
     }
 
@@ -58,16 +58,6 @@ final class DayDetailsViewController: UIViewController {
 
     @objc private func handlePicker() {
         viewModel?.handlePicker(date: viewRoot.picker.date)
-    }
-}
-
-extension DayDetailsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout _: UICollectionViewLayout,
-                        sizeForItemAt _: IndexPath) -> CGSize
-    {
-        let width = collectionView.bounds.width / 4
-        return CGSize(width: width, height: width)
     }
 }
 
@@ -98,10 +88,13 @@ extension DayDetailsViewController: UIDropInteractionDelegate {
     }
 
     func dropInteraction(_: UIDropInteraction, performDrop session: UIDropSession) {
-        session.loadObjects(ofClass: NSString.self) { object in
-            let indexString = object.first!
-            if let index = Int(indexString as! String) {
-                self.viewModel?.cells[index].remove()
+        session.loadObjects(ofClass: NSString.self) { [weak self] object in
+            if let viewModel = self?.viewModel,
+               let indexString = object.first,
+               let index = Int(indexString as! String)
+            {
+                let identifier = viewModel.identifiers[index]
+                viewModel.cell(for: identifier)?.removeHandler()
             }
         }
     }

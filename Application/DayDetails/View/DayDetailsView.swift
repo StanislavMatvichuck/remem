@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DayDetailsView: UIView {
+final class DayDetailsView: UIView, DayDetailsDataProviding {
     static let margin: CGFloat = .buttonMargin / 1.2
     static let radius: CGFloat = margin * 2.6
 
@@ -31,14 +31,8 @@ final class DayDetailsView: UIView {
     }()
 
     let happeningsCollection: UICollectionView = {
-        let collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.scrollDirection = .vertical
-        collectionLayout.minimumInteritemSpacing = 0.0
-        collectionLayout.minimumLineSpacing = 0.0
-
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: DayDetailsView.makeLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.register(DayCell.self, forCellWithReuseIdentifier: DayCell.reuseIdentifier)
         collection.widthAnchor.constraint(equalTo: collection.heightAnchor).isActive = true
         collection.isAccessibilityElement = true
         collection.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue
@@ -84,10 +78,10 @@ final class DayDetailsView: UIView {
     var viewModel: DayDetailsViewModel? { didSet {
         guard let viewModel else { return }
         configure(viewModel: viewModel)
-        dataSource.viewModel = viewModel
+        dataSource.applySnapshot(oldValue)
     }}
 
-    lazy var dataSource = DayDetailsDataSource(happeningsCollection)
+    lazy var dataSource = DayDetailsDataSource(list: happeningsCollection, provider: WeakRef(self))
 
     init() {
         super.init(frame: .zero)
@@ -144,8 +138,19 @@ final class DayDetailsView: UIView {
         titleBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
         buttonBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
 
-        happeningsCollection.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: -DayCell.margin).isActive = true
         addAndConstrain(verticalStack)
+    }
+
+    private static func makeLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { _, _ in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .fractionalWidth(1.0 / 4))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 4))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: DayCell.margin / 2)
+            return section
+        }
     }
 
     private func configureAppearance() {

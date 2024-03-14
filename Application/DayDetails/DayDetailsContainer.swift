@@ -37,9 +37,7 @@ final class DayDetailsContainer:
     private var happenings: [Happening] { event.happenings(forDayIndex: DayIndex(startOfDay)) }
     /// Storage that provides unique ids for the lifetime of presentation
     private lazy var cells: [DayCellViewModel] = {
-        happenings.map { happening in
-            makeDayCellViewModel(happening: happening)
-        }
+        happenings.map { makeDayCellViewModel(happening: $0) }
     }()
 
     // MARK: - ViewModels
@@ -55,10 +53,11 @@ final class DayDetailsContainer:
     }
 
     func makeDayCellViewModel(happening: Happening) -> DayCellViewModel {
-        DayCellViewModel(
-            id: UUID(),
+        let id = UUID().uuidString
+        return DayCellViewModel(
+            id: id,
             happening: happening,
-            remove: makeRemoveHappeningHandler()
+            remove: makeRemoveHappeningHandler(identifier: id, happening: happening)
         )
     }
 
@@ -75,12 +74,11 @@ final class DayDetailsContainer:
         self.commander.save(event)
     }}
 
-    func makeRemoveHappeningHandler() -> DayCellViewModel.RemoveHandler {{ cell, happening in
-        if let index = self.cells.firstIndex(of: cell) {
-            self.cells.remove(at: index)
+    func makeRemoveHappeningHandler(identifier: String, happening: Happening) -> DayCellViewModel.RemoveHandler {{ [weak self] in
+        if let self, let dayCellViewModelIndex = self.cells.firstIndex(where: { $0.id == identifier }) {
+            self.cells.remove(at: dayCellViewModelIndex)
+            do { try self.event.remove(happening: happening) } catch {}
+            self.commander.save(self.event)
         }
-
-        do { try self.event.remove(happening: happening) } catch {}
-        self.commander.save(self.event)
     }}
 }

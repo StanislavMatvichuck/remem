@@ -18,7 +18,7 @@ struct DayDetailsViewModel {
 
     let title: String
     let isToday: Bool
-    var cells: [DayCellViewModel]
+    private var cells: [DayCellViewModel]
     var animation: Animation?
     var pickerDate: Date
 
@@ -47,6 +47,11 @@ struct DayDetailsViewModel {
                 of: startOfDay
             )!
         }()
+    }
+
+    var identifiers: [String] { cells.map { $0.id } }
+    func cell(for id: String) -> DayCellViewModel? {
+        cells.first { $0.id == id }
     }
 
     func addHappening() { addHappeningHandler(pickerDate) }
