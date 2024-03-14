@@ -48,6 +48,33 @@ final class EventDetailsFunctionalTests: XCTestCase {
         XCTAssertEqual(happeningsList.cells.count, 1)
     }
 
+    func test_happeningCanBeRemoved() {
+        createEventWith(name: "EventDetails")
+        firstEvent.tap()
+
+        let firstDayOfWeek = app.descendants(matching: .any)[UITestAccessibilityIdentifier.weekDay.rawValue].firstMatch
+        firstDayOfWeek.tap()
+
+        let cells = app.collectionViews[UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue].firstMatch.staticTexts
+        let addHappeningButton = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue].firstMatch
+
+        XCTAssertEqual(cells.countForHittables, 0)
+        addHappeningButton.tap()
+        XCTAssertEqual(cells.countForHittables, 1)
+
+        let happening = app.descendants(matching: .cell)[UITestAccessibilityIdentifier.dayDetailsHappening.rawValue].firstMatch
+
+        /// Act: remove happening with drag and drop
+        happening.press(
+            forDuration: 1.0,
+            thenDragTo: addHappeningButton,
+            withVelocity: 150,
+            thenHoldForDuration: 0.1
+        )
+
+        XCTAssertEqual(cells.countForHittables, 0)
+    }
+
     // MARK: - Private
 
     //
