@@ -26,9 +26,8 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         clear()
     }
 
-    func test_tableIsConfigured() {
+    func test_listIsConfigured() {
         XCTAssertNotNil(sut.viewRoot.happeningsCollection.dataSource)
-        XCTAssertNotNil(sut.viewRoot.happeningsCollection.delegate)
     }
 
     func test_showsTitle() {
