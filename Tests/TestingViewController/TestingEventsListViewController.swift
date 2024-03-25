@@ -9,14 +9,14 @@
 import Domain
 import XCTest
 
-extension TestingViewController where Controller == EventsListViewController {
+extension TestingViewController where Controller == EventsListController {
     var list: UICollectionView { sut.viewRoot.list }
     var eventsCount: Int {
         sut.viewModel?.cellsIdentifiers(for: .events).count ?? 0
     }
 
     func make() {
-        sut = EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as? EventsListViewController
+        sut = EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as? EventsListController
         sut.loadViewIfNeeded()
     }
 
@@ -63,7 +63,7 @@ extension TestingViewController where Controller == EventsListViewController {
         let appC = ApplicationContainer(mode: .uikit)
         appC.commander.save(event)
         let container = EventsListContainer(appC)
-        sut = container.make() as? EventsListViewController
+        sut = container.make() as? EventsListController
     }
 
     func makeWithManyEvents() {

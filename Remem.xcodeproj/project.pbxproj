@@ -183,7 +183,7 @@
 		0875B46C2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */; };
 		0875B46E2B5A874F004C0575 /* EventsSortingDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */; };
 		0875B4702B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */; };
-		0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListViewController.swift */; };
+		0875E27C298EF91A00622125 /* EventsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875E27B298EF91A00622125 /* EventsListController.swift */; };
 		0877919729747A3000780F60 /* EventInputSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877919629747A3000780F60 /* EventInputSnapshots.swift */; };
 		087791992974858300780F60 /* ZAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087791982974858300780F60 /* ZAtlas.swift */; };
 		087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087AFFBF2A13F4610005B4D9 /* EmojiView.swift */; };
@@ -612,7 +612,7 @@
 		0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingPresentationAnimator.swift; sourceTree = "<group>"; };
 		0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingDismissAnimator.swift; sourceTree = "<group>"; };
 		0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingAnimationsHelper.swift; sourceTree = "<group>"; };
-		0875E27B298EF91A00622125 /* EventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
+		0875E27B298EF91A00622125 /* EventsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListController.swift; sourceTree = "<group>"; };
 		0877919629747A3000780F60 /* EventInputSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputSnapshots.swift; sourceTree = "<group>"; };
 		087791982974858300780F60 /* ZAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZAtlas.swift; sourceTree = "<group>"; };
 		087AFFBF2A13F4610005B4D9 /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
@@ -1452,7 +1452,7 @@
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
 				08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */,
-				0875E27B298EF91A00622125 /* EventsListViewController.swift */,
+				0875E27B298EF91A00622125 /* EventsListController.swift */,
 				08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */,
 				08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */,
 			);
@@ -2218,7 +2218,7 @@
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0881E4B12B5F382600F68CAE /* EventCreationContainer.swift in Sources */,
-				0875E27C298EF91A00622125 /* EventsListViewController.swift in Sources */,
+				0875E27C298EF91A00622125 /* EventsListController.swift in Sources */,
 				08CE3E482B9662AC00ECF5C6 /* GoalDecrementCommand.swift in Sources */,
 				0816D0C52B909AD7005FD6A0 /* GoalCellViewModeling.swift in Sources */,
 				0852404F2B61534B004F9BDA /* DayOfWeekCellViewModel.swift in Sources */,

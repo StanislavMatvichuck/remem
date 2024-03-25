@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension EventsListViewController:
+extension EventsListController:
     UICollectionViewDragDelegate,
     UICollectionViewDropDelegate
 {

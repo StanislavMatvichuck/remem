@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-final class EventsListViewController:
+final class EventsListController:
     UIViewController,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout

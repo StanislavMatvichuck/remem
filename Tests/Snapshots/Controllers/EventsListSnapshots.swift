@@ -13,7 +13,7 @@ final class EventsListSnapshots:
     FBSnapshotTestCase,
     TestingViewController
 {
-    var sut: EventsListViewController!
+    var sut: EventsListController!
     var event: Event! // is not needed here but required by a protocol
 
     override func setUp() {

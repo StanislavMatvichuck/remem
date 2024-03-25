@@ -54,7 +54,7 @@ final class EventsListContainer:
     }
 
     func make() -> UIViewController {
-        let controller = EventsListViewController(
+        let controller = EventsListController(
             viewModelFactory: self,
             view: EventsListView(),
             widgetUpdater: WidgetViewController()

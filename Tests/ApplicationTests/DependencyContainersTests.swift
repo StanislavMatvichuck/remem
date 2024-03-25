@@ -19,7 +19,7 @@ final class DependencyContainersTests: XCTestCase {
     }
 
     func test_eventsListContainer_hasNoCyclingReferences() {
-        var vc: EventsListViewController? = ApplicationContainer.make()
+        var vc: EventsListController? = ApplicationContainer.make()
         weakSut = vc
 
         vc = nil
@@ -76,8 +76,8 @@ final class DependencyContainersTests: XCTestCase {
 }
 
 extension ApplicationContainer {
-    static func make() -> EventsListViewController {
-        EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as! EventsListViewController
+    static func make() -> EventsListController {
+        EventsListContainer(ApplicationContainer(mode: .unitTest)).make() as! EventsListController
     }
 
     static func make() -> EventDetailsViewController {

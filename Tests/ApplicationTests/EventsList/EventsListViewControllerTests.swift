@@ -13,7 +13,7 @@ import XCTest
 final class EventsListViewControllerTests: XCTestCase {
     // MARK: - Setup
 
-    var sut: EventsListViewController!
+    var sut: EventsListController!
 
     override func setUp() {
         super.setUp()
@@ -107,7 +107,7 @@ final class EventsListViewControllerTests: XCTestCase {
     private func configureEmpty() {
         let appContainer = ApplicationContainer(mode: .unitTest)
         let container = EventsListContainer(appContainer)
-        sut = container.make() as? EventsListViewController
+        sut = container.make() as? EventsListController
         sut.loadViewIfNeeded()
     }
 
@@ -116,7 +116,7 @@ final class EventsListViewControllerTests: XCTestCase {
         let appContainer = ApplicationContainer(mode: .unitTest)
         appContainer.commander.save(event)
         let container = EventsListContainer(appContainer)
-        sut = container.make() as? EventsListViewController
+        sut = container.make() as? EventsListController
         sut.loadViewIfNeeded()
     }
 
