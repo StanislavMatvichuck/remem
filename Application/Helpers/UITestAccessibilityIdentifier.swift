@@ -23,5 +23,7 @@ enum UITestAccessibilityIdentifier: String {
          weekDay,
          dayDetailsHappening,
          dayDetailsAddHappening,
-         dayDetailsHappeningsList
+         dayDetailsHappeningsList,
+         dayDetailsBackground,
+         summaryValue
 }

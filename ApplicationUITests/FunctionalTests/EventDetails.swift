@@ -75,8 +75,27 @@ final class EventDetailsFunctionalTests: XCTestCase {
         XCTAssertEqual(cells.countForHittables, 0)
     }
 
-    // MARK: - Private
+    func test_dayDetailsUpdatesSummary() {
+        createEventWith(name: "SummaryUpdate")
+        firstEvent.tap()
 
+        let summaryValue = app.descendants(matching: .staticText)[UITestAccessibilityIdentifier.summaryValue.rawValue].firstMatch
+        let addHappeningButton = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue].firstMatch
+        let firstDayOfWeek = app.descendants(matching: .any)[UITestAccessibilityIdentifier.weekDay.rawValue].firstMatch
+        let dayDetailsBg = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsBackground.rawValue].firstMatch
+
+        XCTAssertEqual(summaryValue.label, "0")
+
+        firstDayOfWeek.tap()
+        addHappeningButton.tap()
+        addHappeningButton.tap()
+        addHappeningButton.tap()
+        dayDetailsBg.tap()
+
+        XCTAssertEqual(summaryValue.label, "3")
+    }
+
+    // MARK: - Private
     //
     // Elements querying
     //

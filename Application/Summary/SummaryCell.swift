@@ -9,7 +9,13 @@ import UIKit
 
 final class SummaryCell: UICollectionViewCell {
     let title: UILabel = { UILabel(al: true) }()
-    let value: UILabel = { UILabel(al: true) }()
+    let value: UILabel = {
+        let label = UILabel(al: true)
+        label.isAccessibilityElement = true
+        label.accessibilityIdentifier = UITestAccessibilityIdentifier.summaryValue.rawValue
+        return label
+    }()
+
     let stack: UIStackView = {
         let stack = UIStackView(al: true)
         stack.axis = .vertical
