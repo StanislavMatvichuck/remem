@@ -95,8 +95,8 @@ final class CreateEventCell: UICollectionViewCell {
         contentView.addSubview(uiTestingDropArea)
         uiTestingDropArea.widthAnchor.constraint(equalToConstant: 1.0).isActive = true
         uiTestingDropArea.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
-        uiTestingDropArea.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .buttonMargin).isActive = true
-        uiTestingDropArea.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        uiTestingDropArea.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .buttonMargin).isActive = true
+        uiTestingDropArea.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 
     // MARK: - Events handling
