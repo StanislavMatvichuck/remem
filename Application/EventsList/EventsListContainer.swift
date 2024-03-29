@@ -14,12 +14,7 @@ final class EventsListContainer:
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
     EventCellViewModelFactoring,
-    CreateEventCellViewModelFactoring,
-    ShowEventDetailsServiceFactoring,
-    SetEventsOrderingServiceFactoring,
-    CreateHappeningServiceFactoring,
-    RemoveEventServiceFactoring,
-    ShowCreateEventServiceFactoring
+    CreateEventCellViewModelFactoring
 {
     private let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
@@ -62,10 +57,10 @@ final class EventsListContainer:
         let dataSource = EventsListDataSource(
             list: list,
             viewModelProvider: self,
-            showEventDetailsServiceProvider: self,
-            createHappeningServiceProvider: self,
-            removeEventServiceProvider: self,
-            showCreateEventServiceProvider: self
+            showEventDetailsService: makeShowEventDetailsService(),
+            createHappeningService: makeCreateHappeningService(),
+            removeEventService: makeRemoveEventService(),
+            showCreateEventService: makeShowCreateEventService()
         )
 
         return EventsListController(
@@ -111,7 +106,7 @@ final class EventsListContainer:
         )
     }
 
-    // MARK: - Handlers factoring
+    // MARK: - Services factoring
     func makeShowEventDetailsService() -> ShowEventDetailsService { ShowEventDetailsService(
         coordinator: parent.coordinator,
         factory: EventDetailsContainer(parent),
