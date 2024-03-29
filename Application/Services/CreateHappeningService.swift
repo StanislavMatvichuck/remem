@@ -8,8 +8,6 @@
 import Domain
 import Foundation
 
-protocol CreateHappeningServiceFactoring { func makeCreateHappeningService() -> CreateHappeningService }
-
 struct CreateHappeningServiceArgument {
     let eventId: String
     let date: Date

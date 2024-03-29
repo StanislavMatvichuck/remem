@@ -40,7 +40,7 @@ final class EventsSortingContainer: NSObject,
     }
 
     func make() -> UIViewController {
-        let view = EventsSortingView(factory: parent)
+        let view = EventsSortingView(service: makeSetEventsOrderingService())
         let controller = EventsSortingController(self, view: view)
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom

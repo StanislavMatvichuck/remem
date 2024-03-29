@@ -8,8 +8,6 @@
 import Domain
 import Foundation
 
-protocol CreateEventServiceFactoring { func makeCreateEventService() -> CreateEventService }
-
 struct CreateEventServiceArgument {
     let name: String
 }

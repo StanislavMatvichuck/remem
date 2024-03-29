@@ -26,10 +26,10 @@ final class EventsSortingView: UIView {
     } }
 
     var cells: [EventsSortingCellView]?
-    private let factory: SetEventsOrderingServiceFactoring
+    private let service: SetEventsOrderingService
 
-    init(factory: SetEventsOrderingServiceFactoring) {
-        self.factory = factory
+    init(service: SetEventsOrderingService) {
+        self.service = service
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
@@ -85,7 +85,7 @@ final class EventsSortingView: UIView {
 
         for index in 0 ..< vm.count {
             cells?[index].viewModel = vm.cell(at: index)
-            cells?[index].setEventsOrderingService = factory.makeSetEventsOrderingService()
+            cells?[index].setEventsOrderingService = service
         }
 
         if let from = vm.animateFrom {

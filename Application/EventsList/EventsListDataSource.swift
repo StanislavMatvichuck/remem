@@ -13,24 +13,24 @@ struct EventsListDataSource {
 
     private let dataSource: DataSource
     private let viewModelProvider: EventsListViewModelFactoring
-    private let showEventDetailsServiceProvider: ShowEventDetailsServiceFactoring
-    private let createHappeningServiceProvider: CreateHappeningServiceFactoring
-    private let removeEventServiceProvider: RemoveEventServiceFactoring
-    private let showCreateEventServiceProvider: ShowCreateEventServiceFactoring
+    private let showEventDetailsService: ShowEventDetailsService
+    private let createHappeningService: CreateHappeningService
+    private let removeEventService: RemoveEventService
+    private let showCreateEventService: ShowCreateEventService
 
     init(
         list: UICollectionView,
         viewModelProvider: EventsListViewModelFactoring,
-        showEventDetailsServiceProvider: ShowEventDetailsServiceFactoring,
-        createHappeningServiceProvider: CreateHappeningServiceFactoring,
-        removeEventServiceProvider: RemoveEventServiceFactoring,
-        showCreateEventServiceProvider: ShowCreateEventServiceFactoring
+        showEventDetailsService: ShowEventDetailsService,
+        createHappeningService: CreateHappeningService,
+        removeEventService: RemoveEventService,
+        showCreateEventService: ShowCreateEventService
     ) {
         self.viewModelProvider = viewModelProvider
-        self.showEventDetailsServiceProvider = showEventDetailsServiceProvider
-        self.createHappeningServiceProvider = createHappeningServiceProvider
-        self.removeEventServiceProvider = removeEventServiceProvider
-        self.showCreateEventServiceProvider = showCreateEventServiceProvider
+        self.showEventDetailsService = showEventDetailsService
+        self.createHappeningService = createHappeningService
+        self.removeEventService = removeEventService
+        self.showCreateEventService = showCreateEventService
 
         let hintCellRegistration = UICollectionView.CellRegistration
         <HintCell, HintCellViewModel> { cell, _, viewModel in
@@ -39,14 +39,14 @@ struct EventsListDataSource {
         let eventCellRegistration = UICollectionView.CellRegistration
         <EventCell, EventCellViewModel> { cell, _, viewModel in
             cell.viewModel = viewModel
-            cell.tapService = showEventDetailsServiceProvider.makeShowEventDetailsService()
-            cell.swipeService = createHappeningServiceProvider.makeCreateHappeningService()
-            cell.removeService = removeEventServiceProvider.makeRemoveEventService()
+            cell.tapService = showEventDetailsService
+            cell.swipeService = createHappeningService
+            cell.removeService = removeEventService
         }
         let createEventCellRegistration = UICollectionView.CellRegistration
         <CreateEventCell, CreateEventCellViewModel> { cell, _, viewModel in
             cell.viewModel = viewModel
-            cell.tapService = showCreateEventServiceProvider.makeShowCreateEventService()
+            cell.tapService = showCreateEventService
         }
 
         dataSource = DataSource(collectionView: list) {

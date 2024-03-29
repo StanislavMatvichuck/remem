@@ -8,10 +8,6 @@
 import Domain
 import Foundation
 
-protocol SetEventsOrderingServiceFactoring {
-    func makeSetEventsOrderingService() -> SetEventsOrderingService
-}
-
 struct SetEventsOrderingServiceArgument {
     let eventsIdentifiersOrder: [String]?
     let ordering: EventsSorter

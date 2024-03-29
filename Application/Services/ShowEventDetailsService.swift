@@ -8,10 +8,6 @@
 import Domain
 import Foundation
 
-protocol ShowEventDetailsServiceFactoring {
-    func makeShowEventDetailsService() -> ShowEventDetailsService
-}
-
 protocol EventDetailsControllerFactoring {
     func makeEventDetailsController(event: Event) -> EventDetailsViewController
 }

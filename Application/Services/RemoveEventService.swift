@@ -8,7 +8,6 @@
 import Domain
 import Foundation
 
-protocol RemoveEventServiceFactoring { func makeRemoveEventService() -> RemoveEventService }
 struct RemoveEventServiceArgument { let eventId: String }
 
 struct RemoveEventService: ApplicationService {
