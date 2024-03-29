@@ -41,6 +41,7 @@ final class EventsListController:
     var happeningCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription?
 
     init(
         viewModelFactory: EventsListViewModelFactoring,
@@ -68,6 +69,7 @@ final class EventsListController:
         happeningCreatedSubscription = nil
         eventRemovedSubscription = nil
         eventCreatedSubscription = nil
+        eventVisitedSubscription = nil
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -95,6 +97,11 @@ final class EventsListController:
 
         eventCreatedSubscription = DomainEventsPublisher.shared.subscribe(
             EventCreated.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        eventVisitedSubscription = DomainEventsPublisher.shared.subscribe(
+            EventVisited.self,
             usingBlock: { [weak self] _ in self?.update() }
         )
 

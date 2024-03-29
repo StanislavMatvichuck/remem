@@ -8,6 +8,10 @@
 import Domain
 import Foundation
 
+struct VisitEventServiceArgument {
+    let date: Date
+}
+
 struct VisitEventService: ApplicationService {
     private let event: Event
     private let repository: EventsCommanding
@@ -17,8 +21,8 @@ struct VisitEventService: ApplicationService {
         self.repository = repository
     }
 
-    func serve(_: ApplicationServiceEmptyArgument) {
-        event.visit()
+    func serve(_ arg: VisitEventServiceArgument) {
+        event.visit(at: arg.date)
 
         repository.save(event)
 

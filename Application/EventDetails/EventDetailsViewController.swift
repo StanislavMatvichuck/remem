@@ -8,14 +8,18 @@
 import Domain
 import UIKit
 
-
-
 final class EventDetailsViewController: UIViewController {
     let factory: EventDetailsViewModelFactoring
     var viewModel: EventDetailsViewModel
+    let service: VisitEventService
     let viewRoot: EventDetailsView
 
-    init(factory: EventDetailsViewModelFactoring, controllers: [UIViewController]) {
+    init(
+        factory: EventDetailsViewModelFactoring,
+        controllers: [UIViewController],
+        service: VisitEventService
+    ) {
+        self.service = service
         self.factory = factory
         self.viewModel = factory.makeEventDetailsViewModel()
         self.viewRoot = EventDetailsView()
@@ -36,7 +40,7 @@ final class EventDetailsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.visit()
+        service.serve(VisitEventServiceArgument(date: .now))
     }
 
     private func contain(controller: UIViewController) {

@@ -33,7 +33,8 @@ final class EventDetailsContainer:
                 HourDistributionContainer(self).make(),
                 DayOfWeekContainer(self).make(),
                 PDFWritingContainer(self).make()
-            ]
+            ],
+            service: VisitEventService(event: event, repository: commander)
         )
 
         updater.addDelegate(controller)
@@ -46,9 +47,6 @@ final class EventDetailsContainer:
     }
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel {
-        EventDetailsViewModel(event: event) { event in
-            event.visit()
-            self.commander.save(event)
-        }
+        EventDetailsViewModel(event: event)
     }
 }
