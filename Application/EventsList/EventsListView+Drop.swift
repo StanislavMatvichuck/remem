@@ -17,7 +17,16 @@ extension EventsListView: UIDropInteractionDelegate {
     }
 
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        viewModel?.removeDraggedCell()
+        // this call must invoke cell service
+        guard
+            let viewModel,
+            let draggedCellIndex = viewModel.draggedCellIndex
+        else { return }
+        let eventCellsIdentifiers = viewModel.identifiersFor(section: .events)
+        let cellIdentifier = eventCellsIdentifiers[draggedCellIndex]
+        if let cell = list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 1)) as? EventCell {
+            cell.removeService?.serve(RemoveEventServiceArgument(eventId: cellIdentifier))
+        }
     }
 
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal { UIDropProposal(operation: .move) }

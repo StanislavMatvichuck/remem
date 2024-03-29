@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EventsSortingCellViewFactoring {
+    func makeEventsSortingCellView() -> EventsSortingCellView
+}
+
 final class EventsSortingView: UIView {
     static let borderWidth: CGFloat = 1
 
@@ -22,8 +26,10 @@ final class EventsSortingView: UIView {
     } }
 
     var cells: [EventsSortingCellView]?
+    private let factory: SetEventsOrderingServiceFactoring
 
-    init() {
+    init(factory: SetEventsOrderingServiceFactoring) {
+        self.factory = factory
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
@@ -79,6 +85,7 @@ final class EventsSortingView: UIView {
 
         for index in 0 ..< vm.count {
             cells?[index].viewModel = vm.cell(at: index)
+            cells?[index].setEventsOrderingService = factory.makeSetEventsOrderingService()
         }
 
         if let from = vm.animateFrom {

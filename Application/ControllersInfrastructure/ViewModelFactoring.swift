@@ -20,11 +20,11 @@ protocol EventsListViewModelFactoring {
 }
 
 protocol HintCellViewModelFactoring {
-    func makeHintCellViewModel(events: [Event]) -> HintCellViewModel
+    func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel
 }
 
 protocol EventCellViewModelFactoring {
-    func makeEventCellViewModel(event: Event, hintEnabled: Bool) -> EventCellViewModel
+    func makeEventCellViewModel(eventId: String) -> EventCellViewModel
 }
 
 protocol CreateEventCellViewModelFactoring {

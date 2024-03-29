@@ -1,130 +1,67 @@
 //
-//  EventsListViewModel.swift
-//  Remem
+//  EventsListViewModelWithRepository.swift
+//  Application
 //
-//  Created by Stanislav Matvichuck on 14.07.2022.
+//  Created by Stanislav Matvichuck on 27.03.2024.
 //
 
 import Domain
-import Foundation
 
 struct EventsListViewModel {
     enum Section: Int, CaseIterable { case hint, events, createEvent }
 
     static let title = String(localizationId: "eventsList.title")
     static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
+    static let sections = Section.allCases
 
-    typealias SortingTapHandler = (CGFloat, EventsSorter?) -> Void
-    typealias ManualSortingHandler = ([String]) -> Void
+    private static let hintSectionIdentifier = "Hint"
+    private static let createEventSectionIdentifier = "CreateEvent"
 
-    private var cells: [Section: [any EventsListCellViewModel]]
-    let sorter: EventsSorter
-    let eventsSortingHandler: SortingTapHandler?
-    let manualSortingHandler: ManualSortingHandler?
+    private let list: EventsList
+    private let hintVmFactory: HintCellViewModelFactoring
+    private let eventVmFactory: EventCellViewModelFactoring
+    private let createEventVmFactory: CreateEventCellViewModelFactoring
+
+    init(
+        list: EventsList,
+        hintFactory: HintCellViewModelFactoring,
+        eventFactory: EventCellViewModelFactoring,
+        createEventFactory: CreateEventCellViewModelFactoring
+    ) {
+        self.list = list
+        self.hintVmFactory = hintFactory
+        self.eventVmFactory = eventFactory
+        self.createEventVmFactory = createEventFactory
+    }
+
+    // MARK: - Public
+    // MARK: - Ordering support
+    var sorter: EventsSorter { list.sorter }
+
+    func manualSortingPresentableFor(_ oldValue: EventsListViewModel?) -> Bool {
+        guard let oldValue else { return false }
+        return list.sorter == .manual && oldValue.list.sorter != .manual
+    }
+
+    // MARK: - DataSource
+    /// Operates on stored property
+    func identifiersFor(section: Section) -> [String] { switch section {
+    case .hint: return [Self.hintSectionIdentifier]
+    case .events: return list.eventsIdentifiers
+    case .createEvent: return [Self.createEventSectionIdentifier]
+    } }
+
+    /// Operates on calculated property -> mutable
+    func viewModel(forIdentifier id: String) -> (any EventsListCellViewModel)? {
+        if id == Self.hintSectionIdentifier { return hintVmFactory.makeHintCellViewModel(hint: list.hint) }
+        if id == Self.createEventSectionIdentifier { return createEventVmFactory.makeCreateEventCellViewModel(eventsCount: list.eventsIdentifiers.count) }
+        return eventVmFactory.makeEventCellViewModel(eventId: id)
+    }
+
+    // MARK: - Drag and drop
     var removalDropAreaHidden = true
     var removalDropAreaActive = false
     var draggedCellIndex: Int?
-
-    init(
-        cells: [Section: [any EventsListCellViewModel]],
-        sorter: EventsSorter,
-        eventsSortingHandler: SortingTapHandler? = nil,
-        manualSortingHandler: ManualSortingHandler? = nil
-    ) {
-        self.cells = cells
-        self.sorter = sorter
-        self.eventsSortingHandler = eventsSortingHandler
-        self.manualSortingHandler = manualSortingHandler
-    }
-
-    var sections: [Section] {
-        var result: [Section] = []
-        for section in Section.allCases {
-            if cells[section] != nil { result.append(section) }
-        }
-        return result
-    }
-
-    func cellsIdentifiers(for section: Section) -> [String] {
-        cells[section]?.map { $0.id } ?? []
-    }
-
-    func cell(identifier: String) -> (any EventsListCellViewModel)? {
-        for section in sections {
-            if let cells = cells[section] {
-                for cell in cells {
-                    if cell.id == identifier { return cell }
-                }
-            }
-        }
-        return nil
-    }
-
-    mutating func configureAnimationForEventCells(oldValue: EventsListViewModel?) {
-        guard let oldValue else { return }
-        var swipedCell: EventCellViewModel?
-
-        var configuredEvents = eventCells.map { cell in
-            for oldCell in oldValue.eventCells {
-                if cell.id == oldCell.id, cell.isValueIncreased(oldCell) {
-                    var updatedCell = cell
-                    updatedCell.animation = .swipe
-                    swipedCell = updatedCell
-                    return updatedCell
-                }
-            }
-            return cell
-        }
-
-        if let swipedCell, let index = configuredEvents.firstIndex(of: swipedCell) {
-            let previousIndex = configuredEvents.index(before: index)
-            if previousIndex >= 0 {
-                var previousCell = configuredEvents[previousIndex]
-                previousCell.animation = .aboveSwipe
-                configuredEvents[previousIndex] = previousCell
-            }
-
-            let nextIndex = configuredEvents.index(after: index)
-            if nextIndex < configuredEvents.count {
-                var nextCell = configuredEvents[nextIndex]
-                nextCell.animation = .belowSwipe
-                configuredEvents[nextIndex] = nextCell
-            }
-        }
-
-        cells[.events] = configuredEvents
-    }
-
-    func cellsRequireReconfigurationIds(oldValue: EventsListViewModel?) -> [String] {
-        guard let oldValue else { return [] }
-        var identifiers = [String]()
-
-        for section in sections {
-            for cell in cells[section]! {
-                for oldCell in oldValue.cells[section]! {
-                    if cell.requiresUpdate(oldValue: oldCell) {
-                        identifiers.append(cell.id)
-                    }
-                }
-            }
-        }
-
-        return identifiers
-    }
-
-    func shouldPresentManualSorting(_ oldValue: EventsListViewModel? = nil) -> Bool {
-        guard let oldValue else { return false }
-        return sorter == .manual && oldValue.sorter != .manual
-    }
-
-    func removeDraggedCell() {
-        guard let draggedCellIndex else { return }
-        let eventCellsIdentifiers = cellsIdentifiers(for: .events)
-        let cellIdentifier = eventCellsIdentifiers[draggedCellIndex]
-        if let cell = cell(identifier: cellIdentifier) as? EventCellViewModel {
-            cell.remove()
-        }
-    }
 
     mutating func startDragFor(eventIndex: Int) {
         draggedCellIndex = eventIndex
@@ -134,17 +71,4 @@ struct EventsListViewModel {
     mutating func endDrag() { removalDropAreaHidden = true }
     mutating func activateDropArea() { removalDropAreaActive = true }
     mutating func deactivateDropArea() { removalDropAreaActive = false }
-
-    // MARK: - Private
-    private var eventCells: [EventCellViewModel] { cells[.events] as! [EventCellViewModel] }
-}
-
-private func equals(_ lhs: Any, _ rhs: Any) -> Bool {
-    func open<A: Equatable>(_ lhs: A, _ rhs: Any) -> Bool {
-        lhs == (rhs as? A)
-    }
-
-    guard let lhs = lhs as? any Equatable else { return false }
-
-    return open(lhs, rhs)
 }

@@ -16,10 +16,6 @@ extension WeakRef: Updating where T: Updating {
     func update() { weakRef?.update() }
 }
 
-extension WeakRef: EventsListDataProviding where T: EventsListDataProviding {
-    var viewModel: EventsListViewModel? { weakRef?.viewModel }
-}
-
 extension WeakRef: DayDetailsDataProviding where T: DayDetailsDataProviding {
     var viewModel: DayDetailsViewModel? { weakRef?.viewModel }
 }

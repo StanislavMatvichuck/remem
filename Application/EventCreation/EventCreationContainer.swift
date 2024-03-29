@@ -10,19 +10,20 @@ import UIKit
 
 final class EventCreationContainer:
     ControllerFactoring,
-    EventCreationViewModelFactoring
+    EventCreationViewModelFactoring,
+    CreateEventControllerFactoring
 {
     private let parent: ApplicationContainer
 
     init(parent: ApplicationContainer) { self.parent = parent }
 
-    func make() -> UIViewController { EventCreationController(self) }
+    func make() -> UIViewController { EventCreationController(self, submitService: CreateEventService(eventsStorage: parent.commander)) }
 
     func makeEventCreationViewModel() -> EventCreationViewModel {
-        EventCreationViewModel(submitHandler: makeSubmitHandler())
+        EventCreationViewModel()
     }
 
-    func makeSubmitHandler() -> EventCreationViewModel.SubmitHandler {{ name in
-        self.parent.commander.save(Event(name: name))
-    }}
+    func makeCreateEventController() -> EventCreationController {
+        make() as! EventCreationController
+    }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 final class Coordinator {
+    enum NavigationWithoutFactory { case eventDetails, eventsOrdering, createEvent }
+
     let navigationController: UINavigationController
 
     init() {
@@ -29,6 +31,17 @@ final class Coordinator {
             navigationController.present(newController, animated: true)
         case .pdf:
             navigationController.pushViewController(newController, animated: true)
+        }
+    }
+
+    func goto(navigation: NavigationWithoutFactory, controller: UIViewController) {
+        switch navigation {
+        case .createEvent:
+            navigationController.present(controller, animated: true)
+        case .eventDetails:
+            navigationController.pushViewController(controller, animated: true)
+        case .eventsOrdering:
+            navigationController.present(controller, animated: true)
         }
     }
 

@@ -14,10 +14,16 @@ final class EventCell: UICollectionViewCell {
     let staticBackgroundView = UIView(al: true)
 
     var viewModel: EventCellViewModel? { didSet {
+        /// this gives me an old value for cell view model
+        /// allows to apply swipe animation but not above swipe or below swipe
         guard let viewModel else { return }
         view.configure(viewModel)
         playAnimationIfNeeded(oldValue)
     }}
+
+    var tapService: ShowEventDetailsService?
+    var swipeService: CreateHappeningService?
+    var removeService: RemoveEventService?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +39,9 @@ final class EventCell: UICollectionViewCell {
         super.prepareForReuse()
         view.prepareForReuse()
         viewModel = nil
+        tapService = nil
+        swipeService = nil
+        removeService = nil
     }
 
     // MARK: - Private
@@ -71,8 +80,15 @@ final class EventCell: UICollectionViewCell {
         )
     }
 
-    @objc private func handleSwipe() { viewModel?.swipeHandler() }
-    @objc private func handleTap() { viewModel?.tapHandler() }
+    @objc private func handleSwipe() {
+        guard let viewModel, let swipeService else { return }
+        swipeService.serve(CreateHappeningServiceArgument(eventId: viewModel.id, date: .now))
+    }
+
+    @objc private func handleTap() {
+        guard let viewModel, let tapService else { return }
+        tapService.serve(ShowEventDetailsServiceArgument(eventId: viewModel.id))
+    }
 }
 
 // MARK: - Happening creation animations
@@ -89,6 +105,11 @@ extension EventCell {
         case .belowSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: false)
         default: return
         }
+    }
+
+    func playSwipeAnimation() {
+        view.circleContainer.prepareForHappeningCreationAnimation()
+        SwiperAnimationsHelper.animateHappening(view)
     }
 
     func animateGoalProgress() {

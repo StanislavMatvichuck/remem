@@ -14,10 +14,12 @@ final class EventCreationController: UIViewController, UITextFieldDelegate {
     private var viewModel: EventCreationViewModel? { didSet {
         viewRoot.viewModel = viewModel
     }}
+    private let submitService: CreateEventService
 
     // MARK: - Init
-    init(_ factory: EventCreationViewModelFactoring) {
+    init(_ factory: EventCreationViewModelFactoring, submitService: CreateEventService) {
         self.factory = factory
+        self.submitService = submitService
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
@@ -61,7 +63,9 @@ final class EventCreationController: UIViewController, UITextFieldDelegate {
     @objc private func handleTextField() { viewModel?.createdEventName = viewRoot.input.text! }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        viewModel?.submit()
+        if let name = viewModel?.createdEventName {
+            submitService.serve(CreateEventServiceArgument(name: name))
+        }
         dismiss(animated: true)
         return true
     }

@@ -7,15 +7,11 @@
 
 import UIKit
 
-final class EventsListView: UIView, EventsListDataProviding {
+final class EventsListView: UIView {
     static let removalDropAreaDefaultOpacity: Float = 0.5
     
-    let list: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let list: UICollectionView
+    let dataSource: EventsListDataSource
     
     let removalDropArea: UIView = {
         let view = UIView(al: true)
@@ -31,8 +27,6 @@ final class EventsListView: UIView, EventsListDataProviding {
         return view
     }()
     
-    lazy var dataSource = EventsListDataSource(list: list, provider: WeakRef(self))
-    
     var viewModel: EventsListViewModel? { didSet {
         guard let viewModel else { return }
         configureContent(viewModel)
@@ -41,7 +35,9 @@ final class EventsListView: UIView, EventsListDataProviding {
     
     lazy var animatedConstraint: NSLayoutConstraint = { removalDropArea.trailingAnchor.constraint(equalTo: leadingAnchor) }()
     
-    init() {
+    init(list: UICollectionView, dataSource: EventsListDataSource) {
+        self.list = list
+        self.dataSource = dataSource
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
@@ -61,26 +57,50 @@ final class EventsListView: UIView, EventsListDataProviding {
     }
     
     func startHintAnimationIfNeeded() {
-        guard
-            let viewModel,
-            let eventsSection = viewModel.sections.first(where: { section in
-                section == .events
-            }),
-            viewModel.cellsIdentifiers(for: .events).count > 0
-        else { return }
+//        guard
+//            let viewModel,
+//            let eventsSection = viewModel.sections.first(where: { section in
+//                section == .events
+//            }),
+//            viewModel.cellsIdentifiers(for: .events).count > 0
+//        else { return }
+//
+//        let firstEventCellIndexPath = IndexPath(
+//            row: 0,
+//            section: eventsSection.rawValue
+//        )
+//
+//        guard
+//            let eventCell = list.cellForItem(
+//                at: firstEventCellIndexPath
+//            ) as? EventCell
+//        else { return }
+//
+//        eventCell.view.hintDisplay.startAnimationIfNeeded()
+    }
+    
+    static func makeList() -> UICollectionView {
+        let list = UICollectionView(frame: .zero, collectionViewLayout: EventsListView.makeLayout())
+        list.translatesAutoresizingMaskIntoConstraints = false
+        return list
+    }
+    
+    private static func makeLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { _, _ in
+            let heightDimension: NSCollectionLayoutDimension = .estimated(.eventsListCellHeight)
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-        let firstEventCellIndexPath = IndexPath(
-            row: 0,
-            section: eventsSection.rawValue
-        )
-
-        guard
-            let eventCell = list.cellForItem(
-                at: firstEventCellIndexPath
-            ) as? EventCell
-        else { return }
-
-        eventCell.view.hintDisplay.startAnimationIfNeeded()
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = .buttonMargin
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: .buttonMargin, leading: 0,
+                bottom: .buttonMargin, trailing: 0
+            )
+            return section
+        }
     }
     
     // MARK: - Private

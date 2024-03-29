@@ -45,6 +45,8 @@ final class CreateEventCell: UICollectionViewCell {
         }
     }
 
+    var tapService: ShowCreateEventService?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         isAccessibilityElement = true
@@ -58,6 +60,7 @@ final class CreateEventCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         viewModel = nil
+        tapService = nil
         super.prepareForReuse()
     }
 
@@ -97,5 +100,5 @@ final class CreateEventCell: UICollectionViewCell {
     }
 
     // MARK: - Events handling
-    @objc private func handleTouchUp(_: UIButton) { viewModel?.handleTap() }
+    @objc private func handleTouchUp(_: UIButton) { tapService?.serve(ApplicationServiceEmptyArgument()) }
 }

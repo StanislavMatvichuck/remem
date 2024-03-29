@@ -8,21 +8,22 @@
 import Domain
 import Foundation
 
+protocol CreateEventServiceFactoring { func makeCreateEventService() -> CreateEventService }
+
 struct CreateEventServiceArgument {
     let name: String
-    let dateCreated: Date
 }
 
 struct CreateEventService: ApplicationService {
-    private let repository: EventsCommanding
-    
-    init(repository: EventsCommanding) {
-        self.repository = repository
-    }
-    
-    func serve(_ argument: CreateEventServiceArgument) {
-        let newEvent = Event(name: argument.name, dateCreated: argument.dateCreated)
-        repository.save(newEvent)
-        DomainEventsPublisher.shared.publish(EventCreated(event: newEvent))
+    private let eventsStorage: EventsCommanding
+
+    init(eventsStorage: EventsCommanding) { self.eventsStorage = eventsStorage }
+
+    func serve(_ arg: CreateEventServiceArgument) {
+        let createdEvent = Event(name: arg.name, dateCreated: .now)
+
+        eventsStorage.save(createdEvent)
+
+        DomainEventsPublisher.shared.publish(EventCreated(event: createdEvent))
     }
 }

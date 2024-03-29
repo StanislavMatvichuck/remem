@@ -16,10 +16,6 @@ struct EventCellViewModel {
     static let rename = String(localizationId: "button.rename")
     static let delete = String(localizationId: "button.delete")
 
-    typealias TapHandler = () -> Void
-    typealias SwipeHandler = () -> Void
-    typealias RemoveHandler = () -> Void
-
     private let event: Event
     private let valueAmount: Int
 
@@ -32,18 +28,12 @@ struct EventCellViewModel {
     let goalAmount: String?
     var animation: Animations
 
-    let tapHandler: TapHandler
-    let swipeHandler: SwipeHandler
-    let removeHandler: RemoveHandler
     private let currentMoment: Date
 
     init(
         event: Event,
         hintEnabled: Bool,
         currentMoment: Date,
-        tapHandler: @escaping TapHandler,
-        swipeHandler: @escaping SwipeHandler,
-        removeHandler: @escaping RemoveHandler,
         animation: Animations
     ) {
         self.animation = animation
@@ -71,10 +61,6 @@ struct EventCellViewModel {
         } else {
             self.value = "\(valueAmount)"
         }
-
-        self.tapHandler = tapHandler
-        self.swipeHandler = swipeHandler
-        self.removeHandler = removeHandler
     }
 
     func isValueIncreased(_ oldValue: EventCellViewModel) -> Bool {
@@ -90,14 +76,9 @@ struct EventCellViewModel {
             event: event,
             hintEnabled: hintEnabled,
             currentMoment: currentMoment,
-            tapHandler: tapHandler,
-            swipeHandler: swipeHandler,
-            removeHandler: removeHandler,
             animation: withAnimation
         )
     }
-
-    func remove() { removeHandler() }
 
     static func timeSinceDate(date: Date, now: Date) -> String {
         let formatter = DateComponentsFormatter()

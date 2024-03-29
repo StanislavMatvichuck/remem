@@ -20,6 +20,8 @@ final class EventsSortingCellView: UIView {
         guard let viewModel else { return }
         configureContent(viewModel)
     }}
+    
+    var setEventsOrderingService: SetEventsOrderingService?
 
     init() {
         super.init(frame: .zero)
@@ -53,6 +55,10 @@ final class EventsSortingCellView: UIView {
     }
 
     @objc private func handleTap() {
-        viewModel?.handleTap()
+        guard let service = setEventsOrderingService, let viewModel else { return }
+        service.serve(SetEventsOrderingServiceArgument(
+            eventsIdentifiersOrder: nil,
+            ordering: viewModel.sorter
+        ))
     }
 }

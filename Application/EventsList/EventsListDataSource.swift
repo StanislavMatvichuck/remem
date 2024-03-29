@@ -7,27 +7,52 @@
 
 import UIKit
 
-protocol EventsListDataProviding {
-    var viewModel: EventsListViewModel? { get }
-}
-
 struct EventsListDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<EventsListViewModel.Section, String>
 
-    private let provider: EventsListDataProviding
     private let dataSource: DataSource
+    private let viewModelProvider: EventsListViewModelFactoring
+    private let showEventDetailsServiceProvider: ShowEventDetailsServiceFactoring
+    private let createHappeningServiceProvider: CreateHappeningServiceFactoring
+    private let removeEventServiceProvider: RemoveEventServiceFactoring
+    private let showCreateEventServiceProvider: ShowCreateEventServiceFactoring
 
-    init(list: UICollectionView, provider: EventsListDataProviding) {
-        let hintCellRegistration = UICollectionView.CellRegistration<HintCell, HintCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
-        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, EventCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
-        let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
+    init(
+        list: UICollectionView,
+        viewModelProvider: EventsListViewModelFactoring,
+        showEventDetailsServiceProvider: ShowEventDetailsServiceFactoring,
+        createHappeningServiceProvider: CreateHappeningServiceFactoring,
+        removeEventServiceProvider: RemoveEventServiceFactoring,
+        showCreateEventServiceProvider: ShowCreateEventServiceFactoring
+    ) {
+        self.viewModelProvider = viewModelProvider
+        self.showEventDetailsServiceProvider = showEventDetailsServiceProvider
+        self.createHappeningServiceProvider = createHappeningServiceProvider
+        self.removeEventServiceProvider = removeEventServiceProvider
+        self.showCreateEventServiceProvider = showCreateEventServiceProvider
 
-        self.provider = provider
+        let hintCellRegistration = UICollectionView.CellRegistration
+        <HintCell, HintCellViewModel> { cell, _, viewModel in
+            cell.viewModel = viewModel
+        }
+        let eventCellRegistration = UICollectionView.CellRegistration
+        <EventCell, EventCellViewModel> { cell, _, viewModel in
+            cell.viewModel = viewModel
+            cell.tapService = showEventDetailsServiceProvider.makeShowEventDetailsService()
+            cell.swipeService = createHappeningServiceProvider.makeCreateHappeningService()
+            cell.removeService = removeEventServiceProvider.makeRemoveEventService()
+        }
+        let createEventCellRegistration = UICollectionView.CellRegistration
+        <CreateEventCell, CreateEventCellViewModel> { cell, _, viewModel in
+            cell.viewModel = viewModel
+            cell.tapService = showCreateEventServiceProvider.makeShowCreateEventService()
+        }
+
         dataSource = DataSource(collectionView: list) {
             collectionView, indexPath, itemIdentifier in
 
-            guard let item = provider.viewModel?.cell(identifier: itemIdentifier) else { fatalError() }
+            guard let item = viewModelProvider.makeEventsListViewModel().viewModel(forIdentifier: itemIdentifier) else { fatalError() }
 
             switch indexPath.section {
             case EventsListViewModel.Section.hint.rawValue:
@@ -54,23 +79,20 @@ struct EventsListDataSource {
     }
 
     func applySnapshot(_ oldValue: EventsListViewModel?) {
+        let viewModel = viewModelProvider.makeEventsListViewModel()
         guard
-            let viewModel = provider.viewModel,
             viewModel.removalDropAreaHidden
         else { return }
         var snapshot = Snapshot()
 
-        for section in viewModel.sections {
+        for section in EventsListViewModel.sections {
             snapshot.appendSections([section])
             snapshot.appendItems(
-                viewModel.cellsIdentifiers(for: section),
+                viewModel.identifiersFor(section: section),
                 toSection: section
             )
-        }
-
-        if let oldValue {
-            let reconfiguredIdentifiers = viewModel.cellsRequireReconfigurationIds(oldValue: oldValue)
-            snapshot.reconfigureItems(reconfiguredIdentifiers)
+            // TODO: optimize this solution
+            snapshot.reconfigureItems(viewModel.identifiersFor(section: section))
         }
 
         dataSource.apply(snapshot, animatingDifferences: true)

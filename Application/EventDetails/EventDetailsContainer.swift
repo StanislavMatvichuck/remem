@@ -10,17 +10,17 @@ import UIKit
 
 final class EventDetailsContainer:
     ControllerFactoring,
-    EventDetailsViewModelFactoring
+    EventDetailsViewModelFactoring,
+    EventDetailsControllerFactoring
 {
     let parent: ApplicationContainer
-    let event: Event
+    var event: Event!
     var commander: EventsCommanding { parent.commander }
     var updater: ViewControllersUpdater { parent.updater }
     var currentMoment: Date { parent.currentMoment }
 
-    init(_ parent: ApplicationContainer, event: Event) {
+    init(_ parent: ApplicationContainer) {
         self.parent = parent
-        self.event = event
     }
 
     func make() -> UIViewController {
@@ -38,6 +38,11 @@ final class EventDetailsContainer:
 
         updater.addDelegate(controller)
         return controller
+    }
+
+    func makeEventDetailsController(event: Event) -> EventDetailsViewController {
+        self.event = event
+        return make() as! EventDetailsViewController
     }
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel {

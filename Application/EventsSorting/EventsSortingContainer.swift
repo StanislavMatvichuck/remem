@@ -12,19 +12,20 @@ import UIKit
 final class EventsSortingContainer: NSObject,
     ControllerFactoring,
     EventsSortingViewModelFactoring,
-    EventsSortingCellViewModelFactoring
+    EventsSortingCellViewModelFactoring,
+    EventsOrderingControllerFactoring
 {
     static let topSpacing: CGFloat = .layoutSquare / 2
 
     private let parent: EventsListContainer
-    private let animateFrom: EventsSorter?
+    private var animateFrom: EventsSorter?
     private var provider: EventsSortingQuerying { parent.sortingProvider }
     private var commander: EventsSortingCommanding { parent.sortingCommander }
     private var updater: ViewControllersUpdater { parent.updater }
     private var manualSortingQuerying: EventsSortingManualQuerying { parent.manualSortingProvider }
     private var manualSortingCommanding: EventsSortingManualCommanding { parent.manualSortingCommander }
 
-    private let presentationTopOffset: CGFloat
+    private var presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
     private let dismissAnimator = EventsSortingDismissAnimator()
 
@@ -39,7 +40,8 @@ final class EventsSortingContainer: NSObject,
     }
 
     func make() -> UIViewController {
-        let controller = EventsSortingController(self)
+        let view = EventsSortingView(factory: parent)
+        let controller = EventsSortingController(self, view: view)
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
         updater.addDelegate(controller)
@@ -55,16 +57,21 @@ final class EventsSortingContainer: NSObject,
         )
     }
 
-    func makeTapHandler() -> EventsSortingCellViewModel.TapHandler {{ selectedSorter in
-        self.commander.set(selectedSorter)
-    }}
-
     func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel {
         EventsSortingCellViewModel(
             EventsSorter.allCases[index],
-            activeSorter: provider.get(),
-            handler: makeTapHandler()
+            activeSorter: provider.get()
         )
+    }
+
+    func makeEventsOrderingController(using arg: ShowEventsOrderingServiceArgument) -> EventsSortingController {
+        animateFrom = arg.oldValue
+        presentationTopOffset = arg.offset
+        return make() as! EventsSortingController
+    }
+
+    func makeSetEventsOrderingService() -> SetEventsOrderingService {
+        parent.makeSetEventsOrderingService()
     }
 }
 

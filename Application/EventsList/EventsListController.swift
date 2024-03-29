@@ -16,43 +16,58 @@ final class EventsListController:
     let factory: EventsListViewModelFactoring
 
     let viewRoot: EventsListView
-    private let widgetUpdater: WidgetViewController
     private var timer: Timer?
 
     var viewModel: EventsListViewModel? {
         didSet {
-            viewModel?.configureAnimationForEventCells(oldValue: oldValue)
-
             title = EventsListViewModel.title
 
             viewRoot.viewModel = viewModel
 
             guard let viewModel else { return }
-            widgetUpdater.update(viewModel)
 
-            if viewModel.shouldPresentManualSorting(oldValue),
+            if viewModel.manualSortingPresentableFor(oldValue),
                presentedViewController == nil
             {
-                viewModel.eventsSortingHandler?(view.safeAreaInsets.top, oldValue?.sorter)
+                showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.sorter))
             }
         }
     }
 
+    var showEventsOrderingService: ShowEventsOrderingService?
+    var setEventsOrderingService: SetEventsOrderingService?
+
+    var eventsListOrderingSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var happeningCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+
     init(
         viewModelFactory: EventsListViewModelFactoring,
         view: EventsListView,
-        widgetUpdater: WidgetViewController
+        showEventsOrderingService: ShowEventsOrderingService? = nil,
+        setEventsOrderingService: SetEventsOrderingService? = nil
     ) {
         self.factory = viewModelFactory
+        self.showEventsOrderingService = showEventsOrderingService
+        self.setEventsOrderingService = setEventsOrderingService
         self.viewRoot = view
-        self.widgetUpdater = widgetUpdater
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewRoot.startHintAnimationIfNeeded()
+    }
+
     deinit {
         timer?.invalidate()
+        eventsListOrderingSubscription = nil
+        happeningCreatedSubscription = nil
+        eventRemovedSubscription = nil
+        eventCreatedSubscription = nil
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -64,10 +79,41 @@ final class EventsListController:
         update()
         setupTimer()
         configureForegroundNotification()
+        configureDomainEventsSubscriptions()
+    }
+
+    private func configureDomainEventsSubscriptions() {
+        eventsListOrderingSubscription = DomainEventsPublisher.shared.subscribe(
+            EventsListOrderingSet.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        eventRemovedSubscription = DomainEventsPublisher.shared.subscribe(
+            EventRemoved.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        eventCreatedSubscription = DomainEventsPublisher.shared.subscribe(
+            EventCreated.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        happeningCreatedSubscription = DomainEventsPublisher.shared.subscribe(
+            HappeningCreated.self,
+            usingBlock: { [weak self] action in
+                self?.update()
+                if let renderedCells = self?.viewRoot.list.visibleCells {
+                    for cell in renderedCells {
+                        if let cell = cell as? EventCell, cell.viewModel?.id == action.eventId {
+                            cell.playSwipeAnimation()
+                        }
+                    }
+                }
+            }
+        )
     }
 
     private func configureList() {
-        viewRoot.list.delegate = self
         viewRoot.list.dragDelegate = self
         viewRoot.list.dropDelegate = self
         viewRoot.list.dragInteractionEnabled = true
@@ -95,21 +141,12 @@ final class EventsListController:
     }
 
     @objc private func handleEventsSortingTap() {
-        viewModel?.eventsSortingHandler?(view.safeAreaInsets.top, nil)
+        showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: nil))
     }
 
     private func setupTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             [weak self] _ in self?.update()
         }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: .eventsListCellHeight)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewRoot.startHintAnimationIfNeeded()
     }
 }

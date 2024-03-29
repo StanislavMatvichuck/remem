@@ -10,7 +10,7 @@ import UIKit
 
 final class EventsSortingController: UIViewController {
     // MARK: - Properties
-    let viewRoot = EventsSortingView()
+    let viewRoot: EventsSortingView
     let factory: EventsSortingViewModelFactoring
 
     var viewModel: EventsSortingViewModel? { didSet {
@@ -19,8 +19,9 @@ final class EventsSortingController: UIViewController {
     }}
 
     // MARK: - Init
-    init(_ factory: EventsSortingViewModelFactoring) {
+    init(_ factory: EventsSortingViewModelFactoring, view: EventsSortingView) {
         self.factory = factory
+        self.viewRoot = view
         super.init(nibName: nil, bundle: nil)
     }
 

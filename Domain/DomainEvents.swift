@@ -8,10 +8,15 @@
 import Foundation
 
 enum DomainEvents: String {
-    case eventCreated, eventVisited
+    case eventCreated,
+         eventVisited,
+         eventRemoved,
+
+         eventsListOrderingSet,
+         happeningCreated
 }
 
-enum UserInfoCodingKeys: String { case event }
+enum UserInfoCodingKeys: String { case event, eventsListOrdering, eventId }
 
 public struct EventCreated: DomainEventsPublisher.DomainEvent {
     public static var eventName = Notification.Name(DomainEvents.eventCreated.rawValue)
@@ -27,7 +32,20 @@ public struct EventCreated: DomainEventsPublisher.DomainEvent {
     public func userInfo() -> DomainEventsPublisher.UserInfo { [UserInfoCodingKeys.event: event] }
 }
 
-public struct EventRemoved {}
+public struct EventRemoved: DomainEventsPublisher.DomainEvent {
+    public static var eventName = Notification.Name(DomainEvents.eventRemoved.rawValue)
+
+    let eventId: String
+
+    public init(userInfo: DomainEventsPublisher.UserInfo) {
+        self.eventId = userInfo[UserInfoCodingKeys.eventId] as! String
+    }
+
+    public init(eventId: String) { self.eventId = eventId }
+
+    public func userInfo() -> DomainEventsPublisher.UserInfo { [UserInfoCodingKeys.eventId: eventId] }
+}
+
 public struct EventVisited: DomainEventsPublisher.DomainEvent {
     public static var eventName = Notification.Name(DomainEvents.eventVisited.rawValue)
 
@@ -42,10 +60,31 @@ public struct EventVisited: DomainEventsPublisher.DomainEvent {
     public func userInfo() -> DomainEventsPublisher.UserInfo { [UserInfoCodingKeys.event: event] }
 }
 
-public struct HappeningCreated {}
+public struct HappeningCreated: DomainEventsPublisher.DomainEvent {
+    public static var eventName = Notification.Name(DomainEvents.happeningCreated.rawValue)
+
+    public let eventId: String
+
+    public init(userInfo: DomainEventsPublisher.UserInfo) {
+        self.eventId = userInfo[UserInfoCodingKeys.eventId] as! String
+    }
+
+    public init(eventId: String) { self.eventId = eventId }
+
+    public func userInfo() -> DomainEventsPublisher.UserInfo { [UserInfoCodingKeys.eventId: eventId] }
+}
+
 public struct HappeningRemoved {}
 public struct GoalCreated {}
 public struct GoalRemoved {}
 public struct GoalValueUpdated {}
 public struct GoalAchieved {}
-public struct EventsSorterChanged {}
+public struct EventsListOrderingSet: DomainEventsPublisher.DomainEvent {
+    public static var eventName = Notification.Name(DomainEvents.eventsListOrderingSet.rawValue)
+
+    public init(userInfo: DomainEventsPublisher.UserInfo) {}
+
+    public init() {}
+
+    public func userInfo() -> DomainEventsPublisher.UserInfo { [:] }
+}
