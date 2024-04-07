@@ -10,15 +10,9 @@ import Foundation
 struct CreateEventCellViewModel {
     static let title = String(localizationId: "button.create")
 
-    typealias TapHandler = () -> Void
-
     let isHighlighted: Bool
-    private let tapHandler: TapHandler?
 
-    init(eventsCount: Int, tapHandler: TapHandler? = nil) {
+    init(eventsCount: Int) {
         self.isHighlighted = eventsCount == 0
-        self.tapHandler = tapHandler
     }
-
-    func handleTap() { tapHandler?() }
 }

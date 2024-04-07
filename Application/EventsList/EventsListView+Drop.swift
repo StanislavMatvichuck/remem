@@ -17,7 +17,6 @@ extension EventsListView: UIDropInteractionDelegate {
     }
 
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        // this call must invoke cell service
         guard
             let viewModel,
             let draggedCellIndex = viewModel.draggedCellIndex
