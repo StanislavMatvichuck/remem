@@ -21,7 +21,6 @@ final class EventsSortingContainer:
     private var animateFrom: EventsSorter?
     private var provider: EventsSortingQuerying { parent.sortingProvider }
     private var commander: EventsSortingCommanding { parent.sortingCommander }
-    private var updater: ViewControllersUpdater { parent.updater }
     private var manualSortingQuerying: EventsSortingManualQuerying { parent.manualSortingProvider }
     private var manualSortingCommanding: EventsSortingManualCommanding { parent.manualSortingCommander }
 
@@ -62,7 +61,6 @@ final class EventsSortingContainer:
         let controller = EventsSortingController(self, view: view)
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
-        updater.addDelegate(controller)
         return controller
     }
 

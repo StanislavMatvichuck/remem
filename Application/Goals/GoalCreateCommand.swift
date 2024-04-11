@@ -10,7 +10,6 @@ import Foundation
 
 struct GoalCreateCommand: Command {
     let repository: GoalsCommanding
-    let updater: Updating
     let date: Date
     let count: Int
     let event: Event
@@ -18,6 +17,5 @@ struct GoalCreateCommand: Command {
     func execute() {
         let createdGoal = Goal(dateCreated: date, event: event)
         repository.save(createdGoal)
-        updater.update()
     }
 }

@@ -12,7 +12,6 @@ final class SummaryContainer:
     SummaryViewModelFactoring
 {
     let parent: EventDetailsContainer
-    var commander: ViewControllersUpdater { parent.updater }
 
     var event: Event { parent.event }
     var currentMoment: Date { parent.currentMoment }
@@ -21,11 +20,6 @@ final class SummaryContainer:
         self.parent = parent
     }
 
-    func make() -> UIViewController {
-        let controller = SummaryViewController(self)
-        commander.addDelegate(WeakRef(controller))
-        return controller
-    }
-
+    func make() -> UIViewController { SummaryViewController(self) }
     func makeSummaryViewModel() -> SummaryViewModel { SummaryViewModel(event: event, createdUntil: currentMoment) }
 }

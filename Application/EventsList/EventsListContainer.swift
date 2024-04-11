@@ -18,7 +18,6 @@ final class EventsListContainer:
 {
     private let parent: ApplicationContainer
     var commander: EventsCommanding { parent.commander }
-    var updater: ViewControllersUpdater { parent.updater }
 
     let sortingProvider: EventsSortingQuerying
     let sortingCommander: EventsSortingCommanding
@@ -48,7 +47,6 @@ final class EventsListContainer:
         self.manualSortingProvider = manualSortingRepository
         self.manualSortingCommander = manualSortingRepository
         self.sortingCommander = updatingSortingCommander
-        updatingSortingCommander.delegate = updater
     }
 
     func makeEventsListController() -> EventsListController {

@@ -15,7 +15,6 @@ final class EventDetailsContainer:
     let parent: ApplicationContainer
     var event: Event!
     var commander: EventsCommanding { parent.commander }
-    var updater: ViewControllersUpdater { parent.updater }
     var currentMoment: Date { parent.currentMoment }
 
     init(_ parent: ApplicationContainer) {
@@ -23,7 +22,7 @@ final class EventDetailsContainer:
     }
 
     func make() -> UIViewController {
-        let controller = EventDetailsViewController(
+        EventDetailsViewController(
             factory: self,
             controllers: [
                 WeekContainer(self).make(),
@@ -35,9 +34,6 @@ final class EventDetailsContainer:
             ],
             service: VisitEventService(event: event, repository: commander)
         )
-
-        updater.addDelegate(controller)
-        return controller
     }
 
     func makeEventDetailsController(event: Event) -> EventDetailsViewController {

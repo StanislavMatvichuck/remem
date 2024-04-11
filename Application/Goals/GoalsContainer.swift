@@ -14,7 +14,6 @@ final class GoalsContainer:
 {
     private let parent: EventDetailsContainer
     private let repository = TemporaryGoalsRepository()
-    private var updater: Updating { parent.updater }
     private var event: Event { parent.event }
     private var now: Date { parent.currentMoment }
 
@@ -22,11 +21,7 @@ final class GoalsContainer:
         self.parent = parent
     }
 
-    func make() -> UIViewController {
-        let controller = GoalsViewController(factory: self)
-        parent.updater.addDelegate(controller)
-        return controller
-    }
+    func make() -> UIViewController { GoalsViewController(factory: self) }
 
     // MARK: - ViewModels
 
@@ -51,17 +46,16 @@ final class GoalsContainer:
 
     // MARK: - Handlers
     func makeIncrementCommand(goal: Goal) -> GoalIncrementCommand {
-        GoalIncrementCommand(goal: goal, repository: repository, updater: updater)
+        GoalIncrementCommand(goal: goal, repository: repository)
     }
 
     func makeDecrementCommand(goal: Goal) -> GoalDecrementCommand {
-        GoalDecrementCommand(goal: goal, repository: repository, updater: updater)
+        GoalDecrementCommand(goal: goal, repository: repository)
     }
 
     func makeCreateCommand() -> GoalCreateCommand {
         GoalCreateCommand(
             repository: repository,
-            updater: updater,
             date: .now,
             count: event.happenings.count + 1,
             event: event

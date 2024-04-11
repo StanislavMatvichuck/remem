@@ -16,7 +16,6 @@ final class ApplicationContainer {
     let provider: EventsQuerying
     let commander: EventsCommanding
     let coordinator: Coordinator
-    let updater: ViewControllersUpdater
     let watcher: Watching
     let injectedCurrentMoment: Date
 
@@ -45,12 +44,8 @@ final class ApplicationContainer {
         self.coordinator = coordinator
         self.provider = repository
         self.commander = updatingCommander
-        self.updater = ViewControllersUpdater()
         self.watcher = watcher
-
-        let weakUpdater = WeakRef(updater)
-        updatingCommander.delegate = weakUpdater
-        watcher.delegate = weakUpdater
+//        watcher.delegate = weakUpdater
     }
 
     static func parseLaunchMode() -> LaunchMode {

@@ -16,7 +16,6 @@ final class DayDetailsContainer:
     let startOfDay: Date
 
     var commander: EventsCommanding { parent.commander }
-    var updater: ViewControllersUpdater { parent.updater }
     var event: Event { parent.event }
     var currentMoment: Date { parent.currentMoment }
     var hour: Int { Calendar.current.component(.hour, from: currentMoment) }
@@ -27,11 +26,7 @@ final class DayDetailsContainer:
         self.startOfDay = startOfDay
     }
 
-    func make() -> UIViewController {
-        let controller = DayDetailsViewController(self)
-        updater.addDelegate(controller)
-        return controller
-    }
+    func make() -> UIViewController { DayDetailsViewController(self) }
 
     private var happenings: [Happening] { event.happenings(forDayIndex: DayIndex(startOfDay)) }
     /// Storage that provides unique ids for the lifetime of presentation
