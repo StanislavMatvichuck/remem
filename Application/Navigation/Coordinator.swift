@@ -8,26 +8,22 @@
 import UIKit
 
 final class Coordinator {
-    enum NavigationWithoutFactory {
+    enum Screen {
         case eventsList,
-             eventDetails,
-             eventsOrdering,
              createEvent,
+             eventsOrdering,
+             eventDetails,
              dayDetails,
              pdfReading
     }
 
-    let navigationController: UINavigationController
+    let navigationController = Coordinator.makeStyledNavigationController()
 
-    init() {
-        navigationController = Self.makeStyledNavigationController()
-    }
-
-    func goto(navigation: NavigationWithoutFactory, controller: UIViewController) { switch navigation {
+    func goto(navigation: Screen, controller: UIViewController) { switch navigation {
     case .eventsList: navigationController.pushViewController(controller, animated: false)
     case .createEvent: navigationController.present(controller, animated: true)
-    case .eventDetails: navigationController.pushViewController(controller, animated: true)
     case .eventsOrdering: navigationController.present(controller, animated: true)
+    case .eventDetails: navigationController.pushViewController(controller, animated: true)
     case .dayDetails: navigationController.present(controller, animated: true)
     case .pdfReading: navigationController.pushViewController(controller, animated: true)
     } }
