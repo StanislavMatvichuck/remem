@@ -9,7 +9,6 @@ import Domain
 import UIKit
 
 final class GoalsContainer:
-    ControllerFactoring,
     GoalsViewModelFactoring,
     GoalViewModelFactoring
 {

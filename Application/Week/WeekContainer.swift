@@ -9,7 +9,6 @@ import Domain
 import UIKit
 
 final class WeekContainer:
-    ControllerFactoring,
     WeekViewModelFactoring,
     WeekDayViewModelFactoring,
     WeekPageViewModelFactoring
@@ -17,22 +16,11 @@ final class WeekContainer:
     private let parent: EventDetailsContainer
     private var event: Event { parent.event }
     private var currentMoment: Date { parent.parent.currentMoment }
-    private var coordinator: Coordinator { parent.parent.coordinator }
-    private var updater: ViewControllersUpdater { parent.parent.updater }
-    private var calendar: Calendar { Calendar.current }
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController {
-        let controller = WeekViewController(self)
-        updater.addDelegate(WeakRef(controller))
-        return controller
-    }
-
-    func makeWeekViewModel() -> WeekViewModel {
-        WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment)
-    }
-
+    func make() -> UIViewController { WeekViewController(self, view: WeekView(service: makeShowDayDetailsService())) }
+    func makeWeekViewModel() -> WeekViewModel { WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment) }
     func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {
         WeekPageViewModel(
             event: event,
@@ -43,29 +31,17 @@ final class WeekContainer:
     }
 
     func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel {
-        let startOfWeek = WeekIndex(event.dateCreated).dayIndex
-        let day = startOfWeek.adding(days: dayIndex)
-
-        return WeekDayViewModel(
+        WeekDayViewModel(
             event: event,
             index: dayIndex,
             today: currentMoment,
             dailyMaximum: dailyMaximum
-        ) { presentationAnimation, dismissAnimation in
-            let dayDetailsContainer = DayDetailsContainer(self.parent, startOfDay: day.date)
-
-            let presentationContainer = DayDetailsPresentationContainer(
-                parent: self.parent,
-                dayDetailsContainer: dayDetailsContainer,
-                presentationAnimator: DayDetailsPresentationAnimator()
-            )
-
-            presentationContainer.cellPresentationAnimationBlock = presentationAnimation
-            presentationContainer.cellDismissAnimationBlock = dismissAnimation
-
-            self.coordinator.show(.dayDetails(
-                factory: presentationContainer
-            ))
-        }
+        )
     }
+
+    func makeShowDayDetailsService() -> ShowDayDetailsService { ShowDayDetailsService(
+        coordinator: parent.parent.coordinator,
+        factory: DayDetailsPresentationContainer(parent: parent),
+        eventsProvider: parent.parent.provider
+    ) }
 }

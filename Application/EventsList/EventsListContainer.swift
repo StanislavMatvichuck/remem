@@ -10,7 +10,7 @@ import Domain
 import UIKit
 
 final class EventsListContainer:
-    ControllerFactoring,
+    EventsListControllerFactoring,
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
     EventCellViewModelFactoring,
@@ -51,7 +51,7 @@ final class EventsListContainer:
         updatingSortingCommander.delegate = updater
     }
 
-    func make() -> UIViewController {
+    func makeEventsListController() -> EventsListController {
         let list = EventsListView.makeList()
 
         let dataSource = EventsListDataSource(

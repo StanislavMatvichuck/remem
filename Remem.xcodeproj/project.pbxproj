@@ -85,7 +85,6 @@
 		084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F529C0977A00B601DA /* PDFReadingContainer.swift */; };
 		084B21F929C0A84700B601DA /* FileSavingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21F729C0A83400B601DA /* FileSavingTests.swift */; };
 		084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */; };
-		084B21FD29C0B03400B601DA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084B21FC29C0B03400B601DA /* Navigation.swift */; };
 		0850075429216E9D007B272C /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 0850075329216E9D007B272C /* iOSSnapshotTestCase */; };
 		085145C429AE066C00CA533D /* ClockContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C329AE066C00CA533D /* ClockContainer.swift */; };
 		085145C829AE092100CA533D /* SummaryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085145C729AE092100CA533D /* SummaryContainer.swift */; };
@@ -234,6 +233,9 @@
 		089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIHelper.swift */; };
 		089B378D2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */; };
 		089C5B9729A7E27800B1B977 /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C5B9629A7E27800B1B977 /* TestingViewController.swift */; };
+		089D1DA62BC28A2D0050AD33 /* ShowDayDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */; };
+		089D1DA82BC294F90050AD33 /* ShowEventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */; };
+		089D1DAA2BC296CF0050AD33 /* ShowPDFReadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */; };
 		089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
 		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
@@ -525,7 +527,6 @@
 		084B21F529C0977A00B601DA /* PDFReadingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingContainer.swift; sourceTree = "<group>"; };
 		084B21F729C0A83400B601DA /* FileSavingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSavingTests.swift; sourceTree = "<group>"; };
 		084B21FA29C0AA1D00B601DA /* PDFReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingView.swift; sourceTree = "<group>"; };
-		084B21FC29C0B03400B601DA /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		0850074929216E73007B272C /* ApplicationSnapshotsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationSnapshotsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0850075529216ECF007B272C /* EventsListSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListSnapshots.swift; sourceTree = "<group>"; };
 		085145C329AE066C00CA533D /* ClockContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockContainer.swift; sourceTree = "<group>"; };
@@ -672,6 +673,9 @@
 		089B37892A0A3EC500422971 /* AnimatedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedProgressView.swift; sourceTree = "<group>"; };
 		089B378C2A0A4DA600422971 /* ExtensionEventWeeklyGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionEventWeeklyGoalViewModel.swift; sourceTree = "<group>"; };
 		089C5B9629A7E27800B1B977 /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
+		089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDayDetailsService.swift; sourceTree = "<group>"; };
+		089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEventsListService.swift; sourceTree = "<group>"; };
+		089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPDFReadingService.swift; sourceTree = "<group>"; };
 		089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestAccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		089E4B472A2DEAB300727624 /* LaunchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchMode.swift; sourceTree = "<group>"; };
 		089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsDataSource.swift; sourceTree = "<group>"; };
@@ -1233,6 +1237,9 @@
 				0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */,
 				087EEF332BB59401009A55BB /* SetEventsOrderingService.swift */,
 				087EEF352BB5BA4B009A55BB /* ShowEventDetailsService.swift */,
+				089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */,
+				089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */,
+				089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */,
 				08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */,
 				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */,
@@ -1352,7 +1359,6 @@
 		08C52E7929CA63E40056C116 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				084B21FC29C0B03400B601DA /* Navigation.swift */,
 				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
 			);
 			path = Navigation;
@@ -2116,7 +2122,6 @@
 				08396EEA29A64B5900281E51 /* WidgetViewController.swift in Sources */,
 				085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */,
 				08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */,
-				084B21FD29C0B03400B601DA /* Navigation.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,
 				08B26A16289E98B700DFBAC8 /* DayCell.swift in Sources */,
 				085145C429AE066C00CA533D /* ClockContainer.swift in Sources */,
@@ -2224,6 +2229,7 @@
 				081A155F2B628D9D00EDA8A2 /* HourDistributionViewModel.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PDFWritingViewController.swift in Sources */,
+				089D1DA62BC28A2D0050AD33 /* ShowDayDetailsService.swift in Sources */,
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				0871E7512B9DCDCA00FF1F7D /* RemoveEventService.swift in Sources */,
 				081A156B2B62920500EDA8A2 /* HourDistributionView.swift in Sources */,
@@ -2243,6 +2249,8 @@
 				0852404F2B61534B004F9BDA /* DayOfWeekCellViewModel.swift in Sources */,
 				087433C32B33814C00336FC3 /* WeekPageViewModel.swift in Sources */,
 				085240612B61D480004F9BDA /* DayOfWeekContainer.swift in Sources */,
+				089D1DAA2BC296CF0050AD33 /* ShowPDFReadingService.swift in Sources */,
+				089D1DA82BC294F90050AD33 /* ShowEventsListService.swift in Sources */,
 				08C9DAFD2BB4CD8D00F038BB /* ShowEventsOrderingService.swift in Sources */,
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
 				087EEF362BB5BA4B009A55BB /* ShowEventDetailsService.swift in Sources */,

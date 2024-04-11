@@ -9,9 +9,6 @@ import Domain
 import Foundation
 
 struct WeekDayViewModel {
-    typealias TapHandler = (@escaping AnimationBlock, @escaping AnimationBlock) -> ()
-    typealias AnimationBlock = () -> ()
-
     let dayNumber: String
     let dayName: String
     let isToday: Bool
@@ -19,19 +16,22 @@ struct WeekDayViewModel {
     let hasHappenings: Bool
     let happeningsAmount: String
     let relativeLength: CGFloat
-    let tapHandler: TapHandler
+    // these properties only passed to a service
+    let eventId: String
+    let startOfDay: Date
 
     init(
         event: Event,
         index: Int,
         today: Date,
-        dailyMaximum: Int,
-        tapHandler: @escaping TapHandler = { _, _ in }
+        dailyMaximum: Int
     ) {
         let startOfWeek = WeekIndex(event.dateCreated).dayIndex
         let day = startOfWeek.adding(days: index)
         let dayDate = day.date
 
+        self.eventId = event.id
+        self.startOfDay = dayDate
         self.isToday = day == DayIndex(today)
         self.dayNumber = String(day.dayInMonth)
         self.dayName = dayDate.formatted(Date.FormatStyle().weekday(.narrow))
@@ -46,8 +46,6 @@ struct WeekDayViewModel {
 
         let relativeLength = CGFloat(happeningsAmount) / CGFloat(dailyMaximum)
         self.relativeLength = dailyMaximum == 0 ? 0 : relativeLength
-
-        self.tapHandler = tapHandler
     }
 }
 

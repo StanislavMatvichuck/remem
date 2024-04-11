@@ -5,19 +5,20 @@
 //  Created by Stanislav Matvichuck on 13.03.2023.
 //
 
+import DataLayer // wtf?
 import UIKit
-
-
 
 final class PDFWritingViewController: UIViewController {
     let viewRoot: PDFWritingView
     let factory: PDFWritingViewModelFactoring
     let viewModel: PDFWritingViewModel
+    let service: ShowPDFReadingService
 
-    init(_ factory: PDFWritingViewModelFactoring) {
+    init(_ factory: PDFWritingViewModelFactoring, service: ShowPDFReadingService) {
         self.factory = factory
         self.viewRoot = PDFWritingView()
         self.viewModel = factory.makePdfMakingViewModel()
+        self.service = service
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -35,6 +36,6 @@ final class PDFWritingViewController: UIViewController {
 
     @objc func handleTap(_: UIButton) {
         viewRoot.button.animateTapReceiving()
-        viewModel.tapHandler()
+        service.serve(ApplicationServiceEmptyArgument())
     }
 }

@@ -9,8 +9,8 @@ import DataLayer
 import Domain
 import UIKit
 
-final class EventsSortingContainer: NSObject,
-    ControllerFactoring,
+final class EventsSortingContainer:
+    NSObject,
     EventsSortingViewModelFactoring,
     EventsSortingCellViewModelFactoring,
     EventsOrderingControllerFactoring
@@ -39,15 +39,6 @@ final class EventsSortingContainer: NSObject,
         self.presentationTopOffset = topOffset
     }
 
-    func make() -> UIViewController {
-        let view = EventsSortingView(service: makeSetEventsOrderingService())
-        let controller = EventsSortingController(self, view: view)
-        controller.transitioningDelegate = self
-        controller.modalPresentationStyle = .custom
-        updater.addDelegate(controller)
-        return controller
-    }
-
     func makeEventsSortingViewModel() -> EventsSortingViewModel {
         EventsSortingViewModel(
             self,
@@ -67,7 +58,12 @@ final class EventsSortingContainer: NSObject,
     func makeEventsOrderingController(using arg: ShowEventsOrderingServiceArgument) -> EventsSortingController {
         animateFrom = arg.oldValue
         presentationTopOffset = arg.offset
-        return make() as! EventsSortingController
+        let view = EventsSortingView(service: makeSetEventsOrderingService())
+        let controller = EventsSortingController(self, view: view)
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .custom
+        updater.addDelegate(controller)
+        return controller
     }
 
     func makeSetEventsOrderingService() -> SetEventsOrderingService {

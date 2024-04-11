@@ -29,6 +29,8 @@ final class WeekDayView: UIStackView {
         configureContent(viewModel)
     }}
 
+    var service: ShowDayDetailsService?
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +117,14 @@ final class WeekDayView: UIStackView {
             )
         }
 
-        viewModel?.tapHandler(presentationAnimationBlock, dismissAnimationBlock)
+        if let viewModel, let service {
+            service.serve(ShowDayDetailsServiceArgument(
+                startOfDay: viewModel.startOfDay,
+                eventId: viewModel.eventId,
+                presentationAnimation: presentationAnimationBlock,
+                dismissAnimation: dismissAnimationBlock
+            ))
+        }
     }
 
     private func configureLayout() {

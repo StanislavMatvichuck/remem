@@ -20,20 +20,21 @@ final class WeekView: UIView {
         return collection
     }()
 
-    var viewModel: WeekViewModel? {
-        didSet {
-            guard let viewModel else { return }
-            configureContentFor(viewModel)
-        }
-    }
+    var viewModel: WeekViewModel? { didSet {
+        guard let viewModel else { return }
+        configureContentFor(viewModel)
+    } }
 
-    init() {
+    var service: ShowDayDetailsService?
+
+    init(service: ShowDayDetailsService? = nil) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
         configureLayout()
         configureAppearance()
+        self.service = service
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -73,6 +74,7 @@ extension WeekView: UICollectionViewDataSource {
             for: indexPath) as? WeekPageView, let viewModel
         else { fatalError(viewModelErrorMessage) }
         page.viewModel = viewModel.page(at: indexPath.row)
+        if let service = service { page.service = service }
         return page
     }
 }

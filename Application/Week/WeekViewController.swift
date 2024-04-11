@@ -13,10 +13,10 @@ final class WeekViewController: UIViewController {
     
     var viewModel: WeekViewModel { didSet { viewRoot.viewModel = viewModel }}
     
-    init(_ factory: WeekViewModelFactoring) {
+    init(_ factory: WeekViewModelFactoring, view: WeekView) {
         self.factory = factory
         self.viewModel = factory.makeWeekViewModel()
-        self.viewRoot = WeekView()
+        self.viewRoot = view
         super.init(nibName: nil, bundle: nil)
     }
     

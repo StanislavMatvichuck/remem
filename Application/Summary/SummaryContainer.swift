@@ -9,7 +9,6 @@ import Domain
 import UIKit
 
 final class SummaryContainer:
-    ControllerFactoring,
     SummaryViewModelFactoring
 {
     let parent: EventDetailsContainer
@@ -28,7 +27,5 @@ final class SummaryContainer:
         return controller
     }
 
-    func makeSummaryViewModel() -> SummaryViewModel {
-        SummaryViewModel(event: event, createdUntil: currentMoment)
-    }
+    func makeSummaryViewModel() -> SummaryViewModel { SummaryViewModel(event: event, createdUntil: currentMoment) }
 }

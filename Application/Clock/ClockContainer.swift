@@ -9,7 +9,6 @@ import Domain
 import UIKit
 
 final class ClockContainer:
-    ControllerFactoring,
     ClockViewModelFactoring
 {
     let clockSize = 64

@@ -7,15 +7,14 @@
 
 import PDFKit
 import UIKit
-import DataLayer
 
 final class PDFReadingViewController: UIViewController {
-    private let provider: URLProviding
+    private let url: URL
     let viewRoot: PDFReadingView
 
-    init(_ provider: URLProviding) {
-        self.provider = provider
-        self.viewRoot = PDFReadingView(provider.url)
+    init(url: URL) {
+        self.url = url
+        self.viewRoot = PDFReadingView(url)
         super.init(nibName: nil, bundle: nil)
         configureNavigationItem()
     }
@@ -38,7 +37,7 @@ final class PDFReadingViewController: UIViewController {
             target: self,
             action: #selector(showShare)
         )
-        
+
         shareButton.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonPdfShare.rawValue
 
         navigationItem.rightBarButtonItem = shareButton
@@ -51,7 +50,7 @@ final class PDFReadingViewController: UIViewController {
     }
 
     private func makeShare() -> UIViewController {
-        let data = NSData(contentsOf: provider.url)
+        let data = NSData(contentsOf: url)
 
         let vc = UIActivityViewController(
             activityItems: [data],

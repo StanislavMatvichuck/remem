@@ -9,7 +9,4 @@ import Foundation
 
 struct PDFWritingViewModel {
     static let title = String(localizationId: "pdf.create")
-
-    typealias TapHandler = () -> ()
-    let tapHandler: TapHandler
 }

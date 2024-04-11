@@ -65,10 +65,11 @@ final class ApplicationContainer {
         return .uikit
     }
 
-    func makeRootViewController() -> UIViewController {
-        coordinator.show(Navigation.eventsList(factory: EventsListContainer(self)))
-        return coordinator.navigationController
-    }
-
+    func makeRootViewController() -> UIViewController { coordinator.navigationController }
     func makeWatcher() -> Watching { watcher }
+    func makeShowEventsListService() -> ShowEventsListService { ShowEventsListService(
+        coordinator: coordinator,
+        factory: EventsListContainer(self),
+        eventsProvider: provider
+    ) }
 }

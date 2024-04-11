@@ -23,6 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let launchMode = ApplicationContainer.parseLaunchMode()
         let container = ApplicationContainer(mode: launchMode)
+        let service = container.makeShowEventsListService()
+        service.serve(ApplicationServiceEmptyArgument())
 
         window.rootViewController = container.makeRootViewController()
         window.makeKeyAndVisible()

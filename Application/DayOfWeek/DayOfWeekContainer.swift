@@ -7,10 +7,7 @@
 
 import UIKit
 
-final class DayOfWeekContainer:
-    ControllerFactoring,
-    DayOfWeekViewModelFactoring
-{
+final class DayOfWeekContainer: DayOfWeekViewModelFactoring {
     private let parent: EventDetailsContainer
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }

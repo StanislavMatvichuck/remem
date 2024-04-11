@@ -8,7 +8,14 @@
 import UIKit
 
 final class Coordinator {
-    enum NavigationWithoutFactory { case eventDetails, eventsOrdering, createEvent }
+    enum NavigationWithoutFactory {
+        case eventsList,
+             eventDetails,
+             eventsOrdering,
+             createEvent,
+             dayDetails,
+             pdfReading
+    }
 
     let navigationController: UINavigationController
 
@@ -16,34 +23,14 @@ final class Coordinator {
         navigationController = Self.makeStyledNavigationController()
     }
 
-    func show(_ navigation: Navigation) {
-        let newController = navigation.controller
-        switch navigation {
-        case .eventCreation:
-            navigationController.present(newController, animated: true)
-        case .eventsList:
-            navigationController.pushViewController(newController, animated: false)
-        case .eventsSorting:
-            navigationController.present(newController, animated: true)
-        case .eventDetails:
-            navigationController.pushViewController(newController, animated: true)
-        case .dayDetails:
-            navigationController.present(newController, animated: true)
-        case .pdf:
-            navigationController.pushViewController(newController, animated: true)
-        }
-    }
-
-    func goto(navigation: NavigationWithoutFactory, controller: UIViewController) {
-        switch navigation {
-        case .createEvent:
-            navigationController.present(controller, animated: true)
-        case .eventDetails:
-            navigationController.pushViewController(controller, animated: true)
-        case .eventsOrdering:
-            navigationController.present(controller, animated: true)
-        }
-    }
+    func goto(navigation: NavigationWithoutFactory, controller: UIViewController) { switch navigation {
+    case .eventsList: navigationController.pushViewController(controller, animated: false)
+    case .createEvent: navigationController.present(controller, animated: true)
+    case .eventDetails: navigationController.pushViewController(controller, animated: true)
+    case .eventsOrdering: navigationController.present(controller, animated: true)
+    case .dayDetails: navigationController.present(controller, animated: true)
+    case .pdfReading: navigationController.pushViewController(controller, animated: true)
+    } }
 
     // MARK: - UINavigationController styling
     static func makeStyledNavigationController() -> UINavigationController {

@@ -5,15 +5,10 @@
 //  Created by Stanislav Matvichuck on 14.03.2023.
 //
 
-import UIKit
-import DataLayer
+import Foundation
 
-final class PDFReadingContainer: ControllerFactoring {
-    let provider: URLProviding
-
-    init(provider: URLProviding) { self.provider = provider }
-
-    func make() -> UIViewController {
-        PDFReadingViewController(provider)
+final class PDFReadingContainer: PDFReadingControllerFactoring {
+    func makePDFReadingController(url: URL) -> PDFReadingViewController {
+        PDFReadingViewController(url: url)
     }
 }

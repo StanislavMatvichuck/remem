@@ -9,7 +9,6 @@ import Domain
 import UIKit
 
 final class EventCreationContainer:
-    ControllerFactoring,
     EventCreationViewModelFactoring,
     CreateEventControllerFactoring
 {
@@ -17,13 +16,7 @@ final class EventCreationContainer:
 
     init(parent: ApplicationContainer) { self.parent = parent }
 
-    func make() -> UIViewController { EventCreationController(self, submitService: CreateEventService(eventsStorage: parent.commander)) }
-
-    func makeEventCreationViewModel() -> EventCreationViewModel {
-        EventCreationViewModel()
-    }
-
-    func makeCreateEventController() -> EventCreationController {
-        make() as! EventCreationController
-    }
+    func makeEventCreationViewModel() -> EventCreationViewModel { EventCreationViewModel() }
+    func makeCreateEventController() -> EventCreationController { EventCreationController(self, submitService: makeCreateEventService()) }
+    func makeCreateEventService() -> CreateEventService { CreateEventService(eventsStorage: parent.commander) }
 }

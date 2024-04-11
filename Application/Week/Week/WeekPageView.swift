@@ -53,6 +53,8 @@ final class WeekPageView: UICollectionViewCell {
         configureContent(viewModel)
     } }
 
+    var service: ShowDayDetailsService?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
@@ -113,6 +115,7 @@ final class WeekPageView: UICollectionViewCell {
         for index in 0 ..< WeekPageViewModel.daysCount {
             if let dayView = days.arrangedSubviews[index] as? WeekDayView {
                 dayView.viewModel = viewModel.day(dayNumberInWeek: index)
+                dayView.service = service
             }
         }
     }

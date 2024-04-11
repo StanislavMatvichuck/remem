@@ -8,7 +8,6 @@
 import UIKit
 
 final class HourDistributionContainer:
-    ControllerFactoring,
     HourDistributionViewModelFactoring
 {
     private let parent: EventDetailsContainer
