@@ -13,7 +13,8 @@ final class DayOfWeekContainer: DayOfWeekViewModelFactoring {
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController { DayOfWeekController(self) }
-    func makeDayOfWeekViewModel() -> DayOfWeekViewModel {
-        DayOfWeekViewModel(parent.event.happenings, currentMoment: parent.currentMoment)
-    }
+    func makeDayOfWeekViewModel() -> DayOfWeekViewModel { DayOfWeekViewModel(
+        parent.event.happenings,
+        currentMoment: parent.parent.currentMoment
+    ) }
 }

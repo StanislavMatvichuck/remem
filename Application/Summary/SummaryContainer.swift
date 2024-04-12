@@ -14,11 +14,9 @@ final class SummaryContainer:
     let parent: EventDetailsContainer
 
     var event: Event { parent.event }
-    var currentMoment: Date { parent.currentMoment }
+    var currentMoment: Date { parent.parent.currentMoment }
 
-    init(parent: EventDetailsContainer) {
-        self.parent = parent
-    }
+    init(_ parent: EventDetailsContainer) { self.parent = parent }
 
     func make() -> UIViewController { SummaryViewController(self) }
     func makeSummaryViewModel() -> SummaryViewModel { SummaryViewModel(event: event, createdUntil: currentMoment) }

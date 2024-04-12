@@ -13,35 +13,26 @@ final class EventDetailsContainer:
     EventDetailsControllerFactoring
 {
     let parent: ApplicationContainer
-    var event: Event!
-    var commander: EventsCommanding { parent.commander }
-    var currentMoment: Date { parent.currentMoment }
+    var eventId: String!
+    var event: Event { parent.provider.get().first { $0.id == eventId }! }
 
-    init(_ parent: ApplicationContainer) {
-        self.parent = parent
-    }
+    init(_ parent: ApplicationContainer) { self.parent = parent }
 
-    func make() -> UIViewController {
-        EventDetailsViewController(
+    func makeEventDetailsController(_ arg: ShowEventDetailsServiceArgument) -> EventDetailsViewController {
+        eventId = arg.eventId
+        return EventDetailsViewController(
             factory: self,
             controllers: [
                 WeekContainer(self).make(),
-                SummaryContainer(parent: self).make(),
+                SummaryContainer(self).make(),
                 GoalsContainer(self).make(),
                 HourDistributionContainer(self).make(),
                 DayOfWeekContainer(self).make(),
                 PDFWritingContainer(self).make()
             ],
-            service: VisitEventService(event: event, repository: commander)
+            service: VisitEventService(event: event, repository: parent.commander)
         )
     }
 
-    func makeEventDetailsController(event: Event) -> EventDetailsViewController {
-        self.event = event
-        return make() as! EventDetailsViewController
-    }
-
-    func makeEventDetailsViewModel() -> EventDetailsViewModel {
-        EventDetailsViewModel(event: event)
-    }
+    func makeEventDetailsViewModel() -> EventDetailsViewModel { EventDetailsViewModel(event: event) }
 }

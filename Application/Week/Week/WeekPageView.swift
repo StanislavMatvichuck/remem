@@ -114,8 +114,8 @@ final class WeekPageView: UICollectionViewCell {
     private func configureDaysContent(_ viewModel: WeekPageViewModel) {
         for index in 0 ..< WeekPageViewModel.daysCount {
             if let dayView = days.arrangedSubviews[index] as? WeekDayView {
-                dayView.viewModel = viewModel.day(dayNumberInWeek: index)
                 dayView.service = service
+                dayView.viewModel = viewModel.day(dayNumberInWeek: index)
             }
         }
     }

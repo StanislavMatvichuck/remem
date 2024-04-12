@@ -14,17 +14,31 @@ final class DayDetailsViewController: UIViewController {
     let viewRoot: DayDetailsView
 
     var viewModel: DayDetailsViewModel? { didSet {
-        viewModel?.configureCellsAnimations(oldValue)
         viewRoot.viewModel = viewModel
     } }
 
-    init(_ factory: DayDetailsViewModelFactoring) {
+    var createHappeningService: CreateHappeningService?
+    var removeHappeningService: RemoveHappeningService?
+    var createHappeningSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var removeHappeningSubscription: DomainEventsPublisher.DomainEventSubscription?
+
+    init(
+        _ factory: DayDetailsViewModelFactoring,
+        createHappeningService: CreateHappeningService?,
+        removeHappeningService: RemoveHappeningService?
+    ) {
         self.factory = factory
         self.viewRoot = DayDetailsView()
+        self.createHappeningService = createHappeningService
+        self.removeHappeningService = removeHappeningService
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    deinit {
+        createHappeningSubscription = nil
+        removeHappeningSubscription = nil
+    }
 
     // MARK: - View lifecycle
     override func loadView() { view = viewRoot }
@@ -32,6 +46,12 @@ final class DayDetailsViewController: UIViewController {
         viewModel = factory.makeDayDetailsViewModel(pickerDate: nil)
         configureCollection()
         configureEventHandlers()
+        createHappeningSubscription = DomainEventsPublisher.shared.subscribe(HappeningCreated.self, usingBlock: { [weak self] _ in
+            self?.update()
+        })
+        removeHappeningSubscription = DomainEventsPublisher.shared.subscribe(HappeningRemoved.self, usingBlock: { [weak self] _ in
+            self?.update()
+        })
     }
 
     private func configureCollection() {
@@ -48,7 +68,13 @@ final class DayDetailsViewController: UIViewController {
     }
 
     @objc private func handleButton() {
-        viewModel?.addHappening()
+        if let viewModel, let createHappeningService {
+            createHappeningService.serve(CreateHappeningServiceArgument(
+                eventId: viewModel.eventId,
+                date: viewModel.pickerDate
+            ))
+        }
+
         viewRoot.button.animateTapReceiving()
     }
 
@@ -65,8 +91,8 @@ extension DayDetailsViewController: UICollectionViewDragDelegate {
     func collectionView(
         _: UICollectionView,
         itemsForBeginning _: UIDragSession,
-        at index: IndexPath) -> [UIDragItem]
-    {
+        at index: IndexPath
+    ) -> [UIDragItem] {
         let provider = NSItemProvider(object: "\(index.row)" as NSString)
         let dragItem = UIDragItem(itemProvider: provider)
         return [dragItem]
@@ -94,7 +120,12 @@ extension DayDetailsViewController: UIDropInteractionDelegate {
                let index = Int(indexString as! String)
             {
                 let identifier = viewModel.identifiers[index]
-                viewModel.cell(for: identifier)?.removeHandler()
+                if let cellViewModel = viewModel.cell(for: identifier) {
+                    self?.removeHappeningService?.serve(RemoveHappeningServiceArgument(
+                        eventId: viewModel.eventId,
+                        happening: cellViewModel.happening
+                    ))
+                }
             }
         }
     }

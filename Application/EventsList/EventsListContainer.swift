@@ -41,12 +41,10 @@ final class EventsListContainer:
                 LocalFile.testingEventsQueryManualSorter
         )
 
-        let updatingSortingCommander = UpdatingEventsSortingCommander(sortingRepository)
-
         self.sortingProvider = sortingRepository
+        self.sortingCommander = sortingRepository
         self.manualSortingProvider = manualSortingRepository
         self.manualSortingCommander = manualSortingRepository
-        self.sortingCommander = updatingSortingCommander
     }
 
     func makeEventsListController() -> EventsListController {

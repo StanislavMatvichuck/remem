@@ -28,13 +28,13 @@ final class WeekView: UIView {
     var service: ShowDayDetailsService?
 
     init(service: ShowDayDetailsService? = nil) {
+        self.service = service
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         collection.dataSource = self
         collection.delegate = self
         configureLayout()
         configureAppearance()
-        self.service = service
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -73,8 +73,8 @@ extension WeekView: UICollectionViewDataSource {
             withReuseIdentifier: WeekPageView.reuseIdentifier,
             for: indexPath) as? WeekPageView, let viewModel
         else { fatalError(viewModelErrorMessage) }
+        page.service = service
         page.viewModel = viewModel.page(at: indexPath.row)
-        if let service = service { page.service = service }
         return page
     }
 }

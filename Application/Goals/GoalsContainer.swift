@@ -15,7 +15,7 @@ final class GoalsContainer:
     private let parent: EventDetailsContainer
     private let repository = TemporaryGoalsRepository()
     private var event: Event { parent.event }
-    private var now: Date { parent.currentMoment }
+    private var now: Date { parent.parent.currentMoment }
 
     init(_ parent: EventDetailsContainer) {
         self.parent = parent

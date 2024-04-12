@@ -28,6 +28,7 @@ public class DomainEventsPublisher {
     // MARK: - Event Publishing and Subscribing
     
     public func publish<T: DomainEvent>(_ event: T) {
+        print(event.self)
         event.post(notificationCenter: notificationCenter)
     }
     

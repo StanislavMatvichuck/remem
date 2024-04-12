@@ -14,7 +14,7 @@ final class HourDistributionContainer:
     private var currentHour: Int {
         Calendar.current.dateComponents(
             [.hour],
-            from: parent.currentMoment
+            from: parent.parent.currentMoment
         ).hour!
     }
 

@@ -12,8 +12,6 @@ struct DayDetailsViewModel {
     static let create = String(localizationId: "button.addHappening")
     static let delete = String(localizationId: "dropToDelete")
 
-    typealias AddHappeningHandler = (Date) -> Void
-
     enum Animation { case deleteDropArea }
 
     let title: String
@@ -21,21 +19,21 @@ struct DayDetailsViewModel {
     private var cells: [DayCellViewModel]
     var animation: Animation?
     var pickerDate: Date
-
-    private let addHappeningHandler: AddHappeningHandler
+    // passed to a service only
+    var eventId: String
 
     init(
+        eventId: String,
         currentMoment: Date,
         startOfDay: Date,
         pickerDate: Date?,
-        cells: [DayCellViewModel],
-        addHappeningHandler: @escaping AddHappeningHandler
+        cells: [DayCellViewModel]
     ) {
+        self.eventId = eventId
         self.title = Self.titleFormatter.string(from: startOfDay)
         self.isToday = DayIndex(currentMoment).date == startOfDay
         self.cells = cells
         self.animation = nil
-        self.addHappeningHandler = addHappeningHandler
         self.pickerDate = pickerDate ?? {
             let cal = Calendar.current
             let hour = cal.dateComponents([.hour], from: currentMoment).hour ?? 0
@@ -54,24 +52,9 @@ struct DayDetailsViewModel {
         cells.first { $0.id == id }
     }
 
-    func addHappening() { addHappeningHandler(pickerDate) }
     mutating func enableDrag() { animation = .deleteDropArea }
     mutating func disableDrag() { animation = nil }
     mutating func handlePicker(date: Date) { pickerDate = date }
-
-    mutating func configureCellsAnimations(_ oldValue: DayDetailsViewModel?) {
-        guard let oldValue else { return }
-        cells = cells.map { cell in
-            var updatedCell = cell
-            updatedCell.animation = .new
-
-            for oldCell in oldValue.cells {
-                if cell == oldCell { updatedCell.animation = nil }
-            }
-
-            return updatedCell
-        }
-    }
 
     private static let titleFormatter = {
         let titleFormatter = DateFormatter()

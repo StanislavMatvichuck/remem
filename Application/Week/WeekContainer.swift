@@ -19,7 +19,8 @@ final class WeekContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { WeekViewController(self, view: WeekView(service: makeShowDayDetailsService())) }
+    func make() -> UIViewController { WeekViewController(self, view: makeWeekView()) }
+    func makeWeekView() -> WeekView { WeekView(service: makeShowDayDetailsService()) }
     func makeWeekViewModel() -> WeekViewModel { WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment) }
     func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {
         WeekPageViewModel(

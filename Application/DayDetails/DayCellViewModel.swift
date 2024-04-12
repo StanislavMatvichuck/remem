@@ -8,9 +8,7 @@
 import Domain
 import Foundation
 
-struct DayCellViewModel: Identifiable {
-    typealias RemoveHandler = () -> Void
-
+struct DayCellViewModel {
     enum Animation { case new }
 
     private static let formatter: DateFormatter = {
@@ -20,8 +18,7 @@ struct DayCellViewModel: Identifiable {
         return dateFormatter
     }()
 
-    let removeHandler: RemoveHandler
-    private let happening: Happening
+    let happening: Happening // passed to service
     let id: String
 
     let time: String
@@ -30,32 +27,14 @@ struct DayCellViewModel: Identifiable {
     init(
         id: String,
         happening: Happening,
-        animation: Animation? = nil,
-        remove: @escaping RemoveHandler
+        animation: Animation? = nil
     ) {
         self.id = id
 
         self.happening = happening
         self.time = Self.formatter.string(from: happening.dateCreated)
         self.animation = animation
-        self.removeHandler = remove
     }
 
-    func removeAnimation() -> DayCellViewModel {
-        DayCellViewModel(
-            id: id,
-            happening: happening,
-            remove: removeHandler
-        )
-    }
-}
-
-extension DayCellViewModel: Equatable, Hashable {
-    static func == (lhs: DayCellViewModel, rhs: DayCellViewModel) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
+    func removeAnimation() -> DayCellViewModel { DayCellViewModel(id: id, happening: happening) }
 }

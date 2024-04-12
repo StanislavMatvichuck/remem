@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 protocol EventDetailsControllerFactoring {
-    func makeEventDetailsController(event: Event) -> EventDetailsViewController
+    func makeEventDetailsController(_: ShowEventDetailsServiceArgument) -> EventDetailsViewController
 }
 
 struct ShowEventDetailsServiceArgument {
@@ -36,7 +36,7 @@ struct ShowEventDetailsService: ApplicationService {
 
         coordinator.goto(
             navigation: .eventDetails,
-            controller: factory.makeEventDetailsController(event: event)
+            controller: factory.makeEventDetailsController(arg)
         )
     }
 }

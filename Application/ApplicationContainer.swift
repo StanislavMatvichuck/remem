@@ -36,14 +36,13 @@ final class ApplicationContainer {
 
         let coordinator = Coordinator()
         let repository = makeRepository(mode)
-        let updatingCommander = UpdatingEventsCommander(commander: repository)
         let watcher = DayWatcher()
 
         self.mode = mode
         self.injectedCurrentMoment = currentMoment
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = updatingCommander
+        self.commander = repository
         self.watcher = watcher
 //        watcher.delegate = weakUpdater
     }

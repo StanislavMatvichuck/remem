@@ -7,6 +7,13 @@
 
 import CoreData
 import Domain
+import os
+
+let signposter = OSSignposter()
+let signpostID = signposter.makeSignpostID()
+extension StaticString {
+    static let repositoryReading: StaticString = "repositoryReading"
+}
 
 public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
     private let container: NSPersistentContainer
@@ -21,7 +28,11 @@ public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
         self.entityMapper = mapper
     }
 
-    public func get() -> [Event] { allEvents.compactMap { entityMapper.convert($0) } }
+    public func get() -> [Event] { allEvents.compactMap {
+        let state = signposter.beginInterval(.repositoryReading, id: signpostID)
+        defer { signposter.endInterval(.repositoryReading, state) }
+        return entityMapper.convert($0)
+    } }
 
     public func save(_ event: Event) {
         if let existingEvent = allEvents.first(where: {
