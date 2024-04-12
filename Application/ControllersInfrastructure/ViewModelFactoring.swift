@@ -43,7 +43,7 @@ protocol EventDetailsViewModelFactoring { func makeEventDetailsViewModel() -> Ev
 protocol WeekViewModelFactoring { func makeWeekViewModel() -> WeekViewModel }
 protocol WeekPageViewModelFactoring { func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel }
 protocol WeekDayViewModelFactoring { func makeWeekDayViewModel(dayIndex: Int, dailyMaximum: Int) -> WeekDayViewModel }
-protocol ClockViewModelFactoring { func makeClockViewModel() -> ClockViewModel }
+
 protocol HourDistributionViewModelFactoring {
     func makeHourDistributionViewModel() -> HourDistributionViewModel
 }

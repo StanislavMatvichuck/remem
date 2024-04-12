@@ -16,9 +16,7 @@ final class EventsListContainer:
     EventCellViewModelFactoring,
     CreateEventCellViewModelFactoring
 {
-    private let parent: ApplicationContainer
-    var commander: EventsCommanding { parent.commander }
-
+    let parent: ApplicationContainer
     let sortingProvider: EventsSortingQuerying
     let sortingCommander: EventsSortingCommanding
     let manualSortingProvider: EventsSortingManualQuerying
