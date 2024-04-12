@@ -1338,14 +1338,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		08C52E7929CA63E40056C116 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
 		08D5121127870D2500C2037F = {
 			isa = PBXGroup;
 			children = (
@@ -1378,27 +1370,27 @@
 		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				0871E74D2B9DCD7100FF1F7D /* Services */,
-				08CC506B2906DEEC00840385 /* main.swift */,
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
-				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
-				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
 				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
-				08C52E7929CA63E40056C116 /* Navigation */,
+				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
+				08CC506B2906DEEC00840385 /* main.swift */,
+				08D8F0B929AB7A3A00C34041 /* Coordinator.swift */,
+				08D5121F27870D2500C2037F /* SceneDelegate.swift */,
 				0816B6E62B500CBB00A29815 /* ControllersInfrastructure */,
-				08B57DA12B5ED2C00046D307 /* EventCreation */,
-				08DFFADB2B5007B50063B389 /* EventsList */,
-				0875B4452B57F0A4004C0575 /* EventsSorting */,
-				08DFFADC2B5008260063B389 /* EventDetails */,
-				081A15592B62886300EDA8A2 /* HourDistribution */,
-				08DFFADD2B5008730063B389 /* Week */,
-				08EAD4E92B8D023200557C4D /* Goals */,
 				0816B6E32B500B2B00A29815 /* DayDetails */,
 				0852404D2B615342004F9BDA /* DayOfWeek */,
-				08DFFADE2B5008D40063B389 /* Summary */,
+				08B57DA12B5ED2C00046D307 /* EventCreation */,
+				08DFFADC2B5008260063B389 /* EventDetails */,
+				08DFFADB2B5007B50063B389 /* EventsList */,
+				0875B4452B57F0A4004C0575 /* EventsSorting */,
+				08EAD4E92B8D023200557C4D /* Goals */,
 				08D5123E278716DA00C2037F /* Helpers */,
+				081A15592B62886300EDA8A2 /* HourDistribution */,
 				0816B6E42B500BBF00A29815 /* PDF */,
 				08D512312787135300C2037F /* Resources */,
+				0871E74D2B9DCD7100FF1F7D /* Services */,
+				08DFFADE2B5008D40063B389 /* Summary */,
+				08DFFADD2B5008730063B389 /* Week */,
 				0816B6E52B500BE600A29815 /* Widget */,
 			);
 			path = Application;
