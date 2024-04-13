@@ -14,11 +14,14 @@ public protocol EventsCommanding {
     func delete(_: Event)
 }
 
-public protocol Command { func execute() }
-public protocol GoalsQuerying { func get(for: Event) -> [Goal] }
-public protocol GoalsCommanding {
-    func save(_: Goal)
-    func remove(_: Goal)
+public protocol GoalsReading {
+    func read(eventId: String) -> [Goal]
+}
+
+public protocol GoalsWriting {
+    func create(goal: Goal)
+    func update(id: String, goal: Goal)
+    func delete(id: String)
 }
 
 public protocol EventsSortingQuerying { func get() -> EventsSorter }

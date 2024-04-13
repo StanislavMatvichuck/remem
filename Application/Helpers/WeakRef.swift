@@ -23,7 +23,3 @@ extension WeakRef: DayDetailsDataProviding where T: DayDetailsDataProviding {
 extension WeakRef: SummaryDataProviding where T: SummaryDataProviding {
     var viewModel: SummaryViewModel? { weakRef?.viewModel }
 }
-
-extension WeakRef: GoalsDataProviding where T: GoalsDataProviding {
-    var viewModel: GoalsViewModel? { weakRef?.viewModel }
-}

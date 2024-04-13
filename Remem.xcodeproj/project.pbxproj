@@ -18,6 +18,7 @@
 		080C417E2986AEC600C1F54F /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417D2986AEC600C1F54F /* SummaryViewController.swift */; };
 		080C41802986AF4800C1F54F /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C417F2986AF4800C1F54F /* SummaryView.swift */; };
 		080C41822986B69700C1F54F /* SummarySnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41812986B69700C1F54F /* SummarySnapshots.swift */; };
+		080C9A452BC97F5A00830A9F /* CreateGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A442BC97F5A00830A9F /* CreateGoalService.swift */; };
 		080F9F2729ED51810013CBFE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2629ED51810013CBFE /* EventCell.swift */; };
 		080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F9F2A29ED6C050013CBFE /* EventCellView.swift */; };
 		081015582B331656004CE297 /* WeekContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081015572B331656004CE297 /* WeekContainer.swift */; };
@@ -267,9 +268,6 @@
 		08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC50692906DE8200840385 /* TestingAppDelegate.swift */; };
 		08CC506C2906DEEC00840385 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC506B2906DEEC00840385 /* main.swift */; };
 		08CE3E442B964E4E00ECF5C6 /* GoalCommandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE3E432B964E4E00ECF5C6 /* GoalCommandsTests.swift */; };
-		08CE3E462B964E7D00ECF5C6 /* GoalIncrementCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE3E452B964E7D00ECF5C6 /* GoalIncrementCommand.swift */; };
-		08CE3E482B9662AC00ECF5C6 /* GoalDecrementCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE3E472B9662AC00ECF5C6 /* GoalDecrementCommand.swift */; };
-		08CE3E4A2B96669500ECF5C6 /* GoalCreateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE3E492B96669500ECF5C6 /* GoalCreateCommand.swift */; };
 		08D2C3FD2B2B15E60086E3F6 /* ViewModelFactoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */; };
 		08D4BD5E2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */; };
 		08D5121E27870D2500C2037F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5121D27870D2500C2037F /* AppDelegate.swift */; };
@@ -444,6 +442,7 @@
 		080C417D2986AEC600C1F54F /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		080C417F2986AF4800C1F54F /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		080C41812986B69700C1F54F /* SummarySnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarySnapshots.swift; sourceTree = "<group>"; };
+		080C9A442BC97F5A00830A9F /* CreateGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalService.swift; sourceTree = "<group>"; };
 		080DFDE028E5CD0B00598413 /* ReverseRelationshipWarningFixed05.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReverseRelationshipWarningFixed05.xcdatamodel; sourceTree = "<group>"; };
 		080F9F2629ED51810013CBFE /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		080F9F2A29ED6C050013CBFE /* EventCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellView.swift; sourceTree = "<group>"; };
@@ -696,9 +695,6 @@
 		08CC50692906DE8200840385 /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		08CC506B2906DEEC00840385 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		08CE3E432B964E4E00ECF5C6 /* GoalCommandsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCommandsTests.swift; sourceTree = "<group>"; };
-		08CE3E452B964E7D00ECF5C6 /* GoalIncrementCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalIncrementCommand.swift; sourceTree = "<group>"; };
-		08CE3E472B9662AC00ECF5C6 /* GoalDecrementCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDecrementCommand.swift; sourceTree = "<group>"; };
-		08CE3E492B96669500ECF5C6 /* GoalCreateCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCreateCommand.swift; sourceTree = "<group>"; };
 		08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactoring.swift; sourceTree = "<group>"; };
 		08D4BD5D2A014C5A007F5E3F /* EventWeeklyGoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventWeeklyGoalViewModel.swift; sourceTree = "<group>"; };
 		08D5121A27870D2500C2037F /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1223,6 +1219,7 @@
 				089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */,
 				08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */,
 				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
+				080C9A442BC97F5A00830A9F /* CreateGoalService.swift */,
 				082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */,
 				08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */,
 				0871E7522B9DCDE000FF1F7D /* VisitEventService.swift */,
@@ -1551,9 +1548,6 @@
 				087D42692B8E3AB80075004D /* GoalsViewController.swift */,
 				087D42612B8E37480075004D /* GoalsView.swift */,
 				0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */,
-				08CE3E452B964E7D00ECF5C6 /* GoalIncrementCommand.swift */,
-				08CE3E472B9662AC00ECF5C6 /* GoalDecrementCommand.swift */,
-				08CE3E492B96669500ECF5C6 /* GoalCreateCommand.swift */,
 				0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */,
 				087D426F2B8E894F0075004D /* GoalCell.swift */,
 				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
@@ -2073,7 +2067,6 @@
 				08B26A12289E91D400DFBAC8 /* DayDetailsView.swift in Sources */,
 				0872F5222BB4761900799142 /* EventsListViewModel.swift in Sources */,
 				0869C4992B7FF52B0007D6E0 /* EventsListCellViewModel.swift in Sources */,
-				08CE3E4A2B96669500ECF5C6 /* GoalCreateCommand.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
@@ -2119,7 +2112,6 @@
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
-				08CE3E462B964E7D00ECF5C6 /* GoalIncrementCommand.swift in Sources */,
 				081A15632B62911200EDA8A2 /* HourDistributionContainer.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* CreateEventCellViewModel.swift in Sources */,
 				0881E4B32B5F386100F68CAE /* EventCreationController.swift in Sources */,
@@ -2180,6 +2172,7 @@
 				088AF7462B34D99F0039EF83 /* WeekPageView.swift in Sources */,
 				081A15672B6291A300EDA8A2 /* HourDistributionController.swift in Sources */,
 				081A155F2B628D9D00EDA8A2 /* HourDistributionViewModel.swift in Sources */,
+				080C9A452BC97F5A00830A9F /* CreateGoalService.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PDFWritingViewController.swift in Sources */,
 				089D1DA62BC28A2D0050AD33 /* ShowDayDetailsService.swift in Sources */,
@@ -2196,7 +2189,6 @@
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0881E4B12B5F382600F68CAE /* EventCreationContainer.swift in Sources */,
 				0875E27C298EF91A00622125 /* EventsListController.swift in Sources */,
-				08CE3E482B9662AC00ECF5C6 /* GoalDecrementCommand.swift in Sources */,
 				0816D0C52B909AD7005FD6A0 /* GoalCellViewModeling.swift in Sources */,
 				08BBD4A22BB6E67A0095DBBF /* ShowCreateEventService.swift in Sources */,
 				0852404F2B61534B004F9BDA /* DayOfWeekCellViewModel.swift in Sources */,

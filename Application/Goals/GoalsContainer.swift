@@ -14,69 +14,56 @@ final class GoalsContainer:
 {
     private let parent: EventDetailsContainer
     private let repository = TemporaryGoalsRepository()
-    private var event: Event { parent.event }
-    private var now: Date { parent.parent.currentMoment }
+    private let list = GoalsView.makeList()
+    private var eventId: String { parent.event.id }
 
-    init(_ parent: EventDetailsContainer) {
-        self.parent = parent
-    }
+    init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { GoalsViewController(factory: self) }
+    func make() -> UIViewController { GoalsViewController(factory: self, view: makeGoalsView()) }
+    func makeGoalsView() -> GoalsView { GoalsView(
+        list: list,
+        dataSource: makeDataSource(list: list)
+    ) }
+
+    func makeDataSource(list: UICollectionView) -> GoalsDataSource { GoalsDataSource(
+        list: list,
+        provider: self,
+        createGoalService: makeCreateGoalService()
+    ) }
+    func makeCreateGoalService() -> CreateGoalService { CreateGoalService(
+        goalsStorage: repository,
+        eventsProvider: parent.parent.provider
+    ) }
 
     // MARK: - ViewModels
 
     func makeGoalsViewModel() -> GoalsViewModel {
         GoalsViewModel(cells: [
-            .goals: repository.get(for: event).map { makeGoalViewModel(goal: $0) },
+            .goals: repository.read(eventId: eventId).map { makeGoalViewModel(goal: $0) },
             .createGoal: [makeCreateGoalViewModel()]
         ])
     }
 
-    func makeGoalViewModel(goal: Goal) -> GoalViewModel {
-        GoalViewModel(
-            goal: goal,
-            incrementCommand: makeIncrementCommand(goal: goal),
-            decrementCommand: makeDecrementCommand(goal: goal)
-        )
-    }
-
-    func makeCreateGoalViewModel() -> CreateGoalViewModel {
-        CreateGoalViewModel(command: makeCreateCommand())
-    }
-
-    // MARK: - Handlers
-    func makeIncrementCommand(goal: Goal) -> GoalIncrementCommand {
-        GoalIncrementCommand(goal: goal, repository: repository)
-    }
-
-    func makeDecrementCommand(goal: Goal) -> GoalDecrementCommand {
-        GoalDecrementCommand(goal: goal, repository: repository)
-    }
-
-    func makeCreateCommand() -> GoalCreateCommand {
-        GoalCreateCommand(
-            repository: repository,
-            date: .now,
-            count: event.happenings.count + 1,
-            event: event
-        )
-    }
+    func makeGoalViewModel(goal: Goal) -> GoalViewModel { GoalViewModel(goal: goal) }
+    func makeCreateGoalViewModel() -> CreateGoalViewModel { CreateGoalViewModel(eventId: eventId) }
 }
 
-final class TemporaryGoalsRepository: GoalsQuerying, GoalsCommanding {
+final class TemporaryGoalsRepository: GoalsReading, GoalsWriting {
     private var goals: [Goal] = []
 
-    func get(for _: Domain.Event) -> [Domain.Goal] { goals }
+    func read(eventId: String) -> [Domain.Goal] { goals }
 
-    func save(_ goal: Domain.Goal) {
-        if let index = goals.firstIndex(where: { existingGoal in
-            existingGoal.id == goal.id
-        }) {
+    func create(goal: Domain.Goal) { goals.append(goal) }
+
+    func update(id: String, goal: Domain.Goal) {
+        if let index = goals.firstIndex(where: { $0.id == id }) {
             goals[index] = goal
-        } else {
-            goals.append(goal)
         }
     }
 
-    func remove(_: Domain.Goal) {}
+    func delete(id: String) {
+        if let index = goals.firstIndex(where: { $0.id == id }) {
+            goals.remove(at: index)
+        }
+    }
 }

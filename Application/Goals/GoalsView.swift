@@ -8,12 +8,9 @@
 import Foundation
 import UIKit
 
-final class GoalsView: UIView, GoalsDataProviding {
-    let list: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: GoalsView.makeLayout())
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+final class GoalsView: UIView {
+    let list: UICollectionView
+    let dataSource: GoalsDataSource
 
     var viewModel: GoalsViewModel? { didSet {
         dataSource.applySnapshot(oldValue)
@@ -21,9 +18,10 @@ final class GoalsView: UIView, GoalsDataProviding {
     }}
 
     lazy var heightConstraint: NSLayoutConstraint = { list.heightAnchor.constraint(equalToConstant: 7 * .layoutSquare) }()
-    lazy var dataSource = GoalsDataSource(list: list, provider: WeakRef(self))
 
-    init() {
+    init(list: UICollectionView, dataSource: GoalsDataSource) {
+        self.list = list
+        self.dataSource = dataSource
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -46,6 +44,12 @@ final class GoalsView: UIView, GoalsDataProviding {
 
     private func configureAppearance() {
         list.backgroundColor = .clear
+    }
+
+    static func makeList() -> UICollectionView {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: GoalsView.makeLayout())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }
 
     private static func makeLayout() -> UICollectionViewLayout {

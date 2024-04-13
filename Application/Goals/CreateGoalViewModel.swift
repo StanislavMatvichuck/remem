@@ -9,8 +9,5 @@ import Foundation
 
 struct CreateGoalViewModel {
     static let createGoal = String(localizationId: "goals.create")
-
-    let command: GoalCreateCommand?
-
-    init(command: GoalCreateCommand? = nil) { self.command = command }
+    let eventId: String
 }

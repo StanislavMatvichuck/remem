@@ -15,6 +15,7 @@ final class CreateGoalCell: UICollectionViewCell {
     }()
 
     var viewModel: CreateGoalViewModel?
+    var service: CreateGoalService?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,5 +41,5 @@ final class CreateGoalCell: UICollectionViewCell {
     }
 
     private func configureTapHandler() { button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) }
-    @objc private func handleTap() { viewModel?.command?.execute() }
+    @objc private func handleTap() { service?.serve(CreateGoalServiceArgument(eventId: viewModel!.eventId, dateCreated: .now)) }
 }

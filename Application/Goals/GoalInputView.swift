@@ -81,8 +81,13 @@ final class GoalInputView: UIStackView {
         minus.isUserInteractionEnabled = true
     }
 
-    @objc private func handleTapPlus() { viewModel?.incrementCommand?.execute() }
-    @objc private func handleTapMinus() { viewModel?.decrementCommand?.execute() }
+    @objc private func handleTapPlus() {
+//        viewModel?.incrementCommand?.execute()
+    }
+
+    @objc private func handleTapMinus() {
+//        viewModel?.decrementCommand?.execute()
+    }
 }
 
 final class GoalInput: UITextField {
