@@ -13,13 +13,13 @@ final class WeekContainer:
     WeekDayViewModelFactoring,
     WeekPageViewModelFactoring
 {
-    private let parent: EventDetailsContainer
+    let parent: EventDetailsContainer
     private var event: Event { parent.event }
     private var currentMoment: Date { parent.parent.currentMoment }
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { WeekViewController(self, view: makeWeekView()) }
+    func makeWeekController() -> WeekViewController { WeekViewController(self, view: makeWeekView()) }
     func makeWeekView() -> WeekView { WeekView(service: makeShowDayDetailsService()) }
     func makeWeekViewModel() -> WeekViewModel { WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment) }
     func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {

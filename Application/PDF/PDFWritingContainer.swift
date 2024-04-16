@@ -17,7 +17,7 @@ final class PDFWritingContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { PDFWritingViewController(self, service: makeShowPDFReadingService()) }
+    func makePDFWritingController() -> PDFWritingViewController { PDFWritingViewController(self, service: makeShowPDFReadingService()) }
     func makePdfMakingViewModel() -> PDFWritingViewModel { PDFWritingViewModel() }
     func makeShowPDFReadingService() -> ShowPDFReadingService { ShowPDFReadingService(
         coordinator: parent.parent.coordinator,

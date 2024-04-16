@@ -63,10 +63,6 @@ struct EventCellViewModel {
         }
     }
 
-    func isValueIncreased(_ oldValue: EventCellViewModel) -> Bool {
-        valueAmount > oldValue.valueAmount
-    }
-
     func isProgressIncreased(_ oldValue: EventCellViewModel) -> Bool {
         progress > oldValue.progress && progress <= 1
     }

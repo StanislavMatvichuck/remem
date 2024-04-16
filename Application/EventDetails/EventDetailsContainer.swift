@@ -25,12 +25,12 @@ final class EventDetailsContainer:
         EventDetailsViewController(
             factory: self,
             controllers: [
-                WeekContainer(self).make(),
-                SummaryContainer(self).make(),
-                GoalsContainer(self).make(),
-                HourDistributionContainer(self).make(),
-                DayOfWeekContainer(self).make(),
-                PDFWritingContainer(self).make()
+                WeekContainer(self).makeWeekController(),
+                SummaryContainer(self).makeSummaryController(),
+                GoalsContainer(self).makeGoalsController(),
+                HourDistributionContainer(self).makeHourDistributionController(),
+                DayOfWeekContainer(self).makeDayOfWeekController(),
+                PDFWritingContainer(self).makePDFWritingController()
             ],
             service: VisitEventService(event: event, repository: parent.commander)
         )

@@ -19,7 +19,7 @@ final class GoalsContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { GoalsViewController(factory: self, view: makeGoalsView()) }
+    func makeGoalsController() -> GoalsViewController { GoalsViewController(factory: self, view: makeGoalsView()) }
     func makeGoalsView() -> GoalsView { GoalsView(
         list: list,
         dataSource: makeDataSource(list: list)

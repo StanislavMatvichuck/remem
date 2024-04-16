@@ -18,6 +18,6 @@ final class SummaryContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func make() -> UIViewController { SummaryViewController(self) }
+    func makeSummaryController() -> SummaryViewController { SummaryViewController(self) }
     func makeSummaryViewModel() -> SummaryViewModel { SummaryViewModel(event: event, createdUntil: currentMoment) }
 }
