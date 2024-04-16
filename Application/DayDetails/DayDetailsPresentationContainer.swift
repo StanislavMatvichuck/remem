@@ -33,7 +33,7 @@ final class DayDetailsPresentationContainer:
     func makeDayDetailsController(_ arg: ShowDayDetailsServiceArgument) -> DayDetailsViewController {
         cellPresentationAnimationBlock = arg.presentationAnimation
         cellDismissAnimationBlock = arg.dismissAnimation
-        let controller = DayDetailsContainer(parent, startOfDay: arg.startOfDay).make() as! DayDetailsViewController
+        let controller = DayDetailsContainer(parent, startOfDay: arg.startOfDay).makeDayDetailsController()
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
         return controller

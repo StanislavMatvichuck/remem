@@ -8,22 +8,20 @@
 import Domain
 import Foundation
 
-struct RemoveHappeningServiceArgument {
-    let eventId: String
-    let happening: Happening
-}
-
+struct RemoveHappeningServiceArgument { let happening: Happening }
 struct RemoveHappeningService: ApplicationService {
     private let eventsStorage: EventsCommanding
     private let eventsProvider: EventsQuerying
+    private let eventId: String
 
-    init(eventsStorage: EventsCommanding, eventsProvider: EventsQuerying) {
+    init(eventId: String, eventsStorage: EventsCommanding, eventsProvider: EventsQuerying) {
+        self.eventId = eventId
         self.eventsStorage = eventsStorage
         self.eventsProvider = eventsProvider
     }
 
     func serve(_ arg: RemoveHappeningServiceArgument) {
-        let event = eventsProvider.get().first { $0.id == arg.eventId }!
+        let event = eventsProvider.get().first { $0.id == eventId }!
 
         do {
             try event.remove(happening: arg.happening)
@@ -33,6 +31,6 @@ struct RemoveHappeningService: ApplicationService {
 
         eventsStorage.save(event)
 
-        DomainEventsPublisher.shared.publish(HappeningRemoved(eventId: arg.eventId))
+        DomainEventsPublisher.shared.publish(HappeningRemoved(eventId: eventId))
     }
 }

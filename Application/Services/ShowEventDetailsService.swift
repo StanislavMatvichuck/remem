@@ -9,34 +9,35 @@ import Domain
 import Foundation
 
 protocol EventDetailsControllerFactoring {
-    func makeEventDetailsController(_: ShowEventDetailsServiceArgument) -> EventDetailsViewController
+    func makeEventDetailsController() -> EventDetailsViewController
 }
 
-struct ShowEventDetailsServiceArgument {
-    let eventId: String
+protocol EventDetailsControllerFactoringFactoring {
+    func makeEventDetailsControllerFactoring(eventId: String) -> EventDetailsControllerFactoring
 }
 
 struct ShowEventDetailsService: ApplicationService {
     private let coordinator: Coordinator
-    private let factory: EventDetailsControllerFactoring
+    private let factory: EventDetailsControllerFactoringFactoring
     private let eventsProvider: EventsQuerying
+    private let eventId: String
 
     init(
+        eventId: String,
         coordinator: Coordinator,
-        factory: EventDetailsControllerFactoring,
+        factory: EventDetailsControllerFactoringFactoring,
         eventsProvider: EventsQuerying
     ) {
+        self.eventId = eventId
         self.coordinator = coordinator
         self.factory = factory
         self.eventsProvider = eventsProvider
     }
 
-    func serve(_ arg: ShowEventDetailsServiceArgument) {
-        let event = eventsProvider.get().first(where: { $0.id == arg.eventId })!
+    func serve(_ arg: ApplicationServiceEmptyArgument) {
+        let controllerFactory = factory.makeEventDetailsControllerFactoring(eventId: eventId)
+        let controller = controllerFactory.makeEventDetailsController()
 
-        coordinator.goto(
-            navigation: .eventDetails,
-            controller: factory.makeEventDetailsController(arg)
-        )
+        coordinator.goto(navigation: .eventDetails, controller: controller)
     }
 }

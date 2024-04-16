@@ -19,17 +19,13 @@ struct DayDetailsViewModel {
     private var cells: [DayCellViewModel]
     var animation: Animation?
     var pickerDate: Date
-    // passed to a service only
-    var eventId: String
 
     init(
-        eventId: String,
         currentMoment: Date,
         startOfDay: Date,
         pickerDate: Date?,
         cells: [DayCellViewModel]
     ) {
-        self.eventId = eventId
         self.title = Self.titleFormatter.string(from: startOfDay)
         self.isToday = DayIndex(currentMoment).date == startOfDay
         self.cells = cells

@@ -13,14 +13,16 @@ final class EventDetailsContainer:
     EventDetailsControllerFactoring
 {
     let parent: ApplicationContainer
-    var eventId: String!
+    let eventId: String
     var event: Event { parent.provider.get().first { $0.id == eventId }! }
 
-    init(_ parent: ApplicationContainer) { self.parent = parent }
+    init(_ parent: ApplicationContainer, eventId: String) {
+        self.parent = parent
+        self.eventId = eventId
+    }
 
-    func makeEventDetailsController(_ arg: ShowEventDetailsServiceArgument) -> EventDetailsViewController {
-        eventId = arg.eventId
-        return EventDetailsViewController(
+    func makeEventDetailsController() -> EventDetailsViewController {
+        EventDetailsViewController(
             factory: self,
             controllers: [
                 WeekContainer(self).make(),

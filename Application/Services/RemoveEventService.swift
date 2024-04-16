@@ -8,23 +8,22 @@
 import Domain
 import Foundation
 
-struct RemoveEventServiceArgument { let eventId: String }
-
 struct RemoveEventService: ApplicationService {
     private let eventsStorage: EventsCommanding
     private let eventsProvider: EventsQuerying
+    private let eventId: String
 
-    init(eventsStorage: EventsCommanding, eventsProvider: EventsQuerying) {
+    init(eventId: String, eventsStorage: EventsCommanding, eventsProvider: EventsQuerying) {
+        self.eventId = eventId
         self.eventsStorage = eventsStorage
         self.eventsProvider = eventsProvider
     }
 
-    func serve(_ arg: RemoveEventServiceArgument) {
-        print(#function)
-        let event = eventsProvider.get().first { $0.id == arg.eventId }!
+    func serve(_ arg: ApplicationServiceEmptyArgument) {
+        let event = eventsProvider.get().first { $0.id == eventId }!
 
         eventsStorage.delete(event)
 
-        DomainEventsPublisher.shared.publish(EventRemoved(eventId: event.id))
+        DomainEventsPublisher.shared.publish(EventRemoved(eventId: eventId))
     }
 }

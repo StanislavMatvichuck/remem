@@ -21,10 +21,8 @@ extension EventsListView: UIDropInteractionDelegate {
             let viewModel,
             let draggedCellIndex = viewModel.draggedCellIndex
         else { return }
-        let eventCellsIdentifiers = viewModel.identifiersFor(section: .events)
-        let cellIdentifier = eventCellsIdentifiers[draggedCellIndex]
         if let cell = list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 1)) as? EventCell {
-            cell.removeService?.serve(RemoveEventServiceArgument(eventId: cellIdentifier))
+            cell.removeService?.serve(ApplicationServiceEmptyArgument())
         }
     }
 

@@ -82,12 +82,12 @@ final class EventCell: UICollectionViewCell {
 
     @objc private func handleSwipe() {
         guard let viewModel, let swipeService else { return }
-        swipeService.serve(CreateHappeningServiceArgument(eventId: viewModel.id, date: .now))
+        swipeService.serve(CreateHappeningServiceArgument(date: .now))
     }
 
     @objc private func handleTap() {
         guard let viewModel, let tapService else { return }
-        tapService.serve(ShowEventDetailsServiceArgument(eventId: viewModel.id))
+        tapService.serve(ApplicationServiceEmptyArgument())
     }
 }
 

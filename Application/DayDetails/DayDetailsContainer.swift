@@ -20,7 +20,7 @@ final class DayDetailsContainer:
         self.startOfDay = startOfDay
     }
 
-    func make() -> UIViewController { DayDetailsViewController(
+    func makeDayDetailsController() -> DayDetailsViewController { DayDetailsViewController(
         self,
         createHappeningService: makeCreateHappeningService(),
         removeHappeningService: makeRemoveHappeningService()
@@ -28,7 +28,6 @@ final class DayDetailsContainer:
 
     func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel {
         DayDetailsViewModel(
-            eventId: parent.event.id,
             currentMoment: parent.parent.currentMoment,
             startOfDay: startOfDay,
             pickerDate: pickerDate,
@@ -38,11 +37,13 @@ final class DayDetailsContainer:
 
     func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(id: UUID().uuidString, happening: happening) }
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
+        eventId: parent.eventId,
         eventsStorage: parent.parent.commander,
         eventsProvider: parent.parent.provider
     ) }
 
     func makeRemoveHappeningService() -> RemoveHappeningService { RemoveHappeningService(
+        eventId: parent.eventId,
         eventsStorage: parent.parent.commander,
         eventsProvider: parent.parent.provider
     ) }

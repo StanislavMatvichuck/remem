@@ -14,7 +14,11 @@ final class EventsListContainer:
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
     EventCellViewModelFactoring,
-    CreateEventCellViewModelFactoring
+    CreateEventCellViewModelFactoring,
+    CreateHappeningServiceFactoring,
+    RemoveEventServiceFactoring,
+    ShowEventDetailsServiceFactoring,
+    EventDetailsControllerFactoringFactoring
 {
     let parent: ApplicationContainer
     let sortingProvider: EventsSortingQuerying
@@ -51,9 +55,9 @@ final class EventsListContainer:
         let dataSource = EventsListDataSource(
             list: list,
             viewModelProvider: self,
-            showEventDetailsService: makeShowEventDetailsService(),
-            createHappeningService: makeCreateHappeningService(),
-            removeEventService: makeRemoveEventService(),
+            showEventDetailsService: self,
+            createHappeningService: self,
+            removeEventService: self,
             showCreateEventService: makeShowCreateEventService()
         )
 
@@ -101,9 +105,10 @@ final class EventsListContainer:
     }
 
     // MARK: - Services factoring
-    func makeShowEventDetailsService() -> ShowEventDetailsService { ShowEventDetailsService(
+    func makeShowEventDetailsService(id: String) -> ShowEventDetailsService { ShowEventDetailsService(
+        eventId: id,
         coordinator: parent.coordinator,
-        factory: EventDetailsContainer(parent),
+        factory: self,
         eventsProvider: parent.provider
     ) }
 
@@ -123,13 +128,18 @@ final class EventsListContainer:
         manualOrderingRepository: manualSortingCommander
     ) }
 
-    func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
+    func makeCreateHappeningService(id: String) -> CreateHappeningService { CreateHappeningService(
+        eventId: id,
         eventsStorage: parent.commander,
         eventsProvider: parent.provider
     ) }
 
-    func makeRemoveEventService() -> RemoveEventService { RemoveEventService(
+    func makeRemoveEventService(id: String) -> RemoveEventService { RemoveEventService(
+        eventId: id,
         eventsStorage: parent.commander,
         eventsProvider: parent.provider
     ) }
+
+    // MARK: - Containers factoring
+    func makeEventDetailsControllerFactoring(eventId: String) -> any EventDetailsControllerFactoring { EventDetailsContainer(parent, eventId: eventId) }
 }

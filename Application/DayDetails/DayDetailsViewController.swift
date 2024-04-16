@@ -70,7 +70,6 @@ final class DayDetailsViewController: UIViewController {
     @objc private func handleButton() {
         if let viewModel, let createHappeningService {
             createHappeningService.serve(CreateHappeningServiceArgument(
-                eventId: viewModel.eventId,
                 date: viewModel.pickerDate
             ))
         }
@@ -122,7 +121,6 @@ extension DayDetailsViewController: UIDropInteractionDelegate {
                 let identifier = viewModel.identifiers[index]
                 if let cellViewModel = viewModel.cell(for: identifier) {
                     self?.removeHappeningService?.serve(RemoveHappeningServiceArgument(
-                        eventId: viewModel.eventId,
                         happening: cellViewModel.happening
                     ))
                 }
