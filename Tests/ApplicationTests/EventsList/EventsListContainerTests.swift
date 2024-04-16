@@ -11,21 +11,10 @@ import XCTest
 
 final class EventsListContainerTests: XCTestCase {
     private var sut: EventsListContainer!
-
-    override func setUp() {
-        super.setUp()
-        let applicationContainer = ApplicationContainer(mode: .unitTest)
-        sut = EventsListContainer(applicationContainer)
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
+    override func setUp() { super.setUp(); sut = EventsListContainer.makeForUnitTests() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init_requiresApplicationContainer() { XCTAssertNotNil(sut) }
-
     func test_storesEventsSortingQuerying() { sut.sortingProvider is EventsSortingQuerying }
     func test_storesEventsSortingCommanding() { sut.sortingCommander is EventsSortingCommanding }
-    func test_makeEventsSortingTapHandler() { XCTAssertNotNil(sut.makeEventsSortingTapHandler()) }
 }

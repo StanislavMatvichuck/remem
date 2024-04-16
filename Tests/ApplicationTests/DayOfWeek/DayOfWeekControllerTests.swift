@@ -15,20 +15,11 @@ final class DayOfWeekControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let detailsContainer = EventDetailsContainer(appContainer, event: event)
-        let container = DayOfWeekContainer(detailsContainer)
-        sut = DayOfWeekController(container)
+        sut = DayOfWeekContainer.makeForUnitTests().makeDayOfWeekController()
         sut.loadViewIfNeeded()
     }
 
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-
-    // MARK: - Tests
+    override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init_requiresViewModelFactory() { XCTAssertNotNil(sut) }
     func test_showsDayOfWeekView() { XCTAssertNotNil(sut.view as? DayOfWeekView) }

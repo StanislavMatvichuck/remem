@@ -60,21 +60,4 @@ final class EventCellViewModelTests: XCTestCase {
 
         XCTAssertEqual(timeString, "1 week, 4 days")
     }
-
-    func test_isValueIncreased_trueAfterHappeningAddition() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-
-        let appC = ApplicationContainer(mode: .unitTest)
-        appC.commander.save(event)
-
-        let container = EventsListContainer(appC)
-        let oldValue = container.makeEventCellViewModel(event: event, hintEnabled: true)
-
-        event.addHappening(date: DayIndex.referenceValue.date)
-        appC.commander.save(event)
-
-        let sut = container.makeEventCellViewModel(event: event, hintEnabled: false)
-
-        XCTAssertTrue(sut.isValueIncreased(oldValue))
-    }
 }

@@ -50,8 +50,10 @@ public struct EventsList {
     }
 }
 
-struct EventsSortingExecutor {
-    func sort(
+public struct EventsSortingExecutor {
+    public init() {}
+    
+    public func sort(
         events: [Event],
         ordering: EventsSorter,
         manualIdentifiers: [String] = []

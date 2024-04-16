@@ -46,13 +46,13 @@ final class WeekPageViewModelTests: XCTestCase {
 
     /// May be tested in Event class
     func test_amountNumber_withOneHappeningAtToday_isOne() {
-        let sut = make()
+        let sut = makeWithOneHappening()
 
         XCTAssertEqual(sut.totalNumber, 1)
     }
 
     func test_titleHasWeekNumberAndTotalNumberLocalized() {
-        let sut = make()
+        let sut = makeWithOneHappening()
 
         XCTAssertEqual(sut.title, "Week 1 total 1")
     }
@@ -67,25 +67,15 @@ final class WeekPageViewModelTests: XCTestCase {
         XCTAssertEqual(WeekPageViewModel.daysCount, 7)
     }
 
-    private func make(withDateCreatedAndTodayOffset offset: Int) -> WeekPageViewModel {
-        let eventDayCreated = DayIndex.referenceValue
-        let event = Event(name: "", dateCreated: eventDayCreated.date)
-        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
-
-        let sut = container.makeWeekPageViewModel(pageIndex: offset / 7, dailyMaximum: 0)
-
-        return sut
+    private func make(withDateCreatedAndTodayOffset offset: Int = 0) -> WeekPageViewModel {
+        WeekContainer.makeForUnitTests().makeWeekPageViewModel(pageIndex: offset / 7, dailyMaximum: 0)
     }
 
-    private func make(with happenings: [Date] = [DayIndex.referenceValue.date]) -> WeekPageViewModel {
-        let eventDayCreated = DayIndex.referenceValue
-        let event = Event(name: "", dateCreated: eventDayCreated.date)
-        happenings.forEach { event.addHappening(date: $0) }
-
-        let container = WeekContainer(EventDetailsContainer(ApplicationContainer(mode: .unitTest), event: event))
-
-        let sut = container.makeWeekPageViewModel(pageIndex: 0, dailyMaximum: 0)
-
-        return sut
+    private func makeWithOneHappening() -> WeekPageViewModel {
+        let event = Event.makeForUnitTests()
+        event.addHappening(date: DayIndex.referenceValue.date)
+        let details = EventDetailsContainer.makeForUnitTests(event: event)
+        details.parent.commander.save(event)
+        return WeekContainer(details).makeWeekPageViewModel(pageIndex: 0, dailyMaximum: 1)
     }
 }

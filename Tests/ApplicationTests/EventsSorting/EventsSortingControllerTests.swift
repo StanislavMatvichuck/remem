@@ -6,6 +6,7 @@
 //
 
 @testable import Application
+import DataLayer
 import XCTest
 
 final class EventsSortingControllerTests: XCTestCase {
@@ -13,17 +14,11 @@ final class EventsSortingControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let applicationContainer = ApplicationContainer(mode: .unitTest)
-        let listContainer = EventsListContainer(applicationContainer)
-        let container = EventsSortingContainer(listContainer)
-        sut = EventsSortingController(container)
+        sut = EventsSortingContainer.makeForUnitTests().makeEventsOrderingController(using: ShowEventsOrderingServiceArgument(offset: 0.0, oldValue: nil))
         sut.loadViewIfNeeded()
     }
 
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init_requiresFactory() { XCTAssertNotNil(sut) }
     func test_showsEventsSortingView() { XCTAssertNotNil(sut.view as? EventsSortingView) }

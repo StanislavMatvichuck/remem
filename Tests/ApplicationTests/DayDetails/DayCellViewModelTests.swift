@@ -13,8 +13,7 @@ final class DayCellViewModelTests: XCTestCase {
     func test_time_happeningAtStart_0000() {
         let sut = DayCellViewModel(
             id: UUID().uuidString,
-            happening: Happening(dateCreated: DayIndex.referenceValue.date),
-            remove: {}
+            happening: Happening(dateCreated: DayIndex.referenceValue.date)
         )
 
         XCTAssertEqual(sut.time, "00:00")

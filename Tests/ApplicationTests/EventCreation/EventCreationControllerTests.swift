@@ -10,18 +10,8 @@ import XCTest
 
 final class EventCreationControllerTests: XCTestCase {
     var sut: EventCreationController!
-
-    override func setUp() {
-        super.setUp()
-        let appContainer = ApplicationContainer(mode: .uikit)
-        let container = EventCreationContainer(parent: appContainer)
-        sut = EventCreationController(container)
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
+    override func setUp() { super.setUp(); sut = EventCreationContainer.makeForUnitTests().makeCreateEventController() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init_requiresFactory() { XCTAssertNotNil(sut) }
 
@@ -55,18 +45,4 @@ final class EventCreationControllerTests: XCTestCase {
 
         XCTAssertEqual(view.input.text, emoji.titleLabel?.text)
     }
-
-    func test_keyboardDoneButtonTap_dismissesController() {
-        // TODO: finish this test
-//        guard let view = sut.view as? EventCreationView else { XCTFail(); return }
-//        _ = view.input.delegate?.textFieldShouldReturn?(view.input)
-    }
-
-//    func test_submittingEvent_addsEventToList() {
-//        submitEvent()
-//
-//        let eventsAmount = sut.viewRoot.table.numberOfRows(inSection: EventsListViewModel.Section.events.rawValue)
-//
-//        XCTAssertEqual(eventsAmount, 1)
-//    }
 }

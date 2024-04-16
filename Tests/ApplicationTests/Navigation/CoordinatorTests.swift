@@ -6,41 +6,32 @@
 //
 
 @testable import Application
+import UIKit
 import XCTest
 
-struct ControllerFactoryFake: ControllerFactoring {
-    func make() -> UIViewController {
-        UIViewController()
-    }
-}
-
-final class NavigationTests: XCTestCase {
-    func test_init_requiresFactory() {
-        _ = Navigation.eventsList(factory: ControllerFactoryFake())
-    }
+struct ControllerFactoryFake {
+    func make() -> UIViewController { UIViewController() }
 }
 
 final class CoordinatorTests: XCTestCase {
-    func test_init_hasStyledNavigationViewController() {
-        let sut = Coordinator()
+    var sut: Coordinator!
+    override func setUp() { super.setUp(); sut = Coordinator() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
+    func test_init_hasStyledNavigationViewController() {
         XCTAssertTrue(sut.navigationController.navigationBar.prefersLargeTitles)
     }
 
     func test_init_hasNoChildren() {
-        let sut = Coordinator()
-
         XCTAssertEqual(sut.navigationController.children.count, 0)
     }
 
     func test_show_pushesOnStack() {
-        let sut = Coordinator()
-
-        sut.show(Navigation.eventsList(factory: ControllerFactoryFake()))
+        sut.goto(navigation: .eventsList, controller: UIViewController())
 
         XCTAssertEqual(sut.navigationController.children.count, 1)
 
-        sut.show(Navigation.eventDetails(factory: ControllerFactoryFake()))
+        sut.goto(navigation: .eventDetails, controller: UIViewController())
 
         executeRunLoop()
 

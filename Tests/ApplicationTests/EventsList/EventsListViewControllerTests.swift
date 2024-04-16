@@ -27,50 +27,8 @@ final class EventsListViewControllerTests: XCTestCase {
 
     // MARK: - Tests
 
-    func test_showsTitle() {
-        XCTAssertEqual(sut.title, String(localizationId: "eventsList.title"))
-    }
-
-    func test_tableIsConfigured() {
-        XCTAssertNotNil(sut.viewRoot.list.dataSource)
-        XCTAssertNotNil(sut.viewRoot.list.delegate)
-    }
-
-    // TODO: fix sumbitEvent()
-//    func test_singleEvent_swiped_eventAmountIsIncreasedByOne() {
-//        submitEvent()
-//
-//        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "0")
-//
-//        swipeFirstEvent()
-//
-//        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "1")
-//    }
-//
-//    func test_singleEvent_swipedTwoTimes_eventAmountIncreasedByTwo() {
-//        submitEvent()
-//
-//        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "0")
-//
-//        swipeFirstEvent()
-//        swipeFirstEvent()
-//
-//        XCTAssertEqual(sut.viewRoot.eventCell.view.amountContainer.label.text, "2")
-//    }
-//
-//    func test_singleEvent_swiped_showsHint_pressToSeeDetails() {
-//        submitEvent()
-//        swipeFirstEvent()
-//
-//        XCTAssertEqual(sut.viewRoot.hintCell.label.text, HintCellViewModel.HintState.pressMe.text)
-//    }
-//
-//    func test_singleEvent_swiped_gestureHintIsNotVisible() {
-//        submitEvent()
-//        swipeFirstEvent()
-//
-//        XCTAssertNil(sut.viewRoot.eventCell.view.swipingHint)
-//    }
+    func test_showsTitle() { XCTAssertEqual(sut.title, String(localizationId: "eventsList.title")) }
+    func test_listIsConfigured() { XCTAssertNotNil(sut.viewRoot.list.dataSource) }
 
     func test_singleEvent_tapped_showsDetails() {
         // TODO: write this test
@@ -107,7 +65,7 @@ final class EventsListViewControllerTests: XCTestCase {
     private func configureEmpty() {
         let appContainer = ApplicationContainer(mode: .unitTest)
         let container = EventsListContainer(appContainer)
-        sut = container.make() as? EventsListController
+        sut = container.makeEventsListController()
         sut.loadViewIfNeeded()
     }
 
@@ -116,9 +74,13 @@ final class EventsListViewControllerTests: XCTestCase {
         let appContainer = ApplicationContainer(mode: .unitTest)
         appContainer.commander.save(event)
         let container = EventsListContainer(appContainer)
-        sut = container.make() as? EventsListController
+        sut = container.makeEventsListController()
         sut.loadViewIfNeeded()
     }
 
-    private func swipeFirstEvent() { sut.viewRoot.eventCell.viewModel?.swipeHandler() }
+    private func swipeFirstEvent() {
+        sut.viewRoot.eventCell.swipeService?.serve(
+            CreateHappeningServiceArgument(date: .distantPast)
+        )
+    }
 }

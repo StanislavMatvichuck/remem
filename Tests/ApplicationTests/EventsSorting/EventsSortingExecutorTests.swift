@@ -29,7 +29,7 @@ final class EventsSortingExecutorTests: XCTestCase {
         eventWithHappening.addHappening(date: DayIndex.referenceValue.date)
         let eventsToBeSorted = [eventWithoutHappenings, eventWithHappening]
 
-        let sortedEvents = sut.sort(events: eventsToBeSorted, sorter: .total)
+        let sortedEvents = sut.sort(events: eventsToBeSorted, ordering: .total)
 
         XCTAssertEqual(sortedEvents.first, eventWithHappening)
     }
@@ -39,7 +39,7 @@ final class EventsSortingExecutorTests: XCTestCase {
         let eventB = Event(name: "B")
         let eventsToBeSorted = [eventB, eventA]
 
-        let sortedEvents = sut.sort(events: eventsToBeSorted, sorter: .name)
+        let sortedEvents = sut.sort(events: eventsToBeSorted, ordering: .name)
 
         XCTAssertEqual(sortedEvents.first, eventA)
     }
@@ -52,7 +52,7 @@ final class EventsSortingExecutorTests: XCTestCase {
 
         let sortedEvents = sut.sort(
             events: eventsToBeSorted,
-            sorter: .manual,
+            ordering: .manual,
             manualIdentifiers: eventsManualIdentifiers
         )
 
@@ -69,7 +69,7 @@ final class EventsSortingExecutorTests: XCTestCase {
 
         let sortedEvents = sut.sort(
             events: eventsToBeSorted,
-            sorter: .manual,
+            ordering: .manual,
             manualIdentifiers: eventsManualIdentifiers
         )
 
@@ -86,7 +86,7 @@ final class EventsSortingExecutorTests: XCTestCase {
 
         let sortedEvents = sut.sort(
             events: eventsToBeSorted,
-            sorter: .manual,
+            ordering: .manual,
             manualIdentifiers: eventsManualIdentifiers
         )
 

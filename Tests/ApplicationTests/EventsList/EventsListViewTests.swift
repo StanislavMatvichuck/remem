@@ -13,25 +13,20 @@ final class EventsListViewTests: XCTestCase {
     // MARK: - Setup
 
     private var sut: EventsListView!
-    private var container: EventsListContainer!
 
     override func setUp() {
         super.setUp()
-        configureEmptySutAndContainer()
+        let controller = EventsListContainer.makeForUnitTests().makeEventsListController()
+        controller.loadViewIfNeeded()
+        sut = controller.viewRoot
     }
 
-    override func tearDown() {
-        sut = nil
-        container = nil
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown(); sut = nil }
 
     // MARK: - Tests
 
-    func test_init() { _ = EventsListView() }
-
     func test_showsHint_addFirstEvent() {
-        XCTAssertEqual(sut.hintCell.label.text, HintCellViewModel.HintState.addFirstEvent.text)
+        XCTAssertEqual(sut.hintCell.label.text, String(localizationId: "eventsList.hint.empty"))
     }
 
     func test_showsCreateEvent_highlighted() {
@@ -42,36 +37,6 @@ final class EventsListViewTests: XCTestCase {
     func test_showsNoEvents() {
         let eventsSection = EventsListViewModel.Section.events.rawValue
         XCTAssertEqual(sut.list.dataSource?.collectionView(sut.list, numberOfItemsInSection: eventsSection), 0)
-    }
-
-    func test_oneEvent_hintAsksToSwipeEvent() {
-        configureWithOneEvent()
-
-        XCTAssertEqual(sut.hintCell.label.text, HintCellViewModel.HintState.swipeFirstTime.text)
-    }
-
-    func test_oneEvent_showsCreateEvent_default() {
-        configureWithOneEvent()
-
-        XCTAssertEqual(sut.createEventCell.button.backgroundColor?.cgColor, UIColor.bg_item.cgColor, "highlighted button has brand background")
-    }
-
-    // MARK: - Creation
-
-    private func configureEmptySutAndContainer() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let container = EventsListContainer(appContainer)
-        let viewModel = container.makeEventsListViewModel()
-        let sut = EventsListView()
-        sut.viewModel = viewModel
-
-        self.sut = sut
-        self.container = container
-    }
-
-    private func configureWithOneEvent() {
-        container.commander.save(Event(name: "", dateCreated: DayIndex.referenceValue.date))
-        sut.viewModel = container.makeEventsListViewModel()
     }
 }
 

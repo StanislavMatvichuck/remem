@@ -10,94 +10,9 @@ import Domain
 import XCTest
 
 final class EventsListViewModelTests: XCTestCase {
-    // MARK: - Setup
-
     var sut: EventsListViewModel!
-    var container: EventsListContainer!
-    var secondEvent: Event!
+    override func setUp() { super.setUp(); sut = EventsListContainer.makeForUnitTests().makeEventsListViewModel() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
-    override func setUp() {
-        super.setUp()
-        configureSUTWithThreeEvents()
-    }
-
-    override func tearDown() {
-        sut = nil
-        container = nil
-        secondEvent = nil
-        super.tearDown()
-    }
-
-    // MARK: - Tests
-    func test_eventsSortingPresentingButtonText_ordering() {
-        XCTAssertEqual(EventsListViewModel.eventsSortingLabel, "Ordering")
-    }
-
-    func test_handleEventsSortingTap() { sut.eventsSortingHandler?(0, .none) }
-
-    func test_configureAnimationForEventCells_usingOldValue_addedHappeningForSecondEvent_neighboursReceiveAnimations() {
-        arrangeWithSecondEventSwiped()
-
-        XCTAssertEqual(firstCell.animation, .aboveSwipe)
-        XCTAssertEqual(secondCell.animation, .swipe)
-        XCTAssertEqual(thirdCell.animation, .belowSwipe)
-    }
-
-    func test_configureAnimationForEventCells_usingSameValue_noneForAllCells() {
-        sut.configureAnimationForEventCells(oldValue: sut)
-
-        XCTAssertEqual(firstCell.animation, .none)
-        XCTAssertEqual(secondCell.animation, .none)
-        XCTAssertEqual(thirdCell.animation, .none)
-    }
-
-    func test_shouldPresentManualSorting_noOldValue_false() {
-        XCTAssertFalse(sut.shouldPresentManualSorting())
-    }
-
-    func test_shouldPresentManualSorting_oldValueWithNotManualSorting_true() {
-        let newSut = EventsListViewModel(
-            cells: [:],
-            sorter: .manual,
-            eventsSortingHandler: { _, _ in },
-            manualSortingHandler: { _ in }
-        )
-
-        XCTAssertTrue(newSut.shouldPresentManualSorting(sut))
-    }
-
-    // MARK: - Creation
-
-    private func configureSUTWithThreeEvents() {
-        let eventA = Event(name: "A", dateCreated: DayIndex.referenceValue.date)
-        let eventB = Event(name: "B", dateCreated: DayIndex.referenceValue.date)
-        let eventC = Event(name: "C", dateCreated: DayIndex.referenceValue.date)
-        let appC = ApplicationContainer(mode: .unitTest)
-        appC.commander.save(eventA)
-        appC.commander.save(eventB)
-        appC.commander.save(eventC)
-
-        let container = EventsListContainer(appC)
-        sut = container.makeEventsListViewModel()
-        self.container = container
-        secondEvent = eventB
-    }
-
-    private func arrangeWithSecondEventSwiped() {
-        secondEvent.addHappening(date: DayIndex.referenceValue.date)
-        container.commander.save(secondEvent)
-        // Imitates controller update cycle with didSet observer
-        let oldValue = sut
-        sut = container.makeEventsListViewModel()
-        sut.configureAnimationForEventCells(oldValue: oldValue)
-    }
-
-    private var eventCells: [EventCellViewModel] {
-        let eventCellsIds = sut.cellsIdentifiers(for: .events)
-        let cells = eventCellsIds.map { sut.cell(identifier: $0) as! EventCellViewModel }
-        return cells
-    }
-    private var firstCell: EventCellViewModel { eventCells[0] }
-    private var secondCell: EventCellViewModel { eventCells[1] }
-    private var thirdCell: EventCellViewModel { eventCells[2] }
+    func test_eventsSortingPresentingButtonText_ordering() { XCTAssertEqual(EventsListViewModel.eventsSortingLabel, "Ordering") }
 }

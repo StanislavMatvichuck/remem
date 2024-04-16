@@ -12,28 +12,10 @@ import XCTest
 
 final class GoalsContainerTests: XCTestCase {
     private var sut: GoalsContainer!
-    
-    override func setUp() {
-        super.setUp()
-        sut = GoalsContainer(
-            EventDetailsContainer(
-                ApplicationContainer(mode: .unitTest),
-                event: Event(
-                    name: "",
-                    dateCreated: DayIndex.referenceValue.date
-                )
-            )
-        )
-    }
-    
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-    
-    // MARK: - Tests
-    
+    override func setUp() { super.setUp(); sut = GoalsContainer.makeForUnitTests() }
+    override func tearDown() { super.tearDown(); sut = nil }
+
     func test_init() { XCTAssertNotNil(sut) }
-    func test_makesController() { XCTAssertTrue(sut is ControllerFactoring) }
+    func test_makesController() { XCTAssertNotNil(sut.makeGoalsController()) }
     func test_makesViewModel() { XCTAssertTrue(sut is GoalsViewModelFactoring) }
 }

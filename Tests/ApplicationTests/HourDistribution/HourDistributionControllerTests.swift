@@ -6,30 +6,20 @@
 //
 
 @testable import Application
-import Domain
 import Foundation
 import XCTest
 
 final class HourDistributionControllerTests: XCTestCase {
     private var sut: HourDistributionController!
-    
+
     override func setUp() {
         super.setUp()
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let detailsContainer = EventDetailsContainer(appContainer, event: event)
-        let container = HourDistributionContainer(detailsContainer)
-        sut = HourDistributionController(container)
+        sut = HourDistributionContainer.makeForUnitTests().makeHourDistributionController()
         sut.loadViewIfNeeded()
     }
-    
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-    
-    // MARK: - Tests
-    
+
+    override func tearDown() { super.tearDown(); sut = nil }
+
     func test_init() { XCTAssertNotNil(sut) }
     func test_view() { XCTAssertNotNil(sut.view as? HourDistributionView) }
     func test_viewModel() { XCTAssertNotNil(sut.viewModel) }

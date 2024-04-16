@@ -9,24 +9,16 @@
 import Domain
 import XCTest
 
-final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
+final class EventDetailsViewControllerTests: XCTestCase {
     var sut: EventDetailsViewController!
-    var event: Event!
-    var commander: EventsCommanding!
-
     override func setUp() {
         super.setUp()
-        make()
+        sut = EventDetailsContainer.makeForUnitTests().makeEventDetailsController()
+        sut.loadViewIfNeeded()
     }
+    override func tearDown() { super.tearDown(); sut = nil }
 
-    override func tearDown() {
-        clear()
-        super.tearDown()
-    }
-
-    func test_showsTitle_nameOfEvent() {
-        XCTAssertEqual(sut.title, "Event")
-    }
+    func test_showsTitle_nameOfEvent() { XCTAssertEqual(sut.title, "") }
 
     func test_viewDidAppear_visitEvent() {
         putInViewHierarchy(sut)
@@ -38,23 +30,9 @@ final class EventDetailsViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertTrue(sut.viewModel.isVisited)
     }
 
-    func test_showsControllersInScroll() {
-        XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count)
-    }
-
-    func test_showsWeek() {
-        XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1)
-    }
-
-    func test_showsClock() {
-        XCTAssertEqual(sut.children.filter { $0 is HourDistributionController }.count, 1)
-    }
-
-    func test_showsSummary() {
-        XCTAssertEqual(sut.children.filter { $0 is SummaryViewController }.count, 1)
-    }
-
-    func test_showsPDFWritingView() {
-        XCTAssertEqual(sut.children.filter { $0 is PDFWritingViewController }.count, 1)
-    }
+    func test_showsControllersInScroll() { XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count) }
+    func test_showsWeek() { XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1) }
+    func test_showsClock() { XCTAssertEqual(sut.children.filter { $0 is HourDistributionController }.count, 1) }
+    func test_showsSummary() { XCTAssertEqual(sut.children.filter { $0 is SummaryViewController }.count, 1) }
+    func test_showsPDFWritingView() { XCTAssertEqual(sut.children.filter { $0 is PDFWritingViewController }.count, 1) }
 }

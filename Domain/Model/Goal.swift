@@ -13,7 +13,7 @@ public class Goal {
     public var value: GoalValue
     public var achieved: Bool { progress >= 1.0 }
 
-    private let event: Event
+    public let event: Event
     private var contributingHappeningsCount: Int {
         var count = 0
 

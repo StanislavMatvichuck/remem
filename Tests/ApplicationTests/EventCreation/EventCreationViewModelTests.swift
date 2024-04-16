@@ -11,9 +11,6 @@ import XCTest
 
 final class EventCreationViewModelTests: XCTestCase {
     func test_init() { _ = EventCreationViewModel() }
-    func test_init_canReceiveSubmitHandler() {
-        _ = EventCreationViewModel(submitHandler: { _ in })
-    }
     
     func test_emoji() {
         let sut = EventCreationViewModel()
@@ -29,34 +26,6 @@ final class EventCreationViewModelTests: XCTestCase {
         let sut = EventCreationViewModel()
         
         XCTAssertEqual(sut.createdEventName.count, 0)
-    }
-    
-    func test_submit_createdEventNameEmpty_doesNotCallSubmitHandler() {
-        var submitHandlerCalled = false
-        let submitHandler: EventCreationViewModel.SubmitHandler = { _ in submitHandlerCalled = true }
-        let sut = EventCreationViewModel(submitHandler: submitHandler)
-        
-        sut.submit()
-        
-        XCTAssertFalse(submitHandlerCalled)
-    }
-    
-    func test_submit_createdEventNameIsNotEmpty_submitHandlerIsCalledWithCreatedEventName() {
-        var submitHandlerCalled = false
-        var submitHandlerNameArgument = ""
-        
-        let submitHandler: EventCreationViewModel.SubmitHandler = { createdEventName in
-            submitHandlerCalled = true
-            submitHandlerNameArgument = createdEventName
-        }
-        
-        var sut = EventCreationViewModel(submitHandler: submitHandler)
-        
-        sut.createdEventName = "Some"
-        sut.submit()
-        
-        XCTAssertTrue(submitHandlerCalled)
-        XCTAssertEqual(submitHandlerNameArgument, "Some")
     }
     
     func test_handleEmoji_addsItToCreatedEventName() {

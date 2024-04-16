@@ -10,8 +10,6 @@ import Domain
 import XCTest
 
 final class DayDetailsViewModelTests: XCTestCase {
-    /// things created in container are part of view model logic but it looks bad to test them here
-    /// then what are those handlers and where should they be tested
     private var sut: DayDetailsViewModel!
     
     override func setUp() {
@@ -21,7 +19,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             startOfDay: DayIndex.referenceValue.date,
             pickerDate: nil,
             cells: []
-        ) { _ in }
+        )
     }
     
     override func tearDown() {
@@ -39,8 +37,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date,
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: [],
-            addHappeningHandler: { _ in }
+            cells: []
         )
         
         XCTAssertEqual(sut.title, "2 January")
@@ -52,8 +49,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date,
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: [],
-            addHappeningHandler: { _ in }
+            cells: []
         )
         
         XCTAssertFalse(sut.isToday)
@@ -64,8 +60,7 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(30 * 3)),
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: [],
-            addHappeningHandler: { _ in }
+            cells: []
         )
         
         // this test will duplicate the implementation
@@ -112,16 +107,14 @@ final class DayDetailsViewModelTests: XCTestCase {
     func test_cellForIdentifier() {
         let cell = DayCellViewModel(
             id: "id",
-            happening: Happening(dateCreated: .distantFuture),
-            remove: {}
+            happening: Happening(dateCreated: .distantFuture)
         )
         
         sut = DayDetailsViewModel(
             currentMoment: .distantFuture,
             startOfDay: .distantFuture,
             pickerDate: nil,
-            cells: [cell],
-            addHappeningHandler: { _ in }
+            cells: [cell]
         )
         
         XCTAssertNotNil(sut.cell(for: "id"))

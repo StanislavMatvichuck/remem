@@ -11,35 +11,16 @@ import XCTest
 
 final class EventsSortingContainerTests: XCTestCase {
     private var sut: EventsSortingContainer!
-
-    override func setUp() {
-        super.setUp()
-
-        let applicationContainer = ApplicationContainer(mode: .unitTest)
-        let listContainer = EventsListContainer(applicationContainer)
-        sut = EventsSortingContainer(listContainer)
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
+    override func setUp() { super.setUp(); sut = EventsSortingContainer.makeForUnitTests() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init() { XCTAssertNotNil(sut) }
 
-    func test_conformsToControllerFactoring() { sut is ControllerFactoring }
-
     func test_makeController_configuredForPresentationEventsSorting() {
-        let controller = sut.make()
+        let controller = sut.makeEventsOrderingController(using: ShowEventsOrderingServiceArgument(offset: 0.0, oldValue: nil))
 
         XCTAssertNotNil(controller.transitioningDelegate)
         XCTAssertEqual(controller.modalPresentationStyle, .custom)
-    }
-
-    func test_makeController_isEventsSortingController() {
-        let controller = sut.make()
-
-        XCTAssertNotNil(controller as? EventsSortingController)
     }
 
     func test_presentationController_notNil() {
@@ -95,9 +76,5 @@ final class EventsSortingContainerTests: XCTestCase {
         ))
     }
 
-    func test_animationForDismiss() {
-        XCTAssertNotNil(sut.animationController(forDismissed: UIViewController()))
-    }
-
-    func test_makeTapHandler() { XCTAssertNotNil(sut.makeTapHandler()) }
+    func test_animationForDismiss() { XCTAssertNotNil(sut.animationController(forDismissed: UIViewController())) }
 }

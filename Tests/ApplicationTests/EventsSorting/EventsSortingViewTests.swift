@@ -14,17 +14,14 @@ final class EventsSortingViewTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let applicationContainer = ApplicationContainer(mode: .unitTest)
-        let listContainer = EventsListContainer(applicationContainer)
-        let container = EventsSortingContainer(listContainer)
-        let viewModel = container.makeEventsSortingViewModel()
-        sut = EventsSortingView()
-        sut.viewModel = viewModel
+        let controller = EventsSortingContainer.makeForUnitTests().makeEventsOrderingController(using: ShowEventsOrderingServiceArgument(offset: 0.0, oldValue: nil))
+        controller.loadViewIfNeeded()
+        sut = controller.viewRoot
     }
 
     override func tearDown() {
-        sut = nil
         super.tearDown()
+        sut = nil
     }
 
     func test_init() { XCTAssertNotNil(sut) }

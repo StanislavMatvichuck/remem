@@ -14,11 +14,7 @@ final class SummaryViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
-        let appC = ApplicationContainer(mode: .unitTest)
-        let eventDetails = EventDetailsContainer(appC, event: event)
-        let container = SummaryContainer(parent: eventDetails)
-        sut = SummaryViewController(container)
+        sut = SummaryContainer.makeForUnitTests().makeSummaryController()
         let view = UIView(frame: UIScreen.main.bounds)
         view.addSubview(sut.view)
         sut.view.layoutIfNeeded()

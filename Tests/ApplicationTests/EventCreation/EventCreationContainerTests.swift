@@ -10,22 +10,11 @@ import Foundation
 import XCTest
 
 final class EventCreationContainerTests: XCTestCase {
-    func test_init() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let sut = EventCreationContainer(parent: appContainer)
-    }
+    var sut: EventCreationContainer!
+    override func setUp() { super.setUp(); sut = EventCreationContainer.makeForUnitTests() }
+    override func tearDown() { super.tearDown(); sut = nil }
 
-    func test_makesEventCreationController() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let sut: ControllerFactoring = EventCreationContainer(parent: appContainer)
-
-        XCTAssertNotNil(sut.make() as? EventCreationController)
-    }
-
-    func test_makesEventCreationViewModel() {
-        let appContainer = ApplicationContainer(mode: .unitTest)
-        let sut: EventCreationViewModelFactoring = EventCreationContainer(parent: appContainer)
-
-        XCTAssertNotNil(sut.makeEventCreationViewModel())
-    }
+    func test_init() { XCTAssertNotNil(sut) }
+    func test_makesController() { XCTAssertNotNil(sut.makeCreateEventController()) }
+    func test_makesViewModel() { XCTAssertNotNil(sut.makeEventCreationViewModel()) }
 }

@@ -15,16 +15,7 @@ final class GoalsViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let container = GoalsContainer(
-            EventDetailsContainer(
-                ApplicationContainer(mode: .unitTest),
-                event: Event(
-                    name: "",
-                    dateCreated: DayIndex.referenceValue.date
-                )
-            )
-        )
-        sut = container.make() as? GoalsViewController
+        sut = GoalsContainer.makeForUnitTests().makeGoalsController()
         sut.loadViewIfNeeded()
     }
     
@@ -32,8 +23,6 @@ final class GoalsViewControllerTests: XCTestCase {
         super.tearDown()
         sut = nil
     }
-    
-    // MARK: - Tests
     
     func test_init() { XCTAssertNotNil(sut) }
     func test_showsGoalsView() { XCTAssertTrue(sut.view is GoalsView) }

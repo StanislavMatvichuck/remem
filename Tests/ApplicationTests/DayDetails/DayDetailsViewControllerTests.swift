@@ -11,24 +11,17 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
+final class DayDetailsViewControllerTests: XCTestCase {
     var sut: DayDetailsViewController!
-    var event: Event!
-    var commander: EventsCommanding!
 
-    override func setUp() {
-        super.setUp()
-        make()
+    override func setUp() { super.setUp()
+        sut = DayDetailsContainer.makeForUnitTests().makeDayDetailsController()
+        sut.loadViewIfNeeded()
     }
 
-    override func tearDown() {
-        super.tearDown()
-        clear()
-    }
+    override func tearDown() { super.tearDown(); sut = nil }
 
-    func test_listIsConfigured() {
-        XCTAssertNotNil(sut.viewRoot.happeningsCollection.dataSource)
-    }
+    func test_listIsConfigured() { XCTAssertNotNil(sut.viewRoot.happeningsCollection.dataSource) }
 
     func test_showsTitle() {
         let numberString = sut.viewRoot.title.text!.split(separator: " ").first
@@ -38,19 +31,13 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertLessThanOrEqual(3, wordString!.count)
     }
 
-    func test_showsCreateHappeningButton() {
-        XCTAssertEqual(sut.viewRoot.button.text, String(localizationId: "button.addHappening"))
-    }
-
-    func test_empty_noHappeningsInList() {
-        XCTAssertEqual(happeningsAmount, 0)
-    }
+    func test_showsCreateHappeningButton() { XCTAssertEqual(sut.viewRoot.button.text, String(localizationId: "button.addHappening")) }
+    func test_empty_noHappeningsInList() { XCTAssertEqual(happeningsAmount, 0) }
 
     func test_singleHappening_showsTime() {
         addHappening(at: DayIndex.referenceValue.date)
-        sendEventUpdatesToController()
 
-        assertCellHasTimeText(at: firstIndex)
+        assertCellHasTimeText(at: firstCellIndex)
     }
 
     // TODO: finish
@@ -64,12 +51,11 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         addHappening(at: date.addingTimeInterval(1))
         addHappening(at: date.addingTimeInterval(2))
         addHappening(at: date.addingTimeInterval(3))
-        sendEventUpdatesToController()
 
         let secondCellIndex = IndexPath(row: 1, section: 0)
         let thirdCellIndex = IndexPath(row: 2, section: 0)
 
-        assertCellHasTimeText(at: firstIndex)
+        assertCellHasTimeText(at: firstCellIndex)
         assertCellHasTimeText(at: secondCellIndex)
         assertCellHasTimeText(at: thirdCellIndex)
     }
@@ -84,13 +70,27 @@ final class DayDetailsViewControllerTests: XCTestCase, TestingViewController {
         XCTAssertNotEqual(sut.viewRoot.buttonBackground.interactions.count, 0, "interaction must be added to button to allow drop to delete")
     }
 
+    let firstCellIndex = IndexPath(row: 0, section: 0)
+
     private func assertCellHasTimeText(
         at index: IndexPath,
         file: StaticString = #file,
-        line: UInt = #line
-    ) {
+        line: UInt = #line)
+    {
         let cell = happening(at: index)
         XCTAssertNotNil(cell.label.text?.firstIndex(of: ":"), file: file, line: line)
         XCTAssertLessThanOrEqual(5, cell.label.text?.count ?? 0, file: file, line: line)
     }
+
+    private func happening(at: IndexPath) -> DayCell {
+        sut.viewRoot.happeningsCollection.dataSource?.collectionView(
+            sut.viewRoot.happeningsCollection,
+            cellForItemAt: at) as! DayCell
+    }
+
+    private func addHappening(at: Date) {
+        sut.createHappeningService?.serve(CreateHappeningServiceArgument(date: at))
+    }
+
+    private var happeningsAmount: Int { sut.viewRoot.happeningsCollection.numberOfItems(inSection: 0) }
 }
