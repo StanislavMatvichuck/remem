@@ -22,6 +22,8 @@ struct EventsListViewModel {
     private let eventVmFactory: EventCellViewModelFactoring
     private let createEventVmFactory: CreateEventCellViewModelFactoring
 
+    var dragAndDrop = RemovalDropAreaViewModel()
+
     init(
         list: EventsList,
         hintFactory: HintCellViewModelFactoring,
@@ -57,18 +59,4 @@ struct EventsListViewModel {
         if id == Self.createEventSectionIdentifier { return createEventVmFactory.makeCreateEventCellViewModel(eventsCount: list.eventsIdentifiers.count) }
         return eventVmFactory.makeEventCellViewModel(eventId: id)
     }
-
-    // MARK: - Drag and drop
-    var removalDropAreaHidden = true
-    var removalDropAreaActive = false
-    var draggedCellIndex: Int?
-
-    mutating func startDragFor(eventIndex: Int) {
-        draggedCellIndex = eventIndex
-        removalDropAreaHidden = false
-    }
-
-    mutating func endDrag() { removalDropAreaHidden = true }
-    mutating func activateDropArea() { removalDropAreaActive = true }
-    mutating func deactivateDropArea() { removalDropAreaActive = false }
 }

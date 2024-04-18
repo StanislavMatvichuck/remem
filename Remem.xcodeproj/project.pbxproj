@@ -48,6 +48,8 @@
 		081C431F29FFC46600ACC4D7 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */; };
 		081C432129FFC46600ACC4D7 /* DayIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE1857298AC90900DBC78D /* DayIndex.swift */; };
 		081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
+		081CA53D2BD197A200924635 /* RemovalDropAreaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CA53C2BD197A200924635 /* RemovalDropAreaViewModel.swift */; };
+		081CA53F2BD197AB00924635 /* RemovalDropAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CA53E2BD197AB00924635 /* RemovalDropAreaView.swift */; };
 		08214D102B8F4244002F1F16 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */; };
 		0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */; };
 		082458132B4C270C00362B84 /* DayDetailsViewSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */; };
@@ -247,7 +249,6 @@
 		08BBD4A22BB6E67A0095DBBF /* ShowCreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
 		08C23EBA2B83C145004DF159 /* EventsListViewController+DragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */; };
-		08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */; };
 		08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */; };
 		08C9DAFD2BB4CD8D00F038BB /* ShowEventsOrderingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */; };
@@ -447,6 +448,8 @@
 		081A156A2B62920500EDA8A2 /* HourDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionView.swift; sourceTree = "<group>"; };
 		081A156C2B62968D00EDA8A2 /* HourDistributionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDistributionCellView.swift; sourceTree = "<group>"; };
 		081BAFA0292B892F00112C76 /* EventDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		081CA53C2BD197A200924635 /* RemovalDropAreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovalDropAreaViewModel.swift; sourceTree = "<group>"; };
+		081CA53E2BD197AB00924635 /* RemovalDropAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovalDropAreaView.swift; sourceTree = "<group>"; };
 		08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimator.swift; sourceTree = "<group>"; };
 		082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewSnapshots.swift; sourceTree = "<group>"; };
@@ -658,7 +661,6 @@
 		08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCreateEventService.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
 		08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListViewController+DragAndDrop.swift"; sourceTree = "<group>"; };
-		08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventsListView+Drop.swift"; sourceTree = "<group>"; };
 		08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsPresentationAnimator.swift; sourceTree = "<group>"; };
 		08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationContainer.swift; sourceTree = "<group>"; };
 		08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEventsOrderingService.swift; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 		0816B6E62B500CBB00A29815 /* ControllersInfrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				081CA53B2BD1978400924635 /* RemovalDropArea */,
 				08A331E929A8EBC3000B68A1 /* Watching.swift */,
 				0828877A29BCA17700FF9839 /* Updating.swift */,
 				08D2C3FC2B2B15E60086E3F6 /* ViewModelFactoring.swift */,
@@ -966,6 +969,15 @@
 				081A156C2B62968D00EDA8A2 /* HourDistributionCellView.swift */,
 			);
 			path = HourDistribution;
+			sourceTree = "<group>";
+		};
+		081CA53B2BD1978400924635 /* RemovalDropArea */ = {
+			isa = PBXGroup;
+			children = (
+				081CA53C2BD197A200924635 /* RemovalDropAreaViewModel.swift */,
+				081CA53E2BD197AB00924635 /* RemovalDropAreaView.swift */,
+			);
+			path = RemovalDropArea;
 			sourceTree = "<group>";
 		};
 		0826AC9028C86ECE0021D607 /* Frameworks */ = {
@@ -1399,7 +1411,6 @@
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
 				08D512352787144800C2037F /* EventsListView.swift */,
-				08C23EBB2B83C525004DF159 /* EventsListView+Drop.swift */,
 				0875E27B298EF91A00622125 /* EventsListController.swift */,
 				08C23EB92B83C145004DF159 /* EventsListViewController+DragAndDrop.swift */,
 			);
@@ -2057,6 +2068,7 @@
 				08214D102B8F4244002F1F16 /* GoalProgressView.swift in Sources */,
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
 				0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */,
+				081CA53F2BD197AB00924635 /* RemovalDropAreaView.swift in Sources */,
 				089308AA2B3B07550059D51A /* WeekDayHappeningsView.swift in Sources */,
 				08BBD4A02BB6D3330095DBBF /* CreateHappeningService.swift in Sources */,
 				0851963B2A0C1CE600FD8FD8 /* PDFWriting.swift in Sources */,
@@ -2083,6 +2095,7 @@
 				085240572B61C9F1004F9BDA /* DayOfWeekView.swift in Sources */,
 				085896B22A2652BA00390C76 /* PDFReadingViewModel.swift in Sources */,
 				086BC9A02A44F29A00766CF7 /* PDFWritingQRPageView.swift in Sources */,
+				081CA53D2BD197A200924635 /* RemovalDropAreaViewModel.swift in Sources */,
 				083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */,
 				087D42662B8E38B10075004D /* GoalsViewModel.swift in Sources */,
 				085BD7A72B31CE9C000283E1 /* WeekViewModel.swift in Sources */,
@@ -2103,7 +2116,6 @@
 				0871E7512B9DCDCA00FF1F7D /* RemoveEventService.swift in Sources */,
 				081A156B2B62920500EDA8A2 /* HourDistributionView.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
-				08C23EBC2B83C525004DF159 /* EventsListView+Drop.swift in Sources */,
 				089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */,
 				087D426E2B8E58CF0075004D /* GoalsContainer.swift in Sources */,
 				0816D0CB2B90A435005FD6A0 /* CreateGoalCell.swift in Sources */,

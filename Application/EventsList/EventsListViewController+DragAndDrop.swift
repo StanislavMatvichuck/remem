@@ -22,7 +22,7 @@ extension EventsListController:
         let eventIndex = indexPath.row
         let provider = NSItemProvider(object: "\(eventIndex)" as NSString)
         let dragItem = UIDragItem(itemProvider: provider)
-        viewModel?.startDragFor(eventIndex: eventIndex)
+        viewModel?.dragAndDrop.startDragFor(eventIndex: eventIndex)
         return [dragItem]
     }
 
@@ -36,7 +36,7 @@ extension EventsListController:
 
         guard
             let viewModel,
-            let from = viewModel.draggedCellIndex,
+            let from = viewModel.dragAndDrop.draggedCellIndex,
             let to = coordinator.destinationIndexPath?.row
         else { return }
         var eventsIdentifiers = viewModel.identifiersFor(section: .events)
@@ -46,7 +46,7 @@ extension EventsListController:
     }
 
     func collectionView(_: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath indexPath: IndexPath?) -> UICollectionViewDropProposal {
-        viewRoot.updateRemovalDropAreaPosition(x: session.location(in: viewRoot).x)
+        viewRoot.removalDropArea.updateRemovalDropAreaPosition(x: session.location(in: viewRoot.removalDropArea).x)
 
         let section = indexPath?.section
         if section == EventsListViewModel.Section.events.rawValue {
@@ -57,6 +57,6 @@ extension EventsListController:
     }
 
     func collectionView(_: UICollectionView, dropSessionDidEnd _: UIDropSession) {
-        viewModel?.endDrag()
+        viewModel?.dragAndDrop.endDrag()
     }
 }

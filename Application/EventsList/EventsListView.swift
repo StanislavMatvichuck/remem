@@ -8,32 +8,20 @@
 import UIKit
 
 final class EventsListView: UIView {
-    static let removalDropAreaDefaultOpacity: Float = 0.5
-    
     let list: UICollectionView
     let dataSource: EventsListDataSource
     
-    let removalDropArea: UIView = {
-        let view = UIView(al: true)
-        let image = UIImage(systemName: "trash.fill")?
-            .withTintColor(UIColor.bg)
-            .withRenderingMode(.alwaysOriginal)
-            .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
-        let imageView = UIImageView(al: true)
-        imageView.image = image
-        view.addSubview(imageView)
-        imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.buttonMargin).isActive = true
-        return view
-    }()
+    lazy var removalDropArea = RemovalDropAreaView(handler: { [weak self] draggedCellIndex in
+        if let cell = self?.list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 1)) as? EventCell {
+            cell.removeService?.serve(ApplicationServiceEmptyArgument())
+        }
+    })
     
     var viewModel: EventsListViewModel? { didSet {
         guard let viewModel else { return }
-        configureContent(viewModel)
+        removalDropArea.viewModel = viewModel.dragAndDrop
         dataSource.applySnapshot(oldValue)
     }}
-    
-    lazy var animatedConstraint: NSLayoutConstraint = { removalDropArea.trailingAnchor.constraint(equalTo: leadingAnchor) }()
     
     init(list: UICollectionView, dataSource: EventsListDataSource) {
         self.list = list
@@ -41,20 +29,9 @@ final class EventsListView: UIView {
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
-        configureDropArea()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    func updateRemovalDropAreaPosition(x: CGFloat) {
-        let constant = (bounds.width - x) / 3
-        
-        let lowerBound = CGFloat.buttonMargin
-        let upperBound = removalDropArea.bounds.width - 2 * removalDropArea.layer.cornerRadius
-        let clampedConstant = constant.clamped(to: lowerBound ... upperBound)
-        
-        animatedConstraint.constant = clampedConstant
-    }
     
     func startHintAnimationIfNeeded() {
 //        guard
@@ -107,33 +84,11 @@ final class EventsListView: UIView {
     
     private func configureLayout() {
         addAndConstrain(list)
-        
-        addSubview(removalDropArea)
-        removalDropArea.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3).isActive = true
-        removalDropArea.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, constant: -2 * .buttonMargin).isActive = true
-        animatedConstraint.isActive = true
-        removalDropArea.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
+        addAndConstrain(removalDropArea)
     }
     
     private func configureAppearance() {
         list.backgroundColor = .clear
-        
         backgroundColor = .bg
-        removalDropArea.backgroundColor = UIColor.red
-        removalDropArea.layer.cornerRadius = CGFloat.buttonMargin
-        removalDropArea.isHidden = true
-        removalDropArea.layer.opacity = Self.removalDropAreaDefaultOpacity
-    }
-    
-    private func configureContent(_ viewModel: EventsListViewModel) {
-        removalDropArea.isHidden = viewModel.removalDropAreaHidden
-        removalDropArea.layer.opacity = viewModel.removalDropAreaActive ?
-            1.0 :
-            Self.removalDropAreaDefaultOpacity
-    }
-    
-    private func configureDropArea() {
-        let dropInteraction = UIDropInteraction(delegate: self)
-        removalDropArea.addInteraction(dropInteraction)
     }
 }
