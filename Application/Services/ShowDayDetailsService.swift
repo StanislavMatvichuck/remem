@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 protocol DayDetailsControllerFactoring {
-    func makeDayDetailsController(_: ShowDayDetailsServiceArgument) -> DayDetailsViewController
+    func makeDayDetailsController(_: ShowDayDetailsServiceArgument) -> DayDetailsController
 }
 
 struct ShowDayDetailsServiceArgument {

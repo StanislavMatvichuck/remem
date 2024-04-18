@@ -8,7 +8,7 @@
 import PDFKit
 import UIKit
 
-final class PDFReadingViewController: UIViewController {
+final class PDFReadingController: UIViewController {
     private let url: URL
     let viewRoot: PDFReadingView
 

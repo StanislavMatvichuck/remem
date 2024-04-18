@@ -9,8 +9,8 @@
 import Domain
 import XCTest
 
-final class SummaryViewControllerTests: XCTestCase {
-    private var sut: SummaryViewController!
+final class SummaryControllerTests: XCTestCase {
+    private var sut: SummaryController!
 
     override func setUp() {
         super.setUp()
@@ -33,7 +33,7 @@ final class SummaryViewControllerTests: XCTestCase {
     private func clear() { sut = nil }
 }
 
-private extension SummaryViewController {
+private extension SummaryController {
     var totalValue: String? { cellValueAt(row: 0) }
     var daysTracked: String? { cellValueAt(row: 1) }
     var dayAverage: String? { cellValueAt(row: 2) }

@@ -10,7 +10,7 @@ import Domain
 import Foundation
 
 protocol PDFReadingControllerFactoring {
-    func makePDFReadingController(url: URL) -> PDFReadingViewController
+    func makePDFReadingController(url: URL) -> PDFReadingController
 }
 
 protocol PDFViewModelFactoring { func makePDFViewModel() -> [PdfRenderingPage] }

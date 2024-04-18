@@ -23,7 +23,7 @@ final class GoalsContainer:
         self.goalsStorage = GoalsCoreDataRepository(container: parent.parent.coreDataContainer)
     }
 
-    func makeGoalsController() -> GoalsViewController { GoalsViewController(factory: self, view: makeGoalsView()) }
+    func makeGoalsController() -> GoalsController { GoalsController(factory: self, view: makeGoalsView()) }
     func makeGoalsView() -> GoalsView { GoalsView(
         list: list,
         dataSource: makeDataSource(list: list)

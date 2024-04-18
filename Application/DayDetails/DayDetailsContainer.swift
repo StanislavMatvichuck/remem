@@ -20,7 +20,7 @@ final class DayDetailsContainer:
         self.startOfDay = startOfDay
     }
 
-    func makeDayDetailsController() -> DayDetailsViewController { DayDetailsViewController(
+    func makeDayDetailsController() -> DayDetailsController { DayDetailsController(
         self,
         createHappeningService: makeCreateHappeningService(),
         removeHappeningService: makeRemoveHappeningService()

@@ -9,7 +9,7 @@ import AudioToolbox
 import Domain
 import UIKit
 
-final class DayDetailsViewController: UIViewController {
+final class DayDetailsController: UIViewController {
     let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
 
@@ -86,7 +86,7 @@ final class DayDetailsViewController: UIViewController {
     }
 }
 
-extension DayDetailsViewController: UICollectionViewDragDelegate {
+extension DayDetailsController: UICollectionViewDragDelegate {
     func collectionView(
         _: UICollectionView,
         itemsForBeginning _: UIDragSession,
@@ -106,7 +106,7 @@ extension DayDetailsViewController: UICollectionViewDragDelegate {
     }
 }
 
-extension DayDetailsViewController: UIDropInteractionDelegate {
+extension DayDetailsController: UIDropInteractionDelegate {
     func dropInteraction(_: UIDropInteraction, canHandle _: UIDropSession) -> Bool { true }
     func dropInteraction(_: UIDropInteraction, sessionDidUpdate _: UIDropSession) -> UIDropProposal {
         UIDropProposal(operation: .move)

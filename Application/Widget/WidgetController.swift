@@ -1,5 +1,5 @@
 //
-//  WidgetViewController.swift
+//  WidgetController.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 22.02.2023.
@@ -8,7 +8,7 @@
 import Foundation
 import WidgetKit
 
-final class WidgetViewController {
+final class WidgetController {
     func update(_ viewModel: EventsListViewModel) {
 //        guard let directory = FileManager.default.containerURL(
 //            forSecurityApplicationGroupIdentifier: "group.remem.io"

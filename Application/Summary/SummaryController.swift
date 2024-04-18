@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SummaryViewController: UIViewController {
+final class SummaryController: UIViewController {
     var viewModel: SummaryViewModel? { didSet {
         guard isViewLoaded, let viewModel else { return }
         viewRoot.viewModel = viewModel

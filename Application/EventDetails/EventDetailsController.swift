@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-final class EventDetailsViewController: UIViewController {
+final class EventDetailsController: UIViewController {
     let factory: EventDetailsViewModelFactoring
     var viewModel: EventDetailsViewModel
     let service: VisitEventService

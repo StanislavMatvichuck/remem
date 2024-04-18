@@ -14,7 +14,7 @@ final class PdfSnapshots:
     TestingViewController,
     AtlasProducing
 {
-    var sut: PDFReadingViewController!
+    var sut: PDFReadingController!
     var event: Event!
     var atlas: UIView!
 

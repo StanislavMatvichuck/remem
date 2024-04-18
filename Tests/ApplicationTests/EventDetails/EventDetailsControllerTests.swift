@@ -9,8 +9,8 @@
 import Domain
 import XCTest
 
-final class EventDetailsViewControllerTests: XCTestCase {
-    var sut: EventDetailsViewController!
+final class EventDetailsControllerTests: XCTestCase {
+    var sut: EventDetailsController!
     override func setUp() {
         super.setUp()
         sut = EventDetailsContainer.makeForUnitTests().makeEventDetailsController()
@@ -31,8 +31,8 @@ final class EventDetailsViewControllerTests: XCTestCase {
     }
 
     func test_showsControllersInScroll() { XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count) }
-    func test_showsWeek() { XCTAssertEqual(sut.children.filter { $0 is WeekViewController }.count, 1) }
+    func test_showsWeek() { XCTAssertEqual(sut.children.filter { $0 is WeekController }.count, 1) }
     func test_showsClock() { XCTAssertEqual(sut.children.filter { $0 is HourDistributionController }.count, 1) }
-    func test_showsSummary() { XCTAssertEqual(sut.children.filter { $0 is SummaryViewController }.count, 1) }
-    func test_showsPDFWritingView() { XCTAssertEqual(sut.children.filter { $0 is PDFWritingViewController }.count, 1) }
+    func test_showsSummary() { XCTAssertEqual(sut.children.filter { $0 is SummaryController }.count, 1) }
+    func test_showsPDFWritingView() { XCTAssertEqual(sut.children.filter { $0 is PDFWritingController }.count, 1) }
 }

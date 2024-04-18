@@ -13,7 +13,7 @@ final class DayDetailsSnapshots:
     FBSnapshotTestCase,
     TestingViewController
 {
-    var sut: DayDetailsViewController!
+    var sut: DayDetailsController!
     var event: Event!
     var commander: EventsCommanding!
     

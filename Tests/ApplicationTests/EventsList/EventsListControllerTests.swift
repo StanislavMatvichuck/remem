@@ -10,7 +10,7 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-final class EventsListViewControllerTests: XCTestCase {
+final class EventsListControllerTests: XCTestCase {
     // MARK: - Setup
 
     var sut: EventsListController!

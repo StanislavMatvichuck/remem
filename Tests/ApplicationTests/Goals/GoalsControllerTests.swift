@@ -10,8 +10,8 @@ import Domain
 import Foundation
 import XCTest
 
-final class GoalsViewControllerTests: XCTestCase {
-    private var sut: GoalsViewController!
+final class GoalsControllerTests: XCTestCase {
+    private var sut: GoalsController!
     
     override func setUp() {
         super.setUp()

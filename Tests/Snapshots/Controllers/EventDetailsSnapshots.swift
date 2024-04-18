@@ -10,7 +10,7 @@ import Domain
 import iOSSnapshotTestCase
 
 final class EventDetailsSnapshots: FBSnapshotTestCase, TestingViewController {
-    var sut: EventDetailsViewController!
+    var sut: EventDetailsController!
     var event: Event!
     var commander: EventsCommanding!
     

@@ -9,6 +9,6 @@
 import DataLayer
 import XCTest
 
-final class PDFReadingViewControllerTests: XCTestCase {
-    func test_init_requiresURLProviding() { PDFReadingViewController(url: LocalFile.testingPdfReport.url) }
+final class PDFReadingControllerTests: XCTestCase {
+    func test_init_requiresURLProviding() { PDFReadingController(url: LocalFile.testingPdfReport.url) }
 }

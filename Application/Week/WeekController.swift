@@ -1,5 +1,5 @@
 //
-//  WeekViewController.swift
+//  WeekController.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 27.12.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WeekViewController: UIViewController {
+final class WeekController: UIViewController {
     let factory: WeekViewModelFactoring
     let viewRoot: WeekView
     

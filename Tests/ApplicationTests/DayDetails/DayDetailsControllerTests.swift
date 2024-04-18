@@ -11,8 +11,8 @@ import ViewControllerPresentationSpy
 import XCTest
 
 @MainActor
-final class DayDetailsViewControllerTests: XCTestCase {
-    var sut: DayDetailsViewController!
+final class DayDetailsControllerTests: XCTestCase {
+    var sut: DayDetailsController!
 
     override func setUp() { super.setUp()
         sut = DayDetailsContainer.makeForUnitTests().makeDayDetailsController()

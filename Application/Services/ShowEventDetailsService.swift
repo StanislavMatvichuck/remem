@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 protocol EventDetailsControllerFactoring {
-    func makeEventDetailsController() -> EventDetailsViewController
+    func makeEventDetailsController() -> EventDetailsController
 }
 
 protocol EventDetailsControllerFactoringFactoring {

@@ -9,8 +9,8 @@
 import Domain
 import XCTest
 
-final class WeekViewControllerTests: XCTestCase {
-    var sut: WeekViewController!
+final class WeekControllerTests: XCTestCase {
+    var sut: WeekController!
     override func setUp() { super.setUp()
         sut = WeekContainer.makeForUnitTests().makeWeekController()
         sut.loadViewIfNeeded()

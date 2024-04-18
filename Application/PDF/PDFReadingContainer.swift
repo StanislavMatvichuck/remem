@@ -8,7 +8,7 @@
 import Foundation
 
 final class PDFReadingContainer: PDFReadingControllerFactoring {
-    func makePDFReadingController(url: URL) -> PDFReadingViewController {
-        PDFReadingViewController(url: url)
+    func makePDFReadingController(url: URL) -> PDFReadingController {
+        PDFReadingController(url: url)
     }
 }

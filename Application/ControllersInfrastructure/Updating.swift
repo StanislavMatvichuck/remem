@@ -9,7 +9,7 @@ import Foundation
 
 protocol Updating { func update() }
 
-extension EventDetailsViewController: Updating {
+extension EventDetailsController: Updating {
     func update() {
         viewModel = factory.makeEventDetailsViewModel()
 
@@ -20,17 +20,17 @@ extension EventDetailsViewController: Updating {
 }
 
 extension EventsListController: Updating { func update() { viewModel = factory.makeEventsListViewModel() }}
-extension WeekViewController: Updating { func update() {
+extension WeekController: Updating { func update() {
     viewModel = factory.makeWeekViewModel()
 }}
-extension SummaryViewController: Updating { func update() {
+extension SummaryController: Updating { func update() {
     viewModel = factory.makeSummaryViewModel()
 }}
 
-extension GoalsViewController: Updating { func update() {
+extension GoalsController: Updating { func update() {
     viewModel = factory.makeGoalsViewModel()
 }}
-extension DayDetailsViewController: Updating { func update() {
+extension DayDetailsController: Updating { func update() {
     viewModel = factory.makeDayDetailsViewModel(pickerDate: viewModel?.pickerDate)
 }}
 

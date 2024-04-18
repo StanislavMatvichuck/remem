@@ -8,7 +8,7 @@
 import Domain
 import UIKit
 
-final class GoalsViewController: UIViewController {
+final class GoalsController: UIViewController {
     let viewRoot: GoalsView
     var viewModel: GoalsViewModel? { didSet {
         viewRoot.viewModel = viewModel

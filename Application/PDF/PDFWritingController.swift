@@ -8,7 +8,7 @@
 import DataLayer // wtf?
 import UIKit
 
-final class PDFWritingViewController: UIViewController {
+final class PDFWritingController: UIViewController {
     let viewRoot: PDFWritingView
     let factory: PDFWritingViewModelFactoring
     let viewModel: PDFWritingViewModel

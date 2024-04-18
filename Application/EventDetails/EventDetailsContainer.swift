@@ -21,8 +21,8 @@ final class EventDetailsContainer:
         self.eventId = eventId
     }
 
-    func makeEventDetailsController() -> EventDetailsViewController {
-        EventDetailsViewController(
+    func makeEventDetailsController() -> EventDetailsController {
+        EventDetailsController(
             factory: self,
             controllers: [
                 WeekContainer(self).makeWeekController(),
