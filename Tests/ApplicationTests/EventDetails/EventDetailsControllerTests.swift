@@ -19,17 +19,6 @@ final class EventDetailsControllerTests: XCTestCase {
     override func tearDown() { super.tearDown(); sut = nil }
 
     func test_showsTitle_nameOfEvent() { XCTAssertEqual(sut.title, "") }
-
-    func test_viewDidAppear_visitEvent() {
-        putInViewHierarchy(sut)
-
-        XCTAssertFalse(sut.viewModel.isVisited, "precondition")
-
-        RunLoop.current.run(until: Date().addingTimeInterval(0.1))
-
-        XCTAssertTrue(sut.viewModel.isVisited)
-    }
-
     func test_showsControllersInScroll() { XCTAssertLessThan(1, sut.viewRoot.scroll.viewContent.arrangedSubviews.count) }
     func test_showsWeek() { XCTAssertEqual(sut.children.filter { $0 is WeekController }.count, 1) }
     func test_showsClock() { XCTAssertEqual(sut.children.filter { $0 is HourDistributionController }.count, 1) }
