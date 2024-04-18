@@ -38,6 +38,9 @@ final class GoalInputView: UIStackView {
     var viewModel: GoalViewModel? { didSet {
         guard let viewModel else { return }
         input.text = viewModel.readableValue
+        input.textColor = viewModel.isAchieved ? UIColor.text_goalAchieved : UIColor.bg
+        plus.isHidden = viewModel.isAchieved
+        minus.isHidden = viewModel.isAchieved
     }}
 
     init() {

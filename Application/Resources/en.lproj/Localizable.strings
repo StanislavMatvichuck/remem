@@ -36,6 +36,7 @@
 "goals.create" = "Create goal";
 "goal.createdAt" = "Goal created at";
 "goal.leftToAchieve" = "left to achieve";
+"goal.achievedAt" = "Achieved at";
 
 "summary.total" = "Total";
 "summary.weekAverage" = "Week average";

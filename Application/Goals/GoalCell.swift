@@ -34,6 +34,7 @@ final class GoalCell: UICollectionViewCell {
         leftToAchieve.text = viewModel.readableLeftToAchieve
         progress.viewModel = viewModel
         input.viewModel = viewModel
+        configureAppearance(viewModel.isAchieved)
     }}
 
     override init(frame: CGRect) {
@@ -70,5 +71,12 @@ final class GoalCell: UICollectionViewCell {
         createdAt.textColor = .bg
         leftToAchieve.font = .font
         leftToAchieve.textColor = .text_secondary
+    }
+
+    private func configureAppearance(_ isAchieved: Bool) {
+        backgroundColor = isAchieved ? .bg_goal_achieved : .bg_secondary
+        layer.borderColor = isAchieved ? UIColor.text_goalAchieved.cgColor : UIColor.secondary.cgColor
+        createdAt.textColor = isAchieved ? UIColor.text_goalAchieved : UIColor.bg
+        leftToAchieve.textColor = isAchieved ? UIColor.text_goalAchieved : UIColor.bg
     }
 }

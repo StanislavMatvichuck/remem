@@ -36,6 +36,7 @@
 "goals.create" = "Ziel hinzufügen";
 "goal.createdAt" = "Ziel erstellt bei";
 "goal.leftToAchieve" = "bleibt zu erreichen";
+"goal.achievedAt" = "Erreicht bei";
 
 "summary.total" = "Totale Happenings";
 "summary.weekAverage" = "Wochendurchschnitt";

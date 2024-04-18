@@ -9,9 +9,9 @@ import Domain
 import Foundation
 
 struct GoalViewModel {
-    private let goal: Goal
     private static let textCreatedAt = String(localizationId: "goal.createdAt")
     private static let textLeftToAchieve = String(localizationId: "goal.leftToAchieve")
+    private static let textAchievedAt = String(localizationId: "goal.achievedAt")
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -24,7 +24,9 @@ struct GoalViewModel {
         return formatter
     }()
 
+    private let goal: Goal
     var id: String { goal.id }
+
     let readableDateCreated: String
     let readableLeftToAchieve: String
     let readablePercent: String
@@ -38,12 +40,19 @@ struct GoalViewModel {
         readableDateCreated =
             Self.textCreatedAt + " " +
             Self.dateFormatter.string(from: goal.dateCreated)
-        readableLeftToAchieve =
-            String(describing: goal.leftToAchieve) + " " +
-            Self.textLeftToAchieve
+
+        readableLeftToAchieve = {
+            if let achievedAt = goal.achievedAt {
+                let textAchievedAt = Self.textAchievedAt + " " + Self.dateFormatter.string(from: achievedAt)
+                return textAchievedAt
+            } else {
+                let textLeftToAchieve = String(describing: goal.leftToAchieve) + " " + Self.textLeftToAchieve
+                return textLeftToAchieve
+            }
+        }()
 
         progress = goal.progress.clamped(to: 0 ... 1)
-        isAchieved = false
+        isAchieved = goal.achieved
         readablePercent = Self.percentFormatter.string(from: NSNumber(floatLiteral: Double(goal.progress)))!
         readableValue = "\(goal.value.amount)"
     }

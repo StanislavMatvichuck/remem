@@ -57,15 +57,9 @@ struct GoalsDataSource {
 
         for section in viewModel.sections {
             snapshot.appendSections([section])
-            snapshot.appendItems(
-                viewModel.cellsIdentifiers(for: section),
-                toSection: section
-            )
-        }
-
-        if let oldValue {
-            let reconfiguredIdentifiers = viewModel.cellsRequireReconfigurationIds(oldValue: oldValue)
-            snapshot.reconfigureItems(reconfiguredIdentifiers)
+            let identifiers = viewModel.cellsIdentifiers(for: section)
+            snapshot.appendItems(identifiers, toSection: section)
+            snapshot.reconfigureItems(identifiers)
         }
 
         dataSource.apply(snapshot, animatingDifferences: true)

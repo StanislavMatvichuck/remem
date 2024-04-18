@@ -36,6 +36,7 @@
 "goals.create" = "Создать цель";
 "goal.createdAt" = "Цель создано";
 "goal.leftToAchieve" = "осталось до достижения";
+"goal.achievedAt" = "Достигнута";
 
 "summary.total" = "Всего происшествий";
 "summary.weekAverage" = "Среднее за неделю";

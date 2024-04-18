@@ -36,6 +36,7 @@
 "goals.create" = "Створити ціль";
 "goal.createdAt" = "Ціль створено";
 "goal.leftToAchieve" = "залишилось для досягнення";
+"goal.achievedAt" = "Досягнуто";
 
 "summary.total" = "Загалом випадків";
 "summary.weekAverage" = "Середнє за тиждень";
