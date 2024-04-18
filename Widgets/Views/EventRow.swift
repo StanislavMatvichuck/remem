@@ -14,14 +14,6 @@ struct EventRow: View {
     var body: some View {
         if let item = item {
             ZStack {
-                GeometryReader { geomery in
-                    Color(
-                        item.goalState == .achieved ?
-                            UIColor.bg_goal_achieved :
-                            UIColor.bg_goal
-                    ).frame(width: geomery.size.width * item.progress)
-                }
-
                 HStack {
                     StyledText(item.title)
 

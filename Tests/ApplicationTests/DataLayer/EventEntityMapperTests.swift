@@ -42,14 +42,6 @@ final class EventEntityMapperTests: XCTestCase {
         event.addHappening(date: date)
 
         assertBidirectionalConversion(event: event)
-
-        event.setWeeklyGoal(amount: 1, for: date)
-
-        assertBidirectionalConversion(event: event)
-
-        event.setWeeklyGoal(amount: 0, for: date)
-
-        assertBidirectionalConversion(event: event)
     }
 
     private func assertBidirectionalConversion(event: Event, file: StaticString = #file, line: UInt = #line) {
@@ -61,5 +53,15 @@ final class EventEntityMapperTests: XCTestCase {
         let recreatedEvent = sut.convert(cdEvent)
 
         XCTAssertEqual(event, recreatedEvent)
+    }
+}
+
+extension Event: Equatable {
+    public static func == (lhs: Event, rhs: Event) -> Bool {
+        lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.happenings == rhs.happenings &&
+            lhs.dateCreated == rhs.dateCreated &&
+            lhs.dateVisited == rhs.dateVisited
     }
 }

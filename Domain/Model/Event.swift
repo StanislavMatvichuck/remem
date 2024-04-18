@@ -15,7 +15,6 @@ public class Event {
     public let id: String
     public var name: String
     public var happenings: [Happening]
-    public var weeklyGoals: [WeeklyGoal] = []
 
     public let dateCreated: Date
     public var dateVisited: Date?
@@ -86,48 +85,5 @@ public extension Event {
         if happeningDeleted == nil { throw EventManipulationError.invalidHappeningDeletion }
 
         return happeningDeleted
-    }
-
-    /// This method deals with weekly goal only, not scalable
-    func weeklyGoalAmount(at date: Date) -> Int {
-        let startOfWeek = WeekIndex(date).date
-
-        if let goalForWeek = weeklyGoals.last(where: { $0.dateCreated <= startOfWeek }) {
-            return goalForWeek.amount
-        } else if let lastGoal = weeklyGoals.last, lastGoal.dateCreated < startOfWeek {
-            return lastGoal.amount
-        }
-
-        return 0
-    }
-
-    /// This method deals with weekly goal only, not scalable
-    func setWeeklyGoal(amount: Int, for date: Date) {
-        let startOfWeek = WeekIndex(date).date
-        let newGoal = WeeklyGoal(dateCreated: startOfWeek, amount: amount)
-
-        if let existingIndex = weeklyGoals.firstIndex(where: { goal in
-            goal.dateCreated == startOfWeek
-        }) {
-            weeklyGoals[existingIndex] = newGoal
-        } else if let insertingIndex = weeklyGoals.lastIndex(where: { goal in
-            goal.dateCreated < startOfWeek
-        }) {
-            weeklyGoals.insert(newGoal, at: insertingIndex.advanced(by: 1))
-        } else {
-            weeklyGoals.append(newGoal)
-        }
-    }
-}
-
-// MARK: - Equatable
-extension Event: Equatable {
-    public static func == (lhs: Event, rhs: Event) -> Bool {
-        lhs.id == rhs.id &&
-            lhs.name == rhs.name &&
-            lhs.happenings == rhs.happenings &&
-            lhs.weeklyGoals == rhs.weeklyGoals &&
-            lhs.dateCreated == rhs.dateCreated &&
-            lhs.dateVisited == rhs.dateVisited
     }
 }

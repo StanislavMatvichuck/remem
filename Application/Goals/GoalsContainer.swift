@@ -39,7 +39,7 @@ final class GoalsContainer:
 
     func makeGoalsViewModel() -> GoalsViewModel {
         GoalsViewModel(cells: [
-            .goals: repository.read(eventId: eventId).map { makeGoalViewModel(goal: $0) },
+            .goals: repository.read(forEvent: parent.event).map { makeGoalViewModel(goal: $0) },
             .createGoal: [makeCreateGoalViewModel()]
         ])
     }
@@ -51,7 +51,7 @@ final class GoalsContainer:
 final class TemporaryGoalsRepository: GoalsReading, GoalsWriting {
     private var goals: [Goal] = []
 
-    func read(eventId: String) -> [Domain.Goal] { goals }
+    func read(forEvent: Event) -> [Domain.Goal] { goals }
 
     func create(goal: Domain.Goal) { goals.append(goal) }
 

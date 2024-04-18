@@ -111,15 +111,4 @@ extension EventCell {
         view.circleContainer.prepareForHappeningCreationAnimation()
         SwiperAnimationsHelper.animateHappening(view)
     }
-
-    func animateGoalProgress() {
-        UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: SwiperAnimationsHelper.progressMovementDuration,
-            delay: 0,
-            animations: {
-                self.view.animatedProgress.move()
-                self.view.layoutIfNeeded()
-            }
-        )
-    }
 }

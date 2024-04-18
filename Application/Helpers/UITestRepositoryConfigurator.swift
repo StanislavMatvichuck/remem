@@ -51,7 +51,6 @@ final class UITestRepositoryConfigurator {
             addEvents()
         case .appPreview03_widget, .appPreview03_darkMode:
             addFitnessHappenings(thirdEvent)
-            mockAddingWeeklyGoal(thirdEvent)
             addEvents()
         case .eventsListInteractions:
             addEvents()
@@ -68,12 +67,5 @@ final class UITestRepositoryConfigurator {
         event.addHappening(date: Self.dateCreated.addingTimeInterval(days(14) + hours(18) + minutes(13)))
         event.addHappening(date: Self.dateCreated.addingTimeInterval(days(16) + hours(20) + minutes(30)))
         event.addHappening(date: Self.dateCreated.addingTimeInterval(days(17) + hours(17) + minutes(15)))
-    }
-
-    private func mockAddingWeeklyGoal(_ event: Event) {
-        let todayMock = Self.viewAndExportToday.date
-        event.setWeeklyGoal(amount: 5, for: todayMock)
-        event.addHappening(date: todayMock)
-        event.addHappening(date: todayMock)
     }
 }

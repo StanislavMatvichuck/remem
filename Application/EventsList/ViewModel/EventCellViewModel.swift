@@ -23,9 +23,6 @@ struct EventCellViewModel {
     let value: String
     let timeSince: String
     let hintEnabled: Bool
-    let progress: CGFloat
-    let progressState: EventWeeklyGoalViewModel.State
-    let goalAmount: String?
     var animation: Animations
 
     private let currentMoment: Date
@@ -40,7 +37,6 @@ struct EventCellViewModel {
         self.currentMoment = currentMoment
         self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment)
         self.event = event
-        let weeklyGoalDescription = EventWeeklyGoalViewModel(weekDate: currentMoment, event: event, goalEditable: false)
 
         self.title = event.name
         self.hintEnabled = hintEnabled
@@ -52,19 +48,7 @@ struct EventCellViewModel {
             }
         }()
 
-        self.goalAmount = weeklyGoalDescription.goal
-        self.progress = weeklyGoalDescription.progress
-        self.progressState = weeklyGoalDescription.state
-
-        if let goal = goalAmount {
-            self.value = "\(valueAmount)/\(goal)"
-        } else {
-            self.value = "\(valueAmount)"
-        }
-    }
-
-    func isProgressIncreased(_ oldValue: EventCellViewModel) -> Bool {
-        progress > oldValue.progress && progress <= 1
+        self.value = "\(valueAmount)"
     }
 
     func clone(withAnimation: Animations) -> EventCellViewModel {

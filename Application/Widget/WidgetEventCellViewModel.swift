@@ -18,16 +18,12 @@ struct WidgetEventCellViewModel: Codable, Identifiable {
     let title: String
     let value: String
     let timeSince: String
-    let progress: CGFloat
-    let goalState: GoalState
 }
 
 extension WidgetEventCellViewModel {
     static let empty = WidgetEventCellViewModel(
         title: String(localizationId: "widget.emptyRow"),
         value: "!",
-        timeSince: "time since",
-        progress: 0.0,
-        goalState: .notAchieved
+        timeSince: "time since"
     )
 }

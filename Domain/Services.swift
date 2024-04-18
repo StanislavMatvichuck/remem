@@ -15,7 +15,7 @@ public protocol EventsCommanding {
 }
 
 public protocol GoalsReading {
-    func read(eventId: String) -> [Goal]
+    func read(forEvent: Event) -> [Goal]
 }
 
 public protocol GoalsWriting {

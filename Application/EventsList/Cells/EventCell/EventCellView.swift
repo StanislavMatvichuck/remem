@@ -37,7 +37,6 @@ final class EventCellView: UIView {
     let timeSince = TimeSinceView()
     let circleContainer = SwipingCircleView()
     let amountContainer = EventAmountView()
-    let animatedProgress = AnimatedProgressView()
     let hintDisplay = SwipeHintDisplay()
 
     init() {
@@ -53,13 +52,11 @@ final class EventCellView: UIView {
     func configure(_ vm: EventCellViewModel) {
         title.text = vm.title
         amountContainer.configure(vm)
-        animatedProgress.configure(vm)
         timeSince.configure(vm.timeSince)
         hintDisplay.configure(vm)
     }
 
     func prepareForReuse() {
-        animatedProgress.prepareForReuse()
         circleContainer.prepareForReuse()
         hintDisplay.prepareForReuse()
     }
@@ -68,7 +65,6 @@ final class EventCellView: UIView {
     private func configureLayout() {
         let circleSpacer = UIView(al: true)
         circleSpacer.widthAnchor.constraint(equalToConstant: .buttonHeight).isActive = true
-        stack.addSubview(animatedProgress)
         stack.addArrangedSubview(circleSpacer)
         stack.addArrangedSubview(title)
         stack.addArrangedSubview(amountContainer)
@@ -95,7 +91,6 @@ final class EventCellView: UIView {
             stack.centerYAnchor.constraint(equalTo: centerYAnchor),
             stack.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            animatedProgress.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
             fireDecal.centerYAnchor.constraint(equalTo: centerYAnchor),
             fireDecal.trailingAnchor.constraint(equalTo: leadingAnchor),
             circleContainer.centerYAnchor.constraint(equalTo: centerYAnchor),

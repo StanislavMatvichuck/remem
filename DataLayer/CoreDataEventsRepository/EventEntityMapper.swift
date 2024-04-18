@@ -28,11 +28,6 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
             event.addHappening(date: cdHappening.dateCreated!)
         }
 
-        for cdWeeklyGoal in entity.weeklyGoals! {
-            guard let cdWeeklyGoal = cdWeeklyGoal as? CDWeeklyGoal else { continue }
-            event.setWeeklyGoal(amount: Int(cdWeeklyGoal.amount), for: cdWeeklyGoal.dateCreated!)
-        }
-
         return event
     }
 
@@ -62,24 +57,5 @@ public class EventEntityMapper: EntityMapper<Event, CDEvent> {
         }
 
         entity.happenings = NSOrderedSet(array: mappedHappenings)
-
-        //
-        // Goals
-        //
-
-        for existingCdWeeklyGoal in entity.weeklyGoals! { context.delete(existingCdWeeklyGoal as! NSManagedObject) }
-
-        let mappedWeeklyGoals = model.weeklyGoals.map {
-            let new = CDWeeklyGoal(
-                entity: CDWeeklyGoal.entity(),
-                insertInto: context
-            )
-            new.dateCreated = $0.dateCreated
-            new.amount = Int32($0.amount)
-            new.event = entity
-            return new
-        }
-
-        entity.weeklyGoals = NSOrderedSet(array: mappedWeeklyGoals)
     }
 }
