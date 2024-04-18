@@ -15,7 +15,6 @@ final class EventDetailsController: UIViewController {
     let viewRoot: EventDetailsView
     private var happeningAddedSubscription: DomainEventsPublisher.DomainEventSubscription?
     private var happeningRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    private var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription? /// used by `EventDetailsViewControllerTests` only
 
     init(
         factory: EventDetailsViewModelFactoring,
@@ -37,7 +36,6 @@ final class EventDetailsController: UIViewController {
     deinit {
         happeningAddedSubscription = nil
         happeningRemovedSubscription = nil
-        eventVisitedSubscription = nil
     }
 
     // MARK: - View lifecycle
@@ -68,9 +66,6 @@ final class EventDetailsController: UIViewController {
             self?.update()
         })
         happeningRemovedSubscription = DomainEventsPublisher.shared.subscribe(HappeningRemoved.self, usingBlock: { [weak self] _ in
-            self?.update()
-        })
-        eventVisitedSubscription = DomainEventsPublisher.shared.subscribe(EventVisited.self, usingBlock: { [weak self] _ in
             self?.update()
         })
     }
