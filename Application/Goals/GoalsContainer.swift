@@ -32,12 +32,16 @@ final class GoalsContainer:
     func makeDataSource(list: UICollectionView) -> GoalsDataSource { GoalsDataSource(
         list: list,
         provider: self,
-        createGoalService: makeCreateGoalService()
+        createGoalService: makeCreateGoalService(),
+        deleteGoalService: makeDeleteGoalService()
     ) }
+
     func makeCreateGoalService() -> CreateGoalService { CreateGoalService(
         goalsStorage: goalsStorage,
         eventsProvider: parent.parent.provider
     ) }
+
+    func makeDeleteGoalService() -> DeleteGoalService { DeleteGoalService(goalsStorage: goalsStorage) }
 
     // MARK: - ViewModels
 

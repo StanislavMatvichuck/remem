@@ -10,6 +10,8 @@
 		0800A0712A1E2F3200E1D1BA /* TimelineTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C804298AD9B60048EC12 /* TimelineTesting.swift */; };
 		080354F82B67BFA4003EA6AA /* EventsListInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080354F72B67BFA4003EA6AA /* EventsListInteractions.swift */; };
 		080396BB2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080396BA2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift */; };
+		0806B4452BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */; };
+		0806B4472BD1A57200BFA5B3 /* DeleteGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */; };
 		0807E85C2BA328D1005ED448 /* XCUIElementQueryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */; };
 		0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */; };
 		080949A02B8A3B9400ACAC61 /* PDFRenderingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */; };
@@ -412,6 +414,8 @@
 		080354F72B67BFA4003EA6AA /* EventsListInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListInteractions.swift; sourceTree = "<group>"; };
 		080396BA2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCoreDataMapper.swift; sourceTree = "<group>"; };
 		080396BC2BCAF8A700EC1A98 /* AddedGoal08.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AddedGoal08.xcdatamodel; sourceTree = "<group>"; };
+		0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalsController+RemovableDropArea.swift"; sourceTree = "<group>"; };
+		0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGoalService.swift; sourceTree = "<group>"; };
 		0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElementQueryExtension.swift; sourceTree = "<group>"; };
 		0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRendering.swift; sourceTree = "<group>"; };
 		0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRenderingPage.swift; sourceTree = "<group>"; };
@@ -1190,6 +1194,7 @@
 				08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */,
 				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				080C9A442BC97F5A00830A9F /* CreateGoalService.swift */,
+				0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */,
 				082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */,
 				08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */,
 				0871E7522B9DCDE000FF1F7D /* VisitEventService.swift */,
@@ -1406,13 +1411,13 @@
 		08DFFADB2B5007B50063B389 /* EventsList */ = {
 			isa = PBXGroup;
 			children = (
-				0869C49A2B7FFBAF0007D6E0 /* ViewModel */,
-				0816B6F32B50124800A29815 /* Cells */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
-				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
-				08D512352787144800C2037F /* EventsListView.swift */,
 				0875E27B298EF91A00622125 /* EventsListController.swift */,
 				08C23EB92B83C145004DF159 /* EventsListController+DragAndDrop.swift */,
+				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
+				08D512352787144800C2037F /* EventsListView.swift */,
+				0816B6F32B50124800A29815 /* Cells */,
+				0869C49A2B7FFBAF0007D6E0 /* ViewModel */,
 			);
 			path = EventsList;
 			sourceTree = "<group>";
@@ -1495,18 +1500,19 @@
 		08EAD4E92B8D023200557C4D /* Goals */ = {
 			isa = PBXGroup;
 			children = (
-				08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */,
-				087D42652B8E38B10075004D /* GoalsViewModel.swift */,
-				087D42692B8E3AB80075004D /* GoalsController.swift */,
-				087D42612B8E37480075004D /* GoalsView.swift */,
-				0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */,
 				0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */,
-				087D426F2B8E894F0075004D /* GoalCell.swift */,
-				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
 				0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */,
-				087D42712B8EA7690075004D /* GoalInputView.swift */,
-				087D426D2B8E58CF0075004D /* GoalsContainer.swift */,
+				087D426F2B8E894F0075004D /* GoalCell.swift */,
 				0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */,
+				087D42712B8EA7690075004D /* GoalInputView.swift */,
+				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
+				087D426D2B8E58CF0075004D /* GoalsContainer.swift */,
+				087D42692B8E3AB80075004D /* GoalsController.swift */,
+				0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */,
+				0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */,
+				087D42612B8E37480075004D /* GoalsView.swift */,
+				087D42652B8E38B10075004D /* GoalsViewModel.swift */,
+				08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -2088,6 +2094,7 @@
 				0875B4662B59DCDC004C0575 /* EventsSortingController.swift in Sources */,
 				0852AAFE29800B6E00EF50B0 /* EventsListContainer.swift in Sources */,
 				084B21FB29C0AA1D00B601DA /* PDFReadingView.swift in Sources */,
+				0806B4472BD1A57200BFA5B3 /* DeleteGoalService.swift in Sources */,
 				0816D0CD2B90AA2A005FD6A0 /* GoalsDataSource.swift in Sources */,
 				0852405D2B61CD22004F9BDA /* DayOfWeekCellView.swift in Sources */,
 				08F50DC92965EF5300B65CDF /* CreateEventCell.swift in Sources */,
@@ -2115,6 +2122,7 @@
 				08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */,
 				0871E7512B9DCDCA00FF1F7D /* RemoveEventService.swift in Sources */,
 				081A156B2B62920500EDA8A2 /* HourDistributionView.swift in Sources */,
+				0806B4452BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift in Sources */,
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
 				089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */,
 				087D426E2B8E58CF0075004D /* GoalsContainer.swift in Sources */,

@@ -11,6 +11,7 @@ struct GoalsViewModel {
     enum Section: Int, CaseIterable { case goals, createGoal }
 
     let cells: [Section: [any GoalCellViewModeling]]
+    var dragAndDrop = RemovalDropAreaViewModel()
 
     init(cells: [Section: [any GoalCellViewModeling]] = [:]) {
         self.cells = cells

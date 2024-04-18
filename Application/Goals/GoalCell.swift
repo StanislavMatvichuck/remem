@@ -37,6 +37,8 @@ final class GoalCell: UICollectionViewCell {
         configureAppearance(viewModel.isAchieved)
     }}
 
+    var deleteService: DeleteGoalService?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()

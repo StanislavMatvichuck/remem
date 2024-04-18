@@ -14,12 +14,15 @@ struct GoalsDataSource {
     private let provider: GoalsViewModelFactoring
     private let dataSource: DataSource
     private let createGoalService: CreateGoalService
+    private let deleteGoalService: DeleteGoalService
 
-    init(list: UICollectionView, provider: GoalsViewModelFactoring, createGoalService: CreateGoalService) {
+    init(list: UICollectionView, provider: GoalsViewModelFactoring, createGoalService: CreateGoalService, deleteGoalService: DeleteGoalService) {
         self.createGoalService = createGoalService
+        self.deleteGoalService = deleteGoalService
 
         let goalCellRegistration = UICollectionView.CellRegistration<GoalCell, GoalViewModel> { cell, _, viewModel in
             cell.viewModel = viewModel
+            cell.deleteService = deleteGoalService
         }
 
         let createGoalCellRegistration = UICollectionView.CellRegistration<CreateGoalCell, CreateGoalViewModel> { cell, _, viewModel in
@@ -53,6 +56,8 @@ struct GoalsDataSource {
 
     func applySnapshot(_ oldValue: GoalsViewModel?) {
         let viewModel = provider.makeGoalsViewModel()
+        guard viewModel.dragAndDrop.removalDropAreaHidden else { return }
+
         var snapshot = Snapshot()
 
         for section in viewModel.sections {

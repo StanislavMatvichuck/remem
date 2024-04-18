@@ -11,8 +11,16 @@ import UIKit
 final class GoalsView: UIView {
     let list: UICollectionView
     let dataSource: GoalsDataSource
+    lazy var removalDropArea = RemovalDropAreaView(handler: { [weak self] draggedCellIndex in
+        if let cell = self?.list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 0)) as? GoalCell,
+           let id = cell.viewModel?.id
+        {
+            cell.deleteService?.serve(DeleteGoalServiceArgument(goalId: id))
+        }
+    })
 
     var viewModel: GoalsViewModel? { didSet {
+        removalDropArea.viewModel = viewModel?.dragAndDrop
         dataSource.applySnapshot(oldValue)
         setNeedsLayout()
     }}
@@ -39,6 +47,7 @@ final class GoalsView: UIView {
     // MARK: - Private
     private func configureLayout() {
         addAndConstrain(list)
+        addAndConstrain(removalDropArea)
         heightConstraint.isActive = true
     }
 
