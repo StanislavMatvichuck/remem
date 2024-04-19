@@ -19,13 +19,13 @@ struct ShowPDFReadingService: ApplicationService {
     private let coordinator: Coordinator
     private let controllerFactory: PDFReadingControllerFactoring
     private let viewModelFactory: PDFViewModelFactoring
-    private let eventsProvider: EventsQuerying
+    private let eventsProvider: EventsReading
 
     init(
         coordinator: Coordinator,
         controllerFactory: PDFReadingControllerFactoring,
         viewModelFactory: PDFViewModelFactoring,
-        eventsProvider: EventsQuerying
+        eventsProvider: EventsReading
     ) {
         self.coordinator = coordinator
         self.controllerFactory = controllerFactory

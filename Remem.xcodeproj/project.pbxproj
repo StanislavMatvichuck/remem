@@ -124,9 +124,8 @@
 		0867A2DC28D469F500E0842C /* DataLayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; };
 		0867A2DE28D469F500E0842C /* DataLayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0867A2C928D469F400E0842C /* DataLayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083D3893279AE81100134A15 /* Model.xcdatamodeld */; };
-		0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91828998053000B08BC /* EntityMapper.swift */; };
 		0867A2EE28D46A4E00E0842C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0880C3B528009DFA00970254 /* CoreDataStack.swift */; };
-		0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventEntityMapper.swift */; };
+		0867A2EF28D46A4E00E0842C /* EventCoreDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91A28998088000B08BC /* EventCoreDataMapper.swift */; };
 		0867A2F028D46A4E00E0842C /* CoreDataEventsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */; };
 		0867A2F328D46A6A00E0842C /* libDomain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 083BECF128D0A319009157FD /* libDomain.a */; };
 		0868209527BFAD7F00551F6A /* ViewScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868209427BFAD7F00551F6A /* ViewScroll.swift */; };
@@ -694,8 +693,7 @@
 		08E3325A29B4A14B00E59693 /* WeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRef.swift; sourceTree = "<group>"; };
 		08E454B529C31B25006AF35B /* PdfSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfSnapshots.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
-		08E5B91828998053000B08BC /* EntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMapper.swift; sourceTree = "<group>"; };
-		08E5B91A28998088000B08BC /* EventEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntityMapper.swift; sourceTree = "<group>"; };
+		08E5B91A28998088000B08BC /* EventCoreDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreDataMapper.swift; sourceTree = "<group>"; };
 		08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModelTests.swift; sourceTree = "<group>"; };
 		08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
 		08EAD4EC2B8D050D00557C4D /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
@@ -1480,8 +1478,7 @@
 			isa = PBXGroup;
 			children = (
 				08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */,
-				08E5B91828998053000B08BC /* EntityMapper.swift */,
-				08E5B91A28998088000B08BC /* EventEntityMapper.swift */,
+				08E5B91A28998088000B08BC /* EventCoreDataMapper.swift */,
 				083D3893279AE81100134A15 /* Model.xcdatamodeld */,
 			);
 			path = CoreDataEventsRepository;
@@ -1924,8 +1921,7 @@
 				0875B43A2B57CFFF004C0575 /* URLProviding.swift in Sources */,
 				08641AB82BD10F4C00799E5C /* GoalsCoreDataRepository.swift in Sources */,
 				0867A2E928D46A3900E0842C /* Model.xcdatamodeld in Sources */,
-				0867A2EF28D46A4E00E0842C /* EventEntityMapper.swift in Sources */,
-				0867A2EA28D46A4600E0842C /* EntityMapper.swift in Sources */,
+				0867A2EF28D46A4E00E0842C /* EventCoreDataMapper.swift in Sources */,
 				08A811822B5D387C00C031BF /* EventsSorterManualRepository.swift in Sources */,
 				080396BB2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift in Sources */,
 			);

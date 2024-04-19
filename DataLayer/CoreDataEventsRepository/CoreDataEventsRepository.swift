@@ -7,84 +7,77 @@
 
 import CoreData
 import Domain
-import os
 
-let signposter = OSSignposter()
-let signpostID = signposter.makeSignpostID()
-extension StaticString {
-    static let repositoryReading: StaticString = "repositoryReading"
-}
-
-public class CoreDataEventsRepository: EventsQuerying, EventsCommanding {
+public class CoreDataEventsRepository {
     private let container: NSPersistentContainer
-    private let entityMapper: EventEntityMapper
     private var moc: NSManagedObjectContext { container.viewContext }
 
-    public init(
-        container: NSPersistentContainer,
-        mapper: EventEntityMapper
-    ) {
-        self.container = container
-        self.entityMapper = mapper
-    }
-
-    public func get() -> [Event] { allEvents.compactMap {
-        let state = signposter.beginInterval(.repositoryReading, id: signpostID)
-        defer { signposter.endInterval(.repositoryReading, state) }
-        return entityMapper.convert($0)
-    } }
-
-    public func save(_ event: Event) {
-        if let existingEvent = allEvents.first(where: {
-            entityMapper.entityAccessorKey($0) ==
-                entityMapper.entityAccessorKey(event)
-        }) {
-            entityMapper.update(existingEvent, by: event)
-        } else {
-            let newCdEvent = CDEvent(context: moc)
-            entityMapper.update(newCdEvent, by: event)
-        }
-
-        applyChanges()
-    }
-
-    public func delete(_ event: Event) {
-        guard let cdEventToDelete = getById(of: event) else { fatalError("Cant find object to delete") }
-
-        moc.delete(cdEventToDelete)
-
-        applyChanges()
-    }
-
-    private var allEvents: [CDEvent] {
-        do {
-            let request = CDEvent.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-            request.sortDescriptors = [sortDescriptor]
-            return try moc.fetch(request)
-        } catch {
-            fatalError("Unable to fetch events")
-        }
-    }
-
-    private func getById(of event: Event) -> CDEvent? {
-        allEvents.filter {
-            self.entityMapper.entityAccessorKey(event) ==
-                self.entityMapper.entityAccessorKey($0)
-        }.first
-    }
+    public init(container: NSPersistentContainer) { self.container = container }
 
     private func applyChanges() {
-        if moc.hasChanges {
-            do {
+        do {
+            if moc.hasChanges {
                 moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                 try moc.save()
-            } catch {
-                fatalError(error.localizedDescription)
+                print("CoreDataEventsRepository.applyChanges")
             }
-            print("Saved")
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    private func cdEvent(id: String) -> CDEvent? { do {
+        let request = CDEvent.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", id)
+        request.predicate = predicate
+        return try moc.fetch(request).first
+    } catch {
+        fatalError("Event not found in a context")
+    } }
+}
+
+extension CoreDataEventsRepository: EventsReading {
+    public func read() -> [Event] { do {
+        let request = CDEvent.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        let cdEvents = try moc.fetch(request)
+        return cdEvents.map { EventCoreDataMapper.convert(cdEvent: $0) }
+    } catch {
+        fatalError("Unable to fetch events")
+    } }
+
+    public func read(byId: String) -> Event {
+        if let cdEvent = cdEvent(id: byId) {
+            return EventCoreDataMapper.convert(cdEvent: cdEvent)
         } else {
-            print("No changes to save in repository")
+            fatalError("Unable to find CDEvent by id")
+        }
+    }
+}
+
+extension CoreDataEventsRepository: EventsWriting {
+    public func create(event: Domain.Event) {
+        let newEvent = CDEvent(entity: CDEvent.entity(), insertInto: moc)
+
+        EventCoreDataMapper.update(cdEvent: newEvent, event: event)
+
+        applyChanges()
+    }
+
+    public func update(id: String, event: Domain.Event) {
+        if let cdEvent = cdEvent(id: id) {
+            EventCoreDataMapper.update(cdEvent: cdEvent, event: event)
+
+            applyChanges()
+        }
+    }
+
+    public func delete(id: String) {
+        if let cdEvent = cdEvent(id: id) {
+            moc.delete(cdEvent)
+
+            applyChanges()
         }
     }
 }

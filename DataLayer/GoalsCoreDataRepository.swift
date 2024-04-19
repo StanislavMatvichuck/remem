@@ -28,7 +28,7 @@ extension GoalsCoreDataRepository: GoalsReading {
         if let cdGoal = cdGoal(id: byId),
            let cdEvent = cdEvent(id: cdGoal.event!.uuid!)
         {
-            return GoalCoreDataMapper.make(for: EventEntityMapper().convert(cdEvent)!, cdGoal: cdGoal)
+            return GoalCoreDataMapper.make(for: EventCoreDataMapper.convert(cdEvent: cdEvent), cdGoal: cdGoal)
         }
 
         return nil

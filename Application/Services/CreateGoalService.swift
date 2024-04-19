@@ -15,15 +15,15 @@ struct CreateGoalServiceArgument {
 
 struct CreateGoalService: ApplicationService {
     private let goalsStorage: GoalsWriting
-    private let eventsProvider: EventsQuerying
+    private let eventsProvider: EventsReading
 
-    init(goalsStorage: GoalsWriting, eventsProvider: EventsQuerying) {
+    init(goalsStorage: GoalsWriting, eventsProvider: EventsReading) {
         self.goalsStorage = goalsStorage
         self.eventsProvider = eventsProvider
     }
 
     func serve(_ arg: CreateGoalServiceArgument) {
-        let event = eventsProvider.get().first { $0.id == arg.eventId }!
+        let event = eventsProvider.read(byId: arg.eventId)
 
         let goal = Goal(dateCreated: arg.dateCreated, event: event)
 

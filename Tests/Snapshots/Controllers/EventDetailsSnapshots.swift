@@ -12,7 +12,7 @@ import iOSSnapshotTestCase
 final class EventDetailsSnapshots: FBSnapshotTestCase, TestingViewController {
     var sut: EventDetailsController!
     var event: Event!
-    var commander: EventsCommanding!
+    var commander: EventsWriting!
     
     override func setUp() {
         super.setUp()

@@ -22,12 +22,12 @@ struct ShowDayDetailsServiceArgument {
 struct ShowDayDetailsService: ApplicationService {
     private let coordinator: Coordinator
     private let factory: DayDetailsControllerFactoring
-    private let eventsProvider: EventsQuerying
+    private let eventsProvider: EventsReading
 
     init(
         coordinator: Coordinator,
         factory: DayDetailsControllerFactoring,
-        eventsProvider: EventsQuerying
+        eventsProvider: EventsReading
     ) {
         self.coordinator = coordinator
         self.factory = factory

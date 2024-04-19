@@ -15,12 +15,12 @@ protocol CreateEventControllerFactoring {
 struct ShowCreateEventService: ApplicationService {
     private let coordinator: Coordinator
     private let factory: CreateEventControllerFactoring
-    private let eventsProvider: EventsQuerying
+    private let eventsProvider: EventsReading
 
     init(
         coordinator: Coordinator,
         factory: CreateEventControllerFactoring,
-        eventsProvider: EventsQuerying
+        eventsProvider: EventsReading
     ) {
         self.coordinator = coordinator
         self.factory = factory

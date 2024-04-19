@@ -32,11 +32,11 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_increasesCount() {
-        XCTAssertEqual(sut.get().count, 0)
+        XCTAssertEqual(sut.read().count, 0)
 
         sut.save(Event(name: ""))
 
-        XCTAssertEqual(sut.get().count, 1)
+        XCTAssertEqual(sut.read().count, 1)
     }
 
     func test_save_eventWithHappening() {
@@ -97,7 +97,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         sut.delete(event)
 
-        XCTAssertEqual(sut.get().count, 0)
+        XCTAssertEqual(sut.read().count, 0)
     }
 
     private func givenSavedDefaultEvent() -> Event {
@@ -109,7 +109,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
 private extension CoreDataEventsRepository {
     func event(byId: String) -> Event {
-        let all = get()
+        let all = read()
 
         guard let index = all.firstIndex(where: { $0.id == byId })
         else { fatalError("unable to find event by id \(byId)") }

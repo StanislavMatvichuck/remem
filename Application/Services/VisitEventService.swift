@@ -14,9 +14,9 @@ struct VisitEventServiceArgument {
 
 struct VisitEventService: ApplicationService {
     private let event: Event
-    private let repository: EventsCommanding
+    private let repository: EventsWriting
 
-    init(event: Event, repository: EventsCommanding) {
+    init(event: Event, repository: EventsWriting) {
         self.event = event
         self.repository = repository
     }
@@ -24,7 +24,7 @@ struct VisitEventService: ApplicationService {
     func serve(_ arg: VisitEventServiceArgument) {
         event.visit(at: arg.date)
 
-        repository.save(event)
+        repository.update(id: event.id, event: event)
 
         DomainEventsPublisher.shared.publish(EventVisited(event: event))
     }

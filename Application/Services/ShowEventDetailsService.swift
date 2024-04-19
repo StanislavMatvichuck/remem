@@ -19,14 +19,14 @@ protocol EventDetailsControllerFactoringFactoring {
 struct ShowEventDetailsService: ApplicationService {
     private let coordinator: Coordinator
     private let factory: EventDetailsControllerFactoringFactoring
-    private let eventsProvider: EventsQuerying
+    private let eventsProvider: EventsReading
     private let eventId: String
 
     init(
         eventId: String,
         coordinator: Coordinator,
         factory: EventDetailsControllerFactoringFactoring,
-        eventsProvider: EventsQuerying
+        eventsProvider: EventsReading
     ) {
         self.eventId = eventId
         self.coordinator = coordinator

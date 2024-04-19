@@ -7,11 +7,15 @@
 
 import Foundation
 
-public protocol EventsQuerying { func get() -> [Event] }
+public protocol EventsReading {
+    func read() -> [Event]
+    func read(byId: String) -> Event
+}
 
-public protocol EventsCommanding {
-    func save(_: Event)
-    func delete(_: Event)
+public protocol EventsWriting {
+    func create(event: Event)
+    func update(id: String, event: Event)
+    func delete(id: String)
 }
 
 public protocol GoalsReading {

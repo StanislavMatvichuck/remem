@@ -15,7 +15,7 @@ final class DayDetailsSnapshots:
 {
     var sut: DayDetailsController!
     var event: Event!
-    var commander: EventsCommanding!
+    var commander: EventsWriting!
     
     override func setUp() {
         super.setUp()

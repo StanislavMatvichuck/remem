@@ -10,27 +10,25 @@ import Foundation
 
 struct RemoveHappeningServiceArgument { let happening: Happening }
 struct RemoveHappeningService: ApplicationService {
-    private let eventsStorage: EventsCommanding
-    private let eventsProvider: EventsQuerying
+    private let eventsStorage: EventsWriting
+    private let eventsProvider: EventsReading
     private let eventId: String
 
-    init(eventId: String, eventsStorage: EventsCommanding, eventsProvider: EventsQuerying) {
+    init(eventId: String, eventsStorage: EventsWriting, eventsProvider: EventsReading) {
         self.eventId = eventId
         self.eventsStorage = eventsStorage
         self.eventsProvider = eventsProvider
     }
 
     func serve(_ arg: RemoveHappeningServiceArgument) {
-        let event = eventsProvider.get().first { $0.id == eventId }!
-
         do {
+            let event = eventsProvider.read(byId: eventId)
             try event.remove(happening: arg.happening)
+            eventsStorage.update(id: eventId, event: event)
+
+            DomainEventsPublisher.shared.publish(HappeningRemoved(eventId: eventId))
         } catch {
             fatalError("remove happening")
         }
-
-        eventsStorage.save(event)
-
-        DomainEventsPublisher.shared.publish(HappeningRemoved(eventId: eventId))
     }
 }

@@ -11,7 +11,7 @@ import iOSSnapshotTestCase
 
 final class SummarySnapshots: FBSnapshotTestCase, TestingViewController {    
     var sut: SummaryController!
-    var commander: EventsCommanding!
+    var commander: EventsWriting!
     var event: Event!
 
     override func setUp() {

@@ -15,7 +15,7 @@ final class ClockSnapshots:
 {
     var sut: ClockViewController!
     var event: Event!
-    var commander: EventsCommanding!
+    var commander: EventsWriting!
 
     override func setUp() {
         super.setUp()

@@ -27,11 +27,11 @@ public struct EventsList {
     public init(
         sorterProvider: EventsSortingQuerying,
         manualSorterProvider: EventsSortingManualQuerying,
-        eventsProvider: EventsQuerying
+        eventsProvider: EventsReading
     ) {
         let sorter = sorterProvider.get()
         let manualSorter = manualSorterProvider.get()
-        let events = eventsProvider.get()
+        let events = eventsProvider.read()
         let sortedEvents = EventsSortingExecutor().sort(
             events: events,
             ordering: sorter,

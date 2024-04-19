@@ -14,7 +14,7 @@ final class EventDetailsContainer:
 {
     let parent: ApplicationContainer
     let eventId: String
-    var event: Event { parent.provider.get().first { $0.id == eventId }! }
+    var event: Event { parent.provider.read(byId: eventId) }
 
     init(_ parent: ApplicationContainer, eventId: String) {
         self.parent = parent

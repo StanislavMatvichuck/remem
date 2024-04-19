@@ -23,9 +23,9 @@ final class UITestRepositoryConfigurator {
         let thirdEvent = Event(name: Self.eventsNames[2], dateCreated: dateCreated)
 
         func addEvents() {
-            repository.save(firstEvent)
-            repository.save(secondEvent)
-            repository.save(thirdEvent)
+            repository.create(event: firstEvent)
+            repository.create(event: secondEvent)
+            repository.create(event: thirdEvent)
         }
 
         switch mode {

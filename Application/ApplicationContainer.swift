@@ -11,11 +11,11 @@ import Domain
 import UIKit
 
 final class ApplicationContainer {
-    typealias Repository = EventsQuerying & EventsCommanding
+    typealias Repository = EventsReading & EventsWriting
 
     let mode: LaunchMode
-    let provider: EventsQuerying
-    let commander: EventsCommanding
+    let provider: EventsReading
+    let commander: EventsWriting
     let coordinator: Coordinator
     let watcher: Watching
     let coreDataContainer: NSPersistentContainer
@@ -24,11 +24,8 @@ final class ApplicationContainer {
     var currentMoment: Date { mode == .injectedCurrentMoment ? injectedCurrentMoment : mode.currentMoment }
 
     init(mode: LaunchMode, currentMoment: Date = DayIndex.referenceValue.date) {
-        func makeRepository(_ mode: LaunchMode, coreDataContainer: NSPersistentContainer) -> EventsQuerying & EventsCommanding {
-            let repository = CoreDataEventsRepository(
-                container: coreDataContainer,
-                mapper: EventEntityMapper()
-            )
+        func makeRepository(_ mode: LaunchMode, coreDataContainer: NSPersistentContainer) -> EventsReading & EventsWriting {
+            let repository = CoreDataEventsRepository(container: coreDataContainer)
 
             let repositoryConfigurator = UITestRepositoryConfigurator()
             repositoryConfigurator.configure(repository: repository, for: mode)

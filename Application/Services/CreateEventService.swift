@@ -13,14 +13,14 @@ struct CreateEventServiceArgument {
 }
 
 struct CreateEventService: ApplicationService {
-    private let eventsStorage: EventsCommanding
+    private let eventsStorage: EventsWriting
 
-    init(eventsStorage: EventsCommanding) { self.eventsStorage = eventsStorage }
+    init(eventsStorage: EventsWriting) { self.eventsStorage = eventsStorage }
 
     func serve(_ arg: CreateEventServiceArgument) {
         let createdEvent = Event(name: arg.name, dateCreated: .now)
 
-        eventsStorage.save(createdEvent)
+        eventsStorage.create(event: createdEvent)
 
         DomainEventsPublisher.shared.publish(EventCreated(event: createdEvent))
     }

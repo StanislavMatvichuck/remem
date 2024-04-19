@@ -10,14 +10,14 @@ import Foundation
 
 struct CreateHappeningServiceArgument { let date: Date }
 struct CreateHappeningService: ApplicationService {
-    private let eventsStorage: EventsCommanding
-    private let eventsProvider: EventsQuerying
+    private let eventsStorage: EventsWriting
+    private let eventsProvider: EventsReading
     private let eventId: String
 
     init(
         eventId: String,
-        eventsStorage: EventsCommanding,
-        eventsProvider: EventsQuerying
+        eventsStorage: EventsWriting,
+        eventsProvider: EventsReading
     ) {
         self.eventId = eventId
         self.eventsStorage = eventsStorage
@@ -25,11 +25,10 @@ struct CreateHappeningService: ApplicationService {
     }
 
     func serve(_ arg: CreateHappeningServiceArgument) {
-        let event = eventsProvider.get().first { $0.id == eventId }!
-
+        let event = eventsProvider.read(byId: eventId)
         event.addHappening(date: arg.date)
 
-        eventsStorage.save(event)
+        eventsStorage.update(id: eventId, event: event)
 
         DomainEventsPublisher.shared.publish(HappeningCreated(eventId: eventId))
     }

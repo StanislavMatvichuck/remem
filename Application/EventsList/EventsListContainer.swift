@@ -88,7 +88,7 @@ final class EventsListContainer:
     }
 
     func makeEventCellViewModel(eventId: String) -> EventCellViewModel {
-        let event = parent.provider.get().filter { $0.id == eventId }.first!
+        let event = parent.provider.read(byId: eventId)
 
         return EventCellViewModel(
             event: event,
