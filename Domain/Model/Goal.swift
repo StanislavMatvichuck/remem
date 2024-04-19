@@ -14,7 +14,7 @@ public class Goal {
     public var achieved: Bool { progress >= 1.0 }
 
     public let event: Event
-    private var contributingHappeningsCount: Int {
+    public var contributingHappeningsCount: Int {
         var count = 0
 
         for happening in event.happenings {

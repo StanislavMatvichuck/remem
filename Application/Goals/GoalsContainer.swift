@@ -11,7 +11,8 @@ import UIKit
 
 final class GoalsContainer:
     GoalsViewModelFactoring,
-    GoalViewModelFactoring
+    GoalViewModelFactoring,
+    UpdateGoalServiceFactoring
 {
     private let parent: EventDetailsContainer
     private let goalsStorage: GoalsWriting & GoalsReading
@@ -33,7 +34,8 @@ final class GoalsContainer:
         list: list,
         provider: self,
         createGoalService: makeCreateGoalService(),
-        deleteGoalService: makeDeleteGoalService()
+        deleteGoalService: makeDeleteGoalService(),
+        updateServiceFactory: self
     ) }
 
     func makeCreateGoalService() -> CreateGoalService { CreateGoalService(
@@ -45,13 +47,19 @@ final class GoalsContainer:
 
     // MARK: - ViewModels
 
-    func makeGoalsViewModel() -> GoalsViewModel {
-        GoalsViewModel(cells: [
+    func makeGoalsViewModel() -> GoalsViewModel { GoalsViewModel(
+        cells: [
             .goals: goalsStorage.read(forEvent: parent.event).map { makeGoalViewModel(goal: $0) },
-            .createGoal: [makeCreateGoalViewModel()]
-        ])
-    }
+            .createGoal: [makeCreateGoalViewModel()],
+        ]
+    ) }
 
     func makeGoalViewModel(goal: Goal) -> GoalViewModel { GoalViewModel(goal: goal) }
     func makeCreateGoalViewModel() -> CreateGoalViewModel { CreateGoalViewModel(eventId: eventId) }
+
+    // MARK: - Services
+    func makeUpdateGoalService(goalId: String) -> UpdateGoalService { UpdateGoalService(
+        goalId: goalId,
+        goalsStorage: goalsStorage
+    ) }
 }

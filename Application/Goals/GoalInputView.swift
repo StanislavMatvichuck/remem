@@ -8,17 +8,32 @@
 import UIKit
 
 final class GoalInputView: UIStackView {
-    private static let buttonsSize: CGFloat = .buttonMargin * 3.2
-    let input: GoalInput = {
-        let field = GoalInput(al: true)
-        field.text = "123"
-        return field
+    private static let buttonsSize: CGFloat = .buttonMargin * 5
+
+    let minusBg: UIView = {
+        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg_secondary, .green, .bg])
+        let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
+        let image = UIImage(systemName: "minus.circle.fill")?
+            .withRenderingMode(.alwaysTemplate)
+            .withConfiguration(fontConfiguration)
+        let view = UIImageView(image: image)
+        return view
+    }()
+
+    let plusBg: UIView = {
+        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg_secondary, .green, .bg])
+        let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
+        let image = UIImage(systemName: "plus.circle.fill")?
+            .withRenderingMode(.alwaysTemplate)
+            .withConfiguration(fontConfiguration)
+        let view = UIImageView(image: image)
+        return view
     }()
 
     let minus: UIView = {
         let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg, .green, .primary])
         let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "minus.square.fill")?
+        let image = UIImage(systemName: "minus.circle.fill")?
             .withRenderingMode(.alwaysTemplate)
             .withConfiguration(fontConfiguration)
         let view = UIImageView(image: image)
@@ -28,7 +43,7 @@ final class GoalInputView: UIStackView {
     let plus: UIView = {
         let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg, .green, .primary])
         let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "plus.square.fill")?
+        let image = UIImage(systemName: "plus.circle.fill")?
             .withRenderingMode(.alwaysTemplate)
             .withConfiguration(fontConfiguration)
         let view = UIImageView(image: image)
@@ -37,11 +52,11 @@ final class GoalInputView: UIStackView {
 
     var viewModel: GoalViewModel? { didSet {
         guard let viewModel else { return }
-        input.text = viewModel.readableValue
-        input.textColor = viewModel.isAchieved ? UIColor.text_goalAchieved : UIColor.bg
         plus.isHidden = viewModel.isAchieved
-        minus.isHidden = viewModel.isAchieved
+        minus.isHidden = viewModel.isAchieved || viewModel.readableValue == "1"
     }}
+
+    var updateService: UpdateGoalService?
 
     init() {
         super.init(frame: .zero)
@@ -61,35 +76,37 @@ final class GoalInputView: UIStackView {
         let spacer = UIView(al: true)
         spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        addArrangedSubview(minus)
-        addArrangedSubview(input)
-        addArrangedSubview(plus)
+        addArrangedSubview(minusBg)
         addArrangedSubview(spacer)
+        addArrangedSubview(plusBg)
+        minusBg.addSubview(minus)
+        plusBg.addSubview(plus)
+        minus.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        plus.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     }
 
-    private func configureAppearance() {
-        input.font = .fontBold
-        input.textColor = UIColor.bg
-        input.backgroundColor = .bg_secondary_dimmed
-        input.layer.cornerRadius = .buttonMargin
-    }
+    private func configureAppearance() {}
 
     private func configureButtons() {
         let plusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapPlus))
         plus.addGestureRecognizer(plusGR)
+        plusBg.isUserInteractionEnabled = true
         plus.isUserInteractionEnabled = true
 
         let minusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapMinus))
         minus.addGestureRecognizer(minusGR)
+        minusBg.isUserInteractionEnabled = true
         minus.isUserInteractionEnabled = true
     }
 
     @objc private func handleTapPlus() {
-//        viewModel?.incrementCommand?.execute()
+        plus.animateTapReceiving()
+        updateService?.serve(UpdateGoalServiceArgument(input: .plus))
     }
 
     @objc private func handleTapMinus() {
-//        viewModel?.decrementCommand?.execute()
+        minus.animateTapReceiving()
+        updateService?.serve(UpdateGoalServiceArgument(input: .minus))
     }
 }
 

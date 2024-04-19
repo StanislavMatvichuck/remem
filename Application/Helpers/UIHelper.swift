@@ -18,6 +18,7 @@ extension UIColor {
     static let bg_secondary_dimmed = UIColor(named: "bg_secondary_dimmed")!
     static let bg_goal = UIColor(named: "bg_goal")!
     static let bg_goal_achieved = UIColor(named: "bg_goal_achieved")!
+    static let bg_goal_achieved_dimmed = UIColor(named: "bg_goal_achieved_dimmed")!
 
     static let text = UIColor(named: "text")!
     static let text_goalAchieved = UIColor(named: "text_goalAchieved")!

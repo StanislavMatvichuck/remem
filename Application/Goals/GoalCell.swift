@@ -14,6 +14,7 @@ final class GoalCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.3
+        label.textAlignment = .center
         return label
     }()
 
@@ -22,11 +23,13 @@ final class GoalCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.3
+        label.textAlignment = .center
         return label
     }()
 
     let input = GoalInputView()
     let progress = GoalProgressView()
+    var opaqueBg: UIView?
 
     var viewModel: GoalViewModel? { didSet {
         guard let viewModel else { return }
@@ -38,7 +41,7 @@ final class GoalCell: UICollectionViewCell {
     }}
 
     var deleteService: DeleteGoalService?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
@@ -49,24 +52,31 @@ final class GoalCell: UICollectionViewCell {
 
     // MARK: - Private
     private func configureLayout() {
-        let horizontalStack = UIStackView(al: true)
+        let opaqueBackgroundContainer = UIView(al: true)
+        opaqueBackgroundContainer.addSubview(progress)
+        opaqueBackgroundContainer.addSubview(input)
+        opaqueBackgroundContainer.backgroundColor = .bg_secondary
+        self.opaqueBg = opaqueBackgroundContainer
+        NSLayoutConstraint.activate([
+            progress.centerXAnchor.constraint(equalTo: opaqueBackgroundContainer.centerXAnchor),
+            progress.centerYAnchor.constraint(equalTo: opaqueBackgroundContainer.centerYAnchor),
+            progress.heightAnchor.constraint(equalTo: opaqueBackgroundContainer.heightAnchor, constant: -4 * .buttonMargin),
+            input.centerXAnchor.constraint(equalTo: opaqueBackgroundContainer.centerXAnchor),
+            input.bottomAnchor.constraint(equalTo: opaqueBackgroundContainer.bottomAnchor, constant: -.buttonMargin),
+            input.widthAnchor.constraint(equalTo: opaqueBackgroundContainer.widthAnchor, constant: -2 * .buttonMargin)
+        ])
+
         let stack = UIStackView(al: true)
         stack.axis = .vertical
         stack.addArrangedSubview(createdAt)
-        stack.addArrangedSubview(input)
+        stack.addArrangedSubview(opaqueBackgroundContainer)
         stack.addArrangedSubview(leftToAchieve)
         stack.spacing = .buttonMargin
-        horizontalStack.addArrangedSubview(stack)
-        horizontalStack.addArrangedSubview(progress)
-        horizontalStack.alignment = .center
-        progress.widthAnchor.constraint(equalTo: horizontalStack.widthAnchor, multiplier: 1 / 5).isActive = true
-        addAndConstrain(horizontalStack, constant: .buttonMargin)
+        addAndConstrain(stack, top: .buttonMargin, bottom: .buttonMargin)
     }
 
     private func configureAppearance() {
-        backgroundColor = .bg_secondary
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.secondary.cgColor
+        backgroundColor = .bg_secondary_dimmed
         layer.cornerRadius = CGFloat.buttonMargin
 
         createdAt.font = .font
@@ -76,9 +86,9 @@ final class GoalCell: UICollectionViewCell {
     }
 
     private func configureAppearance(_ isAchieved: Bool) {
-        backgroundColor = isAchieved ? .bg_goal_achieved : .bg_secondary
+        backgroundColor = isAchieved ? .bg_goal_achieved_dimmed : .bg_secondary_dimmed
         layer.borderColor = isAchieved ? UIColor.text_goalAchieved.cgColor : UIColor.secondary.cgColor
-        createdAt.textColor = isAchieved ? UIColor.text_goalAchieved : UIColor.bg
         leftToAchieve.textColor = isAchieved ? UIColor.text_goalAchieved : UIColor.bg
+        opaqueBg?.backgroundColor = isAchieved ? UIColor.bg_goal_achieved : UIColor.bg_secondary
     }
 }

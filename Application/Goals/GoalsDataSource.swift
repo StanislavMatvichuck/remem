@@ -7,6 +7,8 @@
 
 import UIKit
 
+protocol UpdateGoalServiceFactoring { func makeUpdateGoalService(goalId: String) -> UpdateGoalService }
+
 struct GoalsDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<GoalsViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<GoalsViewModel.Section, String>
@@ -15,14 +17,23 @@ struct GoalsDataSource {
     private let dataSource: DataSource
     private let createGoalService: CreateGoalService
     private let deleteGoalService: DeleteGoalService
+    private let updateServiceFactory: UpdateGoalServiceFactoring
 
-    init(list: UICollectionView, provider: GoalsViewModelFactoring, createGoalService: CreateGoalService, deleteGoalService: DeleteGoalService) {
+    init(
+        list: UICollectionView,
+        provider: GoalsViewModelFactoring,
+        createGoalService: CreateGoalService,
+        deleteGoalService: DeleteGoalService,
+        updateServiceFactory: UpdateGoalServiceFactoring
+    ) {
         self.createGoalService = createGoalService
         self.deleteGoalService = deleteGoalService
+        self.updateServiceFactory = updateServiceFactory
 
         let goalCellRegistration = UICollectionView.CellRegistration<GoalCell, GoalViewModel> { cell, _, viewModel in
             cell.viewModel = viewModel
             cell.deleteService = deleteGoalService
+            cell.input.updateService = updateServiceFactory.makeUpdateGoalService(goalId: viewModel.id)
         }
 
         let createGoalCellRegistration = UICollectionView.CellRegistration<CreateGoalCell, CreateGoalViewModel> { cell, _, viewModel in

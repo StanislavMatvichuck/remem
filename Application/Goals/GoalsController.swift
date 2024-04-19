@@ -17,6 +17,7 @@ final class GoalsController: UIViewController {
     let factory: GoalsViewModelFactoring
     var goalCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var goalDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var goalUpdatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     
     init(factory: GoalsViewModelFactoring, view: GoalsView) {
         self.factory = factory
@@ -45,12 +46,11 @@ final class GoalsController: UIViewController {
     }
     
     private func configureSubscriptions() {
-        goalCreatedSubscription = DomainEventsPublisher.shared.subscribe(GoalCreated.self, usingBlock: { [weak self] _ in
-            self?.update()
-        })
-        
-        goalDeletedSubscription = DomainEventsPublisher.shared.subscribe(GoalDeleted.self, usingBlock: { [weak self] _ in
-            self?.update()
-        })
+        let publisher = DomainEventsPublisher.shared
+        goalCreatedSubscription = publisher.subscribe(GoalCreated.self, usingBlock: updateBlock)
+        goalDeletedSubscription = publisher.subscribe(GoalDeleted.self, usingBlock: updateBlock)
+        goalUpdatedSubscription = publisher.subscribe(GoalValueUpdated.self, usingBlock: updateBlock)
     }
+    
+    private var updateBlock: (_: DomainEventsPublisher.DomainEvent) -> Void { { [weak self] _ in self?.update() }}
 }

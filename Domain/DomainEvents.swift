@@ -16,7 +16,8 @@ enum DomainEvents: String {
          happeningCreated,
          happeningRemoved,
          goalCreated,
-         goalDeleted
+         goalDeleted,
+         goalUpdated
 }
 
 enum UserInfoCodingKeys: String {
@@ -126,8 +127,16 @@ public struct GoalDeleted: DomainEventsPublisher.DomainEvent {
     public func userInfo() -> DomainEventsPublisher.UserInfo { [:] }
 }
 
-public struct GoalValueUpdated {}
+public struct GoalValueUpdated: DomainEventsPublisher.DomainEvent {
+    public static var eventName = Notification.Name(DomainEvents.goalUpdated.rawValue)
+
+    public init(userInfo: DomainEventsPublisher.UserInfo) {}
+    public init() {}
+    public func userInfo() -> DomainEventsPublisher.UserInfo { [:] }
+}
+
 public struct GoalAchieved {}
+
 public struct EventsListOrderingSet: DomainEventsPublisher.DomainEvent {
     public static var eventName = Notification.Name(DomainEvents.eventsListOrderingSet.rawValue)
 

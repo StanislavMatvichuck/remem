@@ -23,6 +23,16 @@ extension GoalsCoreDataRepository: GoalsReading {
             return cdGoals.map { GoalCoreDataMapper.make(for: event, cdGoal: $0) }
         } catch { fatalError(error.localizedDescription) }
     }
+
+    public func read(byId: String) -> Goal? {
+        if let cdGoal = cdGoal(id: byId),
+           let cdEvent = cdEvent(id: cdGoal.event!.uuid!)
+        {
+            return GoalCoreDataMapper.make(for: EventEntityMapper().convert(cdEvent)!, cdGoal: cdGoal)
+        }
+
+        return nil
+    }
 }
 
 extension GoalsCoreDataRepository: GoalsWriting {

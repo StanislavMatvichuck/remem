@@ -63,13 +63,13 @@ final class GoalsView: UIView {
 
     private static func makeLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { sectionIndex, _ in
-            let heightDimension: NSCollectionLayoutDimension = .estimated(3 * .layoutSquare)
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let isCreateGoalSection = sectionIndex == GoalsViewModel.Section.createGoal.rawValue
+            let height = NSCollectionLayoutDimension.fractionalWidth(isCreateGoalSection ? 0.2 : 1.0)
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: height)
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: height)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-            let isCreateGoalSection = sectionIndex == GoalsViewModel.Section.createGoal.rawValue
             let section = NSCollectionLayoutSection(group: group)
             section.interGroupSpacing = .buttonMargin
             section.contentInsets = NSDirectionalEdgeInsets(

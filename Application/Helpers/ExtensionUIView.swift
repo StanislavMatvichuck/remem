@@ -55,8 +55,8 @@ extension UIView {
         }
 
         let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fromValue = 1.0
-        animation.toValue = 0.9
+        animation.fromValue = 0.9
+        animation.toValue = 0.8
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.duration = 0.07
         animation.autoreverses = true

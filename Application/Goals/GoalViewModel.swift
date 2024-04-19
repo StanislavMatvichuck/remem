@@ -15,6 +15,7 @@ struct GoalViewModel {
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
+        formatter.timeStyle = .short
         return formatter
     }()
 
@@ -29,6 +30,7 @@ struct GoalViewModel {
 
     let readableDateCreated: String
     let readableLeftToAchieve: String
+    let readableHappenings: String
     let readablePercent: String
     let readableValue: String
     let progress: CGFloat
@@ -40,6 +42,8 @@ struct GoalViewModel {
         readableDateCreated =
             Self.textCreatedAt + " " +
             Self.dateFormatter.string(from: goal.dateCreated)
+
+        readableHappenings = "\(goal.contributingHappeningsCount)"
 
         readableLeftToAchieve = {
             if let achievedAt = goal.achievedAt {

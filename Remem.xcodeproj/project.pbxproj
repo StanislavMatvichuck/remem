@@ -77,6 +77,7 @@
 		083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */; };
 		0841F28F2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841F28E2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift */; };
 		0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */; };
+		0846862B2BD1B93000FCA819 /* UpdateGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846862A2BD1B93000FCA819 /* UpdateGoalService.swift */; };
 		0848741A2984328700C27155 /* WidgetEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventCellViewModel.swift */; };
 		084A8677299A3DFF00300918 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		084A8678299A3E5800300918 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -481,6 +482,7 @@
 		083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListDataSource.swift; sourceTree = "<group>"; };
 		0841F28E2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCoreDataMapperTests.swift; sourceTree = "<group>"; };
 		0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListControllerTests.swift; sourceTree = "<group>"; };
+		0846862A2BD1B93000FCA819 /* UpdateGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGoalService.swift; sourceTree = "<group>"; };
 		08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepositoryTests.swift; sourceTree = "<group>"; };
 		08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming02.xcdatamodel; sourceTree = "<group>"; };
 		084874192984328700C27155 /* WidgetEventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEventCellViewModel.swift; sourceTree = "<group>"; };
@@ -1185,18 +1187,19 @@
 			children = (
 				0871E7542B9DCDEB00FF1F7D /* ApplicationService.swift */,
 				0871E74E2B9DCD8400FF1F7D /* CreateEventService.swift */,
-				0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */,
-				087EEF332BB59401009A55BB /* SetEventsOrderingService.swift */,
-				087EEF352BB5BA4B009A55BB /* ShowEventDetailsService.swift */,
-				089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */,
-				089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */,
-				089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */,
-				08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */,
-				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				080C9A442BC97F5A00830A9F /* CreateGoalService.swift */,
+				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */,
+				0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */,
 				082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */,
+				087EEF332BB59401009A55BB /* SetEventsOrderingService.swift */,
+				08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */,
+				0846862A2BD1B93000FCA819 /* UpdateGoalService.swift */,
+				089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */,
+				087EEF352BB5BA4B009A55BB /* ShowEventDetailsService.swift */,
+				089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */,
 				08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */,
+				089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */,
 				0871E7522B9DCDE000FF1F7D /* VisitEventService.swift */,
 			);
 			path = Services;
@@ -2014,6 +2017,7 @@
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
+				0846862B2BD1B93000FCA819 /* UpdateGoalService.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
 				08396EEA29A64B5900281E51 /* WidgetController.swift in Sources */,
 				085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */,
