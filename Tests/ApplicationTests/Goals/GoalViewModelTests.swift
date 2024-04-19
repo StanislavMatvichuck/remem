@@ -30,14 +30,14 @@ final class GoalViewModelTests: XCTestCase {
 
     func test_init_requiresGoal() { XCTAssertNotNil(sut) }
     func test_readableDateCreated_localizedTextAndFormattedGoalDateCreated() {
-        XCTAssertEqual(sut.readableDateCreated, "Goal created at 1 Jan 2001")
+        XCTAssertEqual(sut.readableDateCreated, "Goal created at 1 Jan 2001 at 00:00")
 
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.adding(days: 1).date,
             event: Event(name: "", dateCreated: DayIndex.referenceValue.date)
         ))
 
-        XCTAssertEqual(sut.readableDateCreated, "Goal created at 2 Jan 2001")
+        XCTAssertEqual(sut.readableDateCreated, "Goal created at 2 Jan 2001 at 00:00")
     }
 
     func test_leftToAchieve_localizedTextAndGoalLeftToAchieve() {
