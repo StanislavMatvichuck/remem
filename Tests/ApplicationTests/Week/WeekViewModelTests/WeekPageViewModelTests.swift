@@ -75,7 +75,7 @@ final class WeekPageViewModelTests: XCTestCase {
         let event = Event.makeForUnitTests()
         event.addHappening(date: DayIndex.referenceValue.date)
         let details = EventDetailsContainer.makeForUnitTests(event: event)
-        details.parent.commander.save(event)
+        details.parent.eventsStorage.update(id: event.id, event: event)
         return WeekContainer(details).makeWeekPageViewModel(pageIndex: 0, dailyMaximum: 1)
     }
 }

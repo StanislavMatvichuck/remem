@@ -10,6 +10,9 @@ import Domain
 
 public enum EventCoreDataMapper {
     public static func convert(cdEvent: CDEvent) -> Event {
+        let state = signposter.beginInterval(.convert, id: signpostID)
+        defer { signposter.endInterval(.convert, state) }
+
         let event = Event(
             id: cdEvent.uuid!,
             name: cdEvent.name!,
@@ -27,6 +30,9 @@ public enum EventCoreDataMapper {
     }
 
     public static func update(cdEvent: CDEvent, event: Event) {
+        let state = signposter.beginInterval(.update, id: signpostID)
+        defer { signposter.endInterval(.update, state) }
+
         cdEvent.uuid = event.id
         cdEvent.name = event.name
         cdEvent.dateCreated = event.dateCreated

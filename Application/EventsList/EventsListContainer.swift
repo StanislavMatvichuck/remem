@@ -54,7 +54,6 @@ final class EventsListContainer:
 
         let dataSource = EventsListDataSource(
             list: list,
-            viewModelProvider: self,
             showEventDetailsService: self,
             createHappeningService: self,
             removeEventService: self,
@@ -70,22 +69,18 @@ final class EventsListContainer:
     }
 
     // MARK: - ViewModels factoring
-    func makeEventsListViewModel() -> EventsListViewModel {
-        EventsListViewModel(
-            list: EventsList(
-                sorterProvider: sortingProvider,
-                manualSorterProvider: manualSortingProvider,
-                eventsProvider: parent.provider
-            ),
-            hintFactory: self,
-            eventFactory: self,
-            createEventFactory: self
-        )
-    }
+    func makeEventsListViewModel() -> EventsListViewModel { EventsListViewModel(
+        list: EventsList(
+            sorterProvider: sortingProvider,
+            manualSorterProvider: manualSortingProvider,
+            eventsProvider: parent.provider
+        ),
+        hintFactory: self,
+        eventFactory: self,
+        createEventFactory: self
+    ) }
 
-    func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel {
-        HintCellViewModel(hint: hint)
-    }
+    func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel { HintCellViewModel(hint: hint) }
 
     func makeEventCellViewModel(eventId: String) -> EventCellViewModel {
         let event = parent.provider.read(byId: eventId)
@@ -99,9 +94,7 @@ final class EventsListContainer:
     }
 
     func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel {
-        CreateEventCellViewModel(
-            eventsCount: eventsCount
-        )
+        CreateEventCellViewModel(eventsCount: eventsCount)
     }
 
     // MARK: - Services factoring
@@ -130,13 +123,13 @@ final class EventsListContainer:
 
     func makeCreateHappeningService(id: String) -> CreateHappeningService { CreateHappeningService(
         eventId: id,
-        eventsStorage: parent.commander,
+        eventsStorage: parent.eventsStorage,
         eventsProvider: parent.provider
     ) }
 
     func makeRemoveEventService(id: String) -> RemoveEventService { RemoveEventService(
         eventId: id,
-        eventsStorage: parent.commander,
+        eventsStorage: parent.eventsStorage,
         eventsProvider: parent.provider
     ) }
 

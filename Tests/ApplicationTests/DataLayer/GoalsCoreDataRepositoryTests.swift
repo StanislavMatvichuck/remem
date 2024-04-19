@@ -19,11 +19,8 @@ final class GoalsCoreDataRepositoryTests: XCTestCase {
         super.setUp()
         let container = CoreDataStack.createContainer(inMemory: true)
         let event = Event(name: "", dateCreated: .distantPast)
-        let eventsRepository = CoreDataEventsRepository(
-            container: container,
-            mapper: EventEntityMapper()
-        )
-        eventsRepository.save(event)
+        let eventsRepository = CoreDataEventsRepository(container: container)
+        eventsRepository.create(event: event)
         sut = GoalsCoreDataRepository(container: container)
         self.event = event
         self.eventsRepository = eventsRepository
@@ -71,7 +68,7 @@ final class GoalsCoreDataRepositoryTests: XCTestCase {
      
         XCTAssertEqual(sut.read(forEvent: event).first!.id, goal.id)
         
-        eventsRepository.delete(event)
+        eventsRepository.delete(id: event.id)
         
         XCTAssertEqual(sut.read(forEvent: event).count, 0)
     }

@@ -17,9 +17,8 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         super.setUp()
 
         let container = CoreDataStack.createContainer(inMemory: true)
-        let mapper = EventEntityMapper()
 
-        sut = CoreDataEventsRepository(container: container, mapper: mapper)
+        sut = CoreDataEventsRepository(container: container)
     }
 
     override func tearDown() {
@@ -34,7 +33,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
     func test_save_increasesCount() {
         XCTAssertEqual(sut.read().count, 0)
 
-        sut.save(Event(name: ""))
+        sut.create(event: Event(name: ""))
 
         XCTAssertEqual(sut.read().count, 1)
     }
@@ -44,7 +43,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         savedEvent.addHappening(date: DayIndex.referenceValue.date)
 
-        sut.save(savedEvent)
+        sut.create(event: savedEvent)
 
         let acquiredEvent = sut.event(byId: savedEvent.id)
         XCTAssertEqual(acquiredEvent, savedEvent)
@@ -57,7 +56,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
             savedEvent.addHappening(date: DayIndex.referenceValue.date.addingTimeInterval(-1 * Double(i) * 5.0))
         }
 
-        sut.save(savedEvent)
+        sut.create(event: savedEvent)
 
         let acquiredEvent = sut.event(byId: savedEvent.id)
         XCTAssertEqual(acquiredEvent, savedEvent)
@@ -68,7 +67,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         newEvent.name = "Updated name"
 
-        sut.save(newEvent)
+        sut.update(id: newEvent.id, event: newEvent)
 
         let acquiredEvent = sut.event(byId: newEvent.id)
         XCTAssertEqual(acquiredEvent, newEvent)
@@ -79,30 +78,30 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         // renaming
         newEvent.name = "UpdatedName"
-        sut.save(newEvent)
+        sut.update(id: newEvent.id, event: newEvent)
         // adding happenings
         for i in 0 ... 10 { newEvent.addHappening(date: Date.now.addingTimeInterval(-1 * Double(i) * 5.0)) }
-        sut.save(newEvent)
+        sut.update(id: newEvent.id, event: newEvent)
         // removing happening
         if let removedHappening = newEvent.happenings.first {
             try newEvent.remove(happening: removedHappening)
         }
 
-        sut.save(newEvent)
+        sut.update(id: newEvent.id, event: newEvent)
         XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
     }
 
     func test_delete_decreasesCount() {
         let event = givenSavedDefaultEvent()
 
-        sut.delete(event)
+        sut.delete(id: event.id)
 
         XCTAssertEqual(sut.read().count, 0)
     }
 
     private func givenSavedDefaultEvent() -> Event {
         let newEvent = Event(name: "Event")
-        sut.save(newEvent)
+        sut.create(event: newEvent)
         return newEvent
     }
 }

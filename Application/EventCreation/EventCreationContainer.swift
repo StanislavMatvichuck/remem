@@ -18,5 +18,5 @@ final class EventCreationContainer:
 
     func makeEventCreationViewModel() -> EventCreationViewModel { EventCreationViewModel() }
     func makeCreateEventController() -> EventCreationController { EventCreationController(self, submitService: makeCreateEventService()) }
-    func makeCreateEventService() -> CreateEventService { CreateEventService(eventsStorage: parent.commander) }
+    func makeCreateEventService() -> CreateEventService { CreateEventService(eventsStorage: parent.eventsStorage) }
 }

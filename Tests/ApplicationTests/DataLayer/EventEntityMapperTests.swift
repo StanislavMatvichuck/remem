@@ -11,22 +11,6 @@ import Domain
 import XCTest
 
 final class EventEntityMapperTests: XCTestCase {
-    private var sut: EventEntityMapper!
-
-    override func setUp() {
-        super.setUp()
-        sut = EventEntityMapper()
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-
-    func testInit() {
-        XCTAssertNotNil(sut)
-    }
-
     func test_bidirectionalConversion() {
         let date = DayIndex.referenceValue.date
         let event = Event(
@@ -48,9 +32,9 @@ final class EventEntityMapperTests: XCTestCase {
         let context = CoreDataStack.createContainer(inMemory: true).viewContext
         let cdEvent = CDEvent(context: context)
 
-        sut.update(cdEvent, by: event)
+        EventCoreDataMapper.update(cdEvent: cdEvent, event: event)
 
-        let recreatedEvent = sut.convert(cdEvent)
+        let recreatedEvent = EventCoreDataMapper.convert(cdEvent: cdEvent)
 
         XCTAssertEqual(event, recreatedEvent)
     }

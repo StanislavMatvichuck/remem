@@ -38,13 +38,13 @@ final class DayDetailsContainer:
     func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(id: UUID().uuidString, happening: happening) }
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
         eventId: parent.eventId,
-        eventsStorage: parent.parent.commander,
+        eventsStorage: parent.parent.eventsStorage,
         eventsProvider: parent.parent.provider
     ) }
 
     func makeRemoveHappeningService() -> RemoveHappeningService { RemoveHappeningService(
         eventId: parent.eventId,
-        eventsStorage: parent.parent.commander,
+        eventsStorage: parent.parent.eventsStorage,
         eventsProvider: parent.parent.provider
     ) }
 }

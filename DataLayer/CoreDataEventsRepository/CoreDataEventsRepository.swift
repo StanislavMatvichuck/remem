@@ -7,6 +7,16 @@
 
 import CoreData
 import Domain
+import os
+
+let signposter = OSSignposter()
+let signpostID = signposter.makeSignpostID()
+extension StaticString {
+    static let read: StaticString = "read"
+    static let readById: StaticString = "readById"
+    static let convert: StaticString = "mapper.convert"
+    static let update: StaticString = "mapper.update"
+}
 
 public class CoreDataEventsRepository {
     private let container: NSPersistentContainer
@@ -38,6 +48,9 @@ public class CoreDataEventsRepository {
 
 extension CoreDataEventsRepository: EventsReading {
     public func read() -> [Event] { do {
+        let state = signposter.beginInterval(.read, id: signpostID)
+        defer { signposter.endInterval(.read, state) }
+
         let request = CDEvent.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -48,6 +61,9 @@ extension CoreDataEventsRepository: EventsReading {
     } }
 
     public func read(byId: String) -> Event {
+        let state = signposter.beginInterval(.readById, id: signpostID)
+        defer { signposter.endInterval(.readById, state) }
+
         if let cdEvent = cdEvent(id: byId) {
             return EventCoreDataMapper.convert(cdEvent: cdEvent)
         } else {

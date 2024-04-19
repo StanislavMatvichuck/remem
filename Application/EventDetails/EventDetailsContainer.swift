@@ -32,7 +32,7 @@ final class EventDetailsContainer:
                 DayOfWeekContainer(self).makeDayOfWeekController(),
                 PDFWritingContainer(self).makePDFWritingController()
             ],
-            service: VisitEventService(event: event, repository: parent.commander)
+            service: VisitEventService(event: event, repository: parent.eventsStorage)
         )
     }
 

@@ -10,32 +10,13 @@ import UIKit
 protocol ShowEventDetailsServiceFactoring { func makeShowEventDetailsService(id: String) -> ShowEventDetailsService }
 protocol RemoveEventServiceFactoring { func makeRemoveEventService(id: String) -> RemoveEventService }
 protocol CreateHappeningServiceFactoring { func makeCreateHappeningService(id: String) -> CreateHappeningService }
+protocol EventsListDataProviding: AnyObject { var viewModel: EventsListViewModel? { get } }
 
-struct EventsListDataSource {
+final class EventsListDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<EventsListViewModel.Section, String>
 
-    private let dataSource: DataSource
-    private let viewModelProvider: EventsListViewModelFactoring
-    private let showEventDetailsService: ShowEventDetailsServiceFactoring
-    private let createHappeningService: CreateHappeningServiceFactoring
-    private let removeEventService: RemoveEventServiceFactoring
-    private let showCreateEventService: ShowCreateEventService
-
-    init(
-        list: UICollectionView,
-        viewModelProvider: EventsListViewModelFactoring,
-        showEventDetailsService: ShowEventDetailsServiceFactoring,
-        createHappeningService: CreateHappeningServiceFactoring,
-        removeEventService: RemoveEventServiceFactoring,
-        showCreateEventService: ShowCreateEventService
-    ) {
-        self.viewModelProvider = viewModelProvider
-        self.showEventDetailsService = showEventDetailsService
-        self.createHappeningService = createHappeningService
-        self.removeEventService = removeEventService
-        self.showCreateEventService = showCreateEventService
-
+    private lazy var dataSource: DataSource = {
         let hintCellRegistration = UICollectionView.CellRegistration<HintCell, HintCellViewModel>
         { cell, _, viewModel in
             cell.viewModel = viewModel
@@ -43,20 +24,23 @@ struct EventsListDataSource {
         let eventCellRegistration = UICollectionView.CellRegistration<EventCell, EventCellViewModel>
         { cell, _, viewModel in
             cell.viewModel = viewModel
-            cell.tapService = showEventDetailsService.makeShowEventDetailsService(id: viewModel.id)
-            cell.swipeService = createHappeningService.makeCreateHappeningService(id: viewModel.id)
-            cell.removeService = removeEventService.makeRemoveEventService(id: viewModel.id)
+            cell.tapService = self.showEventDetailsService.makeShowEventDetailsService(id: viewModel.id)
+            cell.swipeService = self.createHappeningService.makeCreateHappeningService(id: viewModel.id)
+            cell.removeService = self.removeEventService.makeRemoveEventService(id: viewModel.id)
         }
         let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel>
         { cell, _, viewModel in
             cell.viewModel = viewModel
-            cell.tapService = showCreateEventService
+            cell.tapService = self.showCreateEventService
         }
 
-        dataSource = DataSource(collectionView: list) {
+        return DataSource(collectionView: list) {
             collectionView, indexPath, itemIdentifier in
 
-            guard let cellViewModel = viewModelProvider.makeEventsListViewModel().viewModel(forIdentifier: itemIdentifier) else { fatalError() }
+            /// Called frequently. Have to cache viewModel somewhere
+            ///     in a controller?
+            /// But how to know that viewModel has to be updated? Controller knows and updates.
+            guard let cellViewModel = self.viewModelProvider?.viewModel?.viewModel(forIdentifier: itemIdentifier) else { fatalError() }
 
             switch indexPath.section {
             case EventsListViewModel.Section.hint.rawValue:
@@ -80,11 +64,34 @@ struct EventsListDataSource {
             default: fatalError()
             }
         }
+    }()
+
+    weak var viewModelProvider: EventsListDataProviding?
+
+    private let list: UICollectionView
+    private let showEventDetailsService: ShowEventDetailsServiceFactoring
+    private let createHappeningService: CreateHappeningServiceFactoring
+    private let removeEventService: RemoveEventServiceFactoring
+    private let showCreateEventService: ShowCreateEventService
+
+    init(
+        list: UICollectionView,
+        showEventDetailsService: ShowEventDetailsServiceFactoring,
+        createHappeningService: CreateHappeningServiceFactoring,
+        removeEventService: RemoveEventServiceFactoring,
+        showCreateEventService: ShowCreateEventService
+    ) {
+        self.list = list
+        self.showEventDetailsService = showEventDetailsService
+        self.createHappeningService = createHappeningService
+        self.removeEventService = removeEventService
+        self.showCreateEventService = showCreateEventService
     }
 
     func applySnapshot(_ oldValue: EventsListViewModel?) {
-        let viewModel = viewModelProvider.makeEventsListViewModel()
-        guard viewModel.dragAndDrop.removalDropAreaHidden else { return }
+        guard let viewModel = viewModelProvider?.viewModel,
+              viewModel.dragAndDrop.removalDropAreaHidden
+        else { return }
 
         var snapshot = Snapshot()
 

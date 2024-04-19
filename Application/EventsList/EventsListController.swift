@@ -11,7 +11,8 @@ import UIKit
 final class EventsListController:
     UIViewController,
     UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout
+    UICollectionViewDelegateFlowLayout,
+    EventsListDataProviding
 {
     let factory: EventsListViewModelFactoring
 
@@ -124,6 +125,7 @@ final class EventsListController:
         viewRoot.list.dragDelegate = self
         viewRoot.list.dropDelegate = self
         viewRoot.list.dragInteractionEnabled = true
+        viewRoot.dataSource.viewModelProvider = self
     }
 
     private func configureForegroundNotification() {

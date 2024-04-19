@@ -15,7 +15,7 @@ final class ApplicationContainer {
 
     let mode: LaunchMode
     let provider: EventsReading
-    let commander: EventsWriting
+    let eventsStorage: EventsWriting
     let coordinator: Coordinator
     let watcher: Watching
     let coreDataContainer: NSPersistentContainer
@@ -42,7 +42,7 @@ final class ApplicationContainer {
         self.injectedCurrentMoment = currentMoment
         self.coordinator = coordinator
         self.provider = repository
-        self.commander = repository
+        self.eventsStorage = repository
         self.coreDataContainer = container
         self.watcher = watcher
 //        watcher.delegate = weakUpdater
