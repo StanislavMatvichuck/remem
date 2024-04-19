@@ -12,7 +12,7 @@ final class PDFWritingView: UIView {
         let button = UIButton(al: true)
 
         let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.fontSmallBold,
+            NSAttributedString.Key.font: UIFont.font,
             NSAttributedString.Key.foregroundColor: UIColor.bg,
         ]
 
@@ -24,7 +24,9 @@ final class PDFWritingView: UIView {
             for: .normal
         )
 
-        button.backgroundColor = UIColor.primary
+        button.backgroundColor = UIColor.bg_primary
+        button.layer.borderColor = UIColor.border_primary.cgColor
+        button.layer.borderWidth = .border
         button.layer.cornerRadius = (2 * .layoutSquare - 0.5 * .layoutSquare) / 2
         button.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonPdfCreate.rawValue
 

@@ -64,7 +64,9 @@ final class GoalsView: UIView {
     private static func makeLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { sectionIndex, _ in
             let isCreateGoalSection = sectionIndex == GoalsViewModel.Section.createGoal.rawValue
-            let height = NSCollectionLayoutDimension.fractionalWidth(isCreateGoalSection ? 0.2 : 1.0)
+            let height = isCreateGoalSection ?
+                NSCollectionLayoutDimension.absolute(.buttonHeight) :
+                NSCollectionLayoutDimension.fractionalWidth(1.0)
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: height)
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: height)

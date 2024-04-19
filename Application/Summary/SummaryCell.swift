@@ -49,8 +49,8 @@ final class SummaryCell: UICollectionViewCell {
 
     private func configureAppearance() {
         stack.backgroundColor = .bg_secondary
-        stack.layer.borderColor = UIColor.secondary.cgColor
-        stack.layer.borderWidth = .border
+//        stack.layer.borderColor = UIColor.secondary.cgColor
+//        stack.layer.borderWidth = .border
         stack.layer.cornerRadius = .buttonMargin
         title.font = .font
         value.font = .fontWeekTitle

@@ -981,6 +981,29 @@
 			path = RemovalDropArea;
 			sourceTree = "<group>";
 		};
+		082680472BD2B9A20080172C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */,
+				0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */,
+				08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */,
+				087D42652B8E38B10075004D /* GoalsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		082680482BD2B9E90080172C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */,
+				087D426F2B8E894F0075004D /* GoalCell.swift */,
+				087D42712B8EA7690075004D /* GoalInputView.swift */,
+				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
+				087D42612B8E37480075004D /* GoalsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0826AC9028C86ECE0021D607 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1497,19 +1520,12 @@
 		08EAD4E92B8D023200557C4D /* Goals */ = {
 			isa = PBXGroup;
 			children = (
-				0816D0CA2B90A435005FD6A0 /* CreateGoalCell.swift */,
-				0816D0C82B90A2D8005FD6A0 /* CreateGoalViewModel.swift */,
-				087D426F2B8E894F0075004D /* GoalCell.swift */,
-				0816D0C42B909AD7005FD6A0 /* GoalCellViewModeling.swift */,
-				087D42712B8EA7690075004D /* GoalInputView.swift */,
-				08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */,
 				087D426D2B8E58CF0075004D /* GoalsContainer.swift */,
 				087D42692B8E3AB80075004D /* GoalsController.swift */,
 				0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */,
 				0816D0CC2B90AA2A005FD6A0 /* GoalsDataSource.swift */,
-				087D42612B8E37480075004D /* GoalsView.swift */,
-				087D42652B8E38B10075004D /* GoalsViewModel.swift */,
-				08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */,
+				082680482BD2B9E90080172C /* View */,
+				082680472BD2B9A20080172C /* ViewModel */,
 			);
 			path = Goals;
 			sourceTree = "<group>";

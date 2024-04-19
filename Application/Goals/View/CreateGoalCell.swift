@@ -26,17 +26,14 @@ final class CreateGoalCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    private func configureLayout() {
-        button.heightAnchor.constraint(equalToConstant: .layoutSquare).isActive = true
-        contentView.addAndConstrain(button)
-    }
+    private func configureLayout() { contentView.addAndConstrain(button) }
 
     private func configureAppearance() {
         let color = UIColor.bg_primary
         button.backgroundColor = color
         button.layer.borderWidth = .border
         button.layer.borderColor = color.cgColor
-        button.layer.cornerRadius = CGFloat.buttonMargin
+        button.layer.cornerRadius = CGFloat.buttonHeight / 2
         button.setTitleColor(UIColor.bg, for: .normal)
     }
 
