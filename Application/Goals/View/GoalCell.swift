@@ -82,13 +82,12 @@ final class GoalCell: UICollectionViewCell {
         createdAt.font = .font
         createdAt.textColor = .bg
         leftToAchieve.font = .font
-        leftToAchieve.textColor = .text_secondary
+        leftToAchieve.textColor = .bg
     }
 
     private func configureAppearance(_ isAchieved: Bool) {
         backgroundColor = isAchieved ? .bg_goal_achieved_dimmed : .bg_secondary_dimmed
         layer.borderColor = isAchieved ? UIColor.text_goalAchieved.cgColor : UIColor.secondary.cgColor
-        leftToAchieve.textColor = isAchieved ? UIColor.text_goalAchieved : UIColor.bg
         opaqueBg?.backgroundColor = isAchieved ? UIColor.bg_goal_achieved : UIColor.bg_secondary
     }
 }

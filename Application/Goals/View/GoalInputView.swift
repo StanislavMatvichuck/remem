@@ -10,50 +10,41 @@ import UIKit
 final class GoalInputView: UIStackView {
     private static let buttonsSize: CGFloat = .buttonMargin * 5
 
-    let minusBg: UIView = {
-        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg_secondary, .green, .bg])
-        let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "minus.circle.fill")?
-            .withRenderingMode(.alwaysTemplate)
-            .withConfiguration(fontConfiguration)
-        let view = UIImageView(image: image)
-        return view
-    }()
+    let minusBg = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .inactive)
+    let plusBg = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .inactive)
 
-    let plusBg: UIView = {
-        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg_secondary, .green, .bg])
-        let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "plus.circle.fill")?
-            .withRenderingMode(.alwaysTemplate)
-            .withConfiguration(fontConfiguration)
-        let view = UIImageView(image: image)
-        return view
-    }()
+    let minusAchieved = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .inactiveAchieved)
+    let plusAchieved = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .inactiveAchieved)
 
-    let minus: UIView = {
-        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg, .green, .primary])
-        let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "minus.circle.fill")?
-            .withRenderingMode(.alwaysTemplate)
-            .withConfiguration(fontConfiguration)
-        let view = UIImageView(image: image)
-        return view
-    }()
+    let minus = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .active)
+    let plus = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .active)
 
-    let plus: UIView = {
-        let configurationColors = UIImage.SymbolConfiguration(paletteColors: [.bg, .green, .primary])
+    enum ButtonVariant {
+        case inactive, inactiveAchieved, active
+        var colors: [UIColor] { switch self {
+        case .inactive: return [.bg_secondary, .green, .bg]
+        case .inactiveAchieved: return [.bg_goal_achieved, .green, .bg]
+        case .active: return [.bg, .green, .primary]
+        }}
+    }
+
+    private static func makeSymbolImage(symbolName: String, variant: ButtonVariant) -> UIView {
+        let configurationColors = UIImage.SymbolConfiguration(paletteColors: variant.colors)
         let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: "plus.circle.fill")?
+        let image = UIImage(systemName: symbolName)?
             .withRenderingMode(.alwaysTemplate)
             .withConfiguration(fontConfiguration)
         let view = UIImageView(image: image)
         return view
-    }()
+    }
 
     var viewModel: GoalViewModel? { didSet {
         guard let viewModel else { return }
         plus.isHidden = viewModel.isAchieved
         minus.isHidden = viewModel.isAchieved || viewModel.readableValue == "1"
+        
+        plusAchieved.isHidden = !viewModel.isAchieved
+        minusAchieved.isHidden = !viewModel.isAchieved
     }}
 
     var updateService: UpdateGoalService?
@@ -79,7 +70,9 @@ final class GoalInputView: UIStackView {
         addArrangedSubview(minusBg)
         addArrangedSubview(spacer)
         addArrangedSubview(plusBg)
+        minusBg.addSubview(minusAchieved)
         minusBg.addSubview(minus)
+        plusBg.addSubview(plusAchieved)
         plusBg.addSubview(plus)
         minus.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         plus.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
