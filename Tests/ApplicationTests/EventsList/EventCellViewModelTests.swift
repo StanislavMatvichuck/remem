@@ -60,4 +60,17 @@ final class EventCellViewModelTests: XCTestCase {
 
         XCTAssertEqual(timeString, "1 week, 4 days")
     }
+
+    func test_goalProgress() {
+        let event = Event(name: "")
+        let sut = EventCellViewModel(
+            event: event,
+            hintEnabled: false,
+            currentMoment: .now,
+            animation: .none,
+            goal: GoalViewModel(goal: Goal(dateCreated: .now, event: event))
+        )
+
+        XCTAssertNotNil(sut.goal)
+    }
 }

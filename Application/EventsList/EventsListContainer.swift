@@ -85,11 +85,20 @@ final class EventsListContainer:
     func makeEventCellViewModel(eventId: String) -> EventCellViewModel {
         let event = parent.provider.read(byId: eventId)
 
+        let goal: GoalViewModel? = {
+            let goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
+            if let goal = goalsStorage.readActiveGoal(forEvent: event) {
+                return GoalViewModel(goal: goal)
+            }
+            return nil
+        }()
+
         return EventCellViewModel(
             event: event,
             hintEnabled: false,
             currentMoment: parent.currentMoment,
-            animation: .none
+            animation: .none,
+            goal: goal
         )
     }
 

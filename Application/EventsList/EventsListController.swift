@@ -43,6 +43,9 @@ final class EventsListController:
     var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var goalCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var goalDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var goalUpdatedSubscription: DomainEventsPublisher.DomainEventSubscription?
 
     init(
         viewModelFactory: EventsListViewModelFactoring,
@@ -71,6 +74,9 @@ final class EventsListController:
         eventRemovedSubscription = nil
         eventCreatedSubscription = nil
         eventVisitedSubscription = nil
+        goalCreatedSubscription = nil
+        goalDeletedSubscription = nil
+        goalUpdatedSubscription = nil
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -118,6 +124,21 @@ final class EventsListController:
                     }
                 }
             }
+        )
+
+        goalCreatedSubscription = DomainEventsPublisher.shared.subscribe(
+            GoalCreated.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        goalDeletedSubscription = DomainEventsPublisher.shared.subscribe(
+            GoalDeleted.self,
+            usingBlock: { [weak self] _ in self?.update() }
+        )
+
+        goalUpdatedSubscription = DomainEventsPublisher.shared.subscribe(
+            GoalValueUpdated.self,
+            usingBlock: { [weak self] _ in self?.update() }
         )
     }
 

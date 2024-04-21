@@ -11,6 +11,7 @@
 		080396BB2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080396BA2BCAF85A00EC1A98 /* GoalCoreDataMapper.swift */; };
 		0806B4452BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */; };
 		0806B4472BD1A57200BFA5B3 /* DeleteGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */; };
+		08077DD42BD51EB8003F9C48 /* EventCellGoalIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08077DD32BD51EB8003F9C48 /* EventCellGoalIndicator.swift */; };
 		0807E85C2BA328D1005ED448 /* XCUIElementQueryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */; };
 		0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */; };
 		080949A02B8A3B9400ACAC61 /* PDFRenderingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */; };
@@ -411,6 +412,7 @@
 		080396BC2BCAF8A700EC1A98 /* AddedGoal08.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AddedGoal08.xcdatamodel; sourceTree = "<group>"; };
 		0806B4442BD19DE000BFA5B3 /* GoalsController+RemovableDropArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalsController+RemovableDropArea.swift"; sourceTree = "<group>"; };
 		0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGoalService.swift; sourceTree = "<group>"; };
+		08077DD32BD51EB8003F9C48 /* EventCellGoalIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellGoalIndicator.swift; sourceTree = "<group>"; };
 		0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElementQueryExtension.swift; sourceTree = "<group>"; };
 		0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRendering.swift; sourceTree = "<group>"; };
 		0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRenderingPage.swift; sourceTree = "<group>"; };
@@ -1134,6 +1136,7 @@
 				089B37872A0A32B700422971 /* EventAmountView.swift */,
 				080F9F2629ED51810013CBFE /* EventCell.swift */,
 				080F9F2A29ED6C050013CBFE /* EventCellView.swift */,
+				08077DD32BD51EB8003F9C48 /* EventCellGoalIndicator.swift */,
 				089B37852A0A2D7900422971 /* SwipingCircleView.swift */,
 				089B37832A0A271D00422971 /* TimeSinceView.swift */,
 			);
@@ -2152,6 +2155,7 @@
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */,
+				08077DD42BD51EB8003F9C48 /* EventCellGoalIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

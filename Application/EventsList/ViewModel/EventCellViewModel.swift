@@ -23,6 +23,7 @@ struct EventCellViewModel {
     let value: String
     let timeSince: String
     let hintEnabled: Bool
+    let goal: GoalViewModel?
     var animation: Animations
 
     private let currentMoment: Date
@@ -31,11 +32,13 @@ struct EventCellViewModel {
         event: Event,
         hintEnabled: Bool,
         currentMoment: Date,
-        animation: Animations
+        animation: Animations,
+        goal: GoalViewModel?
     ) {
         self.animation = animation
         self.currentMoment = currentMoment
         self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment)
+        self.goal = goal
         self.event = event
 
         self.title = event.name
@@ -56,7 +59,8 @@ struct EventCellViewModel {
             event: event,
             hintEnabled: hintEnabled,
             currentMoment: currentMoment,
-            animation: withAnimation
+            animation: withAnimation,
+            goal: goal
         )
     }
 

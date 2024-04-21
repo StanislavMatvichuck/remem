@@ -15,6 +15,26 @@ public struct GoalsCoreDataRepository {
 }
 
 extension GoalsCoreDataRepository: GoalsReading {
+    public func readActiveGoal(forEvent event: Event) -> Goal? {
+        let goalsSortedByValue: [Domain.Goal] = { do {
+            let request = CDGoal.fetchRequest()
+            request.predicate = NSPredicate(format: "event.uuid == %@", event.id)
+            request.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
+            return try moc.fetch(request).map { GoalCoreDataMapper.make(for: event, cdGoal: $0) }
+        } catch { return [] }
+        }()
+
+        var activeGoal: Goal?
+
+        for goal in goalsSortedByValue {
+            if goal.achieved == false { activeGoal = goal; break }
+        }
+
+        if activeGoal == nil { activeGoal = goalsSortedByValue.last }
+
+        return activeGoal
+    }
+
     public func read(forEvent event: Event) -> [Domain.Goal] {
         do {
             let request = CDGoal.fetchRequest()

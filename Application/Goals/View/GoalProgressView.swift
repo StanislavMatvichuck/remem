@@ -8,9 +8,9 @@
 import UIKit
 
 final class GoalProgressView: UIView {
-    private static let start = CGFloat.pi / -2
-    private static let end = CGFloat.pi * 3 / 2
-    private static let width: CGFloat = 2 * .buttonMargin
+    static let start = CGFloat.pi / -2
+    static let end = CGFloat.pi * 3 / 2
+    static let width: CGFloat = 2 * .buttonMargin
 
     private var circleConfigured = false
     private lazy var circle: CAShapeLayer = {
