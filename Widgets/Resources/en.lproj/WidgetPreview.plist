@@ -8,41 +8,35 @@
 		<key>value</key>
 		<string>3</string>
 		<key>title</key>
-		<string>a chapter in a 📖</string>
+		<string>A chapter in a 📖</string>
 		<key>timeSince</key>
 		<string></string>
 		<key>progress</key>
-		<real>0</real>
-		<key>goalState</key>
-		<integer>0</integer>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>2BAD065B-A649-49DD-9D07-8CAEBA53ABEB</string>
 		<key>value</key>
-		<string>2/3</string>
+		<string>2</string>
 		<key>title</key>
-		<string>plants watering 🪴</string>
+		<string>Plants watering 🪴</string>
 		<key>timeSince</key>
 		<string></string>
 		<key>progress</key>
-		<real>0.666666</real>
-		<key>goalState</key>
-		<integer>0</integer>
+		<real>0.666</real>
 	</dict>
 	<dict>
 		<key>id</key>
 		<string>B08CCC21-04CF-4B86-ABD1-64C208BCADC9</string>
 		<key>value</key>
-		<string>1/3</string>
+		<string>1</string>
 		<key>title</key>
-		<string>meditation 🧘🏻‍♀️</string>
+		<string>Meditation 🧘🏻‍♀️</string>
 		<key>timeSince</key>
 		<string></string>
 		<key>progress</key>
 		<real>0.333333</real>
-		<key>goalState</key>
-		<integer>0</integer>
 	</dict>
 </array>
 </plist>

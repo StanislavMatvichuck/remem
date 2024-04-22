@@ -9,6 +9,8 @@
 		<string>3</string>
 		<key>name</key>
 		<string>Glass of water 🥛</string>
+		<key>progress</key>
+		<real>0</real>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -17,6 +19,8 @@
 		<string>1</string>
 		<key>name</key>
 		<string>Plants watering 🪴</string>
+		<key>progress</key>
+		<integer>0</integer>
 	</dict>
 	<dict>
 		<key>id</key>
@@ -25,6 +29,8 @@
 		<string>0</string>
 		<key>name</key>
 		<string>Meditation 🧘🏻‍♀️</string>
+		<key>progress</key>
+		<integer>0</integer>
 	</dict>
 </array>
 </plist>
