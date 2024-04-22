@@ -10,7 +10,6 @@ import UIKit
 final class CreateGoalCell: UICollectionViewCell {
     let button: UIButton = {
         let button = UIButton(al: true)
-        button.setTitle(CreateGoalViewModel.createGoal, for: .normal)
         return button
     }()
 
@@ -36,7 +35,19 @@ final class CreateGoalCell: UICollectionViewCell {
         button.layer.borderWidth = .border
         button.layer.borderColor = color.cgColor
         button.layer.cornerRadius = CGFloat.buttonHeight / 2
-        button.setTitleColor(UIColor.bg, for: .normal)
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.font,
+            NSAttributedString.Key.foregroundColor: UIColor.bg,
+        ]
+
+        button.setAttributedTitle(
+            NSAttributedString(
+                string: CreateGoalViewModel.createGoal,
+                attributes: attributes
+            ),
+            for: .normal
+        )
     }
 
     private func configureTapHandler() { button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) }
