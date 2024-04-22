@@ -22,6 +22,7 @@ final class WeekPageView: UICollectionViewCell {
         let label = UILabel(al: true)
         label.font = .font
         label.textAlignment = .center
+        label.accessibilityIdentifier = UITestAccessibilityIdentifier.weekPageMonth.rawValue
         return label
     }()
 

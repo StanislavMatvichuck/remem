@@ -26,8 +26,8 @@ final class EventDetailsContainer:
             factory: self,
             controllers: [
                 WeekContainer(self).makeWeekController(),
-                SummaryContainer(self).makeSummaryController(),
                 GoalsContainer(self).makeGoalsController(),
+                SummaryContainer(self).makeSummaryController(),
                 HourDistributionContainer(self).makeHourDistributionController(),
                 DayOfWeekContainer(self).makeDayOfWeekController(),
                 PDFWritingContainer(self).makePDFWritingController()

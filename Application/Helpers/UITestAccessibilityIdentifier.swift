@@ -21,9 +21,14 @@ enum UITestAccessibilityIdentifier: String {
          hint,
          orderingVariant,
          weekDay,
+         weekPageMonth,
          dayDetailsHappening,
          dayDetailsAddHappening,
          dayDetailsHappeningsList,
          dayDetailsBackground,
-         summaryValue
+         summaryValue,
+         goalsList,
+         goal,
+         buttonCreateGoal,
+         buttonIncreaseGoalValue
 }

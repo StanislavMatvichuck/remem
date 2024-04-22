@@ -42,7 +42,7 @@ final class GoalInputView: UIStackView {
         guard let viewModel else { return }
         plus.isHidden = viewModel.isAchieved
         minus.isHidden = viewModel.isAchieved || viewModel.readableValue == "1"
-        
+
         plusAchieved.isHidden = !viewModel.isAchieved
         minusAchieved.isHidden = !viewModel.isAchieved
     }}
@@ -83,8 +83,12 @@ final class GoalInputView: UIStackView {
     private func configureButtons() {
         let plusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapPlus))
         plus.addGestureRecognizer(plusGR)
-        plusBg.isUserInteractionEnabled = true
         plus.isUserInteractionEnabled = true
+        plus.isAccessibilityElement = true
+        plus.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonIncreaseGoalValue.rawValue
+
+        plusBg.isUserInteractionEnabled = true
+        plusBg.isAccessibilityElement = true
 
         let minusGR = UITapGestureRecognizer(target: self, action: #selector(handleTapMinus))
         minus.addGestureRecognizer(minusGR)

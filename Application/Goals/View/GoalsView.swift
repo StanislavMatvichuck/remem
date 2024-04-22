@@ -58,6 +58,8 @@ final class GoalsView: UIView {
     static func makeList() -> UICollectionView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: GoalsView.makeLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isAccessibilityElement = true
+        view.accessibilityIdentifier = UITestAccessibilityIdentifier.goalsList.rawValue
         return view
     }
 

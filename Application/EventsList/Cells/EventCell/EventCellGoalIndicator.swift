@@ -38,6 +38,7 @@ final class EventCellGoalIndicator: UIView {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        isUserInteractionEnabled = false
         widthAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
 

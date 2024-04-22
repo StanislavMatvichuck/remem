@@ -22,6 +22,8 @@ final class CreateGoalCell: UICollectionViewCell {
         configureLayout()
         configureAppearance()
         configureTapHandler()
+        isAccessibilityElement = true
+        accessibilityIdentifier = UITestAccessibilityIdentifier.buttonCreateGoal.rawValue
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
