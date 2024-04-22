@@ -15,6 +15,9 @@ final class DayDetailsPresentationController: UIPresentationController {
     let dismissTransition: UIPercentDrivenInteractiveTransition
     let container: DayDetailsPresentationContainer
 
+    var backgroundGradientLayer: CAGradientLayer?
+    var backgroundBorderLayer: CALayer?
+
     lazy var backgroundView: UIView = {
         let borderWidth = DayDetailsView.margin * 3
         let dayDetailsLeftOffset = frameOfPresentedViewInContainerView.minX - borderWidth / 2
@@ -32,6 +35,7 @@ final class DayDetailsPresentationController: UIPresentationController {
         dayDetailsBackground.layer.borderColor = UIColor.border.cgColor
         dayDetailsBackground.layer.borderWidth = borderWidth
         dayDetailsBackground.clipsToBounds = false
+        self.backgroundBorderLayer = dayDetailsBackground.layer
 
         let shapeLayer = CAGradientLayer()
         shapeLayer.frame = CGRect(
@@ -44,6 +48,7 @@ final class DayDetailsPresentationController: UIPresentationController {
         shapeLayer.startPoint = CGPoint(x: 0, y: 0)
         shapeLayer.endPoint = CGPoint(x: 0, y: 1)
         shapeLayer.colors = [UIColor.border.cgColor, UIColor.bg.cgColor]
+        self.backgroundGradientLayer = shapeLayer
 
         let backgroundView = UIView(frame: containerView!.frame)
         backgroundView.backgroundColor = .bg
@@ -77,6 +82,12 @@ final class DayDetailsPresentationController: UIPresentationController {
         self.dismissTransition = dismissTransition
         self.container = container
         super.init(presentedViewController: presented, presenting: presenting)
+        if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(updateBackgroundColors)) }
+    }
+
+    @objc private func updateBackgroundColors() {
+        backgroundGradientLayer?.colors = [UIColor.border.cgColor, UIColor.bg.cgColor]
+        backgroundBorderLayer?.borderColor = UIColor.border.cgColor
     }
 
     lazy var detailsViewCalculatedRect = {

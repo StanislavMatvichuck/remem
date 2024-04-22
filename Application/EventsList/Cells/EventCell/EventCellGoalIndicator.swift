@@ -14,10 +14,7 @@ final class EventCellGoalIndicator: UIView {
         guard let viewModel else { isHidden = true; return }
         isHidden = false
         if circlesConfigured {
-            circle.strokeEnd = viewModel.progress
-            circle.strokeColor = viewModel.isAchieved ?
-                UIColor.bg_goal_achieved.cgColor :
-                UIColor.border_secondary.cgColor
+            configureAppearance()
         }
     }}
 
@@ -40,6 +37,8 @@ final class EventCellGoalIndicator: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
         widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        /// Dark mode fix for CAShapeLayer
+        if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance)) }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -47,6 +46,16 @@ final class EventCellGoalIndicator: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureCircleIfNeeded()
+    }
+
+    @objc private func configureAppearance() {
+        guard let viewModel else { return }
+        circle.strokeEnd = viewModel.progress
+        circle.strokeColor = viewModel.isAchieved ?
+            UIColor.bg_goal_achieved.cgColor :
+            UIColor.border_secondary.cgColor
+
+        permanentCircle.strokeColor = UIColor.border.cgColor
     }
 
     private func configureCircleIfNeeded() {

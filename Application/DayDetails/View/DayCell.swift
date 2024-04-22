@@ -38,6 +38,7 @@ final class DayCell: UICollectionViewCell {
         configureAppearance()
         isAccessibilityElement = true
         accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappening.rawValue
+        if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance)) }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -48,7 +49,7 @@ final class DayCell: UICollectionViewCell {
         contentView.addAndConstrain(animatedBackground, top: Self.margin, left: Self.margin)
     }
 
-    private func configureAppearance() {
+    @objc private func configureAppearance() {
         backgroundColor = .clear
         label.textColor = UIColor.primary
         label.font = .fontSmallBold

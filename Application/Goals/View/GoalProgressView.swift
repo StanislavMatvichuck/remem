@@ -120,7 +120,11 @@ final class GoalProgressView: UIView {
 
         value.font = .font
         value.textColor = .bg
+
+        if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(updatePermanentCircleColor)) }
     }
+
+    @objc private func updatePermanentCircleColor() { permanentCircle.strokeColor = UIColor.bg_secondary_dimmed.cgColor }
 
     private func configureCircleIfNeeded() {
         guard circleConfigured == false else { return }
