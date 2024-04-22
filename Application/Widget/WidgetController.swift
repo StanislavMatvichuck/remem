@@ -10,30 +10,30 @@ import WidgetKit
 
 final class WidgetController {
     func update(_ viewModel: EventsListViewModel) {
-//        guard let directory = FileManager.default.containerURL(
-//            forSecurityApplicationGroupIdentifier: "group.remem.io"
-//        ) else { return }
-//
-//        let filePath = "RememWidgets.plist"
-//        let fileURL = directory.appendingPathComponent(filePath)
-//
-//        let encoder = PropertyListEncoder()
-//        let eventsCellsIdentifiers = viewModel.cellsIdentifiers(for: .events)
-//        var writableItems = [WidgetEventCellViewModel]()
-//
-//        eventsCellsIdentifiers.prefix(3).forEach {
-//            if let eventCell = viewModel.cell(identifier: $0) as? EventCellViewModel {
-//                writableItems.append(WidgetEventCellViewModel(item: eventCell))
-//            }
-//        }
-//
-//        do {
-//            let dataToWrite = try encoder.encode(writableItems)
-//            try dataToWrite.write(to: fileURL)
-//            WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
-//        } catch {
-//            fatalError("unable to update widget \(fileURL.absoluteString) \(viewModel) \(writableItems)")
-//        }
+        guard let directory = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.remem.io"
+        ) else { return }
+
+        let filePath = "RememWidgets.plist"
+        let fileURL = directory.appendingPathComponent(filePath)
+
+        let encoder = PropertyListEncoder()
+        let eventsCellsIdentifiers = viewModel.identifiersFor(section: .events)
+        var writableItems = [WidgetEventCellViewModel]()
+
+        eventsCellsIdentifiers.prefix(3).forEach {
+            if let eventCell = viewModel.viewModel(forIdentifier: $0) as? EventCellViewModel {
+                writableItems.append(WidgetEventCellViewModel(item: eventCell))
+            }
+        }
+
+        do {
+            let dataToWrite = try encoder.encode(writableItems)
+            try dataToWrite.write(to: fileURL)
+            WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
+        } catch {
+            fatalError("unable to update widget \(fileURL.absoluteString) \(viewModel) \(writableItems)")
+        }
     }
 }
 
@@ -42,5 +42,6 @@ extension WidgetEventCellViewModel {
         title = item.title
         value = item.value
         timeSince = item.timeSince
+        progress = item.goal?.progress
     }
 }

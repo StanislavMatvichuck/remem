@@ -25,6 +25,7 @@ final class EventsListContainer:
     let sortingCommander: EventsSortingCommanding
     let manualSortingProvider: EventsSortingManualQuerying
     let manualSortingCommander: EventsSortingManualCommanding
+    lazy var widgetUpdater = WidgetUpdateService(provider: self) /// test for reference cycle here
 
     var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
 
@@ -47,6 +48,7 @@ final class EventsListContainer:
         self.sortingCommander = sortingRepository
         self.manualSortingProvider = manualSortingRepository
         self.manualSortingCommander = manualSortingRepository
+        widgetUpdater.serve(ApplicationServiceEmptyArgument())
     }
 
     func makeEventsListController() -> EventsListController {

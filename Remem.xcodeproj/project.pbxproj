@@ -245,6 +245,7 @@
 		08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
+		08BA0B022BD6A39200F642D1 /* WidgetUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */; };
 		08BBD4A02BB6D3330095DBBF /* CreateHappeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */; };
 		08BBD4A22BB6E67A0095DBBF /* ShowCreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
@@ -657,6 +658,7 @@
 		08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestRepositoryConfigurator.swift; sourceTree = "<group>"; };
 		08B89A2528E3190600F4B63B /* StyledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledText.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
+		08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateService.swift; sourceTree = "<group>"; };
 		08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHappeningService.swift; sourceTree = "<group>"; };
 		08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCreateEventService.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
@@ -1202,6 +1204,7 @@
 				080C9A442BC97F5A00830A9F /* CreateGoalService.swift */,
 				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */,
+				08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */,
 				0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */,
 				082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */,
 				087EEF332BB59401009A55BB /* SetEventsOrderingService.swift */,
@@ -2013,6 +2016,7 @@
 				0872F5222BB4761900799142 /* EventsListViewModel.swift in Sources */,
 				0869C4992B7FF52B0007D6E0 /* EventsListCellViewModel.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
+				08BA0B022BD6A39200F642D1 /* WidgetUpdateService.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,

@@ -40,6 +40,7 @@ final class EventsListController:
 
     var eventsListOrderingSubscription: DomainEventsPublisher.DomainEventSubscription?
     var happeningCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    var happeningDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription?
@@ -71,6 +72,7 @@ final class EventsListController:
         timer?.invalidate()
         eventsListOrderingSubscription = nil
         happeningCreatedSubscription = nil
+        happeningDeletedSubscription = nil
         eventRemovedSubscription = nil
         eventCreatedSubscription = nil
         eventVisitedSubscription = nil
@@ -124,6 +126,11 @@ final class EventsListController:
                     }
                 }
             }
+        )
+
+        happeningDeletedSubscription = DomainEventsPublisher.shared.subscribe(
+            HappeningCreated.self,
+            usingBlock: { [weak self] _ in self?.update() }
         )
 
         goalCreatedSubscription = DomainEventsPublisher.shared.subscribe(
