@@ -137,26 +137,20 @@ final class AppPreviewRecorder: XCTestCase {
             .firstMatch
     }
 
-    private func submitSecondEvent() {
-        field.typeText("Coffee ")
-
-        let coffeeEmoji = app.buttons["☕️"]
-        coffeeEmoji.tap()
-
+    private func submitFirstEvent() {
+        field.typeText("A chapter in a 📖")
         app.keyboards.buttons["Done"].tap()
+        sleep(1)
+    }
+
+    private func submitSecondEvent() {
+        field.typeText("Plants watering 🪴")
+        app.keyboards.buttons["Done"].tap()
+        sleep(1)
     }
 
     private func submitThirdEvent() {
-        field.typeText("Fitness ")
-
-        let coffeeEmoji = app.buttons["👟"]
-        coffeeEmoji.tap()
-
-        app.keyboards.buttons["Done"].tap()
-    }
-
-    private func submitFirstEvent() {
-        field.typeText("Car broke down 🚙")
+        field.typeText("Meditation 🧘🏻‍♀️")
         app.keyboards.buttons["Done"].tap()
     }
 
