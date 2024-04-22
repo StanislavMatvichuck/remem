@@ -19,26 +19,19 @@ final class AppPreviewRecorder: XCTestCase {
     override func tearDown() { app = nil; super.tearDown() }
 
     func test_recordPreview() {
-        executeWith(mode: .appPreview02_addingEvents, recording: recording) {
+        executeWith(mode: .appPreview, recording: recording) {
             createEventButton.tap()
-            submitFirstEvent()
+            field.typeText("junk food 🌭")
+            app.keyboards.buttons["Done"].tap()
+            sleep(1)
 
-            createEventButton.tap()
-            submitSecondEvent()
-
-            createEventButton.tap()
-            submitThirdEvent()
-
-            swipeCell(at: 1)
             swipeCell(at: 2)
-            swipeCell(at: 3)
-
             sleep(1)
 
             ///
             /// Open event details
             ///
-            cell(at: 2).tap()
+            cell(at: 1).tap()
 
             /// Next to rows do not work because no predefined data involved
             app.collectionViews.firstMatch.swipeRight()
@@ -47,10 +40,10 @@ final class AppPreviewRecorder: XCTestCase {
             ///
             /// Scroll event details forth and back
             ///
-            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
-            sleep(1)
-            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeDown()
-            sleep(1)
+//            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
+//            sleep(1)
+//            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeDown()
+//            sleep(1)
 
             ///
             /// Add goal
@@ -87,15 +80,15 @@ final class AppPreviewRecorder: XCTestCase {
             backButton.tap()
             sleep(1)
 
-            swipeCell(at: 2)
+            swipeCell(at: 1)
             sleep(1)
-            swipeCell(at: 2)
+            swipeCell(at: 1)
             sleep(1)
-            swipeCell(at: 2)
+            swipeCell(at: 1)
             sleep(1)
 
             /// Go to event details and observe achieved goal
-            cell(at: 2).tap()
+            cell(at: 1).tap()
 
             let month2 = app.descendants(matching: .staticText).element(
                 matching: .staticText,
@@ -135,23 +128,6 @@ final class AppPreviewRecorder: XCTestCase {
             .descendants(matching: .any)
             .element(matching: .any, identifier: UITestAccessibilityIdentifier.weekDay.rawValue)
             .firstMatch
-    }
-
-    private func submitFirstEvent() {
-        field.typeText("A chapter in a 📖")
-        app.keyboards.buttons["Done"].tap()
-        sleep(1)
-    }
-
-    private func submitSecondEvent() {
-        field.typeText("Plants watering 🪴")
-        app.keyboards.buttons["Done"].tap()
-        sleep(1)
-    }
-
-    private func submitThirdEvent() {
-        field.typeText("Meditation 🧘🏻‍♀️")
-        app.keyboards.buttons["Done"].tap()
     }
 
     // MARK: - Elements querying

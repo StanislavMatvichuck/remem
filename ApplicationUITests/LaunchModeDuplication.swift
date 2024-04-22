@@ -9,7 +9,7 @@ import Foundation
 
 /// Duplication from Application target
 enum LaunchMode: String {
-    case appPreview02_addingEvents,
+    case appPreview,
          appPreview02_swipingEvents,
          appPreview02_viewDetailsAndExport,
          appPreview02_addWeeklyGoal,

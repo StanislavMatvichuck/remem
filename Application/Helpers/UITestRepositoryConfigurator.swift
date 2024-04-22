@@ -9,15 +9,13 @@ import Domain
 import Foundation
 
 final class UITestRepositoryConfigurator {
-    static let viewAndExportToday = DayIndex.referenceValue.adding(days: 18)
-    static let eventsNames = ["Car broke down 🚙", "Coffee ☕️", "Fitness 👟"]
-    static let dateCreated = DayIndex.referenceValue.date
+    static let eventsNames = ["🔟 pull-ups", "Coffee ☕️", "Fitness 👟"]
 
     func configure(
         repository: ApplicationContainer.Repository,
         for mode: LaunchMode
     ) {
-        let dateCreated = Self.dateCreated
+        let dateCreated = Date.now.addingTimeInterval(Self.days(-21))
         let firstEvent = Event(name: Self.eventsNames[0], dateCreated: dateCreated)
         let secondEvent = Event(name: Self.eventsNames[1], dateCreated: dateCreated)
         let thirdEvent = Event(name: Self.eventsNames[2], dateCreated: dateCreated)
@@ -29,43 +27,20 @@ final class UITestRepositoryConfigurator {
         }
 
         switch mode {
-        case .appPreview02_swipingEvents:
-            addEvents()
-        case .appPreview02_viewDetailsAndExport:
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(7) + hours(8) + minutes(13)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(8) + hours(9) + minutes(5)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(9) + hours(8) + minutes(47)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(9) + hours(12) + minutes(20)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(10) + hours(9) + minutes(1)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(11) + hours(10) + minutes(20)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(11) + hours(11) + minutes(53)))
-
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(14) + hours(8) + minutes(13)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(9) + minutes(27)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(8) + minutes(7)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(16) + hours(8) + minutes(35)))
-            secondEvent.addHappening(date: dateCreated.addingTimeInterval(days(17) + hours(8) + minutes(42)))
-            addEvents()
-        case .appPreview02_addWeeklyGoal:
-            addFitnessHappenings(thirdEvent)
-            addEvents()
-        case .appPreview03_widget, .appPreview03_darkMode:
-            addFitnessHappenings(thirdEvent)
-            addEvents()
-        case .eventsListInteractions:
-            addEvents()
+        case .appPreview:
+            firstEvent.visit()
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(20) + hours(8) + minutes(13)))
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(19) + hours(9) + minutes(27)))
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(18) + hours(5) + minutes(17)))
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(15) + hours(0) + minutes(42)))
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(15) + hours(3) + minutes(54)))
+            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(13) + hours(9) + minutes(74)))
+            repository.create(event: firstEvent)
         default: break
         }
     }
 
-    private func days(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * 24 * amount) }
+    private static func days(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * 24 * amount) }
     private func hours(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * amount) }
     private func minutes(_ amount: Int) -> TimeInterval { TimeInterval(60 * amount) }
-
-    /// Bad naming
-    private func addFitnessHappenings(_ event: Event) {
-        event.addHappening(date: Self.dateCreated.addingTimeInterval(days(14) + hours(18) + minutes(13)))
-        event.addHappening(date: Self.dateCreated.addingTimeInterval(days(16) + hours(20) + minutes(30)))
-        event.addHappening(date: Self.dateCreated.addingTimeInterval(days(17) + hours(17) + minutes(15)))
-    }
 }
