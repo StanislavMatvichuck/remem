@@ -133,3 +133,14 @@ final class GoalProgressView: UIView {
         circleConfigured = true
     }
 }
+
+extension GoalProgressView {
+    func animateValueUpdate() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = 2.0
+        animation.toValue = 1.0
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        animation.duration = 0.1
+        value.layer.add(animation, forKey: nil)
+    }
+}

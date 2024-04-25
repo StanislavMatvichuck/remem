@@ -38,6 +38,9 @@ final class GoalCell: UICollectionViewCell {
         progress.viewModel = viewModel
         input.viewModel = viewModel
         configureAppearance(viewModel.isAchieved)
+        if let oldValue, oldValue.readableValue != viewModel.readableValue {
+            progress.animateValueUpdate()
+        }
     }}
 
     var deleteService: DeleteGoalService?
