@@ -101,5 +101,9 @@ final class CreateEventCell: UICollectionViewCell {
     }
 
     // MARK: - Events handling
-    @objc private func handleTouchUp(_: UIButton) { tapService?.serve(ApplicationServiceEmptyArgument()) }
+    @objc private func handleTouchUp(_: UIButton) {
+        animateTapReceiving {
+            self.tapService?.serve(ApplicationServiceEmptyArgument())
+        }
+    }
 }

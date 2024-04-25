@@ -86,8 +86,10 @@ final class EventCell: UICollectionViewCell {
     }
 
     @objc private func handleTap() {
-        guard let viewModel, let tapService else { return }
-        tapService.serve(ApplicationServiceEmptyArgument())
+        view.animateTapReceiving {
+            guard let tapService = self.tapService else { return }
+            tapService.serve(ApplicationServiceEmptyArgument())
+        }
     }
 }
 

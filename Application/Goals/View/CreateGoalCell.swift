@@ -51,5 +51,9 @@ final class CreateGoalCell: UICollectionViewCell {
     }
 
     private func configureTapHandler() { button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) }
-    @objc private func handleTap() { service?.serve(CreateGoalServiceArgument(eventId: viewModel!.eventId, dateCreated: .now)) }
+    @objc private func handleTap() {
+        animateTapReceiving {
+            self.service?.serve(CreateGoalServiceArgument(eventId: self.viewModel!.eventId, dateCreated: .now))
+        }
+    }
 }

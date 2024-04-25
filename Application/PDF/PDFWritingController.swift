@@ -35,7 +35,8 @@ final class PDFWritingController: UIViewController {
     }
 
     @objc func handleTap(_: UIButton) {
-        viewRoot.button.animateTapReceiving()
-        service.serve(ApplicationServiceEmptyArgument())
+        viewRoot.button.animateTapReceiving {
+            self.service.serve(ApplicationServiceEmptyArgument())
+        }
     }
 }

@@ -42,7 +42,7 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = !al
     }
 
-    func animateTapReceiving(completionHandler: (() -> Void)? = nil) {
+    func animateTapReceiving(completionHandler: (() -> Void)? = nil, fromScale: CGFloat = 1.0, toScale: CGFloat = 0.9) {
         class AnimationDelegate: NSObject, CAAnimationDelegate {
             let completionHandler: (() -> Void)?
             init(completionHandler: (() -> Void)? = nil) {
@@ -55,8 +55,8 @@ extension UIView {
         }
 
         let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fromValue = 0.9
-        animation.toValue = 0.8
+        animation.fromValue = fromScale
+        animation.toValue = toScale
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         animation.duration = 0.07
         animation.autoreverses = true

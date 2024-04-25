@@ -97,12 +97,12 @@ final class GoalInputView: UIStackView {
     }
 
     @objc private func handleTapPlus() {
-        plus.animateTapReceiving()
+        plus.animateTapReceiving(fromScale: 0.9, toScale: 0.8)
         updateService?.serve(UpdateGoalServiceArgument(input: .plus))
     }
 
     @objc private func handleTapMinus() {
-        minus.animateTapReceiving()
+        minus.animateTapReceiving(fromScale: 0.9, toScale: 0.8)
         updateService?.serve(UpdateGoalServiceArgument(input: .minus))
     }
 }
