@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Wallpaper.jpg",
+      "filename" : "wp.jpg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "WallpaperDark.jpg",
+      "filename" : "wpDark.jpg",
       "idiom" : "universal"
     }
   ],
