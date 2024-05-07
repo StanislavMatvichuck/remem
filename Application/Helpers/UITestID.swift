@@ -1,5 +1,5 @@
 //
-//  UITestAccessibilityIdentifier.swift
+//  UITestID.swift
 //  Application
 //
 //  Created by Stanislav Matvichuck on 05.06.2023.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum UITestAccessibilityIdentifier: String {
+/// This type is available for `ApplicationUITests` target
+enum UITestID: String {
     case eventDetailsScroll,
          textFieldGoal,
          buttonGoalDone,

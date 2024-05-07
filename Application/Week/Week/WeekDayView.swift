@@ -35,7 +35,7 @@ final class WeekDayView: UIStackView {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         isAccessibilityElement = true
-        accessibilityIdentifier = UITestAccessibilityIdentifier.weekDay.rawValue
+        accessibilityIdentifier = UITestID.weekDay.rawValue
         configureLayout()
         configureAppearance()
     }

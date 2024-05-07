@@ -224,8 +224,8 @@
 		089D1DA62BC28A2D0050AD33 /* ShowDayDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */; };
 		089D1DA82BC294F90050AD33 /* ShowEventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */; };
 		089D1DAA2BC296CF0050AD33 /* ShowPDFReadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */; };
-		089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
-		089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */; };
+		089E4B452A2DE8E100727624 /* UITestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestID.swift */; };
+		089E4B462A2DE90900727624 /* UITestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestID.swift */; };
 		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
 		089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */; };
 		08A0CB562B48649700DF2CD3 /* EventsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */; };
@@ -638,7 +638,7 @@
 		089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDayDetailsService.swift; sourceTree = "<group>"; };
 		089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEventsListService.swift; sourceTree = "<group>"; };
 		089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPDFReadingService.swift; sourceTree = "<group>"; };
-		089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestAccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		089E4B442A2DE8E100727624 /* UITestID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestID.swift; sourceTree = "<group>"; };
 		089E4B472A2DEAB300727624 /* LaunchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchMode.swift; sourceTree = "<group>"; };
 		089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsDataSource.swift; sourceTree = "<group>"; };
 		08A0CB552B48649700DF2CD3 /* EventsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListViewModelTests.swift; sourceTree = "<group>"; };
@@ -1409,7 +1409,7 @@
 				08D5123F2787170200C2037F /* ExtensionUIView.swift */,
 				089595F829EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift */,
 				08DA2C11284F559200FC418B /* UIHelper.swift */,
-				089E4B442A2DE8E100727624 /* UITestAccessibilityIdentifier.swift */,
+				089E4B442A2DE8E100727624 /* UITestID.swift */,
 				08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 			);
@@ -1913,7 +1913,7 @@
 				0807E85C2BA328D1005ED448 /* XCUIElementQueryExtension.swift in Sources */,
 				0831A1132BA0804D002233D5 /* EventDetails.swift in Sources */,
 				0858F71A2B9F8A45005F16A3 /* EventsList.swift in Sources */,
-				089E4B462A2DE90900727624 /* UITestAccessibilityIdentifier.swift in Sources */,
+				089E4B462A2DE90900727624 /* UITestID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2051,7 +2051,7 @@
 				0887C807298AE5040048EC12 /* ExtensionEvent.swift in Sources */,
 				08752B0E2B8836ED00ECCE77 /* SummaryCell.swift in Sources */,
 				089AC5F22B3C53BF00577781 /* WeekDayNumberView.swift in Sources */,
-				089E4B452A2DE8E100727624 /* UITestAccessibilityIdentifier.swift in Sources */,
+				089E4B452A2DE8E100727624 /* UITestID.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				089B37882A0A32B700422971 /* EventAmountView.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeHintDisplay.swift in Sources */,
@@ -2406,7 +2406,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.ApplicationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2425,7 +2425,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mckstanislav.ApplicationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

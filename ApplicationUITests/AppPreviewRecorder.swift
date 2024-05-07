@@ -40,17 +40,17 @@ final class AppPreviewRecorder: XCTestCase {
             ///
             /// Scroll event details forth and back
             ///
-//            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeUp()
+//            app.scrollViews[UITestID.eventDetailsScroll.rawValue].swipeUp()
 //            sleep(1)
-//            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeDown()
+//            app.scrollViews[UITestID.eventDetailsScroll.rawValue].swipeDown()
 //            sleep(1)
 
             ///
             /// Add goal
             ///
             let createGoalButton = app.collectionViews.matching(
-                identifier: UITestAccessibilityIdentifier.goalsList.rawValue).cells.matching(
-                identifier: UITestAccessibilityIdentifier.buttonCreateGoal.rawValue
+                identifier: UITestID.goalsList.rawValue).cells.matching(
+                identifier: UITestID.buttonCreateGoal.rawValue
             ).firstMatch
             createGoalButton.tap()
 
@@ -59,7 +59,7 @@ final class AppPreviewRecorder: XCTestCase {
             ///
             let month = app.descendants(matching: .staticText).element(
                 matching: .staticText,
-                identifier: UITestAccessibilityIdentifier.weekPageMonth.rawValue
+                identifier: UITestID.weekPageMonth.rawValue
             )
             let backButton = app.navigationBars.firstMatch.descendants(matching: .button).firstMatch
             month.press(forDuration: 0.01, thenDragTo: backButton, withVelocity: .slow, thenHoldForDuration: 0.01)
@@ -67,8 +67,8 @@ final class AppPreviewRecorder: XCTestCase {
             ///
             /// Increase goal value
             ///
-            let goalsList = app.collectionViews.matching(identifier: UITestAccessibilityIdentifier.goalsList.rawValue).firstMatch
-            let increaseGoalValueButton = goalsList.cells.matching(identifier: UITestAccessibilityIdentifier.goal.rawValue).firstMatch.descendants(matching: .any)[UITestAccessibilityIdentifier.buttonIncreaseGoalValue.rawValue]
+            let goalsList = app.collectionViews.matching(identifier: UITestID.goalsList.rawValue).firstMatch
+            let increaseGoalValueButton = goalsList.cells.matching(identifier: UITestID.goal.rawValue).firstMatch.descendants(matching: .any)[UITestID.buttonIncreaseGoalValue.rawValue]
             sleep(1)
             increaseGoalValueButton.tap()
             increaseGoalValueButton.tap()
@@ -92,7 +92,7 @@ final class AppPreviewRecorder: XCTestCase {
 
             let month2 = app.descendants(matching: .staticText).element(
                 matching: .staticText,
-                identifier: UITestAccessibilityIdentifier.weekPageMonth.rawValue
+                identifier: UITestID.weekPageMonth.rawValue
             )
             let backButton2 = app.navigationBars.firstMatch.descendants(matching: .button).firstMatch
             month2.press(forDuration: 0.01, thenDragTo: backButton2, withVelocity: .slow, thenHoldForDuration: 0.01)
@@ -101,7 +101,7 @@ final class AppPreviewRecorder: XCTestCase {
             ///
             /// Scroll to top and go to day details
             ///
-//            app.scrollViews[UITestAccessibilityIdentifier.eventDetailsScroll.rawValue].swipeDown()
+//            app.scrollViews[UITestID.eventDetailsScroll.rawValue].swipeDown()
 //            sleep(1)
 //            weekCell(at: 1).tap()
 //            sleep(2)
@@ -126,14 +126,14 @@ final class AppPreviewRecorder: XCTestCase {
             .cells
             .firstMatch
             .descendants(matching: .any)
-            .element(matching: .any, identifier: UITestAccessibilityIdentifier.weekDay.rawValue)
+            .element(matching: .any, identifier: UITestID.weekDay.rawValue)
             .firstMatch
     }
 
     // MARK: - Elements querying
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch.cells.matching(
-            identifier: UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
+            identifier: UITestID.buttonCreteEvent.rawValue
         ).firstMatch
     }
 
@@ -155,8 +155,8 @@ final class AppPreviewRecorder: XCTestCase {
 
     private func swipeCell(at index: Int) {
         let event = cell(at: index)
-        let value = event.descendants(matching: .staticText)[UITestAccessibilityIdentifier.eventValue.rawValue]
-        let swiper = event.descendants(matching: .any)[UITestAccessibilityIdentifier.eventSwiper.rawValue]
+        let value = event.descendants(matching: .staticText)[UITestID.eventValue.rawValue]
+        let swiper = event.descendants(matching: .any)[UITestID.eventSwiper.rawValue]
 
         swiper.press(
             forDuration: 0.01,

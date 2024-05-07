@@ -34,7 +34,7 @@ final class HintCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isAccessibilityElement = true
-        accessibilityIdentifier = UITestAccessibilityIdentifier.hint.rawValue
+        accessibilityIdentifier = UITestID.hint.rawValue
         configureLayout()
         configureAppearance()
     }

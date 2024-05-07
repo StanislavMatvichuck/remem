@@ -12,7 +12,7 @@ final class EventsSortingCellView: UIView {
         let label = UILabel(al: true)
         label.font = .font
         label.isAccessibilityElement = true
-        label.accessibilityIdentifier = UITestAccessibilityIdentifier.orderingVariant.rawValue
+        label.accessibilityIdentifier = UITestID.orderingVariant.rawValue
         return label
     }()
 

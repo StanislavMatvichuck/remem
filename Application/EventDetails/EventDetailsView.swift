@@ -14,7 +14,7 @@ final class EventDetailsView: UIView {
     // MARK: - Init
     init() {
         self.scroll = ViewScroll(.vertical)
-        self.scroll.accessibilityIdentifier = UITestAccessibilityIdentifier.eventDetailsScroll.rawValue
+        self.scroll.accessibilityIdentifier = UITestID.eventDetailsScroll.rawValue
         super.init(frame: .zero)
 
         configureLayout()

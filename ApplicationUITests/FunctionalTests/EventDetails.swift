@@ -27,21 +27,21 @@ final class EventDetailsFunctionalTests: XCTestCase {
         createEventWith(name: "EventDetails")
         firstEvent.tap()
 
-        let firstDayOfWeek = app.descendants(matching: .any)[UITestAccessibilityIdentifier.weekDay.rawValue].firstMatch
+        let firstDayOfWeek = app.descendants(matching: .any)[UITestID.weekDay.rawValue].firstMatch
         _ = firstDayOfWeek.waitForExistence(timeout: 1.0)
         firstDayOfWeek.tap()
 
-        let happeningsList = app.collectionViews[UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue].firstMatch
+        let happeningsList = app.collectionViews[UITestID.dayDetailsHappeningsList.rawValue].firstMatch
 
         XCTAssertEqual(happeningsList.cells.count, 0)
 
-        let addHappeningButton = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue].firstMatch
+        let addHappeningButton = app.descendants(matching: .any)[UITestID.dayDetailsAddHappening.rawValue].firstMatch
         _ = addHappeningButton.waitForExistence(timeout: 1.0)
         addHappeningButton.tap()
 
         sleep(1)
 
-        let happening = app.descendants(matching: .cell)[UITestAccessibilityIdentifier.dayDetailsHappening.rawValue].firstMatch
+        let happening = app.descendants(matching: .cell)[UITestID.dayDetailsHappening.rawValue].firstMatch
         _ = happening.waitForExistence(timeout: 1.0)
 
         /// Assert: happening added
@@ -52,17 +52,17 @@ final class EventDetailsFunctionalTests: XCTestCase {
         createEventWith(name: "EventDetails")
         firstEvent.tap()
 
-        let firstDayOfWeek = app.descendants(matching: .any)[UITestAccessibilityIdentifier.weekDay.rawValue].firstMatch
+        let firstDayOfWeek = app.descendants(matching: .any)[UITestID.weekDay.rawValue].firstMatch
         firstDayOfWeek.tap()
 
-        let cells = app.collectionViews[UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue].firstMatch.staticTexts
-        let addHappeningButton = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue].firstMatch
+        let cells = app.collectionViews[UITestID.dayDetailsHappeningsList.rawValue].firstMatch.staticTexts
+        let addHappeningButton = app.descendants(matching: .any)[UITestID.dayDetailsAddHappening.rawValue].firstMatch
 
         XCTAssertEqual(cells.countForHittables, 0)
         addHappeningButton.tap()
         XCTAssertEqual(cells.countForHittables, 1)
 
-        let happening = app.descendants(matching: .cell)[UITestAccessibilityIdentifier.dayDetailsHappening.rawValue].firstMatch
+        let happening = app.descendants(matching: .cell)[UITestID.dayDetailsHappening.rawValue].firstMatch
 
         /// Act: remove happening with drag and drop
         happening.press(
@@ -79,10 +79,10 @@ final class EventDetailsFunctionalTests: XCTestCase {
         createEventWith(name: "SummaryUpdate")
         firstEvent.tap()
 
-        let summaryValue = app.descendants(matching: .staticText)[UITestAccessibilityIdentifier.summaryValue.rawValue].firstMatch
-        let addHappeningButton = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue].firstMatch
-        let firstDayOfWeek = app.descendants(matching: .any)[UITestAccessibilityIdentifier.weekDay.rawValue].firstMatch
-        let dayDetailsBg = app.descendants(matching: .any)[UITestAccessibilityIdentifier.dayDetailsBackground.rawValue].firstMatch
+        let summaryValue = app.descendants(matching: .staticText)[UITestID.summaryValue.rawValue].firstMatch
+        let addHappeningButton = app.descendants(matching: .any)[UITestID.dayDetailsAddHappening.rawValue].firstMatch
+        let firstDayOfWeek = app.descendants(matching: .any)[UITestID.weekDay.rawValue].firstMatch
+        let dayDetailsBg = app.descendants(matching: .any)[UITestID.dayDetailsBackground.rawValue].firstMatch
 
         XCTAssertEqual(summaryValue.label, "0")
 
@@ -101,7 +101,7 @@ final class EventDetailsFunctionalTests: XCTestCase {
     //
     private var createEventButton: XCUIElement {
         app.collectionViews.firstMatch.cells.matching(
-            identifier: UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
+            identifier: UITestID.buttonCreteEvent.rawValue
         ).firstMatch
     }
 

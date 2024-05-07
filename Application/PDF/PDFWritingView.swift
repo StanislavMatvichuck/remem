@@ -28,7 +28,7 @@ final class PDFWritingView: UIView {
         button.layer.borderColor = UIColor.border_primary.cgColor
         button.layer.borderWidth = .border
         button.layer.cornerRadius = (2 * .layoutSquare - 0.5 * .layoutSquare) / 2
-        button.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonPdfCreate.rawValue
+        button.accessibilityIdentifier = UITestID.buttonPdfCreate.rawValue
 
         return button
     }()

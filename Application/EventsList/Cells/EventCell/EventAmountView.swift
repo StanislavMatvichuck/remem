@@ -16,7 +16,7 @@ final class EventAmountView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 1
-        label.accessibilityIdentifier = UITestAccessibilityIdentifier.eventValue.rawValue
+        label.accessibilityIdentifier = UITestID.eventValue.rawValue
         label.isAccessibilityElement = true
         return label
     }()

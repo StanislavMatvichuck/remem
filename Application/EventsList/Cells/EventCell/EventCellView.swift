@@ -22,7 +22,7 @@ final class EventCellView: UIView {
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 3
         label.isAccessibilityElement = true
-        label.accessibilityIdentifier = UITestAccessibilityIdentifier.eventTitle.rawValue
+        label.accessibilityIdentifier = UITestID.eventTitle.rawValue
         return label
     }()
 

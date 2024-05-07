@@ -51,7 +51,7 @@ final class CreateEventCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isAccessibilityElement = true
-        accessibilityIdentifier = UITestAccessibilityIdentifier.buttonCreteEvent.rawValue
+        accessibilityIdentifier = UITestID.buttonCreteEvent.rawValue
         configureLayout()
         configureAppearance()
         configureEventHandlers()
@@ -91,7 +91,7 @@ final class CreateEventCell: UICollectionViewCell {
     private func addInvisibleDropAreaForUITesting() {
         let uiTestingDropArea = UIView(al: true)
         uiTestingDropArea.isAccessibilityElement = true
-        uiTestingDropArea.accessibilityIdentifier = UITestAccessibilityIdentifier.removeEventArea.rawValue
+        uiTestingDropArea.accessibilityIdentifier = UITestID.removeEventArea.rawValue
         uiTestingDropArea.backgroundColor = .clear
         contentView.addSubview(uiTestingDropArea)
         uiTestingDropArea.widthAnchor.constraint(equalToConstant: 1.0).isActive = true

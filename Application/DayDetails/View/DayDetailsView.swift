@@ -35,7 +35,7 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.widthAnchor.constraint(equalTo: collection.heightAnchor).isActive = true
         collection.isAccessibilityElement = true
-        collection.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappeningsList.rawValue
+        collection.accessibilityIdentifier = UITestID.dayDetailsHappeningsList.rawValue
         return collection
     }()
 
@@ -55,7 +55,7 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.isAccessibilityElement = true
-        label.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsAddHappening.rawValue
+        label.accessibilityIdentifier = UITestID.dayDetailsAddHappening.rawValue
         return label
     }()
 

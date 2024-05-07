@@ -37,7 +37,7 @@ final class DayCell: UICollectionViewCell {
         configureLayout()
         configureAppearance()
         isAccessibilityElement = true
-        accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsHappening.rawValue
+        accessibilityIdentifier = UITestID.dayDetailsHappening.rawValue
         if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(configureAppearance)) }
     }
 

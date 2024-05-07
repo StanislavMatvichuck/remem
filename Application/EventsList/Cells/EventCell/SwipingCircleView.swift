@@ -15,7 +15,7 @@ final class SwipingCircleView: UIControl {
         let view = UIView(al: true)
         view.widthAnchor.constraint(equalToConstant: .swiperRadius * 2).isActive = true
         view.heightAnchor.constraint(equalToConstant: .swiperRadius * 2).isActive = true
-        view.accessibilityIdentifier = UITestAccessibilityIdentifier.eventSwiper.rawValue
+        view.accessibilityIdentifier = UITestID.eventSwiper.rawValue
         view.isAccessibilityElement = true
         return view
     }()

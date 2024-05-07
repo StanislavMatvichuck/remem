@@ -12,7 +12,7 @@ final class SummaryCell: UICollectionViewCell {
     let value: UILabel = {
         let label = UILabel(al: true)
         label.isAccessibilityElement = true
-        label.accessibilityIdentifier = UITestAccessibilityIdentifier.summaryValue.rawValue
+        label.accessibilityIdentifier = UITestID.summaryValue.rawValue
         return label
     }()
 

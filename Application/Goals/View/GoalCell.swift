@@ -50,7 +50,7 @@ final class GoalCell: UICollectionViewCell {
         configureLayout()
         configureAppearance()
         isAccessibilityElement = true
-        accessibilityIdentifier = UITestAccessibilityIdentifier.goal.rawValue
+        accessibilityIdentifier = UITestID.goal.rawValue
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

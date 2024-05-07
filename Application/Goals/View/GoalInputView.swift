@@ -85,7 +85,7 @@ final class GoalInputView: UIStackView {
         plus.addGestureRecognizer(plusGR)
         plus.isUserInteractionEnabled = true
         plus.isAccessibilityElement = true
-        plus.accessibilityIdentifier = UITestAccessibilityIdentifier.buttonIncreaseGoalValue.rawValue
+        plus.accessibilityIdentifier = UITestID.buttonIncreaseGoalValue.rawValue
 
         plusBg.isUserInteractionEnabled = true
         plusBg.isAccessibilityElement = true

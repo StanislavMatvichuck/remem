@@ -54,7 +54,7 @@ final class DayDetailsPresentationController: UIPresentationController {
         backgroundView.backgroundColor = .bg
         backgroundView.alpha = 0
         backgroundView.isAccessibilityElement = true
-        backgroundView.accessibilityIdentifier = UITestAccessibilityIdentifier.dayDetailsBackground.rawValue
+        backgroundView.accessibilityIdentifier = UITestID.dayDetailsBackground.rawValue
         backgroundView.addSubview(dayDetailsBackground)
         backgroundView.layer.addSublayer(shapeLayer)
         backgroundView.addGestureRecognizer(UIPanGestureRecognizer(
