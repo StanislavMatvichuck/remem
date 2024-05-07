@@ -1,4 +1,5 @@
 {
+  "originHash" : "29b0383f65edb2bf1804143815425d98b22744fea5519352f118bee57b942318",
   "pins" : [
     {
       "identity" : "ios-snapshot-test-case",
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
