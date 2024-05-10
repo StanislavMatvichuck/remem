@@ -10,6 +10,7 @@ import Foundation
 public protocol EventsReading {
     func read() -> [Event]
     func read(byId: String) -> Event
+    func identifiers() -> [String]
 }
 
 public protocol EventsWriting {

@@ -8,11 +8,15 @@
 import Domain
 import Foundation
 
+/// This type is duplicated at `ApplicationUITests` target
 enum LaunchMode: String {
     case appPreview,
          unitTest,
          uikit,
-         injectedCurrentMoment
+         injectedCurrentMoment,
+         functionalTest,
+         performanceTest,
+         performanceTestWritesData
 
     var uiTestingDisabled: Bool { return self != .appPreview }
 

@@ -9,38 +9,71 @@ import Domain
 import Foundation
 
 final class UITestRepositoryConfigurator {
-    static let eventsNames = ["🔟 pull-ups", "Coffee ☕️", "Fitness 👟"]
-
     func configure(
         repository: ApplicationContainer.Repository,
         for mode: LaunchMode
     ) {
-        let dateCreated = Date.now.addingTimeInterval(Self.days(-21))
-        let firstEvent = Event(name: Self.eventsNames[0], dateCreated: dateCreated)
-        let secondEvent = Event(name: Self.eventsNames[1], dateCreated: dateCreated)
-        let thirdEvent = Event(name: Self.eventsNames[2], dateCreated: dateCreated)
-
-        func addEvents() {
-            repository.create(event: firstEvent)
-            repository.create(event: secondEvent)
-            repository.create(event: thirdEvent)
-        }
-
         switch mode {
-        case .appPreview:
-            firstEvent.visit()
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(20) + hours(8) + minutes(13)))
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(19) + hours(9) + minutes(27)))
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(18) + hours(5) + minutes(17)))
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(15) + hours(0) + minutes(42)))
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(15) + hours(3) + minutes(54)))
-            firstEvent.addHappening(date: dateCreated.addingTimeInterval(Self.days(13) + hours(9) + minutes(74)))
-            repository.create(event: firstEvent)
+        case .appPreview: configureForPreview(repository: repository)
+        case .performanceTestWritesData: configurePerformanceData(repository: repository)
         default: break
         }
     }
 
-    private static func days(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * 24 * amount) }
+    // MARK: - Private
+    private func configureForPreview(repository: ApplicationContainer.Repository) {
+        let dateCreated = Date.now.addingTimeInterval(days(-21))
+        let event = Event(name: "🔟 pull-ups", dateCreated: dateCreated)
+
+        event.visit()
+        event.addHappening(date: dateCreated.addingTimeInterval(days(20) + hours(8) + minutes(13)))
+        event.addHappening(date: dateCreated.addingTimeInterval(days(19) + hours(9) + minutes(27)))
+        event.addHappening(date: dateCreated.addingTimeInterval(days(18) + hours(5) + minutes(17)))
+        event.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(0) + minutes(42)))
+        event.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(3) + minutes(54)))
+        event.addHappening(date: dateCreated.addingTimeInterval(days(13) + hours(9) + minutes(74)))
+        repository.create(event: event)
+    }
+
+    private func configurePerformanceData(repository: ApplicationContainer.Repository) {
+        removeAllEvents(repository: repository)
+        createEvents(repository: repository)
+    }
+
+    private func removeAllEvents(repository: ApplicationContainer.Repository) {
+        for id in repository.identifiers() {
+            repository.delete(id: id)
+        }
+    }
+
+    private func createEvents(repository: ApplicationContainer.Repository) {
+        for eventNumber in 1 ... EventsPerformanceDescriptor.eventsCount {
+            let dateCreated = Date.now.addingTimeInterval(days(-EventsPerformanceDescriptor.daysPassedCount))
+            let event = Event(name: "Event#\(eventNumber)", dateCreated: dateCreated)
+
+            addHappenings(event: event)
+
+            repository.create(event: event)
+        }
+    }
+
+    private func addHappenings(event: Event) {
+        for day in 0 ..< EventsPerformanceDescriptor.daysPassedCount {
+            for swipeHour in 0 ..< EventsPerformanceDescriptor.swipesPerDay {
+                let happeningDate = Date.now.addingTimeInterval(days(-day) - hours(swipeHour))
+                event.addHappening(date: happeningDate)
+            }
+        }
+    }
+
+    private func days(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * 24 * amount) }
     private func hours(_ amount: Int) -> TimeInterval { TimeInterval(60 * 60 * amount) }
     private func minutes(_ amount: Int) -> TimeInterval { TimeInterval(60 * amount) }
+}
+
+private enum EventsPerformanceDescriptor {
+    static let eventsCount = 100
+    static let yearsPassed = 10
+    static let daysPassedCount = yearsPassed * 365
+    static let swipesPerDay = 3
 }

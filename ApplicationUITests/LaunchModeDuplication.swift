@@ -7,16 +7,13 @@
 
 import Foundation
 
-/// Duplication from Application target
+/// Duplication from `Application` target
 enum LaunchMode: String {
     case appPreview,
-         appPreview02_swipingEvents,
-         appPreview02_viewDetailsAndExport,
-         appPreview02_addWeeklyGoal,
-         appPreview03_widget,
-         appPreview03_darkMode,
-         eventsListInteractions,
-         eventsListFunctionalTests,
          unitTest,
-         uikit
+         uikit,
+         injectedCurrentMoment,
+         functionalTest,
+         performanceTest,
+         performanceTestWritesData
 }

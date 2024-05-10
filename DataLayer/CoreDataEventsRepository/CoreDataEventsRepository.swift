@@ -70,6 +70,15 @@ extension CoreDataEventsRepository: EventsReading {
             fatalError("Unable to find CDEvent by id")
         }
     }
+
+    public func identifiers() -> [String] { do {
+        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Event")
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["uuid"]
+        return try moc.fetch(fetchRequest).map { $0.allValues.first } as! [String]
+    } catch {
+        fatalError(error.localizedDescription)
+    } }
 }
 
 extension CoreDataEventsRepository: EventsWriting {

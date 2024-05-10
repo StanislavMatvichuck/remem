@@ -13,7 +13,7 @@ final class EventsListFunctionalTests: XCTestCase {
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
-        app.launchArguments = [LaunchMode.eventsListFunctionalTests.rawValue]
+        app.launchArguments = [LaunchMode.functionalTest.rawValue]
         app.launch()
     }
 

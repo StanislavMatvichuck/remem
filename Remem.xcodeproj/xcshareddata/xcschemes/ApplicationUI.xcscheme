@@ -55,6 +55,11 @@
                BlueprintName = "ApplicationUITests"
                ReferencedContainer = "container:Remem.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BasicPerformanceTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

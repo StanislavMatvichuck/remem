@@ -22,7 +22,7 @@ public struct EventsList {
     public let sorter: EventsSorter /// sorter enum can be nested in that list
     public let eventsIdentifiers: [String]
     public let hint: Hint
-    private let events: [Event]
+//    private let events: [Event]
 
     public init(
         sorterProvider: EventsSortingQuerying,
@@ -31,22 +31,23 @@ public struct EventsList {
     ) {
         let sorter = sorterProvider.get()
         let manualSorter = manualSorterProvider.get()
-        let events = eventsProvider.read()
-        let sortedEvents = EventsSortingExecutor().sort(
-            events: events,
-            ordering: sorter,
-            manualIdentifiers: manualSorter
-        )
+//        let events = eventsProvider.read()
+//        let sortedEvents = EventsSortingExecutor().sort(
+//            events: events,
+//            ordering: sorter,
+//            manualIdentifiers: manualSorter
+//        )
 
         self.sorter = sorter
-        self.events = sortedEvents
-        self.eventsIdentifiers = sortedEvents.map { $0.id }
-        self.hint = {
-            if events.count == 0 { return .createEvent }
-            if events.filter({ $0.happenings.count > 0 }).count == 0 { return .swipeEvent }
-            if events.filter({ $0.dateVisited != nil }).count == 0 { return .checkDetails }
-            return .allDone
-        }()
+//        self.events = sortedEvents
+        self.eventsIdentifiers = eventsProvider.identifiers()
+        self.hint = .createEvent
+//        self.hint = {
+//            if events.count == 0 { return .createEvent }
+//            if events.filter({ $0.happenings.count > 0 }).count == 0 { return .swipeEvent }
+//            if events.filter({ $0.dateVisited != nil }).count == 0 { return .checkDetails }
+//            return .allDone
+//        }()
     }
 }
 

@@ -17,17 +17,12 @@
 		<key>ApplicationSnapshots.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
 		</dict>
 		<key>ApplicationUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>DataLayer.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>4</integer>
 		</dict>
 		<key>Domain.xcscheme_^#shared#^_</key>
 		<dict>
@@ -45,6 +40,11 @@
 			<integer>4</integer>
 		</dict>
 		<key>IosUseCases.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>PerformanceTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
@@ -78,6 +78,16 @@
 			<true/>
 		</dict>
 		<key>083BECF028D0A319009157FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0857B5A229892CBC002B400B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0867A2C828D469F400E0842C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

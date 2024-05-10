@@ -33,7 +33,11 @@ final class ApplicationContainer {
             return repository
         }
 
-        let container = CoreDataStack.createContainer(inMemory: mode != .uikit)
+        let coreDataOperatesWithStoredData =
+            mode == .uikit ||
+            mode == .performanceTest ||
+            mode == .performanceTestWritesData
+        let container = CoreDataStack.createContainer(inMemory: !coreDataOperatesWithStoredData)
         let repository = makeRepository(mode, coreDataContainer: container)
         let watcher = DayWatcher()
         let coordinator = Coordinator()
