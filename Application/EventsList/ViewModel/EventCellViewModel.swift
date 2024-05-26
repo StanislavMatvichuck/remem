@@ -25,6 +25,7 @@ struct EventCellViewModel {
     let hintEnabled: Bool
     let goal: GoalViewModel?
     var animation: Animations
+    var loading: Bool
 
     private let currentMoment: Date
 
@@ -33,13 +34,15 @@ struct EventCellViewModel {
         hintEnabled: Bool,
         currentMoment: Date,
         animation: Animations,
-        goal: GoalViewModel?
+        goal: GoalViewModel?,
+        loading: Bool
     ) {
         self.animation = animation
         self.currentMoment = currentMoment
-        self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment)
+        self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment) // this method requires all happenings filtering
         self.goal = goal
         self.event = event
+        self.loading = loading
 
         self.title = event.name
         self.hintEnabled = hintEnabled
@@ -60,7 +63,8 @@ struct EventCellViewModel {
             hintEnabled: hintEnabled,
             currentMoment: currentMoment,
             animation: withAnimation,
-            goal: goal
+            goal: goal,
+            loading: loading
         )
     }
 
