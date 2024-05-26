@@ -42,6 +42,40 @@ final class BasicPerformanceTest: XCTestCase {
         eventDetailsBackToEventsListButton.tap()
     }
 
+    func test_swipeFirstEvent() {
+        swipeCell(at: 1)
+        sleep(5)
+        swipeCell(at: 2)
+        sleep(5)
+        swipeCell(at: 1)
+    }
+
+    func test_eventRemoval() {}
+    func test_scroll() {
+        app.collectionViews.firstMatch.swipeUp(velocity: .fast)
+        sleep(5)
+        app.collectionViews.firstMatch.swipeDown(velocity: .fast)
+    }
+
+    func test_ordering() {}
+    func test_eventOrderingManual() {}
+    func test_tapFirstEvent_tapFirstDay_goBack() {}
+    func test_tapFirstEvent_tapFirstDay_addHappening() {}
+    func test_tapFirstEvent_scroll() {}
+
+    private func swipeCell(at index: Int) {
+        let event = cell(at: index)
+        let value = event.descendants(matching: .staticText)[UITestID.eventValue.rawValue]
+        let swiper = event.descendants(matching: .any)[UITestID.eventSwiper.rawValue]
+
+        swiper.press(
+            forDuration: 0.01,
+            thenDragTo: value,
+            withVelocity: 150,
+            thenHoldForDuration: 0.01
+        )
+    }
+
     private func cell(at index: Int) -> XCUIElement {
         app.collectionViews.firstMatch.cells.element(boundBy: index)
     }
