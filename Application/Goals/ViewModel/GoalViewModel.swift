@@ -60,4 +60,9 @@ struct GoalViewModel {
         readablePercent = Self.percentFormatter.string(from: NSNumber(floatLiteral: Double(goal.progress)))!
         readableValue = "\(goal.value.amount)"
     }
+    
+    init?(goal: Goal?) {
+        guard let goal else { return nil }
+        self.init(goal: goal)
+    }
 }

@@ -22,9 +22,11 @@ struct VisitEventService: ApplicationService {
     }
 
     func serve(_ arg: VisitEventServiceArgument) {
-        event.visit(at: arg.date)
+        var visitedEvent = event
 
-        repository.update(id: event.id, event: event)
+        visitedEvent.visit(at: arg.date)
+
+        repository.update(id: event.id, event: visitedEvent)
 
         DomainEventsPublisher.shared.publish(EventVisited(event: event))
     }

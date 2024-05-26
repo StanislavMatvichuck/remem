@@ -22,7 +22,7 @@ struct RemoveHappeningService: ApplicationService {
 
     func serve(_ arg: RemoveHappeningServiceArgument) {
         do {
-            let event = eventsProvider.read(byId: eventId)
+            var event = eventsProvider.read(byId: eventId)
             try event.remove(happening: arg.happening)
             eventsStorage.update(id: eventId, event: event)
 

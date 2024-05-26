@@ -11,7 +11,7 @@ public enum EventManipulationError: Error {
     case invalidHappeningDeletion
 }
 
-public class Event {
+public struct Event {
     public let id: String
     public var name: String
     public var happenings: [Happening]
@@ -20,7 +20,7 @@ public class Event {
     public var dateVisited: Date?
 
     // MARK: - Init
-    public convenience init(name: String) {
+    public init(name: String) {
         self.init(
             id: UUID().uuidString,
             name: name,
@@ -30,7 +30,7 @@ public class Event {
         )
     }
 
-    public convenience init(name: String, dateCreated: Date) {
+    public init(name: String, dateCreated: Date) {
         self.init(
             id: UUID().uuidString,
             name: name,
@@ -58,7 +58,7 @@ public class Event {
 
 // MARK: - Public
 public extension Event {
-    @discardableResult func addHappening(date: Date) -> Happening {
+    @discardableResult mutating func addHappening(date: Date) -> Happening {
         let newHappening = Happening(dateCreated: date)
 
         if let insertIndex = happenings.lastIndex(where: { $0.dateCreated <= date }) {
@@ -70,9 +70,9 @@ public extension Event {
         return newHappening
     }
 
-    func visit(at date: Date = .now) { dateVisited = date }
+    mutating func visit(at date: Date = .now) { dateVisited = date }
 
-    @discardableResult func remove(happening: Happening) throws -> Happening? {
+    @discardableResult mutating func remove(happening: Happening) throws -> Happening? {
         var happeningDeleted: Happening?
 
         for (index, existingHappening) in happenings.enumerated() {

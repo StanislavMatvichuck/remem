@@ -13,20 +13,22 @@ public enum EventCoreDataMapper {
         let state = signposter.beginInterval(.convert, id: signpostID)
         defer { signposter.endInterval(.convert, state) }
 
-        let event = Event(
-            id: cdEvent.uuid!,
-            name: cdEvent.name!,
-            happenings: [],
-            dateCreated: cdEvent.dateCreated!,
-            dateVisited: cdEvent.dateVisited
-        )
-
-        for cdHappening in cdEvent.happenings! {
-            guard let cdHappening = cdHappening as? CDHappening else { continue }
-            event.addHappening(date: cdHappening.dateCreated!)
+        guard
+            let id = cdEvent.uuid,
+            let name = cdEvent.name,
+            let happenings = cdEvent.happenings?.array as? [CDHappening],
+            let dateCreated = cdEvent.dateCreated
+        else {
+            fatalError("unable to convert")
         }
 
-        return event
+        return Event(
+            id: id,
+            name: name,
+            happenings: happenings.map { Happening(dateCreated: $0.dateCreated!) },
+            dateCreated: dateCreated,
+            dateVisited: cdEvent.dateVisited
+        )
     }
 
     public static func update(cdEvent: CDEvent, event: Event) {
@@ -43,8 +45,6 @@ public enum EventCoreDataMapper {
         //
         // Happenings
         //
-
-        for existingCdHappening in cdEvent.happenings! { context.delete(existingCdHappening as! NSManagedObject) }
 
         let mappedHappenings = event.happenings.map {
             let new = CDHappening(

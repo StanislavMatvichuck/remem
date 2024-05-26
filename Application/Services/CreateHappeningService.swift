@@ -25,7 +25,7 @@ struct CreateHappeningService: ApplicationService {
     }
 
     func serve(_ arg: CreateHappeningServiceArgument) {
-        let event = eventsProvider.read(byId: eventId)
+        var event = eventsProvider.read(byId: eventId)
         event.addHappening(date: arg.date)
 
         eventsStorage.update(id: eventId, event: event)

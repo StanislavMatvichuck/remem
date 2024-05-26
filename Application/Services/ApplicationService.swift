@@ -11,5 +11,5 @@ struct ApplicationServiceEmptyArgument {}
 
 protocol ApplicationService {
     associatedtype ServiceArgument
-    func serve(_: ServiceArgument)
+    mutating func serve(_: ServiceArgument)
 }

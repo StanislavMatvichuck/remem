@@ -23,7 +23,7 @@ final class UITestRepositoryConfigurator {
     // MARK: - Private
     private func configureForPreview(repository: ApplicationContainer.Repository) {
         let dateCreated = Date.now.addingTimeInterval(days(-21))
-        let event = Event(name: "🔟 pull-ups", dateCreated: dateCreated)
+        var event = Event(name: "🔟 pull-ups", dateCreated: dateCreated)
 
         event.visit()
         event.addHappening(date: dateCreated.addingTimeInterval(days(20) + hours(8) + minutes(13)))
@@ -49,15 +49,15 @@ final class UITestRepositoryConfigurator {
     private func createEvents(repository: ApplicationContainer.Repository) {
         for eventNumber in 1 ... EventsPerformanceDescriptor.eventsCount {
             let dateCreated = Date.now.addingTimeInterval(days(-EventsPerformanceDescriptor.daysPassedCount))
-            let event = Event(name: "Event#\(eventNumber)", dateCreated: dateCreated)
+            var event = Event(name: "Event#\(eventNumber)", dateCreated: dateCreated)
 
-            addHappenings(event: event)
+            addHappenings(event: &event)
 
             repository.create(event: event)
         }
     }
 
-    private func addHappenings(event: Event) {
+    private func addHappenings(event: inout Event) {
         for day in 0 ..< EventsPerformanceDescriptor.daysPassedCount {
             for swipeHour in 0 ..< EventsPerformanceDescriptor.swipesPerDay {
                 let happeningDate = Date.now.addingTimeInterval(days(-day) - hours(swipeHour))
