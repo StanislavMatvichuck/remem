@@ -39,11 +39,6 @@ final class EventCellView: UIView {
     let amountContainer = EventAmountView()
     let hintDisplay = SwipeHintDisplay()
     let goalIndicator = EventCellGoalIndicator()
-    let loadingBackground: UIView = {
-        let view = UIView(al: true)
-        view.backgroundColor = .red
-        return view
-    }()
 
     init() {
         super.init(frame: .zero)
@@ -56,16 +51,11 @@ final class EventCellView: UIView {
 
     // MARK: - Public
     func configure(_ vm: EventCellViewModel) {
-        if vm.loading {
-            addAndConstrain(loadingBackground)
-        } else {
-            loadingBackground.removeFromSuperview()
-            title.text = vm.title
-            amountContainer.configure(vm)
-            timeSince.configure(vm.timeSince)
-            hintDisplay.configure(vm)
-            goalIndicator.viewModel = vm.goal
-        }
+        title.text = vm.title
+        amountContainer.configure(vm)
+        timeSince.configure(vm.timeSince)
+        hintDisplay.configure(vm)
+        goalIndicator.viewModel = vm.goal
     }
 
     func prepareForReuse() {
