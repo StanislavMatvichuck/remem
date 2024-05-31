@@ -13,7 +13,7 @@ final class EventsListView: UIView {
     
     lazy var removalDropArea = RemovalDropAreaView(handler: { [weak self] draggedCellIndex in
         if let cell = self?.list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 1)) as? EventCell {
-            cell.removeService?.serve(ApplicationServiceEmptyArgument())
+            cell.handleRemove()
         }
     })
     
@@ -33,6 +33,7 @@ final class EventsListView: UIView {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+    // TODO: enable and test this behaviour
     func startHintAnimationIfNeeded() {
 //        guard
 //            let viewModel,

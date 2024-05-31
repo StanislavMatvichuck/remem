@@ -9,10 +9,9 @@ import CoreData
 import Domain
 
 public enum EventCoreDataMapper {
-    public static func convert(cdEvent: CDEvent) -> Event {
-        let state = signposter.beginInterval(.convert, id: signpostID)
-        defer { signposter.endInterval(.convert, state) }
+    enum MapperError: Error { case cdEventConvertAsync }
 
+    public static func convert(cdEvent: CDEvent) -> Event {
         guard
             let id = cdEvent.uuid,
             let name = cdEvent.name,
@@ -31,10 +30,31 @@ public enum EventCoreDataMapper {
         )
     }
 
-    public static func update(cdEvent: CDEvent, event: Event) {
-        let state = signposter.beginInterval(.update, id: signpostID)
-        defer { signposter.endInterval(.update, state) }
+    public static func convert(cdEvent: CDEvent) async throws -> Event {
+        guard
+            let id = cdEvent.uuid,
+            let name = cdEvent.name,
+            let happenings = cdEvent.happenings?.array as? [CDHappening],
+            let dateCreated = cdEvent.dateCreated
+        else { throw MapperError.cdEventConvertAsync }
 
+        var mappedHappenings = [Happening]()
+
+        for happening in happenings {
+            try Task.checkCancellation()
+            mappedHappenings.append(Happening(dateCreated: happening.dateCreated!))
+        }
+
+        return Event(
+            id: id,
+            name: name,
+            happenings: mappedHappenings,
+            dateCreated: dateCreated,
+            dateVisited: cdEvent.dateVisited
+        )
+    }
+
+    public static func update(cdEvent: CDEvent, event: Event) {
         cdEvent.uuid = event.id
         cdEvent.name = event.name
         cdEvent.dateCreated = event.dateCreated

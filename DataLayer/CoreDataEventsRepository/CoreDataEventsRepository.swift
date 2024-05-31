@@ -9,16 +9,9 @@ import CoreData
 import Domain
 import os
 
-let signposter = OSSignposter()
-let signpostID = signposter.makeSignpostID()
-extension StaticString {
-    static let read: StaticString = "read"
-    static let readById: StaticString = "readById"
-    static let convert: StaticString = "mapper.convert"
-    static let update: StaticString = "mapper.update"
-}
+public struct CoreDataEventsRepository {
+    enum RepositoryError: Error { case asyncReadingNil }
 
-public class CoreDataEventsRepository {
     private let container: NSPersistentContainer
     private var moc: NSManagedObjectContext { container.viewContext }
 
@@ -48,9 +41,6 @@ public class CoreDataEventsRepository {
 
 extension CoreDataEventsRepository: EventsReading {
     public func read() -> [Event] { do {
-        let state = signposter.beginInterval(.read, id: signpostID)
-        defer { signposter.endInterval(.read, state) }
-
         let request = CDEvent.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -61,9 +51,6 @@ extension CoreDataEventsRepository: EventsReading {
     } }
 
     public func read(byId: String) -> Event {
-        let state = signposter.beginInterval(.readById, id: signpostID)
-        defer { signposter.endInterval(.readById, state) }
-
         if let cdEvent = cdEvent(id: byId) {
             return EventCoreDataMapper.convert(cdEvent: cdEvent)
         } else {
@@ -79,6 +66,23 @@ extension CoreDataEventsRepository: EventsReading {
     } catch {
         fatalError(error.localizedDescription)
     } }
+
+    public func readAsync(byId: String) async throws -> Event {
+        let backgroundContext = container.newBackgroundContext()
+
+        let cdEvent = try await backgroundContext.perform {
+            let request = CDEvent.fetchRequest()
+            let predicate = NSPredicate(format: "uuid == %@", byId)
+            request.predicate = predicate
+            return try request.execute().first
+        }
+
+        try Task.checkCancellation()
+
+        if let cdEvent {
+            return try await EventCoreDataMapper.convert(cdEvent: cdEvent)
+        } else { throw RepositoryError.asyncReadingNil }
+    }
 }
 
 extension CoreDataEventsRepository: EventsWriting {

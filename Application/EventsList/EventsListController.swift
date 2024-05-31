@@ -120,7 +120,7 @@ final class EventsListController:
                 self?.update()
                 if let renderedCells = self?.viewRoot.list.visibleCells {
                     for cell in renderedCells {
-                        if let cell = cell as? EventCell, cell.viewModel?.id == action.eventId {
+                        if let cell = cell as? EventCell, cell.viewModel?.vm?.id == action.eventId {
                             cell.playSwipeAnimation()
                         }
                     }
@@ -129,7 +129,7 @@ final class EventsListController:
         )
 
         happeningDeletedSubscription = DomainEventsPublisher.shared.subscribe(
-            HappeningCreated.self,
+            HappeningRemoved.self,
             usingBlock: { [weak self] _ in self?.update() }
         )
 
@@ -182,8 +182,8 @@ final class EventsListController:
     }
 
     private func setupTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
-            [weak self] _ in self?.update()
-        }
+//        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
+//            [weak self] _ in self?.update()
+//        }
     }
 }

@@ -16,18 +16,57 @@ final class EventsListDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<EventsListViewModel.Section, String>
 
+    weak var viewModelProvider: EventsListDataProviding?
+
+    private let list: UICollectionView
+    private let showEventDetailsServiceFactory: ShowEventDetailsServiceFactoring
+    private let createHappeningServiceFactory: CreateHappeningServiceFactoring
+    private let removeEventServiceFactory: RemoveEventServiceFactoring
+    private let eventCellViewModelFactory: LoadableEventCellViewModelFactoring
+    private let showCreateEventService: ShowCreateEventService
+    private let cellsLoadingManager = CellsLoadingManager()
+
+    init(
+        list: UICollectionView,
+        showEventDetailsServiceFactory: ShowEventDetailsServiceFactoring,
+        createHappeningServiceFactory: CreateHappeningServiceFactoring,
+        removeEventServiceFactory: RemoveEventServiceFactoring,
+        showCreateEventService: ShowCreateEventService,
+        eventCellViewModelFactory: LoadableEventCellViewModelFactoring
+    ) {
+        self.list = list
+        self.showEventDetailsServiceFactory = showEventDetailsServiceFactory
+        self.createHappeningServiceFactory = createHappeningServiceFactory
+        self.removeEventServiceFactory = removeEventServiceFactory
+        self.showCreateEventService = showCreateEventService
+        self.eventCellViewModelFactory = eventCellViewModelFactory
+    }
+
     private lazy var dataSource: DataSource = {
         let hintCellRegistration = UICollectionView.CellRegistration<HintCell, HintCellViewModel>
         { cell, _, viewModel in
             cell.viewModel = viewModel
         }
-        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, EventCellViewModel>
+
+        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, LoadableEventCellViewModel>
         { cell, _, viewModel in
-            cell.viewModel = viewModel
-            cell.tapService = self.showEventDetailsService.makeShowEventDetailsService(id: viewModel.id)
-            cell.swipeService = self.createHappeningService.makeCreateHappeningService(id: viewModel.id)
-            cell.removeService = self.removeEventService.makeRemoveEventService(id: viewModel.id)
+
+            if cell.viewModel == nil {
+                /// works for initial rendering
+                cell.viewModel = viewModel
+            }
+
+            if let eventId = viewModel.loadingArguments {
+                cell.configureServices(
+                    tapService: self.showEventDetailsServiceFactory.makeShowEventDetailsService(id: eventId),
+                    swipeService: self.createHappeningServiceFactory.makeCreateHappeningService(id: eventId),
+                    removeService: self.removeEventServiceFactory.makeRemoveEventService(id: eventId),
+                    loadingInterrupter: self.cellsLoadingManager
+                )
+                self.cellsLoadingManager.startLoading(for: cell, factory: self.eventCellViewModelFactory) // assigns loaded vm
+            }
         }
+
         let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel>
         { cell, _, viewModel in
             cell.viewModel = viewModel
@@ -37,9 +76,6 @@ final class EventsListDataSource {
         return DataSource(collectionView: list) {
             collectionView, indexPath, itemIdentifier in
 
-            /// Called frequently. Have to cache viewModel somewhere
-            ///     in a controller?
-            /// But how to know that viewModel has to be updated? Controller knows and updates.
             guard let cellViewModel = self.viewModelProvider?.viewModel?.viewModel(forIdentifier: itemIdentifier) else { fatalError() }
 
             switch indexPath.section {
@@ -53,7 +89,7 @@ final class EventsListDataSource {
                 return collectionView.dequeueConfiguredReusableCell(
                     using: eventCellRegistration,
                     for: indexPath,
-                    item: cellViewModel as? EventCellViewModel
+                    item: cellViewModel as? LoadableEventCellViewModel
                 )
             case EventsListViewModel.Section.createEvent.rawValue:
                 return collectionView.dequeueConfiguredReusableCell(
@@ -65,28 +101,6 @@ final class EventsListDataSource {
             }
         }
     }()
-
-    weak var viewModelProvider: EventsListDataProviding?
-
-    private let list: UICollectionView
-    private let showEventDetailsService: ShowEventDetailsServiceFactoring
-    private let createHappeningService: CreateHappeningServiceFactoring
-    private let removeEventService: RemoveEventServiceFactoring
-    private let showCreateEventService: ShowCreateEventService
-
-    init(
-        list: UICollectionView,
-        showEventDetailsService: ShowEventDetailsServiceFactoring,
-        createHappeningService: CreateHappeningServiceFactoring,
-        removeEventService: RemoveEventServiceFactoring,
-        showCreateEventService: ShowCreateEventService
-    ) {
-        self.list = list
-        self.showEventDetailsService = showEventDetailsService
-        self.createHappeningService = createHappeningService
-        self.removeEventService = removeEventService
-        self.showCreateEventService = showCreateEventService
-    }
 
     func applySnapshot(_ oldValue: EventsListViewModel?) {
         guard let viewModel = viewModelProvider?.viewModel,

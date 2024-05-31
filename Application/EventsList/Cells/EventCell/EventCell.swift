@@ -7,23 +7,36 @@
 
 import UIKit
 
-final class EventCell: UICollectionViewCell {
-    static let reuseIdentifier = "EventCell"
+typealias LoadableEventCellViewModel = LoadableViewModelWrapper<String, EventCellViewModel>
 
-    let view = EventCellView()
-    let staticBackgroundView = UIView(al: true)
+final class EventCell: UICollectionViewCell, LoadableView {
+    private static let reuseIdentifier = "EventCell"
 
-    var viewModel: EventCellViewModel? { didSet {
-        /// this gives me an old value for cell view model
-        /// allows to apply swipe animation but not above swipe or below swipe
+    private let view = EventCellView()
+    private let staticBackgroundView = UIView(al: true)
+
+    // TODO: improve this part
+    var viewModel: LoadableEventCellViewModel? { didSet {
         guard let viewModel else { return }
-        view.configure(viewModel)
-        playAnimationIfNeeded(oldValue)
+        if viewModel.loading {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
+
+        if let vm = viewModel.vm {
+            view.configure(vm)
+        }
+
+        if let oldVm = oldValue?.vm {
+            playAnimationIfNeeded(oldVm)
+        }
     }}
 
-    var tapService: ShowEventDetailsService?
-    var swipeService: CreateHappeningService?
-    var removeService: RemoveEventService?
+    private var tapService: ShowEventDetailsService?
+    private var swipeService: CreateHappeningService?
+    private var removeService: RemoveEventService?
+    private var loadingInterrupter: CellLoadingStopping?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,10 +51,9 @@ final class EventCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         view.prepareForReuse()
+        loadingInterrupter?.stopLoading(for: self)
         viewModel = nil
-        tapService = nil
-        swipeService = nil
-        removeService = nil
+        clearServices()
     }
 
     // MARK: - Private
@@ -67,7 +79,29 @@ final class EventCell: UICollectionViewCell {
         staticBackgroundView.layer.cornerRadius = view.stack.layer.cornerRadius
     }
 
-    // MARK: - Events handling
+    // MARK: - Services
+
+    func configureServices(
+        tapService: ShowEventDetailsService,
+        swipeService: CreateHappeningService,
+        removeService: RemoveEventService,
+        loadingInterrupter: CellLoadingStopping
+    ) {
+        self.tapService = tapService
+        self.swipeService = swipeService
+        self.removeService = removeService
+        self.loadingInterrupter = loadingInterrupter
+    }
+
+    private func clearServices() {
+        self.tapService = nil
+        self.swipeService = nil
+        self.removeService = nil
+        self.loadingInterrupter = nil
+    }
+
+    // MARK: - User events handling
+
     private func configureEventHandlers() {
         view.addGestureRecognizer(UITapGestureRecognizer(
             target: self,
@@ -81,8 +115,7 @@ final class EventCell: UICollectionViewCell {
     }
 
     @objc private func handleSwipe() {
-        guard let viewModel, let swipeService else { return }
-        swipeService.serve(CreateHappeningServiceArgument(date: .now))
+        swipeService?.serve(CreateHappeningServiceArgument(date: .now))
     }
 
     @objc private func handleTap() {
@@ -91,6 +124,8 @@ final class EventCell: UICollectionViewCell {
             tapService.serve(ApplicationServiceEmptyArgument())
         }
     }
+
+    func handleRemove() { removeService?.serve(ApplicationServiceEmptyArgument()) }
 }
 
 // MARK: - Happening creation animations
@@ -99,10 +134,8 @@ extension EventCell {
         /// exists after controller.viewModel.didSet
         /// does not exist after cell reusing (during scroll and first render)
         guard oldValue != nil else { return }
-        switch viewModel?.animation {
-        case .swipe:
-            view.circleContainer.prepareForHappeningCreationAnimation()
-            SwiperAnimationsHelper.animateHappening(view)
+        switch viewModel?.vm?.animation {
+        case .swipe: playSwipeAnimation()
         case .aboveSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: true)
         case .belowSwipe: SwiperAnimationsHelper.animate(neighbour: view, isAbove: false)
         default: return

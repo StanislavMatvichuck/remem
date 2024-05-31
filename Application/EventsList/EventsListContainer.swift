@@ -13,7 +13,7 @@ final class EventsListContainer:
     EventsListControllerFactoring,
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
-    EventCellViewModelFactoring,
+    LoadableEventCellViewModelFactoring,
     CreateEventCellViewModelFactoring,
     CreateHappeningServiceFactoring,
     RemoveEventServiceFactoring,
@@ -26,8 +26,7 @@ final class EventsListContainer:
     let manualSortingProvider: EventsSortingManualQuerying
     let manualSortingCommander: EventsSortingManualCommanding
     lazy var widgetUpdater = WidgetUpdateService(provider: self) /// test for reference cycle here
-
-    var uiTestingDisabled: Bool { parent.mode.uiTestingDisabled }
+    let goalsStorage: GoalsReading & GoalsWriting
 
     init(_ parent: ApplicationContainer) {
         self.parent = parent
@@ -48,6 +47,7 @@ final class EventsListContainer:
         self.sortingCommander = sortingRepository
         self.manualSortingProvider = manualSortingRepository
         self.manualSortingCommander = manualSortingRepository
+        self.goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
         widgetUpdater.serve(ApplicationServiceEmptyArgument())
     }
 
@@ -56,10 +56,11 @@ final class EventsListContainer:
 
         let dataSource = EventsListDataSource(
             list: list,
-            showEventDetailsService: self,
-            createHappeningService: self,
-            removeEventService: self,
-            showCreateEventService: makeShowCreateEventService()
+            showEventDetailsServiceFactory: self,
+            createHappeningServiceFactory: self,
+            removeEventServiceFactory: self,
+            showCreateEventService: makeShowCreateEventService(),
+            eventCellViewModelFactory: self
         )
 
         return EventsListController(
@@ -84,24 +85,23 @@ final class EventsListContainer:
 
     func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel { HintCellViewModel(hint: hint) }
 
-    func makeEventCellViewModel(eventId: String) -> EventCellViewModel {
-        let event = parent.provider.read(byId: eventId)
+    func makeLoadingEventCellViewModel(eventId: String) -> LoadableEventCellViewModel {
+        LoadableEventCellViewModel(loadingArguments: eventId)
+    }
 
-        let goal: GoalViewModel? = {
-            let goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
-            if let goal = goalsStorage.readActiveGoal(forEvent: event) {
-                return GoalViewModel(goal: goal)
-            }
-            return nil
-        }()
+    func makeLoadedEventCellViewModel(eventId: String) async throws -> LoadableEventCellViewModel {
+        let event = try await parent.provider.readAsync(byId: eventId)
+        let goal = goalsStorage.readActiveGoal(forEvent: event)
 
-        return EventCellViewModel(
+        let cellVm = EventCellViewModel(
             event: event,
             hintEnabled: false,
             currentMoment: parent.currentMoment,
             animation: .none,
-            goal: goal
+            goal: GoalViewModel(goal: goal)
         )
+
+        return LoadableEventCellViewModel(loadingArguments: eventId, loading: false, vm: cellVm)
     }
 
     func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel {
@@ -109,12 +109,6 @@ final class EventsListContainer:
     }
 
     // MARK: - Services factoring
-    func makeShowEventDetailsService(id: String) -> ShowEventDetailsService { ShowEventDetailsService(
-        eventId: id,
-        coordinator: parent.coordinator,
-        factory: self,
-        eventsProvider: parent.provider
-    ) }
 
     func makeShowCreateEventService() -> ShowCreateEventService { ShowCreateEventService(
         coordinator: parent.coordinator,
@@ -130,6 +124,13 @@ final class EventsListContainer:
     func makeSetEventsOrderingService() -> SetEventsOrderingService { SetEventsOrderingService(
         orderingRepository: sortingCommander,
         manualOrderingRepository: manualSortingCommander
+    ) }
+
+    func makeShowEventDetailsService(id: String) -> ShowEventDetailsService { ShowEventDetailsService(
+        eventId: id,
+        coordinator: parent.coordinator,
+        factory: self,
+        eventsProvider: parent.provider
     ) }
 
     func makeCreateHappeningService(id: String) -> CreateHappeningService { CreateHappeningService(
