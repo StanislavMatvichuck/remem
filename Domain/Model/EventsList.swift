@@ -22,7 +22,7 @@ public struct EventsList {
     ) {
         let sorter = sorterProvider.get()
         let manualSorter = manualSorterProvider.get()
-        let identifiers = eventsProvider.identifiers()
+        let identifiers = eventsProvider.identifiers(using: sorter)
 
         self.sorter = sorter
         self.eventsIdentifiers = identifiers

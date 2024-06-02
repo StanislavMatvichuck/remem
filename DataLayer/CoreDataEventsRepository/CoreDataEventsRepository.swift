@@ -58,6 +58,23 @@ extension CoreDataEventsRepository: EventsReading {
         fatalError(error.localizedDescription)
     } }
 
+    public func identifiers(using ordering: EventsList.Ordering) -> [String] { do {
+        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Event")
+        fetchRequest.resultType = .dictionaryResultType
+
+        fetchRequest.sortDescriptors = { switch ordering {
+        case .name: return [NSSortDescriptor(key: #keyPath(CDEvent.name), ascending: true)]
+        case .dateCreated: return [NSSortDescriptor(key: #keyPath(CDEvent.dateCreated), ascending: true)]
+        case .total: return [NSSortDescriptor(key: #keyPath(CDEvent.name), ascending: true)] // TODO: finish this
+        case .manual: return [] // TODO: finish this
+        } }()
+
+        fetchRequest.propertiesToFetch = ["uuid"]
+        return try moc.fetch(fetchRequest).map { $0.allValues.first } as! [String]
+    } catch {
+        fatalError(error.localizedDescription)
+    } }
+
     public func readAsync(byId: String) async throws -> Event {
         let backgroundContext = container.newBackgroundContext()
 
