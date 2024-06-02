@@ -10,6 +10,7 @@ import Domain
 import UIKit
 
 final class EventsListContainer:
+    EventsListFactoring,
     EventsListControllerFactoring,
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
@@ -21,11 +22,10 @@ final class EventsListContainer:
     EventDetailsControllerFactoringFactoring
 {
     let parent: ApplicationContainer
-    let sortingProvider: EventsSortingQuerying
-    let sortingCommander: EventsSortingCommanding
-    let manualSortingProvider: EventsSortingManualQuerying
-    let manualSortingCommander: EventsSortingManualCommanding
-    lazy var widgetUpdater = WidgetUpdateService(provider: self) /// test for reference cycle here
+    let sortingProvider: EventsSorterReading
+    let sortingCommander: EventsSorterWriting
+    let manualSortingProvider: ManualEventsSorterReading
+    let manualSortingCommander: ManualEventsSorterWriting
     let goalsStorage: GoalsReading & GoalsWriting
 
     init(_ parent: ApplicationContainer) {
@@ -48,7 +48,6 @@ final class EventsListContainer:
         self.manualSortingProvider = manualSortingRepository
         self.manualSortingCommander = manualSortingRepository
         self.goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
-        widgetUpdater.serve(ApplicationServiceEmptyArgument())
     }
 
     func makeEventsListController() -> EventsListController {
@@ -73,14 +72,16 @@ final class EventsListContainer:
 
     // MARK: - ViewModels factoring
     func makeEventsListViewModel() -> EventsListViewModel { EventsListViewModel(
-        list: EventsList(
-            sorterProvider: sortingProvider,
-            manualSorterProvider: manualSortingProvider,
-            eventsProvider: parent.provider
-        ),
+        list: makeEventsList(),
         hintFactory: self,
         eventFactory: self,
         createEventFactory: self
+    ) }
+
+    func makeEventsList() -> EventsList { EventsList(
+        sorterProvider: sortingProvider,
+        manualSorterProvider: manualSortingProvider,
+        eventsProvider: parent.provider
     ) }
 
     func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel { HintCellViewModel(hint: hint) }

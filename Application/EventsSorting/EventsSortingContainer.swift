@@ -19,10 +19,10 @@ final class EventsSortingContainer:
 
     private let parent: EventsListContainer
     private var animateFrom: EventsSorter?
-    private var provider: EventsSortingQuerying { parent.sortingProvider }
-    private var commander: EventsSortingCommanding { parent.sortingCommander }
-    private var manualSortingQuerying: EventsSortingManualQuerying { parent.manualSortingProvider }
-    private var manualSortingCommanding: EventsSortingManualCommanding { parent.manualSortingCommander }
+    private var provider: EventsSorterReading { parent.sortingProvider }
+    private var commander: EventsSorterWriting { parent.sortingCommander }
+    private var manualSortingQuerying: ManualEventsSorterReading { parent.manualSortingProvider }
+    private var manualSortingCommanding: ManualEventsSorterWriting { parent.manualSortingCommander }
 
     private var presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()

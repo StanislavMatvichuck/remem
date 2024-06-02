@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-public struct EventsSorterRepository: EventsSortingQuerying, EventsSortingCommanding {
+public struct EventsSorterRepository: EventsSorterReading, EventsSorterWriting {
     private static let decoder = PropertyListDecoder()
     private static let encoder = PropertyListEncoder()
 

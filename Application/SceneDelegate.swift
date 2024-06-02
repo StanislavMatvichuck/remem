@@ -9,7 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    var watcher: Watching?
+    var dayChangeWatcher: Watching?
 
     func scene(
         _ scene: UIScene,
@@ -29,10 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = container.makeRootViewController()
         window.makeKeyAndVisible()
 
-        watcher = container.makeWatcher()
+        dayChangeWatcher = container.makeDayWatcher()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        watcher?.watch(.now)
+        dayChangeWatcher?.watch(.now)
     }
 }

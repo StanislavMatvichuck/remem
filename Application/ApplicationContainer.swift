@@ -17,7 +17,6 @@ final class ApplicationContainer {
     let provider: EventsReading
     let eventsStorage: EventsWriting
     let coordinator: Coordinator
-    let watcher: Watching
     let coreDataContainer: NSPersistentContainer
     let injectedCurrentMoment: Date
 
@@ -39,7 +38,6 @@ final class ApplicationContainer {
             mode == .performanceTestWritesData
         let container = CoreDataStack.createContainer(inMemory: !coreDataOperatesWithStoredData)
         let repository = makeRepository(mode, coreDataContainer: container)
-        let watcher = DayWatcher()
         let coordinator = Coordinator()
 
         self.mode = mode
@@ -48,8 +46,6 @@ final class ApplicationContainer {
         self.provider = repository
         self.eventsStorage = repository
         self.coreDataContainer = container
-        self.watcher = watcher
-//        watcher.delegate = weakUpdater
     }
 
     static func parseLaunchMode() -> LaunchMode {
@@ -65,7 +61,8 @@ final class ApplicationContainer {
     }
 
     func makeRootViewController() -> UIViewController { coordinator.navigationController }
-    func makeWatcher() -> Watching { watcher }
+    func makeDayWatcher() -> Watching { DayWatcher() }
+
     func makeShowEventsListService() -> ShowEventsListService { ShowEventsListService(
         coordinator: coordinator,
         factory: EventsListContainer(self),

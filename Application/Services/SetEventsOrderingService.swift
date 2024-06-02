@@ -14,12 +14,12 @@ struct SetEventsOrderingServiceArgument {
 }
 
 struct SetEventsOrderingService: ApplicationService {
-    private let orderingRepository: EventsSortingCommanding
-    private let manualOrderingRepository: EventsSortingManualCommanding
+    private let orderingRepository: EventsSorterWriting
+    private let manualOrderingRepository: ManualEventsSorterWriting
 
     public init(
-        orderingRepository: EventsSortingCommanding,
-        manualOrderingRepository: EventsSortingManualCommanding
+        orderingRepository: EventsSorterWriting,
+        manualOrderingRepository: ManualEventsSorterWriting
     ) {
         self.orderingRepository = orderingRepository
         self.manualOrderingRepository = manualOrderingRepository

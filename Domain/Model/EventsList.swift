@@ -7,16 +7,9 @@
 
 import Foundation
 
-public protocol EventsListQuerying { func get() -> EventsList }
-// public protocol EventsListOrderingQuerying { func get() -> EventsList.Ordering }
-// public protocol EventsListOrderingCommanding {
-//    func set(sorter: EventsList.Ordering)
-//    func set(manualOrdering: [String])
-// }
-
 /// This struct only holds data, it is not being persisted
 public struct EventsList {
-    public enum Hint { case createEvent, swipeEvent, checkDetails, allDone }
+    public enum Hint: CaseIterable { case createEvent, swipeEvent, checkDetails, allDone }
 //    public enum Ordering: Int, Codable, Equatable, CaseIterable { case name, dateCreated, total, manual }
 
     public let sorter: EventsSorter /// sorter enum can be nested in that list
@@ -25,8 +18,8 @@ public struct EventsList {
 //    private let events: [Event]
 
     public init(
-        sorterProvider: EventsSortingQuerying,
-        manualSorterProvider: EventsSortingManualQuerying,
+        sorterProvider: EventsSorterReading,
+        manualSorterProvider: ManualEventsSorterReading,
         eventsProvider: EventsReading
     ) {
         let sorter = sorterProvider.get()
