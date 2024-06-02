@@ -41,16 +41,6 @@ public struct CoreDataEventsRepository {
 }
 
 extension CoreDataEventsRepository: EventsReading {
-    public func read() -> [Event] { do {
-        let request = CDEvent.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        let cdEvents = try moc.fetch(request)
-        return cdEvents.map { EventCoreDataMapper.convert(cdEvent: $0) }
-    } catch {
-        fatalError("Unable to fetch events")
-    } }
-
     public func read(byId: String) -> Event {
         if let cdEvent = cdEvent(id: byId) {
             return EventCoreDataMapper.convert(cdEvent: cdEvent)
