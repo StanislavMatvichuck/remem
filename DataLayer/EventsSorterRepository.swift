@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-public struct EventsSorterRepository: EventsSorterReading, EventsSorterWriting {
+public struct EventsSorterRepository: EventsOrderingReading, EventsOrderingWriting {
     private static let decoder = PropertyListDecoder()
     private static let encoder = PropertyListEncoder()
 
@@ -16,17 +16,17 @@ public struct EventsSorterRepository: EventsSorterReading, EventsSorterWriting {
 
     public init(_ provider: URLProviding) { self.provider = provider }
 
-    public func get() -> Domain.EventsSorter {
+    public func get() -> Domain.EventsList.Ordering {
         do {
             let data = try Data(contentsOf: provider.url)
-            let sorter = try Self.decoder.decode([EventsSorter].self, from: data)
+            let sorter = try Self.decoder.decode([EventsList.Ordering].self, from: data)
             return sorter.first!
         } catch {
             return .name
         }
     }
 
-    public func set(_ sorter: Domain.EventsSorter) {
+    public func set(_ sorter: Domain.EventsList.Ordering) {
         do {
             let data = try Self.encoder.encode([sorter])
             try data.write(to: provider.url)

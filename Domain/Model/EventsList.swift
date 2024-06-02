@@ -7,32 +7,23 @@
 
 import Foundation
 
-/// This struct only holds data, it is not being persisted
 public struct EventsList {
     public enum Hint: CaseIterable { case createEvent, swipeEvent, checkDetails, allDone }
-//    public enum Ordering: Int, Codable, Equatable, CaseIterable { case name, dateCreated, total, manual }
+    public enum Ordering: Int, Codable, Equatable, CaseIterable { case name, dateCreated, total, manual }
 
-    public let sorter: EventsSorter /// sorter enum can be nested in that list
+    public let sorter: Ordering
     public let eventsIdentifiers: [String]
     public let hint: Hint
-//    private let events: [Event]
 
     public init(
-        sorterProvider: EventsSorterReading,
-        manualSorterProvider: ManualEventsSorterReading,
+        sorterProvider: EventsOrderingReading,
+        manualSorterProvider: ManualEventsOrderingReading,
         eventsProvider: EventsReading
     ) {
         let sorter = sorterProvider.get()
         let manualSorter = manualSorterProvider.get()
-//        let events = eventsProvider.read()
-//        let sortedEvents = EventsSortingExecutor().sort(
-//            events: events,
-//            ordering: sorter,
-//            manualIdentifiers: manualSorter
-//        )
 
         self.sorter = sorter
-//        self.events = sortedEvents
         self.eventsIdentifiers = eventsProvider.identifiers()
         self.hint = .createEvent
 //        self.hint = {
@@ -46,10 +37,10 @@ public struct EventsList {
 
 public struct EventsSortingExecutor {
     public init() {}
-    
+
     public func sort(
         events: [Event],
-        ordering: EventsSorter,
+        ordering: EventsList.Ordering,
         manualIdentifiers: [String] = []
     ) -> [Event] {
         switch ordering {

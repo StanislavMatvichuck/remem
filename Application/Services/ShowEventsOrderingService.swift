@@ -15,7 +15,7 @@ protocol EventsOrderingControllerFactoring {
 
 struct ShowEventsOrderingServiceArgument {
     let offset: CGFloat
-    let oldValue: EventsSorter?
+    let oldValue: EventsList.Ordering?
 }
 
 struct ShowEventsOrderingService: ApplicationService {

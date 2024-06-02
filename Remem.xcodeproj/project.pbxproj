@@ -139,7 +139,6 @@
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */; };
 		0871E7472B9DCC2500FF1F7D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E7462B9DCC2500FF1F7D /* Services.swift */; };
-		0871E7492B9DCC3700FF1F7D /* EventsSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E7482B9DCC3700FF1F7D /* EventsSorter.swift */; };
 		0871E74C2B9DCCBE00FF1F7D /* DomainEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E74B2B9DCCBE00FF1F7D /* DomainEvents.swift */; };
 		0871E74F2B9DCD8400FF1F7D /* CreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E74E2B9DCD8400FF1F7D /* CreateEventService.swift */; };
 		0871E7512B9DCDCA00FF1F7D /* RemoveEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */; };
@@ -556,7 +555,6 @@
 		0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasProducing.swift; sourceTree = "<group>"; };
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0871E7462B9DCC2500FF1F7D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
-		0871E7482B9DCC3700FF1F7D /* EventsSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSorter.swift; sourceTree = "<group>"; };
 		0871E74B2B9DCCBE00FF1F7D /* DomainEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainEvents.swift; sourceTree = "<group>"; };
 		0871E74E2B9DCD8400FF1F7D /* CreateEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventService.swift; sourceTree = "<group>"; };
 		0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveEventService.swift; sourceTree = "<group>"; };
@@ -794,7 +792,6 @@
 				08CB230729FFB53C00F3B484 /* WeeklyGoal.swift */,
 				087ED40D28D0A3F60085A37D /* Happening.swift */,
 				08EAD4EE2B8D052D00557C4D /* Goal.swift */,
-				0871E7482B9DCC3700FF1F7D /* EventsSorter.swift */,
 				0872F51D2BB4709B00799142 /* EventsList.swift */,
 			);
 			path = Model;
@@ -1896,7 +1893,6 @@
 				08EAD4EF2B8D052D00557C4D /* Goal.swift in Sources */,
 				081C431C29FFC46600ACC4D7 /* DateIndexing.swift in Sources */,
 				083BECF428D0A31A009157FD /* Event.swift in Sources */,
-				0871E7492B9DCC3700FF1F7D /* EventsSorter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

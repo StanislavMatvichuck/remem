@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-extension EventsSorter {
+extension EventsList.Ordering {
     var title: String { switch self {
     case .name: String(localizationId: "eventsSorting.name")
     case .total: String(localizationId: "eventsSorting.total")
@@ -21,9 +21,9 @@ struct EventsSortingCellViewModel {
     let title: String
     let isActive: Bool
 
-    let sorter: EventsSorter
+    let sorter: EventsList.Ordering
 
-    init(_ sorter: EventsSorter, activeSorter: EventsSorter? = nil) {
+    init(_ sorter: EventsList.Ordering, activeSorter: EventsList.Ordering? = nil) {
         self.sorter = sorter
 
         title = sorter.title

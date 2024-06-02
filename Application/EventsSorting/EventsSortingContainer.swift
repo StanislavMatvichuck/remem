@@ -18,11 +18,11 @@ final class EventsSortingContainer:
     static let topSpacing: CGFloat = .layoutSquare / 2
 
     private let parent: EventsListContainer
-    private var animateFrom: EventsSorter?
-    private var provider: EventsSorterReading { parent.sortingProvider }
-    private var commander: EventsSorterWriting { parent.sortingCommander }
-    private var manualSortingQuerying: ManualEventsSorterReading { parent.manualSortingProvider }
-    private var manualSortingCommanding: ManualEventsSorterWriting { parent.manualSortingCommander }
+    private var animateFrom: EventsList.Ordering?
+    private var provider: EventsOrderingReading { parent.sortingProvider }
+    private var commander: EventsOrderingWriting { parent.sortingCommander }
+    private var manualSortingQuerying: ManualEventsOrderingReading { parent.manualSortingProvider }
+    private var manualSortingCommanding: ManualEventsOrderingWriting { parent.manualSortingCommander }
 
     private var presentationTopOffset: CGFloat
     private let presentationAnimator = EventsSortingPresentationAnimator()
@@ -31,7 +31,7 @@ final class EventsSortingContainer:
     init(
         _ parent: EventsListContainer,
         topOffset: CGFloat = 0,
-        animateFrom: EventsSorter? = nil
+        animateFrom: EventsList.Ordering? = nil
     ) {
         self.parent = parent
         self.animateFrom = animateFrom
@@ -49,7 +49,7 @@ final class EventsSortingContainer:
 
     func makeEventsSortingCellViewModel(index: Int) -> EventsSortingCellViewModel {
         EventsSortingCellViewModel(
-            EventsSorter.allCases[index],
+            EventsList.Ordering.allCases[index],
             activeSorter: provider.get()
         )
     }

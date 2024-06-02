@@ -10,7 +10,7 @@ import Domain
 import XCTest
 
 final class EventsSorterRepositoryTests: XCTestCase {
-    private var sut: (EventsSorterReading & EventsSorterWriting)!
+    private var sut: (EventsOrderingReading & EventsOrderingWriting)!
 
     override func setUp() {
         super.setUp()
@@ -30,7 +30,7 @@ final class EventsSorterRepositoryTests: XCTestCase {
     }
 
     func test_get_name() {
-        XCTAssertEqual(sut.get(), EventsSorter.name)
+        XCTAssertEqual(sut.get(), Ordering.name)
     }
 
     func test_set_acceptsSorter() {

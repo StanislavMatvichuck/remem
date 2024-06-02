@@ -22,10 +22,10 @@ final class EventsListContainer:
     EventDetailsControllerFactoringFactoring
 {
     let parent: ApplicationContainer
-    let sortingProvider: EventsSorterReading
-    let sortingCommander: EventsSorterWriting
-    let manualSortingProvider: ManualEventsSorterReading
-    let manualSortingCommander: ManualEventsSorterWriting
+    let sortingProvider: EventsOrderingReading
+    let sortingCommander: EventsOrderingWriting
+    let manualSortingProvider: ManualEventsOrderingReading
+    let manualSortingCommander: ManualEventsOrderingWriting
     let goalsStorage: GoalsReading & GoalsWriting
 
     init(_ parent: ApplicationContainer) {

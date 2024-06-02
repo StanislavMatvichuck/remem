@@ -32,7 +32,7 @@ public protocol GoalsWriting {
     func delete(id: String)
 }
 
-public protocol EventsSorterReading { func get() -> EventsSorter }
-public protocol EventsSorterWriting { func set(_: EventsSorter) }
-public protocol ManualEventsSorterReading { func get() -> [String] }
-public protocol ManualEventsSorterWriting { func set(_: [String]) }
+public protocol EventsOrderingReading { func get() -> EventsList.Ordering }
+public protocol EventsOrderingWriting { func set(_: EventsList.Ordering) }
+public protocol ManualEventsOrderingReading { func get() -> [String] }
+public protocol ManualEventsOrderingWriting { func set(_: [String]) }

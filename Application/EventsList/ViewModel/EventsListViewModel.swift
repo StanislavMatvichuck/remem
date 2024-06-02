@@ -37,7 +37,7 @@ struct EventsListViewModel {
     }
 
     // MARK: - Ordering support
-    var sorter: EventsSorter { list.sorter }
+    var sorter: EventsList.Ordering { list.sorter }
 
     func manualSortingPresentableFor(_ oldValue: EventsListViewModel?) -> Bool {
         guard let oldValue else { return false }

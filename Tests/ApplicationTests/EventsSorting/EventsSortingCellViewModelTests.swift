@@ -14,7 +14,7 @@ final class EventsSortingCellViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = EventsSortingCellViewModel(EventsSorter.name)
+        sut = EventsSortingCellViewModel(Ordering.name)
     }
 
     override func tearDown() {

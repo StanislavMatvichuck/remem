@@ -10,16 +10,16 @@ import Foundation
 
 struct SetEventsOrderingServiceArgument {
     let eventsIdentifiersOrder: [String]?
-    let ordering: EventsSorter
+    let ordering: EventsList.Ordering
 }
 
 struct SetEventsOrderingService: ApplicationService {
-    private let orderingRepository: EventsSorterWriting
-    private let manualOrderingRepository: ManualEventsSorterWriting
+    private let orderingRepository: EventsOrderingWriting
+    private let manualOrderingRepository: ManualEventsOrderingWriting
 
     public init(
-        orderingRepository: EventsSorterWriting,
-        manualOrderingRepository: ManualEventsSorterWriting
+        orderingRepository: EventsOrderingWriting,
+        manualOrderingRepository: ManualEventsOrderingWriting
     ) {
         self.orderingRepository = orderingRepository
         self.manualOrderingRepository = manualOrderingRepository
