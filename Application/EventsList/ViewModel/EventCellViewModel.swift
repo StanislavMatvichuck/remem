@@ -37,7 +37,7 @@ struct EventCellViewModel {
     ) {
         self.animation = animation
         self.currentMoment = currentMoment
-        self.valueAmount = event.happeningsAmount(forWeekAt: currentMoment) // this method requires all happenings filtering
+        self.valueAmount = event.happeningsCount
         self.goal = goal
         self.event = event
 
