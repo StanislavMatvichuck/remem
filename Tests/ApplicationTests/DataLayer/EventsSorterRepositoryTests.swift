@@ -30,7 +30,7 @@ final class EventsSorterRepositoryTests: XCTestCase {
     }
 
     func test_get_name() {
-        XCTAssertEqual(sut.get(), Ordering.name)
+        XCTAssertEqual(sut.get(), EventsList.Ordering.name)
     }
 
     func test_set_acceptsSorter() {

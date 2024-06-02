@@ -22,16 +22,16 @@ public struct EventsList {
     ) {
         let sorter = sorterProvider.get()
         let manualSorter = manualSorterProvider.get()
+        let identifiers = eventsProvider.identifiers()
 
         self.sorter = sorter
-        self.eventsIdentifiers = eventsProvider.identifiers()
-        self.hint = .createEvent
-//        self.hint = {
-//            if events.count == 0 { return .createEvent }
-//            if events.filter({ $0.happenings.count > 0 }).count == 0 { return .swipeEvent }
-//            if events.filter({ $0.dateVisited != nil }).count == 0 { return .checkDetails }
-//            return .allDone
-//        }()
+        self.eventsIdentifiers = identifiers
+        self.hint = {
+            if identifiers.count == 0 { return .createEvent }
+            if eventsProvider.hasNoHappenings() { return .swipeEvent }
+            if eventsProvider.hasNoVisitedEvents() { return .checkDetails }
+            return .allDone
+        }()
     }
 }
 

@@ -11,6 +11,7 @@ import os
 
 public struct CoreDataEventsRepository {
     enum RepositoryError: Error { case asyncReadingNil }
+    private enum EntityName: String { case Event, Happening }
 
     private let container: NSPersistentContainer
     private var moc: NSManagedObjectContext { container.viewContext }
@@ -83,6 +84,23 @@ extension CoreDataEventsRepository: EventsReading {
             return try await EventCoreDataMapper.convert(cdEvent: cdEvent)
         } else { throw RepositoryError.asyncReadingNil }
     }
+
+    public func hasNoVisitedEvents() -> Bool { do {
+        let request = NSFetchRequest<NSNumber>(entityName: EntityName.Event.rawValue)
+        request.resultType = .countResultType
+        request.predicate = NSPredicate(format: "dateVisited != nil")
+        let fetchResult = try moc.fetch(request)
+        let visitedEventsCount = fetchResult.first?.intValue ?? 0
+        return visitedEventsCount == 0
+    } catch { return true } }
+
+    public func hasNoHappenings() -> Bool { do {
+        let request = NSFetchRequest<NSNumber>(entityName: EntityName.Happening.rawValue)
+        request.resultType = .countResultType
+        let fetchResult = try moc.fetch(request)
+        let happeningsCount = fetchResult.first?.intValue ?? 0
+        return happeningsCount == 0
+    } catch { return true } }
 }
 
 extension CoreDataEventsRepository: EventsWriting {

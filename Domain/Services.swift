@@ -12,6 +12,8 @@ public protocol EventsReading {
     func read(byId: String) -> Event
     func readAsync(byId: String) async throws -> Event
     func identifiers() -> [String]
+    func hasNoVisitedEvents() -> Bool
+    func hasNoHappenings() -> Bool
 }
 
 public protocol EventsWriting {

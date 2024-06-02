@@ -65,6 +65,8 @@ public enum EventCoreDataMapper {
         //
         // Happenings
         //
+        
+        for existingCdHappening in cdEvent.happenings! { context.delete(existingCdHappening as! NSManagedObject) }
 
         let mappedHappenings = event.happenings.map {
             let new = CDHappening(
