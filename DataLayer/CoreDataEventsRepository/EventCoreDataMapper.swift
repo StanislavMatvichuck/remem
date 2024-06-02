@@ -65,7 +65,7 @@ public enum EventCoreDataMapper {
         //
         // Happenings
         //
-        
+
         for existingCdHappening in cdEvent.happenings! { context.delete(existingCdHappening as! NSManagedObject) }
 
         let mappedHappenings = event.happenings.map {
@@ -80,5 +80,6 @@ public enum EventCoreDataMapper {
         }
 
         cdEvent.happenings = NSOrderedSet(array: mappedHappenings)
+        cdEvent.happeningsCount = Int32(mappedHappenings.count)
     }
 }

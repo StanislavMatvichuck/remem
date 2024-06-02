@@ -15,7 +15,7 @@ public struct Event {
     public let id: String
     public var name: String
     public var happenings: [Happening]
-
+    public var happeningsCount: Int
     public let dateCreated: Date
     public var dateVisited: Date?
 
@@ -53,6 +53,7 @@ public struct Event {
         self.happenings = happenings
         self.dateCreated = dateCreated
         self.dateVisited = dateVisited
+        self.happeningsCount = happenings.count
     }
 }
 

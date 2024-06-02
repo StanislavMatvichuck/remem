@@ -65,7 +65,10 @@ extension CoreDataEventsRepository: EventsReading {
         fetchRequest.sortDescriptors = { switch ordering {
         case .name: return [NSSortDescriptor(key: #keyPath(CDEvent.name), ascending: true)]
         case .dateCreated: return [NSSortDescriptor(key: #keyPath(CDEvent.dateCreated), ascending: true)]
-        case .total: return [NSSortDescriptor(key: #keyPath(CDEvent.name), ascending: true)] // TODO: finish this
+        case .total: return [
+                NSSortDescriptor(key: #keyPath(CDEvent.happeningsCount), ascending: false),
+                NSSortDescriptor(key: #keyPath(CDEvent.name), ascending: true)
+            ]
         case .manual: return [] // TODO: finish this
         } }()
 
