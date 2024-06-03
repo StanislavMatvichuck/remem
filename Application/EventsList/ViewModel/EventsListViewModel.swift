@@ -37,11 +37,11 @@ struct EventsListViewModel {
     }
 
     // MARK: - Ordering support
-    var sorter: EventsList.Ordering { list.sorter }
+    var ordering: EventsList.Ordering { list.ordering }
 
     func manualSortingPresentableFor(_ oldValue: EventsListViewModel?) -> Bool {
         guard let oldValue else { return false }
-        return list.sorter == .manual && oldValue.list.sorter != .manual
+        return list.ordering == .manual && oldValue.list.ordering != .manual
     }
 
     // MARK: - DataSource

@@ -15,6 +15,6 @@ final class EventsListContainerTests: XCTestCase {
     override func tearDown() { super.tearDown(); sut = nil }
 
     func test_init_requiresApplicationContainer() { XCTAssertNotNil(sut) }
-    func test_storesEventsSortingQuerying() { sut.sortingProvider is EventsOrderingReading }
-    func test_storesEventsSortingCommanding() { sut.sortingCommander is EventsOrderingWriting }
+    func test_storesEventsSortingQuerying() { sut.orderingReading is EventsOrderingReading }
+    func test_storesEventsSortingCommanding() { sut.orderingWriter is EventsOrderingWriting }
 }

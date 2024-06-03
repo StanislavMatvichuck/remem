@@ -30,7 +30,7 @@ final class EventsListController:
             if viewModel.manualSortingPresentableFor(oldValue),
                presentedViewController == nil
             {
-                showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.sorter))
+                showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.ordering))
             }
         }
     }

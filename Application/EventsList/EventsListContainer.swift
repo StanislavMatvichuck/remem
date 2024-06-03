@@ -22,10 +22,10 @@ final class EventsListContainer:
     EventDetailsControllerFactoringFactoring
 {
     let parent: ApplicationContainer
-    let sortingProvider: EventsOrderingReading
-    let sortingCommander: EventsOrderingWriting
-    let manualSortingProvider: ManualEventsOrderingReading
-    let manualSortingCommander: ManualEventsOrderingWriting
+    let orderingReader: EventsOrderingReading
+    let orderingWriter: EventsOrderingWriting
+    let manualOrderingReader: ManualEventsOrderingReading
+    let manualOrderingWriter: ManualEventsOrderingWriting
     let goalsStorage: GoalsReading & GoalsWriting
 
     init(_ parent: ApplicationContainer) {
@@ -43,10 +43,10 @@ final class EventsListContainer:
                 LocalFile.testingEventsQueryManualSorter
         )
 
-        self.sortingProvider = sortingRepository
-        self.sortingCommander = sortingRepository
-        self.manualSortingProvider = manualSortingRepository
-        self.manualSortingCommander = manualSortingRepository
+        self.orderingReader = sortingRepository
+        self.orderingWriter = sortingRepository
+        self.manualOrderingReader = manualSortingRepository
+        self.manualOrderingWriter = manualSortingRepository
         self.goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
     }
 
@@ -79,9 +79,9 @@ final class EventsListContainer:
     ) }
 
     func makeEventsList() -> EventsList { EventsList(
-        sorterProvider: sortingProvider,
-        manualSorterProvider: manualSortingProvider,
-        eventsProvider: parent.provider
+        eventsReader: parent.provider,
+        orderingReader: orderingReader,
+        manualOrderingReader: manualOrderingReader
     ) }
 
     func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel { HintCellViewModel(hint: hint) }
@@ -123,8 +123,8 @@ final class EventsListContainer:
     ) }
 
     func makeSetEventsOrderingService() -> SetEventsOrderingService { SetEventsOrderingService(
-        orderingRepository: sortingCommander,
-        manualOrderingRepository: manualSortingCommander
+        orderingRepository: orderingWriter,
+        manualOrderingRepository: manualOrderingWriter
     ) }
 
     func makeShowEventDetailsService(id: String) -> ShowEventDetailsService { ShowEventDetailsService(
