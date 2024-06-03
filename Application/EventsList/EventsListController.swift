@@ -15,49 +15,52 @@ final class EventsListController:
     EventsListDataProviding
 {
     let factory: EventsListViewModelFactoring
-
     let viewRoot: EventsListView
+
+    var viewModel: EventsListViewModel? { didSet {
+        title = EventsListViewModel.title
+
+        viewRoot.viewModel = viewModel
+
+        guard let viewModel else { return }
+
+        if viewModel.manualSortingPresentableFor(oldValue),
+           presentedViewController == nil
+        {
+            showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.ordering))
+        }
+
+        /// This is here to trigger widget update on each list update because controller is subscribed to DomainEvents
+        widgetService?.serve(ApplicationServiceEmptyArgument())
+    } }
+
+    private let widgetService: WidgetService?
+    private let showEventsOrderingService: ShowEventsOrderingService?
+    private let setEventsOrderingService: SetEventsOrderingService?
     private var timer: Timer?
 
-    var viewModel: EventsListViewModel? {
-        didSet {
-            title = EventsListViewModel.title
-
-            viewRoot.viewModel = viewModel
-
-            guard let viewModel else { return }
-
-            if viewModel.manualSortingPresentableFor(oldValue),
-               presentedViewController == nil
-            {
-                showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.ordering))
-            }
-        }
-    }
-
-    var showEventsOrderingService: ShowEventsOrderingService?
-    var setEventsOrderingService: SetEventsOrderingService?
-
-    var eventsListOrderingSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var happeningCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var happeningDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var goalCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var goalDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
-    var goalUpdatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var eventsListOrderingSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var happeningCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var happeningDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var eventRemovedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var eventCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var eventVisitedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var goalCreatedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var goalDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
+    private var goalUpdatedSubscription: DomainEventsPublisher.DomainEventSubscription?
 
     init(
         viewModelFactory: EventsListViewModelFactoring,
         view: EventsListView,
         showEventsOrderingService: ShowEventsOrderingService? = nil,
-        setEventsOrderingService: SetEventsOrderingService? = nil
+        setEventsOrderingService: SetEventsOrderingService? = nil,
+        widgetService: WidgetService? = nil
     ) {
         self.factory = viewModelFactory
         self.showEventsOrderingService = showEventsOrderingService
         self.setEventsOrderingService = setEventsOrderingService
         self.viewRoot = view
+        self.widgetService = widgetService
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -70,6 +73,7 @@ final class EventsListController:
 
     deinit {
         timer?.invalidate()
+        timer = nil
         eventsListOrderingSubscription = nil
         happeningCreatedSubscription = nil
         happeningDeletedSubscription = nil
@@ -86,12 +90,31 @@ final class EventsListController:
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         configureList()
-        setupEventsSortingButton()
+        configureEventsSortingButton()
         update()
-        setupTimer()
+        configureTimer()
         configureForegroundNotification()
         configureDomainEventsSubscriptions()
     }
+
+    // MARK: - Events handling
+
+    @objc private func handleForeground() { viewRoot.startHintAnimationIfNeeded() }
+    @objc private func handleEventsSortingTap() {
+        showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(
+            offset: view.safeAreaInsets.top,
+            oldValue: nil
+        ))
+    }
+
+    func handle(manualOrdering eventsIdentifiers: [String]) {
+        setEventsOrderingService?.serve(SetEventsOrderingServiceArgument(
+            eventsIdentifiersOrder: eventsIdentifiers,
+            ordering: .manual
+        ))
+    }
+
+    // MARK: - Private configurations
 
     private func configureDomainEventsSubscriptions() {
         eventsListOrderingSubscription = DomainEventsPublisher.shared.subscribe(
@@ -164,11 +187,7 @@ final class EventsListController:
         )
     }
 
-    @objc private func handleForeground() {
-        viewRoot.startHintAnimationIfNeeded()
-    }
-
-    private func setupEventsSortingButton() {
+    private func configureEventsSortingButton() {
         let item = UIBarButtonItem(
             title: EventsListViewModel.eventsSortingLabel,
             style: .plain, target: self,
@@ -177,11 +196,7 @@ final class EventsListController:
         navigationItem.setRightBarButton(item, animated: false)
     }
 
-    @objc private func handleEventsSortingTap() {
-        showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: nil))
-    }
-
-    private func setupTimer() {
+    private func configureTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
             [weak self] _ in self?.update()
         }

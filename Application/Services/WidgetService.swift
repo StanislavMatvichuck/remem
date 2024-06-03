@@ -6,38 +6,59 @@
 //
 
 import Domain
+import Foundation
 import WidgetKit
 
-struct WidgetServiceArgument { let viewModel: EventsListViewModel }
+protocol EventsListFactoring { func makeEventsList() -> EventsList }
 
 struct WidgetService: ApplicationService {
-    func serve(_ arg: WidgetServiceArgument) {
-        guard let directory = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: "group.remem.io"
-        ) else { return }
+    private static let encoder = PropertyListEncoder()
+    private var widgetFileURL: URL? { FileManager.default.containerURL(
+        forSecurityApplicationGroupIdentifier: "group.remem.io"
+    )?.appendingPathComponent("RememWidgets.plist") }
 
-        let filePath = "RememWidgets.plist"
-        let fileURL = directory.appendingPathComponent(filePath)
+    private let eventsListFactory: EventsListFactoring
+    private let eventCellFactory: LoadableEventCellViewModelFactoring
 
-        let encoder = PropertyListEncoder()
-        let eventsCellsIdentifiers = arg.viewModel.identifiersFor(section: .events)
-        var writableItems = [WidgetEventCellViewModel]()
+    init(
+        eventsListFactory: EventsListFactoring,
+        eventCellFactory: LoadableEventCellViewModelFactoring
+    ) {
+        self.eventsListFactory = eventsListFactory
+        self.eventCellFactory = eventCellFactory
+    }
 
-        eventsCellsIdentifiers.prefix(3).forEach {
-            if
-                let loadableVm = arg.viewModel.viewModel(forIdentifier: $0) as? LoadableEventCellViewModel,
-                let eventVm = loadableVm.vm
-            {
-                writableItems.append(WidgetEventCellViewModel(item: eventVm))
+    func serve(_ arg: ApplicationServiceEmptyArgument) {
+        guard let widgetFileURL else { return }
+
+        Task(priority: .background) {
+            let eventsList = eventsListFactory.makeEventsList()
+            let eventsIdentifiers = eventsList.eventsIdentifiers.prefix(3)
+            var writableItems = [WidgetEventCellViewModel]()
+
+            for id in eventsIdentifiers {
+                let loadedEventCellVm = try await eventCellFactory.makeLoadedEventCellViewModel(eventId: id)
+                if let vm = loadedEventCellVm.vm {
+                    writableItems.append(WidgetEventCellViewModel(item: vm))
+                }
+            }
+
+            do {
+                let dataToWrite = try Self.encoder.encode(writableItems)
+                try dataToWrite.write(to: widgetFileURL)
+                WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
+            } catch {
+                fatalError("unable to update widget \(widgetFileURL.absoluteString)")
             }
         }
+    }
+}
 
-        do {
-            let dataToWrite = try encoder.encode(writableItems)
-            try dataToWrite.write(to: fileURL)
-            WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
-        } catch {
-            fatalError("unable to update widget \(fileURL.absoluteString) \(arg.viewModel) \(writableItems)")
-        }
+extension WidgetEventCellViewModel {
+    init(item: EventCellViewModel) {
+        title = item.title
+        value = item.value
+        timeSince = item.timeSince
+        progress = item.goal?.progress
     }
 }

@@ -42,7 +42,7 @@ extension EventsListController:
         var eventsIdentifiers = viewModel.identifiersFor(section: .events)
         let movedEvent = eventsIdentifiers.remove(at: from)
         eventsIdentifiers.insert(movedEvent, at: to)
-        setEventsOrderingService?.serve(SetEventsOrderingServiceArgument(eventsIdentifiersOrder: eventsIdentifiers, ordering: .manual))
+        handle(manualOrdering: eventsIdentifiers)
     }
 
     func collectionView(_: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath indexPath: IndexPath?) -> UICollectionViewDropProposal {

@@ -66,11 +66,15 @@ final class EventsListContainer:
             viewModelFactory: self,
             view: EventsListView(list: list, dataSource: dataSource),
             showEventsOrderingService: makeShowEventsOrderingService(),
-            setEventsOrderingService: makeSetEventsOrderingService()
+            setEventsOrderingService: makeSetEventsOrderingService(),
+            widgetService: makeWidgetService()
         )
     }
 
-    // MARK: - ViewModels factoring
+    //
+    // MARK: - ViewModels
+    //
+
     func makeEventsListViewModel() -> EventsListViewModel { EventsListViewModel(
         list: makeEventsList(),
         hintFactory: self,
@@ -109,7 +113,9 @@ final class EventsListContainer:
         CreateEventCellViewModel(eventsCount: eventsCount)
     }
 
-    // MARK: - Services factoring
+    //
+    // MARK: - Services
+    //
 
     func makeShowCreateEventService() -> ShowCreateEventService { ShowCreateEventService(
         coordinator: parent.coordinator,
@@ -146,6 +152,14 @@ final class EventsListContainer:
         eventsProvider: parent.provider
     ) }
 
-    // MARK: - Containers factoring
+    func makeWidgetService() -> WidgetService { WidgetService(
+        eventsListFactory: self,
+        eventCellFactory: self
+    ) }
+
+    //
+    // MARK: - Containers
+    //
+
     func makeEventDetailsControllerFactoring(eventId: String) -> any EventDetailsControllerFactoring { EventDetailsContainer(parent, eventId: eventId) }
 }
