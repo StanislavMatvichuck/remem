@@ -75,7 +75,6 @@
 		0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EAD0A28DDDD55001EE985 /* WidgetEventsQuerying.swift */; };
 		083380422944F9100021281C /* WidgetDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895FB5F28E23C66006716F4 /* WidgetDescription.swift */; };
 		0838C7C329F3E40700079453 /* CoreDataEventsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */; };
-		08396EEA29A64B5900281E51 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08396EE929A64B5900281E51 /* WidgetController.swift */; };
 		083BECF428D0A31A009157FD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BECF328D0A31A009157FD /* Event.swift */; };
 		083E3A0E29919EEB007792B0 /* EventsListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */; };
 		0841F28F2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841F28E2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift */; };
@@ -248,7 +247,7 @@
 		08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */; };
 		08B89A2628E3190600F4B63B /* StyledText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2528E3190600F4B63B /* StyledText.swift */; };
 		08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B89A2928E3194C00F4B63B /* EventsList.swift */; };
-		08BA0B022BD6A39200F642D1 /* WidgetUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */; };
+		08BA0B022BD6A39200F642D1 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA0B012BD6A39200F642D1 /* WidgetService.swift */; };
 		08BBD4A02BB6D3330095DBBF /* CreateHappeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */; };
 		08BBD4A22BB6E67A0095DBBF /* ShowCreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
@@ -478,7 +477,6 @@
 		082E8BF42C0601CC00D00655 /* LoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableView.swift; sourceTree = "<group>"; };
 		083141D129142DCE00D5AB8A /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		0831A1122BA0804D002233D5 /* EventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
-		08396EE929A64B5900281E51 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		083BECF128D0A319009157FD /* libDomain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDomain.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		083BECF328D0A31A009157FD /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		083D3894279AE81100134A15 /* Entry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Entry.xcdatamodel; sourceTree = "<group>"; };
@@ -665,7 +663,7 @@
 		08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestRepositoryConfigurator.swift; sourceTree = "<group>"; };
 		08B89A2528E3190600F4B63B /* StyledText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledText.swift; sourceTree = "<group>"; };
 		08B89A2928E3194C00F4B63B /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
-		08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUpdateService.swift; sourceTree = "<group>"; };
+		08BA0B012BD6A39200F642D1 /* WidgetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetService.swift; sourceTree = "<group>"; };
 		08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHappeningService.swift; sourceTree = "<group>"; };
 		08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCreateEventService.swift; sourceTree = "<group>"; };
 		08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingHintDisplaySnapshotsTests.swift; sourceTree = "<group>"; };
@@ -837,7 +835,6 @@
 			isa = PBXGroup;
 			children = (
 				084874192984328700C27155 /* WidgetEventCellViewModel.swift */,
-				08396EE929A64B5900281E51 /* WidgetController.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -1213,7 +1210,7 @@
 				080C9A442BC97F5A00830A9F /* CreateGoalService.swift */,
 				08BBD49F2BB6D3330095DBBF /* CreateHappeningService.swift */,
 				0806B4462BD1A57200BFA5B3 /* DeleteGoalService.swift */,
-				08BA0B012BD6A39200F642D1 /* WidgetUpdateService.swift */,
+				08BA0B012BD6A39200F642D1 /* WidgetService.swift */,
 				0871E7502B9DCDCA00FF1F7D /* RemoveEventService.swift */,
 				082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */,
 				087EEF332BB59401009A55BB /* SetEventsOrderingService.swift */,
@@ -2034,13 +2031,12 @@
 				0872F5222BB4761900799142 /* EventsListViewModel.swift in Sources */,
 				0869C4992B7FF52B0007D6E0 /* EventsListCellViewModel.swift in Sources */,
 				089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */,
-				08BA0B022BD6A39200F642D1 /* WidgetUpdateService.swift in Sources */,
+				08BA0B022BD6A39200F642D1 /* WidgetService.swift in Sources */,
 				087AFFC02A13F4610005B4D9 /* EmojiView.swift in Sources */,
 				08F467F129BF3E6B00D35AB6 /* PDFWritingContainer.swift in Sources */,
 				08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */,
 				0846862B2BD1B93000FCA819 /* UpdateGoalService.swift in Sources */,
 				08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */,
-				08396EEA29A64B5900281E51 /* WidgetController.swift in Sources */,
 				085896B52A26540700390C76 /* PDFWritingTitlePageView.swift in Sources */,
 				08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */,
 				086055F92795EC0600DDDD02 /* ExtensionComparable.swift in Sources */,

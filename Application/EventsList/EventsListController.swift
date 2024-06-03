@@ -182,8 +182,8 @@ final class EventsListController:
     }
 
     private func setupTimer() {
-//        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
-//            [weak self] _ in self?.update()
-//        }
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {
+            [weak self] _ in self?.update()
+        }
     }
 }
