@@ -96,26 +96,22 @@ struct SummaryViewModel {
 }
 
 enum SummaryRow: CaseIterable {
-    case total, daysTracked, dayAverage, weekAverage, daysSinceLastHappening, dateStart, dateEnd
+    case total,
+         daysTracked,
+         dayAverage,
+         weekAverage,
+         daysSinceLastHappening,
+         dateStart,
+         dateEnd
 
     var title: String { switch self {
-    case .total: return String(localizationId: "summary.total") + "\n"
-    case .weekAverage: return String(localizationId: "summary.weekAverage") + "\n"
-    case .dayAverage: return String(localizationId: "summary.dayAverage") + "\n"
-    case .daysTracked: return String(localizationId: "summary.daysTracked") + "\n"
-    case .daysSinceLastHappening: return String(localizationId: "summary.daysSinceLastHappening") + "\n"
-    case .dateStart: return String(localizationId: "summary.dateStart") + "\n"
-    case .dateEnd: return String(localizationId: "summary.dateEnd") + "\n"
-    } }
-
-    var id: String { switch self {
-    case .total: return "total"
-    case .weekAverage: return "weekAverage"
-    case .dayAverage: return "dayAverage"
-    case .daysTracked: return "daysTracked"
-    case .daysSinceLastHappening: return "daysSinceLastHappening"
-    case .dateStart: return "dateStart"
-    case .dateEnd: return "dateEnd"
+    case .total: return String(localizationId: localizationIdSummaryTotal) + "\n"
+    case .weekAverage: return String(localizationId: localizationIdSummaryWeekAverage) + "\n"
+    case .dayAverage: return String(localizationId: localizationIdSummaryDayAverage) + "\n"
+    case .daysTracked: return String(localizationId: localizationIdSummaryDaysTracked) + "\n"
+    case .daysSinceLastHappening: return String(localizationId: localizationIdSummaryDaysSinceLastHappening) + "\n"
+    case .dateStart: return String(localizationId: localizationIdSummaryDateStart) + "\n"
+    case .dateEnd: return String(localizationId: localizationIdSummaryDateEnd) + "\n"
     } }
 }
 

@@ -13,9 +13,6 @@ struct EventCellViewModel {
 
     enum Animations { case swipe, aboveSwipe, belowSwipe, none }
 
-    static let rename = String(localizationId: "button.rename")
-    static let delete = String(localizationId: "button.delete")
-
     private let event: Event
     private let valueAmount: Int
 
@@ -47,7 +44,7 @@ struct EventCellViewModel {
             if let happening = event.happenings.last {
                 return Self.timeSinceDate(date: happening.dateCreated, now: currentMoment)
             } else {
-                return String(localizationId: "eventsList.timeSince")
+                return String(localizationId: localizationIdEventsListEventCellTimeSince)
             }
         }()
 

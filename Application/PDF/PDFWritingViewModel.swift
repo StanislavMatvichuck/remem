@@ -8,5 +8,5 @@
 import Foundation
 
 struct PDFWritingViewModel {
-    static let title = String(localizationId: "pdf.create")
+    static let title = String(localizationId: localizationIdPdfButtonCreate)
 }

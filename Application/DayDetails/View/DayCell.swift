@@ -8,7 +8,7 @@
 import UIKit
 
 final class DayCell: UICollectionViewCell {
-    static let reuseIdentifier = "DayHappeningCell"
+    static let reuseIdentifier = collectionCellReuseIdentifierDayHappening
     static let margin: CGFloat = 2.5
 
     let label: UILabel = {
@@ -66,7 +66,7 @@ final class DayCell: UICollectionViewCell {
     }
 
     private func animateCreation() {
-        let animation = CABasicAnimation(keyPath: "opacity")
+        let animation = CABasicAnimation.opacity
         animation.fromValue = 1.0
         animation.toValue = 0.0
         animation.duration = 1 / 3

@@ -32,7 +32,7 @@ final class EventCreationView: UIView {
         input.minimumFontSize = UIFont.fontSmall.pointSize
         input.returnKeyType = .done
         input.isAccessibilityElement = true
-        input.accessibilityIdentifier = "EventInput"
+        input.accessibilityIdentifier = UITestID.eventCreationInput.rawValue
         return input
     }()
 

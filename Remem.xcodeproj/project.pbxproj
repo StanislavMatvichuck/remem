@@ -252,6 +252,7 @@
 		08BBD4A22BB6E67A0095DBBF /* ShowCreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBD4A12BB6E67A0095DBBF /* ShowCreateEventService.swift */; };
 		08BBFCDB296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BBFCDA296EE04500F455AE /* SwipingHintDisplaySnapshotsTests.swift */; };
 		08C23EBA2B83C145004DF159 /* EventsListController+DragAndDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB92B83C145004DF159 /* EventsListController+DragAndDrop.swift */; };
+		08C4A4EF2C0F8671009F40B8 /* GlobalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0B52B2C0F669100C76232 /* GlobalStrings.swift */; };
 		08C52E7B29CA64090056C116 /* DayDetailsPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */; };
 		08C85FF228B4FB7800FF37D9 /* ApplicationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */; };
 		08C9DAFD2BB4CD8D00F038BB /* ShowEventsOrderingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9DAFC2BB4CD8D00F038BB /* ShowEventsOrderingService.swift */; };
@@ -279,6 +280,7 @@
 		08EAD4ED2B8D050D00557C4D /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EC2B8D050D00557C4D /* GoalTests.swift */; };
 		08EAD4EF2B8D052D00557C4D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EE2B8D052D00557C4D /* Goal.swift */; };
 		08EC54392837B2B000249DF1 /* Features.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 08EC54382837B2B000249DF1 /* Features.rtf */; };
+		08F0B52C2C0F669100C76232 /* GlobalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0B52B2C0F669100C76232 /* GlobalStrings.swift */; };
 		08F467E429BF1C1C00D35AB6 /* PDFReadingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E329BF1C1C00D35AB6 /* PDFReadingControllerTests.swift */; };
 		08F467EA29BF2A6E00D35AB6 /* PDFReadingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467E929BF2A6E00D35AB6 /* PDFReadingController.swift */; };
 		08F467EF29BF3B7800D35AB6 /* PDFWritingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F467EE29BF3B7800D35AB6 /* PDFWritingController.swift */; };
@@ -701,6 +703,7 @@
 		08EAD4EE2B8D052D00557C4D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		08EC438128BA365400755B54 /* EventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCellViewModel.swift; sourceTree = "<group>"; };
 		08EC54382837B2B000249DF1 /* Features.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Features.rtf; sourceTree = "<group>"; };
+		08F0B52B2C0F669100C76232 /* GlobalStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStrings.swift; sourceTree = "<group>"; };
 		08F467E329BF1C1C00D35AB6 /* PDFReadingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingControllerTests.swift; sourceTree = "<group>"; };
 		08F467E929BF2A6E00D35AB6 /* PDFReadingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReadingController.swift; sourceTree = "<group>"; };
 		08F467EE29BF3B7800D35AB6 /* PDFWritingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFWritingController.swift; sourceTree = "<group>"; };
@@ -1426,6 +1429,7 @@
 				089E4B442A2DE8E100727624 /* UITestID.swift */,
 				08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */,
 				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
+				08F0B52B2C0F669100C76232 /* GlobalStrings.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1865,6 +1869,7 @@
 				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
 				089B378B2A0A4D8B00422971 /* UIHelper.swift in Sources */,
 				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
+				08C4A4EF2C0F8671009F40B8 /* GlobalStrings.swift in Sources */,
 				08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */,
 				0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */,
 				0816B6E72B500D0500A29815 /* WidgetEventCellViewModel.swift in Sources */,
@@ -2076,6 +2081,7 @@
 				0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				081A15632B62911200EDA8A2 /* HourDistributionContainer.swift in Sources */,
+				08F0B52C2C0F669100C76232 /* GlobalStrings.swift in Sources */,
 				08F50DC52965E70F00B65CDF /* CreateEventCellViewModel.swift in Sources */,
 				0881E4B32B5F386100F68CAE /* EventCreationController.swift in Sources */,
 				087D42722B8EA7690075004D /* GoalInputView.swift in Sources */,

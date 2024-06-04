@@ -32,7 +32,7 @@ final class PDFReadingController: UIViewController {
 
     private func setupShareButton() {
         let shareButton = UIBarButtonItem(
-            title: String(localizationId: "pdf.share"),
+            title: String(localizationId: localizationIdPdfButtonShare),
             style: .plain,
             target: self,
             action: #selector(showShare)

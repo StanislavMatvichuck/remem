@@ -8,7 +8,7 @@
 import UIKit
 
 final class WeekPageView: UICollectionViewCell {
-    static let reuseIdentifier: String = "WeekPageView"
+    static let reuseIdentifier: String = collectionCellReuseIdentifierWeekPage
     static let daySpacing: CGFloat = .layoutSquare / 10
 
     let title: UILabel = {

@@ -10,10 +10,10 @@ import Foundation
 
 extension EventsList.Ordering {
     var title: String { switch self {
-    case .name: String(localizationId: "eventsSorting.name")
-    case .total: String(localizationId: "eventsSorting.total")
-    case .dateCreated: String(localizationId: "eventsSorting.dateCreated")
-    case .manual: String(localizationId: "eventsSorting.manual")
+    case .name: String(localizationId: localizationIdOrderingName)
+    case .total: String(localizationId: localizationIdOrderingTotal)
+    case .dateCreated: String(localizationId: localizationIdOrderingDateCreated)
+    case .manual: String(localizationId: localizationIdOrderingManual)
     } }
 }
 

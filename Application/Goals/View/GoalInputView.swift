@@ -10,14 +10,14 @@ import UIKit
 final class GoalInputView: UIStackView {
     private static let buttonsSize: CGFloat = .buttonMargin * 5
 
-    let minusBg = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .inactive)
-    let plusBg = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .inactive)
+    let minusBg = GoalInputView.makeSymbolImage(image: .minus, variant: .inactive)
+    let plusBg = GoalInputView.makeSymbolImage(image: .plus, variant: .inactive)
 
-    let minusAchieved = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .inactiveAchieved)
-    let plusAchieved = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .inactiveAchieved)
+    let minusAchieved = GoalInputView.makeSymbolImage(image: .minus, variant: .inactiveAchieved)
+    let plusAchieved = GoalInputView.makeSymbolImage(image: .plus, variant: .inactiveAchieved)
 
-    let minus = GoalInputView.makeSymbolImage(symbolName: "minus.circle.fill", variant: .active)
-    let plus = GoalInputView.makeSymbolImage(symbolName: "plus.circle.fill", variant: .active)
+    let minus = GoalInputView.makeSymbolImage(image: .minus, variant: .active)
+    let plus = GoalInputView.makeSymbolImage(image: .plus, variant: .active)
 
     enum ButtonVariant {
         case inactive, inactiveAchieved, active
@@ -28,10 +28,10 @@ final class GoalInputView: UIStackView {
         }}
     }
 
-    private static func makeSymbolImage(symbolName: String, variant: ButtonVariant) -> UIView {
+    private static func makeSymbolImage(image: UIImage, variant: ButtonVariant) -> UIView {
         let configurationColors = UIImage.SymbolConfiguration(paletteColors: variant.colors)
         let fontConfiguration = configurationColors.applying(UIImage.SymbolConfiguration(pointSize: GoalInputView.buttonsSize))
-        let image = UIImage(systemName: symbolName)?
+        let image = image
             .withRenderingMode(.alwaysTemplate)
             .withConfiguration(fontConfiguration)
         let view = UIImageView(image: image)

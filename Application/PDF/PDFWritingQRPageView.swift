@@ -9,7 +9,7 @@ import UIKit
 
 final class PDFWritingQRPageView: UIView {
     let stack: UIStackView = {
-        let image = UIImage(named: "qr")?.withTintColor(.secondary)
+        let image = UIImage.qr.withTintColor(.secondary)
         let imageView = UIImageView(al: true)
         imageView.image = image
         imageView.contentMode = .scaleAspectFill
@@ -17,7 +17,7 @@ final class PDFWritingQRPageView: UIView {
         let label = UILabel(al: true)
         label.font = .fontBold
         label.textColor = .text
-        label.text = String(localizationId: "pdf.download")
+        label.text = String(localizationId: localizationIdPdfButtonDownload)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.33

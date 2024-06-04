@@ -10,8 +10,8 @@ import Foundation
 
 struct WeekPageViewModel {
     static let daysCount: Int = 7
-    static let weekNumberDescription = String(localized: "Week.weekNumberDescription")
-    static let totalNumberDescription = String(localized: "Week.totalNumberDescription")
+    static let weekNumberDescription = String(localizationId: localizationIdWeekNumber)
+    static let totalNumberDescription = String(localizationId: localizationIdWeekTotal)
 
     private let event: Event
     private let dayFactory: WeekDayViewModelFactoring
@@ -58,7 +58,7 @@ struct WeekPageViewModel {
 
     var localisedMonth: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "LLLL"
+        dateFormatter.dateFormat = weekPageDateFormat
         let nameOfMonth = dateFormatter.string(from: lastDayStart)
         return nameOfMonth
     }

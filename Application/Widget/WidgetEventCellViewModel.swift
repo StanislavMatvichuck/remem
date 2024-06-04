@@ -19,9 +19,9 @@ struct WidgetEventCellViewModel: Codable, Identifiable {
 
 extension WidgetEventCellViewModel {
     static let empty = WidgetEventCellViewModel(
-        title: String(localizationId: "widget.emptyRow"),
+        title: String(localizationId: localizationIdWidgetEmpty),
         value: "!",
-        timeSince: "time since",
+        timeSince: localizationIdEventsListEventCellTimeSince,
         progress: nil
     )
 }

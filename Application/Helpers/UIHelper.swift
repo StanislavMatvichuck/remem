@@ -7,6 +7,20 @@
 
 import UIKit
 
+extension UIImage {
+    static let trash = UIImage(systemName: "trash.fill")!
+    static let finger = UIImage(systemName: "hand.point.up.left")!
+    static let minus = UIImage(systemName: "minus.circle.fill")!
+    static let plus = UIImage(systemName: "plus.circle.fill")!
+    static let qr = UIImage(systemName: "qr")!
+}
+
+extension CABasicAnimation {
+    static let opacity = CABasicAnimation(keyPath: "opacity")
+    static let positionX = CABasicAnimation(keyPath: "position.x")
+    static let scale = CABasicAnimation(keyPath: "transform.scale")
+}
+
 extension UIColor {
     static let primary = UIColor(named: "primary")!
     static let secondary = UIColor(named: "secondary")!

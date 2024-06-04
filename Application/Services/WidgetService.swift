@@ -14,8 +14,8 @@ protocol EventsListFactoring { func makeEventsList() -> EventsList }
 struct WidgetService: ApplicationService {
     private static let encoder = PropertyListEncoder()
     private var widgetFileURL: URL? { FileManager.default.containerURL(
-        forSecurityApplicationGroupIdentifier: "group.remem.io"
-    )?.appendingPathComponent("RememWidgets.plist") }
+        forSecurityApplicationGroupIdentifier: SecurityApplicationGroupId
+    )?.appendingPathComponent(WidgetStorageFile) }
 
     private let eventsListFactory: EventsListFactoring
     private let eventCellFactory: LoadableEventCellViewModelFactoring
@@ -46,7 +46,7 @@ struct WidgetService: ApplicationService {
             do {
                 let dataToWrite = try Self.encoder.encode(writableItems)
                 try dataToWrite.write(to: widgetFileURL)
-                WidgetCenter.shared.reloadTimelines(ofKind: "RememWidgets")
+                WidgetCenter.shared.reloadTimelines(ofKind: WidgetTimelineKind)
             } catch {
                 fatalError("unable to update widget \(widgetFileURL.absoluteString)")
             }

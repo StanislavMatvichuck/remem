@@ -8,7 +8,7 @@
 import Foundation
 
 struct EventCreationViewModel {
-    static let hint = String(localizationId: "eventsList.new")
+    static let hint = String(localizationId: localizationIdEventsListNew)
 
     let emoji: [String] = ["📖", "👟", "☕️", "🚬", "💊", "📝", "🪴", "🍷", "🍭"]
     var createdEventName = ""

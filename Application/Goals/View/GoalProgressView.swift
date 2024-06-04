@@ -136,7 +136,7 @@ final class GoalProgressView: UIView {
 
 extension GoalProgressView {
     func animateValueUpdate() {
-        let animation = CABasicAnimation(keyPath: "transform.scale")
+        let animation = CABasicAnimation.scale
         animation.fromValue = 2.0
         animation.toValue = 1.0
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)

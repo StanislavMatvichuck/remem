@@ -8,7 +8,7 @@
 import UIKit
 
 final class HintCell: UICollectionViewCell {
-    static var reuseIdentifier = "HintItem"
+    static var reuseIdentifier = collectionCellReuseIdentifierHint
 
     var viewModel: HintCellViewModel? {
         didSet {

@@ -18,7 +18,7 @@ extension PDFRendering { func scrollIfNeeded() {}}
 extension PDFWritingTitlePageView: PDFRendering {
     func configure(_ page: PdfRenderingPage) {
         guard let viewModel = page.viewModel as? String else { return }
-        title.text = "Swipes recording report\n" + viewModel
+        title.text = localizationIdPdfTitle + viewModel
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CreateEventCell: UICollectionViewCell {
-    static var reuseIdentifier = "CreateEventCell"
+    static var reuseIdentifier = collectionCellReuseIdentifierCreate
 
     let button = UIButton(al: true)
 

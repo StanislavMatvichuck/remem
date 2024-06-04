@@ -55,7 +55,7 @@ final class WeekView: UIView {
 }
 
 extension WeekView: UICollectionViewDataSource {
-    var viewModelErrorMessage: String { "view has no access to viewModel" }
+    var viewModelErrorMessage: String { collectionViewDataSourceWeekError }
 
     func collectionView(
         _ collectionView: UICollectionView,

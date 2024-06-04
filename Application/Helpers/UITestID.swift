@@ -17,6 +17,7 @@ enum UITestID: String {
          eventValue,
          eventTitle,
          eventSwiper,
+         eventCreationInput,
          buttonCreteEvent,
          removeEventArea,
          hint,

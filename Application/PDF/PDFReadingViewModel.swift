@@ -9,9 +9,9 @@ import Domain
 import Foundation
 
 struct PDFReadingViewModel {
-    static let title = String(localizationId: "pdf.titlePage.title")
-    static let start = String(localizationId: "pdf.titlePage.start")
-    static let finish = String(localizationId: "pdf.titlePage.finish")
+    static let title = String(localizationId: localizationIdPdfTitle)
+    static let start = String(localizationId: localizationIdPdfStart)
+    static let finish = String(localizationId: localizationIdPdfFinish)
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium

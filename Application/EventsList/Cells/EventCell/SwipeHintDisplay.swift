@@ -34,7 +34,7 @@ final class SwipeHintDisplay: UIView {
     }()
 
     private let finger: UIView = {
-        let image = UIImage(systemName: "hand.point.up.left")?
+        let image = UIImage.finger
             .withTintColor(.secondary.withAlphaComponent(1.0))
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font:
@@ -104,14 +104,14 @@ final class SwipeHintDisplay: UIView {
         let from = initialConstant
         let to = finalConstant
         UIView.animate(withDuration: duration, animations: {
-            let animation = CABasicAnimation(keyPath: "position.x")
+            let animation = CABasicAnimation.positionX
             animation.fromValue = from
             animation.toValue = to
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animation.autoreverses = true
             animation.duration = self.duration
             animation.repeatCount = 100
-            self.circle.layer.add(animation, forKey: "position")
+            self.circle.layer.add(animation, forKey: nil)
         })
     }
 }

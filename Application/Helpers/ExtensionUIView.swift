@@ -54,7 +54,7 @@ extension UIView {
             }
         }
 
-        let animation = CABasicAnimation(keyPath: "transform.scale")
+        let animation = CABasicAnimation.scale
         animation.fromValue = fromScale
         animation.toValue = toScale
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -67,7 +67,7 @@ extension UIView {
     }
 
     func animateEmoji() {
-        let animation = CABasicAnimation(keyPath: "transform.scale")
+        let animation = CABasicAnimation.scale
         animation.fromValue = 1.0
         animation.toValue = 0.75
         animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)

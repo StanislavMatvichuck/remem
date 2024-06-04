@@ -14,10 +14,10 @@ struct HintCellViewModel {
 
     init(hint: EventsList.Hint) {
         title = { switch hint {
-        case .createEvent: return String(localizationId: "eventsList.hint.empty")
-        case .swipeEvent: return String(localizationId: "eventsList.hint.firstHappening")
-        case .checkDetails: return String(localizationId: "eventsList.hint.firstVisit")
-        case .allDone: return String(localizationId: "eventsList.hint.permanentlyVisible")
+        case .createEvent: return String(localizationId: localizationIdEventsListHintEmpty)
+        case .swipeEvent: return String(localizationId: localizationIdEventsListHintFirstHappening)
+        case .checkDetails: return String(localizationId: localizationIdEventsListHintFirstVisit)
+        case .allDone: return String(localizationId: localizationIdEventsListHintPermanent)
         } }()
 
         highlighted = hint != .allDone

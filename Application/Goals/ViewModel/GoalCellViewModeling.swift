@@ -21,7 +21,7 @@ extension GoalViewModel: GoalCellViewModeling {
 }
 
 extension CreateGoalViewModel: GoalCellViewModeling {
-    var id: String { "CreateGoalViewModel" }
+    var id: String { collectionCellReuseIdentifierGoalCreate }
 
     static func == (lhs: CreateGoalViewModel, rhs: CreateGoalViewModel) -> Bool {
         lhs.id == rhs.id

@@ -9,8 +9,8 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
-    static let create = String(localizationId: "button.addHappening")
-    static let delete = String(localizationId: "dropToDelete")
+    static let create = String(localizationId: localizationIdButtonCreate)
+    static let delete = String(localizationId: localizationIdDrop)
 
     enum Animation { case deleteDropArea }
 
@@ -54,7 +54,7 @@ struct DayDetailsViewModel {
 
     private static let titleFormatter = {
         let titleFormatter = DateFormatter()
-        titleFormatter.dateFormat = "d MMMM"
+        titleFormatter.dateFormat = dayDetailsDateFormat
         return titleFormatter
     }()
 }

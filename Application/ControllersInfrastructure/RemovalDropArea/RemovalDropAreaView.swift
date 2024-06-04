@@ -20,7 +20,7 @@ final class RemovalDropAreaView: UIView {
     
     let removalDropArea: UIView = {
         let view = UIView(al: true)
-        let image = UIImage(systemName: "trash.fill")?
+        let image = UIImage.trash
             .withTintColor(UIColor.bg)
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))

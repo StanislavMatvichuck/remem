@@ -17,8 +17,8 @@ enum PdfRenderingPage {
     var title: String? { switch self {
     case .title: return nil
     case .summary: return nil
-    case .time: return "Time"
-    case .week: return "Week"
+    case .time: return localizationIdPdfPageTime
+    case .week: return localizationIdPdfPageWeek
     case .weekInYear: return nil
     }}
 

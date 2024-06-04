@@ -9,9 +9,9 @@ import Domain
 import Foundation
 
 struct GoalViewModel {
-    private static let textCreatedAt = String(localizationId: "goal.createdAt")
-    private static let textLeftToAchieve = String(localizationId: "goal.leftToAchieve")
-    private static let textAchievedAt = String(localizationId: "goal.achievedAt")
+    private static let textCreatedAt = String(localizationId: localizationIdGoalsCreatedAt)
+    private static let textLeftToAchieve = String(localizationId: localizationIdGoalLeftToAchieve)
+    private static let textAchievedAt = String(localizationId: localizationIdGoalAchievedAt)
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium

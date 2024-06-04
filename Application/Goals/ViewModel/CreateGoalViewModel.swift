@@ -8,6 +8,6 @@
 import Foundation
 
 struct CreateGoalViewModel {
-    static let createGoal = String(localizationId: "goals.create")
+    static let createGoal = String(localizationId: localizationIdGoalsCreate)
     let eventId: String
 }

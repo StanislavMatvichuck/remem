@@ -8,7 +8,7 @@
 import Foundation
 
 struct CreateEventCellViewModel {
-    static let title = String(localizationId: "button.create")
+    static let title = String(localizationId: localizationIdButtonCreate)
 
     let isHighlighted: Bool
 

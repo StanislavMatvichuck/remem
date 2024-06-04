@@ -111,13 +111,11 @@ final class DayOfWeekCellView: UIStackView {
     }
 
     private func configureContent(_ vm: DayOfWeekCellViewModel) {
-        percent.text = "\(vm.percent)"
-        dayValue.text = "\(vm.value)"
+        percent.text = vm.percent
+        dayValue.text = vm.value
         dayName.text = vm.shortDayName
 
-//        percent.isHidden = vm.isHidden
         dayValue.isHidden = vm.isHidden
-//        flexibleBackground.isHidden = vm.isHidden
 
         dayName.font = vm.isToday ? .fontSmallBold : .font
         flexibleBackground.layer.borderWidth = vm.isToday ? .border * 2 : .border

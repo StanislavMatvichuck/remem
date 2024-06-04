@@ -10,8 +10,8 @@ import Domain
 struct EventsListViewModel {
     enum Section: Int, CaseIterable { case hint, events, createEvent }
 
-    static let title = String(localizationId: "eventsList.title")
-    static let eventsSortingLabel = String(localizationId: "eventsSorting.title")
+    static let title = String(localizationId: localizationIdEventsListTitle)
+    static let eventsSortingLabel = String(localizationId: localizationIdOrderingTitle)
     static let sections = Section.allCases
 
     private static let hintSectionIdentifier = "Hint"

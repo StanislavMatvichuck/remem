@@ -10,7 +10,7 @@ import UIKit
 typealias LoadableEventCellViewModel = LoadableViewModelWrapper<String, EventCellViewModel>
 
 final class EventCell: UICollectionViewCell, LoadableView {
-    private static let reuseIdentifier = "EventCell"
+    private static let reuseIdentifier = collectionCellReuseIdentifierEvent
 
     private let view = EventCellView()
     private let staticBackgroundView = UIView(al: true)
