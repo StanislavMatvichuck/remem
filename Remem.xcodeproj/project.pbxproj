@@ -63,7 +63,6 @@
 		0826ACAC28C889FD0021D607 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAA28C889FA0021D607 /* Provider.swift */; };
 		0826ACAE28C88E180021D607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08D5122627870D2600C2037F /* Assets.xcassets */; };
 		0826ACB028C88EF20021D607 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826ACAF28C88EF20021D607 /* Helpers.swift */; };
-		0827DD642B5E723C00E0661D /* EventsSortingExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827DD632B5E723C00E0661D /* EventsSortingExecutorTests.swift */; };
 		0828877B29BCA17700FF9839 /* Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828877A29BCA17700FF9839 /* Updating.swift */; };
 		08292EC7292E24F700F46A32 /* ClockSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08292EC6292E24F700F46A32 /* ClockSnapshots.swift */; };
 		082D8BE62BC941AE0001DC17 /* RemoveHappeningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D8BE52BC941AE0001DC17 /* RemoveHappeningService.swift */; };
@@ -469,7 +468,6 @@
 		0826AC9A28C86ECF0021D607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0826ACAA28C889FA0021D607 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		0826ACAF28C88EF20021D607 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		0827DD632B5E723C00E0661D /* EventsSortingExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsSortingExecutorTests.swift; sourceTree = "<group>"; };
 		0828877A29BCA17700FF9839 /* Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updating.swift; sourceTree = "<group>"; };
 		08292EC6292E24F700F46A32 /* ClockSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSnapshots.swift; sourceTree = "<group>"; };
 		082ACBED29F2CDE200FCDAA6 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
@@ -1249,7 +1247,6 @@
 				0875B44C2B582066004C0575 /* EventsSortingViewTests.swift */,
 				0875B45F2B59C6C6004C0575 /* EventsSortingContainerTests.swift */,
 				0875B4632B59DCAA004C0575 /* EventsSortingControllerTests.swift */,
-				0827DD632B5E723C00E0661D /* EventsSortingExecutorTests.swift */,
 			);
 			path = EventsSorting;
 			sourceTree = "<group>";
@@ -1984,7 +1981,6 @@
 				0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */,
 				08A0CB562B48649700DF2CD3 /* EventsListViewModelTests.swift in Sources */,
 				0875B43F2B57D84A004C0575 /* EventsSorterRepositoryTests.swift in Sources */,
-				0827DD642B5E723C00E0661D /* EventsSortingExecutorTests.swift in Sources */,
 				08F467E429BF1C1C00D35AB6 /* PDFReadingControllerTests.swift in Sources */,
 				08AF544A293740E800032487 /* DayDetailsViewModelTests.swift in Sources */,
 				08CC506A2906DE8200840385 /* TestingAppDelegate.swift in Sources */,

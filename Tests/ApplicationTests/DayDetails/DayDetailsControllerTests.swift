@@ -31,7 +31,7 @@ final class DayDetailsControllerTests: XCTestCase {
         XCTAssertLessThanOrEqual(3, wordString!.count)
     }
 
-    func test_showsCreateHappeningButton() { XCTAssertEqual(sut.viewRoot.button.text, String(localizationId: "button.addHappening")) }
+    func test_showsCreateHappeningButton() { XCTAssertEqual(sut.viewRoot.button.text, String(localizationId: localizationIdButtonAddHappening)) }
     func test_empty_noHappeningsInList() { XCTAssertEqual(happeningsAmount, 0) }
 
     func test_singleHappening_showsTime() {

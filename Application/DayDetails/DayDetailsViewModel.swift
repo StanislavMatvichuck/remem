@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 struct DayDetailsViewModel {
-    static let create = String(localizationId: localizationIdButtonCreate)
+    static let create = String(localizationId: localizationIdButtonAddHappening)
     static let delete = String(localizationId: localizationIdDrop)
 
     enum Animation { case deleteDropArea }

@@ -41,7 +41,7 @@ final class GoalViewModelTests: XCTestCase {
     }
 
     func test_leftToAchieve_localizedTextAndGoalLeftToAchieve() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
@@ -54,7 +54,7 @@ final class GoalViewModelTests: XCTestCase {
 
     func test_progress_zero() { XCTAssertEqual(sut.progress, 0) }
     func test_progress_clampedToOne() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
@@ -72,7 +72,7 @@ final class GoalViewModelTests: XCTestCase {
     func test_isAchieved_false() { XCTAssertFalse(sut.isAchieved) }
     func test_readablePercent() { XCTAssertEqual(sut.readablePercent, "0%") }
     func test_readablePercent_33() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = GoalViewModel(goal: Goal(
             dateCreated: DayIndex.referenceValue.date,
@@ -84,7 +84,7 @@ final class GoalViewModelTests: XCTestCase {
     }
 
     func test_readablePercent_133() {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)
         event.addHappening(date: DayIndex.referenceValue.date)

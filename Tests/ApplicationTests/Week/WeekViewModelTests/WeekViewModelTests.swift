@@ -84,7 +84,7 @@ final class WeekViewModelTests: XCTestCase {
     }
 
     private func make(withDateCreatedAndTodayOffset: Int, happenings: [Date] = []) -> WeekViewModel {
-        let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         for happening in happenings { event.addHappening(date: happening) }
 
         let app = ApplicationContainer(mode: .injectedCurrentMoment, currentMoment: DayIndex.referenceValue.adding(days: withDateCreatedAndTodayOffset).date)

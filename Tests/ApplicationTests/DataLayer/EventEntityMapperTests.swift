@@ -13,7 +13,7 @@ import XCTest
 final class EventEntityMapperTests: XCTestCase {
     func test_bidirectionalConversion() {
         let date = DayIndex.referenceValue.date
-        let event = Event(
+        var event = Event(
             id: UUID().uuidString,
             name: "Event",
             happenings: [],

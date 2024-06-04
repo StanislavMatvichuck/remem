@@ -126,7 +126,7 @@ final class SummaryViewModelTests: XCTestCase {
 
     func test_eventCreatedTwoWeeksAgoWithHappeningEachDay_weekAverage_7() {
         let today = DayIndex.referenceValue.adding(days: 13)
-        let event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
+        var event = Event(name: "Event", dateCreated: DayIndex.referenceValue.date)
 
         for i in 0 ..< 14 {
             event.addHappening(date: DayIndex.referenceValue.adding(days: i).date)

@@ -72,7 +72,7 @@ final class WeekPageViewModelTests: XCTestCase {
     }
 
     private func makeWithOneHappening() -> WeekPageViewModel {
-        let event = Event.makeForUnitTests()
+       var event = Event.makeForUnitTests()
         event.addHappening(date: DayIndex.referenceValue.date)
         let details = EventDetailsContainer.makeForUnitTests(event: event)
         details.parent.eventsStorage.update(id: event.id, event: event)

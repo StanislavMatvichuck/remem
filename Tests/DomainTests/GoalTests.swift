@@ -29,7 +29,7 @@ final class GoalTests: XCTestCase {
     
     func test_init_requiresDateCreatedAndValueAndEvent() { XCTAssertNotNil(sut) }
     func test_progress_doesNotIncludeEventHappeningsBeforeDateCreated() {
-        let event = Event.makeDefault()
+        var event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.date)
         sut = Goal(dateCreated: DayIndex.referenceValue.adding(days: 1).date, event: event)
         
@@ -37,7 +37,7 @@ final class GoalTests: XCTestCase {
     }
     
     func test_progress_countEventHappeningAfterDateCreated() {
-        let event = Event.makeDefault()
+        var event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.adding(days: 1).date)
         sut = Goal(dateCreated: DayIndex.referenceValue.date, event: event)
         
@@ -46,7 +46,7 @@ final class GoalTests: XCTestCase {
     }
     
     func test_progress_goalValueIsThreeAndTwoOfThreeEventHappeningsCounted() {
-        let event = Event.makeDefault()
+        var event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
         event.addHappening(date: DayIndex.referenceValue.adding(days: 2).date)
         event.addHappening(date: DayIndex.referenceValue.adding(days: 3).date)
@@ -58,7 +58,7 @@ final class GoalTests: XCTestCase {
     
     func test_achievedAt_nil() { XCTAssertNil(sut.achievedAt) }
     func test_achievedAt_isFirstHappeningDateCreatedThatReachesProgressOfOne() {
-        let event = Event.makeDefault()
+        var event = Event.makeDefault()
         /// happening that is not counted
         event.addHappening(date: DayIndex.referenceValue.adding(days: 0).date)
         
@@ -78,7 +78,7 @@ final class GoalTests: XCTestCase {
     
     func test_leftToAchieve() {
         let value = 5
-        let event = Event.makeDefault()
+        var event = Event.makeDefault()
         event.addHappening(date: DayIndex.referenceValue.date)
         
         sut = Goal(

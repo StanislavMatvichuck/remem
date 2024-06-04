@@ -137,7 +137,7 @@ final class WeekDayViewModelTests: XCTestCase {
         withHappeningsAt: [Date] = []
     ) -> WeekDayViewModel {
         let eventDayCreated = DayIndex.referenceValue
-        let event = Event(name: "", dateCreated: eventDayCreated.date)
+        var event = Event(name: "", dateCreated: eventDayCreated.date)
         withHappeningsAt.forEach { event.addHappening(date: $0) }
         
         let app = ApplicationContainer(mode: .unitTest)

@@ -31,26 +31,26 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_increasesCount() {
-        XCTAssertEqual(sut.read().count, 0)
+        XCTAssertEqual(sut.identifiers().count, 0)
 
         sut.create(event: Event(name: ""))
 
-        XCTAssertEqual(sut.read().count, 1)
+        XCTAssertEqual(sut.identifiers().count, 1)
     }
 
     func test_save_eventWithHappening() {
-        let savedEvent = Event(name: "")
+        var savedEvent = Event(name: "")
 
         savedEvent.addHappening(date: DayIndex.referenceValue.date)
 
         sut.create(event: savedEvent)
 
-        let acquiredEvent = sut.event(byId: savedEvent.id)
+        let acquiredEvent = sut.read(byId: savedEvent.id)
         XCTAssertEqual(acquiredEvent, savedEvent)
     }
 
     func test_save_eventWith_N_Happenings() {
-        let savedEvent = Event(name: "")
+        var savedEvent = Event(name: "")
 
         for i in 0 ..< 10 {
             savedEvent.addHappening(date: DayIndex.referenceValue.date.addingTimeInterval(-1 * Double(i) * 5.0))
@@ -58,23 +58,23 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         sut.create(event: savedEvent)
 
-        let acquiredEvent = sut.event(byId: savedEvent.id)
+        let acquiredEvent = sut.read(byId: savedEvent.id)
         XCTAssertEqual(acquiredEvent, savedEvent)
     }
 
     func test_save_renamedEvent() {
-        let newEvent = givenSavedDefaultEvent()
+        var newEvent = givenSavedDefaultEvent()
 
         newEvent.name = "Updated name"
 
         sut.update(id: newEvent.id, event: newEvent)
 
-        let acquiredEvent = sut.event(byId: newEvent.id)
+        let acquiredEvent = sut.read(byId: newEvent.id)
         XCTAssertEqual(acquiredEvent, newEvent)
     }
 
     func test_save_allPossibleModifications() throws {
-        let newEvent = givenSavedDefaultEvent()
+        var newEvent = givenSavedDefaultEvent()
 
         // renaming
         newEvent.name = "UpdatedName"
@@ -88,7 +88,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
         }
 
         sut.update(id: newEvent.id, event: newEvent)
-        XCTAssertEqual(sut.event(byId: newEvent.id), newEvent)
+        XCTAssertEqual(sut.read(byId: newEvent.id), newEvent)
     }
 
     func test_delete_decreasesCount() {
@@ -96,23 +96,12 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         sut.delete(id: event.id)
 
-        XCTAssertEqual(sut.read().count, 0)
+        XCTAssertEqual(sut.identifiers().count, 0)
     }
 
     private func givenSavedDefaultEvent() -> Event {
         let newEvent = Event(name: "Event")
         sut.create(event: newEvent)
         return newEvent
-    }
-}
-
-private extension CoreDataEventsRepository {
-    func event(byId: String) -> Event {
-        let all = read()
-
-        guard let index = all.firstIndex(where: { $0.id == byId })
-        else { fatalError("unable to find event by id \(byId)") }
-
-        return all[index]
     }
 }
