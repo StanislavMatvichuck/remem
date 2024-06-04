@@ -38,7 +38,7 @@ final class CreateGoalCell: UICollectionViewCell {
 
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font: UIFont.font,
-            NSAttributedString.Key.foregroundColor: UIColor.bg,
+            NSAttributedString.Key.foregroundColor: UIColor.remem_bg,
         ]
 
         button.setAttributedTitle(

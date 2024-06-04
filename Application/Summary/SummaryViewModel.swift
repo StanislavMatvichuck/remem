@@ -66,20 +66,6 @@ struct SummaryViewModel {
             return averageNumberFormatter.string(from: number)!
         }()
 
-        let daysSinceLastHappeningAmount: String = {
-            guard let lastHappeningDate = event.happenings.last?.dateCreated else { return "0" }
-            let lastDay = DayIndex(createdUntil)
-
-            let calendar = Calendar.current
-            let daysDifference = calendar.dateComponents(
-                [.day],
-                from: lastHappeningDate,
-                to: lastDay.date
-            ).day ?? 0
-
-            return String(daysDifference)
-        }()
-
         self.items = [
             SummaryCellViewModel(SummaryRow.total, value: String(totalAmount)),
             SummaryCellViewModel(SummaryRow.daysTracked, value: String(daysTrackedAmount)),

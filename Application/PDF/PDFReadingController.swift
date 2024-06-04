@@ -53,7 +53,7 @@ final class PDFReadingController: UIViewController {
         let data = NSData(contentsOf: url)
 
         let vc = UIActivityViewController(
-            activityItems: [data],
+            activityItems: [data as Any],
             applicationActivities: nil
         )
 

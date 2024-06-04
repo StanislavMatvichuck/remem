@@ -42,7 +42,7 @@ final class EventsSortingCellView: UIView {
 
     private func configureAppearance() {
         backgroundColor = .clear
-        title.textColor = .text
+        title.textColor = .remem_text
     }
 
     private func configureContent(_ vm: EventsSortingCellViewModel) {

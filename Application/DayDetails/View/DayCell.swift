@@ -51,11 +51,11 @@ final class DayCell: UICollectionViewCell {
 
     @objc private func configureAppearance() {
         backgroundColor = .clear
-        label.textColor = UIColor.primary
+        label.textColor = UIColor.remem_primary
         label.font = .fontSmallBold
-        background.layer.backgroundColor = UIColor.border.cgColor
+        background.layer.backgroundColor = UIColor.remem_border.cgColor
         background.layer.cornerRadius = .layoutSquare / 5
-        animatedBackground.backgroundColor = UIColor.primary
+        animatedBackground.backgroundColor = UIColor.remem_primary
         animatedBackground.layer.cornerRadius = .layoutSquare / 5
         animatedBackground.layer.opacity = 0.0
     }

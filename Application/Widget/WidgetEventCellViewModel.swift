@@ -9,7 +9,7 @@ import Foundation
 
 /// File used by `Application` and `Widgets` targets
 struct WidgetEventCellViewModel: Codable, Identifiable {
-    var id = UUID()
+    let id: UUID
     let title: String
     let value: String
     let timeSince: String
@@ -19,6 +19,7 @@ struct WidgetEventCellViewModel: Codable, Identifiable {
 
 extension WidgetEventCellViewModel {
     static let empty = WidgetEventCellViewModel(
+        id: UUID(),
         title: String(localizationId: localizationIdWidgetEmpty),
         value: "!",
         timeSince: localizationIdEventsListEventCellTimeSince,

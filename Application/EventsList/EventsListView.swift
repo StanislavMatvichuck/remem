@@ -90,6 +90,6 @@ final class EventsListView: UIView {
     
     private func configureAppearance() {
         list.backgroundColor = .clear
-        backgroundColor = .bg
+        backgroundColor = .remem_bg
     }
 }

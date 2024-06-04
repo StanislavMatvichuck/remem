@@ -40,7 +40,7 @@ final class WeekPageView: UICollectionViewCell {
 
         for _ in 0 ..< 7 {
             let dayBackground = UIView(al: true)
-            dayBackground.backgroundColor = .border
+            dayBackground.backgroundColor = .remem_border
             dayBackground.layer.cornerRadius = .layoutSquare / 10 * 1.6
             dayBackground.heightAnchor.constraint(equalTo: dayBackground.widthAnchor, multiplier: 4).isActive = true
             stack.addArrangedSubview(dayBackground)
@@ -101,8 +101,8 @@ final class WeekPageView: UICollectionViewCell {
     }
 
     private func configureAppearance() {
-        month.textColor = .secondary
-        title.textColor = .secondary
+        month.textColor = .remem_secondary
+        title.textColor = .remem_secondary
     }
 
     private func configureContent(_ viewModel: WeekPageViewModel) {

@@ -21,7 +21,7 @@ final class RemovalDropAreaView: UIView {
     let removalDropArea: UIView = {
         let view = UIView(al: true)
         let image = UIImage.trash
-            .withTintColor(UIColor.bg)
+            .withTintColor(UIColor.remem_bg)
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30)))
         let imageView = UIImageView(al: true)

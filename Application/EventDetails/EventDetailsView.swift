@@ -26,7 +26,7 @@ final class EventDetailsView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .bg
+        backgroundColor = .remem_bg
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }

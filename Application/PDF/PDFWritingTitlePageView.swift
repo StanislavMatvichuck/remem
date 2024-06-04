@@ -27,6 +27,6 @@ final class PDFWritingTitlePageView: UIView {
 
     private func configureAppearance() {
         title.font = .fontBoldBig
-        title.textColor = .secondary
+        title.textColor = .remem_secondary
     }
 }

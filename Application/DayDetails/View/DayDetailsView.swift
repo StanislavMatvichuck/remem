@@ -19,7 +19,7 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
 
     let title: UILabel = {
         let label = UILabel(al: true)
-        label.textColor = .bg
+        label.textColor = .remem_bg
         label.textAlignment = .center
         label.numberOfLines = 1
         return label
@@ -104,7 +104,7 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         case nil:
             UIView.animateKeyframes(withDuration: duration, delay: 0, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
-                    self.buttonBackground.backgroundColor = .primary
+                    self.buttonBackground.backgroundColor = .remem_primary
                 })
 
                 UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
@@ -159,8 +159,8 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         layer.cornerRadius = Self.radius
 
         picker.backgroundColor = .clear
-        titleBackground.backgroundColor = .secondary
-        buttonBackground.backgroundColor = .primary
+        titleBackground.backgroundColor = .remem_secondary
+        buttonBackground.backgroundColor = .remem_primary
     }
 
     private func configureTitle(viewModel: DayDetailsViewModel) {

@@ -27,7 +27,7 @@ final class WeekDayNumberView: UIView {
         number.text = viewModel.dayNumber
 
         number.font = viewModel.isToday ? .fontBold : .font
-        backgroundColor = viewModel.isDimmed ? .bg_primary : .primary
+        backgroundColor = viewModel.isDimmed ? .bg_primary : .remem_primary
     }
 
     private func configureLayout() {
@@ -40,6 +40,6 @@ final class WeekDayNumberView: UIView {
 
     private func configureAppearance() {
         number.textColor = .bg_item
-        backgroundColor = .primary
+        backgroundColor = .remem_primary
     }
 }

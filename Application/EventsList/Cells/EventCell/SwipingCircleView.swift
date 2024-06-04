@@ -99,7 +99,7 @@ final class SwipingCircleView: UIControl {
     }
 
     private func configureAppearance() {
-        circle.backgroundColor = .primary
+        circle.backgroundColor = .remem_primary
         circle.layer.addSublayer(plusLayer)
         circle.layer.cornerRadius = .swiperRadius
         circle.layer.borderColor = UIColor.border_primary.cgColor

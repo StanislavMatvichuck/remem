@@ -38,7 +38,7 @@ struct PDFDataGenerator {
             if let text = page.title {
                 let title = UILabel(al: true)
                 title.font = .font
-                title.textColor = .secondary
+                title.textColor = .remem_secondary
                 title.text = text
                 pageView.addSubview(title)
                 title.centerXAnchor.constraint(equalTo: pageView.centerXAnchor).isActive = true
@@ -55,7 +55,7 @@ struct PDFDataGenerator {
 
     private func makeNewPage(_ context: UIGraphicsPDFRendererContext) {
         context.beginPage()
-        context.cgContext.setFillColor(UIColor.bg.cgColor)
+        context.cgContext.setFillColor(UIColor.remem_bg.cgColor)
         context.cgContext.fill(PdfRenderingPage.size)
     }
 }

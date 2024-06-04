@@ -17,7 +17,7 @@ struct StyledText: View {
     var body: some View {
         Text(content)
             .font(Font(uiFont: .font))
-            .foregroundColor(Color(UIColor.text))
+            .foregroundColor(Color(UIColor.remem_text))
     }
 }
 
@@ -31,6 +31,6 @@ struct TimeSinceText: View {
     var body: some View {
         Text(content)
             .font(Font(uiFont: .fontSmall))
-            .foregroundColor(Color(UIColor.secondary))
+            .foregroundColor(Color(UIColor.remem_secondary))
     }
 }

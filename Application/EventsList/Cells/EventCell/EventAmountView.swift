@@ -12,7 +12,7 @@ final class EventAmountView: UIView {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.font = .font
-        label.textColor = UIColor.text
+        label.textColor = UIColor.remem_text
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 1
@@ -56,9 +56,9 @@ final class EventAmountView: UIView {
     }
 
     private func configureAppearance() {
-        background.backgroundColor = .bg
+        background.backgroundColor = .remem_bg
         background.layer.cornerRadius = .swiperRadius
-        background.layer.borderColor = UIColor.border.cgColor
+        background.layer.borderColor = UIColor.remem_border.cgColor
         background.layer.borderWidth = .border
     }
 

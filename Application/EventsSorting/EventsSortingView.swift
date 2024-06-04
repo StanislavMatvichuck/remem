@@ -74,7 +74,7 @@ final class EventsSortingView: UIView {
         selectionBackground.backgroundColor = .bg_secondary
 
         layer.borderWidth = Self.borderWidth
-        layer.borderColor = UIColor.border.cgColor
+        layer.borderColor = UIColor.remem_border.cgColor
         layer.cornerRadius = .layoutSquare / 4
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         clipsToBounds = true

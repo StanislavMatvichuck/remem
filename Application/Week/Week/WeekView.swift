@@ -45,7 +45,7 @@ final class WeekView: UIView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .bg
+        backgroundColor = .remem_bg
         collection.backgroundColor = .clear
     }
 

@@ -110,7 +110,7 @@ extension UIView {
         let patternLayer = CAShapeLayer()
         patternLayer.frame = frame
         patternLayer.path = makePatternPath().cgPath
-        patternLayer.fillColor = UIColor.secondary.withAlphaComponent(1.0).cgColor
+        patternLayer.fillColor = UIColor.remem_secondary.withAlphaComponent(1.0).cgColor
         patternLayer.mask = makeMaskLayer()
         return patternLayer
     }

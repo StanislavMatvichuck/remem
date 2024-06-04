@@ -28,7 +28,7 @@ extension MakingSnapshotsRowView {
         let atlasFrame = CGRect(origin: .zero, size: atlasSize)
         let view = UIView(frame: atlasFrame)
         view.addAndConstrain(makeRow(testNames: testCases))
-        view.backgroundColor = .bg
+        view.backgroundColor = .remem_bg
         return view
     }
     

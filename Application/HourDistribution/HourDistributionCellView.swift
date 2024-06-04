@@ -80,7 +80,7 @@ final class HourDistributionCellView: UIStackView {
     }
 
     private func configureAppearance() {
-        hour.textColor = .secondary
+        hour.textColor = .remem_secondary
         hour.font = .fontSmall
 
         flexibleBackground.layer.borderWidth = .border

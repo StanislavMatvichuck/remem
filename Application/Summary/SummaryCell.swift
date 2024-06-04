@@ -49,15 +49,13 @@ final class SummaryCell: UICollectionViewCell {
 
     private func configureAppearance() {
         stack.backgroundColor = .bg_secondary
-//        stack.layer.borderColor = UIColor.secondary.cgColor
-//        stack.layer.borderWidth = .border
         stack.layer.cornerRadius = .buttonMargin
         title.font = .font
         value.font = .fontWeekTitle
         value.adjustsFontSizeToFitWidth = true
         value.minimumScaleFactor = 0.1
-        value.textColor = .bg
-        title.textColor = .bg
+        value.textColor = .remem_bg
+        title.textColor = .remem_bg
     }
 
     private func configureContent(_ vm: SummaryCellViewModel) {

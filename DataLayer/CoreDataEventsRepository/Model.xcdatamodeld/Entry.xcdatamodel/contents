@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1">
     <entity name="Entry" representedClassName="Event" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateVisited" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
-        <relationship name="freshPoint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Point"/>
         <relationship name="points" toMany="YES" deletionRule="Cascade" destinationEntity="Point" inverseName="entry" inverseEntity="Point"/>
     </entity>
     <entity name="Point" representedClassName="Happening" syncable="YES" codeGenerationType="class">
@@ -12,8 +11,4 @@
         <attribute name="value" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="points" inverseEntity="Entry"/>
     </entity>
-    <elements>
-        <element name="Entry" positionX="-63" positionY="-18" width="128" height="104"/>
-        <element name="Point" positionX="-63" positionY="0" width="128" height="74"/>
-    </elements>
 </model>

@@ -17,7 +17,7 @@ final class EventCellView: UIView {
         let label = UILabel(al: true)
         label.textAlignment = .center
         label.font = .font
-        label.textColor = UIColor.text
+        label.textColor = UIColor.remem_text
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 3
@@ -112,7 +112,7 @@ final class EventCellView: UIView {
         stack.backgroundColor = .bg_item
         stack.layer.cornerRadius = .buttonRadius
         stack.clipsToBounds = true
-        stack.layer.borderColor = UIColor.border.cgColor
+        stack.layer.borderColor = UIColor.remem_border.cgColor
         stack.layer.borderWidth = .border
     }
 

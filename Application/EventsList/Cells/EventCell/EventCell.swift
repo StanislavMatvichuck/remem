@@ -74,8 +74,8 @@ final class EventCell: UICollectionViewCell, LoadableView {
     }
 
     private func configureAppearance() {
-        backgroundColor = .bg
-        staticBackgroundView.backgroundColor = .border
+        backgroundColor = .remem_bg
+        staticBackgroundView.backgroundColor = .remem_border
         staticBackgroundView.layer.cornerRadius = view.stack.layer.cornerRadius
     }
 

@@ -38,8 +38,10 @@ struct WidgetService: ApplicationService {
 
             for id in eventsIdentifiers {
                 let loadedEventCellVm = try await eventCellFactory.makeLoadedEventCellViewModel(eventId: id)
-                if let vm = loadedEventCellVm.vm {
-                    writableItems.append(WidgetEventCellViewModel(item: vm))
+                if let vm = loadedEventCellVm.vm,
+                   let widgetVm = WidgetEventCellViewModel(item: vm)
+                {
+                    writableItems.append(widgetVm)
                 }
             }
 
@@ -55,7 +57,9 @@ struct WidgetService: ApplicationService {
 }
 
 extension WidgetEventCellViewModel {
-    init(item: EventCellViewModel) {
+    init?(item: EventCellViewModel) {
+        guard let id = UUID(uuidString: item.id) else { return nil }
+        self.id = id
         title = item.title
         value = item.value
         timeSince = item.timeSince

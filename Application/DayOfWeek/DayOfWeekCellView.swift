@@ -100,9 +100,9 @@ final class DayOfWeekCellView: UIStackView {
 
     private func configureAppearance() {
         dayName.font = .font
-        dayName.textColor = .secondary
+        dayName.textColor = .remem_secondary
         percent.font = .font
-        percent.textColor = .secondary
+        percent.textColor = .remem_secondary
         dayValue.font = .fontSmallBold
         dayValue.textColor = .bg_item
         flexibleBackground.backgroundColor = .bg_secondary

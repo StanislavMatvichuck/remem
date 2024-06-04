@@ -35,7 +35,7 @@ final class SwipeHintDisplay: UIView {
 
     private let finger: UIView = {
         let image = UIImage.finger
-            .withTintColor(.secondary.withAlphaComponent(1.0))
+            .withTintColor(.remem_secondary.withAlphaComponent(1.0))
             .withRenderingMode(.alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(font:
                 .systemFont(ofSize: 40, weight: .regular)))
@@ -94,7 +94,7 @@ final class SwipeHintDisplay: UIView {
     }
 
     private func configureCircleAppearance() {
-        circle.layer.backgroundColor = UIColor.secondary.withAlphaComponent(0.1).cgColor
+        circle.layer.backgroundColor = UIColor.remem_secondary.withAlphaComponent(0.1).cgColor
         circle.layer.cornerRadius = circle.bounds.width / 2
     }
 

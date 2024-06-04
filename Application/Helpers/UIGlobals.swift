@@ -12,7 +12,7 @@ extension UIImage {
     static let finger = UIImage(systemName: "hand.point.up.left")!
     static let minus = UIImage(systemName: "minus.circle.fill")!
     static let plus = UIImage(systemName: "plus.circle.fill")!
-    static let qr = UIImage(systemName: "qr")!
+    static let qrCode = UIImage(systemName: "qr")!
 }
 
 extension CABasicAnimation {
@@ -22,10 +22,10 @@ extension CABasicAnimation {
 }
 
 extension UIColor {
-    static let primary = UIColor(named: "primary")!
-    static let secondary = UIColor(named: "secondary")!
+    static let remem_primary = UIColor(named: "remem_primary")!
+    static let remem_secondary = UIColor(named: "remem_secondary")!
 
-    static let bg = UIColor(named: "bg")!
+    static let remem_bg = UIColor(named: "remem_bg")!
     static let bg_item = UIColor(named: "bg_item")!
     static let bg_primary = UIColor(named: "bg_primary")!
     static let bg_secondary = UIColor(named: "bg_secondary")!
@@ -34,10 +34,10 @@ extension UIColor {
     static let bg_goal_achieved = UIColor(named: "bg_goal_achieved")!
     static let bg_goal_achieved_dimmed = UIColor(named: "bg_goal_achieved_dimmed")!
 
-    static let text = UIColor(named: "text")!
+    static let remem_text = UIColor(named: "remem_text")!
     static let text_goalAchieved = UIColor(named: "text_goalAchieved")!
     static let text_secondary = UIColor(named: "text_secondary")!
-    static let border = UIColor(named: "border")!
+    static let remem_border = UIColor(named: "remem_border")!
     static let border_primary = UIColor(named: "border_primary")!
     static let border_secondary = UIColor(named: "border_secondary")!
 }

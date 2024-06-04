@@ -43,7 +43,7 @@ final class WeekDayView: UIStackView {
     required init(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     private func configureAppearance() {
-        dayName.textColor = .secondary
+        dayName.textColor = .remem_secondary
         roundContainer.layer.cornerRadius = .layoutSquare / 10 * 1.6
         roundContainer.clipsToBounds = true
         roundContainer.backgroundColor = .bg_item

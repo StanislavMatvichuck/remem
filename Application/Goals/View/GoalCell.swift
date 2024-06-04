@@ -85,14 +85,14 @@ final class GoalCell: UICollectionViewCell {
         layer.cornerRadius = CGFloat.buttonMargin
 
         createdAt.font = .font
-        createdAt.textColor = .bg
+        createdAt.textColor = .remem_bg
         leftToAchieve.font = .font
-        leftToAchieve.textColor = .bg
+        leftToAchieve.textColor = .remem_bg
     }
 
     private func configureAppearance(_ isAchieved: Bool) {
         backgroundColor = isAchieved ? .bg_goal_achieved_dimmed : .bg_secondary_dimmed
-        layer.borderColor = isAchieved ? UIColor.text_goalAchieved.cgColor : UIColor.secondary.cgColor
+        layer.borderColor = isAchieved ? UIColor.text_goalAchieved.cgColor : UIColor.remem_secondary.cgColor
         opaqueBg?.backgroundColor = isAchieved ? UIColor.bg_goal_achieved : UIColor.bg_secondary
     }
 }

@@ -11,7 +11,7 @@ final class EventCellGoalIndicator: UIView {
     private static let width = CGFloat.buttonMargin + 1
 
     var viewModel: GoalViewModel? { didSet {
-        guard let viewModel else { isHidden = true; return }
+        guard viewModel != nil else { isHidden = true; return }
         isHidden = false
         if circlesConfigured {
             configureAppearance()
@@ -30,7 +30,7 @@ final class EventCellGoalIndicator: UIView {
         }
     }()
 
-    private lazy var permanentCircle = makeCircle(color: .border, progress: 1.0)
+    private lazy var permanentCircle = makeCircle(color: .remem_border, progress: 1.0)
 
     init() {
         super.init(frame: .zero)
@@ -55,7 +55,7 @@ final class EventCellGoalIndicator: UIView {
             UIColor.bg_goal_achieved.cgColor :
             UIColor.border_secondary.cgColor
 
-        permanentCircle.strokeColor = UIColor.border.cgColor
+        permanentCircle.strokeColor = UIColor.remem_border.cgColor
     }
 
     private func configureCircleIfNeeded() {

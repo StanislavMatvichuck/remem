@@ -30,9 +30,9 @@ final class DayDetailsPresentationController: UIPresentationController {
             width: dayDetailsBackgroundWidth,
             height: dayDetailsBackgroundHeight
         ))
-        dayDetailsBackground.backgroundColor = .border
+        dayDetailsBackground.backgroundColor = .remem_border
         dayDetailsBackground.layer.cornerRadius = DayDetailsView.radius
-        dayDetailsBackground.layer.borderColor = UIColor.border.cgColor
+        dayDetailsBackground.layer.borderColor = UIColor.remem_border.cgColor
         dayDetailsBackground.layer.borderWidth = borderWidth
         dayDetailsBackground.clipsToBounds = false
         self.backgroundBorderLayer = dayDetailsBackground.layer
@@ -47,11 +47,11 @@ final class DayDetailsPresentationController: UIPresentationController {
         shapeLayer.type = .axial
         shapeLayer.startPoint = CGPoint(x: 0, y: 0)
         shapeLayer.endPoint = CGPoint(x: 0, y: 1)
-        shapeLayer.colors = [UIColor.border.cgColor, UIColor.bg.cgColor]
+        shapeLayer.colors = [UIColor.remem_border.cgColor, UIColor.remem_bg.cgColor]
         self.backgroundGradientLayer = shapeLayer
 
         let backgroundView = UIView(frame: containerView!.frame)
-        backgroundView.backgroundColor = .bg
+        backgroundView.backgroundColor = .remem_bg
         backgroundView.alpha = 0
         backgroundView.isAccessibilityElement = true
         backgroundView.accessibilityIdentifier = UITestID.dayDetailsBackground.rawValue
@@ -86,8 +86,8 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     @objc private func updateBackgroundColors() {
-        backgroundGradientLayer?.colors = [UIColor.border.cgColor, UIColor.bg.cgColor]
-        backgroundBorderLayer?.borderColor = UIColor.border.cgColor
+        backgroundGradientLayer?.colors = [UIColor.remem_border.cgColor, UIColor.remem_bg.cgColor]
+        backgroundBorderLayer?.borderColor = UIColor.remem_border.cgColor
     }
 
     lazy var detailsViewCalculatedRect = {

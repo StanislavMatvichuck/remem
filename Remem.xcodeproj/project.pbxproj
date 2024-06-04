@@ -221,7 +221,6 @@
 		089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37832A0A271D00422971 /* TimeSinceView.swift */; };
 		089B37862A0A2D7900422971 /* SwipingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37852A0A2D7900422971 /* SwipingCircleView.swift */; };
 		089B37882A0A32B700422971 /* EventAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B37872A0A32B700422971 /* EventAmountView.swift */; };
-		089B378B2A0A4D8B00422971 /* UIGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIGlobals.swift */; };
 		089D1DA62BC28A2D0050AD33 /* ShowDayDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA52BC28A2D0050AD33 /* ShowDayDetailsService.swift */; };
 		089D1DA82BC294F90050AD33 /* ShowEventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */; };
 		089D1DAA2BC296CF0050AD33 /* ShowPDFReadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */; };
@@ -289,6 +288,7 @@
 		08F50DC52965E70F00B65CDF /* CreateEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC42965E70F00B65CDF /* CreateEventCellViewModel.swift */; };
 		08F50DC72965EEDA00B65CDF /* HintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC62965EEDA00B65CDF /* HintCell.swift */; };
 		08F50DC92965EF5300B65CDF /* CreateEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F50DC82965EF5300B65CDF /* CreateEventCell.swift */; };
+		08F69C062C0F8F560022A501 /* UIGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIGlobals.swift */; };
 		08F97A3E2950769100AB7051 /* DayCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F97A3D2950769100AB7051 /* DayCellViewModel.swift */; };
 		08FDDEEB28E4ECC200B0E781 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		08FE8B992B51929D005E780E /* EventsListDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FE8B982B51929D005E780E /* EventsListDataSourceTests.swift */; };
@@ -1734,7 +1734,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					0826AC8E28C86ECE0021D607 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -1867,12 +1867,12 @@
 				0826ACAC28C889FD0021D607 /* Provider.swift in Sources */,
 				080AA96D28D768350038C21A /* EventRow.swift in Sources */,
 				0826ACB028C88EF20021D607 /* Helpers.swift in Sources */,
-				089B378B2A0A4D8B00422971 /* UIGlobals.swift in Sources */,
 				0826AC9728C86ECE0021D607 /* RememWidgets.swift in Sources */,
 				08C4A4EF2C0F8671009F40B8 /* GlobalStrings.swift in Sources */,
 				08B89A2A28E3194C00F4B63B /* EventsList.swift in Sources */,
 				0833803F2944F9100021281C /* WidgetEventsQuerying.swift in Sources */,
 				0816B6E72B500D0500A29815 /* WidgetEventCellViewModel.swift in Sources */,
+				08F69C062C0F8F560022A501 /* UIGlobals.swift in Sources */,
 				084A8677299A3DFF00300918 /* ExtensionString.swift in Sources */,
 				083380422944F9100021281C /* WidgetDescription.swift in Sources */,
 				08B89A2628E3190600F4B63B /* StyledText.swift in Sources */,
@@ -2283,7 +2283,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -2295,7 +2295,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2315,7 +2315,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = Widgets/Resources/RememWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = JQ483HLUHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widgets/Resources/Info.plist;
@@ -2327,7 +2327,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = io.remem.RememWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2622,6 +2622,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2686,6 +2687,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

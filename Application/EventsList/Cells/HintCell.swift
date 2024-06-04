@@ -15,7 +15,7 @@ final class HintCell: UICollectionViewCell {
             guard let viewModel else { return }
 
             label.text = viewModel.title
-            label.textColor = UIColor.secondary
+            label.textColor = UIColor.remem_secondary
 
             if viewModel.highlighted { label.font = .fontBold }
             else { label.font = .fontSmall }

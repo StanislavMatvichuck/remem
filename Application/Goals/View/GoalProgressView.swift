@@ -116,10 +116,10 @@ final class GoalProgressView: UIView {
         percent.minimumScaleFactor = 0.3
 
         happenings.font = .font
-        happenings.textColor = .bg
+        happenings.textColor = .remem_bg
 
         value.font = .font
-        value.textColor = .bg
+        value.textColor = .remem_bg
 
         if #available(iOS 17.0, *) { registerForTraitChanges([UITraitUserInterfaceStyle.self], target: self, action: #selector(updatePermanentCircleColor)) }
     }

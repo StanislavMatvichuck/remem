@@ -24,8 +24,8 @@ final class CreateEventCell: UICollectionViewCell {
 
             let foreground: UIColor = {
                 viewModel.isHighlighted ?
-                    UIColor.bg :
-                    UIColor.primary
+                    UIColor.remem_bg :
+                    UIColor.remem_primary
             }()
 
             let attributes: [NSAttributedString.Key: Any] = [
@@ -77,7 +77,7 @@ final class CreateEventCell: UICollectionViewCell {
     @objc private func configureAppearance() {
         backgroundColor = .clear
         button.layer.cornerRadius = .buttonRadius
-        button.layer.borderColor = UIColor.primary.cgColor
+        button.layer.borderColor = UIColor.remem_primary.cgColor
         button.layer.borderWidth = .border
     }
 

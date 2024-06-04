@@ -82,7 +82,7 @@ final class EventCreationView: UIView {
 
     private func configureAppearance() {
         hint.font = .fontBold
-        hint.textColor = .secondary
+        hint.textColor = .remem_secondary
         input.backgroundColor = .bg_item
         input.layer.cornerRadius = .buttonHeight / 2
     }

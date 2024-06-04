@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct EventsList: View {
-    let items: [WidgetEventCellViewModel?]
+    let items: [WidgetEventCellViewModel]
 
     init(items: [WidgetEventCellViewModel]) {
         if items.isEmpty {
-            self.items = [.empty, nil]
+            self.items = [.empty]
             return
         }
 
-        var result = [WidgetEventCellViewModel?]()
+        var result = [WidgetEventCellViewModel]()
 
         items.prefix(3).forEach { result.append($0) }
-
-        while result.count < 3 { result.append(nil) }
 
         self.items = result
     }
@@ -33,8 +31,8 @@ struct EventsList: View {
                 alignment: .center,
                 content: {
                     VStack(spacing: spacing) {
-                        ForEach(items.indices) {
-                            EventRow(item: items[$0])
+                        ForEach(items, id: \.id) {
+                            EventRow(item: $0)
                         }
                     }.padding(EdgeInsets(
                         top: spacing,
@@ -44,15 +42,15 @@ struct EventsList: View {
                     ))
                 }
             ).containerBackground(for: .widget, content: {
-                Color(uiColor: UIColor.bg)
+                Color(uiColor: UIColor.remem_bg)
             })
         } else {
             ZStack(
                 alignment: .center,
                 content: {
                     VStack(spacing: spacing) {
-                        ForEach(items.indices) {
-                            EventRow(item: items[$0])
+                        ForEach(items, id: \.id) {
+                            EventRow(item: $0)
                         }
                     }.padding(EdgeInsets(
                         top: spacing,

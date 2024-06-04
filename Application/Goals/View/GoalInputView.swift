@@ -22,9 +22,9 @@ final class GoalInputView: UIStackView {
     enum ButtonVariant {
         case inactive, inactiveAchieved, active
         var colors: [UIColor] { switch self {
-        case .inactive: return [.bg_secondary, .green, .bg]
-        case .inactiveAchieved: return [.bg_goal_achieved, .green, .bg]
-        case .active: return [.bg, .green, .primary]
+        case .inactive: return [.bg_secondary, .green, .remem_bg]
+        case .inactiveAchieved: return [.bg_goal_achieved, .green, .remem_bg]
+        case .active: return [.remem_bg, .green, .remem_primary]
         }}
     }
 
