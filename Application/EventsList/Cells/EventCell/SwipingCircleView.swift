@@ -54,7 +54,7 @@ final class SwipingCircleView: UIControl {
         configurePanHandler()
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     private func configureAnimatorIfNeeded() {
         guard animator == nil else { return }

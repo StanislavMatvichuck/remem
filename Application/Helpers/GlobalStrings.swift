@@ -15,6 +15,7 @@ let WidgetStorageFile = "RememWidgets.plist"
 let WidgetTimelineKind = "RememWidgets"
 
 let collectionViewDataSourceWeekError = "view has no access to viewModel"
+let errorUIKitInit = "init(coder:) has not been implemented"
 
 let localizationIdButtonAddHappening = "button.addHappening"
 let localizationIdButtonCreate = "button.create"

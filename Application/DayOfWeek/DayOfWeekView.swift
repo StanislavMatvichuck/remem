@@ -19,7 +19,7 @@ final class DayOfWeekView: UIView {
         configureAppearance()
     }
 
-    required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     // MARK: - Private
     private let stack: UIStackView = {

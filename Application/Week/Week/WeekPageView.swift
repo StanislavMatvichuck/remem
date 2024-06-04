@@ -62,7 +62,7 @@ final class WeekPageView: UICollectionViewCell {
         configureAppearance()
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     private func configureLayout() {
         let verticalStack = UIStackView(al: true)

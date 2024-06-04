@@ -46,7 +46,7 @@ final class EventCell: UICollectionViewCell, LoadableView {
         configureEventHandlers()
     }
 
-    required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder _: NSCoder) { fatalError(errorUIKitInit) }
 
     override func prepareForReuse() {
         super.prepareForReuse()

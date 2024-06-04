@@ -34,7 +34,7 @@ final class DayDetailsController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder _: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder _: NSCoder) { fatalError(errorUIKitInit) }
     deinit {
         createHappeningSubscription = nil
         removeHappeningSubscription = nil

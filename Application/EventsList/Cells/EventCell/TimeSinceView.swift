@@ -31,7 +31,7 @@ final class TimeSinceView: UIStackView {
         configureAppearance()
     }
 
-    required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     // MARK: - Public
     func configure(_ vm: String) { label.text = vm }

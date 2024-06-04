@@ -31,7 +31,7 @@ final class EventsListView: UIView {
         configureAppearance()
     }
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
     
     // TODO: enable and test this behaviour
     func startHintAnimationIfNeeded() {

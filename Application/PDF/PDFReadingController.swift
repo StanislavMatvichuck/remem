@@ -20,7 +20,7 @@ final class PDFReadingController: UIViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(errorUIKitInit)
     }
 
     override func loadView() { view = viewRoot }

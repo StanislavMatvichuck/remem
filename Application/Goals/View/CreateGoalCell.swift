@@ -25,7 +25,7 @@ final class CreateGoalCell: UICollectionViewCell {
         accessibilityIdentifier = UITestID.buttonCreateGoal.rawValue
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     private func configureLayout() { contentView.addAndConstrain(button) }
 
