@@ -8,49 +8,37 @@
 import UIKit
 
 final class CreateGoalCell: UICollectionViewCell {
-    let button: UIButton = {
-        let button = UIButton(al: true)
-        return button
-    }()
+    let button = Button(title: CreateGoalViewModel.createGoal)
 
     var viewModel: CreateGoalViewModel?
     var service: CreateGoalService?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureAccessibility()
         configureLayout()
-        configureAppearance()
         configureTapHandler()
-        isAccessibilityElement = true
-        accessibilityIdentifier = UITestID.buttonCreateGoal.rawValue
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
-    private func configureLayout() { contentView.addAndConstrain(button) }
+    private func configureAccessibility() {
+        isAccessibilityElement = true
+        accessibilityIdentifier = UITestID.buttonCreateGoal.rawValue
+    }
 
-    private func configureAppearance() {
-        let color = UIColor.bg_primary
-        button.backgroundColor = color
-        button.layer.borderWidth = .border
-        button.layer.borderColor = color.cgColor
-        button.layer.cornerRadius = CGFloat.buttonHeight / 2
-
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.font,
-            NSAttributedString.Key.foregroundColor: UIColor.remem_bg,
-        ]
-
-        button.setAttributedTitle(
-            NSAttributedString(
-                string: CreateGoalViewModel.createGoal,
-                attributes: attributes
-            ),
-            for: .normal
+    private func configureLayout() {
+        contentView.addAndConstrain(
+            button,
+            top: .buttonMargin,
+            bottom: .buttonMargin
         )
     }
 
-    private func configureTapHandler() { button.addTarget(self, action: #selector(handleTap), for: .touchUpInside) }
+    private func configureTapHandler() {
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+    }
+
     @objc private func handleTap() {
         animateTapReceiving {
             self.service?.serve(CreateGoalServiceArgument(eventId: self.viewModel!.eventId, dateCreated: .now))
