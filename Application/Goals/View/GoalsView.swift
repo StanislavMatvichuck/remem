@@ -25,34 +25,25 @@ final class GoalsView: UIView {
         setNeedsLayout()
     }}
 
-    lazy var heightConstraint: NSLayoutConstraint = { list.heightAnchor.constraint(equalToConstant: 7 * .layoutSquare) }()
-
     init(list: UICollectionView, dataSource: GoalsDataSource) {
         self.list = list
         self.dataSource = dataSource
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
         configureAppearance()
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        list.layoutIfNeeded()
-        heightConstraint.constant = list.contentSize.height
-    }
-
     // MARK: - Private
     private func configureLayout() {
         addAndConstrain(list)
         addAndConstrain(removalDropArea)
-        heightConstraint.isActive = true
     }
 
     private func configureAppearance() {
         list.backgroundColor = .clear
+        backgroundColor = .remem_bg
     }
 
     static func makeList() -> UICollectionView {

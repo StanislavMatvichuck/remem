@@ -8,6 +8,8 @@
 import Foundation
 
 struct GoalsViewModel {
+    static let title = String(localizationId: localizationIdGoalsTitle)
+    
     enum Section: Int, CaseIterable { case goals, createGoal }
 
     let cells: [Section: [any GoalCellViewModeling]]

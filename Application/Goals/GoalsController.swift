@@ -33,7 +33,7 @@ final class GoalsController: UIViewController {
         super.viewDidLoad()
         configureList()
         configureSubscriptions()
-        
+        title = GoalsViewModel.title
         viewModel = factory.makeGoalsViewModel()
     }
     

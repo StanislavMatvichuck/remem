@@ -13,6 +13,7 @@ final class Coordinator {
              createEvent,
              eventsOrdering,
              eventDetails,
+             goals,
              dayDetails,
              pdfReading
     }
@@ -24,6 +25,7 @@ final class Coordinator {
     case .createEvent: navigationController.present(controller, animated: true)
     case .eventsOrdering: navigationController.present(controller, animated: true)
     case .eventDetails: navigationController.pushViewController(controller, animated: true)
+    case .goals: navigationController.pushViewController(controller, animated: true)
     case .dayDetails: navigationController.present(controller, animated: true)
     case .pdfReading: navigationController.pushViewController(controller, animated: true)
     } }
