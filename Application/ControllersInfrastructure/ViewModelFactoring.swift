@@ -23,11 +23,6 @@ protocol HintCellViewModelFactoring {
     func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel
 }
 
-protocol LoadableEventCellViewModelFactoring {
-    func makeLoadingEventCellViewModel(eventId: String) -> LoadableEventCellViewModel
-    func makeLoadedEventCellViewModel(eventId: String) async throws -> LoadableEventCellViewModel
-}
-
 protocol CreateEventCellViewModelFactoring {
     func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel
 }

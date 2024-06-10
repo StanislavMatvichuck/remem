@@ -7,25 +7,24 @@
 
 import UIKit
 
-protocol SummaryDataProviding {
-    var viewModel: SummaryViewModel? { get }
+protocol SummaryDataProviding: AnyObject {
+    var viewModel: Loadable<SummaryViewModel>? { get }
 }
 
-struct SummaryViewDiffableDataSource {
+final class SummaryDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, SummaryRow>
     typealias DataSource = UICollectionViewDiffableDataSource<Int, SummaryRow>
 
-    private let provider: SummaryDataProviding
-    private let dataSource: DataSource
+    weak var viewModelProvider: SummaryDataProviding?
 
-    init(list: UICollectionView, provider: SummaryDataProviding) {
+    let list: UICollectionView
+    private lazy var dataSource: DataSource = {
         let createEventCellRegistration = UICollectionView.CellRegistration<SummaryCell, SummaryCellViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
 
-        self.provider = provider
-        dataSource = DataSource(collectionView: list) {
+        return DataSource(collectionView: list) {
             collectionView, indexPath, itemIdentifier in
 
-            guard let item = provider.viewModel?.cell(for: itemIdentifier) else { fatalError() }
+            guard let item = self.viewModelProvider?.viewModel?.vm?.cell(for: itemIdentifier) else { fatalError() }
 
             return collectionView.dequeueConfiguredReusableCell(
                 using: createEventCellRegistration,
@@ -33,10 +32,14 @@ struct SummaryViewDiffableDataSource {
                 item: item
             )
         }
+    }()
+
+    init(list: UICollectionView) {
+        self.list = list
     }
 
-    func applySnapshot(_ oldValue: SummaryViewModel?) {
-        guard let viewModel = provider.viewModel else { return }
+    func applySnapshot() {
+        guard let viewModel = viewModelProvider?.viewModel?.vm else { return }
         var snapshot = Snapshot()
 
         let defaultSection = 0

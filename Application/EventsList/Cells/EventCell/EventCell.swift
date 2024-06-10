@@ -7,16 +7,14 @@
 
 import UIKit
 
-typealias LoadableEventCellViewModel = LoadableViewModelWrapper<String, EventCellViewModel>
-
-final class EventCell: UICollectionViewCell, LoadableView {
+final class EventCell: UICollectionViewCell, LoadableView, UsingLoadableViewModel {
     private static let reuseIdentifier = collectionCellReuseIdentifierEvent
 
     private let view = EventCellView()
     private let staticBackgroundView = UIView(al: true)
 
     // TODO: improve this part
-    var viewModel: LoadableEventCellViewModel? { didSet {
+    var viewModel: Loadable<EventCellViewModel>? { didSet {
         guard let viewModel else { return }
         if viewModel.loading {
             displayLoading()
@@ -36,7 +34,7 @@ final class EventCell: UICollectionViewCell, LoadableView {
     private var tapService: ShowEventDetailsService?
     private var swipeService: CreateHappeningService?
     private var removeService: RemoveEventService?
-    private var loadingInterrupter: CellLoadingStopping?
+    private var loadingInterrupter: LoadableViewModelHandling?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +49,7 @@ final class EventCell: UICollectionViewCell, LoadableView {
     override func prepareForReuse() {
         super.prepareForReuse()
         view.prepareForReuse()
-        loadingInterrupter?.stopLoading(for: self)
+        loadingInterrupter?.cancel(for: self)
         viewModel = nil
         clearServices()
     }
@@ -85,7 +83,7 @@ final class EventCell: UICollectionViewCell, LoadableView {
         tapService: ShowEventDetailsService,
         swipeService: CreateHappeningService,
         removeService: RemoveEventService,
-        loadingInterrupter: CellLoadingStopping
+        loadingInterrupter: LoadableViewModelHandling
     ) {
         self.tapService = tapService
         self.swipeService = swipeService
@@ -115,17 +113,21 @@ final class EventCell: UICollectionViewCell, LoadableView {
     }
 
     @objc private func handleSwipe() {
-        swipeService?.serve(CreateHappeningServiceArgument(date: .now))
+        guard let swipeService, let eventId = viewModel?.vm?.eventId else { return }
+        swipeService.serve(CreateHappeningServiceArgument(eventId: eventId, date: .now))
     }
 
     @objc private func handleTap() {
+        guard let tapService = self.tapService, let eventId = viewModel?.vm?.eventId else { return }
         view.animateTapReceiving {
-            guard let tapService = self.tapService else { return }
-            tapService.serve(ApplicationServiceEmptyArgument())
+            tapService.serve(ShowEventDetailsServiceArgument(eventId: eventId))
         }
     }
 
-    func handleRemove() { removeService?.serve(ApplicationServiceEmptyArgument()) }
+    func handleRemove() {
+        guard let removeService = self.removeService, let eventId = viewModel?.vm?.eventId else { return }
+        removeService.serve(RemoveEventServiceArgument(eventId: eventId))
+    }
 }
 
 // MARK: - Happening creation animations

@@ -21,10 +21,10 @@ extension EventDetailsController: Updating {
 
 extension EventsListController: Updating { func update() { viewModel = factory.makeEventsListViewModel() }}
 extension WeekController: Updating { func update() {
-    viewModel = factory.makeWeekViewModel()
+    loadingHandler.load(for: viewRoot, factory: factory)
 }}
 extension SummaryController: Updating { func update() {
-    viewModel = factory.makeSummaryViewModel()
+    loadingHandler.load(for: viewRoot, factory: factory)
 }}
 
 extension GoalsController: Updating { func update() {
@@ -35,7 +35,7 @@ extension DayDetailsController: Updating { func update() {
 }}
 
 extension DayOfWeekController: Updating { func update() {
-    viewModel = factory.makeDayOfWeekViewModel()
+    loadingHandler.load(for: viewRoot, factory: factory)
 }}
 
 extension EventsSortingController: Updating { func update() {
@@ -44,6 +44,6 @@ extension EventsSortingController: Updating { func update() {
 
 extension HourDistributionController: Updating {
     func update() {
-        viewModel = factory.makeHourDistributionViewModel()
+        loadingHandler.load(for: viewRoot, factory: factory)
     }
 }

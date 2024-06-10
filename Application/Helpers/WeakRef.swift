@@ -19,7 +19,3 @@ extension WeakRef: Updating where T: Updating {
 extension WeakRef: DayDetailsDataProviding where T: DayDetailsDataProviding {
     var viewModel: DayDetailsViewModel? { weakRef?.viewModel }
 }
-
-extension WeakRef: SummaryDataProviding where T: SummaryDataProviding {
-    var viewModel: SummaryViewModel? { weakRef?.viewModel }
-}

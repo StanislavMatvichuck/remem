@@ -7,9 +7,15 @@
 
 import UIKit
 
-final class DayOfWeekView: UIView {
-    var viewModel: DayOfWeekViewModel? { didSet {
-        guard let viewModel else { return }
+final class DayOfWeekView: UIView, LoadableView, UsingLoadableViewModel {
+    var viewModel: Loadable<DayOfWeekViewModel>? { didSet {
+        if viewModel?.loading == true {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
+
+        guard let viewModel = viewModel?.vm else { return }
         configureContent(viewModel)
     } }
 
@@ -32,11 +38,11 @@ final class DayOfWeekView: UIView {
     }()
 
     private func configureLayout() {
-        addAndConstrain(
-            stack,
-            top: 0, left: .buttonMargin,
-            right: .buttonMargin, bottom: 0
-        )
+        widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        addSubview(stack)
+        stack.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin).isActive = true
+        stack.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 
     private func configureAppearance() {}

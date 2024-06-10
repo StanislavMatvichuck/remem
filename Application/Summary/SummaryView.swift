@@ -7,32 +7,41 @@
 
 import UIKit
 
-final class SummaryView: UIView, SummaryDataProviding {
-    let list: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = .buttonMargin
-        layout.minimumInteritemSpacing = .buttonMargin
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+final class SummaryView: UIView, LoadableView, UsingLoadableViewModel {
+    let list: UICollectionView
+    let dataSource: SummaryDataSource
 
-    var viewModel: SummaryViewModel? { didSet {
-        dataSource.applySnapshot(oldValue)
+    var viewModel: Loadable<SummaryViewModel>? { didSet {
+        if viewModel?.loading == true {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
+        dataSource.applySnapshot()
     }}
+    
+    lazy var heightConstraint: NSLayoutConstraint = list.heightAnchor.constraint(equalToConstant: 4 * .layoutSquare + .buttonMargin)
 
-    lazy var dataSource = SummaryViewDiffableDataSource(list: list, provider: WeakRef(self))
-    lazy var heightConstraint: NSLayoutConstraint = list.heightAnchor.constraint(equalToConstant: 4 * .layoutSquare + .buttonMargin) 
-
-    init() {
+    init(list: UICollectionView, dataSource: SummaryDataSource) {
+        self.list = list
+        self.dataSource = dataSource
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        list.delegate = self
         configureLayout()
         configureAppearance()
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
+    
+    // MARK: - Public
+    
+    static func makeList() -> UICollectionView {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
+    
+    // MARK: - Private
 
     private func configureLayout() {
         addAndConstrain(list, constant: .buttonMargin)
@@ -42,13 +51,18 @@ final class SummaryView: UIView, SummaryDataProviding {
     private func configureAppearance() {
         list.backgroundColor = .clear
     }
-}
-
-extension SummaryView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let availableWidth = collectionView.bounds.width - .buttonMargin
-        let cellWidth = (availableWidth / 2).rounded(.down)
-        let cellHeight = 2 * collectionView.bounds.width / 7
-        return CGSize(width: cellWidth, height: cellHeight)
+    
+    private static func makeLayout() -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { _, _ in
+            let heightDimension: NSCollectionLayoutDimension = .absolute(2 * CGFloat.layoutSquare)
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: heightDimension)
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: heightDimension)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 2)
+            group.interItemSpacing = .fixed(.buttonMargin)
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = .buttonMargin
+            return section
+        }
     }
 }

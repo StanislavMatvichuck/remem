@@ -9,15 +9,20 @@ import UIKit
 
 final class HourDistributionController: UIViewController {
     // MARK: - Properties
-    private let viewRoot = HourDistributionView()
-    let factory: HourDistributionViewModelFactoring
-    var viewModel: HourDistributionViewModel? { didSet {
+    let viewRoot = HourDistributionView()
+    let factory: any LoadableHourDistributionViewModelFactoring
+    let loadingHandler: LoadableViewModelHandling
+    var viewModel: Loadable<HourDistributionViewModel>? = Loadable<HourDistributionViewModel>() { didSet {
         viewRoot.viewModel = viewModel
     }}
 
     // MARK: - Init
-    init(_ factory: HourDistributionViewModelFactoring) {
-        self.factory = factory
+    init(
+        viewModelFactory: any LoadableHourDistributionViewModelFactoring,
+        loadingHandler: LoadableViewModelHandling
+    ) {
+        self.factory = viewModelFactory
+        self.loadingHandler = loadingHandler
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,6 +32,8 @@ final class HourDistributionController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = factory.makeHourDistributionViewModel()
+        loadingHandler.load(for: viewRoot, factory: factory)
     }
+
+    deinit { loadingHandler.cancel(for: viewRoot) }
 }

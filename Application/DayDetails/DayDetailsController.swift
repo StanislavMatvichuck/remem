@@ -70,6 +70,7 @@ final class DayDetailsController: UIViewController {
     @objc private func handleButton() {
         if let viewModel, let createHappeningService {
             createHappeningService.serve(CreateHappeningServiceArgument(
+                eventId: viewModel.eventId,
                 date: viewModel.pickerDate
             ))
         }

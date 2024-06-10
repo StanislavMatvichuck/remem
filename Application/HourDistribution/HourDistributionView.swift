@@ -7,9 +7,15 @@
 
 import UIKit
 
-final class HourDistributionView: UIView {
-    var viewModel: HourDistributionViewModel? { didSet {
-        guard let viewModel else { return }
+final class HourDistributionView: UIView, LoadableView, UsingLoadableViewModel {
+    var viewModel: Loadable<HourDistributionViewModel>? { didSet {
+        if viewModel?.loading == true {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
+
+        guard let viewModel = viewModel?.vm else { return }
         configureContent(viewModel)
     }}
 
@@ -31,13 +37,12 @@ final class HourDistributionView: UIView {
 
     // MARK: - Private
     private func configureLayout() {
-        addAndConstrain(
-            stack,
-            top: 0, left: .buttonMargin,
-            right: .buttonMargin, bottom: 0
-        )
-
-        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.2 / 3).isActive = true
+        widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        addSubview(stack)
+        stack.widthAnchor.constraint(equalTo: widthAnchor, constant: -2 * .buttonMargin).isActive = true
+        stack.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        stack.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stack.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 
     private func configureAppearance() {}

@@ -32,10 +32,11 @@ enum PdfRenderingPage {
 
     var renderer: PDFRendering { switch self {
     case .title: return PDFWritingTitlePageView()
-    case .summary: return SummaryView()
+//    case .summary: return SummaryView()
     case .time: return HourDistributionView()
     case .week: return DayOfWeekView()
     case .weekInYear: return WeekView()
+    default: fatalError("todo: implement pdf rendering for a view")
     }}
 
     private static let pageWidth = CGFloat.screenW

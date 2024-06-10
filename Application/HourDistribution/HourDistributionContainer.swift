@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class HourDistributionContainer:
-    HourDistributionViewModelFactoring
-{
+final class HourDistributionContainer: LoadableHourDistributionViewModelFactoring {
     private let parent: EventDetailsContainer
     private var currentHour: Int { Calendar.current.dateComponents(
         [.hour],
@@ -18,9 +16,22 @@ final class HourDistributionContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func makeHourDistributionController() -> HourDistributionController { HourDistributionController(self) }
+    func makeHourDistributionController() -> HourDistributionController { HourDistributionController(
+        viewModelFactory: self,
+        loadingHandler: parent.parent.viewModelsLoadingHandler
+    ) }
     func makeHourDistributionViewModel() -> HourDistributionViewModel { HourDistributionViewModel(
         parent.event.happenings,
         currentHour: currentHour
     ) }
+
+    func makeLoading() -> Loadable<HourDistributionViewModel> { Loadable<HourDistributionViewModel>() }
+    func makeLoaded() async throws -> Loadable<HourDistributionViewModel> {
+        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let vm = HourDistributionViewModel(
+            event.happenings,
+            currentHour: currentHour
+        )
+        return Loadable<HourDistributionViewModel>(vm: vm)
+    }
 }

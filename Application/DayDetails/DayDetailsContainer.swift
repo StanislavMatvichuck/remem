@@ -31,13 +31,13 @@ final class DayDetailsContainer:
             currentMoment: parent.parent.currentMoment,
             startOfDay: startOfDay,
             pickerDate: pickerDate,
-            cells: parent.event.happenings(forDayIndex: DayIndex(startOfDay)).map { makeDayCellViewModel(happening: $0) }
+            cells: parent.event.happenings(forDayIndex: DayIndex(startOfDay)).map { makeDayCellViewModel(happening: $0) },
+            eventId: parent.eventId
         )
     }
 
     func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(id: UUID().uuidString, happening: happening) }
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
-        eventId: parent.eventId,
         eventsStorage: parent.parent.eventsStorage,
         eventsProvider: parent.parent.provider
     ) }

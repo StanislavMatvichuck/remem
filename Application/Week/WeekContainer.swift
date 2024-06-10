@@ -9,6 +9,7 @@ import Domain
 import UIKit
 
 final class WeekContainer:
+    LoadableWeekViewModelFactoring,
     WeekViewModelFactoring,
     WeekDayViewModelFactoring,
     WeekPageViewModelFactoring
@@ -19,7 +20,11 @@ final class WeekContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func makeWeekController() -> WeekController { WeekController(self, view: makeWeekView()) }
+    func makeWeekController() -> WeekController { WeekController(
+        viewModelFactory: self,
+        view: makeWeekView(),
+        loadingHandler: parent.parent.viewModelsLoadingHandler
+    ) }
     func makeWeekView() -> WeekView { WeekView(service: makeShowDayDetailsService()) }
     func makeWeekViewModel() -> WeekViewModel { WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment) }
     func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {
@@ -38,6 +43,13 @@ final class WeekContainer:
             today: currentMoment,
             dailyMaximum: dailyMaximum
         )
+    }
+
+    func makeLoading() -> Loadable<WeekViewModel> { Loadable<WeekViewModel>() }
+    func makeLoaded() async throws -> Loadable<WeekViewModel> {
+        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let vm = WeekViewModel(event: event, pageFactory: self, createUntil: parent.parent.currentMoment)
+        return Loadable<WeekViewModel>(vm: vm)
     }
 
     func makeShowDayDetailsService() -> ShowDayDetailsService { ShowDayDetailsService(

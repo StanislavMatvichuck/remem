@@ -19,6 +19,7 @@ final class ApplicationContainer {
     let coordinator: Coordinator
     let coreDataContainer: NSPersistentContainer
     let injectedCurrentMoment: Date
+    let viewModelsLoadingHandler: LoadableViewModelHandling = LoadableViewModelHandler()
 
     var currentMoment: Date { mode == .injectedCurrentMoment ? injectedCurrentMoment : mode.currentMoment }
 

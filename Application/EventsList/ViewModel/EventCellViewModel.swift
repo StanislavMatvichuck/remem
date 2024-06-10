@@ -9,13 +9,12 @@ import Domain
 import Foundation
 
 struct EventCellViewModel {
-    var id: String { event.id } /// used by `EventsListCellViewModel`
-
     enum Animations { case swipe, aboveSwipe, belowSwipe, none }
 
     private let event: Event
     private let valueAmount: Int
 
+    var eventId: String { event.id }
     let title: String
     let value: String
     let timeSince: String
@@ -51,7 +50,7 @@ struct EventCellViewModel {
         self.value = "\(valueAmount)"
     }
 
-    static func timeSinceDate(date: Date, now: Date) -> String {
+    private static func timeSinceDate(date: Date, now: Date) -> String {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
         formatter.maximumUnitCount = 2

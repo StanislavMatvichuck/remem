@@ -16,6 +16,7 @@ struct DayDetailsViewModel {
 
     let title: String
     let isToday: Bool
+    let eventId: String /// needed in a `CreateHappeningService`
     private var cells: [DayCellViewModel]
     var animation: Animation?
     var pickerDate: Date
@@ -24,12 +25,14 @@ struct DayDetailsViewModel {
         currentMoment: Date,
         startOfDay: Date,
         pickerDate: Date?,
-        cells: [DayCellViewModel]
+        cells: [DayCellViewModel],
+        eventId: String
     ) {
         self.title = Self.titleFormatter.string(from: startOfDay)
         self.isToday = DayIndex(currentMoment).date == startOfDay
         self.cells = cells
         self.animation = nil
+        self.eventId = eventId
         self.pickerDate = pickerDate ?? {
             let cal = Calendar.current
             let hour = cal.dateComponents([.hour], from: currentMoment).hour ?? 0

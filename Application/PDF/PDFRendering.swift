@@ -40,7 +40,7 @@ extension SummaryView: PDFRendering {
         heightConstraint.isActive = false
         removeConstraint(heightConstraint)
         list.heightAnchor.constraint(equalToConstant: 6 * .layoutSquare + .buttonMargin).isActive = true
-        self.viewModel = viewModel
+//        self.viewModel = viewModel
         setNeedsLayout()
     }
 }
@@ -48,21 +48,22 @@ extension SummaryView: PDFRendering {
 extension HourDistributionView: PDFRendering {
     func configure(_ page: PdfRenderingPage) {
         guard let viewModel = page.viewModel as? HourDistributionViewModel else { return }
-        self.viewModel = viewModel
+//        self.viewModel = viewModel
     }
 }
 
 extension DayOfWeekView: PDFRendering {
     func configure(_ page: PdfRenderingPage) {
         guard let viewModel = page.viewModel as? DayOfWeekViewModel else { return }
-        self.viewModel = viewModel
+//        self.viewModel = viewModel
     }
 }
 
 extension WeekView: PDFRendering {
     func configure(_ page: PdfRenderingPage) {
         guard let viewModelWithIndex = page.viewModel as? WeekViewModelWithScrollIndex else { return }
-        viewModel = viewModelWithIndex.viewModel
+        let vm = Loadable<WeekViewModel>(vm: viewModelWithIndex.viewModel)
+        viewModel = vm
         tag = viewModelWithIndex.scrollIndex
     }
 

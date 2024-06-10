@@ -7,10 +7,9 @@
 
 import UIKit
 
-protocol ShowEventDetailsServiceFactoring { func makeShowEventDetailsService(id: String) -> ShowEventDetailsService }
-protocol RemoveEventServiceFactoring { func makeRemoveEventService(id: String) -> RemoveEventService }
-protocol CreateHappeningServiceFactoring { func makeCreateHappeningService(id: String) -> CreateHappeningService }
-protocol EventsListDataProviding: AnyObject { var viewModel: EventsListViewModel? { get } }
+protocol EventsListDataProviding: AnyObject {
+    var viewModel: EventsListViewModel? { get }
+}
 
 final class EventsListDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
@@ -19,27 +18,29 @@ final class EventsListDataSource {
     weak var viewModelProvider: EventsListDataProviding?
 
     private let list: UICollectionView
-    private let showEventDetailsServiceFactory: ShowEventDetailsServiceFactoring
-    private let createHappeningServiceFactory: CreateHappeningServiceFactoring
-    private let removeEventServiceFactory: RemoveEventServiceFactoring
-    private let eventCellViewModelFactory: LoadableEventCellViewModelFactoring
+    private let showEventDetailsService: ShowEventDetailsService
+    private let createHappeningService: CreateHappeningService
+    private let removeEventService: RemoveEventService
+    private let eventCellViewModelFactoryFactoring: EventCellViewModelFactoryFactoring
     private let showCreateEventService: ShowCreateEventService
-    private let cellsLoadingManager = CellsLoadingManager()
+    private let loadingHandler: LoadableViewModelHandling
 
     init(
         list: UICollectionView,
-        showEventDetailsServiceFactory: ShowEventDetailsServiceFactoring,
-        createHappeningServiceFactory: CreateHappeningServiceFactoring,
-        removeEventServiceFactory: RemoveEventServiceFactoring,
+        showEventDetailsService: ShowEventDetailsService,
+        createHappeningService: CreateHappeningService,
+        removeEventService: RemoveEventService,
         showCreateEventService: ShowCreateEventService,
-        eventCellViewModelFactory: LoadableEventCellViewModelFactoring
+        eventCellViewModelFactory: @escaping EventCellViewModelFactoryFactoring,
+        loadingHandler: LoadableViewModelHandling
     ) {
         self.list = list
-        self.showEventDetailsServiceFactory = showEventDetailsServiceFactory
-        self.createHappeningServiceFactory = createHappeningServiceFactory
-        self.removeEventServiceFactory = removeEventServiceFactory
+        self.showEventDetailsService = showEventDetailsService
+        self.createHappeningService = createHappeningService
+        self.removeEventService = removeEventService
         self.showCreateEventService = showCreateEventService
-        self.eventCellViewModelFactory = eventCellViewModelFactory
+        self.eventCellViewModelFactoryFactoring = eventCellViewModelFactory
+        self.loadingHandler = loadingHandler
     }
 
     private lazy var dataSource: DataSource = {
@@ -48,23 +49,23 @@ final class EventsListDataSource {
             cell.viewModel = viewModel
         }
 
-        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, LoadableEventCellViewModel>
-        { cell, _, viewModel in
+        let eventCellRegistration = UICollectionView.CellRegistration<EventCell, Loadable<EventCellViewModel>>
+        { cell, indexPath, viewModel in
+            let vmFactory = self.eventCellViewModelFactoryFactoring(indexPath)
 
             if cell.viewModel == nil {
                 /// works for initial rendering
                 cell.viewModel = viewModel
             }
 
-            if let eventId = viewModel.loadingArguments {
-                cell.configureServices(
-                    tapService: self.showEventDetailsServiceFactory.makeShowEventDetailsService(id: eventId),
-                    swipeService: self.createHappeningServiceFactory.makeCreateHappeningService(id: eventId),
-                    removeService: self.removeEventServiceFactory.makeRemoveEventService(id: eventId),
-                    loadingInterrupter: self.cellsLoadingManager
-                )
-                self.cellsLoadingManager.startLoading(for: cell, factory: self.eventCellViewModelFactory) // assigns loaded vm
-            }
+            cell.configureServices(
+                tapService: self.showEventDetailsService,
+                swipeService: self.createHappeningService,
+                removeService: self.removeEventService,
+                loadingInterrupter: self.loadingHandler
+            )
+
+            self.loadingHandler.load(for: cell, factory: vmFactory)
         }
 
         let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel>
@@ -73,8 +74,7 @@ final class EventsListDataSource {
             cell.tapService = self.showCreateEventService
         }
 
-        return DataSource(collectionView: list) {
-            collectionView, indexPath, itemIdentifier in
+        return DataSource(collectionView: list) { collectionView, indexPath, itemIdentifier in
 
             guard let cellViewModel = self.viewModelProvider?.viewModel?.viewModel(forIdentifier: itemIdentifier) else { fatalError() }
 
@@ -89,7 +89,7 @@ final class EventsListDataSource {
                 return collectionView.dequeueConfiguredReusableCell(
                     using: eventCellRegistration,
                     for: indexPath,
-                    item: cellViewModel as? LoadableEventCellViewModel
+                    item: cellViewModel as? Loadable<EventCellViewModel>
                 )
             case EventsListViewModel.Section.createEvent.rawValue:
                 return collectionView.dequeueConfiguredReusableCell(

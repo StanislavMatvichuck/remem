@@ -10,5 +10,5 @@ import Foundation
 protocol EventsListCellViewModel {}
 
 extension HintCellViewModel: EventsListCellViewModel {}
-extension LoadableEventCellViewModel: EventsListCellViewModel {}
+extension Loadable<EventCellViewModel>: EventsListCellViewModel {}
 extension CreateEventCellViewModel: EventsListCellViewModel {}

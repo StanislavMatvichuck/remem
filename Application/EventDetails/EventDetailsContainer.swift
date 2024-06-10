@@ -14,27 +14,26 @@ final class EventDetailsContainer:
 {
     let parent: ApplicationContainer
     let eventId: String
-    var event: Event { parent.provider.read(byId: eventId) }
+    var event: Event { parent.provider.read(byId: eventId) } // TODO: improve this
 
     init(_ parent: ApplicationContainer, eventId: String) {
         self.parent = parent
         self.eventId = eventId
     }
 
-    func makeEventDetailsController() -> EventDetailsController {
-        EventDetailsController(
-            factory: self,
-            controllers: [
-                WeekContainer(self).makeWeekController(),
-                GoalsContainer(self).makeGoalsController(),
-                SummaryContainer(self).makeSummaryController(),
-                HourDistributionContainer(self).makeHourDistributionController(),
-                DayOfWeekContainer(self).makeDayOfWeekController(),
-                PDFWritingContainer(self).makePDFWritingController()
-            ],
-            service: VisitEventService(event: event, repository: parent.eventsStorage)
-        )
-    }
+    func makeEventDetailsController() -> EventDetailsController { EventDetailsController(
+        factory: self,
+        controllers: [
+            WeekContainer(self).makeWeekController(),
+            GoalsContainer(self).makeGoalsController(),
+            SummaryContainer(self).makeSummaryController(),
+            HourDistributionContainer(self).makeHourDistributionController(),
+            DayOfWeekContainer(self).makeDayOfWeekController(),
+            PDFWritingContainer(self).makePDFWritingController()
+        ],
+        service: makeVisitEventService()
+    ) }
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel { EventDetailsViewModel(event: event) }
+    func makeVisitEventService() -> VisitEventService { VisitEventService(event: event, repository: parent.eventsStorage) }
 }

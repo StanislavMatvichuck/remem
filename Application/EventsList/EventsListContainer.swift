@@ -9,16 +9,14 @@ import DataLayer
 import Domain
 import UIKit
 
+typealias EventCellViewModelFactoryFactoring = (IndexPath) -> any LoadableEventCellViewModelFactoring
+
 final class EventsListContainer:
     EventsListFactoring,
     EventsListControllerFactoring,
     EventsListViewModelFactoring,
     HintCellViewModelFactoring,
-    LoadableEventCellViewModelFactoring,
     CreateEventCellViewModelFactoring,
-    CreateHappeningServiceFactoring,
-    RemoveEventServiceFactoring,
-    ShowEventDetailsServiceFactoring,
     EventDetailsControllerFactoringFactoring
 {
     let parent: ApplicationContainer
@@ -27,6 +25,15 @@ final class EventsListContainer:
     let manualOrderingReader: ManualEventsOrderingReading
     let manualOrderingWriter: ManualEventsOrderingWriting
     let goalsStorage: GoalsReading & GoalsWriting
+
+    var eventCellViewModelFactory: (EventsListContainer) -> EventCellViewModelFactoryFactoring = { container in { indexPath in
+        EventCellViewModelFactory(
+            provider: container.parent.provider,
+            goalsStorage: container.goalsStorage,
+            eventId: container.makeEventsList().eventsIdentifiers[indexPath.row],
+            currentMoment: container.parent.currentMoment
+        )
+    }}
 
     init(_ parent: ApplicationContainer) {
         self.parent = parent
@@ -50,25 +57,28 @@ final class EventsListContainer:
         self.goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
     }
 
-    func makeEventsListController() -> EventsListController {
+    func makeEventsListController() -> EventsListController { EventsListController(
+        viewModelFactory: self,
+        view: makeEventsListView(),
+        showEventsOrderingService: makeShowEventsOrderingService(),
+        setEventsOrderingService: makeSetEventsOrderingService(),
+        widgetService: makeWidgetService()
+    ) }
+
+    func makeEventsListView() -> EventsListView {
         let list = EventsListView.makeList()
 
         let dataSource = EventsListDataSource(
             list: list,
-            showEventDetailsServiceFactory: self,
-            createHappeningServiceFactory: self,
-            removeEventServiceFactory: self,
+            showEventDetailsService: makeShowEventDetailsService(),
+            createHappeningService: makeCreateHappeningService(),
+            removeEventService: makeRemoveEventService(),
             showCreateEventService: makeShowCreateEventService(),
-            eventCellViewModelFactory: self
+            eventCellViewModelFactory: eventCellViewModelFactory(self),
+            loadingHandler: parent.viewModelsLoadingHandler
         )
 
-        return EventsListController(
-            viewModelFactory: self,
-            view: EventsListView(list: list, dataSource: dataSource),
-            showEventsOrderingService: makeShowEventsOrderingService(),
-            setEventsOrderingService: makeSetEventsOrderingService(),
-            widgetService: makeWidgetService()
-        )
+        return EventsListView(list: list, dataSource: dataSource)
     }
 
     //
@@ -78,7 +88,6 @@ final class EventsListContainer:
     func makeEventsListViewModel() -> EventsListViewModel { EventsListViewModel(
         list: makeEventsList(),
         hintFactory: self,
-        eventFactory: self,
         createEventFactory: self
     ) }
 
@@ -89,25 +98,6 @@ final class EventsListContainer:
     ) }
 
     func makeHintCellViewModel(hint: EventsList.Hint) -> HintCellViewModel { HintCellViewModel(hint: hint) }
-
-    func makeLoadingEventCellViewModel(eventId: String) -> LoadableEventCellViewModel {
-        LoadableEventCellViewModel(loadingArguments: eventId)
-    }
-
-    func makeLoadedEventCellViewModel(eventId: String) async throws -> LoadableEventCellViewModel {
-        let event = try await parent.provider.readAsync(byId: eventId)
-        let goal = goalsStorage.readActiveGoal(forEvent: event)
-
-        let cellVm = EventCellViewModel(
-            event: event,
-            hintEnabled: false,
-            currentMoment: parent.currentMoment,
-            animation: .none,
-            goal: GoalViewModel(goal: goal)
-        )
-
-        return LoadableEventCellViewModel(loadingArguments: eventId, loading: false, vm: cellVm)
-    }
 
     func makeCreateEventCellViewModel(eventsCount: Int) -> CreateEventCellViewModel {
         CreateEventCellViewModel(eventsCount: eventsCount)
@@ -133,28 +123,25 @@ final class EventsListContainer:
         manualOrderingRepository: manualOrderingWriter
     ) }
 
-    func makeShowEventDetailsService(id: String) -> ShowEventDetailsService { ShowEventDetailsService(
-        eventId: id,
+    func makeShowEventDetailsService() -> ShowEventDetailsService { ShowEventDetailsService(
         coordinator: parent.coordinator,
         factory: self,
         eventsProvider: parent.provider
     ) }
 
-    func makeCreateHappeningService(id: String) -> CreateHappeningService { CreateHappeningService(
-        eventId: id,
+    func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
         eventsStorage: parent.eventsStorage,
         eventsProvider: parent.provider
     ) }
 
-    func makeRemoveEventService(id: String) -> RemoveEventService { RemoveEventService(
-        eventId: id,
+    func makeRemoveEventService() -> RemoveEventService { RemoveEventService(
         eventsStorage: parent.eventsStorage,
         eventsProvider: parent.provider
     ) }
 
     func makeWidgetService() -> WidgetService { WidgetService(
         eventsListFactory: self,
-        eventCellFactory: self
+        eventCellFactory: eventCellViewModelFactory(self)
     ) }
 
     //
@@ -162,4 +149,27 @@ final class EventsListContainer:
     //
 
     func makeEventDetailsControllerFactoring(eventId: String) -> any EventDetailsControllerFactoring { EventDetailsContainer(parent, eventId: eventId) }
+}
+
+struct EventCellViewModelFactory: LoadableEventCellViewModelFactoring {
+    let provider: EventsReading
+    let goalsStorage: GoalsReading
+    let eventId: String
+    let currentMoment: Date
+
+    func makeLoading() -> Loadable<EventCellViewModel> { Loadable<EventCellViewModel>() }
+    func makeLoaded() async throws -> Loadable<EventCellViewModel> {
+        let event = try await provider.readAsync(byId: eventId)
+        let goal = goalsStorage.readActiveGoal(forEvent: event)
+
+        let cellVm = EventCellViewModel(
+            event: event,
+            hintEnabled: false,
+            currentMoment: currentMoment,
+            animation: .none,
+            goal: GoalViewModel(goal: goal)
+        )
+
+        return Loadable<EventCellViewModel>(vm: cellVm)
+    }
 }

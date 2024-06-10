@@ -9,17 +9,22 @@ import Foundation
 import UIKit
 
 final class DayOfWeekController: UIViewController {
-    private let viewRoot = DayOfWeekView()
-    let factory: DayOfWeekViewModelFactoring
+    let viewRoot = DayOfWeekView()
+    let factory: any LoadableDayOfWeekViewModelFactoring
+    let loadingHandler: LoadableViewModelHandling
 
-    var viewModel: DayOfWeekViewModel? { didSet {
+    var viewModel: Loadable<DayOfWeekViewModel>? = Loadable<DayOfWeekViewModel>() { didSet {
         guard let viewModel else { return }
         viewRoot.viewModel = viewModel
     }}
 
     // MARK: - Init
-    init(_ factory: DayOfWeekViewModelFactoring) {
-        self.factory = factory
+    init(
+        viewModelFactory: any LoadableDayOfWeekViewModelFactoring,
+        loadingHandler: LoadableViewModelHandling
+    ) {
+        self.factory = viewModelFactory
+        self.loadingHandler = loadingHandler
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,6 +34,11 @@ final class DayOfWeekController: UIViewController {
     override func loadView() { view = viewRoot }
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = factory.makeDayOfWeekViewModel()
+        loadingHandler.load(for: viewRoot, factory: factory)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        loadingHandler.cancel(for: viewRoot)
     }
 }

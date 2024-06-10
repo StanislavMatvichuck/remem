@@ -7,14 +7,24 @@
 
 import UIKit
 
-final class DayOfWeekContainer: DayOfWeekViewModelFactoring {
+final class DayOfWeekContainer: LoadableDayOfWeekViewModelFactoring {
     private let parent: EventDetailsContainer
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func makeDayOfWeekController() -> DayOfWeekController { DayOfWeekController(self) }
+    func makeDayOfWeekController() -> DayOfWeekController { DayOfWeekController(
+        viewModelFactory: self,
+        loadingHandler: parent.parent.viewModelsLoadingHandler
+    ) }
+
     func makeDayOfWeekViewModel() -> DayOfWeekViewModel { DayOfWeekViewModel(
         parent.event.happenings,
         currentMoment: parent.parent.currentMoment
     ) }
+
+    func makeLoaded() async throws -> Loadable<DayOfWeekViewModel> {
+        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let vm = DayOfWeekViewModel(event.happenings, currentMoment: parent.parent.currentMoment)
+        return Loadable<DayOfWeekViewModel>(vm: vm)
+    }
 }

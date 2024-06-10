@@ -30,7 +30,7 @@ final class PDFWritingContainer:
         let weekViewModel = WeekContainer(parent).makeWeekViewModel()
         var pages: [PdfRenderingPage] = [
             .title(parent.event.name),
-            .summary(SummaryContainer(parent).makeSummaryViewModel()),
+//            .summary(SummaryContainer(parent).makeLoadingSummaryViewModel()),
             .time(HourDistributionContainer(parent).makeHourDistributionViewModel()),
             .week(DayOfWeekContainer(parent).makeDayOfWeekViewModel())
         ]

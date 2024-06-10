@@ -8,28 +8,25 @@
 import Domain
 import Foundation
 
-struct CreateHappeningServiceArgument { let date: Date }
+struct CreateHappeningServiceArgument { let eventId: String; let date: Date }
 struct CreateHappeningService: ApplicationService {
     private let eventsStorage: EventsWriting
     private let eventsProvider: EventsReading
-    private let eventId: String
 
     init(
-        eventId: String,
         eventsStorage: EventsWriting,
         eventsProvider: EventsReading
     ) {
-        self.eventId = eventId
         self.eventsStorage = eventsStorage
         self.eventsProvider = eventsProvider
     }
 
     func serve(_ arg: CreateHappeningServiceArgument) {
-        var event = eventsProvider.read(byId: eventId)
+        var event = eventsProvider.read(byId: arg.eventId)
         event.addHappening(date: arg.date)
 
-        eventsStorage.update(id: eventId, event: event)
+        eventsStorage.update(id: arg.eventId, event: event)
 
-        DomainEventsPublisher.shared.publish(HappeningCreated(eventId: eventId))
+        DomainEventsPublisher.shared.publish(HappeningCreated(eventId: arg.eventId))
     }
 }

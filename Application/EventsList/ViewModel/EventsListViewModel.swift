@@ -19,7 +19,6 @@ struct EventsListViewModel {
 
     private let list: EventsList
     private let hintVmFactory: HintCellViewModelFactoring
-    private let eventVmFactory: LoadableEventCellViewModelFactoring
     private let createEventVmFactory: CreateEventCellViewModelFactoring
 
     var dragAndDrop = RemovalDropAreaViewModel()
@@ -27,12 +26,10 @@ struct EventsListViewModel {
     init(
         list: EventsList,
         hintFactory: HintCellViewModelFactoring,
-        eventFactory: LoadableEventCellViewModelFactoring,
         createEventFactory: CreateEventCellViewModelFactoring
     ) {
         self.list = list
         self.hintVmFactory = hintFactory
-        self.eventVmFactory = eventFactory
         self.createEventVmFactory = createEventFactory
     }
 
@@ -56,6 +53,6 @@ struct EventsListViewModel {
     func viewModel(forIdentifier id: String) -> (any EventsListCellViewModel)? {
         if id == Self.hintSectionIdentifier { return hintVmFactory.makeHintCellViewModel(hint: list.hint) }
         if id == Self.createEventSectionIdentifier { return createEventVmFactory.makeCreateEventCellViewModel(eventsCount: list.eventsIdentifiers.count) }
-        return eventVmFactory.makeLoadingEventCellViewModel(eventId: id)
+        return Loadable<EventCellViewModel>()
     }
 }

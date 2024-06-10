@@ -143,7 +143,7 @@ final class EventsListController:
                 self?.update()
                 if let renderedCells = self?.viewRoot.list.visibleCells {
                     for cell in renderedCells {
-                        if let cell = cell as? EventCell, cell.viewModel?.vm?.id == action.eventId {
+                        if let cell = cell as? EventCell, cell.viewModel?.vm?.eventId == action.eventId {
                             cell.playSwipeAnimation()
                         }
                     }

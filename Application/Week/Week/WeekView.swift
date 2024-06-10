@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class WeekView: UIView {
+final class WeekView: UIView, LoadableView, UsingLoadableViewModel {
+    typealias ViewModel = Loadable<WeekViewModel>
     let collection: UICollectionView = {
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.scrollDirection = .horizontal
@@ -20,8 +21,14 @@ final class WeekView: UIView {
         return collection
     }()
 
-    var viewModel: WeekViewModel? { didSet {
-        guard let viewModel else { return }
+    var viewModel: Loadable<WeekViewModel>? { didSet {
+        if viewModel?.loading == true {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
+
+        guard let viewModel = viewModel?.vm else { return }
         configureContentFor(viewModel)
     } }
 
@@ -62,7 +69,7 @@ extension WeekView: UICollectionViewDataSource {
         numberOfItemsInSection section: Int) -> Int
     {
         guard let viewModel else { fatalError(viewModelErrorMessage) }
-        return viewModel.pagesCount
+        return viewModel.vm?.pagesCount ?? 0
     }
 
     func collectionView(
@@ -71,7 +78,8 @@ extension WeekView: UICollectionViewDataSource {
     {
         guard let page = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeekPageView.reuseIdentifier,
-            for: indexPath) as? WeekPageView, let viewModel
+            for: indexPath) as? WeekPageView,
+            let viewModel = viewModel?.vm
         else { fatalError(viewModelErrorMessage) }
         page.service = service
         page.viewModel = viewModel.page(at: indexPath.row)

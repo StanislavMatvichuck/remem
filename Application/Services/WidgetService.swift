@@ -18,11 +18,11 @@ struct WidgetService: ApplicationService {
     )?.appendingPathComponent(WidgetStorageFile) }
 
     private let eventsListFactory: EventsListFactoring
-    private let eventCellFactory: LoadableEventCellViewModelFactoring
+    private let eventCellFactory: EventCellViewModelFactoryFactoring
 
     init(
         eventsListFactory: EventsListFactoring,
-        eventCellFactory: LoadableEventCellViewModelFactoring
+        eventCellFactory: @escaping EventCellViewModelFactoryFactoring
     ) {
         self.eventsListFactory = eventsListFactory
         self.eventCellFactory = eventCellFactory
@@ -36,8 +36,9 @@ struct WidgetService: ApplicationService {
             let eventsIdentifiers = eventsList.eventsIdentifiers.prefix(3)
             var writableItems = [WidgetEventCellViewModel]()
 
-            for id in eventsIdentifiers {
-                let loadedEventCellVm = try await eventCellFactory.makeLoadedEventCellViewModel(eventId: id)
+            for (index, _) in eventsIdentifiers.enumerated() {
+                let eventCellFactory = self.eventCellFactory(IndexPath(row: index, section: 0))
+                let loadedEventCellVm = try await eventCellFactory.makeLoaded()
                 if let vm = loadedEventCellVm.vm,
                    let widgetVm = WidgetEventCellViewModel(item: vm)
                 {
@@ -58,7 +59,7 @@ struct WidgetService: ApplicationService {
 
 extension WidgetEventCellViewModel {
     init?(item: EventCellViewModel) {
-        guard let id = UUID(uuidString: item.id) else { return nil }
+        guard let id = UUID(uuidString: item.eventId) else { return nil }
         self.id = id
         title = item.title
         value = item.value
