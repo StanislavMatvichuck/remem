@@ -1397,7 +1397,6 @@
 		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				082576772C175B1300D203AA /* GoalsPresenter */,
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
 				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
 				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
@@ -1412,6 +1411,7 @@
 				08DFFADB2B5007B50063B389 /* EventsList */,
 				0875B4452B57F0A4004C0575 /* EventsSorting */,
 				08EAD4E92B8D023200557C4D /* Goals */,
+				082576772C175B1300D203AA /* GoalsPresenter */,
 				08D5123E278716DA00C2037F /* Helpers */,
 				081A15592B62886300EDA8A2 /* HourDistribution */,
 				0816B6E42B500BBF00A29815 /* PDF */,
