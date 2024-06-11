@@ -23,7 +23,7 @@ final class DayOfWeekContainer: LoadableDayOfWeekViewModelFactoring {
     ) }
 
     func makeLoaded() async throws -> Loadable<DayOfWeekViewModel> {
-        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let event = try await parent.parent.eventsReader.readAsync(byId: parent.eventId)
         let vm = DayOfWeekViewModel(event.happenings, currentMoment: parent.parent.currentMoment)
         return Loadable<DayOfWeekViewModel>(vm: vm)
     }

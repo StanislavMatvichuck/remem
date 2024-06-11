@@ -27,7 +27,7 @@ final class EventsListContainer:
 
     var eventCellViewModelFactory: (EventsListContainer) -> EventCellViewModelFactoryFactoring = { container in { indexPath in
         EventCellViewModelFactory(
-            provider: container.parent.provider,
+            provider: container.parent.eventsReader,
             goalsStorage: container.parent.goalsReader,
             eventId: container.makeEventsList().eventsIdentifiers[indexPath.row],
             currentMoment: container.parent.currentMoment
@@ -90,7 +90,7 @@ final class EventsListContainer:
     ) }
 
     func makeEventsList() -> EventsList { EventsList(
-        eventsReader: parent.provider,
+        eventsReader: parent.eventsReader,
         orderingReader: orderingReader,
         manualOrderingReader: manualOrderingReader
     ) }
@@ -108,7 +108,7 @@ final class EventsListContainer:
     func makeShowCreateEventService() -> ShowCreateEventService { ShowCreateEventService(
         coordinator: parent.coordinator,
         factory: EventCreationContainer(parent: parent),
-        eventsProvider: parent.provider
+        eventsProvider: parent.eventsReader
     ) }
 
     func makeShowEventsOrderingService() -> ShowEventsOrderingService { ShowEventsOrderingService(
@@ -124,17 +124,17 @@ final class EventsListContainer:
     func makeShowEventDetailsService() -> ShowEventDetailsService { ShowEventDetailsService(
         coordinator: parent.coordinator,
         factory: self,
-        eventsProvider: parent.provider
+        eventsProvider: parent.eventsReader
     ) }
 
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
-        eventsStorage: parent.eventsStorage,
-        eventsProvider: parent.provider
+        eventsStorage: parent.eventsWriter,
+        eventsProvider: parent.eventsReader
     ) }
 
     func makeRemoveEventService() -> RemoveEventService { RemoveEventService(
-        eventsStorage: parent.eventsStorage,
-        eventsProvider: parent.provider
+        eventsStorage: parent.eventsWriter,
+        eventsProvider: parent.eventsReader
     ) }
 
     func makeWidgetService() -> WidgetService { WidgetService(

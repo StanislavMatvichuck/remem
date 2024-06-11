@@ -30,7 +30,7 @@ final class SummaryContainer: LoadableSummaryViewModelFactoring {
 
     func makeLoading() -> Loadable<SummaryViewModel> { Loadable<SummaryViewModel>() }
     func makeLoaded() async throws -> Loadable<SummaryViewModel> {
-        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let event = try await parent.parent.eventsReader.readAsync(byId: parent.eventId)
         let vm = SummaryViewModel(event: event, createdUntil: parent.parent.currentMoment)
         return Loadable<SummaryViewModel>(vm: vm)
     }

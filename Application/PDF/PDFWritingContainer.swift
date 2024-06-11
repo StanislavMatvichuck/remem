@@ -23,7 +23,7 @@ final class PDFWritingContainer:
         coordinator: parent.parent.coordinator,
         controllerFactory: PDFReadingContainer(),
         viewModelFactory: self,
-        eventsProvider: parent.parent.provider
+        eventsProvider: parent.parent.eventsReader
     ) }
 
     func makePDFViewModel() -> [PdfRenderingPage] {

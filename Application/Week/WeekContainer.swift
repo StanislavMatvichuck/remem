@@ -47,7 +47,7 @@ final class WeekContainer:
 
     func makeLoading() -> Loadable<WeekViewModel> { Loadable<WeekViewModel>() }
     func makeLoaded() async throws -> Loadable<WeekViewModel> {
-        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let event = try await parent.parent.eventsReader.readAsync(byId: parent.eventId)
         let vm = WeekViewModel(event: event, pageFactory: self, createUntil: parent.parent.currentMoment)
         return Loadable<WeekViewModel>(vm: vm)
     }
@@ -55,6 +55,6 @@ final class WeekContainer:
     func makeShowDayDetailsService() -> ShowDayDetailsService { ShowDayDetailsService(
         coordinator: parent.parent.coordinator,
         factory: DayDetailsPresentationContainer(parent: parent),
-        eventsProvider: parent.parent.provider
+        eventsProvider: parent.parent.eventsReader
     ) }
 }

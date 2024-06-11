@@ -141,7 +141,7 @@ final class WeekDayViewModelTests: XCTestCase {
         withHappeningsAt.forEach { event.addHappening(date: $0) }
         
         let app = ApplicationContainer(mode: .unitTest)
-        app.eventsStorage.create(event: event)
+        app.eventsWriter.create(event: event)
         let details = EventDetailsContainer(app, eventId: event.id)
 
         let container = WeekContainer(details)

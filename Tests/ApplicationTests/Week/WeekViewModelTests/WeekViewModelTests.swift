@@ -88,7 +88,7 @@ final class WeekViewModelTests: XCTestCase {
         for happening in happenings { event.addHappening(date: happening) }
 
         let app = ApplicationContainer(mode: .injectedCurrentMoment, currentMoment: DayIndex.referenceValue.adding(days: withDateCreatedAndTodayOffset).date)
-        app.eventsStorage.create(event: event)
+        app.eventsWriter.create(event: event)
         let details = EventDetailsContainer(app, eventId: event.id)
         let container = WeekContainer(details)
         return container.makeWeekViewModel()

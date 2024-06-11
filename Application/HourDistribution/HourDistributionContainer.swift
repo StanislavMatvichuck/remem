@@ -27,7 +27,7 @@ final class HourDistributionContainer: LoadableHourDistributionViewModelFactorin
 
     func makeLoading() -> Loadable<HourDistributionViewModel> { Loadable<HourDistributionViewModel>() }
     func makeLoaded() async throws -> Loadable<HourDistributionViewModel> {
-        let event = try await parent.parent.provider.readAsync(byId: parent.eventId)
+        let event = try await parent.parent.eventsReader.readAsync(byId: parent.eventId)
         let vm = HourDistributionViewModel(
             event.happenings,
             currentHour: currentHour

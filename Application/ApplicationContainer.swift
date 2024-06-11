@@ -11,11 +11,9 @@ import Domain
 import UIKit
 
 final class ApplicationContainer {
-    typealias Repository = EventsReading & EventsWriting
-
     let mode: LaunchMode
-    let provider: EventsReading
-    let eventsStorage: EventsWriting
+    let eventsReader: EventsReading
+    let eventsWriter: EventsWriting
     let goalsReader: GoalsReading
     let goalsWriter: GoalsWriting
     let coordinator: Coordinator
@@ -30,7 +28,7 @@ final class ApplicationContainer {
             let repository = CoreDataEventsRepository(container: coreDataContainer)
 
             let repositoryConfigurator = UITestRepositoryConfigurator()
-            repositoryConfigurator.configure(repository: repository, for: mode)
+            repositoryConfigurator.configure(reader: repository, writer: repository, for: mode)
 
             return repository
         }
@@ -51,8 +49,8 @@ final class ApplicationContainer {
         self.mode = mode
         self.injectedCurrentMoment = currentMoment
         self.coordinator = coordinator
-        self.provider = eventsRepository
-        self.eventsStorage = eventsRepository
+        self.eventsReader = eventsRepository
+        self.eventsWriter = eventsRepository
         self.coreDataContainer = container
         self.goalsReader = goalsRepository
         self.goalsWriter = goalsRepository
@@ -76,6 +74,6 @@ final class ApplicationContainer {
     func makeShowEventsListService() -> ShowEventsListService { ShowEventsListService(
         coordinator: coordinator,
         factory: EventsListContainer(self),
-        eventsProvider: provider
+        eventsProvider: eventsReader
     ) }
 }

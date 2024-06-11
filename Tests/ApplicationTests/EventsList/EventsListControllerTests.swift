@@ -72,7 +72,7 @@ final class EventsListControllerTests: XCTestCase {
     private func configureWithOneEvent() {
         let event = Event(name: "", dateCreated: DayIndex.referenceValue.date)
         let appContainer = ApplicationContainer(mode: .unitTest)
-        appContainer.eventsStorage.create(event: event)
+        appContainer.eventsWriter.create(event: event)
         let container = EventsListContainer(appContainer)
         sut = container.makeEventsListController()
         sut.loadViewIfNeeded()

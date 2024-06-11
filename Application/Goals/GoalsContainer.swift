@@ -41,7 +41,7 @@ final class GoalsContainer:
 
     func makeCreateGoalService() -> CreateGoalService { CreateGoalService(
         goalsStorage: goalsStorage,
-        eventsProvider: parent.parent.provider
+        eventsProvider: parent.parent.eventsReader
     ) }
 
     func makeDeleteGoalService() -> DeleteGoalService { DeleteGoalService(goalsStorage: goalsStorage) }

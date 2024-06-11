@@ -14,7 +14,7 @@ final class EventDetailsContainer:
 {
     let parent: ApplicationContainer
     let eventId: String
-    var event: Event { parent.provider.read(byId: eventId) } // TODO: improve this
+    var event: Event { parent.eventsReader.read(byId: eventId) } // TODO: improve this
 
     init(_ parent: ApplicationContainer, eventId: String) {
         self.parent = parent
@@ -35,5 +35,5 @@ final class EventDetailsContainer:
     ) }
 
     func makeEventDetailsViewModel() -> EventDetailsViewModel { EventDetailsViewModel(event: event) }
-    func makeVisitEventService() -> VisitEventService { VisitEventService(event: event, repository: parent.eventsStorage) }
+    func makeVisitEventService() -> VisitEventService { VisitEventService(event: event, repository: parent.eventsWriter) }
 }

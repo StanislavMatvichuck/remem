@@ -10,18 +10,19 @@ import Foundation
 
 final class UITestRepositoryConfigurator {
     func configure(
-        repository: ApplicationContainer.Repository,
+        reader: EventsReading,
+        writer: EventsWriting,
         for mode: LaunchMode
     ) {
         switch mode {
-        case .appPreview: configureForPreview(repository: repository)
-        case .performanceTestWritesData: configurePerformanceData(repository: repository)
+        case .appPreview: configureForPreview(writer: writer)
+        case .performanceTestWritesData: configurePerformanceData(reader: reader, writer: writer)
         default: break
         }
     }
 
     // MARK: - Private
-    private func configureForPreview(repository: ApplicationContainer.Repository) {
+    private func configureForPreview(writer: EventsWriting) {
         let dateCreated = Date.now.addingTimeInterval(days(-21))
         var event = Event(name: "🔟 pull-ups", dateCreated: dateCreated)
 
@@ -32,28 +33,28 @@ final class UITestRepositoryConfigurator {
         event.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(0) + minutes(42)))
         event.addHappening(date: dateCreated.addingTimeInterval(days(15) + hours(3) + minutes(54)))
         event.addHappening(date: dateCreated.addingTimeInterval(days(13) + hours(9) + minutes(74)))
-        repository.create(event: event)
+        writer.create(event: event)
     }
 
-    private func configurePerformanceData(repository: ApplicationContainer.Repository) {
-        removeAllEvents(repository: repository)
-        createEvents(repository: repository)
+    private func configurePerformanceData(reader: EventsReading, writer: EventsWriting) {
+        removeAllEvents(reader: reader, writer: writer)
+        createEvents(writer: writer)
     }
 
-    private func removeAllEvents(repository: ApplicationContainer.Repository) {
-        for id in repository.identifiers() {
-            repository.delete(id: id)
+    private func removeAllEvents(reader: EventsReading, writer: EventsWriting) {
+        for id in reader.identifiers() {
+            writer.delete(id: id)
         }
     }
 
-    private func createEvents(repository: ApplicationContainer.Repository) {
+    private func createEvents(writer: EventsWriting) {
         for eventNumber in 1 ... EventsPerformanceDescriptor.eventsCount {
             let dateCreated = Date.now.addingTimeInterval(days(-EventsPerformanceDescriptor.daysPassedCount))
             var event = Event(name: "Event#\(eventNumber)", dateCreated: dateCreated)
 
             addHappenings(event: &event)
 
-            repository.create(event: event)
+            writer.create(event: event)
         }
     }
 

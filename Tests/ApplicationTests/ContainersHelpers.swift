@@ -15,7 +15,7 @@ extension EventsSortingContainer { static func makeForUnitTests() -> EventsSorti
 extension EventDetailsContainer {
     static func makeForUnitTests(event: Event = Event.makeForUnitTests()) -> EventDetailsContainer {
         let app = ApplicationContainer(mode: .unitTest)
-        app.eventsStorage.create(event: event)
+        app.eventsWriter.create(event: event)
         return EventDetailsContainer(app, eventId: event.id)
     }
 }
