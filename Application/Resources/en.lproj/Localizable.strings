@@ -35,6 +35,7 @@
 
 "goals.title" = "Goals";
 "goals.create" = "Create goal";
+"goals.manage" = "Manage goals";
 "goal.createdAt" = "Goal created at";
 "goal.leftToAchieve" = "left to achieve";
 "goal.achievedAt" = "Achieved at";

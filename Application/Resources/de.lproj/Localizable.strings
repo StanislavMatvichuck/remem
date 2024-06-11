@@ -35,6 +35,7 @@
 
 "goals.title" = "Ziele";
 "goals.create" = "Ziel hinzufügen";
+"goals.manage" = "Ziele verwalten";
 "goal.createdAt" = "Ziel erstellt bei";
 "goal.leftToAchieve" = "bleibt zu erreichen";
 "goal.achievedAt" = "Erreicht bei";

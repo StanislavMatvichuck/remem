@@ -15,6 +15,7 @@ public struct GoalsCoreDataRepository {
 }
 
 extension GoalsCoreDataRepository: GoalsReading {
+    enum EntityName: String { case Goal }
     public func readActiveGoal(forEvent event: Event) -> Goal? {
         let goalsSortedByValue: [Domain.Goal] = { do {
             let request = CDGoal.fetchRequest()
@@ -53,6 +54,15 @@ extension GoalsCoreDataRepository: GoalsReading {
 
         return nil
     }
+
+    public func hasGoals(eventId: String) -> Bool { do {
+        let request = NSFetchRequest<NSNumber>(entityName: EntityName.Goal.rawValue)
+        request.resultType = .countResultType
+        request.predicate = NSPredicate(format: "event.uuid == %@", eventId)
+        let fetchResult = try moc.fetch(request)
+        let goalsCount = fetchResult.first?.intValue ?? 0
+        return goalsCount != 0
+    } catch { return true } }
 }
 
 extension GoalsCoreDataRepository: GoalsWriting {

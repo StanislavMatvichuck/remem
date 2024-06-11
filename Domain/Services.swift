@@ -26,6 +26,7 @@ public protocol GoalsReading {
     func read(forEvent: Event) -> [Goal]
     func readActiveGoal(forEvent: Event) -> Goal?
     func read(byId: String) -> Goal?
+    func hasGoals(eventId: String) -> Bool
 }
 
 public protocol GoalsWriting {

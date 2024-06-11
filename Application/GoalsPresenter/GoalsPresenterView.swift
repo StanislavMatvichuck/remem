@@ -7,13 +7,21 @@
 
 import UIKit
 
+protocol GoalsPresenterViewModelFactoring { func makeGoalsPresenterViewModel() -> GoalsPresenterViewModel }
+
 final class GoalsPresenterView: UIView {
-    let button = Button(title: GoalsPresenterViewModel.create)
+    lazy var button = Button(title: vm.title)
 
     private let showGoalsService: ShowGoalsService
+    private var vm: GoalsPresenterViewModel { didSet {
+        button.update(title: vm.title)
+    }}
+    private let vmFactory: GoalsPresenterViewModelFactoring
 
-    init(showGoalsService: ShowGoalsService) {
+    init(showGoalsService: ShowGoalsService, vmFactory: GoalsPresenterViewModelFactoring) {
         self.showGoalsService = showGoalsService
+        self.vm = vmFactory.makeGoalsPresenterViewModel()
+        self.vmFactory = vmFactory
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -36,4 +44,8 @@ final class GoalsPresenterView: UIView {
             self.showGoalsService.serve(ApplicationServiceEmptyArgument())
         }
     }
+}
+
+extension GoalsPresenterView: Updating {
+    func update() { vm = vmFactory.makeGoalsPresenterViewModel() }
 }

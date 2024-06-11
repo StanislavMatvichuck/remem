@@ -16,6 +16,8 @@ final class ApplicationContainer {
     let mode: LaunchMode
     let provider: EventsReading
     let eventsStorage: EventsWriting
+    let goalsReader: GoalsReading
+    let goalsWriter: GoalsWriting
     let coordinator: Coordinator
     let coreDataContainer: NSPersistentContainer
     let injectedCurrentMoment: Date
@@ -24,7 +26,7 @@ final class ApplicationContainer {
     var currentMoment: Date { mode == .injectedCurrentMoment ? injectedCurrentMoment : mode.currentMoment }
 
     init(mode: LaunchMode, currentMoment: Date = DayIndex.referenceValue.date) {
-        func makeRepository(_ mode: LaunchMode, coreDataContainer: NSPersistentContainer) -> EventsReading & EventsWriting {
+        func makeEventsRepository(_ mode: LaunchMode, coreDataContainer: NSPersistentContainer) -> EventsReading & EventsWriting {
             let repository = CoreDataEventsRepository(container: coreDataContainer)
 
             let repositoryConfigurator = UITestRepositoryConfigurator()
@@ -33,20 +35,27 @@ final class ApplicationContainer {
             return repository
         }
 
+        func makeGoalsRepository(coreDataContainer: NSPersistentContainer) -> GoalsReading & GoalsWriting {
+            GoalsCoreDataRepository(container: coreDataContainer)
+        }
+
         let coreDataOperatesWithStoredData =
             mode == .uikit ||
             mode == .performanceTest ||
             mode == .performanceTestWritesData
         let container = CoreDataStack.createContainer(inMemory: !coreDataOperatesWithStoredData)
-        let repository = makeRepository(mode, coreDataContainer: container)
+        let eventsRepository = makeEventsRepository(mode, coreDataContainer: container)
+        let goalsRepository = makeGoalsRepository(coreDataContainer: container)
         let coordinator = Coordinator()
 
         self.mode = mode
         self.injectedCurrentMoment = currentMoment
         self.coordinator = coordinator
-        self.provider = repository
-        self.eventsStorage = repository
+        self.provider = eventsRepository
+        self.eventsStorage = eventsRepository
         self.coreDataContainer = container
+        self.goalsReader = goalsRepository
+        self.goalsWriter = goalsRepository
     }
 
     static func parseLaunchMode() -> LaunchMode {

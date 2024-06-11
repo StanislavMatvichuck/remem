@@ -24,12 +24,11 @@ final class EventsListContainer:
     let orderingWriter: EventsOrderingWriting
     let manualOrderingReader: ManualEventsOrderingReading
     let manualOrderingWriter: ManualEventsOrderingWriting
-    let goalsStorage: GoalsReading & GoalsWriting
 
     var eventCellViewModelFactory: (EventsListContainer) -> EventCellViewModelFactoryFactoring = { container in { indexPath in
         EventCellViewModelFactory(
             provider: container.parent.provider,
-            goalsStorage: container.goalsStorage,
+            goalsStorage: container.parent.goalsReader,
             eventId: container.makeEventsList().eventsIdentifiers[indexPath.row],
             currentMoment: container.parent.currentMoment
         )
@@ -54,7 +53,6 @@ final class EventsListContainer:
         self.orderingWriter = sortingRepository
         self.manualOrderingReader = manualSortingRepository
         self.manualOrderingWriter = manualSortingRepository
-        self.goalsStorage = GoalsCoreDataRepository(container: parent.coreDataContainer)
     }
 
     func makeEventsListController() -> EventsListController { EventsListController(

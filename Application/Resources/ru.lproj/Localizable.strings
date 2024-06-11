@@ -35,6 +35,7 @@
 
 "goals.title" = "Цели";
 "goals.create" = "Создать цель";
+"goals.manage" = "Редактировать цели";
 "goal.createdAt" = "Цель создано";
 "goal.leftToAchieve" = "осталось до достижения";
 "goal.achievedAt" = "Достигнута";

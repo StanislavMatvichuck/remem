@@ -35,6 +35,7 @@
 
 "goals.title" = "Цілі";
 "goals.create" = "Створити ціль";
+"goals.manage" = "Редагувати цілі";
 "goal.createdAt" = "Ціль створено";
 "goal.leftToAchieve" = "залишилось для досягнення";
 "goal.achievedAt" = "Досягнуто";
