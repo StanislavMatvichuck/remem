@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class SummaryController: UIViewController, SummaryDataProviding {
-    var viewModel: Loadable<SummaryViewModel>? { didSet {
+final class SummaryController: UIViewController {
+    var viewModel: Loadable<SummaryViewModel>? = Loadable<SummaryViewModel>() { didSet {
         guard isViewLoaded, let viewModel else { return }
         viewRoot.viewModel = viewModel
     }}
@@ -25,7 +25,7 @@ final class SummaryController: UIViewController, SummaryDataProviding {
         self.factory = viewModelFactory
         self.viewRoot = view
         self.loadingHandler = loadingHandler
-        view.viewModel = Loadable<SummaryViewModel>()
+        view.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -43,6 +43,6 @@ final class SummaryController: UIViewController, SummaryDataProviding {
     // MARK: - Private
 
     private func configureList() {
-        viewRoot.dataSource.viewModelProvider = self
+        viewRoot.dataSource.viewModelProvider = viewRoot
     }
 }

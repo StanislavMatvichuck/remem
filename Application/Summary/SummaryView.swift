@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SummaryView: UIView, LoadableView, UsingLoadableViewModel {
+final class SummaryView: UIView, LoadableView, UsingLoadableViewModel, SummaryDataProviding {
     let list: UICollectionView
     let dataSource: SummaryDataSource
 
