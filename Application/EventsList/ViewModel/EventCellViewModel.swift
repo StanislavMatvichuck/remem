@@ -18,7 +18,6 @@ struct EventCellViewModel {
     let title: String
     let value: String
     let timeSince: String
-    let hintEnabled: Bool
     let goal: GoalViewModel?
     var animation: Animations
 
@@ -38,7 +37,6 @@ struct EventCellViewModel {
         self.event = event
 
         self.title = event.name
-        self.hintEnabled = hintEnabled
         self.timeSince = {
             if let happening = event.happenings.last {
                 return Self.timeSinceDate(date: happening.dateCreated, now: currentMoment)

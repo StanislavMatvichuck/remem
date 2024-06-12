@@ -149,3 +149,9 @@ extension EventCell {
         SwiperAnimationsHelper.animateHappening(view)
     }
 }
+
+// MARK: - Hint animation
+extension EventCell {
+    func startSwipeHintAnimation() { view.enableSwipeHint() }
+    func removeSwipeHintAnimation() { view.disableSwipeHint() }
+}

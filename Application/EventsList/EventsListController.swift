@@ -18,8 +18,8 @@ final class EventsListController:
     var viewModel: EventsListViewModel { didSet {
         title = EventsListViewModel.title
 
-        viewRoot.viewModel = viewModel
         dataSource.viewModel = viewModel
+        viewRoot.viewModel = viewModel
 
         if viewModel.manualSortingPresentableFor(oldValue),
            presentedViewController == nil
@@ -67,11 +67,6 @@ final class EventsListController:
 
     required init?(coder _: NSCoder) { fatalError(errorUIKitInit) }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewRoot.startHintAnimationIfNeeded()
-    }
-
     deinit {
         timer?.invalidate()
         timer = nil
@@ -98,9 +93,14 @@ final class EventsListController:
         configureDomainEventsSubscriptions()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewRoot.configureSwipeHintAnimation()
+    }
+
     // MARK: - Events handling
 
-    @objc private func handleForeground() { viewRoot.startHintAnimationIfNeeded() }
+    @objc private func handleForeground() { viewRoot.configureSwipeHintAnimation() }
     @objc private func handleEventsSortingTap() {
         showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(
             offset: view.safeAreaInsets.top,

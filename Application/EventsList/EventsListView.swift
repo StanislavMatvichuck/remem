@@ -18,6 +18,7 @@ final class EventsListView: UIView {
     
     var viewModel: EventsListViewModel { didSet {
         removalDropArea.viewModel = viewModel.dragAndDrop
+        configureSwipeHintAnimation()
     }}
     
     init(list: UICollectionView, viewModel: EventsListViewModel) {
@@ -30,17 +31,19 @@ final class EventsListView: UIView {
     
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
     
-    func startHintAnimationIfNeeded() {
+    func configureSwipeHintAnimation() {
         let firstEventCellIndexPath = IndexPath(
             row: 0,
             section: EventsListViewModel.Section.events.rawValue
         )
 
-        guard let eventCell = list.cellForItem(
-            at: firstEventCellIndexPath
-        ) as? EventCell else { return }
+        guard let eventCell = list.cellForItem(at: firstEventCellIndexPath) as? EventCell else { return }
 
-        eventCell.startSwipeHintAnimation()
+        if viewModel.swipeHintVisible {
+            eventCell.startSwipeHintAnimation()
+        } else {
+            eventCell.removeSwipeHintAnimation()
+        }
     }
     
     static func makeList() -> UICollectionView {

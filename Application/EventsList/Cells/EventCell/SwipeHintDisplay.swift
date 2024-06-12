@@ -50,6 +50,7 @@ final class SwipeHintDisplay: UIView {
     }()
 
     init() {
+        print(#function)
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
@@ -58,18 +59,13 @@ final class SwipeHintDisplay: UIView {
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
+    private var animationRequired = true
+
     override func layoutSubviews() {
+        print(#function)
         super.layoutSubviews()
         configureCircleAppearance()
-    }
-
-    func configure(_ vm: EventCellViewModel) {
-        isHidden = !vm.hintEnabled
-        startAnimationIfNeeded()
-    }
-
-    func prepareForReuse() {
-        isHidden = true
+        startAnimation()
     }
 
     // MARK: - Private
@@ -98,15 +94,14 @@ final class SwipeHintDisplay: UIView {
         circle.layer.cornerRadius = circle.bounds.width / 2
     }
 
-    func startAnimationIfNeeded() {
-        guard !isHidden else { return }
-        layoutIfNeeded()
-        let from = initialConstant
-        let to = finalConstant
+    func startAnimation() {
+        guard animationRequired else { return }
+        animationRequired = false
+
         UIView.animate(withDuration: duration, animations: {
             let animation = CABasicAnimation.positionX
-            animation.fromValue = from
-            animation.toValue = to
+            animation.fromValue = self.initialConstant
+            animation.toValue = self.finalConstant
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animation.autoreverses = true
             animation.duration = self.duration

@@ -37,8 +37,8 @@ final class EventCellView: UIView {
     let timeSince = TimeSinceView()
     let circleContainer = SwipingCircleView()
     let amountContainer = EventAmountView()
-    let hintDisplay = SwipeHintDisplay()
     let goalIndicator = EventCellGoalIndicator()
+    private var swipeHintDisplay: SwipeHintDisplay?
 
     init() {
         super.init(frame: .zero)
@@ -54,13 +54,26 @@ final class EventCellView: UIView {
         title.text = vm.title
         amountContainer.configure(vm)
         timeSince.configure(vm.timeSince)
-        hintDisplay.configure(vm)
         goalIndicator.viewModel = vm.goal
     }
 
     func prepareForReuse() {
         circleContainer.prepareForReuse()
-        hintDisplay.prepareForReuse()
+        disableSwipeHint()
+    }
+
+    func enableSwipeHint() {
+        if swipeHintDisplay == nil {
+            let hintDisplay = SwipeHintDisplay()
+            hintDisplay.layer.zPosition = 4
+            swipeHintDisplay = hintDisplay
+            addAndConstrain(hintDisplay)
+        }
+    }
+
+    func disableSwipeHint() {
+        swipeHintDisplay?.removeFromSuperview()
+        swipeHintDisplay = nil
     }
 
     // MARK: - Private
@@ -71,7 +84,6 @@ final class EventCellView: UIView {
         stack.addArrangedSubview(title)
         stack.addArrangedSubview(amountContainer)
 
-        hintDisplay.layer.zPosition = 4
         circleContainer.layer.zPosition = 3
         title.layer.zPosition = 2
         amountContainer.layer.zPosition = 1
@@ -80,7 +92,6 @@ final class EventCellView: UIView {
         addSubview(timeSince)
         addSubview(circleContainer)
         addSubview(fireDecal)
-        addAndConstrain(hintDisplay)
         addSubview(goalIndicator)
 
         NSLayoutConstraint.activate([
