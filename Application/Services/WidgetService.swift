@@ -36,8 +36,8 @@ struct WidgetService: ApplicationService {
             let eventsIdentifiers = eventsList.eventsIdentifiers.prefix(3)
             var writableItems = [WidgetEventCellViewModel]()
 
-            for (index, _) in eventsIdentifiers.enumerated() {
-                let eventCellFactory = self.eventCellFactory(IndexPath(row: index, section: 0))
+            for identifier in eventsIdentifiers {
+                let eventCellFactory = self.eventCellFactory(identifier)
                 let loadedEventCellVm = try await eventCellFactory.makeLoaded()
                 if let vm = loadedEventCellVm.vm,
                    let widgetVm = WidgetEventCellViewModel(item: vm)

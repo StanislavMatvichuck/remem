@@ -7,15 +7,9 @@
 
 import UIKit
 
-protocol EventsListDataProviding: AnyObject {
-    var viewModel: EventsListViewModel? { get }
-}
-
 final class EventsListDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<EventsListViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<EventsListViewModel.Section, String>
-
-    weak var viewModelProvider: EventsListDataProviding?
 
     private let list: UICollectionView
     private let showEventDetailsService: ShowEventDetailsService
@@ -24,6 +18,7 @@ final class EventsListDataSource {
     private let eventCellViewModelFactoryFactoring: EventCellViewModelFactoryFactoring
     private let showCreateEventService: ShowCreateEventService
     private let loadingHandler: LoadableViewModelHandling
+    var viewModel: EventsListViewModel { didSet { applySnapshot() }}
 
     init(
         list: UICollectionView,
@@ -32,7 +27,8 @@ final class EventsListDataSource {
         removeEventService: RemoveEventService,
         showCreateEventService: ShowCreateEventService,
         eventCellViewModelFactory: @escaping EventCellViewModelFactoryFactoring,
-        loadingHandler: LoadableViewModelHandling
+        loadingHandler: LoadableViewModelHandling,
+        viewModel: EventsListViewModel
     ) {
         self.list = list
         self.showEventDetailsService = showEventDetailsService
@@ -41,6 +37,7 @@ final class EventsListDataSource {
         self.showCreateEventService = showCreateEventService
         self.eventCellViewModelFactoryFactoring = eventCellViewModelFactory
         self.loadingHandler = loadingHandler
+        self.viewModel = viewModel
     }
 
     private lazy var dataSource: DataSource = {
@@ -50,8 +47,7 @@ final class EventsListDataSource {
         }
 
         let eventCellRegistration = UICollectionView.CellRegistration<EventCell, Loadable<EventCellViewModel>>
-        { cell, indexPath, viewModel in
-            let vmFactory = self.eventCellViewModelFactoryFactoring(indexPath)
+        { cell, _, viewModel in
 
             if cell.viewModel == nil {
                 /// works for initial rendering
@@ -64,8 +60,6 @@ final class EventsListDataSource {
                 removeService: self.removeEventService,
                 loadingInterrupter: self.loadingHandler
             )
-
-            self.loadingHandler.load(for: cell, factory: vmFactory)
         }
 
         let createEventCellRegistration = UICollectionView.CellRegistration<CreateEventCell, CreateEventCellViewModel>
@@ -75,10 +69,9 @@ final class EventsListDataSource {
         }
 
         return DataSource(collectionView: list) { collectionView, indexPath, itemIdentifier in
+            guard let cellViewModel = self.viewModel.viewModel(forIdentifier: itemIdentifier) else { fatalError() }
 
-            guard let cellViewModel = self.viewModelProvider?.viewModel?.viewModel(forIdentifier: itemIdentifier) else { fatalError() }
-
-            switch indexPath.section {
+            let configuredCell: UICollectionViewCell = { switch indexPath.section {
             case EventsListViewModel.Section.hint.rawValue:
                 return collectionView.dequeueConfiguredReusableCell(
                     using: hintCellRegistration,
@@ -99,13 +92,19 @@ final class EventsListDataSource {
                 )
             default: fatalError()
             }
+            }()
+
+            if let loadableCell = configuredCell as? EventCell {
+                let factory = self.eventCellViewModelFactoryFactoring(itemIdentifier)
+                self.loadingHandler.load(for: loadableCell, factory: factory)
+            }
+
+            return configuredCell
         }
     }()
 
-    func applySnapshot(_ oldValue: EventsListViewModel?) {
-        guard let viewModel = viewModelProvider?.viewModel,
-              viewModel.dragAndDrop.removalDropAreaHidden
-        else { return }
+    func applySnapshot() {
+        guard viewModel.dragAndDrop.removalDropAreaHidden else { return }
 
         var snapshot = Snapshot()
 

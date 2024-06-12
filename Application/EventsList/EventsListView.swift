@@ -9,23 +9,20 @@ import UIKit
 
 final class EventsListView: UIView {
     let list: UICollectionView
-    let dataSource: EventsListDataSource
-    
+
     lazy var removalDropArea = RemovalDropAreaView(handler: { [weak self] draggedCellIndex in
         if let cell = self?.list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 1)) as? EventCell {
             cell.handleRemove()
         }
     })
     
-    var viewModel: EventsListViewModel? { didSet {
-        guard let viewModel else { return }
+    var viewModel: EventsListViewModel { didSet {
         removalDropArea.viewModel = viewModel.dragAndDrop
-        dataSource.applySnapshot(oldValue)
     }}
     
-    init(list: UICollectionView, dataSource: EventsListDataSource) {
+    init(list: UICollectionView, viewModel: EventsListViewModel) {
         self.list = list
-        self.dataSource = dataSource
+        self.viewModel = viewModel
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
@@ -33,28 +30,17 @@ final class EventsListView: UIView {
     
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
     
-    // TODO: enable and test this behaviour
     func startHintAnimationIfNeeded() {
-//        guard
-//            let viewModel,
-//            let eventsSection = viewModel.sections.first(where: { section in
-//                section == .events
-//            }),
-//            viewModel.cellsIdentifiers(for: .events).count > 0
-//        else { return }
-//
-//        let firstEventCellIndexPath = IndexPath(
-//            row: 0,
-//            section: eventsSection.rawValue
-//        )
-//
-//        guard
-//            let eventCell = list.cellForItem(
-//                at: firstEventCellIndexPath
-//            ) as? EventCell
-//        else { return }
-//
-//        eventCell.view.hintDisplay.startAnimationIfNeeded()
+        let firstEventCellIndexPath = IndexPath(
+            row: 0,
+            section: EventsListViewModel.Section.events.rawValue
+        )
+
+        guard let eventCell = list.cellForItem(
+            at: firstEventCellIndexPath
+        ) as? EventCell else { return }
+
+        eventCell.startSwipeHintAnimation()
     }
     
     static func makeList() -> UICollectionView {

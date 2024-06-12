@@ -10,30 +10,28 @@ import UIKit
 
 final class EventsListController:
     UIViewController,
-    UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout,
-    EventsListDataProviding
+    UICollectionViewDelegate
 {
     let factory: EventsListViewModelFactoring
     let viewRoot: EventsListView
 
-    var viewModel: EventsListViewModel? { didSet {
+    var viewModel: EventsListViewModel { didSet {
         title = EventsListViewModel.title
 
         viewRoot.viewModel = viewModel
-
-        guard let viewModel else { return }
+        dataSource.viewModel = viewModel
 
         if viewModel.manualSortingPresentableFor(oldValue),
            presentedViewController == nil
         {
-            showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue?.ordering))
+            showEventsOrderingService?.serve(ShowEventsOrderingServiceArgument(offset: view.safeAreaInsets.top, oldValue: oldValue.ordering))
         }
 
         /// This is here to trigger widget update on each list update because controller is subscribed to DomainEvents
         widgetService?.serve(ApplicationServiceEmptyArgument())
     } }
 
+    private let dataSource: EventsListDataSource
     private let widgetService: WidgetService?
     private let showEventsOrderingService: ShowEventsOrderingService?
     private let setEventsOrderingService: SetEventsOrderingService?
@@ -54,13 +52,16 @@ final class EventsListController:
         view: EventsListView,
         showEventsOrderingService: ShowEventsOrderingService? = nil,
         setEventsOrderingService: SetEventsOrderingService? = nil,
-        widgetService: WidgetService? = nil
+        widgetService: WidgetService? = nil,
+        dataSource: EventsListDataSource
     ) {
         self.factory = viewModelFactory
         self.showEventsOrderingService = showEventsOrderingService
         self.setEventsOrderingService = setEventsOrderingService
         self.viewRoot = view
         self.widgetService = widgetService
+        self.dataSource = dataSource
+        self.viewModel = viewModelFactory.makeEventsListViewModel()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -176,7 +177,6 @@ final class EventsListController:
         viewRoot.list.dragDelegate = self
         viewRoot.list.dropDelegate = self
         viewRoot.list.dragInteractionEnabled = true
-        viewRoot.dataSource.viewModelProvider = self
     }
 
     private func configureForegroundNotification() {

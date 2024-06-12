@@ -22,7 +22,7 @@ extension EventsListController:
         let eventIndex = indexPath.row
         let provider = NSItemProvider(object: "\(eventIndex)" as NSString)
         let dragItem = UIDragItem(itemProvider: provider)
-        viewModel?.dragAndDrop.startDragFor(eventIndex: eventIndex)
+        viewModel.dragAndDrop.startDragFor(eventIndex: eventIndex)
         return [dragItem]
     }
 
@@ -35,7 +35,6 @@ extension EventsListController:
         }
 
         guard
-            let viewModel,
             let from = viewModel.dragAndDrop.draggedCellIndex,
             let to = coordinator.destinationIndexPath?.row
         else { return }
@@ -57,6 +56,6 @@ extension EventsListController:
     }
 
     func collectionView(_: UICollectionView, dropSessionDidEnd _: UIDropSession) {
-        viewModel?.dragAndDrop.endDrag()
+        viewModel.dragAndDrop.endDrag()
     }
 }

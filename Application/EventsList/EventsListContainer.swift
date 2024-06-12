@@ -9,7 +9,7 @@ import DataLayer
 import Domain
 import UIKit
 
-typealias EventCellViewModelFactoryFactoring = (IndexPath) -> any LoadableEventCellViewModelFactoring
+typealias EventCellViewModelFactoryFactoring = (String) -> any LoadableEventCellViewModelFactoring
 
 final class EventsListContainer:
     EventsListFactoring,
@@ -24,15 +24,6 @@ final class EventsListContainer:
     let orderingWriter: EventsOrderingWriting
     let manualOrderingReader: ManualEventsOrderingReading
     let manualOrderingWriter: ManualEventsOrderingWriting
-
-    var eventCellViewModelFactory: (EventsListContainer) -> EventCellViewModelFactoryFactoring = { container in { indexPath in
-        EventCellViewModelFactory(
-            provider: container.parent.eventsReader,
-            goalsStorage: container.parent.goalsReader,
-            eventId: container.makeEventsList().eventsIdentifiers[indexPath.row],
-            currentMoment: container.parent.currentMoment
-        )
-    }}
 
     init(_ parent: ApplicationContainer) {
         self.parent = parent
@@ -55,29 +46,41 @@ final class EventsListContainer:
         self.manualOrderingWriter = manualSortingRepository
     }
 
-    func makeEventsListController() -> EventsListController { EventsListController(
-        viewModelFactory: self,
-        view: makeEventsListView(),
-        showEventsOrderingService: makeShowEventsOrderingService(),
-        setEventsOrderingService: makeSetEventsOrderingService(),
-        widgetService: makeWidgetService()
-    ) }
-
-    func makeEventsListView() -> EventsListView {
+    func makeEventsListController() -> EventsListController {
         let list = EventsListView.makeList()
+        let viewModel = makeEventsListViewModel()
 
-        let dataSource = EventsListDataSource(
-            list: list,
-            showEventDetailsService: makeShowEventDetailsService(),
-            createHappeningService: makeCreateHappeningService(),
-            removeEventService: makeRemoveEventService(),
-            showCreateEventService: makeShowCreateEventService(),
-            eventCellViewModelFactory: eventCellViewModelFactory(self),
-            loadingHandler: parent.viewModelsLoadingHandler
+        return EventsListController(
+            viewModelFactory: self,
+            view: makeEventsListView(list: list, viewModel: viewModel),
+            showEventsOrderingService: makeShowEventsOrderingService(),
+            setEventsOrderingService: makeSetEventsOrderingService(),
+            widgetService: makeWidgetService(),
+            dataSource: makeDataSource(list: list, viewModel: viewModel)
         )
-
-        return EventsListView(list: list, dataSource: dataSource)
     }
+
+    func makeEventsListView(list: UICollectionView, viewModel: EventsListViewModel) -> EventsListView {
+        EventsListView(list: list, viewModel: viewModel)
+    }
+
+    func makeDataSource(list: UICollectionView, viewModel: EventsListViewModel) -> EventsListDataSource { EventsListDataSource(
+        list: list,
+        showEventDetailsService: makeShowEventDetailsService(),
+        createHappeningService: makeCreateHappeningService(),
+        removeEventService: makeRemoveEventService(),
+        showCreateEventService: makeShowCreateEventService(),
+        eventCellViewModelFactory: { eventId in
+            EventCellViewModelFactory(
+                provider: self.parent.eventsReader,
+                goalsStorage: self.parent.goalsReader,
+                eventId: eventId,
+                currentMoment: self.parent.currentMoment
+            )
+        },
+        loadingHandler: parent.viewModelsLoadingHandler,
+        viewModel: viewModel
+    ) }
 
     //
     // MARK: - ViewModels
@@ -139,7 +142,14 @@ final class EventsListContainer:
 
     func makeWidgetService() -> WidgetService { WidgetService(
         eventsListFactory: self,
-        eventCellFactory: eventCellViewModelFactory(self)
+        eventCellFactory: { eventId in
+            EventCellViewModelFactory(
+                provider: self.parent.eventsReader,
+                goalsStorage: self.parent.goalsReader,
+                eventId: eventId,
+                currentMoment: self.parent.currentMoment
+            )
+        }
     ) }
 
     //
