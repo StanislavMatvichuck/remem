@@ -165,7 +165,6 @@ struct EventCellViewModelFactory: LoadableEventCellViewModelFactoring {
     let eventId: String
     let currentMoment: Date
 
-    func makeLoading() -> Loadable<EventCellViewModel> { Loadable<EventCellViewModel>() }
     func makeLoaded() async throws -> Loadable<EventCellViewModel> {
         let event = try await provider.readAsync(byId: eventId)
         let goal = goalsStorage.readActiveGoal(forEvent: event)

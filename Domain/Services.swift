@@ -10,7 +10,6 @@ import Foundation
 public protocol EventsReading {
     func read(byId: String) -> Event
     func readAsync(byId: String) async throws -> Event
-    func identifiers() -> [String]
     func identifiers(using: EventsList.Ordering) -> [String]
     func hasNoVisitedEvents() -> Bool
     func hasNoHappenings() -> Bool

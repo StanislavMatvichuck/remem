@@ -49,15 +49,6 @@ extension CoreDataEventsRepository: EventsReading {
         }
     }
 
-    public func identifiers() -> [String] { do {
-        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Event")
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["uuid"]
-        return try moc.fetch(fetchRequest).map { $0.allValues.first } as! [String]
-    } catch {
-        fatalError(error.localizedDescription)
-    } }
-
     public func identifiers(using ordering: EventsList.Ordering) -> [String] { do {
         let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Event")
         fetchRequest.resultType = .dictionaryResultType

@@ -42,7 +42,7 @@ final class UITestRepositoryConfigurator {
     }
 
     private func removeAllEvents(reader: EventsReading, writer: EventsWriting) {
-        for id in reader.identifiers() {
+        for id in reader.identifiers(using: .name) {
             writer.delete(id: id)
         }
     }
