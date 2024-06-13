@@ -52,6 +52,7 @@
 		081C432229FFC46600ACC4D7 /* WeekIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C802298AD39E0048EC12 /* WeekIndex.swift */; };
 		081CA53D2BD197A200924635 /* RemovalDropAreaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CA53C2BD197A200924635 /* RemovalDropAreaViewModel.swift */; };
 		081CA53F2BD197AB00924635 /* RemovalDropAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081CA53E2BD197AB00924635 /* RemovalDropAreaView.swift */; };
+		081E57F02C1B5D2200BBF33F /* SummaryContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E57EF2C1B5D2200BBF33F /* SummaryContainerTests.swift */; };
 		08214D102B8F4244002F1F16 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */; };
 		0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */; };
 		082458132B4C270C00362B84 /* DayDetailsViewSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */; };
@@ -460,6 +461,7 @@
 		081BAFA0292B892F00112C76 /* EventDetailsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsControllerTests.swift; sourceTree = "<group>"; };
 		081CA53C2BD197A200924635 /* RemovalDropAreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovalDropAreaViewModel.swift; sourceTree = "<group>"; };
 		081CA53E2BD197AB00924635 /* RemovalDropAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovalDropAreaView.swift; sourceTree = "<group>"; };
+		081E57EF2C1B5D2200BBF33F /* SummaryContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryContainerTests.swift; sourceTree = "<group>"; };
 		08214D0F2B8F4244002F1F16 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsAnimator.swift; sourceTree = "<group>"; };
 		082458112B4C270800362B84 /* DayDetailsViewSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewSnapshots.swift; sourceTree = "<group>"; };
@@ -898,6 +900,7 @@
 			children = (
 				088FD14F298839BC00C94031 /* SummaryViewModelTests.swift */,
 				080C41792986ACE400C1F54F /* SummaryControllerTests.swift */,
+				081E57EF2C1B5D2200BBF33F /* SummaryContainerTests.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -1979,6 +1982,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0861B4E92B4F02A0005A7480 /* DayCellViewModelTests.swift in Sources */,
+				081E57F02C1B5D2200BBF33F /* SummaryContainerTests.swift in Sources */,
 				087D42682B8E3A8F0075004D /* GoalsControllerTests.swift in Sources */,
 				085896B92A279D6A00390C76 /* EventEntityMapperTests.swift in Sources */,
 				0852404C2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift in Sources */,

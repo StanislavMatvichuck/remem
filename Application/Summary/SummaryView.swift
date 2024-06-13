@@ -7,9 +7,8 @@
 
 import UIKit
 
-final class SummaryView: UIView, LoadableView, UsingLoadableViewModel, SummaryDataProviding {
+final class SummaryView: UIView, LoadableView, UsingLoadableViewModel {
     let list: UICollectionView
-    let dataSource: SummaryDataSource
 
     var viewModel: Loadable<SummaryViewModel>? { didSet {
         if viewModel?.loading == true {
@@ -17,14 +16,12 @@ final class SummaryView: UIView, LoadableView, UsingLoadableViewModel, SummaryDa
         } else {
             disableLoadingCover()
         }
-        dataSource.applySnapshot()
     }}
-    
+
     lazy var heightConstraint: NSLayoutConstraint = list.heightAnchor.constraint(equalToConstant: 4 * .layoutSquare + .buttonMargin)
 
-    init(list: UICollectionView, dataSource: SummaryDataSource) {
+    init(list: UICollectionView) {
         self.list = list
-        self.dataSource = dataSource
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         configureLayout()
@@ -32,15 +29,15 @@ final class SummaryView: UIView, LoadableView, UsingLoadableViewModel, SummaryDa
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
-    
+
     // MARK: - Public
-    
+
     static func makeList() -> UICollectionView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
-    
+
     // MARK: - Private
 
     private func configureLayout() {
@@ -51,7 +48,7 @@ final class SummaryView: UIView, LoadableView, UsingLoadableViewModel, SummaryDa
     private func configureAppearance() {
         list.backgroundColor = .clear
     }
-    
+
     private static func makeLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { _, _ in
             let heightDimension: NSCollectionLayoutDimension = .absolute(2 * CGFloat.layoutSquare)

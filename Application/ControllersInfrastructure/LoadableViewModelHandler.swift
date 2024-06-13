@@ -12,7 +12,8 @@ protocol LoadableViewModel {
     var vm: ViewModel? { get }
 }
 
-protocol UsingLoadableViewModel: UIView {
+/// `UIView` and `UIViewController` conformances are used
+protocol UsingLoadableViewModel: AnyObject, Hashable {
     associatedtype ViewModel: LoadableViewModel
     var viewModel: ViewModel? { get set }
 }
@@ -60,7 +61,7 @@ protocol LoadableViewModelHandling {
 }
 
 final class LoadableViewModelHandler: LoadableViewModelHandling {
-    private var loadingTasks: [UIView: Task<Void, Never>] = [:]
+    private var loadingTasks: [AnyHashable: Task<Void, Never>] = [:]
 
     func load<
         View: UsingLoadableViewModel,
@@ -79,7 +80,16 @@ final class LoadableViewModelHandler: LoadableViewModelHandling {
     }
 
     func cancel(for view: any UsingLoadableViewModel) {
-        let cancelledTask = loadingTasks.removeValue(forKey: view)
+        var cancelledTask: Task<Void, Never>?
+
+        if let view = view as? UIView {
+            cancelledTask = loadingTasks.removeValue(forKey: view)
+        } else if let controller = view as? UIViewController {
+            cancelledTask = loadingTasks.removeValue(forKey: controller)
+        } else {
+            fatalError(errorLoadableViewModelHandlerType)
+        }
+
         cancelledTask?.cancel()
     }
 }

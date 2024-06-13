@@ -16,6 +16,7 @@ let WidgetTimelineKind = "RememWidgets"
 
 let collectionViewDataSourceWeekError = "view has no access to viewModel"
 let errorUIKitInit = "init(coder:) has not been implemented"
+let errorLoadableViewModelHandlerType = "LoadableViewModelHandler works with UIView or UIViewController"
 
 let localizationIdButtonAddHappening = "button.addHappening"
 let localizationIdButtonCreate = "button.create"

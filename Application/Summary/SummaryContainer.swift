@@ -16,19 +16,29 @@ final class SummaryContainer: LoadableSummaryViewModelFactoring {
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func makeSummaryController() -> SummaryController { SummaryController(
-        view: makeSummaryView(),
-        viewModelFactory: self,
-        loadingHandler: parent.parent.viewModelsLoadingHandler
-    ) }
-
-    func makeSummaryView() -> SummaryView {
+    func makeSummaryController() -> SummaryController {
         let list = SummaryView.makeList()
-        let dataSource = SummaryDataSource(list: list)
-        return SummaryView(list: list, dataSource: dataSource)
+        let viewModel = makeViewModel()
+        let dataSource = makeDataSource(list: list, viewModel: viewModel)
+
+        return SummaryController(
+            view: makeSummaryView(list: list),
+            viewModelFactory: self,
+            dataSource: makeDataSource(list: list, viewModel: viewModel),
+            loadingHandler: parent.parent.viewModelsLoadingHandler
+        )
     }
 
-    func makeLoading() -> Loadable<SummaryViewModel> { Loadable<SummaryViewModel>() }
+    func makeViewModel() -> Loadable<SummaryViewModel> { Loadable<SummaryViewModel>() }
+
+    func makeSummaryView(list: UICollectionView) -> SummaryView {
+        SummaryView(list: list)
+    }
+
+    func makeDataSource(list: UICollectionView, viewModel: Loadable<SummaryViewModel>) -> SummaryDataSource { SummaryDataSource(
+        list: list, viewModel: viewModel
+    ) }
+
     func makeLoaded() async throws -> Loadable<SummaryViewModel> {
         let event = try await parent.parent.eventsReader.readAsync(byId: parent.eventId)
         let vm = SummaryViewModel(event: event, createdUntil: parent.parent.currentMoment)
