@@ -18,7 +18,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date,
             startOfDay: DayIndex.referenceValue.date,
             pickerDate: nil,
-            cells: []
+            cells: [],
+            eventId: ""
         )
     }
     
@@ -37,7 +38,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date,
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: []
+            cells: [],
+            eventId: ""
         )
         
         XCTAssertEqual(sut.title, "2 January")
@@ -49,7 +51,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date,
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: []
+            cells: [],
+            eventId: ""
         )
         
         XCTAssertFalse(sut.isToday)
@@ -60,7 +63,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(30 * 3)),
             startOfDay: DayIndex.referenceValue.adding(days: 1).date,
             pickerDate: nil,
-            cells: []
+            cells: [],
+            eventId: ""
         )
         
         // this test will duplicate the implementation
@@ -114,7 +118,8 @@ final class DayDetailsViewModelTests: XCTestCase {
             currentMoment: .distantFuture,
             startOfDay: .distantFuture,
             pickerDate: nil,
-            cells: [cell]
+            cells: [cell],
+            eventId: ""
         )
         
         XCTAssertNotNil(sut.cell(for: "id"))

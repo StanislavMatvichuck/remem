@@ -10,16 +10,24 @@ import Domain
 import ViewControllerPresentationSpy
 import XCTest
 
-//@MainActor
+// @MainActor
 final class DayDetailsControllerTests: XCTestCase {
     var sut: DayDetailsController!
+    var eventId: String!
 
-    override func setUp() { super.setUp()
-        sut = DayDetailsContainer.makeForUnitTests().makeDayDetailsController()
+    override func setUp() {
+        super.setUp()
+        let container = DayDetailsContainer.makeForUnitTests()
+        eventId = container.parent.eventId
+        sut = container.makeDayDetailsController()
         sut.loadViewIfNeeded()
     }
 
-    override func tearDown() { super.tearDown(); sut = nil }
+    override func tearDown() {
+        super.tearDown()
+        eventId = nil
+        sut = nil
+    }
 
     func test_listIsConfigured() { XCTAssertNotNil(sut.viewRoot.happeningsCollection.dataSource) }
 
@@ -89,7 +97,7 @@ final class DayDetailsControllerTests: XCTestCase {
     }
 
     private func addHappening(at: Date) {
-        sut.createHappeningService?.serve(CreateHappeningServiceArgument(date: at))
+        sut.createHappeningService?.serve(CreateHappeningServiceArgument(eventId: eventId, date: at))
     }
 
     private var happeningsAmount: Int { sut.viewRoot.happeningsCollection.numberOfItems(inSection: 0) }

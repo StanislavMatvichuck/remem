@@ -31,11 +31,11 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
     }
 
     func test_save_increasesCount() {
-        XCTAssertEqual(sut.identifiers().count, 0)
+        XCTAssertEqual(sut.identifiers(using: .name).count, 0)
 
         sut.create(event: Event(name: ""))
 
-        XCTAssertEqual(sut.identifiers().count, 1)
+        XCTAssertEqual(sut.identifiers(using: .name).count, 1)
     }
 
     func test_save_eventWithHappening() {
@@ -96,7 +96,7 @@ final class CoreDataEventsRepositoryTests: XCTestCase {
 
         sut.delete(id: event.id)
 
-        XCTAssertEqual(sut.identifiers().count, 0)
+        XCTAssertEqual(sut.identifiers(using: .name).count, 0)
     }
 
     private func givenSavedDefaultEvent() -> Event {

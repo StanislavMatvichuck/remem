@@ -17,5 +17,5 @@ final class HourDistributionContainerTests: XCTestCase {
 
     func test_init_requiresEventDetailsContainer() { XCTAssertNotNil(sut) }
     func test_makesController() { XCTAssertNotNil(sut.makeHourDistributionController()) }
-    func test_makesViewModel() { XCTAssertNotNil(sut as? HourDistributionViewModelFactoring) }
+    func test_makesViewModel() { XCTAssertNotNil(sut as? any LoadableHourDistributionViewModelFactoring) }
 }

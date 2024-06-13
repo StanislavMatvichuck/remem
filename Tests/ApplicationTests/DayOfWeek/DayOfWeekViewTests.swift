@@ -12,12 +12,12 @@ import XCTest
 final class DayOfWeekViewTests: XCTestCase {
     func test_init() {
         let sut = DayOfWeekView()
-        sut.viewModel = DayOfWeekViewModel()
+        sut.viewModel = Loadable<DayOfWeekViewModel>()
     }
 
     func test_usesViewModel() {
         let sut = DayOfWeekView()
-        sut.viewModel = DayOfWeekViewModel()
+        sut.viewModel = Loadable<DayOfWeekViewModel>()
 
         XCTAssertNotNil(sut.viewModel)
     }

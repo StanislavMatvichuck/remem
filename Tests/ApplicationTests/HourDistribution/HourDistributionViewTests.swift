@@ -15,7 +15,7 @@ final class HourDistributionViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sut = HourDistributionView()
-        sut.viewModel = HourDistributionViewModel()
+        sut.viewModel = Loadable<HourDistributionViewModel>()
     }
     
     override func tearDown() {
