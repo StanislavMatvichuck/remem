@@ -37,8 +37,5 @@ final class DayOfWeekController: UIViewController {
         loadingHandler.load(for: viewRoot, factory: factory)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        loadingHandler.cancel(for: viewRoot)
-    }
+    deinit { loadingHandler.cancel(for: viewRoot) }
 }
