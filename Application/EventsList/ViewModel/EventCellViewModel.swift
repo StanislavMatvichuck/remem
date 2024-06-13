@@ -48,7 +48,7 @@ struct EventCellViewModel {
         self.value = "\(valueAmount)"
     }
 
-    private static func timeSinceDate(date: Date, now: Date) -> String {
+    static func timeSinceDate(date: Date, now: Date) -> String {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
         formatter.maximumUnitCount = 2
