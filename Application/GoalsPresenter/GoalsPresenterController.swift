@@ -34,12 +34,12 @@ final class GoalsPresenterController: UIViewController {
     // MARK: - Private
 
     private func configureSubscriptions() {
-        goalCreatedSubscription = DomainEventsPublisher.shared.subscribe(GoalCreated.self, usingBlock: { _ in
-            self.viewRoot.update()
+        goalCreatedSubscription = DomainEventsPublisher.shared.subscribe(GoalCreated.self, usingBlock: { [weak self] _ in
+            self?.viewRoot.update()
         })
 
-        goalRemovedSubscription = DomainEventsPublisher.shared.subscribe(GoalDeleted.self, usingBlock: { _ in
-            self.viewRoot.update()
+        goalRemovedSubscription = DomainEventsPublisher.shared.subscribe(GoalDeleted.self, usingBlock: { [weak self] _ in
+            self?.viewRoot.update()
         })
     }
 }
