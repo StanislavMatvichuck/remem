@@ -19,7 +19,6 @@ final class SummaryContainer: LoadableSummaryViewModelFactoring {
     func makeSummaryController() -> SummaryController {
         let list = SummaryView.makeList()
         let viewModel = makeViewModel()
-        let dataSource = makeDataSource(list: list, viewModel: viewModel)
 
         return SummaryController(
             view: makeSummaryView(list: list),

@@ -12,8 +12,20 @@ import XCTest
 
 final class GoalsContainerTests: XCTestCase {
     private var sut: GoalsContainer!
-    override func setUp() { super.setUp(); sut = GoalsContainer.makeForUnitTests() }
-    override func tearDown() { super.tearDown(); sut = nil }
+    private weak var weakSUT: GoalsContainer?
+    override func setUp() {
+        super.setUp()
+        sut = GoalsContainer.makeForUnitTests()
+        let controller = sut.makeGoalsController()
+        controller.loadViewIfNeeded()
+        weakSUT = sut
+    }
+    override func tearDown() {
+        super.tearDown()
+        sut = nil
+        executeRunLoop(until: .now + 0.1)
+        XCTAssertNil(weakSUT)
+    }
 
     func test_init() { XCTAssertNotNil(sut) }
     func test_makesController() { XCTAssertNotNil(sut.makeGoalsController()) }

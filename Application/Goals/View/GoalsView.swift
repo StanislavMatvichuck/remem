@@ -10,7 +10,7 @@ import UIKit
 
 final class GoalsView: UIView {
     let list: UICollectionView
-    let dataSource: GoalsDataSource
+
     lazy var removalDropArea = RemovalDropAreaView(handler: { [weak self] draggedCellIndex in
         if let cell = self?.list.cellForItem(at: IndexPath(row: draggedCellIndex, section: 0)) as? GoalCell,
            let id = cell.viewModel?.id
@@ -21,13 +21,10 @@ final class GoalsView: UIView {
 
     var viewModel: GoalsViewModel? { didSet {
         removalDropArea.viewModel = viewModel?.dragAndDrop
-        dataSource.applySnapshot(oldValue)
-        setNeedsLayout()
     }}
 
-    init(list: UICollectionView, dataSource: GoalsDataSource) {
+    init(list: UICollectionView) {
         self.list = list
-        self.dataSource = dataSource
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()

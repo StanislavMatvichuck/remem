@@ -16,51 +16,55 @@ final class GoalsContainer:
     UpdateGoalServiceFactoring
 {
     private let parent: EventDetailsContainer
-    private let goalsStorage: GoalsWriting & GoalsReading
-    private let list = GoalsView.makeList()
-    private var eventId: String { parent.event.id }
 
     init(_ parent: EventDetailsContainer) {
         self.parent = parent
-        self.goalsStorage = GoalsCoreDataRepository(container: parent.parent.coreDataContainer)
     }
 
-    func makeGoalsController() -> GoalsController { GoalsController(factory: self, view: makeGoalsView()) }
-    func makeGoalsView() -> GoalsView { GoalsView(
-        list: list,
-        dataSource: makeDataSource(list: list)
+    func makeGoalsController() -> GoalsController {
+        let list = GoalsView.makeList()
+        return GoalsController(
+            factory: self,
+            view: makeGoalsView(list: list),
+            dataSource: makeDataSource(list: list)
+        )
+    }
+
+    func makeGoalsView(list: UICollectionView) -> GoalsView { GoalsView(
+        list: list
     ) }
 
     func makeDataSource(list: UICollectionView) -> GoalsDataSource { GoalsDataSource(
         list: list,
-        provider: self,
+        viewModel: makeGoalsViewModel(),
         createGoalService: makeCreateGoalService(),
         deleteGoalService: makeDeleteGoalService(),
         updateServiceFactory: self
     ) }
 
     func makeCreateGoalService() -> CreateGoalService { CreateGoalService(
-        goalsStorage: goalsStorage,
+        goalsStorage: parent.parent.goalsWriter,
         eventsProvider: parent.parent.eventsReader
     ) }
 
-    func makeDeleteGoalService() -> DeleteGoalService { DeleteGoalService(goalsStorage: goalsStorage) }
+    func makeDeleteGoalService() -> DeleteGoalService { DeleteGoalService(goalsStorage: parent.parent.goalsWriter) }
 
     // MARK: - ViewModels
 
     func makeGoalsViewModel() -> GoalsViewModel { GoalsViewModel(
         cells: [
-            .goals: goalsStorage.read(forEvent: parent.event).map { makeGoalViewModel(goal: $0) },
+            .goals: parent.parent.goalsReader.read(forEvent: parent.event).map { makeGoalViewModel(goal: $0) },
             .createGoal: [makeCreateGoalViewModel()],
         ]
     ) }
 
     func makeGoalViewModel(goal: Goal) -> GoalViewModel { GoalViewModel(goal: goal) }
-    func makeCreateGoalViewModel() -> CreateGoalViewModel { CreateGoalViewModel(eventId: eventId) }
+    func makeCreateGoalViewModel() -> CreateGoalViewModel { CreateGoalViewModel(eventId: parent.eventId) }
 
     // MARK: - Services
     func makeUpdateGoalService(goalId: String) -> UpdateGoalService { UpdateGoalService(
         goalId: goalId,
-        goalsStorage: goalsStorage
+        goalsReader: parent.parent.goalsReader,
+        goalsWriter: parent.parent.goalsWriter
     ) }
 }

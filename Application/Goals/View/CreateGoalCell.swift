@@ -40,8 +40,10 @@ final class CreateGoalCell: UICollectionViewCell {
     }
 
     @objc private func handleTap() {
+        guard let service = service, let eventId = viewModel?.eventId else { return }
+
         animateTapReceiving {
-            self.service?.serve(CreateGoalServiceArgument(eventId: self.viewModel!.eventId, dateCreated: .now))
+            service.serve(CreateGoalServiceArgument(eventId: eventId, dateCreated: .now))
         }
     }
 }

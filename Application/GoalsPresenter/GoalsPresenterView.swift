@@ -28,7 +28,7 @@ final class GoalsPresenterView: UIView {
         configureTapHandler()
     }
 
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     // MARK: - Private
     private func configureLayout() {
@@ -40,8 +40,8 @@ final class GoalsPresenterView: UIView {
     }
 
     @objc private func handleTap() {
-        button.animateTapReceiving {
-            self.showGoalsService.serve(ApplicationServiceEmptyArgument())
+        button.animateTapReceiving { [weak self] in
+            self?.showGoalsService.serve(ApplicationServiceEmptyArgument())
         }
     }
 }

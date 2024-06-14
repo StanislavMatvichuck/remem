@@ -10,7 +10,11 @@ import UIKit
 
 final class GoalsController: UIViewController {
     let viewRoot: GoalsView
+    let dataSource: GoalsDataSource
+    
     var viewModel: GoalsViewModel? { didSet {
+        guard let viewModel else { return }
+        dataSource.viewModel = viewModel
         viewRoot.viewModel = viewModel
     }}
     
@@ -19,9 +23,10 @@ final class GoalsController: UIViewController {
     var goalDeletedSubscription: DomainEventsPublisher.DomainEventSubscription?
     var goalUpdatedSubscription: DomainEventsPublisher.DomainEventSubscription?
     
-    init(factory: GoalsViewModelFactoring, view: GoalsView) {
+    init(factory: GoalsViewModelFactoring, view: GoalsView, dataSource: GoalsDataSource) {
         self.factory = factory
         self.viewRoot = view
+        self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }
     

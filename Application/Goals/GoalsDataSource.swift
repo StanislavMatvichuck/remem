@@ -9,64 +9,72 @@ import UIKit
 
 protocol UpdateGoalServiceFactoring { func makeUpdateGoalService(goalId: String) -> UpdateGoalService }
 
-struct GoalsDataSource {
+final class GoalsDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<GoalsViewModel.Section, String>
     typealias DataSource = UICollectionViewDiffableDataSource<GoalsViewModel.Section, String>
 
-    private let provider: GoalsViewModelFactoring
-    private let dataSource: DataSource
+    private let list: UICollectionView
+    var viewModel: GoalsViewModel { didSet { applySnapshot() }}
+
+    private let goalCellRegistration = UICollectionView.CellRegistration<GoalCell, GoalViewModel> { cell, _, viewModel in
+        cell.viewModel = viewModel
+    }
+
+    private let createGoalCellRegistration = UICollectionView.CellRegistration<CreateGoalCell, CreateGoalViewModel> { cell, _, viewModel in
+        cell.viewModel = viewModel
+    }
+
+    private lazy var dataSource: DataSource = { DataSource(collectionView: self.list) {
+        [weak self] collectionView, indexPath, itemIdentifier in
+
+        guard
+            let item = self?.viewModel.cell(identifier: itemIdentifier),
+            let goalCellRegistration = self?.goalCellRegistration,
+            let createGoalCellRegistration = self?.createGoalCellRegistration
+        else { fatalError() }
+
+        switch indexPath.section {
+        case GoalsViewModel.Section.goals.rawValue:
+            let cell = collectionView.dequeueConfiguredReusableCell(
+                using: goalCellRegistration,
+                for: indexPath,
+                item: item as? GoalViewModel
+            )
+            cell.deleteService = self?.deleteGoalService
+            cell.input.updateService = self?.updateServiceFactory.makeUpdateGoalService(goalId: item.id)
+            return cell
+        case GoalsViewModel.Section.createGoal.rawValue:
+            let cell = collectionView.dequeueConfiguredReusableCell(
+                using: createGoalCellRegistration,
+                for: indexPath,
+                item: item as? CreateGoalViewModel
+            )
+
+            cell.service = self?.createGoalService
+            return cell
+        default: fatalError()
+        }
+    } }()
+
     private let createGoalService: CreateGoalService
     private let deleteGoalService: DeleteGoalService
     private let updateServiceFactory: UpdateGoalServiceFactoring
 
     init(
         list: UICollectionView,
-        provider: GoalsViewModelFactoring,
+        viewModel: GoalsViewModel,
         createGoalService: CreateGoalService,
         deleteGoalService: DeleteGoalService,
         updateServiceFactory: UpdateGoalServiceFactoring
     ) {
+        self.list = list
+        self.viewModel = viewModel
         self.createGoalService = createGoalService
         self.deleteGoalService = deleteGoalService
         self.updateServiceFactory = updateServiceFactory
-
-        let goalCellRegistration = UICollectionView.CellRegistration<GoalCell, GoalViewModel> { cell, _, viewModel in
-            cell.viewModel = viewModel
-            cell.deleteService = deleteGoalService
-            cell.input.updateService = updateServiceFactory.makeUpdateGoalService(goalId: viewModel.id)
-        }
-
-        let createGoalCellRegistration = UICollectionView.CellRegistration<CreateGoalCell, CreateGoalViewModel> { cell, _, viewModel in
-            cell.viewModel = viewModel
-            cell.service = createGoalService
-        }
-
-        self.provider = provider
-        dataSource = DataSource(collectionView: list) {
-            collectionView, indexPath, itemIdentifier in
-
-            guard let item = provider.makeGoalsViewModel().cell(identifier: itemIdentifier) else { fatalError() }
-
-            switch indexPath.section {
-            case GoalsViewModel.Section.goals.rawValue:
-                return collectionView.dequeueConfiguredReusableCell(
-                    using: goalCellRegistration,
-                    for: indexPath,
-                    item: item as? GoalViewModel
-                )
-            case GoalsViewModel.Section.createGoal.rawValue:
-                return collectionView.dequeueConfiguredReusableCell(
-                    using: createGoalCellRegistration,
-                    for: indexPath,
-                    item: item as? CreateGoalViewModel
-                )
-            default: fatalError()
-            }
-        }
     }
 
-    func applySnapshot(_ oldValue: GoalsViewModel?) {
-        let viewModel = provider.makeGoalsViewModel()
+    func applySnapshot() {
         guard viewModel.dragAndDrop.removalDropAreaHidden else { return }
 
         var snapshot = Snapshot()
