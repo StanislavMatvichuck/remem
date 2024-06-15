@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DayDetailsView: UIView, DayDetailsDataProviding {
+final class DayDetailsView: UIView {
     static let margin: CGFloat = .buttonMargin / 1.2
     static let radius: CGFloat = margin * 2.6
 
@@ -30,14 +30,7 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         return view
     }()
 
-    let happeningsCollection: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: DayDetailsView.makeLayout())
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.widthAnchor.constraint(equalTo: collection.heightAnchor).isActive = true
-        collection.isAccessibilityElement = true
-        collection.accessibilityIdentifier = UITestID.dayDetailsHappeningsList.rawValue
-        return collection
-    }()
+    let list: UICollectionView
 
     let picker: UIDatePicker = {
         let view = UIDatePicker(al: true)
@@ -75,15 +68,13 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         return view
     }()
 
-    var viewModel: DayDetailsViewModel? { didSet {
-        guard let viewModel else { return }
+    var viewModel: DayDetailsViewModel { didSet {
         configure(viewModel: viewModel)
-        dataSource.applySnapshot(oldValue)
     }}
 
-    lazy var dataSource = DayDetailsDataSource(list: happeningsCollection, provider: WeakRef(self))
-
-    init() {
+    init(list: UICollectionView, viewModel: DayDetailsViewModel) {
+        self.list = list
+        self.viewModel = viewModel
         super.init(frame: .zero)
         configureLayout()
         configureAppearance()
@@ -126,12 +117,14 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
     }
 
     private func configureLayout() {
+        list.widthAnchor.constraint(equalTo: list.heightAnchor).isActive = true
+
         titleBackground.addAndConstrain(title)
         buttonBackground.addAndConstrain(button)
         buttonBackground.addAndConstrain(delete)
 
         verticalStack.addArrangedSubview(titleBackground)
-        verticalStack.addArrangedSubview(happeningsCollection)
+        verticalStack.addArrangedSubview(list)
         verticalStack.addArrangedSubview(picker)
         verticalStack.addArrangedSubview(buttonBackground)
 
@@ -139,6 +132,14 @@ final class DayDetailsView: UIView, DayDetailsDataProviding {
         buttonBackground.heightAnchor.constraint(equalTo: verticalStack.widthAnchor, multiplier: 1 / 4).isActive = true
 
         addAndConstrain(verticalStack)
+    }
+
+    static func makeList() -> UICollectionView {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: DayDetailsView.makeLayout())
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.isAccessibilityElement = true
+        collection.accessibilityIdentifier = UITestID.dayDetailsHappeningsList.rawValue
+        return collection
     }
 
     private static func makeLayout() -> UICollectionViewLayout {

@@ -7,37 +7,41 @@
 
 import UIKit
 
-protocol DayDetailsDataProviding {
-    var viewModel: DayDetailsViewModel? { get }
-}
-
-struct DayDetailsDataSource {
+final class DayDetailsDataSource {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, String>
     typealias DataSource = UICollectionViewDiffableDataSource<Int, String>
     typealias Registration = UICollectionView.CellRegistration<DayCell, DayCellViewModel>
 
-    private let provider: DayDetailsDataProviding
-    private var dataSource: DataSource?
+    private let registration = Registration { cell, _, viewModel in cell.viewModel = viewModel }
+    private let list: UICollectionView
 
-    init(list: UICollectionView, provider: DayDetailsDataProviding) {
-        self.provider = provider
+    var viewModel: DayDetailsViewModel { didSet { applySnapshot() }}
 
-        let registration = Registration { cell, _, viewModel in cell.viewModel = viewModel }
+    private lazy var dataSource: DataSource = {
+        DataSource(collectionView: list) {
+            [weak self] collectionView, indexPath, itemIdentifier in
 
-        dataSource = DataSource(collectionView: list) { collectionView, indexPath, itemIdentifier in
-            if let item = provider.viewModel?.cell(for: itemIdentifier) {
+            if
+                let item = self?.viewModel.cell(for: itemIdentifier),
+                let registration = self?.registration
+            {
                 return collectionView.dequeueConfiguredReusableCell(
                     using: registration,
                     for: indexPath,
                     item: item
                 )
             }
-            return nil
+
+            fatalError(collectionViewDataSource)
         }
+    }()
+
+    init(list: UICollectionView, viewModel: DayDetailsViewModel) {
+        self.list = list
+        self.viewModel = viewModel
     }
 
-    func applySnapshot(_ oldValue: DayDetailsViewModel?) {
-        guard let viewModel = provider.viewModel else { return }
+    func applySnapshot() {
         var snapshot = Snapshot()
 
         let defaultSection = 0
@@ -49,6 +53,6 @@ struct DayDetailsDataSource {
 
         snapshot.reconfigureItems(viewModel.identifiers)
 
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }

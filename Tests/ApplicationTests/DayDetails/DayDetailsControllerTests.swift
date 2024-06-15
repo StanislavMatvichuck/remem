@@ -29,7 +29,7 @@ final class DayDetailsControllerTests: XCTestCase {
         sut = nil
     }
 
-    func test_listIsConfigured() { XCTAssertNotNil(sut.viewRoot.happeningsCollection.dataSource) }
+    func test_listIsConfigured() { XCTAssertNotNil(sut.viewRoot.list.dataSource) }
 
     func test_showsTitle() {
         let numberString = sut.viewRoot.title.text!.split(separator: " ").first
@@ -70,7 +70,7 @@ final class DayDetailsControllerTests: XCTestCase {
 
     func test_manyHappenings_allowsItemDrag() {
 //        XCTAssert(sut is UICollectionViewDragDelegate)
-        XCTAssertNotNil(sut.viewRoot.happeningsCollection.dragDelegate)
+        XCTAssertNotNil(sut.viewRoot.list.dragDelegate)
     }
 
     func test_manyHappenings_allowsDraggedItemsDrop() {
@@ -91,8 +91,8 @@ final class DayDetailsControllerTests: XCTestCase {
     }
 
     private func happening(at: IndexPath) -> DayCell {
-        sut.viewRoot.happeningsCollection.dataSource?.collectionView(
-            sut.viewRoot.happeningsCollection,
+        sut.viewRoot.list.dataSource?.collectionView(
+            sut.viewRoot.list,
             cellForItemAt: at) as! DayCell
     }
 
@@ -100,5 +100,5 @@ final class DayDetailsControllerTests: XCTestCase {
         sut.createHappeningService?.serve(CreateHappeningServiceArgument(eventId: eventId, date: at))
     }
 
-    private var happeningsAmount: Int { sut.viewRoot.happeningsCollection.numberOfItems(inSection: 0) }
+    private var happeningsAmount: Int { sut.viewRoot.list.numberOfItems(inSection: 0) }
 }

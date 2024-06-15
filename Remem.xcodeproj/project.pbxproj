@@ -277,7 +277,6 @@
 		08DA2C12284F559200FC418B /* UIGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIGlobals.swift */; };
 		08E1744F2B27064D0018256D /* DayDetailsPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */; };
 		08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E174512B292ABF0018256D /* DayDetailsPresentationDelegate.swift */; };
-		08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3325A29B4A14B00E59693 /* WeakRef.swift */; };
 		08E454B629C31B25006AF35B /* PdfSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E454B529C31B25006AF35B /* PdfSnapshots.swift */; };
 		08EAD4E82B8D020500557C4D /* GoalViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4E72B8D020500557C4D /* GoalViewModelTests.swift */; };
 		08EAD4EB2B8D024400557C4D /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD4EA2B8D024400557C4D /* GoalViewModel.swift */; };
@@ -703,7 +702,6 @@
 		08DA2C11284F559200FC418B /* UIGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGlobals.swift; sourceTree = "<group>"; };
 		08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsPresentationContainer.swift; sourceTree = "<group>"; };
 		08E174512B292ABF0018256D /* DayDetailsPresentationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsPresentationDelegate.swift; sourceTree = "<group>"; };
-		08E3325A29B4A14B00E59693 /* WeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRef.swift; sourceTree = "<group>"; };
 		08E454B529C31B25006AF35B /* PdfSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfSnapshots.swift; sourceTree = "<group>"; };
 		08E5B91328997E1F000B08BC /* CoreDataEventsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepository.swift; sourceTree = "<group>"; };
 		08E5B91A28998088000B08BC /* EventCoreDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoreDataMapper.swift; sourceTree = "<group>"; };
@@ -1452,7 +1450,6 @@
 				08DA2C11284F559200FC418B /* UIGlobals.swift */,
 				089E4B442A2DE8E100727624 /* UITestID.swift */,
 				08B878722A2DC188000748F4 /* UITestRepositoryConfigurator.swift */,
-				08E3325A29B4A14B00E59693 /* WeakRef.swift */,
 				08F0B52B2C0F669100C76232 /* GlobalStrings.swift */,
 			);
 			path = Helpers;
@@ -2122,7 +2119,6 @@
 				0871E7532B9DCDE000FF1F7D /* VisitEventService.swift in Sources */,
 				089066BC29E0150F0047052A /* DayDetailsPresentationController.swift in Sources */,
 				088AF7482B34F8E40039EF83 /* WeekDayView.swift in Sources */,
-				08E3325B29B4A14B00E59693 /* WeakRef.swift in Sources */,
 				08214D102B8F4244002F1F16 /* GoalProgressView.swift in Sources */,
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
 				0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */,

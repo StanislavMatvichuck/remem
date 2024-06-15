@@ -22,7 +22,7 @@ final class DayDetailsViewSnapshots: FBSnapshotTestCase {
         let vm = DayDetailsContainer(EventDetailsContainer(container, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
         let sut = DayDetailsView()
         sut.viewModel = vm
-        sut.happeningsCollection.delegate = self
+        sut.list.delegate = self
         sut.frame = .screenSquare
 
         FBSnapshotVerifyView(sut)
@@ -44,7 +44,7 @@ final class DayDetailsViewSnapshots: FBSnapshotTestCase {
         let vm = DayDetailsContainer(EventDetailsContainer(container, event: event), startOfDay: DayIndex.referenceValue.date).makeDayDetailsViewModel()
         let sut = DayDetailsView()
         sut.viewModel = vm
-        sut.happeningsCollection.delegate = self
+        sut.list.delegate = self
         sut.frame = UIScreen.main.bounds
 
         FBSnapshotVerifyView(sut)

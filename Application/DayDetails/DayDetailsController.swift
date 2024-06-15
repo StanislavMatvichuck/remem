@@ -12,8 +12,11 @@ import UIKit
 final class DayDetailsController: UIViewController {
     let factory: DayDetailsViewModelFactoring
     let viewRoot: DayDetailsView
+    let dataSource: DayDetailsDataSource
 
     var viewModel: DayDetailsViewModel? { didSet {
+        guard let viewModel else { return }
+        dataSource.viewModel = viewModel
         viewRoot.viewModel = viewModel
     } }
 
@@ -25,10 +28,13 @@ final class DayDetailsController: UIViewController {
     init(
         _ factory: DayDetailsViewModelFactoring,
         createHappeningService: CreateHappeningService?,
-        removeHappeningService: RemoveHappeningService?
+        removeHappeningService: RemoveHappeningService?,
+        view: DayDetailsView,
+        dataSource: DayDetailsDataSource
     ) {
         self.factory = factory
-        self.viewRoot = DayDetailsView()
+        self.viewRoot = view
+        self.dataSource = dataSource
         self.createHappeningService = createHappeningService
         self.removeHappeningService = removeHappeningService
         super.init(nibName: nil, bundle: nil)
@@ -55,7 +61,7 @@ final class DayDetailsController: UIViewController {
     }
 
     private func configureCollection() {
-        viewRoot.happeningsCollection.dragDelegate = self
+        viewRoot.list.dragDelegate = self
     }
 
     private func configureEventHandlers() {

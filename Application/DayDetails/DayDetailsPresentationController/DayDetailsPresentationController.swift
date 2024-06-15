@@ -95,7 +95,8 @@ final class DayDetailsPresentationController: UIPresentationController {
         let width: CGFloat = .screenW * relativeWidth
         let container = UIView(frame: containerView!.bounds)
 
-        let detailsView = DayDetailsView()
+        // TODO: simplify this?
+        let detailsView = DayDetailsView(list: DayDetailsView.makeList(), viewModel: DayDetailsViewModel(currentMoment: .now, startOfDay: .now, pickerDate: nil, cells: [], eventId: ""))
         detailsView.translatesAutoresizingMaskIntoConstraints = false
 
         container.addSubview(detailsView)

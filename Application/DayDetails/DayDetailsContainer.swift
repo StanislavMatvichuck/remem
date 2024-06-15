@@ -20,10 +20,22 @@ final class DayDetailsContainer:
         self.startOfDay = startOfDay
     }
 
-    func makeDayDetailsController() -> DayDetailsController { DayDetailsController(
-        self,
-        createHappeningService: makeCreateHappeningService(),
-        removeHappeningService: makeRemoveHappeningService()
+    func makeDayDetailsController() -> DayDetailsController {
+        let list = DayDetailsView.makeList()
+        let viewModel = makeDayDetailsViewModel(pickerDate: nil)
+
+        return DayDetailsController(
+            self,
+            createHappeningService: makeCreateHappeningService(),
+            removeHappeningService: makeRemoveHappeningService(),
+            view: makeView(list: list, viewModel: viewModel),
+            dataSource: makeDataSource(list: list, viewModel: viewModel)
+        )
+    }
+
+    func makeView(list: UICollectionView, viewModel: DayDetailsViewModel) -> DayDetailsView { DayDetailsView(
+        list: list,
+        viewModel: viewModel
     ) }
 
     func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel {
@@ -35,6 +47,11 @@ final class DayDetailsContainer:
             eventId: parent.eventId
         )
     }
+
+    func makeDataSource(list: UICollectionView, viewModel: DayDetailsViewModel) -> DayDetailsDataSource { DayDetailsDataSource(
+        list: list,
+        viewModel: viewModel
+    ) }
 
     func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(id: UUID().uuidString, happening: happening) }
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
