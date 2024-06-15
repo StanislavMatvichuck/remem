@@ -812,12 +812,11 @@
 		0816B6E32B500B2B00A29815 /* DayDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0838E0B22C1DF5A800837FA2 /* Presentation */,
+				0838E0B12C1DF59000837FA2 /* ViewModel */,
 				089F08DE2B72493600EA953A /* View */,
 				086E39732981431C00CCE80E /* DayDetailsContainer.swift */,
-				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
-				08F97A3D2950769100AB7051 /* DayCellViewModel.swift */,
-				08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */,
-				08E174502B292A990018256D /* DayDetailsPresentationController */,
+				089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */,
 				08B26A0F289E919F00DFBAC8 /* DayDetailsController.swift */,
 			);
 			path = DayDetails;
@@ -1065,6 +1064,28 @@
 				0826AC9828C86ECF0021D607 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0838E0B12C1DF59000837FA2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				08B26A13289E975900DFBAC8 /* DayDetailsViewModel.swift */,
+				08F97A3D2950769100AB7051 /* DayCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0838E0B22C1DF5A800837FA2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */,
+				089066B929DF12340047052A /* DayDetailsDismissAnimator.swift */,
+				08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */,
+				089066BB29E0150F0047052A /* DayDetailsPresentationController.swift */,
+				08E174512B292ABF0018256D /* DayDetailsPresentationDelegate.swift */,
+				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		083BECF228D0A31A009157FD /* Domain */ = {
@@ -1339,7 +1360,6 @@
 			isa = PBXGroup;
 			children = (
 				08B26A15289E98B700DFBAC8 /* DayCell.swift */,
-				089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */,
 				08B26A11289E91D400DFBAC8 /* DayDetailsView.swift */,
 			);
 			path = View;
@@ -1527,18 +1547,6 @@
 				080C417B2986AE3200C1F54F /* SummaryViewModel.swift */,
 			);
 			path = Summary;
-			sourceTree = "<group>";
-		};
-		08E174502B292A990018256D /* DayDetailsPresentationController */ = {
-			isa = PBXGroup;
-			children = (
-				0821EB7929E84B9C00B90407 /* DayDetailsAnimator.swift */,
-				089066B929DF12340047052A /* DayDetailsDismissAnimator.swift */,
-				08C52E7A29CA64090056C116 /* DayDetailsPresentationAnimator.swift */,
-				089066BB29E0150F0047052A /* DayDetailsPresentationController.swift */,
-				08E174512B292ABF0018256D /* DayDetailsPresentationDelegate.swift */,
-			);
-			path = DayDetailsPresentationController;
 			sourceTree = "<group>";
 		};
 		08E5B91728998042000B08BC /* CoreDataEventsRepository */ = {
