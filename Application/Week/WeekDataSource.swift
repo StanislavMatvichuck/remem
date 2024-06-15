@@ -34,7 +34,7 @@ final class WeekDataSource {
                 let item = self?.viewModel.vm?.viewModel(forIdentifier: itemIdentifier),
                 let registration = self?.registration,
                 let showDayDetailsService = self?.showDayDetailsService
-            else { fatalError(collectionViewDataSource) }
+            else { fatalError(collectionViewDataSourceError) }
 
             let configuredCell = collectionView.dequeueConfiguredReusableCell(
                 using: registration,

@@ -32,7 +32,7 @@ final class DayDetailsDataSource {
                 )
             }
 
-            fatalError(collectionViewDataSource)
+            fatalError(collectionViewDataSourceError)
         }
     }()
 

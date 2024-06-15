@@ -15,7 +15,7 @@ let WidgetStorageFile = "RememWidgets.plist"
 let WidgetTimelineKind = "RememWidgets"
 
 let collectionViewDataSourceWeekError = "view has no access to viewModel"
-let collectionViewDataSource = "dataSource provider error"
+let collectionViewDataSourceError = "dataSource provider error"
 let errorUIKitInit = "init(coder:) has not been implemented"
 let errorLoadableViewModelHandlerType = "LoadableViewModelHandler works with UIView or UIViewController"
 
