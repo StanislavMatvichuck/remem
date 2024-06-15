@@ -1089,6 +1089,35 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0838E0B52C1DF6B700837FA2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0875B4502B593780004C0575 /* EventsSortingCellView.swift */,
+				0875B44E2B582093004C0575 /* EventsSortingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0838E0B62C1DF6C500837FA2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */,
+				0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */,
+				0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */,
+				0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0838E0B72C1DF6DB00837FA2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */,
+				0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		083BECF228D0A31A009157FD /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -1312,15 +1341,10 @@
 		0875B4452B57F0A4004C0575 /* EventsSorting */ = {
 			isa = PBXGroup;
 			children = (
-				0875B4462B57F0C3004C0575 /* EventsSortingCellViewModel.swift */,
-				0875B44A2B57F6CD004C0575 /* EventsSortingViewModel.swift */,
-				0875B44E2B582093004C0575 /* EventsSortingView.swift */,
-				0875B4502B593780004C0575 /* EventsSortingCellView.swift */,
-				0875B4692B59FC7B004C0575 /* EventsSortingPresentationController.swift */,
+				0838E0B62C1DF6C500837FA2 /* Presentation */,
+				0838E0B72C1DF6DB00837FA2 /* ViewModel */,
+				0838E0B52C1DF6B700837FA2 /* View */,
 				0875B4612B59C77E004C0575 /* EventsSortingContainer.swift */,
-				0875B46B2B5A8491004C0575 /* EventsSortingPresentationAnimator.swift */,
-				0875B46D2B5A874F004C0575 /* EventsSortingDismissAnimator.swift */,
-				0875B46F2B5A8A1A004C0575 /* EventsSortingAnimationsHelper.swift */,
 				0875B4652B59DCDC004C0575 /* EventsSortingController.swift */,
 			);
 			path = EventsSorting;
