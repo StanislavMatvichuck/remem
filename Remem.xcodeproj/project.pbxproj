@@ -954,16 +954,6 @@
 			path = ControllersInfrastructure;
 			sourceTree = "<group>";
 		};
-		0816B6F32B50124800A29815 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
-				085A2C2F29F15144005C6E5E /* EventCell */,
-				08F50DC82965EF5300B65CDF /* CreateEventCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		081A15562B6287F700EDA8A2 /* HourDistribution */ = {
 			isa = PBXGroup;
 			children = (
@@ -1086,6 +1076,17 @@
 				08E1744E2B27064D0018256D /* DayDetailsPresentationContainer.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0838E0B32C1DF67B00837FA2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				08D512352787144800C2037F /* EventsListView.swift */,
+				08F50DC62965EEDA00B65CDF /* HintCell.swift */,
+				085A2C2F29F15144005C6E5E /* EventCell */,
+				08F50DC82965EF5300B65CDF /* CreateEventCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		083BECF228D0A31A009157FD /* Domain */ = {
@@ -1500,13 +1501,12 @@
 		08DFFADB2B5007B50063B389 /* EventsList */ = {
 			isa = PBXGroup;
 			children = (
+				0869C49A2B7FFBAF0007D6E0 /* ViewModel */,
+				0838E0B32C1DF67B00837FA2 /* View */,
 				0852AAFD29800B6E00EF50B0 /* EventsListContainer.swift */,
 				0875E27B298EF91A00622125 /* EventsListController.swift */,
 				08C23EB92B83C145004DF159 /* EventsListController+DragAndDrop.swift */,
 				083E3A0D29919EEB007792B0 /* EventsListDataSource.swift */,
-				08D512352787144800C2037F /* EventsListView.swift */,
-				0816B6F32B50124800A29815 /* Cells */,
-				0869C49A2B7FFBAF0007D6E0 /* ViewModel */,
 			);
 			path = EventsList;
 			sourceTree = "<group>";
