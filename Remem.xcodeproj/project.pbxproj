@@ -1077,6 +1077,16 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		08484E292C1D95C4008EA32A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				08D5D0E52B32660000B71512 /* WeekDayViewModel.swift */,
+				087433C22B33814C00336FC3 /* WeekPageViewModel.swift */,
+				085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		084D0E212983E892008203C3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1251,7 +1261,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		087433BC2B3375D400336FC3 /* Week */ = {
+		087433BC2B3375D400336FC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				087433BD2B3375E000336FC3 /* WeekView.swift */,
@@ -1260,7 +1270,7 @@
 				089308A92B3B07550059D51A /* WeekDayHappeningsView.swift */,
 				089AC5F12B3C53BF00577781 /* WeekDayNumberView.swift */,
 			);
-			path = Week;
+			path = View;
 			sourceTree = "<group>";
 		};
 		0875B4422B57F045004C0575 /* EventsSorting */ = {
@@ -1494,12 +1504,10 @@
 		08DFFADD2B5008730063B389 /* Week */ = {
 			isa = PBXGroup;
 			children = (
-				087433BC2B3375D400336FC3 /* Week */,
+				08484E292C1D95C4008EA32A /* ViewModel */,
+				087433BC2B3375D400336FC3 /* View */,
 				081015572B331656004CE297 /* WeekContainer.swift */,
-				08D5D0E52B32660000B71512 /* WeekDayViewModel.swift */,
-				087433C22B33814C00336FC3 /* WeekPageViewModel.swift */,
 				089AC5F52B3C61C300577781 /* WeekController.swift */,
-				085BD7A62B31CE9C000283E1 /* WeekViewModel.swift */,
 			);
 			path = Week;
 			sourceTree = "<group>";
