@@ -35,7 +35,7 @@ enum PdfRenderingPage {
 //    case .summary: return SummaryView()
     case .time: return HourDistributionView()
     case .week: return DayOfWeekView()
-    case .weekInYear: return WeekView()
+    case .weekInYear: return WeekView(list: WeekView.makeList(), viewModel: Loadable<WeekViewModel>())
     default: fatalError("todo: implement pdf rendering for a view")
     }}
 

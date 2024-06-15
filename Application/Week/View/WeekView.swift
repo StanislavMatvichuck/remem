@@ -7,89 +7,59 @@
 
 import UIKit
 
-final class WeekView: UIView, LoadableView, UsingLoadableViewModel {
-    typealias ViewModel = Loadable<WeekViewModel>
-    let collection: UICollectionView = {
-        let collectionLayout = UICollectionViewFlowLayout()
-        collectionLayout.scrollDirection = .horizontal
-        collectionLayout.minimumInteritemSpacing = 0.0
-        collectionLayout.minimumLineSpacing = 0.0
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
+final class WeekView: UIView, LoadableView {
+    let list: UICollectionView
+
+    static func makeList() -> UICollectionView {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: WeekView.makeLayout())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.isPagingEnabled = true
-        collection.register(WeekPageView.self, forCellWithReuseIdentifier: WeekPageView.reuseIdentifier)
         return collection
-    }()
+    }
 
-    var viewModel: Loadable<WeekViewModel>? { didSet {
-        if viewModel?.loading == true {
-            displayLoading()
-        } else {
-            disableLoadingCover()
-        }
+    private static func makeLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+        configuration.scrollDirection = .horizontal
+        let layout = UICollectionViewCompositionalLayout(section: section, configuration: configuration)
+        return layout
+    }
 
-        guard let viewModel = viewModel?.vm else { return }
-        configureContentFor(viewModel)
-    } }
-
+    var viewModel: Loadable<WeekViewModel> { didSet { configureContent() } }
     var service: ShowDayDetailsService?
 
-    init(service: ShowDayDetailsService? = nil) {
+    init(list: UICollectionView, viewModel: Loadable<WeekViewModel>, service: ShowDayDetailsService? = nil) {
         self.service = service
+        self.list = list
+        self.viewModel = viewModel
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        collection.dataSource = self
-        collection.delegate = self
         configureLayout()
         configureAppearance()
+        configureContent()
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
 
     private func configureLayout() {
         widthAnchor.constraint(equalTo: heightAnchor).isActive = true
-        addAndConstrain(collection)
+        addAndConstrain(list)
     }
 
     private func configureAppearance() {
         backgroundColor = .remem_bg
-        collection.backgroundColor = .clear
+        list.backgroundColor = .clear
     }
 
-    private func configureContentFor(_ viewModel: WeekViewModel) {
-        collection.reloadData()
-    }
-}
-
-extension WeekView: UICollectionViewDataSource {
-    var viewModelErrorMessage: String { collectionViewDataSourceWeekError }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int) -> Int
-    {
-        guard let viewModel else { fatalError(viewModelErrorMessage) }
-        return viewModel.vm?.pagesCount ?? 0
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        guard let page = collectionView.dequeueReusableCell(
-            withReuseIdentifier: WeekPageView.reuseIdentifier,
-            for: indexPath) as? WeekPageView,
-            let viewModel = viewModel?.vm
-        else { fatalError(viewModelErrorMessage) }
-        page.service = service
-        page.viewModel = viewModel.page(at: indexPath.row)
-        return page
-    }
-}
-
-extension WeekView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: width)
+    private func configureContent() {
+        if viewModel.loading == true {
+            displayLoading()
+        } else {
+            disableLoadingCover()
+        }
     }
 }

@@ -20,12 +20,27 @@ final class WeekContainer:
 
     init(_ parent: EventDetailsContainer) { self.parent = parent }
 
-    func makeWeekController() -> WeekController { WeekController(
-        viewModelFactory: self,
-        view: makeWeekView(),
-        loadingHandler: parent.parent.viewModelsLoadingHandler
+    func makeWeekController() -> WeekController {
+        let list = WeekView.makeList()
+        let viewModel = makeLoading()
+        return WeekController(
+            viewModelFactory: self,
+            view: makeWeekView(list: list, viewModel: viewModel),
+            dataSource: makeDataSource(list: list, viewModel: viewModel),
+            loadingHandler: parent.parent.viewModelsLoadingHandler
+        )
+    }
+
+    func makeDataSource(list: UICollectionView, viewModel: Loadable<WeekViewModel>) -> WeekDataSource { WeekDataSource(
+        list: list,
+        viewModel: viewModel
     ) }
-    func makeWeekView() -> WeekView { WeekView(service: makeShowDayDetailsService()) }
+
+    func makeWeekView(list: UICollectionView, viewModel: Loadable<WeekViewModel>) -> WeekView { WeekView(
+        list: list,
+        viewModel: viewModel,
+        service: makeShowDayDetailsService()
+    ) }
     func makeWeekViewModel() -> WeekViewModel { WeekViewModel(event: event, pageFactory: self, createUntil: currentMoment) }
     func makeWeekPageViewModel(pageIndex: Int, dailyMaximum: Int) -> WeekPageViewModel {
         WeekPageViewModel(

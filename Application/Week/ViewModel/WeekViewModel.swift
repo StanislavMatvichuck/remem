@@ -9,6 +9,7 @@ import Domain
 import Foundation
 
 struct WeekViewModel {
+    enum Section: Int, CaseIterable { case main }
     private let event: Event
     private let pageFactory: WeekPageViewModelFactoring
     private let createUntil: Date
@@ -53,7 +54,12 @@ struct WeekViewModel {
         }()
     }
 
-    func page(at index: Int) -> WeekPageViewModel {
-        pageFactory.makeWeekPageViewModel(pageIndex: index, dailyMaximum: dayMaximum)
+    func identifiersFor(section: Section) -> [Int] { switch section {
+    case .main: return Array(0 ..< pagesCount)
+    } }
+
+    /// Operates on calculated property -> mutable
+    func viewModel(forIdentifier id: Int) -> WeekPageViewModel {
+        pageFactory.makeWeekPageViewModel(pageIndex: id, dailyMaximum: dayMaximum)
     }
 }

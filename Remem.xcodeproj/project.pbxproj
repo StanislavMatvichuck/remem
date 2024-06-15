@@ -84,6 +84,7 @@
 		0841F28F2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841F28E2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift */; };
 		0844342728F6DFF900A30FB2 /* EventsListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */; };
 		0846862B2BD1B93000FCA819 /* UpdateGoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846862A2BD1B93000FCA819 /* UpdateGoalService.swift */; };
+		08484E2B2C1D9644008EA32A /* WeekDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484E2A2C1D9644008EA32A /* WeekDataSource.swift */; };
 		0848741A2984328700C27155 /* WidgetEventCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084874192984328700C27155 /* WidgetEventCellViewModel.swift */; };
 		084A8677299A3DFF00300918 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDDEEA28E4ECC200B0E781 /* ExtensionString.swift */; };
 		084A8678299A3E5800300918 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
@@ -494,6 +495,7 @@
 		0841F28E2BCF1E450078C0A7 /* GoalCoreDataMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCoreDataMapperTests.swift; sourceTree = "<group>"; };
 		0844342628F6DFF900A30FB2 /* EventsListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListControllerTests.swift; sourceTree = "<group>"; };
 		0846862A2BD1B93000FCA819 /* UpdateGoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGoalService.swift; sourceTree = "<group>"; };
+		08484E2A2C1D9644008EA32A /* WeekDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDataSource.swift; sourceTree = "<group>"; };
 		08485BAB289EEB110045B9F2 /* CoreDataEventsRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEventsRepositoryTests.swift; sourceTree = "<group>"; };
 		08485BAD289EF1E50045B9F2 /* Renaming02.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming02.xcdatamodel; sourceTree = "<group>"; };
 		084874192984328700C27155 /* WidgetEventCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEventCellViewModel.swift; sourceTree = "<group>"; };
@@ -1508,6 +1510,7 @@
 				087433BC2B3375D400336FC3 /* View */,
 				081015572B331656004CE297 /* WeekContainer.swift */,
 				089AC5F52B3C61C300577781 /* WeekController.swift */,
+				08484E2A2C1D9644008EA32A /* WeekDataSource.swift */,
 			);
 			path = Week;
 			sourceTree = "<group>";
@@ -2102,6 +2105,7 @@
 				089E4B452A2DE8E100727624 /* UITestID.swift in Sources */,
 				08D512402787170200C2037F /* ExtensionUIView.swift in Sources */,
 				089B37882A0A32B700422971 /* EventAmountView.swift in Sources */,
+				08484E2B2C1D9644008EA32A /* WeekDataSource.swift in Sources */,
 				0873EFC4281B208A00A18F53 /* SwipeHintDisplay.swift in Sources */,
 				084B21F629C0977A00B601DA /* PDFReadingContainer.swift in Sources */,
 				089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */,

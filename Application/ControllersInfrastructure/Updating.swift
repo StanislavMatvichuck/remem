@@ -21,7 +21,7 @@ extension EventDetailsController: Updating {
 
 extension EventsListController: Updating { func update() { viewModel = factory.makeEventsListViewModel() }}
 extension WeekController: Updating { func update() {
-    loadingHandler.load(for: viewRoot, factory: factory)
+    loadingHandler.load(for: self, factory: factory)
 }}
 extension SummaryController: Updating { func update() {
     loadingHandler.load(for: viewRoot, factory: factory)

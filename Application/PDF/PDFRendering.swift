@@ -69,6 +69,6 @@ extension WeekView: PDFRendering {
 
     func scrollIfNeeded() {
         let index = IndexPath(row: tag, section: 0)
-        collection.scrollToItem(at: index, at: .right, animated: false)
+        list.scrollToItem(at: index, at: .right, animated: false)
     }
 }
