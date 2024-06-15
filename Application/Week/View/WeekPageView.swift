@@ -54,7 +54,7 @@ final class WeekPageView: UICollectionViewCell {
         configureContent(viewModel)
     } }
 
-    var service: ShowDayDetailsService?
+    private var showDayDetailsService: ShowDayDetailsService?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,6 +63,18 @@ final class WeekPageView: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) { fatalError(errorUIKitInit) }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        showDayDetailsService = nil
+    }
+
+    func configureServices(showDayDetails: ShowDayDetailsService) {
+        showDayDetailsService = showDayDetails
+        configureServiceForDayViews()
+    }
+
+    // MARK: - Private
 
     private func configureLayout() {
         let verticalStack = UIStackView(al: true)
@@ -115,8 +127,15 @@ final class WeekPageView: UICollectionViewCell {
     private func configureDaysContent(_ viewModel: WeekPageViewModel) {
         for index in 0 ..< WeekPageViewModel.daysCount {
             if let dayView = days.arrangedSubviews[index] as? WeekDayView {
-                dayView.service = service
                 dayView.viewModel = viewModel.day(dayNumberInWeek: index)
+            }
+        }
+    }
+
+    private func configureServiceForDayViews() {
+        for index in 0 ..< WeekPageViewModel.daysCount {
+            if let dayView = days.arrangedSubviews[index] as? WeekDayView {
+                dayView.service = showDayDetailsService
             }
         }
     }

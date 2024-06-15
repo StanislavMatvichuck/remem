@@ -33,7 +33,8 @@ final class WeekContainer:
 
     func makeDataSource(list: UICollectionView, viewModel: Loadable<WeekViewModel>) -> WeekDataSource { WeekDataSource(
         list: list,
-        viewModel: viewModel
+        viewModel: viewModel,
+        showDayDetailsService: makeShowDayDetailsService()
     ) }
 
     func makeWeekView(list: UICollectionView, viewModel: Loadable<WeekViewModel>) -> WeekView { WeekView(

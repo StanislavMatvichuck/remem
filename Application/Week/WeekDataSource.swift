@@ -12,11 +12,17 @@ final class WeekDataSource {
     typealias DataSource = UICollectionViewDiffableDataSource<WeekViewModel.Section, Int>
 
     private let list: UICollectionView
+    private let showDayDetailsService: ShowDayDetailsService
     var viewModel: Loadable<WeekViewModel> { didSet { applySnapshot() }}
 
-    init(list: UICollectionView, viewModel: Loadable<WeekViewModel>) {
+    init(
+        list: UICollectionView,
+        viewModel: Loadable<WeekViewModel>,
+        showDayDetailsService: ShowDayDetailsService
+    ) {
         self.list = list
         self.viewModel = viewModel
+        self.showDayDetailsService = showDayDetailsService
     }
 
     private let registration = UICollectionView.CellRegistration<WeekPageView, WeekPageViewModel> { cell, _, viewModel in cell.viewModel = viewModel }
@@ -26,19 +32,17 @@ final class WeekDataSource {
             [weak self] collectionView, indexPath, itemIdentifier in
             guard
                 let item = self?.viewModel.vm?.viewModel(forIdentifier: itemIdentifier),
-                let registration = self?.registration
+                let registration = self?.registration,
+                let showDayDetailsService = self?.showDayDetailsService
             else { fatalError(collectionViewDataSource) }
 
-            let configuredCell: UICollectionViewCell = { switch indexPath.section {
-            case WeekViewModel.Section.main.rawValue:
-                return collectionView.dequeueConfiguredReusableCell(
-                    using: registration,
-                    for: indexPath,
-                    item: item
-                )
-            default:
-                fatalError(collectionViewDataSource)
-            } }()
+            let configuredCell = collectionView.dequeueConfiguredReusableCell(
+                using: registration,
+                for: indexPath,
+                item: item
+            )
+
+            configuredCell.configureServices(showDayDetails: showDayDetailsService)
 
             return configuredCell
         }
