@@ -9,8 +9,8 @@ import Domain
 import UIKit
 
 final class DayDetailsContainer:
-    DayDetailsViewModelFactoring,
-    DayCellViewModelFactoring
+    DayDetailsViewModelFactoring
+//    DayCellViewModelFactoring
 {
     let parent: EventDetailsContainer
     let startOfDay: Date
@@ -43,7 +43,7 @@ final class DayDetailsContainer:
             currentMoment: parent.parent.currentMoment,
             startOfDay: startOfDay,
             pickerDate: pickerDate,
-            cells: parent.event.happenings(forDayIndex: DayIndex(startOfDay)).map { makeDayCellViewModel(happening: $0) },
+            eventsReader: parent.parent.eventsReader,
             eventId: parent.eventId
         )
     }
@@ -53,7 +53,11 @@ final class DayDetailsContainer:
         viewModel: viewModel
     ) }
 
-    func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(id: UUID().uuidString, happening: happening) }
+//    func makeDayCellViewModel(happening: Happening) -> DayCellViewModel { DayCellViewModel(
+//        id: UUID(),
+//        happening: happening
+//    ) }
+
     func makeCreateHappeningService() -> CreateHappeningService { CreateHappeningService(
         eventsStorage: parent.parent.eventsWriter,
         eventsProvider: parent.parent.eventsReader

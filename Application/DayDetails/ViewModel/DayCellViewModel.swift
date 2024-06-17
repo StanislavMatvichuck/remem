@@ -8,9 +8,7 @@
 import Domain
 import Foundation
 
-struct DayCellViewModel {
-    enum Animation { case new }
-
+struct DayCellViewModel: Identifiable {
     private static let formatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
@@ -19,21 +17,14 @@ struct DayCellViewModel {
     }()
 
     let happening: Happening // passed to service
-    let id: String
+    let id: UUID
 
     let time: String
-    var animation: Animation?
 
-    init(
-        id: String,
-        happening: Happening,
-        animation: Animation? = nil
-    ) {
+    init(id: UUID, happening: Happening) {
         self.id = id
-
         self.happening = happening
         self.time = Self.formatter.string(from: happening.dateCreated)
-        self.animation = animation
     }
 
     func removeAnimation() -> DayCellViewModel { DayCellViewModel(id: id, happening: happening) }

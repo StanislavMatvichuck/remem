@@ -5,7 +5,6 @@
 //  Created by Stanislav Matvichuck on 06.08.2022.
 //
 
-import AudioToolbox
 import Domain
 import UIKit
 
@@ -24,6 +23,9 @@ final class DayDetailsController: UIViewController {
     var removeHappeningService: RemoveHappeningService?
     var createHappeningSubscription: DomainEventsPublisher.DomainEventSubscription?
     var removeHappeningSubscription: DomainEventsPublisher.DomainEventSubscription?
+
+    /// This is required because `Happening` is a value object without ID
+    var removedCell: DayCellViewModel?
 
     init(
         _ factory: DayDetailsViewModelFactoring,
@@ -52,11 +54,19 @@ final class DayDetailsController: UIViewController {
         viewModel = factory.makeDayDetailsViewModel(pickerDate: nil)
         configureCollection()
         configureEventHandlers()
-        createHappeningSubscription = DomainEventsPublisher.shared.subscribe(HappeningCreated.self, usingBlock: { [weak self] _ in
-            self?.update()
+        configureDomainEventSubscriptions()
+    }
+
+    private func configureDomainEventSubscriptions() {
+        createHappeningSubscription = DomainEventsPublisher.shared.subscribe(HappeningCreated.self, usingBlock: { [weak self] event in
+            self?.viewModel?.add(happening: event.happening)
         })
+
         removeHappeningSubscription = DomainEventsPublisher.shared.subscribe(HappeningRemoved.self, usingBlock: { [weak self] _ in
-            self?.update()
+            if let removedCell = self?.removedCell {
+                self?.viewModel?.remove(cell: removedCell)
+                self?.removedCell = nil
+            }
         })
     }
 
@@ -122,11 +132,14 @@ extension DayDetailsController: UIDropInteractionDelegate {
     func dropInteraction(_: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: NSString.self) { [weak self] object in
             if let viewModel = self?.viewModel,
-               let indexString = object.first,
-               let index = Int(indexString as! String)
+               let indexObject = object.first,
+               let indexString = indexObject as? String,
+               let index = Int(indexString)
             {
                 let identifier = viewModel.identifiers[index]
                 if let cellViewModel = viewModel.cell(for: identifier) {
+                    self?.removedCell = cellViewModel
+
                     self?.removeHappeningService?.serve(RemoveHappeningServiceArgument(
                         happening: cellViewModel.happening
                     ))

@@ -37,19 +37,19 @@ final class WeekViewModelTests: XCTestCase {
     func test_pageAt_withEventDateCreatedAndTodayAfterSevenDays_firstIndex_weekNumber_isOne() {
         let sut = make(withDateCreatedAndTodayOffset: 7)
 
-        XCTAssertEqual(sut.page(at: 0).weekNumber, 1)
+        XCTAssertEqual(sut.viewModel(forIdentifier: 0).weekNumber, 1)
     }
 
     func test_pageAt_withEventDateCreatedAndTodayAfterSevenDays_secondIndex_weekNumber_isTwo() {
         let sut = make(withDateCreatedAndTodayOffset: 7)
 
-        XCTAssertEqual(sut.page(at: 1).weekNumber, 2)
+        XCTAssertEqual(sut.viewModel(forIdentifier: 1).weekNumber, 2)
     }
 
     func test_pageAt_withEventDateCreatedAndTodayAfterTwentyDays_thirdIndex_weekNumber_isThree() {
         let sut = make(withDateCreatedAndTodayOffset: 20)
 
-        XCTAssertEqual(sut.page(at: 2).weekNumber, 3)
+        XCTAssertEqual(sut.viewModel(forIdentifier: 2).weekNumber, 3)
     }
 
     func test_dayMaximumAmount_noHappenings_zero() {

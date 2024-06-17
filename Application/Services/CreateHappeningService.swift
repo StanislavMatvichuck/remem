@@ -23,10 +23,10 @@ struct CreateHappeningService: ApplicationService {
 
     func serve(_ arg: CreateHappeningServiceArgument) {
         var event = eventsProvider.read(byId: arg.eventId)
-        event.addHappening(date: arg.date)
+        let createdHappening = event.addHappening(date: arg.date)
 
         eventsStorage.update(id: arg.eventId, event: event)
 
-        DomainEventsPublisher.shared.publish(HappeningCreated(eventId: arg.eventId))
+        DomainEventsPublisher.shared.publish(HappeningCreated(eventId: arg.eventId, happening: createdHappening))
     }
 }

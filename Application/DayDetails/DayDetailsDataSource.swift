@@ -8,8 +8,8 @@
 import UIKit
 
 final class DayDetailsDataSource {
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, String>
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, String>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, DayCellViewModel.ID>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, DayCellViewModel.ID>
     typealias Registration = UICollectionView.CellRegistration<DayCell, DayCellViewModel>
 
     private let registration = Registration { cell, _, viewModel in cell.viewModel = viewModel }

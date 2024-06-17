@@ -59,10 +59,6 @@ protocol DayDetailsViewModelFactoring {
     func makeDayDetailsViewModel(pickerDate: Date?) -> DayDetailsViewModel
 }
 
-protocol DayCellViewModelFactoring {
-    func makeDayCellViewModel(happening: Happening) -> DayCellViewModel
-}
-
 // MARK: - PDF
 
 protocol PDFWritingViewModelFactoring {

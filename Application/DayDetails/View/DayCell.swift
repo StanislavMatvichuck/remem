@@ -62,15 +62,5 @@ final class DayCell: UICollectionViewCell {
 
     private func configureContent(_ vm: DayCellViewModel) {
         label.text = vm.time
-        if vm.animation == .new { animateCreation() }
-    }
-
-    private func animateCreation() {
-        let animation = CABasicAnimation.opacity
-        animation.fromValue = 1.0
-        animation.toValue = 0.0
-        animation.duration = 1 / 3
-        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        animatedBackground.layer.add(animation, forKey: nil)
     }
 }

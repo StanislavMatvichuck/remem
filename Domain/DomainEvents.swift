@@ -24,6 +24,7 @@ enum UserInfoCodingKeys: String {
     case event,
          eventsListOrdering,
          eventId,
+         happening,
          goal
 }
 
@@ -73,14 +74,22 @@ public struct HappeningCreated: DomainEventsPublisher.DomainEvent {
     public static var eventName = Notification.Name(DomainEvents.happeningCreated.rawValue)
 
     public let eventId: String
+    public let happening: Happening
 
     public init(userInfo: DomainEventsPublisher.UserInfo) {
         self.eventId = userInfo[UserInfoCodingKeys.eventId] as! String
+        self.happening = userInfo[UserInfoCodingKeys.happening] as! Happening
     }
 
-    public init(eventId: String) { self.eventId = eventId }
+    public init(eventId: String, happening: Happening) {
+        self.eventId = eventId
+        self.happening = happening
+    }
 
-    public func userInfo() -> DomainEventsPublisher.UserInfo { [UserInfoCodingKeys.eventId: eventId] }
+    public func userInfo() -> DomainEventsPublisher.UserInfo { [
+        UserInfoCodingKeys.eventId: eventId,
+        UserInfoCodingKeys.happening: happening
+    ] }
 }
 
 public struct HappeningRemoved: DomainEventsPublisher.DomainEvent {

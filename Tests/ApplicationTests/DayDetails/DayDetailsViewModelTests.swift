@@ -109,8 +109,9 @@ final class DayDetailsViewModelTests: XCTestCase {
     func test_identifiers() { XCTAssertEqual(sut.identifiers.count, 0) }
     
     func test_cellForIdentifier() {
+        let id = UUID()
         let cell = DayCellViewModel(
-            id: "id",
+            id: id,
             happening: Happening(dateCreated: .distantFuture)
         )
         
@@ -122,6 +123,6 @@ final class DayDetailsViewModelTests: XCTestCase {
             eventId: ""
         )
         
-        XCTAssertNotNil(sut.cell(for: "id"))
+        XCTAssertNotNil(sut.cell(for: id))
     }
 }

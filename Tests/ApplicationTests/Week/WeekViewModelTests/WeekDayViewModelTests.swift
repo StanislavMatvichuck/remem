@@ -146,7 +146,7 @@ final class WeekDayViewModelTests: XCTestCase {
 
         let container = WeekContainer(details)
 
-        let sut = container.makeWeekViewModel().page(at: pageIndex).day(dayNumberInWeek: index.row - pageIndex * 7)
+        let sut = container.makeWeekViewModel().viewModel(forIdentifier: pageIndex).day(dayNumberInWeek: index.row - pageIndex * 7)
 
         return sut
     }
