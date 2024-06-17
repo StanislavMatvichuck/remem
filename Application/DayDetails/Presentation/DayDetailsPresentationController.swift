@@ -91,23 +91,21 @@ final class DayDetailsPresentationController: UIPresentationController {
     }
 
     lazy var detailsViewCalculatedRect = {
-        let relativeWidth: CGFloat = 2 / 3
-        let width: CGFloat = .screenW * relativeWidth
-        let container = UIView(frame: containerView!.bounds)
+        let containerW = containerView?.bounds.width ?? 0
+        let containerH = containerView?.bounds.height ?? 0
+        let width = 4 * .layoutSquare
+        let height = 8 * .layoutSquare
 
-        // TODO: simplify this?
-        let detailsView = DayDetailsView(list: DayDetailsView.makeList(), viewModel: DayDetailsViewModel(currentMoment: .now, startOfDay: .now, pickerDate: nil, cells: [], eventId: ""))
-        detailsView.translatesAutoresizingMaskIntoConstraints = false
-
-        container.addSubview(detailsView)
-        detailsView.widthAnchor.constraint(equalToConstant: width).isActive = true
-        detailsView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
-        detailsView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-
-        detailsView.layoutIfNeeded()
-        container.layoutIfNeeded()
-
-        return detailsView.frame
+        return CGRect(
+            origin: CGPoint(
+                x: containerW / 2 - width / 2,
+                y: containerH / 2 - height / 2
+            ),
+            size: CGSize(
+                width: width,
+                height: height
+            )
+        )
     }()
 
     override var frameOfPresentedViewInContainerView: CGRect {
