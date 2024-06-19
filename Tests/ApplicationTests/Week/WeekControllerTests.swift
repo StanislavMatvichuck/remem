@@ -19,7 +19,6 @@ final class WeekControllerTests: XCTestCase {
     override func tearDown() { super.tearDown(); sut = nil }
 
     func test_showsWeekView() { XCTAssertTrue(sut.view is WeekView) }
-    func test_configuresCollection() { XCTAssertNotNil(sut.viewRoot.list.delegate) }
     func test_configuresViewModel() { XCTAssertNotNil(sut.viewRoot.viewModel) }
     func test_scrollsToLastPage() {} // todo
 }

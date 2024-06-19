@@ -15,6 +15,11 @@
 		0807E85C2BA328D1005ED448 /* XCUIElementQueryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */; };
 		0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */; };
 		080949A02B8A3B9400ACAC61 /* PDFRenderingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */; };
+		080A66C42C21F888000EC552 /* WeekCircleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A66C32C21F888000EC552 /* WeekCircleViewModelTests.swift */; };
+		080A66C62C21F8A4000EC552 /* WeekCircleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A66C52C21F8A4000EC552 /* WeekCircleViewModel.swift */; };
+		080A66C82C222034000EC552 /* WeekCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A66C72C222034000EC552 /* WeekCircleView.swift */; };
+		080A66CA2C22207C000EC552 /* WeekCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A66C92C22207C000EC552 /* WeekCircleController.swift */; };
+		080A66CC2C2220BB000EC552 /* WeekCircleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A66CB2C2220BB000EC552 /* WeekCircleContainer.swift */; };
 		080AA96D28D768350038C21A /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA96C28D768350038C21A /* EventRow.swift */; };
 		080AB7DA2BCE8B0D00A5CD1A /* ContainersHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AB7D82BCE8AEE00A5CD1A /* ContainersHelpers.swift */; };
 		080C417A2986ACE400C1F54F /* SummaryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C41792986ACE400C1F54F /* SummaryControllerTests.swift */; };
@@ -141,6 +146,11 @@
 		086E39742981431C00CCE80E /* DayDetailsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E39732981431C00CCE80E /* DayDetailsContainer.swift */; };
 		086FFE68281699DF0054266E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 086FFE6A281699DF0054266E /* Localizable.strings */; };
 		0870AFAF2B444DC50005BE11 /* AtlasProducing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */; };
+		08713BA72C22F8EF00372ECF /* HoursCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08713BA62C22F8EF00372ECF /* HoursCircleView.swift */; };
+		08713BA92C22F90F00372ECF /* HoursCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08713BA82C22F90F00372ECF /* HoursCircleController.swift */; };
+		08713BAB2C22F94500372ECF /* HoursCircleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08713BAA2C22F94500372ECF /* HoursCircleContainer.swift */; };
+		08713BAD2C22FF7C00372ECF /* HoursCircleContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08713BAC2C22FF7C00372ECF /* HoursCircleContainerTests.swift */; };
+		08713BAF2C230B9A00372ECF /* WeekCircleContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08713BAE2C230B9A00372ECF /* WeekCircleContainerTests.swift */; };
 		0871E7472B9DCC2500FF1F7D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E7462B9DCC2500FF1F7D /* Services.swift */; };
 		0871E74C2B9DCCBE00FF1F7D /* DomainEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E74B2B9DCCBE00FF1F7D /* DomainEvents.swift */; };
 		0871E74F2B9DCD8400FF1F7D /* CreateEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0871E74E2B9DCD8400FF1F7D /* CreateEventService.swift */; };
@@ -229,6 +239,7 @@
 		089D1DA82BC294F90050AD33 /* ShowEventsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */; };
 		089D1DAA2BC296CF0050AD33 /* ShowPDFReadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */; };
 		089D3CD62BEAA60400510D7A /* BasicPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D3CD52BEAA60400510D7A /* BasicPerformanceTest.swift */; };
+		089D83A72C20991100DB15A9 /* CircularGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D83A62C20991100DB15A9 /* CircularGraphView.swift */; };
 		089E4B452A2DE8E100727624 /* UITestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestID.swift */; };
 		089E4B462A2DE90900727624 /* UITestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B442A2DE8E100727624 /* UITestID.swift */; };
 		089E4B482A2DEAB300727624 /* LaunchMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089E4B472A2DEAB300727624 /* LaunchMode.swift */; };
@@ -272,6 +283,8 @@
 		08D512402787170200C2037F /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5123F2787170200C2037F /* ExtensionUIView.swift */; };
 		08D5D0E42B325DF300B71512 /* WeekDayViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5D0E32B325DF300B71512 /* WeekDayViewModelTests.swift */; };
 		08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5D0E52B32660000B71512 /* WeekDayViewModel.swift */; };
+		08D6E16F2C22E3550045765F /* HoursCircleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E16E2C22E3550045765F /* HoursCircleViewModelTests.swift */; };
+		08D6E1722C22E4370045765F /* HoursCircleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D6E1712C22E4370045765F /* HoursCircleViewModel.swift */; };
 		08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8F0B729AB786500C34041 /* CoordinatorTests.swift */; };
 		08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D8F0B929AB7A3A00C34041 /* Coordinator.swift */; };
 		08DA2C12284F559200FC418B /* UIGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA2C11284F559200FC418B /* UIGlobals.swift */; };
@@ -425,6 +438,11 @@
 		0807E85B2BA328D1005ED448 /* XCUIElementQueryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElementQueryExtension.swift; sourceTree = "<group>"; };
 		0809499D2B8A3B2F00ACAC61 /* PDFRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRendering.swift; sourceTree = "<group>"; };
 		0809499F2B8A3B9400ACAC61 /* PDFRenderingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRenderingPage.swift; sourceTree = "<group>"; };
+		080A66C32C21F888000EC552 /* WeekCircleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleViewModelTests.swift; sourceTree = "<group>"; };
+		080A66C52C21F8A4000EC552 /* WeekCircleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleViewModel.swift; sourceTree = "<group>"; };
+		080A66C72C222034000EC552 /* WeekCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleView.swift; sourceTree = "<group>"; };
+		080A66C92C22207C000EC552 /* WeekCircleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleController.swift; sourceTree = "<group>"; };
+		080A66CB2C2220BB000EC552 /* WeekCircleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleContainer.swift; sourceTree = "<group>"; };
 		080AA96C28D768350038C21A /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		080AB7D82BCE8AEE00A5CD1A /* ContainersHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainersHelpers.swift; sourceTree = "<group>"; };
 		080C41792986ACE400C1F54F /* SummaryControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryControllerTests.swift; sourceTree = "<group>"; };
@@ -563,6 +581,11 @@
 		086FFE6D28169DA70054266E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0870AFAE2B444DC50005BE11 /* AtlasProducing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasProducing.swift; sourceTree = "<group>"; };
 		0870EEF82809B81100336759 /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08713BA62C22F8EF00372ECF /* HoursCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleView.swift; sourceTree = "<group>"; };
+		08713BA82C22F90F00372ECF /* HoursCircleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleController.swift; sourceTree = "<group>"; };
+		08713BAA2C22F94500372ECF /* HoursCircleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleContainer.swift; sourceTree = "<group>"; };
+		08713BAC2C22FF7C00372ECF /* HoursCircleContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleContainerTests.swift; sourceTree = "<group>"; };
+		08713BAE2C230B9A00372ECF /* WeekCircleContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCircleContainerTests.swift; sourceTree = "<group>"; };
 		0871E7462B9DCC2500FF1F7D /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		0871E74B2B9DCCBE00FF1F7D /* DomainEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainEvents.swift; sourceTree = "<group>"; };
 		0871E74E2B9DCD8400FF1F7D /* CreateEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventService.swift; sourceTree = "<group>"; };
@@ -653,6 +676,7 @@
 		089D1DA72BC294F90050AD33 /* ShowEventsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEventsListService.swift; sourceTree = "<group>"; };
 		089D1DA92BC296CF0050AD33 /* ShowPDFReadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPDFReadingService.swift; sourceTree = "<group>"; };
 		089D3CD52BEAA60400510D7A /* BasicPerformanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPerformanceTest.swift; sourceTree = "<group>"; };
+		089D83A62C20991100DB15A9 /* CircularGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularGraphView.swift; sourceTree = "<group>"; };
 		089E4B442A2DE8E100727624 /* UITestID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestID.swift; sourceTree = "<group>"; };
 		089E4B472A2DEAB300727624 /* LaunchMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchMode.swift; sourceTree = "<group>"; };
 		089F08DC2B71984800EA953A /* DayDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsDataSource.swift; sourceTree = "<group>"; };
@@ -696,6 +720,8 @@
 		08D5123F2787170200C2037F /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		08D5D0E32B325DF300B71512 /* WeekDayViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayViewModelTests.swift; sourceTree = "<group>"; };
 		08D5D0E52B32660000B71512 /* WeekDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayViewModel.swift; sourceTree = "<group>"; };
+		08D6E16E2C22E3550045765F /* HoursCircleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleViewModelTests.swift; sourceTree = "<group>"; };
+		08D6E1712C22E4370045765F /* HoursCircleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCircleViewModel.swift; sourceTree = "<group>"; };
 		08D6E1D228880297003BF595 /* Renaming01.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Renaming01.xcdatamodel; sourceTree = "<group>"; };
 		08D8F0B729AB786500C34041 /* CoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTests.swift; sourceTree = "<group>"; };
 		08D8F0B929AB7A3A00C34041 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -795,6 +821,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080A66C12C21F865000EC552 /* WeekCircle */ = {
+			isa = PBXGroup;
+			children = (
+				080A66C52C21F8A4000EC552 /* WeekCircleViewModel.swift */,
+				080A66C92C22207C000EC552 /* WeekCircleController.swift */,
+				080A66CB2C2220BB000EC552 /* WeekCircleContainer.swift */,
+				080A66C72C222034000EC552 /* WeekCircleView.swift */,
+			);
+			path = WeekCircle;
+			sourceTree = "<group>";
+		};
+		080A66C22C21F879000EC552 /* WeekCircle */ = {
+			isa = PBXGroup;
+			children = (
+				080A66C32C21F888000EC552 /* WeekCircleViewModelTests.swift */,
+				08713BAE2C230B9A00372ECF /* WeekCircleContainerTests.swift */,
+			);
+			path = WeekCircle;
+			sourceTree = "<group>";
+		};
 		080A679028D1E2DA00889A97 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1318,8 @@
 		0870EEF92809B81100336759 /* ApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				08D6E16D2C22E33F0045765F /* HoursCircle */,
+				080A66C22C21F879000EC552 /* WeekCircle */,
 				08EAD4E62B8D01F600557C4D /* Goals */,
 				081A15562B6287F700EDA8A2 /* HourDistribution */,
 				0852404A2B615314004F9BDA /* DayOfWeek */,
@@ -1385,6 +1433,14 @@
 			path = PerformanceTests;
 			sourceTree = "<group>";
 		};
+		089D83A52C2098FF00DB15A9 /* CircularGraph */ = {
+			isa = PBXGroup;
+			children = (
+				089D83A62C20991100DB15A9 /* CircularGraphView.swift */,
+			);
+			path = CircularGraph;
+			sourceTree = "<group>";
+		};
 		089F08DE2B72493600EA953A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1459,6 +1515,9 @@
 		08D5121C27870D2500C2037F /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				08D6E1702C22E4270045765F /* HoursCircle */,
+				080A66C12C21F865000EC552 /* WeekCircle */,
+				089D83A52C2098FF00DB15A9 /* CircularGraph */,
 				08D5121D27870D2500C2037F /* AppDelegate.swift */,
 				08C85FF128B4FB7800FF37D9 /* ApplicationContainer.swift */,
 				089E4B472A2DEAB300727624 /* LaunchMode.swift */,
@@ -1525,6 +1584,26 @@
 				08D5D0E32B325DF300B71512 /* WeekDayViewModelTests.swift */,
 			);
 			path = WeekViewModelTests;
+			sourceTree = "<group>";
+		};
+		08D6E16D2C22E33F0045765F /* HoursCircle */ = {
+			isa = PBXGroup;
+			children = (
+				08D6E16E2C22E3550045765F /* HoursCircleViewModelTests.swift */,
+				08713BAC2C22FF7C00372ECF /* HoursCircleContainerTests.swift */,
+			);
+			path = HoursCircle;
+			sourceTree = "<group>";
+		};
+		08D6E1702C22E4270045765F /* HoursCircle */ = {
+			isa = PBXGroup;
+			children = (
+				08D6E1712C22E4370045765F /* HoursCircleViewModel.swift */,
+				08713BA62C22F8EF00372ECF /* HoursCircleView.swift */,
+				08713BA82C22F90F00372ECF /* HoursCircleController.swift */,
+				08713BAA2C22F94500372ECF /* HoursCircleContainer.swift */,
+			);
+			path = HoursCircle;
 			sourceTree = "<group>";
 		};
 		08DFFADB2B5007B50063B389 /* EventsList */ = {
@@ -2033,11 +2112,13 @@
 				0852404C2B615330004F9BDA /* DayOfWeekCellViewModelTests.swift in Sources */,
 				08EAD4E82B8D020500557C4D /* GoalViewModelTests.swift in Sources */,
 				0875B4492B57F6AC004C0575 /* EventsSortingViewModelTests.swift in Sources */,
+				08D6E16F2C22E3550045765F /* HoursCircleViewModelTests.swift in Sources */,
 				0875B4642B59DCAA004C0575 /* EventsSortingControllerTests.swift in Sources */,
 				085240512B61A5AA004F9BDA /* DayOfWeekViewModelTests.swift in Sources */,
 				081A15692B6291F200EDA8A2 /* HourDistributionViewTests.swift in Sources */,
 				08641ABA2BD1139600799E5C /* GoalsCoreDataRepositoryTests.swift in Sources */,
 				08D8F0B829AB786500C34041 /* CoordinatorTests.swift in Sources */,
+				08713BAF2C230B9A00372ECF /* WeekCircleContainerTests.swift in Sources */,
 				08FE8B992B51929D005E780E /* EventsListDataSourceTests.swift in Sources */,
 				089AC5F42B3C60F000577781 /* WeekControllerTests.swift in Sources */,
 				08B57DA42B5ED3340046D307 /* EventCreationViewModelTests.swift in Sources */,
@@ -2068,6 +2149,7 @@
 				081A155D2B628D3200EDA8A2 /* HourDistributionViewModelTests.swift in Sources */,
 				0852405F2B61D46B004F9BDA /* DayOfWeekContainerTests.swift in Sources */,
 				08A331E829A8EAFE000B68A1 /* WatchingTests.swift in Sources */,
+				08713BAD2C22FF7C00372ECF /* HoursCircleContainerTests.swift in Sources */,
 				087433C52B33816700336FC3 /* WeekPageViewModelTests.swift in Sources */,
 				080C417A2986ACE400C1F54F /* SummaryControllerTests.swift in Sources */,
 				087D42642B8E38960075004D /* GoalsViewModelTests.swift in Sources */,
@@ -2080,6 +2162,7 @@
 				081A15652B62918B00EDA8A2 /* HourDistributionControllerTests.swift in Sources */,
 				08D5D0E42B325DF300B71512 /* WeekDayViewModelTests.swift in Sources */,
 				085A2C3229F19E3A005C6E5E /* EventCellViewModelTests.swift in Sources */,
+				080A66C42C21F888000EC552 /* WeekCircleViewModelTests.swift in Sources */,
 				0816D0C72B90A29C005FD6A0 /* CreateGoalViewModelTests.swift in Sources */,
 				0881E4B92B5F3AE800F68CAE /* EventCreationControllerTests.swift in Sources */,
 				085BD7A52B31CD9F000283E1 /* WeekViewModelTests.swift in Sources */,
@@ -2125,6 +2208,7 @@
 				080F9F2B29ED6C050013CBFE /* EventCellView.swift in Sources */,
 				082576812C175FD700D203AA /* ShowGoalsService.swift in Sources */,
 				081015582B331656004CE297 /* WeekContainer.swift in Sources */,
+				08D6E1722C22E4370045765F /* HoursCircleViewModel.swift in Sources */,
 				0875B46E2B5A874F004C0575 /* EventsSortingDismissAnimator.swift in Sources */,
 				085145C829AE092100CA533D /* SummaryContainer.swift in Sources */,
 				085240532B61A5C6004F9BDA /* DayOfWeekViewModel.swift in Sources */,
@@ -2149,6 +2233,7 @@
 				087D426A2B8E3AB90075004D /* GoalsController.swift in Sources */,
 				08D8F0BA29AB7A3A00C34041 /* Coordinator.swift in Sources */,
 				0809499E2B8A3B2F00ACAC61 /* PDFRendering.swift in Sources */,
+				08713BA72C22F8EF00372ECF /* HoursCircleView.swift in Sources */,
 				086E397229809C5800CCE80E /* EventDetailsContainer.swift in Sources */,
 				081A15632B62911200EDA8A2 /* HourDistributionContainer.swift in Sources */,
 				08F0B52C2C0F669100C76232 /* GlobalStrings.swift in Sources */,
@@ -2170,6 +2255,7 @@
 				088AF7482B34F8E40039EF83 /* WeekDayView.swift in Sources */,
 				08214D102B8F4244002F1F16 /* GoalProgressView.swift in Sources */,
 				089B37842A0A271D00422971 /* TimeSinceView.swift in Sources */,
+				08713BA92C22F90F00372ECF /* HoursCircleController.swift in Sources */,
 				0851963D2A0C1D1700FD8FD8 /* PDFWritingDataGenerator.swift in Sources */,
 				081CA53F2BD197AB00924635 /* RemovalDropAreaView.swift in Sources */,
 				089308AA2B3B07550059D51A /* WeekDayHappeningsView.swift in Sources */,
@@ -2185,6 +2271,7 @@
 				0821EB7A29E84B9C00B90407 /* DayDetailsAnimator.swift in Sources */,
 				0875B4472B57F0C3004C0575 /* EventsSortingCellViewModel.swift in Sources */,
 				082576832C17627500D203AA /* GoalsPresenterContainer.swift in Sources */,
+				080A66CC2C2220BB000EC552 /* WeekCircleContainer.swift in Sources */,
 				08B57DA62B5ED3540046D307 /* EventCreationViewModel.swift in Sources */,
 				082D8BE62BC941AE0001DC17 /* RemoveHappeningService.swift in Sources */,
 				08F97A3E2950769100AB7051 /* DayCellViewModel.swift in Sources */,
@@ -2217,6 +2304,7 @@
 				082576852C17687000D203AA /* Button.swift in Sources */,
 				080C9A452BC97F5A00830A9F /* CreateGoalService.swift in Sources */,
 				08B236BE2C133EE3006CEE48 /* LoadableViewModelHandler.swift in Sources */,
+				080A66C62C21F8A4000EC552 /* WeekCircleViewModel.swift in Sources */,
 				08F50DC32965E6FA00B65CDF /* HintCellViewModel.swift in Sources */,
 				08F467EF29BF3B7800D35AB6 /* PDFWritingController.swift in Sources */,
 				082E8BF52C0601CC00D00655 /* LoadableView.swift in Sources */,
@@ -2228,8 +2316,10 @@
 				0828877B29BCA17700FF9839 /* Updating.swift in Sources */,
 				089F08DD2B71984800EA953A /* DayDetailsDataSource.swift in Sources */,
 				087D426E2B8E58CF0075004D /* GoalsContainer.swift in Sources */,
+				089D83A72C20991100DB15A9 /* CircularGraphView.swift in Sources */,
 				0816D0CB2B90A435005FD6A0 /* CreateGoalCell.swift in Sources */,
 				0881E4B52B5F387900F68CAE /* EventCreationView.swift in Sources */,
+				080A66C82C222034000EC552 /* WeekCircleView.swift in Sources */,
 				089595F929EAC4BC004CDFB7 /* SwiperAnimationsHelper.swift in Sources */,
 				089066BA29DF12340047052A /* DayDetailsDismissAnimator.swift in Sources */,
 				0881E4B12B5F382600F68CAE /* EventCreationContainer.swift in Sources */,
@@ -2244,6 +2334,7 @@
 				08C9DAFD2BB4CD8D00F038BB /* ShowEventsOrderingService.swift in Sources */,
 				08E174522B292ABF0018256D /* DayDetailsPresentationDelegate.swift in Sources */,
 				087EEF362BB5BA4B009A55BB /* ShowEventDetailsService.swift in Sources */,
+				08713BAB2C22F94500372ECF /* HoursCircleContainer.swift in Sources */,
 				0875B4622B59C77E004C0575 /* EventsSortingContainer.swift in Sources */,
 				08B26A10289E919F00DFBAC8 /* DayDetailsController.swift in Sources */,
 				08752B102B8838D900ECCE77 /* SummaryDataSource.swift in Sources */,
@@ -2251,6 +2342,7 @@
 				08D5D0E62B32660000B71512 /* WeekDayViewModel.swift in Sources */,
 				089AC5F62B3C61C300577781 /* WeekController.swift in Sources */,
 				08C23EBA2B83C145004DF159 /* EventsListController+DragAndDrop.swift in Sources */,
+				080A66CA2C22207C000EC552 /* WeekCircleController.swift in Sources */,
 				08B878732A2DC188000748F4 /* UITestRepositoryConfigurator.swift in Sources */,
 				08D5122027870D2500C2037F /* SceneDelegate.swift in Sources */,
 				08A331EA29A8EBC3000B68A1 /* Watching.swift in Sources */,

@@ -26,9 +26,9 @@ final class EventDetailsContainer:
         controllers: [
             WeekContainer(self).makeWeekController(),
             GoalsPresenterContainer(self).makeGoalsPresenterController(),
+            WeekCircleContainer(self).makeWeekCircleController(),
+            HoursCircleContainer(self).makeHoursCircleController(),
             SummaryContainer(self).makeSummaryController(),
-            HourDistributionContainer(self).makeHourDistributionController(),
-            DayOfWeekContainer(self).makeDayOfWeekController(),
             PDFWritingContainer(self).makePDFWritingController()
         ],
         service: makeVisitEventService()
