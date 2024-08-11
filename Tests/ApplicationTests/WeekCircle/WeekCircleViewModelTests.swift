@@ -14,31 +14,31 @@ final class WeekCircleViewModelTests: XCTestCase {
     // MARK: - Tests
 
     func test_init_requiresEventsReadingAndEventId() {
-        let sut = makeWithoutEvent()
+        let sut = makeWith()
 
         XCTAssertNotNil(sut)
     }
 
     func test_conformsToCircularViewModeling() {
-        let sut = makeWithoutEvent()
+        let sut = makeWith()
 
         XCTAssertNotNil(sut as CircularViewModeling)
     }
 
     func test_vertices_count_seven() {
-        let sut = makeWithoutEvent()
+        let sut = makeWith()
 
         XCTAssertEqual(sut.vertices.count, 7)
     }
 
     func test_vertices_first_text_localizedDayOfWeek() {
-        let sut = makeWithoutEvent()
+        let sut = makeWith()
 
         XCTAssertEqual(sut.vertices.first?.text, "Mon")
     }
 
     func test_vertices_withoutHappenings_value_zero() {
-        let sut = makeWithoutEvent()
+        let sut = makeWith()
 
         for index in 0 ..< sut.vertices.count {
             XCTAssertEqual(sut.vertices[index].value, 0)
@@ -101,12 +101,11 @@ final class WeekCircleViewModelTests: XCTestCase {
     }
 
     // MARK: - Private
-
-    private func makeWithoutEvent() -> WeekCircleViewModel { WeekCircleViewModel(reader: EventsReaderStub(), eventId: "") }
-    private func makeWith(happenings: [Happening]) -> WeekCircleViewModel {
-        let event = Event(id: UUID().uuidString, name: "", happenings: happenings, dateCreated: .distantPast, dateVisited: nil)
+    private func makeWith(happenings: [Happening] = []) -> WeekCircleViewModel {
+        let event = Event.make(with: happenings)
         let reader = CoreDataEventsRepository(container: CoreDataStack.createContainer(inMemory: true))
         reader.create(event: event)
+
         return WeekCircleViewModel(reader: reader, eventId: event.id)
     }
 }

@@ -13,37 +13,37 @@ import XCTest
 
 final class HoursCircleViewModelTests: XCTestCase {
     func test_init_requiresEventsReadingAndEventId() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         XCTAssertNotNil(sut)
     }
     
     func test_conformsToCircularViewModeling() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         XCTAssertNotNil(sut as CircularViewModeling)
     }
     
     func test_vertices_count_twentyFour() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         XCTAssertEqual(sut.vertices.count, 24)
     }
     
     func test_vertices_first_text_0() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         XCTAssertEqual(sut.vertices.first?.text, "0")
     }
     
     func test_vertices_last_text_23() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         XCTAssertEqual(sut.vertices.last?.text, "23")
     }
     
     func test_vertices_withoutHappenings_value_zero() {
-        let sut = makeWithoutEvent()
+        let sut = make()
         
         for index in 0 ..< sut.vertices.count {
             XCTAssertEqual(sut.vertices[index].value, 0)
@@ -51,7 +51,7 @@ final class HoursCircleViewModelTests: XCTestCase {
     }
     
     func test_vertices_first_oneHappening_value_one() {
-        let sut = makeWith(happenings: [
+        let sut = make(withHappenings: [
             Happening(dateCreated: DayIndex.referenceValue.date)
         ])
         
@@ -63,7 +63,7 @@ final class HoursCircleViewModelTests: XCTestCase {
     }
     
     func test_vertices_last_oneHappening_value_one() {
-        let sut = makeWith(happenings: [
+        let sut = make(withHappenings: [
             Happening(dateCreated: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(60 * 60 * 23)))
         ])
         
@@ -81,7 +81,7 @@ final class HoursCircleViewModelTests: XCTestCase {
             happenings.append(Happening(dateCreated: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(60 * 60 * hour))))
         }
         
-        let sut = makeWith(happenings: happenings)
+        let sut = make(withHappenings: happenings)
         
         for index in 0 ..< sut.vertices.count {
             XCTAssertEqual(sut.vertices[index].value, 1)
@@ -89,7 +89,7 @@ final class HoursCircleViewModelTests: XCTestCase {
     }
     
     func test_vertices_twoHappeningsAtFirstHour_oneHappeningAtSecond_values() {
-        let sut = makeWith(happenings: [
+        let sut = make(withHappenings: [
             Happening(dateCreated: DayIndex.referenceValue.date),
             Happening(dateCreated: DayIndex.referenceValue.date),
             Happening(dateCreated: DayIndex.referenceValue.date.addingTimeInterval(TimeInterval(60 * 60)))
@@ -100,7 +100,7 @@ final class HoursCircleViewModelTests: XCTestCase {
     }
     
     func test_vertices_threeHappeningsAtFirstHour_oneHappeningAtSecond_values() {
-        let sut = makeWith(happenings: [
+        let sut = make(withHappenings: [
             Happening(dateCreated: DayIndex.referenceValue.date),
             Happening(dateCreated: DayIndex.referenceValue.date),
             Happening(dateCreated: DayIndex.referenceValue.date),
@@ -112,12 +112,11 @@ final class HoursCircleViewModelTests: XCTestCase {
     }
     
     // MARK: - Private
-    
-    private func makeWithoutEvent() -> HoursCircleViewModel { HoursCircleViewModel(reader: EventsReaderStub(), eventId: "") }
-    private func makeWith(happenings: [Happening]) -> HoursCircleViewModel {
-        let event = Event(id: UUID().uuidString, name: "", happenings: happenings, dateCreated: .distantPast, dateVisited: nil)
+    private func make(withHappenings: [Happening] = []) -> HoursCircleViewModel {
+        let event = Event.make(with: withHappenings)
         let reader = CoreDataEventsRepository(container: CoreDataStack.createContainer(inMemory: true))
         reader.create(event: event)
+        
         return HoursCircleViewModel(reader: reader, eventId: event.id)
     }
 }

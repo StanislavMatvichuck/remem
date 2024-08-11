@@ -7,6 +7,7 @@
 
 @testable import Application
 import Domain
+import Foundation
 
 extension EventsListContainer { static func makeForUnitTests() -> EventsListContainer { EventsListContainer(ApplicationContainer(mode: .unitTest)) }}
 extension EventCreationContainer { static func makeForUnitTests() -> EventCreationContainer { EventCreationContainer(parent: ApplicationContainer(mode: .unitTest)) }}
@@ -30,4 +31,13 @@ extension DayDetailsContainer { static func makeForUnitTests() -> DayDetailsCont
 
 extension Event {
     static func makeForUnitTests() -> Event { Event(name: "", dateCreated: DayIndex.referenceValue.date) }
+    static func make(with happenings: [Happening]) -> Event {
+        Event(
+            id: UUID().uuidString,
+            name: "",
+            happenings: happenings,
+            dateCreated: .distantPast,
+            dateVisited: nil
+        )
+    }
 }
